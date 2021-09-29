@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 15:40+0000\n"
+"POT-Creation-Date: 2021-09-29 10:33+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1847,7 +1847,7 @@ msgstr "Liệu tổ chức này có áp dụng đối với thông tin toàn c�
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-msgid "Whether to publish the engagement breakdown charts."
+msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."

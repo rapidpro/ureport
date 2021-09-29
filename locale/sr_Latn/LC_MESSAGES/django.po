@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 15:40+0000\n"
+"POT-Creation-Date: 2021-09-29 10:33+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1869,7 +1869,7 @@ msgstr "Da li ova postavka uključuje globalne podatke, npr. mapu sveta umesto m
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-msgid "Whether to publish the engagement breakdown charts."
+msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."

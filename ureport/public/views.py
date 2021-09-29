@@ -444,8 +444,8 @@ class UreportersView(SmartTemplateView):
 
         context["data_metrics"] = [dict(slug=key, title=str(val)) for key, val in PollStats.DATA_METRICS.items()]
 
-        context["publish_charts_breakdown"] = org.get_config("common.has_charts_published", False) or (
-            (user.is_authenticated and org in user.get_user_orgs()) or user.is_superuser
+        context["hide_charts_breakdown"] = org.get_config("common.has_charts_hidden", False) and not (
+            (user.is_authenticated and org in user.get_user_orgs()) and not user.is_superuser
         )
 
         return context

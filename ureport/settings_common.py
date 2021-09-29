@@ -575,8 +575,8 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
-        name="has_charts_published",
-        field=dict(help_text=_("Whether to publish the engagement breakdown charts."), required=False),
+        name="has_charts_hidden",
+        field=dict(help_text=_("Whether to hide the engagement breakdown charts."), required=False),
     ),
     dict(
         name="iso_code",
