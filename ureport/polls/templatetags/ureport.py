@@ -99,16 +99,7 @@ def org_color(org, index):
     if org_colors:
         org_colors = org_colors.split(",")
     else:
-        if org.get_config("common.primary_color") and org.get_config("common.secondary_color"):
-            org_colors = [
-                org.get_config("common.primary_color").strip(),
-                org.get_config("common.secondary_color").strip(),
-            ]
-        else:
-            org_colors = [
-                getattr(settings, "UREPORT_DEFAULT_PRIMARY_COLOR"),
-                getattr(settings, "UREPORT_DEFAULT_SECONDARY_COLOR"),
-            ]
+        org_colors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"]
 
     return org_colors[int(index) % len(org_colors)].strip()
 

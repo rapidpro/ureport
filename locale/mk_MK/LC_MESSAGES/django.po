@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-09-30 12:05+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -1635,21 +1635,6 @@ msgstr "Второстепената боја за нагласување на �
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Најмногу 6 бои за уредување на графикони, користете запирка меѓу боите"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Бојата на текстот во лентата со повик за вклучување"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Бојата на позадината во лентата со повик за вклучување"
-
-msgid "The primary color for styling for this organization"
-msgstr "Основната боја за уредување на страната на организацијата "
-
-msgid "The secondary color for styling for this organization"
-msgstr "Второстепената боја за уредување на страната на организацијата "
-
-msgid "The background color for the site"
-msgstr "Позадинска боја за оваа страна"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 бои за уредување на мапи, користи запирка меѓу боите. Не се користи ако не се 11 бои"
 
@@ -1771,6 +1756,21 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Бојата на текстот во лентата со повик за вклучување"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Бојата на позадината во лентата со повик за вклучување"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Основната боја за уредување на страната на организацијата "
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Второстепената боја за уредување на страната на организацијата "
+
+#~ msgid "The background color for the site"
+#~ msgstr "Позадинска боја за оваа страна"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "Дали да се активира новиот дизајн"

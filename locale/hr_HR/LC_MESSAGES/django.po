@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-09-30 12:05+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -1642,21 +1642,6 @@ msgstr "Sekundarna boja za naglašavanje ovog dijela treba biti svijetla"
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Do 6 boja za stiliziranje grafika, koristite zarez izmedju boja"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Boja za pisanje teksta na polju za pridruživanje"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
-
-msgid "The primary color for styling for this organization"
-msgstr "Primarna boja za ovu postavku"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Sekundarna boja za ovu postavku"
-
-msgid "The background color for the site"
-msgstr "Pozadinska boja ove stranice"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 boja za stiliziranje mapa, koristi zarez izmedju boja, ne koristiti ako nije 11 boja"
 
@@ -1778,6 +1763,21 @@ msgstr "Je li priča objavljena"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Boja za pisanje teksta na polju za pridruživanje"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Primarna boja za ovu postavku"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Sekundarna boja za ovu postavku"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Pozadinska boja ove stranice"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "Treba li aktivirati novi dizajn"
