@@ -575,10 +575,8 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
-        name="has_new_design",
-        field=dict(help_text=_("Whether to activate the new design."), required=False),
-        superuser_only=True,
-        read_only=True,
+        name="has_charts_hidden",
+        field=dict(help_text=_("Whether to hide the engagement breakdown charts."), required=False),
     ),
     dict(
         name="iso_code",

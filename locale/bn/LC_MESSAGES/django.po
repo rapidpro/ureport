@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-09-29 10:33+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1740,8 +1740,8 @@ msgstr "যদি এই প্রতিষ্ঠান এর তথ্যগ�
 msgid "Whether to activate an extra gender."
 msgstr "বাড়তি কোন লিঙ্গ সক্রিয় করা হবে কি না"
 
-msgid "Whether to activate the new design."
-msgstr "নতুন কোন ডিজাইন সক্রিয় করা হবে কি না"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "প্রতিষ্ঠানটির alpha-3 ISO কোড যা U-Report অ্যাপ-এর স্টোরি তে থাকবে। যেমন- BRA, NIG, CMR (GLOBAL ব্যবহার করুন যদি U-Report GLOBAL হয়)। "
@@ -1801,6 +1801,9 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "নতুন কোন ডিজাইন সক্রিয় করা হবে কি না"
 
 #~ msgid "JOIN NOW"
 #~ msgstr "এখুনি যোগদান করুন"

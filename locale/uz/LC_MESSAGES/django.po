@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-09-29 10:33+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -1728,8 +1728,8 @@ msgstr "Ushbu tashkilot umumjahon ma'lumotlari uchunmi. Misol: U mamlakat xarita
 msgid "Whether to activate an extra gender."
 msgstr "Qo'shimcha jinsni faollashtirish lozimmi"
 
-msgid "Whether to activate the new design."
-msgstr "Yangi disaynni faollashtirish lozimmi."
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Tashkilotning alpha-3 ISO kodi, maqsad shuki, unda U-Report ilovasining hikoyalar widjeti namoyish etilsin. Misol: BRA, NIG, CMR (GLOBAL ni ishlating, agar U-Report umumjahon bo'lsa)"
@@ -1787,6 +1787,9 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Yangi disaynni faollashtirish lozimmi."
 
 #~ msgid "JOIN NOW"
 #~ msgstr "HOZIR QO'SHILING"

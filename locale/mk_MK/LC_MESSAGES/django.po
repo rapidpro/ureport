@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-09-29 10:33+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -1712,8 +1712,8 @@ msgstr "Дали оваа организација вклучува глобал
 msgid "Whether to activate an extra gender."
 msgstr "Дали да се активира додатно родово определување"
 
-msgid "Whether to activate the new design."
-msgstr "Дали да се активира новиот дизајн"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Аlpha-3 ISO код на организацијата кој ќе го прикаже stories widget U-Report App. Пр: BRA, NIG, CMR (Користи GLOBAL ако U-Report е Global)."
@@ -1771,3 +1771,6 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Дали да се активира новиот дизајн"
