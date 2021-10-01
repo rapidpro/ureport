@@ -1752,6 +1752,11 @@ msgstr "12 oy"
 msgid "Age"
 msgstr "Yosh"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "O'zgarishlarni saqlash"
+
 msgid "Location"
 msgstr "Joylashgan o'rni"
 

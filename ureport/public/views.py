@@ -419,7 +419,10 @@ class UreportersView(SmartTemplateView):
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
         context["registration_stats"] = org.get_registration_stats()
-        context["occupation_stats"] = org.get_occupation_stats()
+
+        scheme_stats = org.get_schemes_stats()
+        context["scheme_bar_height"] = (50 * len(scheme_stats)) + 30
+        context["schemes_stats"] = scheme_stats
         context["reporters"] = org.get_reporters_count()
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
@@ -439,7 +442,7 @@ class UreportersView(SmartTemplateView):
         context["data_segments"] = [
             dict(segment_type=key, label=str(val))
             for key, val in PollStats.DATA_SEGMENTS.items()
-            if key != "location" or show_maps
+            if (key != "location" or show_maps)
         ]
 
         context["data_metrics"] = [dict(slug=key, title=str(val)) for key, val in PollStats.DATA_METRICS.items()]

@@ -1885,6 +1885,11 @@ msgid "Age"
 msgstr ""
 
 #, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Simpan Perubahan"
+
+#, fuzzy
 #| msgid "Population"
 msgid "Location"
 msgstr "Populasi"

@@ -1898,6 +1898,11 @@ msgid "Age"
 msgstr ""
 
 #, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Sačuvaj promene"
+
+#, fuzzy
 #| msgid "Population"
 msgid "Location"
 msgstr "Populacija"

@@ -37,13 +37,22 @@ class AgeSegment(models.Model):
 
 
 class SchemeSegment(models.Model):
+
+    SCHEME_DISPLAY = {"tel": "SMS", "twitterid": "TWITTER", "ext": None}
+
     scheme = models.CharField(max_length=16, unique=True)
 
 
 class PollStats(models.Model):
     DATA_TIME_FILTERS = {3: _("90 Days"), 6: _("6 Months"), 12: _("12 Months")}
 
-    DATA_SEGMENTS = {"all": _("All"), "gender": _("Gender"), "age": _("Age"), "location": _("Location")}
+    DATA_SEGMENTS = {
+        "all": _("All"),
+        "gender": _("Gender"),
+        "age": _("Age"),
+        "scheme": _("Channels"),
+        "location": _("Location"),
+    }
 
     DATA_METRICS = {
         "opinion-responses": _("Opinion Responses"),
@@ -213,7 +222,6 @@ class PollStats(models.Model):
 
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
-
         key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"
         output_data = cache.get(key, None)
         if output_data:
@@ -236,6 +244,8 @@ class PollStats(models.Model):
                 output_data = PollStats.get_gender_opinion_responses(org, time_filter)
             if segment_slug == "location":
                 output_data = PollStats.get_location_opinion_responses(org, time_filter)
+            if segment_slug == "scheme":
+                output_data = PollStats.get_scheme_opinion_responses(org, time_filter)
 
         if metric == "sign-up-rate":
             if segment_slug == "all":
@@ -246,6 +256,8 @@ class PollStats(models.Model):
                 output_data = org.get_sign_up_rate_gender(time_filter)
             if segment_slug == "location":
                 output_data = org.get_sign_up_rate_location(time_filter)
+            if segment_slug == "scheme":
+                output_data = org.get_sign_up_rate_scheme(time_filter)
 
         if metric == "response-rate":
             if segment_slug == "all":
@@ -256,6 +268,8 @@ class PollStats(models.Model):
                 output_data = PollStats.get_gender_response_rate_series(org, time_filter)
             if segment_slug == "location":
                 output_data = PollStats.get_location_response_rate_series(org, time_filter)
+            if segment_slug == "scheme":
+                output_data = PollStats.get_scheme_response_rate_series(org, time_filter)
 
         if metric == "active-users":
             if segment_slug == "all":
@@ -266,6 +280,8 @@ class PollStats(models.Model):
                 output_data = ContactActivity.get_activity_gender(org, time_filter)
             if segment_slug == "location":
                 output_data = ContactActivity.get_contact_activity_location(org, time_filter)
+            if segment_slug == "scheme":
+                output_data = ContactActivity.get_contact_activity_scheme(org, time_filter)
 
         if output_data:
             cache.set(key, {"results": output_data}, None)
@@ -319,6 +335,42 @@ class PollStats(models.Model):
             )
             series = PollStats.get_counts_data(responses, time_filter)
             output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=series))
+        return output_data
+
+    @classmethod
+    def get_scheme_opinion_responses(cls, org, time_filter):
+        now = timezone.now()
+        year_ago = now - timedelta(days=365)
+        start = year_ago.replace(day=1)
+        translation.activate(org.language)
+
+        flow_result_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
+        )
+
+        schemes = SchemeSegment.objects.all().values("scheme", "id")
+        org_contacts_counts = org.get_org_contacts_counts()
+        org_schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
+
+        output_data = []
+        for scheme in schemes:
+            if scheme["scheme"] not in org_schemes:
+                continue
+
+            responses = (
+                PollStats.objects.filter(
+                    org=org, date__gte=start, scheme_segment_id=scheme["id"], flow_result_id__in=flow_result_ids
+                )
+                .exclude(flow_result_category=None)
+                .values("date")
+                .annotate(Sum("count"))
+            )
+            series = PollStats.get_counts_data(responses, time_filter)
+
+            name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
+            if not name:
+                continue
+            output_data.append(dict(name=name, data=series))
         return output_data
 
     @classmethod
@@ -470,6 +522,48 @@ class PollStats(models.Model):
             )
             series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
             output_data.append(dict(name=name, osm_id=osm_id, data=series))
+        return output_data
+
+    @classmethod
+    def get_scheme_response_rate_series(cls, org, time_filter):
+        now = timezone.now()
+        year_ago = now - timedelta(days=365)
+        start = year_ago.replace(day=1)
+        flow_result_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
+        )
+
+        schemes = SchemeSegment.objects.all().values("scheme", "id")
+        org_contacts_counts = org.get_org_contacts_counts()
+        org_schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
+
+        output_data = []
+        for scheme in schemes:
+            if scheme["scheme"] not in org_schemes:
+                continue
+
+            polled_stats = (
+                PollStats.objects.filter(
+                    org=org, date__gte=start, scheme_segment_id=scheme["id"], flow_result_id__in=flow_result_ids
+                )
+                .values("date")
+                .annotate(Sum("count"))
+            )
+            responded_stats = (
+                PollStats.objects.filter(
+                    org=org, date__gte=start, scheme_segment_id=scheme["id"], flow_result_id__in=flow_result_ids
+                )
+                .exclude(flow_result_category=None)
+                .values("date")
+                .annotate(Sum("count"))
+            )
+            gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
+
+            name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
+            if not name:
+                continue
+            output_data.append(dict(name=name, data=gender_rate_series))
+
         return output_data
 
     @classmethod
@@ -759,6 +853,33 @@ class ContactActivity(models.Model):
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=name, osm_id=osm_id, data=series))
+        return output_data
+
+    @classmethod
+    def get_contact_activity_scheme(cls, org, time_filter):
+        now = timezone.now()
+        today = now.date()
+        year_ago = now - timedelta(days=365)
+        start = year_ago.replace(day=1).date()
+
+        org_contacts_counts = org.get_org_contacts_counts()
+        schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
+
+        output_data = []
+        for scheme in schemes:
+            activities = (
+                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, scheme=scheme)
+                .values("date")
+                .annotate(Count("id"))
+            )
+            series = ContactActivity.get_activity_data(activities, time_filter)
+
+            name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
+            if not name:
+                continue
+
+            output_data.append(dict(name=name, data=series))
+
         return output_data
 
 

@@ -1750,6 +1750,11 @@ msgstr "12 месеца"
 msgid "Age"
 msgstr "Възраст"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Запази промените"
+
 msgid "Location"
 msgstr "Местоположение"
 

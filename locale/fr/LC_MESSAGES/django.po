@@ -1710,6 +1710,11 @@ msgstr "12 mois"
 msgid "Age"
 msgstr "Age"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Enregistrer les modifications"
+
 msgid "Location"
 msgstr "Lieu"
 

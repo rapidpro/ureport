@@ -1876,6 +1876,11 @@ msgid "Age"
 msgstr ""
 
 #, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Lưu thay đổi"
+
+#, fuzzy
 #| msgid "Population"
 msgid "Location"
 msgstr "Dân số"
