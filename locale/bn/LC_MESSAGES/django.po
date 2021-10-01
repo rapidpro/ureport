@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:05+0000\n"
+"POT-Creation-Date: 2021-10-01 11:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1048,6 +1048,9 @@ msgstr "অঞ্চলভেদে U-REPORTERS "
 
 msgid "FILTER RESULTS"
 msgstr "ফলাফল ফিল্টার করুন"
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
 
 msgid "Export and Share"
 msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"

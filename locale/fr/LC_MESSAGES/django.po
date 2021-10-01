@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:05+0000\n"
+"POT-Creation-Date: 2021-10-01 11:51+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1037,6 +1037,9 @@ msgstr "U-REPORTERS PAR REGION"
 
 msgid "FILTER RESULTS"
 msgstr "FILTRER LES RÉSULTATS"
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
 
 msgid "Export and Share"
 msgstr "Exporter et Partager"
