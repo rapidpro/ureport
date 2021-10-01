@@ -401,36 +401,6 @@ ORG_CONFIG_FIELDS = [
         field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False),
         superuser_only=True,
     ),
-    # deprecated, can be removed after v2 launch
-    dict(
-        name="join_fg_color",
-        field=dict(help_text=_("The color used to draw the text on the join bar"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, can be removed after v2 launch
-    dict(
-        name="join_bg_color",
-        field=dict(help_text=_("The color used to draw the background on the join bar"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, should be replaced by dark1
-    dict(
-        name="primary_color",
-        field=dict(help_text=_("The primary color for styling for this organization"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, should be replaced by dark2
-    dict(
-        name="secondary_color",
-        field=dict(help_text=_("The secondary color for styling for this organization"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, can be removed after v2 launch
-    dict(
-        name="bg_color",
-        field=dict(help_text=_("The background color for the site"), required=False),
-        superuser_only=True,
-    ),
     dict(
         name="colors_map",
         field=dict(
@@ -575,10 +545,8 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
-        name="has_new_design",
-        field=dict(help_text=_("Whether to activate the new design."), required=False),
-        superuser_only=True,
-        read_only=True,
+        name="has_charts_hidden",
+        field=dict(help_text=_("Whether to hide the engagement breakdown charts."), required=False),
     ),
     dict(
         name="iso_code",

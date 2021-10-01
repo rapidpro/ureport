@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-09-30 12:05+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -1625,21 +1625,6 @@ msgstr "Den sekundære highlight-fargen tilknyttet denne organisasjonen, bør v�
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Du kan ha opptil 6 farger for styling charts, bruk komma mellom fargene"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Tekstfarge på \"delta/bli med\"-baren"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Bakgrunnsfarge for \"delta/bli med\"-baren"
-
-msgid "The primary color for styling for this organization"
-msgstr "Primærfargen for styling tilknyttet denne organisasjonen"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen"
-
-msgid "The background color for the site"
-msgstr "Bakgrunnsfargen for siden"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 farger for styling-kart, bruk komma mellom fargene, vil kun fungere med 11 farger"
 
@@ -1702,8 +1687,8 @@ msgstr "Skal denne organisasjonen ha global data? MAO: skal det være et verdens
 msgid "Whether to activate an extra gender."
 msgstr "Aktiver fler kjønnsidentiteter"
 
-msgid "Whether to activate the new design."
-msgstr "Aktiver nytt design"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO koden for organisasjonen, slik at story widget fra U-Report appen fremvises. For eksempel: BRA, NIG, CMR (bruk GLOBAL hvis U-Reporten er global)."
@@ -1761,6 +1746,24 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Tekstfarge på \"delta/bli med\"-baren"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Bakgrunnsfarge for \"delta/bli med\"-baren"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Primærfargen for styling tilknyttet denne organisasjonen"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Bakgrunnsfargen for siden"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Aktiver nytt design"
 
 #~ msgid "JOIN NOW"
 #~ msgstr "BLI MED NÅ"

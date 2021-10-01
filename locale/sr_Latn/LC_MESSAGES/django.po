@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-09-30 12:05+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1786,21 +1786,6 @@ msgstr "Sekundarna boja za ovu postavku"
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Do 6 boja za stilizovanje grafika, koristite zarez izmedju boja"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Boja za pisanje teksta na polju za pridruživanje"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
-
-msgid "The primary color for styling for this organization"
-msgstr "Primarna boja za ovu postavku"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Sekundarna boja za ovu postavku"
-
-msgid "The background color for the site"
-msgstr "Pozadinska boja ove stranice"
-
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
@@ -1869,7 +1854,7 @@ msgstr "Da li ova postavka uključuje globalne podatke, npr. mapu sveta umesto m
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-msgid "Whether to activate the new design."
+msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
@@ -1938,6 +1923,21 @@ msgstr "Da li je priča objavljena"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Boja za pisanje teksta na polju za pridruživanje"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Primarna boja za ovu postavku"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Sekundarna boja za ovu postavku"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Pozadinska boja ove stranice"
 
 #, fuzzy
 #~| msgid ""
