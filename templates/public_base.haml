@@ -569,23 +569,24 @@
                 %i.fas.fa-bars
                 %i.fas.fa-times.hidden
 
-      .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.hidden.border-b.pb-6(class="md:flex")
-        .flex-1
-          .p-8.hover-parent
-            {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark"  %}
+      -block top-join-call
+        .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.border-b.pb-6(class="md:flex")
+          .flex-1
+            .p-8.hover-parent
+              {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark"  %}
 
-            .text-3xl.font-bold.leading-tight.text-center
-              -if org|config:"join_text"
-                {{ org|config:"join_text" }}
-              -else
-                - trans "Join U-Report, Your voice matters."
+              .text-3xl.font-bold.leading-tight.text-center
+                -if org|config:"join_text"
+                  {{ org|config:"join_text" }}
+                -else
+                  - trans "Join U-Report, Your voice matters."
 
-            .mt-8.text-center
-              %a.btn.bg-black.text-white(href="{% url 'public.join' %}" class="hover:bg-gray-700")
-                - if org|config:"join_button_text"
-                  {{ org|config:"join_button_text" }}
-                - else
-                  -trans "Join Now"
+              .mt-8.text-center
+                %a.btn.bg-black.text-white(href="{% url 'public.join' %}" class="hover:bg-gray-700")
+                  - if org|config:"join_button_text"
+                    {{ org|config:"join_button_text" }}
+                  - else
+                    -trans "Join Now"
      
       -block content
   
