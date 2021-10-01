@@ -90,13 +90,17 @@
 
         .text-white.font-bold.flex-center-y.flex-row(class="md:flex-col")
           -trans "FILTER RESULTS"
-  
+
+        -if org|config:"common.has_charts_hidden"
+          .mx-auto.px-home
+            .px-home.py-2.text-white.flex-center.border-white.border.text-center
+              -trans "Charts only visible for logged in admins"
+
         .flex-center-y.flex-row(class="md:flex-col")
           .text-white.text-xs.flex
             - for time_filter in data_time_filters
               .cursor-pointer.border-white.pill-black.tab-button-time-filter.whitespace-no-wrap(class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
                 {{time_filter.label}}
-  
     .bg-dark-blue.border-b.border-gray-600
       .max-w-page.mx-auto.p-home.text-white
         - for time_filter in data_time_filters
