@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunSQL(INDEX_POLLSTATS_ORG_RESULT_SQL),
-        migrations.RunSQL(INDEX_POLLSTATS_ORG_QST_RST_CAT_SQL),
+        migrations.RunSQL(INDEX_POLLSTATS_ORG_RESULT_SQL, ""),
+        migrations.RunSQL(INDEX_POLLSTATS_ORG_QST_RST_CAT_SQL, ""),
     ]
