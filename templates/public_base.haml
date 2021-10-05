@@ -142,13 +142,16 @@
       }
 
     :javascript
-      {% if org|config:"colors" %}
-      var orgColors = '{{org|config:"colors"}}'.split(',');
-      {% else %}
-      var orgColors = [
-        "#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"
-      ];
-      {% endif %}
+      var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
+      var orgColors = '{{org|config:"colors"|default:""}}'.toUpperCase().split(',');
+
+      for (var i = 0; i < defaultColors.length; i++) {
+        var elt = defaultColors[i].trim().toUpperCase();
+        if ((orgColors.length <= 6) && (!orgColors.includes(elt))) {
+          orgColors.push(elt);
+        }
+      }
+
 
     -if org and org|config:"google_tag_manager_id"
       <!-- Google Tag Manager -->
