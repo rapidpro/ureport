@@ -582,7 +582,7 @@
                   - trans "Join U-Report, Your voice matters."
 
               .mt-8.text-center
-                %a.btn.bg-black.text-white(href="{% url 'public.join' %}" class="hover:bg-gray-700")
+                %a.btn.bg-light1.text-black.hover-dark(href="{% url 'public.join' %}")
                   - if org|config:"join_button_text"
                     {{ org|config:"join_button_text" }}
                   - else
