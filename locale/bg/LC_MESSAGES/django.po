@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1609,6 +1609,11 @@ msgstr "Шрифтът, използван за обикновен текст "
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Краткият текст, който насочва посетителите да се присъединят към U-Report"
+
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Заглавието на секцията със снимки на началната страница на U-Report "
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Идентификация на YouTube клипа за това как да се присъедините към U-Report"
