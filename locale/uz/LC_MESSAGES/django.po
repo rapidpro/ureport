@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -699,6 +699,9 @@ msgstr "Chiqish"
 msgid "Opinions"
 msgstr "Mulohazalar"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
@@ -1230,6 +1233,47 @@ msgstr "Ushbu suratga qisqacha ta'riflovchi nom"
 
 msgid "Image type"
 msgstr "Tasvir turi"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Mazkur so'rov uy sahifasida alohida ajralib turishi kerakmi"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Ushbu element uchun sarlavha"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Ushbu hikoya uchun toifa"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The description of the stories page"
+msgid "The description text for this bot"
+msgstr "Hikoyalar sahifasining bayoni"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Mazkur savolning so'rovnoma sahifasidagi ustivorligi, ustivorligi yoqori bo'lgani avval keladi"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
 
 msgid "Label"
 msgstr "Yorliq"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -726,6 +726,9 @@ msgstr "Keluar"
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Nama Pengguna"
 
@@ -1313,6 +1316,47 @@ msgstr "Sebuah nama deskriptif singkat untuk gambar ini"
 
 msgid "Image type"
 msgstr "Tipe Gambar"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "organisasi jajak pendapat ini adalah bagian dari"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Apakah jajak pendapat ini harus tampil di homepage"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Judul untuk item ini"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Kategori cerita"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description text for this bot"
+msgstr "Lokasi responden"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih tinggi yang lebih dulu"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
 
 msgid "Label"
 msgstr "Label"

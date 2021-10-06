@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -696,6 +696,9 @@ msgstr "Sair"
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Utilizadores"
 
@@ -1254,6 +1257,45 @@ msgstr "Um nome descritivo curto para esta imagem"
 
 msgid "Image type"
 msgstr "Tipo de Imagem"
+
+#, fuzzy
+#| msgid "The organization this item belongs to"
+msgid "The organization this bot is part of"
+msgstr "A organização na qual este item pertence"
+
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "O título deste item"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "A categoria para esta história"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description text for this bot"
+msgstr "A localização da pessoa que responde."
+
+#, fuzzy
+#| msgid "The priority for this block, higher priority blocks come first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "A prioridade para este bloco, blocos de mais elevada prioridade vêm em primeiro lugar"
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "Whether this bot should be shown to the public"
+msgstr "Se existem vagas de emprego a serem visualizados no site público"
 
 msgid "Label"
 msgstr "Categoria"

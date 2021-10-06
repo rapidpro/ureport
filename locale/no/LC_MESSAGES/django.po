@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -698,6 +698,9 @@ msgstr "Logg ut"
 msgid "Opinions"
 msgstr "Meninger"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Brukere"
 
@@ -1212,6 +1215,47 @@ msgstr "En kort  beskrivelse av dette bildet"
 
 msgid "Image type"
 msgstr "Bildetype"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organisasjonen denne undersøkelsen tilhører"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Undersøkelsen skal vises på hovedsiden"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Tittelen på dette elementet"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Kategorien til denne historien"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The description of the stories page"
+msgid "The description text for this bot"
+msgstr "Beskrivelse av historiesiden"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Organisasjonen skal vises på landingssiden"
 
 msgid "Label"
 msgstr "Etikett"

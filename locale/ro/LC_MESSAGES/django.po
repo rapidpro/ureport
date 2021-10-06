@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -706,6 +706,9 @@ msgstr "Deconectare"
 msgid "Opinions"
 msgstr "Opinii"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Utilizatori"
 
@@ -1244,6 +1247,47 @@ msgstr "O scurtă denumire descriptivă pentru această imagine"
 
 msgid "Image type"
 msgstr "Tipul imaginii"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organizația la care face parte acest sondaj"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Dacă acest sondaj ar trebui să fie afișat pe pagina principală"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Titlul pentru acest element"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Categoria pentru acest articol"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The description of the stories page"
+msgid "The description text for this bot"
+msgstr "Descrierea paginii de istorioare"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioritatea acestei întrebări pe pagina de sondaj, prioritatea mai mare se află în partea de sus a paginii"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
 
 msgid "Label"
 msgstr "Etichetă"

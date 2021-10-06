@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -697,6 +697,9 @@ msgstr "تسجيل الخروج "
 msgid "Opinions"
 msgstr "استطلاع الرأي"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "المستخدمين"
 
@@ -1214,6 +1217,47 @@ msgstr "وصف مختصر عن الصورة"
 
 msgid "Image type"
 msgstr "نوع الصورة "
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "هل تعتقد أن هذا الإستطلاع إستثنائي ويجب نشره في الصفحة الرئيسية؟"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "عنوان البند "
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "فئة المقال"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The description text for this bot"
+msgstr "عنوان البند "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "ترتيب هذا السؤال على صفحة الاستطلاع، الأكثر أولوية يأتي أولاً "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "Label"
 msgstr "ملصق"

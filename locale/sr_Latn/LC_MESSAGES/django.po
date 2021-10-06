@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -735,6 +735,9 @@ msgstr "Odjava"
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Korisnici"
 
@@ -1334,6 +1337,47 @@ msgstr "Kratko opisno ime za ovu sliku"
 
 msgid "Image type"
 msgstr "Tip slike"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organizacija kojoj anketa pripada"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Treba li anketa biti prikazana na početnoj stranici"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Naslov ove stavke"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Kategorija za ovu priču"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description text for this bot"
+msgstr "Lokacija ispitanika"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Nivo prioriteta ovog pitanja u anketi. Pitanja s najvećim prioritetom idu prva"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
 msgid "Label"
 msgstr "Oznaka"

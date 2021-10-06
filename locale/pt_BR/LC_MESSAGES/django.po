@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-10-06 17:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -706,6 +706,9 @@ msgstr "Sair"
 msgid "Opinions"
 msgstr "Opiniões"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Usuários"
 
@@ -1242,6 +1245,47 @@ msgstr "Um nome descritivo curto para esta imagem"
 
 msgid "Image type"
 msgstr "Tipo de Imagem"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "A organização desta esquete é parte de"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Se essa enquete deve ser destaque na página inicial"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "O título para esse item"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "A categoria para esta história"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The description of the stories page"
+msgid "The description text for this bot"
+msgstr "A descrição da página de histórias"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioridade dessa pergunta na página de enquetes, a maior aparecerá primeiro"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Se esta organização deve aparecer na página de destino"
 
 msgid "Label"
 msgstr "Rótulo"
