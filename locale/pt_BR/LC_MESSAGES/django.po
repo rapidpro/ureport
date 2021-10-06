@@ -1745,8 +1745,8 @@ msgstr "Se esta organização é para dados globais. Por exemplo: Ela mostra um 
 msgid "Whether to activate an extra gender."
 msgstr "Se deve ativar um gênero extra."
 
-msgid "Whether to activate the new design."
-msgstr "Se deve ativar o novo design."
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "O código alfa-3 ISO da organização que aparecerá no widget de histórias no aplicativo do U-Report. Exemplo: BRA, NIG, CMR (Use GLOBAL se U-Report for Global)."
@@ -1806,6 +1806,9 @@ msgstr "Se esta história é destaque"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Se deve ativar o novo design."
 
 #~ msgid "JOIN NOW"
 #~ msgstr "PARTICIPE JÁ!"

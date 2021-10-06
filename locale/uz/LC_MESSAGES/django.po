@@ -1733,8 +1733,8 @@ msgstr "Ushbu tashkilot umumjahon ma'lumotlari uchunmi. Misol: U mamlakat xarita
 msgid "Whether to activate an extra gender."
 msgstr "Qo'shimcha jinsni faollashtirish lozimmi"
 
-msgid "Whether to activate the new design."
-msgstr "Yangi disaynni faollashtirish lozimmi."
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Tashkilotning alpha-3 ISO kodi, maqsad shuki, unda U-Report ilovasining hikoyalar widjeti namoyish etilsin. Misol: BRA, NIG, CMR (GLOBAL ni ishlating, agar U-Report umumjahon bo'lsa)"
@@ -1792,6 +1792,9 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Yangi disaynni faollashtirish lozimmi."
 
 #~ msgid "JOIN NOW"
 #~ msgstr "HOZIR QO'SHILING"

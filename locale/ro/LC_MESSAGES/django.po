@@ -1747,8 +1747,8 @@ msgstr "Dacă această organizație este destinată pentru date globale, de ex.:
 msgid "Whether to activate an extra gender."
 msgstr "În caz dacă activați un gen suplimentar."
 
-msgid "Whether to activate the new design."
-msgstr "În caz dacă activați noul design."
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Codul ISO alpha-3 pentru organizaţie care va apărea în widget-ul de istorii U-Report App. De exemplu: BRA, NIG, CMR (a se utiliza GLOBAL dacă U-Reporterul este Global)."
@@ -1808,6 +1808,9 @@ msgstr "Dacă acest articol este recomandat"
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "În caz dacă activați noul design."
 
 #~ msgid "JOIN NOW"
 #~ msgstr "ALĂTURĂ-TE ACUM"

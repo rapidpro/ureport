@@ -1724,8 +1724,8 @@ msgstr "Je li ova postavka uključuje globalne podatke, npr. mapu svijeta umjest
 msgid "Whether to activate an extra gender."
 msgstr "Treba li aktivirati dodatno rodno opredjeljenje"
 
-msgid "Whether to activate the new design."
-msgstr "Treba li aktivirati novi dizajn"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO kod organizacije koji će inicirati widget priče U-Report App. Primjer: BRA, NIG, CMR (Koristite GLOBAL ako je U-Report globalan)."
@@ -1783,3 +1783,6 @@ msgstr "Je li priča objavljena"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Treba li aktivirati novi dizajn"

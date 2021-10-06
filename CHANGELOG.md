@@ -1,3 +1,17 @@
+v1.1.295
+----------
+ * Merge pull request #784 from rapidpro/FB-customerchat-dialog-hidden
+ * Merge pull request #783 from rapidpro/resumable-scheme-backfill
+ * Merge pull request #782 from rapidpro/better-index
+ * Merge pull request #779 from rapidpro/engagement-chart-1
+ * Hide customer chat plugin dialog until user clicks on it
+ * Run code_check
+ * Make scheme backfill tasks resumable
+ * Show chart breakdown by default on engagement page
+ * Add better indexes
+ * Merge pull request #780 from Ilhasoft/feature/kyrgyzstan-flag
+ * feat: Add Kyrgyzstan flag
+
 v1.1.294
 ----------
  * Merge pull request #778 from rapidpro/use-slow-queue-to-backfill

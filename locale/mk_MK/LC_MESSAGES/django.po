@@ -1717,8 +1717,8 @@ msgstr "Дали оваа организација вклучува глобал
 msgid "Whether to activate an extra gender."
 msgstr "Дали да се активира додатно родово определување"
 
-msgid "Whether to activate the new design."
-msgstr "Дали да се активира новиот дизајн"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Аlpha-3 ISO код на организацијата кој ќе го прикаже stories widget U-Report App. Пр: BRA, NIG, CMR (Користи GLOBAL ако U-Report е Global)."
@@ -1776,3 +1776,6 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Дали да се активира новиот дизајн"

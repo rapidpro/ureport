@@ -1707,8 +1707,8 @@ msgstr "Skal denne organisasjonen ha global data? MAO: skal det være et verdens
 msgid "Whether to activate an extra gender."
 msgstr "Aktiver fler kjønnsidentiteter"
 
-msgid "Whether to activate the new design."
-msgstr "Aktiver nytt design"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO koden for organisasjonen, slik at story widget fra U-Report appen fremvises. For eksempel: BRA, NIG, CMR (bruk GLOBAL hvis U-Reporten er global)."
@@ -1766,6 +1766,9 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Aktiver nytt design"
 
 #~ msgid "JOIN NOW"
 #~ msgstr "BLI MED NÅ"

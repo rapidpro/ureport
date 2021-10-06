@@ -1850,7 +1850,7 @@ msgstr "Liệu tổ chức này có áp dụng đối với thông tin toàn c�
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-msgid "Whether to activate the new design."
+msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
