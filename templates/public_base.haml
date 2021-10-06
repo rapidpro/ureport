@@ -573,11 +573,11 @@
         .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.border-b.pb-6(class="md:flex")
           .flex-1
             .p-8.hover-parent
-              {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark"  %}
+              {% edit_content 'orgs.org_edit' "" "#id_common.join_text_top"  "-m-8"  "dark"  %}
 
               .text-3xl.font-bold.leading-tight.text-center
-                -if org|config:"join_text"
-                  {{ org|config:"join_text" }}
+                -if org|config:"join_text_top"
+                  {{ org|config:"join_text_top" }}
                 -else
                   - trans "Join U-Report, Your voice matters."
 
