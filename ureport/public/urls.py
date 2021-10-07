@@ -9,6 +9,7 @@ from django.views.generic import RedirectView
 from .views import (
     AboutView,
     BoundaryView,
+    Bots,
     Count,
     CountriesView,
     CustomPage,
@@ -36,6 +37,7 @@ urlpatterns = [
     url(r"^$", IndexView.as_view(), {}, "public.index"),
     url(r"^news/$", NewsView.as_view(), {}, "public.news"),
     url(r"^about/$", AboutView.as_view(), {}, "public.about"),
+    url(r"^bots/$", Bots.as_view(), {}, "public.bots"),
     url(r"^opinions/$", PollsView.as_view(), {}, "public.opinions"),
     url(r"^polls/$", RedirectView.as_view(pattern_name="public.opinions"), {}, "public.polls"),
     url(r"^opinion/(?P<pk>\d+)/$", PollReadView.as_view(), {}, "public.opinion_read"),

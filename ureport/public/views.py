@@ -29,6 +29,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import RedirectView
 
+from ureport.bots.models import Bot
 from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
@@ -462,6 +463,17 @@ class JoinEngageView(SmartTemplateView):
         org = self.request.org
         context["org"] = org
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
+        return context
+
+
+class Bots(SmartTemplateView):
+    template_name = "public/bots.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(Bots, self).get_context_data(**kwargs)
+        org = self.request.org
+        context["org"] = org
+        context["bots"] = Bot.objects.filter(org=org, is_active=True).order_by("-priority")
         return context
 
 

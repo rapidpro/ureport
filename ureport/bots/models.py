@@ -23,11 +23,9 @@ class Bot(SmartModel):
 
     keyword = models.CharField(max_length=128, help_text=_("The keyword for this bot"))
 
-    deeplink = models.URLField(null=True, help_text=_("The deeplink for this bot, if any is available"))
+    deeplink = models.URLField(null=True, blank=True, help_text=_("The deeplink for this bot, optional"))
 
-    description = models.CharField(
-        max_length=640, blank=True, null=True, help_text=_("The description text for this bot")
-    )
+    description = models.TextField(blank=True, null=True, help_text=_("The description of this bot, optional"))
 
     priority = models.IntegerField(
         default=0, help_text=_("The priority number for this bot among others on a list, high priority comes first")
