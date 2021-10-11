@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 11:35+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -1597,6 +1597,9 @@ msgstr ""
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "النص القصير المستخدم لتوجيه الزائرين للتسجيل في يو-ريبورت"
 
+msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -1635,21 +1638,6 @@ msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "إختر 6 ألوان لتنسيق الرسوم البيانية، الرجاء الفصل بين الألوان بفاصلة "
-
-msgid "The color used to draw the text on the join bar"
-msgstr "لون النص المستخدم في شريط التسجيل "
-
-msgid "The color used to draw the background on the join bar"
-msgstr "لون الخلفية المستخدم في شريط التسجيل "
-
-msgid "The primary color for styling for this organization"
-msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
-
-msgid "The secondary color for styling for this organization"
-msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
-
-msgid "The background color for the site"
-msgstr "لون الخلفية التي تريد إستخدامها لصفحات الموقع "
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr ""
@@ -1779,6 +1767,21 @@ msgstr "هل هذه المقالة إستثنائية أو مميزة "
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "لون النص المستخدم في شريط التسجيل "
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "لون الخلفية المستخدم في شريط التسجيل "
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
+
+#~ msgid "The background color for the site"
+#~ msgstr "لون الخلفية التي تريد إستخدامها لصفحات الموقع "
 
 #~ msgid "JOIN NOW"
 #~ msgstr "انضم الآن!"

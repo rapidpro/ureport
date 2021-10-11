@@ -246,7 +246,7 @@ showChart = (questionID, segmentName) ->
           name: category.label
           y: category.count
           weight: category.count
-          percent: if total > 0 then Math.round(category.count / total * 100) else 0
+          percent: if segment.set > 0 then Math.round(category.count / segment.set * 100) else 0
         })
 
       # ignore states that aren't included
@@ -393,7 +393,10 @@ showChart = (questionID, segmentName) ->
         }
         title: { text: null }
         yAxis: { visible: false }
-        tooltip: { enabled: true }
+        tooltip: {
+          enabled: true
+          pointFormat: '{series.name}: <b>{point.percent}%</b><br/>'
+        }
         xAxis: {
           categories: categories
           opposite: false

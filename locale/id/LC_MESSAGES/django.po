@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 11:35+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1721,6 +1721,9 @@ msgstr ""
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung U-Report"
 
+msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -1773,21 +1776,6 @@ msgstr "Warna sekunder untuk desain organisasi ini"
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Sampai dengan 6 warna untuk styling grafik, Gunakan koma di antara warna pilihan"
-
-msgid "The color used to draw the text on the join bar"
-msgstr "Warna yang digunakan untuk menggambar teks pada gambar bersama"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Warna yang digunakan untuk menggambar latar belakang pada gambar bersama"
-
-msgid "The primary color for styling for this organization"
-msgstr "Warna utama untuk desain organisasi ini"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Warna sekunder untuk desain organisasi ini"
-
-msgid "The background color for the site"
-msgstr "Warna latar belakang untuk situs"
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -1933,6 +1921,21 @@ msgstr "Cerita ini di tampilkan di halaman depan"
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Warna yang digunakan untuk menggambar teks pada gambar bersama"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Warna yang digunakan untuk menggambar latar belakang pada gambar bersama"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Warna utama untuk desain organisasi ini"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Warna sekunder untuk desain organisasi ini"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Warna latar belakang untuk situs"
 
 #, fuzzy
 #~| msgid ""

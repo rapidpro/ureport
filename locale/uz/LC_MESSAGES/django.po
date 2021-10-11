@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 11:35+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -1615,6 +1615,11 @@ msgstr "Oddiy matn uchun qo'llaniluvchi shrift"
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
 
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "U-Report sahifasidagi fotosur'atlar qismining sarlavhasi"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "U-Report qismiga qanday qo'shilish haqidagi YouTube video IDsi"
 
@@ -1653,21 +1658,6 @@ msgstr "Ushbu tashkilotni bezash uchun ikkilamchi ajratish rangi, och rang bo'li
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
-
-msgid "The color used to draw the text on the join bar"
-msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
-
-msgid "The primary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
-
-msgid "The background color for the site"
-msgstr "Sahifa uchun orqa fon rangi"
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "Bezash xaritalari uchun 11 ta rang, ranglar orasini vergul bilan ajrating, agar 11 ta rang bo'lmaydigan bo'lsa ishlatilmaydi"
@@ -1795,6 +1785,21 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Sahifa uchun orqa fon rangi"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "Yangi disaynni faollashtirish lozimmi."

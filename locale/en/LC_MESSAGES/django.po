@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 11:35+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1532,6 +1532,9 @@ msgstr ""
 msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
 
+msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -1569,21 +1572,6 @@ msgid "The secondary highlight color for styling for this organization, should b
 msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
-
-msgid "The color used to draw the text on the join bar"
-msgstr ""
-
-msgid "The color used to draw the background on the join bar"
-msgstr ""
-
-msgid "The primary color for styling for this organization"
-msgstr ""
-
-msgid "The secondary color for styling for this organization"
-msgstr ""
-
-msgid "The background color for the site"
 msgstr ""
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
