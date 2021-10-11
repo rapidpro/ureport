@@ -94,21 +94,16 @@ def org_color(org, index):
     if not org:
         return None
 
-    org_colors = org.get_config("common.colors")
+    default_colors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"]
 
-    if org_colors:
-        org_colors = org_colors.split(",")
-    else:
-        if org.get_config("common.primary_color") and org.get_config("common.secondary_color"):
-            org_colors = [
-                org.get_config("common.primary_color").strip(),
-                org.get_config("common.secondary_color").strip(),
-            ]
-        else:
-            org_colors = [
-                getattr(settings, "UREPORT_DEFAULT_PRIMARY_COLOR"),
-                getattr(settings, "UREPORT_DEFAULT_SECONDARY_COLOR"),
-            ]
+    org_colors = org.get_config("common.colors", "").upper().split(",")
+    org_colors = [elt.strip() for elt in org_colors if elt.strip()]
+
+    for elt in default_colors:
+        if len(org_colors) >= 6:
+            break
+        if elt.upper() not in org_colors:
+            org_colors.append(elt.upper())
 
     return org_colors[int(index) % len(org_colors)].strip()
 

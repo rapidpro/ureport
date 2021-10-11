@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-09-30 12:05+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -1663,21 +1663,6 @@ msgstr "A cor de destaque secundária do estilo para esta organização deve ser
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Até 6 cores para definir o estilo dos gráficos, use vírgula entre as cores."
 
-msgid "The color used to draw the text on the join bar"
-msgstr "A cor usada no texto da barra de registro"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "A cor usada no fundo na barra de registro"
-
-msgid "The primary color for styling for this organization"
-msgstr "A cor primária para definir o estilo desta organização"
-
-msgid "The secondary color for styling for this organization"
-msgstr "A cor secundária para definir o estilo desta organização"
-
-msgid "The background color for the site"
-msgstr "A cor de fundo para o site"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 cores para estilizar mapas, use vírgula entre cores, não usado se não tiver 11 cores"
 
@@ -1801,6 +1786,21 @@ msgstr "Se esta história é destaque"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "A cor usada no texto da barra de registro"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "A cor usada no fundo na barra de registro"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "A cor primária para definir o estilo desta organização"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "A cor secundária para definir o estilo desta organização"
+
+#~ msgid "The background color for the site"
+#~ msgstr "A cor de fundo para o site"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "Se deve ativar o novo design."

@@ -1090,37 +1090,23 @@ class PollTest(UreportTest):
             mock.assert_called_with("field_name")
 
         self.assertIsNone(org_color(None, 1))
-        self.assertEqual(org_color(self.uganda, 0), "#FFD100")
-        self.assertEqual(org_color(self.uganda, 1), "#1F49BF")
+        self.assertEqual(org_color(self.uganda, 0), "#E4002B")
+        self.assertEqual(org_color(self.uganda, 1), "#FF8200")
         self.assertEqual(org_color(self.uganda, 2), "#FFD100")
-        self.assertEqual(org_color(self.uganda, 3), "#1F49BF")
-
-        self.uganda.set_config("common.primary_color", "#aaaaaa")
-
-        self.assertEqual(org_color(self.uganda, 0), "#FFD100")
-        self.assertEqual(org_color(self.uganda, 1), "#1F49BF")
-        self.assertEqual(org_color(self.uganda, 2), "#FFD100")
-        self.assertEqual(org_color(self.uganda, 3), "#1F49BF")
-
-        self.uganda.set_config("common.secondary_color", "#bbbbbb")
-
-        self.assertEqual(org_color(self.uganda, 0), "#aaaaaa")
-        self.assertEqual(org_color(self.uganda, 1), "#bbbbbb")
-        self.assertEqual(org_color(self.uganda, 2), "#aaaaaa")
-        self.assertEqual(org_color(self.uganda, 3), "#bbbbbb")
+        self.assertEqual(org_color(self.uganda, 3), "#009A17")
 
         self.uganda.set_config("common.colors", "#cccccc, #dddddd, #eeeeee, #111111, #222222, #333333, #444444")
 
-        self.assertEqual(org_color(self.uganda, 0), "#cccccc")
-        self.assertEqual(org_color(self.uganda, 1), "#dddddd")
-        self.assertEqual(org_color(self.uganda, 2), "#eeeeee")
+        self.assertEqual(org_color(self.uganda, 0), "#CCCCCC")
+        self.assertEqual(org_color(self.uganda, 1), "#DDDDDD")
+        self.assertEqual(org_color(self.uganda, 2), "#EEEEEE")
         self.assertEqual(org_color(self.uganda, 3), "#111111")
         self.assertEqual(org_color(self.uganda, 4), "#222222")
         self.assertEqual(org_color(self.uganda, 5), "#333333")
         self.assertEqual(org_color(self.uganda, 6), "#444444")
-        self.assertEqual(org_color(self.uganda, 7), "#cccccc")
-        self.assertEqual(org_color(self.uganda, 8), "#dddddd")
-        self.assertEqual(org_color(self.uganda, 9), "#eeeeee")
+        self.assertEqual(org_color(self.uganda, 7), "#CCCCCC")
+        self.assertEqual(org_color(self.uganda, 8), "#DDDDDD")
+        self.assertEqual(org_color(self.uganda, 9), "#EEEEEE")
         self.assertEqual(org_color(self.uganda, 10), "#111111")
         self.assertEqual(org_color(self.uganda, 11), "#222222")
 

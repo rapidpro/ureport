@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 10:33+0000\n"
+"POT-Creation-Date: 2021-09-30 12:05+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1575,21 +1575,6 @@ msgid "The secondary highlight color for styling for this organization, should b
 msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
-
-msgid "The color used to draw the text on the join bar"
-msgstr ""
-
-msgid "The color used to draw the background on the join bar"
-msgstr ""
-
-msgid "The primary color for styling for this organization"
-msgstr ""
-
-msgid "The secondary color for styling for this organization"
-msgstr ""
-
-msgid "The background color for the site"
 msgstr ""
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
