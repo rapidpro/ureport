@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:05+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1571,6 +1571,11 @@ msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Le mot-clé utilisé pour inciter les visiteurs a s'inscrire sur U-Report"
+
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Le titre de la rubrique photos de la page d’accueil U-Report"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "L’ID de la vidéo YouTube pour la rubrique Comment rejoindre U-Report"
