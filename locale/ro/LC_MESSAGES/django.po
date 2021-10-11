@@ -1670,21 +1670,6 @@ msgstr "Culoarea secundară evidențiată pentru stilul acestei organizații, ar
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Culoarea textului de pe bara „Alătură-te”"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Culoarea fundalului de pe bara „Alătură-te”"
-
-msgid "The primary color for styling for this organization"
-msgstr "Culoarea primară de stilizare pentru această organizație"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Culoarea secundară de stilizare pentru această organizație"
-
-msgid "The background color for the site"
-msgstr "Culoarea fundalului pentru site"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 culori pentru hărți de styling, utilizați virgula între culori, nu sunt folosite dacă nu sunt cel puțin 11 culori"
 
@@ -1808,6 +1793,21 @@ msgstr "Dacă acest articol este recomandat"
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Culoarea textului de pe bara „Alătură-te”"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Culoarea fundalului de pe bara „Alătură-te”"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Culoarea primară de stilizare pentru această organizație"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Culoarea secundară de stilizare pentru această organizație"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Culoarea fundalului pentru site"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "În caz dacă activați noul design."

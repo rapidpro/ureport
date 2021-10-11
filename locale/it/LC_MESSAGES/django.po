@@ -1672,21 +1672,6 @@ msgstr "Il colore secondario per la progettazione per questa organizzazione, chi
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Fino a 6 colori per il design dei grafici, usa la virgola tra i colori"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Il colore usato per elaborare il testo nel tasto di adesione"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Il colore usato per lo sfondo sulla barra di adesione"
-
-msgid "The primary color for styling for this organization"
-msgstr "Il colore primario per la progettazione per questa organizzazione"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Il colore secondario per la progettazione per questa organizzazione"
-
-msgid "The background color for the site"
-msgstr "Il colore di sfondo per il sito"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "Fino a 11 colori per il design dei grafici, usa la virgola tra i colori, non usato se non 11 colori"
 
@@ -1814,6 +1799,21 @@ msgstr "Se questa storia è apparsa"
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Il colore usato per elaborare il testo nel tasto di adesione"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Il colore usato per lo sfondo sulla barra di adesione"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Il colore primario per la progettazione per questa organizzazione"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Il colore secondario per la progettazione per questa organizzazione"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Il colore di sfondo per il sito"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "Se attivare il nuovo design"

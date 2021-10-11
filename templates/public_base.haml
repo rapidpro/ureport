@@ -39,76 +39,39 @@
 
     :css
       .bg-dark1 {
-        {% if org|config:'dark1_color' %}
-        background: {{ org|config:'dark1_color' }};
-        {% else %}
-        background: {{ org|config:'primary_color'|default:'#439932' }};
-        {% endif %}
-
+        background: {{ org|config:'dark1_color'|default:'#439932'  }};
       }
 
       .border-dark1 {
-        {% if org|config:'dark1_color' %}
-        border-color: {{ org|config:'dark1_color' }};
-        {% else %}
-        border-color: {{ org|config:'primary_color'|default:'#439932' }};
-        {% endif %}
+        border-color: {{ org|config:'dark1_color'|default:'#439932' }};
       }
 
       .hover\:border-dark1:hover {
-        {% if org|config:'dark1_color' %}
-        border-color: {{ org|config:'dark1_color' }};
-        {% else %}
-        border-color: {{ org|config:'primary_color'|default:'#439932' }};
-        {% endif %}
+        border-color: {{ org|config:'dark1_color'|default:'#439932' }};
       }
 
       .bg-dark2 {
-        {% if org|config:'dark2_color' %}
-        background: {{ org|config:'dark2_color' }};
-        {% else %}
-        background: {{ org|config:'primary_color'|default:'#1751af' }};
-        {% endif %}
+        background: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
 
       .border-dark2 {
-        {% if org|config:'dark2_color' %}
-        border-color: {{ org|config:'dark2_color' }};
-        {% else %}
-        border-color: {{ org|config:'primary_color'|default:'#1751af' }};
-        {% endif %}
+        border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
 
       .hover\:border-dark2:hover {
-        {% if org|config:'dark2_color' %}
-        border-color: {{ org|config:'dark2_color' }};
-        {% else %}
-        border-color: {{ org|config:'primary_color'|default:'#1751af' }};
-        {% endif %}
+        border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
 
       .bg-dark3 {
-        {% if org|config:'dark3_color' %}
-        background: {{ org|config:'dark3_color' }};
-        {% else %}
-        background: {{ org|config:'primary_color'|default:'#5eb3e0' }};
-        {% endif %}
+        background: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
       }
 
       .border-dark3 {
-        {% if org|config:'dark3_color' %}
-        border-color: {{ org|config:'dark3_color' }};
-        {% else %}
-        border-color: {{ org|config:'primary_color'|default:'#5eb3e0' }};
-        {% endif %}
+        border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
       }
 
       .hover\:border-dark3:hover {
-        {% if org|config:'dark3_color' %}
-        border-color: {{ org|config:'dark3_color' }};
-        {% else %}
-        border-color: {{ org|config:'primary_color'|default:'#5eb3e0' }};
-        {% endif %}
+        border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
       }
 
       .border-light1 {
@@ -179,15 +142,16 @@
       }
 
     :javascript
-      {% if org|config:"colors" %}
-      var orgColors = '{{org|config:"colors"}}'.split(',');
-      {% else %}
-      var orgColors = [
-        "{{ org|config:'primary_color'|default:'#439932' }}",
-        "{{ org|config:'secondary_color'|default:'#1751af' }}",
-        "{{ org|config:'tertiary_color'|default:'#5eb3e0' }}"
-      ];
-      {% endif %}
+      var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
+      var orgColors = '{{org|config:"colors"|default:""}}'.toUpperCase().split(',');
+
+      for (var i = 0; i < defaultColors.length; i++) {
+        var elt = defaultColors[i].trim().toUpperCase();
+        if ((orgColors.length <= 6) && (!orgColors.includes(elt))) {
+          orgColors.push(elt);
+        }
+      }
+
 
     -if org and org|config:"google_tag_manager_id"
       <!-- Google Tag Manager -->
@@ -747,11 +711,7 @@
   -block script
     :javascript
       // global primary color
-      {% if org|config:"dark1_color" %}
       var primaryColor = '{{ org|config:"dark1_color"}}';
-      {% else %}
-      var primaryColor = '{{ org|config:"primary_color"}}';
-      {% endif %}
       window.string_Responders = "{% trans "Responders" %}";
       window.string_Polled = "{% trans "Polled" %}";
       window.string_Reporters = "{% trans "Reporters" %}";

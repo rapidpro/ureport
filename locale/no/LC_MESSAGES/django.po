@@ -1630,21 +1630,6 @@ msgstr "Den sekundære highlight-fargen tilknyttet denne organisasjonen, bør v�
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Du kan ha opptil 6 farger for styling charts, bruk komma mellom fargene"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Tekstfarge på \"delta/bli med\"-baren"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Bakgrunnsfarge for \"delta/bli med\"-baren"
-
-msgid "The primary color for styling for this organization"
-msgstr "Primærfargen for styling tilknyttet denne organisasjonen"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen"
-
-msgid "The background color for the site"
-msgstr "Bakgrunnsfargen for siden"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 farger for styling-kart, bruk komma mellom fargene, vil kun fungere med 11 farger"
 
@@ -1766,6 +1751,21 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Tekstfarge på \"delta/bli med\"-baren"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Bakgrunnsfarge for \"delta/bli med\"-baren"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Primærfargen for styling tilknyttet denne organisasjonen"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Bakgrunnsfargen for siden"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "Aktiver nytt design"

@@ -1656,21 +1656,6 @@ msgstr "Ushbu tashkilotni bezash uchun ikkilamchi ajratish rangi, och rang bo'li
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
 
-msgid "The color used to draw the text on the join bar"
-msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
-
-msgid "The primary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
-
-msgid "The background color for the site"
-msgstr "Sahifa uchun orqa fon rangi"
-
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "Bezash xaritalari uchun 11 ta rang, ranglar orasini vergul bilan ajrating, agar 11 ta rang bo'lmaydigan bo'lsa ishlatilmaydi"
 
@@ -1792,6 +1777,21 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Sahifa uchun orqa fon rangi"
 
 #~ msgid "Whether to activate the new design."
 #~ msgstr "Yangi disaynni faollashtirish lozimmi."
