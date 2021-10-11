@@ -1053,6 +1053,9 @@ msgstr "U-REPORTERS DUPĂ REGIUNE"
 msgid "FILTER RESULTS"
 msgstr "FILTRU DE REZULTATE"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Exportă și Partajează"
 
@@ -1770,6 +1773,11 @@ msgstr "12 Luni"
 
 msgid "Age"
 msgstr "Vârsta"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Salvează modificările"
 
 msgid "Location"
 msgstr "Locația"

@@ -1005,6 +1005,9 @@ msgstr ""
 msgid "FILTER RESULTS"
 msgstr ""
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1668,6 +1671,9 @@ msgid "12 Months"
 msgstr ""
 
 msgid "Age"
+msgstr ""
+
+msgid "Channels"
 msgstr ""
 
 msgid "Location"

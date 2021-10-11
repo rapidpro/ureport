@@ -1120,6 +1120,9 @@ msgstr "U-REPORTERI U"
 msgid "FILTER RESULTS"
 msgstr "REZULTATI ANKETE"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1899,6 +1902,11 @@ msgstr ""
 
 msgid "Age"
 msgstr ""
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Sačuvaj promene"
 
 #, fuzzy
 #| msgid "Population"

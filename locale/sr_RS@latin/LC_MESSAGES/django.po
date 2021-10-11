@@ -1052,6 +1052,9 @@ msgstr "U-REPORTERI PO REGIONIMA"
 msgid "FILTER RESULTS"
 msgstr "FILTRIRANI REZULTATI"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Preuzmi i Podeli"
 
@@ -1738,6 +1741,11 @@ msgstr "12 meseci"
 
 msgid "Age"
 msgstr "Godine"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Sačuvaj promene"
 
 msgid "Location"
 msgstr "Lokacija"

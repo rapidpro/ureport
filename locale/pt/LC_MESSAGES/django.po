@@ -1075,6 +1075,9 @@ msgstr "SMS BIZ EM"
 msgid "FILTER RESULTS"
 msgstr "RESULTADOS DOS INQUÉRITOS"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1812,6 +1815,11 @@ msgstr ""
 
 msgid "Age"
 msgstr ""
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Guardar Alterações"
 
 #, fuzzy
 #| msgid "Population"

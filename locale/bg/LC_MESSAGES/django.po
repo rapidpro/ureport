@@ -1043,6 +1043,9 @@ msgstr "U-РЕПОРТЕРИ ПО РЕГИОН"
 msgid "FILTER RESULTS"
 msgstr "ФИЛТРИРАЙ РЕЗУЛТАТИТЕ"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Експортирай и сподели"
 
@@ -1754,6 +1757,11 @@ msgstr "12 месеца"
 
 msgid "Age"
 msgstr "Възраст"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Запази промените"
 
 msgid "Location"
 msgstr "Местоположение"

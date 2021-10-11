@@ -1060,6 +1060,9 @@ msgstr "GLASOVI MLADIH PO LOKACIJI"
 msgid "FILTER RESULTS"
 msgstr "FILTERI REZULTATA"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Izvezi i podijeli"
 
@@ -1747,6 +1750,11 @@ msgstr "12 mjeseci"
 
 msgid "Age"
 msgstr "Dobne skupine"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Sačuvaj promjene"
 
 msgid "Location"
 msgstr "Lokacija"

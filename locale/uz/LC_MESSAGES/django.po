@@ -1044,6 +1044,9 @@ msgstr "MINTAQALAR BO'YICHA U-REPORTYORLAR"
 msgid "FILTER RESULTS"
 msgstr "FILTR NATIJALARI"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Chiqarish va Bo'lishish"
 
@@ -1756,6 +1759,11 @@ msgstr "12 oy"
 
 msgid "Age"
 msgstr "Yosh"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "O'zgarishlarni saqlash"
 
 msgid "Location"
 msgstr "Joylashgan o'rni"

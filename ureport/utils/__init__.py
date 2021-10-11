@@ -22,7 +22,7 @@ from sentry_sdk import capture_exception
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
-from ureport.stats.models import PollStats, GenderSegment, AgeSegment
+from ureport.stats.models import PollStats, GenderSegment, AgeSegment, SchemeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -422,6 +422,41 @@ def get_age_stats(org):
     return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i["name"]))
 
 
+def get_schemes_stats(org):
+    org_contacts_counts = get_org_contacts_counts(org)
+    schemes_counts = {
+        k[7:]: v for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:] and k[7:] != "ext"
+    }
+
+    total = 0
+    schemes_stats_data = defaultdict(int)
+    for scheme, count in schemes_counts.items():
+        total += count
+
+        name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
+        if not name:
+            continue
+        schemes_stats_data[name] += count
+
+    scheme_stats = schemes_stats_data
+    if total > 0:
+        scheme_stats = {k: int(round(v * 100 / float(total))) for k, v in schemes_stats_data.items()}
+
+    other_stat = 0
+    output_dict = dict()
+    for name, v in scheme_stats.items():
+        if v <= 5:
+            other_stat += v
+        else:
+            output_dict[name] = v
+
+    output = sorted([dict(name=k, y=v) for k, v in output_dict.items()], key=lambda i: -i["y"])
+
+    if other_stat:
+        output.append(dict(name="OTHERS", y=other_stat))
+    return output
+
+
 def get_sign_up_rate(org, time_filter):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
@@ -620,7 +655,11 @@ def get_sign_up_rate_scheme(org, time_filter):
 
     registered_on_counts = {k[18:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_scheme")}
 
+    schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:] and k[7:] != "ext"]
     registered_on_counts_by_scheme = {}
+
+    for scheme in schemes:
+        registered_on_counts_by_scheme[scheme] = defaultdict(int)
 
     dates_map = get_time_filter_dates_map(time_filter=time_filter)
     keys = list(set(dates_map.values()))
@@ -646,7 +685,10 @@ def get_sign_up_rate_scheme(org, time_filter):
         for key in keys:
             data[key] = scheme_data[key]
 
-        output_data.append(dict(name=scheme, data=data))
+        name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
+        if not name:
+            continue
+        output_data.append(dict(name=name, data=data))
 
     return output_data
 
@@ -1022,6 +1064,7 @@ def populate_contact_activity(org):
         )
 
 
+Org.get_org_contacts_counts = get_org_contacts_counts
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
@@ -1037,5 +1080,7 @@ Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_
 Org.get_sign_up_rate = get_sign_up_rate
 Org.get_sign_up_rate_gender = get_sign_up_rate_gender
 Org.get_sign_up_rate_age = get_sign_up_rate_age
+Org.get_sign_up_rate_scheme = get_sign_up_rate_scheme
+Org.get_schemes_stats = get_schemes_stats
 Org.get_logo = get_logo
 Org.get_sign_up_rate_location = get_sign_up_rate_location

@@ -1107,6 +1107,9 @@ msgstr "U-REPORTERS DI"
 msgid "FILTER RESULTS"
 msgstr "HASIL POLLING"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1886,6 +1889,11 @@ msgstr ""
 
 msgid "Age"
 msgstr ""
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Simpan Perubahan"
 
 #, fuzzy
 #| msgid "Population"

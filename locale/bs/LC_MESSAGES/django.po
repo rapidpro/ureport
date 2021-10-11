@@ -1135,6 +1135,9 @@ msgstr "U-REPORTERI PO LOKACIJI"
 msgid "FILTER RESULTS"
 msgstr "FILTERI ZA REZULTATE"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Eksportuj i podijeli"
 
@@ -1853,6 +1856,11 @@ msgstr "12 mjeseci"
 
 msgid "Age"
 msgstr "Godine"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Sačuvaj promjene"
 
 msgid "Location"
 msgstr "Lokacija"

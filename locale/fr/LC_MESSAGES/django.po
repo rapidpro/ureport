@@ -1038,6 +1038,9 @@ msgstr "U-REPORTERS PAR REGION"
 msgid "FILTER RESULTS"
 msgstr "FILTRER LES RÉSULTATS"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Exporter et Partager"
 
@@ -1714,6 +1717,11 @@ msgstr "12 mois"
 
 msgid "Age"
 msgstr "Age"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Enregistrer les modifications"
 
 msgid "Location"
 msgstr "Lieu"

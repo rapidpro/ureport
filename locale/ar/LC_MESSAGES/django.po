@@ -1051,6 +1051,9 @@ msgstr ""
 msgid "FILTER RESULTS"
 msgstr "تصفية النتائج"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1736,6 +1739,11 @@ msgstr "12 شهر "
 
 msgid "Age"
 msgstr "العمر "
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "حفظ التغييرات"
 
 msgid "Location"
 msgstr ""

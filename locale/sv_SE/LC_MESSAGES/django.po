@@ -1043,6 +1043,9 @@ msgstr "U-REPORTERS I REGIONEN"
 msgid "FILTER RESULTS"
 msgstr "FILTRERADE RESULTAT"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Exportera och dela"
 
@@ -1725,6 +1728,11 @@ msgstr "12 månader"
 
 msgid "Age"
 msgstr "Ålder"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Spara ändringarna"
 
 msgid "Location"
 msgstr "Plats"

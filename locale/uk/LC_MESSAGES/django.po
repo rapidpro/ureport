@@ -1023,6 +1023,9 @@ msgstr "U-репортери в регіонах"
 msgid "FILTER RESULTS"
 msgstr "ФІЛЬТР РЕЗУЛЬТАТІВ"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1689,6 +1692,9 @@ msgstr "12 місяців"
 
 msgid "Age"
 msgstr "Вік"
+
+msgid "Channels"
+msgstr ""
 
 msgid "Location"
 msgstr "Область"
