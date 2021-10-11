@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 11:51+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -1605,6 +1605,11 @@ msgstr "Tekst gumba za pridruživanje"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Kratak tekst kojim se posjetitelji upućuju da se pridruže ZABUM voice-u"
+
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Naslov foto sekcije na ZABUM voice naslovnoj strani"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Youtube video ID o tome kako se pridružiti ZABUM voice-u"

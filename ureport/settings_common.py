@@ -316,6 +316,14 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="join_text_top",
+        field=dict(
+            help_text=_("The call to action text to join on the top section on U-Report"),
+            label="Join Call to Action Text",
+            required=False,
+        ),
+    ),
+    dict(
         name="homepage_join_video_id",
         field=dict(
             help_text=_("The YouTube video ID for how to join U-Report section"),

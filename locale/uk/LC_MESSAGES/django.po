@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 11:51+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1550,6 +1550,9 @@ msgid "The join button text"
 msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
+
+msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
 
 msgid "The YouTube video ID for how to join U-Report section"

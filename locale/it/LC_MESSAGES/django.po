@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 11:51+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1630,6 +1630,11 @@ msgstr "Il font usato per i testi normali"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Il testo abbreviato usato per invitare i visitatori ad aderire a U-Report"
+
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Il titolo della sezione foto nella homepage U-Report"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "L'ID del video Youtube su come aderire a U-Report"

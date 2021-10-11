@@ -142,13 +142,16 @@
       }
 
     :javascript
-      {% if org|config:"colors" %}
-      var orgColors = '{{org|config:"colors"}}'.split(',');
-      {% else %}
-      var orgColors = [
-        "#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"
-      ];
-      {% endif %}
+      var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
+      var orgColors = '{{org|config:"colors"|default:""}}'.toUpperCase().split(',');
+
+      for (var i = 0; i < defaultColors.length; i++) {
+        var elt = defaultColors[i].trim().toUpperCase();
+        if ((orgColors.length <= 6) && (!orgColors.includes(elt))) {
+          orgColors.push(elt);
+        }
+      }
+
 
     -if org and org|config:"google_tag_manager_id"
       <!-- Google Tag Manager -->
@@ -535,16 +538,16 @@
         .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.border-b.pb-6(class="md:flex")
           .flex-1
             .p-8.hover-parent
-              {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark"  %}
+              {% edit_content 'orgs.org_edit' "" "#id_common.join_text_top"  "-m-8"  "dark"  %}
 
               .text-3xl.font-bold.leading-tight.text-center
-                -if org|config:"join_text"
-                  {{ org|config:"join_text" }}
+                -if org|config:"join_text_top"
+                  {{ org|config:"join_text_top" }}
                 -else
                   - trans "Join U-Report, Your voice matters."
 
               .mt-8.text-center
-                %a.btn.bg-black.text-white(href="{% url 'public.join' %}" class="hover:bg-gray-700")
+                %a.btn.bg-light1.text-black.hover-dark(href="{% url 'public.join' %}")
                   - if org|config:"join_button_text"
                     {{ org|config:"join_button_text" }}
                   - else
