@@ -367,6 +367,11 @@
                  %a.admin-menu.text-sm.leading-loose(href="{% url 'stories.story_list' %}")
                   - trans "Stories"
   
+            - if request.user.is_superuser or org_perms.bots.bot_list
+              %li
+                 %a.admin-menu.text-sm.leading-loose(href="{% url 'bots.bot_list' %}")
+                  - trans "Bots"
+
             - if request.user.is_superuser or org_perms.categories.category_list
               %li
                 %a.admin-menu.text-sm.leading-loose(href="{% url 'categories.category_list' %}")

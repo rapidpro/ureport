@@ -695,6 +695,9 @@ msgstr "Logga ut"
 msgid "Opinions"
 msgstr "Åsikter"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Användare"
 
@@ -1212,6 +1215,47 @@ msgstr "Kort beskrivning av den här bilden"
 
 msgid "Image type"
 msgstr "Bildtyp"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organisationen som undersökningen är en del av"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Undersökningen ska visas på startsidan"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Titeln för objektet"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Berättelsens kategori"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The description of the stories page"
+msgid "The description text for this bot"
+msgstr "Beskrivning av sidan \"Berättelser\""
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioritering för denna fråga i undersökningen, den högsta prioriteten kommer först."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Organisationen ska visas på landningssidan"
 
 msgid "Label"
 msgstr "Etikett"

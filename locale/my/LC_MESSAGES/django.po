@@ -677,6 +677,9 @@ msgstr ""
 msgid "Opinions"
 msgstr "Poll Results"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr ""
 
@@ -1173,6 +1176,39 @@ msgstr "A short descriptive name for this image"
 
 msgid "Image type"
 msgstr "Image type"
+
+#, fuzzy
+#| msgid "The organization this category applies to"
+msgid "The organization this bot is part of"
+msgstr "he organization this category applies to"
+
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr ""
+
+msgid "The title to display for this bot"
+msgstr ""
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The name to describe this image"
+msgid "The keyword for this bot"
+msgstr "The name to describe this image"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "The description text for this bot"
+msgstr "A short descriptive name for this image"
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr ""
+
+msgid "Whether this bot should be shown to the public"
+msgstr ""
 
 msgid "Label"
 msgstr "အညွှန်း"

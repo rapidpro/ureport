@@ -699,6 +699,9 @@ msgstr "Déconnexion"
 msgid "Opinions"
 msgstr "Sondages"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Utilisateurs"
 
@@ -1207,6 +1210,47 @@ msgstr "Nom descriptif de l'image"
 
 msgid "Image type"
 msgstr "Type de l'image"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "L'organisation dont ce sondage fait partie"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Le titre de cet élément"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "La catégorie pour cet article"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The description of the stories page"
+msgid "The description text for this bot"
+msgstr "La description de la page Articles"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "La priorité de cette question sur la page de sondage, la plus haute priorité vient en premier"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Si cette organisation devrait montrer sur la page d’atterrissage"
 
 msgid "Label"
 msgstr "Etiquette"

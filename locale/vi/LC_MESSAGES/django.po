@@ -726,6 +726,9 @@ msgstr "Đăng xuất"
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Người dùng"
 
@@ -1315,6 +1318,47 @@ msgstr "Tên mô tả ngắn cho hình ảnh này"
 
 msgid "Image type"
 msgstr "Loại hình ảnh"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Khảo sát này nằm trong tổ chức"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Khảo sát này nên được đưa lên trang chủ hay không"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Tiêu đề cho mục này"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Danh mục của câu chuyện này"
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description text for this bot"
+msgstr "Địa phương của phóng viên."
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Mức độ ưu tiên của câu hỏi này trên trang khảo sát, những đề mục ưu tiên hơn xuất hiện trước"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
 
 msgid "Label"
 msgstr "Nhãn"

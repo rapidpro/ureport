@@ -671,6 +671,9 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr ""
 
@@ -1165,6 +1168,33 @@ msgid "A short descriptive name for this image"
 msgstr ""
 
 msgid "Image type"
+msgstr ""
+
+msgid "The organization this bot is part of"
+msgstr ""
+
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr ""
+
+msgid "The title to display for this bot"
+msgstr ""
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+msgid "The keyword for this bot"
+msgstr ""
+
+msgid "The deeplink for this bot, if any is available"
+msgstr ""
+
+msgid "The description text for this bot"
+msgstr ""
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr ""
+
+msgid "Whether this bot should be shown to the public"
 msgstr ""
 
 msgid "Label"
