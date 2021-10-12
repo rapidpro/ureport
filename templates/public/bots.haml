@@ -12,11 +12,12 @@
     -for bot in bots
 
       .max-w-page.mx-auto.my-8.py-2.px-4
-        .border.p-home.bg-white
-          .block.border-b
-            .mb-4.text-3xl
+        .border.p-home.bg-white.hover-parent
+          {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
+          .block.border-b.hover-parent
+            .mb-4.text-3xl.hover-parent
               {{bot.title}}
-          .block.flex.mt-4
+          .block.flex.mt-4.hover-parent
             .block(class="w-1/2")
               -if bot.deeplink
                 .block.mb-1
