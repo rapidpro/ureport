@@ -8,8 +8,8 @@ from django.views.generic import RedirectView
 
 from .views import (
     AboutView,
-    BoundaryView,
     Bots,
+    BoundaryView,
     Count,
     CountriesView,
     CustomPage,

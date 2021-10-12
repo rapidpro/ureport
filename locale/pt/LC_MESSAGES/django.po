@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -904,6 +904,15 @@ msgstr "HISTÓRIAS ARQUIVADAS"
 msgid "LIST"
 msgstr "LISTAR"
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -934,6 +943,9 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "SMS BIZ EM"
 
 msgid "AGES"
+msgstr ""
+
+msgid "More bots"
 msgstr ""
 
 msgid "Join U-Report, Your voice matters."
@@ -1282,12 +1294,14 @@ msgstr ""
 msgid "The keyword for this bot"
 msgstr "A categoria para esta história"
 
-msgid "The deeplink for this bot, if any is available"
-msgstr ""
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The deeplink for this bot, optional"
+msgstr "O título para este bloco de conteúdo, opcional"
 
 #, fuzzy
 #| msgid "The location of the responder."
-msgid "The description text for this bot"
+msgid "The description of this bot, optional"
 msgstr "A localização da pessoa que responde."
 
 #, fuzzy
@@ -1889,6 +1903,16 @@ msgstr "Se esta história é selecionada"
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org."
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description text for this bot"
+#~ msgstr "A localização da pessoa que responde."
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "A cor usada para desenhar o texto na barra de registro"

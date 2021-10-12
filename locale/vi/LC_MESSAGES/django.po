@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -936,6 +936,15 @@ msgstr "CÁC CÂU CHUYỆN ĐÃ LƯU TRỮ"
 msgid "LIST"
 msgstr "DANH SÁCH"
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -966,6 +975,9 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "U-REPORTERS TẠI"
 
 msgid "AGES"
+msgstr ""
+
+msgid "More bots"
 msgstr ""
 
 msgid "Join U-Report, Your voice matters."
@@ -1342,12 +1354,14 @@ msgstr ""
 msgid "The keyword for this bot"
 msgstr "Danh mục của câu chuyện này"
 
-msgid "The deeplink for this bot, if any is available"
-msgstr ""
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The deeplink for this bot, optional"
+msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
 
 #, fuzzy
 #| msgid "The location of the responder."
-msgid "The description text for this bot"
+msgid "The description of this bot, optional"
 msgstr "Địa phương của phóng viên."
 
 #, fuzzy
@@ -1956,6 +1970,16 @@ msgstr "Câu chuyện này có nổi bật hay không"
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Tổ chức"
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description text for this bot"
+#~ msgstr "Địa phương của phóng viên."
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Màu sắc cho chữ trên thanh tham gia"

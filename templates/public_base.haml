@@ -458,7 +458,11 @@
               -trans "Engagement"
             %a.flex-initial.ml-4.py-menu(href="{% url 'public.about' %}" class="hover:text-gray-750")
               -trans "About"
-  
+
+            -if show_bots_link
+              %a.flex-initial.ml-4.py-menu(href="{% url 'public.bots' %}" class="hover:text-gray-750")
+                -trans "Bots"
+
             - if org|config:"has_jobs"
               %a.flex-initial.ml-4.py-menu(href="{% url 'public.jobs' %}" class="hover:text-gray-750")
                 - trans "Jobs"

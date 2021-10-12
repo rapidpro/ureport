@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -878,6 +878,15 @@ msgstr ""
 msgid "LIST"
 msgstr ""
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "Актуальне опитування"
 
@@ -901,6 +910,9 @@ msgstr "КРАЇНАХ СВІТУ"
 
 msgid "AGES"
 msgstr "Вік"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr ""
@@ -1205,12 +1217,14 @@ msgstr ""
 msgid "The keyword for this bot"
 msgstr ""
 
-msgid "The deeplink for this bot, if any is available"
-msgstr ""
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The deeplink for this bot, optional"
+msgstr "Опитування"
 
 #, fuzzy
 #| msgid "The description of the opinions page"
-msgid "The description text for this bot"
+msgid "The description of this bot, optional"
 msgstr "Опитування"
 
 msgid "The priority number for this bot among others on a list, high priority comes first"

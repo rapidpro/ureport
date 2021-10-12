@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -909,6 +909,15 @@ msgstr "АРХИВА НА ПРИКАЗНИ"
 msgid "LIST"
 msgstr "ЛИСТА"
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "ПОСЛЕДНИ МИСЛЕЊА"
 
@@ -932,6 +941,9 @@ msgstr "ЗЕМЈИ ВО СВЕТОТ"
 
 msgid "AGES"
 msgstr "ВОЗРАСТ"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Придружи се на U-Report, твоето мислење е важно"
@@ -1254,13 +1266,15 @@ msgstr ""
 msgid "The keyword for this bot"
 msgstr "Категоријата за оваа приказна"
 
-msgid "The deeplink for this bot, if any is available"
-msgstr ""
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The deeplink for this bot, optional"
+msgstr "Наслов на овој содржински блок, изборно"
 
 #, fuzzy
-#| msgid "The description of the stories page"
-msgid "The description text for this bot"
-msgstr "Опис на страната со статии"
+#| msgid "The description of the opinions page"
+msgid "The description of this bot, optional"
+msgstr "Опис на страната за мислења"
 
 #, fuzzy
 #| msgid "The priority of this question on the poll page, higher priority comes first"
@@ -1813,6 +1827,16 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Орг"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Опис на страната со статии"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Бојата на текстот во лентата со повик за вклучување"

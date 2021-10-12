@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -908,6 +908,15 @@ msgstr "ARTICOLE ARHIVATE"
 msgid "LIST"
 msgstr "LISTĂ"
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "ULTIMELE OPINII"
 
@@ -931,6 +940,9 @@ msgstr "ȚĂRILE DIN LUME"
 
 msgid "AGES"
 msgstr "ANI"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Alăturați-vă U-report, Vocea Ta Contează."
@@ -1274,13 +1286,15 @@ msgstr ""
 msgid "The keyword for this bot"
 msgstr "Categoria pentru acest articol"
 
-msgid "The deeplink for this bot, if any is available"
-msgstr ""
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The deeplink for this bot, optional"
+msgstr "Titlul pentru acest bloc de conținut, opțional"
 
 #, fuzzy
-#| msgid "The description of the stories page"
-msgid "The description text for this bot"
-msgstr "Descrierea paginii de istorioare"
+#| msgid "The description of the opinions page"
+msgid "The description of this bot, optional"
+msgstr "Descrierea paginii de opinii"
 
 #, fuzzy
 #| msgid "The priority of this question on the poll page, higher priority comes first"
@@ -1845,6 +1859,16 @@ msgstr "Dacă acest articol este recomandat"
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Organizație"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Descrierea paginii de istorioare"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Culoarea textului de pe bara „Alătură-te”"

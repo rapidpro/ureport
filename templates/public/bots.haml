@@ -20,20 +20,22 @@
             .block(class="w-1/2")
               -if bot.deeplink
                 .block.mb-1
-                  -blocktrans with deeplink=bot.deeplink
-                    %a.btn.bg-light1.hover-dark.text-black(href="{{deeplink}}")
-                      Click to start
+                  %a.btn.bg-light1.hover-dark.text-black(href="{{deeplink}}")
+                    -trans "Click to start"
                 .mt-8.block
-                  -trans "Or"
+                  {{"//"}}
 
               .mb-4.mt-4
-                -trans "Send"
-                .text-2xl.inline.text-bold
-                  "{{bot.keyword}}"
-                .inline
-                  keyword to
-                .text-2xl.inline-block
-                  {{bot.channel}}
+                .block
+                  .text-sm.inline
+                    -trans "Send keyword:"
+                  .text-xl.inline
+                    "{{bot.keyword}}"
+                .block
+                  .text-sm.inline
+                    -trans "Channel / Number:"
+                  .text-xl.inline
+                    {{bot.channel}}
               
               
             .flex-1
