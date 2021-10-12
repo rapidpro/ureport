@@ -69,6 +69,35 @@
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
 
+  -if featured_bots
+    .max-w-page.mx-auto.border-black.border-b
+      -for bot in featured_bots|slice:"3"
+        %div.border-b(class="flex")
+          .block.py-4.px-16.my-auto(class="w-1/2")
+            {{bot.title}}
+            .inline-block.float-right
+              -if bot.deeplink
+                %a.btn.p-3.text-xs.bg-black.hover-dark.text-white(href="{{bot.deeplink}}")
+                  -trans "Click to start"
+
+          .block.p-8(class="w-1/2")
+            .block
+              .text-sm.inline
+                -trans "Send keyword:"
+              .text-xl.inline
+                "{{bot.keyword}}"
+            .block
+              .text-sm.inline
+                -trans "Channel / Number:"
+              .text-xl.inline
+                {{bot.channel}}
+
+      %div(class="md:flex")
+        .inline-block.w-full.p-8
+          .text-center
+            %a.btn.bg-black.text-white(href="{% url 'public.bots' %}" class="hover:bg-gray-700")
+              -trans "More bots"
+
   // join video and social
   .max-w-page.mx-auto
     %div(class="md:flex")

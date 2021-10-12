@@ -7,6 +7,7 @@ from functools import reduce
 
 from django.conf import settings
 
+from ureport.bots.models import Bot
 from ureport.utils import get_linked_orgs
 
 
@@ -80,6 +81,8 @@ def set_config_display_flags(request):
         context["show_gender_stats"] = reduce(
             operator.or_, [bool(org.get_config("%s.gender_label" % option)) for option in backend_options], False
         )
+
+        context["show_bots_link"] = Bot.objects.filter(is_active=True, org=org).exists()
 
         context["colors_map"] = [str(color.strip()) for color in org.get_config("colors_map", "").split(",")]
 

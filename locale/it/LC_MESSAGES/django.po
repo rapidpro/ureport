@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -701,6 +701,9 @@ msgstr "Esci"
 msgid "Opinions"
 msgstr "Opinioni"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Utenti"
 
@@ -898,6 +901,15 @@ msgstr "STORIE ARCHIVIATE"
 msgid "LIST"
 msgstr "LISTA"
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "Ultima opinione"
 
@@ -921,6 +933,9 @@ msgstr "PAESI NEL MONDO"
 
 msgid "AGES"
 msgstr "ETÀ"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Unisciti a U-Report, la tua voce conta"
@@ -1243,6 +1258,49 @@ msgstr "Un breve titolo descrittivo per questa immagine"
 
 msgid "Image type"
 msgstr "Tipo di immagine"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "L'organizzazione di cui è parte questo sondaggio"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Se questo sondaggio può essere visualizzato nella homepage"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Il titolo per questo elemento"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "La categoria per questa storia "
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The deeplink for this bot, optional"
+msgstr "Il titolo per questo blocco di contenuti, opzionale"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The description of this bot, optional"
+msgstr "La descrizione della pagina opinioni"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "La priorità di questa domanda nella pagina del sondaggio, le priorità più alte vengono prima"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Se questa org deve essere mostrato nella pagina di destinazione"
 
 msgid "Label"
 msgstr "Etichetta"
@@ -1807,6 +1865,16 @@ msgstr "Se questa storia è apparsa"
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "La descrizione della pagina storie"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Il colore usato per elaborare il testo nel tasto di adesione"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -696,6 +696,9 @@ msgstr "Sair"
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Utilizadores"
 
@@ -901,6 +904,15 @@ msgstr "HISTÓRIAS ARQUIVADAS"
 msgid "LIST"
 msgstr "LISTAR"
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -931,6 +943,9 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "SMS BIZ EM"
 
 msgid "AGES"
+msgstr ""
+
+msgid "More bots"
 msgstr ""
 
 msgid "Join U-Report, Your voice matters."
@@ -1257,6 +1272,47 @@ msgstr "Um nome descritivo curto para esta imagem"
 
 msgid "Image type"
 msgstr "Tipo de Imagem"
+
+#, fuzzy
+#| msgid "The organization this item belongs to"
+msgid "The organization this bot is part of"
+msgstr "A organização na qual este item pertence"
+
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "O título deste item"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "A categoria para esta história"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The deeplink for this bot, optional"
+msgstr "O título para este bloco de conteúdo, opcional"
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of this bot, optional"
+msgstr "A localização da pessoa que responde."
+
+#, fuzzy
+#| msgid "The priority for this block, higher priority blocks come first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "A prioridade para este bloco, blocos de mais elevada prioridade vêm em primeiro lugar"
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "Whether this bot should be shown to the public"
+msgstr "Se existem vagas de emprego a serem visualizados no site público"
 
 msgid "Label"
 msgstr "Categoria"
@@ -1847,6 +1903,16 @@ msgstr "Se esta história é selecionada"
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org."
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description text for this bot"
+#~ msgstr "A localização da pessoa que responde."
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "A cor usada para desenhar o texto na barra de registro"

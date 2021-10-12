@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-12 14:08+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -698,6 +698,9 @@ msgstr "Logg ut"
 msgid "Opinions"
 msgstr "Meninger"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Brukere"
 
@@ -898,6 +901,15 @@ msgstr "ARKIVERTE HISTORIER"
 msgid "LIST"
 msgstr "LISTE"
 
+msgid "Click to start"
+msgstr ""
+
+msgid "Send keyword:"
+msgstr ""
+
+msgid "Channel / Number:"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "NYESTE ALTERNATIV  "
 
@@ -921,6 +933,9 @@ msgstr "LAND VERDEN OVER"
 
 msgid "AGES"
 msgstr "ALDER"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Bli en U-Reporter, din stemme betyr noe. "
@@ -1215,6 +1230,49 @@ msgstr "En kort  beskrivelse av dette bildet"
 
 msgid "Image type"
 msgstr "Bildetype"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organisasjonen denne undersøkelsen tilhører"
+
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this bot is featured and displayed on the homepage"
+msgstr "Undersøkelsen skal vises på hovedsiden"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Tittelen på dette elementet"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Kategorien til denne historien"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The deeplink for this bot, optional"
+msgstr "Tittel for denne innholdsblokken, valgfritt"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The description of this bot, optional"
+msgstr "Beskrivelse av meningssiden"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Organisasjonen skal vises på landingssiden"
 
 msgid "Label"
 msgstr "Etikett"
@@ -1759,6 +1817,16 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Beskrivelse av historiesiden"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Tekstfarge på \"delta/bli med\"-baren"
