@@ -72,15 +72,16 @@
   -if featured_bots
     .max-w-page.mx-auto.border-black.border-b
       -for bot in featured_bots|slice:"3"
-        %div.border-b(class="flex")
-          .block.py-4.px-16.my-auto(class="w-1/2")
+        .flex.border-b.hover-parent
+          .block.py-4.px-16.my-auto.hover-parent(class="w-1/2")
             {{bot.title}}
             .inline-block.float-right
               -if bot.deeplink
                 %a.btn.p-3.text-xs.bg-black.hover-dark.text-white(href="{{bot.deeplink}}")
                   -trans "Click to start"
 
-          .block.p-8(class="w-1/2")
+          .block.p-8.hover-parent(class="w-1/2")
+            {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
             .block
               .text-sm.inline
                 -trans "Send keyword:"
