@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-13 17:41+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1351,6 +1351,18 @@ msgstr ""
 msgid "The featured response message"
 msgstr ""
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr ""
 
@@ -1445,6 +1457,12 @@ msgid "Title"
 msgstr ""
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+
+msgid "Color Choice"
+msgstr ""
+
+msgid "The color to use for the question block will be displayed publicly"
 msgstr ""
 
 #, fuzzy

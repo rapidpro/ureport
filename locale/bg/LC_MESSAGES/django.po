@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-13 17:41+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1409,6 +1409,18 @@ msgstr "Името на подателя на съобщението"
 msgid "The featured response message"
 msgstr "Включеното съобщение, съдържащо отговор"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Допитването, от което е част този въпрос"
 
@@ -1505,6 +1517,14 @@ msgid "Title"
 msgstr "Заглавие"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Въпросът, зададен на вашатата публика, ще бъде показан публично"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "Въпросът, зададен на вашатата публика, ще бъде показан публично"
 
 #, fuzzy
