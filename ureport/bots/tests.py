@@ -14,7 +14,7 @@ class BotTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 8)
+        self.assertEquals(len(response.context["form"].fields), 11)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict()
@@ -27,7 +27,7 @@ class BotTest(UreportTest):
             title="WhatsApp",
             channel="+12345",
             keyword="join",
-            deeplink="https://example.com/12345",
+            facebook_deeplink="https://example.com/12345",
             description="The main channel",
             priority=1,
         )
@@ -39,7 +39,7 @@ class BotTest(UreportTest):
         self.assertEquals(bot.org, self.uganda)
         self.assertEquals(bot.channel, "+12345")
         self.assertEquals(bot.keyword, "join")
-        self.assertEquals(bot.deeplink, "https://example.com/12345")
+        self.assertEquals(bot.facebook_deeplink, "https://example.com/12345")
         self.assertEquals(bot.description, "The main channel")
         self.assertEquals(bot.priority, 1)
         self.assertTrue(bot.featured)
@@ -47,14 +47,14 @@ class BotTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 8)
+        self.assertEquals(len(response.context["form"].fields), 11)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict(
             title="Facebook",
             channel="HereWeGo",
             keyword="participate",
-            deeplink="https://example.com/herewego",
+            facebook_deeplink="https://example.com/herewego",
             description="The Facebook channel",
             priority=2,
         )
@@ -66,7 +66,7 @@ class BotTest(UreportTest):
         self.assertEquals(bot.org, self.uganda)
         self.assertEquals(bot.channel, "HereWeGo")
         self.assertEquals(bot.keyword, "participate")
-        self.assertEquals(bot.deeplink, "https://example.com/herewego")
+        self.assertEquals(bot.facebook_deeplink, "https://example.com/herewego")
         self.assertEquals(bot.description, "The Facebook channel")
         self.assertEquals(bot.priority, 2)
         self.assertFalse(bot.featured)
@@ -78,7 +78,7 @@ class BotTest(UreportTest):
             title="WhatsApp",
             channel="+12345",
             keyword="join",
-            deeplink="https://example.com/12345",
+            facebook_deeplink="https://example.com/12345",
             description="The main channel",
             priority=1,
             created_by=self.admin,
@@ -91,7 +91,7 @@ class BotTest(UreportTest):
             title="Facebook",
             channel="HereWeGo",
             keyword="participate",
-            deeplink="https://example.com/herewego",
+            facebook_deeplink="https://example.com/herewego",
             description="The Facebook channel",
             priority=2,
             created_by=self.admin,
@@ -104,7 +104,7 @@ class BotTest(UreportTest):
             title="WhatsApp",
             channel="+12555",
             keyword="join",
-            deeplink="https://example.com/12555",
+            facebook_deeplink="https://example.com/12555",
             description="The main channel",
             priority=1,
             created_by=self.admin,
@@ -145,7 +145,7 @@ class BotTest(UreportTest):
             title="Facebook",
             channel="HereWeGo",
             keyword="participate",
-            deeplink="https://example.com/herewego",
+            facebook_deeplink="https://example.com/herewego",
             description="The Facebook channel",
             priority=2,
             created_by=self.admin,
@@ -158,7 +158,7 @@ class BotTest(UreportTest):
             title="WhatsApp",
             channel="+12555",
             keyword="join",
-            deeplink="https://example.com/12555",
+            facebook_deeplink="https://example.com/12555",
             description="The main channel",
             priority=1,
             created_by=self.admin,
@@ -181,7 +181,7 @@ class BotTest(UreportTest):
 
         response = self.client.get(uganda_update_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 9)
+        self.assertEquals(len(response.context["form"].fields), 12)
 
         post_data = dict(
             is_active=True,
@@ -189,7 +189,7 @@ class BotTest(UreportTest):
             title="WhatsApp",
             channel="+12345",
             keyword="join",
-            deeplink="https://example.com/12345",
+            facebook_deeplink="https://example.com/12345",
             description="The main channel",
             priority=3,
         )
@@ -200,7 +200,7 @@ class BotTest(UreportTest):
         self.assertEquals(bot.org, self.uganda)
         self.assertEquals(bot.channel, "+12345")
         self.assertEquals(bot.keyword, "join")
-        self.assertEquals(bot.deeplink, "https://example.com/12345")
+        self.assertEquals(bot.facebook_deeplink, "https://example.com/12345")
         self.assertEquals(bot.description, "The main channel")
         self.assertEquals(bot.priority, 3)
         self.assertTrue(bot.featured)

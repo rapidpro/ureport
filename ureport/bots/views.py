@@ -13,7 +13,19 @@ class BotForm(forms.ModelForm):
 
     class Meta:
         model = Bot
-        fields = ("is_active", "featured", "title", "channel", "keyword", "deeplink", "description", "priority")
+        fields = (
+            "is_active",
+            "featured",
+            "title",
+            "channel",
+            "keyword",
+            "facebook_deeplink",
+            "telegram_deeplink",
+            "viber_deeplink",
+            "whatsapp_deeplink",
+            "description",
+            "priority",
+        )
 
 
 class BotCRUDL(SmartCRUDL):
@@ -22,7 +34,18 @@ class BotCRUDL(SmartCRUDL):
 
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = BotForm
-        fields = ("featured", "title", "channel", "keyword", "deeplink", "description", "priority")
+        fields = (
+            "featured",
+            "title",
+            "channel",
+            "keyword",
+            "facebook_deeplink",
+            "telegram_deeplink",
+            "viber_deeplink",
+            "whatsapp_deeplink",
+            "description",
+            "priority",
+        )
 
         def pre_save(self, obj):
             obj = super(BotCRUDL.Create, self).pre_save(obj)
@@ -42,4 +65,16 @@ class BotCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = BotForm
-        fields = ("is_active", "featured", "title", "channel", "keyword", "deeplink", "description", "priority")
+        fields = (
+            "is_active",
+            "featured",
+            "title",
+            "channel",
+            "keyword",
+            "facebook_deeplink",
+            "telegram_deeplink",
+            "viber_deeplink",
+            "whatsapp_deeplink",
+            "description",
+            "priority",
+        )

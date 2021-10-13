@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 14:08+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -936,13 +936,10 @@ msgstr "ARSIP CERITA"
 msgid "LIST"
 msgstr "DAFTAR"
 
-msgid "Click to start"
+msgid "Send"
 msgstr ""
 
-msgid "Send keyword:"
-msgstr ""
-
-msgid "Channel / Number:"
+msgid "to"
 msgstr ""
 
 #, fuzzy
@@ -1337,10 +1334,8 @@ msgstr "Tipe Gambar"
 msgid "The organization this bot is part of"
 msgstr "organisasi jajak pendapat ini adalah bagian dari"
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
-msgid "Whether this bot is featured and displayed on the homepage"
-msgstr "Apakah jajak pendapat ini harus tampil di homepage"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
 
 #, fuzzy
 #| msgid "The title for this item"
@@ -1357,13 +1352,28 @@ msgstr "Kategori cerita"
 
 #, fuzzy
 #| msgid "The title for this block of content, optional"
-msgid "The deeplink for this bot, optional"
+msgid "The Facebook bot deeplink, optional"
 msgstr "Judul untuk blok konten ini, opsional"
 
 #, fuzzy
-#| msgid "The location of the responder."
-msgid "The description of this bot, optional"
-msgstr "Lokasi responden"
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Deskripsi ringkasan pendek untuk item ini"
 
 #, fuzzy
 #| msgid "The priority of this question on the poll page, higher priority comes first"
@@ -1979,6 +1989,16 @@ msgstr "Cerita ini di tampilkan di halaman depan"
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Lokasi responden"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Apakah jajak pendapat ini harus tampil di homepage"
 
 #, fuzzy
 #~| msgid "Org"

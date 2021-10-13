@@ -72,26 +72,41 @@
   -if featured_bots
     .max-w-page.mx-auto.border-black.border-b
       -for bot in featured_bots|slice:"3"
-        .flex.border-b.hover-parent
-          .block.py-4.px-16.my-auto.hover-parent(class="w-1/2")
+        .border-b.hover-parent(class="md:flex")
+          .block.pb-6.pt-12.px-16.my-auto.hover-parent(class="md:w-1/2")
             {{bot.title}}
-            .inline-block.float-right
-              -if bot.deeplink
-                %a.btn.p-3.text-xs.bg-black.hover-dark.text-white(href="{{bot.deeplink}}")
-                  -trans "Click to start"
+            .block.hover-parent
+              .block.no-wrap
+                .text-sm.inline
+                  -trans "Send"
+                .text-xl.inline
+                  "{{bot.keyword}}"
+                .text-sm.inline
+                  -trans "to"
+                .text-xl.inline
+                  {{bot.channel}}
 
-          .block.p-8.hover-parent(class="w-1/2")
+            .block.flex.mt-4
+              - if bot.facebook_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2
+                  %i.fab.fa-facebook-f
+
+              - if bot.telegram_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2
+                  %i.fab.fa-telegram
+
+              - if bot.viber_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2
+                  %i.fab.fa-viber
+
+              - if bot.whatsapp_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2
+                  %i.fab.fa-whatsapp
+
+          .block.px-16.pt-12.pb-6.hover-parent(class="md:w-1/2")
             {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
-            .block
-              .text-sm.inline
-                -trans "Send keyword:"
-              .text-xl.inline
-                "{{bot.keyword}}"
-            .block
-              .text-sm.inline
-                -trans "Channel / Number:"
-              .text-xl.inline
-                {{bot.channel}}
+            .block.hover-parent.h-32.overflow-hidden.text-ellipsis.text-sm
+              {{bot.description|safe}}
 
       %div(class="md:flex")
         .inline-block.w-full.p-8
