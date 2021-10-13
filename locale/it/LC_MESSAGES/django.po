@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 14:08+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -901,13 +901,10 @@ msgstr "STORIE ARCHIVIATE"
 msgid "LIST"
 msgstr "LISTA"
 
-msgid "Click to start"
+msgid "Send"
 msgstr ""
 
-msgid "Send keyword:"
-msgstr ""
-
-msgid "Channel / Number:"
+msgid "to"
 msgstr ""
 
 msgid "LATEST OPINION"
@@ -1264,10 +1261,8 @@ msgstr "Tipo di immagine"
 msgid "The organization this bot is part of"
 msgstr "L'organizzazione di cui è parte questo sondaggio"
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
-msgid "Whether this bot is featured and displayed on the homepage"
-msgstr "Se questo sondaggio può essere visualizzato nella homepage"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
 
 #, fuzzy
 #| msgid "The title for this item"
@@ -1284,13 +1279,28 @@ msgstr "La categoria per questa storia "
 
 #, fuzzy
 #| msgid "The title for this block of content, optional"
-msgid "The deeplink for this bot, optional"
+msgid "The Facebook bot deeplink, optional"
 msgstr "Il titolo per questo blocco di contenuti, opzionale"
 
 #, fuzzy
-#| msgid "The description of the opinions page"
-msgid "The description of this bot, optional"
-msgstr "La descrizione della pagina opinioni"
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Il titolo per questo blocco di contenuti, opzionale"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Il titolo per questo blocco di contenuti, opzionale"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Il titolo per questo blocco di contenuti, opzionale"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Una breve descrizione sommaria per questo elemento"
 
 #, fuzzy
 #| msgid "The priority of this question on the poll page, higher priority comes first"
@@ -1865,6 +1875,16 @@ msgstr "Se questa storia è apparsa"
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "La descrizione della pagina opinioni"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Se questo sondaggio può essere visualizzato nella homepage"
 
 #, fuzzy
 #~| msgid "Org"

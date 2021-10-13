@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 14:08+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -904,13 +904,10 @@ msgstr "HISTÓRIAS ARQUIVADAS"
 msgid "LIST"
 msgstr "LISTAR"
 
-msgid "Click to start"
+msgid "Send"
 msgstr ""
 
-msgid "Send keyword:"
-msgstr ""
-
-msgid "Channel / Number:"
+msgid "to"
 msgstr ""
 
 #, fuzzy
@@ -1278,7 +1275,7 @@ msgstr "Tipo de Imagem"
 msgid "The organization this bot is part of"
 msgstr "A organização na qual este item pertence"
 
-msgid "Whether this bot is featured and displayed on the homepage"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
 
 #, fuzzy
@@ -1296,13 +1293,28 @@ msgstr "A categoria para esta história"
 
 #, fuzzy
 #| msgid "The title for this block of content, optional"
-msgid "The deeplink for this bot, optional"
+msgid "The Facebook bot deeplink, optional"
 msgstr "O título para este bloco de conteúdo, opcional"
 
 #, fuzzy
-#| msgid "The location of the responder."
-msgid "The description of this bot, optional"
-msgstr "A localização da pessoa que responde."
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "O título para este bloco de conteúdo, opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "O título para este bloco de conteúdo, opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "O título para este bloco de conteúdo, opcional"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Uma descrição breve do resumo para este item"
 
 #, fuzzy
 #| msgid "The priority for this block, higher priority blocks come first"
@@ -1903,6 +1915,11 @@ msgstr "Se esta história é selecionada"
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description of this bot, optional"
+#~ msgstr "A localização da pessoa que responde."
 
 #, fuzzy
 #~| msgid "Org"

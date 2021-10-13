@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 14:08+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -899,13 +899,10 @@ msgstr "ARXIVDAGI HIKOYALAR"
 msgid "LIST"
 msgstr "RO'YXAT"
 
-msgid "Click to start"
+msgid "Send"
 msgstr ""
 
-msgid "Send keyword:"
-msgstr ""
-
-msgid "Channel / Number:"
+msgid "to"
 msgstr ""
 
 msgid "LATEST OPINION"
@@ -1254,10 +1251,8 @@ msgstr "Tasvir turi"
 msgid "The organization this bot is part of"
 msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
-msgid "Whether this bot is featured and displayed on the homepage"
-msgstr "Mazkur so'rov uy sahifasida alohida ajralib turishi kerakmi"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
 
 #, fuzzy
 #| msgid "The title for this item"
@@ -1274,13 +1269,28 @@ msgstr "Ushbu hikoya uchun toifa"
 
 #, fuzzy
 #| msgid "The title for this block of content, optional"
-msgid "The deeplink for this bot, optional"
+msgid "The Facebook bot deeplink, optional"
 msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
 
 #, fuzzy
-#| msgid "The description of the opinions page"
-msgid "The description of this bot, optional"
-msgstr "Fikrlar sahifasining bayoni"
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Ushbu elementning qisqacha ta'rifi"
 
 #, fuzzy
 #| msgid "The priority of this question on the poll page, higher priority comes first"
@@ -1843,6 +1853,16 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Fikrlar sahifasining bayoni"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Mazkur so'rov uy sahifasida alohida ajralib turishi kerakmi"
 
 #, fuzzy
 #~| msgid "Org"

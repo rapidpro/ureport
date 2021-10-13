@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 14:08+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -898,13 +898,10 @@ msgstr "ARKIVERADE BERÄTTELSER"
 msgid "LIST"
 msgstr "LISTA"
 
-msgid "Click to start"
+msgid "Send"
 msgstr ""
 
-msgid "Send keyword:"
-msgstr ""
-
-msgid "Channel / Number:"
+msgid "to"
 msgstr ""
 
 msgid "LATEST OPINION"
@@ -1233,10 +1230,8 @@ msgstr "Bildtyp"
 msgid "The organization this bot is part of"
 msgstr "Organisationen som undersökningen är en del av"
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
-msgid "Whether this bot is featured and displayed on the homepage"
-msgstr "Undersökningen ska visas på startsidan"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
 
 #, fuzzy
 #| msgid "The title for this item"
@@ -1253,13 +1248,28 @@ msgstr "Berättelsens kategori"
 
 #, fuzzy
 #| msgid "The title for this block of content, optional"
-msgid "The deeplink for this bot, optional"
+msgid "The Facebook bot deeplink, optional"
 msgstr "Titeln för innehållsblocket, valfritt"
 
 #, fuzzy
-#| msgid "The description of the opinions page"
-msgid "The description of this bot, optional"
-msgstr "Beskrivning av sidan \"Åsikter\""
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Titeln för innehållsblocket, valfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Titeln för innehållsblocket, valfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Titeln för innehållsblocket, valfritt"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Kort sammanfattning av objektet"
 
 #, fuzzy
 #| msgid "The priority of this question on the poll page, higher priority comes first"
@@ -1812,6 +1822,16 @@ msgstr "Raden skapades genom squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Beskrivning av sidan \"Åsikter\""
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Undersökningen ska visas på startsidan"
 
 #, fuzzy
 #~| msgid "Org"

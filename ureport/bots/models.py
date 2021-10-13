@@ -12,7 +12,10 @@ class Bot(SmartModel):
     )
 
     featured = models.BooleanField(
-        default=False, help_text=_("Whether this bot is featured and displayed on the homepage")
+        default=False,
+        help_text=_(
+            "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+        ),
     )
 
     title = models.CharField(max_length=128, help_text=_("The title to display for this bot"))
@@ -23,9 +26,17 @@ class Bot(SmartModel):
 
     keyword = models.CharField(max_length=128, help_text=_("The keyword for this bot"))
 
-    deeplink = models.URLField(null=True, blank=True, help_text=_("The deeplink for this bot, optional"))
+    facebook_deeplink = models.URLField(null=True, blank=True, help_text=_("The Facebook bot deeplink, optional"))
 
-    description = models.TextField(blank=True, null=True, help_text=_("The description of this bot, optional"))
+    telegram_deeplink = models.URLField(null=True, blank=True, help_text=_("The Telegram bot deeplink, optional"))
+
+    viber_deeplink = models.URLField(null=True, blank=True, help_text=_("The Viber bot deeplink, optional"))
+
+    whatsapp_deeplink = models.URLField(null=True, blank=True, help_text=_("The WhatsApp bot deeplink, optional"))
+
+    description = models.TextField(
+        max_length=320, default="", help_text=_("A short description for this bot, required")
+    )
 
     priority = models.IntegerField(
         default=0, help_text=_("The priority number for this bot among others on a list, high priority comes first")

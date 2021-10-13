@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 14:08+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -870,13 +870,10 @@ msgstr "သိမ်းထားသော သတင်းဆောင်းပ�
 msgid "LIST"
 msgstr "LIST"
 
-msgid "Click to start"
+msgid "Send"
 msgstr ""
 
-msgid "Send keyword:"
-msgstr ""
-
-msgid "Channel / Number:"
+msgid "to"
 msgstr ""
 
 msgid "LATEST OPINION"
@@ -1194,7 +1191,7 @@ msgstr "Image type"
 msgid "The organization this bot is part of"
 msgstr "he organization this category applies to"
 
-msgid "Whether this bot is featured and displayed on the homepage"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
 
 msgid "The title to display for this bot"
@@ -1210,12 +1207,27 @@ msgstr "The name to describe this image"
 
 #, fuzzy
 #| msgid "A short descriptive name for this image"
-msgid "The deeplink for this bot, optional"
+msgid "The Facebook bot deeplink, optional"
 msgstr "A short descriptive name for this image"
 
 #, fuzzy
 #| msgid "A short descriptive name for this image"
-msgid "The description of this bot, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "The Viber bot deeplink, optional"
+msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "A short description for this bot, required"
 msgstr "A short descriptive name for this image"
 
 msgid "The priority number for this bot among others on a list, high priority comes first"
@@ -1755,6 +1767,11 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#, fuzzy
+#~| msgid "A short descriptive name for this image"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "A short descriptive name for this image"
 
 #, fuzzy
 #~| msgid "Org"

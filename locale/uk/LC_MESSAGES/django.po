@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 14:08+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -878,13 +878,10 @@ msgstr ""
 msgid "LIST"
 msgstr ""
 
-msgid "Click to start"
+msgid "Send"
 msgstr ""
 
-msgid "Send keyword:"
-msgstr ""
-
-msgid "Channel / Number:"
+msgid "to"
 msgstr ""
 
 msgid "LATEST OPINION"
@@ -1205,7 +1202,7 @@ msgstr ""
 msgid "The organization this bot is part of"
 msgstr ""
 
-msgid "Whether this bot is featured and displayed on the homepage"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
 
 msgid "The title to display for this bot"
@@ -1219,12 +1216,27 @@ msgstr ""
 
 #, fuzzy
 #| msgid "The description of the opinions page"
-msgid "The deeplink for this bot, optional"
+msgid "The Facebook bot deeplink, optional"
 msgstr "Опитування"
 
 #, fuzzy
 #| msgid "The description of the opinions page"
-msgid "The description of this bot, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The Viber bot deeplink, optional"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "A short description for this bot, required"
 msgstr "Опитування"
 
 msgid "The priority number for this bot among others on a list, high priority comes first"
