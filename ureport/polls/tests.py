@@ -917,7 +917,7 @@ class PollTest(UreportTest):
         self.assertTrue("ruleset_uuid-101_title" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_color" in response.context["form"].fields)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_priority"].initial, 0)
-        self.assertNone(response.context["form"].fields["ruleset_uuid-101_color"].initial, None)
+        self.assertIsNone(response.context["form"].fields["ruleset_uuid-101_color"].initial)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_label"].initial, "question poll 1")
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_title"].initial, "question poll 1")
         self.assertContains(response, "The label of the ruleset from RapidPro")
