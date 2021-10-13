@@ -1,0 +1,1911 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Ellen Gonçalves <ellen.goncalves@ilhasoft.com.br>, 2021
+# Mavliuda Dzhaparova, 2021
+# Mirbek Tursunbekov, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: Mirbek Tursunbekov, 2021\n"
+"Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "The name of this category"
+msgstr "Название этой категории"
+
+msgid "An optional image that can describe this category"
+msgstr "Дополнительная картинка, которая может описать эту категорию"
+
+msgid "The organization this category applies to"
+msgstr "Организация этой категории подходит к"
+
+msgid "Categories"
+msgstr "Категории"
+
+msgid "The name to describe this image"
+msgstr "Описание этой картинки"
+
+msgid "The category this image represents"
+msgstr "Картинка представляет категорию"
+
+msgid "The image file to use"
+msgstr "Визуальный файл для использования"
+
+msgid "The human readable name for this content type"
+msgstr "Название для такого типа категории"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+"Определение этого типа контента, который используется с примерными тегами"
+
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
+msgstr ""
+"Описание того, где этот тип контента используется на сайте и как он будет "
+"отображаться"
+
+msgid "Whether this content should include a title"
+msgstr "Должен ли этот контент включать заголовок"
+
+msgid "Whether this content should include an image"
+msgstr "Должен ли этот контент включать изображение"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr ""
+"Следует ли использовать для этого контента многофункциональный редактор HTML"
+
+msgid "Whether this content should include a summary field"
+msgstr "Должен ли этот контент включать резюмирующее поле"
+
+msgid "Whether this content should include a link"
+msgstr "Должен ли этот контент включать ссылку"
+
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
+"Должен ли этот контент разрешать загрузку дополнительных изображений, "
+"например галерею"
+
+msgid "Whether this content has a color field"
+msgstr "Есть ли у этого контента цветовое поле"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Должен ли этот контент разрешать установку идентификатора YouTube"
+
+msgid "Whether this content should allow tags"
+msgstr "Должен ли этот контент разрешать теги"
+
+msgid "Content Type"
+msgstr "Тип содержимого"
+
+msgid "The category, or type for this content block"
+msgstr "Категория или тип этого блока содержимого"
+
+msgid "The title for this block of content, optional"
+msgstr "Заголовок для этого блока контента, необязательно"
+
+msgid "The summary for this item, should be short"
+msgstr "Резюме по этому пункту должно быть кратким"
+
+msgid "The body of text for this content block, optional"
+msgstr "Основной текст этого блока содержимого, необязательно"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr ""
+"Любое изображение, которое должно отображаться с этим блоком содержимого, "
+"необязательно"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Цвет фона для изображения в формате: #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr ""
+"Любая ссылка, которая должна быть связана с этим блоком содержимого, "
+"необязательно"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Идентификатор видео YouTube, которое нужно связать с этим элементом"
+
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr ""
+"Любые теги для этого блока содержимого, разделенные пробелами, могут "
+"использоваться для более расширенной фильтрации, необязательно"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+"Приоритет для этого блока, блоки с более высоким приоритетом идут первыми"
+
+msgid "The organization this content block belongs to"
+msgstr "Организация, которой принадлежит этот контентный блок"
+
+msgid "Gallery"
+msgstr "Галерея"
+
+msgid "Add Image"
+msgstr "Добавить изображение"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Add"
+msgstr "Добавить"
+
+msgid "Content Types"
+msgstr "Типы контента"
+
+msgid "Content Blocks"
+msgstr "Блоки контента"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%sБлоки"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Редактировать %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Создать %s"
+
+msgid "Create Content Block"
+msgstr "Создать блок содержимого"
+
+msgid "Your first name"
+msgstr "Ваше имя"
+
+msgid "Your last name"
+msgstr "Ваша фамилия"
+
+msgid "Your email address"
+msgstr "Ваш электронный адрес"
+
+msgid "Your password, at least eight letters please"
+msgstr "Ваш пароль должен содержать минимум восемь букв"
+
+msgid "That email address is already used"
+msgstr "Этот электронный адрес уже был использован"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Пароли должны содержать не менее 8 букв."
+
+msgid "This domain is used for subdomains"
+msgstr "Этот домен используется для поддоменов"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "The name of this organization"
+msgstr "Название этой организации"
+
+msgid "The logo that should be used for this organization"
+msgstr "Логотип, который следует использовать для этой организации"
+
+msgid "Administrators"
+msgstr "Администраторы"
+
+msgid "The administrators in your organization"
+msgstr "Администраторы в вашей организации"
+
+msgid "Viewers"
+msgstr "Посетители"
+
+msgid "The viewers in your organization"
+msgstr "Посетители вашей организации"
+
+msgid "Editors"
+msgstr "Редакторы"
+
+msgid "The editors in your organization"
+msgstr "Редакторы в вашей организации"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "The main language used by this organization"
+msgstr "Основной язык, используемый в вашей организации"
+
+msgid "Subdomain"
+msgstr "Субдомен"
+
+msgid "This subdomain is not available"
+msgstr "Этот субдомен не доступен"
+
+msgid "The subdomain for this organization"
+msgstr "Субдомен для этой организации"
+
+msgid "Domain"
+msgstr "Домен"
+
+msgid "This domain is not available"
+msgstr "Этот домен недоступен"
+
+msgid "The custom domain for this organization"
+msgstr "Персональный домен для этой организации"
+
+msgid "Timezone"
+msgstr "Часовой пояс"
+
+msgid "The timezone your organization is in."
+msgstr "Часовой пояс, в котором находится ваша организация"
+
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"Большой двоичный объект JSON используется для хранения информации о "
+"конфигурации, связанной с этой организацией."
+
+msgid "Administrator"
+msgstr "Администратор"
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Viewer"
+msgstr "Наблюдатель"
+
+msgid "Org"
+msgstr "Организация"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Организация, которой предлагается аккаунт для просмотра"
+
+msgid "Email"
+msgstr "Электронный адрес"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "электронное письмо, на которое мы отправляем приглашение наблюдателю"
+
+msgid "Secret"
+msgstr "Секрет"
+
+msgid "a unique code associated with this invitation"
+msgstr "уникальный код, связанный с этим приглашением"
+
+msgid "User Role"
+msgstr "Роль пользователя"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%sПриглашений"
+
+msgid "Banner"
+msgstr "Баннер"
+
+msgid "Pattern"
+msgstr "Шаблон"
+
+msgid "The organization in which the image will be used"
+msgstr "Организация, в которой будет использоваться изображение"
+
+msgid "The name to describe this background"
+msgstr "Описание этого фона"
+
+msgid "Background type"
+msgstr "Тип фона"
+
+msgid "The image file"
+msgstr "Файл изображения"
+
+msgid "The API token for this backend"
+msgstr "токен API для этого бэкэнда"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"Вас пригласили присоединиться %(org_name)s\n"
+"<br/>\n"
+"Чтобы принять приглашение, <a href='%(host)s%(join_url)s'>щелкните здесь</a>"
+
+msgid "You are invited to join {{org.name}}."
+msgstr "Вас приглашают присоединиться к {{org.name}}"
+
+msgid "Click this link to join"
+msgstr "Пройдите по ссылке, чтобы присоединиться"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Manage Backends"
+msgstr "Управление серверным бекэндом"
+
+msgid "Manage Users"
+msgstr "Управление пользователями"
+
+msgid "Accounts"
+msgstr "Учетные записи"
+
+msgid "Admins"
+msgstr "Админы"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "You must have at least one administator"
+msgstr "У вас должен быть хотя бы один администратор"
+
+msgid "Select your Organization"
+msgstr "Выберите вашу организацию"
+
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"Ваша учетная запись не связана с организацией. Обратитесь к администратору."
+
+msgid "Your Organization"
+msgstr "Ваша Организация"
+
+msgid "Invite people to your organization"
+msgstr "Пригласите людей в вашу организацию"
+
+msgid "User group"
+msgstr "Группа пользователей"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Один из введенных вами электронных адресов недействителен"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Управлять %(name)sаккаунтами"
+
+msgid "Create"
+msgstr "Создать"
+
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"Ваша пригласительная ссылка недействительна. Обратитесь к администратору "
+"вашей организации."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Присоединить %(name)s"
+
+msgid "Join"
+msgstr "Присоединиться"
+
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"Срок действия вашей пригласительной ссылки истек. Обратитесь к "
+"администратору вашей организации."
+
+msgid "Task"
+msgstr "Задание"
+
+msgid "Tasks"
+msgstr "Задания"
+
+msgid "The title for this story"
+msgstr "Заголовок для истории"
+
+msgid "Whether this story is featured"
+msgstr "Показана ли эта история"
+
+msgid "The summary for the story"
+msgstr "Краткое содержание истории"
+
+msgid "The body of text for the story"
+msgstr "Основной текст истории"
+
+msgid "The writer of the story"
+msgstr "Автор истории"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Ссылка на mp3-файл для публикации этой истории"
+
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"Идентификатор видео YouTube, которое должно быть связано с этой историей "
+"(это текст, который идет после v = и перед & в URL-адресе YouTube)"
+
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Любые теги для этой истории, разделенные пробелами, можно использовать для "
+"расширенной фильтрации, необязательно"
+
+msgid "The category for this story"
+msgstr "Категория для этой истории"
+
+msgid "The organization this story belongs to"
+msgstr "Организация, которой принадлежит эта история"
+
+msgid "Stories"
+msgstr "Истории"
+
+msgid "The story to associate to"
+msgstr "История, которая относится"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Story Images"
+msgstr "Изображения для истории"
+
+#, python-format
+msgid "Image %d"
+msgstr "Изображение %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+"Изображение для отображения на странице истории и в превью (по желанию)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+"Изображение для отображения на странице истории и в предварительном "
+"просмотре (необязательно)"
+
+msgid "Remove Item?"
+msgstr "Удалить предмет?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Вы уверены, что вы хотите удалить <b>%(object)s</b>?"
+
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr ""
+"Как только он будет удален, он исчезнет навсегда. Отменить эту операцию "
+"невозможно."
+
+msgid "Cancel"
+msgstr "Отменить"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"Результаты %(counter)s"
+msgstr[1] ""
+"\n"
+"Результаты %(counter)s"
+msgstr[2] ""
+"\n"
+"Результаты %(counter)s"
+msgstr[3] ""
+"\n"
+"Результаты %(counter)s"
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"Результаты %(start)s-%(end)sот%(count)s"
+
+msgid "Previous"
+msgstr "Предыдущий"
+
+msgid "Next"
+msgstr "Следующий"
+
+msgid "edit"
+msgstr "редактировать"
+
+msgid "Sign in"
+msgstr "Войти"
+
+msgid "Login"
+msgstr "Авторизоваться "
+
+msgid "Forgot Password?"
+msgstr "Забыли пароль?"
+
+msgid "Token Expired"
+msgstr "Срок действия токена истек"
+
+msgid "Login Failure"
+msgstr "Ошибка входа"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+" К сожалению, в настоящее время,вы не можете войти в систему,  потому что было %(failed_login_limit)sраз неправильных попыток авторизации. "
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Для повторной авторизации, пожалуйста подождите %(lockout_timeout)s минут."
+
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+"Кроме того, вы можете заполнить форму ниже, чтобы запросить пароль по "
+"электронной почте."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Обратитесь к администратору веб-сайта, чтобы обновить пароль."
+
+msgid "Email Address"
+msgstr "Электронный адрес"
+
+msgid "Recover"
+msgstr "Восстановить"
+
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+"Пожалуйста, введите адрес электронной почты, который вы использовали для "
+"регистрации, и мы поможем вам восстановить ваш пароль."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Ваш пароль устарел</strong> Согласно Политике сайта, вы должны заменять пароль  каждые %(expire_days)s дня, и пароль не должен быть использован повторно %(window_days)s дня."
+
+msgid "New Password"
+msgstr "Новый пароль"
+
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
+"Пароли должны содержать не менее 8 символов, включая одну заглавную букву, "
+"одну строчную, и цифру"
+
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
+"Вы уже использовали этот пароль в прошлом году, пожалуйста, используйте "
+"новый пароль."
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Confirm Password"
+msgstr "Подтвердите пароль"
+
+msgid "Please enter your password to save changes."
+msgstr "Пожалуйста, введите свой пароль, чтобы сохранить изменения."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Подтвердите новый пароль, заполнив это поле"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Новый пароль не совпадает с подтвержденным"
+
+msgid "Your Email"
+msgstr "Ваш электронный адрес"
+
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
+"Восстановление электронной почты не поддерживается, обратитесь к "
+"администратору веб-сайта, чтобы сбросить пароль вручную."
+
+msgid "Current Password"
+msgstr "Текущий пароль"
+
+msgid "Your current password"
+msgstr "Ваш текущий пароль"
+
+msgid "Your new password."
+msgstr "Ваш новый пароль"
+
+msgid "Confirm new Password"
+msgstr "Подтвердите новый пароль"
+
+msgid "Confirm your new password."
+msgstr "Подтвердите ваш новый пароль"
+
+msgid "Please enter your password to save changes"
+msgstr "Пожалуйста, введите свой пароль, чтобы сохранить изменения"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Подтвердите свой новый пароль, введя его здесь"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr ""
+"Несоответствие между вашим новым паролем и подтверждением, попробуйте еще "
+"раз"
+
+msgid "New user created successfully."
+msgstr "Новый пользователь успешно создан."
+
+msgid "Groups"
+msgstr "Группы"
+
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr ""
+"Пользователи получат только те разрешения, которые доступны для их группы"
+
+msgid "Set the user's initial password here."
+msgstr "Установите здесь начальный пароль пользователя."
+
+msgid "Last Login"
+msgstr "Последний логин"
+
+msgid "Is Active"
+msgstr "Активен"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Разрешено ли этому пользователю войти на сайт"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+"Пользователи получат только те разрешения, которые доступны для их группы"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Вы можете сбросить пароль пользователя, введя новый пароль здесь"
+
+msgid "Username"
+msgstr "Имя пользователя"
+
+msgid "Your password"
+msgstr "Ваш пароль"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Если вы хотите установить новый пароль, введите его здесь"
+
+msgid "Confirm New Password"
+msgstr "Подтвердите новый пароль"
+
+msgid "Confirm your new password"
+msgstr "Подтвердите ваш новый пароль"
+
+msgid "Edit your profile"
+msgstr "Отредактируйте ваш профиль"
+
+msgid "Password Recovery"
+msgstr "Восстановление пароля"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr ""
+"На вашу почту было отправлено электронное письмо с дальнейшими инструкциями."
+
+msgid "Password Recovery Request"
+msgstr "Запрос на восстановление пароля"
+
+msgid "Pick a new password"
+msgstr "Выберите новый пароль"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Ваш пароль успешно обновлен, спасибо."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Вы вошли как %s"
+
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+"Пароль успешно обновлен. Теперь вы можете войти в систему, используя новый "
+"пароль."
+
+msgid "Reset your Password"
+msgstr "Сбросить пароль"
+
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr ""
+"Срок действия вашей ссылки истек по соображениям безопасности. Пожалуйста, "
+"повторите процесс, указав здесь свой адрес электронной почты."
+
+msgid "Submit"
+msgstr "Отправить"
+
+msgid "Form"
+msgstr "Форма"
+
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Ваш новый %s был создан."
+
+#, python-format
+msgid "Import %s"
+msgstr "Импортировать %s"
+
+msgid "Back to Website"
+msgstr "Вернуться на сайт"
+
+msgid "Welcome, "
+msgstr "Добро пожаловать, "
+
+msgid "Logout"
+msgstr "Выйти"
+
+msgid "Opinions"
+msgstr "Мнения"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Pages"
+msgstr "Страницы"
+
+msgid "Jobs"
+msgstr "Работы"
+
+msgid "Photos"
+msgstr "Фотографии"
+
+msgid "Categories Images"
+msgstr "Фотографии категорий"
+
+msgid "News Items"
+msgstr "Новые элементы"
+
+msgid "Orgs"
+msgstr "Организации"
+
+msgid "Images"
+msgstr "Изображения"
+
+msgid "About"
+msgstr "О нас"
+
+msgid "Engagement"
+msgstr "Участие"
+
+msgid "Category Images"
+msgstr "Фотографии категорий"
+
+msgid "+ New "
+msgstr "+ новое"
+
+msgid "+ New Page"
+msgstr "+ новая страница"
+
+msgid "U-Report"
+msgstr "Ю-Репорт"
+
+msgid "Admin"
+msgstr "Администратор"
+
+msgid "Configuration"
+msgstr "Конфигурация"
+
+msgid "Content"
+msgstr "Содержание"
+
+msgid "Country Aliases"
+msgstr "Названия стран"
+
+msgid "Job Sources"
+msgstr "Источники работ"
+
+msgid "Jobs Content"
+msgstr "Содержание работ"
+
+msgid "About Content"
+msgstr "О содержании"
+
+msgid "Videos"
+msgstr "Видео"
+
+msgid "Contact Us Content"
+msgstr "Связаться с нами Содержание"
+
+msgid "Missions Content"
+msgstr "Содержание миссий"
+
+msgid "Terms & Conditions"
+msgstr "Условия и положения"
+
+msgid "U-Reporters Content"
+msgstr "Содержание для Ю-Репортёров"
+
+msgid "Join &amp; Engage Content"
+msgstr "Присоединиться к & amp; Вовлекающий контент"
+
+msgid "Join Steps Content"
+msgstr "Шаги по присоединению"
+
+msgid "Additional Menu"
+msgstr "Дополнительное меню"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "ВЫБЕРИТЕ ВАШУ СТРАНУ"
+
+msgid "Join Now"
+msgstr "Присоединиться сейчас "
+
+msgid "READ MORE"
+msgstr "ПОДРОБНЕЕ"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "ОПРЕДЕЛИТЬ ВЗАИМОДЕЙСТВИЕ "
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"Чтобы добавить источник вакансии в Twitter, вам необходимо получить идентификатор виджета из Twitter. "
+
+msgid "Follow this step by step guide"
+msgstr "Следуйте этой последовательной инструкции"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"<div> После создания виджета скопируйте идентификатор виджета из URL-адреса, как показано на  </div>"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "НЕДАВНИЕ УВЕДОМЛЕНИЯ "
+
+msgid "Backends"
+msgstr "Бэкэнды"
+
+#, python-format
+msgid ""
+"There is currently %(counter)s new poll syncing. Polls are displayed on the "
+"public site once they have completely synced their results."
+msgid_plural ""
+"There are currently %(counter)s new polls syncing. Polls are displayed on "
+"the public site once they have completely synced their results."
+msgstr[0] ""
+"В настоящее время синхронизируются %(counter)sновый опрос. Опросы "
+"отображаются на общедоступном сайте после полной синхронизации результатов. "
+msgstr[1] ""
+"В настоящее время синхронизируются %(counter)s новых опросов. Опросы "
+"отображаются на общедоступном сайте после полной синхронизации результатов. "
+msgstr[2] ""
+"В настоящее время синхронизируются  %(counter)sновых опросов. Опросы "
+"отображаются на общедоступном сайте после полной синхронизации результатов. "
+msgstr[3] ""
+"В настоящее время синхронизируются %(counter)sновых опросов. Опросы "
+"отображаются на общедоступном сайте после полной синхронизации результатов. "
+
+msgid "+ New Poll"
+msgstr "+ Новый опрос "
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "%(counter)s й вопрос опросника"
+msgstr[1] " %(counter)sе вопросы опросника"
+msgstr[2] " %(counter)sе вопросы опросника"
+msgstr[3] "%(counter)sй вопрос опросника"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr "Для нового опроса синхронизация запланирована каждые 10 минут "
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr "Для главного опроса синхронизация запланирована каждые 10 минут"
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr "Для последнего опроса синхронизация запланирована каждые 60 минут"
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr "Синхронизация больше не запланирована, запускается в архиве "
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "Синхронизация опроса запланирована каждые 24 часа "
+
+msgid "Not scheduling syncs, not active"
+msgstr "Синхронизация не запланирована, не активна "
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr "Не запланирована синхронизация, нет потока для опроса "
+
+msgid "Refresh Results"
+msgstr "Обновить результат"
+
+msgid "MORE POLLS"
+msgstr "БОЛЬШЕ ОПРОСОВ "
+
+msgid "FILTER"
+msgstr "ФИЛЬТР"
+
+msgid "All"
+msgstr "Все"
+
+msgid "POLL LIST"
+msgstr "Список опросов"
+
+msgid "All polls from most recent to oldest"
+msgstr " Все опросы от самого последнего до самого старого "
+
+msgid "ARCHIVED STORIES"
+msgstr "АРХИВИРОВАННЫЕ ИСТОРИИ"
+
+msgid "LIST"
+msgstr "СПИСОК"
+
+msgid "LATEST OPINION"
+msgstr "ПОСЛЕДНЕЕ МНЕНИЕ "
+
+msgid "VIEW FULL RESULTS"
+msgstr "ПОСМОТРЕТЬ ПОЛНЫЕ РЕЗУЛЬТАТЫ "
+
+msgid "U-REPORTERS IN"
+msgstr "Ю-РЕПОРТЕРЫ В "
+
+msgid "PARTNERING WITH"
+msgstr "В ПАРТНЕРСТВЕ С "
+
+msgid "U-REPORTERS"
+msgstr "Ю-РЕПОРТЕРЫ"
+
+msgid "IN"
+msgstr "В"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "СТРАНЫ МИРА"
+
+msgid "AGES"
+msgstr "ВОЗРАСТЫ"
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Присоединяйтесь к U-Report, ваш голос имеет значение. "
+
+msgid "FEATURED STORY"
+msgstr "ИЗБРАННАЯ ИСТОРИЯ"
+
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
+msgstr ""
+"Мы являемся частью глобальной платформы, работающей над изменением жизни "
+"молодых людей во всем мире. "
+
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"Узнайте больше о том, как U-Report расширяет возможности и объединяет "
+"молодых людей, чтобы они высказывались по важным для них вопросам. "
+
+msgid "LEARN MORE"
+msgstr "УЗНАТЬ БОЛЬШЕ"
+
+msgid "Visit"
+msgstr "Визит"
+
+msgid "How would you like to join?"
+msgstr "Хотели бы вы присоединиться? "
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "SEARCH"
+msgstr "ПОИСК"
+
+msgid "No results found"
+msgstr "Результаты не найдены"
+
+msgid "RESPONSES"
+msgstr "ОТВЕТЫ "
+
+msgid "RESPONSE RATE"
+msgstr "СКОРОСТЬ ОТКЛИКА"
+
+msgid "TOTAL RESPONSES"
+msgstr "ВСЕ ОТВЕТЫ "
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "ответили%(responded)s из числа опрошенных  %(polled)s"
+
+msgid "ALL"
+msgstr "ВСЕ"
+
+msgid "AGE"
+msgstr "ВОЗРАСТ"
+
+msgid "GENDER"
+msgstr "ПОЛ"
+
+msgid "LOCATION"
+msgstr "МЕСТОПОЛОЖЕНИЕ"
+
+msgid "Written by:"
+msgstr "Автор:"
+
+msgid "Even"
+msgstr "Даже"
+
+msgid "State"
+msgstr "Область"
+
+msgid "Other"
+msgstr "Другое"
+
+msgid "District"
+msgstr "Район"
+
+msgid "Participation Level"
+msgstr "Уровень участия"
+
+msgid "Responses"
+msgstr "Ответы"
+
+msgid "Reporters in"
+msgstr "Репортеры в"
+
+msgid "Results"
+msgstr "Результаты"
+
+msgid "*Other answers include"
+msgstr "* Другие ответы включены"
+
+msgid "Population"
+msgstr "Население"
+
+msgid "Registered in"
+msgstr "Зарегистрировано в"
+
+msgid "Density"
+msgstr "Плотность"
+
+msgid "total"
+msgstr "Всего"
+
+msgid "of"
+msgstr "из числа"
+
+msgid "the"
+msgstr " -"
+
+msgid "OVERALL STATISTICS"
+msgstr "ОБЩАЯ СТАТИСТИКА "
+
+msgid "THIS YEAR"
+msgstr "ЭТОТ ГОД"
+
+msgid "AVG RESPONSE RATE"
+msgstr "СРЕДНЯЯ СКОРОСТЬ ОТКЛИКА"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "Ю-РЕПОРТЕРЫ ПО РЕГИОНАМ"
+
+msgid "FILTER RESULTS"
+msgstr "ФИЛЬТР РЕЗУЛЬТАТОВ "
+
+msgid "Export and Share"
+msgstr "Экспортировать и Поделиться"
+
+msgid ""
+"Want to tell the world about this? Download this image to easily share on "
+"social media or for a beautiful presentation!"
+msgstr ""
+"Хотите рассказать об этом миру? Загрузите это изображение, чтобы поделиться "
+"в социальных сетях или для красивой презентации! "
+
+msgid "SELECT LANGUAGE"
+msgstr "ВЫБЕРИТЕ ЯЗЫК"
+
+msgid "SELECT COUNTRY"
+msgstr "ВЫБЕРИТЕ СТРАНУ"
+
+msgid "Custom pages"
+msgstr "Пользовательские страницы "
+
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
+msgstr ""
+"Посмотрите цифры, как мы привлекаем голоса молодежи к позитивным социальным "
+"изменениям."
+
+msgid "Polled"
+msgstr "Опрошено"
+
+msgid "Reporters"
+msgstr "Репортеры"
+
+msgid "Top Region"
+msgstr "Верхний регион "
+
+msgid "January"
+msgstr "Январь"
+
+msgid "February"
+msgstr "Февраль"
+
+msgid "March"
+msgstr "Март"
+
+msgid "April"
+msgstr "Апрель"
+
+msgid "May"
+msgstr "Май"
+
+msgid "June"
+msgstr "Июнь"
+
+msgid "July"
+msgstr "Июль"
+
+msgid "August"
+msgstr "Август"
+
+msgid "September"
+msgstr "Сентябрь"
+
+msgid "October"
+msgstr "Октябрь"
+
+msgid "November"
+msgstr "Ноябрь"
+
+msgid "December"
+msgstr "Декабрь"
+
+msgid "Jan"
+msgstr "Январь"
+
+msgid "Feb"
+msgstr "Февраль"
+
+msgid "Mar"
+msgstr "Март"
+
+msgid "Apr"
+msgstr "Апрель"
+
+msgid "Jun"
+msgstr "Июнь"
+
+msgid "Jul"
+msgstr "Июль"
+
+msgid "Aug"
+msgstr "Август"
+
+msgid "Sep"
+msgstr "Сентябрь"
+
+msgid "Oct"
+msgstr "Октябрь"
+
+msgid "Nov"
+msgstr "Ноябрь"
+
+msgid "Dec"
+msgstr "Декабрь"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Вы действительно хотите удалить <strong>%(object)s</strong>?"
+
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] "Результат %(counter)s"
+msgstr[1] "Результаты %(counter)s"
+msgstr[2] "Результаты %(counter)s"
+msgstr[3] "Результаты %(counter)s "
+
+#, python-format
+msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr "Результаты %(start)s-%(end)sот%(count)s"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Enter Dashboard"
+msgstr "Войти в дашборд"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"К сожалению, сейчас вы не можете войти в систему, потому что мы получили %(failed_login_limit)s неправильных попыток авторизации. "
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Подождите %(lockout_timeout)s минут, прежде чем попытаться снова автоматизироваться. "
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Ваш пароль истек. </strong>Политика сайта гласит, что вы должны выбирать новый пароль каждый%(expire_days)s дни, и что пароли не должны использоваться в течение предыдущих %(window_days)sдней."
+
+msgid "+ New Story"
+msgstr "+ Новая история"
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "Обновлен %s кеш для этой организации"
+
+msgid "Flag"
+msgstr "Флаг"
+
+msgid "The organization to which the image will be used"
+msgstr "Изображение организации которое будет использовано"
+
+msgid "A short descriptive name for this image"
+msgstr "Краткое описательное название для этого изображения"
+
+msgid "Image type"
+msgstr "Тип изображения"
+
+msgid "Label"
+msgstr "Ярлык"
+
+msgid "Key"
+msgstr "Ключ"
+
+msgid "Male"
+msgstr "Мужчина"
+
+msgid "Female"
+msgstr "Женщина"
+
+msgid "Organization"
+msgstr "Организация"
+
+msgid "Gender"
+msgstr "Гендер"
+
+msgid "Gender of the contact"
+msgstr "Пол контакта"
+
+msgid "Born Field"
+msgstr "Поле Рождения"
+
+msgid "Occupation Field"
+msgstr "Поля для профессии, занятий"
+
+msgid "Registration Date"
+msgstr "Дата регистрации"
+
+msgid "State Field"
+msgstr "Поле области"
+
+msgid "District Field"
+msgstr "Поле для района"
+
+msgid "Ward Field"
+msgstr "Поля для административной единицы"
+
+msgid "Number of items with this counter"
+msgstr "Количество товаров с этим счетчиком"
+
+msgid "No root user found. Please create a root user"
+msgstr ""
+"Первоочередный пользователь не найден. Пожалуйста, создайте первоочередного "
+"пользователя"
+
+msgid "The name for our alias"
+msgstr "Имя для нашего псевдонима "
+
+msgid "The title or name to reference this Job source."
+msgstr "Заголовок или имя для направления на этот источник работы. "
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr "Выберите тип источника задания. Twitter, Facebook или RSS-канал"
+
+msgid "The full URL to navigate to this Job source."
+msgstr "Полный URL-адрес для перехода к этому источнику работы"
+
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
+msgstr ""
+"В Twitter для встраивания твитов на веб-сайт требуется идентификатор "
+"виджета. Внимательно прочтите приведенные выше инструкции о том, как "
+"получить правильный идентификатор виджета"
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr ""
+"Рекомендуемые источники вакансий отображаются первыми на странице вакансий."
+
+msgid "The organization this job source is for"
+msgstr "Организация, для которой предназначена этот источник работы"
+
+msgid "Your job source has been added successfully"
+msgstr "Ваш источник работы успешно добавлен"
+
+msgid "Your job source has been updated successfully"
+msgstr "Ваш источник вакансий был успешно обновлен"
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr "Это идентификатор OSM для этой административной границы. "
+
+msgid "The name of our administrative boundary"
+msgstr "Название нашей административной границы"
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr "Уровень границы, 0 для страны, 1 для области, 2 для района"
+
+msgid "The parent to this political boundary if any"
+msgstr "Вышестоящая граница административного деления"
+
+msgid "Geometry"
+msgstr "Геометрия"
+
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr "JSON, представляющий тип геометрии и координаты границ "
+
+msgid "The title for this item"
+msgstr "Название этого элемента "
+
+msgid "A short summary description for this item"
+msgstr "Краткое описание этого элемента "
+
+msgid "A link that should be associated with this item"
+msgstr "Ссылка, которая должна быть связана с этим предметом"
+
+msgid "The category this item belongs to"
+msgstr "Категория, к которой принадлежит этот предмет"
+
+msgid "The organization this item belongs to"
+msgstr "Организация, которой принадлежит этот предмет"
+
+msgid "The title for this Video"
+msgstr "Заголовок для этого видео"
+
+msgid "A short summary description for this video"
+msgstr "Краткое краткое описание этого видео"
+
+msgid "The organization this video belongs to"
+msgstr "Организация, которой принадлежит это видео"
+
+msgid "The name of this poll category"
+msgstr "Название этой категории опроса"
+
+msgid "Poll Categories"
+msgstr "Категория опроса"
+
+msgid "The Flow this Poll is based on"
+msgstr "Поток, на котором основан этот опрос "
+
+msgid ""
+"The date to display for this poll. Leave empty to use flow creation date."
+msgstr ""
+"Дата, отображаемая для этого опроса. Оставьте поле пустым, чтобы "
+"использовать дату создания процесса"
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "Архивируется ли поток этого опроса в RapidPro "
+
+msgid "The base language of the flow to use"
+msgstr "Основной язык для потока"
+
+msgid "The number of polled reporters on this poll"
+msgstr "Количество опрошенных в этом опросе"
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr "Завершил ли опрос синхронизацию первоначальных результатов"
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Должен ли опрос перестать создавать статистику"
+
+msgid "The title for this Poll"
+msgstr "Название этого опроса"
+
+msgid "The category this Poll belongs to"
+msgstr "Категория, к которой принадлежит этот опрос"
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr "Следует ли размещать этот опрос на главной странице "
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr "Изображение заставки для отображения в опросе (необязательно) "
+
+msgid "The organization this poll is part of"
+msgstr "Организация, в которой проводится этот опрос"
+
+msgid "The title for this response story"
+msgstr "Название этой истории ответа"
+
+msgid "The writer of the response story"
+msgstr "Автор статьи по ответу"
+
+msgid "The poll to associate to"
+msgstr "Опрос, с которым можно ассоциировать"
+
+msgid "The poll for this response"
+msgstr "Опрос для этого ответа"
+
+msgid "The location for this response"
+msgstr "Место для этого ответа"
+
+msgid "The name of the sender of the message"
+msgstr "Имя отправителя сообщения"
+
+msgid "The featured response message"
+msgstr "Рекомендуемое ответное сообщение"
+
+msgid "The poll this question is part of"
+msgstr "Опрос, в который входит этот вопрос "
+
+msgid "The title of this question"
+msgstr "Название этого вопроса"
+
+msgid "The RuleSet this question is based on"
+msgstr "Набор правил, на котором основан этот вопрос "
+
+msgid "The label of the ruleset on RapidPro"
+msgstr "Ярлык набора правил на RapidPro"
+
+msgid "The priority number for this question on the poll"
+msgstr "Номер приоритета для этого вопроса в опросе"
+
+msgid "The Rule this response category is based on"
+msgstr "Правило этой категории ответа основано на "
+
+msgid "Your org does not have any API token configuration."
+msgstr "В вашей организации нет конфигурации токена API"
+
+msgid "You must include a title for every included question."
+msgstr "Вы должны включить заголовок для каждого включенного вопроса"
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr ""
+"Заголовок слишком длинный. Максимальный предел - 255 символов для каждого "
+"заголовка"
+
+msgid "You must include at least one poll question."
+msgstr "Вы должны включить хотя бы один вопрос для опроса"
+
+msgid "Adjust poll date"
+msgstr "Изменить дату опроса"
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr "Ваш опрос был обновлен, теперь выберите, какие вопросы включить"
+
+msgid "Configure flow"
+msgstr "Конфигурировать поток"
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr "Ваш опрос настроен, теперь настройте дату опроса"
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "Ваш опрос создан, теперь настройте его процесс"
+
+msgid "Poll Images"
+msgstr "Изображения для опроса"
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr "Теперь введите любые ответы, которые вы хотите отметить (если есть)"
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr ""
+"Изображение для отображения на странице опроса и в превью. (по желанию) "
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr ""
+"Изображение для отображения на странице опроса и в предварительном просмотре"
+" (необязательно)"
+
+msgid "Poll Response"
+msgstr "Ответ на опрос"
+
+msgid "Your poll has been updated."
+msgstr "Ваш опрос обновлен"
+
+msgid "Poll Questions"
+msgstr "Вопросы для опроса"
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr ""
+"Теперь установите, какие изображения вы хотите отображать на странице вашего"
+" опроса (если есть)"
+
+msgid "Include"
+msgstr "Содержит"
+
+msgid "Whether to include this question in your public results"
+msgstr "Следует ли включать этот вопрос в ваши результаты"
+
+msgid "Priority"
+msgstr "Приоритет"
+
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
+msgstr ""
+"Приоритет этого вопроса на странице опроса, более высокий приоритет идет "
+"первым"
+
+msgid "Ruleset Label"
+msgstr "Правила набора ярлыка"
+
+msgid "The label of the ruleset from RapidPro"
+msgstr "Метка набора правил от RapidPro"
+
+msgid "Title"
+msgstr "Заголовок"
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Вопрос, заданный вашей аудитории, будет опубликован"
+
+msgid "Category {idx+1}"
+msgstr "Категория {idx+1}"
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Ярлык категории из бэкэнда (например, RapidPro)"
+
+msgid "Display {idx+1}"
+msgstr "Показать {idx+1}"
+
+msgid "The label to display of the category on the public site"
+msgstr "Ярлык для отображения категории на общедоступном сайте"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr "Выполняется запланированная синхронизация ..."
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr "Последние результаты синхронизированы %(time)s назад"
+
+msgid "Synced"
+msgstr "Синхронизировано"
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr "Выполняется синхронизация ... {sync_progress:.1f}%"
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr "Изменить опрос для потока [{flow_name} ({flow_date_hint})]"
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr ""
+"Запланировано обновление по запросу для опроса № %(poll_id)d в организации №"
+" %(org_id)d"
+
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr ""
+"Название Контактной группы, в которую входят зарегистрированные репортеры"
+
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr "Название поля контакта, содержащая дату рождения репортера."
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr "Метка поля контакта, содержащая пол репортеров"
+
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr "Ярлык поля контактов, в котором указаны профессии репортеров"
+
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr "Ярлык поля для контактов с датой регистрации репортеров"
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr "Метка поля контакта, содержащая область репортеров"
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr "Метка поля контакта, содержащего район репортеров"
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr "Ярлык поля контакта, в котором находится группа репортеров"
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "Ярлык, присвоенный Ю-репортерам мужского пола"
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "Ярлык, присвоенный Ю-репортерам женского пола. "
+
+msgid "Whether this org should be show on the landing page"
+msgstr "Должна ли эта org отображаться на главной странице"
+
+msgid "Whether this org count should consider the count from link only"
+msgstr "Должна ли эта организация учитывать счетчик только по ссылке"
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr ""
+"Короткий код, который пользователи будут использовать для локальной связи с "
+"U-Report "
+
+msgid ""
+"The whatapp number that users will use to contact U-Report if you have one"
+msgstr ""
+"Номер whatapp, который пользователи будут использовать для связи с Ю-Репорт,"
+" если он у вас есть"
+
+msgid ""
+"The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+"Имя пользователя viber, которое пользователи будут использовать для связи с "
+"Ю-Репорт, если он у вас есть"
+
+msgid "The join button text"
+msgstr "Текст кнопки присоединения"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
+"Краткий текст, используемый для направления посетителей присоединиться к "
+"U-Report "
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr "ID видео YouTube для того, как присоединиться к разделу Ю-Репорт"
+
+msgid "The title of the photos section U-Report homepage"
+msgstr "Название раздела фотографий на домашней странице Ю-Репорт"
+
+msgid "The description of the photos section U-Report homepage"
+msgstr "Описание главной страницы раздела фотографий Ю-Репорт"
+
+msgid "The description of the opinions page"
+msgstr "Описание страницы мнений"
+
+msgid "The description of the stories page"
+msgstr "Описание страницы историй"
+
+msgid "The description of the engagement page"
+msgstr "Описание страницы Взаимодействия"
+
+msgid "The callout message on the footer engagement section"
+msgstr "Сообщение в нижней части раздела Взаимодействия"
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Основной цвет для стилизации для этой организации должен быть темным"
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Вторичный цвет для стилизации для этой организации должен быть темным"
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Третичный цвет для стилизации для этой организации должен быть темным"
+
+msgid ""
+"The primary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Основной цвет выделения для стиля для этой организации должен быть светлым"
+
+msgid ""
+"The secondary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Вторичный цвет выделения для стилизации для этой организации должен быть "
+"светлым"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr ""
+"До 6 цветов для стилизации диаграмм, используйте запятую между цветами "
+
+msgid "The color used to draw the text on the join bar"
+msgstr "Цвет, используемый для рисования текста на панели соединения"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Цвет, используемый для рисования фона на панели соединения"
+
+msgid "The primary color for styling for this organization"
+msgstr "Основной цвет для оформления этой организации"
+
+msgid "The secondary color for styling for this organization"
+msgstr "Дополнительный цвет для стилизации для этой организации"
+
+msgid "The background color for the site"
+msgstr "Цвет фона для сайта"
+
+msgid ""
+"11 colors for styling maps, use comma between colors, not used if not 11 "
+"colors"
+msgstr ""
+"11 цветов для стилизации карт, используйте запятую между цветами, не "
+"используется, если не 11 цветов "
+
+msgid "The states to show on maps only"
+msgstr "Области для отображения исключительно на картах"
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr ""
+"Области, отображаемые только на картах, используются для фильтрации "
+"результатов опроса"
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "Идентификатор отслеживания Google Analytics для этой организации"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "Ссылка на Ютуб канал этой организации"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "Ссылка на страницу этой организации в Facebook"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr ""
+"Целочисленный идентификатор страницы Facebook для этой организации "
+"(необязательно) "
+
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr ""
+"Идентификатор приложения Facebook для приложения чата этой организации "
+"(необязательно)"
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr ""
+"Короткий текст, используемый для приветствия пользователей в плагине "
+"Facebook Messenger"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "Идентификатор пикселя Facebook для этой организации (необязательно)"
+
+msgid "The Instagram username for this organization"
+msgstr "Instagram аккаунт этой организации"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Instagram виджет от lightwidget.com"
+
+msgid "The Twitter handle for this organization"
+msgstr "Twitter аккаунт для этой организации"
+
+msgid "The Twitter widget used for searching"
+msgstr "Виджет Twitter использовано для поиска"
+
+msgid "The words to filter out from the results on public site"
+msgstr "Слова, которые нужно исключить из результатов на общедоступном сайте"
+
+msgid "If there are jobs to be shown on the public site."
+msgstr "Если есть работы для показа на открытом сайте."
+
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+"Если это организация для глобальных данных. Например: вместо карты страны "
+"отображается карта мира."
+
+msgid "Whether to activate an extra gender."
+msgstr "Активировать ли дополнительный пол."
+
+msgid "Whether to activate the new design."
+msgstr "Активировать ли новый дизайн"
+
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
+msgstr ""
+"Альфа-3 ISO-код организации, чтобы он отображался в виджете историй U-Report"
+" App. Пример: BRA, NIG, CMR (используйте GLOBAL, если U-Report глобальный)."
+
+msgid "The font used for headline texts"
+msgstr "Шрифт, используемый для текста заголовка"
+
+msgid "The font used for normal text"
+msgstr "Шрифт, используемый для обычного текста "
+
+msgid "Hide participation stats"
+msgstr "Скрыть статистику участия"
+
+msgid "The text to describe the sponsors of free messages"
+msgstr "Текст описания спонсоров бесплатных сообщений "
+
+msgid "The font used for small text"
+msgstr "Шрифт, используемый для мелкого текста"
+
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
+msgstr ""
+"Если вам нужно включить некоторые пользовательские коды HTML на свои "
+"организационные страницы, например фрагменты кода пользовательской аналитики"
+
+msgid "Other language sites links"
+msgstr "Ссылки на сайты на других языках"
+
+msgid "90 Days"
+msgstr "90 дней"
+
+msgid "6 Months"
+msgstr "6 месяцев"
+
+msgid "12 Months"
+msgstr "12 месяцев"
+
+msgid "Age"
+msgstr "Возраст"
+
+msgid "Location"
+msgstr "Место нахождения"
+
+msgid "Opinion Responses"
+msgstr "Ответы на мнения"
+
+msgid "Sign Up Rate"
+msgstr "Скорость регистрации"
+
+msgid "Response Rate"
+msgstr "Скорость отклика"
+
+msgid "Active Users"
+msgstr "Активные пользователи"
+
+msgid "Whether this row was created by squashing"
+msgstr "Была ли эта строка создана сжатием"
+
+msgid "Something to trigger localizations"
+msgstr "Что-то для запуска локализаций"
