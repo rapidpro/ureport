@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1043,6 +1043,9 @@ msgstr "U-РЕПОРТЕРИ ПО РЕГИОН"
 msgid "FILTER RESULTS"
 msgstr "ФИЛТРИРАЙ РЕЗУЛТАТИТЕ"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Експортирай и сподели"
 
@@ -1615,6 +1618,11 @@ msgstr "Шрифтът, използван за обикновен текст "
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Краткият текст, който насочва посетителите да се присъединят към U-Report"
 
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Заглавието на секцията със снимки на началната страница на U-Report "
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Идентификация на YouTube клипа за това как да се присъедините към U-Report"
 
@@ -1653,21 +1661,6 @@ msgstr "Второстепенният цвят за оформление стр
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "До 6 цвята в диаграмите за оформление, използвайте запетая между цветовете"
-
-msgid "The color used to draw the text on the join bar"
-msgstr "Цветът, използван за текста в полето за присъединяване"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Цвят на фона на полето за присъединяване"
-
-msgid "The primary color for styling for this organization"
-msgstr "Основният цвят за оформление на страницата на тази организация "
-
-msgid "The secondary color for styling for this organization"
-msgstr "Второстепенният цвят за оформление на страницата на тази отганизация"
-
-msgid "The background color for the site"
-msgstr "Цвят на фона на сайта"
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 цвята за оформление на карти, използвайте запетая между цветовете, не може да се използва, ако не са 11 цвята"
@@ -1731,8 +1724,8 @@ msgstr "Ако тази организация е за глобални данн
 msgid "Whether to activate an extra gender."
 msgstr "Дали да бъде активирана допълнителна опция за пол"
 
-msgid "Whether to activate the new design."
-msgstr "Дали да бъде активиран новия дизайн"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr " Аlpha-3 ISO кодът на организацията, който да се появява в историите на U-Report приложението. Например: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
@@ -1770,6 +1763,11 @@ msgstr "12 месеца"
 msgid "Age"
 msgstr "Възраст"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Запази промените"
+
 msgid "Location"
 msgstr "Местоположение"
 
@@ -1790,6 +1788,24 @@ msgstr "Дали тази редица е създадена чрез сбива
 
 msgid "Something to trigger localizations"
 msgstr "Нещо, което да задейства локализиране"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Цветът, използван за текста в полето за присъединяване"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Цвят на фона на полето за присъединяване"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Основният цвят за оформление на страницата на тази организация "
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Второстепенният цвят за оформление на страницата на тази отганизация"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Цвят на фона на сайта"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Дали да бъде активиран новия дизайн"
 
 #~ msgid "JOIN NOW"
 #~ msgstr "ВКЛЮЧИ СЕ СЕГА"

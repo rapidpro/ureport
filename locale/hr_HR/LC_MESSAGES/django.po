@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -1060,6 +1060,9 @@ msgstr "GLASOVI MLADIH PO LOKACIJI"
 msgid "FILTER RESULTS"
 msgstr "FILTERI REZULTATA"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Izvezi i podijeli"
 
@@ -1608,6 +1611,11 @@ msgstr "Tekst gumba za pridruživanje"
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Kratak tekst kojim se posjetitelji upućuju da se pridruže ZABUM voice-u"
 
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Naslov foto sekcije na ZABUM voice naslovnoj strani"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Youtube video ID o tome kako se pridružiti ZABUM voice-u"
 
@@ -1646,21 +1654,6 @@ msgstr "Sekundarna boja za naglašavanje ovog dijela treba biti svijetla"
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Do 6 boja za stiliziranje grafika, koristite zarez izmedju boja"
-
-msgid "The color used to draw the text on the join bar"
-msgstr "Boja za pisanje teksta na polju za pridruživanje"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
-
-msgid "The primary color for styling for this organization"
-msgstr "Primarna boja za ovu postavku"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Sekundarna boja za ovu postavku"
-
-msgid "The background color for the site"
-msgstr "Pozadinska boja ove stranice"
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 boja za stiliziranje mapa, koristi zarez izmedju boja, ne koristiti ako nije 11 boja"
@@ -1724,8 +1717,8 @@ msgstr "Je li ova postavka uključuje globalne podatke, npr. mapu svijeta umjest
 msgid "Whether to activate an extra gender."
 msgstr "Treba li aktivirati dodatno rodno opredjeljenje"
 
-msgid "Whether to activate the new design."
-msgstr "Treba li aktivirati novi dizajn"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO kod organizacije koji će inicirati widget priče U-Report App. Primjer: BRA, NIG, CMR (Koristite GLOBAL ako je U-Report globalan)."
@@ -1763,6 +1756,11 @@ msgstr "12 mjeseci"
 msgid "Age"
 msgstr "Dobne skupine"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Sačuvaj promjene"
+
 msgid "Location"
 msgstr "Lokacija"
 
@@ -1783,3 +1781,21 @@ msgstr "Je li priča objavljena"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Boja za pisanje teksta na polju za pridruživanje"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Primarna boja za ovu postavku"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Sekundarna boja za ovu postavku"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Pozadinska boja ove stranice"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Treba li aktivirati novi dizajn"

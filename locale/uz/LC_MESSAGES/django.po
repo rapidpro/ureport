@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -1044,6 +1044,9 @@ msgstr "MINTAQALAR BO'YICHA U-REPORTYORLAR"
 msgid "FILTER RESULTS"
 msgstr "FILTR NATIJALARI"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Chiqarish va Bo'lishish"
 
@@ -1617,6 +1620,11 @@ msgstr "Oddiy matn uchun qo'llaniluvchi shrift"
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
 
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "U-Report sahifasidagi fotosur'atlar qismining sarlavhasi"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "U-Report qismiga qanday qo'shilish haqidagi YouTube video IDsi"
 
@@ -1655,21 +1663,6 @@ msgstr "Ushbu tashkilotni bezash uchun ikkilamchi ajratish rangi, och rang bo'li
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
-
-msgid "The color used to draw the text on the join bar"
-msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
-
-msgid "The primary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
-
-msgid "The background color for the site"
-msgstr "Sahifa uchun orqa fon rangi"
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "Bezash xaritalari uchun 11 ta rang, ranglar orasini vergul bilan ajrating, agar 11 ta rang bo'lmaydigan bo'lsa ishlatilmaydi"
@@ -1733,8 +1726,8 @@ msgstr "Ushbu tashkilot umumjahon ma'lumotlari uchunmi. Misol: U mamlakat xarita
 msgid "Whether to activate an extra gender."
 msgstr "Qo'shimcha jinsni faollashtirish lozimmi"
 
-msgid "Whether to activate the new design."
-msgstr "Yangi disaynni faollashtirish lozimmi."
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Tashkilotning alpha-3 ISO kodi, maqsad shuki, unda U-Report ilovasining hikoyalar widjeti namoyish etilsin. Misol: BRA, NIG, CMR (GLOBAL ni ishlating, agar U-Report umumjahon bo'lsa)"
@@ -1772,6 +1765,11 @@ msgstr "12 oy"
 msgid "Age"
 msgstr "Yosh"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "O'zgarishlarni saqlash"
+
 msgid "Location"
 msgstr "Joylashgan o'rni"
 
@@ -1792,6 +1790,24 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Sahifa uchun orqa fon rangi"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Yangi disaynni faollashtirish lozimmi."
 
 #~ msgid "JOIN NOW"
 #~ msgstr "HOZIR QO'SHILING"

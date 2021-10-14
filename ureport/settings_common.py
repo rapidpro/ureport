@@ -111,7 +111,11 @@ LANGUAGES = (
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
     ("no", "Norwegian"),
+<<<<<<< HEAD
     ("sv-se", "Swedish"),
+=======
+    ("ru", "Russia"),
+>>>>>>> a7514489aec4141643e66d7474ff7dac9b101310
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -317,6 +321,14 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="join_text_top",
+        field=dict(
+            help_text=_("The call to action text to join on the top section on U-Report"),
+            label="Join Call to Action Text",
+            required=False,
+        ),
+    ),
+    dict(
         name="homepage_join_video_id",
         field=dict(
             help_text=_("The YouTube video ID for how to join U-Report section"),
@@ -400,36 +412,6 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="colors",
         field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, can be removed after v2 launch
-    dict(
-        name="join_fg_color",
-        field=dict(help_text=_("The color used to draw the text on the join bar"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, can be removed after v2 launch
-    dict(
-        name="join_bg_color",
-        field=dict(help_text=_("The color used to draw the background on the join bar"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, should be replaced by dark1
-    dict(
-        name="primary_color",
-        field=dict(help_text=_("The primary color for styling for this organization"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, should be replaced by dark2
-    dict(
-        name="secondary_color",
-        field=dict(help_text=_("The secondary color for styling for this organization"), required=False),
-        superuser_only=True,
-    ),
-    # deprecated, can be removed after v2 launch
-    dict(
-        name="bg_color",
-        field=dict(help_text=_("The background color for the site"), required=False),
         superuser_only=True,
     ),
     dict(
@@ -576,10 +558,8 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
-        name="has_new_design",
-        field=dict(help_text=_("Whether to activate the new design."), required=False),
-        superuser_only=True,
-        read_only=True,
+        name="has_charts_hidden",
+        field=dict(help_text=_("Whether to hide the engagement breakdown charts."), required=False),
     ),
     dict(
         name="iso_code",

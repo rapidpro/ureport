@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -1051,6 +1051,9 @@ msgstr ""
 msgid "FILTER RESULTS"
 msgstr "تصفية النتائج"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1599,6 +1602,9 @@ msgstr ""
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "النص القصير المستخدم لتوجيه الزائرين للتسجيل في يو-ريبورت"
 
+msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -1637,21 +1643,6 @@ msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "إختر 6 ألوان لتنسيق الرسوم البيانية، الرجاء الفصل بين الألوان بفاصلة "
-
-msgid "The color used to draw the text on the join bar"
-msgstr "لون النص المستخدم في شريط التسجيل "
-
-msgid "The color used to draw the background on the join bar"
-msgstr "لون الخلفية المستخدم في شريط التسجيل "
-
-msgid "The primary color for styling for this organization"
-msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
-
-msgid "The secondary color for styling for this organization"
-msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
-
-msgid "The background color for the site"
-msgstr "لون الخلفية التي تريد إستخدامها لصفحات الموقع "
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr ""
@@ -1715,7 +1706,7 @@ msgstr "إذا كانت هذه المنظمة للبيانات العالمية�
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-msgid "Whether to activate the new design."
+msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
@@ -1754,6 +1745,11 @@ msgstr "12 شهر "
 msgid "Age"
 msgstr "العمر "
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "حفظ التغييرات"
+
 msgid "Location"
 msgstr ""
 
@@ -1776,6 +1772,21 @@ msgstr "هل هذه المقالة إستثنائية أو مميزة "
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "لون النص المستخدم في شريط التسجيل "
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "لون الخلفية المستخدم في شريط التسجيل "
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
+
+#~ msgid "The background color for the site"
+#~ msgstr "لون الخلفية التي تريد إستخدامها لصفحات الموقع "
 
 #~ msgid "JOIN NOW"
 #~ msgstr "انضم الآن!"

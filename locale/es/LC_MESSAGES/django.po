@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1035,6 +1035,9 @@ msgstr "U-REPORTERS POR REGIÓN"
 msgid "FILTER RESULTS"
 msgstr "FILTRAR RESULTADOS"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Exportar y compartir"
 
@@ -1574,6 +1577,11 @@ msgstr ""
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "El texto corto usado para dirigir a los visitantes a que se unan a U-Report "
 
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "El título de la sección de imágenes en la página de Inicio de U-Report"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "El ID del video de YouTube para la sección de cómo unirse a U-Report"
 
@@ -1612,21 +1620,6 @@ msgstr "El color secundario para destacar en el diseño de esta organización, d
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Hasta 6 colores para los gráficos, coloque una coma entre cada color"
-
-msgid "The color used to draw the text on the join bar"
-msgstr "El color usado para el texto en la barra de participar"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "El color usado para el fondo en la barra de participar"
-
-msgid "The primary color for styling for this organization"
-msgstr "El color primario para el diseño de esta organización"
-
-msgid "The secondary color for styling for this organization"
-msgstr "El color secundario para el diseño de esta organización"
-
-msgid "The background color for the site"
-msgstr "El color de fondo para el sitio"
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 colores para el estilo de los mapas, hay que usar comas entre colores, no se usa si no hay 11 colores"
@@ -1688,8 +1681,8 @@ msgstr "Si la org es para información mundial. P.ej: si se muestra un mapa del 
 msgid "Whether to activate an extra gender."
 msgstr "Si hay que activar otro género."
 
-msgid "Whether to activate the new design."
-msgstr "Si se activa el nuevo diseño."
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "El código ISO alpha-3 de la organización como aparece en el widget de Historias de la aplicación U-Report. Ejemplos: BRA, NIG, CMR (usar GLOBAL si U-Report es mundial)."
@@ -1727,6 +1720,11 @@ msgstr "12 meses"
 msgid "Age"
 msgstr "Edad"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Guardar cambios"
+
 msgid "Location"
 msgstr "Ubicación"
 
@@ -1747,3 +1745,21 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "El color usado para el texto en la barra de participar"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "El color usado para el fondo en la barra de participar"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "El color primario para el diseño de esta organización"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "El color secundario para el diseño de esta organización"
+
+#~ msgid "The background color for the site"
+#~ msgstr "El color de fondo para el sitio"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Si se activa el nuevo diseño."

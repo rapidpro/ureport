@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -1043,6 +1043,9 @@ msgstr "U-REPORTERS I REGIONEN"
 msgid "FILTER RESULTS"
 msgstr "FILTRERADE RESULTAT"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr "Exportera och dela"
 
@@ -1581,6 +1584,11 @@ msgstr "Så deltar du"
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "En enkel text som används för att vägleda besökare att gå med i U-Report"
 
+#, fuzzy
+#| msgid "The title of the photos section U-Report homepage"
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Titeln på bildavsnittet på U-Report Sveriges startsida"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "YouTube-ID till video för avsnittet \"Hur du blir en U-Reporter\""
 
@@ -1619,21 +1627,6 @@ msgstr "Sekundära markeringsfärgen för den här organisationen, ska vara ljus
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Du kan ha upp till 6 färger för färgdiagrammen, använd kommatecken mellan färgerna"
-
-msgid "The color used to draw the text on the join bar"
-msgstr "Textfärg på \"Så deltar du\"-avsnittet"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "Bakgrundsfärg på \"Så deltar du\"-avsnittet"
-
-msgid "The primary color for styling for this organization"
-msgstr "Primärfärg för den här organisationen"
-
-msgid "The secondary color for styling for this organization"
-msgstr "Sekundärfärg för den här organisationen"
-
-msgid "The background color for the site"
-msgstr "Bakgrundsfärg för den här webbsidan"
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr "11 färger för färgdiagram, använd kommatecken mellan färgerna, fungerar bara med 11 färger"
@@ -1697,8 +1690,8 @@ msgstr "Bör denna organisation ha global data? Ska det vara en världskarta ist
 msgid "Whether to activate an extra gender."
 msgstr "Aktivera fler könsidentiteter"
 
-msgid "Whether to activate the new design."
-msgstr "Aktivera den nya designen"
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO-kod för organisationen, så att story-widgeten från U-Report-appen visas. Till exempel: BRA, NIG, CMR (använd GLOBAL om U-Report är global)."
@@ -1736,6 +1729,11 @@ msgstr "12 månader"
 msgid "Age"
 msgstr "Ålder"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Spara ändringarna"
+
 msgid "Location"
 msgstr "Plats"
 
@@ -1756,3 +1754,21 @@ msgstr "Raden skapades genom squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "Textfärg på \"Så deltar du\"-avsnittet"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "Bakgrundsfärg på \"Så deltar du\"-avsnittet"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Primärfärg för den här organisationen"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Sekundärfärg för den här organisationen"
+
+#~ msgid "The background color for the site"
+#~ msgstr "Bakgrundsfärg för den här webbsidan"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Aktivera den nya designen"

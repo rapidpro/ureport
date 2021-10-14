@@ -80,9 +80,7 @@ def set_config_display_flags(request):
         context["show_gender_stats"] = reduce(
             operator.or_, [bool(org.get_config("%s.gender_label" % option)) for option in backend_options], False
         )
-        context["show_occupation_stats"] = reduce(
-            operator.or_, [bool(org.get_config("%s.occupation_label" % option)) for option in backend_options], False
-        )
+
         context["colors_map"] = [str(color.strip()) for color in org.get_config("colors_map", "").split(",")]
 
         other_languages_sites = {}
