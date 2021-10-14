@@ -422,7 +422,11 @@ class PollCRUDL(SmartCRUDL):
             return fields
 
         def get_questions(self):
-            return self.object.questions.all().select_related("flow_result").order_by("-priority", "pk")
+            return (
+                self.object.questions.all()
+                .select_related("flow_result", "poll", "poll__org")
+                .order_by("-priority", "pk")
+            )
 
         def get_form(self):
             form = super(PollCRUDL.Questions, self).get_form()
