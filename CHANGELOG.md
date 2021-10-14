@@ -1,3 +1,8 @@
+v1.1.298
+----------
+ * Merge pull request #795 from rapidpro/more-indexes
+ * Add more index on contact activities
+
 v1.1.297
 ----------
  * Merge pull request #793 from rapidpro/few-queries-for-rebuild-stats
