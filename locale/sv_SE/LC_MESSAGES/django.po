@@ -1458,6 +1458,18 @@ msgstr "Namnet på avsändaren"
 msgid "The featured response message"
 msgstr "Featured svarsmeddelande"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Undersökningen frågan tillhör"
 
@@ -1554,6 +1566,14 @@ msgid "Title"
 msgstr "Titel"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Frågan som ställs till din publik kommer att visas offentligt"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "Frågan som ställs till din publik kommer att visas offentligt"
 
 msgid "Category {idx+1}"

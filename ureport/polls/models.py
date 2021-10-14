@@ -713,6 +713,35 @@ class PollQuestion(SmartModel):
     POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
     POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 12
 
+    QUESTION_COLOR_CHOICES = (
+        (None, "-----"),
+        ("D1", _("Dark 1 background and White text")),
+        ("L1", _("Light 1 background and Black text")),
+        ("D2", _("Dark 2 background and White text")),
+        ("D3", _("Dark 3 background and Black text")),
+    )
+
+    QUESTION_COLOR_CHOICE_BLOCK_CSS_CLASSES = {
+        "D1": "bg-dark1 text-white",
+        "L1": "bg-light1 text-black",
+        "D2": "bg-dark2 text-white",
+        "D3": "bg-dark3 text-black",
+    }
+
+    QUESTION_COLOR_CHOICE_BG_COLORS = {
+        "D1": ("dark1_color", "#439932"),
+        "L1": ("light1_color", "#FFD100"),
+        "D2": ("dark2_color", "#1751af"),
+        "D3": ("dark3_color", "#5eb3e0"),
+    }
+
+    QUESTION_COLOR_CHOICE_BORDER_COLORS = {
+        "D1": "white",
+        "L1": "black",
+        "D2": "white",
+        "D3": "white",
+    }
+
     poll = models.ForeignKey(
         Poll, on_delete=models.PROTECT, related_name="questions", help_text=_("The poll this question is part of")
     )
@@ -734,6 +763,19 @@ class PollQuestion(SmartModel):
     )
 
     flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
+
+    color_choice = models.CharField(max_length=2, choices=QUESTION_COLOR_CHOICES, null=True, blank=True)
+
+    def get_color_choice_css(self):
+        return self.QUESTION_COLOR_CHOICE_BLOCK_CSS_CLASSES.get(self.color_choice, "")
+
+    def get_border_color_choice(self):
+        return self.QUESTION_COLOR_CHOICE_BORDER_COLORS.get(self.color_choice, "")
+
+    def get_bg_color_choice(self):
+        org = self.poll.org
+        color_tuple = self.QUESTION_COLOR_CHOICE_BG_COLORS.get(self.color_choice, ("", ""))
+        return org.get_config(color_tuple[0]) or color_tuple[1]
 
     @classmethod
     def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):

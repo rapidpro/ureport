@@ -1479,6 +1479,18 @@ msgstr "Xabar yuboruvchining ismi"
 msgid "The featured response message"
 msgstr "Tavsiya etiladigan javob"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Ushbu savol uning qismi bo'lgan so'rov"
 
@@ -1575,6 +1587,14 @@ msgid "Title"
 msgstr "Sarlavha"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "O'z auditoriyangizga berilgan savol, ochiq ommaga namoyish etiladi"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "O'z auditoriyangizga berilgan savol, ochiq ommaga namoyish etiladi"
 
 #, fuzzy

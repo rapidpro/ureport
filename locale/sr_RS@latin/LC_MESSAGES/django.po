@@ -1471,6 +1471,18 @@ msgstr "Ime pošiljaoca poruke"
 msgid "The featured response message"
 msgstr "Istaknuta poruka uz odgovor"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Anketa kojoj ovo pitanje pripada"
 
@@ -1567,6 +1579,14 @@ msgid "Title"
 msgstr "Naslov"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Pitanje upućeno publici biće javno objavljeno"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "Pitanje upućeno publici biće javno objavljeno"
 
 msgid "Category {idx+1}"

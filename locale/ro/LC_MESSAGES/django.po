@@ -1493,6 +1493,18 @@ msgstr "Numele persoanei care a trimis mesajul"
 msgid "The featured response message"
 msgstr "Mesajul cu răspunsul recomandat"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Sondajul din care face parte această întrebare"
 
@@ -1589,6 +1601,14 @@ msgid "Title"
 msgstr "Titlu"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Întrebarea pusă persoanelor pe care le-ai intervievat va fi afișată pentru toți"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "Întrebarea pusă persoanelor pe care le-ai intervievat va fi afișată pentru toți"
 
 #, fuzzy

@@ -1567,6 +1567,18 @@ msgstr "Tên của người gửi tin nhắn"
 msgid "The featured response message"
 msgstr "Tin nhắn phản hồi nổi bật"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Câu hỏi này nằm trong khảo sát"
 
@@ -1671,6 +1683,14 @@ msgid "Title"
 msgstr "Tiêu đề"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Câu hỏi đặt ra cho đối tượng nhắm đến của bạn, sẽ được hiển thị công khai"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "Câu hỏi đặt ra cho đối tượng nhắm đến của bạn, sẽ được hiển thị công khai"
 
 #, fuzzy
