@@ -111,11 +111,8 @@ LANGUAGES = (
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
     ("no", "Norwegian"),
-<<<<<<< HEAD
     ("sv-se", "Swedish"),
-=======
     ("ru", "Russia"),
->>>>>>> a7514489aec4141643e66d7474ff7dac9b101310
 )
 
 DEFAULT_LANGUAGE = "en"
