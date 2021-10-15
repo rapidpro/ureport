@@ -258,8 +258,9 @@ showChart = (questionID, segmentName) ->
 
       barColor = $("#question-block-" + questionID).data("bar-color")
       if not barColor?
-        barColor = primaryColor
-
+        barColor = $("#chart-" + questionID).data("bar-color")
+        if not barColor?
+          barColor = primaryColor
 
       if segmentName  == "all"
         color = barColor
