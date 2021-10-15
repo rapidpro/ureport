@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 13:49+0000\n"
+"POT-Creation-Date: 2021-10-06 17:50+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -1075,6 +1075,9 @@ msgstr "SMS BIZ EM"
 msgid "FILTER RESULTS"
 msgstr "RESULTADOS DOS INQUÉRITOS"
 
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
 msgid "Export and Share"
 msgstr ""
 
@@ -1651,6 +1654,9 @@ msgstr ""
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "O texto curto usado para direcionar os visitantes para se juntar ao SMS BIZ"
 
+msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -1703,21 +1709,6 @@ msgstr "A cor secundária para definir o estilo para esta organização."
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Até 6 cores para definir o estilo dos gráficos, use a vírgula entre as cores."
-
-msgid "The color used to draw the text on the join bar"
-msgstr "A cor usada para desenhar o texto na barra de registro"
-
-msgid "The color used to draw the background on the join bar"
-msgstr "A cor usada para desenhar o fundo na barra de registro"
-
-msgid "The primary color for styling for this organization"
-msgstr "A cor primária para definir o estilo para esta organização."
-
-msgid "The secondary color for styling for this organization"
-msgstr "A cor secundária para definir o estilo para esta organização."
-
-msgid "The background color for the site"
-msgstr "A cor de fundo para o site"
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -1787,7 +1778,7 @@ msgstr ""
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-msgid "Whether to activate the new design."
+msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
@@ -1831,6 +1822,11 @@ msgid "Age"
 msgstr ""
 
 #, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Guardar Alterações"
+
+#, fuzzy
 #| msgid "Population"
 msgid "Location"
 msgstr "População"
@@ -1856,6 +1852,21 @@ msgstr "Se esta história é selecionada"
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "A cor usada para desenhar o texto na barra de registro"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "A cor usada para desenhar o fundo na barra de registro"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "A cor primária para definir o estilo para esta organização."
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "A cor secundária para definir o estilo para esta organização."
+
+#~ msgid "The background color for the site"
+#~ msgstr "A cor de fundo para o site"
 
 #, fuzzy
 #~| msgid ""

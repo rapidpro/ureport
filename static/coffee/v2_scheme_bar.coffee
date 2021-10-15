@@ -1,5 +1,8 @@
 
-showAgeChart = (id, data, barColor, labelColor, labelPosition, labelSize, labelWeight) ->
+showSchemeChart = (id, data, barColor, labelColor) ->
+ 
+  colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a']
+
   if not labelPosition?
     labelPosition = "bottom"
 
@@ -17,7 +20,8 @@ showAgeChart = (id, data, barColor, labelColor, labelPosition, labelSize, labelW
 
   $("#" + id).highcharts({
     chart: {
-      type: 'column'
+      type: 'bar'
+      width: 450
       backgroundColor: 'transparent'
       marginTop: if labelPosition == "top" then labelSize*2.2 else 0
       marginBottom: if labelPosition == "bottom" then labelSize*2.2 else 0
@@ -25,9 +29,9 @@ showAgeChart = (id, data, barColor, labelColor, labelPosition, labelSize, labelW
           fontFamily: "Montserrat"
       }
     }
+    title: null
     credits: { enabled: false }
     legend: { enabled: false }
-    title: { text: null }
     xAxis: {
       categories: categories
       opposite: if labelPosition == "top" then true else false
@@ -49,38 +53,37 @@ showAgeChart = (id, data, barColor, labelColor, labelPosition, labelSize, labelW
         groupPadding: 0.1
         borderWidth: 0
       }
-      column: {
+      bar: {
         color: barColor,
         pointPadding: 0
+        maxPointWidth: 35
         dataLabels: {
           enabled: true
-          verticalAlign: "bottom"
+          align: "left"
           style: {
             fontSize: ".75rem"
             textOutline: false
-            color: 'white'
+            color: "white"
           }
           formatter: ->
             this.y + "%"
         }
       }
     }
+
     series: [{
-      data: data
+      data: data,
     }]
   })
 
 
 $(->
-  $(".age-chart").each((idx, el) ->
+  $(".scheme-chart").each((idx, el) ->
     barColor = $(this).data("bar-color")
     labelColor = $(this).data("label-color")
-    labelPosition = $(this).data("label-position")
-    labelSize = $(this).data("label-size")
-    labelWeight = $(this).data("label-weight")
     id = $(this).attr("id")
     data = JSON.parse(document.getElementById($(this).data("stats")).textContent);
-    showAgeChart(id, data, barColor, labelColor, labelPosition, labelSize, labelWeight)
+    showSchemeChart(id, data, barColor, labelColor)
   )
 )
 
@@ -88,18 +91,15 @@ $(->
   redrawAgeChart = (evt) ->
     graphType = $("#" + evt.detail.id).data("graph-type")
     
-    if graphType == "age-chart"
+    if graphType == "scheme-chart"
       graphDiv = $("#" + evt.detail.id)
 
       barColor = graphDiv.data("bar-color")
       labelColor = graphDiv.data("label-color")
-      labelPosition = graphDiv.data("label-position")
-      labelSize = graphDiv.data("label-size")
-      labelWeight = graphDiv.data("label-weight")
       id = graphDiv.attr("id")
       data = JSON.parse(document.getElementById(graphDiv.data("stats")).textContent);
   
-      showAgeChart(id, data, barColor, labelColor, labelPosition, labelSize, labelWeight)
+      showSchemeChart(id, data, barColor, labelColor)
       
 
   document.addEventListener 'aos:in', redrawAgeChart
