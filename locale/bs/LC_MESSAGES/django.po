@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -788,6 +788,9 @@ msgstr "Odjava"
 msgid "Opinions"
 msgstr "Mišljenja"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Korisnici"
 
@@ -987,6 +990,12 @@ msgstr "ARHIVIRANE PRIČE"
 msgid "LIST"
 msgstr "LISTA"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "NAJNOVIJA ANEKTA"
 
@@ -1010,6 +1019,9 @@ msgstr "ZEMLJE ŠIROM SVIJETA"
 
 msgid "AGES"
 msgstr "GODIŠTA"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Pridruži se U-Reportu, tvoj glas je važan"
@@ -1328,6 +1340,70 @@ msgstr "Kratko opisno ime za ovu sliku"
 
 msgid "Image type"
 msgstr "Tip slike"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organizacija kojoj anketa pripada"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Naslov ove stavke"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Kategorija za ovu priču"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr ""
+"Naziv sadržajnog bloka, opciono\n"
+" "
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr ""
+"Naziv sadržajnog bloka, opciono\n"
+" "
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr ""
+"Naziv sadržajnog bloka, opciono\n"
+" "
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr ""
+"Naziv sadržajnog bloka, opciono\n"
+" "
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Kratak opis stavke"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Nivo prioriteta ovog pitanja u anketi. Pitanja s najvećim prioritetom idu prva"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
 msgid "Label"
 msgstr "Oznaka"
@@ -1882,6 +1958,26 @@ msgstr "Da li je priča objavljena"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Opis stranice sa odgovorima "
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Treba li anketa biti prikazana na početnoj stranici"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Opis stranice sa pričama "
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Boja za pisanje teksta na polju za pridruživanje"

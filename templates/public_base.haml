@@ -367,6 +367,11 @@
                  %a.admin-menu.text-sm.leading-loose(href="{% url 'stories.story_list' %}")
                   - trans "Stories"
   
+            - if request.user.is_superuser or org_perms.bots.bot_list
+              %li
+                 %a.admin-menu.text-sm.leading-loose(href="{% url 'bots.bot_list' %}")
+                  - trans "Bots"
+
             - if request.user.is_superuser or org_perms.categories.category_list
               %li
                 %a.admin-menu.text-sm.leading-loose(href="{% url 'categories.category_list' %}")
@@ -453,7 +458,11 @@
               -trans "Engagement"
             %a.flex-initial.ml-4.py-menu(href="{% url 'public.about' %}" class="hover:text-gray-750")
               -trans "About"
-  
+
+            -if show_bots_link
+              %a.flex-initial.ml-4.py-menu(href="{% url 'public.bots' %}" class="hover:text-gray-750")
+                -trans "Bots"
+
             - if org|config:"has_jobs"
               %a.flex-initial.ml-4.py-menu(href="{% url 'public.jobs' %}" class="hover:text-gray-750")
                 - trans "Jobs"

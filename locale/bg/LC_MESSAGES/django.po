@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -698,6 +698,9 @@ msgstr "Излизане"
 msgid "Opinions"
 msgstr "Допитвания"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Потребители"
 
@@ -895,6 +898,12 @@ msgstr "АРХИВИРАНИ ИСТОРИИ"
 msgid "LIST"
 msgstr "СПИСЪК"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "НАЙ-АКТУАЛНО МНЕНИЯ"
 
@@ -918,6 +927,9 @@ msgstr "СТРАНИ ПО СВЕТА"
 
 msgid "AGES"
 msgstr "ВЪЗРАСТИ"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Включи се в U-Report: Твоят глас е важен!"
@@ -1231,6 +1243,62 @@ msgstr "Кратко описание на изображението"
 
 msgid "Image type"
 msgstr "Вид на изображението"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Организацията, към която това допитване принадлежи"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Заглавието нa този артикул"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Категорията на тази история"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Заглавие на това текстово поле, по избор"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Заглавие на това текстово поле, по избор"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Заглавие на това текстово поле, по избор"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Заглавие на това текстово поле, по избор"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Кратко описание на този артикул"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Степен на приоритет за този въпрос от допитването. Въпросите с по-висока степен на приоритет застават на по-високи позиции"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Дали тази организация трябва да бъде показана на целевата страница"
 
 msgid "Label"
 msgstr "Етикет"
@@ -1783,6 +1851,26 @@ msgstr "Дали тази редица е създадена чрез сбива
 
 msgid "Something to trigger localizations"
 msgstr "Нещо, което да задейства локализиране"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Описанието на страницата с допитвания"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Дали това допитване трябва да бъде показано на началната страница"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Оргазация"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Описанието на страницата с мнения"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Цветът, използван за текста в полето за присъединяване"

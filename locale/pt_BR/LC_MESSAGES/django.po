@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -706,6 +706,9 @@ msgstr "Sair"
 msgid "Opinions"
 msgstr "Opiniões"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Usuários"
 
@@ -903,6 +906,12 @@ msgstr "HISTÓRIAS ARQUIVADAS"
 msgid "LIST"
 msgstr "LISTA"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "Últimas opiniões"
 
@@ -926,6 +935,9 @@ msgstr "países em todo o mundo"
 
 msgid "AGES"
 msgstr "Idades"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Faça parte do U-Report, aqui sua voz tem poder."
@@ -1245,6 +1257,62 @@ msgstr "Um nome descritivo curto para esta imagem"
 
 msgid "Image type"
 msgstr "Tipo de Imagem"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "A organização desta esquete é parte de"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "O título para esse item"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "A categoria para esta história"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "O título para este bloco de conteúdo é opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "O título para este bloco de conteúdo é opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "O título para este bloco de conteúdo é opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "O título para este bloco de conteúdo é opcional"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Uma descrição curta e resumida para esse item"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioridade dessa pergunta na página de enquetes, a maior aparecerá primeiro"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Se esta organização deve aparecer na página de destino"
 
 msgid "Label"
 msgstr "Rótulo"
@@ -1799,6 +1867,26 @@ msgstr "Se esta história é destaque"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "A descrição da página de opiniões"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Se essa enquete deve ser destaque na página inicial"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Organização"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "A descrição da página de histórias"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "A cor usada no texto da barra de registro"

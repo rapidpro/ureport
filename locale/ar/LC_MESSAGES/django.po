@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -697,6 +697,9 @@ msgstr "تسجيل الخروج "
 msgid "Opinions"
 msgstr "استطلاع الرأي"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "المستخدمين"
 
@@ -903,6 +906,12 @@ msgstr "أرشيف المقالات "
 msgid "LIST"
 msgstr "القائمة "
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "آخر استطلاعات الرأي"
 
@@ -926,6 +935,9 @@ msgstr ""
 
 msgid "AGES"
 msgstr "الأعمار"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr ""
@@ -1217,6 +1229,62 @@ msgstr "وصف مختصر عن الصورة"
 
 msgid "Image type"
 msgstr "نوع الصورة "
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "عنوان البند "
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "فئة المقال"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "وصف مختصر عن البند "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "ترتيب هذا السؤال على صفحة الاستطلاع، الأكثر أولوية يأتي أولاً "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "Label"
 msgstr "ملصق"
@@ -1767,6 +1835,21 @@ msgstr "هل هذه المقالة إستثنائية أو مميزة "
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+#, fuzzy
+#~| msgid "The title for this item"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "عنوان البند "
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "هل تعتقد أن هذا الإستطلاع إستثنائي ويجب نشره في الصفحة الرئيسية؟"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "لون النص المستخدم في شريط التسجيل "

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -704,6 +704,9 @@ msgstr "প্রস্থান করুন "
 msgid "Opinions"
 msgstr "মতামতগুলো"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "ব্যবহারকারী গণ  "
 
@@ -901,6 +904,12 @@ msgstr "সংরক্ষিত ঘটনাবলি "
 msgid "LIST"
 msgstr "তালিকা"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "সর্বশেষ মতামত "
 
@@ -924,6 +933,9 @@ msgstr "বিশ্বব্যাপি দেশগুলো"
 
 msgid "AGES"
 msgstr "বয়স"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Report-এর সাথে যুক্ত হোন, আপনার কথা গুরুত্বপূর্ণ"
@@ -1239,6 +1251,62 @@ msgstr "এই ছবির জন্য একটি ছোট বর্ণন�
 
 msgid "Image type"
 msgstr "ছবির ধরণ "
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "এই পোল টি যে প্রতিষ্ঠান এর অংশ "
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "এই জিনিস টির শিরোনাম "
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "এই ঘটনাটির শ্রেণী "
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "এই জিনিসটির জন্য একটি ছোট সারসংক্ষেপ বর্ণনা "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "এই পোল পেজ এর প্রশ্নের অগ্রাধিকার। উচ্চ অগ্রাধিকার প্রথমে আসবে। "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
 msgid "Label"
 msgstr "লেবেল "
@@ -1799,6 +1867,26 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "মতামত জানানোর পেইজের বর্ণনা"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "এই পোলটি কি হোমপেজে দেখানো উচিত? "
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "অরগ "
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "ঘটনা পেইজের বর্ণনা"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "যোগদান করার বার এর লেখার জন্য যে রঙ টি ব্যবহার করা হয়েছে  "
