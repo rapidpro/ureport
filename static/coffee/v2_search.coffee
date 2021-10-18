@@ -42,7 +42,10 @@ $(->
     if filter == ""
       $("#" + results).find(".search-category").each(->
         console.log(this)
-        $(this).removeClass("hidden")
+        if $(this).hasClass("date-category")
+          $(this).addClass("hidden")
+        else
+          $(this).removeClass("hidden")
         console.log("state: " + $(this).data("state"))
         if $(this).data("state") == "open"
           $(this).addClass("open")
@@ -53,19 +56,41 @@ $(->
       $("#" + results).find(".no-results").addClass("hidden")
       return
 
+    useDate = false
+    filterAsYear = parseInt(filter)
+    if filter.length == 4 and (1900 < filterAsYear < 2100)
+      useDate = true
+
     # for each category
     total_count = 0
     $("#" + results).find(".search-category").each(->
       # find all items that match
       count = 0
-      $(this).find(".searchable").each(->
-        value = $(this).data("search-value")
-        if value.toLowerCase().indexOf(filter) >= 0
-          $(this).removeClass("hide")
-          count += 1
-        else
-          $(this).addClass("hide")
-      )
+      if $(this).hasClass("date-category") and useDate
+         $(this).find(".searchable").each(->
+          value = $(this).data("search-value")
+          if value.toLowerCase().indexOf(filter) >= 0
+            $(this).removeClass("hide")
+            count += 1
+          else
+            $(this).addClass("hide")
+        )
+      else if $(this).hasClass("date-category")
+        $(this).addClass("hidden")
+        count = 0
+
+      else if not $(this).hasClass("date-category") and useDate
+        $(this).addClass("hidden")
+        count = 0
+      else
+        $(this).find(".searchable").each(->
+          value = $(this).data("search-value")
+          if value.toLowerCase().indexOf(filter) >= 0
+            $(this).removeClass("hide")
+            count += 1
+          else
+            $(this).addClass("hide")
+        )
 
       # hide or not based on our count
       if count > 0
