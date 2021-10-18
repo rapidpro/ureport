@@ -244,6 +244,10 @@
 
         %a.block.mt-4(href="{% url 'public.ureporters' %}" class="hover:text-gray-600")
           -trans "Engagement"
+
+        -if show_bots_link
+          %a.block.mt-4(href="{% url 'public.bots' %}" class="hover:text-gray-600")
+            -trans "Bots"
         
         - if org|config:"has_jobs"
           %a.block.mt-4(href="{% url 'public.jobs' %}" class="hover:text-gray-600")
