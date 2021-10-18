@@ -239,11 +239,11 @@
         %a.block.mt-4.font-bold(href="{% url 'public.stories' %}" class="hover:text-gray-600")
           -trans "Stories"
 
-        %a.block.mt-4(href="{% url 'public.ureporters' %}" class="hover:text-gray-600")
-          -trans "Engagement"
-
         %a.block.mt-8(href="{% url 'public.about' %}" class="hover:text-gray-600")
           -trans "About"
+
+        %a.block.mt-4(href="{% url 'public.ureporters' %}" class="hover:text-gray-600")
+          -trans "Engagement"
 
         -if show_bots_link
           %a.block.mt-4(href="{% url 'public.bots' %}" class="hover:text-gray-600")
