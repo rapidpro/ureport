@@ -43,7 +43,7 @@
                   %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.whatsapp_deeplink}}")
                     %i.fab.fa-whatsapp
 
-          .block.p-home.hover-parent(class="md:w-1/2 md:px-16 md:py-4")
+          .block.p-home.hover-parent(class="md:w-1/2")
             {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
             .block.hover-parent.overflow-hidden.text-ellipsis
               {{bot.description|safe}}
