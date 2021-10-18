@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 14:29+0000\n"
+"POT-Creation-Date: 2021-10-13 17:41+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1491,6 +1491,18 @@ msgstr "Il nome del mittente del messaggio"
 msgid "The featured response message"
 msgstr "Il messaggio di risposta visualizzato"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Il sondaggio di cui fa parte questa domanda"
 
@@ -1587,6 +1599,14 @@ msgid "Title"
 msgstr "Titolo"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "La questione posta alla tua audience, sarà visualizzata pubblicamente"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "La questione posta alla tua audience, sarà visualizzata pubblicamente"
 
 #, fuzzy

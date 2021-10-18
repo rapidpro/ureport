@@ -407,6 +407,9 @@ class PollCRUDL(SmartCRUDL):
 
                 fields.append("ruleset_%s_include" % result_uuid)
                 fields.append("ruleset_%s_label" % result_uuid)
+
+                fields.append("ruleset_%s_color" % result_uuid)
+
                 fields.append("ruleset_%s_title" % result_uuid)
 
                 categories = question.get_public_categories()
@@ -419,7 +422,11 @@ class PollCRUDL(SmartCRUDL):
             return fields
 
         def get_questions(self):
-            return self.object.questions.all().select_related("flow_result").order_by("-priority", "pk")
+            return (
+                self.object.questions.all()
+                .select_related("flow_result", "poll", "poll__org")
+                .order_by("-priority", "pk")
+            )
 
         def get_form(self):
             form = super(PollCRUDL.Questions, self).get_form()
@@ -471,10 +478,21 @@ class PollCRUDL(SmartCRUDL):
                     help_text=_("The question posed to your audience, will be displayed publicly"),
                 )
 
+                color_field_name = f"ruleset_{result_uuid}_color"
+                color_field_initial = initial.get(color_field_name, "")
+                color_field = forms.ChoiceField(
+                    label=_("Color Choice"),
+                    choices=PollQuestion.QUESTION_COLOR_CHOICES,
+                    required=False,
+                    initial=color_field_initial,
+                    help_text=_("The color to use for the question block will be displayed publicly"),
+                )
+
                 self.form.fields[include_field_name] = include_field
                 self.form.fields[priority_field_name] = priority_field
                 self.form.fields[label_field_name] = label_field
                 self.form.fields[title_field_name] = title_field
+                self.form.fields[color_field_name] = color_field
 
                 categories = question.get_public_categories()
                 for idx, category in enumerate(categories):
@@ -518,8 +536,10 @@ class PollCRUDL(SmartCRUDL):
 
                 title = data[f"ruleset_{result_uuid}_title"]
 
+                color_choice = data[f"ruleset_{result_uuid}_color"]
+
                 PollQuestion.objects.filter(poll=poll, flow_result__result_uuid=result_uuid).update(
-                    is_active=included, title=title, priority=priority
+                    is_active=included, title=title, priority=priority, color_choice=color_choice
                 )
 
                 categories = question.get_public_categories()
@@ -563,6 +583,7 @@ class PollCRUDL(SmartCRUDL):
                 initial["ruleset_%s_priority" % result_uuid] = question.priority
                 initial["ruleset_%s_label" % result_uuid] = result_name
                 initial["ruleset_%s_title" % result_uuid] = question.title
+                initial["ruleset_%s_color" % result_uuid] = question.color_choice
 
                 categories = question.get_public_categories()
                 for category in categories:

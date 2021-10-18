@@ -9,11 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 14:29+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
-"Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
-"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1567,6 +1563,18 @@ msgstr "Tên của người gửi tin nhắn"
 msgid "The featured response message"
 msgstr "Tin nhắn phản hồi nổi bật"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Câu hỏi này nằm trong khảo sát"
 
@@ -1671,6 +1679,14 @@ msgid "Title"
 msgstr "Tiêu đề"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Câu hỏi đặt ra cho đối tượng nhắm đến của bạn, sẽ được hiển thị công khai"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "Câu hỏi đặt ra cho đối tượng nhắm đến của bạn, sẽ được hiển thị công khai"
 
 #, fuzzy

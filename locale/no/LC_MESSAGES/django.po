@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 14:29+0000\n"
+"POT-Creation-Date: 2021-10-13 17:41+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -1461,6 +1461,18 @@ msgstr "Navnet til avsender"
 msgid "The featured response message"
 msgstr "Feature responsmelding "
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Undersøkelsen dette spørsmålet er en del av"
 
@@ -1557,6 +1569,14 @@ msgid "Title"
 msgstr "Tittel"
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
 msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
 
 msgid "Category {idx+1}"
