@@ -43,6 +43,23 @@
                           .inline.text-xs.font-bold
                             {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
 
+            - for category in categories_by_date
+              - if category.polls|length > 0
+                .block.py-1.bg-white.search-category.date-category.hidden
+                  %a.font-bold.px-2.block(href="#")
+                    %i.fas.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+                    %i.fas.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
+                    .text-sm(class="rtl:pr-3 ltr:pl-3")
+                      {{ category.name|date:"F" }} {{ category.name|date:"Y" }}
+                  .category-results
+                    - for poll in category.polls
+                      %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'public.opinion_read' poll.pk %}" data-search-value="{{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
+                        .text-sm(class="rtl:mr-2 ltr:ml-2")
+                          {{ poll.title }} - ({{poll.category.name}})
+                          .inline.text-xs.font-bold
+                            {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
+
+
   .max-w-page.mx-auto
     .bg-white(class="md:flex")
       .flex-1.my-home.self-center(class="rtl:border-l ltr:border-r")
