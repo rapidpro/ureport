@@ -1,3 +1,7 @@
+v1.1.300
+----------
+ * Fix bots padding
+
 v1.1.299
 ----------
  * Merge pull request #798 from rapidpro/bot-listing
