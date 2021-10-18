@@ -358,8 +358,6 @@ class Poll(SmartModel):
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list("pk", flat=True)
 
-                poll_results_ids_count = len(poll_results_ids)
-
                 questions = self.questions.all().select_related("flow_result").prefetch_related("response_categories")
                 questions_dict = dict()
 
@@ -389,8 +387,6 @@ class Poll(SmartModel):
 
                 logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
 
-                logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
-
                 processed_results = 0
                 stats_dict = defaultdict(int)
 
@@ -404,10 +400,10 @@ class Poll(SmartModel):
 
                         processed_results += 1
 
-                logger.info(
-                    "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds"
-                    % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
-                )
+                    logger.info(
+                        "Rebuild counts progress... build counters dict for pair %s, %s, processed %d in %ds"
+                        % (org_id, flow, processed_results, time.time() - start)
+                    )
 
                 poll_stats_obj_to_insert = []
                 for stat_tuple in stats_dict.keys():

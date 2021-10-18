@@ -9,11 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 17:41+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
-"Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
-"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -726,6 +722,9 @@ msgstr "Đăng xuất"
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Người dùng"
 
@@ -933,6 +932,12 @@ msgstr "CÁC CÂU CHUYỆN ĐÃ LƯU TRỮ"
 msgid "LIST"
 msgstr "DANH SÁCH"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -963,6 +968,9 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "U-REPORTERS TẠI"
 
 msgid "AGES"
+msgstr ""
+
+msgid "More bots"
 msgstr ""
 
 msgid "Join U-Report, Your voice matters."
@@ -1315,6 +1323,62 @@ msgstr "Tên mô tả ngắn cho hình ảnh này"
 
 msgid "Image type"
 msgstr "Loại hình ảnh"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Khảo sát này nằm trong tổ chức"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Tiêu đề cho mục này"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Danh mục của câu chuyện này"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Mô tả ngắn cho muc này"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Mức độ ưu tiên của câu hỏi này trên trang khảo sát, những đề mục ưu tiên hơn xuất hiện trước"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
 
 msgid "Label"
 msgstr "Nhãn"
@@ -1932,6 +1996,26 @@ msgstr "Câu chuyện này có nổi bật hay không"
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Địa phương của phóng viên."
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Khảo sát này nên được đưa lên trang chủ hay không"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Tổ chức"
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description text for this bot"
+#~ msgstr "Địa phương của phóng viên."
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Màu sắc cho chữ trên thanh tham gia"

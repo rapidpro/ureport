@@ -704,6 +704,9 @@ msgstr "Одјавување"
 msgid "Opinions"
 msgstr "Мислења"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Корисници"
 
@@ -906,6 +909,12 @@ msgstr "АРХИВА НА ПРИКАЗНИ"
 msgid "LIST"
 msgstr "ЛИСТА"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "ПОСЛЕДНИ МИСЛЕЊА"
 
@@ -929,6 +938,9 @@ msgstr "ЗЕМЈИ ВО СВЕТОТ"
 
 msgid "AGES"
 msgstr "ВОЗРАСТ"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Придружи се на U-Report, твоето мислење е важно"
@@ -1227,6 +1239,62 @@ msgstr "Кусо и описно име за сликата"
 
 msgid "Image type"
 msgstr "Тип на слика"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Организација на којашто припаѓа оваа анкета"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Назив за оваа ставка"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Категоријата за оваа приказна"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Краток опис на оваа ставка"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Степен на приоритет на прашањето во анкетата. Прашањата со повисок приоритет први се прикажани"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
 
 msgid "Label"
 msgstr "Назив"
@@ -1789,6 +1857,26 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Опис на страната за мислења"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Дали анкетата ќе биде прикажана на насловната страна"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Орг"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Опис на страната со статии"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Бојата на текстот во лентата со повик за вклучување"

@@ -677,6 +677,9 @@ msgstr ""
 msgid "Opinions"
 msgstr "Poll Results"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr ""
 
@@ -867,6 +870,12 @@ msgstr "သိမ်းထားသော သတင်းဆောင်းပ�
 msgid "LIST"
 msgstr "LIST"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr ""
 
@@ -890,6 +899,9 @@ msgstr ""
 
 msgid "AGES"
 msgstr "အသက်"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr ""
@@ -1173,6 +1185,56 @@ msgstr "A short descriptive name for this image"
 
 msgid "Image type"
 msgstr "Image type"
+
+#, fuzzy
+#| msgid "The organization this category applies to"
+msgid "The organization this bot is part of"
+msgstr "he organization this category applies to"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+msgid "The title to display for this bot"
+msgstr ""
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The name to describe this image"
+msgid "The keyword for this bot"
+msgstr "The name to describe this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "The Facebook bot deeplink, optional"
+msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "The Telegram bot deeplink, optional"
+msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "The Viber bot deeplink, optional"
+msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#| msgid "A short descriptive name for this image"
+msgid "A short description for this bot, required"
+msgstr "A short descriptive name for this image"
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr ""
+
+msgid "Whether this bot should be shown to the public"
+msgstr ""
 
 msgid "Label"
 msgstr "အညွှန်း"
@@ -1723,3 +1785,13 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#, fuzzy
+#~| msgid "A short descriptive name for this image"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "A short descriptive name for this image"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"

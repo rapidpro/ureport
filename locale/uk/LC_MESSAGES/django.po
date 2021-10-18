@@ -679,6 +679,9 @@ msgstr ""
 msgid "Opinions"
 msgstr "Опитування"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr ""
 
@@ -875,6 +878,12 @@ msgstr ""
 msgid "LIST"
 msgstr ""
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "Актуальне опитування"
 
@@ -898,6 +907,9 @@ msgstr "КРАЇНАХ СВІТУ"
 
 msgid "AGES"
 msgstr "Вік"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr ""
@@ -1185,6 +1197,52 @@ msgid "A short descriptive name for this image"
 msgstr ""
 
 msgid "Image type"
+msgstr ""
+
+msgid "The organization this bot is part of"
+msgstr ""
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+msgid "The title to display for this bot"
+msgstr ""
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+msgid "The keyword for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The Viber bot deeplink, optional"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "The description of the opinions page"
+msgid "A short description for this bot, required"
+msgstr "Опитування"
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr ""
+
+msgid "Whether this bot should be shown to the public"
 msgstr ""
 
 msgid "Label"

@@ -12,11 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 17:41+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
-"Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
-"Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -699,6 +695,9 @@ msgstr "Chiqish"
 msgid "Opinions"
 msgstr "Mulohazalar"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
@@ -896,6 +895,12 @@ msgstr "ARXIVDAGI HIKOYALAR"
 msgid "LIST"
 msgstr "RO'YXAT"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "ENG SO'NGGI MULOHAZA"
 
@@ -919,6 +924,9 @@ msgstr "DUNYO BO'YICHA MAMLAKATLAR"
 
 msgid "AGES"
 msgstr "YOSHLAR"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Reportga qo'shiling, Sizning fikringiz muhimdir."
@@ -1233,6 +1241,62 @@ msgstr "Ushbu suratga qisqacha ta'riflovchi nom"
 
 msgid "Image type"
 msgstr "Tasvir turi"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Ushbu element uchun sarlavha"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Ushbu hikoya uchun toifa"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Ushbu elementning qisqacha ta'rifi"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Mazkur savolning so'rovnoma sahifasidagi ustivorligi, ustivorligi yoqori bo'lgani avval keladi"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
 
 msgid "Label"
 msgstr "Yorliq"
@@ -1805,6 +1869,26 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Fikrlar sahifasining bayoni"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Mazkur so'rov uy sahifasida alohida ajralib turishi kerakmi"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Tashk"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Hikoyalar sahifasining bayoni"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"

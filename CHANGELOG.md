@@ -1,3 +1,15 @@
+v1.1.298
+----------
+ * Merge pull request #795 from rapidpro/more-indexes
+ * Add more index on contact activities
+
+v1.1.297
+----------
+ * Merge pull request #793 from rapidpro/few-queries-for-rebuild-stats
+ * Merge pull request #796 from Ilhasoft/feature/translations_django-po--master_ru
+ * translation completed for the source file '/locale/en/LC_MESSAGES/django.po' on the 'ru' language.
+ * Remove count of poll results IDs in rebuilt poll stats
+
 v1.1.296
 ----------
  * Merge pull request #781 from rapidpro/engagement-chart-2

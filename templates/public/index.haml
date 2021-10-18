@@ -69,6 +69,51 @@
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
 
+  -if featured_bots
+    .max-w-page.mx-auto.border-black.border-b
+      -for bot in featured_bots|slice:"3"
+        .border-b.hover-parent(class="md:flex")
+          .block.pb-6.pt-12.px-16.my-auto.hover-parent(class="md:w-1/2")
+            {{bot.title}}
+            .block.hover-parent
+              .block.no-wrap
+                .text-sm.inline
+                  -trans "Send"
+                .text-xl.inline
+                  "{{bot.keyword}}"
+                .text-sm.inline
+                  -trans "to"
+                .text-xl.inline
+                  {{bot.channel}}
+
+            .block.flex.mt-4
+              - if bot.facebook_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.facebook_deeplink}}")
+                  %i.fab.fa-facebook-f
+
+              - if bot.telegram_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.telegram_deeplink}}")
+                  %i.fab.fa-telegram
+
+              - if bot.viber_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.viber_deeplink}}")
+                  %i.fab.fa-viber
+
+              - if bot.whatsapp_deeplink
+                %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.whatsapp_deeplink}}")
+                  %i.fab.fa-whatsapp
+
+          .block.px-16.pt-12.pb-6.hover-parent(class="md:w-1/2")
+            {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
+            .block.hover-parent.h-32.overflow-hidden.text-ellipsis.text-sm
+              {{bot.description|safe}}
+
+      %div(class="md:flex")
+        .inline-block.w-full.p-8
+          .text-center
+            %a.btn.bg-black.text-white(href="{% url 'public.bots' %}" class="hover:bg-gray-700")
+              -trans "More bots"
+
   // join video and social
   .max-w-page.mx-auto
     %div(class="md:flex")

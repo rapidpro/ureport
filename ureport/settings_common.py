@@ -111,6 +111,7 @@ LANGUAGES = (
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
     ("no", "Norwegian"),
+    ("ru", "Russia"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -641,6 +642,7 @@ INSTALLED_APPS = (
     "ureport.admins",
     "ureport.api",
     "ureport.assets",
+    "ureport.bots",
     "ureport.contacts",
     "ureport.countries",
     "ureport.flows",
@@ -752,6 +754,7 @@ PERMISSIONS = {
 GROUP_PERMISSIONS = {
     "Administrators": (
         "assets.image.*",
+        "bots.bot.*",
         "categories.category.*",
         "categories.categoryimage.*",
         "dashblocks.dashblock.*",
@@ -773,6 +776,7 @@ GROUP_PERMISSIONS = {
         "users.user_profile",
     ),
     "Editors": (
+        "bots.bot.*",
         "categories.category.*",
         "categories.categoryimage.*",
         "dashblocks.dashblock.*",

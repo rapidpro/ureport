@@ -695,6 +695,9 @@ msgstr "Logga ut"
 msgid "Opinions"
 msgstr "Åsikter"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Användare"
 
@@ -895,6 +898,12 @@ msgstr "ARKIVERADE BERÄTTELSER"
 msgid "LIST"
 msgstr "LISTA"
 
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "SENASTE ÅSIKTERNA"
 
@@ -918,6 +927,9 @@ msgstr "LÄNDER VÄRLDEN ÖVER"
 
 msgid "AGES"
 msgstr "ÅLDER"
+
+msgid "More bots"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Gå med i U-Report. Din röst är viktig."
@@ -1212,6 +1224,62 @@ msgstr "Kort beskrivning av den här bilden"
 
 msgid "Image type"
 msgstr "Bildtyp"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organisationen som undersökningen är en del av"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Titeln för objektet"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Berättelsens kategori"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Titeln för innehållsblocket, valfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Titeln för innehållsblocket, valfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Titeln för innehållsblocket, valfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Titeln för innehållsblocket, valfritt"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Kort sammanfattning av objektet"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioritering för denna fråga i undersökningen, den högsta prioriteten kommer först."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Organisationen ska visas på landningssidan"
 
 msgid "Label"
 msgstr "Etikett"
@@ -1774,6 +1842,26 @@ msgstr "Raden skapades genom squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Beskrivning av sidan \"Åsikter\""
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Undersökningen ska visas på startsidan"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Beskrivning av sidan \"Berättelser\""
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Textfärg på \"Så deltar du\"-avsnittet"
