@@ -1,3 +1,8 @@
+v1.1.303
+----------
+ * Merge pull request #805 from rapidpro/contact-activities-optimizations-part2
+ * Populate the used field for contact activities with a date in the last 13 months
+
 v1.1.302
 ----------
  * Merge pull request #799 from rapidpro/contact-activities-optimizations
