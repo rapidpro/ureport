@@ -58,6 +58,10 @@ def populate_contact_activities_used(apps, schema_editor):  # pragma: no cover
 
             cache.set(contact_activities_used_max_id_key, latest_id, None)
 
+        logger.info(
+            f"Finished populating used on {org_count} contacts activities for org #{org.id} in {elapsed:.1f} seconds"
+        )
+
 
 def apply_manual():  # pragma: no cover
     from django.apps import apps
