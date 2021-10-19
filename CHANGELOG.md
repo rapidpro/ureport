@@ -1,3 +1,7 @@
+v1.1.302
+----------
+ * Merge pull request #799 from rapidpro/contact-activities-optimizations
+
 v1.1.301
 ----------
  * Merge pull request #801 from rapidpro/fix-age-chart-labels
