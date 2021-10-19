@@ -58,7 +58,7 @@ showAgeChart = (id, data, barColor, labelColor, labelPosition, labelSize, labelW
           style: {
             fontSize: ".75rem"
             textOutline: false
-            color: 'white'
+            color: labelColor
           }
           formatter: ->
             this.y + "%"

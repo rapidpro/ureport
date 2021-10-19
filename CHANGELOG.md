@@ -1,3 +1,8 @@
+v1.1.301
+----------
+ * Merge pull request #801 from rapidpro/fix-age-chart-labels
+ * Merge pull request #803 from rapidpro/poll-search-feedback
+
 v1.1.300
 ----------
  * Fix bots padding
