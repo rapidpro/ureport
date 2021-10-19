@@ -735,6 +735,8 @@ class ContactActivity(models.Model):
 
     date = models.DateField(help_text="The starting date for for the month")
 
+    used = models.BooleanField(null=True)
+
     class Meta:
         index_together = (("org", "contact"), ("org", "date"))
         unique_together = ("org", "contact", "date")
