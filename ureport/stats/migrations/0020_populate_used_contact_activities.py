@@ -26,10 +26,11 @@ def populate_contact_activities_used(apps, schema_editor):  # pragma: no cover
     # We'll be indexing the objects newer than 400 days, around 1 months
     start = today - timedelta(days=400)
 
-    start_time = time.time()
     orgs = Org.objects.all().order_by("id")
 
     for org in orgs:
+        start_time = time.time()
+
         print(f"Migrating contact_activities on org #{org.id}")
 
         contact_activities_used_max_id_key = f"contact_activities_used_max_id:{org.id}"
