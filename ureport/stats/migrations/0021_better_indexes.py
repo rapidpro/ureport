@@ -20,7 +20,7 @@ CREATE INDEX IF NOT EXISTS stats_contactactivity_org_id_date_used_state_not_null
 
 # language=SQL
 INDEX_SQL_CONTACTACTIVITY_ORG_DATE_USED = """
-CREATE INDEX IF NOT EXISTS stats_contactactivity_org_id_date_used on stats_contactactivity (org_id, date, used) WHERE state used is TRUE;
+CREATE INDEX IF NOT EXISTS stats_contactactivity_org_id_date_used on stats_contactactivity (org_id, date, used) WHERE used is TRUE;
 """
 
 
