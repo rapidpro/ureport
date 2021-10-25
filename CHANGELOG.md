@@ -1,3 +1,8 @@
+v1.1.305
+----------
+ * Merge pull request #809 from rapidpro/add-gabon
+ * Add Gabon flag
+
 v1.1.304
 ----------
  * Merge pull request #808 from rapidpro/disable_sentry_transactions
