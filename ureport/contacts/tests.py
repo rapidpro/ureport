@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from dash.orgs.models import TaskState
-from dash.utils.sync import SyncOutcome
 from mock import patch
 
+from dash.orgs.models import TaskState
+from dash.utils.sync import SyncOutcome
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
 from ureport.contacts.tasks import check_contacts_count_mismatch, pull_contacts, update_org_contact_count
 from ureport.locations.models import Boundary
