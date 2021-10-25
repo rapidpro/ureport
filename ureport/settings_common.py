@@ -1190,6 +1190,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://fsm.ureport.in/count/",
     ),
     dict(
+        name="Gabon",
+        host="//gabon.ureport.in/",
+        flag="flag_gabon.png",
+        countries_codes=["GAB"],
+        count_link="http://gabon.ureport.in/count/",
+    ),
+    dict(
         name="Gambia",
         host="//gambia.ureport.in/",
         flag="flag_gambia.png",
