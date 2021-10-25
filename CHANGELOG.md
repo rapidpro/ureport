@@ -1,3 +1,8 @@
+v1.1.304
+----------
+ * Merge pull request #808 from rapidpro/disable_sentry_transactions
+ * Disable sentry transaction collecting
+
 v1.1.303
 ----------
  * Merge pull request #805 from rapidpro/contact-activities-optimizations-part2
