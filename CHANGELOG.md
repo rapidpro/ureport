@@ -1,3 +1,7 @@
+v1.2.0
+----------
+ * Merge pull request #810 from rapidpro/update-deps-dash-1.8.1
+
 v1.1.305
 ----------
  * Merge pull request #809 from rapidpro/add-gabon
