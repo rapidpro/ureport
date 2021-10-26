@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 16:39+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -933,6 +933,9 @@ msgstr "СТРАНИ ПО СВЕТА"
 
 msgid "AGES"
 msgstr "ВЪЗРАСТИ"
+
+msgid "Available bots"
+msgstr ""
 
 msgid "More bots"
 msgstr ""

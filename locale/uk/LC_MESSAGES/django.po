@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 16:39+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -913,6 +913,9 @@ msgstr "КРАЇНАХ СВІТУ"
 
 msgid "AGES"
 msgstr "Вік"
+
+msgid "Available bots"
+msgstr ""
 
 msgid "More bots"
 msgstr ""

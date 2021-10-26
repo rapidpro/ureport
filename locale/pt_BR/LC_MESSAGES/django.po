@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 16:39+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -941,6 +941,9 @@ msgstr "países em todo o mundo"
 
 msgid "AGES"
 msgstr "Idades"
+
+msgid "Available bots"
+msgstr ""
 
 msgid "More bots"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 16:39+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -978,6 +978,9 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "U-REPORTERS DI"
 
 msgid "AGES"
+msgstr ""
+
+msgid "Available bots"
 msgstr ""
 
 msgid "More bots"

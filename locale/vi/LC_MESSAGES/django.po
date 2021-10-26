@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 16:39+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -975,6 +975,9 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "U-REPORTERS TẠI"
 
 msgid "AGES"
+msgstr ""
+
+msgid "Available bots"
 msgstr ""
 
 msgid "More bots"
