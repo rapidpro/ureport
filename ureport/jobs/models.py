@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from html.parser import HTMLParser
+from html import unescape
 
 import feedparser
 import six
@@ -79,10 +79,9 @@ class JobSource(SmartModel):
             cache.delete(key)
             pass
 
-        html_parser = HTMLParser()
         for entry in entries:
             summary = entry.get("summary", "")
-            entry["summary"] = strip_tags(html_parser.unescape(html_parser.unescape(summary)))
+            entry["summary"] = strip_tags(unescape(unescape(summary)))
         return entries
 
     def get_return_page(self):
