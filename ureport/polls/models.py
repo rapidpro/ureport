@@ -234,8 +234,8 @@ class Poll(SmartModel):
         return latest_synced_obj_time, pull_after_delete
 
     def delete_poll_stats(self):
-        from ureport.utils import chunk_list
         from ureport.stats.models import PollStats
+        from ureport.utils import chunk_list
 
         if self.stopped_syncing:
             logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id), exc_info=True)
@@ -321,10 +321,11 @@ class Poll(SmartModel):
         Poll.pull_poll_results_task(self)
 
     def rebuild_poll_results_counts(self):
-        from ureport.utils import chunk_list
-        from ureport.stats.models import PollStats, AgeSegment, GenderSegment, SchemeSegment
-        from ureport.locations.models import Boundary
         import time
+
+        from ureport.locations.models import Boundary
+        from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
+        from ureport.utils import chunk_list
 
         start = time.time()
 
@@ -861,8 +862,9 @@ class PollQuestion(SmartModel):
             poll_word_cloud.save()
 
     def calculate_results(self, segment=None):
-        from ureport.stats.models import AgeSegment, PollStats, GenderSegment, PollWordCloud
         from stop_words import safe_get_stop_words
+
+        from ureport.stats.models import AgeSegment, GenderSegment, PollStats, PollWordCloud
 
         org = self.poll.org
         open_ended = self.is_open_ended()
