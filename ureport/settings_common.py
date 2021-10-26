@@ -822,20 +822,15 @@ ANONYMOUS_USER_NAME = "AnonymousUser"
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
 
-BROKER_BACKEND = "redis"
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
-REDIS_DB = "1"
+CELERY_BROKER_URL = "redis://localhost:6379/1"
 
-BROKER_URL = "redis://%s:%s/%s" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
-
-CELERY_RESULT_BACKEND = BROKER_URL
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": BROKER_URL,
+        "LOCATION": CELERY_BROKER_URL,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     }
 }
