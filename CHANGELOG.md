@@ -1,3 +1,7 @@
+v1.2.1
+----------
+ * Fix prod settings for celery
+
 v1.2.0
 ----------
  * Merge pull request #810 from rapidpro/update-deps-dash-1.8.1
