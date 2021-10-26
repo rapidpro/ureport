@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 17:41+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -177,6 +177,12 @@ msgstr "Dodaj"
 
 msgid "Content Types"
 msgstr "Vrste sadržaja"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr ""
@@ -1019,6 +1025,9 @@ msgstr "ZEMLJE ŠIROM SVIJETA"
 
 msgid "AGES"
 msgstr "GODIŠTA"
+
+msgid "Available bots"
+msgstr ""
 
 msgid "More bots"
 msgstr ""

@@ -1,8 +1,8 @@
-from dash.orgs.models import Org
-from smartmin.models import SmartModel
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from dash.orgs.models import Org
+from smartmin.models import SmartModel
 
 
 class Bot(SmartModel):

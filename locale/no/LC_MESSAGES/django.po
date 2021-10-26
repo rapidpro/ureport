@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 17:41+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -129,6 +129,12 @@ msgstr "Legg til"
 
 msgid "Content Types"
 msgstr "Innholdstyper"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "Innholdsblokker"
@@ -930,6 +936,9 @@ msgstr "LAND VERDEN OVER"
 
 msgid "AGES"
 msgstr "ALDER"
+
+msgid "Available bots"
+msgstr ""
 
 msgid "More bots"
 msgstr ""

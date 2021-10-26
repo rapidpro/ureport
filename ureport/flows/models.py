@@ -1,6 +1,6 @@
-from dash.orgs.models import Org
-
 from django.db import models
+
+from dash.orgs.models import Org
 
 # Create your models here.
 

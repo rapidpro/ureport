@@ -7,14 +7,14 @@ from datetime import datetime
 import mock
 import pytz
 import redis
-from dash.categories.models import Category
-from dash.test import MockClientQuery, MockResponse
 from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
 from django.utils import timezone
 
+from dash.categories.models import Category
+from dash.test import MockClientQuery, MockResponse
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
