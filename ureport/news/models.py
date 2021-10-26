@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from dash.categories.models import Category
-from dash.orgs.models import Org
-
 from django.db import models
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 
+from dash.categories.models import Category
+from dash.orgs.models import Org
 from smartmin.models import SmartModel
 
 

@@ -6,7 +6,6 @@ import time
 from collections import defaultdict
 
 import requests
-from dash.utils.sync import BaseSyncer, SyncOutcome, sync_local_to_changes
 from django_redis import get_redis_connection
 from temba_client.v2 import TembaClient
 
@@ -14,6 +13,7 @@ from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
 
+from dash.utils.sync import BaseSyncer, SyncOutcome, sync_local_to_changes
 from ureport.contacts.models import Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult

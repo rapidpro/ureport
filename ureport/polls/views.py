@@ -5,11 +5,6 @@ import ast
 import re
 from datetime import timedelta
 
-from dash.categories.fields import CategoryChoiceField
-from dash.categories.models import Category, CategoryImage
-from dash.orgs.models import OrgBackend
-from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
-from dash.tags.models import Tag
 from django_redis import get_redis_connection
 
 from django import forms
@@ -25,6 +20,11 @@ from django.utils.html import strip_tags
 from django.utils.timesince import timesince
 from django.utils.translation import ugettext_lazy as _
 
+from dash.categories.fields import CategoryChoiceField
+from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import OrgBackend
+from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
+from dash.tags.models import Tag
 from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 from ureport.utils import json_date_to_datetime
 
