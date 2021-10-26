@@ -826,6 +826,10 @@ CELERY_BROKER_URL = "redis://localhost:6379/1"
 
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
+# by default, celery doesn't have any timeout on our redis connections, this fixes that
+CELERY_BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
+
+CELERY_TIMEZONE = "UTC"
 
 CACHES = {
     "default": {
@@ -863,7 +867,7 @@ INTERNAL_IPS = ("127.0.0.1",)
 
 CELERY_TIMEZONE = "UTC"
 
-CELERYBEAT_SCHEDULE = {
+CELERY_BEAT_SCHEDULE = {
     "refresh_flows": {"task": "polls.refresh_org_flows", "schedule": timedelta(minutes=20), "relative": True},
     "recheck_poll_flow_data": {
         "task": "polls.recheck_poll_flow_data",
