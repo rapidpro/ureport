@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from mock import patch
-from temba_client.v2.types import Contact as TembaContact, ObjectRef
-
 from dash.categories.models import Category
 from dash.test import MockClientQuery
 from dash.utils.sync import SyncOutcome
+from mock import patch
+from temba_client.v2.types import Contact as TembaContact, ObjectRef
+
 from ureport.backend.floip import ContactSyncer, FLOIPBackend
 from ureport.contacts.models import Contact
 from ureport.flows.models import FlowResult, FlowResultCategory

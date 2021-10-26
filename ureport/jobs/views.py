@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
+
 from django.utils.translation import ugettext_lazy as _
 
-from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
 from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 from ureport.jobs.models import JobSource
 

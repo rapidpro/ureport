@@ -7,6 +7,9 @@ import json
 import logging
 from datetime import timedelta
 
+from dash.categories.models import Category
+from dash.test import MockClientQuery
+from dash.utils.sync import SyncOutcome
 from mock import PropertyMock, patch
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import (
@@ -22,9 +25,6 @@ from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
 
-from dash.categories.models import Category
-from dash.test import MockClientQuery
-from dash.utils.sync import SyncOutcome
 from ureport.backend.rapidpro import BoundarySyncer, ContactSyncer, FieldSyncer, RapidProBackend
 from ureport.contacts.models import Contact, ContactField
 from ureport.flows.models import FlowResult, FlowResultCategory

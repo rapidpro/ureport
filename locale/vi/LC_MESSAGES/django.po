@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-10-26 20:48+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -374,6 +374,9 @@ msgstr "Nhiệm vụ"
 msgid "Tasks"
 msgstr "Các nhiệm vụ"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Tiêu đề cho câu chuyện này"
 
@@ -393,6 +396,9 @@ msgstr "Người viết câu chuyện"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Liên kết đến tệp mp3 để đăng trên câu chuyện này"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id của video YouTube được dẫn đến câu hcuyeejn này (đây là đoạn văn bản theo sau v= và trước & in URL YouTube)"

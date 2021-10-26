@@ -10,6 +10,10 @@ from functools import reduce
 
 import pycountry
 import six
+from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import Org, TaskState
+from dash.stories.models import Story
 from django_redis import get_redis_connection
 
 from django.conf import settings
@@ -24,10 +28,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import RedirectView
 
-from dash.categories.models import Category
-from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import Org, TaskState
-from dash.stories.models import Story
 from smartmin.views import SmartReadView, SmartTemplateView
 from ureport.bots.models import Bot
 from ureport.countries.models import CountryAlias
@@ -73,12 +73,17 @@ class IndexView(SmartTemplateView):
 
         # fake photos, generated from stories that are featured and have a photo
         context["stories_photos"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None))
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
             .exclude(images=None)
             .order_by("-created_on")[4:]
         )
 
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on")
+        context["main_stories"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("-created_on")
+        )
 
         return context
 
@@ -277,7 +282,11 @@ class PollContextMixin(object):
 
         context["polls"] = polls
 
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on")
+        context["main_stories"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("-created_on")
+        )
         return context
 
 
@@ -320,13 +329,26 @@ class StoriesView(SmartTemplateView):
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)
             .prefetch_related(
-                Prefetch("story_set", queryset=Story.objects.filter(is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on"))
+                Prefetch(
+                    "story_set",
+                    queryset=Story.objects.filter(is_active=True)
+                    .filter(Q(attachment="") | Q(attachment=None))
+                    .order_by("-created_on"),
+                )
             )
             .order_by("name")
         )
-        context["stories"] = Story.objects.filter(org=org, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("title")
+        context["stories"] = (
+            Story.objects.filter(org=org, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("title")
+        )
 
-        featured_stories = Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on")
+        featured_stories = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("-created_on")
+        )
         context["main_stories"] = featured_stories
 
         return context
@@ -349,7 +371,11 @@ class StoryReadView(SmartReadView):
         context["org"] = org
         context["categories"] = Category.objects.filter(org=org, is_active=True).order_by("name")
 
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on")
+        context["main_stories"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("-created_on")
+        )
         return context
 
 
@@ -434,7 +460,11 @@ class UreportersView(SmartTemplateView):
         context["scheme_bar_height"] = (50 * len(scheme_stats)) + 30
         context["schemes_stats"] = scheme_stats
         context["reporters"] = org.get_reporters_count()
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on")
+        context["main_stories"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("-created_on")
+        )
 
         # global counter
         context["global_counter"] = get_global_count()
@@ -471,7 +501,11 @@ class JoinEngageView(SmartTemplateView):
         context = super(JoinEngageView, self).get_context_data(**kwargs)
         org = self.request.org
         context["org"] = org
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on")
+        context["main_stories"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("-created_on")
+        )
         return context
 
 
@@ -503,7 +537,11 @@ class JobsView(SmartTemplateView):
         context["job_sources"] = JobSource.objects.filter(org=org, is_active=True).order_by(
             "-is_featured", "-created_on"
         )
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).filter(Q(attachment="") | Q(attachment=None)).order_by("-created_on")
+        context["main_stories"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .filter(Q(attachment="") | Q(attachment=None))
+            .order_by("-created_on")
+        )
         return context
 
 

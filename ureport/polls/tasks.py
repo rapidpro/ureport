@@ -5,14 +5,14 @@ import logging
 import time
 from datetime import timedelta
 
+from dash.orgs.models import Org
+from dash.orgs.tasks import org_task
 from django_redis import get_redis_connection
 from temba_client.exceptions import TembaRateExceededError
 
 from django.core.cache import cache
 from django.utils import timezone
 
-from dash.orgs.models import Org
-from dash.orgs.tasks import org_task
 from ureport.celery import app
 from ureport.utils import (
     fetch_flows,
