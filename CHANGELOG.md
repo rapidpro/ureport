@@ -1,3 +1,7 @@
+v1.2.2
+----------
+ * Merge pull request #812 from rapidpro/fix-html-unescape
+
 v1.2.1
 ----------
  * Fix prod settings for celery
