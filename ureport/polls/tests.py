@@ -1083,8 +1083,15 @@ class PollTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_templatetags(self):
-        from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
-        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
+        from ureport.polls.templatetags.ureport import (
+            config,
+            org_arrow_link,
+            org_color,
+            org_host_link,
+            question_results,
+            show_org_flags,
+            transparency,
+        )
 
         with patch("dash.orgs.models.Org.get_config") as mock:
             mock.return_value = "Done"

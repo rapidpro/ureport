@@ -253,8 +253,10 @@ def get_linked_orgs(authenticated=False):
 
 
 def fetch_old_sites_count():
-    import requests
     import re
+
+    import requests
+
     from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
     start = time.time()
