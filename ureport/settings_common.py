@@ -822,20 +822,19 @@ ANONYMOUS_USER_NAME = "AnonymousUser"
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
 
-BROKER_BACKEND = "redis"
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
-REDIS_DB = "1"
+CELERY_BROKER_URL = "redis://localhost:6379/1"
 
-BROKER_URL = "redis://%s:%s/%s" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
-CELERY_RESULT_BACKEND = BROKER_URL
+# by default, celery doesn't have any timeout on our redis connections, this fixes that
+CELERY_BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
 
+CELERY_TIMEZONE = "UTC"
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": BROKER_URL,
+        "LOCATION": CELERY_BROKER_URL,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     }
 }
@@ -868,7 +867,7 @@ INTERNAL_IPS = ("127.0.0.1",)
 
 CELERY_TIMEZONE = "UTC"
 
-CELERYBEAT_SCHEDULE = {
+CELERY_BEAT_SCHEDULE = {
     "refresh_flows": {"task": "polls.refresh_org_flows", "schedule": timedelta(minutes=20), "relative": True},
     "recheck_poll_flow_data": {
         "task": "polls.recheck_poll_flow_data",

@@ -6,16 +6,16 @@ from datetime import timedelta
 
 import mock
 import pytz
-from dash.categories.models import Category
-from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import TaskState
-from dash.stories.models import Story
 
 from django.test import override_settings
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.http import urlquote
 
+from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import TaskState
+from dash.stories.models import Story
 from ureport.countries.models import CountryAlias
 from ureport.news.models import NewsItem, Video
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
