@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 20:48+0000\n"
+"POT-Creation-Date: 2021-10-27 13:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -759,6 +759,11 @@ msgstr "O nama"
 msgid "Engagement"
 msgstr "Sudjelovanje"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Glasovi mladih"
+
 msgid "Category Images"
 msgstr "Slike kategorija"
 
@@ -1024,6 +1029,12 @@ msgstr "LOKACIJA"
 
 msgid "Written by:"
 msgstr "Napisao/la:"
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Jednako"

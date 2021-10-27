@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 20:48+0000\n"
+"POT-Creation-Date: 2021-10-27 13:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -730,6 +730,9 @@ msgstr ""
 msgid "Engagement"
 msgstr "U-репортери"
 
+msgid "Reports"
+msgstr ""
+
 msgid "Category Images"
 msgstr ""
 
@@ -986,6 +989,12 @@ msgid "LOCATION"
 msgstr "ОБЛАСТЬ"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"

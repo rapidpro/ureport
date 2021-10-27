@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 20:48+0000\n"
+"POT-Creation-Date: 2021-10-27 13:29+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -751,6 +751,11 @@ msgstr "Sobre Nós"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "A malta SMS BIZ"
+
 msgid "Category Images"
 msgstr "Categoria de Imagens"
 
@@ -1030,6 +1035,12 @@ msgid "LOCATION"
 msgstr "LOCALIZAÇÕES"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 20:48+0000\n"
+"POT-Creation-Date: 2021-10-27 13:29+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -750,6 +750,11 @@ msgstr "À Propos"
 msgid "Engagement"
 msgstr "Statistiques"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
+
 msgid "Category Images"
 msgstr "Images pour catégorie"
 
@@ -1004,6 +1009,12 @@ msgstr "LIEU"
 
 msgid "Written by:"
 msgstr "Ecrit par:"
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Même"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 20:48+0000\n"
+"POT-Creation-Date: 2021-10-27 13:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -754,6 +754,11 @@ msgstr "О нас"
 msgid "Engagement"
 msgstr "Участие"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Репортеры"
+
 msgid "Category Images"
 msgstr "Фотографии категорий"
 
@@ -1019,6 +1024,12 @@ msgstr "МЕСТОПОЛОЖЕНИЕ"
 
 msgid "Written by:"
 msgstr "Автор:"
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Даже"

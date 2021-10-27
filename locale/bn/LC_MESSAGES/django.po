@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 20:48+0000\n"
+"POT-Creation-Date: 2021-10-27 13:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -755,6 +755,11 @@ msgstr "সম্পর্কিত "
 msgid "Engagement"
 msgstr "কতজন যুক্ত হয়েছেন"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
+
 msgid "Category Images"
 msgstr "বিভাগের ছবিগুলো "
 
@@ -1013,6 +1018,12 @@ msgstr "ঠিকানা "
 
 msgid "Written by:"
 msgstr "লিখেছেন :"
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "সমান "
