@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 20:02+0000\n"
+"POT-Creation-Date: 2021-10-27 20:32+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -1069,6 +1069,9 @@ msgstr "Na koji način se želiš pridružiti? "
 
 msgid "Text"
 msgstr "Tekst"
+
+msgid "PAGE"
+msgstr ""
 
 msgid "SEARCH"
 msgstr "Pretraži"
