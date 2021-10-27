@@ -42,14 +42,14 @@
 
   .max-w-page.mx-auto.p-home.pt-home.hover-parent(class="grid grid-cols-1 md:grid-cols-3")
     - for story in stories|slice:"9"
-      %a.block.mt-6.p-4(class="md:mt-4 {% if not forloop.first %} md:ml-4 {% endif %} md:m-4 md:p-0" href="{% url 'public.story_read' story.pk %}")
+      %a.block.mt-6.p-4.border(class="md:mt-4 {% if not forloop.first %} md:ml-4 {% endif %} md:m-4 md:p-0" href="{% url 'public.story_read' story.pk %}")
         .block
           {% thumbnail story.get_image "400x250" crop="top" as im %}
           %img(width="100%" src="{{im.url}}")
           {% endthumbnail %}
-        .font-bold.mt-4.h-20(class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %}")
+        .p-4.font-bold.mt-4.h-20(class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %}")
           {{ story.title }}  
-        .mt-4.hidden(class="md:block")
+        .m-4.hidden(class="md:block")
           %button.btn.bg-black.text-white(class="hover:bg-gray-700")
             -trans "READ MORE"
 
