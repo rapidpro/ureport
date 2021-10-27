@@ -57,11 +57,11 @@
         .flex-auto.px-home.story-attachment.hover-parent
           {% edit_content 'stories.story_update' story.pk "#id_attachment" "-m-8" "dark" %}
           .px-home
-            %object.overflow-hidden(data="{{STATIC_URL}}{{ story.attachment }}#toolbar=0&navpanes=0&scrollbar=0&title={{story.title}}" type="application/pdf" width="100%" height="800px")
+            %object.overflow-hidden(data="{{MEDIA_URL}}{{ story.attachment }}#toolbar=0&navpanes=0&scrollbar=0&title={{story.title}}" type="application/pdf" width="100%" height="800px")
       .block.p-home
         .px-home
           .px-home
-            %a.btn.bg-black.text-white(href="{{STATIC_URL}}{{ story.attachment }}" class="hover:bg-gray-700" download="{{ story.title }}")
+            %a.btn.bg-black.text-white(href="{{MEDIA_URL}}{{ story.attachment }}" class="hover:bg-gray-700" download="{{ story.title }}")
               -trans "Download Report"
 
     .block.p-home
