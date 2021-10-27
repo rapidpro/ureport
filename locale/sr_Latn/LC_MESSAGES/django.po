@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 17:29+0000\n"
+"POT-Creation-Date: 2021-10-27 20:02+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -761,6 +761,9 @@ msgstr ""
 msgid "Pages"
 msgstr "Slike"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Poslovi"
 
@@ -1184,6 +1187,9 @@ msgstr ""
 msgid "Custom pages"
 msgstr ""
 
+msgid "Landing pages"
+msgstr ""
+
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
@@ -1511,6 +1517,36 @@ msgstr "Vaš izvor zadataka uspešno dodat"
 
 msgid "Your job source has been updated successfully"
 msgstr "Vaš izvor zadataka uspešno ažuriran"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organizacija kojoj anketa pripada"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Naslov ove stavke"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Struktura teksta priče"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Fajl za sliku koja će se koristiti"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ovo je OSM ID za ovo administrativno ograničenje"

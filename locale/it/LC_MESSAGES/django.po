@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 17:29+0000\n"
+"POT-Creation-Date: 2021-10-27 20:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -725,6 +725,9 @@ msgstr "Impostazioni"
 msgid "Pages"
 msgstr "Pagine"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Opportunità di lavoro"
 
@@ -1110,6 +1113,9 @@ msgstr "SELEZIONA IL PAESE"
 msgid "Custom pages"
 msgstr "Pagine Custom"
 
+msgid "Landing pages"
+msgstr ""
+
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Guarda attraverso i numeri come stiamo coinvolgendo le voci dei giovani per un cambiamento sociale positivo."
 
@@ -1417,6 +1423,36 @@ msgstr "La tua offerta di lavoro è stata inserita con successo"
 
 msgid "Your job source has been updated successfully"
 msgstr "La tua offerta di lavoro è stata aggiornata con successo"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "L'organizzazione di cui è parte questo sondaggio"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Il titolo per questo elemento"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Se questa org deve essere mostrato nella pagina di destinazione"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Il corpo del testo per la storia "
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Il file immagine da usare"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Se questa org deve essere mostrato nella pagina di destinazione"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Questo è l'ID OSM per questa divisione amministrativa"

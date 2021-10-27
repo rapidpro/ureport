@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 17:29+0000\n"
+"POT-Creation-Date: 2021-10-27 20:02+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -752,6 +752,9 @@ msgstr ""
 msgid "Pages"
 msgstr "Gambar"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Pekerjaan"
 
@@ -1171,6 +1174,9 @@ msgstr ""
 msgid "Custom pages"
 msgstr ""
 
+msgid "Landing pages"
+msgstr ""
+
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
@@ -1490,6 +1496,36 @@ msgstr "Sumber pekerjaan Anda telah berhasil ditambahkan"
 
 msgid "Your job source has been updated successfully"
 msgstr "Sumber pekerjaan Anda telah berhasil diperbarui"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "organisasi jajak pendapat ini adalah bagian dari"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Judul untuk item ini"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Isi cerita"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "File gambar yang akan digunakan"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ini adalah id OSM untuk batas administrasi ini"

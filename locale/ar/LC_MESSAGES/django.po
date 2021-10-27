@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 17:29+0000\n"
+"POT-Creation-Date: 2021-10-27 20:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -721,6 +721,9 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "الأعمال"
 
@@ -1115,6 +1118,9 @@ msgstr ""
 msgid "Custom pages"
 msgstr ""
 
+msgid "Landing pages"
+msgstr ""
+
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "بالأرقام – احصائيات مراسلي يو-ريبورت"
 
@@ -1391,6 +1397,36 @@ msgstr "تم إضافة مصدر العمل بنجاح"
 
 msgid "Your job source has been updated successfully"
 msgstr "تم تحديث مصدر العمل بنجاح"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "عنوان البند "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "نص المقال"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "ملف الصورة التي تريد إستخدامها "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "هذا هو رمز الـOSM الخاص بالحدود الإدارية "
