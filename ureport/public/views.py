@@ -378,7 +378,7 @@ class ReportsView(SmartTemplateView):
         context["stories"] = (
             Story.objects.filter(org=org, is_active=True)
             .exclude(Q(attachment="") | Q(attachment=None))
-            .order_by("title")
+            .order_by("-created_on")
         )
 
         return context
