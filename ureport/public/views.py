@@ -354,6 +354,36 @@ class StoriesView(SmartTemplateView):
         return context
 
 
+class ReportsView(SmartTemplateView):
+    template_name = "public/reports.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ReportsView, self).get_context_data(**kwargs)
+
+        org = self.request.org
+
+        context["org"] = org
+        context["categories"] = (
+            Category.objects.filter(org=org, is_active=True)
+            .prefetch_related(
+                Prefetch(
+                    "story_set",
+                    queryset=Story.objects.filter(is_active=True)
+                    .exclude(Q(attachment="") | Q(attachment=None))
+                    .order_by("-created_on"),
+                )
+            )
+            .order_by("name")
+        )
+        context["stories"] = (
+            Story.objects.filter(org=org, is_active=True)
+            .exclude(Q(attachment="") | Q(attachment=None))
+            .order_by("title")
+        )
+
+        return context
+
+
 class StoryReadView(SmartReadView):
     template_name = "public/story_read.html"
     model = Story
