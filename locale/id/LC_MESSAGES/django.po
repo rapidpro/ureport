@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 13:29+0000\n"
+"POT-Creation-Date: 2021-10-27 17:29+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1071,6 +1071,14 @@ msgstr ""
 
 msgid "No reports published yet"
 msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "U-REPORTERS DI"
+
+msgid "STORY"
+msgstr "CERITA"
 
 msgid "Download Report"
 msgstr ""
@@ -2261,9 +2269,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "BERITA"
-
-#~ msgid "STORY"
-#~ msgstr "CERITA"
 
 #, fuzzy
 #~| msgid "Read This Story"

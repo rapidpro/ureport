@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 13:29+0000\n"
+"POT-Creation-Date: 2021-10-27 17:29+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1068,6 +1068,14 @@ msgstr ""
 
 msgid "No reports published yet"
 msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "U-REPORTERS TẠI"
+
+msgid "STORY"
+msgstr "Câu chuyện"
 
 msgid "Download Report"
 msgstr ""
@@ -2266,9 +2274,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "TIN TỨC"
-
-#~ msgid "STORY"
-#~ msgstr "Câu chuyện"
 
 #~ msgid "Read full story"
 #~ msgstr "Đọc toàn bộ câu chuyện"

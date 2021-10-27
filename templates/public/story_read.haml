@@ -20,7 +20,10 @@
         .px-home.text-white.flex.items-center.h-full
           .block.hover-parent
             .text-light1.font-bold
-              STORY
+              -if story.attachment
+                -trans "REPORT"
+              -else
+                -trans "STORY"
             .font-alt.font-bold.text-4xl.leading-tight.italic.hover-parent
               {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "white" %}
               {{ story.title }}
