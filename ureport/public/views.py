@@ -32,6 +32,7 @@ from smartmin.views import SmartReadView, SmartTemplateView
 from ureport.bots.models import Bot
 from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
+from ureport.landingpages.models import LandingPage
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
@@ -188,6 +189,19 @@ class CustomPage(SmartReadView):
 
         queryset = DashBlock.objects.filter(dashblock_type=dashblock_type, org=org, is_active=True)
         queryset = queryset.order_by("-priority")
+
+        return queryset
+
+
+class LandingPageView(SmartReadView):
+    template_name = "public/landing_page.html"
+    model = LandingPage
+    slug_url_kwarg = "slug"
+
+    def derive_queryset(self):
+        org = self.request.org
+
+        queryset = LandingPage.objects.filter(org=org, is_active=True)
 
         return queryset
 
