@@ -1,5 +1,6 @@
 from django.urls import reverse
 
+from ureport.bots.models import Bot
 from ureport.landingpages.models import LandingPage
 from ureport.tests import UreportTest
 
@@ -14,7 +15,7 @@ class LandingPageTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 5)
+        self.assertEquals(len(response.context["form"].fields), 6)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict()
@@ -39,7 +40,7 @@ class LandingPageTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 5)
+        self.assertEquals(len(response.context["form"].fields), 6)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict(
@@ -99,17 +100,44 @@ class LandingPageTest(UreportTest):
         self.assertNotIn(uganda_foo_lp, response.context["object_list"])
         self.assertNotIn(uganda_bar_lp, response.context["object_list"])
         self.assertIn(nigeria_foo_lp, response.context["object_list"])
-        self.assertEquals(len(response.context["fields"]), 2)
+        self.assertEquals(len(response.context["fields"]), 3)
 
         self.login(self.superuser)
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEquals(len(response.context["fields"]), 2)
+        self.assertEquals(len(response.context["fields"]), 3)
         self.assertEquals(len(response.context["object_list"]), 2)
         self.assertIn(uganda_foo_lp, response.context["object_list"])
         self.assertIn(uganda_bar_lp, response.context["object_list"])
         self.assertNotIn(nigeria_foo_lp, response.context["object_list"])
 
     def test_bot_update(self):
+        uganda_fb_bot = Bot.objects.create(
+            org=self.uganda,
+            featured=False,
+            title="Facebook Bot",
+            channel="HereWeGo",
+            keyword="participate",
+            facebook_deeplink="https://example.com/herewego",
+            description="The Facebook channel",
+            priority=2,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
+        # bot from othre org
+        Bot.objects.create(
+            org=self.nigeria,
+            featured=True,
+            title="WhatsApp",
+            channel="+12555",
+            keyword="join",
+            facebook_deeplink="https://example.com/12555",
+            description="The main channel",
+            priority=1,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
         uganda_foo_lp = LandingPage.objects.create(
             org=self.uganda,
             title="foo",
@@ -144,7 +172,11 @@ class LandingPageTest(UreportTest):
 
         response = self.client.get(uganda_update_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 6)
+        self.assertEquals(len(response.context["form"].fields), 7)
+        self.assertEqual(
+            list(response.context["form"].fields["bots"].choices),
+            [(uganda_fb_bot.pk, "Facebook Bot")],
+        )
 
         post_data = dict(
             title="Bar Bar",

@@ -12,6 +12,31 @@
       margin-right: 20px;
     }
 
+    .select2-container {
+        width: 75%
+    }
+
+    .select2-container .selection {
+        width: 100%
+    }
+
+    .select2-results__option--selected {
+      display: none;
+    }
+
+    .select2-selection, .select2-container--default .select2-selection--multiple {
+      height: 2.25rem;
+      border-color: #dbdbdb;
+    }
+
+    .select2-selection:hover, .select2-container--default .select2-selection--multiple:hover {
+      border-color: #b5b5b5;
+    }
+
+    .select2-container .select2-search--inline .select2-search__field {
+      height: 80%;
+    }
+
 - block extra-script
   <script src="{{ STATIC_URL }}js/prettify.js"></script>
   <script src="{{ STATIC_URL }}js/summernote-lite.min.js"></script>
@@ -27,4 +52,12 @@
           }
         }
       })
+    });
+
+    $(document).ready(function() {
+      $('#id_bots').select2({
+          placeholder: '{{ _("Select bots")|escapejs }}',
+          width: '100%',
+          tags: true,
+      });
     });

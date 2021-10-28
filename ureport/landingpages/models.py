@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from dash.orgs.models import Org
 from dash.utils import generate_file_path
 from smartmin.models import SmartModel
+from ureport.bots.models import Bot
 
 
 class LandingPage(SmartModel):
@@ -28,6 +29,8 @@ class LandingPage(SmartModel):
         blank=True,
         help_text=_("The image file to use for the page"),
     )
+
+    bots = models.ManyToManyField(Bot, blank=True)
 
     class Meta:
         index_together = (("org", "slug"),)

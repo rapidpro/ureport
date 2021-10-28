@@ -50,6 +50,46 @@
         {% edit_content 'landingpages.landingpage_update' object.pk "#id_content" "-m-8" "dark" %}
         {{ object.content|safe }}
 
+        - if object.bots.all
+          .font-bold.text-center.mt-4.border-b.py-2
+            -trans "Join using our Bots below"
+        - for bot in object.bots.all
+          .border-b.hover-parent(class="md:flex")
+            .block.pb-6.pt-12.px-16.my-auto.hover-parent(class="md:w-1/2")
+              .font-bold.hover-parent
+                {{bot.title}}
+              .block.hover-parent
+                .block.no-wrap
+                  .text-sm.inline
+                    -trans "Send"
+                  .text-xl.inline
+                    "{{bot.keyword}}"
+                  .text-sm.inline
+                    -trans "to"
+                  .text-xl.inline
+                    {{bot.channel}}
+
+              .block.flex.mt-4
+                - if bot.facebook_deeplink
+                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.facebook_deeplink}}")
+                    %i.fab.fa-facebook-f
+
+                - if bot.telegram_deeplink
+                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.telegram_deeplink}}")
+                    %i.fab.fa-telegram
+
+                - if bot.viber_deeplink
+                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.viber_deeplink}}")
+                    %i.fab.fa-viber
+
+                - if bot.whatsapp_deeplink
+                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.whatsapp_deeplink}}")
+                    %i.fab.fa-whatsapp
+
+            .block.px-16.pt-12.pb-6.hover-parent(class="md:w-1/2")
+              .block.hover-parent.h-32.overflow-hidden.text-ellipsis.text-sm
+                {{bot.description|safe}}
+
       .flex-none.w-10
         %img(src="{{STATIC_URL}}img/u-icon-small.png" )
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 20:32+0000\n"
+"POT-Creation-Date: 2021-10-28 15:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -856,6 +856,12 @@ msgstr ""
 msgid "Back"
 msgstr "Înapoi"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr "ULTIMELE NOTIFICĂRI"
 
@@ -989,6 +995,9 @@ msgid "Text"
 msgstr "Text "
 
 msgid "PAGE"
+msgstr ""
+
+msgid "Join using our Bots below"
 msgstr ""
 
 msgid "SEARCH"
