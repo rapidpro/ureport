@@ -22,7 +22,7 @@ class LandingPageForm(forms.ModelForm):
 
     class Meta:
         model = LandingPage
-        fields = ("is_active", "title", "slug", "content", "image", "bots")
+        fields = ("is_active", "title", "slug", "action_text", "content", "image", "bots")
 
 
 class LandingPageCRUDL(SmartCRUDL):
@@ -34,6 +34,7 @@ class LandingPageCRUDL(SmartCRUDL):
         fields = (
             "title",
             "slug",
+            "action_text",
             "content",
             "image",
             "bots",
@@ -78,6 +79,7 @@ class LandingPageCRUDL(SmartCRUDL):
             "is_active",
             "title",
             "slug",
+            "action_text",
             "content",
             "image",
             "bots",

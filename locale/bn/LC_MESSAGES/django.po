@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 15:42+0000\n"
+"POT-Creation-Date: 2021-10-28 21:40+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -993,9 +993,6 @@ msgstr "টেক্সট"
 msgid "PAGE"
 msgstr ""
 
-msgid "Join using our Bots below"
-msgstr ""
-
 msgid "SEARCH"
 msgstr "সার্চ"
 
@@ -1441,6 +1438,11 @@ msgstr "এই পোল টি যে প্রতিষ্ঠান এর অ
 #| msgid "The title for this item"
 msgid "The title to display for this landing page"
 msgstr "এই জিনিস টির শিরোনাম "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "এই ঘটনাটির মূল অংশ"
 
 #, fuzzy
 #| msgid "Whether this org should be show on the landing page"

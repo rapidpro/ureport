@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 15:42+0000\n"
+"POT-Creation-Date: 2021-10-28 21:40+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -988,9 +988,6 @@ msgstr "Texte"
 msgid "PAGE"
 msgstr ""
 
-msgid "Join using our Bots below"
-msgstr ""
-
 msgid "SEARCH"
 msgstr "RECHERCHE"
 
@@ -1409,6 +1406,11 @@ msgstr "L'organisation dont ce sondage fait partie"
 #| msgid "The title for this item"
 msgid "The title to display for this landing page"
 msgstr "Le titre de cet élément"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Le texte principal de l’article"
 
 #, fuzzy
 #| msgid "Whether this org should be show on the landing page"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 15:42+0000\n"
+"POT-Creation-Date: 2021-10-28 21:40+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -987,9 +987,6 @@ msgstr "Текст"
 msgid "PAGE"
 msgstr ""
 
-msgid "Join using our Bots below"
-msgstr ""
-
 msgid "SEARCH"
 msgstr "ТЪРСЕНЕ"
 
@@ -1433,6 +1430,11 @@ msgstr "Организацията, към която това допитван�
 #| msgid "The title for this item"
 msgid "The title to display for this landing page"
 msgstr "Заглавието нa този артикул"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Съдържание на историята"
 
 #, fuzzy
 #| msgid "Whether this org should be show on the landing page"

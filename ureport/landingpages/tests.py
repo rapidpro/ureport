@@ -15,7 +15,7 @@ class LandingPageTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 6)
+        self.assertEquals(len(response.context["form"].fields), 7)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict()
@@ -40,7 +40,7 @@ class LandingPageTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 6)
+        self.assertEquals(len(response.context["form"].fields), 7)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict(
@@ -172,7 +172,7 @@ class LandingPageTest(UreportTest):
 
         response = self.client.get(uganda_update_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 7)
+        self.assertEquals(len(response.context["form"].fields), 8)
         self.assertEqual(
             list(response.context["form"].fields["bots"].choices),
             [(uganda_fb_bot.pk, "Facebook Bot")],
