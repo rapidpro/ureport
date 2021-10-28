@@ -1,3 +1,12 @@
+v1.2.3
+----------
+ * Run code checks
+ * Merge pull request #807 from rapidpro/task-update-old-contact-activities
+ * Merge pull request #806 from rapidpro/contact-activity-better-smaller-indexes
+ * Fix typo
+ * Add better smaller index and use used field in the queries
+ * Add task to update old contact activities to have used field False
+
 v1.2.2
 ----------
  * Merge pull request #812 from rapidpro/fix-html-unescape
