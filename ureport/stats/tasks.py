@@ -62,6 +62,7 @@ def update_used_contact_activities(org, since, until):
             f"Task: Updating {org_count} old contact activities used field to False on org #{org.id} in {elapsed:.1f} seconds"
         )
 
+    elapsed = time.time() - start_time
     logger.info(
         f"Task: Finished updating {org_count} old contact activities until {last_used_time} used field to False on org #{org.id} in {elapsed:.1f} seconds"
     )
