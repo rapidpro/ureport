@@ -1,3 +1,7 @@
+v1.2.4
+----------
+ * Fix variable referenced before assignment
+
 v1.2.3
 ----------
  * Run code checks
