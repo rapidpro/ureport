@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 17:41+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -128,6 +128,12 @@ msgstr "Lägg till"
 
 msgid "Content Types"
 msgstr "Innehållstyper"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "Innehållsblock"
@@ -927,6 +933,9 @@ msgstr "LÄNDER VÄRLDEN ÖVER"
 
 msgid "AGES"
 msgstr "ÅLDER"
+
+msgid "Available bots"
+msgstr ""
 
 msgid "More bots"
 msgstr ""

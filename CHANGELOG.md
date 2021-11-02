@@ -1,3 +1,53 @@
+v1.2.6
+----------
+ * Merge pull request #818 from rapidpro/better-indexes-2
+ * Remove unused indexes
+
+v1.2.5
+----------
+ * Merge pull request #817 from rapidpro/better-indexes
+ * Rebuild indexes properly
+
+v1.2.4
+----------
+ * Fix variable referenced before assignment
+
+v1.2.3
+----------
+ * Run code checks
+ * Merge pull request #807 from rapidpro/task-update-old-contact-activities
+ * Merge pull request #806 from rapidpro/contact-activity-better-smaller-indexes
+ * Fix typo
+ * Add better smaller index and use used field in the queries
+ * Add task to update old contact activities to have used field False
+
+v1.2.2
+----------
+ * Merge pull request #812 from rapidpro/fix-html-unescape
+
+v1.2.1
+----------
+ * Fix prod settings for celery
+
+v1.2.0
+----------
+ * Merge pull request #810 from rapidpro/update-deps-dash-1.8.1
+
+v1.1.305
+----------
+ * Merge pull request #809 from rapidpro/add-gabon
+ * Add Gabon flag
+
+v1.1.304
+----------
+ * Merge pull request #808 from rapidpro/disable_sentry_transactions
+ * Disable sentry transaction collecting
+
+v1.1.303
+----------
+ * Merge pull request #805 from rapidpro/contact-activities-optimizations-part2
+ * Populate the used field for contact activities with a date in the last 13 months
+
 v1.1.302
 ----------
  * Merge pull request #799 from rapidpro/contact-activities-optimizations

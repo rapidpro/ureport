@@ -71,10 +71,13 @@
 
   -if featured_bots
     .max-w-page.mx-auto.border-black.border-b
+      .font-bold.text-xl.text-center.mt-4.border-b.py-2
+        -trans "Available bots"
       -for bot in featured_bots|slice:"3"
         .border-b.hover-parent(class="md:flex")
           .block.pb-6.pt-12.px-16.my-auto.hover-parent(class="md:w-1/2")
-            {{bot.title}}
+            .font-bold.hover-parent
+              {{bot.title}}
             .block.hover-parent
               .block.no-wrap
                 .text-sm.inline

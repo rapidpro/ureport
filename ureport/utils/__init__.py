@@ -1,28 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import iso8601
 import json
-import six
-import time
 import logging
-from datetime import timedelta, datetime
-from itertools import islice, chain
+import time
 from collections import defaultdict
+from datetime import datetime, timedelta
+from itertools import chain, islice
 
-from dash.orgs.models import Org
-from dash.utils import datetime_to_ms
+import iso8601
+import pytz
+import six
+from sentry_sdk import capture_exception
+
 from django.conf import settings
 from django.core.cache import cache
 from django.db.models import Sum
 from django.utils import timezone, translation
-import pytz
-from ureport.assets.models import Image, LOGO
-from sentry_sdk import capture_exception
 
+from dash.orgs.models import Org
+from dash.utils import datetime_to_ms
+from ureport.assets.models import LOGO, Image
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
-from ureport.stats.models import PollStats, GenderSegment, AgeSegment, SchemeSegment
+from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -252,8 +253,10 @@ def get_linked_orgs(authenticated=False):
 
 
 def fetch_old_sites_count():
-    import requests
     import re
+
+    import requests
+
     from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
     start = time.time()

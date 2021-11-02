@@ -5,7 +5,6 @@ jobs:
     name: Test
     strategy:
       matrix:
-        python-version: ['3.6.x', '3.9.x']
         pg-version: ['11', '12']
     runs-on: ubuntu-18.04
     steps:
@@ -28,7 +27,7 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v1
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.9.x'
 
     - name: Initialize environment
       run: |

@@ -3,8 +3,6 @@ import time
 from collections import defaultdict
 from datetime import timedelta
 
-from dash.orgs.models import Org
-
 from django.core.cache import cache
 from django.db import connection, models
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, JSONField, Q, Sum
@@ -12,6 +10,7 @@ from django.db.models.functions import ExtractYear
 from django.utils import timezone, translation
 from django.utils.translation import ugettext_lazy as _
 
+from dash.orgs.models import Org
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollQuestion, PollResponseCategory
@@ -769,7 +768,7 @@ class ContactActivity(models.Model):
         translation.activate(org.language)
 
         activities = (
-            ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start)
+            ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, used=True)
             .values("date")
             .annotate(Count("id"))
         )
@@ -799,7 +798,7 @@ class ContactActivity(models.Model):
                 data_key = "35+"
 
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start)
+                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, used=True)
                 .exclude(born=None)
                 .exclude(date=None)
                 .annotate(year=ExtractYear("date"))
@@ -829,7 +828,9 @@ class ContactActivity(models.Model):
         output_data = []
         for gender in genders:
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, gender=gender["gender"])
+                ContactActivity.objects.filter(
+                    org=org, date__lte=today, date__gte=start, gender=gender["gender"], used=True
+                )
                 .values("date")
                 .annotate(Count("id"))
             )
@@ -849,7 +850,7 @@ class ContactActivity(models.Model):
         output_data = []
         for osm_id, name in top_boundaries.items():
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, state=osm_id)
+                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, state=osm_id, used=True)
                 .values("date")
                 .annotate(Count("id"))
             )
@@ -870,7 +871,7 @@ class ContactActivity(models.Model):
         output_data = []
         for scheme in schemes:
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, scheme=scheme)
+                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, scheme=scheme, used=True)
                 .values("date")
                 .annotate(Count("id"))
             )

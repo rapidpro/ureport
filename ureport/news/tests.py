@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from dash.categories.fields import CategoryChoiceField
-from dash.categories.models import Category
-
 from django.urls import reverse
 from django.utils import formats
 
+from dash.categories.fields import CategoryChoiceField
+from dash.categories.models import Category
 from ureport.news.models import NewsItem, Video
 from ureport.tests import UreportTest
 

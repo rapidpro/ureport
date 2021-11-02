@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 17:41+0000\n"
+"POT-Creation-Date: 2021-10-26 11:10+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -126,6 +126,12 @@ msgstr "Dodaj"
 
 msgid "Content Types"
 msgstr "Vrste sadržaja"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "Sadržajni blokovi"
@@ -985,6 +991,9 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "U-REPORTERI U"
 
 msgid "AGES"
+msgstr ""
+
+msgid "Available bots"
 msgstr ""
 
 msgid "More bots"

@@ -6,10 +6,6 @@ from datetime import datetime, timedelta
 
 import pytz
 import six
-from dash.categories.fields import CategoryChoiceField
-from dash.categories.models import Category, CategoryImage
-from dash.orgs.models import TaskState
-from dash.tags.models import Tag
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
@@ -21,6 +17,10 @@ from django.template import TemplateSyntaxError
 from django.urls import reverse
 from django.utils import timezone
 
+from dash.categories.fields import CategoryChoiceField
+from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import TaskState
+from dash.tags.models import Tag
 from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
@@ -1083,8 +1083,15 @@ class PollTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_templatetags(self):
-        from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
-        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
+        from ureport.polls.templatetags.ureport import (
+            config,
+            org_arrow_link,
+            org_color,
+            org_host_link,
+            question_results,
+            show_org_flags,
+            transparency,
+        )
 
         with patch("dash.orgs.models.Org.get_config") as mock:
             mock.return_value = "Done"

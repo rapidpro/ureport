@@ -17,17 +17,12 @@ from celery.schedules import crontab
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
 
-
-def traces_sampler(sampling_context):  # pragma: no cover
-    return 0 if ("shell" in sys.argv) else 1.0
-
-
 if SENTRY_DSN:  # pragma: no cover
     sentry_sdk.init(
         dsn=SENTRY_DSN,
         integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
         send_default_pii=True,
-        traces_sampler=traces_sampler,
+        traces_sample_rate=0.0,
     )
     ignore_logger("django.security.DisallowedHost")
 
@@ -827,20 +822,19 @@ ANONYMOUS_USER_NAME = "AnonymousUser"
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
 
-BROKER_BACKEND = "redis"
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
-REDIS_DB = "1"
+CELERY_BROKER_URL = "redis://localhost:6379/1"
 
-BROKER_URL = "redis://%s:%s/%s" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
-CELERY_RESULT_BACKEND = BROKER_URL
+# by default, celery doesn't have any timeout on our redis connections, this fixes that
+CELERY_BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
 
+CELERY_TIMEZONE = "UTC"
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": BROKER_URL,
+        "LOCATION": CELERY_BROKER_URL,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     }
 }
@@ -873,7 +867,7 @@ INTERNAL_IPS = ("127.0.0.1",)
 
 CELERY_TIMEZONE = "UTC"
 
-CELERYBEAT_SCHEDULE = {
+CELERY_BEAT_SCHEDULE = {
     "refresh_flows": {"task": "polls.refresh_org_flows", "schedule": timedelta(minutes=20), "relative": True},
     "recheck_poll_flow_data": {
         "task": "polls.recheck_poll_flow_data",
@@ -933,6 +927,11 @@ CELERYBEAT_SCHEDULE = {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=2, minute=0),
         "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
+    },
+    "update-old-contact-activity": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(hour=22, minute=0),
+        "args": ("ureport.stats.tasks.update_used_contact_activities", "slow"),
     },
     "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
     "populate-schemes": {
@@ -1193,6 +1192,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_fsm.png",
         countries_codes=["FSM"],
         count_link="http://fsm.ureport.in/count/",
+    ),
+    dict(
+        name="Gabon",
+        host="//gabon.ureport.in/",
+        flag="flag_gabon.png",
+        countries_codes=["GAB"],
+        count_link="http://gabon.ureport.in/count/",
     ),
     dict(
         name="Gambia",

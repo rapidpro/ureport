@@ -79,7 +79,7 @@ if __name__ == "__main__":
     status("Running flake8")
     cmd("flake8")
     status("Running isort")
-    cmd("isort -rc ureport")
+    cmd("isort ureport")
     status("Updating locale PO files")
     update_po_files()
     status("Recompiling locale MO files")
