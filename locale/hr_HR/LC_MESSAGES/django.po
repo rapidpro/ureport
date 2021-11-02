@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-02 20:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -375,6 +375,9 @@ msgstr "Zadatak"
 msgid "Tasks"
 msgstr "Zadaci"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Naslov priče"
 
@@ -392,6 +395,9 @@ msgstr "Autor priče"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Link za mp3 datoteka koji će biti objavljen uz priču"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "ID You Tube videa koji treba biti linkovan uz ovu priču (tekst koji slijedi nakon v= i prije & unutar You Tube URL)"
@@ -753,6 +759,11 @@ msgstr "O nama"
 msgid "Engagement"
 msgstr "Sudjelovanje"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Glasovi mladih"
+
 msgid "Category Images"
 msgstr "Slike kategorija"
 
@@ -1018,6 +1029,20 @@ msgstr "LOKACIJA"
 
 msgid "Written by:"
 msgstr "Napisao/la:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "GLASOVA MLADIH"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Jednako"

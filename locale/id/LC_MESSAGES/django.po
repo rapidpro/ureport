@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-02 20:26+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -376,6 +376,9 @@ msgstr "Tugas"
 msgid "Tasks"
 msgstr "Tugas-tugas"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Judul cerita"
 
@@ -395,6 +398,9 @@ msgstr "Penulis cerita"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
@@ -775,6 +781,11 @@ msgstr "Tentang Kami"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
 msgid "Category Images"
 msgstr "Gambar Kategori"
 
@@ -1056,6 +1067,20 @@ msgid "LOCATION"
 msgstr "LOKASI"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "U-REPORTERS DI"
+
+msgid "STORY"
+msgstr "CERITA"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -2244,9 +2269,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "BERITA"
-
-#~ msgid "STORY"
-#~ msgstr "CERITA"
 
 #, fuzzy
 #~| msgid "Read This Story"

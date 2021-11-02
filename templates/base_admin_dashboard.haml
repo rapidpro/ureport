@@ -259,6 +259,16 @@
             %a.flex-initial.py-menu(href="{% url 'public.ureporters' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
               -trans "Engagement"
 
+            %a.flex-initial.py-menu(href="{% url 'public.bots' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
+              -trans "Bots"
+
+            %a.flex-initial.py-menu(href="{% url 'public.reports' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
+              -trans "Reports"
+
+            - if org|config:"has_jobs"
+              %a.flex-initial.py-menu(href="{% url 'public.jobs' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
+                -trans "Jobs"
+
           .li.flex-grow.flex(class="md:justify-end")
             - if org|config:"instagram_username"
               %a.flex-initial.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750")
