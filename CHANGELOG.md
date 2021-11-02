@@ -1,3 +1,8 @@
+v1.2.5
+----------
+ * Merge pull request #817 from rapidpro/better-indexes
+ * Rebuild indexes properly
+
 v1.2.4
 ----------
  * Fix variable referenced before assignment
