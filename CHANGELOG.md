@@ -1,3 +1,8 @@
+v1.2.6
+----------
+ * Merge pull request #818 from rapidpro/better-indexes-2
+ * Remove unused indexes
+
 v1.2.5
 ----------
  * Merge pull request #817 from rapidpro/better-indexes
