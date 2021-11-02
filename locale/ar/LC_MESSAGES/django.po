@@ -12,7 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2021-11-02 20:26+0000\n"
+=======
+"POT-Creation-Date: 2021-10-28 21:40+0000\n"
+>>>>>>> 2f61526098993ea2fe9df70380a7d1fa8250b25d
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -721,6 +725,9 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "الأعمال"
 
@@ -844,6 +851,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "العودة"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr ""
@@ -983,6 +996,9 @@ msgstr "كيف تريد الانضمام"
 msgid "Text"
 msgstr ""
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "ابحث "
 
@@ -1113,6 +1129,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1391,6 +1410,41 @@ msgstr "تم إضافة مصدر العمل بنجاح"
 
 msgid "Your job source has been updated successfully"
 msgstr "تم تحديث مصدر العمل بنجاح"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "عنوان البند "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "نص المقال"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "نص المقال"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "ملف الصورة التي تريد إستخدامها "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "هذا هو رمز الـOSM الخاص بالحدود الإدارية "

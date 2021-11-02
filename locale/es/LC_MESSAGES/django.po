@@ -11,7 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2021-11-02 20:26+0000\n"
+=======
+"POT-Creation-Date: 2021-10-28 21:40+0000\n"
+>>>>>>> 2f61526098993ea2fe9df70380a7d1fa8250b25d
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -721,6 +725,9 @@ msgstr "Configuración"
 msgid "Pages"
 msgstr "Páginas"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Trabajos"
 
@@ -843,6 +850,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Volver"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "NOTIFICACIONES RECIENTES"
@@ -973,6 +986,9 @@ msgstr "¿Cómo te gustaría unirte?"
 msgid "Text"
 msgstr "Texto"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "BUSCAR"
 
@@ -1098,6 +1114,9 @@ msgstr "ELIGE PAÍS"
 
 msgid "Custom pages"
 msgstr "Páginas personalizadas"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Mira cómo está la participación de los jóvenes para un cambio social a través de los números."
@@ -1378,6 +1397,41 @@ msgstr "Tu fuente de trabajo ha sido agregada satisfactoriamente"
 
 msgid "Your job source has been updated successfully"
 msgstr "Tu fuente de trabajo ha sido actualizada correctamente"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "La organización a la que pertenece esta encuesta"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "El título para este ítem"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "El cuerpo del texto para la historia"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "El cuerpo del texto para la historia"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "El archivo de la imagen que se va a utilizar"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Este es el ID de OSM para este límite administrativo "

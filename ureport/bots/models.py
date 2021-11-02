@@ -41,3 +41,6 @@ class Bot(SmartModel):
     priority = models.IntegerField(
         default=0, help_text=_("The priority number for this bot among others on a list, high priority comes first")
     )
+
+    def __str__(self):
+        return self.title
