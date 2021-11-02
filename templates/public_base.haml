@@ -19,6 +19,13 @@
     - if has_better_domain
       %meta(name="robots" content="noindex")
 
+    -if org.subdomain
+      <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+      %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/site_flags/flag_{{org.subdomain}}.png")
+    -else
+      <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+      %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
+
     -block meta-extra
 
     // Google fonts we use
