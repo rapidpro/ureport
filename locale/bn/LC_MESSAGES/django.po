@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-10-27 17:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -376,6 +376,9 @@ msgstr "কাজ "
 msgid "Tasks"
 msgstr "কাজগুলো "
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "এই ঘটনাটির শিরোনাম "
 
@@ -395,6 +398,9 @@ msgstr "ঘটনাটির লেখক "
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "এই ঘটনার সাথে সম্পৃক্ত একটি mp3 ফাইলের লিংকও প্রকাশ করা হবে"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "এই ঘটনার সাথে সম্পৃক্ত YouTube ভিডিওর আইডি এখানে লিঙ্ক করা থাকবে (যে  শব্দগুলো YouTube URL এর v= এর পরে ও & পরে আগে আসে)"
@@ -749,6 +755,11 @@ msgstr "সম্পর্কিত "
 msgid "Engagement"
 msgstr "কতজন যুক্ত হয়েছেন"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
+
 msgid "Category Images"
 msgstr "বিভাগের ছবিগুলো "
 
@@ -1007,6 +1018,20 @@ msgstr "ঠিকানা "
 
 msgid "Written by:"
 msgstr "লিখেছেন :"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "ঘটনা "
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "সমান "
@@ -2138,9 +2163,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 
 #~ msgid "NEWS FEED"
 #~ msgstr "ঘটনা প্রবাহ  "
-
-#~ msgid "STORY"
-#~ msgstr "ঘটনা "
 
 #~ msgid "Read full story"
 #~ msgstr "সম্পূর্ণ ঘটনা জানুন "

@@ -254,6 +254,9 @@
           %a.block.mt-4(href="{% url 'public.bots' %}" class="hover:text-gray-600")
             -trans "Bots"
         
+        %a.block.mt-4(href="{% url 'public.reports' %}" class="hover:text-gray-600")
+          -trans "Reports"
+
         - if org|config:"has_jobs"
           %a.block.mt-4(href="{% url 'public.jobs' %}" class="hover:text-gray-600")
             - trans "Jobs"
@@ -475,6 +478,9 @@
             - if org|config:"has_jobs"
               %a.flex-initial.ml-4.py-menu(href="{% url 'public.jobs' %}" class="hover:text-gray-750")
                 - trans "Jobs"
+
+            %a.flex-initial.ml-4.py-menu(href="{% url 'public.reports' %}" class="hover:text-gray-750")
+              -trans "Reports"
           
             - for custom_page in additional_menu|slice:":3"
               %a.flex-initial.ml-4.py-menu(href="{% url 'public.custom_page' custom_page.link %}" class="hover:text-gray-750")
@@ -645,6 +651,16 @@
   
           %a.flex-initial.py-menu(href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
             -trans "Engagement"
+
+          %a.flex-initial.py-menu(href="{% url 'public.bots' %}" class="md:ml-4 hover:text-gray-750")
+            -trans "Bots"
+
+          %a.flex-initial.py-menu(href="{% url 'public.reports' %}" class="md:ml-4 hover:text-gray-750")
+            -trans "Reports"
+
+          - if org|config:"has_jobs"
+            %a.flex-initial.py-menu(href="{% url 'public.jobs' %}" class="md:ml-4 hover:text-gray-750")
+              -trans "Jobs"
   
         .li.flex-grow.flex(class="md:justify-end")
           - if org|config:"instagram_username"

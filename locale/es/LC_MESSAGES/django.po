@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-10-27 17:29+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -373,6 +373,9 @@ msgstr "Tarea"
 msgid "Tasks"
 msgstr "Tareas"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "El título para esta historia"
 
@@ -390,6 +393,9 @@ msgstr "El autor de la historia"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "El enlace a un archivo mp3 para publicar en esta historia"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "El ID del video en YouTube que debe estar vinculado a esta historia (este es el texto que viene después de v= y antes de & en el URL de YouTube)"
@@ -742,6 +748,11 @@ msgstr "Acerca "
 msgid "Engagement"
 msgstr "Participación"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
 msgid "Category Images"
 msgstr "Imágenes de categorías"
 
@@ -995,6 +1006,20 @@ msgstr "UBICACIÓN"
 
 msgid "Written by:"
 msgstr "Escrito por:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Todavía"

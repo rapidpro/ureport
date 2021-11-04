@@ -3,6 +3,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
+from django.db.models import Q
+
 from dash.dashblocks.models import DashBlock
 from dash.orgs.models import Org
 from dash.stories.models import Story
@@ -867,7 +869,7 @@ class StoryDetails(RetrieveAPIView):
     """
 
     serializer_class = StoryReadSerializer
-    queryset = Story.objects.filter(is_active=True)
+    queryset = Story.objects.filter(is_active=True).filter(Q(attachment="") | Q(attachment=None))
 
 
 class DashBlockList(BaseListAPIView):

@@ -20,7 +20,10 @@
         .px-home.text-white.flex.items-center.h-full
           .block.hover-parent
             .text-light1.font-bold
-              STORY
+              -if story.attachment
+                -trans "REPORT"
+              -else
+                -trans "STORY"
             .font-alt.font-bold.text-4xl.leading-tight.italic.hover-parent
               {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "white" %}
               {{ story.title }}
@@ -51,6 +54,18 @@
 
       .flex-none.w-10
         %img(src="{{STATIC_URL}}img/u-icon-small.png" )
+
+    -if story.attachment
+      .block.px-home
+        .flex-auto.px-home.story-attachment.hover-parent
+          {% edit_content 'stories.story_update' story.pk "#id_attachment" "-m-8" "dark" %}
+          .px-home
+            %object.overflow-hidden(data="{{ story.attachment.url }}#toolbar=0&navpanes=0&scrollbar=0&title={{story.title}}" type="application/pdf" width="100%" height="800px")
+      .block.p-home
+        .px-home
+          .px-home
+            %a.btn.bg-black.text-white(href="{{ story.attachment.url }}" class="hover:bg-gray-700" download="{{ story.title }}")
+              -trans "Download Report"
 
     .block.p-home
       .px-home
