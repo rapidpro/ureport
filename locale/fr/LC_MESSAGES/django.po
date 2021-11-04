@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 17:29+0000\n"
+"POT-Creation-Date: 2021-10-27 20:32+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -723,6 +723,9 @@ msgstr "Configurations"
 msgid "Pages"
 msgstr "Pages"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Emplois"
 
@@ -976,6 +979,9 @@ msgstr "Comment tu peux joindre?"
 msgid "Text"
 msgstr "Texte"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "RECHERCHE"
 
@@ -1101,6 +1107,9 @@ msgstr "SELECTIONNER PAYS"
 
 msgid "Custom pages"
 msgstr "Pages personnalisées"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Pour voir en chiffres de quelle façon nous engageons les jeunes pour un changement positif."
@@ -1381,6 +1390,36 @@ msgstr "Votre source d’emploi a été ajoutée avec succès"
 
 msgid "Your job source has been updated successfully"
 msgstr "Votre source d’emploi a été ajoutée avec succès"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "L'organisation dont ce sondage fait partie"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Le titre de cet élément"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Si cette organisation devrait montrer sur la page d’atterrissage"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Le texte principal de l’article"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "L'image à utiliser"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Si cette organisation devrait montrer sur la page d’atterrissage"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ceci est l'ID OSM de cette limite administrative"

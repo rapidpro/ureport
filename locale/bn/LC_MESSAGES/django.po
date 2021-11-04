@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 17:29+0000\n"
+"POT-Creation-Date: 2021-10-27 20:32+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -728,6 +728,9 @@ msgstr "সেটিংস"
 msgid "Pages"
 msgstr "পেইজগুলো"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "কাজ গুলো"
 
@@ -981,6 +984,9 @@ msgstr "আপনি কিভাবে যুক্ত হতে চান?"
 msgid "Text"
 msgstr "টেক্সট"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "সার্চ"
 
@@ -1112,6 +1118,9 @@ msgstr "দেশের নাম বেছে নিন"
 
 msgid "Custom pages"
 msgstr "কাস্টম পেইজেস"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "সংখ্যার মাধ্যমে দেখুন কীভাবে আমরা সমাজের ইতিবাচক পরিবর্তনের জন্য যুবকদের মতামতগুলোকে যুক্ত করছি।"
@@ -1413,6 +1422,36 @@ msgstr "আপনার কাজের উৎস টি সফল ভাবে 
 
 msgid "Your job source has been updated successfully"
 msgstr "আপনার কাজের উৎস টি ঠিক ভাবে হাল নাগাদ করা হয়েছে"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "এই পোল টি যে প্রতিষ্ঠান এর অংশ "
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "এই জিনিস টির শিরোনাম "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "এই ঘটনাটির মূল অংশ"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "যে ছবিটি ব্যবহার করা হবে"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "এই প্রশাসনিক সীমানার জন্য এই ওএসএম আইডি প্রযোজ্য  "

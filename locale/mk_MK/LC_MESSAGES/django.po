@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 17:29+0000\n"
+"POT-Creation-Date: 2021-10-27 20:32+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -728,6 +728,9 @@ msgstr "Подесувања"
 msgid "Pages"
 msgstr "Страни"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Работни места"
 
@@ -986,6 +989,9 @@ msgstr "Како би сакал/а да се придружиш?"
 msgid "Text"
 msgstr "Текст"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "БАРАЈ"
 
@@ -1117,6 +1123,9 @@ msgstr "ИЗБЕРИ ЗЕМЈА"
 
 msgid "Custom pages"
 msgstr "Кориснички приспособени страни"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Погледнете како го вклучуваме гласот на младите за позитивна социјална промена."
@@ -1401,6 +1410,36 @@ msgstr "Вашиот извор на работа е успешно додаде
 
 msgid "Your job source has been updated successfully"
 msgstr "Вашиот извор на работа е успешно ажуриран"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Организација на којашто припаѓа оваа анкета"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Назив за оваа ставка"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Основен текст на приказната"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Слика која ќе се користи"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ова е OSM id за оваа административна граница"

@@ -140,6 +140,14 @@
                             %img(src="{{ STATIC_URL }}img/pages_icon.png")
                           %span.menu-link-title
                             - trans "Pages"
+
+                       %li
+                        %a(href="{% url 'landingpages.landingpage_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "Landing Pages"
+
                       %li
                         %a(href="{% url 'jobs.jobsource_list' %}")
                           %span.icon

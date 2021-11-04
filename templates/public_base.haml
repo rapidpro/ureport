@@ -444,6 +444,9 @@
                     %hr
                     %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=additional_menu")
                       - trans "Custom pages"
+
+                    %a.admin-menu.small-link-no-wrap.separator(href="{% url 'landingpages.landingpage_list' %}")
+                      - trans "Landing pages"
   
             - block login
               %li(class="{% if is_rtl_org %}mr-auto{% else %}ml-auto{% endif %}")
