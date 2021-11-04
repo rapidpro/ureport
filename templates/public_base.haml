@@ -19,6 +19,11 @@
     - if has_better_domain
       %meta(name="robots" content="noindex")
 
+    -if org.subdomain
+      %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicos/flag_{{org.subdomain}}.png")
+    -else
+      %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
+
     -block meta-extra
 
     // Google fonts we use
