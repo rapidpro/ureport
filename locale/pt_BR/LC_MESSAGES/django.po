@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 20:32+0000\n"
+"POT-Creation-Date: 2021-10-28 21:40+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -856,6 +856,12 @@ msgstr ""
 msgid "Back"
 msgstr "Voltar"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr "Últimas notificações"
 
@@ -1438,6 +1444,11 @@ msgstr "A organização desta esquete é parte de"
 #| msgid "The title for this item"
 msgid "The title to display for this landing page"
 msgstr "O título para esse item"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "O corpo do texto para a história"
 
 #, fuzzy
 #| msgid "Whether this org should be show on the landing page"

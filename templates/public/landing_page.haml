@@ -15,6 +15,46 @@
 
 
 -block top-join-call
+  .max-w-page.mx-auto.justify-around.mt-6.mb-12(class="md:flex")
+    .flex-1
+      .hover-parent
+        -if object.action_text
+          .text-3xl.font-bold.leading-tight.text-center
+            {{object.action_text}}
+
+        .mt-2.text-center
+          - for bot in object.bots.all
+            .hover-parent
+              .block.py-4.px-16.my-auto.hover-parent
+                .font-bold.hover-parent
+                  {{bot.title}}
+                .block.hover-parent
+                  .block.no-wrap
+                    .text-sm.inline
+                      -trans "Send"
+                    .text-xl.inline
+                      "{{bot.keyword}}"
+                    .text-sm.inline
+                      -trans "to"
+                    .text-xl.inline
+                      {{bot.channel}}
+  
+                .block.mt-4
+                  - if bot.facebook_deeplink
+                    %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.facebook_deeplink}}")
+                      %i.fab.fa-facebook-f
+  
+                  - if bot.telegram_deeplink
+                    %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.telegram_deeplink}}")
+                      %i.fab.fa-telegram
+  
+                  - if bot.viber_deeplink
+                    %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.viber_deeplink}}")
+                      %i.fab.fa-viber
+  
+                  - if bot.whatsapp_deeplink
+                    %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.whatsapp_deeplink}}")
+                      %i.fab.fa-whatsapp
 
 -block content
   .max-w-page.mx-auto.bg-dark-blue(class="md:flex")

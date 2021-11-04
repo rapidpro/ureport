@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 20:32+0000\n"
+"POT-Creation-Date: 2021-10-28 21:40+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -848,6 +848,12 @@ msgstr ""
 msgid "Back"
 msgstr "Voltar"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST NOTIFICATIONS"
@@ -1450,6 +1456,11 @@ msgstr "A organização na qual este item pertence"
 #| msgid "The title for this item"
 msgid "The title to display for this landing page"
 msgstr "O título deste item"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "O corpo do texto para a história"
 
 msgid "The slug to use on the link for this landing page"
 msgstr ""
