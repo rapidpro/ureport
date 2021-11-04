@@ -1,3 +1,8 @@
+v1.2.7
+----------
+ * Merge pull request #821 from rapidpro/fix-indexes
+ * Rebuild the index properly
+
 v1.2.6
 ----------
  * Merge pull request #818 from rapidpro/better-indexes-2
