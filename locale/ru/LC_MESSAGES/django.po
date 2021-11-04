@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-04 11:15+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -375,6 +375,9 @@ msgstr "Задание"
 msgid "Tasks"
 msgstr "Задания"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Заголовок для истории"
 
@@ -392,6 +395,9 @@ msgstr "Автор истории"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Ссылка на mp3-файл для публикации этой истории"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Идентификатор видео YouTube, которое должно быть связано с этой историей (это текст, который идет после v = и перед & в URL-адресе YouTube)"

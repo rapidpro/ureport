@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-04 11:15+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -372,6 +372,9 @@ msgstr "Topshiriq"
 msgid "Tasks"
 msgstr "Topshiriqlar"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Ushbu hikoya uchun sarlavha"
 
@@ -389,6 +392,9 @@ msgstr "Hikoya muallifi"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Mazkur hikoyani chop etish uchun mp3 fayliga link"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Ushbu hikoyaga ulanishi zarur bo'lgan YouTube videolavhasining identifikatori (bu v= dan keyin va YouTube URL dan avval va ichida keladigan matn)"
