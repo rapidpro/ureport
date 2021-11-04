@@ -716,7 +716,7 @@ class PollStats(models.Model):
 
 
 class ContactActivity(models.Model):
-    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_activities")
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_activities", db_index=False)
 
     contact = models.CharField(max_length=36)
 
