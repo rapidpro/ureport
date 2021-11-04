@@ -1,3 +1,8 @@
+v1.2.8
+----------
+ * Merge pull request #822 from rapidpro/more-stats-indexes
+ * Add more stats indexes
+
 v1.2.7
 ----------
  * Merge pull request #821 from rapidpro/fix-indexes
