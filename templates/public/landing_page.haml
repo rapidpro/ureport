@@ -15,7 +15,7 @@
 
 
 -block top-join-call
-  .max-w-page.mx-auto.justify-around.mt-6.mb-12.border-b(class="md:flex")
+  .max-w-page.mx-auto.justify-around.mt-6.mb-12(class="md:flex")
     .flex-1
       .hover-parent
         -if object.action_text
@@ -24,7 +24,7 @@
 
         .mt-2.text-center
           - for bot in object.bots.all
-            .border-t.border-b.hover-parent
+            .hover-parent
               .block.py-4.px-16.my-auto.hover-parent
                 .font-bold.hover-parent
                   {{bot.title}}
