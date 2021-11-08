@@ -28,19 +28,19 @@
                     {{bot.channel}}
               .block.flex.mt-4
                 - if bot.facebook_deeplink
-                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.facebook_deeplink}}")
+                  %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.facebook_deeplink}}")
                     %i.fab.fa-facebook-f
 
                 - if bot.telegram_deeplink
-                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.telegram_deeplink}}")
+                  %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.telegram_deeplink}}")
                     %i.fab.fa-telegram
 
                 - if bot.viber_deeplink
-                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.viber_deeplink}}")
+                  %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.viber_deeplink}}")
                     %i.fab.fa-viber
 
                 - if bot.whatsapp_deeplink
-                  %a.cursor-pointer.bg-circle-xs.border.border-black.mx-2(href="{{bot.whatsapp_deeplink}}")
+                  %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.whatsapp_deeplink}}")
                     %i.fab.fa-whatsapp
 
           .block.p-home.hover-parent(class="md:w-1/2")
