@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-09 15:24+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -380,6 +380,9 @@ msgstr "مهمة"
 msgid "Tasks"
 msgstr "مهام"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "عنوان المقال"
 
@@ -399,6 +402,9 @@ msgstr "كاتب المقالة"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
@@ -1246,6 +1252,11 @@ msgstr "المنظمة أو الجميعية التي يتبع لها هذا ا�
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 #, fuzzy
 #| msgid "The title for this item"

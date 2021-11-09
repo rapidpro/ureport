@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-09 15:24+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -374,6 +374,9 @@ msgstr "Tâche"
 msgid "Tasks"
 msgstr "Tâches"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Le titre de cet article"
 
@@ -391,6 +394,9 @@ msgstr "L'auteur de l'article"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Un lien vers un fichier MP3 pour publier au sein de l'article"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "L'ID de la vidéo YouTube que vous souhaitez lier à cet article (le code après v= et avant & au niveau de l'URL YouTube)"
@@ -1236,6 +1242,11 @@ msgstr "L'organisation dont ce sondage fait partie"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Si cette organisation devrait montrer sur la page d’atterrissage"
 
 #, fuzzy
 #| msgid "The title for this item"

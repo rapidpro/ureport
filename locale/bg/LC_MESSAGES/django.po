@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-09 15:24+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -375,6 +375,9 @@ msgstr "Задача"
 msgid "Tasks"
 msgstr "Задачи"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Заглавието на тази история"
 
@@ -392,6 +395,9 @@ msgstr "Авторът на тази история"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Линк към mp3 файл, който да бъде публикуван към тази история"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Идентификацията на YouTube клипа (Това е текстът, който следва след v= и е преди & в YouTube линка)"
@@ -1260,6 +1266,11 @@ msgstr "Организацията, към която това допитван�
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Дали тази организация трябва да бъде показана на целевата страница"
 
 #, fuzzy
 #| msgid "The title for this item"
