@@ -747,33 +747,26 @@ python-versions = "*"
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.8.1"
+version = "1.8.2"
 description = "Support library for RapidPro dashboards"
 category = "main"
 optional = false
-python-versions = "^3.6"
-develop = false
+python-versions = ">=3.6,<4.0"
 
 [package.dependencies]
 celery = ">4.4.6"
 Django = "<4.0"
-django-compressor = "^2.4"
-django-hamlpy = "^1.4.3"
-django-redis = "^4.12.1"
-django-timezone-field = "^4.1.1"
-phonenumbers = "^8.12.16"
-Pillow = "^8.1.0"
+django-compressor = ">=2.4,<3.0"
+django-hamlpy = ">=1.4.3,<2.0.0"
+django-redis = ">=4.12.1,<5.0.0"
+django-timezone-field = ">=4.1.1,<5.0.0"
+phonenumbers = ">=8.12.16,<9.0.0"
+Pillow = ">=8.1.0,<9.0.0"
 psycopg2-binary = "<2.9.0"
-python-dateutil = "^2.8.1"
-rapidpro-python = "^2.8.3"
-smartmin = "^3.1.0"
-sorl-thumbnail = "^12.7.0"
-
-[package.source]
-type = "git"
-url = "https://github.com/rapidpro/dash.git"
-reference = "report-attachments"
-resolved_reference = "89c5a982e6caace2cf775ed942030380a6427001"
+python-dateutil = ">=2.8.1,<3.0.0"
+rapidpro-python = ">=2.8.3,<3.0.0"
+smartmin = ">=3.1.0,<4.0.0"
+sorl-thumbnail = ">=12.7.0,<13.0.0"
 
 [[package]]
 name = "rapidpro-python"
@@ -1063,7 +1056,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "54d18cbc123c9aaa7d743a3b60f03cc0c200c9d61ce430a73e0443d879ce0028"
+content-hash = "2e708e0effaa790979937f6924885ce0e480939586d0fd194272c4575622cf59"
 
 [metadata.files]
 amqp = [
@@ -1469,7 +1462,10 @@ pytz = [
     {file = "pytz-2021.3-py2.py3-none-any.whl", hash = "sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c"},
     {file = "pytz-2021.3.tar.gz", hash = "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"},
 ]
-rapidpro-dash = []
+rapidpro-dash = [
+    {file = "rapidpro-dash-1.8.2.tar.gz", hash = "sha256:2ee2fe90b21acb22602be24f74a77de0041c7c5901e11064be96de584e541479"},
+    {file = "rapidpro_dash-1.8.2-py3-none-any.whl", hash = "sha256:34efe25ce88b61427d6f18391687a421fa5114d96934f87a6c37e497ade6f77f"},
+]
 rapidpro-python = [
     {file = "rapidpro-python-2.8.3.tar.gz", hash = "sha256:6f41f1a34bc2e8df7bcc54f29b5f1db8e50b1e95221ecf7ec040952e845b1b1e"},
     {file = "rapidpro_python-2.8.3-py3-none-any.whl", hash = "sha256:cf69357a037d7dd6a487631f1350fe8fca73ce6ea0ae75f2c86ae22545261225"},
