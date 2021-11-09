@@ -15,6 +15,7 @@ class BotForm(forms.ModelForm):
         fields = (
             "is_active",
             "featured",
+            "landing_page_only",
             "title",
             "channel",
             "keyword",
@@ -35,6 +36,7 @@ class BotCRUDL(SmartCRUDL):
         form_class = BotForm
         fields = (
             "featured",
+            "landing_page_only",
             "title",
             "channel",
             "keyword",
@@ -67,6 +69,7 @@ class BotCRUDL(SmartCRUDL):
         fields = (
             "is_active",
             "featured",
+            "landing_page_only",
             "title",
             "channel",
             "keyword",
