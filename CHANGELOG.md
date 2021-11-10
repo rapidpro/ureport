@@ -1,3 +1,23 @@
+v1.2.8
+----------
+ * Merge pull request #822 from rapidpro/more-stats-indexes
+ * Add more stats indexes
+
+v1.2.7
+----------
+ * Merge pull request #821 from rapidpro/fix-indexes
+ * Rebuild the index properly
+
+v1.2.6
+----------
+ * Merge pull request #818 from rapidpro/better-indexes-2
+ * Remove unused indexes
+
+v1.2.5
+----------
+ * Merge pull request #817 from rapidpro/better-indexes
+ * Rebuild indexes properly
+
 v1.2.4
 ----------
  * Fix variable referenced before assignment

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ureport"
-version = "1.2.4"
+version = "1.2.8"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.9"
 Django = "<4.0"
 smartmin = "^3.0.0"
-rapidpro-dash = {git = "https://github.com/rapidpro/dash.git", rev = "report-attachments"}
+rapidpro-dash = "^1.8.2"
 colorama = "^0.4.3"
 coverage = "^4.5.1"
 django-compressor = "^2.3"
@@ -44,7 +44,7 @@ celery = {extras = ["redis"], version = ">4.4.6"}
 
 
 [tool.poetry.dev-dependencies]
-black = "^20.8b1"
+black = "^21.10b0"
 isort = "^5.9.3"
 flake8 = "^3.7.9"
 

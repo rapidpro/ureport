@@ -61,13 +61,28 @@
 
 
   .max-w-page.mx-auto
-    .bg-white(class="md:flex")
-      .flex-1.my-home.self-center(class="rtl:border-l ltr:border-r")
-        .px-home
+    .bg-white(class="md:flex" id="poll-top-{{latest_poll.id}}")
+      .flex-1.my-home.self-center.hover-parent(class="rtl:border-l ltr:border-r")
+        .px-home.hover-parent
           -if latest_poll
             .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white.mb-6
               {{ latest_poll.category.name }}
-  
+
+            .share.flex-none.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
+              .block
+                %a.cursor-pointer.bg-circle-xs.border.border-black.facebook-share(data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fab.fa-facebook-f
+                %a.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fab.fa-twitter
+                %a.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fab.fa-whatsapp
+                %a.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fas.fa-envelope
+                %a.cursor-pointer.bg-circle-xs.border.border-black.screenshot-share(data-screen-id="poll-top-{{latest_poll.id}}")
+                  %i.fas.fa-file-image
+
+
+
             .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl{% else %}text-2xl{% endif %}")
               {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.title }}

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 21:40+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -1879,6 +1879,11 @@ msgstr "Дали да се активира додатно родово опре
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Дали корисникот е овластен да се најави на веб-локацијата"
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Аlpha-3 ISO код на организацијата кој ќе го прикаже stories widget U-Report App. Пр: BRA, NIG, CMR (Користи GLOBAL ако U-Report е Global)."
