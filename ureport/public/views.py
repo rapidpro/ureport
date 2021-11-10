@@ -201,7 +201,9 @@ class LandingPageView(SmartReadView):
     def derive_queryset(self):
         org = self.request.org
 
-        queryset = LandingPage.objects.filter(org=org, is_active=True)
+        queryset = LandingPage.objects.filter(org=org, is_active=True).prefetch_related(
+            Prefetch("bots", queryset=Bot.objects.filter(is_active=True).order_by("-priority"))
+        )
 
         return queryset
 
