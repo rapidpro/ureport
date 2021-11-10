@@ -1327,6 +1327,9 @@ msgstr "A organização na qual este item pertence"
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
 
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr ""
+
 #, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"

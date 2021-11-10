@@ -562,7 +562,7 @@ class Bots(SmartTemplateView):
         context = super(Bots, self).get_context_data(**kwargs)
         org = self.request.org
         context["org"] = org
-        context["bots"] = Bot.objects.filter(org=org, is_active=True).order_by("-priority")
+        context["bots"] = Bot.objects.filter(org=org, is_active=True, landing_page_only=False).order_by("-priority")
         return context
 
 

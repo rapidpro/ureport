@@ -18,6 +18,11 @@ class Bot(SmartModel):
         ),
     )
 
+    landing_page_only = models.BooleanField(
+        default=False,
+        help_text=_("Whether this bot is hidden on public pages except landing pages"),
+    )
+
     title = models.CharField(max_length=128, help_text=_("The title to display for this bot"))
 
     channel = models.CharField(
