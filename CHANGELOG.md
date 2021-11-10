@@ -1,3 +1,8 @@
+v1.2.11
+----------
+ * Merge pull request #828 from rapidpro/fix-dashblock-views
+ * Update deps
+
 v1.2.10
 ----------
  * Fix flags name
