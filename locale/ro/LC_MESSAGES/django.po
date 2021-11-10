@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-10 11:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -375,6 +375,9 @@ msgstr "Sarcină"
 msgid "Tasks"
 msgstr "Sarcini"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Titlul pentru acest articol"
 
@@ -394,6 +397,9 @@ msgstr "Autorul articolului"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Un link către un fişier MP3 care să fie publicat în acest articol"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "ID-ul videoului de pe YouTube care trebuie să fie ataşat la acest articol (acesta este textul care urmează după v= și înainte de & în adresa URL a canalului YouTube)"
