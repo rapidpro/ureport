@@ -613,19 +613,33 @@
                 -trans "EXPLORE ENGAGEMENT"
   
       // footer navbar
-      .justify-around.mt-12.mb-3.px-home(class="md:flex")
+      .grid.grid-cols-1.gap-4.px-home.mt-12.mb-3(class="md:grid md:grid-cols-3")
         %a.flex-1.text-center.mb-2.hidden(href="{% url 'public.index' %}" class="md:block")
-          .(style="width:360px")
+          .(style="max-width:360px")
             {% thumbnail org.get_logo "x180" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
   
+        .justify-center.hidden(class="md:flex")
+          .block(class="md:block" style="max-width:185px")
+            -if org.language != "ar" and org.language != "ru"
+              %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_en.png" class="md:-ml-0")
+            -else
+              %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_{{org.language}}.png" class="md:-ml-0")
+
         %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
           .(style="width:180px")
             {% thumbnail org.get_logo "x180" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
   
+          .flex.flex-1.-mt-2.justify-end.float-right(class="md:hidden")
+            .block(class="md:block" style="width:150px")
+              -if org.language != "ar" and org.language != "ru"
+                %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_en.png")
+              -else
+                %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_{{org.language}}.png")
+
         .flex-1.flex(class="md:justify-end")
           .font-bold.text-2xl.flex-center-y(class="md:ml-6")
             %div
@@ -637,16 +651,15 @@
               %a.pb-2.border-b-2.border-black(href="{% url 'public.stories' %}" class="hover:text-gray-750 hover:border-dark1")
                 -trans "Stories"
   
-      // footer menu
-      %ul.mt-5.mb-12.px-home.text-sm.font-bold(class="md:flex")
-        .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
+      .grid-cols-2.gap-4.px-home.mt-5.mb-12(class="md:grid")
+        .text-sm.font-bold
           %a.flex-initial.py-menu(href="{% url 'public.about' %}" class="hover:text-gray-750")
             -trans "About"
   
           %a.flex-initial.py-menu(href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
             -trans "Engagement"
   
-        .li.flex-grow.flex(class="md:justify-end")
+        .flex.text-sm.font-bold(class="md:justify-end")
           - if org|config:"instagram_username"
             %a.flex-initial.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750" target="_blank")
               %i.fab.fa-instagram
