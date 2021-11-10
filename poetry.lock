@@ -756,11 +756,11 @@ python-versions = "*"
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.8.2"
+version = "1.8.3"
 description = "Support library for RapidPro dashboards"
 category = "main"
 optional = false
-python-versions = ">=3.6,<4.0"
+python-versions = ">=3.6.2,<4.0"
 
 [package.dependencies]
 celery = ">4.4.6"
@@ -1057,7 +1057,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "e1bd46df1b0ef9c006e9c63da6227a640704f0c92d6eaf574ae1c1577d794755"
+content-hash = "1acd3f80fdb2e9f9da3925443106bd7b0254dcc37a70c38f6b8a716ef137185e"
 
 [metadata.files]
 amqp = [
@@ -1465,8 +1465,8 @@ pytz = [
     {file = "pytz-2021.3.tar.gz", hash = "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"},
 ]
 rapidpro-dash = [
-    {file = "rapidpro-dash-1.8.2.tar.gz", hash = "sha256:2ee2fe90b21acb22602be24f74a77de0041c7c5901e11064be96de584e541479"},
-    {file = "rapidpro_dash-1.8.2-py3-none-any.whl", hash = "sha256:34efe25ce88b61427d6f18391687a421fa5114d96934f87a6c37e497ade6f77f"},
+    {file = "rapidpro-dash-1.8.3.tar.gz", hash = "sha256:5142b193a702167871418c3f5471572585843e658fc0bc516fd6789491766f03"},
+    {file = "rapidpro_dash-1.8.3-py3-none-any.whl", hash = "sha256:f3a26daf1974934f9c4985b368c5533499bfce54229bad85fe3bfa050cdfeba1"},
 ]
 rapidpro-python = [
     {file = "rapidpro-python-2.8.3.tar.gz", hash = "sha256:6f41f1a34bc2e8df7bcc54f29b5f1db8e50b1e95221ecf7ec040952e845b1b1e"},
