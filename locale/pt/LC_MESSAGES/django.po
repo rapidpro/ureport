@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 15:24+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -751,6 +751,11 @@ msgstr "Sobre Nós"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "A malta SMS BIZ"
+
 msgid "Category Images"
 msgstr "Categoria de Imagens"
 
@@ -1030,6 +1035,20 @@ msgid "LOCATION"
 msgstr "LOCALIZAÇÕES"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "SMS BIZ EM"
+
+msgid "STORY"
+msgstr "HISTÓRIA"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -1882,6 +1901,11 @@ msgstr ""
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Se o utilizador tem permissão para entrar no site"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -2152,9 +2176,6 @@ msgstr ""
 
 #~ msgid "NEWS FEED"
 #~ msgstr "NOTÍCIAS"
-
-#~ msgid "STORY"
-#~ msgstr "HISTÓRIA"
 
 #~ msgid "Read full story"
 #~ msgstr "Leia a história completa."

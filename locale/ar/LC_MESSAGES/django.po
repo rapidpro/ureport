@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 15:24+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -748,6 +748,11 @@ msgstr "نبذة عن "
 msgid "Engagement"
 msgstr "مشاركة"
 
+#, fuzzy
+#| msgid "U-Report"
+msgid "Reports"
+msgstr "يو-ريبورت"
+
 msgid "Category Images"
 msgstr "صور الفئة"
 
@@ -1014,6 +1019,20 @@ msgid "LOCATION"
 msgstr ""
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "JOIN U-REPORT"
+msgid "REPORT"
+msgstr "شارك في يوريبورت U-REPORT الآن "
+
+msgid "STORY"
+msgstr "قصة"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -1812,6 +1831,11 @@ msgstr ""
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "إذا كان هذا المستخدم مسموح له بالدخول للموقع"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -2082,9 +2106,6 @@ msgstr "أداة تفعيل التعريب"
 #~ msgid "NEWS FEED"
 #~ msgstr "أخر النشاطات والأخبار "
 
-#~ msgid "STORY"
-#~ msgstr "قصة"
-
 #~ msgid "Read full story"
 #~ msgstr "قراءة القصة الكاملة"
 
@@ -2096,9 +2117,6 @@ msgstr "أداة تفعيل التعريب"
 
 #~ msgid "Read more"
 #~ msgstr "إقرأ المزيد"
-
-#~ msgid "JOIN U-REPORT"
-#~ msgstr "شارك في يوريبورت U-REPORT الآن "
 
 #~ msgid "HOW TO JOIN"
 #~ msgstr "كيفية المشاركة "

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 15:24+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -748,6 +748,11 @@ msgstr "Acerca "
 msgid "Engagement"
 msgstr "Participación"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
 msgid "Category Images"
 msgstr "Imágenes de categorías"
 
@@ -1001,6 +1006,20 @@ msgstr "UBICACIÓN"
 
 msgid "Written by:"
 msgstr "Escrito por:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Todavía"
@@ -1786,6 +1805,11 @@ msgstr "Si hay que activar otro género."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Si el usuario tiene permiso de acceder al sitio"
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "El código ISO alpha-3 de la organización como aparece en el widget de Historias de la aplicación U-Report. Ejemplos: BRA, NIG, CMR (usar GLOBAL si U-Report es mundial)."

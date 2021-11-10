@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 15:24+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -757,6 +757,11 @@ msgstr "Despre noi"
 msgid "Engagement"
 msgstr "Implicare"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Raportori"
+
 msgid "Category Images"
 msgstr "Categorie imagini"
 
@@ -1017,6 +1022,20 @@ msgstr "LOCAȚIE"
 
 msgid "Written by:"
 msgstr "Scris de către:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "ARTICOL"
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Pe aceeași temă"
@@ -1846,6 +1865,11 @@ msgstr "În caz dacă activați un gen suplimentar."
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Codul ISO alpha-3 pentru organizaţie care va apărea în widget-ul de istorii U-Report App. De exemplu: BRA, NIG, CMR (a se utiliza GLOBAL dacă U-Reporterul este Global)."
 
@@ -2157,9 +2181,6 @@ msgstr "Ceva care să seteze localizările"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "FLUX DE ȘTIRI"
-
-#~ msgid "STORY"
-#~ msgstr "ARTICOL"
 
 #~ msgid "Read full story"
 #~ msgstr "Citește tot articolul"

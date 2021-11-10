@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 15:24+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -722,6 +722,9 @@ msgstr ""
 msgid "Engagement"
 msgstr ""
 
+msgid "Reports"
+msgstr ""
+
 msgid "Category Images"
 msgstr ""
 
@@ -970,6 +973,18 @@ msgid "LOCATION"
 msgstr ""
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "REPORT"
+msgstr ""
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -1719,6 +1734,9 @@ msgid "Whether to activate an extra gender."
 msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
+
+msgid "Whether to show the UNICEF logo in the footer."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."

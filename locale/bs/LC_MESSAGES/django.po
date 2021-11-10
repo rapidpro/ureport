@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 15:24+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -839,6 +839,11 @@ msgstr "O nama"
 msgid "Engagement"
 msgstr "Angažman"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporteri"
+
 msgid "Category Images"
 msgstr "Slike kategorija"
 
@@ -1099,6 +1104,20 @@ msgstr "LOKACIJA"
 
 msgid "Written by:"
 msgstr "Napisao/la:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERI"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Jednako"
@@ -1936,6 +1955,11 @@ msgstr "Treba li aktivirati dodatno rodno opredjeljenje"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO kod organizacije koji će inicirati widget priče U-Report App. Primjer: BRA, NIG, CMR (Koristite GLOBAL ako je U-Report globalan)."
