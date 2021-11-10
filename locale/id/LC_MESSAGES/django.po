@@ -781,6 +781,11 @@ msgstr "Tentang Kami"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
 msgid "Category Images"
 msgstr "Gambar Kategori"
 
@@ -1062,6 +1067,20 @@ msgid "LOCATION"
 msgstr "LOKASI"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "U-REPORTERS DI"
+
+msgid "STORY"
+msgstr "CERITA"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -2255,9 +2274,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "BERITA"
-
-#~ msgid "STORY"
-#~ msgstr "CERITA"
 
 #, fuzzy
 #~| msgid "Read This Story"

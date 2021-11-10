@@ -753,6 +753,11 @@ msgstr "O nama"
 msgid "Engagement"
 msgstr "Statistika"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reportera"
+
 msgid "Category Images"
 msgstr "Slike kategorija"
 
@@ -1016,6 +1021,20 @@ msgstr "LOKACIJA"
 
 msgid "Written by:"
 msgstr "Napisao:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERA"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Jednako"

@@ -755,6 +755,11 @@ msgstr "За нас"
 msgid "Engagement"
 msgstr "Вклученост"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Известувачи"
+
 msgid "Category Images"
 msgstr "Категорија слики"
 
@@ -1018,6 +1023,20 @@ msgstr "ЛОКАЦИЈА"
 
 msgid "Written by:"
 msgstr "Автор:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-РЕПОРТЕРИ "
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Еднакво/парно"

@@ -790,6 +790,11 @@ msgstr "O nama"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "U-Reporteri"
+
 msgid "Category Images"
 msgstr "Slike kategorija"
 
@@ -1075,6 +1080,20 @@ msgid "LOCATION"
 msgstr "LOKACIJE"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "U-REPORTERI U"
+
+msgid "STORY"
+msgstr "PRIČA"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -2303,9 +2322,6 @@ msgstr "Nešto što inicira lokalizaciju"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "VESTI"
-
-#~ msgid "STORY"
-#~ msgstr "PRIČA"
 
 #~ msgid "Read full story"
 #~ msgstr "Pročitaj celu priču"

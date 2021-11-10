@@ -778,6 +778,11 @@ msgstr "Thông tin"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
 msgid "Category Images"
 msgstr "Các hình ảnh cho danh mục"
 
@@ -1059,6 +1064,20 @@ msgid "LOCATION"
 msgstr "ĐỊA ĐIỂM"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "U-REPORTERS TẠI"
+
+msgid "STORY"
+msgstr "Câu chuyện"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -2260,9 +2279,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "TIN TỨC"
-
-#~ msgid "STORY"
-#~ msgstr "Câu chuyện"
 
 #~ msgid "Read full story"
 #~ msgstr "Đọc toàn bộ câu chuyện"

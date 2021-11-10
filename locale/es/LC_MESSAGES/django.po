@@ -748,6 +748,11 @@ msgstr "Acerca "
 msgid "Engagement"
 msgstr "Participación"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
 msgid "Category Images"
 msgstr "Imágenes de categorías"
 
@@ -1001,6 +1006,20 @@ msgstr "UBICACIÓN"
 
 msgid "Written by:"
 msgstr "Escrito por:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Todavía"

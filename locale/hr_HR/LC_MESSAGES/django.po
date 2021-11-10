@@ -759,6 +759,11 @@ msgstr "O nama"
 msgid "Engagement"
 msgstr "Sudjelovanje"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Glasovi mladih"
+
 msgid "Category Images"
 msgstr "Slike kategorija"
 
@@ -1024,6 +1029,20 @@ msgstr "LOKACIJA"
 
 msgid "Written by:"
 msgstr "Napisao/la:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "GLASOVA MLADIH"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Jednako"

@@ -755,6 +755,11 @@ msgstr "সম্পর্কিত "
 msgid "Engagement"
 msgstr "কতজন যুক্ত হয়েছেন"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
+
 msgid "Category Images"
 msgstr "বিভাগের ছবিগুলো "
 
@@ -1013,6 +1018,20 @@ msgstr "ঠিকানা "
 
 msgid "Written by:"
 msgstr "লিখেছেন :"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "ঘটনা "
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "সমান "
@@ -2149,9 +2168,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 
 #~ msgid "NEWS FEED"
 #~ msgstr "ঘটনা প্রবাহ  "
-
-#~ msgid "STORY"
-#~ msgstr "ঘটনা "
 
 #~ msgid "Read full story"
 #~ msgstr "সম্পূর্ণ ঘটনা জানুন "

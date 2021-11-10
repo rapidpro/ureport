@@ -754,6 +754,11 @@ msgstr "О нас"
 msgid "Engagement"
 msgstr "Участие"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Репортеры"
+
 msgid "Category Images"
 msgstr "Фотографии категорий"
 
@@ -1019,6 +1024,20 @@ msgstr "МЕСТОПОЛОЖЕНИЕ"
 
 msgid "Written by:"
 msgstr "Автор:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "Ю-РЕПОРТЕРЫ"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Даже"

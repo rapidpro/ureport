@@ -748,6 +748,11 @@ msgstr "نبذة عن "
 msgid "Engagement"
 msgstr "مشاركة"
 
+#, fuzzy
+#| msgid "U-Report"
+msgid "Reports"
+msgstr "يو-ريبورت"
+
 msgid "Category Images"
 msgstr "صور الفئة"
 
@@ -1014,6 +1019,20 @@ msgid "LOCATION"
 msgstr ""
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "JOIN U-REPORT"
+msgid "REPORT"
+msgstr "شارك في يوريبورت U-REPORT الآن "
+
+msgid "STORY"
+msgstr "قصة"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -2082,9 +2101,6 @@ msgstr "أداة تفعيل التعريب"
 #~ msgid "NEWS FEED"
 #~ msgstr "أخر النشاطات والأخبار "
 
-#~ msgid "STORY"
-#~ msgstr "قصة"
-
 #~ msgid "Read full story"
 #~ msgstr "قراءة القصة الكاملة"
 
@@ -2096,9 +2112,6 @@ msgstr "أداة تفعيل التعريب"
 
 #~ msgid "Read more"
 #~ msgstr "إقرأ المزيد"
-
-#~ msgid "JOIN U-REPORT"
-#~ msgstr "شارك في يوريبورت U-REPORT الآن "
 
 #~ msgid "HOW TO JOIN"
 #~ msgstr "كيفية المشاركة "

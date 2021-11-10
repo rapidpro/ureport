@@ -747,6 +747,11 @@ msgstr "Haqida"
 msgid "Engagement"
 msgstr "Mashg'ullik"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reportyorlar"
+
 msgid "Category Images"
 msgstr "Toifa tasvirlari"
 
@@ -1005,6 +1010,20 @@ msgstr "JOYLASHGAN O'RNI"
 
 msgid "Written by:"
 msgstr "Muallif:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTYORLAR"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Hatto"

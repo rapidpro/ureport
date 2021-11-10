@@ -752,6 +752,11 @@ msgstr "Chi siamo"
 msgid "Engagement"
 msgstr "Partecipazione"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
+
 msgid "Category Images"
 msgstr "Immagini Categoria"
 
@@ -1010,6 +1015,20 @@ msgstr "DOVE"
 
 msgid "Written by:"
 msgstr "Scritto da:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "STORIA"
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Anche"
@@ -2154,9 +2173,6 @@ msgstr "Qualcosa per avviare localizzazione"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "FEED DI NOTIZIE"
-
-#~ msgid "STORY"
-#~ msgstr "STORIA"
 
 #~ msgid "Read full story"
 #~ msgstr "Leggi la storia completa"

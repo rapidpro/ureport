@@ -722,6 +722,9 @@ msgstr ""
 msgid "Engagement"
 msgstr ""
 
+msgid "Reports"
+msgstr ""
+
 msgid "Category Images"
 msgstr ""
 
@@ -970,6 +973,18 @@ msgid "LOCATION"
 msgstr ""
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "REPORT"
+msgstr ""
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"

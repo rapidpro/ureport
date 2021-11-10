@@ -757,6 +757,11 @@ msgstr "Sobre"
 msgid "Engagement"
 msgstr "Engajamento"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
+
 msgid "Category Images"
 msgstr "Categoria de Imagens"
 
@@ -1015,6 +1020,20 @@ msgstr "LOCALIZAÇÃO"
 
 msgid "Written by:"
 msgstr "Escrito por"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "HISTÓRIA"
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Até"
@@ -2149,9 +2168,6 @@ msgstr "Algo para disparar localizações"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "NOTÍCIAS"
-
-#~ msgid "STORY"
-#~ msgstr "HISTÓRIA"
 
 #~ msgid "Read full story"
 #~ msgstr "Ler história completa"

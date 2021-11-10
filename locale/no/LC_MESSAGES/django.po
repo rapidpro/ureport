@@ -749,6 +749,11 @@ msgstr "Om oss"
 msgid "Engagement"
 msgstr "Engasjement"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
 msgid "Category Images"
 msgstr "Bildekategorier"
 
@@ -1010,6 +1015,20 @@ msgstr "BOSTED"
 
 msgid "Written by:"
 msgstr "Skrevet av:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Til og med"

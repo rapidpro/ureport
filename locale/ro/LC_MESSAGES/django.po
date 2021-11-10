@@ -757,6 +757,11 @@ msgstr "Despre noi"
 msgid "Engagement"
 msgstr "Implicare"
 
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Raportori"
+
 msgid "Category Images"
 msgstr "Categorie imagini"
 
@@ -1017,6 +1022,20 @@ msgstr "LOCAȚIE"
 
 msgid "Written by:"
 msgstr "Scris de către:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "ARTICOL"
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Pe aceeași temă"
@@ -2157,9 +2176,6 @@ msgstr "Ceva care să seteze localizările"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "FLUX DE ȘTIRI"
-
-#~ msgid "STORY"
-#~ msgstr "ARTICOL"
 
 #~ msgid "Read full story"
 #~ msgstr "Citește tot articolul"

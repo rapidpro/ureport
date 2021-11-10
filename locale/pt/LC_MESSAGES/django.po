@@ -751,6 +751,11 @@ msgstr "Sobre Nós"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "A malta SMS BIZ"
+
 msgid "Category Images"
 msgstr "Categoria de Imagens"
 
@@ -1030,6 +1035,20 @@ msgid "LOCATION"
 msgstr "LOCALIZAÇÕES"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "SMS BIZ EM"
+
+msgid "STORY"
+msgstr "HISTÓRIA"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -2154,9 +2173,6 @@ msgstr ""
 
 #~ msgid "NEWS FEED"
 #~ msgstr "NOTÍCIAS"
-
-#~ msgid "STORY"
-#~ msgstr "HISTÓRIA"
 
 #~ msgid "Read full story"
 #~ msgstr "Leia a história completa."

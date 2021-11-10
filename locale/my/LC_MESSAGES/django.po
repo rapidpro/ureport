@@ -728,6 +728,11 @@ msgstr "U-Report အကြောင်း"
 msgid "Engagement"
 msgstr ""
 
+#, fuzzy
+#| msgid "U-Report"
+msgid "Reports"
+msgstr "U-Report"
+
 msgid "Category Images"
 msgstr ""
 
@@ -976,6 +981,18 @@ msgid "LOCATION"
 msgstr "တည်နေရာ"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "REPORT"
+msgstr ""
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
