@@ -1,3 +1,43 @@
+v1.2.9
+----------
+ * Merge pull request #813 from rapidpro/story-attachment-reports
+ * fix conflicts, merge main
+ * Merge pull request #827 from rapidpro/unicef-footer-logo
+ * Update black
+ * Update code checks
+ * Add option to allow admin to hide/show the UNICEF logo in the footer
+ * Run code checks
+ * Update rapidpro-dash
+ * Merge pull request #825 from rapidpro/poll-top-section-share
+ * Merge pull request #824 from rapidpro/unicef-footer-logo
+ * Merge pull request #819 from rapidpro/favicos
+ * Update rapidpro-dash
+ * Use the black UNICEF logo
+ * Adjust responsiveness
+ * Support localized UNICEF logos
+ * UNICEF logo in footer center
+ * Add sharing buttons on the top of the poll summary section
+ * Display favicos for sites by subdomain
+ * Update favicos
+ * Rename flag files to match the subdomain used for each site
+ * Cleaner favicons
+ * Add favicon for sudan
+ * Add Sudan flag
+ * Add gabon favicon
+ * Add flag favico assets
+ * Adjust title of story page
+ * Fix attachment URL
+ * Add border for reports page list
+ * Fix reports order
+ * Fix attachment URL
+ * Run code checks
+ * Add reports public pages
+ * update deps
+ * Fix conflicts
+ * Run code checks
+ * Run code checks
+ * Filter stories to keep current behaviour excluding rows with PDF attachments
+
 v1.2.8
 ----------
  * Merge pull request #822 from rapidpro/more-stats-indexes
