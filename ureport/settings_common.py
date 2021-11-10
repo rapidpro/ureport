@@ -1634,14 +1634,14 @@ COUNTRY_FLAGS_SITES = [
     dict(
         name="Western Balkans",
         host="//westernbalkans.ureport.in",
-        flag="flag_western_balkans.png",
+        flag="flag_westernbalkans.png",
         countries_codes=["ALB", "XKX", "MNE"],
         count_link="http://westernbalkans.ureport.in/count/",
     ),
     dict(
         name="Zambia",
         host="//zm.ureport.in",
-        flag="flag_zambia.png",
+        flag="flag_zm.png",
         countries_codes=["ZMB"],
         count_link="http://zm.ureport.in/count/",
     ),
