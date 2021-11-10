@@ -1,3 +1,7 @@
+v1.2.10
+----------
+ * Fix flags name
+
 v1.2.9
 ----------
  * Merge pull request #813 from rapidpro/story-attachment-reports
