@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -374,6 +374,9 @@ msgstr "Oppgave"
 msgid "Tasks"
 msgstr "Oppgaver"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Tittel for denne historien"
 
@@ -391,6 +394,9 @@ msgstr "Forfatteren av historien"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Lenke til mp3 fil som skal publiseres med denne historien"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id til YouTube-video som skal linkes til denne historien (dette er teksten som kommer etter \"v=\" og før \"&\" i YouTube videoens URL)"
@@ -1794,6 +1800,11 @@ msgstr "Aktiver fler kjønnsidentiteter"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Brukeren kan logge inn på siden"
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO koden for organisasjonen, slik at story widget fra U-Report appen fremvises. For eksempel: BRA, NIG, CMR (bruk GLOBAL hvis U-Reporten er global)."

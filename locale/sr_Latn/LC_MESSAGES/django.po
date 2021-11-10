@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -377,6 +377,9 @@ msgstr "Zadatak"
 msgid "Tasks"
 msgstr "Zadaci"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Naslov priče"
 
@@ -396,6 +399,9 @@ msgstr "Autor priče"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Link za mp3 fajl koji će biti objavljen uz priču"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "ID YouTube videa koji treba biti linkovan uz ovu priču (tekst koji sledi nakon v= i prije & unutar You Tube URL)"
@@ -1959,6 +1965,11 @@ msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO kod organizacije koji će inicirati widget priče U-Report aplikacije. Primer: BRA, NIG, CMR (Koristite GLOBAL ako je U-Report globalan)."

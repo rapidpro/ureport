@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 11:10+0000\n"
+"POT-Creation-Date: 2021-11-10 11:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -370,6 +370,9 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr ""
 
@@ -386,6 +389,9 @@ msgid "The writer of the story"
 msgstr ""
 
 msgid "A link to an mp3 file to publish on this story"
+msgstr ""
+
+msgid "The PDF report to attach"
 msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
@@ -1733,6 +1739,9 @@ msgid "Whether to activate an extra gender."
 msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
+
+msgid "Whether to show the UNICEF logo in the footer."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
