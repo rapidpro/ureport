@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ureport"
-version = "1.2.2"
+version = "1.2.8"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
@@ -44,7 +44,7 @@ celery = {extras = ["redis"], version = ">4.4.6"}
 
 
 [tool.poetry.dev-dependencies]
-black = "^20.8b1"
+black = "^21.10b0"
 isort = "^5.9.3"
 flake8 = "^3.7.9"
 
