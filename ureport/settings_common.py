@@ -553,6 +553,10 @@ ORG_CONFIG_FIELDS = [
         field=dict(help_text=_("Whether to hide the engagement breakdown charts."), required=False),
     ),
     dict(
+        name="has_footer_unicef_logo",
+        field=dict(help_text=_("Whether to show the UNICEF logo in the footer."), required=False),
+    ),
+    dict(
         name="iso_code",
         field=dict(
             help_text=_(
