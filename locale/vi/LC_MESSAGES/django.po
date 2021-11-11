@@ -749,6 +749,9 @@ msgstr ""
 msgid "Pages"
 msgstr "Hình ảnh"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Công việc"
 
@@ -875,6 +878,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Quay lại"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1018,6 +1027,9 @@ msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
+msgstr ""
+
+msgid "PAGE"
 msgstr ""
 
 msgid "SEARCH"
@@ -1166,6 +1178,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1368,6 +1383,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Tiêu đề cho mục này"
@@ -1486,6 +1506,41 @@ msgstr "Nguồn công việc của bạn đã được thêm mới thành công"
 
 msgid "Your job source has been updated successfully"
 msgstr "Nguồn công việc của bạn đã được cập nhật thành công"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Khảo sát này nằm trong tổ chức"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Tiêu đề cho mục này"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Phần nội dung của câu chuyện"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Phần nội dung của câu chuyện"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Tệp hình ảnh để sử dụng"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Đây là id OSM cho ranh giới quản trị này"

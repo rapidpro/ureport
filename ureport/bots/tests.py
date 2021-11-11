@@ -14,7 +14,7 @@ class BotTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 11)
+        self.assertEquals(len(response.context["form"].fields), 12)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict()
@@ -24,6 +24,7 @@ class BotTest(UreportTest):
 
         post_data = dict(
             featured=True,
+            landing_page_only=False,
             title="WhatsApp",
             channel="+12345",
             keyword="join",
@@ -43,11 +44,12 @@ class BotTest(UreportTest):
         self.assertEquals(bot.description, "The main channel")
         self.assertEquals(bot.priority, 1)
         self.assertTrue(bot.featured)
+        self.assertFalse(bot.landing_page_only)
 
         self.login(self.superuser)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 11)
+        self.assertEquals(len(response.context["form"].fields), 12)
         self.assertNotIn("org", response.context["form"].fields)
 
         post_data = dict(
@@ -70,11 +72,13 @@ class BotTest(UreportTest):
         self.assertEquals(bot.description, "The Facebook channel")
         self.assertEquals(bot.priority, 2)
         self.assertFalse(bot.featured)
+        self.assertFalse(bot.landing_page_only)
 
     def test_list(self):
         uganda_wa_bot = Bot.objects.create(
             org=self.uganda,
             featured=True,
+            landing_page_only=False,
             title="WhatsApp",
             channel="+12345",
             keyword="join",
@@ -88,6 +92,7 @@ class BotTest(UreportTest):
         uganda_fb_bot = Bot.objects.create(
             org=self.uganda,
             featured=False,
+            landing_page_only=False,
             title="Facebook",
             channel="HereWeGo",
             keyword="participate",
@@ -101,6 +106,7 @@ class BotTest(UreportTest):
         nigeria_wa_bot = Bot.objects.create(
             org=self.nigeria,
             featured=True,
+            landing_page_only=False,
             title="WhatsApp",
             channel="+12555",
             keyword="join",
@@ -142,6 +148,7 @@ class BotTest(UreportTest):
         uganda_fb_bot = Bot.objects.create(
             org=self.uganda,
             featured=False,
+            landing_page_only=False,
             title="Facebook",
             channel="HereWeGo",
             keyword="participate",
@@ -155,6 +162,7 @@ class BotTest(UreportTest):
         nigeria_wa_bot = Bot.objects.create(
             org=self.nigeria,
             featured=True,
+            landing_page_only=False,
             title="WhatsApp",
             channel="+12555",
             keyword="join",
@@ -181,11 +189,12 @@ class BotTest(UreportTest):
 
         response = self.client.get(uganda_update_url, SERVER_NAME="uganda.ureport.io")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context["form"].fields), 12)
+        self.assertEquals(len(response.context["form"].fields), 13)
 
         post_data = dict(
             is_active=True,
             featured=True,
+            landing_page_only=True,
             title="WhatsApp",
             channel="+12345",
             keyword="join",
@@ -204,3 +213,4 @@ class BotTest(UreportTest):
         self.assertEquals(bot.description, "The main channel")
         self.assertEquals(bot.priority, 3)
         self.assertTrue(bot.featured)
+        self.assertTrue(bot.landing_page_only)

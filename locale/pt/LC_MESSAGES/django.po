@@ -722,6 +722,9 @@ msgstr ""
 msgid "Pages"
 msgstr "Imagens"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Emprego"
 
@@ -844,6 +847,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Voltar"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -989,6 +998,9 @@ msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
+msgstr ""
+
+msgid "PAGE"
 msgstr ""
 
 msgid "SEARCH"
@@ -1137,6 +1149,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1312,6 +1327,9 @@ msgstr "A organização na qual este item pertence"
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
 
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr ""
+
 #, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
@@ -1431,6 +1449,39 @@ msgstr "A tua fonte de emprego foi adicionada com sucesso"
 
 msgid "Your job source has been updated successfully"
 msgstr "A tua fonte de emprego foi actualiza com sucesso"
+
+#, fuzzy
+#| msgid "The organization this item belongs to"
+msgid "The organization this landing page is part of"
+msgstr "A organização na qual este item pertence"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "O título deste item"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "O corpo do texto para a história"
+
+msgid "The slug to use on the link for this landing page"
+msgstr ""
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "O corpo do texto para a história"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "O ficheiro de imagem a ser usado"
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "Whether this page should be active to the public"
+msgstr "Se existem vagas de emprego a serem visualizados no site público"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr ""

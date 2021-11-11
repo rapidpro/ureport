@@ -730,6 +730,9 @@ msgstr "Setări"
 msgid "Pages"
 msgstr "Pagini"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Oferte de muncă"
 
@@ -852,6 +855,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Înapoi"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "ULTIMELE NOTIFICĂRI"
@@ -985,6 +994,9 @@ msgstr "Cum ai vrea să te înscrii?"
 msgid "Text"
 msgstr "Text "
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "CAUTĂ"
 
@@ -1116,6 +1128,9 @@ msgstr "SELECTEAZĂ ȚARA"
 
 msgid "Custom pages"
 msgstr "Pagini personalizate"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Vedeți după numere cum interacționăm cu propunerile tinerilor pentru schimbări sociale pozitive."
@@ -1303,6 +1318,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Titlul pentru acest element"
@@ -1421,6 +1441,41 @@ msgstr "Sursa ta de oferte de muncă a fost adăugată cu succes"
 
 msgid "Your job source has been updated successfully"
 msgstr "Sursa ta de oferte de muncă a fost actualizată cu succes"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organizația la care face parte acest sondaj"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Titlul pentru acest element"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Corpul de text pentru articol"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Corpul de text pentru articol"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Fișierul imagine pentru utilizare"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Acesta este ID-ul OSM pentru această frontieră administrativă"

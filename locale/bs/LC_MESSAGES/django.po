@@ -812,6 +812,9 @@ msgstr "Opcije"
 msgid "Pages"
 msgstr "Stranice"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Poslovi"
 
@@ -934,6 +937,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Povratak nazad"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "NOVE NOTIFIKACIJE"
@@ -1067,6 +1076,9 @@ msgstr "Na koji način se želiš pridružiti? "
 msgid "Text"
 msgstr "Tekst"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "Pretraži"
 
@@ -1198,6 +1210,9 @@ msgstr "Izaberi zemlju"
 
 msgid "Custom pages"
 msgstr "Kustomizirane stranice"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Pogledajte kako se glas mladih koristi za stvaranje pozitivne društvene promjene."
@@ -1384,6 +1399,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Naslov ove stavke"
@@ -1510,6 +1530,41 @@ msgstr "Vaš izvor zadataka uspješno dodan"
 
 msgid "Your job source has been updated successfully"
 msgstr "Vaš izvor zadataka uspješno ažuriran"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organizacija kojoj anketa pripada"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Naslov ove stavke"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Struktura teksta priče"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Struktura teksta priče"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Fajl za sliku koja će se koristiti"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ovo je OSM ID za ovo administrativno ograničenje"

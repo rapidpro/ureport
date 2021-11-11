@@ -728,6 +728,9 @@ msgstr "Подесувања"
 msgid "Pages"
 msgstr "Страни"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Работни места"
 
@@ -852,6 +855,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Назад"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "ПОСЛЕДНИ ИЗВЕСТУВАЊА"
@@ -986,6 +995,9 @@ msgstr "Како би сакал/а да се придружиш?"
 msgid "Text"
 msgstr "Текст"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "БАРАЈ"
 
@@ -1117,6 +1129,9 @@ msgstr "ИЗБЕРИ ЗЕМЈА"
 
 msgid "Custom pages"
 msgstr "Кориснички приспособени страни"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Погледнете како го вклучуваме гласот на младите за позитивна социјална промена."
@@ -1283,6 +1298,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Назив за оваа ставка"
@@ -1401,6 +1421,41 @@ msgstr "Вашиот извор на работа е успешно додаде
 
 msgid "Your job source has been updated successfully"
 msgstr "Вашиот извор на работа е успешно ажуриран"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Организација на којашто припаѓа оваа анкета"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Назив за оваа ставка"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Основен текст на приказната"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Основен текст на приказната"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Слика која ќе се користи"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ова е OSM id за оваа административна граница"

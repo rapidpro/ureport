@@ -720,6 +720,9 @@ msgstr "Sozlashlar"
 msgid "Pages"
 msgstr "Sahifalar"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Ish o'rinlari"
 
@@ -844,6 +847,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Ortga"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "SO'NGGI BILDIRISHLAR"
@@ -972,6 +981,9 @@ msgstr "Qay tarzda qo'shilishni istaysiz?"
 
 msgid "Text"
 msgstr "Matn"
+
+msgid "PAGE"
+msgstr ""
 
 msgid "SEARCH"
 msgstr "IZLASH"
@@ -1104,6 +1116,9 @@ msgstr "MAMLAKATNI TANLANG"
 
 msgid "Custom pages"
 msgstr "Maxsus yaratiluvchi sahifalar"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Ijobiy ijtimoiy o'zgarishlarga erishishda yoshlarning fikrlarini qanday qo'llayotganimizni raqamlarda ko'ring."
@@ -1286,6 +1301,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Ushbu element uchun sarlavha"
@@ -1404,6 +1424,41 @@ msgstr "Sizning ish o'rinlari bo'yicha manbaingiz muvaffaqiyatli tarzda qo'shib 
 
 msgid "Your job source has been updated successfully"
 msgstr "Sizning ish o'rinlari bo'yicha manbaingiz muvaffaqiyatli tarzda yangilandi"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Ushbu element uchun sarlavha"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Hikoya uchun asosiy matn"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Hikoya uchun asosiy matn"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Ishlatiladigan surat-fayli"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Bu mazkur ma'muriy chegara uchun OSM - Operasion Tizim Darajasining identifikatori."
