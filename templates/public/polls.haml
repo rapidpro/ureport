@@ -179,17 +179,21 @@
             .block.justify-center.flex.flex-wrap.hover-parent(data-html2canvas-ignore=true)
               - if not question.is_open_ended
                 .text-xs.flex-none.mb-4
-                  %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}")>
+                  %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %} {% if question.hide_all_chart_pills %} hidden{% endif %}")>
                     .whitespace-no-wrap
                       -trans "ALL"
-                  %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
+                  {% if question.show_age %}
+                  %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'age' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
                     .whitespace-no-wrap
                       -trans "AGE"
-                  %a.pill-white.segment-pill(class="{% if not show_maps %}{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                  {% endif %}
+                  {% if question.show_gender %}
+                  %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'gender' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
                     .whitespace-no-wrap
                       -trans "GENDER"
-                  -if show_maps
-                    %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>
+                  {% endif %}
+                  -if show_maps and question.show_locations
+                    %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}")>
                       %span.whitespace-no-wrap
                         -trans "LOCATION"
                       %i.fas.fa-caret-down
@@ -206,7 +210,7 @@
               - else
                 .block
 
-              .share.flex-none.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
+              .share.flex-none.mx-32.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
                 .block
                   %a.cursor-pointer.bg-circle-xs.border.border-black.facebook-share(data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                     %i.fab.fa-facebook-f
