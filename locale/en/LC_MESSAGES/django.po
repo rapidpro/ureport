@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 11:47+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -701,6 +701,9 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -858,6 +861,9 @@ msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 msgid "Refresh Results"
+msgstr ""
+
+msgid "Partners"
 msgstr ""
 
 msgid "MORE POLLS"
@@ -1200,6 +1206,9 @@ msgstr ""
 msgid "Flag"
 msgstr ""
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr ""
 
@@ -1207,6 +1216,9 @@ msgid "A short descriptive name for this image"
 msgstr ""
 
 msgid "Image type"
+msgstr ""
+
+msgid "The priority number for this image among others on a list, high priority comes first"
 msgstr ""
 
 msgid "The organization this bot is part of"

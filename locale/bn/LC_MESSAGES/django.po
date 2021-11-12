@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 11:47+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -734,6 +734,9 @@ msgstr "কাজ গুলো"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "ছবিগুলো"
 
@@ -899,6 +902,9 @@ msgstr ""
 
 msgid "Refresh Results"
 msgstr "ফলাফল রিফ্রেশ করুন"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "নতুন পোলগুলো "
@@ -1277,6 +1283,9 @@ msgstr "এই প্রতিষ্ঠানের  জন্য 1 %s cache ref
 msgid "Flag"
 msgstr "পতাকা "
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "যে প্রতিষ্ঠানে এই ছবি ব্যবহার করা হবে "
 
@@ -1285,6 +1294,11 @@ msgstr "এই ছবির জন্য একটি ছোট বর্ণন�
 
 msgid "Image type"
 msgstr "ছবির ধরণ "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "এই পোল পেজ এর প্রশ্নের অগ্রাধিকার। উচ্চ অগ্রাধিকার প্রথমে আসবে। "
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

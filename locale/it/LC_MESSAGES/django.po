@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 11:47+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -731,6 +731,9 @@ msgstr "Opportunità di lavoro"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Foto"
 
@@ -896,6 +899,9 @@ msgstr ""
 
 msgid "Refresh Results"
 msgstr "Aggiorna i risultati"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "ALTRI SONDAGGI"
@@ -1281,6 +1287,9 @@ msgstr "Cache aggiornato %s per questa organizzazione"
 msgid "Flag"
 msgstr "Flag"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "L'organizzazione da cui sarà utilizzata l'immagine"
 
@@ -1289,6 +1298,11 @@ msgstr "Un breve titolo descrittivo per questa immagine"
 
 msgid "Image type"
 msgstr "Tipo di immagine"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "La priorità di questa domanda nella pagina del sondaggio, le priorità più alte vengono prima"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

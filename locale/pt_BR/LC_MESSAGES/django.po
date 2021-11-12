@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 11:47+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -736,6 +736,9 @@ msgstr "Empregos"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Fotos"
 
@@ -901,6 +904,9 @@ msgstr ""
 
 msgid "Refresh Results"
 msgstr "Atualizar resultados"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "MAIS ENQUETES"
@@ -1283,6 +1289,9 @@ msgstr "Cache %s atualizado para esta organização"
 msgid "Flag"
 msgstr "Bandeira"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "A organização para a qual a imagem será usada"
 
@@ -1291,6 +1300,11 @@ msgstr "Um nome descritivo curto para esta imagem"
 
 msgid "Image type"
 msgstr "Tipo de Imagem"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Prioridade dessa pergunta na página de enquetes, a maior aparecerá primeiro"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

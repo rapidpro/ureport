@@ -775,6 +775,7 @@ GROUP_PERMISSIONS = {
         "users.user_profile",
     ),
     "Editors": (
+        "assets.image.*",
         "bots.bot.*",
         "categories.category.*",
         "categories.categoryimage.*",

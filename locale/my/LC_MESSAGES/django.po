@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 11:47+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -707,6 +707,9 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -864,6 +867,9 @@ msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 msgid "Refresh Results"
+msgstr ""
+
+msgid "Partners"
 msgstr ""
 
 msgid "MORE POLLS"
@@ -1209,6 +1215,9 @@ msgstr ""
 msgid "Flag"
 msgstr "အလံ"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "The organization to which the image will be used"
 
@@ -1217,6 +1226,9 @@ msgstr "A short descriptive name for this image"
 
 msgid "Image type"
 msgstr "Image type"
+
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr ""
 
 #, fuzzy
 #| msgid "The organization this category applies to"
