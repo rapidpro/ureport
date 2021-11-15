@@ -11,8 +11,15 @@ BANNER = "B"
 PATTERN = "P"
 FLAG = "F"
 LOGO = "L"
+ABOUT_PARTNER_LOGO = "A"
 
-IMAGE_TYPES = ((BANNER, _("Banner")), (PATTERN, _("Pattern")), (FLAG, _("Flag")), (LOGO, "LOGO"))
+IMAGE_TYPES = (
+    (BANNER, _("Banner")),
+    (PATTERN, _("Pattern")),
+    (FLAG, _("Flag")),
+    (LOGO, "Logo"),
+    (ABOUT_PARTNER_LOGO, _("About Partner Logo")),
+)
 
 
 class Image(SmartModel):
@@ -28,6 +35,10 @@ class Image(SmartModel):
         verbose_name=_("Name"), max_length=128, help_text=_("A short descriptive name for this image")
     )
 
-    image_type = models.CharField(max_length=1, choices=IMAGE_TYPES, default="P", verbose_name=_("Image type"))
+    image_type = models.CharField(max_length=1, choices=IMAGE_TYPES, default="A", verbose_name=_("Image type"))
 
     image = models.ImageField(upload_to="images", help_text=_("The image file"))
+
+    priority = models.IntegerField(
+        default=0, help_text=_("The priority number for this image among others on a list, high priority comes first")
+    )

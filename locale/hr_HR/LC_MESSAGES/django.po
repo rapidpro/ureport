@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -741,6 +741,9 @@ msgstr "Poslovi"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Slike"
 
@@ -919,6 +922,9 @@ msgstr "Ne planira sinkronizaciju, nema flowa za anketu"
 
 msgid "Refresh Results"
 msgstr "Osvježi rezultate"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "VIŠE ANKETA"
@@ -1287,6 +1293,9 @@ msgstr "Ažurirano %s predmemorije organizacije"
 msgid "Flag"
 msgstr "Oznaka"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Organizacijska jedinice u kojoj će slika biti korištena"
 
@@ -1295,6 +1304,11 @@ msgstr "Kratko opisno ime za ovu sliku"
 
 msgid "Image type"
 msgstr "Tip slike"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Razina prioriteta ovog pitanja u anketi. Pitanja s najvećim prioritetom idu prva"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

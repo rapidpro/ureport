@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -761,6 +761,9 @@ msgstr "Pekerjaan"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -940,6 +943,9 @@ msgstr ""
 #| msgid "Results"
 msgid "Refresh Results"
 msgstr "Hasil"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "POLLING LAINNYA"
@@ -1369,6 +1375,9 @@ msgstr "Refreshed %s cache untuk organisasi ini"
 msgid "Flag"
 msgstr "Bendera"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Organisasi yang akan di gunakan untuk gambar ini"
 
@@ -1377,6 +1386,11 @@ msgstr "Sebuah nama deskriptif singkat untuk gambar ini"
 
 msgid "Image type"
 msgstr "Tipe Gambar"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih tinggi yang lebih dulu"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

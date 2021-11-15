@@ -29,6 +29,7 @@ from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.orgs.models import Org, TaskState
 from dash.stories.models import Story
 from smartmin.views import SmartReadView, SmartTemplateView
+from ureport.assets.models import Image
 from ureport.bots.models import Bot
 from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
@@ -219,6 +220,9 @@ class AboutView(SmartTemplateView):
 
         videos = Video.objects.filter(is_active=True, org=org).order_by("-created_on")
         context["videos"] = videos
+
+        partners_logos = Image.objects.filter(org=org, is_active=True, image_type="A").order_by("-priority")
+        context["partners_logos"] = partners_logos
 
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context

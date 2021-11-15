@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -728,6 +728,9 @@ msgstr "Jobb"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Bilder"
 
@@ -902,6 +905,9 @@ msgstr "Synkroniseringar är inte planerade, inget flöde finns för undersökni
 
 msgid "Refresh Results"
 msgstr "Uppdaterar resultaten"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "FLER UNDERSÖKNINGAR"
@@ -1265,6 +1271,9 @@ msgstr "Uppdaterade %s cache för den här organisationen"
 msgid "Flag"
 msgstr "Flagga"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Bilden som används för den här organisationen"
 
@@ -1273,6 +1282,11 @@ msgstr "Kort beskrivning av den här bilden"
 
 msgid "Image type"
 msgstr "Bildtyp"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Prioritering för denna fråga i undersökningen, den högsta prioriteten kommer först."
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

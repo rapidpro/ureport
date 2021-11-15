@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-12 16:57+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -730,6 +730,9 @@ msgstr "Trabajos"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Fotos"
 
@@ -900,6 +903,9 @@ msgstr ""
 
 msgid "Refresh Results"
 msgstr "Actualizar resultados"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "MÁS ENCUESTAS"
@@ -1257,6 +1263,9 @@ msgstr "Actualizado %s cache para esta organización"
 msgid "Flag"
 msgstr "Bandera"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "La organización para la que se usará la imagen"
 
@@ -1265,6 +1274,11 @@ msgstr "Descripción corta para esta imagen"
 
 msgid "Image type"
 msgstr "Tipo de imagen"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "La prioridad de esta pregunta en la página de la encuesta, la prioridad más alta aparece primero"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"
