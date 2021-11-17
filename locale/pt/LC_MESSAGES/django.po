@@ -731,6 +731,9 @@ msgstr "Emprego"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -908,6 +911,9 @@ msgstr ""
 #| msgid "Results"
 msgid "Refresh Results"
 msgstr "Resultados"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "MAIS INQUÉRITOS"
@@ -1310,6 +1316,9 @@ msgstr ""
 msgid "Flag"
 msgstr "Marcar"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "A organização na qual a imagem será usada"
 
@@ -1318,6 +1327,11 @@ msgstr "Um nome descritivo curto para esta imagem"
 
 msgid "Image type"
 msgstr "Tipo de Imagem"
+
+#, fuzzy
+#| msgid "The priority for this block, higher priority blocks come first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "A prioridade para este bloco, blocos de mais elevada prioridade vêm em primeiro lugar"
 
 #, fuzzy
 #| msgid "The organization this item belongs to"

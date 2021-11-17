@@ -732,6 +732,9 @@ msgstr "Emplois"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Photos"
 
@@ -903,6 +906,9 @@ msgstr "Pas de planification des synchronisations, pas de flux pour le sondage"
 
 msgid "Refresh Results"
 msgstr "Rafraîchir les résultats"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "+ DE SONDAGES"
@@ -1260,6 +1266,9 @@ msgstr "%s cache actualisé pour cette organisation"
 msgid "Flag"
 msgstr "Drapeau"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "L’organisation à laquelle l’image sera utilisée"
 
@@ -1268,6 +1277,11 @@ msgstr "Nom descriptif de l'image"
 
 msgid "Image type"
 msgstr "Type de l'image"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "La priorité de cette question sur la page de sondage, la plus haute priorité vient en premier"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

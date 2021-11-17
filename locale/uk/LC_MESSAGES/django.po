@@ -712,6 +712,9 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Фото"
 
@@ -879,6 +882,9 @@ msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 msgid "Refresh Results"
+msgstr ""
+
+msgid "Partners"
 msgstr ""
 
 msgid "MORE POLLS"
@@ -1237,6 +1243,9 @@ msgstr ""
 msgid "Flag"
 msgstr ""
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr ""
 
@@ -1244,6 +1253,9 @@ msgid "A short descriptive name for this image"
 msgstr ""
 
 msgid "Image type"
+msgstr ""
+
+msgid "The priority number for this image among others on a list, high priority comes first"
 msgstr ""
 
 msgid "The organization this bot is part of"

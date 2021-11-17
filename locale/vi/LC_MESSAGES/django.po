@@ -758,6 +758,9 @@ msgstr "Công việc"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -937,6 +940,9 @@ msgstr ""
 #| msgid "Results"
 msgid "Refresh Results"
 msgstr "Kết quả"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "THÊM KHẢO SÁT"
@@ -1365,6 +1371,9 @@ msgstr "Đã làm mới %s bộ nhớ cache cho tổ chức này"
 msgid "Flag"
 msgstr "Cờ"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
 
@@ -1373,6 +1382,11 @@ msgstr "Tên mô tả ngắn cho hình ảnh này"
 
 msgid "Image type"
 msgstr "Loại hình ảnh"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Mức độ ưu tiên của câu hỏi này trên trang khảo sát, những đề mục ưu tiên hơn xuất hiện trước"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

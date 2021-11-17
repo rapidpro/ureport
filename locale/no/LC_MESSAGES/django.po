@@ -731,6 +731,9 @@ msgstr "Jobber"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Bilder"
 
@@ -905,6 +908,9 @@ msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for under
 
 msgid "Refresh Results"
 msgstr "Oppdater resultatene"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "FLERE UNDERSØKELSER"
@@ -1268,6 +1274,9 @@ msgstr "Oppdatert %s for denne organisasjonen"
 msgid "Flag"
 msgstr "Flagg"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Bildet som vil brukes sammen med organisasjonen"
 
@@ -1276,6 +1285,11 @@ msgstr "En kort  beskrivelse av dette bildet"
 
 msgid "Image type"
 msgstr "Bildetype"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

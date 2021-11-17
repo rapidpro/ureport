@@ -730,6 +730,9 @@ msgstr "الأعمال"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -909,6 +912,9 @@ msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 msgid "Refresh Results"
+msgstr ""
+
+msgid "Partners"
 msgstr ""
 
 msgid "MORE POLLS"
@@ -1270,6 +1276,9 @@ msgstr "تحديث ذاكرة التخزين المؤقت %s لهذه المؤس
 msgid "Flag"
 msgstr "علم"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
 
@@ -1278,6 +1287,11 @@ msgstr "وصف مختصر عن الصورة"
 
 msgid "Image type"
 msgstr "نوع الصورة "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "ترتيب هذا السؤال على صفحة الاستطلاع، الأكثر أولوية يأتي أولاً "
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

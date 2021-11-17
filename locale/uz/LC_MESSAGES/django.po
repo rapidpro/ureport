@@ -729,6 +729,9 @@ msgstr "Ish o'rinlari"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Fotosur'atlar"
 
@@ -900,6 +903,9 @@ msgstr ""
 
 msgid "Refresh Results"
 msgstr "Natijalarni yangilash"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "YANADA KO'PROQ SO'ROVLAR"
@@ -1283,6 +1289,9 @@ msgstr "%s ning keshi bu tashkilot uchun yangilandi"
 msgid "Flag"
 msgstr "Bayroq"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Surat uning uchun ishlatiladigan tashkilot"
 
@@ -1291,6 +1300,11 @@ msgstr "Ushbu suratga qisqacha ta'riflovchi nom"
 
 msgid "Image type"
 msgstr "Tasvir turi"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Mazkur savolning so'rovnoma sahifasidagi ustivorligi, ustivorligi yoqori bo'lgani avval keladi"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

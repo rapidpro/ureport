@@ -737,6 +737,9 @@ msgstr "Работни места"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Фотографии"
 
@@ -913,6 +916,9 @@ msgstr "Нема закажана синхронизација, нема анк�
 
 msgid "Refresh Results"
 msgstr "Освежи резултати"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "ПОВЕЌЕ АНКЕТИ"
@@ -1280,6 +1286,9 @@ msgstr "Освежени %s кеш за оваа организација"
 msgid "Flag"
 msgstr "Знаменце"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Во која организација се користи сликата"
 
@@ -1288,6 +1297,11 @@ msgstr "Кусо и описно име за сликата"
 
 msgid "Image type"
 msgstr "Тип на слика"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Степен на приоритет на прашањето во анкетата. Прашањата со повисок приоритет први се прикажани"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"

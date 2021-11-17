@@ -414,6 +414,11 @@
                     %a.admin-menu.small-link-no-wrap.separator(href="{% url 'dashblocks.dashblock_list' %}?slug=about")
                       - trans "About Content"
   
+                  -if perms.assets.image_list or org_perms.assets.image_list
+                    %a.admin-menu.small-link-no-wrap.separator(href="{% url 'assets.image_list' %}")
+                      - trans "Partners Logos"
+
+                  -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
                     %a.admin-menu.small-link-no-wrap.separator(href="{% url 'dashblocks.dashblock_list' %}?slug=photos")
                       - trans "Photos"
 

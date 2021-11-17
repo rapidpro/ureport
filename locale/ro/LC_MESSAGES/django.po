@@ -739,6 +739,9 @@ msgstr "Oferte de muncă"
 msgid "Tags"
 msgstr ""
 
+msgid "Partners Logos"
+msgstr ""
+
 msgid "Photos"
 msgstr "Fotografii"
 
@@ -912,6 +915,9 @@ msgstr ""
 
 msgid "Refresh Results"
 msgstr "Actualizare Rezultate"
+
+msgid "Partners"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "MAI MULTE SONDAJE"
@@ -1300,6 +1306,9 @@ msgstr "Actualizat %s pentru această organizație"
 msgid "Flag"
 msgstr "Steag"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Organizația pentru care imaginea va fi utilizată"
 
@@ -1308,6 +1317,11 @@ msgstr "O scurtă denumire descriptivă pentru această imagine"
 
 msgid "Image type"
 msgstr "Tipul imaginii"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Prioritatea acestei întrebări pe pagina de sondaj, prioritatea mai mare se află în partea de sus a paginii"
 
 #, fuzzy
 #| msgid "The organization this poll is part of"
