@@ -1,3 +1,10 @@
+v1.2.12
+----------
+ * Merge pull request #830 from rapidpro/about-partners
+ * fix conflicts
+ * Merge pull request #829 from rapidpro/question-hidden-charts-config
+ * Merge pull request #816 from rapidpro/landing_pages_bots
+
 v1.2.11
 ----------
  * Merge pull request #828 from rapidpro/fix-dashblock-views
