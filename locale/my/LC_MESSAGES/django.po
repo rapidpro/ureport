@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -701,6 +701,9 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr ""
 
@@ -821,6 +824,12 @@ msgid ""
 msgstr ""
 
 msgid "Back"
+msgstr ""
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
 msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
@@ -953,6 +962,9 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr ""
 
@@ -1079,6 +1091,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1238,6 +1253,9 @@ msgstr "he organization this category applies to"
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
 
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr ""
+
 msgid "The title to display for this bot"
 msgstr ""
 
@@ -1350,6 +1368,37 @@ msgid "Your job source has been added successfully"
 msgstr ""
 
 msgid "Your job source has been updated successfully"
+msgstr ""
+
+#, fuzzy
+#| msgid "The organization this category applies to"
+msgid "The organization this landing page is part of"
+msgstr "he organization this category applies to"
+
+#, fuzzy
+#| msgid "The name to describe this image"
+msgid "The title to display for this landing page"
+msgstr "The name to describe this image"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "The body of text for the story"
+
+msgid "The slug to use on the link for this landing page"
+msgstr ""
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "The body of text for the story"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "The image file to use"
+
+msgid "Whether this page should be active to the public"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1469,6 +1518,30 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+msgid "Hide Age and Location charts"
+msgstr ""
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr ""
 
@@ -1569,6 +1642,12 @@ msgid "Color Choice"
 msgstr ""
 
 msgid "The color to use for the question block will be displayed publicly"
+msgstr ""
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
 #, fuzzy

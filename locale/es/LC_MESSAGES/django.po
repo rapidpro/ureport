@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -721,6 +721,9 @@ msgstr "Configuración"
 msgid "Pages"
 msgstr "Páginas"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Trabajos"
 
@@ -846,6 +849,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Volver"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "NOTIFICACIONES RECIENTES"
@@ -979,6 +988,9 @@ msgstr "¿Cómo te gustaría unirte?"
 msgid "Text"
 msgstr "Texto"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "BUSCAR"
 
@@ -1104,6 +1116,9 @@ msgstr "ELIGE PAÍS"
 
 msgid "Custom pages"
 msgstr "Páginas personalizadas"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Mira cómo está la participación de los jóvenes para un cambio social a través de los números."
@@ -1274,6 +1289,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "El título para este ítem"
@@ -1393,6 +1413,41 @@ msgstr "Tu fuente de trabajo ha sido agregada satisfactoriamente"
 msgid "Your job source has been updated successfully"
 msgstr "Tu fuente de trabajo ha sido actualizada correctamente"
 
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "La organización a la que pertenece esta encuesta"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "El título para este ítem"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "El cuerpo del texto para la historia"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "El cuerpo del texto para la historia"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "El archivo de la imagen que se va a utilizar"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
+
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Este es el ID de OSM para este límite administrativo "
 
@@ -1510,6 +1565,32 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "Ocultar las estadísticas de participación"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "La encuesta de la que forma parte esta pregunta"
 
@@ -1615,6 +1696,12 @@ msgstr ""
 #| msgid "The question posed to your audience, will be displayed publicly"
 msgid "The color to use for the question block will be displayed publicly"
 msgstr "La pregunta planteada a su público, será exhibida públicamente"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 msgid "Category {idx+1}"
 msgstr ""

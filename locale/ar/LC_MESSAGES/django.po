@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -721,6 +721,9 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "الأعمال"
 
@@ -847,6 +850,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "العودة"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr ""
@@ -989,6 +998,9 @@ msgstr "كيف تريد الانضمام"
 msgid "Text"
 msgstr ""
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "ابحث "
 
@@ -1119,6 +1131,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1287,6 +1302,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "عنوان البند "
@@ -1405,6 +1425,41 @@ msgstr "تم إضافة مصدر العمل بنجاح"
 
 msgid "Your job source has been updated successfully"
 msgstr "تم تحديث مصدر العمل بنجاح"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "عنوان البند "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "نص المقال"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "نص المقال"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "ملف الصورة التي تريد إستخدامها "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "هذا هو رمز الـOSM الخاص بالحدود الإدارية "
@@ -1525,6 +1580,30 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+msgid "Hide Age and Location charts"
+msgstr ""
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "الإستطلاع الذي يتبع له هذا السؤال "
 
@@ -1630,6 +1709,12 @@ msgstr ""
 #| msgid "The question posed to your audience, will be displayed publicly"
 msgid "The color to use for the question block will be displayed publicly"
 msgstr "سيتم مشاركة السؤال الذي قمت بطرحه للفئة المستهدفة خاصتك، علناً "
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "Categories"

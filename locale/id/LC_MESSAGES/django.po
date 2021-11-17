@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -752,6 +752,9 @@ msgstr ""
 msgid "Pages"
 msgstr "Gambar"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Pekerjaan"
 
@@ -881,6 +884,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Kembali"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1029,6 +1038,9 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr ""
 
@@ -1175,6 +1187,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1386,6 +1401,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Judul untuk item ini"
@@ -1504,6 +1524,41 @@ msgstr "Sumber pekerjaan Anda telah berhasil ditambahkan"
 
 msgid "Your job source has been updated successfully"
 msgstr "Sumber pekerjaan Anda telah berhasil diperbarui"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "organisasi jajak pendapat ini adalah bagian dari"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Judul untuk item ini"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Isi cerita"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Isi cerita"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "File gambar yang akan digunakan"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ini adalah id OSM untuk batas administrasi ini"
@@ -1630,6 +1685,32 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participation Level"
+msgid "Hide Age and Location charts"
+msgstr "Tingkat Partisipasi"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Jajak pendapat pertanyaan ini adalah bagian dari"
 
@@ -1747,6 +1828,12 @@ msgstr ""
 #| msgid "The question posed to your audience, will be displayed publicly"
 msgid "The color to use for the question block will be displayed publicly"
 msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "Categories"

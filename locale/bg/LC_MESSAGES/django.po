@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -722,6 +722,9 @@ msgstr "Настройки"
 msgid "Pages"
 msgstr "Страници"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Заети длъжности"
 
@@ -847,6 +850,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Връщане назад"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "НАЙ-НОВИ ИЗВЕСТИЯ"
@@ -981,6 +990,9 @@ msgstr "U-Report е на линия за теб във Viber!"
 msgid "Text"
 msgstr "Текст"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "ТЪРСЕНЕ"
 
@@ -1112,6 +1124,9 @@ msgstr "ИЗБЕРЕТЕ ДЪРЖАВА"
 
 msgid "Custom pages"
 msgstr "Персонализирани страници"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Виж в цифри как включваме гласовете на младите хора за социална промяна!"
@@ -1301,6 +1316,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Дали тази организация трябва да бъде показана на целевата страница"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Заглавието нa този артикул"
@@ -1420,6 +1440,41 @@ msgstr "Вашият източник на работно място е доба
 msgid "Your job source has been updated successfully"
 msgstr "Вашият източник на работно място е актуализиран успешно"
 
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Организацията, към която това допитване принадлежи"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Заглавието нa този артикул"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Съдържание на историята"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Дали тази организация трябва да бъде показана на целевата страница"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Съдържание на историята"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Изображението, което да бъде използвано"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Дали тази организация трябва да бъде показана на целевата страница"
+
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Това е OSM ID за тази административна граница"
 
@@ -1537,6 +1592,32 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "Скрий статистическите данни за участието на потребителите "
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Допитването, от което е част този въпрос"
 
@@ -1642,6 +1723,12 @@ msgstr ""
 #| msgid "The question posed to your audience, will be displayed publicly"
 msgid "The color to use for the question block will be displayed publicly"
 msgstr "Въпросът, зададен на вашатата публика, ще бъде показан публично"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "Categories"

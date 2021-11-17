@@ -45,7 +45,7 @@
             %i.fab.fa-twitter
           %a.mb-2.block.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.story_read' story.pk %}")
             %i.fab.fa-whatsapp
-          %a.mb-2.block.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body={% url 'public.story_read' story.pk %}" uk-icon="icon: mail; ratio: 1.5")
+          %a.mb-2.block.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body={% org_host_link %}{% url 'public.story_read' story.pk %}" uk-icon="icon: mail; ratio: 1.5")
             %i.fas.fa-envelope
 
       .flex-auto.px-home.story-content.hover-parent

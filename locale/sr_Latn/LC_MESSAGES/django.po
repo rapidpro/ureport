@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -761,6 +761,9 @@ msgstr ""
 msgid "Pages"
 msgstr "Slike"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Poslovi"
 
@@ -890,6 +893,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Povratak nazad"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1042,6 +1051,9 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr ""
 
@@ -1188,6 +1200,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1407,6 +1422,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Naslov ove stavke"
@@ -1525,6 +1545,41 @@ msgstr "Vaš izvor zadataka uspešno dodat"
 
 msgid "Your job source has been updated successfully"
 msgstr "Vaš izvor zadataka uspešno ažuriran"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organizacija kojoj anketa pripada"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Naslov ove stavke"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Struktura teksta priče"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Struktura teksta priče"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Fajl za sliku koja će se koristiti"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ovo je OSM ID za ovo administrativno ograničenje"
@@ -1649,6 +1704,32 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participation Level"
+msgid "Hide Age and Location charts"
+msgstr "Nivo učešća"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Anketa kojoj ovo pitanje pripada"
 
@@ -1762,6 +1843,12 @@ msgstr ""
 #| msgid "The question posed to your audience, will be displayed publicly"
 msgid "The color to use for the question block will be displayed publicly"
 msgstr "Pitanje upućeno publici biće javno objavljeno"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "Categories"

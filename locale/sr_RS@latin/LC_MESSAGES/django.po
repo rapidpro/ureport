@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2021\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -726,6 +726,9 @@ msgstr "Podešavanja"
 msgid "Pages"
 msgstr "Stranice"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Poslovi"
 
@@ -851,6 +854,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Povratak nazad"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "POSLEDNJA OBAVEŠTENJA"
@@ -990,6 +999,9 @@ msgstr "Kako želiš da se pridružiš?"
 msgid "Text"
 msgstr "Tekst"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "PRETRAGA"
 
@@ -1121,6 +1133,9 @@ msgstr "ODABERI SVOJU ZEMLJU"
 
 msgid "Custom pages"
 msgstr "Dodatni meni"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Pogledajte po brojevima na koji način uključujemo glasove mladih u pozitivne društvene promene."
@@ -1295,6 +1310,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Naslov ove stavke"
@@ -1414,6 +1434,41 @@ msgstr "Vaš izvor zadataka uspešno dodat"
 msgid "Your job source has been updated successfully"
 msgstr "Vaš izvor zadataka uspešno ažuriran"
 
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organizacija kojoj anketa pripada"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Naslov ove stavke"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Struktura teksta priče"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Struktura teksta priče"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Fajl za sliku koja će se koristiti"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ovo je OSM ID za ovo administrativno ograničenje"
 
@@ -1531,6 +1586,32 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "Sakrij statistiku učešća"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Anketa kojoj ovo pitanje pripada"
 
@@ -1636,6 +1717,12 @@ msgstr ""
 #| msgid "The question posed to your audience, will be displayed publicly"
 msgid "The color to use for the question block will be displayed publicly"
 msgstr "Pitanje upućeno publici biće javno objavljeno"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 msgid "Category {idx+1}"
 msgstr "Kategorija {idx+1}"

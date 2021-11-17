@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-12 16:57+0000\n"
+"POT-Creation-Date: 2021-11-11 14:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -722,6 +722,9 @@ msgstr "Innstillinger"
 msgid "Pages"
 msgstr "Sider"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Jobber"
 
@@ -847,6 +850,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Tilbake"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "SISTE VARSLER"
@@ -984,6 +993,9 @@ msgstr "Hvordan ønsker du å bli med?"
 msgid "Text"
 msgstr "Tekst"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "SØK"
 
@@ -1115,6 +1127,9 @@ msgstr "VELG LAND"
 
 msgid "Custom pages"
 msgstr "Egendefinerte sider"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Se hvor mange barn og unge som ønsker at vi skal høre akkurat deres stemme som bidrar til en positiv endring."
@@ -1285,6 +1300,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Organisasjonen skal vises på landingssiden"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Tittelen på dette elementet"
@@ -1404,6 +1424,41 @@ msgstr "Jobbkilden har blitt lagt til"
 msgid "Your job source has been updated successfully"
 msgstr "Jobbkilden har blitt oppdatert"
 
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organisasjonen denne undersøkelsen tilhører"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Tittelen på dette elementet"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Brødteksten for denne historien"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Organisasjonen skal vises på landingssiden"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Brødteksten for denne historien"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Bildefilen som skal benyttes"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Organisasjonen skal vises på landingssiden"
+
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Dette er OSM id for denne administrative grensen"
 
@@ -1521,6 +1576,32 @@ msgstr ""
 msgid "Dark 3 background and Black text"
 msgstr ""
 
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "Skjul deltakelsesstatistikk"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Undersøkelsen dette spørsmålet er en del av"
 
@@ -1626,6 +1707,12 @@ msgstr ""
 #| msgid "The question posed to your audience, will be displayed publicly"
 msgid "The color to use for the question block will be displayed publicly"
 msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 msgid "Category {idx+1}"
 msgstr "Kategori {idx+1}"
