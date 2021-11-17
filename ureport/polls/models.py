@@ -739,6 +739,17 @@ class PollQuestion(SmartModel):
         "D3": "white",
     }
 
+    QUESTION_HIDDEN_CHARTS_CHOICES = (
+        (None, _("Show Age, Gender and Location charts")),
+        ("A", _("Hide Age chart ONLY")),
+        ("G", _("Hide Gender chart ONLY")),
+        ("L", _("Hide Location chart ONLY")),
+        ("AG", _("Hide Age and Gender charts")),
+        ("AL", _("Hide Age and Location charts")),
+        ("GL", _("Hide Gender and Location charts")),
+        ("AGL", _("Hide Age, Gender and Location charts")),
+    )
+
     poll = models.ForeignKey(
         Poll, on_delete=models.PROTECT, related_name="questions", help_text=_("The poll this question is part of")
     )
@@ -762,6 +773,29 @@ class PollQuestion(SmartModel):
     flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
 
     color_choice = models.CharField(max_length=2, choices=QUESTION_COLOR_CHOICES, null=True, blank=True)
+
+    hidden_charts = models.CharField(max_length=3, choices=QUESTION_HIDDEN_CHARTS_CHOICES, null=True, blank=True)
+
+    def show_age(self):
+        return self.hidden_charts is None or "A" not in self.hidden_charts
+
+    def show_gender(self):
+        return self.hidden_charts is None or "G" not in self.hidden_charts
+
+    def show_locations(self):
+        return self.hidden_charts is None or "L" not in self.hidden_charts
+
+    def hide_all_chart_pills(self):
+        return "AGL" == self.hidden_charts
+
+    def get_last_pill(self):
+        if self.hidden_charts is None or "L" not in self.hidden_charts:
+            return "locations"
+        if self.hidden_charts is None or "G" not in self.hidden_charts:
+            return "gender"
+        if self.hidden_charts is None or "A" not in self.hidden_charts:
+            return "age"
+        return "all"
 
     def get_color_choice_css(self):
         return self.QUESTION_COLOR_CHOICE_BLOCK_CSS_CLASSES.get(self.color_choice, "")
