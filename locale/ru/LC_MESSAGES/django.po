@@ -727,6 +727,9 @@ msgstr "Настройки"
 msgid "Pages"
 msgstr "Страницы"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Работы"
 
@@ -849,6 +852,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Назад"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "НЕДАВНИЕ УВЕДОМЛЕНИЯ "
@@ -987,6 +996,9 @@ msgstr "Хотели бы вы присоединиться? "
 msgid "Text"
 msgstr "Текст"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "ПОИСК"
 
@@ -1118,6 +1130,9 @@ msgstr "ВЫБЕРИТЕ СТРАНУ"
 
 msgid "Custom pages"
 msgstr "Пользовательские страницы "
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Посмотрите цифры, как мы привлекаем голоса молодежи к позитивным социальным изменениям."
@@ -1282,6 +1297,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Должна ли эта org отображаться на главной странице"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Название этого элемента "
@@ -1392,6 +1412,41 @@ msgstr "Ваш источник работы успешно добавлен"
 
 msgid "Your job source has been updated successfully"
 msgstr "Ваш источник вакансий был успешно обновлен"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Организация, в которой проводится этот опрос"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Название этого элемента "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Основной текст истории"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Должна ли эта org отображаться на главной странице"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Основной текст истории"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Визуальный файл для использования"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Должна ли эта org отображаться на главной странице"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Это идентификатор OSM для этой административной границы. "

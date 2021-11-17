@@ -719,6 +719,9 @@ msgstr "Inställningar"
 msgid "Pages"
 msgstr "Sidor"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Jobb"
 
@@ -841,6 +844,12 @@ msgstr ""
 
 msgid "Back"
 msgstr "Tillbaka"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "SENASTE NOTIFIKATIONERNA"
@@ -975,6 +984,9 @@ msgstr "Hur vill du delta?"
 msgid "Text"
 msgstr "Text"
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "SÖK"
 
@@ -1106,6 +1118,9 @@ msgstr "VÄLJ LAND"
 
 msgid "Custom pages"
 msgstr "Anpassade sidor"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Se hur många barn och unga som vill att vi ska lyssna på deras röster för att skapa en positiv förändring."
@@ -1268,6 +1283,11 @@ msgid "Whether this bot is displayed on the homepage, up to 3 only with the high
 msgstr ""
 
 #, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Organisationen ska visas på landningssidan"
+
+#, fuzzy
 #| msgid "The title for this item"
 msgid "The title to display for this bot"
 msgstr "Titeln för objektet"
@@ -1386,6 +1406,41 @@ msgstr "Jobbkällan har lagts till"
 
 msgid "Your job source has been updated successfully"
 msgstr "Jobbkällan har uppdaterats"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organisationen som undersökningen är en del av"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Titeln för objektet"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Berättelsens brödtext"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Organisationen ska visas på landningssidan"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Berättelsens brödtext"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Bildfilen som ska användas"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Organisationen ska visas på landningssidan"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "OSM-id för den här administrativa gränsen"

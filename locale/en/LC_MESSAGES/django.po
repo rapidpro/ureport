@@ -695,6 +695,9 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr ""
 
@@ -810,6 +813,12 @@ msgid ""
 msgstr ""
 
 msgid "Back"
+msgstr ""
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
 msgstr ""
 
 msgid "LATEST NOTIFICATIONS"
@@ -941,6 +950,9 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr ""
 
@@ -1063,6 +1075,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1215,6 +1230,9 @@ msgstr ""
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
 msgstr ""
 
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr ""
+
 msgid "The title to display for this bot"
 msgstr ""
 
@@ -1315,6 +1333,27 @@ msgid "Your job source has been added successfully"
 msgstr ""
 
 msgid "Your job source has been updated successfully"
+msgstr ""
+
+msgid "The organization this landing page is part of"
+msgstr ""
+
+msgid "The title to display for this landing page"
+msgstr ""
+
+msgid "The call to action text for this landing page"
+msgstr ""
+
+msgid "The slug to use on the link for this landing page"
+msgstr ""
+
+msgid "The body of text for the landing page"
+msgstr ""
+
+msgid "The image file to use for the page"
+msgstr ""
+
+msgid "Whether this page should be active to the public"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
