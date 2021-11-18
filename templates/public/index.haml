@@ -265,47 +265,6 @@
           %a.btn.bg-light1.text-black.hover-dark(href="{% url 'public.about' %}")
             -trans "LEARN MORE"
 
-  - if not photos
-    -if stories_photos
-      // photos
-      .max-w-page.mx-auto
-        %div.text-white(class="md:flex")
-          .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
-            .hover-parent
-              .font-bold.text-3xl.hover-parent
-                {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" "white" %}
-                {{ org|config:"photos_section_title"|default:"Photos"}}
-  
-              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" "white" %}
-              {{ org|config:"photos_section_description"|default:""}}
-  
-          .flex-1.p-home.text-black.flex.flex-col.justify-center
-            .flex.flex-wrap.justify-center
-              - for photo in stories_photos|slice:":6"
-                {% thumbnail photo.get_image "200x200" crop="center" as im %}
-                .inline-block.bg-gray-500.m-2(class="w-5/12")
-                  %img(src="{{im.url}}")
-                {% endthumbnail %}
-  - else
-    // photos
-    .max-w-page.mx-auto
-      %div.text-white(class="md:flex")
-        .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
-          .hover-parent
-            .font-bold.text-3xl.hover-parent
-              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" "white" %}
-              {{ org|config:"photos_section_title"|default:"Photos"}}
-
-            {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" "white" %}
-            {{ org|config:"photos_section_description"|default:""}}
-
-        .flex-1.p-home.text-black.flex.flex-col.justify-center
-          .flex.flex-wrap.justify-center
-            - for photo in photos|slice:":6"
-              {% thumbnail photo.image "200x200" crop="center" as im %}
-              .inline-block.bg-gray-500.m-2(class="w-5/12")
-                %img(src="{{im.url}}")
-              {% endthumbnail %}
 
 - block script
   {{ block.super }}
