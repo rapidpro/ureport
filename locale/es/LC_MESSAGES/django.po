@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -732,9 +732,6 @@ msgstr ""
 
 msgid "Partners Logos"
 msgstr ""
-
-msgid "Photos"
-msgstr "Fotos"
 
 msgid "Categories Images"
 msgstr "Imágenes de categorías"
@@ -1968,6 +1965,9 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
+
+#~ msgid "Photos"
+#~ msgstr "Fotos"
 
 #, fuzzy
 #~| msgid "The description of the opinions page"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2021\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -737,9 +737,6 @@ msgstr ""
 
 msgid "Partners Logos"
 msgstr ""
-
-msgid "Photos"
-msgstr "Slike"
 
 msgid "Categories Images"
 msgstr "Slike kategorija"
@@ -1995,6 +1992,9 @@ msgstr "Da li je ovaj red stvoren zbijanjem"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "Photos"
+#~ msgstr "Slike"
 
 #, fuzzy
 #~| msgid "The description of the opinions page"

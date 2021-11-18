@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -736,9 +736,6 @@ msgstr ""
 
 msgid "Partners Logos"
 msgstr ""
-
-msgid "Photos"
-msgstr "Foto"
 
 msgid "Categories Images"
 msgstr "Immagini di categoria"
@@ -2035,6 +2032,9 @@ msgstr "Se questa storia è apparsa"
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+#~ msgid "Photos"
+#~ msgstr "Foto"
 
 #, fuzzy
 #~| msgid "The description of the opinions page"
