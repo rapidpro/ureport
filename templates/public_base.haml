@@ -400,9 +400,6 @@
                   - trans "Content"
                   %i.fas.fa-caret-down
                 .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-700
-                  -# - if request.user.is_superuser or org_perms.news.newsitem_list
-                  -#   %a.inline-block.px-6.py-4.small-link-no-wrap(href="{% url 'news.newsitem_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
-                  -#     - trans "News Items"
                   - if request.user.is_superuser or org_perms.jobs.jobsource_list
                     %a.admin-menu.small-link-no-wrap.separator(href="{% url 'jobs.jobsource_list' %}")
                       - trans "Job Sources"
@@ -419,33 +416,12 @@
                       - trans "Partners Logos"
 
                   -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
-                    -# %a.admin-menu.small-link-no-wrap.separator(href="{% url 'dashblocks.dashblock_list' %}?slug=photos")
-                    -#   - trans "Photos"
-
-                    -# %a.admin-menu.small-link-no-wrap.separator(href="{% url 'news.video_list' %}")
-                    -#   - trans "Videos"
-  
-                    -# %hr
-                    -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=contact_us" class="hover:text-gray-800 hover:bg-gray-300")
-                    -#   - trans "Contact Us Content"
-  
-                    -# %hr
-                    -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=missions" class="hover:text-gray-800 hover:bg-gray-300")
-                    -#   - trans "Missions Content"
-  
-                    -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions" class="hover:text-gray-800 hover:bg-gray-300")
-                    -#   - trans "Terms & Conditions"
-  
                     %a.admin-menu.small-link-no-wrap.separator(href="{% url 'dashblocks.dashblock_list' %}?slug=ureporters")
                       - trans "U-Reporters Content"
   
                     %hr
                     %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=join_engage")
                       - trans "Join &amp; Engage Content"
-  
-                    -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=join_steps" class="hover:text-gray-800 hover:bg-gray-300")
-                    -#   - trans "Join Steps Content"
-  
                     %hr
                     %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=additional_menu")
                       - trans "Custom pages"

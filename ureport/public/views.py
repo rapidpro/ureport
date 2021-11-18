@@ -35,7 +35,7 @@ from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
 from ureport.landingpages.models import LandingPage
 from ureport.locations.models import Boundary
-from ureport.news.models import NewsItem, Video
+from ureport.news.models import NewsItem
 from ureport.polls.models import Poll, PollQuestion
 from ureport.stats.models import GenderSegment, PollStats
 from ureport.utils import (
@@ -217,9 +217,6 @@ class AboutView(SmartTemplateView):
         org = self.request.org
 
         context["org"] = org
-
-        videos = Video.objects.filter(is_active=True, org=org).order_by("-created_on")
-        context["videos"] = videos
 
         partners_logos = Image.objects.filter(org=org, is_active=True, image_type="A").order_by("-priority")
         context["partners_logos"] = partners_logos
