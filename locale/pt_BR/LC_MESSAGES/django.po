@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -741,9 +741,6 @@ msgstr ""
 
 msgid "Partners Logos"
 msgstr ""
-
-msgid "Photos"
-msgstr "Fotos"
 
 msgid "Categories Images"
 msgstr "Categorias de imagens"
@@ -2027,6 +2024,9 @@ msgstr "Se esta história é destaque"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
+
+#~ msgid "Photos"
+#~ msgstr "Fotos"
 
 #, fuzzy
 #~| msgid "The description of the opinions page"

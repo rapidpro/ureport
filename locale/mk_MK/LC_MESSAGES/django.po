@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 14:48+0000\n"
+"POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -739,9 +739,6 @@ msgstr ""
 
 msgid "Partners Logos"
 msgstr ""
-
-msgid "Photos"
-msgstr "Фотографии"
 
 msgid "Categories Images"
 msgstr "Категории слики"
@@ -1997,6 +1994,9 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#~ msgid "Photos"
+#~ msgstr "Фотографии"
 
 #, fuzzy
 #~| msgid "The description of the opinions page"

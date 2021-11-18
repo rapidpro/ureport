@@ -174,12 +174,6 @@
                           %span.menu-link-title
                             - trans "Partners Logos"
 
-                      %li
-                        %a(href="{% url 'dashblocks.dashblock_list' %}?slug=photos")
-                          %span.icon
-                            %img(src="{{ STATIC_URL }}img/photos_icon.png")
-                          %span.menu-link-title
-                            - trans "Photos"
 
                       - if request.user.is_superuser
                         %li
