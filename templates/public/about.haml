@@ -35,7 +35,7 @@
           .block.mx-auto.my-8.justify-content.hover-parent
             .grid.grid-cols-3.gap-4
               -for partner_logo in partners_logos
-                .flex.justify-center.border.p-8
+                .flex.justify-center.p-8
                   .flex.items-center(class="w-1/2")
                     {% thumbnail partner_logo.image "x500" crop="center" as im %}
                     %img(src="{{im.url}}")
