@@ -1,3 +1,9 @@
+v1.2.13
+----------
+ * Merge pull request #831 from rapidpro/remove-photos
+ * Run code checks
+ * Remove photos section
+
 v1.2.12
 ----------
  * Merge pull request #830 from rapidpro/about-partners
