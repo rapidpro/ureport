@@ -1,3 +1,9 @@
+v1.2.14
+----------
+ * Merge pull request #832 from rapidpro/remove-unused-context-variables
+ * Remove border on partner logos
+ * Remove unused context variables
+
 v1.2.13
 ----------
  * Merge pull request #831 from rapidpro/remove-photos
