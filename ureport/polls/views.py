@@ -583,9 +583,6 @@ class PollCRUDL(SmartCRUDL):
         def post_save(self, obj):
             obj = super(PollCRUDL.Questions, self).post_save(obj)
 
-            # clear our cache of featured polls
-            Poll.clear_brick_polls_cache(obj.org)
-
             obj.update_questions_results_cache_task()
 
             return obj
@@ -647,7 +644,6 @@ class PollCRUDL(SmartCRUDL):
 
             context["main_poll"] = Poll.get_main_poll(org)
             context["other_polls"] = Poll.get_other_polls(org)
-            context["brick_polls_ids"] = Poll.get_brick_polls_ids(org)
             context["recent_polls"] = Poll.get_recent_polls(org)
 
             return context

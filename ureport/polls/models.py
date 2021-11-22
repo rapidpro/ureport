@@ -515,45 +515,10 @@ class Poll(SmartModel):
         return main_poll
 
     @classmethod
-    def get_brick_polls_ids(cls, org):
-        cache_key = "brick_polls_ids:%d" % org.id
-        brick_polls = cache.get(cache_key, None)
-
-        if brick_polls is None:
-            poll_with_questions = PollQuestion.objects.filter(is_active=True, poll__org=org).values_list(
-                "poll", flat=True
-            )
-
-            main_poll = Poll.get_main_poll(org)
-
-            polls = (
-                Poll.get_public_polls(org=org)
-                .filter(pk__in=poll_with_questions)
-                .order_by("-is_featured", "-created_on")
-            )
-            if main_poll:
-                polls = polls.exclude(pk=main_poll.pk)
-
-            brick_polls = []
-
-            for poll in polls:
-                if poll.get_first_question():
-                    brick_polls.append(poll.pk)
-            cache.set(cache_key, brick_polls, BRICK_POLLS_CACHE_TIME)
-
-        return brick_polls
-
-    @classmethod
-    def clear_brick_polls_cache(self, org):
-        cache_key = "brick_polls:%d" % org.id
-        cache.delete(cache_key)
-
-    @classmethod
     def get_other_polls(cls, org):
         main_poll = Poll.get_main_poll(org)
-        brick_polls = Poll.get_brick_polls_ids(org)[:5]
 
-        exclude_polls = [poll_id for poll_id in brick_polls]
+        exclude_polls = []
         if main_poll:
             exclude_polls.append(main_poll.pk)
 

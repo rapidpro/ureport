@@ -84,50 +84,6 @@ def pull_results_main_poll(org, since, until):
     return results_log
 
 
-@org_task("results-pull-brick-polls", 60 * 60 * 24)
-def pull_results_brick_polls(org, since, until):
-    from .models import Poll
-
-    results_log = dict()
-
-    brick_polls_ids_list = Poll.get_brick_polls_ids(org)
-    brick_polls_ids_list = [poll_id for poll_id in brick_polls_ids_list]
-
-    brick_polls_ids = (
-        Poll.objects.filter(id__in=brick_polls_ids_list)
-        .order_by("flow_uuid")
-        .distinct("flow_uuid")
-        .values_list("id", flat=True)
-    )
-
-    brick_polls = list(Poll.objects.filter(id__in=brick_polls_ids).order_by("-created_on"))[:5]
-    for poll in brick_polls:
-
-        key = Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid)
-        if not cache.get(key):
-            try:
-                (
-                    num_val_created,
-                    num_val_updated,
-                    num_val_ignored,
-                    num_path_created,
-                    num_path_updated,
-                    num_path_ignored,
-                ) = Poll.pull_results(poll.id)
-                results_log["flow-%s" % poll.flow_uuid] = {
-                    "num_val_created": num_val_created,
-                    "num_val_updated": num_val_updated,
-                    "num_val_ignored": num_val_ignored,
-                    "num_path_created": num_path_created,
-                    "num_path_updated": num_path_updated,
-                    "num_path_ignored": num_path_ignored,
-                }
-
-            except TembaRateExceededError:
-                pass
-    return results_log
-
-
 @org_task("results-pull-other-polls", 60 * 60 * 24)
 def pull_results_other_polls(org, since, until):
     from .models import Poll
@@ -211,6 +167,7 @@ def clear_old_poll_results(org, since, until):
         Poll.objects.filter(org=org)
         .exclude(poll_date__gte=syncing_window)
         .exclude(created_on__gte=new_window)
+        .exclude(stopped_syncing=True)
         .order_by("pk")
     )
     for poll in old_polls:
