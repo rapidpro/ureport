@@ -223,7 +223,10 @@ class PollTest(UreportTest):
             polls.append(poll)
 
         self.assertTrue(Poll.get_other_polls(self.uganda))
-        self.assertEqual(list(Poll.get_other_polls(self.uganda)), [polls[8], polls[7], polls[6], polls[5], polls[4], polls[3], polls[2], polls[1], polls[0]])
+        self.assertEqual(
+            list(Poll.get_other_polls(self.uganda)),
+            [polls[8], polls[7], polls[6], polls[5], polls[4], polls[3], polls[2], polls[1], polls[0]],
+        )
 
     @patch("django.core.cache.cache.get")
     def test_get_recent_polls(self, mock_cache_get):
