@@ -1,3 +1,9 @@
+v1.2.15
+----------
+ * Merge pull request #833 from rapidpro/syncing-improvements
+ * Run code checks
+ * Remove brick polls tasks, only clear results for poll not stopped syncing
+
 v1.2.14
 ----------
  * Merge pull request #832 from rapidpro/remove-unused-context-variables
