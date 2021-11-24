@@ -184,7 +184,7 @@ class Poll(SmartModel):
         ) = backend.pull_results_from_archives(poll)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
-            poll.rebuild_poll_results_counts()
+            poll.rebuild_poll_counts_cache()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
@@ -219,7 +219,7 @@ class Poll(SmartModel):
         ) = backend.pull_results(poll, None, None)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
-            poll.rebuild_poll_results_counts()
+            poll.rebuild_poll_counts_cache()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
@@ -319,6 +319,20 @@ class Poll(SmartModel):
 
         Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
         Poll.pull_poll_results_task(self)
+
+    def rebuild_poll_counts_cache(self):
+        org_id = self.org_id
+        flow = self.flow_uuid
+
+        flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow)
+        for flow_poll in flow_polls:
+            if flow_poll.is_active and self.stopped_syncing:
+                flow_poll.update_questions_results_cache()
+
+            if not flow_poll.stopped_syncing:
+                # update the word clouds for questions
+                flow_poll.update_question_word_clouds()
+                flow_poll.update_questions_results_cache()
 
     def rebuild_poll_results_counts(self):
         import time
@@ -1260,11 +1274,9 @@ class PollResult(models.Model):
 
     scheme = models.CharField(max_length=16, null=True)
 
-    def generate_poll_stats(self):
-        generated_stats = dict()
-
+    def get_result_tuple(self):
         if not self.org_id or not self.flow or not self.ruleset:
-            return generated_stats
+            return ()
 
         ruleset = ""
         category = ""
@@ -1314,7 +1326,15 @@ class PollResult(models.Model):
         if self.scheme:
             scheme = self.scheme.lower()
 
-        generated_stats[(self.org_id, ruleset, category, born, gender, state, district, ward, scheme, date)] = 1
+        return (self.org_id, ruleset, category, born, gender, state, district, ward, scheme, date)
+
+    def generate_poll_stats(self):
+        generated_stats = dict()
+
+        result_tuple = self.get_result_tuple()
+        if result_tuple:
+            generated_stats[result_tuple] = 1
+
         return generated_stats
 
     class Meta:
