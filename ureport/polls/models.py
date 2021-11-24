@@ -184,7 +184,7 @@ class Poll(SmartModel):
         ) = backend.pull_results_from_archives(poll)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
-            poll.rebuild_poll_results_counts()
+            poll.rebuild_poll_counts_cache()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
@@ -219,7 +219,7 @@ class Poll(SmartModel):
         ) = backend.pull_results(poll, None, None)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
-            poll.rebuild_poll_results_counts()
+            poll.rebuild_poll_counts_cache()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
