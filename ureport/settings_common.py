@@ -947,7 +947,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     "polls_stats_squash": {
         "task": "polls.polls_stats_squash",
-        "schedule": timedelta(minutes=10),
+        "schedule": timedelta(minutes=30),
         "relative": True,
         "options": {"queue": "slow"},
     },
