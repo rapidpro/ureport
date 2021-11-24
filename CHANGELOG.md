@@ -1,3 +1,7 @@
+v1.2.16
+----------
+ * Merge pull request #834 from rapidpro/optimize-sync-stats-creations
+
 v1.2.15
 ----------
  * Merge pull request #833 from rapidpro/syncing-improvements
