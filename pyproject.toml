@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ureport"
-version = "1.2.16"
+version = "1.2.17"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"

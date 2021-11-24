@@ -1,3 +1,8 @@
+v1.2.17
+----------
+ * Merge pull request #836 from rapidpro/squash-stats-dedupe
+ * Make sure only one task is squashing the stats at a time
+
 v1.2.16
 ----------
  * Merge pull request #834 from rapidpro/optimize-sync-stats-creations
