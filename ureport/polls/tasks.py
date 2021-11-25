@@ -233,13 +233,17 @@ def pull_refresh_from_archives(poll_id):
 def rebuild_counts():
     from .models import Poll
 
+    start_time = time.time()
+
     logger.info("Task: polls.rebuild_counts started")
     polls = Poll.objects.filter(is_active=True)
 
     for poll in polls:
         poll.rebuild_poll_results_counts()
 
-    logger.info("Task: polls.rebuild_counts finished")
+    elapsed = time.time() - start_time
+
+    logger.info(f"Task: polls.rebuild_counts finished in {elapsed:.1f} seconds")
 
 
 @app.task(name="update_results_age_gender")
