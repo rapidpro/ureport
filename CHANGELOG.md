@@ -1,3 +1,8 @@
+v1.2.18
+----------
+ * Merge pull request #837 from rapidpro/rebuild-polls-counts
+ * Rebuild stats once a day
+
 v1.2.17
 ----------
  * Merge pull request #836 from rapidpro/squash-stats-dedupe
