@@ -235,6 +235,7 @@ class PollContextMixin(object):
 
         org = self.request.org
         context["org"] = org
+        translation.activate(org.language)
 
         context["states"] = sorted(
             [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()],
