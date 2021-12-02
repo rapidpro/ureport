@@ -1,3 +1,12 @@
+v1.2.19
+----------
+ * Merge pull request #841 from rapidpro/gender-stats-fix
+ * Make sure the org language is activate for gender stats
+ * Merge pull request #840 from rapidpro/word-cloud-fix
+ * Populate flow result on word clouds objects
+ * Merge pull request #839 from rapidpro/install_poetry
+ * Install poetry the proper way during CI
+
 v1.2.18
 ----------
  * Merge pull request #837 from rapidpro/rebuild-polls-counts
