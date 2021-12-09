@@ -1,3 +1,8 @@
+v1.2.20
+----------
+ * Merge pull request #843 from rapidpro/revert-poll-stats-insert-on-sync
+ * Revert to always recalculate poll stats
+
 v1.2.19
 ----------
  * Merge pull request #841 from rapidpro/gender-stats-fix
