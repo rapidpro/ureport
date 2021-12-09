@@ -17,7 +17,6 @@ from dash.utils.sync import BaseSyncer, SyncOutcome, sync_local_to_changes
 from ureport.contacts.models import Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
-from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
 from . import BaseBackend
@@ -355,12 +354,9 @@ class FLOIPBackend(BaseBackend):
                     results = response_json["data"]["attributes"]["responses"]
                     poll_results_url = response_json["data"]["relationships"]["links"]["next"]
 
-                    (
-                        contacts_map,
-                        poll_results_map,
-                        poll_results_to_save_map,
-                        poll_stats_to_save_map,
-                    ) = self._initiate_lookup_maps(results, org, poll)
+                    (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(
+                        results, org, poll
+                    )
 
                     for result in results:
                         if latest_synced_obj_time is None or json_date_to_datetime(result[0]) > json_date_to_datetime(
@@ -377,7 +373,6 @@ class FLOIPBackend(BaseBackend):
                             contact_obj,
                             poll_results_map,
                             poll_results_to_save_map,
-                            poll_stats_to_save_map,
                             stats_dict,
                         )
 
@@ -386,8 +381,6 @@ class FLOIPBackend(BaseBackend):
                             progress_callback(stats_dict["num_synced"])
 
                     self._save_new_poll_results_to_database(poll_results_to_save_map)
-
-                    self._save_poll_stats_to_database(poll, poll_stats_to_save_map)
 
                     logger.info(
                         "Processed fetch of %d - %d "
@@ -398,7 +391,7 @@ class FLOIPBackend(BaseBackend):
                     logger.info("=" * 40)
 
                     if stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
-                        poll.rebuild_poll_counts_cache()
+                        poll.rebuild_poll_results_counts()
 
                         self._mark_poll_results_sync_paused(org, poll, latest_synced_obj_time)
 
@@ -471,8 +464,7 @@ class FLOIPBackend(BaseBackend):
             poll_results_map[res.contact][res.ruleset] = res
 
         poll_results_to_save_map = defaultdict(dict)
-        poll_stats_to_save_map = defaultdict(dict)
-        return contacts_map, poll_results_map, poll_results_to_save_map, poll_stats_to_save_map
+        return contacts_map, poll_results_map, poll_results_to_save_map
 
     def _process_run_poll_results(
         self,
@@ -483,7 +475,6 @@ class FLOIPBackend(BaseBackend):
         contact_obj,
         existing_db_poll_results_map,
         poll_results_to_save_map,
-        poll_stats_to_save_map,
         stats_dict,
     ):
         contact_uuid = result[2]
@@ -517,7 +508,6 @@ class FLOIPBackend(BaseBackend):
             )
 
             if update_required:
-                self._adjust_poll_stats_count(poll_stats_to_save_map, existing_poll_result, False)
                 # update the db object
                 PollResult.objects.filter(pk=existing_poll_result.pk).update(
                     category=category,
@@ -544,8 +534,6 @@ class FLOIPBackend(BaseBackend):
 
                 existing_db_poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
 
-                self._adjust_poll_stats_count(poll_stats_to_save_map, existing_poll_result, True)
-
                 stats_dict["num_val_updated"] += 1
             else:
                 stats_dict["num_val_ignored"] += 1
@@ -557,7 +545,6 @@ class FLOIPBackend(BaseBackend):
             )
 
             if replace_save_map:
-                self._adjust_poll_stats_count(poll_stats_to_save_map, poll_result_to_save, False)
 
                 result_obj = PollResult(
                     org=org,
@@ -574,7 +561,6 @@ class FLOIPBackend(BaseBackend):
                     date=value_date,
                     completed=completed,
                 )
-                self._adjust_poll_stats_count(poll_stats_to_save_map, result_obj, True)
 
                 poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
@@ -596,7 +582,6 @@ class FLOIPBackend(BaseBackend):
                 date=value_date,
                 completed=completed,
             )
-            self._adjust_poll_stats_count(poll_stats_to_save_map, result_obj, True)
 
             poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
@@ -633,107 +618,6 @@ class FLOIPBackend(BaseBackend):
                 if obj_to_create is not None:
                     new_poll_results.append(obj_to_create)
         PollResult.objects.bulk_create(new_poll_results)
-
-    @staticmethod
-    def _adjust_poll_stats_count(poll_stats_to_save_map, poll_result_obj, increment=True):
-        result_tuple = poll_result_obj.get_result_tuple()
-        if not result_tuple:
-            return
-        if result_tuple not in poll_stats_to_save_map:
-            poll_stats_to_save_map[result_tuple] = 0
-
-        if increment:
-            poll_stats_to_save_map[result_tuple] += 1
-        else:
-            poll_stats_to_save_map[result_tuple] -= 1
-
-    @staticmethod
-    def _save_poll_stats_to_database(poll_obj, poll_stats_to_save_map):
-        poll_year = poll_obj.poll_date.year
-
-        questions = poll_obj.questions.all().select_related("flow_result").prefetch_related("response_categories")
-        questions_dict = dict()
-
-        for qsn in questions:
-            categories = qsn.response_categories.all().select_related("flow_result_category")
-            categoryies_dict = {elt.flow_result_category.category.lower(): elt.id for elt in categories}
-            flow_categories_dict = {
-                elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories
-            }
-            questions_dict[qsn.flow_result.result_uuid] = dict(
-                id=qsn.id,
-                flow_result_id=qsn.flow_result_id,
-                categories=categoryies_dict,
-                flow_categories=flow_categories_dict,
-            )
-
-        gender_dict = {elt.gender.lower(): elt.id for elt in GenderSegment.objects.all()}
-        age_dict = {elt.min_age: elt.id for elt in AgeSegment.objects.all()}
-        scheme_dict = {elt.scheme.lower(): elt.id for elt in SchemeSegment.objects.all()}
-
-        boundaries = Boundary.objects.filter(org_id=poll_obj.org_id)
-        location_dict = {elt.osm_id.upper(): elt.id for elt in boundaries}
-
-        poll_stats_obj_to_insert = []
-        for stat_tuple in poll_stats_to_save_map.keys():
-            org_id, ruleset, category, born, gender, state, district, ward, scheme, date = stat_tuple
-            count = poll_stats_to_save_map.get(stat_tuple)
-            stat_kwargs = dict(org_id=org_id, count=count, date=date)
-
-            if ruleset not in questions_dict:
-                continue
-
-            question_id = questions_dict[ruleset].get("id")
-            if not question_id:
-                continue
-
-            flow_result_id = questions_dict[ruleset].get("flow_result_id")
-            if not flow_result_id:
-                continue
-
-            flow_category_id = questions_dict[ruleset].get("flow_categories", dict()).get(category)
-
-            gender_id = None
-            if gender:
-                gender_id = gender_dict.get(gender, gender_dict.get("O"))
-
-            age_id = None
-            if born:
-                age_id = age_dict.get(AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
-
-            scheme_id = None
-            if scheme:
-                scheme_id = scheme_dict.get(scheme, None)
-                if scheme_id is None:
-                    scheme_obj, created_flag = SchemeSegment.objects.get_or_create(scheme=scheme.lower())
-                    scheme_dict[scheme.lower()] = scheme_obj.id
-
-            location_id = None
-            if ward:
-                location_id = location_dict.get(ward)
-            elif district:
-                location_id = location_dict.get(district)
-            elif state:
-                location_id = location_dict.get(state)
-
-            if flow_result_id:
-                stat_kwargs["flow_result_id"] = flow_result_id
-
-            if flow_category_id:
-                stat_kwargs["flow_result_category_id"] = flow_category_id
-
-            if age_id:
-                stat_kwargs["age_segment_id"] = age_id
-            if gender_id:
-                stat_kwargs["gender_segment_id"] = gender_id
-            if scheme_id:
-                stat_kwargs["scheme_segment_id"] = scheme_id
-            if location_id:
-                stat_kwargs["location_id"] = location_id
-
-            poll_stats_obj_to_insert.append(PollStats(**stat_kwargs))
-
-        PollStats.objects.bulk_create(poll_stats_obj_to_insert)
 
     @staticmethod
     def _mark_poll_results_sync_paused(org, poll, latest_synced_obj_time):
