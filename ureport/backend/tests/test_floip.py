@@ -1171,7 +1171,7 @@ class FLOIPBackendTest(UreportTest):
         self.create_poll_question(self.admin, poll, "question 2", "q_1522956746998_26")
         self.create_poll_question(self.admin, poll, "question 3", "q_1522957067432_34")
 
-        with self.assertNumQueries(14):
+        with self.assertNumQueries(4):
             (
                 num_val_created,
                 num_val_updated,
