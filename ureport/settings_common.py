@@ -1399,6 +1399,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://myanmar.ureport.in/count/",
     ),
     dict(
+        name="Niger",
+        host="//niger.ureport.in",
+        flag="flag_niger.png",
+        countries_codes=["NER"],
+        count_link="http://niger.ureport.in/count/",
+    ),
+    dict(
         name="Nigeria",
         host="//nigeria.ureport.in",
         flag="flag_nigeria.png",
