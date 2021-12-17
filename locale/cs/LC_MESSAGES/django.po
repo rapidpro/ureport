@@ -1,0 +1,1902 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# trendspotter <jirka.p@volny.cz>, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
+"Language-Team: Czech (https://www.transifex.com/rapidpro/teams/226/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+msgid "The name of this category"
+msgstr "Název této kategorie"
+
+msgid "An optional image that can describe this category"
+msgstr "Volitelný obrázek, který může popisovat tuto kategorii"
+
+msgid "The organization this category applies to"
+msgstr "Organizace, na kterou se tato kategorie vztahuje"
+
+msgid "Categories"
+msgstr "Kategorie"
+
+msgid "The name to describe this image"
+msgstr "Název popisující tento obrázek"
+
+msgid "The category this image represents"
+msgstr "Kategorie, kterou tento obrázek představuje"
+
+msgid "The image file to use"
+msgstr "Soubor obrázku, který se má použít"
+
+msgid "The human readable name for this content type"
+msgstr "Lidsky čitelný název tohoto typu obsahu"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+"Slug pro identifikaci tohoto typu obsahu, který se používá se značkami "
+"šablony."
+
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
+msgstr ""
+"Popis, kde se tento typ obsahu na webu používá a jak se bude zobrazovat."
+
+msgid "Whether this content should include a title"
+msgstr "Zda má tento obsah obsahovat název"
+
+msgid "Whether this content should include an image"
+msgstr "Zda má tento obsah obsahovat obrázek"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Zda má tento obsah používat kompletní editor HTML"
+
+msgid "Whether this content should include a summary field"
+msgstr "Zda má tento obsah obsahovat shrnující pole"
+
+msgid "Whether this content should include a link"
+msgstr "Zda má tento obsah obsahovat odkaz"
+
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Zda má tento obsah umožňovat nahrávání dalších obrázků, tj. galerie."
+
+msgid "Whether this content has a color field"
+msgstr "Zda má tento obsah barevné pole"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Zda by tento obsah měl umožnit nastavení id YouTube"
+
+msgid "Whether this content should allow tags"
+msgstr "Zda má tento obsah povolovat značky"
+
+msgid "Content Type"
+msgstr "Typ obsahu"
+
+msgid "The category, or type for this content block"
+msgstr "Kategorie nebo typ tohoto bloku obsahu"
+
+msgid "The title for this block of content, optional"
+msgstr "Název tohoto bloku obsahu, volitelný"
+
+msgid "The summary for this item, should be short"
+msgstr "Shrnutí této položky by mělo být krátké"
+
+msgid "The body of text for this content block, optional"
+msgstr "Tělo textu pro tento blok obsahu, nepovinné."
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr ""
+"Jakýkoli obrázek, který se má zobrazit s tímto blokem obsahu, nepovinné."
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Barva pozadí, která se použije pro obrázek, ve formátu: #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr ""
+"Jakýkoli odkaz, který by měl být spojen s tímto blokem obsahu, nepovinné."
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Id videa na YouTube, které by mělo být propojeno s touto položkou."
+
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr ""
+"Jakékoli značky pro tento blok obsahu, oddělené mezerami, lze použít k "
+"pokročilejšímu filtrování, volitelné."
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Priorita pro tento blok, bloky s vyšší prioritou mají přednost."
+
+msgid "The organization this content block belongs to"
+msgstr "Organizace, do které tento blok obsahu patří"
+
+msgid "Gallery"
+msgstr "Galerie"
+
+msgid "Add Image"
+msgstr "Přidat obrázek"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "Add"
+msgstr "Přidat"
+
+msgid "Content Types"
+msgstr "Typy obsahu"
+
+msgid "Content Blocks"
+msgstr "Obsahové bloky"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%s Bloky"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Upravit %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Vytvořit %s"
+
+msgid "Create Content Block"
+msgstr "Vytvořit obsahový blok"
+
+msgid "Your first name"
+msgstr "Vaše křestní jméno"
+
+msgid "Your last name"
+msgstr "Vaše příjmení"
+
+msgid "Your email address"
+msgstr "Vaše e-mailová adresa"
+
+msgid "Your password, at least eight letters please"
+msgstr "Vaše heslo, alespoň osm písmen, prosím"
+
+msgid "That email address is already used"
+msgstr "Tato e-mailová adresa je již použita"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Hesla musí obsahovat alespoň 8 písmen."
+
+msgid "This domain is used for subdomains"
+msgstr "Tato doména se používá pro subdomény"
+
+msgid "Name"
+msgstr "Název"
+
+msgid "The name of this organization"
+msgstr "Název této organizace"
+
+msgid "The logo that should be used for this organization"
+msgstr "Logo, které by mělo být použito pro tuto organizaci"
+
+msgid "Administrators"
+msgstr "Správci"
+
+msgid "The administrators in your organization"
+msgstr "Správci ve vaší organizaci"
+
+msgid "Viewers"
+msgstr "Prohlížející"
+
+msgid "The viewers in your organization"
+msgstr "Prohlížející ve vaší organizaci"
+
+msgid "Editors"
+msgstr "Editoři"
+
+msgid "The editors in your organization"
+msgstr "Redaktoři ve vaší organizaci"
+
+msgid "Language"
+msgstr "Jazyk"
+
+msgid "The main language used by this organization"
+msgstr "Hlavní jazyk používaný touto organizací"
+
+msgid "Subdomain"
+msgstr "Subdoména"
+
+msgid "This subdomain is not available"
+msgstr "Tato subdoména není k dispozici"
+
+msgid "The subdomain for this organization"
+msgstr "Subdoména pro tuto organizaci"
+
+msgid "Domain"
+msgstr "Doména"
+
+msgid "This domain is not available"
+msgstr "Tato doména není k dispozici"
+
+msgid "The custom domain for this organization"
+msgstr "Vlastní doména pro tuto organizaci"
+
+msgid "Timezone"
+msgstr "Časové pásmo"
+
+msgid "The timezone your organization is in."
+msgstr "Časové pásmo, ve kterém se vaše organizace nachází."
+
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"blob JSON používaný k ukládání konfiguračních informací spojených s touto "
+"organizací"
+
+msgid "Administrator"
+msgstr "Správce"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Viewer"
+msgstr "Prohlížející"
+
+msgid "Org"
+msgstr "Org"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Organizace, do které je účet pozván k prohlížení."
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "E-mail, na který zašleme pozvánku prohlížejícímu."
+
+msgid "Secret"
+msgstr "Tajemství"
+
+msgid "a unique code associated with this invitation"
+msgstr "jedinečný kód spojený s touto pozvánkou"
+
+msgid "User Role"
+msgstr "Uživatelská role"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s pozvání"
+
+msgid "Banner"
+msgstr "Reklamní proužek"
+
+msgid "Pattern"
+msgstr "Vzor"
+
+msgid "The organization in which the image will be used"
+msgstr "Organizace, ve které bude obrázek použit"
+
+msgid "The name to describe this background"
+msgstr "Název popisující toto pozadí"
+
+msgid "Background type"
+msgstr "Typ pozadí"
+
+msgid "The image file"
+msgstr "Obrazový soubor"
+
+msgid "The API token for this backend"
+msgstr "Token API pro tento backend"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+" Byli jste pozváni, abyste se připojili k %(org_name)s.\n"
+"<br/>\n"
+"Chcete-li pozvání přijmout, <a href='%(host)s%(join_url)s'>klikněte zde</a>."
+
+msgid "You are invited to join {{org.name}}."
+msgstr "Jste zváni, abyste se připojili k {{org.name}}."
+
+msgid "Click this link to join"
+msgstr "Pro připojení klikněte na odkaz. "
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Manage Backends"
+msgstr "Správa backendů"
+
+msgid "Manage Users"
+msgstr "Správa uživatelů"
+
+msgid "Accounts"
+msgstr "Účty"
+
+msgid "Admins"
+msgstr "Správci"
+
+msgid "Remove"
+msgstr "Odstranit"
+
+msgid "You must have at least one administator"
+msgstr "Musíte mít alespoň jednoho správce"
+
+msgid "Select your Organization"
+msgstr "Vyberte svou organizaci"
+
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"Váš účet není přidružen k žádné organizaci. Kontaktujte prosím správce."
+
+msgid "Your Organization"
+msgstr "Vaše Organizace"
+
+msgid "Invite people to your organization"
+msgstr "Pozvěte lidi do své organizace"
+
+msgid "User group"
+msgstr "Uživatelská skupina"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Jeden ze zadaných e-mailů je neplatný."
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Spravovat účty %(name)s"
+
+msgid "Create"
+msgstr "Vytvořit"
+
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"Váš odkaz na pozvánku je neplatný. Kontaktujte prosím správce vaší "
+"organizace."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Připojit %(name)s"
+
+msgid "Join"
+msgstr "Připojit"
+
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"Platnost vašeho odkazu na pozvánku vypršela. Kontaktujte prosím správce vaší"
+" organizace."
+
+msgid "Task"
+msgstr "Úloha"
+
+msgid "Tasks"
+msgstr "Úlohy"
+
+msgid "The title for this story"
+msgstr "Název pro tento příběh"
+
+msgid "Whether this story is featured"
+msgstr "Zda je tento příběh uveden"
+
+msgid "The summary for the story"
+msgstr "Shrnutí příběhu"
+
+msgid "The body of text for the story"
+msgstr "Hlavní text příběhu"
+
+msgid "The writer of the story"
+msgstr "Autor příběhu"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Odkaz na soubor mp3 pro zveřejnění v tomto příběhu"
+
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"ID videa na YouTube, které by mělo být propojeno s tímto příběhem (jedná se "
+"o text, který je uveden za v= a před & v adrese URL YouTube)."
+
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Jakékoli značky pro tento příběh, oddělené mezerami, lze použít k "
+"pokročilejšímu filtrování, volitelné."
+
+msgid "The category for this story"
+msgstr "Kategorie tohoto příběhu"
+
+msgid "The organization this story belongs to"
+msgstr "Organizace, které tento příběh patří"
+
+msgid "Stories"
+msgstr "Příběhy"
+
+msgid "The story to associate to"
+msgstr "Příběh, který se váže k"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Story Images"
+msgstr "Obrázky příběhu"
+
+#, python-format
+msgid "Image %d"
+msgstr "Obrázek %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+"Obrázek, který se zobrazí na stránce příběhu a v náhledech. (nepovinné)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+"Obrázek, který se zobrazí na stránce příběhu a v náhledech (nepovinné)"
+
+msgid "Remove Item?"
+msgstr "Odebrat položku?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"    Jste si jisti, že chcete odstranit <b>%(object)s</b>?\n"
+"    "
+
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr "Jakmile je odstraněn, navždy zmizí. Tuto operaci nelze vrátit zpět."
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"         %(counter)s výsledků\n"
+"        "
+msgstr[1] ""
+"\n"
+"         %(counter)s výsledků\n"
+"        "
+msgstr[2] ""
+"\n"
+"         %(counter)s výsledků\n"
+"        "
+msgstr[3] ""
+"\n"
+"         %(counter)s výsledků\n"
+"        "
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tVýsledky %(start)s-%(end)s z %(count)s\n"
+"\t"
+
+msgid "Previous"
+msgstr "Předchozí"
+
+msgid "Next"
+msgstr "Další"
+
+msgid "edit"
+msgstr "upravit"
+
+msgid "Sign in"
+msgstr "Přihlásit se"
+
+msgid "Login"
+msgstr "Přihlášení"
+
+msgid "Forgot Password?"
+msgstr "Zapomenuté heslo?"
+
+msgid "Token Expired"
+msgstr "Platnost tokenu vypršela"
+
+msgid "Login Failure"
+msgstr "Selhání přihlášení"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+" Je nám líto, ale v tuto chvíli se nemůžete přihlásit, protože jsme obdrželi %(failed_login_limit)s nesprávné pokusy o přihlášení.\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Počkejte prosím %(lockout_timeout)s minut, než se zkusíte přihlásit znovu.\n"
+"     "
+
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+"Můžete také vyplnit níže uvedený formulář a nechat si obnovit heslo "
+"e-mailem."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Pro obnovení hesla se obraťte na správce webu."
+
+msgid "Email Address"
+msgstr "E-mailová adresa"
+
+msgid "Recover"
+msgstr "Obnovit"
+
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+"Zadejte prosím e-mailovou adresu, kterou jste použili při registraci, a my "
+"vám pomůžeme obnovit heslo."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+" <strong>Platnost vašeho hesla vypršela.</strong> Zásady webu stanoví, že si musíte každý %(expire_days)s den zvolit nové heslo a že hesla nesměla být v předchozích %(window_days)s dnech použita."
+
+msgid "New Password"
+msgstr "Nové heslo"
+
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
+"Hesla musí obsahovat alespoň 8 znaků, z toho jedno velké písmeno, jedno malé"
+" písmeno a jednu číslici."
+
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
+"Toto heslo jste v uplynulém roce již použili, použijte prosím nové heslo."
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Confirm Password"
+msgstr "Potvrdit heslo"
+
+msgid "Please enter your password to save changes."
+msgstr "Pro uložení změn zadejte své heslo."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Potvrďte nové heslo vyplněním tohoto pole."
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Nové heslo se neshoduje s jeho potvrzením"
+
+msgid "Your Email"
+msgstr "Váš e-mail"
+
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
+"Obnovení hesla e-mailem není podporováno, obraťte se prosím na správce webu "
+"a obnovte heslo ručně."
+
+msgid "Current Password"
+msgstr "Aktuální heslo"
+
+msgid "Your current password"
+msgstr "Vaše aktuální heslo"
+
+msgid "Your new password."
+msgstr "Vaše nové heslo."
+
+msgid "Confirm new Password"
+msgstr "Potvrzení nového hesla"
+
+msgid "Confirm your new password."
+msgstr "Potvrďte své nové heslo."
+
+msgid "Please enter your password to save changes"
+msgstr "Pro uložení změn zadejte své heslo"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Potvrďte své nové heslo zadáním zde"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Neshoda mezi novým heslem a potvrzením, zkuste to znovu."
+
+msgid "New user created successfully."
+msgstr "Nový uživatel byl úspěšně vytvořen."
+
+msgid "Groups"
+msgstr "Skupiny"
+
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr ""
+"Uživatelé získají pouze ta oprávnění, která jsou povolena pro jejich "
+"skupinu."
+
+msgid "Set the user's initial password here."
+msgstr "Zde nastavte počáteční heslo uživatele."
+
+msgid "Last Login"
+msgstr "Poslední přihlášení"
+
+msgid "Is Active"
+msgstr "Je aktivní"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Zda je tomuto uživateli povoleno přihlásit se k webu."
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+"Uživatelé získají pouze ta oprávnění, která jsou povolena pro jejich "
+"skupinu."
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Heslo uživatele můžete obnovit zadáním nového hesla zde."
+
+msgid "Username"
+msgstr "Uživatelské jméno"
+
+msgid "Your password"
+msgstr "Vaše heslo"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Pokud chcete nastavit nové heslo, zadejte ho zde."
+
+msgid "Confirm New Password"
+msgstr "Potvrdit nové heslo"
+
+msgid "Confirm your new password"
+msgstr "Potvrďte své nové heslo"
+
+msgid "Edit your profile"
+msgstr "Upravit svůj profil"
+
+msgid "Password Recovery"
+msgstr "Obnova hesla"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Na váš účet byl odeslán e-mail s dalšími pokyny."
+
+msgid "Password Recovery Request"
+msgstr "Žádost o obnovení hesla"
+
+msgid "Pick a new password"
+msgstr "Výběr nového hesla"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Vaše heslo bylo úspěšně aktualizováno, děkujeme."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Nyní jste přihlášeni jako %s"
+
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+"Heslo bylo úspěšně aktualizováno. Nyní se můžete přihlásit pomocí nového "
+"hesla."
+
+msgid "Reset your Password"
+msgstr "Obnovte své heslo"
+
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr ""
+"Platnost vašeho odkazu z bezpečnostních důvodů vypršela. Znovu jej spusťte "
+"zadáním svého e-mailu zde."
+
+msgid "Submit"
+msgstr "Odeslat"
+
+msgid "Form"
+msgstr "Formulář"
+
+msgid "Save Changes"
+msgstr "Uložit změny"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Váš nový %s byl vytvořen."
+
+#, python-format
+msgid "Import %s"
+msgstr "Import %s"
+
+msgid "Back to Website"
+msgstr "Zpět na webovou stranu"
+
+msgid "Welcome, "
+msgstr "Vítejte, "
+
+msgid "Logout"
+msgstr "Odhlášení"
+
+msgid "Opinions"
+msgstr "Názory"
+
+msgid "Users"
+msgstr "Uživatelé"
+
+msgid "Settings"
+msgstr "Nastavení"
+
+msgid "Pages"
+msgstr "Strany"
+
+msgid "Jobs"
+msgstr "Pracovní nabídky"
+
+msgid "Photos"
+msgstr "Fotky"
+
+msgid "Categories Images"
+msgstr "Obrázky kategorie"
+
+msgid "News Items"
+msgstr "Zprávy"
+
+msgid "Orgs"
+msgstr "Organizace"
+
+msgid "Images"
+msgstr "Obrázky"
+
+msgid "About"
+msgstr "O nás..."
+
+msgid "Engagement"
+msgstr "Zapojení"
+
+msgid "Category Images"
+msgstr "Obrázky kategorií"
+
+msgid "+ New "
+msgstr "+ Nový"
+
+msgid "+ New Page"
+msgstr "+ Nová strana"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Configuration"
+msgstr "Konfigurace"
+
+msgid "Content"
+msgstr "Obsah"
+
+msgid "Country Aliases"
+msgstr "Aliasy zemí"
+
+msgid "Job Sources"
+msgstr "Zdroje Pracovních nabídek"
+
+msgid "Jobs Content"
+msgstr "Obsah Pracovních nabídek"
+
+msgid "About Content"
+msgstr "O obsahu"
+
+msgid "Videos"
+msgstr "Videa"
+
+msgid "Contact Us Content"
+msgstr "Obsah strany Kontaktujte nás"
+
+msgid "Missions Content"
+msgstr "Obsah misí"
+
+msgid "Terms & Conditions"
+msgstr "Podmínky a pravidla"
+
+msgid "U-Reporters Content"
+msgstr "Obsah strany U-Reporters"
+
+msgid "Join &amp; Engage Content"
+msgstr "Připojte se a zapojte se do obsahu"
+
+msgid "Join Steps Content"
+msgstr "Obsah strany Kroky k připojení"
+
+msgid "Additional Menu"
+msgstr "Další nabídka"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "VYBERTE SVOU ZEMI"
+
+msgid "Join Now"
+msgstr "Připojte se"
+
+msgid "READ MORE"
+msgstr "ČTĚTE VÍCE"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "PROZKOUMEJTE ZAPOJENÍ"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+" Chcete-li přidat zdroj Pracovních nabídek Twitter, musíte získat id widgetu z Twitteru.\n"
+"     "
+
+msgid "Follow this step by step guide"
+msgstr "Postupujte podle tohoto průvodce krok za krokem"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+" <div>Po vytvoření widgetu zkopírujte id widgetu z url adresy, jak je uvedeno na</div>\n"
+"    "
+
+msgid "Back"
+msgstr "Zpět"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "NEJNOVĚJŠÍ OZNÁMENÍ"
+
+msgid "Backends"
+msgstr "Backendy"
+
+#, python-format
+msgid ""
+"There is currently %(counter)s new poll syncing. Polls are displayed on the "
+"public site once they have completely synced their results."
+msgid_plural ""
+"There are currently %(counter)s new polls syncing. Polls are displayed on "
+"the public site once they have completely synced their results."
+msgstr[0] ""
+"V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy "
+"se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich "
+"výsledky."
+msgstr[1] ""
+"V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy "
+"se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich "
+"výsledky."
+msgstr[2] ""
+"V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy "
+"se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich "
+"výsledky."
+msgstr[3] ""
+"V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy "
+"se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich "
+"výsledky."
+
+msgid "+ New Poll"
+msgstr "+ Nový Průzkum"
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "%(counter)s otázek průzkumu"
+msgstr[1] "%(counter)s otázek průzkumu"
+msgstr[2] "%(counter)s otázek průzkumu"
+msgstr[3] "%(counter)s otázek průzkumu"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr "Nová počáteční synchronizace průzkumu naplánovaná každých 10 minut"
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr "Hlavní synchronizace průzkumu naplánovaná každých 10 minut"
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr "Poslední synchronizace průzkumů naplánovaná každých 60 minut"
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr "Synchronizace se již neplánuje, běhy se archivují"
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "Synchronizace průzkumů naplánovaná každých 24 hodin"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Nenaplánovaná synchronizace, není aktivní"
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr "Neplánování synchronizací, žádný tok pro průzkum"
+
+msgid "Refresh Results"
+msgstr "Obnovit výsledky"
+
+msgid "MORE POLLS"
+msgstr "VÍCE PRŮZKUMŮ"
+
+msgid "FILTER"
+msgstr "FILTR"
+
+msgid "All"
+msgstr "Vše"
+
+msgid "POLL LIST"
+msgstr "SEZNAM PRŮZKUMŮ"
+
+msgid "All polls from most recent to oldest"
+msgstr "Všechny průzkumy od nejnovějšího po nejstarší"
+
+msgid "ARCHIVED STORIES"
+msgstr "ARCHIVOVANÉ PŘÍBĚHY"
+
+msgid "LIST"
+msgstr "SEZNAM"
+
+msgid "LATEST OPINION"
+msgstr "NEJNOVĚJŠÍ NÁZOR"
+
+msgid "VIEW FULL RESULTS"
+msgstr "ZOBRAZIT KOMPLETNÍ VÝSLEDKY"
+
+msgid "U-REPORTERS IN"
+msgstr "U-REPORTERS IN"
+
+msgid "PARTNERING WITH"
+msgstr "PARTNERSTVÍ S"
+
+msgid "U-REPORTERS"
+msgstr "U-REPORTÉŘI"
+
+msgid "IN"
+msgstr "V"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ZEMĚ CELOSVĚTOVĚ"
+
+msgid "AGES"
+msgstr "VĚKOVÉ SKUPINY"
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Přidejte se k U-Report, na vašem hlase záleží."
+
+msgid "FEATURED STORY"
+msgstr "OBSAZENÝ PŘÍBĚH"
+
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
+msgstr ""
+"Jsme součástí globální platformy, která se snaží změnit životy mladých lidí "
+"na celém světě."
+
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"Zjistěte více o tom, jak U-Report posiluje a propojuje mladé lidi, aby se "
+"vyjadřovali k otázkám, na kterých jim záleží."
+
+msgid "LEARN MORE"
+msgstr "DALŠÍ INFORMACE"
+
+msgid "Visit"
+msgstr "Navštívít"
+
+msgid "How would you like to join?"
+msgstr "Jak byste se chtěli připojit?"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "SEARCH"
+msgstr "HLEDAT"
+
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
+
+msgid "RESPONSES"
+msgstr "ODPOVĚDI"
+
+msgid "RESPONSE RATE"
+msgstr "RYCHLOST ODEZVY"
+
+msgid "TOTAL RESPONSES"
+msgstr "CELKEM ODPOVĚDÍ"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s odpovědělo z %(polled)s dotázaných"
+
+msgid "ALL"
+msgstr "VŠE"
+
+msgid "AGE"
+msgstr "VĚK"
+
+msgid "GENDER"
+msgstr "POHLAVÍ"
+
+msgid "LOCATION"
+msgstr "LOKALITA"
+
+msgid "Written by:"
+msgstr "Napsal:"
+
+msgid "Even"
+msgstr "Také"
+
+msgid "State"
+msgstr "Stav"
+
+msgid "Other"
+msgstr "Ostatní"
+
+msgid "District"
+msgstr "Okres"
+
+msgid "Participation Level"
+msgstr "Úroveň participace"
+
+msgid "Responses"
+msgstr "Odpovědi"
+
+msgid "Reporters in"
+msgstr "Reportéři v"
+
+msgid "Results"
+msgstr "Výsledky"
+
+msgid "*Other answers include"
+msgstr "*Další odpovědi zahrnují"
+
+msgid "Population"
+msgstr "Obyvatelstvo"
+
+msgid "Registered in"
+msgstr "Registrován v"
+
+msgid "Density"
+msgstr "Hustota"
+
+msgid "total"
+msgstr "celkem"
+
+msgid "of"
+msgstr "z"
+
+msgid "the"
+msgstr " "
+
+msgid "OVERALL STATISTICS"
+msgstr "CELKOVÉ STATISTIKY"
+
+msgid "THIS YEAR"
+msgstr "TENTO ROK"
+
+msgid "AVG RESPONSE RATE"
+msgstr "PRŮMĚRNÁ MÍRA ODEZVY"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTÉŘI PODLE REGIONŮ"
+
+msgid "FILTER RESULTS"
+msgstr "VÝSLEDKY FILTROVÁNÍ"
+
+msgid "Export and Share"
+msgstr "Export a sdílení"
+
+msgid ""
+"Want to tell the world about this? Download this image to easily share on "
+"social media or for a beautiful presentation!"
+msgstr ""
+"Chcete o tom říct světu? Stáhněte si tento obrázek a snadno ho sdílejte na "
+"sociálních sítích nebo pro krásnou prezentaci!"
+
+msgid "SELECT LANGUAGE"
+msgstr "VYBRAT JAZYK"
+
+msgid "SELECT COUNTRY"
+msgstr "VYBRAT ZEMI"
+
+msgid "Custom pages"
+msgstr "Uživatelské stránky"
+
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
+msgstr ""
+"Podívejte se na čísla, jak zapojujeme hlasy mladých lidí do pozitivní "
+"sociální změny."
+
+msgid "Polled"
+msgstr "Proveden výzkum"
+
+msgid "Reporters"
+msgstr "Reportéři"
+
+msgid "Top Region"
+msgstr "Top region"
+
+msgid "January"
+msgstr "leden"
+
+msgid "February"
+msgstr "únor"
+
+msgid "March"
+msgstr "březen"
+
+msgid "April"
+msgstr "duben"
+
+msgid "May"
+msgstr "květen"
+
+msgid "June"
+msgstr "červen"
+
+msgid "July"
+msgstr "červenec"
+
+msgid "August"
+msgstr "srpen"
+
+msgid "September"
+msgstr "září"
+
+msgid "October"
+msgstr "říjen"
+
+msgid "November"
+msgstr "listopad"
+
+msgid "December"
+msgstr "prosinec"
+
+msgid "Jan"
+msgstr "led"
+
+msgid "Feb"
+msgstr "úno"
+
+msgid "Mar"
+msgstr "bře"
+
+msgid "Apr"
+msgstr "dub"
+
+msgid "Jun"
+msgstr "čer"
+
+msgid "Jul"
+msgstr "čvc"
+
+msgid "Aug"
+msgstr "srp"
+
+msgid "Sep"
+msgstr "zář"
+
+msgid "Oct"
+msgstr "říj"
+
+msgid "Nov"
+msgstr "lis"
+
+msgid "Dec"
+msgstr "pro"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+" Opravdu chcete odstranit <strong>%(object)s</strong>?\n"
+"      "
+
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] "%(counter)s výsledků"
+msgstr[1] "%(counter)s výsledků"
+msgstr[2] "%(counter)s výsledků"
+msgstr[3] "%(counter)s výsledků"
+
+#, python-format
+msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr "Výsledky %(start)s-%(end)s z %(count)s"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Enter Dashboard"
+msgstr "Vstup na ovládací panel"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Je nám líto, ale v tuto chvíli se nemůžete přihlásit, protože jsme obdrželi %(failed_login_limit)s nesprávných pokusů o přihlášení."
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+" Počkejte prosím %(lockout_timeout)s minut, než se zkusíte přihlásit znovu."
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+" <strong>Platnost vašeho hesla vypršela</strong>. Zásady webu stanoví, že si musíte každý %(expire_days)s den zvolit nové heslo a že hesla nesměla být v předchozích %(window_days)s dnech použita."
+
+msgid "+ New Story"
+msgstr "+ Nový příběh"
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "Obnovená %s mezipaměť této organizace"
+
+msgid "Flag"
+msgstr "Označení"
+
+msgid "The organization to which the image will be used"
+msgstr "Organizace, pro kterou bude obrázek použit"
+
+msgid "A short descriptive name for this image"
+msgstr "Krátký popisný název tohoto obrázku"
+
+msgid "Image type"
+msgstr "Typ obrázku"
+
+msgid "Label"
+msgstr "Štítek"
+
+msgid "Key"
+msgstr "Klíč"
+
+msgid "Male"
+msgstr "Muž"
+
+msgid "Female"
+msgstr "Žena"
+
+msgid "Organization"
+msgstr "Organizace"
+
+msgid "Gender"
+msgstr "Pohlaví"
+
+msgid "Gender of the contact"
+msgstr "Pohlaví kontaktu"
+
+msgid "Born Field"
+msgstr "Born Field"
+
+msgid "Occupation Field"
+msgstr "Oblast povolání"
+
+msgid "Registration Date"
+msgstr "Datum registrace"
+
+msgid "State Field"
+msgstr "Pole Stavu"
+
+msgid "District Field"
+msgstr "pole okresu"
+
+msgid "Ward Field"
+msgstr "Ward Field"
+
+msgid "Number of items with this counter"
+msgstr "Počet položek s tímto čítačem"
+
+msgid "No root user found. Please create a root user"
+msgstr "Nebyl nalezen žádný uživatel root. Vytvořte prosím uživatele root"
+
+msgid "The name for our alias"
+msgstr "Název našeho aliasu"
+
+msgid "The title or name to reference this Job source."
+msgstr "Název nebo jméno pro odkaz na tento zdroj Pracovních nabídek."
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr ""
+"Vyberte typ zdroje Pracovních nabídek. Twitter, Facebook nebo RSS kanál"
+
+msgid "The full URL to navigate to this Job source."
+msgstr "Úplná adresa URL pro přechod na tento zdroj pracovních nabídek."
+
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
+msgstr ""
+"V případě Twitteru je pro vložení tweetů na webové stránky vyžadováno ID "
+"widgetu. Pozorně si přečtěte výše uvedené pokyny, jak získat správné ID "
+"widgetu."
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr ""
+"Doporučené zdroje pracovních nabídek se na stránce pracovních nabídek "
+"zobrazují jako první."
+
+msgid "The organization this job source is for"
+msgstr "Organizace, pro kterou je tento zdroj pracovních nabídek určen"
+
+msgid "Your job source has been added successfully"
+msgstr "Váš zdroj pracovních nabídek byl úspěšně přidán"
+
+msgid "Your job source has been updated successfully"
+msgstr "Váš zdroj pracovních nabídek byl úspěšně aktualizován"
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr "Toto je ID OSM pro tuto správní hranici."
+
+msgid "The name of our administrative boundary"
+msgstr "Název naší správní hranice"
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr "Úroveň hranice, 0 pro zemi, 1 pro stát, 2 pro okres."
+
+msgid "The parent to this political boundary if any"
+msgstr "Nadřízený orgán této politické hranice, pokud existuje"
+
+msgid "Geometry"
+msgstr "Geometrie"
+
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr "json reprezentující typ geometrie a souřadnice hranic"
+
+msgid "The title for this item"
+msgstr "nadpis pro tuto položku"
+
+msgid "A short summary description for this item"
+msgstr "Krátký souhrnný popis této položky"
+
+msgid "A link that should be associated with this item"
+msgstr "Odkaz, který by měl být spojen s touto položkou"
+
+msgid "The category this item belongs to"
+msgstr "Kategorie, do které tato položka patří"
+
+msgid "The organization this item belongs to"
+msgstr "Organizace, které tato položka patří"
+
+msgid "The title for this Video"
+msgstr "Název tohoto videa"
+
+msgid "A short summary description for this video"
+msgstr "Krátký souhrnný popis tohoto videa"
+
+msgid "The organization this video belongs to"
+msgstr "Organizace, které toto video patří"
+
+msgid "The name of this poll category"
+msgstr "Název této kategorie průzkumu"
+
+msgid "Poll Categories"
+msgstr "Kategorie průzkumů"
+
+msgid "The Flow this Poll is based on"
+msgstr "Tok, na kterém je tento průzkum založen"
+
+msgid ""
+"The date to display for this poll. Leave empty to use flow creation date."
+msgstr ""
+"Datum, které se má zobrazit pro tento průzkum. Nechte prázdné, chcete-li "
+"použít datum vytvoření toku."
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "Zda je tok pro tento průzkum archivován na RapidPro"
+
+msgid "The base language of the flow to use"
+msgstr "Základní jazyk toku, který se má použít"
+
+msgid "The number of polled reporters on this poll"
+msgstr "Počet dotazovaných reportérů v tomto průzkumu"
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr "Zda průzkum dokončil synchronizaci počátečních výsledků."
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Zda by průzkum měl zastavit regeneraci statistik."
+
+msgid "The title for this Poll"
+msgstr "Název tohoto průzkumu"
+
+msgid "The category this Poll belongs to"
+msgstr "Kategorie, do které tento průzkum patří"
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr "Zda by tento průzkum měl být uveden na domovské stránce"
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr "Úvodní obrázek kategorie, který se zobrazí u průzkumu (nepovinné)"
+
+msgid "The organization this poll is part of"
+msgstr "Organizace, jejíž součástí je tento průzkum"
+
+msgid "The title for this response story"
+msgstr "Název této reakce na příběh"
+
+msgid "The writer of the response story"
+msgstr "Autor příběhu odpovědi"
+
+msgid "The poll to associate to"
+msgstr "Průzkum, ke kterému se má přidružit"
+
+msgid "The poll for this response"
+msgstr "Průzkum pro tuto odpověď"
+
+msgid "The location for this response"
+msgstr "Místo pro tuto odpověď"
+
+msgid "The name of the sender of the message"
+msgstr "Jméno odesílatele zprávy"
+
+msgid "The featured response message"
+msgstr "Doporučená zpráva s odpovědí"
+
+msgid "The poll this question is part of"
+msgstr "Průzkum, jehož součástí je tato otázka"
+
+msgid "The title of this question"
+msgstr "Nadpis této otázky"
+
+msgid "The RuleSet this question is based on"
+msgstr "Soubor pravidel, na kterém je tato otázka založena"
+
+msgid "The label of the ruleset on RapidPro"
+msgstr "Označení sady pravidel v systému RapidPro"
+
+msgid "The priority number for this question on the poll"
+msgstr "Číslo priority pro tuto otázku v průzkumu"
+
+msgid "The Rule this response category is based on"
+msgstr "Pravidlo, na kterém je tato kategorie odpovědí založena"
+
+msgid "Your org does not have any API token configuration."
+msgstr "Vaše organizace nemá žádnou konfiguraci tokenů API."
+
+msgid "You must include a title for every included question."
+msgstr "U každé zařazené otázky musíte uvést název."
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr "Příliš dlouhý název. Maximální limit je 255 znaků pro každý název"
+
+msgid "You must include at least one poll question."
+msgstr "Musíte uvést alespoň jednu otázku průzkumu."
+
+msgid "Adjust poll date"
+msgstr "Upravit datum průzkumu"
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr ""
+"Váš průzkum byl aktualizován, nyní vyberte, které otázky chcete zahrnout."
+
+msgid "Configure flow"
+msgstr "Konfigurace toku"
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr "Váš průzkum byl nakonfigurován, nyní upravte datum průzkumu."
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "Your poll has been created, now configure its flow."
+
+msgid "Poll Images"
+msgstr "Obrázky průzkumu"
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr "Nyní zadejte všechny odpovědi, které chcete uvést. (pokud existují)"
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr ""
+"Obrázek, který se zobrazí na stránce průzkumu a v náhledech. (nepovinné)"
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr ""
+"Obrázek, který se zobrazí na stránce průzkumu a v náhledech (nepovinné)"
+
+msgid "Poll Response"
+msgstr "Reakce na průzkum"
+
+msgid "Your poll has been updated."
+msgstr "Váš průzkum byl aktualizován."
+
+msgid "Poll Questions"
+msgstr "Otázky průzkumu"
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr ""
+"Nyní nastavte, jaké obrázky chcete na stránce průzkumu zobrazit. (pokud "
+"existují)"
+
+msgid "Include"
+msgstr "Zahrnout"
+
+msgid "Whether to include this question in your public results"
+msgstr "Zda tuto otázku zahrnout do veřejných výsledků"
+
+msgid "Priority"
+msgstr "Priorita"
+
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
+msgstr ""
+"Priorita této otázky na stránce průzkumu, vyšší priorita je na prvním místě"
+
+msgid "Ruleset Label"
+msgstr "Označení sady pravidel"
+
+msgid "The label of the ruleset from RapidPro"
+msgstr "Označení sady pravidel z aplikace RapidPro"
+
+msgid "Title"
+msgstr "Název"
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Otázka položená vašemu publiku se zobrazí veřejně."
+
+msgid "Category {idx+1}"
+msgstr "Kategorie {idx+1}"
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Označení kategorie z backendu (například RapidPro)"
+
+msgid "Display {idx+1}"
+msgstr "Zobrazení {idx+1}"
+
+msgid "The label to display of the category on the public site"
+msgstr "Štítek, který se má zobrazit u kategorie na veřejném webu."
+
+msgid "Scheduled Sync currently in progress..."
+msgstr "Plánovaná synchronizace právě probíhá..."
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr "Poslední výsledky synchronizované před %(time)s"
+
+msgid "Synced"
+msgstr "Synchronizováno"
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr "Synchronizace právě probíhá... {sync_progress:.1f}%"
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr "Upravit průzkum pro tok [{flow_name} ({flow_date_hint})]"
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr ""
+"Naplánované obnovení tahu pro průzkum číslo %(poll_id)d na org číslo "
+"%(org_id)d"
+
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr "Název skupiny kontaktů, která obsahuje registrované reportéry."
+
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr "Označení pole kontaktu, které obsahuje datum narození reportérů."
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr "Označení pole kontaktu, které obsahuje pohlaví zpravodajů."
+
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr "Označení pole kontaktu, které obsahuje povolání reportérů."
+
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr "Štítek kontaktního pole, které obsahuje datum registrace zpravodajů."
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr "Štítek pole kontaktu, který obsahuje stav reportérů"
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr "Označení pole kontaktů, které obsahuje okres reportérů."
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr "Označení pole kontaktů, které obsahuje oddělení zpravodajů."
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "Označení přiřazené U-Reporterům, kteří jsou Muži."
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "Označení přiřazené U-Reporterům, kteří jsou Ženy."
+
+msgid "Whether this org should be show on the landing page"
+msgstr "Zda se má tato organizace zobrazit na vstupní stránce"
+
+msgid "Whether this org count should consider the count from link only"
+msgstr "Zda má tato organizace počítat pouze s počtem z odkazu."
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr ""
+"Zkrácený kód, který budou uživatelé používat k místnímu kontaktu s U-Report."
+
+msgid ""
+"The whatapp number that users will use to contact U-Report if you have one"
+msgstr ""
+"Číslo whatapp, které uživatelé použijí pro kontaktování U-Report, pokud ho "
+"máte."
+
+msgid ""
+"The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+"Uživatelské jméno Viber, které budou uživatelé používat pro kontaktování "
+"U-Report, pokud ho máte."
+
+msgid "The join button text"
+msgstr "Text tlačítka pro připojení"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr "Krátký text, který návštěvníky nasměruje k připojení k U-Report."
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr "ID videa na YouTube, jak se připojit k sekci U-Report"
+
+msgid "The title of the photos section U-Report homepage"
+msgstr "Název sekce fotografií na domovské stránce U-Report"
+
+msgid "The description of the photos section U-Report homepage"
+msgstr "Popis sekce fotografií na domovské stránce U-Report"
+
+msgid "The description of the opinions page"
+msgstr "Popis stránky s názory"
+
+msgid "The description of the stories page"
+msgstr "Popis stránky s příběhy"
+
+msgid "The description of the engagement page"
+msgstr "Popis stránky zapojení"
+
+msgid "The callout message on the footer engagement section"
+msgstr "Zpráva s výzvou v zápatí sekce angažovanost"
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Primární barva pro stylování této organizace by měla být tmavá."
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Sekundární barva pro stylování této organizace by měla být tmavá."
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Třetí barva pro stylování této organizace by měla být tmavá."
+
+msgid ""
+"The primary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Hlavní barva zvýraznění pro stylování této organizace by měla být světlá."
+
+msgid ""
+"The secondary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Sekundární barva zvýraznění pro stylování této organizace by měla být "
+"světlá."
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Až 6 barev pro stylování grafů, mezi barvami použijte čárku"
+
+msgid "The color used to draw the text on the join bar"
+msgstr "Barva použitá pro vykreslení textu na spojovacím pruhu"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Barva použitá pro vykreslení pozadí na připojovací liště"
+
+msgid "The primary color for styling for this organization"
+msgstr "Hlavní barva pro stylování této organizace"
+
+msgid "The secondary color for styling for this organization"
+msgstr "Sekundární barva pro stylování této organizace"
+
+msgid "The background color for the site"
+msgstr "Barva pozadí webu"
+
+msgid ""
+"11 colors for styling maps, use comma between colors, not used if not 11 "
+"colors"
+msgstr ""
+"11 barev pro stylování map, mezi barvami použijte čárku, nepoužívá se, pokud"
+" není 11 barev"
+
+msgid "The states to show on maps only"
+msgstr "Stavy k zobrazení pouze na mapách"
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr ""
+"Státy, které se mají zobrazovat pouze na mapách, slouží k filtrování "
+"výsledků průzkumu"
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "ID sledování Google Analytics pro tuto organizaci"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "Adresa URL kanálu Youtube této organizace"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "Adresa URL na stránku této organizace na Facebooku"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr "Celočíselné ID stránky této organizace na Facebooku (nepovinné)."
+
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr ""
+"Celočíselné ID aplikace Facebook pro aplikaci chatu této organizace "
+"(nepovinné)."
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr ""
+"Krátký text používaný k uvítání uživatelů v pluginu Facebook Messenger"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "Identifikátor Facebook Pixel pro tuto organizaci (nepovinné)"
+
+msgid "The Instagram username for this organization"
+msgstr "Uživatelské jméno této organizace na Instagramu"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Widget Instagram id od lightwidget.com"
+
+msgid "The Twitter handle for this organization"
+msgstr "Handle této organizace na Twitteru"
+
+msgid "The Twitter widget used for searching"
+msgstr "Widget Twitter používaný pro vyhledávání"
+
+msgid "The words to filter out from the results on public site"
+msgstr "Slova, která se mají odfiltrovat z výsledků na veřejných stránkách"
+
+msgid "If there are jobs to be shown on the public site."
+msgstr "Pokud se na veřejných stránkách zobrazují pracovní nabídky."
+
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+"Pokud je tento orgán určen pro globální data, např.: zobrazuje mapu světa "
+"namísto mapy zemí."
+
+msgid "Whether to activate an extra gender."
+msgstr "Zda se má aktivovat další pohlaví."
+
+msgid "Whether to activate the new design."
+msgstr "Zda aktivovat nový design."
+
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
+msgstr ""
+"Kód ISO alfa-3 organizace tak, aby se zobrazovaly příběhy widgetu U-Report "
+"App. Příklad: BRA, NIG, CMR (pokud je U-Report globální, použijte GLOBAL)."
+
+msgid "The font used for headline texts"
+msgstr "Písmo použité pro texty nadpisů"
+
+msgid "The font used for normal text"
+msgstr "Písmo používané pro normální text"
+
+msgid "Hide participation stats"
+msgstr "Skrýt statistiky účasti"
+
+msgid "The text to describe the sponsors of free messages"
+msgstr "Text popisující sponzory bezplatných zpráv"
+
+msgid "The font used for small text"
+msgstr "Písmo používané pro malý text"
+
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
+msgstr ""
+"Pokud potřebujete do svých stránek org zahrnout některé vlastní kódy HTML, "
+"například vlastní úryvky analytického kódu."
+
+msgid "Other language sites links"
+msgstr "Odkazy na další jazykové stránky"
+
+msgid "90 Days"
+msgstr "90 dní"
+
+msgid "6 Months"
+msgstr "6 měsíců"
+
+msgid "12 Months"
+msgstr "12 měsíců"
+
+msgid "Age"
+msgstr "Věk"
+
+msgid "Location"
+msgstr "Lokalita"
+
+msgid "Opinion Responses"
+msgstr "Reakce na názory"
+
+msgid "Sign Up Rate"
+msgstr "Rychlost registrace"
+
+msgid "Response Rate"
+msgstr "Míra odezvy"
+
+msgid "Active Users"
+msgstr "Aktivní uživatelé"
+
+msgid "Whether this row was created by squashing"
+msgstr "Zda byl tento řádek vytvořen stlačením"
+
+msgid "Something to trigger localizations"
+msgstr "Něco pro spouštění lokalizací"
