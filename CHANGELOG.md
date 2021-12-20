@@ -1,3 +1,8 @@
+v1.2.21
+----------
+ * Merge pull request #845 from rapidpro/add-niger
+ * Add Niger flag
+
 v1.2.20
 ----------
  * Merge pull request #843 from rapidpro/revert-poll-stats-insert-on-sync
