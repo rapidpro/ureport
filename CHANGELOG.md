@@ -1,3 +1,12 @@
+v1.2.22
+----------
+ * Remove Niger logo
+ * Merge pull request #848 from Ilhasoft/feature/nicaragua-flag
+ * Add Favico Flag Nicaragua
+ * Merge branch 'main' of https://github.com/rapidpro/ureport into feature/nicaragua-flag
+ * Adding Nicaragua's Flag - update 2
+ * Adding Nicaragua's Flag
+
 v1.2.21
 ----------
  * Merge pull request #845 from rapidpro/add-niger
