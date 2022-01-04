@@ -254,6 +254,7 @@ class UreportAPITests(APITestCase):
         age_stats = response.data.pop("age_stats")
         registration_stats = response.data.pop("registration_stats")
         occupation_stats = response.data.pop("occupation_stats")
+        schemes_stats = response.data.pop("schemes_stats")
         reporters_count = response.data.pop("reporters_count")
         self.assertDictEqual(
             response.data,
@@ -275,16 +276,17 @@ class UreportAPITests(APITestCase):
         self.assertEqual(
             age_stats,
             [
-                dict(name="0-14", y=0),
-                dict(name="15-19", y=0),
-                dict(name="20-24", y=0),
-                dict(name="25-30", y=0),
-                dict(name="31-34", y=0),
-                dict(name="35+", y=0),
+                dict(name="0-14", y=0, absolute_count=0),
+                dict(name="15-19", y=0, absolute_count=0),
+                dict(name="20-24", y=0, absolute_count=0),
+                dict(name="25-30", y=0, absolute_count=0),
+                dict(name="31-34", y=0, absolute_count=0),
+                dict(name="35+", y=0, absolute_count=0),
             ],
         )
         self.assertEqual(reporters_count, 0)
         self.assertEqual(occupation_stats, [])
+        self.assertEqual(schemes_stats, [])
 
         ReportersCounter.objects.create(org=org, type="gender:f", count=2)
         ReportersCounter.objects.create(org=org, type="gender:m", count=2)
@@ -324,12 +326,12 @@ class UreportAPITests(APITestCase):
         self.assertEqual(
             age_stats,
             [
-                dict(name="0-14", y=80),
-                dict(name="15-19", y=0),
-                dict(name="20-24", y=0),
-                dict(name="25-30", y=0),
-                dict(name="31-34", y=0),
-                dict(name="35+", y=20),
+                dict(name="0-14", y=80, absolute_count=8),
+                dict(name="15-19", y=0, absolute_count=0),
+                dict(name="20-24", y=0, absolute_count=0),
+                dict(name="25-30", y=0, absolute_count=0),
+                dict(name="31-34", y=0, absolute_count=0),
+                dict(name="35+", y=20, absolute_count=2),
             ],
         )
 

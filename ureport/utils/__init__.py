@@ -422,7 +422,12 @@ def get_age_stats(org):
     if total > 0:
         age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.items()}
 
-    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i["name"]))
+    return json.dumps(
+        sorted(
+            [dict(name=k, y=v, absolute_count=age_counts_interval.get(k, 0)) for k, v in age_stats.items()],
+            key=lambda i: i["name"],
+        )
+    )
 
 
 def get_schemes_stats(org):
@@ -446,17 +451,22 @@ def get_schemes_stats(org):
         scheme_stats = {k: int(round(v * 100 / float(total))) for k, v in schemes_stats_data.items()}
 
     other_stat = 0
+    other_absolute_count = 0
     output_dict = dict()
     for name, v in scheme_stats.items():
         if v <= 5:
             other_stat += v
+            other_absolute_count += schemes_stats_data.get(name, 0)
         else:
             output_dict[name] = v
 
-    output = sorted([dict(name=k, y=v) for k, v in output_dict.items()], key=lambda i: -i["y"])
+    output = sorted(
+        [dict(name=k, y=v, absolute_count=schemes_stats_data.get(k, 0)) for k, v in output_dict.items()],
+        key=lambda i: -i["y"],
+    )
 
     if other_stat:
-        output.append(dict(name="OTHERS", y=other_stat))
+        output.append(dict(name="OTHERS", y=other_stat, absolute_count=other_absolute_count))
     return output
 
 
