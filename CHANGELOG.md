@@ -1,3 +1,12 @@
+v1.2.23
+----------
+ * Run code checks
+ * Merge pull request #852 from rapidpro/absolute_count
+ * Merge pull request #846 from rapidpro/translations_locale-en-lc-messages-django-po--main_cs
+ * Add Niger logo
+ * Add absolute count of age stats and schemes stats for API only
+ * Translate /locale/en/LC_MESSAGES/django.po in cs
+
 v1.2.22
 ----------
  * Remove Niger logo
