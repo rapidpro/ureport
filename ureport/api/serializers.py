@@ -46,6 +46,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
     age_stats = SerializerMethodField()
     registration_stats = SerializerMethodField()
     occupation_stats = SerializerMethodField()
+    schemes_stats = SerializerMethodField()
     reporters_count = SerializerMethodField()
     timezone = SerializerMethodField()
 
@@ -63,6 +64,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
             "age_stats",
             "registration_stats",
             "occupation_stats",
+            "schemes_stats",
             "reporters_count",
         )
 
@@ -82,6 +84,9 @@ class OrgReadSerializer(serializers.ModelSerializer):
 
     def get_occupation_stats(self, obj):
         return json.loads(obj.get_occupation_stats())
+
+    def get_schemes_stats(self, obj):
+        return obj.get_schemes_stats()
 
     def get_reporters_count(self, obj):
         return obj.get_reporters_count()
