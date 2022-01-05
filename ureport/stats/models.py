@@ -310,7 +310,7 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
-        translation.activate(org.language)
+        org_gender_labels = org.get_gender_labels()
 
         flow_result_ids = list(
             PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
@@ -333,7 +333,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
             series = PollStats.get_counts_data(responses, time_filter)
-            output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=series))
+            output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=series))
         return output_data
 
     @classmethod
@@ -573,7 +573,7 @@ class PollStats(models.Model):
         flow_result_ids = list(
             PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
         )
-        translation.activate(org.language)
+        org_gender_labels = org.get_gender_labels()
 
         genders = GenderSegment.objects.all()
         if not org.get_config("common.has_extra_gender"):
@@ -599,7 +599,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
             gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
-            output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=gender_rate_series))
+            output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=gender_rate_series))
 
         return output_data
 
@@ -817,7 +817,7 @@ class ContactActivity(models.Model):
         today = now.date()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1).date()
-        translation.activate(org.language)
+        org_gender_labels = org.get_gender_labels()
 
         genders = GenderSegment.objects.all()
         if not org.get_config("common.has_extra_gender"):
@@ -835,7 +835,7 @@ class ContactActivity(models.Model):
                 .annotate(Count("id"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
-            output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=series))
+            output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=series))
 
         return output_data
 

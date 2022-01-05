@@ -249,6 +249,19 @@ class UtilsTest(UreportTest):
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
 
+    def test_get_gender_labels(self):
+        self.assertEqual(self.org.get_gender_labels(), {"M": "Male", "F": "Female", "O": "Other"})
+
+        self.org.language = "fr"
+        self.org.save()
+
+        self.assertEqual(self.org.get_gender_labels(), {"M": "Homme", "F": "Femme", "O": "Autre"})
+
+        self.org.language = "es"
+        self.org.save()
+
+        self.assertEqual(self.org.get_gender_labels(), {"M": "Hombre", "F": "Mujer", "O": "Otro"})
+
     @patch("django.core.cache.cache.get")
     def test_get_gender_stats(self, mock_cache_get):
         mock_cache_get.return_value = None

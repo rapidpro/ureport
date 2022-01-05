@@ -343,6 +343,11 @@ def update_cache_org_contact_counts(org):
     return org_contacts_counts
 
 
+def get_gender_labels(org):
+    translation.activate(org.language)
+    return {k: str(v) for k, v in GenderSegment.GENDERS.items()}
+
+
 def get_gender_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -547,7 +552,8 @@ def get_sign_up_rate_gender(org, time_filter):
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
     tz = pytz.timezone("UTC")
-    translation.activate(org.language)
+
+    org_gender_labels = org.get_gender_labels()
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -582,7 +588,7 @@ def get_sign_up_rate_gender(org, time_filter):
         data = dict()
         for key in keys:
             data[key] = interval_dict[key]
-        output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=data))
+        output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=data))
     return output_data
 
 
@@ -1077,6 +1083,7 @@ def populate_contact_activity(org):
         )
 
 
+Org.get_gender_labels = get_gender_labels
 Org.get_org_contacts_counts = get_org_contacts_counts
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
