@@ -1,3 +1,8 @@
+v1.2.24
+----------
+ * Merge pull request #853 from rapidpro/gender-label-stats-fix
+ * Fix issue for gender stats
+
 v1.2.23
 ----------
  * Run code checks
