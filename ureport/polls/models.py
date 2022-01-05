@@ -17,7 +17,7 @@ from django.core.cache import cache
 from django.db import connection, models
 from django.db.models import Count, F, Q, Sum
 from django.db.models.functions import Lower
-from django.utils import timezone, translation
+from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -883,7 +883,7 @@ class PollQuestion(SmartModel):
         open_ended = self.is_open_ended()
         responded = self.calculate_responded()
         polled = self.calculate_polled()
-        translation.activate(org.language)
+        org_gender_labels = org.get_gender_labels()
 
         results = []
 
@@ -1075,7 +1075,7 @@ class PollQuestion(SmartModel):
                             dict(
                                 set=set_count,
                                 unset=unset_count,
-                                label=str(GenderSegment.GENDERS.get(gender["gender"])),
+                                label=org_gender_labels.get(gender["gender"]),
                                 categories=categories,
                             )
                         )
