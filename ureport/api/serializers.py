@@ -101,26 +101,25 @@ class StoryReadSerializer(serializers.ModelSerializer):
         ]
 
     # Function to use ?fields and ?exclude API calls for specific attributes in stories
-    # this is for which we can exclude any field
     def __init__(self, *args, **kwargs):
         # Don't pass the 'fields' arg up to the superclass
         request = kwargs.get('context', {}).get('request')
-        str_fields = request.GET.get('exclude', '') if request else None
-        str_exclude_fields = request.GET.get('fields', '') if request else None
-        exclude_fields = str_exclude_fields.split(',') if str_exclude_fields else None
+        str_exclude_fields = request.GET.get('exclude', '') if request else None
+        str_fields = request.GET.get('fields', '') if request else None
         fields = str_fields.split(',') if str_fields else None
+        exclude_fields = str_exclude_fields.split(',') if str_exclude_fields else None
 
         # Instantiate the superclass normally
         super(StoryReadSerializer, self).__init__(*args, **kwargs)
 
-        if fields is not None:
-            # Drop any fields that are not specified in the `fields` argument.
-            allowed = set(fields)
+        if exclude_fields is not None:
+            # Drop any fields that are specified in the `exclude` argument.
+            exclude_allowed = set(exclude_fields)
             existing = set(self.fields)
-            for field_name in allowed:
+            for field_name in exclude_allowed:
                 self.fields.pop(field_name)
-        elif exclude_fields is not None:
-            allowed_fields = set(exclude_fields)
+        elif fields is not None:
+            allowed_fields = set(fields)
             existing_data = set(self.fields)
             for field_names in existing_data - allowed_fields:
                 self.fields.pop(field_names)
@@ -152,23 +151,23 @@ class PollReadSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         # Don't pass the 'fields' arg up to the superclass
         request = kwargs.get('context', {}).get('request')
-        str_fields = request.GET.get('exclude', '') if request else None
-        str_exclude_fields = request.GET.get('fields', '') if request else None
-        exclude_fields = str_exclude_fields.split(',') if str_exclude_fields else None
+        str_exclude_fields = request.GET.get('exclude', '') if request else None
+        str_fields = request.GET.get('fields', '') if request else None
         fields = str_fields.split(',') if str_fields else None
+        exclude_fields = str_exclude_fields.split(',') if str_exclude_fields else None
 
         # Instantiate the superclass normally
         super(PollReadSerializer, self).__init__(*args, **kwargs)
 
-        if fields is not None:
-            # Drop any fields that are not specified in the `fields` argument.
-            allowed = set(fields)
-            print('allowed :',allowed)
+        if exclude_fields is not None:
+            # Drop any fields that are specified in the `exclude` argument.
+            exclude_allowed = set(exclude_fields)
+            print('exclude_allowed :',exclude_allowed)
             existing = set(self.fields)
-            for field_name in allowed:
+            for field_name in exclude_allowed:
                 self.fields.pop(field_name)
-        elif exclude_fields is not None:
-            allowed_fields = set(exclude_fields)
+        elif fields is not None:
+            allowed_fields = set(fields)
             existing_data = set(self.fields)
             for field_names in existing_data - allowed_fields:
                 self.fields.pop(field_names)
