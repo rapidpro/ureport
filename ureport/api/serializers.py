@@ -115,7 +115,6 @@ class StoryReadSerializer(serializers.ModelSerializer):
         if exclude_fields is not None:
             # Drop any fields that are specified in the `exclude` argument.
             exclude_allowed = set(exclude_fields)
-            existing = set(self.fields)
             for field_name in exclude_allowed:
                 self.fields.pop(field_name)
         elif fields is not None:
@@ -162,8 +161,6 @@ class PollReadSerializer(serializers.ModelSerializer):
         if exclude_fields is not None:
             # Drop any fields that are specified in the `exclude` argument.
             exclude_allowed = set(exclude_fields)
-            print('exclude_allowed :',exclude_allowed)
-            existing = set(self.fields)
             for field_name in exclude_allowed:
                 self.fields.pop(field_name)
         elif fields is not None:

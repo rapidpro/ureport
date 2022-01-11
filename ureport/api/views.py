@@ -572,12 +572,11 @@ class FeaturedPollList(BaseListAPIView):
                 ...
             ]
         }
-    
 
     If you want to get the featured poll with only specific attributes:
 
     Example:
-    
+
         GET /api/v1/polls/org/{org}/featured/?fields=title,flow_uuid
 
     Response is the featured poll with only title and flow_uuid attributes.
@@ -586,7 +585,7 @@ class FeaturedPollList(BaseListAPIView):
     If you want to get the featured poll without specific attributes:
 
     Example:
-    
+
         GET /api/v1/polls/org/{org}/featured/?exclude=title,flow_uuid
 
     Response is the featured poll without title and flow_uuid attributes.

@@ -402,9 +402,9 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         count_polls = Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count()
         self.assertEqual(response.data["count"], count_polls)
-        poll = [self.second_featured_poll, self.first_featured_poll, self.another_poll, self.reg_poll]
+        polls = [self.second_featured_poll, self.first_featured_poll, self.another_poll, self.reg_poll]
         for i in range(count_polls):
-            self.assertEqual(response.data["results"][i]["title"], poll[i].title)
+            self.assertEqual(response.data["results"][i]["title"], polls[i].title)
 
     def test_polls_by_org_list_with_exclude_parameter(self):
         url = "/api/v1/polls/org/%d/?exclude=%s,%s,%s,%s,%s,%s" % (self.uganda.pk, "flow_uuid","title","category","poll_date","modified_on","created_on")
