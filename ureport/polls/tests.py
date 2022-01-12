@@ -2,9 +2,9 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import uuid
+import zoneinfo
 from datetime import datetime, timedelta
 
-import zoneinfo
 import six
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError

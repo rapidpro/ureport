@@ -2,10 +2,10 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
+import zoneinfo
 from datetime import timedelta
 
 import mock
-import zoneinfo
 
 from django.test import override_settings
 from django.urls import reverse

@@ -7,7 +7,6 @@ import uuid
 from collections import defaultdict
 from datetime import timedelta
 
-import zoneinfo
 import six
 from django_redis import get_redis_connection
 

@@ -9,7 +9,6 @@ import time
 from collections import defaultdict
 from datetime import timedelta
 
-import zoneinfo
 import requests
 from django_redis import get_redis_connection
 from temba_client.exceptions import TembaRateExceededError

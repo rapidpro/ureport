@@ -4,12 +4,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json
 import logging
 import time
+import zoneinfo
 from collections import defaultdict
-from datetime import datetime, timedelta, tzinfo
+from datetime import datetime, timedelta
 from itertools import chain, islice
 
 import iso8601
-import zoneinfo
 import six
 from sentry_sdk import capture_exception
 

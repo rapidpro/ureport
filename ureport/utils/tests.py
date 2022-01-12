@@ -2,10 +2,10 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
+import zoneinfo
 from datetime import datetime
 
 import mock
-import zoneinfo
 import redis
 from mock import patch
 from temba_client.v2 import Flow
