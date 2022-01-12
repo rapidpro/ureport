@@ -4,7 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import uuid
 from datetime import datetime, timedelta
 
-import pytz
+import zoneinfo
 import six
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
@@ -113,8 +113,8 @@ class PollTest(UreportTest):
     @patch("ureport.polls.tasks.pull_refresh.apply_async")
     @patch("django.core.cache.cache.set")
     def test_pull_refresh_task(self, mock_cache_set, mock_pull_refresh):
-        tz = pytz.timezone("Africa/Kigali")
-        with patch.object(timezone, "now", return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
+        tz = zoneinfo.ZoneInfo("Africa/Kigali")
+        with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 0, tzinfo=tz)):
 
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
@@ -123,7 +123,7 @@ class PollTest(UreportTest):
             now = timezone.now()
             mock_cache_set.assert_called_once_with(
                 Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll1.org_id, poll1.pk),
-                datetime_to_json_date(now.replace(tzinfo=pytz.utc)),
+                datetime_to_json_date(now.replace(tzinfo=timezone.utc)),
                 None,
             )
 
@@ -450,8 +450,8 @@ class PollTest(UreportTest):
             self.assertEqual(Poll.objects.all().count(), 2)
 
             Poll.objects.filter(org=poll.org, backend__slug="rapidpro").update(flow_uuid="uuid-25")
-            tz = pytz.timezone("Africa/Kigali")
-            with patch.object(timezone, "now", return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
+            tz = zoneinfo.ZoneInfo("Africa/Kigali")
+            with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 0, tzinfo=tz)):
                 flows_cached["uuid-30"] = dict(
                     runs=300,
                     completed_runs=120,
@@ -658,14 +658,14 @@ class PollTest(UreportTest):
             self.assertEqual(poll.org, self.uganda)
             self.assertEqual(poll.title, "Poll 1")
             self.assertEqual(
-                poll.poll_date.astimezone(self.uganda.timezone).replace(tzinfo=pytz.UTC),
+                poll.poll_date.astimezone(self.uganda.timezone).replace(tzinfo=timezone.utc),
                 yesterday.replace(microsecond=0),
             )
 
             self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_questions", args=[poll.pk]))
 
-            tz = pytz.timezone("Africa/Kigali")
-            with patch.object(timezone, "now", return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
+            tz = zoneinfo.ZoneInfo("Africa/Kigali")
+            with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 0, tzinfo=tz)):
                 response = self.client.post(uganda_poll_date_url, dict(), follow=True, SERVER_NAME="uganda.ureport.io")
 
                 poll = Poll.objects.get(flow_uuid="uuid-1")
@@ -2073,7 +2073,7 @@ class PollQuestionTest(UreportTest):
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
     def test_tasks(self):
-        self.org = self.create_org("burundi", pytz.timezone("Africa/Bujumbura"), self.admin)
+        self.org = self.create_org("burundi", zoneinfo.ZoneInfo("Africa/Bujumbura"), self.admin)
 
         self.education = Category.objects.create(
             org=self.org, name="Education", created_by=self.admin, modified_by=self.admin

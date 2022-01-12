@@ -5,11 +5,11 @@ import json
 import logging
 import time
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, tzinfo
 from itertools import chain, islice
 
 import iso8601
-import pytz
+import zoneinfo
 import six
 from sentry_sdk import capture_exception
 
@@ -43,7 +43,7 @@ def datetime_to_json_date(dt):
     Formats a datetime as a string for inclusion in JSON
     """
     # always output as UTC / Z and always include milliseconds
-    as_utc = dt.astimezone(pytz.utc)
+    as_utc = dt.astimezone(timezone.utc)
     return as_utc.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
 
 
@@ -479,7 +479,7 @@ def get_sign_up_rate(org, time_filter):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
-    tz = pytz.timezone("UTC")
+    tz = zoneinfo.ZoneInfo("UTC")
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -491,8 +491,8 @@ def get_sign_up_rate(org, time_filter):
     keys = list(set(dates_map.values()))
 
     for date_key, date_count in registered_on_counts.items():
-        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
-            hour=0, minute=0, second=0, microsecond=0
+        parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
+            hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
         )
 
         if parsed_time > start:
@@ -511,7 +511,7 @@ def get_sign_up_rate_location(org, time_filter):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
-    tz = pytz.timezone("UTC")
+    tz = zoneinfo.ZoneInfo("UTC")
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -532,8 +532,8 @@ def get_sign_up_rate_location(org, time_filter):
             else:
                 continue
 
-            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
-                hour=0, minute=0, second=0, microsecond=0
+            parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
+                hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
             )
 
             if parsed_time > start:
@@ -551,7 +551,7 @@ def get_sign_up_rate_gender(org, time_filter):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
-    tz = pytz.timezone("UTC")
+    tz = zoneinfo.ZoneInfo("UTC")
 
     org_gender_labels = org.get_gender_labels()
 
@@ -577,8 +577,8 @@ def get_sign_up_rate_gender(org, time_filter):
             else:
                 continue
 
-            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
-                hour=0, minute=0, second=0, microsecond=0
+            parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
+                hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
             )
 
             if parsed_time > start:
@@ -597,7 +597,7 @@ def get_sign_up_rate_age(org, time_filter):
     current_year = now.year
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
-    tz = pytz.timezone("UTC")
+    tz = zoneinfo.ZoneInfo("UTC")
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -616,8 +616,8 @@ def get_sign_up_rate_age(org, time_filter):
 
     for date_key, date_count in registered_on_counts.items():
         date_key_date, date_key_year = date_key.split(":")
-        parsed_time = tz.localize(datetime.strptime(date_key_date, "%Y-%m-%d")).replace(
-            hour=0, minute=0, second=0, microsecond=0
+        parsed_time = datetime.strptime(date_key_date, "%Y-%m-%d").replace(
+            hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
         )
         if parsed_time < start:
             continue
@@ -668,7 +668,7 @@ def get_sign_up_rate_scheme(org, time_filter):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
-    tz = pytz.timezone("UTC")
+    tz = zoneinfo.ZoneInfo("UTC")
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -685,8 +685,8 @@ def get_sign_up_rate_scheme(org, time_filter):
 
     for date_key, date_count in registered_on_counts.items():
         date_key_date, scheme = date_key.split(":")
-        parsed_time = tz.localize(datetime.strptime(date_key_date, "%Y-%m-%d")).replace(
-            hour=0, minute=0, second=0, microsecond=0
+        parsed_time = datetime.strptime(date_key_date, "%Y-%m-%d").replace(
+            hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
         )
         if parsed_time < start:
             continue
@@ -716,7 +716,7 @@ def get_registration_stats(org):
     now = timezone.now()
     six_months_ago = now - timedelta(days=180)
     six_months_ago = six_months_ago - timedelta(six_months_ago.weekday())
-    tz = pytz.timezone("UTC")
+    tz = zoneinfo.ZoneInfo("UTC")
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -725,7 +725,7 @@ def get_registration_stats(org):
     interval_dict = dict()
 
     for date_key, date_count in registered_on_counts.items():
-        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d"))
+        parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(tzinfo=tz)
 
         # this is in the range we care about
         if parsed_time > six_months_ago:
@@ -754,7 +754,7 @@ def get_reporter_registration_dates(org):
     now = timezone.now()
     one_year_ago = now - timedelta(days=365)
     one_year_ago = one_year_ago - timedelta(one_year_ago.weekday())
-    tz = pytz.timezone("UTC")
+    tz = zoneinfo.ZoneInfo("UTC")
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -763,7 +763,7 @@ def get_reporter_registration_dates(org):
     interval_dict = dict()
 
     for date_key, date_count in registered_on_counts.items():
-        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d"))
+        parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(tzinfo=tz)
 
         # this is in the range we care about
         if parsed_time > one_year_ago:

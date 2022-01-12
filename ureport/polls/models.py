@@ -7,7 +7,7 @@ import uuid
 from collections import defaultdict
 from datetime import timedelta
 
-import pytz
+import zoneinfo
 import six
 from django_redis import get_redis_connection
 
@@ -20,7 +20,7 @@ from django.db.models.functions import Lower
 from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import Org, OrgBackend
@@ -313,7 +313,7 @@ class Poll(SmartModel):
         now = timezone.now()
         cache.set(
             Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk),
-            datetime_to_json_date(now.replace(tzinfo=pytz.utc)),
+            datetime_to_json_date(now.replace(tzinfo=timezone.utc)),
             None,
         )
 

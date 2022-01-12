@@ -6,7 +6,7 @@ import six
 from django_countries.fields import CountryField
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from smartmin.models import SmartModel
 

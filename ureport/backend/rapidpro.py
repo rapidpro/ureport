@@ -9,7 +9,7 @@ import time
 from collections import defaultdict
 from datetime import timedelta
 
-import pytz
+import zoneinfo
 import requests
 from django_redis import get_redis_connection
 from temba_client.exceptions import TembaRateExceededError
@@ -635,7 +635,7 @@ class RapidProBackend(BaseBackend):
                                 latest_synced_obj_time
                             ):
                                 latest_synced_obj_time = datetime_to_json_date(
-                                    temba_run.modified_on.replace(tzinfo=pytz.utc)
+                                    temba_run.modified_on.replace(tzinfo=timezone.utc)
                                 )
 
                             contact_obj = contacts_map.get(temba_run.contact.uuid, None)

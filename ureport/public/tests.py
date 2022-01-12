@@ -5,7 +5,7 @@ import json
 from datetime import timedelta
 
 import mock
-import pytz
+import zoneinfo
 
 from django.test import override_settings
 from django.urls import reverse
@@ -25,8 +25,8 @@ from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 class PublicTest(UreportTest):
     def setUp(self):
         super(PublicTest, self).setUp()
-        self.uganda = self.create_org("uganda", pytz.timezone("Africa/Kampala"), self.admin)
-        self.nigeria = self.create_org("nigeria", pytz.timezone("Africa/Lagos"), self.admin)
+        self.uganda = self.create_org("uganda", zoneinfo.ZoneInfo("Africa/Kampala"), self.admin)
+        self.nigeria = self.create_org("nigeria", zoneinfo.ZoneInfo("Africa/Lagos"), self.admin)
 
         self.health_uganda = Category.objects.create(
             org=self.uganda, name="Health", created_by=self.admin, modified_by=self.admin

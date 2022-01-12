@@ -5,7 +5,7 @@ from collections import OrderedDict
 from datetime import datetime
 from random import randint
 
-import pytz
+import zoneinfo
 import six
 from mock import patch
 from rest_framework import status
@@ -341,9 +341,9 @@ class UreportAPITests(APITestCase):
         occupation_stats = response.data.pop("occupation_stats")
         self.assertEqual(occupation_stats, [dict(label="student", count=5), dict(label="writer", count=2)])
 
-        tz = pytz.timezone("UTC")
+        tz = zoneinfo.ZoneInfo("UTC")
 
-        with patch.object(timezone, "now", return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 6))):
+        with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 6, tzinfo=tz)):
 
             for entry in registration_stats:
                 self.assertEqual(entry["count"], 0)
