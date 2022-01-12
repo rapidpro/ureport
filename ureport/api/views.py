@@ -262,12 +262,12 @@ class PollList(BaseListAPIView):
                 ...
             ]
         }
-    
-    
+
+
     If you want to get polls with only specific attributes:
 
     Example:
-    
+
         GET /api/v1/polls/org/{org}/?fields=title,flow_uuid
 
     Response is polls with only title and flow_uuid attributes.
@@ -276,7 +276,7 @@ class PollList(BaseListAPIView):
     If you want to get polls without specific attributes:
 
     Example:
-    
+
         GET /api/v1/polls/org/{org}/?exclude=title,flow_uuid
 
     Response is polls without title and flow_uuid attributes.
@@ -415,21 +415,21 @@ class PollDetails(RetrieveAPIView):
             },
             "created_on": "2015-09-02T08:53:30.313251Z"
         }
-    
+
 
     If you want to get a poll with only specific attributes:
 
     Example:
-    
+
         GET /api/v1/polls/{id}/?fields=title,flow_uuid
 
     Response is a poll with only title and flow_uuid attributes.
 
-    
+
     If you want to get a poll without specific attributes:
 
     Example:
-    
+
         GET /api/v1/polls/{id}/?exclude=title,flow_uuid
 
     Response is a poll without title and flow_uuid attributes.
@@ -888,12 +888,12 @@ class StoryList(BaseListAPIView):
             },
             ...
         }
-    
+
 
     If you want to get stories with only specific attributes:
 
     Example:
-    
+
         GET /api/v1/stories/org/{org}/?fields=title,content
 
     Response is stories with only title and content attributes.
@@ -902,7 +902,7 @@ class StoryList(BaseListAPIView):
     If you want to get stories without specific attributes:
 
     Example:
-    
+
         GET /api/v1/stories/org/{org}/?exclude=title,content
 
     Response is stories without title and content attributes.
@@ -949,21 +949,21 @@ class StoryDetails(RetrieveAPIView):
     If you want to get a story with only specific attributes:
 
     Example:
-    
+
         GET /api/v1/stories/{id}/?fields=title,content
 
     Response is a story with only title and content attributes.
 
-    
+
     If you want to get a story without specific attributes:
 
     Example:
-    
+
         GET /api/v1/stories/{id}/?exclude=title,content
 
     Response is a story without title and content attributes.
 
-    
+
     """
 
     serializer_class = StoryReadSerializer

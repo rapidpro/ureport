@@ -407,7 +407,15 @@ class UreportAPITests(APITestCase):
             self.assertEqual(response.data["results"][i]["title"], polls[i].title)
 
     def test_polls_by_org_list_with_exclude_parameter(self):
-        url = "/api/v1/polls/org/%d/?exclude=%s,%s,%s,%s,%s,%s" % (self.uganda.pk, "flow_uuid","title","category","poll_date","modified_on","created_on")
+        url = "/api/v1/polls/org/%d/?exclude=%s,%s,%s,%s,%s,%s" % (
+            self.uganda.pk,
+            "flow_uuid",
+            "title",
+            "category",
+            "poll_date",
+            "modified_on",
+            "created_on",
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         count_polls = Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count()
@@ -588,9 +596,9 @@ class UreportAPITests(APITestCase):
                     questions=[],
                 ),
             )
-    
+
     def test_single_poll_with_exclude_parameter(self):
-        url = "/api/v1/polls/%d/?exclude=%s,%s,%s,%s" % (self.reg_poll.pk, "id","title","category", "questions") 
+        url = "/api/v1/polls/%d/?exclude=%s,%s,%s,%s" % (self.reg_poll.pk, "id", "title", "category", "questions")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         poll = self.reg_poll
@@ -754,7 +762,13 @@ class UreportAPITests(APITestCase):
         )
 
     def test_single_story_with_exclude_parameter(self):
-        url = "/api/v1/stories/%d/?exclude=%s,%s,%s,%s" % (self.uganda_story.pk, "content", "featured", "images", "category")
+        url = "/api/v1/stories/%d/?exclude=%s,%s,%s,%s" % (
+            self.uganda_story.pk,
+            "content",
+            "featured",
+            "images",
+            "category",
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         story = self.uganda_story
