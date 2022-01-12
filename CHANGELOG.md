@@ -1,3 +1,17 @@
+v1.2.25
+----------
+ * Merge pull request #851 from alviriseup/main
+ * Changes commited
+ * Removed whitespaces and unused variables
+ * Merge branch 'main' of https://github.com/alviriseup/ureport into main
+ * Added Tests, Fixed inverted logic
+ * Delete views_20220103190914.py
+ * Delete views_20220103184452.py
+ * Delete serializers_20220103185012.py
+ * Delete serializers_20220103184452.py
+ * example for field and exclude API call
+ * Added functions for fields and exclude API call
+
 v1.2.24
 ----------
  * Merge pull request #853 from rapidpro/gender-label-stats-fix
