@@ -7,14 +7,14 @@ from datetime import datetime
 import mock
 import pytz
 import redis
-from dash.categories.models import Category
-from dash.test import MockClientQuery, MockResponse
 from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
 from django.utils import timezone
 
+from dash.categories.models import Category
+from dash.test import MockClientQuery, MockResponse
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
@@ -249,6 +249,19 @@ class UtilsTest(UreportTest):
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
 
+    def test_get_gender_labels(self):
+        self.assertEqual(self.org.get_gender_labels(), {"M": "Male", "F": "Female", "O": "Other"})
+
+        self.org.language = "fr"
+        self.org.save()
+
+        self.assertEqual(self.org.get_gender_labels(), {"M": "Homme", "F": "Femme", "O": "Autre"})
+
+        self.org.language = "es"
+        self.org.save()
+
+        self.assertEqual(self.org.get_gender_labels(), {"M": "Hombre", "F": "Mujer", "O": "Otro"})
+
     @patch("django.core.cache.cache.get")
     def test_get_gender_stats(self, mock_cache_get):
         mock_cache_get.return_value = None
@@ -287,12 +300,12 @@ class UtilsTest(UreportTest):
         mock_cache_get.return_value = None
 
         expected = [
-            dict(name="0-14", y=0),
-            dict(name="15-19", y=0),
-            dict(name="20-24", y=0),
-            dict(name="25-30", y=0),
-            dict(name="31-34", y=0),
-            dict(name="35+", y=0),
+            dict(name="0-14", y=0, absolute_count=0),
+            dict(name="15-19", y=0, absolute_count=0),
+            dict(name="20-24", y=0, absolute_count=0),
+            dict(name="25-30", y=0, absolute_count=0),
+            dict(name="31-34", y=0, absolute_count=0),
+            dict(name="35+", y=0, absolute_count=0),
         ]
 
         self.assertEqual(get_age_stats(self.org), json.dumps(expected))
@@ -328,12 +341,12 @@ class UtilsTest(UreportTest):
 
         # y is the percentage of count over the total count
         expected = [
-            dict(name="0-14", y=4),
-            dict(name="15-19", y=87),
-            dict(name="20-24", y=1),
-            dict(name="25-30", y=6),
-            dict(name="31-34", y=1),
-            dict(name="35+", y=1),
+            dict(name="0-14", y=4, absolute_count=8),
+            dict(name="15-19", y=87, absolute_count=175),
+            dict(name="20-24", y=1, absolute_count=2),
+            dict(name="25-30", y=6, absolute_count=12),
+            dict(name="31-34", y=1, absolute_count=2),
+            dict(name="35+", y=1, absolute_count=2),
         ]
 
         self.assertEqual(get_age_stats(self.org), json.dumps(expected))

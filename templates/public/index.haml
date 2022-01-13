@@ -7,8 +7,8 @@
   // latest poll if we have it
   - if latest_poll and latest_poll.get_first_question
     .max-w-page.mx-auto.bg-white.mt-6
-      .bg-dark1(class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %}")
-        .flex-1.self-stretch.bg-dark1.text-white.p-home.self-center
+      .(class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %} {% if latest_poll.get_first_question.get_color_choice_css %} {{latest_poll.get_first_question.get_color_choice_css}} {% else %}bg-dark1 text-white{% endif %}")
+        .flex-1.self-stretch.p-home.self-center(class="{% if latest_poll.get_first_question.get_color_choice_css %} {{latest_poll.get_first_question.get_color_choice_css}} {% else %}bg-dark1 text-white{% endif %}")
           .text-l.mb-10
             - trans "LATEST OPINION"
 
@@ -16,7 +16,7 @@
             {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark"  %}
             {{ latest_poll.title }}
 
-          .font-alt.font-bold.italic.left-border.mt-8.hover-parent
+          .font-alt.font-bold.italic.left-border.mt-8.hover-parent(class="{% if latest_poll.get_first_question.get_border_color_choice %} border-{{latest_poll.get_first_question.get_border_color_choice}} {% else %}border-{{border_color}}{% endif %}")
             {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.flow_result.result_uuid|add:"_title"  "-m-8" "dark" %}
             {{ latest_poll.get_first_question.title }}
 
@@ -30,10 +30,10 @@
 
         .flex-1.self-stretch.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .relative.w-full(style="min-height:20rem;")
-            .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
+            .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all" data-bar-color="{% if latest_poll.get_first_question.get_bg_color_choice %} {{latest_poll.get_first_question.get_bg_color_choice}} {% else %}{{ org|config:\"dark1_color\"|default:\"#439932\"}}{% endif %}")
 
           .mb-6.text-center(class="md:mb-0")
-            %a.btn.bg-light1.hover-dark(href="{% url 'public.opinion_read' latest_poll.pk %}")
+            %a.btn.bg-light1.text-black.hover-dark(href="{% url 'public.opinion_read' latest_poll.pk %}")
               - trans "VIEW FULL RESULTS"
 
   // ureporters graph
@@ -68,6 +68,54 @@
             .relative.w-full.h-40(class="md:h-64")
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
+
+  -if featured_bots
+    .max-w-page.mx-auto.border-black.border-b
+      .font-bold.text-xl.text-center.mt-4.border-b.py-2
+        -trans "Available bots"
+      -for bot in featured_bots|slice:"3"
+        .border-b.hover-parent(class="md:flex")
+          .block.pb-6.pt-12.px-16.my-auto.hover-parent(class="md:w-1/2")
+            .font-bold.hover-parent
+              {{bot.title}}
+            .block.hover-parent
+              .block.no-wrap
+                .text-sm.inline
+                  -trans "Send"
+                .text-xl.inline
+                  "{{bot.keyword}}"
+                .text-sm.inline
+                  -trans "to"
+                .text-xl.inline
+                  {{bot.channel}}
+
+            .block.flex.mt-4
+              - if bot.facebook_deeplink
+                %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.facebook_deeplink}}")
+                  %i.fab.fa-facebook-f
+
+              - if bot.telegram_deeplink
+                %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.telegram_deeplink}}")
+                  %i.fab.fa-telegram
+
+              - if bot.viber_deeplink
+                %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.viber_deeplink}}")
+                  %i.fab.fa-viber
+
+              - if bot.whatsapp_deeplink
+                %a.cursor-pointer.bg-circle-lg.border.border-black.mx-2(href="{{bot.whatsapp_deeplink}}")
+                  %i.fab.fa-whatsapp
+
+          .block.px-16.pt-12.pb-6.hover-parent(class="md:w-1/2")
+            {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
+            .block.hover-parent.h-32.overflow-hidden.text-ellipsis.text-sm
+              {{bot.description|safe}}
+
+      %div(class="md:flex")
+        .inline-block.w-full.p-8
+          .text-center
+            %a.btn.bg-black.text-white(href="{% url 'public.bots' %}" class="hover:bg-gray-700")
+              -trans "More bots"
 
   // join video and social
   .max-w-page.mx-auto
@@ -217,47 +265,6 @@
           %a.btn.bg-light1.text-black.hover-dark(href="{% url 'public.about' %}")
             -trans "LEARN MORE"
 
-  - if not photos
-    -if stories_photos
-      // photos
-      .max-w-page.mx-auto
-        %div.text-white(class="md:flex")
-          .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
-            .hover-parent
-              .font-bold.text-3xl.hover-parent
-                {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" "white" %}
-                {{ org|config:"photos_section_title"|default:"Photos"}}
-  
-              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" "white" %}
-              {{ org|config:"photos_section_description"|default:""}}
-  
-          .flex-1.p-home.text-black.flex.flex-col.justify-center
-            .flex.flex-wrap.justify-center
-              - for photo in stories_photos|slice:":6"
-                {% thumbnail photo.get_image "200x200" crop="center" as im %}
-                .inline-block.bg-gray-500.m-2(class="w-5/12")
-                  %img(src="{{im.url}}")
-                {% endthumbnail %}
-  - else
-    // photos
-    .max-w-page.mx-auto
-      %div.text-white(class="md:flex")
-        .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
-          .hover-parent
-            .font-bold.text-3xl.hover-parent
-              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" "white" %}
-              {{ org|config:"photos_section_title"|default:"Photos"}}
-
-            {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" "white" %}
-            {{ org|config:"photos_section_description"|default:""}}
-
-        .flex-1.p-home.text-black.flex.flex-col.justify-center
-          .flex.flex-wrap.justify-center
-            - for photo in photos|slice:":6"
-              {% thumbnail photo.image "200x200" crop="center" as im %}
-              .inline-block.bg-gray-500.m-2(class="w-5/12")
-                %img(src="{{im.url}}")
-              {% endthumbnail %}
 
 - block script
   {{ block.super }}

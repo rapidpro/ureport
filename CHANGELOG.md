@@ -1,3 +1,238 @@
+v1.2.25
+----------
+ * Merge pull request #851 from alviriseup/main
+ * Changes commited
+ * Removed whitespaces and unused variables
+ * Merge branch 'main' of https://github.com/alviriseup/ureport into main
+ * Added Tests, Fixed inverted logic
+ * Delete views_20220103190914.py
+ * Delete views_20220103184452.py
+ * Delete serializers_20220103185012.py
+ * Delete serializers_20220103184452.py
+ * example for field and exclude API call
+ * Added functions for fields and exclude API call
+
+v1.2.24
+----------
+ * Merge pull request #853 from rapidpro/gender-label-stats-fix
+ * Fix issue for gender stats
+
+v1.2.23
+----------
+ * Run code checks
+ * Merge pull request #852 from rapidpro/absolute_count
+ * Merge pull request #846 from rapidpro/translations_locale-en-lc-messages-django-po--main_cs
+ * Add Niger logo
+ * Add absolute count of age stats and schemes stats for API only
+ * Translate /locale/en/LC_MESSAGES/django.po in cs
+
+v1.2.22
+----------
+ * Remove Niger logo
+ * Merge pull request #848 from Ilhasoft/feature/nicaragua-flag
+ * Add Favico Flag Nicaragua
+ * Merge branch 'main' of https://github.com/rapidpro/ureport into feature/nicaragua-flag
+ * Adding Nicaragua's Flag - update 2
+ * Adding Nicaragua's Flag
+
+v1.2.21
+----------
+ * Merge pull request #845 from rapidpro/add-niger
+ * Add Niger flag
+
+v1.2.20
+----------
+ * Merge pull request #843 from rapidpro/revert-poll-stats-insert-on-sync
+ * Revert to always recalculate poll stats
+
+v1.2.19
+----------
+ * Merge pull request #841 from rapidpro/gender-stats-fix
+ * Make sure the org language is activate for gender stats
+ * Merge pull request #840 from rapidpro/word-cloud-fix
+ * Populate flow result on word clouds objects
+ * Merge pull request #839 from rapidpro/install_poetry
+ * Install poetry the proper way during CI
+
+v1.2.18
+----------
+ * Merge pull request #837 from rapidpro/rebuild-polls-counts
+ * Rebuild stats once a day
+
+v1.2.17
+----------
+ * Merge pull request #836 from rapidpro/squash-stats-dedupe
+ * Make sure only one task is squashing the stats at a time
+
+v1.2.16
+----------
+ * Merge pull request #834 from rapidpro/optimize-sync-stats-creations
+
+v1.2.15
+----------
+ * Merge pull request #833 from rapidpro/syncing-improvements
+ * Run code checks
+ * Remove brick polls tasks, only clear results for poll not stopped syncing
+
+v1.2.14
+----------
+ * Merge pull request #832 from rapidpro/remove-unused-context-variables
+ * Remove border on partner logos
+ * Remove unused context variables
+
+v1.2.13
+----------
+ * Merge pull request #831 from rapidpro/remove-photos
+ * Run code checks
+ * Remove photos section
+
+v1.2.12
+----------
+ * Merge pull request #830 from rapidpro/about-partners
+ * fix conflicts
+ * Merge pull request #829 from rapidpro/question-hidden-charts-config
+ * Merge pull request #816 from rapidpro/landing_pages_bots
+
+v1.2.11
+----------
+ * Merge pull request #828 from rapidpro/fix-dashblock-views
+ * Update deps
+
+v1.2.10
+----------
+ * Fix flags name
+
+v1.2.9
+----------
+ * Merge pull request #813 from rapidpro/story-attachment-reports
+ * fix conflicts, merge main
+ * Merge pull request #827 from rapidpro/unicef-footer-logo
+ * Update black
+ * Update code checks
+ * Add option to allow admin to hide/show the UNICEF logo in the footer
+ * Run code checks
+ * Update rapidpro-dash
+ * Merge pull request #825 from rapidpro/poll-top-section-share
+ * Merge pull request #824 from rapidpro/unicef-footer-logo
+ * Merge pull request #819 from rapidpro/favicos
+ * Update rapidpro-dash
+ * Use the black UNICEF logo
+ * Adjust responsiveness
+ * Support localized UNICEF logos
+ * UNICEF logo in footer center
+ * Add sharing buttons on the top of the poll summary section
+ * Display favicos for sites by subdomain
+ * Update favicos
+ * Rename flag files to match the subdomain used for each site
+ * Cleaner favicons
+ * Add favicon for sudan
+ * Add Sudan flag
+ * Add gabon favicon
+ * Add flag favico assets
+ * Adjust title of story page
+ * Fix attachment URL
+ * Add border for reports page list
+ * Fix reports order
+ * Fix attachment URL
+ * Run code checks
+ * Add reports public pages
+ * update deps
+ * Fix conflicts
+ * Run code checks
+ * Run code checks
+ * Filter stories to keep current behaviour excluding rows with PDF attachments
+
+v1.2.8
+----------
+ * Merge pull request #822 from rapidpro/more-stats-indexes
+ * Add more stats indexes
+
+v1.2.7
+----------
+ * Merge pull request #821 from rapidpro/fix-indexes
+ * Rebuild the index properly
+
+v1.2.6
+----------
+ * Merge pull request #818 from rapidpro/better-indexes-2
+ * Remove unused indexes
+
+v1.2.5
+----------
+ * Merge pull request #817 from rapidpro/better-indexes
+ * Rebuild indexes properly
+
+v1.2.4
+----------
+ * Fix variable referenced before assignment
+
+v1.2.3
+----------
+ * Run code checks
+ * Merge pull request #807 from rapidpro/task-update-old-contact-activities
+ * Merge pull request #806 from rapidpro/contact-activity-better-smaller-indexes
+ * Fix typo
+ * Add better smaller index and use used field in the queries
+ * Add task to update old contact activities to have used field False
+
+v1.2.2
+----------
+ * Merge pull request #812 from rapidpro/fix-html-unescape
+
+v1.2.1
+----------
+ * Fix prod settings for celery
+
+v1.2.0
+----------
+ * Merge pull request #810 from rapidpro/update-deps-dash-1.8.1
+
+v1.1.305
+----------
+ * Merge pull request #809 from rapidpro/add-gabon
+ * Add Gabon flag
+
+v1.1.304
+----------
+ * Merge pull request #808 from rapidpro/disable_sentry_transactions
+ * Disable sentry transaction collecting
+
+v1.1.303
+----------
+ * Merge pull request #805 from rapidpro/contact-activities-optimizations-part2
+ * Populate the used field for contact activities with a date in the last 13 months
+
+v1.1.302
+----------
+ * Merge pull request #799 from rapidpro/contact-activities-optimizations
+
+v1.1.301
+----------
+ * Merge pull request #801 from rapidpro/fix-age-chart-labels
+ * Merge pull request #803 from rapidpro/poll-search-feedback
+
+v1.1.300
+----------
+ * Fix bots padding
+
+v1.1.299
+----------
+ * Merge pull request #798 from rapidpro/bot-listing
+ * Fix the ordering of links
+ * Merge pull request #794 from rapidpro/question-colors-choice
+ * Fix mobile link for bots
+ * Run code_checks
+ * Fix conflicts
+ * Merge pull request #789 from rapidpro/bot-listing
+ * Update CHANGELOG.md for v1.1.298
+ * Merge pull request #795 from rapidpro/more-indexes
+ * Update CHANGELOG.md for v1.1.297
+ * Merge pull request #793 from rapidpro/few-queries-for-rebuild-stats
+ * Merge pull request #796 from Ilhasoft/feature/translations_django-po--master_ru
+ * translation completed for the source file '/locale/en/LC_MESSAGES/django.po' on the 'ru' language.
+ * Remove count of poll results IDs in rebuilt poll stats
+ * Add more index on contact activities
+
 v1.1.298
 ----------
  * Merge pull request #795 from rapidpro/more-indexes

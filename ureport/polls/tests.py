@@ -6,10 +6,6 @@ from datetime import datetime, timedelta
 
 import pytz
 import six
-from dash.categories.fields import CategoryChoiceField
-from dash.categories.models import Category, CategoryImage
-from dash.orgs.models import TaskState
-from dash.tags.models import Tag
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
@@ -21,6 +17,10 @@ from django.template import TemplateSyntaxError
 from django.urls import reverse
 from django.utils import timezone
 
+from dash.categories.fields import CategoryChoiceField
+from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import TaskState
+from dash.tags.models import Tag
 from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
@@ -28,7 +28,6 @@ from ureport.polls.tasks import (
     backfill_poll_results,
     fetch_old_sites_count,
     pull_refresh,
-    pull_results_brick_polls,
     pull_results_main_poll,
     pull_results_other_polls,
     rebuild_counts,
@@ -205,92 +204,6 @@ class PollTest(UreportTest):
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
     @patch("django.core.cache.cache.get")
-    def test_brick_polls(self, mock_cache_get):
-        mock_cache_get.return_value = None
-        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        poll1 = self.create_poll(
-            self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True, has_synced=True
-        )
-
-        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
-
-        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
-
-        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        self.create_poll_question(self.admin, poll2, "question poll 2", "uuid-202")
-
-        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        poll2.is_active = False
-        poll2.save()
-
-        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        poll2.is_active = True
-        poll2.save()
-        self.health_uganda.is_active = False
-        self.health_uganda.save()
-
-        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        self.health_uganda.is_active = True
-        self.health_uganda.save()
-
-        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
-
-        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll3.pk not in Poll.get_brick_polls_ids(self.uganda))
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        self.create_poll_question(self.admin, poll3, "question poll 3", "uuid-303")
-
-        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll3.pk in Poll.get_brick_polls_ids(self.uganda))
-
-        with patch("ureport.polls.models.Poll.get_first_question") as mock_first_question:
-            mock_first_question.return_value = None
-
-            self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
-
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        poll3.is_featured = True
-        poll3.save()
-
-        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll1.pk in Poll.get_brick_polls_ids(self.uganda))
-        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[0], poll1.pk)
-        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[1], poll2.pk)
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-        poll1.is_featured = False
-        poll1.save()
-
-        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
-        self.assertTrue(poll1.pk in Poll.get_brick_polls_ids(self.uganda))
-        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[0], poll2.pk)
-        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[1], poll1.pk)
-        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
-
-    @patch("django.core.cache.cache.get")
     def test_get_other_polls(self, mock_cache_get):
         mock_cache_get.return_value = None
 
@@ -310,7 +223,10 @@ class PollTest(UreportTest):
             polls.append(poll)
 
         self.assertTrue(Poll.get_other_polls(self.uganda))
-        self.assertEqual(list(Poll.get_other_polls(self.uganda)), [polls[3], polls[2], polls[1], polls[0]])
+        self.assertEqual(
+            list(Poll.get_other_polls(self.uganda)),
+            [polls[8], polls[7], polls[6], polls[5], polls[4], polls[3], polls[2], polls[1], polls[0]],
+        )
 
     @patch("django.core.cache.cache.get")
     def test_get_recent_polls(self, mock_cache_get):
@@ -910,12 +826,16 @@ class PollTest(UreportTest):
         response = self.client.get(uganda_questions_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 4)
+        self.assertEqual(len(response.context["form"].fields), 6)
         self.assertTrue("ruleset_uuid-101_include" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_priority" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_label" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_title" in response.context["form"].fields)
+        self.assertTrue("ruleset_uuid-101_color" in response.context["form"].fields)
+        self.assertTrue("ruleset_uuid-101_hidden_charts" in response.context["form"].fields)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_priority"].initial, 0)
+        self.assertIsNone(response.context["form"].fields["ruleset_uuid-101_color"].initial)
+        self.assertIsNone(response.context["form"].fields["ruleset_uuid-101_hidden_charts"].initial)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_label"].initial, "question poll 1")
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_title"].initial, "question poll 1")
         self.assertContains(response, "The label of the ruleset from RapidPro")
@@ -960,6 +880,8 @@ class PollTest(UreportTest):
         post_data["ruleset_uuid-101_include"] = True
         post_data["ruleset_uuid-101_title"] = "electricity network coverage"
         post_data["ruleset_uuid-101_priority"] = 5
+        post_data["ruleset_uuid-101_color"] = "D1"
+        post_data["ruleset_uuid-101_hidden_charts"] = "GL"
         response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
 
         self.assertTrue(PollQuestion.objects.filter(poll=poll1))
@@ -968,16 +890,12 @@ class PollTest(UreportTest):
         self.assertEqual(poll_question.title, "electricity network coverage")
         self.assertEqual(poll_question.ruleset_label, "question poll 1")
         self.assertEqual(poll_question.priority, 5)
-
-        with patch("ureport.polls.models.Poll.clear_brick_polls_cache") as mock:
-            mock.return_value = "Cache cleared"
-
-            post_data = dict()
-            post_data["ruleset_uuid-101_include"] = True
-            post_data["ruleset_uuid-101_title"] = "electricity network coverage"
-            response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
-
-            mock.assert_called_once_with(poll1.org)
+        self.assertEqual(poll_question.color_choice, "D1")
+        self.assertTrue(poll_question.show_age())
+        self.assertFalse(poll_question.show_gender())
+        self.assertFalse(poll_question.show_locations())
+        self.assertFalse(poll_question.hide_all_chart_pills())
+        self.assertEqual(poll_question.get_last_pill(), "age")
 
     def test_images_poll(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -1079,8 +997,15 @@ class PollTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_templatetags(self):
-        from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
-        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
+        from ureport.polls.templatetags.ureport import (
+            config,
+            org_arrow_link,
+            org_color,
+            org_host_link,
+            question_results,
+            show_org_flags,
+            transparency,
+        )
 
         with patch("dash.orgs.models.Org.get_config") as mock:
             mock.return_value = "Done"
@@ -2678,44 +2603,6 @@ class PollsTasksTest(UreportTest):
                 "num_path_ignored": 6,
             },
         )
-
-    @patch("ureport.polls.models.Poll.get_flow_date")
-    @patch("dash.orgs.models.Org.get_backend")
-    @patch("ureport.tests.TestBackend.pull_results")
-    @patch("ureport.polls.models.Poll.get_brick_polls_ids")
-    def test_pull_results_brick_polls(
-        self, mock_get_brick_polls_ids, mock_pull_results, mock_get_backend, mock_get_flow_date
-    ):
-        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
-        mock_get_brick_polls_ids.return_value = [poll.pk for poll in self.polls_query]
-        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
-        mock_get_flow_date.return_value = None
-
-        pull_results_brick_polls(self.nigeria.pk)
-
-        task_state = TaskState.objects.get(org=self.nigeria, task_key="results-pull-brick-polls")
-        self.assertEqual(
-            task_state.get_last_results()["flow-%s" % self.poll.flow_uuid],
-            {
-                "num_val_created": 1,
-                "num_val_updated": 2,
-                "num_val_ignored": 3,
-                "num_path_created": 4,
-                "num_path_updated": 5,
-                "num_path_ignored": 6,
-            },
-        )
-
-        mock_pull_results.assert_called_once()
-
-        mock_pull_results.reset_mock()
-        mock_pull_results.side_effect = [TembaRateExceededError(3)]
-
-        pull_results_brick_polls(self.nigeria.pk)
-
-        task_state = TaskState.objects.get(org=self.nigeria, task_key="results-pull-brick-polls")
-        self.assertEqual(task_state.get_last_results(), {})
-        mock_pull_results.assert_called_once()
 
     @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")

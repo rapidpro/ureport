@@ -32,7 +32,7 @@ class ImageTest(UreportTest):
 
         upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
 
-        post_data = dict(name="Orange Pattern", image_type="P", image=upload)
+        post_data = dict(name="Orange Pattern", priority=0, image=upload)
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         uganda_org_bg = Image.objects.order_by("-pk")[0]
@@ -46,12 +46,13 @@ class ImageTest(UreportTest):
 
         upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
 
-        post_data = dict(name="Orange Pattern", image_type="P", image=upload)
+        post_data = dict(name="Orange Pattern", priority=1, image=upload)
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.status_code, 200)
         nigeria_org_bg = Image.objects.order_by("-pk")[0]
         self.assertEqual(nigeria_org_bg.org, self.nigeria)
         self.assertEqual(nigeria_org_bg.name, "Orange Pattern")
+        self.assertEqual(nigeria_org_bg.image_type, "A")
 
         list_url = reverse("assets.image_list")
 
@@ -78,7 +79,7 @@ class ImageTest(UreportTest):
         self.assertTrue("org" not in response.context["form"].fields)
 
         upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
-        post_data = dict(name="Orange Pattern Updated", image_type="P", image=upload)
+        post_data = dict(name="Orange Pattern Updated", priority=0, image=upload)
         response = self.client.post(uganda_bg_update_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], list_url)
         self.assertEqual(len(response.context["object_list"]), 1)
@@ -87,7 +88,7 @@ class ImageTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["form"].fields), 5)
+        self.assertEqual(len(response.context["form"].fields), 6)
         self.assertTrue("org" in response.context["form"].fields)
 
         upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
@@ -99,7 +100,7 @@ class ImageTest(UreportTest):
 
         upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
 
-        post_data = dict(name="Blue Pattern", image_type="P", image=upload, org=self.uganda.pk)
+        post_data = dict(name="Blue Pattern", image_type="P", priority=0, image=upload, org=self.uganda.pk)
 
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertTrue("form" not in response.context)
@@ -107,11 +108,11 @@ class ImageTest(UreportTest):
         self.assertEqual(blue_bg.org, self.uganda)
 
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(len(response.context["object_list"]), Image.objects.count())
+        self.assertEqual(len(response.context["object_list"]), Image.objects.filter(org=self.uganda).count())
         self.assertTrue(isinstance(response.context["pattern_bg"], Image))
 
         response = self.client.get(nigeria_bg_update_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], nigeria_bg_update_url)
-        self.assertEqual(len(response.context["form"].fields), 6)
+        self.assertEqual(len(response.context["form"].fields), 7)
 
         self.clear_uploads()

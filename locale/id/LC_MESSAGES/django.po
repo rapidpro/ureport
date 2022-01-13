@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2022-01-13 18:35-0300\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -125,6 +125,12 @@ msgstr "Tambah"
 
 msgid "Content Types"
 msgstr "Jenis Konten"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "Blok Konten"
@@ -370,6 +376,9 @@ msgstr "Tugas"
 msgid "Tasks"
 msgstr "Tugas-tugas"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Judul cerita"
 
@@ -389,6 +398,9 @@ msgstr "Penulis cerita"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
@@ -726,6 +738,9 @@ msgstr "Keluar"
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Nama Pengguna"
 
@@ -737,13 +752,16 @@ msgstr ""
 msgid "Pages"
 msgstr "Gambar"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Pekerjaan"
 
 msgid "Tags"
 msgstr ""
 
-msgid "Photos"
+msgid "Partners Logos"
 msgstr ""
 
 #, fuzzy
@@ -765,6 +783,11 @@ msgstr "Tentang Kami"
 
 msgid "Engagement"
 msgstr ""
+
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
 
 msgid "Category Images"
 msgstr "Gambar Kategori"
@@ -859,6 +882,12 @@ msgstr ""
 msgid "Back"
 msgstr "Kembali"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST NOTIFICATIONS"
@@ -912,6 +941,9 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Hasil"
 
+msgid "Partners"
+msgstr ""
+
 msgid "MORE POLLS"
 msgstr "POLLING LAINNYA"
 
@@ -932,6 +964,12 @@ msgstr "ARSIP CERITA"
 
 msgid "LIST"
 msgstr "DAFTAR"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -965,6 +1003,12 @@ msgstr "U-REPORTERS DI"
 msgid "AGES"
 msgstr ""
 
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
@@ -989,6 +1033,9 @@ msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
+msgstr ""
+
+msgid "PAGE"
 msgstr ""
 
 msgid "SEARCH"
@@ -1035,6 +1082,20 @@ msgid "LOCATION"
 msgstr "LOKASI"
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "U-REPORTERS DI"
+
+msgid "STORY"
+msgstr "CERITA"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -1125,6 +1186,9 @@ msgstr ""
 msgid "Custom pages"
 msgstr ""
 
+msgid "Landing pages"
+msgstr ""
+
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
@@ -1213,11 +1277,6 @@ msgstr "Tidak"
 
 msgid "Dec"
 msgstr ""
-
-#, fuzzy
-#| msgid "U-Report"
-msgid "Ureport API"
-msgstr "U-Report"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1313,6 +1372,9 @@ msgstr "Refreshed %s cache untuk organisasi ini"
 msgid "Flag"
 msgstr "Bendera"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Organisasi yang akan di gunakan untuk gambar ini"
 
@@ -1321,6 +1383,72 @@ msgstr "Sebuah nama deskriptif singkat untuk gambar ini"
 
 msgid "Image type"
 msgstr "Tipe Gambar"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih tinggi yang lebih dulu"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "organisasi jajak pendapat ini adalah bagian dari"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Judul untuk item ini"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Kategori cerita"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Deskripsi ringkasan pendek untuk item ini"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih tinggi yang lebih dulu"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
 
 msgid "Label"
 msgstr "Label"
@@ -1393,6 +1521,41 @@ msgstr "Sumber pekerjaan Anda telah berhasil ditambahkan"
 
 msgid "Your job source has been updated successfully"
 msgstr "Sumber pekerjaan Anda telah berhasil diperbarui"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "organisasi jajak pendapat ini adalah bagian dari"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Judul untuk item ini"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Isi cerita"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Isi cerita"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "File gambar yang akan digunakan"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ini adalah id OSM untuk batas administrasi ini"
@@ -1507,6 +1670,44 @@ msgstr "Nama pengirim pesan"
 msgid "The featured response message"
 msgstr "Pesan respon unggulan"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participation Level"
+msgid "Hide Age and Location charts"
+msgstr "Tingkat Partisipasi"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Jajak pendapat pertanyaan ini adalah bagian dari"
 
@@ -1616,6 +1817,20 @@ msgstr "Judul"
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
+msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "Categories"
@@ -1855,6 +2070,11 @@ msgstr ""
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -1926,6 +2146,31 @@ msgstr "Cerita ini di tampilkan di halaman depan"
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Lokasi responden"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Apakah jajak pendapat ini harus tampil di homepage"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
+
+#, fuzzy
+#~| msgid "The location of the responder."
+#~ msgid "The description text for this bot"
+#~ msgstr "Lokasi responden"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Warna yang digunakan untuk menggambar teks pada gambar bersama"
@@ -2132,9 +2377,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 
 #~ msgid "NEWS FEED"
 #~ msgstr "BERITA"
-
-#~ msgid "STORY"
-#~ msgstr "CERITA"
 
 #, fuzzy
 #~| msgid "Read This Story"

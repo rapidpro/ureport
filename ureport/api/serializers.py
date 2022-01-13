@@ -4,14 +4,14 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json
 
 import six
-from dash.categories.models import Category
-from dash.dashblocks.models import DashBlock
-from dash.orgs.models import Org
-from dash.stories.models import Story
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from sorl.thumbnail import get_thumbnail
 
+from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock
+from dash.orgs.models import Org
+from dash.stories.models import Story
 from ureport.assets.models import Image
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
@@ -46,6 +46,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
     age_stats = SerializerMethodField()
     registration_stats = SerializerMethodField()
     occupation_stats = SerializerMethodField()
+    schemes_stats = SerializerMethodField()
     reporters_count = SerializerMethodField()
     timezone = SerializerMethodField()
 
@@ -63,6 +64,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
             "age_stats",
             "registration_stats",
             "occupation_stats",
+            "schemes_stats",
             "reporters_count",
         )
 
@@ -83,6 +85,9 @@ class OrgReadSerializer(serializers.ModelSerializer):
     def get_occupation_stats(self, obj):
         return json.loads(obj.get_occupation_stats())
 
+    def get_schemes_stats(self, obj):
+        return obj.get_schemes_stats()
+
     def get_reporters_count(self, obj):
         return obj.get_reporters_count()
 
@@ -99,6 +104,29 @@ class StoryReadSerializer(serializers.ModelSerializer):
             generate_absolute_url_from_file(self.context["request"], image.image, "800x600")
             for image in obj.get_featured_images()
         ]
+
+    # Function to use ?fields and ?exclude API calls for specific attributes in stories
+    def __init__(self, *args, **kwargs):
+        # Don't pass the 'fields' arg up to the superclass
+        request = kwargs.get("context", {}).get("request")
+        str_exclude_fields = request.GET.get("exclude", "") if request else None
+        str_fields = request.GET.get("fields", "") if request else None
+        fields = str_fields.split(",") if str_fields else None
+        exclude_fields = str_exclude_fields.split(",") if str_exclude_fields else None
+
+        # Instantiate the superclass normally
+        super(StoryReadSerializer, self).__init__(*args, **kwargs)
+
+        if exclude_fields is not None:
+            # Drop any fields that are specified in the `exclude` argument.
+            exclude_allowed = set(exclude_fields)
+            for field_name in exclude_allowed:
+                self.fields.pop(field_name)
+        elif fields is not None:
+            allowed_fields = set(fields)
+            existing_data = set(self.fields)
+            for field_names in existing_data - allowed_fields:
+                self.fields.pop(field_names)
 
     class Meta:
         model = Story
@@ -121,6 +149,29 @@ class StoryReadSerializer(serializers.ModelSerializer):
 class PollReadSerializer(serializers.ModelSerializer):
     category = CategoryReadSerializer()
     questions = SerializerMethodField()
+
+    # Function to use ?fields and ?exclude API calls for specific attributes in polls
+    def __init__(self, *args, **kwargs):
+        # Don't pass the 'fields' arg up to the superclass
+        request = kwargs.get("context", {}).get("request")
+        str_exclude_fields = request.GET.get("exclude", "") if request else None
+        str_fields = request.GET.get("fields", "") if request else None
+        fields = str_fields.split(",") if str_fields else None
+        exclude_fields = str_exclude_fields.split(",") if str_exclude_fields else None
+
+        # Instantiate the superclass normally
+        super(PollReadSerializer, self).__init__(*args, **kwargs)
+
+        if exclude_fields is not None:
+            # Drop any fields that are specified in the `exclude` argument.
+            exclude_allowed = set(exclude_fields)
+            for field_name in exclude_allowed:
+                self.fields.pop(field_name)
+        elif fields is not None:
+            allowed_fields = set(fields)
+            existing_data = set(self.fields)
+            for field_names in existing_data - allowed_fields:
+                self.fields.pop(field_names)
 
     def get_questions(self, obj):
         questions = []

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2022-01-13 18:35-0300\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -129,6 +129,12 @@ msgstr "Додади"
 
 msgid "Content Types"
 msgstr "Типови на Содржина"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "Содржински блокови"
@@ -369,6 +375,9 @@ msgstr "Задача"
 msgid "Tasks"
 msgstr "Задачи"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Насловот на оваа приказна"
 
@@ -386,6 +395,9 @@ msgstr "Автор на приказната"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Линк за mp3 датотека што треба да се објави со оваа приказна"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Идентификатор на YouTube видеото што е во врска со оваа приказна (ова е текстот што се наоѓа после v= и пред & во YouTube URL)"
@@ -704,6 +716,9 @@ msgstr "Одјавување"
 msgid "Opinions"
 msgstr "Мислења"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Корисници"
 
@@ -713,14 +728,17 @@ msgstr "Подесувања"
 msgid "Pages"
 msgstr "Страни"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Работни места"
 
 msgid "Tags"
 msgstr ""
 
-msgid "Photos"
-msgstr "Фотографии"
+msgid "Partners Logos"
+msgstr ""
 
 msgid "Categories Images"
 msgstr "Категории слики"
@@ -739,6 +757,11 @@ msgstr "За нас"
 
 msgid "Engagement"
 msgstr "Вклученост"
+
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Известувачи"
 
 msgid "Category Images"
 msgstr "Категорија слики"
@@ -833,6 +856,12 @@ msgstr ""
 msgid "Back"
 msgstr "Назад"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr "ПОСЛЕДНИ ИЗВЕСТУВАЊА"
 
@@ -885,6 +914,9 @@ msgstr "Нема закажана синхронизација, нема анк�
 msgid "Refresh Results"
 msgstr "Освежи резултати"
 
+msgid "Partners"
+msgstr ""
+
 msgid "MORE POLLS"
 msgstr "ПОВЕЌЕ АНКЕТИ"
 
@@ -905,6 +937,12 @@ msgstr "АРХИВА НА ПРИКАЗНИ"
 
 msgid "LIST"
 msgstr "ЛИСТА"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
 
 msgid "LATEST OPINION"
 msgstr "ПОСЛЕДНИ МИСЛЕЊА"
@@ -930,6 +968,12 @@ msgstr "ЗЕМЈИ ВО СВЕТОТ"
 msgid "AGES"
 msgstr "ВОЗРАСТ"
 
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
 msgid "Join U-Report, Your voice matters."
 msgstr "Придружи се на U-Report, твоето мислење е важно"
 
@@ -953,6 +997,9 @@ msgstr "Како би сакал/а да се придружиш?"
 
 msgid "Text"
 msgstr "Текст"
+
+msgid "PAGE"
+msgstr ""
 
 msgid "SEARCH"
 msgstr "БАРАЈ"
@@ -991,6 +1038,20 @@ msgstr "ЛОКАЦИЈА"
 
 msgid "Written by:"
 msgstr "Автор:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-РЕПОРТЕРИ "
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Еднакво/парно"
@@ -1071,6 +1132,9 @@ msgstr "ИЗБЕРИ ЗЕМЈА"
 
 msgid "Custom pages"
 msgstr "Кориснички приспособени страни"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Погледнете како го вклучуваме гласот на младите за позитивна социјална промена."
@@ -1219,6 +1283,9 @@ msgstr "Освежени %s кеш за оваа организација"
 msgid "Flag"
 msgstr "Знаменце"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Во која организација се користи сликата"
 
@@ -1227,6 +1294,72 @@ msgstr "Кусо и описно име за сликата"
 
 msgid "Image type"
 msgstr "Тип на слика"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Степен на приоритет на прашањето во анкетата. Прашањата со повисок приоритет први се прикажани"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Организација на којашто припаѓа оваа анкета"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Назив за оваа ставка"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Категоријата за оваа приказна"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Наслов на овој содржински блок, изборно"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Краток опис на оваа ставка"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Степен на приоритет на прашањето во анкетата. Прашањата со повисок приоритет први се прикажани"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
 
 msgid "Label"
 msgstr "Назив"
@@ -1299,6 +1432,41 @@ msgstr "Вашиот извор на работа е успешно додаде
 
 msgid "Your job source has been updated successfully"
 msgstr "Вашиот извор на работа е успешно ажуриран"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Организација на којашто припаѓа оваа анкета"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Назив за оваа ставка"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Основен текст на приказната"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Основен текст на приказната"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Слика која ќе се користи"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Дали оваа организација ќе биде прикажана на целната страница"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ова е OSM id за оваа административна граница"
@@ -1405,6 +1573,44 @@ msgstr "Име на испраќачот на пораката"
 msgid "The featured response message"
 msgstr "Истакната порака во одговорот"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "Сокриј статистика на учесници"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Анкета на којашто припаѓа ова прашање"
 
@@ -1502,6 +1708,20 @@ msgstr "Наслов"
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Прашањето упатено кон публиката ќе биде јавно прикажано"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
+msgstr "Прашањето упатено кон публиката ќе биде јавно прикажано"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 msgid "Category {idx+1}"
 msgstr "Категорија {idx+1}"
@@ -1708,6 +1928,11 @@ msgstr "Дали да се активира додатно родово опре
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Дали корисникот е овластен да се најави на веб-локацијата"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Аlpha-3 ISO код на организацијата кој ќе го прикаже stories widget U-Report App. Пр: BRA, NIG, CMR (Користи GLOBAL ако U-Report е Global)."
 
@@ -1769,6 +1994,29 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#~ msgid "Photos"
+#~ msgstr "Фотографии"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Опис на страната за мислења"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Дали анкетата ќе биде прикажана на насловната страна"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Орг"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Опис на страната со статии"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Бојата на текстот во лентата со повик за вклучување"

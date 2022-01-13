@@ -6,18 +6,19 @@ from datetime import timedelta
 
 import mock
 import pytz
-from dash.categories.models import Category
-from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import TaskState
-from dash.stories.models import Story
 
 from django.test import override_settings
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.http import urlquote
 
+from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import TaskState
+from dash.stories.models import Story
+from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
-from ureport.news.models import NewsItem, Video
+from ureport.news.models import NewsItem
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 
 
@@ -47,12 +48,12 @@ class PublicTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 44)
+        self.assertEqual(len(response.context["form"].fields), 45)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 63)
+        self.assertEqual(len(response.context["form"].fields), 64)
 
     def test_count(self):
         count_url = reverse("public.count")
@@ -304,10 +305,11 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/about/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        video1 = Video.objects.create(
-            title="video 1",
-            video_id="video_1",
-            category=self.health_uganda,
+        partner1_logo = Image.objects.create(
+            name="partner1",
+            image="images/image.jpg",
+            image_type="A",
+            priority=1,
             org=self.uganda,
             created_by=self.admin,
             modified_by=self.admin,
@@ -317,13 +319,14 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/about/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 in response.context["videos"])
+        self.assertTrue(response.context["partners_logos"])
+        self.assertTrue(partner1_logo in response.context["partners_logos"])
 
-        video2 = Video.objects.create(
-            title="video 2",
-            video_id="video_2",
-            category=self.education_nigeria,
+        partner2_logo = Image.objects.create(
+            name="partner2",
+            image="images/image.jpg",
+            image_type="A",
+            priority=1,
             org=self.nigeria,
             created_by=self.admin,
             modified_by=self.admin,
@@ -333,14 +336,15 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/about/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 in response.context["videos"])
-        self.assertTrue(video2 not in response.context["videos"])
+        self.assertTrue(response.context["partners_logos"])
+        self.assertTrue(partner1_logo in response.context["partners_logos"])
+        self.assertTrue(partner2_logo not in response.context["partners_logos"])
 
-        video3 = Video.objects.create(
-            title="video 3",
-            video_id="video_3",
-            category=self.health_uganda,
+        partner3_logo = Image.objects.create(
+            name="partner2",
+            image="images/image.jpg",
+            image_type="A",
+            priority=1,
             org=self.uganda,
             created_by=self.admin,
             modified_by=self.admin,
@@ -350,22 +354,22 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/about/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 in response.context["videos"])
-        self.assertTrue(video2 not in response.context["videos"])
-        self.assertTrue(video3 in response.context["videos"])
+        self.assertTrue(response.context["partners_logos"])
+        self.assertTrue(partner1_logo in response.context["partners_logos"])
+        self.assertTrue(partner2_logo not in response.context["partners_logos"])
+        self.assertTrue(partner3_logo in response.context["partners_logos"])
 
-        video1.is_active = False
-        video1.save()
+        partner1_logo.is_active = False
+        partner1_logo.save()
 
         response = self.client.get(about_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/about/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 not in response.context["videos"])
-        self.assertTrue(video2 not in response.context["videos"])
-        self.assertTrue(video3 in response.context["videos"])
+        self.assertTrue(response.context["partners_logos"])
+        self.assertTrue(partner1_logo not in response.context["partners_logos"])
+        self.assertTrue(partner2_logo not in response.context["partners_logos"])
+        self.assertTrue(partner3_logo in response.context["partners_logos"])
 
     def test_join_engage(self):
         join_engage_url = reverse("public.join")

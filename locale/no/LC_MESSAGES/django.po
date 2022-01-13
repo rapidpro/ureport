@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2022-01-13 18:35-0300\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -129,6 +129,12 @@ msgstr "Legg til"
 
 msgid "Content Types"
 msgstr "Innholdstyper"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "Innholdsblokker"
@@ -368,6 +374,9 @@ msgstr "Oppgave"
 msgid "Tasks"
 msgstr "Oppgaver"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "Tittel for denne historien"
 
@@ -385,6 +394,9 @@ msgstr "Forfatteren av historien"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Lenke til mp3 fil som skal publiseres med denne historien"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id til YouTube-video som skal linkes til denne historien (dette er teksten som kommer etter \"v=\" og før \"&\" i YouTube videoens URL)"
@@ -698,6 +710,9 @@ msgstr "Logg ut"
 msgid "Opinions"
 msgstr "Meninger"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Brukere"
 
@@ -707,14 +722,17 @@ msgstr "Innstillinger"
 msgid "Pages"
 msgstr "Sider"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Jobber"
 
 msgid "Tags"
 msgstr ""
 
-msgid "Photos"
-msgstr "Bilder"
+msgid "Partners Logos"
+msgstr ""
 
 msgid "Categories Images"
 msgstr "Kategori Bilder"
@@ -733,6 +751,11 @@ msgstr "Om oss"
 
 msgid "Engagement"
 msgstr "Engasjement"
+
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
 
 msgid "Category Images"
 msgstr "Bildekategorier"
@@ -825,6 +848,12 @@ msgstr ""
 msgid "Back"
 msgstr "Tilbake"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr "SISTE VARSLER"
 
@@ -877,6 +906,9 @@ msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for under
 msgid "Refresh Results"
 msgstr "Oppdater resultatene"
 
+msgid "Partners"
+msgstr ""
+
 msgid "MORE POLLS"
 msgstr "FLERE UNDERSØKELSER"
 
@@ -897,6 +929,12 @@ msgstr "ARKIVERTE HISTORIER"
 
 msgid "LIST"
 msgstr "LISTE"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
 
 msgid "LATEST OPINION"
 msgstr "NYESTE ALTERNATIV  "
@@ -922,6 +960,12 @@ msgstr "LAND VERDEN OVER"
 msgid "AGES"
 msgstr "ALDER"
 
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
 msgid "Join U-Report, Your voice matters."
 msgstr "Bli en U-Reporter, din stemme betyr noe. "
 
@@ -945,6 +989,9 @@ msgstr "Hvordan ønsker du å bli med?"
 
 msgid "Text"
 msgstr "Tekst"
+
+msgid "PAGE"
+msgstr ""
 
 msgid "SEARCH"
 msgstr "SØK"
@@ -983,6 +1030,20 @@ msgstr "BOSTED"
 
 msgid "Written by:"
 msgstr "Skrevet av:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Til og med"
@@ -1063,6 +1124,9 @@ msgstr "VELG LAND"
 
 msgid "Custom pages"
 msgstr "Egendefinerte sider"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Se hvor mange barn og unge som ønsker at vi skal høre akkurat deres stemme som bidrar til en positiv endring."
@@ -1145,11 +1209,6 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Des"
 
-#, fuzzy
-#| msgid "U-Report"
-msgid "Ureport API"
-msgstr "U-Report"
-
 #, python-format
 msgid ""
 "\n"
@@ -1212,6 +1271,9 @@ msgstr "Oppdatert %s for denne organisasjonen"
 msgid "Flag"
 msgstr "Flagg"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "Bildet som vil brukes sammen med organisasjonen"
 
@@ -1220,6 +1282,72 @@ msgstr "En kort  beskrivelse av dette bildet"
 
 msgid "Image type"
 msgstr "Bildetype"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "Organisasjonen denne undersøkelsen tilhører"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Organisasjonen skal vises på landingssiden"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "Tittelen på dette elementet"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "Kategorien til denne historien"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "Tittel for denne innholdsblokken, valgfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "Tittel for denne innholdsblokken, valgfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "Tittel for denne innholdsblokken, valgfritt"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Tittel for denne innholdsblokken, valgfritt"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "En kort oppsummerende beskrivelse av dette elementet"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Organisasjonen skal vises på landingssiden"
 
 msgid "Label"
 msgstr "Etikett"
@@ -1292,6 +1420,41 @@ msgstr "Jobbkilden har blitt lagt til"
 
 msgid "Your job source has been updated successfully"
 msgstr "Jobbkilden har blitt oppdatert"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "Organisasjonen denne undersøkelsen tilhører"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "Tittelen på dette elementet"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "Brødteksten for denne historien"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Organisasjonen skal vises på landingssiden"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "Brødteksten for denne historien"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "Bildefilen som skal benyttes"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Organisasjonen skal vises på landingssiden"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Dette er OSM id for denne administrative grensen"
@@ -1398,6 +1561,44 @@ msgstr "Navnet til avsender"
 msgid "The featured response message"
 msgstr "Feature responsmelding "
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "Skjul deltakelsesstatistikk"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "Undersøkelsen dette spørsmålet er en del av"
 
@@ -1495,6 +1696,20 @@ msgstr "Tittel"
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
+msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 msgid "Category {idx+1}"
 msgstr "Kategori {idx+1}"
@@ -1701,6 +1916,11 @@ msgstr "Aktiver fler kjønnsidentiteter"
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Brukeren kan logge inn på siden"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO koden for organisasjonen, slik at story widget fra U-Report appen fremvises. For eksempel: BRA, NIG, CMR (bruk GLOBAL hvis U-Reporten er global)."
 
@@ -1762,6 +1982,34 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
+#~ msgid "Photos"
+#~ msgstr "Bilder"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "Beskrivelse av meningssiden"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Undersøkelsen skal vises på hovedsiden"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "Beskrivelse av historiesiden"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "Tekstfarge på \"delta/bli med\"-baren"

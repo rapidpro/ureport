@@ -5,14 +5,14 @@ import logging
 import time
 from datetime import timedelta
 
-from dash.orgs.models import Org
-from dash.orgs.tasks import org_task
 from django_redis import get_redis_connection
 from temba_client.exceptions import TembaRateExceededError
 
 from django.core.cache import cache
 from django.utils import timezone
 
+from dash.orgs.models import Org
+from dash.orgs.tasks import org_task
 from ureport.celery import app
 from ureport.utils import (
     fetch_flows,
@@ -81,50 +81,6 @@ def pull_results_main_poll(org, since, until):
             "num_path_ignored": num_path_ignored,
         }
 
-    return results_log
-
-
-@org_task("results-pull-brick-polls", 60 * 60 * 24)
-def pull_results_brick_polls(org, since, until):
-    from .models import Poll
-
-    results_log = dict()
-
-    brick_polls_ids_list = Poll.get_brick_polls_ids(org)
-    brick_polls_ids_list = [poll_id for poll_id in brick_polls_ids_list]
-
-    brick_polls_ids = (
-        Poll.objects.filter(id__in=brick_polls_ids_list)
-        .order_by("flow_uuid")
-        .distinct("flow_uuid")
-        .values_list("id", flat=True)
-    )
-
-    brick_polls = list(Poll.objects.filter(id__in=brick_polls_ids).order_by("-created_on"))[:5]
-    for poll in brick_polls:
-
-        key = Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid)
-        if not cache.get(key):
-            try:
-                (
-                    num_val_created,
-                    num_val_updated,
-                    num_val_ignored,
-                    num_path_created,
-                    num_path_updated,
-                    num_path_ignored,
-                ) = Poll.pull_results(poll.id)
-                results_log["flow-%s" % poll.flow_uuid] = {
-                    "num_val_created": num_val_created,
-                    "num_val_updated": num_val_updated,
-                    "num_val_ignored": num_val_ignored,
-                    "num_path_created": num_path_created,
-                    "num_path_updated": num_path_updated,
-                    "num_path_ignored": num_path_ignored,
-                }
-
-            except TembaRateExceededError:
-                pass
     return results_log
 
 
@@ -211,6 +167,7 @@ def clear_old_poll_results(org, since, until):
         Poll.objects.filter(org=org)
         .exclude(poll_date__gte=syncing_window)
         .exclude(created_on__gte=new_window)
+        .exclude(stopped_syncing=True)
         .order_by("pk")
     )
     for poll in old_polls:
@@ -276,13 +233,17 @@ def pull_refresh_from_archives(poll_id):
 def rebuild_counts():
     from .models import Poll
 
+    start_time = time.time()
+
     logger.info("Task: polls.rebuild_counts started")
     polls = Poll.objects.filter(is_active=True)
 
     for poll in polls:
         poll.rebuild_poll_results_counts()
 
-    logger.info("Task: polls.rebuild_counts finished")
+    elapsed = time.time() - start_time
+
+    logger.info(f"Task: polls.rebuild_counts finished in {elapsed:.1f} seconds")
 
 
 @app.task(name="update_results_age_gender")
@@ -358,4 +319,13 @@ def recheck_poll_flow_data(org_id=None):
 def polls_stats_squash():
     from ureport.stats.models import PollStats
 
-    PollStats.squash()
+    r = get_redis_connection()
+    key = "squesh_stats_lock"
+
+    lock_timeout = 60 * 60 * 2
+
+    if r.get(key):
+        logger.info("Skipping squashing stats as it is still running")
+    else:
+        with r.lock(key, timeout=lock_timeout):
+            PollStats.squash()
