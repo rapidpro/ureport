@@ -6,7 +6,7 @@ COPY ./pyproject.toml .
 COPY ./poetry.lock .
 
 RUN python -m pip install -U poetry
-RUN poetry export --output requirements.txt
+RUN poetry export --without-hashes --output requirements.txt
 
 FROM python:3.6-slim-buster AS base
 
@@ -85,7 +85,7 @@ COPY --from=build-poetry /app/requirements.txt .
 COPY weni_requirements.txt .
 
 RUN mkdir /install \
-  && pip install --no-cache-dir --prefix=/install --require-hashes -r requirements.txt \
+  && pip install --no-cache-dir --prefix=/install -r requirements.txt \
   && pip install --no-cache-dir --prefix=/install -r weni_requirements.txt
 
 FROM base
