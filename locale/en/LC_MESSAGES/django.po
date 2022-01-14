@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2022-01-13 18:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,6 +123,12 @@ msgid "Add"
 msgstr ""
 
 msgid "Content Types"
+msgstr ""
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
 msgstr ""
 
 msgid "Content Blocks"
@@ -359,6 +365,9 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr ""
 
@@ -375,6 +384,9 @@ msgid "The writer of the story"
 msgstr ""
 
 msgid "A link to an mp3 file to publish on this story"
+msgstr ""
+
+msgid "The PDF report to attach"
 msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
@@ -671,6 +683,9 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr ""
 
@@ -680,13 +695,16 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr ""
 
 msgid "Tags"
 msgstr ""
 
-msgid "Photos"
+msgid "Partners Logos"
 msgstr ""
 
 msgid "Categories Images"
@@ -705,6 +723,9 @@ msgid "About"
 msgstr ""
 
 msgid "Engagement"
+msgstr ""
+
+msgid "Reports"
 msgstr ""
 
 msgid "Category Images"
@@ -794,6 +815,12 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr ""
 
@@ -842,6 +869,9 @@ msgstr ""
 msgid "Refresh Results"
 msgstr ""
 
+msgid "Partners"
+msgstr ""
+
 msgid "MORE POLLS"
 msgstr ""
 
@@ -861,6 +891,12 @@ msgid "ARCHIVED STORIES"
 msgstr ""
 
 msgid "LIST"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
 msgstr ""
 
 msgid "LATEST OPINION"
@@ -887,6 +923,12 @@ msgstr ""
 msgid "AGES"
 msgstr ""
 
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
@@ -909,6 +951,9 @@ msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
+msgstr ""
+
+msgid "PAGE"
 msgstr ""
 
 msgid "SEARCH"
@@ -943,6 +988,18 @@ msgid "LOCATION"
 msgstr ""
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "REPORT"
+msgstr ""
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -1021,6 +1078,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1104,9 +1164,6 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-msgid "Ureport API"
-msgstr ""
-
 #, python-format
 msgid ""
 "\n"
@@ -1161,6 +1218,9 @@ msgstr ""
 msgid "Flag"
 msgstr ""
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr ""
 
@@ -1168,6 +1228,48 @@ msgid "A short descriptive name for this image"
 msgstr ""
 
 msgid "Image type"
+msgstr ""
+
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr ""
+
+msgid "The organization this bot is part of"
+msgstr ""
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr ""
+
+msgid "The title to display for this bot"
+msgstr ""
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+msgid "The keyword for this bot"
+msgstr ""
+
+msgid "The Facebook bot deeplink, optional"
+msgstr ""
+
+msgid "The Telegram bot deeplink, optional"
+msgstr ""
+
+msgid "The Viber bot deeplink, optional"
+msgstr ""
+
+msgid "The WhatsApp bot deeplink, optional"
+msgstr ""
+
+msgid "A short description for this bot, required"
+msgstr ""
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr ""
+
+msgid "Whether this bot should be shown to the public"
 msgstr ""
 
 msgid "Label"
@@ -1240,6 +1342,27 @@ msgid "Your job source has been added successfully"
 msgstr ""
 
 msgid "Your job source has been updated successfully"
+msgstr ""
+
+msgid "The organization this landing page is part of"
+msgstr ""
+
+msgid "The title to display for this landing page"
+msgstr ""
+
+msgid "The call to action text for this landing page"
+msgstr ""
+
+msgid "The slug to use on the link for this landing page"
+msgstr ""
+
+msgid "The body of text for the landing page"
+msgstr ""
+
+msgid "The image file to use for the page"
+msgstr ""
+
+msgid "Whether this page should be active to the public"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1347,6 +1470,42 @@ msgstr ""
 msgid "The featured response message"
 msgstr ""
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+msgid "Hide Age and Location charts"
+msgstr ""
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr ""
 
@@ -1441,6 +1600,18 @@ msgid "Title"
 msgstr ""
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+
+msgid "Color Choice"
+msgstr ""
+
+msgid "The color to use for the question block will be displayed publicly"
+msgstr ""
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
 msgid "Category {idx+1}"
@@ -1638,6 +1809,9 @@ msgid "Whether to activate an extra gender."
 msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
+
+msgid "Whether to show the UNICEF logo in the footer."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."

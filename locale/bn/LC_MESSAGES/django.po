@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2022-01-13 18:35-0300\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -129,6 +129,12 @@ msgstr "যোগ করুন"
 
 msgid "Content Types"
 msgstr "বিষয়ের ধরণ "
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "বিষয়ের সারি"
@@ -370,6 +376,9 @@ msgstr "কাজ "
 msgid "Tasks"
 msgstr "কাজগুলো "
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "এই ঘটনাটির শিরোনাম "
 
@@ -389,6 +398,9 @@ msgstr "ঘটনাটির লেখক "
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "এই ঘটনার সাথে সম্পৃক্ত একটি mp3 ফাইলের লিংকও প্রকাশ করা হবে"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "এই ঘটনার সাথে সম্পৃক্ত YouTube ভিডিওর আইডি এখানে লিঙ্ক করা থাকবে (যে  শব্দগুলো YouTube URL এর v= এর পরে ও & পরে আগে আসে)"
@@ -704,6 +716,9 @@ msgstr "প্রস্থান করুন "
 msgid "Opinions"
 msgstr "মতামতগুলো"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "ব্যবহারকারী গণ  "
 
@@ -713,14 +728,17 @@ msgstr "সেটিংস"
 msgid "Pages"
 msgstr "পেইজগুলো"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "কাজ গুলো"
 
 msgid "Tags"
 msgstr ""
 
-msgid "Photos"
-msgstr "ছবিগুলো"
+msgid "Partners Logos"
+msgstr ""
 
 msgid "Categories Images"
 msgstr "বিভাগগুলোর সবছবি"
@@ -739,6 +757,11 @@ msgstr "সম্পর্কিত "
 
 msgid "Engagement"
 msgstr "কতজন যুক্ত হয়েছেন"
+
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
 
 msgid "Category Images"
 msgstr "বিভাগের ছবিগুলো "
@@ -831,6 +854,12 @@ msgstr ""
 msgid "Back"
 msgstr "ফিরে আসুন "
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr "সর্বশেষ নটিফিকেশন"
 
@@ -880,6 +909,9 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "ফলাফল রিফ্রেশ করুন"
 
+msgid "Partners"
+msgstr ""
+
 msgid "MORE POLLS"
 msgstr "নতুন পোলগুলো "
 
@@ -900,6 +932,12 @@ msgstr "সংরক্ষিত ঘটনাবলি "
 
 msgid "LIST"
 msgstr "তালিকা"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
 
 msgid "LATEST OPINION"
 msgstr "সর্বশেষ মতামত "
@@ -925,6 +963,12 @@ msgstr "বিশ্বব্যাপি দেশগুলো"
 msgid "AGES"
 msgstr "বয়স"
 
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Report-এর সাথে যুক্ত হোন, আপনার কথা গুরুত্বপূর্ণ"
 
@@ -948,6 +992,9 @@ msgstr "আপনি কিভাবে যুক্ত হতে চান?"
 
 msgid "Text"
 msgstr "টেক্সট"
+
+msgid "PAGE"
+msgstr ""
 
 msgid "SEARCH"
 msgstr "সার্চ"
@@ -986,6 +1033,20 @@ msgstr "ঠিকানা "
 
 msgid "Written by:"
 msgstr "লিখেছেন :"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "ঘটনা "
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "সমান "
@@ -1067,6 +1128,9 @@ msgstr "দেশের নাম বেছে নিন"
 msgid "Custom pages"
 msgstr "কাস্টম পেইজেস"
 
+msgid "Landing pages"
+msgstr ""
+
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "সংখ্যার মাধ্যমে দেখুন কীভাবে আমরা সমাজের ইতিবাচক পরিবর্তনের জন্য যুবকদের মতামতগুলোকে যুক্ত করছি।"
 
@@ -1147,11 +1211,6 @@ msgstr "নভেম্বর"
 
 msgid "Dec"
 msgstr "ডিসেম্বর"
-
-#, fuzzy
-#| msgid "U-Report"
-msgid "Ureport API"
-msgstr "u-report "
 
 #, python-format
 msgid ""
@@ -1236,6 +1295,9 @@ msgstr "এই প্রতিষ্ঠানের  জন্য 1 %s cache ref
 msgid "Flag"
 msgstr "পতাকা "
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "যে প্রতিষ্ঠানে এই ছবি ব্যবহার করা হবে "
 
@@ -1244,6 +1306,72 @@ msgstr "এই ছবির জন্য একটি ছোট বর্ণন�
 
 msgid "Image type"
 msgstr "ছবির ধরণ "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "এই পোল পেজ এর প্রশ্নের অগ্রাধিকার। উচ্চ অগ্রাধিকার প্রথমে আসবে। "
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "এই পোল টি যে প্রতিষ্ঠান এর অংশ "
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "এই জিনিস টির শিরোনাম "
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "এই ঘটনাটির শ্রেণী "
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "এই জিনিসটির জন্য একটি ছোট সারসংক্ষেপ বর্ণনা "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "এই পোল পেজ এর প্রশ্নের অগ্রাধিকার। উচ্চ অগ্রাধিকার প্রথমে আসবে। "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
 msgid "Label"
 msgstr "লেবেল "
@@ -1316,6 +1444,41 @@ msgstr "আপনার কাজের উৎস টি সফল ভাবে 
 
 msgid "Your job source has been updated successfully"
 msgstr "আপনার কাজের উৎস টি ঠিক ভাবে হাল নাগাদ করা হয়েছে"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "এই পোল টি যে প্রতিষ্ঠান এর অংশ "
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "এই জিনিস টির শিরোনাম "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "এই ঘটনাটির মূল অংশ"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "এই ঘটনাটির মূল অংশ"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "যে ছবিটি ব্যবহার করা হবে"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "এই প্রশাসনিক সীমানার জন্য এই ওএসএম আইডি প্রযোজ্য  "
@@ -1424,6 +1587,44 @@ msgstr "এই ক্ষুদে বার্তা প্রদানকার
 msgid "The featured response message"
 msgstr "বিশেষায়িত ক্ষুদে বার্তা "
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "অংশগ্রহনের পরিসংখ্যান আড়াল করুন"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "এই পোলটি যে প্রশ্নের অংশ "
 
@@ -1521,6 +1722,20 @@ msgstr "শিরোনাম "
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "আপনার শ্রোতা কে করা প্রশ্ন গুলো, জনসমক্ষে দেখানো হবে"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
+msgstr "আপনার শ্রোতা কে করা প্রশ্ন গুলো, জনসমক্ষে দেখানো হবে"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "Categories"
@@ -1741,6 +1956,11 @@ msgstr "বাড়তি কোন লিঙ্গ সক্রিয় করা �
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "ব্যবহারকারী এই সাইটে প্রবেশ করার অনুমতি প্রাপ্ত কি না"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "প্রতিষ্ঠানটির alpha-3 ISO কোড যা U-Report অ্যাপ-এর স্টোরি তে থাকবে। যেমন- BRA, NIG, CMR (GLOBAL ব্যবহার করুন যদি U-Report GLOBAL হয়)। "
 
@@ -1804,6 +2024,34 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "u-report "
+
+#~ msgid "Photos"
+#~ msgstr "ছবিগুলো"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "মতামত জানানোর পেইজের বর্ণনা"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "এই পোলটি কি হোমপেজে দেখানো উচিত? "
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "অরগ "
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "ঘটনা পেইজের বর্ণনা"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "যোগদান করার বার এর লেখার জন্য যে রঙ টি ব্যবহার করা হয়েছে  "
@@ -2026,9 +2274,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 
 #~ msgid "NEWS FEED"
 #~ msgstr "ঘটনা প্রবাহ  "
-
-#~ msgid "STORY"
-#~ msgstr "ঘটনা "
 
 #~ msgid "Read full story"
 #~ msgstr "সম্পূর্ণ ঘটনা জানুন "

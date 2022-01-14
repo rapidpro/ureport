@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2022-01-13 18:35-0300\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -129,6 +129,12 @@ msgstr "إضافة "
 
 msgid "Content Types"
 msgstr "نوع المحتوى "
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "مجموعات المحتوى الخاصة بالصفحة الإلكترونية "
@@ -374,6 +380,9 @@ msgstr "مهمة"
 msgid "Tasks"
 msgstr "مهام"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "عنوان المقال"
 
@@ -393,6 +402,9 @@ msgstr "كاتب المقالة"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
@@ -697,6 +709,9 @@ msgstr "تسجيل الخروج "
 msgid "Opinions"
 msgstr "استطلاع الرأي"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "المستخدمين"
 
@@ -706,13 +721,16 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "الأعمال"
 
 msgid "Tags"
 msgstr ""
 
-msgid "Photos"
+msgid "Partners Logos"
 msgstr ""
 
 msgid "Categories Images"
@@ -732,6 +750,11 @@ msgstr "نبذة عن "
 
 msgid "Engagement"
 msgstr "مشاركة"
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "Reports"
+msgstr "يو-ريبورت"
 
 msgid "Category Images"
 msgstr "صور الفئة"
@@ -825,6 +848,12 @@ msgstr ""
 msgid "Back"
 msgstr "العودة"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr ""
 
@@ -882,6 +911,9 @@ msgstr ""
 msgid "Refresh Results"
 msgstr ""
 
+msgid "Partners"
+msgstr ""
+
 msgid "MORE POLLS"
 msgstr "المزيد من إستطلاعات الرأي العام والمسوحات"
 
@@ -902,6 +934,12 @@ msgstr "أرشيف المقالات "
 
 msgid "LIST"
 msgstr "القائمة "
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
 
 msgid "LATEST OPINION"
 msgstr "آخر استطلاعات الرأي"
@@ -927,6 +965,12 @@ msgstr ""
 msgid "AGES"
 msgstr "الأعمار"
 
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
@@ -949,6 +993,9 @@ msgid "How would you like to join?"
 msgstr "كيف تريد الانضمام"
 
 msgid "Text"
+msgstr ""
+
+msgid "PAGE"
 msgstr ""
 
 msgid "SEARCH"
@@ -987,6 +1034,20 @@ msgid "LOCATION"
 msgstr ""
 
 msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "JOIN U-REPORT"
+msgid "REPORT"
+msgstr "شارك في يوريبورت U-REPORT الآن "
+
+msgid "STORY"
+msgstr "قصة"
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -1067,6 +1128,9 @@ msgid "SELECT COUNTRY"
 msgstr ""
 
 msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
@@ -1150,11 +1214,6 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#, fuzzy
-#| msgid "U-Report"
-msgid "Ureport API"
-msgstr "يو-ريبورت"
-
 #, python-format
 msgid ""
 "\n"
@@ -1214,6 +1273,9 @@ msgstr "تحديث ذاكرة التخزين المؤقت %s لهذه المؤس
 msgid "Flag"
 msgstr "علم"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
 
@@ -1222,6 +1284,72 @@ msgstr "وصف مختصر عن الصورة"
 
 msgid "Image type"
 msgstr "نوع الصورة "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "ترتيب هذا السؤال على صفحة الاستطلاع، الأكثر أولوية يأتي أولاً "
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "عنوان البند "
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "فئة المقال"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "وصف مختصر عن البند "
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "ترتيب هذا السؤال على صفحة الاستطلاع، الأكثر أولوية يأتي أولاً "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "Label"
 msgstr "ملصق"
@@ -1294,6 +1422,41 @@ msgstr "تم إضافة مصدر العمل بنجاح"
 
 msgid "Your job source has been updated successfully"
 msgstr "تم تحديث مصدر العمل بنجاح"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "عنوان البند "
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "نص المقال"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "نص المقال"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "ملف الصورة التي تريد إستخدامها "
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "هذا هو رمز الـOSM الخاص بالحدود الإدارية "
@@ -1402,6 +1565,42 @@ msgstr "اسم مرسل الرسالة "
 msgid "The featured response message"
 msgstr "الرد الإستثنائي "
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+msgid "Hide Age and Location charts"
+msgstr ""
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "الإستطلاع الذي يتبع له هذا السؤال "
 
@@ -1499,6 +1698,20 @@ msgstr "العنوان "
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "سيتم مشاركة السؤال الذي قمت بطرحه للفئة المستهدفة خاصتك، علناً "
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
+msgstr "سيتم مشاركة السؤال الذي قمت بطرحه للفئة المستهدفة خاصتك، علناً "
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "Categories"
@@ -1709,6 +1922,11 @@ msgstr ""
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "إذا كان هذا المستخدم مسموح له بالدخول للموقع"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -1772,6 +1990,26 @@ msgstr "هل هذه المقالة إستثنائية أو مميزة "
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "يو-ريبورت"
+
+#, fuzzy
+#~| msgid "The title for this item"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "عنوان البند "
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "هل تعتقد أن هذا الإستطلاع إستثنائي ويجب نشره في الصفحة الرئيسية؟"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Org"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "لون النص المستخدم في شريط التسجيل "
@@ -1964,9 +2202,6 @@ msgstr "أداة تفعيل التعريب"
 #~ msgid "NEWS FEED"
 #~ msgstr "أخر النشاطات والأخبار "
 
-#~ msgid "STORY"
-#~ msgstr "قصة"
-
 #~ msgid "Read full story"
 #~ msgstr "قراءة القصة الكاملة"
 
@@ -1978,9 +2213,6 @@ msgstr "أداة تفعيل التعريب"
 
 #~ msgid "Read more"
 #~ msgstr "إقرأ المزيد"
-
-#~ msgid "JOIN U-REPORT"
-#~ msgstr "شارك في يوريبورت U-REPORT الآن "
 
 #~ msgid "HOW TO JOIN"
 #~ msgstr "كيفية المشاركة "

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-06 17:50+0000\n"
+"POT-Creation-Date: 2022-01-13 18:35-0300\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -128,6 +128,12 @@ msgstr "Agregar"
 
 msgid "Content Types"
 msgstr "Tipos de contenido"
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
 
 msgid "Content Blocks"
 msgstr "Bloques de contenido"
@@ -367,6 +373,9 @@ msgstr "Tarea"
 msgid "Tasks"
 msgstr "Tareas"
 
+msgid "Only PDF files are supported."
+msgstr ""
+
 msgid "The title for this story"
 msgstr "El título para esta historia"
 
@@ -384,6 +393,9 @@ msgstr "El autor de la historia"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "El enlace a un archivo mp3 para publicar en esta historia"
+
+msgid "The PDF report to attach"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "El ID del video en YouTube que debe estar vinculado a esta historia (este es el texto que viene después de v= y antes de & en el URL de YouTube)"
@@ -697,6 +709,9 @@ msgstr "Cerrar sesión"
 msgid "Opinions"
 msgstr "Opiniones"
 
+msgid "Bots"
+msgstr ""
+
 msgid "Users"
 msgstr "Usuarios"
 
@@ -706,14 +721,17 @@ msgstr "Configuración"
 msgid "Pages"
 msgstr "Páginas"
 
+msgid "Landing Pages"
+msgstr ""
+
 msgid "Jobs"
 msgstr "Trabajos"
 
 msgid "Tags"
 msgstr ""
 
-msgid "Photos"
-msgstr "Fotos"
+msgid "Partners Logos"
+msgstr ""
 
 msgid "Categories Images"
 msgstr "Imágenes de categorías"
@@ -732,6 +750,11 @@ msgstr "Acerca "
 
 msgid "Engagement"
 msgstr "Participación"
+
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
 
 msgid "Category Images"
 msgstr "Imágenes de categorías"
@@ -824,6 +847,12 @@ msgstr ""
 msgid "Back"
 msgstr "Volver"
 
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
 msgid "LATEST NOTIFICATIONS"
 msgstr "NOTIFICACIONES RECIENTES"
 
@@ -872,6 +901,9 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Actualizar resultados"
 
+msgid "Partners"
+msgstr ""
+
 msgid "MORE POLLS"
 msgstr "MÁS ENCUESTAS"
 
@@ -892,6 +924,12 @@ msgstr "HISTORIAS ARCHIVADAS"
 
 msgid "LIST"
 msgstr "LISTA"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
 
 msgid "LATEST OPINION"
 msgstr "OPINIONES RECIENTES"
@@ -917,6 +955,12 @@ msgstr "PAÍSES DEL MUNDO"
 msgid "AGES"
 msgstr "EDADES"
 
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
 msgid "Join U-Report, Your voice matters."
 msgstr "Únete a U-Report, tu voz importa."
 
@@ -940,6 +984,9 @@ msgstr "¿Cómo te gustaría unirte?"
 
 msgid "Text"
 msgstr "Texto"
+
+msgid "PAGE"
+msgstr ""
 
 msgid "SEARCH"
 msgstr "BUSCAR"
@@ -974,6 +1021,20 @@ msgstr "UBICACIÓN"
 
 msgid "Written by:"
 msgstr "Escrito por:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Todavía"
@@ -1052,6 +1113,9 @@ msgstr "ELIGE PAÍS"
 
 msgid "Custom pages"
 msgstr "Páginas personalizadas"
+
+msgid "Landing pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Mira cómo está la participación de los jóvenes para un cambio social a través de los números."
@@ -1134,11 +1198,6 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dic"
 
-#, fuzzy
-#| msgid "U-Report"
-msgid "Ureport API"
-msgstr "U-Report"
-
 #, python-format
 msgid ""
 "\n"
@@ -1201,6 +1260,9 @@ msgstr "Actualizado %s cache para esta organización"
 msgid "Flag"
 msgstr "Bandera"
 
+msgid "About Partner Logo"
+msgstr ""
+
 msgid "The organization to which the image will be used"
 msgstr "La organización para la que se usará la imagen"
 
@@ -1209,6 +1271,72 @@ msgstr "Descripción corta para esta imagen"
 
 msgid "Image type"
 msgstr "Tipo de imagen"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "La prioridad de esta pregunta en la página de la encuesta, la prioridad más alta aparece primero"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this bot is part of"
+msgstr "La organización a la que pertenece esta encuesta"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this bot"
+msgstr "El título para este ítem"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The keyword for this bot"
+msgstr "La categoría para esta historia"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Facebook bot deeplink, optional"
+msgstr "El título para este bloque de contenido, opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Telegram bot deeplink, optional"
+msgstr "El título para este bloque de contenido, opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The Viber bot deeplink, optional"
+msgstr "El título para este bloque de contenido, opcional"
+
+#, fuzzy
+#| msgid "The title for this block of content, optional"
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "El título para este bloque de contenido, opcional"
+
+#, fuzzy
+#| msgid "A short summary description for this item"
+msgid "A short description for this bot, required"
+msgstr "Una breve descripción para este ítem"
+
+#, fuzzy
+#| msgid "The priority of this question on the poll page, higher priority comes first"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "La prioridad de esta pregunta en la página de la encuesta, la prioridad más alta aparece primero"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this bot should be shown to the public"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
 
 msgid "Label"
 msgstr "Etiqueta"
@@ -1281,6 +1409,41 @@ msgstr "Tu fuente de trabajo ha sido agregada satisfactoriamente"
 
 msgid "Your job source has been updated successfully"
 msgstr "Tu fuente de trabajo ha sido actualizada correctamente"
+
+#, fuzzy
+#| msgid "The organization this poll is part of"
+msgid "The organization this landing page is part of"
+msgstr "La organización a la que pertenece esta encuesta"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The title to display for this landing page"
+msgstr "El título para este ítem"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The call to action text for this landing page"
+msgstr "El cuerpo del texto para la historia"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "The slug to use on the link for this landing page"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
+
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for the landing page"
+msgstr "El cuerpo del texto para la historia"
+
+#, fuzzy
+#| msgid "The image file to use"
+msgid "The image file to use for the page"
+msgstr "El archivo de la imagen que se va a utilizar"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this page should be active to the public"
+msgstr "Si esta org debe ser visualizada en la página de inicio"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Este es el ID de OSM para este límite administrativo "
@@ -1387,6 +1550,44 @@ msgstr "El nombre del remitente del mensaje"
 msgid "The featured response message"
 msgstr "El mensaje de respuesta destacada"
 
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide participation stats"
+msgid "Hide Age and Location charts"
+msgstr "Ocultar las estadísticas de participación"
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
 msgid "The poll this question is part of"
 msgstr "La encuesta de la que forma parte esta pregunta"
 
@@ -1484,6 +1685,20 @@ msgstr "Título"
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "La pregunta planteada a su público, será exhibida públicamente"
+
+msgid "Color Choice"
+msgstr ""
+
+#, fuzzy
+#| msgid "The question posed to your audience, will be displayed publicly"
+msgid "The color to use for the question block will be displayed publicly"
+msgstr "La pregunta planteada a su público, será exhibida públicamente"
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
 
 msgid "Category {idx+1}"
 msgstr ""
@@ -1684,6 +1899,11 @@ msgstr "Si hay que activar otro género."
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Si el usuario tiene permiso de acceder al sitio"
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "El código ISO alpha-3 de la organización como aparece en el widget de Historias de la aplicación U-Report. Ejemplos: BRA, NIG, CMR (usar GLOBAL si U-Report es mundial)."
 
@@ -1745,6 +1965,34 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
+#~ msgid "Photos"
+#~ msgstr "Fotos"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "La descripción de la página Opiniones"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Organización"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "La descripción de la página Historias"
 
 #~ msgid "The color used to draw the text on the join bar"
 #~ msgstr "El color usado para el texto en la barra de participar"

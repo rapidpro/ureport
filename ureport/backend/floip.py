@@ -6,7 +6,6 @@ import time
 from collections import defaultdict
 
 import requests
-from dash.utils.sync import BaseSyncer, SyncOutcome, sync_local_to_changes
 from django_redis import get_redis_connection
 from temba_client.v2 import TembaClient
 
@@ -14,6 +13,7 @@ from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
 
+from dash.utils.sync import BaseSyncer, SyncOutcome, sync_local_to_changes
 from ureport.contacts.models import Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
@@ -354,7 +354,7 @@ class FLOIPBackend(BaseBackend):
                     results = response_json["data"]["attributes"]["responses"]
                     poll_results_url = response_json["data"]["relationships"]["links"]["next"]
 
-                    contacts_map, poll_results_map, poll_results_to_save_map = self._initiate_lookup_maps(
+                    (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(
                         results, org, poll
                     )
 
@@ -545,6 +545,7 @@ class FLOIPBackend(BaseBackend):
             )
 
             if replace_save_map:
+
                 result_obj = PollResult(
                     org=org,
                     flow=flow_uuid,

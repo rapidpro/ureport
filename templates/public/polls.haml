@@ -43,14 +43,46 @@
                           .inline.text-xs.font-bold
                             {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
 
+            - for category in categories_by_date
+              - if category.polls|length > 0
+                .block.py-1.bg-white.search-category.date-category.hidden
+                  %a.font-bold.px-2.block(href="#")
+                    %i.fas.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+                    %i.fas.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
+                    .text-sm(class="rtl:pr-3 ltr:pl-3")
+                      {{ category.name|date:"F" }} {{ category.name|date:"Y" }}
+                  .category-results
+                    - for poll in category.polls
+                      %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'public.opinion_read' poll.pk %}" data-search-value="{{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
+                        .text-sm(class="rtl:mr-2 ltr:ml-2")
+                          {{ poll.title }} - ({{poll.category.name}})
+                          .inline.text-xs.font-bold
+                            {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
+
+
   .max-w-page.mx-auto
-    .bg-white(class="md:flex")
-      .flex-1.my-home.self-center(class="rtl:border-l ltr:border-r")
-        .px-home
+    .bg-white(class="md:flex" id="poll-top-{{latest_poll.id}}")
+      .flex-1.my-home.self-center.hover-parent(class="rtl:border-l ltr:border-r")
+        .px-home.hover-parent
           -if latest_poll
             .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white.mb-6
               {{ latest_poll.category.name }}
-  
+
+            .share.flex-none.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
+              .block
+                %a.cursor-pointer.bg-circle-xs.border.border-black.facebook-share(data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fab.fa-facebook-f
+                %a.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fab.fa-twitter
+                %a.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fab.fa-whatsapp
+                %a.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{latest_poll.id}}")
+                  %i.fas.fa-envelope
+                %a.cursor-pointer.bg-circle-xs.border.border-black.screenshot-share(data-screen-id="poll-top-{{latest_poll.id}}")
+                  %i.fas.fa-file-image
+
+
+
             .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl{% else %}text-2xl{% endif %}")
               {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.title }}
@@ -122,14 +154,14 @@
 
 
     - for question in latest_poll.get_questions
-      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" data-aos-anchor-placement="center-bottom" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'dark1_color'|default:'#439932'  org|config:'light1_color'|default:'#FFD100' org|config:'dark2_color'|default:'#1751af' org|config:'dark3_color'|default:'#5eb3e0' %}")
-        .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
+      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" data-aos-anchor-placement="center-bottom" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'dark1_color'|default:'#439932'  org|config:'light1_color'|default:'#FFD100' org|config:'dark2_color'|default:'#1751af' org|config:'dark3_color'|default:'#5eb3e0' as bar_color silent %}{% if question.get_bg_color_choice %} {{question.get_bg_color_choice}} {% else %}{{bar_color}}{% endif %}")
+        .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg silent %}{% if question.get_color_choice_css %} {{question.get_color_choice_css}} {% else %}{{bg}}{% endif %}")
           .p-home.h-full.flex-center-y(class="md:py-24")
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
               .flex-none.bg-circle.bg-black.text-white.font-bold(data-html2canvas-ignore=true)
                 {{ forloop.counter }}
               .flex-1.flex-center-y
-                .h-1.border-t(class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'border-white' 'border-black' 'border-white' 'border-white' as border %}")
+                .h-1.border-t(class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'white' 'black' 'white' 'white' as border_color silent %}{% if question.get_border_color_choice %} border-{{question.get_border_color_choice}} {% else %}border-{{border_color}}{% endif %}")
 
             .mt-8
               .font-alt.font-bold.leading-tight.italic.hover-parent(class="{% if question.title|length < 50 %}text-3xl{% elif question.title|length < 120 %}text-2xl{% else %}text-xl{% endif %}")
@@ -147,17 +179,21 @@
             .block.justify-center.flex.flex-wrap.hover-parent(data-html2canvas-ignore=true)
               - if not question.is_open_ended
                 .text-xs.flex-none.mb-4
-                  %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}")>
+                  %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %} {% if question.hide_all_chart_pills %} hidden{% endif %}")>
                     .whitespace-no-wrap
                       -trans "ALL"
-                  %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
+                  {% if question.show_age %}
+                  %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'age' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
                     .whitespace-no-wrap
                       -trans "AGE"
-                  %a.pill-white.segment-pill(class="{% if not show_maps %}{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                  {% endif %}
+                  {% if question.show_gender %}
+                  %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'gender' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
                     .whitespace-no-wrap
                       -trans "GENDER"
-                  -if show_maps
-                    %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>
+                  {% endif %}
+                  -if show_maps and question.show_locations
+                    %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}")>
                       %span.whitespace-no-wrap
                         -trans "LOCATION"
                       %i.fas.fa-caret-down
@@ -174,7 +210,7 @@
               - else
                 .block
 
-              .share.flex-none.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
+              .share.flex-none.mx-32.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
                 .block
                   %a.cursor-pointer.bg-circle-xs.border.border-black.facebook-share(data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                     %i.fab.fa-facebook-f

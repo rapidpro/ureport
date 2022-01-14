@@ -9,11 +9,7 @@ from datetime import timedelta
 
 import pytz
 import six
-from dash.categories.models import Category, CategoryImage
-from dash.orgs.models import Org, OrgBackend
-from dash.tags.models import Tag
 from django_redis import get_redis_connection
-from smartmin.models import SmartModel
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -21,11 +17,15 @@ from django.core.cache import cache
 from django.db import connection, models
 from django.db.models import Count, F, Q, Sum
 from django.db.models.functions import Lower
-from django.utils import timezone, translation
+from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
+from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import Org, OrgBackend
+from dash.tags.models import Tag
+from smartmin.models import SmartModel
 from ureport.flows.models import FlowResult, FlowResultCategory
 
 logger = logging.getLogger(__name__)
@@ -234,8 +234,8 @@ class Poll(SmartModel):
         return latest_synced_obj_time, pull_after_delete
 
     def delete_poll_stats(self):
-        from ureport.utils import chunk_list
         from ureport.stats.models import PollStats
+        from ureport.utils import chunk_list
 
         if self.stopped_syncing:
             logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id), exc_info=True)
@@ -320,11 +320,26 @@ class Poll(SmartModel):
         Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
         Poll.pull_poll_results_task(self)
 
+    def rebuild_poll_counts_cache(self):
+        org_id = self.org_id
+        flow = self.flow_uuid
+
+        flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow)
+        for flow_poll in flow_polls:
+            if flow_poll.is_active and self.stopped_syncing:
+                flow_poll.update_questions_results_cache()
+
+            if not flow_poll.stopped_syncing:
+                # update the word clouds for questions
+                flow_poll.update_question_word_clouds()
+                flow_poll.update_questions_results_cache()
+
     def rebuild_poll_results_counts(self):
-        from ureport.utils import chunk_list
-        from ureport.stats.models import PollStats, AgeSegment, GenderSegment, SchemeSegment
-        from ureport.locations.models import Boundary
         import time
+
+        from ureport.locations.models import Boundary
+        from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
+        from ureport.utils import chunk_list
 
         start = time.time()
 
@@ -514,45 +529,10 @@ class Poll(SmartModel):
         return main_poll
 
     @classmethod
-    def get_brick_polls_ids(cls, org):
-        cache_key = "brick_polls_ids:%d" % org.id
-        brick_polls = cache.get(cache_key, None)
-
-        if brick_polls is None:
-            poll_with_questions = PollQuestion.objects.filter(is_active=True, poll__org=org).values_list(
-                "poll", flat=True
-            )
-
-            main_poll = Poll.get_main_poll(org)
-
-            polls = (
-                Poll.get_public_polls(org=org)
-                .filter(pk__in=poll_with_questions)
-                .order_by("-is_featured", "-created_on")
-            )
-            if main_poll:
-                polls = polls.exclude(pk=main_poll.pk)
-
-            brick_polls = []
-
-            for poll in polls:
-                if poll.get_first_question():
-                    brick_polls.append(poll.pk)
-            cache.set(cache_key, brick_polls, BRICK_POLLS_CACHE_TIME)
-
-        return brick_polls
-
-    @classmethod
-    def clear_brick_polls_cache(self, org):
-        cache_key = "brick_polls:%d" % org.id
-        cache.delete(cache_key)
-
-    @classmethod
     def get_other_polls(cls, org):
         main_poll = Poll.get_main_poll(org)
-        brick_polls = Poll.get_brick_polls_ids(org)[:5]
 
-        exclude_polls = [poll_id for poll_id in brick_polls]
+        exclude_polls = []
         if main_poll:
             exclude_polls.append(main_poll.pk)
 
@@ -709,6 +689,46 @@ class PollQuestion(SmartModel):
     POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
     POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 12
 
+    QUESTION_COLOR_CHOICES = (
+        (None, "-----"),
+        ("D1", _("Dark 1 background and White text")),
+        ("L1", _("Light 1 background and Black text")),
+        ("D2", _("Dark 2 background and White text")),
+        ("D3", _("Dark 3 background and Black text")),
+    )
+
+    QUESTION_COLOR_CHOICE_BLOCK_CSS_CLASSES = {
+        "D1": "bg-dark1 text-white",
+        "L1": "bg-light1 text-black",
+        "D2": "bg-dark2 text-white",
+        "D3": "bg-dark3 text-black",
+    }
+
+    QUESTION_COLOR_CHOICE_BG_COLORS = {
+        "D1": ("dark1_color", "#439932"),
+        "L1": ("light1_color", "#FFD100"),
+        "D2": ("dark2_color", "#1751af"),
+        "D3": ("dark3_color", "#5eb3e0"),
+    }
+
+    QUESTION_COLOR_CHOICE_BORDER_COLORS = {
+        "D1": "white",
+        "L1": "black",
+        "D2": "white",
+        "D3": "white",
+    }
+
+    QUESTION_HIDDEN_CHARTS_CHOICES = (
+        (None, _("Show Age, Gender and Location charts")),
+        ("A", _("Hide Age chart ONLY")),
+        ("G", _("Hide Gender chart ONLY")),
+        ("L", _("Hide Location chart ONLY")),
+        ("AG", _("Hide Age and Gender charts")),
+        ("AL", _("Hide Age and Location charts")),
+        ("GL", _("Hide Gender and Location charts")),
+        ("AGL", _("Hide Age, Gender and Location charts")),
+    )
+
     poll = models.ForeignKey(
         Poll, on_delete=models.PROTECT, related_name="questions", help_text=_("The poll this question is part of")
     )
@@ -730,6 +750,42 @@ class PollQuestion(SmartModel):
     )
 
     flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
+
+    color_choice = models.CharField(max_length=2, choices=QUESTION_COLOR_CHOICES, null=True, blank=True)
+
+    hidden_charts = models.CharField(max_length=3, choices=QUESTION_HIDDEN_CHARTS_CHOICES, null=True, blank=True)
+
+    def show_age(self):
+        return self.hidden_charts is None or "A" not in self.hidden_charts
+
+    def show_gender(self):
+        return self.hidden_charts is None or "G" not in self.hidden_charts
+
+    def show_locations(self):
+        return self.hidden_charts is None or "L" not in self.hidden_charts
+
+    def hide_all_chart_pills(self):
+        return "AGL" == self.hidden_charts
+
+    def get_last_pill(self):
+        if self.hidden_charts is None or "L" not in self.hidden_charts:
+            return "locations"
+        if self.hidden_charts is None or "G" not in self.hidden_charts:
+            return "gender"
+        if self.hidden_charts is None or "A" not in self.hidden_charts:
+            return "age"
+        return "all"
+
+    def get_color_choice_css(self):
+        return self.QUESTION_COLOR_CHOICE_BLOCK_CSS_CLASSES.get(self.color_choice, "")
+
+    def get_border_color_choice(self):
+        return self.QUESTION_COLOR_CHOICE_BORDER_COLORS.get(self.color_choice, "")
+
+    def get_bg_color_choice(self):
+        org = self.poll.org
+        color_tuple = self.QUESTION_COLOR_CHOICE_BG_COLORS.get(self.color_choice, ("", ""))
+        return org.get_config(color_tuple[0]) or color_tuple[1]
 
     @classmethod
     def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):
@@ -819,14 +875,15 @@ class PollQuestion(SmartModel):
             poll_word_cloud.save()
 
     def calculate_results(self, segment=None):
-        from ureport.stats.models import AgeSegment, PollStats, GenderSegment, PollWordCloud
         from stop_words import safe_get_stop_words
+
+        from ureport.stats.models import AgeSegment, GenderSegment, PollStats, PollWordCloud
 
         org = self.poll.org
         open_ended = self.is_open_ended()
         responded = self.calculate_responded()
         polled = self.calculate_polled()
-        translation.activate(org.language)
+        org_gender_labels = org.get_gender_labels()
 
         results = []
 
@@ -1018,7 +1075,7 @@ class PollQuestion(SmartModel):
                             dict(
                                 set=set_count,
                                 unset=unset_count,
-                                label=str(GenderSegment.GENDERS.get(gender["gender"])),
+                                label=org_gender_labels.get(gender["gender"]),
                                 categories=categories,
                             )
                         )
@@ -1217,11 +1274,9 @@ class PollResult(models.Model):
 
     scheme = models.CharField(max_length=16, null=True)
 
-    def generate_poll_stats(self):
-        generated_stats = dict()
-
+    def get_result_tuple(self):
         if not self.org_id or not self.flow or not self.ruleset:
-            return generated_stats
+            return ()
 
         ruleset = ""
         category = ""
@@ -1271,7 +1326,15 @@ class PollResult(models.Model):
         if self.scheme:
             scheme = self.scheme.lower()
 
-        generated_stats[(self.org_id, ruleset, category, born, gender, state, district, ward, scheme, date)] = 1
+        return (self.org_id, ruleset, category, born, gender, state, district, ward, scheme, date)
+
+    def generate_poll_stats(self):
+        generated_stats = dict()
+
+        result_tuple = self.get_result_tuple()
+        if result_tuple:
+            generated_stats[result_tuple] = 1
+
         return generated_stats
 
     class Meta:

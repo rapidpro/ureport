@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from html.parser import HTMLParser
+from html import unescape
 
 import feedparser
 import six
-from dash.orgs.models import Org
-from smartmin.models import SmartModel
 
 from django.conf import settings
 from django.core.cache import cache
 from django.db import models
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
+
+from dash.orgs.models import Org
+from smartmin.models import SmartModel
 
 RSS_JOBS_FEED_CACHE_TIME = getattr(settings, "RSS_JOBS_FEED_CACHE_TIME", 60 * 60 * 6)
 RSS_JOBS_KEY = "jobsource:%d:%d"
@@ -78,10 +79,9 @@ class JobSource(SmartModel):
             cache.delete(key)
             pass
 
-        html_parser = HTMLParser()
         for entry in entries:
             summary = entry.get("summary", "")
-            entry["summary"] = strip_tags(html_parser.unescape(html_parser.unescape(summary)))
+            entry["summary"] = strip_tags(unescape(unescape(summary)))
         return entries
 
     def get_return_page(self):

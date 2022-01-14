@@ -1,28 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import iso8601
 import json
-import six
-import time
 import logging
-from datetime import timedelta, datetime
-from itertools import islice, chain
+import time
 from collections import defaultdict
+from datetime import datetime, timedelta
+from itertools import chain, islice
 
-from dash.orgs.models import Org
-from dash.utils import datetime_to_ms
+import iso8601
+import pytz
+import six
+from sentry_sdk import capture_exception
+
 from django.conf import settings
 from django.core.cache import cache
 from django.db.models import Sum
 from django.utils import timezone, translation
-import pytz
-from ureport.assets.models import Image, LOGO
-from sentry_sdk import capture_exception
 
+from dash.orgs.models import Org
+from dash.utils import datetime_to_ms
+from ureport.assets.models import LOGO, Image
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
-from ureport.stats.models import PollStats, GenderSegment, AgeSegment, SchemeSegment
+from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -252,8 +253,10 @@ def get_linked_orgs(authenticated=False):
 
 
 def fetch_old_sites_count():
-    import requests
     import re
+
+    import requests
+
     from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
     start = time.time()
@@ -340,6 +343,11 @@ def update_cache_org_contact_counts(org):
     return org_contacts_counts
 
 
+def get_gender_labels(org):
+    translation.activate(org.language)
+    return {k: str(v) for k, v in GenderSegment.GENDERS.items()}
+
+
 def get_gender_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -419,7 +427,12 @@ def get_age_stats(org):
     if total > 0:
         age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.items()}
 
-    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i["name"]))
+    return json.dumps(
+        sorted(
+            [dict(name=k, y=v, absolute_count=age_counts_interval.get(k, 0)) for k, v in age_stats.items()],
+            key=lambda i: i["name"],
+        )
+    )
 
 
 def get_schemes_stats(org):
@@ -443,17 +456,22 @@ def get_schemes_stats(org):
         scheme_stats = {k: int(round(v * 100 / float(total))) for k, v in schemes_stats_data.items()}
 
     other_stat = 0
+    other_absolute_count = 0
     output_dict = dict()
     for name, v in scheme_stats.items():
         if v <= 5:
             other_stat += v
+            other_absolute_count += schemes_stats_data.get(name, 0)
         else:
             output_dict[name] = v
 
-    output = sorted([dict(name=k, y=v) for k, v in output_dict.items()], key=lambda i: -i["y"])
+    output = sorted(
+        [dict(name=k, y=v, absolute_count=schemes_stats_data.get(k, 0)) for k, v in output_dict.items()],
+        key=lambda i: -i["y"],
+    )
 
     if other_stat:
-        output.append(dict(name="OTHERS", y=other_stat))
+        output.append(dict(name="OTHERS", y=other_stat, absolute_count=other_absolute_count))
     return output
 
 
@@ -534,7 +552,8 @@ def get_sign_up_rate_gender(org, time_filter):
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
     tz = pytz.timezone("UTC")
-    translation.activate(org.language)
+
+    org_gender_labels = org.get_gender_labels()
 
     org_contacts_counts = get_org_contacts_counts(org)
 
@@ -569,7 +588,7 @@ def get_sign_up_rate_gender(org, time_filter):
         data = dict()
         for key in keys:
             data[key] = interval_dict[key]
-        output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=data))
+        output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=data))
     return output_data
 
 
@@ -1064,6 +1083,7 @@ def populate_contact_activity(org):
         )
 
 
+Org.get_gender_labels = get_gender_labels
 Org.get_org_contacts_counts = get_org_contacts_counts
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count

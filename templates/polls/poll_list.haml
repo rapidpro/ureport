@@ -83,7 +83,7 @@
               - trans "Main poll syncs scheduled every 20min"
             -elif obj in recent_polls
               - trans "Recent poll syncs scheduled every 60min"
-            -elif obj in other_polls or obj.id in brick_polls_ids
+            -elif obj in other_polls
               - trans "Poll syncs scheduled every 24h"
             -elif not obj.is_active
               -trans "Not scheduling syncs, not active"

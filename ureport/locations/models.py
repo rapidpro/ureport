@@ -3,11 +3,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import json
 
-from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from dash.orgs.models import Org, OrgBackend
 
 BOUNDARY_LOCK_KEY = "lock:boundary:%d:%s"
 
@@ -60,8 +61,9 @@ class Boundary(models.Model):
     @classmethod
     def build_global_boundaries(cls):
 
-        from django.conf import settings
         from temba_client.v2.types import Boundary as TembaBoundary
+
+        from django.conf import settings
 
         handle = open("%s/geojson/countries.json" % settings.MEDIA_ROOT, "r+")
         contents = handle.read()

@@ -195,19 +195,19 @@ COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 REDIS_HOST = config('REDIS_HOST')
 REDIS_DATABASE = config('REDIS_DATABASE', default='1')
 
-BROKER_URL = 'redis://{}:6379/{}'.format(REDIS_HOST, REDIS_DATABASE)
+CELERY_BROKER_URL = 'redis://{}:6379/{}'.format(REDIS_HOST, REDIS_DATABASE)
 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': BROKER_URL,
+        'LOCATION': CELERY_BROKER_URL,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
 
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=BROKER_URL)
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=CELERY_BROKER_URL)
 CELERY_ALWAYS_EAGER = config('CELERY_ALWAYS_EAGER', default=False, cast=bool)
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = config(
     'CELERY_EAGER_PROPAGATES_EXCEPTIONS', default=True, cast=bool)
@@ -219,5 +219,3 @@ UREPORT_RUN_FETCHED_DATA_CACHE_TIME = config('UREPORT_RUN_FETCHED_DATA_CACHE_TIM
 
 TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
 USER_TIME_ZONE = config('USER_TIME_ZONE', default='America/Sao_Paulo')
-
-

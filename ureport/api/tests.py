@@ -7,10 +7,6 @@ from random import randint
 
 import pytz
 import six
-from dash.categories.models import Category
-from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import Org
-from dash.stories.models import Story
 from mock import patch
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -18,6 +14,10 @@ from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import Org
+from dash.stories.models import Story
 from ureport.api.serializers import CategoryReadSerializer, StoryReadSerializer, generate_absolute_url_from_file
 from ureport.contacts.models import ReportersCounter
 from ureport.flows.models import FlowResult
@@ -254,6 +254,7 @@ class UreportAPITests(APITestCase):
         age_stats = response.data.pop("age_stats")
         registration_stats = response.data.pop("registration_stats")
         occupation_stats = response.data.pop("occupation_stats")
+        schemes_stats = response.data.pop("schemes_stats")
         reporters_count = response.data.pop("reporters_count")
         self.assertDictEqual(
             response.data,
@@ -275,16 +276,17 @@ class UreportAPITests(APITestCase):
         self.assertEqual(
             age_stats,
             [
-                dict(name="0-14", y=0),
-                dict(name="15-19", y=0),
-                dict(name="20-24", y=0),
-                dict(name="25-30", y=0),
-                dict(name="31-34", y=0),
-                dict(name="35+", y=0),
+                dict(name="0-14", y=0, absolute_count=0),
+                dict(name="15-19", y=0, absolute_count=0),
+                dict(name="20-24", y=0, absolute_count=0),
+                dict(name="25-30", y=0, absolute_count=0),
+                dict(name="31-34", y=0, absolute_count=0),
+                dict(name="35+", y=0, absolute_count=0),
             ],
         )
         self.assertEqual(reporters_count, 0)
         self.assertEqual(occupation_stats, [])
+        self.assertEqual(schemes_stats, [])
 
         ReportersCounter.objects.create(org=org, type="gender:f", count=2)
         ReportersCounter.objects.create(org=org, type="gender:m", count=2)
@@ -324,12 +326,12 @@ class UreportAPITests(APITestCase):
         self.assertEqual(
             age_stats,
             [
-                dict(name="0-14", y=80),
-                dict(name="15-19", y=0),
-                dict(name="20-24", y=0),
-                dict(name="25-30", y=0),
-                dict(name="31-34", y=0),
-                dict(name="35+", y=20),
+                dict(name="0-14", y=80, absolute_count=8),
+                dict(name="15-19", y=0, absolute_count=0),
+                dict(name="20-24", y=0, absolute_count=0),
+                dict(name="25-30", y=0, absolute_count=0),
+                dict(name="31-34", y=0, absolute_count=0),
+                dict(name="35+", y=20, absolute_count=2),
             ],
         )
 
@@ -396,6 +398,40 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.data["count"], 1)
         self.assertEqual(response.data["results"][0]["title"], "registration")
 
+    def test_polls_by_org_list_with_fields_parameter(self):
+        url = "/api/v1/polls/org/%d/?fields=%s" % (self.uganda.pk, "title")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        count_polls = Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count()
+        self.assertEqual(response.data["count"], count_polls)
+        polls = [self.second_featured_poll, self.first_featured_poll, self.another_poll, self.reg_poll]
+        for i in range(count_polls):
+            self.assertEqual(response.data["results"][i]["title"], polls[i].title)
+
+    def test_polls_by_org_list_with_exclude_parameter(self):
+        url = "/api/v1/polls/org/%d/?exclude=%s,%s,%s,%s,%s,%s" % (
+            self.uganda.pk,
+            "flow_uuid",
+            "title",
+            "category",
+            "poll_date",
+            "modified_on",
+            "created_on",
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        count_polls = Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count()
+        poll = self.reg_poll
+        self.assertEqual(response.data["count"], count_polls)
+        self.assertDictEqual(
+            response.data["results"][3],
+            dict(
+                id=poll.pk,
+                org=poll.org_id,
+                questions=[],
+            ),
+        )
+
     def test_featured_poll_by_org_list_when_featured_polls_exists(self):
         url = "/api/v1/polls/org/%d/featured/" % self.uganda.pk
         response = self.client.get(url)
@@ -409,6 +445,13 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["count"], 2)
         self.assertTrue(response.data["results"][0]["modified_on"] > response.data["results"][1]["modified_on"])
+
+    def test_featured_poll_by_org_list_with_fields_parameter_when_featured_polls_exists(self):
+        url = "/api/v1/polls/org/%d/featured/?fields=%s" % (self.uganda.pk, "created_on")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["count"], 2)
+        self.assertTrue(response.data["results"][0]["created_on"] > response.data["results"][1]["created_on"])
 
     def test_featured_poll_by_org_list_when_no_featured_polls_exists(self):
         url = "/api/v1/polls/org/%d/featured/" % self.nigeria.pk
@@ -497,6 +540,112 @@ class UreportAPITests(APITestCase):
                     modified_on=poll.modified_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     questions=[],
+                ),
+            )
+
+    def test_single_poll_with_fields_parameter(self):
+        url = "/api/v1/polls/%d/?fields=%s,%s,%s" % (self.reg_poll.pk, "id", "title", "questions")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        poll = self.reg_poll
+        self.assertDictEqual(
+            response.data,
+            dict(
+                id=poll.pk,
+                title=poll.title,
+                questions=[],
+            ),
+        )
+
+        with patch("ureport.polls.models.PollQuestion.get_results") as mock_get_results:
+            mock_get_results.return_value = [dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")]
+
+            poll_question = self.create_poll_question(self.superuser, self.reg_poll, "What's on mind? :)", "uuid1")
+
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertDictEqual(
+                response.data,
+                dict(
+                    id=poll.pk,
+                    title=poll.title,
+                    questions=[
+                        dict(
+                            id=poll_question.pk,
+                            ruleset_uuid="uuid1",
+                            title="What's on mind? :)",
+                            results=dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT"),
+                            results_by_age=[dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")],
+                            results_by_gender=[dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")],
+                            results_by_location=[
+                                dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")
+                            ],
+                        )
+                    ],
+                ),
+            )
+
+            poll_question.is_active = False
+            poll_question.save()
+
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertDictEqual(
+                response.data,
+                dict(
+                    id=poll.pk,
+                    title=poll.title,
+                    questions=[],
+                ),
+            )
+
+    def test_single_poll_with_exclude_parameter(self):
+        url = "/api/v1/polls/%d/?exclude=%s,%s,%s,%s" % (self.reg_poll.pk, "id", "title", "category", "questions")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        poll = self.reg_poll
+        self.assertDictEqual(
+            response.data,
+            dict(
+                flow_uuid=poll.flow_uuid,
+                org=poll.org_id,
+                poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                modified_on=poll.modified_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+            ),
+        )
+
+        with patch("ureport.polls.models.PollQuestion.get_results") as mock_get_results:
+            mock_get_results.return_value = [dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")]
+
+            poll_question = self.create_poll_question(self.superuser, self.reg_poll, "What's on mind? :)", "uuid1")
+
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertDictEqual(
+                response.data,
+                dict(
+                    flow_uuid=poll.flow_uuid,
+                    org=poll.org_id,
+                    created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    modified_on=poll.modified_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                ),
+            )
+
+            poll_question.is_active = False
+            poll_question.save()
+
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertDictEqual(
+                response.data,
+                dict(
+                    flow_uuid=poll.flow_uuid,
+                    org=poll.org_id,
+                    poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    modified_on=poll.modified_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                 ),
             )
 
@@ -600,6 +749,43 @@ class UreportAPITests(APITestCase):
         self.assertDictEqual(
             dict(category),
             dict(name=story.category.name, image_url=CategoryReadSerializer().get_image_url(story.category)),
+        )
+
+    def test_single_story_with_fields_parameter(self):
+        url = "/api/v1/stories/%d/?fields=%s" % (self.uganda_story.pk, "content")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        story = self.uganda_story
+        self.assertDictEqual(
+            response.data,
+            dict(
+                content=story.content,
+            ),
+        )
+
+    def test_single_story_with_exclude_parameter(self):
+        url = "/api/v1/stories/%d/?exclude=%s,%s,%s,%s" % (
+            self.uganda_story.pk,
+            "content",
+            "featured",
+            "images",
+            "category",
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        story = self.uganda_story
+        self.assertDictEqual(
+            response.data,
+            dict(
+                id=story.pk,
+                title=story.title,
+                video_id=story.video_id,
+                audio_link=story.audio_link,
+                summary=story.summary,
+                tags=story.tags,
+                org=story.org_id,
+                created_on=story.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+            ),
         )
 
     def test_dashblock_by_org_list(self):
