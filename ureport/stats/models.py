@@ -8,7 +8,7 @@ from django.db import connection, models
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, JSONField, Q, Sum
 from django.db.models.functions import ExtractYear
 from django.utils import timezone, translation
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
 from ureport.flows.models import FlowResult, FlowResultCategory

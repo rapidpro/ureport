@@ -3,8 +3,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import json
 import uuid
+import zoneinfo
 
-import pytz
 from mock import Mock, patch
 from temba_client.v2 import TembaClient
 from temba_client.v2.types import (
@@ -21,7 +21,7 @@ from django.http.request import HttpRequest
 from django.test import override_settings
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from dash.orgs.middleware import SetOrgMiddleware
 from dash.orgs.models import Org
@@ -127,7 +127,7 @@ class MockResponse(object):
 
     def raise_for_status(self):
         if self.status_code != 200:
-            raise Exception("Server returned %s" % force_text(self.status_code))
+            raise Exception("Server returned %s" % force_str(self.status_code))
 
     def json(self, **kwargs):
         return json.loads(self.content)
@@ -143,8 +143,8 @@ class UreportTest(SmartminTest, DashTest):
 
         self.admin = self.create_user("Administrator")
         self.anon = self.create_user("Anon")
-        self.uganda = self.create_org("uganda", pytz.timezone("Africa/Kampala"), self.admin)
-        self.nigeria = self.create_org("nigeria", pytz.timezone("Africa/Lagos"), self.admin)
+        self.uganda = self.create_org("uganda", zoneinfo.ZoneInfo("Africa/Kampala"), self.admin)
+        self.nigeria = self.create_org("nigeria", zoneinfo.ZoneInfo("Africa/Lagos"), self.admin)
 
         rapidpro_backend = self.nigeria.backends.filter(slug="rapidpro").first()
         if not rapidpro_backend:
@@ -327,7 +327,7 @@ class SetOrgMiddlewareTest(UreportTest):
 
     def test_process_request_with_org(self):
 
-        ug_org = self.create_org("uganda", pytz.timezone("Africa/Kampala"), self.admin)
+        ug_org = self.create_org("uganda", zoneinfo.ZoneInfo("Africa/Kampala"), self.admin)
         ug_dash_url = ug_org.subdomain + ".ureport.io"
         self.request.get_host.return_value = ug_dash_url
 
@@ -368,7 +368,7 @@ class SetOrgMiddlewareTest(UreportTest):
             self.assertEqual(self.request.org, None)
             self.assertEqual(self.request.user.get_org(), None)
 
-            self.create_org("rwanda", pytz.timezone("Africa/Kigali"), self.admin)
+            self.create_org("rwanda", zoneinfo.ZoneInfo("Africa/Kigali"), self.admin)
             wrong_subdomain_url = "blabla.ureport.io"
             self.request.get_host.return_value = wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
