@@ -1,3 +1,18 @@
+v1.2.26
+----------
+ * Update deps
+ * Merge pull request #857 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
+ * Merge pull request #858 from rapidpro/django4
+ * Add migrations
+ * Run code checks
+ * Merge branch 'main' of github.com:rapidpro/ureport into HEAD
+ * Merge pull request #856 from rapidpro/django4
+ * Translate /locale/en/LC_MESSAGES/django.po in fr
+ * Update pillow to 9.0.0
+ * Update to support django 4
+ * Run code_checks
+ * Prep update for django 4.0
+
 v1.2.25
 ----------
  * Merge pull request #851 from alviriseup/main
