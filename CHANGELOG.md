@@ -1,3 +1,7 @@
+v1.2.29
+----------
+ * Merge pull request #859 from rapidpro/update-deps
+
 v1.2.26
 ----------
  * Update deps
