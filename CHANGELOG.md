@@ -1,3 +1,8 @@
+v1.2.30
+----------
+ * Merge pull request #895 from rapidpro/percent-graphs
+ * Fix polls graphs percentage bar lengths
+
 v1.2.29
 ----------
  * Merge pull request #859 from rapidpro/update-deps
