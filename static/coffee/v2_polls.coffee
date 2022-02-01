@@ -242,11 +242,13 @@ showChart = (questionID, segmentName) ->
       data = []
       for category in segment.categories
         categories.push(category.label)
+        cat_percentage = if segment.set > 0 then Math.round(category.count / segment.set * 100) else 0
+
         data.push({
           name: category.label
-          y: category.count
-          weight: category.count
-          percent: if segment.set > 0 then Math.round(category.count / segment.set * 100) else 0
+          y: cat_percentage
+          weight: cat_percentage
+          percent: cat_percentage
         })
 
       # ignore states that aren't included
