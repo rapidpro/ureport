@@ -24,7 +24,7 @@
             .block.tags.mt-8
               -for tag in latest_poll.tags.all
                 .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
-                  .whitespace-no-wrap
+                  .whitespace-nowrap
                     {{tag.name}}
 
 
@@ -49,14 +49,14 @@
 
         .font-bold.text-l.min-w-sm
           %div
-            .(class="md:whitespace-no-wrap")
+            .(class="md:whitespace-nowrap")
               - trans "PARTNERING WITH"
-              %span.text-white.whitespace-no-wrap {{global_contact_count|intcomma}}
+              %span.text-white.whitespace-nowrap {{global_contact_count|intcomma}}
               - trans "U-REPORTERS"
 
-            .(class="md:whitespace-no-wrap")
+            .(class="md:whitespace-nowrap")
               - trans "IN"
-              %span.text-white.whitespace-no-wrap {{global_org_count|intcomma}}
+              %span.text-white.whitespace-nowrap {{global_org_count|intcomma}}
               - trans "COUNTRIES WORLDWIDE"
 
       .my-16.p-4(class="md:ml-4 md:w-1/2 md:my-0 md:p-0")

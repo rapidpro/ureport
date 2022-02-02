@@ -288,7 +288,7 @@
           .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
             %i.fas.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
             %i.fas.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
-            .px-3.whitespace-no-wrap(class="hover:text-gray-750")
+            .px-3.whitespace-nowrap(class="hover:text-gray-750")
               -trans "SELECT LANGUAGE"
             .mobile-accordion-content.text-white
               - for lang in other_languages_sites
@@ -304,7 +304,7 @@
         .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
           %i.fas.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
           %i.fas.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
-          .px-3.whitespace-no-wrap(class="hover:text-gray-750")
+          .px-3.whitespace-nowrap(class="hover:text-gray-750")
             -trans "SELECT COUNTRY"
           .mobile-accordion-content.text-white
             - for site in linked_orgs
@@ -491,7 +491,7 @@
             - if other_languages_sites
               %a#languages-toggler.flex-initial.ml-4.w-10.py-menu.language-menu(class="rtl:float-left ltr:float-right")
                 %i.fas.fa-caret-down.mx-1.mt-1(class="rtl:float-left ltr:float-right")
-                %span.whitespace-no-wrap.text-base(class="rtl:float-left ltr:float-right")
+                %span.whitespace-nowrap.text-base(class="rtl:float-left ltr:float-right")
                   %i.fas.fa-language
                 
 
@@ -501,11 +501,11 @@
                       - for lang in other_languages_sites
                         -if lang.link
                           %button.w-full(onclick='location.href="{{lang.link}}"' type="button" class="focus:outline-none hover:bg-gray-200")
-                            .whitespace-no-wrap.p-2
+                            .whitespace-nowrap.p-2
                               {{ lang.name }}
                         -else
                           %button.w-full.cursor-text(type="button" class="focus:outline-none")
-                            .whitespace-no-wrap.p-2
+                            .whitespace-nowrap.p-2
                               %i.fas.fa-check.inline
                               {{ lang.name }}
         // header menu

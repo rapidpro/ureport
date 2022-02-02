@@ -138,7 +138,7 @@
             .block.tags.mt-8
               -for tag in latest_poll.tags.all
                 .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
-                  .whitespace-no-wrap
+                  .whitespace-nowrap
                     {{tag.name}}
 
       -if show_maps
@@ -180,21 +180,21 @@
               - if not question.is_open_ended
                 .text-xs.flex-none.mb-4
                   %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %} {% if question.hide_all_chart_pills %} hidden{% endif %}")>
-                    .whitespace-no-wrap
+                    .whitespace-nowrap
                       -trans "ALL"
                   {% if question.show_age %}
                   %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'age' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
-                    .whitespace-no-wrap
+                    .whitespace-nowrap
                       -trans "AGE"
                   {% endif %}
                   {% if question.show_gender %}
                   %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'gender' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
-                    .whitespace-no-wrap
+                    .whitespace-nowrap
                       -trans "GENDER"
                   {% endif %}
                   -if show_maps and question.show_locations
                     %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}")>
-                      %span.whitespace-no-wrap
+                      %span.whitespace-nowrap
                         -trans "LOCATION"
                       %i.fas.fa-caret-down
                       .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
@@ -204,7 +204,7 @@
                               .py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} rtl:pr-2 rtl:pl-4 ltr:pl-2 ltr:pr-4" data-page="opinions")
                                 .checkbox(class="rtl:float-right ltr:float-left")
                                   %i.fas.fa-check
-                                .ml-4.whitespace-no-wrap
+                                .ml-4.whitespace-nowrap
                                   {{ state.name }}
 
               - else
