@@ -3,27 +3,24 @@
   "private": true,
   "name": "ureport",
   "devDependencies": {
+    "autoprefixer": "^10.4.2",
     "cross-env": "^5.2.0",
-    "cssnano": "^5.0.4",
-    "is-svg": "^4.3.1",
-    "less": "3.10.3",
+    "cssnano": "^5.0.16",
+    "is-svg": "^4.3.2",
+    "less": "4.1.2",
     "lessc": "^1.0.2",
-    "postcss": "^8.2.15",
+    "postcss": "^8.4.6",
     "postcss-cli": "^9.1.0",
-    "postcss-nested": "^5.0.5",
-    "postcss-scss": "^3.0.5",
+    "postcss-nested": "^5.0.6",
+    "postcss-scss": "^4.0.3",
     "postcss-simple-vars": "^6.0.3",
     "ssri": "^8.0.1",
     "tailwindcss": "^2.2.19",
     "tailwindcss-dir": "^4.0.0",
-    "watch": "^0.13.0",
-    "watchpack": "^2.3.1",    
-    "webpack": "^4.43.0",
-    "webpack-cli": "^4.9.2"
+    "watch": "^0.13.0"
   },
   "scripts": {
     "build": "postcss static/scss/tailwind.scss -o static/css/tailwind.css",
     "watch": "watch 'npm run build' ./static/scss"
-  },
-  "dependencies": {}
+  }
 }
