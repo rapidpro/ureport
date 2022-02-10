@@ -2,23 +2,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Malin Åkerlöf <malin.akerlof@unicef.se>, 2021
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 09:42+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
-"Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sv_SE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "The name of this category"
@@ -46,10 +46,16 @@ msgid "The human readable name for this content type"
 msgstr "Det mänskliga läsbara namnet för den här innehållstypen"
 
 msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "URL-koden för att identifiera den här innehållstypen, används tillsammans med template tags"
+msgstr ""
+"URL-koden för att identifiera den här innehållstypen, används tillsammans "
+"med template tags"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr "En beskrivning av var den här innehållstypen används på sidan och hur den kommer att se ut"
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
+msgstr ""
+"En beskrivning av var den här innehållstypen används på sidan och hur den "
+"kommer att se ut"
 
 msgid "Whether this content should include a title"
 msgstr "Innehållet ska ha en titel"
@@ -66,7 +72,8 @@ msgstr "Innehållet ska ha ett sammanfattningsfält"
 msgid "Whether this content should include a link"
 msgstr "Innehållet ska ha en länk"
 
-msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
 msgstr "Innehållet kan tillåta flera bilder"
 
 msgid "Whether this content has a color field"
@@ -105,11 +112,16 @@ msgstr "Länken som är kopplad till här innehållsblocket, valfritt"
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "Id för YouTube-videon som tillhör innehållet"
 
-msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Etiketter för det här innehållsblocket, separeras med mellanrum. Kan användas för att göra mer avancerade filter. Valfritt"
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr ""
+"Etiketter för det här innehållsblocket, separeras med mellanrum. Kan "
+"användas för att göra mer avancerade filter. Valfritt"
 
 msgid "The priority for this block, higher priority blocks come first"
-msgstr "Prioriteringen för det här innehållsblocket, högst prioritet visas först"
+msgstr ""
+"Prioriteringen för det här innehållsblocket, högst prioritet visas först"
 
 msgid "The organization this content block belongs to"
 msgstr "Organisationen det här innehållsblocket tillhör"
@@ -128,12 +140,6 @@ msgstr "Lägg till"
 
 msgid "Content Types"
 msgstr "Innehållstyper"
-
-msgid "Link Slug"
-msgstr ""
-
-msgid "The slug or word to use in the link of the page"
-msgstr ""
 
 msgid "Content Blocks"
 msgstr "Innehållsblock"
@@ -190,10 +196,10 @@ msgid "The administrators in your organization"
 msgstr "Organisationens administratörer"
 
 msgid "Viewers"
-msgstr "Tittare"
+msgstr "Viewers"
 
 msgid "The viewers in your organization"
-msgstr "Tittarna i din organisation"
+msgstr "Viewers i din organisation"
 
 msgid "Editors"
 msgstr "Redigerare"
@@ -231,8 +237,12 @@ msgstr "Tidszon"
 msgid "The timezone your organization is in."
 msgstr "Organisationens tidszon"
 
-msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "JSON-blob som används för att konfigurera information som kopplas till den här organisationen"
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"JSON-blob som används för att konfigurera information som kopplas till den "
+"här organisationen"
 
 msgid "Administrator"
 msgstr "Administratör"
@@ -241,7 +251,7 @@ msgid "Editor"
 msgstr "Redigerare"
 
 msgid "Viewer"
-msgstr "Tittare"
+msgstr "Viewer"
 
 msgid "Org"
 msgstr "Org"
@@ -332,8 +342,11 @@ msgstr "Du måste ha minst en administratör"
 msgid "Select your Organization"
 msgstr "Välj din organisation"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "Ditt konto är inte anslutet till en organisation. Kontakta administratören."
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"Ditt konto är inte anslutet till en organisation. Kontakta administratören."
 
 msgid "Your Organization"
 msgstr "Din organisation"
@@ -354,8 +367,11 @@ msgstr "Hantera %(name)skonton"
 msgid "Create"
 msgstr "Skapa"
 
-msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "Din inbjudningslänk är ogiltig. Kontakta organisationens administratör."
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"Din inbjudningslänk är ogiltig. Kontakta organisationens administratör."
 
 #, python-format
 msgid "Join %(name)s"
@@ -364,8 +380,11 @@ msgstr "Gå med%(name)s"
 msgid "Join"
 msgstr "Gå med"
 
-msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "Din inbjudningslänk har utgått. Kontakta organisationens administratör. "
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"Din inbjudningslänk har utgått. Kontakta organisationens administratör. "
 
 msgid "Task"
 msgstr "Uppgift"
@@ -373,14 +392,11 @@ msgstr "Uppgift"
 msgid "Tasks"
 msgstr "Uppgifter"
 
-msgid "Only PDF files are supported."
-msgstr ""
-
 msgid "The title for this story"
 msgstr "Berättelsens titel"
 
 msgid "Whether this story is featured"
-msgstr "Det är en huvudberättelse"
+msgstr "Det är en aktuell nyhet"
 
 msgid "The summary for the story"
 msgstr "Berättelsens sammanfattning"
@@ -394,14 +410,19 @@ msgstr "Berättelsens skribent"
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Länk till mp3-fil att publicera med berättelsen"
 
-msgid "The PDF report to attach"
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
 msgstr ""
+"Id till YouTube-videon som ska länkas till berättelsen (den text som kommer "
+"efter v= och innan & i YouTube-videons URL)"
 
-msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "Id till YouTube-videon som ska länkas till berättelsen (den text som kommer efter v= och innan & i YouTube-videons URL)"
-
-msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Etiketter för berättelsen, separeras med mellanrum. Används för avancerad filtrering, valfritt"
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Etiketter för berättelsen, separeras med mellanrum. Används för avancerad "
+"filtrering, valfritt"
 
 msgid "The category for this story"
 msgstr "Berättelsens kategori"
@@ -429,18 +450,11 @@ msgid "Image %d"
 msgstr "Bild %d"
 
 msgid "Image to display on story page and in previews. (optional)"
-msgstr "Bild att visa på berättelsens sida och i förhandsvisningar. (valfritt)"
+msgstr ""
+"Bild att visa på berättelsens sida och i förhandsvisningar. (valfritt)"
 
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Bild att visa på berättelsens sida och i förhandsvisningar (valfritt)"
-
-#, fuzzy
-#| msgid "The name of this category"
-msgid "The name of this tag"
-msgstr "Namnet på den här kategorin"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Remove Item?"
 msgstr "Ta bort objekt?"
@@ -454,7 +468,9 @@ msgstr ""
 "\n"
 "Är du säker på att du vill radera <b>%(object)s</b>?"
 
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
 msgstr "När du har raderat, går det inte att ångra. "
 
 msgid "Cancel"
@@ -527,11 +543,17 @@ msgstr ""
 "\n"
 "Vänligen vänta %(lockout_timeout)sminuter innan du försöker igen."
 
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Alternativt kan du fylla i formuläret nedan för att återställa ditt lösenord via din registrerade e -postadress."
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+"Alternativt kan du fylla i formuläret nedan för att återställa ditt lösenord"
+" via din registrerade e -postadress."
 
 msgid "Please contact the website administrator to have your password reset."
-msgstr "Var vänlig kontakta webbsidans administratör för att nollställa ditt lösenord."
+msgstr ""
+"Var vänlig kontakta webbsidans administratör för att nollställa ditt "
+"lösenord."
 
 msgid "Email Address"
 msgstr "E-postadress"
@@ -539,8 +561,12 @@ msgstr "E-postadress"
 msgid "Recover"
 msgstr "Återställ"
 
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Fyll i den e-postadress du använde vid registrering så hjälper vi dig att återställa ditt lösenord. "
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+"Fyll i den e-postadress du använde vid registrering så hjälper vi dig att "
+"återställa ditt lösenord. "
 
 #, python-format
 msgid ""
@@ -554,11 +580,18 @@ msgstr ""
 msgid "New Password"
 msgstr "Nytt lösenord"
 
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Lösenordet måste ha minst 8 tecken, inklusive en stor bokstav, en liten bokstav och en siffra."
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
+"Lösenordet måste ha minst 8 tecken, inklusive en stor bokstav, en liten "
+"bokstav och en siffra."
 
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "Du har använt det här lösenordet senaste året. Var vänlig välj ett nytt."
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
+"Du har använt det här lösenordet senaste året. Var vänlig välj ett nytt."
 
 msgid "Password"
 msgstr "Lösenord"
@@ -578,8 +611,12 @@ msgstr "Det nya lösenordet stämmer inte"
 msgid "Your Email"
 msgstr "Din e-postadress"
 
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "E -poståterställning stöds inte. Kontakta webbplatsadministratören för att återställa lösenordet manuellt."
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
+"Återställning av email stöds inte. Kontakta webbplatsadministratören för att"
+" återställa lösenordet manuellt."
 
 msgid "Current Password"
 msgstr "Nuvarande lösenord"
@@ -611,8 +648,10 @@ msgstr "Ny användare skapad"
 msgid "Groups"
 msgstr "Grupper"
 
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "Användare får bara behörigheter som är tillåtna för gruppen de tillhör."
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr ""
+"Användare får bara behörigheter som är tillåtna för gruppen de tillhör."
 
 msgid "Set the user's initial password here."
 msgstr "Ange användarens gamla lösenord här."
@@ -654,7 +693,8 @@ msgid "Password Recovery"
 msgstr "Återställ lösenord"
 
 msgid "An Email has been sent to your account with further instructions."
-msgstr "Vi har skickat ett mejl till din e-postadress med ytterligare instruktioner."
+msgstr ""
+"Vi har skickat ett mejl till din e-postadress med ytterligare instruktioner."
 
 msgid "Password Recovery Request"
 msgstr "Begäran om återställning av lösenord"
@@ -669,14 +709,19 @@ msgstr "Ditt lösenord har uppdaterats"
 msgid "You are now logged in as %s"
 msgstr "Du är nu inloggad som %s"
 
-msgid "Password Updated Successfully. Now you can log in using your new password."
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
 msgstr "Lösenordet är uppdaterat. Nu kan du logga in med ditt nya lösenord."
 
 msgid "Reset your Password"
 msgstr "Återställ ditt lösenord"
 
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "Av säkerhetsskäl har denna länk gått ut. Försök igen genom att ange din e-postadress här."
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr ""
+"Av säkerhetsskäl har denna länk gått ut. Försök igen genom att ange din "
+"e-postadress här."
 
 msgid "Submit"
 msgstr "Skicka in"
@@ -707,9 +752,6 @@ msgstr "Logga ut"
 msgid "Opinions"
 msgstr "Åsikter"
 
-msgid "Bots"
-msgstr ""
-
 msgid "Users"
 msgstr "Användare"
 
@@ -719,17 +761,11 @@ msgstr "Inställningar"
 msgid "Pages"
 msgstr "Sidor"
 
-msgid "Landing Pages"
-msgstr ""
-
 msgid "Jobs"
 msgstr "Jobb"
 
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
+msgid "Photos"
+msgstr "Bilder"
 
 msgid "Categories Images"
 msgstr "Bildkategorier"
@@ -748,11 +784,6 @@ msgstr "Om oss"
 
 msgid "Engagement"
 msgstr "Engagemang"
-
-#, fuzzy
-#| msgid "Reporters"
-msgid "Reports"
-msgstr "U-Reporters"
 
 msgid "Category Images"
 msgstr "Kategori bilder"
@@ -821,7 +852,7 @@ msgid "READ MORE"
 msgstr "LÄS MER"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "UTFORSKA ENGAGEMANG"
+msgstr "SE ALLA RESLUTAT"
 
 msgid ""
 "\n"
@@ -845,26 +876,25 @@ msgstr ""
 msgid "Back"
 msgstr "Tillbaka"
 
-msgid "Select bots"
-msgstr ""
-
-msgid "View public page"
-msgstr ""
-
 msgid "LATEST NOTIFICATIONS"
-msgstr "SENASTE NOTIFIKATIONERNA"
+msgstr "SENASTE NOTISER"
 
 msgid "Backends"
 msgstr "Backends"
 
-msgid "Add os Select tags"
-msgstr ""
-
 #, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] "Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på den offentliga sidan när synkroniseringen är klar."
-msgstr[1] "Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på den offentliga sidan när synkroniseringen är klar."
+msgid ""
+"There is currently %(counter)s new poll syncing. Polls are displayed on the "
+"public site once they have completely synced their results."
+msgid_plural ""
+"There are currently %(counter)s new polls syncing. Polls are displayed on "
+"the public site once they have completely synced their results."
+msgstr[0] ""
+"Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på "
+"den offentliga sidan när synkroniseringen är klar."
+msgstr[1] ""
+"Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på "
+"den offentliga sidan när synkroniseringen är klar."
 
 msgid "+ New Poll"
 msgstr "+ Ny undersökning"
@@ -878,18 +908,15 @@ msgstr[1] "%(counter)s undersökningsfrågor"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr "Nya undersökningar synkroniseras var 10:e minut"
 
-#, fuzzy
-#| msgid "No longer scheduling syncs, runs archived"
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr "Planerar inte längre synkroniseringar, synkroniserade resultat har sparats"
-
-#, fuzzy
-#| msgid "Main poll syncs scheduled every 10min"
-msgid "Main poll syncs scheduled every 20min"
+msgid "Main poll syncs scheduled every 10min"
 msgstr "Huvudundersökningen synkroniseras var 10:e minut"
 
 msgid "Recent poll syncs scheduled every 60min"
 msgstr "De senaste undersökningarna synkroniseras varje var 60:e minut"
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+"Planerar inte längre synkroniseringar, synkroniserade resultat har sparats"
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Undersökningen synkroniseras i sin helhet var 24:e timme"
@@ -898,13 +925,11 @@ msgid "Not scheduling syncs, not active"
 msgstr "Synkronisering inte schemalagd, inte aktiv"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr "Synkroniseringar är inte planerade, inget flöde finns för undersökningen"
+msgstr ""
+"Synkroniseringar är inte planerade, inget flöde finns för undersökningen"
 
 msgid "Refresh Results"
 msgstr "Uppdaterar resultaten"
-
-msgid "Partners"
-msgstr ""
 
 msgid "MORE POLLS"
 msgstr "FLER UNDERSÖKNINGAR"
@@ -926,12 +951,6 @@ msgstr "ARKIVERADE BERÄTTELSER"
 
 msgid "LIST"
 msgstr "LISTA"
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
 
 msgid "LATEST OPINION"
 msgstr "SENASTE ÅSIKTERNA"
@@ -957,26 +976,28 @@ msgstr "LÄNDER VÄRLDEN ÖVER"
 msgid "AGES"
 msgstr "ÅLDER"
 
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
 msgid "Join U-Report, Your voice matters."
 msgstr "Gå med i U-Report. Din röst är viktig."
 
 msgid "FEATURED STORY"
-msgstr "HUVUDBERÄTTELSE"
+msgstr "Aktuellt"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Vi är en del av en global plattform, som syftar till att förändra barn och ungas liv runt om i världen."
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
+msgstr ""
+"Vi är en del av en global plattform, som syftar till att förändra barns och "
+"ungas liv runt om i världen."
 
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Läs mer om hur U-Report engagerar barn och unga att göra sina röster hörda i frågor som är viktiga för dem."
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"Läs mer om hur och varför U-Report engagerar barn och unga att göra sina "
+"röster hörda i frågor som är viktiga för dem."
 
 msgid "LEARN MORE"
-msgstr "LÄS MER"
+msgstr "OM OSS"
 
 msgid "Visit"
 msgstr "Besök"
@@ -987,26 +1008,19 @@ msgstr "Hur vill du delta?"
 msgid "Text"
 msgstr "Text"
 
-msgid "PAGE"
-msgstr ""
-
 msgid "SEARCH"
 msgstr "SÖK"
 
 msgid "No results found"
 msgstr "Inga resultat"
 
-#, fuzzy
-#| msgid "RESPONSES"
-msgid "RESPONDERS"
+msgid "RESPONSES"
 msgstr "SVAR"
 
 msgid "RESPONSE RATE"
 msgstr "SVARSFREKVENS"
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
-msgid "TOTAL RESPONDERS"
+msgid "TOTAL RESPONSES"
 msgstr "TOTALT ANTAL SVAR"
 
 #, python-format
@@ -1028,20 +1042,6 @@ msgstr "PLATS"
 msgid "Written by:"
 msgstr "Skriven av:"
 
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS"
-msgid "REPORT"
-msgstr "U-REPORTERS"
-
-msgid "STORY"
-msgstr ""
-
-msgid "Download Report"
-msgstr ""
-
 msgid "Even"
 msgstr "Till och med"
 
@@ -1057,9 +1057,7 @@ msgstr "Kommun"
 msgid "Participation Level"
 msgstr "Deltagandenivå "
 
-#, fuzzy
-#| msgid "Responses"
-msgid "Responders"
+msgid "Responses"
 msgstr "Svar"
 
 msgid "Reporters in"
@@ -1090,7 +1088,7 @@ msgid "the"
 msgstr "den"
 
 msgid "OVERALL STATISTICS"
-msgstr "SAMLAD STATISTIK"
+msgstr "TOTAL STATISTIK"
 
 msgid "THIS YEAR"
 msgstr "I ÅR"
@@ -1102,15 +1100,14 @@ msgid "U-REPORTERS BY REGION"
 msgstr "U-REPORTERS I REGIONEN"
 
 msgid "FILTER RESULTS"
-msgstr "FILTRERADE RESULTAT"
-
-msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "FILTRERA RESULTAT"
 
 msgid "Export and Share"
 msgstr "Exportera och dela"
 
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgid ""
+"Want to tell the world about this? Download this image to easily share on "
+"social media or for a beautiful presentation!"
 msgstr "Vill du berätta för dina vänner om det här? Dela på sociala medier!"
 
 msgid "SELECT LANGUAGE"
@@ -1122,11 +1119,11 @@ msgstr "VÄLJ LAND"
 msgid "Custom pages"
 msgstr "Anpassade sidor"
 
-msgid "Landing pages"
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
 msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "Se hur många barn och unga som vill att vi ska lyssna på deras röster för att skapa en positiv förändring."
+"Barn och unga vill göra sina röster hörda för att skapa positiv förändring."
 
 msgid "Polled"
 msgstr "Tillfrågade"
@@ -1268,9 +1265,6 @@ msgstr "Uppdaterade %s cache för den här organisationen"
 msgid "Flag"
 msgstr "Flagga"
 
-msgid "About Partner Logo"
-msgstr ""
-
 msgid "The organization to which the image will be used"
 msgstr "Bilden som används för den här organisationen"
 
@@ -1279,72 +1273,6 @@ msgstr "Kort beskrivning av den här bilden"
 
 msgid "Image type"
 msgstr "Bildtyp"
-
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
-msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "Prioritering för denna fråga i undersökningen, den högsta prioriteten kommer först."
-
-#, fuzzy
-#| msgid "The organization this poll is part of"
-msgid "The organization this bot is part of"
-msgstr "Organisationen som undersökningen är en del av"
-
-msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "Organisationen ska visas på landningssidan"
-
-#, fuzzy
-#| msgid "The title for this item"
-msgid "The title to display for this bot"
-msgstr "Titeln för objektet"
-
-msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
-
-#, fuzzy
-#| msgid "The category for this story"
-msgid "The keyword for this bot"
-msgstr "Berättelsens kategori"
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The Facebook bot deeplink, optional"
-msgstr "Titeln för innehållsblocket, valfritt"
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The Telegram bot deeplink, optional"
-msgstr "Titeln för innehållsblocket, valfritt"
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The Viber bot deeplink, optional"
-msgstr "Titeln för innehållsblocket, valfritt"
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The WhatsApp bot deeplink, optional"
-msgstr "Titeln för innehållsblocket, valfritt"
-
-#, fuzzy
-#| msgid "A short summary description for this item"
-msgid "A short description for this bot, required"
-msgstr "Kort sammanfattning av objektet"
-
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
-msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "Prioritering för denna fråga i undersökningen, den högsta prioriteten kommer först."
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "Whether this bot should be shown to the public"
-msgstr "Organisationen ska visas på landningssidan"
 
 msgid "Label"
 msgstr "Etikett"
@@ -1403,8 +1331,13 @@ msgstr "Välj typ för din jobbkälla. Twitter, Facebook eller RSS feed"
 msgid "The full URL to navigate to this Job source."
 msgstr "Fullständig URL för att navigera den här jobbkällan. "
 
-msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
-msgstr "För att ansluta till Twitter behöver vi ett widget-ID, om vi ska publicera tweets på sidan. Läs instruktionerna ovan noggrant för att få rätt widget-id."
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
+msgstr ""
+"För att ansluta till Twitter behöver vi ett widget-ID, om vi ska publicera "
+"tweets på sidan. Läs instruktionerna ovan noggrant för att få rätt widget-"
+"id."
 
 msgid "Featured job sources are shown first on the jobs page."
 msgstr "Valda jobbkällor visas först på jobbsidan."
@@ -1417,41 +1350,6 @@ msgstr "Jobbkällan har lagts till"
 
 msgid "Your job source has been updated successfully"
 msgstr "Jobbkällan har uppdaterats"
-
-#, fuzzy
-#| msgid "The organization this poll is part of"
-msgid "The organization this landing page is part of"
-msgstr "Organisationen som undersökningen är en del av"
-
-#, fuzzy
-#| msgid "The title for this item"
-msgid "The title to display for this landing page"
-msgstr "Titeln för objektet"
-
-#, fuzzy
-#| msgid "The body of text for the story"
-msgid "The call to action text for this landing page"
-msgstr "Berättelsens brödtext"
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "The slug to use on the link for this landing page"
-msgstr "Organisationen ska visas på landningssidan"
-
-#, fuzzy
-#| msgid "The body of text for the story"
-msgid "The body of text for the landing page"
-msgstr "Berättelsens brödtext"
-
-#, fuzzy
-#| msgid "The image file to use"
-msgid "The image file to use for the page"
-msgstr "Bildfilen som ska användas"
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "Whether this page should be active to the public"
-msgstr "Organisationen ska visas på landningssidan"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "OSM-id för den här administrativa gränsen"
@@ -1468,8 +1366,10 @@ msgstr "Överordnade av den politiska gränsen, om det finns någon"
 msgid "Geometry"
 msgstr "Geometri "
 
-msgid "The json representing the geometry type and coordinates of the boundaries"
-msgstr "Json som representerar typen av geometri och koordinater för gränserna"
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr ""
+"Json som representerar typen av geometri och koordinater för gränserna"
 
 msgid "The title for this item"
 msgstr "Titeln för objektet"
@@ -1504,8 +1404,11 @@ msgstr "Undersökningskategorier"
 msgid "The Flow this Poll is based on"
 msgstr "Flödet denna undersökning baseras på"
 
-msgid "The date to display for this poll. Leave empty to use flow creation date."
-msgstr "Datumet som ska visas för denna omröstning. Lämna fältet tomt för att använda det datum då flödet skapades."
+msgid ""
+"The date to display for this poll. Leave empty to use flow creation date."
+msgstr ""
+"Datumet som ska visas för denna omröstning. Lämna fältet tomt för att "
+"använda det datum då flödet skapades."
 
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr "Flödet för denna undersökning är arkiverat i RapidPro"
@@ -1558,44 +1461,6 @@ msgstr "Namnet på avsändaren"
 msgid "The featured response message"
 msgstr "Featured svarsmeddelande"
 
-msgid "Dark 1 background and White text"
-msgstr ""
-
-msgid "Light 1 background and Black text"
-msgstr ""
-
-msgid "Dark 2 background and White text"
-msgstr ""
-
-msgid "Dark 3 background and Black text"
-msgstr ""
-
-msgid "Show Age, Gender and Location charts"
-msgstr ""
-
-msgid "Hide Age chart ONLY"
-msgstr ""
-
-msgid "Hide Gender chart ONLY"
-msgstr ""
-
-msgid "Hide Location chart ONLY"
-msgstr ""
-
-msgid "Hide Age and Gender charts"
-msgstr ""
-
-#, fuzzy
-#| msgid "Hide participation stats"
-msgid "Hide Age and Location charts"
-msgstr "Dölj deltagarstatistik"
-
-msgid "Hide Gender and Location charts"
-msgstr ""
-
-msgid "Hide Age, Gender and Location charts"
-msgstr ""
-
 msgid "The poll this question is part of"
 msgstr "Undersökningen frågan tillhör"
 
@@ -1613,11 +1478,6 @@ msgstr "Prioritetsnummer för den här frågan i undersökningen"
 
 msgid "The Rule this response category is based on"
 msgstr "Regeln den här kategorin är baserad på"
-
-#, fuzzy
-#| msgid "The title for this Poll"
-msgid "Select tags for this poll"
-msgstr "Titeln för undersökningen"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Din organisation har ingen API-token-konfiguration"
@@ -1653,10 +1513,12 @@ msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Lägg till de svarsalternativ du vill ha. (om något)"
 
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr "Bild som ska synas på undersökningssidan och i förhandsvisningar. (valfritt)"
+msgstr ""
+"Bild som ska synas på undersökningssidan och i förhandsvisningar. (valfritt)"
 
 msgid "Image to display on poll page and in previews (optional)"
-msgstr "Bild som ska synas på undersökningssidan och i förhandsvisningar (valfritt)"
+msgstr ""
+"Bild som ska synas på undersökningssidan och i förhandsvisningar (valfritt)"
 
 msgid "Poll Response"
 msgstr "Undersökningssvar"
@@ -1679,8 +1541,11 @@ msgstr "Frågan måste ingå i offentliga resultat"
 msgid "Priority"
 msgstr "Prioritet"
 
-msgid "The priority of this question on the poll page, higher priority comes first"
-msgstr "Prioritering för denna fråga i undersökningen, den högsta prioriteten kommer först."
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
+msgstr ""
+"Prioritering för denna fråga i undersökningen, den högsta prioriteten kommer"
+" först."
 
 msgid "Ruleset Label"
 msgstr "Regeluppsättningsetikett"
@@ -1693,20 +1558,6 @@ msgstr "Titel"
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Frågan som ställs till din publik kommer att visas offentligt"
-
-msgid "Color Choice"
-msgstr ""
-
-#, fuzzy
-#| msgid "The question posed to your audience, will be displayed publicly"
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "Frågan som ställs till din publik kommer att visas offentligt"
-
-msgid "Hidden Charts Choice"
-msgstr ""
-
-msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
 
 msgid "Category {idx+1}"
 msgstr "Kategori {idx+1}"
@@ -1740,7 +1591,9 @@ msgstr "Redigera undersökningen för flöde [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr "Schemalagt uppdatering för undersökning %(poll_id)d i organisationen #%(org_id)d"
+msgstr ""
+"Schemalagt uppdatering för undersökning %(poll_id)d i organisationen "
+"#%(org_id)d"
 
 #, python-format
 msgid "%s"
@@ -1749,17 +1602,22 @@ msgstr "%s"
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr "Namnet på kontaktgruppen som innehåller registrerade U-Reporters"
 
-msgid "The label of the Contact Field that contains the birth date of reporters"
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
 msgstr "Etikett på kontaktfältet som innehåller födelsedatum för U-Reporters"
 
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Etikett på kontaktfältet som innehåller kön för U-Reporters"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
 msgstr "Etikett på kontaktfältet som innehåller yrket för U-Reporters"
 
-msgid "The label of the Contact Field that contains the registration date of reporters"
-msgstr "Etikett på kontaktfältet som innehåller registreringsdatum för U-Reporters"
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr ""
+"Etikett på kontaktfältet som innehåller registreringsdatum för U-Reporters"
 
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "Etikett på kontaktfältet som innehåller landskapet för U-Reporters"
@@ -1785,29 +1643,24 @@ msgstr "Organisationslistan bör endast ta hänsyn till siffror från länken"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "En enkel kod som användarna använder för att kontakta U-Report lokalt"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "Numret till WhatsApp som användare kommer att använda för att kontakta U-Report Sverige"
+msgid ""
+"The whatapp number that users will use to contact U-Report if you have one"
+msgstr ""
+"Numret till WhatsApp som användare kommer att använda för att kontakta "
+"U-Report Sverige"
 
-#, fuzzy
-#| msgid "The viber username that users will use to contact U-Report if you have one"
-msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "Viber-användarnamnet som användarna måste använda för att kontakta U-Report Sverige"
-
-msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr "Viber-användarnamnet som användarna måste använda för att kontakta U-Report Sverige"
+msgid ""
+"The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+"Viber-användarnamnet som användarna måste använda för att kontakta U-Report "
+"Sverige"
 
 msgid "The join button text"
 msgstr "Så deltar du"
 
 msgid "The short text used to direct visitors to join U-Report"
-msgstr "En enkel text som används för att vägleda besökare att gå med i U-Report"
-
-#, fuzzy
-#| msgid "The title of the photos section U-Report homepage"
-msgid "The call to action text to join on the top section on U-Report"
-msgstr "Titeln på bildavsnittet på U-Report Sveriges startsida"
+msgstr ""
+"En enkel text som används för att vägleda besökare att gå med i U-Report"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "YouTube-ID till video för avsnittet \"Hur du blir en U-Reporter\""
@@ -1839,28 +1692,50 @@ msgstr "Sekundär färg för den här organisationen, bör vara mörk"
 msgid "The tertiary color for styling for this organization, should be dark"
 msgstr "Tredje färgen för den här organisationen, bör vara mörk"
 
-msgid "The primary highlight color for styling for this organization, should be light"
+msgid ""
+"The primary highlight color for styling for this organization, should be "
+"light"
 msgstr "Primära markeringsfärgen för den här organisationen, ska vara ljus"
 
-msgid "The secondary highlight color for styling for this organization, should be light"
+msgid ""
+"The secondary highlight color for styling for this organization, should be "
+"light"
 msgstr "Sekundära markeringsfärgen för den här organisationen, ska vara ljus"
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Du kan ha upp till 6 färger för färgdiagrammen, använd kommatecken mellan färgerna"
+msgstr ""
+"Du kan ha upp till 6 färger för färgdiagrammen, använd kommatecken mellan "
+"färgerna"
 
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "11 färger för färgdiagram, använd kommatecken mellan färgerna, fungerar bara med 11 färger"
+msgid "The color used to draw the text on the join bar"
+msgstr "Textfärg på \"Så deltar du\"-avsnittet"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Bakgrundsfärg på \"Så deltar du\"-avsnittet"
+
+msgid "The primary color for styling for this organization"
+msgstr "Primärfärg för den här organisationen"
+
+msgid "The secondary color for styling for this organization"
+msgstr "Sekundärfärg för den här organisationen"
+
+msgid "The background color for the site"
+msgstr "Bakgrundsfärg för den här webbsidan"
+
+msgid ""
+"11 colors for styling maps, use comma between colors, not used if not 11 "
+"colors"
+msgstr ""
+"11 färger för färgdiagram, använd kommatecken mellan färgerna, fungerar bara"
+" med 11 färger"
 
 msgid "The states to show on maps only"
 msgstr "Landskapen som ska kunna visas på kartan"
 
 msgid "The states to show on maps only, used to filter poll results"
-msgstr "Landskapen som ska kunna visas på kartan, används för att filtrera undersökningars resultat"
-
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
-msgid "The Google Tag Manager ID for this organization"
-msgstr "Google Analytics Tracking-id för den här organisationen"
+msgstr ""
+"Landskapen som ska kunna visas på kartan, används för att filtrera "
+"undersökningars resultat"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Google Analytics Tracking-id för den här organisationen"
@@ -1868,20 +1743,23 @@ msgstr "Google Analytics Tracking-id för den här organisationen"
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL till organisationens YouTube-kanal"
 
-msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
-
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL till organisationens Facebooksida"
 
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr "URL till den här organisationens Facebooksida (valfritt)"
 
-msgid "The integer id to the Facebook app for this organization's chat app (optional)"
-msgstr "Integer-ID för Facebook-applikationen för den här organisationens chattapp (valfritt)"
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr ""
+"Integer-ID för Facebook-applikationen för den här organisationens chattapp "
+"(valfritt)"
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr "En kort text som används för att välkomna användare till Facebook Messenger Plugin"
+msgstr ""
+"En kort text som används för att välkomna användare till Facebook Messenger "
+"Plugin"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "Facebook Pixel för denna organisation (valfritt)"
@@ -1904,22 +1782,27 @@ msgstr "Ord som ska filtreras utifrån resultaten på den offentliga sidan"
 msgid "If there are jobs to be shown on the public site."
 msgstr "Ska dessa jobb visas på den offentliga webbplatsen?"
 
-msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
-msgstr "Bör denna organisation ha global data? Ska det vara en världskarta istället för en nationell karta?"
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+"Bör denna organisation ha global data? Ska det vara en världskarta istället "
+"för en nationell karta?"
 
 msgid "Whether to activate an extra gender."
 msgstr "Aktivera fler könsidentiteter"
 
-msgid "Whether to hide the engagement breakdown charts."
+msgid "Whether to activate the new design."
+msgstr "Aktivera den nya designen"
+
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
 msgstr ""
-
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
-msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Användaren kan logga in på webbplatsen"
-
-msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
-msgstr "Alpha-3 ISO-kod för organisationen, så att story-widgeten från U-Report-appen visas. Till exempel: BRA, NIG, CMR (använd GLOBAL om U-Report är global)."
+"Alpha-3 ISO-kod för organisationen, så att story-widgeten från U-Report-"
+"appen visas. Till exempel: BRA, NIG, CMR (använd GLOBAL om U-Report är "
+"global)."
 
 msgid "The font used for headline texts"
 msgstr "Typsnitt till rubriker"
@@ -1936,8 +1819,12 @@ msgstr "Texten som beskriver sponsorerna för gratis meddelanden"
 msgid "The font used for small text"
 msgstr "Typsnitt för liten text"
 
-msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
-msgstr "Om du behöver en anpassad HTML-kod för organisationens sidor, till exempel anpassade analytiska kodavsnitt"
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
+msgstr ""
+"Om du behöver en anpassad HTML-kod för organisationens sidor, till exempel "
+"anpassade analytiska kodavsnitt"
 
 msgid "Other language sites links"
 msgstr "Länkar till sidan på andra språk"
@@ -1953,11 +1840,6 @@ msgstr "12 månader"
 
 msgid "Age"
 msgstr "Ålder"
-
-#, fuzzy
-#| msgid "Save Changes"
-msgid "Channels"
-msgstr "Spara ändringarna"
 
 msgid "Location"
 msgstr "Plats"
@@ -1979,44 +1861,3 @@ msgstr "Raden skapades genom squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
-
-#~ msgid "Photos"
-#~ msgstr "Bilder"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "Beskrivning av sidan \"Åsikter\""
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Undersökningen ska visas på startsidan"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Org"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "Beskrivning av sidan \"Berättelser\""
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Textfärg på \"Så deltar du\"-avsnittet"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Bakgrundsfärg på \"Så deltar du\"-avsnittet"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Primärfärg för den här organisationen"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Sekundärfärg för den här organisationen"
-
-#~ msgid "The background color for the site"
-#~ msgstr "Bakgrundsfärg för den här webbsidan"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Aktivera den nya designen"
