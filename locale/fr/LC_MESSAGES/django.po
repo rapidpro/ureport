@@ -6,6 +6,7 @@
 # Translators:
 # Yann Séry, 2022
 # Nyaruka <info@textit.in>, 2022
+# Juan Arguello Yepez, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
-"Last-Translator: Nyaruka <info@textit.in>, 2022\n"
+"Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1103,13 +1104,13 @@ msgid "No results found"
 msgstr "Pas de resultat "
 
 msgid "RESPONDERS"
-msgstr "REPONDEURS"
+msgstr "REPONDANTS"
 
 msgid "RESPONSE RATE"
 msgstr "TAUX DE RÉPONSE"
 
 msgid "TOTAL RESPONDERS"
-msgstr "TOUS REPONDEURS"
+msgstr "TOUS REPONDANTS"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1158,7 +1159,7 @@ msgid "Participation Level"
 msgstr "Niveau de participation"
 
 msgid "Responders"
-msgstr "Répondeurs"
+msgstr "Repondants"
 
 msgid "Reporters in"
 msgstr "U-Reporters dans"
