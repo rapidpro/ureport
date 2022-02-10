@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 09:42+0000\n"
-"PO-Revision-Date: 2021-03-30 14:28+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/rapidpro/teams/226/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgid "The name of this category"
 msgstr "Název této kategorie"
 
 msgid "An optional image that can describe this category"
-msgstr "Nepovinný obrázek, který může popisovat tuto kategorii"
+msgstr "Volitelný obrázek, který může popisovat tuto kategorii"
 
 msgid "The organization this category applies to"
 msgstr "Organizace, na kterou se tato kategorie vztahuje"
@@ -63,7 +63,7 @@ msgid "Whether this content should include an image"
 msgstr "Zda má tento obsah obsahovat obrázek"
 
 msgid "Whether this content should use a rich HTML editor"
-msgstr "Zda má tento obsah používat plný editor HTML"
+msgstr "Zda má tento obsah používat kompletní editor HTML"
 
 msgid "Whether this content should include a summary field"
 msgstr "Zda má tento obsah obsahovat shrnující pole"
@@ -141,18 +141,12 @@ msgstr "Přidat"
 msgid "Content Types"
 msgstr "Typy obsahu"
 
-msgid "Link Slug"
-msgstr "Link Slug"
-
-msgid "The slug or word to use in the link of the page"
-msgstr "slug nebo slovo, které se má použít v odkazu na stránku"
-
 msgid "Content Blocks"
 msgstr "Obsahové bloky"
 
 #, python-format
 msgid "%s Blocks"
-msgstr "%s Bloků"
+msgstr "%s Bloky"
 
 #, python-format
 msgid "Edit %s"
@@ -163,7 +157,7 @@ msgid "Create %s"
 msgstr "Vytvořit %s"
 
 msgid "Create Content Block"
-msgstr "Vytvořit blok obsahu"
+msgstr "Vytvořit obsahový blok"
 
 msgid "Your first name"
 msgstr "Vaše křestní jméno"
@@ -172,7 +166,7 @@ msgid "Your last name"
 msgstr "Vaše příjmení"
 
 msgid "Your email address"
-msgstr "Your email address"
+msgstr "Vaše e-mailová adresa"
 
 msgid "Your password, at least eight letters please"
 msgstr "Vaše heslo, alespoň osm písmen, prosím"
@@ -196,22 +190,22 @@ msgid "The logo that should be used for this organization"
 msgstr "Logo, které by mělo být použito pro tuto organizaci"
 
 msgid "Administrators"
-msgstr "The logo that should be used for this organisation"
+msgstr "Správci"
 
 msgid "The administrators in your organization"
 msgstr "Správci ve vaší organizaci"
 
 msgid "Viewers"
-msgstr "Diváci"
+msgstr "Prohlížející"
 
 msgid "The viewers in your organization"
-msgstr "Diváci ve vaší organizaci"
+msgstr "Prohlížející ve vaší organizaci"
 
 msgid "Editors"
 msgstr "Editoři"
 
 msgid "The editors in your organization"
-msgstr "Editoři ve vaší organizaci"
+msgstr "Redaktoři ve vaší organizaci"
 
 msgid "Language"
 msgstr "Jazyk"
@@ -251,7 +245,7 @@ msgstr ""
 "organizací"
 
 msgid "Administrator"
-msgstr "Administrátor"
+msgstr "Správce"
 
 msgid "Editor"
 msgstr "Editor"
@@ -260,7 +254,7 @@ msgid "Viewer"
 msgstr "Prohlížející"
 
 msgid "Org"
-msgstr "Organizace"
+msgstr "Org"
 
 msgid "The organization to which the account is invited to view"
 msgstr "Organizace, do které je účet pozván k prohlížení."
@@ -269,7 +263,7 @@ msgid "Email"
 msgstr "E-mail"
 
 msgid "The email to which we send the invitation of the viewer"
-msgstr "E-mail, na který zašleme pozvánku diváka."
+msgstr "E-mail, na který zašleme pozvánku prohlížejícímu."
 
 msgid "Secret"
 msgstr "Tajemství"
@@ -282,7 +276,7 @@ msgstr "Uživatelská role"
 
 #, python-format
 msgid "%s Invitation"
-msgstr "%s pozvánka"
+msgstr "%s pozvání"
 
 msgid "Banner"
 msgstr "Reklamní proužek"
@@ -300,7 +294,7 @@ msgid "Background type"
 msgstr "Typ pozadí"
 
 msgid "The image file"
-msgstr "Soubor obrázku"
+msgstr "Obrazový soubor"
 
 msgid "The API token for this backend"
 msgstr "Token API pro tento backend"
@@ -322,7 +316,7 @@ msgid "You are invited to join {{org.name}}."
 msgstr "Jste zváni, abyste se připojili k {{org.name}}."
 
 msgid "Click this link to join"
-msgstr "Pro připojení klikněte na tento odkaz "
+msgstr "Pro připojení klikněte na odkaz. "
 
 msgid "Edit"
 msgstr "Upravit"
@@ -337,7 +331,7 @@ msgid "Accounts"
 msgstr "Účty"
 
 msgid "Admins"
-msgstr "Administrátoři"
+msgstr "Správci"
 
 msgid "Remove"
 msgstr "Odstranit"
@@ -352,11 +346,10 @@ msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
 msgstr ""
-"Váš účet není přidružen k žádné organizaci. Kontaktujte prosím "
-"administrátora."
+"Váš účet není přidružen k žádné organizaci. Kontaktujte prosím správce."
 
 msgid "Your Organization"
-msgstr "Vaše organizace"
+msgstr "Vaše Organizace"
 
 msgid "Invite people to your organization"
 msgstr "Pozvěte lidi do své organizace"
@@ -369,7 +362,7 @@ msgstr "Jeden ze zadaných e-mailů je neplatný."
 
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr "Správa %(name)s účtů"
+msgstr "Spravovat účty %(name)s"
 
 msgid "Create"
 msgstr "Vytvořit"
@@ -392,20 +385,17 @@ msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
 msgstr ""
-"Platnost vašeho odkazu na pozvánku vypršela. Kontaktujte prosím "
-"administrátora své organizace."
+"Platnost vašeho odkazu na pozvánku vypršela. Kontaktujte prosím správce vaší"
+" organizace."
 
 msgid "Task"
-msgstr "Úkol"
+msgstr "Úloha"
 
 msgid "Tasks"
-msgstr "Úkoly"
-
-msgid "Only PDF files are supported."
-msgstr "Podporovány jsou pouze soubory PDF."
+msgstr "Úlohy"
 
 msgid "The title for this story"
-msgstr "Název tohoto příběhu"
+msgstr "Název pro tento příběh"
 
 msgid "Whether this story is featured"
 msgstr "Zda je tento příběh uveden"
@@ -421,9 +411,6 @@ msgstr "Autor příběhu"
 
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Odkaz na soubor mp3 pro zveřejnění v tomto příběhu"
-
-msgid "The PDF report to attach"
-msgstr "Zpráva PDF k přiložení"
 
 msgid ""
 "The id of the YouTube video that should be linked to this story (this is the"
@@ -472,12 +459,6 @@ msgid "Image to display on story page and in previews (optional)"
 msgstr ""
 "Obrázek, který se zobrazí na stránce příběhu a v náhledech (nepovinné)"
 
-msgid "The name of this tag"
-msgstr "Název této značky"
-
-msgid "Delete"
-msgstr "Smazat"
-
 msgid "Remove Item?"
 msgstr "Odebrat položku?"
 
@@ -510,16 +491,16 @@ msgid_plural ""
 "        "
 msgstr[0] ""
 "\n"
-"\t %(counter)s výsledek\n"
-"\t"
+"         %(counter)s výsledků\n"
+"        "
 msgstr[1] ""
 "\n"
-"\t %(counter)s výsledky\n"
-"\t"
+"         %(counter)s výsledků\n"
+"        "
 msgstr[2] ""
 "\n"
-"\t %(counter)s výsledků\n"
-"\t"
+"         %(counter)s výsledků\n"
+"        "
 msgstr[3] ""
 "\n"
 "         %(counter)s výsledků\n"
@@ -554,10 +535,10 @@ msgid "Forgot Password?"
 msgstr "Zapomenuté heslo?"
 
 msgid "Token Expired"
-msgstr "platnost Tokenu vypršela"
+msgstr "Platnost tokenu vypršela"
 
 msgid "Login Failure"
-msgstr "Přihlášení selhalo"
+msgstr "Selhání přihlášení"
 
 #, python-format
 msgid ""
@@ -653,10 +634,10 @@ msgstr ""
 "a obnovte heslo ručně."
 
 msgid "Current Password"
-msgstr "Stávající heslo"
+msgstr "Aktuální heslo"
 
 msgid "Your current password"
-msgstr "Vaše stávající heslo"
+msgstr "Vaše aktuální heslo"
 
 msgid "Your new password."
 msgstr "Vaše nové heslo."
@@ -695,10 +676,10 @@ msgid "Last Login"
 msgstr "Poslední přihlášení"
 
 msgid "Is Active"
-msgstr "je aktivní"
+msgstr "Je aktivní"
 
 msgid "Whether this user is allowed to log into the site"
-msgstr "Zda se tento uživatel smí přihlásit k webu."
+msgstr "Zda je tomuto uživateli povoleno přihlásit se k webu."
 
 msgid "Users will only get those permissions that are allowed for their group"
 msgstr ""
@@ -727,7 +708,7 @@ msgid "Edit your profile"
 msgstr "Upravit svůj profil"
 
 msgid "Password Recovery"
-msgstr "Obnovení hesla"
+msgstr "Obnova hesla"
 
 msgid "An Email has been sent to your account with further instructions."
 msgstr "Na váš účet byl odeslán e-mail s dalšími pokyny."
@@ -736,7 +717,7 @@ msgid "Password Recovery Request"
 msgstr "Žádost o obnovení hesla"
 
 msgid "Pick a new password"
-msgstr "Zvolte nové heslo"
+msgstr "Výběr nového hesla"
 
 msgid "Your password has successfully been updated, thank you."
 msgstr "Vaše heslo bylo úspěšně aktualizováno, děkujeme."
@@ -752,7 +733,7 @@ msgstr ""
 "hesla."
 
 msgid "Reset your Password"
-msgstr "Obnovit heslo"
+msgstr "Obnovte své heslo"
 
 msgid ""
 "Your link has expired for security reasons. Please reinitiate the process by"
@@ -779,19 +760,16 @@ msgid "Import %s"
 msgstr "Import %s"
 
 msgid "Back to Website"
-msgstr "Zpět na webové stránky"
+msgstr "Zpět na webovou stranu"
 
 msgid "Welcome, "
 msgstr "Vítejte, "
 
 msgid "Logout"
-msgstr "Odhlásit"
+msgstr "Odhlášení"
 
 msgid "Opinions"
 msgstr "Názory"
-
-msgid "Bots"
-msgstr "Boti"
 
 msgid "Users"
 msgstr "Uživatelé"
@@ -802,23 +780,17 @@ msgstr "Nastavení"
 msgid "Pages"
 msgstr "Strany"
 
-msgid "Landing Pages"
-msgstr "Vstupní strany"
-
 msgid "Jobs"
-msgstr "Úkoly"
+msgstr "Pracovní nabídky"
 
-msgid "Tags"
-msgstr "Štítky"
-
-msgid "Partners Logos"
-msgstr "Loga partnerů"
+msgid "Photos"
+msgstr "Fotky"
 
 msgid "Categories Images"
-msgstr "Obrázky kategorií"
+msgstr "Obrázky kategorie"
 
 msgid "News Items"
-msgstr "Položky Zpráv"
+msgstr "Zprávy"
 
 msgid "Orgs"
 msgstr "Organizace"
@@ -827,13 +799,10 @@ msgid "Images"
 msgstr "Obrázky"
 
 msgid "About"
-msgstr "O"
+msgstr "O nás..."
 
 msgid "Engagement"
 msgstr "Zapojení"
-
-msgid "Reports"
-msgstr "Zprávy"
 
 msgid "Category Images"
 msgstr "Obrázky kategorií"
@@ -842,13 +811,13 @@ msgid "+ New "
 msgstr "+ Nový"
 
 msgid "+ New Page"
-msgstr "+ Nová Strana"
+msgstr "+ Nová strana"
 
 msgid "U-Report"
 msgstr "U-Report"
 
 msgid "Admin"
-msgstr "Administrátor"
+msgstr "Admin"
 
 msgid "Configuration"
 msgstr "Konfigurace"
@@ -860,34 +829,34 @@ msgid "Country Aliases"
 msgstr "Aliasy zemí"
 
 msgid "Job Sources"
-msgstr "Zdroje Úloh"
+msgstr "Zdroje Pracovních nabídek"
 
 msgid "Jobs Content"
-msgstr "Obsah Úloh"
+msgstr "Obsah Pracovních nabídek"
 
 msgid "About Content"
-msgstr "O Obsahu"
+msgstr "O obsahu"
 
 msgid "Videos"
 msgstr "Videa"
 
 msgid "Contact Us Content"
-msgstr "Obsah Kontaktujte nás"
+msgstr "Obsah strany Kontaktujte nás"
 
 msgid "Missions Content"
-msgstr "Obsah Mise"
+msgstr "Obsah misí"
 
 msgid "Terms & Conditions"
 msgstr "Podmínky a pravidla"
 
 msgid "U-Reporters Content"
-msgstr "Obsah strany U-Reportéři"
+msgstr "Obsah strany U-Reporters"
 
 msgid "Join &amp; Engage Content"
 msgstr "Připojte se a zapojte se do obsahu"
 
 msgid "Join Steps Content"
-msgstr "Připojte se k obsahu kroků"
+msgstr "Obsah strany Kroky k připojení"
 
 msgid "Additional Menu"
 msgstr "Další nabídka"
@@ -899,7 +868,7 @@ msgid "Join Now"
 msgstr "Připojte se"
 
 msgid "READ MORE"
-msgstr "PŘEČTĚTE SI VÍCE"
+msgstr "ČTĚTE VÍCE"
 
 msgid "EXPLORE ENGAGEMENT"
 msgstr "PROZKOUMEJTE ZAPOJENÍ"
@@ -928,20 +897,11 @@ msgstr ""
 msgid "Back"
 msgstr "Zpět"
 
-msgid "Select bots"
-msgstr "Výběr botů"
-
-msgid "View public page"
-msgstr "Zobrazit veřejnou stránku"
-
 msgid "LATEST NOTIFICATIONS"
 msgstr "NEJNOVĚJŠÍ OZNÁMENÍ"
 
 msgid "Backends"
 msgstr "Backendy"
-
-msgid "Add os Select tags"
-msgstr "Přidat nebo Vybrat značky"
 
 #, python-format
 msgid ""
@@ -951,9 +911,9 @@ msgid_plural ""
 "There are currently %(counter)s new polls syncing. Polls are displayed on "
 "the public site once they have completely synced their results."
 msgstr[0] ""
-"V současné době je k dispozici %(counter)s nová synchronizace průzkumů. "
-"Ankety se na veřejném webu zobrazí, jakmile se kompletně synchronizují "
-"jejich výsledky."
+"V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy "
+"se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich "
+"výsledky."
 msgstr[1] ""
 "V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy "
 "se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich "
@@ -973,23 +933,22 @@ msgstr "+ Nový Průzkum"
 #, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "%(counter)s otázka průzkumu"
-msgstr[1] "%(counter)s otázky průzkumu"
+msgstr[0] "%(counter)s otázek průzkumu"
+msgstr[1] "%(counter)s otázek průzkumu"
 msgstr[2] "%(counter)s otázek průzkumu"
 msgstr[3] "%(counter)s otázek průzkumu"
 
 msgid "New poll initial syncs scheduled every 10min"
 msgstr "Nová počáteční synchronizace průzkumu naplánovaná každých 10 minut"
 
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
-"Již není možné plánovat synchronizace pro staré průzkumy, jsou archivovány"
-
-msgid "Main poll syncs scheduled every 20min"
-msgstr "Synchronizace hlavního průzkumu naplánovaná každých 20 minut"
+msgid "Main poll syncs scheduled every 10min"
+msgstr "Hlavní synchronizace průzkumu naplánovaná každých 10 minut"
 
 msgid "Recent poll syncs scheduled every 60min"
 msgstr "Poslední synchronizace průzkumů naplánovaná každých 60 minut"
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr "Synchronizace se již neplánuje, běhy se archivují"
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Synchronizace průzkumů naplánovaná každých 24 hodin"
@@ -998,13 +957,10 @@ msgid "Not scheduling syncs, not active"
 msgstr "Nenaplánovaná synchronizace, není aktivní"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr "Žádné plánování synchronizací, žádný tok pro průzkum"
+msgstr "Neplánování synchronizací, žádný tok pro průzkum"
 
 msgid "Refresh Results"
 msgstr "Obnovit výsledky"
-
-msgid "Partners"
-msgstr "Partneři"
 
 msgid "MORE POLLS"
 msgstr "VÍCE PRŮZKUMŮ"
@@ -1027,12 +983,6 @@ msgstr "ARCHIVOVANÉ PŘÍBĚHY"
 msgid "LIST"
 msgstr "SEZNAM"
 
-msgid "Send"
-msgstr "Odeslat"
-
-msgid "to"
-msgstr "do"
-
 msgid "LATEST OPINION"
 msgstr "NEJNOVĚJŠÍ NÁZOR"
 
@@ -1040,7 +990,7 @@ msgid "VIEW FULL RESULTS"
 msgstr "ZOBRAZIT KOMPLETNÍ VÝSLEDKY"
 
 msgid "U-REPORTERS IN"
-msgstr "U-REPORTÉŘI V"
+msgstr "U-REPORTERS IN"
 
 msgid "PARTNERING WITH"
 msgstr "PARTNERSTVÍ S"
@@ -1052,22 +1002,16 @@ msgid "IN"
 msgstr "V"
 
 msgid "COUNTRIES WORLDWIDE"
-msgstr "ZEMĚ PO CELÉM SVĚTĚ"
+msgstr "ZEMĚ CELOSVĚTOVĚ"
 
 msgid "AGES"
 msgstr "VĚKOVÉ SKUPINY"
-
-msgid "Available bots"
-msgstr "Dostupní boti"
-
-msgid "More bots"
-msgstr "Více botů"
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Přidejte se k U-Report, na vašem hlase záleží."
 
 msgid "FEATURED STORY"
-msgstr "DOPORUČENÝ PŘÍBĚH"
+msgstr "OBSAZENÝ PŘÍBĚH"
 
 msgid ""
 "We are a part of a global platform working to change the lives of young "
@@ -1095,23 +1039,20 @@ msgstr "Jak byste se chtěli připojit?"
 msgid "Text"
 msgstr "Text"
 
-msgid "PAGE"
-msgstr "STRANA"
-
 msgid "SEARCH"
 msgstr "HLEDAT"
 
 msgid "No results found"
 msgstr "Nenalezeny žádné výsledky"
 
-msgid "RESPONDERS"
-msgstr "PŘISPĚVATELÉ"
+msgid "RESPONSES"
+msgstr "ODPOVĚDI"
 
 msgid "RESPONSE RATE"
 msgstr "RYCHLOST ODEZVY"
 
-msgid "TOTAL RESPONDERS"
-msgstr "CELKEM PŘISPĚVATELŮ"
+msgid "TOTAL RESPONSES"
+msgstr "CELKEM ODPOVĚDÍ"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1132,18 +1073,6 @@ msgstr "LOKALITA"
 msgid "Written by:"
 msgstr "Napsal:"
 
-msgid "No reports published yet"
-msgstr "Zatím nebyly zveřejněny žádné zprávy"
-
-msgid "REPORT"
-msgstr "ZPRÁVA"
-
-msgid "STORY"
-msgstr "PŘÍBĚH"
-
-msgid "Download Report"
-msgstr "Stáhnout zprávu"
-
 msgid "Even"
 msgstr "Také"
 
@@ -1159,8 +1088,8 @@ msgstr "Okres"
 msgid "Participation Level"
 msgstr "Úroveň participace"
 
-msgid "Responders"
-msgstr "Přispěvatelé"
+msgid "Responses"
+msgstr "Odpovědi"
 
 msgid "Reporters in"
 msgstr "Reportéři v"
@@ -1169,7 +1098,7 @@ msgid "Results"
 msgstr "Výsledky"
 
 msgid "*Other answers include"
-msgstr "*Mezi další odpovědi patří"
+msgstr "*Další odpovědi zahrnují"
 
 msgid "Population"
 msgstr "Obyvatelstvo"
@@ -1196,16 +1125,13 @@ msgid "THIS YEAR"
 msgstr "TENTO ROK"
 
 msgid "AVG RESPONSE RATE"
-msgstr "PRŮMĚRNÁ RYCHLOST ODEZVY"
+msgstr "PRŮMĚRNÁ MÍRA ODEZVY"
 
 msgid "U-REPORTERS BY REGION"
 msgstr "U-REPORTÉŘI PODLE REGIONŮ"
 
 msgid "FILTER RESULTS"
 msgstr "VÝSLEDKY FILTROVÁNÍ"
-
-msgid "Charts only visible for logged in admins"
-msgstr "Grafy viditelné pouze pro přihlášené správce"
 
 msgid "Export and Share"
 msgstr "Export a sdílení"
@@ -1226,9 +1152,6 @@ msgstr "VYBRAT ZEMI"
 msgid "Custom pages"
 msgstr "Uživatelské stránky"
 
-msgid "Landing pages"
-msgstr "Vstupní strany"
-
 msgid ""
 "See by the numbers how we are engaging youth voices for positive social "
 "change."
@@ -1246,25 +1169,25 @@ msgid "Top Region"
 msgstr "Top region"
 
 msgid "January"
-msgstr "Leden"
+msgstr "leden"
 
 msgid "February"
-msgstr "Únor"
+msgstr "únor"
 
 msgid "March"
-msgstr "Březen"
+msgstr "březen"
 
 msgid "April"
-msgstr "Duben"
+msgstr "duben"
 
 msgid "May"
-msgstr "Květen"
+msgstr "květen"
 
 msgid "June"
-msgstr "Červen"
+msgstr "červen"
 
 msgid "July"
-msgstr "Červenec"
+msgstr "červenec"
 
 msgid "August"
 msgstr "srpen"
@@ -1282,37 +1205,37 @@ msgid "December"
 msgstr "prosinec"
 
 msgid "Jan"
-msgstr "Led"
+msgstr "led"
 
 msgid "Feb"
-msgstr "Úno"
+msgstr "úno"
 
 msgid "Mar"
-msgstr "Bře"
+msgstr "bře"
 
 msgid "Apr"
-msgstr "Dub"
+msgstr "dub"
 
 msgid "Jun"
-msgstr "Čer"
+msgstr "čer"
 
 msgid "Jul"
-msgstr "Čvc"
+msgstr "čvc"
 
 msgid "Aug"
-msgstr "Srp"
+msgstr "srp"
 
 msgid "Sep"
-msgstr "Zář"
+msgstr "zář"
 
 msgid "Oct"
-msgstr "Říj"
+msgstr "říj"
 
 msgid "Nov"
-msgstr "Lis"
+msgstr "lis"
 
 msgid "Dec"
-msgstr "Pro"
+msgstr "pro"
 
 #, python-format
 msgid ""
@@ -1327,8 +1250,8 @@ msgstr ""
 #, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] "%(counter)s výsledek"
-msgstr[1] "%(counter)s výsledky"
+msgstr[0] "%(counter)s výsledků"
+msgstr[1] "%(counter)s výsledků"
 msgstr[2] "%(counter)s výsledků"
 msgstr[3] "%(counter)s výsledků"
 
@@ -1379,9 +1302,6 @@ msgstr "Obnovená %s mezipaměť této organizace"
 msgid "Flag"
 msgstr "Označení"
 
-msgid "About Partner Logo"
-msgstr "O logu partnera"
-
 msgid "The organization to which the image will be used"
 msgstr "Organizace, pro kterou bude obrázek použit"
 
@@ -1390,60 +1310,6 @@ msgstr "Krátký popisný název tohoto obrázku"
 
 msgid "Image type"
 msgstr "Typ obrázku"
-
-msgid ""
-"The priority number for this image among others on a list, high priority "
-"comes first"
-msgstr ""
-"Priorita této otázky na stránce průzkumu, vyšší priorita je na prvním místě"
-
-msgid "The organization this bot is part of"
-msgstr "Organizace, jejíž je tento bot součástí"
-
-msgid ""
-"Whether this bot is displayed on the homepage, up to 3 only with the highest"
-" priorities are displayed"
-msgstr ""
-"Zda se tento bot zobrazí na domovské stránce, zobrazí se až 3 pouze s "
-"nejvyššími prioritami."
-
-msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr ""
-"Zda je tento bot skrytý na veřejných stránkách kromě vstupních stránek"
-
-msgid "The title to display for this bot"
-msgstr "Název, který se má zobrazit pro tohoto bota"
-
-msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr "Zkrácený kód, číslo nebo název kanálu pro tohoto bota"
-
-msgid "The keyword for this bot"
-msgstr "Klíčové slovo pro tohoto bota"
-
-msgid "The Facebook bot deeplink, optional"
-msgstr "Hluboký odkaz na bota Facebooku, volitelný"
-
-msgid "The Telegram bot deeplink, optional"
-msgstr "Hluboký odkaz na bota Telegram, volitelný"
-
-msgid "The Viber bot deeplink, optional"
-msgstr "Hluboký odkaz na bota Viber, volitelný"
-
-msgid "The WhatsApp bot deeplink, optional"
-msgstr "Hluboký odkaz na bot WhatsApp, volitelný"
-
-msgid "A short description for this bot, required"
-msgstr "Krátký popis tohoto bota, vyžadováno"
-
-msgid ""
-"The priority number for this bot among others on a list, high priority comes"
-" first"
-msgstr ""
-"Číslo priority pro tohoto bota mezi ostatními na seznamu, vysoká priorita je"
-" na prvním místě."
-
-msgid "Whether this bot should be shown to the public"
-msgstr "Zda by měl být tento bot zobrazen veřejnosti"
 
 msgid "Label"
 msgstr "Štítek"
@@ -1467,7 +1333,7 @@ msgid "Gender of the contact"
 msgstr "Pohlaví kontaktu"
 
 msgid "Born Field"
-msgstr "Rodné místo"
+msgstr "Born Field"
 
 msgid "Occupation Field"
 msgstr "Oblast povolání"
@@ -1494,14 +1360,14 @@ msgid "The name for our alias"
 msgstr "Název našeho aliasu"
 
 msgid "The title or name to reference this Job source."
-msgstr "The title or name to reference this Job source."
+msgstr "Název nebo jméno pro odkaz na tento zdroj Pracovních nabídek."
 
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
 msgstr ""
 "Vyberte typ zdroje Pracovních nabídek. Twitter, Facebook nebo RSS kanál"
 
 msgid "The full URL to navigate to this Job source."
-msgstr "Úplná URL pro přechod na tento zdroj úloh."
+msgstr "Úplná adresa URL pro přechod na tento zdroj pracovních nabídek."
 
 msgid ""
 "For Twitter, a widget Id is required to embed tweets on the website. Read "
@@ -1524,27 +1390,6 @@ msgstr "Váš zdroj pracovních nabídek byl úspěšně přidán"
 
 msgid "Your job source has been updated successfully"
 msgstr "Váš zdroj pracovních nabídek byl úspěšně aktualizován"
-
-msgid "The organization this landing page is part of"
-msgstr "Organizace, jejíž je tato vstupní stránka součástí"
-
-msgid "The title to display for this landing page"
-msgstr "Nadpis, který se má zobrazit pro tuto vstupní stránku"
-
-msgid "The call to action text for this landing page"
-msgstr "Text výzvy k akci pro tuto vstupní stránku"
-
-msgid "The slug to use on the link for this landing page"
-msgstr "Slug, který se použije na odkazu na tuto vstupní stránku"
-
-msgid "The body of text for the landing page"
-msgstr "Tělo textu vstupní stránky"
-
-msgid "The image file to use for the page"
-msgstr "Soubor obrázku, který se použije pro stránku"
-
-msgid "Whether this page should be active to the public"
-msgstr "Zda má být tato stránka aktivní pro veřejnost"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Toto je ID OSM pro tuto správní hranici."
@@ -1620,7 +1465,7 @@ msgid "Whether the poll should stop regenerating stats."
 msgstr "Zda by průzkum měl zastavit regeneraci statistik."
 
 msgid "The title for this Poll"
-msgstr "Název pro tento průzkum"
+msgstr "Název tohoto průzkumu"
 
 msgid "The category this Poll belongs to"
 msgstr "Kategorie, do které tento průzkum patří"
@@ -1635,10 +1480,10 @@ msgid "The organization this poll is part of"
 msgstr "Organizace, jejíž součástí je tento průzkum"
 
 msgid "The title for this response story"
-msgstr "Název tohoto příběhu s odpovědí"
+msgstr "Název této reakce na příběh"
 
 msgid "The writer of the response story"
-msgstr "Autor reakce příběhu"
+msgstr "Autor příběhu odpovědi"
 
 msgid "The poll to associate to"
 msgstr "Průzkum, ke kterému se má přidružit"
@@ -1647,49 +1492,13 @@ msgid "The poll for this response"
 msgstr "Průzkum pro tuto odpověď"
 
 msgid "The location for this response"
-msgstr "Umístění této reakce"
+msgstr "Místo pro tuto odpověď"
 
 msgid "The name of the sender of the message"
 msgstr "Jméno odesílatele zprávy"
 
 msgid "The featured response message"
 msgstr "Doporučená zpráva s odpovědí"
-
-msgid "Dark 1 background and White text"
-msgstr "Tmavé pozadí 1 a bílý text"
-
-msgid "Light 1 background and Black text"
-msgstr "Světlé pozadí 1 a černý text"
-
-msgid "Dark 2 background and White text"
-msgstr "Tmavé pozadí 2 a bílý text"
-
-msgid "Dark 3 background and Black text"
-msgstr "Tmavé pozadí 3 a černý text"
-
-msgid "Show Age, Gender and Location charts"
-msgstr "Zobrazit grafy věku, pohlaví a polohy"
-
-msgid "Hide Age chart ONLY"
-msgstr "Skrýt POUZE věkový graf"
-
-msgid "Hide Gender chart ONLY"
-msgstr "Skrýt POUZE graf pohlaví"
-
-msgid "Hide Location chart ONLY"
-msgstr "Skrýt Pouze graf umístění"
-
-msgid "Hide Age and Gender charts"
-msgstr "Skrýt grafy věku a pohlaví"
-
-msgid "Hide Age and Location charts"
-msgstr "Skrýt grafy věku a polohy"
-
-msgid "Hide Gender and Location charts"
-msgstr "Skrýt grafy pohlaví a polohy"
-
-msgid "Hide Age, Gender and Location charts"
-msgstr "Skrýt grafy věku, pohlaví a polohy"
 
 msgid "The poll this question is part of"
 msgstr "Průzkum, jehož součástí je tato otázka"
@@ -1709,9 +1518,6 @@ msgstr "Číslo priority pro tuto otázku v průzkumu"
 msgid "The Rule this response category is based on"
 msgstr "Pravidlo, na kterém je tato kategorie odpovědí založena"
 
-msgid "Select tags for this poll"
-msgstr "Vyberte značky pro tento průzkum"
-
 msgid "Your org does not have any API token configuration."
 msgstr "Vaše organizace nemá žádnou konfiguraci tokenů API."
 
@@ -1725,7 +1531,7 @@ msgid "You must include at least one poll question."
 msgstr "Musíte uvést alespoň jednu otázku průzkumu."
 
 msgid "Adjust poll date"
-msgstr "Úprava data průzkumu"
+msgstr "Upravit datum průzkumu"
 
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr ""
@@ -1761,7 +1567,7 @@ msgid "Your poll has been updated."
 msgstr "Váš průzkum byl aktualizován."
 
 msgid "Poll Questions"
-msgstr "Otázky v průzkumu"
+msgstr "Otázky průzkumu"
 
 msgid "Now set what images you want displayed on your poll page. (if any)"
 msgstr ""
@@ -1793,19 +1599,6 @@ msgstr "Název"
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Otázka položená vašemu publiku se zobrazí veřejně."
-
-msgid "Color Choice"
-msgstr "Výběr barvy"
-
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "Barva, která se použije pro blok otázek, se zobrazí veřejně."
-
-msgid "Hidden Charts Choice"
-msgstr "Volba skrytých grafů"
-
-msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
-"Vyberte členění grafů, které chcete skrýt pro tuto otázku pro veřejnost."
 
 msgid "Category {idx+1}"
 msgstr "Kategorie {idx+1}"
@@ -1848,7 +1641,7 @@ msgid "%s"
 msgstr "%s"
 
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr "Název skupiny kontaktů, která obsahuje registrované zpravodaje"
+msgstr "Název skupiny kontaktů, která obsahuje registrované reportéry."
 
 msgid ""
 "The label of the Contact Field that contains the birth date of reporters"
@@ -1892,16 +1685,10 @@ msgstr ""
 "Zkrácený kód, který budou uživatelé používat k místnímu kontaktu s U-Report."
 
 msgid ""
-"The WhatsApp number that users will use to contact U-Report if you have one"
+"The whatapp number that users will use to contact U-Report if you have one"
 msgstr ""
-"Číslo WhatsApp, které budou uživatelé používat pro kontaktování U-Report, "
-"pokud ho máte."
-
-msgid ""
-"The Telegram bot that users will use to contact U-Report if you have one"
-msgstr ""
-"Bot Telegramu, který budou uživatelé používat ke kontaktování U-Report, "
-"pokud ho máte."
+"Číslo whatapp, které uživatelé použijí pro kontaktování U-Report, pokud ho "
+"máte."
 
 msgid ""
 "The viber username that users will use to contact U-Report if you have one"
@@ -1914,9 +1701,6 @@ msgstr "Text tlačítka pro připojení"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Krátký text, který návštěvníky nasměruje k připojení k U-Report."
-
-msgid "The call to action text to join on the top section on U-Report"
-msgstr "Text výzvy k akci, abyste se připojili, v horní části U-Report"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "ID videa na YouTube, jak se připojit k sekci U-Report"
@@ -1964,6 +1748,21 @@ msgstr ""
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Až 6 barev pro stylování grafů, mezi barvami použijte čárku"
 
+msgid "The color used to draw the text on the join bar"
+msgstr "Barva použitá pro vykreslení textu na spojovacím pruhu"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Barva použitá pro vykreslení pozadí na připojovací liště"
+
+msgid "The primary color for styling for this organization"
+msgstr "Hlavní barva pro stylování této organizace"
+
+msgid "The secondary color for styling for this organization"
+msgstr "Sekundární barva pro stylování této organizace"
+
+msgid "The background color for the site"
+msgstr "Barva pozadí webu"
+
 msgid ""
 "11 colors for styling maps, use comma between colors, not used if not 11 "
 "colors"
@@ -1979,17 +1778,11 @@ msgstr ""
 "Státy, které se mají zobrazovat pouze na mapách, slouží k filtrování "
 "výsledků průzkumu"
 
-msgid "The Google Tag Manager ID for this organization"
-msgstr "ID správce značek Google pro tuto organizaci"
-
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID sledování Google Analytics pro tuto organizaci"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "Adresa URL kanálu Youtube této organizace"
-
-msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr "Obsah meta tagu pro ověření domény na Facebooku"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "Adresa URL na stránku této organizace na Facebooku"
@@ -2015,7 +1808,7 @@ msgid "The Instagram username for this organization"
 msgstr "Uživatelské jméno této organizace na Instagramu"
 
 msgid "The Instagram widget id from lightwidget.com"
-msgstr "Widget Instagram id z lightwidget.com"
+msgstr "Widget Instagram id od lightwidget.com"
 
 msgid "The Twitter handle for this organization"
 msgstr "Handle této organizace na Twitteru"
@@ -2039,11 +1832,8 @@ msgstr ""
 msgid "Whether to activate an extra gender."
 msgstr "Zda se má aktivovat další pohlaví."
 
-msgid "Whether to hide the engagement breakdown charts."
-msgstr "Zda skrýt grafy rozdělení závazků."
-
-msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Zda se má v zápatí zobrazovat logo UNICEF."
+msgid "Whether to activate the new design."
+msgstr "Zda aktivovat nový design."
 
 msgid ""
 "The alpha-3 ISO code of the organization so that it appears the stories "
@@ -2060,7 +1850,7 @@ msgid "The font used for normal text"
 msgstr "Písmo používané pro normální text"
 
 msgid "Hide participation stats"
-msgstr "Skrýt statistiky participace"
+msgstr "Skrýt statistiky účasti"
 
 msgid "The text to describe the sponsors of free messages"
 msgstr "Text popisující sponzory bezplatných zpráv"
@@ -2072,8 +1862,8 @@ msgid ""
 "If you need to include some custom HTML codes in you org pages, like custom "
 "analytics code snippets"
 msgstr ""
-"Pokud potřebujete do svých stránek organizace zahrnout některé vlastní kódy "
-"HTML, například vlastní části analytického kódu."
+"Pokud potřebujete do svých stránek org zahrnout některé vlastní kódy HTML, "
+"například vlastní úryvky analytického kódu."
 
 msgid "Other language sites links"
 msgstr "Odkazy na další jazykové stránky"
@@ -2089,9 +1879,6 @@ msgstr "12 měsíců"
 
 msgid "Age"
 msgstr "Věk"
-
-msgid "Channels"
-msgstr "Kanály"
 
 msgid "Location"
 msgstr "Lokalita"
