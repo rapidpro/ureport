@@ -2,31 +2,32 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Nyaruka <info@textit.in>, 2019
 # Syeara Koomkoom, 2019
-#
+# Transifex Bot <>, 2022
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 09:42+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Syeara Koomkoom, 2019\n"
+"Last-Translator: Transifex Bot <>, 2022\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
-"Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: bn\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "The name of this category"
-msgstr " বিভাগের নাম"
+msgstr ""
 
 msgid "An optional image that can describe this category"
-msgstr "এই বিভাগের জন্য অন্য ছবি"
+msgstr ""
 
 msgid "The organization this category applies to"
 msgstr "এই  বিভাগের অন্তর্ভুক্ত প্রতিষ্ঠানের নাম "
@@ -38,82 +39,87 @@ msgid "The name to describe this image"
 msgstr "এই ছবিটিকে বর্ণনা করে এমন নাম "
 
 msgid "The category this image represents"
-msgstr "যে বিভাগের ছবি"
+msgstr ""
 
 msgid "The image file to use"
 msgstr "যে ছবিটি ব্যবহার করা হবে"
 
 msgid "The human readable name for this content type"
-msgstr "এই বিষয়কে বর্ননা করতে পারে এমন নাম"
+msgstr ""
 
 msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "এই একই ধরনের বিষয় কে শনাক্ত করে নমুনা হিসেবে ব্যবহার করা"
+msgstr ""
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr "এই বিষয়গুলো সাইটে কোথায় কিভাবে ব্যবহার এবং দেখানো হবে তার বর্ণনা "
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
+msgstr ""
 
 msgid "Whether this content should include a title"
-msgstr "এই বিষয়ের কি কোন শিরোনাম হবে"
+msgstr ""
 
 msgid "Whether this content should include an image"
-msgstr "এই বিষয়ের জন্য কি কোন ছবি ব্যবহার হবে"
+msgstr ""
 
 msgid "Whether this content should use a rich HTML editor"
-msgstr "এই বিষয়ের জন্য কি HTML এডিটর ব্যবহার করা হবে"
+msgstr ""
 
 msgid "Whether this content should include a summary field"
-msgstr "এই বিষয়ের জন্য কি সারাংশ এর জায়গা রাখা উচিত"
+msgstr ""
 
 msgid "Whether this content should include a link"
-msgstr "এই বিষয়ের মধ্যে কি কোন লিঙ্ক থাকা উচিত"
+msgstr ""
 
-msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "এই বিষয়ের মধ্যে কি অতিরিক্ত ছবি আপলোড করার অনুমতি থাকা উচিত, একটি গ্যালারি"
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
 
 msgid "Whether this content has a color field"
-msgstr "এই বিষয়ের মধ্যে কি কোন রঙ্গিন জায়গা থাকা উচিত"
+msgstr ""
 
 msgid "Whether this content should allow setting a YouTube id"
-msgstr "এই বিষয়ের মধ্যে কি YouTube আইডি যুক্ত করার সেটিং রাখা উচিত"
+msgstr ""
 
 msgid "Whether this content should allow tags"
-msgstr "এই বিষয়ের মধ্যে কি ট্যাগ করার সুযোগ থাকা উচিত"
+msgstr ""
 
 msgid "Content Type"
-msgstr "বিষয়বস্তু "
+msgstr ""
 
 msgid "The category, or type for this content block"
-msgstr "এই দলভুক্ত বিষয়ের ধরন বা বিভাগ"
+msgstr ""
 
 msgid "The title for this block of content, optional"
-msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+msgstr ""
 
 msgid "The summary for this item, should be short"
-msgstr "এই বিষয়ের সারাংশ, ছোট হতে হবে"
+msgstr ""
 
 msgid "The body of text for this content block, optional"
-msgstr "এই দলভুক্ত বিষয়ের মূল লেখা, ঐচ্ছিক "
+msgstr ""
 
 msgid "Any image that should be displayed with this content block, optional"
-msgstr "এই দলভুক্ত বিষয়ের সাথে দেখানো হবে এমন ছবি, ঐচ্ছিক"
+msgstr ""
 
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "এই ছবির পেছনে ব্যবহার করা হবে এমন রঙ,  #rrggbb এই ফরম্যাটে"
+msgstr ""
 
 msgid "Any link that should be associated with this content block, optional"
-msgstr "এই সারির বিষয়গুলোর সাথে সম্পর্কিত কোন লিংক, ঐচ্ছিক"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "YouTube ভিডিওর সাথে সম্পৃক্ত আইডি যা এই ভিডিওর সাথে ব্যবহার করা যাবে"
 
-msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "এই দলভুক্ত বিষয়ের জন্য কোন ট্যাগ, যা স্পেস দিয়ে আলাদা করা থাকবে, যা ব্যবহার করা হবে এ্যডভান্স ফিল্টারিংয়ের জন্য, ঐচ্ছিক"
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr ""
 
 msgid "The priority for this block, higher priority blocks come first"
-msgstr "এই সারির গুরুত্ব, বেশি গুরুত্বপূর্ণ সারি প্রথমে আসবে।"
+msgstr ""
 
 msgid "The organization this content block belongs to"
-msgstr "এই সারির বিষয়গুলো যে  প্রতিষ্ঠানের অন্তর্ভুক্ত"
+msgstr ""
 
 msgid "Gallery"
 msgstr "গ্যালারি"
@@ -130,144 +136,140 @@ msgstr "যোগ করুন"
 msgid "Content Types"
 msgstr "বিষয়ের ধরণ "
 
-msgid "Link Slug"
-msgstr ""
-
-msgid "The slug or word to use in the link of the page"
-msgstr ""
-
 msgid "Content Blocks"
-msgstr "বিষয়ের সারি"
+msgstr ""
 
 #, python-format
 msgid "%s Blocks"
-msgstr " %s ব্লক গুলো"
+msgstr ""
 
 #, python-format
 msgid "Edit %s"
-msgstr "সম্পাদনা করুন %s"
+msgstr ""
 
 #, python-format
 msgid "Create %s"
-msgstr "তৈরি করুন  %s"
+msgstr ""
 
 msgid "Create Content Block"
-msgstr "বিষয়ের সারি তৈরি করুন"
+msgstr ""
 
 msgid "Your first name"
-msgstr "আপনার নামের প্রথম অংশ "
+msgstr ""
 
 msgid "Your last name"
-msgstr "আপনার নামের শেষ অংশ"
+msgstr ""
 
 msgid "Your email address"
-msgstr "আপনার ইমেইল "
+msgstr ""
 
 msgid "Your password, at least eight letters please"
-msgstr "আপনার পাসওয়ার্ড, কমপক্ষে ৮ টি অক্ষর হতে হবে"
+msgstr ""
 
 msgid "That email address is already used"
-msgstr "এই ই-মেইল টি ইতিমধ্যে ব্যবহার করা হয়েছে "
+msgstr ""
 
 msgid "Passwords must contain at least 8 letters."
-msgstr "আপনার পাসওয়ার্ড-এ কমপক্ষে ৮ টি অক্ষর থাকতে হবে"
+msgstr ""
 
 msgid "This domain is used for subdomains"
-msgstr "এই ডোমেইন টি সাব- ডোমেইন এর জন্য ব্যবহার করা হয়। "
+msgstr ""
 
 msgid "Name"
 msgstr "নাম"
 
 msgid "The name of this organization"
-msgstr "এই প্রতিষ্ঠানের নাম "
+msgstr ""
 
 msgid "The logo that should be used for this organization"
-msgstr "এই প্রতিষ্ঠানের জন্য ব্যবহার করা হবে যে লোগো  "
+msgstr ""
 
 msgid "Administrators"
-msgstr "এ্যডমিনিসট্রেটরস"
+msgstr ""
 
 msgid "The administrators in your organization"
-msgstr "আপনার প্রতিষ্ঠানের এ্যডমিনিসট্রেটর গণ "
+msgstr ""
 
 msgid "Viewers"
-msgstr "দর্শক"
+msgstr ""
 
 msgid "The viewers in your organization"
-msgstr "আপনার প্রতিষ্ঠানের দর্শকগণ "
+msgstr ""
 
 msgid "Editors"
 msgstr "সম্পাদকগণ "
 
 msgid "The editors in your organization"
-msgstr "আপনার প্রতিষ্ঠানের সম্পাদকগণ "
+msgstr ""
 
 msgid "Language"
-msgstr "ভাষা"
+msgstr ""
 
 msgid "The main language used by this organization"
-msgstr "এই  প্রতিষ্ঠানে ব্যবহৃত মূল ভাষা"
+msgstr ""
 
 msgid "Subdomain"
-msgstr "সাব-ডোমেইন "
+msgstr ""
 
 msgid "This subdomain is not available"
-msgstr "এই সাব- ডোমেইন টি পাওয়া যাবে না"
+msgstr ""
 
 msgid "The subdomain for this organization"
-msgstr "এই সাব-ডোমেইনটি এই প্রতিষ্ঠানের জন্য"
+msgstr ""
 
 msgid "Domain"
-msgstr "ডোমেইন"
+msgstr ""
 
 msgid "This domain is not available"
-msgstr "এই ডোমেইন টি পাওয়া যাবে না"
+msgstr ""
 
 msgid "The custom domain for this organization"
-msgstr "এই বিশেষায়িত ডোমেইনটি এই প্রতিষ্ঠানের  জন্য "
+msgstr ""
 
 msgid "Timezone"
-msgstr "সময় অঞ্চল"
+msgstr ""
 
 msgid "The timezone your organization is in."
-msgstr "আপনার প্রতিষ্ঠান যে সময় অঞ্চলের অন্তর্ভুক্ত "
+msgstr ""
 
-msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "JSON  blob এই প্রতিষ্ঠানের সাথে সম্পৃক্ত কনফিগারেশন তথ্য সংরক্ষণ করে থাকে"
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
 
 msgid "Administrator"
-msgstr "এ্যডমিনিসট্রেটর"
+msgstr ""
 
 msgid "Editor"
-msgstr "সম্পাদক"
+msgstr ""
 
 msgid "Viewer"
-msgstr "দর্শক"
+msgstr ""
 
 msgid "Org"
 msgstr "অরগ "
 
 msgid "The organization to which the account is invited to view"
-msgstr "এই প্রতিষ্ঠানটির সাথে এই একাউন্টটি দেখার জন্য  সম্পৃক্ত করা হয়েছে "
+msgstr ""
 
 msgid "Email"
-msgstr "ই-মেইল "
+msgstr ""
 
 msgid "The email to which we send the invitation of the viewer"
-msgstr "ইমেইলটি আমরা দর্শকদের আমন্ত্রন জানাতে পাঠাবো"
+msgstr ""
 
 msgid "Secret"
-msgstr "গোপন"
+msgstr ""
 
 msgid "a unique code associated with this invitation"
-msgstr " একটি বিশেষ কোড যা এই আমন্ত্রনের সাথে সম্পৃক্ত"
+msgstr ""
 
 msgid "User Role"
-msgstr "ব্যবহারকারীর  ভূমিকা"
+msgstr ""
 
 #, python-format
 msgid "%s Invitation"
-msgstr " %s আমন্ত্রন "
+msgstr ""
 
 msgid "Banner"
 msgstr "ব্যানার "
@@ -276,19 +278,19 @@ msgid "Pattern"
 msgstr "ধরণ "
 
 msgid "The organization in which the image will be used"
-msgstr "যে প্রতিষ্ঠানে এই ছবি ব্যবহার করা হবে "
+msgstr ""
 
 msgid "The name to describe this background"
-msgstr "এর পটভূমি বর্ণনা করা যায় এমন নাম"
+msgstr ""
 
 msgid "Background type"
-msgstr "পটভূমির ধরণ "
+msgstr ""
 
 msgid "The image file"
 msgstr "ছবির ফাইল টি "
 
 msgid "The API token for this backend"
-msgstr "ব্যাকএন্ডে ব্যবহার করার জন্য API টোকেন"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -298,18 +300,12 @@ msgid ""
 "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
 msgstr ""
-"\n"
-"      %(org_name)sযোগদান করতে আপনাকে আমন্ত্রণ দেয়া হয়েছে।\n"
-"      <br/>\n"
-"      আমন্ত্রণটি গ্রহণ করতে,\n"
-" <a href='%(host)s%(join_url)s'> এখানে ক্লিক করুন। </a>.\n"
-"  "
 
 msgid "You are invited to join {{org.name}}."
-msgstr "আপনাকে যোগদান করতে আমন্ত্রন জানানো হয়েছে {{org.name}}."
+msgstr ""
 
 msgid "Click this link to join"
-msgstr "যুক্ত হতে এই লিংকে ক্লিক করুন"
+msgstr ""
 
 msgid "Edit"
 msgstr "সম্পাদনা করুন"
@@ -333,118 +329,112 @@ msgid "You must have at least one administator"
 msgstr "আপনার কমপক্ষে একজন অ্যাডমিন থাকতে  হবে"
 
 msgid "Select your Organization"
-msgstr "আপনার প্রতিষ্ঠান নিশ্চিত করুন "
+msgstr ""
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "আপনার একাউন্ট এই প্রতিষ্ঠান এর সাথে সংযুক্ত নয়। অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন "
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
 
 msgid "Your Organization"
-msgstr "আপনার প্রতিষ্ঠান "
+msgstr ""
 
 msgid "Invite people to your organization"
-msgstr "আপনার প্রতিষ্ঠানে মানুষকে আমন্ত্রন জানান "
+msgstr ""
 
 msgid "User group"
 msgstr "ব্যবহারকারীদের গ্রুপ "
 
 msgid "One of the emails you entered is invalid."
-msgstr "আপনার প্রবেশ করানো ইমেইল গুলোর একটি ভুল"
+msgstr ""
 
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr "একাউন্টগুলো %(name)s নিয়ন্ত্রন করুন"
+msgstr ""
 
 msgid "Create"
-msgstr "তৈরি করুন "
+msgstr ""
 
-msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "আপনার আমন্ত্রন লিঙ্কটি সঠিক নয়। অনুগ্রহ করে আপনার প্রতিষ্ঠানের অ্যাডমিনের সাথে যোগাযোগ করুন। "
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
 
 #, python-format
 msgid "Join %(name)s"
-msgstr "যোগদান %(name)s"
+msgstr ""
 
 msgid "Join"
-msgstr "যোগদান"
+msgstr ""
 
-msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "আপনার আমন্ত্রন লিঙ্কটির মেয়াদ উত্তীর্ণ হয়ে গিয়েছে। অনুগ্রহ করে আপনার প্রতিষ্ঠানের  অ্যাডমিনের সাথে যোগাযোগ করুন। "
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
 
 msgid "Task"
-msgstr "কাজ "
+msgstr ""
 
 msgid "Tasks"
-msgstr "কাজগুলো "
-
-msgid "Only PDF files are supported."
 msgstr ""
 
 msgid "The title for this story"
-msgstr "এই ঘটনাটির শিরোনাম "
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
-msgstr "এই ঘটনাটি প্রকাশিত হয়েছে কিনা "
+msgstr ""
 
 msgid "The summary for the story"
-msgstr "এই ঘটনাটির সারসংক্ষেপ "
+msgstr ""
 
 msgid "The body of text for the story"
 msgstr "এই ঘটনাটির মূল অংশ"
 
 msgid "The writer of the story"
-msgstr "ঘটনাটির লেখক "
-
-msgid "A link to an mp3 file to publish on this story"
-msgstr "এই ঘটনার সাথে সম্পৃক্ত একটি mp3 ফাইলের লিংকও প্রকাশ করা হবে"
-
-msgid "The PDF report to attach"
 msgstr ""
 
-msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "এই ঘটনার সাথে সম্পৃক্ত YouTube ভিডিওর আইডি এখানে লিঙ্ক করা থাকবে (যে  শব্দগুলো YouTube URL এর v= এর পরে ও & পরে আগে আসে)"
+msgid "A link to an mp3 file to publish on this story"
+msgstr ""
 
-msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "এই ঘটনার জন্য যে কোন ট্যাগ, যা স্পেস দিয়ে আলাদা করা থাকবে, যা ব্যবহার করা হবে এ্যডভান্স ফিল্টারিংয়ের জন্য, ঐচ্ছিক"
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
 
 msgid "The category for this story"
-msgstr "এই ঘটনাটির শ্রেণী "
+msgstr ""
 
 msgid "The organization this story belongs to"
-msgstr "এই ঘটনাটি যে প্রতিষ্ঠানের সাথে সংযুক্ত "
+msgstr ""
 
 msgid "Stories"
 msgstr "ঘটনাগুলো "
 
 msgid "The story to associate to"
-msgstr "এই ঘটনাটি যার সাথে সংশ্লিষ্ট"
+msgstr ""
 
 msgid "Yes"
-msgstr "হ্যাঁ "
+msgstr ""
 
 msgid "No"
-msgstr "না "
+msgstr ""
 
 msgid "Story Images"
-msgstr "ঘটনার ছবিগুলো "
+msgstr ""
 
 #, python-format
 msgid "Image %d"
 msgstr "ইমেজ 1 %d "
 
 msgid "Image to display on story page and in previews. (optional)"
-msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
+msgstr ""
 
 msgid "Image to display on story page and in previews (optional)"
-msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
-
-#, fuzzy
-#| msgid "The name of this category"
-msgid "The name of this tag"
-msgstr " বিভাগের নাম"
-
-msgid "Delete"
 msgstr ""
 
 msgid "Remove Item?"
@@ -456,12 +446,13 @@ msgid ""
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
 msgstr ""
-"\n"
-" আপনি নিশ্চিত আপনি বাদ দিতে চান 1\n"
-"%(object)s 1?"
 
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "আপনি যদি একবার বাদ দেন, তাহলে এটি চিরতরে চলে যাবে। আর এটিকে আগের অবস্থায় ফেরাতে পারবেন না।"
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr ""
+"আপনি যদি একবার বাদ দেন, তাহলে এটি চিরতরে চলে যাবে। আর এটিকে আগের অবস্থায় "
+"ফেরাতে পারবেন না।"
 
 msgid "Cancel"
 msgstr "বাতিল করুন "
@@ -476,13 +467,7 @@ msgid_plural ""
 "         %(counter)s results\n"
 "        "
 msgstr[0] ""
-"\n"
-"     %(counter)s ফলাফল\n"
-"        "
 msgstr[1] ""
-"\n"
-"     %(counter)s ফলাফল\n"
-"        "
 
 #, python-format
 msgid ""
@@ -490,9 +475,6 @@ msgid ""
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
 msgstr ""
-"\n"
-"\tফলাফল %(start)s-%(end)s / %(count)s\n"
-"\t"
 
 msgid "Previous"
 msgstr "পূর্ববর্তী "
@@ -513,7 +495,7 @@ msgid "Forgot Password?"
 msgstr "গোপন সংখ্যাটি ভুলে গিয়েছেন ? "
 
 msgid "Token Expired"
-msgstr "টোকেন এর মেয়াদ শেষ হয়ে গিয়েছে "
+msgstr ""
 
 msgid "Login Failure"
 msgstr "লগইন ব্যর্থ"
@@ -524,8 +506,6 @@ msgid ""
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
 msgstr ""
-"\n"
-"দুঃখিত, আপনি এখন লগ ইন করতে পারবেন না কারন আমরা 1 %(failed_login_limit)s যে লগ ইন-এর তথ্য পেয়েছি সেটা সঠিক নয়"
 
 #, python-format
 msgid ""
@@ -533,14 +513,18 @@ msgid ""
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
 msgstr ""
-"\n"
-"অনুগ্রহ করে আবার লগ ইন করার আগে 1 %(lockout_timeout)s মিনিট অপেক্ষা করুন"
 
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "বিকল্পভাবে, আপনার পাসোয়ার্ডটি ই-মেইল এর মাধ্যমে পুনরায় তৈরি  করার জন্য আপনি নিচের ফর্ম টি পূরণ করতে পারেন"
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+"বিকল্পভাবে, আপনার পাসোয়ার্ডটি ই-মেইল এর মাধ্যমে পুনরায় তৈরি  করার জন্য আপনি "
+"নিচের ফর্ম টি পূরণ করতে পারেন"
 
 msgid "Please contact the website administrator to have your password reset."
-msgstr "আপনার পাসওয়ার্ডটি পুনরায় তৈরী করতে অনুগ্রহ করে এই ওয়েবসাইটের অ্যাডমিনের সাথে যোগাযোগ করুন"
+msgstr ""
+"আপনার পাসওয়ার্ডটি পুনরায় তৈরী করতে অনুগ্রহ করে এই ওয়েবসাইটের অ্যাডমিনের সাথে"
+" যোগাযোগ করুন"
 
 msgid "Email Address"
 msgstr "ই-মেইল"
@@ -548,8 +532,12 @@ msgstr "ই-মেইল"
 msgid "Recover"
 msgstr "পুনরুদ্ধার করুন "
 
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "সাইন আপ-এর সময় আপনি যে ই-মেইলটি ব্যবহার করেছিলেন অনুগ্রহ করে সেটি লিখুন এবং আমরা আপনার পাসওয়ার্ডটি ফিরে পেতে সাহায্য করব "
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+"সাইন আপ-এর সময় আপনি যে ই-মেইলটি ব্যবহার করেছিলেন অনুগ্রহ করে সেটি লিখুন এবং "
+"আমরা আপনার পাসওয়ার্ডটি ফিরে পেতে সাহায্য করব "
 
 #, python-format
 msgid ""
@@ -557,152 +545,160 @@ msgid ""
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
-"\n"
-"আপনার পাসওয়ার্ডটির মেয়াদ শেষ। 1 সাইট এর নিয়ম অনুযায়ী আপনাকে প্রতি 1 %(expire_days)s দিনে নতুন পাসওয়ার্ড ঠিক করতে হবে, এবং সেই পাসওয়ার্ডটি  2 %(window_days)s দিনের আগে অবশ্যই ব্যবহার করা যাবে না "
 
 msgid "New Password"
-msgstr "নতুন পাসওয়ার্ড"
+msgstr ""
 
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "পাসওয়ার্ডটি অবশ্যই 8 অক্ষর এর হতে হবে, যার মধ্যে একটি বড় হাতের অক্ষর, একটি ছোট হাতের অক্ষর এবং একটি সংখ্যা থাকতে হবে"
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
 
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "আপনি এই পাসওয়ার্ডটি গত বছর ব্যবহার করেছিলেন, অনুগ্রহ করে নতুন পাসওয়ার্ড ব্যবহার করুন  "
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
 
 msgid "Password"
-msgstr "পাসওয়ার্ড"
+msgstr ""
 
 msgid "Confirm Password"
-msgstr "পাসওয়ার্ড  নিশ্চিত করুন "
+msgstr ""
 
 msgid "Please enter your password to save changes."
-msgstr "পরিবর্তনগুলো সংরক্ষণ করতে অনুগ্রহ করে আপনার পাসওয়ার্ডটি লিখুন "
+msgstr ""
 
 msgid "Confirm the new password by filling the this field"
-msgstr "আপনার নতুন পাসওয়ার্ডটি নিশ্চিত করতে এই খালি জায়গাটি পূরন করুন"
+msgstr ""
 
 msgid "New password doesn't match with its confirmation"
-msgstr "নতুন পাসওয়ার্ডটি কনফারমেশন পাসওয়ার্ডের সাথে মেলেনি"
+msgstr ""
 
 msgid "Your Email"
-msgstr "আপনার ই-মেইল "
+msgstr ""
 
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "ই-মেইল পুনরুদ্ধার সমর্থন করছে না, আপনার পাসওয়ার্ডটি পুনরুদ্ধার করতে অনুগ্রহ করে ওয়েবসাইটের অ্যাডমিনের সাথে যোগাযোগ করুন "
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
 
 msgid "Current Password"
-msgstr "বর্তমান পাসওয়ার্ড"
+msgstr ""
 
 msgid "Your current password"
-msgstr "আপনার বর্তমান পাসওয়ার্ড"
+msgstr ""
 
 msgid "Your new password."
-msgstr "আপনার নতুন পাসওয়ার্ড"
+msgstr ""
 
 msgid "Confirm new Password"
-msgstr "নতুন পাসওয়ার্ডটি নিশ্চিত করুন"
+msgstr ""
 
 msgid "Confirm your new password."
-msgstr "আপনার নতুন পাসওয়ার্ডটি নিশ্চিত করুন "
+msgstr ""
 
 msgid "Please enter your password to save changes"
-msgstr "পরিবর্তনগুলো সংরক্ষণ করতে অনুগ্রহ করে আপনার পাসওয়ার্ডটি লিখুন "
+msgstr ""
 
 msgid "Confirm your new password by entering it here"
-msgstr "আপনার নতুন পাসওয়ার্ডটি এখানে লিখে নিশ্চিত করুন"
+msgstr ""
 
 msgid "Mismatch between your new password and confirmation, try again"
-msgstr "আপনার নতুন এবং নিশ্চিত পাসওয়ার্ডটি মেলেনি, আবার চেষ্টা করুন "
+msgstr ""
 
 msgid "New user created successfully."
-msgstr " সফলভাবে নতুন ব্যবহারকারী তৈরি হয়েছে  "
+msgstr ""
 
 msgid "Groups"
-msgstr "গ্রুপগুলো "
+msgstr ""
 
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "ব্যবহারকারীরা শুধুমাত্র তাদের গ্রুপের জন্য নির্ধারিত অনুমতিগুলো পাবে"
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr ""
 
 msgid "Set the user's initial password here."
-msgstr "ব্যবহারকারীর প্রাথমিক পাসওয়ার্ডটি এখানে লিখুন  "
+msgstr ""
 
 msgid "Last Login"
-msgstr "সর্বশেষ লগ ইন"
+msgstr ""
 
 msgid "Is Active"
-msgstr "সচল "
+msgstr ""
 
 msgid "Whether this user is allowed to log into the site"
-msgstr "ব্যবহারকারী এই সাইটে প্রবেশ করার অনুমতি প্রাপ্ত কি না"
+msgstr ""
 
 msgid "Users will only get those permissions that are allowed for their group"
-msgstr "ব্যবহারকারীরা শুধুমাত্র তাদের গ্রুপের জন্য নির্ধারিত অনুমতিগুলো পাবে"
+msgstr ""
 
 msgid "You can reset the user's password by entering a new password here"
-msgstr "আপনি এখানে একটি নতুন পাসওয়ার্ড লিখে ব্যবহারকারীর পাসওয়ার্ডটি নতুন করে সেট করতে পারবেন"
+msgstr ""
 
 msgid "Username"
-msgstr "ব্যবহারকারীর নাম "
+msgstr ""
 
 msgid "Your password"
-msgstr "আপনার পাসওয়ার্ড"
+msgstr ""
 
 msgid "If you want to set a new password, enter it here"
-msgstr "আপনি যদি নতুন পাসওয়ার্ড তৈরি করতে চান, তাহলে এখানে লিখুন"
+msgstr ""
 
 msgid "Confirm New Password"
-msgstr "নতুন পাসওয়ার্ডটি নিশ্চিত করুন"
+msgstr ""
 
 msgid "Confirm your new password"
-msgstr "আপনার নতুন পাসওয়ার্ডটি নিশ্চিত করুন "
+msgstr ""
 
 msgid "Edit your profile"
-msgstr "আপনার প্রোফাইলটি সম্পাদনা করুন "
+msgstr ""
 
 msgid "Password Recovery"
-msgstr "পাসওয়ার্ড পুনরুদ্ধার করুন"
+msgstr ""
 
 msgid "An Email has been sent to your account with further instructions."
-msgstr "পরবর্তী নির্দেশনা জানিয়ে আপনার একাউন্টে একটি ই-মেইল পাঠানো হয়েছে "
+msgstr ""
 
 msgid "Password Recovery Request"
-msgstr "পাসওয়ার্ড পুনরুদ্ধারের অনুরোধ"
+msgstr ""
 
 msgid "Pick a new password"
-msgstr "একটি নতুন পাসওয়ার্ড বাছাই করুন"
+msgstr ""
 
 msgid "Your password has successfully been updated, thank you."
-msgstr "আপনার পাসওয়ার্ডটি সফলভাবে হালনাগাদ করা হয়েছে। ধন্যবাদ "
+msgstr ""
 
 #, python-format
 msgid "You are now logged in as %s"
-msgstr "আপনি এখন লগ ইন করেছেন %s হিসেবে "
+msgstr ""
 
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "পাসওয়ার্ডটি সফলভাবে হালনাগাদ করা হয়েছে। এখন আপনি নতুন পাসওয়ার্ড ব্যবহার করে লগ ইন করতে পারবেন "
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
 
 msgid "Reset your Password"
-msgstr "আপনার পাসওয়ার্ড নতুন করে তৈরী করুন"
+msgstr ""
 
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "আপনার লিঙ্কটির নির্ধারিত সময় নিরাপত্তা জনিত কারনে বাতিল করা হয়েছে। অনুগ্রহ করে আপনার ই-মেইল আ্যাড্রেসটি লেখা থেকে পুরো প্রক্রিয়াটি আবার আরম্ভ করুন "
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr ""
 
 msgid "Submit"
-msgstr "জমা দিন "
+msgstr ""
 
 msgid "Form"
-msgstr "ফর্ম "
+msgstr ""
 
 msgid "Save Changes"
-msgstr "পরিবর্তনগুলো সংরক্ষণ করুন "
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
-msgstr "আপনার নতুন %s তৈরি সম্পূর্ণ হয়েছে "
+msgstr ""
 
 #, python-format
 msgid "Import %s"
-msgstr "আনুন %s"
+msgstr ""
 
 msgid "Back to Website"
 msgstr "ওয়েবসাইটে ফিরে যান"
@@ -716,9 +712,6 @@ msgstr "প্রস্থান করুন "
 msgid "Opinions"
 msgstr "মতামতগুলো"
 
-msgid "Bots"
-msgstr ""
-
 msgid "Users"
 msgstr "ব্যবহারকারী গণ  "
 
@@ -728,17 +721,11 @@ msgstr "সেটিংস"
 msgid "Pages"
 msgstr "পেইজগুলো"
 
-msgid "Landing Pages"
-msgstr ""
-
 msgid "Jobs"
 msgstr "কাজ গুলো"
 
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
+msgid "Photos"
+msgstr "ছবিগুলো"
 
 msgid "Categories Images"
 msgstr "বিভাগগুলোর সবছবি"
@@ -757,11 +744,6 @@ msgstr "সম্পর্কিত "
 
 msgid "Engagement"
 msgstr "কতজন যুক্ত হয়েছেন"
-
-#, fuzzy
-#| msgid "Reporters"
-msgid "Reports"
-msgstr "Reporters"
 
 msgid "Category Images"
 msgstr "বিভাগের ছবিগুলো "
@@ -854,47 +836,41 @@ msgstr ""
 msgid "Back"
 msgstr "ফিরে আসুন "
 
-msgid "Select bots"
-msgstr ""
-
-msgid "View public page"
-msgstr ""
-
 msgid "LATEST NOTIFICATIONS"
 msgstr "সর্বশেষ নটিফিকেশন"
 
 msgid "Backends"
 msgstr "ব্যাকএন্ড"
 
-msgid "Add os Select tags"
-msgstr ""
-
 #, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid ""
+"There is currently %(counter)s new poll syncing. Polls are displayed on the "
+"public site once they have completely synced their results."
+msgid_plural ""
+"There are currently %(counter)s new polls syncing. Polls are displayed on "
+"the public site once they have completely synced their results."
 msgstr[0] ""
 msgstr[1] ""
 
 msgid "+ New Poll"
 msgstr "+ নতুন পোল"
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "পোল এর প্রশ্নগুলো "
-msgstr[1] "পোল এর প্রশ্নগুলো "
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "New poll initial syncs scheduled every 10min"
 msgstr ""
 
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
-
-msgid "Main poll syncs scheduled every 20min"
+msgid "Main poll syncs scheduled every 10min"
 msgstr ""
 
 msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
 msgstr ""
 
 msgid "Poll syncs scheduled every 24h"
@@ -908,9 +884,6 @@ msgstr ""
 
 msgid "Refresh Results"
 msgstr "ফলাফল রিফ্রেশ করুন"
-
-msgid "Partners"
-msgstr ""
 
 msgid "MORE POLLS"
 msgstr "নতুন পোলগুলো "
@@ -932,12 +905,6 @@ msgstr "সংরক্ষিত ঘটনাবলি "
 
 msgid "LIST"
 msgstr "তালিকা"
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
 
 msgid "LATEST OPINION"
 msgstr "সর্বশেষ মতামত "
@@ -963,23 +930,25 @@ msgstr "বিশ্বব্যাপি দেশগুলো"
 msgid "AGES"
 msgstr "বয়স"
 
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Report-এর সাথে যুক্ত হোন, আপনার কথা গুরুত্বপূর্ণ"
 
 msgid "FEATURED STORY"
 msgstr "বিশেষায়িত ঘটনা "
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "আমরা একটি গ্রোবাল প্লাটফর্ম যারা বিশ্বব্যাপি তরুনদের জীবনযাত্রার পরিবর্তন আনতে কাজ করে চলেছি"
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
+msgstr ""
+"আমরা একটি গ্রোবাল প্লাটফর্ম যারা বিশ্বব্যাপি তরুনদের জীবনযাত্রার পরিবর্তন "
+"আনতে কাজ করে চলেছি"
 
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "U-Report তরুণদের কাছে গুরুত্বপূর্ণ বিষয়গুলি বলার জন্য কীভাবে তাদের ক্ষমতায়িত এবং সংযুক্ত করছে সে সম্পর্কে আরও জানুন"
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"U-Report তরুণদের কাছে গুরুত্বপূর্ণ বিষয়গুলি বলার জন্য কীভাবে তাদের "
+"ক্ষমতায়িত এবং সংযুক্ত করছে সে সম্পর্কে আরও জানুন"
 
 msgid "LEARN MORE"
 msgstr "আরো জানুন"
@@ -993,26 +962,19 @@ msgstr "আপনি কিভাবে যুক্ত হতে চান?"
 msgid "Text"
 msgstr "টেক্সট"
 
-msgid "PAGE"
-msgstr ""
-
 msgid "SEARCH"
 msgstr "সার্চ"
 
 msgid "No results found"
 msgstr "কোন ফলাফল খুঁজে পাওয়া যায়নি"
 
-#, fuzzy
-#| msgid "RESPONSES"
-msgid "RESPONDERS"
+msgid "RESPONSES"
 msgstr "প্রতিক্রিয়া"
 
 msgid "RESPONSE RATE"
 msgstr "প্রতিক্রিয়া হার"
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
-msgid "TOTAL RESPONDERS"
+msgid "TOTAL RESPONSES"
 msgstr "সকল প্রতিক্রিয়া"
 
 #, python-format
@@ -1034,20 +996,6 @@ msgstr "ঠিকানা "
 msgid "Written by:"
 msgstr "লিখেছেন :"
 
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS"
-msgid "REPORT"
-msgstr "U-REPORTERS"
-
-msgid "STORY"
-msgstr "ঘটনা "
-
-msgid "Download Report"
-msgstr ""
-
 msgid "Even"
 msgstr "সমান "
 
@@ -1063,9 +1011,7 @@ msgstr "অঞ্চল "
 msgid "Participation Level"
 msgstr "অংশগ্রহন এর মাত্রা "
 
-#, fuzzy
-#| msgid "Responses"
-msgid "Responders"
+msgid "Responses"
 msgstr "উত্তর গুলো "
 
 msgid "Reporters in"
@@ -1110,14 +1056,15 @@ msgstr "অঞ্চলভেদে U-REPORTERS "
 msgid "FILTER RESULTS"
 msgstr "ফলাফল ফিল্টার করুন"
 
-msgid "Charts only visible for logged in admins"
-msgstr ""
-
 msgid "Export and Share"
 msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"
 
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
+msgid ""
+"Want to tell the world about this? Download this image to easily share on "
+"social media or for a beautiful presentation!"
+msgstr ""
+"এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে"
+" কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
 
 msgid "SELECT LANGUAGE"
 msgstr ""
@@ -1128,11 +1075,12 @@ msgstr "দেশের নাম বেছে নিন"
 msgid "Custom pages"
 msgstr "কাস্টম পেইজেস"
 
-msgid "Landing pages"
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
 msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "সংখ্যার মাধ্যমে দেখুন কীভাবে আমরা সমাজের ইতিবাচক পরিবর্তনের জন্য যুবকদের মতামতগুলোকে যুক্ত করছি।"
+"সংখ্যার মাধ্যমে দেখুন কীভাবে আমরা সমাজের ইতিবাচক পরিবর্তনের জন্য যুবকদের "
+"মতামতগুলোকে যুক্ত করছি।"
 
 msgid "Polled"
 msgstr "পোল করা হয়েছে"
@@ -1221,36 +1169,15 @@ msgstr ""
 "\n"
 " আপনি নিশ্চিত আপনি বাদ দিতে চান %(object)s?"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t %(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] ""
-"\n"
-"     %(counter)s ফলাফল\n"
-"        "
 msgstr[1] ""
-"\n"
-"     %(counter)s ফলাফল\n"
-"        "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
-"\n"
-"\tফলাফল %(start)s-%(end)s / %(count)s\n"
-"\t"
 
 msgid "Error"
 msgstr "ভুল"
@@ -1295,9 +1222,6 @@ msgstr "এই প্রতিষ্ঠানের  জন্য 1 %s cache ref
 msgid "Flag"
 msgstr "পতাকা "
 
-msgid "About Partner Logo"
-msgstr ""
-
 msgid "The organization to which the image will be used"
 msgstr "যে প্রতিষ্ঠানে এই ছবি ব্যবহার করা হবে "
 
@@ -1306,72 +1230,6 @@ msgstr "এই ছবির জন্য একটি ছোট বর্ণন�
 
 msgid "Image type"
 msgstr "ছবির ধরণ "
-
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
-msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "এই পোল পেজ এর প্রশ্নের অগ্রাধিকার। উচ্চ অগ্রাধিকার প্রথমে আসবে। "
-
-#, fuzzy
-#| msgid "The organization this poll is part of"
-msgid "The organization this bot is part of"
-msgstr "এই পোল টি যে প্রতিষ্ঠান এর অংশ "
-
-msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
-
-#, fuzzy
-#| msgid "The title for this item"
-msgid "The title to display for this bot"
-msgstr "এই জিনিস টির শিরোনাম "
-
-msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
-
-#, fuzzy
-#| msgid "The category for this story"
-msgid "The keyword for this bot"
-msgstr "এই ঘটনাটির শ্রেণী "
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The Facebook bot deeplink, optional"
-msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The Telegram bot deeplink, optional"
-msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The Viber bot deeplink, optional"
-msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
-
-#, fuzzy
-#| msgid "The title for this block of content, optional"
-msgid "The WhatsApp bot deeplink, optional"
-msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
-
-#, fuzzy
-#| msgid "A short summary description for this item"
-msgid "A short description for this bot, required"
-msgstr "এই জিনিসটির জন্য একটি ছোট সারসংক্ষেপ বর্ণনা "
-
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
-msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "এই পোল পেজ এর প্রশ্নের অগ্রাধিকার। উচ্চ অগ্রাধিকার প্রথমে আসবে। "
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "Whether this bot should be shown to the public"
-msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
 msgid "Label"
 msgstr "লেবেল "
@@ -1416,7 +1274,8 @@ msgid "Number of items with this counter"
 msgstr "এই কাউন্টার  এর সঙ্গের আইটেম সংখ্যা "
 
 msgid "No root user found. Please create a root user"
-msgstr "কোন মূল ব্যবহারকারী পাওয়া যায় নি। অনুগ্রহ করে মূল ব্যবহারকারী তৈরি করুন।   "
+msgstr ""
+"কোন মূল ব্যবহারকারী পাওয়া যায় নি। অনুগ্রহ করে মূল ব্যবহারকারী তৈরি করুন।   "
 
 msgid "The name for our alias"
 msgstr "আমাদের উপনাম এর আরেক নাম "
@@ -1430,8 +1289,12 @@ msgstr "কাজের উৎস এর ধরণ নির্বাচন ক�
 msgid "The full URL to navigate to this Job source."
 msgstr "এই কাজের উৎস সঠিক ভাবে পরিচালনা করার জন্য সম্পূর্ণ ইউআরএল "
 
-msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
-msgstr "টুঁইটার এর জন্য একটি উইজেট আইডি দরকার যাতে ওয়েবসাইটে টুইট গুলো বসানো যায়। ঠিক উইজেট আইডি পেতে নির্দেশনা মনোযোগ দিয়ে পড়ুন। "
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
+msgstr ""
+"টুঁইটার এর জন্য একটি উইজেট আইডি দরকার যাতে ওয়েবসাইটে টুইট গুলো বসানো যায়। "
+"ঠিক উইজেট আইডি পেতে নির্দেশনা মনোযোগ দিয়ে পড়ুন। "
 
 msgid "Featured job sources are shown first on the jobs page."
 msgstr "কাজের পেজ এ বিশেষায়িত কাজের উৎস গুলো প্রথমে দেখানো হয়েছে। "
@@ -1444,41 +1307,6 @@ msgstr "আপনার কাজের উৎস টি সফল ভাবে 
 
 msgid "Your job source has been updated successfully"
 msgstr "আপনার কাজের উৎস টি ঠিক ভাবে হাল নাগাদ করা হয়েছে"
-
-#, fuzzy
-#| msgid "The organization this poll is part of"
-msgid "The organization this landing page is part of"
-msgstr "এই পোল টি যে প্রতিষ্ঠান এর অংশ "
-
-#, fuzzy
-#| msgid "The title for this item"
-msgid "The title to display for this landing page"
-msgstr "এই জিনিস টির শিরোনাম "
-
-#, fuzzy
-#| msgid "The body of text for the story"
-msgid "The call to action text for this landing page"
-msgstr "এই ঘটনাটির মূল অংশ"
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "The slug to use on the link for this landing page"
-msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
-
-#, fuzzy
-#| msgid "The body of text for the story"
-msgid "The body of text for the landing page"
-msgstr "এই ঘটনাটির মূল অংশ"
-
-#, fuzzy
-#| msgid "The image file to use"
-msgid "The image file to use for the page"
-msgstr "যে ছবিটি ব্যবহার করা হবে"
-
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
-msgid "Whether this page should be active to the public"
-msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "এই প্রশাসনিক সীমানার জন্য এই ওএসএম আইডি প্রযোজ্য  "
@@ -1495,8 +1323,11 @@ msgstr "এই রাজনৈতিক সীমানার মূল, যদ�
 msgid "Geometry"
 msgstr "ক্ষেত্র "
 
-msgid "The json representing the geometry type and coordinates of the boundaries"
-msgstr "জেসন যা এই ক্ষেত্রের ধরণ কে প্রতিনিধিত্ত করে এবং সীমানা গুলো সমশ্রেণিভুক্ত করে "
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr ""
+"জেসন যা এই ক্ষেত্রের ধরণ কে প্রতিনিধিত্ত করে এবং সীমানা গুলো সমশ্রেণিভুক্ত "
+"করে "
 
 msgid "The title for this item"
 msgstr "এই জিনিস টির শিরোনাম "
@@ -1531,7 +1362,8 @@ msgstr "পোল এর ধরণ"
 msgid "The Flow this Poll is based on"
 msgstr "এই পোল টি যে ধারার অন্তর্ভুক্ত "
 
-msgid "The date to display for this poll. Leave empty to use flow creation date."
+msgid ""
+"The date to display for this poll. Leave empty to use flow creation date."
 msgstr "এই পোলটি দেখানোর তারিখ। ধারা টি তৈরির তারিখ লেখার জায়গা খালি রাখুন "
 
 msgid "Whether the flow for this poll is archived on RapidPro"
@@ -1546,10 +1378,8 @@ msgstr "এই পোল এর রিপোর্টার দের সংখ�
 msgid "Whether the poll has finished the initial results sync."
 msgstr "এই পোল এর প্রাথমিক ফলাফল কি সুসংগত করা হয়েছে "
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether the poll should stop regenerating stats."
-msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
+msgstr ""
 
 msgid "The title for this Poll"
 msgstr "এই পোল এর শিরোনাম "
@@ -1587,44 +1417,6 @@ msgstr "এই ক্ষুদে বার্তা প্রদানকার
 msgid "The featured response message"
 msgstr "বিশেষায়িত ক্ষুদে বার্তা "
 
-msgid "Dark 1 background and White text"
-msgstr ""
-
-msgid "Light 1 background and Black text"
-msgstr ""
-
-msgid "Dark 2 background and White text"
-msgstr ""
-
-msgid "Dark 3 background and Black text"
-msgstr ""
-
-msgid "Show Age, Gender and Location charts"
-msgstr ""
-
-msgid "Hide Age chart ONLY"
-msgstr ""
-
-msgid "Hide Gender chart ONLY"
-msgstr ""
-
-msgid "Hide Location chart ONLY"
-msgstr ""
-
-msgid "Hide Age and Gender charts"
-msgstr ""
-
-#, fuzzy
-#| msgid "Hide participation stats"
-msgid "Hide Age and Location charts"
-msgstr "অংশগ্রহনের পরিসংখ্যান আড়াল করুন"
-
-msgid "Hide Gender and Location charts"
-msgstr ""
-
-msgid "Hide Age, Gender and Location charts"
-msgstr ""
-
 msgid "The poll this question is part of"
 msgstr "এই পোলটি যে প্রশ্নের অংশ "
 
@@ -1643,11 +1435,6 @@ msgstr "এই পোল এর প্রশ্নের অগ্রাধি�
 msgid "The Rule this response category is based on"
 msgstr "এই উত্তর এর বিষয় টি যে নিয়ম এর উপর ভিত্তি করে করা হয়েছে "
 
-#, fuzzy
-#| msgid "The title for this Poll"
-msgid "Select tags for this poll"
-msgstr "এই পোল এর শিরোনাম "
-
 msgid "Your org does not have any API token configuration."
 msgstr "আপনার প্রতিষ্ঠানের কোন API টোকেন কনফিগারেশন নেই"
 
@@ -1655,7 +1442,9 @@ msgid "You must include a title for every included question."
 msgstr "আপনাকে প্রতিটি অন্তর্ভুক্ত প্রশ্নের জন্য একটি করে শিরোনাম রাখতে হবে"
 
 msgid "Title too long. The max limit is 255 characters for each title"
-msgstr "শিরোনাম অতিরিক্ত দীর্ঘ। প্রতিটি শিরোনাম এর জন্য সর্বোচ্চ সীমা হচ্ছে ২৫৫ অক্ষর "
+msgstr ""
+"শিরোনাম অতিরিক্ত দীর্ঘ। প্রতিটি শিরোনাম এর জন্য সর্বোচ্চ সীমা হচ্ছে ২৫৫ "
+"অক্ষর "
 
 msgid "You must include at least one poll question."
 msgstr "আপনাকে অন্তত ১ টি পোল এর প্রশ্ন অন্তর্ভুক্ত করতে হবে"
@@ -1664,7 +1453,9 @@ msgid "Adjust poll date"
 msgstr "পোল এর তারিখ টি সমন্বয় করুন "
 
 msgid "Your poll has been updated, now pick which questions to include."
-msgstr "আপনার পোল টি হালনাগাদ করা হয়েছে। এখন কোন প্রশ্ন টি অন্তর্ভুক্ত করতে হবে তা ঠিক করুন। "
+msgstr ""
+"আপনার পোল টি হালনাগাদ করা হয়েছে। এখন কোন প্রশ্ন টি অন্তর্ভুক্ত করতে হবে তা "
+"ঠিক করুন। "
 
 msgid "Configure flow"
 msgstr "কনফিগার ফ্লো"
@@ -1708,7 +1499,8 @@ msgstr "আপনার প্রকাশ্য ফলাফল এর মধ�
 msgid "Priority"
 msgstr "অগ্রাধিকার "
 
-msgid "The priority of this question on the poll page, higher priority comes first"
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
 msgstr "এই পোল পেজ এর প্রশ্নের অগ্রাধিকার। উচ্চ অগ্রাধিকার প্রথমে আসবে। "
 
 msgid "Ruleset Label"
@@ -1723,37 +1515,17 @@ msgstr "শিরোনাম "
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "আপনার শ্রোতা কে করা প্রশ্ন গুলো, জনসমক্ষে দেখানো হবে"
 
-msgid "Color Choice"
-msgstr ""
-
-#, fuzzy
-#| msgid "The question posed to your audience, will be displayed publicly"
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "আপনার শ্রোতা কে করা প্রশ্ন গুলো, জনসমক্ষে দেখানো হবে"
-
-msgid "Hidden Charts Choice"
-msgstr ""
-
-msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
-
-#, fuzzy
-#| msgid "Categories"
 msgid "Category {idx+1}"
-msgstr "বিভাগগুলো "
+msgstr ""
 
-#, fuzzy
-#| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr "RapidPro এর নিয়মাবলীর লেবেল"
+msgstr ""
 
 msgid "Display {idx+1}"
 msgstr ""
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site."
 msgid "The label to display of the category on the public site"
-msgstr "যদি কোন চাকুরী থাকে তাহলে তা পাবলিক সাইটে প্রদর্শিত হবে"
+msgstr ""
 
 msgid "Scheduled Sync currently in progress..."
 msgstr ""
@@ -1775,7 +1547,9 @@ msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr "প্রতিষ্ঠানে %(org_id)d-এ পোল %(poll_id)d-এর একটি pull refresh-এর সময় নির্ধারণ করা হয়েছে"
+msgstr ""
+"প্রতিষ্ঠানে %(org_id)d-এ পোল %(poll_id)d-এর একটি pull refresh-এর সময় "
+"নির্ধারণ করা হয়েছে"
 
 #, python-format
 msgid "%s"
@@ -1784,17 +1558,24 @@ msgstr " %s"
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr "রেজিস্টার্ড রিপোর্টারেরা রয়েছে এমন কন্টাক্ট গ্রুপের নাম"
 
-msgid "The label of the Contact Field that contains the birth date of reporters"
-msgstr "যোগাযোগ এর জায়গার লেবেল যার মধ্যে রিপোর্টার দের জন্ম তারিখ অন্তর্ভুক্ত "
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr ""
+"যোগাযোগ এর জায়গার লেবেল যার মধ্যে রিপোর্টার দের জন্ম তারিখ অন্তর্ভুক্ত "
 
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "যোগাযোগ এর জায়গার লেবেল যার মধ্যে রিপোর্টার দের লিঙ্গ অন্তর্ভুক্ত "
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
 msgstr "যোগাযোগ এর জায়গার লেবেল যার মধ্যে রিপোর্টার দের পেশা  অন্তর্ভুক্ত "
 
-msgid "The label of the Contact Field that contains the registration date of reporters"
-msgstr "যোগাযোগ এর জায়গার লেবেল যার মধ্যে রিপোর্টার দের নিবন্ধন এর তারিখ অন্তর্ভুক্ত "
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr ""
+"যোগাযোগ এর জায়গার লেবেল যার মধ্যে রিপোর্টার দের নিবন্ধন এর তারিখ অন্তর্ভুক্ত"
+" "
 
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "যোগাযোগ এর জায়গার লেবেল যার মধ্যে রিপোর্টার দের অঞ্চল অন্তর্ভুক্ত "
@@ -1818,35 +1599,24 @@ msgid "Whether this org count should consider the count from link only"
 msgstr "এই প্রতিষ্ঠানটির গণনা কেবলমাত্র এর লিংক থেকেই করা হবে কি না"
 
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr "ব্যবহারকারীরা যে  শর্ট কোড ব্যবহার করে  U-Report এ স্থানীয়ভাবে যোগাযোগ করবে"
+msgstr ""
+"ব্যবহারকারীরা যে  শর্ট কোড ব্যবহার করে  U-Report এ স্থানীয়ভাবে যোগাযোগ করবে"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
+msgid ""
+"The whatapp number that users will use to contact U-Report if you have one"
+msgstr ""
+"ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-"
+"এর সাথে যোগাযোগ করতে পারবে"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
+msgid ""
+"The viber username that users will use to contact U-Report if you have one"
+msgstr ""
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
-
-#, fuzzy
-#| msgid "The font used for normal text"
 msgid "The join button text"
-msgstr "সাধারন টেক্সটের জন্য যে ফন্ট ব্যবহার করা হবে"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "ক্ষুদ্র বর্ণনা যা দর্শনার্থীদের U-Report এ যোগদান করার পথ দেখাবে "
-
-#, fuzzy
-#| msgid "The title of the photos section U-Report homepage"
-msgid "The call to action text to join on the top section on U-Report"
-msgstr "U-Report হোমপেজের ছবি বিভাগের শিরোনাম"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "U-Report-এর সাথে কিভাবে যুক্ত হবেন বিভাগের জন্য YouTube ভিডিওর আইডি"
@@ -1878,30 +1648,49 @@ msgstr "এই প্রতিষ্ঠান এর স্টাইলিং-�
 msgid "The tertiary color for styling for this organization, should be dark"
 msgstr "এই প্রতিষ্ঠানের স্টাইলিং-এর জন্য তৃতীয় পর্যায়ের যে রঙ, গাঢ় হতে পারে"
 
-msgid "The primary highlight color for styling for this organization, should be light"
+msgid ""
+"The primary highlight color for styling for this organization, should be "
+"light"
 msgstr "এই প্রতিষ্ঠানের স্টাইলিং-এর জন্য প্রাথমিক হাইলাইট রঙ, হালকা হতে পারে"
 
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "এই প্রতিষ্ঠান এর স্টাইলিং-এর জন্য আনুষাঙ্গিক হাইলাইট রং, হালকা হতে পারে"
+msgid ""
+"The secondary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"এই প্রতিষ্ঠান এর স্টাইলিং-এর জন্য আনুষাঙ্গিক হাইলাইট রং, হালকা হতে পারে"
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "স্টাইলিং চার্ট এর জন্য ৬ টি পর্যন্ত রঙ আছে, রঙ গুলোর মধ্যে কমা ব্যবহার করুন "
+msgstr ""
+"স্টাইলিং চার্ট এর জন্য ৬ টি পর্যন্ত রঙ আছে, রঙ গুলোর মধ্যে কমা ব্যবহার করুন "
 
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "স্টাইলিং ম্যাপের জন্য ১১ টি পর্যন্ত রং,  দুটি রঙয়ের মধ্যে কমা ব্যবহার করুন, ১১ টি রং না হলে ব্যবহার হবে না"
+msgid "The color used to draw the text on the join bar"
+msgstr "যোগদান করার বার এর লেখার জন্য যে রঙ টি ব্যবহার করা হয়েছে  "
+
+msgid "The color used to draw the background on the join bar"
+msgstr "যোগদান করার বার এর পটভূমি আকার  জন্য যে রঙ টি ব্যবহার করা হয়েছে "
+
+msgid "The primary color for styling for this organization"
+msgstr "এই প্রতিষ্ঠান এর স্টাইলিং জন্য প্রাথমিক ভাবে যে রঙ ব্যবহার করা হয়েছে "
+
+msgid "The secondary color for styling for this organization"
+msgstr "এই প্রতিষ্ঠান এর স্টাইলিং এ ব্যবহার করার জন্য দ্বিতীয় রঙ "
+
+msgid "The background color for the site"
+msgstr "এই সাইট এর পটভূমির রঙ "
+
+msgid ""
+"11 colors for styling maps, use comma between colors, not used if not 11 "
+"colors"
+msgstr ""
+"স্টাইলিং ম্যাপের জন্য ১১ টি পর্যন্ত রং,  দুটি রঙয়ের মধ্যে কমা ব্যবহার করুন, "
+"১১ টি রং না হলে ব্যবহার হবে না"
 
 msgid "The states to show on maps only"
 msgstr "বিভাগগুলো কেবলমাত্র মানচিত্রে প্রদর্শিত হবে"
 
-#, fuzzy
-#| msgid "The states to show on maps only"
 msgid "The states to show on maps only, used to filter poll results"
-msgstr "বিভাগগুলো কেবলমাত্র মানচিত্রে প্রদর্শিত হবে"
-
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
-msgid "The Google Tag Manager ID for this organization"
-msgstr "এই প্রতিষ্ঠান এর গুগল অ্যানালিটিক্স ট্র্যাকিং আইডি "
+msgstr ""
+"বিভাগগুলো কেবলমাত্র জরিপের ফলাফলকে ফিল্টার করার জন্য মানচিত্রে প্রদর্শিত হবে"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "এই প্রতিষ্ঠান এর গুগল অ্যানালিটিক্স ট্র্যাকিং আইডি "
@@ -1909,22 +1698,23 @@ msgstr "এই প্রতিষ্ঠান এর গুগল অ্যা�
 msgid "The URL to the Youtube channel for this organization"
 msgstr "এই প্রতিষ্ঠান এর YouTube চ্যানেল এর URL"
 
-msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
-
 msgid "The URL to the Facebook page for this organization"
 msgstr "এই প্রতিষ্ঠান এর ফেসবুক পেজ এর URL"
 
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr "এই প্রতিষ্ঠান (ঐচ্ছিক) এর জন্য ফেসবুক পেজ এর জন্য ইনটেজার আইডি "
 
-msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
 msgstr ""
 "এই প্রতিষ্ঠান এর চ্যাট এপ (ঐচ্ছিক) এর জন্য ফেসবুক এপ টির ইনটেজার আইডি \n"
 "       "
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr "ফেসবুক ম্যাসেন্জারের মাধ্যমে যুক্ত হওয়া ব্যবহারকারীদের স্বাগত জানাতে ছোট বার্তা"
+msgstr ""
+"ফেসবুক ম্যাসেন্জারের মাধ্যমে যুক্ত হওয়া ব্যবহারকারীদের স্বাগত জানাতে ছোট "
+"বার্তা"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "এই প্রতিষ্ঠান এর ফেসবুক পিক্সেল এর আইডি "
@@ -1947,22 +1737,26 @@ msgstr "পাবলিক সাইটে প্রকাশিত রেজা
 msgid "If there are jobs to be shown on the public site."
 msgstr "যদি কোন চাকুরী থাকে তাহলে তা পাবলিক সাইটে প্রদর্শিত হবে"
 
-msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
-msgstr "যদি এই প্রতিষ্ঠান এর তথ্যগুলো সাড়া দুনিয়ার জন্য হয়। যেমনঃ যদি এটা দেশের মানচিত্রের পরিবর্তে পৃথিবীর মানচিত্র হয়। "
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+"যদি এই প্রতিষ্ঠান এর তথ্যগুলো সাড়া দুনিয়ার জন্য হয়। যেমনঃ যদি এটা দেশের "
+"মানচিত্রের পরিবর্তে পৃথিবীর মানচিত্র হয়। "
 
 msgid "Whether to activate an extra gender."
 msgstr "বাড়তি কোন লিঙ্গ সক্রিয় করা হবে কি না"
 
-msgid "Whether to hide the engagement breakdown charts."
+msgid "Whether to activate the new design."
+msgstr "নতুন কোন ডিজাইন সক্রিয় করা হবে কি না"
+
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
 msgstr ""
-
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
-msgid "Whether to show the UNICEF logo in the footer."
-msgstr "ব্যবহারকারী এই সাইটে প্রবেশ করার অনুমতি প্রাপ্ত কি না"
-
-msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
-msgstr "প্রতিষ্ঠানটির alpha-3 ISO কোড যা U-Report অ্যাপ-এর স্টোরি তে থাকবে। যেমন- BRA, NIG, CMR (GLOBAL ব্যবহার করুন যদি U-Report GLOBAL হয়)। "
+"প্রতিষ্ঠানটির alpha-3 ISO কোড যা U-Report অ্যাপ-এর স্টোরি তে থাকবে। যেমন- "
+"BRA, NIG, CMR (GLOBAL ব্যবহার করুন যদি U-Report GLOBAL হয়)। "
 
 msgid "The font used for headline texts"
 msgstr "শিরোনামের জন্য যে ফন্ট ব্যবহার করা হবে"
@@ -1979,8 +1773,12 @@ msgstr "ফ্রি মেসেজের স্পনসরদের বর্
 msgid "The font used for small text"
 msgstr "ছোট বার্তার জন্য যে ফন্ট ব্যবহার করা হবে"
 
-msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
-msgstr "আপনার প্রতিষ্ঠান এর পেজ এর জন্য যদি কোন বিশেষায়িত এইচ টি এম এল কোড দরকার হয় যেমন বিশেষায়িত বিশ্লেষণ কোড "
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
+msgstr ""
+"আপনার প্রতিষ্ঠান এর পেজ এর জন্য যদি কোন বিশেষায়িত এইচ টি এম এল কোড দরকার হয় "
+"যেমন বিশেষায়িত বিশ্লেষণ কোড "
 
 msgid "Other language sites links"
 msgstr ""
@@ -1997,11 +1795,6 @@ msgstr "১২ মাস"
 msgid "Age"
 msgstr "বয়স"
 
-#, fuzzy
-#| msgid "Save Changes"
-msgid "Channels"
-msgstr "পরিবর্তনগুলো সংরক্ষণ করুন "
-
 msgid "Location"
 msgstr "অবস্থান"
 
@@ -2017,398 +1810,8 @@ msgstr "উত্তর দেওয়ার হার "
 msgid "Active Users"
 msgstr "সক্রিয় ব্যবহারকারী"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
-msgstr "এই ঘটনাটি প্রকাশিত হয়েছে কিনা "
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
-
-#~ msgid "Photos"
-#~ msgstr "ছবিগুলো"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "মতামত জানানোর পেইজের বর্ণনা"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "এই পোলটি কি হোমপেজে দেখানো উচিত? "
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "অরগ "
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "ঘটনা পেইজের বর্ণনা"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "যোগদান করার বার এর লেখার জন্য যে রঙ টি ব্যবহার করা হয়েছে  "
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "যোগদান করার বার এর পটভূমি আকার  জন্য যে রঙ টি ব্যবহার করা হয়েছে "
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "এই প্রতিষ্ঠান এর স্টাইলিং জন্য প্রাথমিক ভাবে যে রঙ ব্যবহার করা হয়েছে "
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "এই প্রতিষ্ঠান এর স্টাইলিং এ ব্যবহার করার জন্য দ্বিতীয় রঙ "
-
-#~ msgid "The background color for the site"
-#~ msgstr "এই সাইট এর পটভূমির রঙ "
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "নতুন কোন ডিজাইন সক্রিয় করা হবে কি না"
-
-#~ msgid "JOIN NOW"
-#~ msgstr "এখুনি যোগদান করুন"
-
-#~ msgid ""
-#~ "\n"
-#~ "             %(counter)s result\n"
-#~ "           "
-#~ msgid_plural ""
-#~ "\n"
-#~ "              %(counter)s results\n"
-#~ "            "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "     %(counter)s ফলাফল\n"
-#~ "        "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "     %(counter)s ফলাফল\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "\tফলাফল %(start)s-%(end)s / %(count)s\n"
-#~ "\t"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                  %(questions)s question polled on this topic\n"
-#~| "                "
-#~| msgid_plural ""
-#~| "\n"
-#~| "                  %(questions)s questions polled on this topic\n"
-#~| "                "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "                এই বিষয়ের উপর %(questions)s  -টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "  \n"
-#~ "              "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "                 এই বিষয়ের উপর %(questions)s-টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "                "
-
-#, fuzzy
-#~| msgid "Poll Questions"
-#~ msgid "questions"
-#~ msgstr "পোল এর প্রশ্নগুলো "
-
-#~ msgid "Polls"
-#~ msgstr "পোল গুলো "
-
-#~ msgid "U-Reporters"
-#~ msgstr "u-reporters"
-
-#~ msgid "Join & Engage"
-#~ msgstr "যোগদান করুন এবং কাজ করুন "
-
-#~ msgid "FOLLOW US ON"
-#~ msgstr "আমাদের অনুসরণ করুন "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "মনে রাখুন twitter এ কাজের উৎস খোঁজার  জন্য আপনাকে twitter widget id গ্রহন করতে হবে"
-
-#~ msgid "ABOUT U-REPORT"
-#~ msgstr "U-REPORT এর ব্যাপারে "
-
-#~ msgid "Scroll to Learn more"
-#~ msgstr "আরও জানতে নিচে দেখুন "
-
-#~ msgid "The mission of U-Report"
-#~ msgstr "U-Report এর উদ্দেশ্য "
-
-#~ msgid "Why Join U-Report?"
-#~ msgstr "কেন u-report এ যোগদান করবেন ? "
-
-#~ msgid "Speak out on what's happening in your community"
-#~ msgstr "আপনার চারপাশে কি ঘটছে সেটি নিয়ে কথা বলুন"
-
-#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
-#~ msgstr "U-report এর ফলাফল এবং তথ্য গুলো নাগরিকদের জানান এবং সচেতন  করুন "
-
-#~ msgid "Participate in nationwide campaigns to help improve your country"
-#~ msgstr "সারা দেশব্যাপী প্রচারণায় অংশ নিয়ে আপনার দেশ এর উন্নয়নে সহায়তা করুন"
-
-#~ msgid "Share what's happening around %(country)s with other U-Reporters"
-#~ msgstr "আপনার চারপাশের অন্যান্য U-reporter দের সাথে কি হচ্ছে সেটি সবাইকে জানান '%(country)s'"
-
-#~ msgid "CLICK HERE TO JOIN"
-#~ msgstr "যোগদান করতে এখানে ক্লিক করুন "
-
-#~ msgid "U-REPORT VIDEOS"
-#~ msgstr "U-report এর  ভিডিও গুলো "
-
-#~ msgid "No videos yet."
-#~ msgstr "এখনো কোন ভিডিও নেই "
-
-#~ msgid "WATCH IT ON YOUTUBE"
-#~ msgstr "YOUTUBE এ দেখুন "
-
-#~ msgid "Follow"
-#~ msgstr "অনুসরণ করুন "
-
-#~ msgid ""
-#~ "\n"
-#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "U-report একটি সামাজিক যোগাযোগের মাধ্যম যা সকলের জন্য ফ্রি, যা আপনাকে সুযোগ দেবে পৃথিবীর যেকোন জায়গা থেকেই উন্নয়ন নিয়ে কথা বলার, শিশুদের অধিকারকে সমর্থন করা এবং নিজের দেশ ও সমাজের মানুষদের জীবনযাত্রার মান উন্নয়ন করার"
-
-#~ msgid "CURRENT POLL"
-#~ msgstr "চলতি পোল "
-
-#~ msgid "View Full Results"
-#~ msgstr "সম্পূর্ণ ফলাফল দেখুন "
-
-#~ msgid "All U-Report members"
-#~ msgstr "সকল U-report এর সদস্য গণ "
-
-#~ msgid "Responded out of"
-#~ msgstr "প্রতিক্রিয়া জানিয়েছেন এত জন "
-
-#~ msgid "RESPONDER'S RATE BY LOCATION"
-#~ msgstr "অবস্থান অনুযায়ী উত্তর প্রদানকারীর হার "
-
-#~ msgid "Most responded"
-#~ msgstr "বেশি উত্তর প্রদানকারী "
-
-#~ msgid ""
-#~ "\n"
-#~ "                                  %(responded)s of %(total)s\n"
-#~ "                                  "
-#~ msgstr ""
-#~ "\n"
-#~ "1%(responded)s of 2%(total)s"
-
-#~ msgid "TRENDING WORDS"
-#~ msgstr "জনপ্রিয় শব্দ গুলো "
-
-#~ msgid "FEATURED RESPONSES"
-#~ msgstr "বিশেষায়িত উত্তর গুলো "
-
-#~ msgid "View full results"
-#~ msgstr "সম্পূর্ণ ফলাফল দেখুন "
-
-#~ msgid "TOTAL # OF U-REPORTERS"
-#~ msgstr "মোট U-REPORTERS "
-
-#~ msgid "4 MOST ACTIVE REGIONS"
-#~ msgstr "সবচেয়ে সক্রিয় চারটি অঞ্চল "
-
-#~ msgid "RATE BY GENDER"
-#~ msgstr "লিঙ্গ অনুযায়ী মান নির্ধারণ করুন "
-
-#~ msgid "RATE BY AGE"
-#~ msgstr "বয়স অনুযায়ী মান নির্ধারণ করুন "
-
-#~ msgid "WHAT U-REPORTERS ARE SAYING"
-#~ msgstr "U-REPORTERS রা কি বলছেন ? "
-
-#~ msgid "FEATURED VIDEO"
-#~ msgstr "বিশেষায়িত ভিডিও "
-
-#~ msgid "Watch more videos"
-#~ msgstr "আরও ভিডিও দেখুন "
-
-#~ msgid "FEATURED REGION"
-#~ msgstr "বিশেষায়িত অঞ্চল "
-
-#~ msgid "Check more stories in U-Report app"
-#~ msgstr "U-REPORT এপ এ আরও ঘটনা জানুন "
-
-#~ msgid "View more stories on Facebook"
-#~ msgstr "ফেসবুকে আরও ঘটনা দেখুন "
-
-#~ msgid "View more on Instagram"
-#~ msgstr "ইন্সটাগ্রাম এ আরও দেখুন "
-
-#~ msgid "Read more tweets on Twitter"
-#~ msgstr "টুঁইটার এ আরও টুইট পড়ুন "
-
-#~ msgid "NEWS FEED"
-#~ msgstr "ঘটনা প্রবাহ  "
-
-#~ msgid "Read full story"
-#~ msgstr "সম্পূর্ণ ঘটনা জানুন "
-
-#~ msgid "Read this story"
-#~ msgstr "ঘটনাটি পড়ুন "
-
-#~ msgid "JOBS"
-#~ msgstr "কাজগুলো "
-
-#~ msgid "Scroll to see job details"
-#~ msgstr "কাজের ব্যাপারে জানতে নিচে দেখুন "
-
-#~ msgid "Tweet to"
-#~ msgstr "টুইট করুন "
-
-#~ msgid "Read more"
-#~ msgstr "আরও পড়ুন "
-
-#~ msgid "JOIN U-REPORT"
-#~ msgstr "U-REPORT এ যোগদান করুন "
-
-#~ msgid "HOW TO JOIN"
-#~ msgstr "কিভাবে যোগদান করবেন "
-
-#~ msgid ""
-#~ "\n"
-#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-#~ "\n"
-#~ "              "
-#~ msgstr ""
-#~ "\n"
-#~ "* U-Report UNICEF এর অর্থায়নে তৈরি একটি ফ্রি প্লাটফর্ম যা%(country)s নেটওয়ার্ক প্রভাইডারদের সাহায্যে সকলের কাছে পৌঁছানো হয়। U-Report  কখনোই কোন ধরনের আর্থিক লেনদেন বা ব্যক্তিগত আর্থিক তথ্য জানতে চাইবে না। অনুগ্রহ করে এমন বার্তাগুলো এড়িয়ে যান যা আপনাকে এই নাম্বারে টাকা পাঠাতে বলবে অথবা ফেসবুক বা টুঁইটার পেজে আর্থিক লেনদেন করতে বলবে। U-Report-এর সকল সেবা (all msg on %(shortcode)s) বিনামূল্যে প্রদান করা হয়।"
-
-#~ msgid "U-REPORT ON SOCIAL MEDIA"
-#~ msgstr "U-report সামাজিক যোগাযোগের মাধ্যমে "
-
-#~ msgid "Compose new Tweet"
-#~ msgstr "নতুন টুইট লিখুন "
-
-#~ msgid "CURRENT POLL IN"
-#~ msgstr "চলতি পোলটি "
-
-#~ msgid "response rate"
-#~ msgstr "উত্তর দেওয়ার হার "
-
-#~ msgid "responded out of"
-#~ msgstr "উত্তর দিয়েছেন এত জন "
-
-#~ msgid "polled"
-#~ msgstr "পোল হয়েছে এত গুলো "
-
-#~ msgid "POLL RESULTS"
-#~ msgstr "পোল এর ফলাফল "
-
-#~ msgid ""
-#~ "\n"
-#~ "                    %(responded)s responded out of %(polled)s polled\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "1 %(responded)s উত্তর দিয়েছেন 2 %(polled)s পোল"
-
-#~ msgid "KEYWORDS"
-#~ msgstr "শব্দ গুলো "
-
-#~ msgid "STATISTICS"
-#~ msgstr "পরিসংখ্যান "
-
-#~ msgid "LOCATIONS"
-#~ msgstr "ঠিকানা "
-
-#~ msgid "FEATURED ANSWERS"
-#~ msgstr "বিশেষায়িত উত্তরগুলো "
-
-#~ msgid "No featured answers."
-#~ msgstr "কোন বিশেষায়িত উত্তর নেই "
-
-#~ msgid "U-Reporter in"
-#~ msgstr "U-Reporter আছেন "
-
-#~ msgid "RELATED STORIES"
-#~ msgstr "সম্পর্কিত ঘটনাবলী "
-
-#~ msgid "No related stories."
-#~ msgstr "কোন সম্পর্কিত ঘটনা নেই "
-
-#~ msgid "FEATURED IMAGES"
-#~ msgstr "বিশেষায়িত ছবি গুলো "
-
-#~ msgid "No featured images yet."
-#~ msgstr "কোন বিশেষায়িত ছবি নেই "
-
-#~ msgid "BY"
-#~ msgstr "এর দ্বারা "
-
-#~ msgid "LATEST STORIES"
-#~ msgstr "চলতি ঘটনাবলী "
-
-#~ msgid "FILTERED BY"
-#~ msgstr "আলাদা করা হয়েছে এর দ্বারা "
-
-#~ msgid "Scroll to read more"
-#~ msgstr "আরও পড়তে নিচে নামুন "
-
-#~ msgid "STORY CONTINUES"
-#~ msgstr "ঘটনা চলছে "
-
-#~ msgid "AUDIO"
-#~ msgstr "অডিও "
-
-#~ msgid "RELATED POLLS"
-#~ msgstr "সম্পর্কিত পোল "
-
-#~ msgid "No related polls."
-#~ msgstr "সম্পর্কিত পোল না "
-
-#~ msgid "No featured images."
-#~ msgstr "কোন বিশেষায়িত ছবি না "
-
-#~ msgid "WHO WE ARE"
-#~ msgstr "আমরা কারা "
-
-#~ msgid "U-REPORTER STATISTICS"
-#~ msgstr "U-Reporter দের পরিসংখ্যান "
-
-#~ msgid "WHERE ARE U-REPORTERS FROM?"
-#~ msgstr "U-reporter রা কোন জায়গা থেকে এসেছে ? "
-
-#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-#~ msgstr "নিবন্ধনের হার ঃ গত ৬ মাসে "
-
-#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-#~ msgstr "পেশা : উল্লেখিত শীর্ষ ৯টি"
-
-#~ msgid "Registered"
-#~ msgstr "নিবন্ধিত "
-
-#~ msgid "Week of"
-#~ msgstr "সপ্তাহের "
-
-#~ msgid "Poll Results Data"
-#~ msgstr "পোলের ফলাফলের ডাটা"
