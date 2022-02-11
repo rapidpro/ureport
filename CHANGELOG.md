@@ -1,3 +1,7 @@
+v1.2.33
+----------
+ * Merge pull request #941 from rapidpro/sec-updates
+
 v1.2.31
 ----------
  * Merge pull request #940 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
