@@ -1,3 +1,12 @@
+v1.2.31
+----------
+ * Merge pull request #940 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
+ * Merge pull request #942 from rapidpro/update-deps
+ * Run code checks
+ * Update deps
+ * Translate /locale/en/LC_MESSAGES/django.po in fr
+ * Merge pull request #897 from rapidpro/sec-updates
+
 v1.2.30
 ----------
  * Merge pull request #895 from rapidpro/percent-graphs
