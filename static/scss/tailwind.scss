@@ -259,7 +259,7 @@ html {
     }
 
     &.small-link-no-wrap {
-      @apply w-full text-sm whitespace-no-wrap;
+      @apply w-full text-sm whitespace-nowrap;
 
       &.separator {
         @apply border-t border-black;

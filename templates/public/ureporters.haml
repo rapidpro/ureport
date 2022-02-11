@@ -99,7 +99,7 @@
         .flex-center-y.flex-row(class="md:flex-col")
           .text-white.text-xs.flex
             - for time_filter in data_time_filters
-              .cursor-pointer.border-white.pill-black.tab-button-time-filter.whitespace-no-wrap(class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
+              .cursor-pointer.border-white.pill-black.tab-button-time-filter.whitespace-nowrap(class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
                 {{time_filter.label}}
     .bg-dark-blue.border-b.border-gray-600
       .max-w-page.mx-auto.p-home.text-white
@@ -119,7 +119,7 @@
                           {{segment.label|upper}}
                       - elif forloop.last
                         - if show_maps
-                          %a.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
+                          %a.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-nowrap(href="#" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
                             {{segment.label|upper}}
                             %i.fas.fa-caret-down
                             .state-dropdown.absolute.z-50(id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" style="margin-left:-1px" data-html2canvas-ignore=true)
@@ -129,10 +129,10 @@
                                     .py-1.state-segment(data-state='{{state.id}}' class="ltr:pl-2 ltr:pr-4 rtl:pr-2 rtl:pl-4  hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="engagement"  data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
                                       .checkbox(class="ltr:float-left rtl:float-right")
                                         %i.fas.fa-check
-                                      .whitespace-no-wrap(class="ltr:ml-4 rtl:mr-4")
+                                      .whitespace-nowrap(class="ltr:ml-4 rtl:mr-4")
                                         {{ state.name }}
                         - else
-                          %a.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
+                          %a.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-nowrap(href="#" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
                             {{segment.label|upper}}
     
                       - else
