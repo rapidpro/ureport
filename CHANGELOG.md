@@ -1,3 +1,8 @@
+v1.2.34
+----------
+ * Merge pull request #945 from rapidpro/hide-menu-for-anon
+ * Hide left menu of forget password page
+
 v1.2.33
 ----------
  * Merge pull request #941 from rapidpro/sec-updates
