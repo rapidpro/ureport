@@ -99,9 +99,10 @@
   %section.section.is-paddingless.is-marginless
     .content-section-container
       -block content-section
-            .columns.is-marginless
-              .column.is-one-fifth.block#left-menu
-                -block menu
+          .columns.is-marginless
+            .column.is-one-fifth.block#left-menu
+              -block menu
+                - if request.user and request.user.is_authenticated
                   %aside.menu
                     %ul.menu-list
                       %li
@@ -218,19 +219,18 @@
                               %img(src="{{ STATIC_URL }}img/settings_icon.png")
                             %span.menu-link-title
                               - trans "Images"
+            .column.is-four-fifths.is-offset-one.block(class="bg-white")
+              -block content-div
+                .content-div
+                  - block messages
+                    - if messages
+                      - for message in messages
+                        .notification(class="is-{{ message.tags }}")
+                          {{ message }}
 
-              .column.is-four-fifths.is-offset-one.block(class="bg-white")
-                -block content-div
-                  .content-div
-                    - block messages
-                      - if messages
-                        - for message in messages
-                          .notification(class="is-{{ message.tags }}")
-                            {{ message }}
+                  - block pre-content
 
-                    - block pre-content
-
-                    - block content
+                  - block content
    
   %section.section.is-paddingless.is-marginless
     %footer.footer.is-paddingless
