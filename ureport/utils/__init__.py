@@ -339,7 +339,7 @@ def update_cache_org_contact_counts(org):
 
     key = ORG_CONTACT_COUNT_KEY % org.pk
     org_contacts_counts = ReportersCounter.get_counts(org)
-    cache.set(key, org_contacts_counts, ORG_CONTACT_COUNT_TIMEOUT)
+    cache.set(key, org_contacts_counts, None)
     return org_contacts_counts
 
 
