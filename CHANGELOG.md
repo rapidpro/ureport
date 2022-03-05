@@ -1,3 +1,8 @@
+v1.2.35
+----------
+ * Merge pull request #946 from rapidpro/org-contacts-count-cache
+ * do not expire the org contact counts cache
+
 v1.2.34
 ----------
  * Merge pull request #945 from rapidpro/hide-menu-for-anon
