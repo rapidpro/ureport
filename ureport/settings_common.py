@@ -1402,7 +1402,7 @@ COUNTRY_FLAGS_SITES = [
         name="Nicaragua",
         host="//nicaragua.ureport.in",
         flag="flag_nicaragua.png",
-        countries_code=["NIC"],
+        countries_codes=["NIC"],
         count_link="http://nicaragua.ureport.in/count/",
     ),
     dict(
