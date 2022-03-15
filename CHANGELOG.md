@@ -1,3 +1,8 @@
+v1.2.36
+----------
+ * Merge pull request #947 from Ilhasoft/fix/change-name-Nic-countries_codes
+ * add s in countries_codes Nicaragua
+
 v1.2.35
 ----------
  * Merge pull request #946 from rapidpro/org-contacts-count-cache
