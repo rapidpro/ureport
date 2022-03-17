@@ -161,11 +161,11 @@ html {
 
 // pills for (90 days, 60 months, 12 months)
 .pill {
-  @apply inline-block px-4 text-center border-t border-b py-2 border-l;
+  @apply inline-block px-4 text-center border-t border-b py-2 border-l border-r;
 }
 
 .pill-first {
-  @apply inline-block pl-6 pr-6 text-center border-t border-b py-2 border-l rounded-l-full;
+  @apply inline-block pl-6 pr-6 text-center border-t border-b py-2 border-l rounded-l-full border-r;
 }
 
 .pill-last {
