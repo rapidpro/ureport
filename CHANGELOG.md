@@ -1,3 +1,13 @@
+v1.2.37
+----------
+ * Merge pull request #950 from rapidpro/fix-pills
+ * Merge pull request #949 from Ilhasoft/locale/greek
+ * Fix pills borders
+ * adding .mo file for el language
+ * enable greek language (el) on settings
+ * fix bugs on el locale
+ * Translate /locale/en/LC_MESSAGES/django.po in el
+
 v1.2.36
 ----------
  * Merge pull request #947 from Ilhasoft/fix/change-name-Nic-countries_codes
