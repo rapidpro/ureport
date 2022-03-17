@@ -107,6 +107,7 @@ LANGUAGES = (
     ("hr-hr", "Croatian"),
     ("no", "Norwegian"),
     ("ru", "Russia"),
+    ("el", "Greek"),
 )
 
 DEFAULT_LANGUAGE = "en"
