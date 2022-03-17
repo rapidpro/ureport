@@ -183,12 +183,12 @@
                     .whitespace-nowrap
                       -trans "ALL"
                   {% if question.show_age %}
-                  %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'age' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
+                  %a.pill-white.segment-pill(class="{% if question.get_last_pill == 'age' and not show_maps or not question.show_locations %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
                     .whitespace-nowrap
                       -trans "AGE"
                   {% endif %}
                   {% if question.show_gender %}
-                  %a.pill-white.segment-pill(class="{% if not show_maps or not question.show_locations and question.get_last_pill == 'gender' %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                  %a.pill-white.segment-pill(class="{% if question.get_last_pill == 'gender' and not show_maps or not question.show_locations %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
                     .whitespace-nowrap
                       -trans "GENDER"
                   {% endif %}
