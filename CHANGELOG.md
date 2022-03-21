@@ -1,3 +1,70 @@
+v1.2.38
+----------
+ * Merge pull request #951 from rapidpro/cache-no-expire
+ * Do not expire the cached counts
+
+v1.2.37
+----------
+ * Merge pull request #950 from rapidpro/fix-pills
+ * Merge pull request #949 from Ilhasoft/locale/greek
+ * Fix pills borders
+ * adding .mo file for el language
+ * enable greek language (el) on settings
+ * fix bugs on el locale
+ * Translate /locale/en/LC_MESSAGES/django.po in el
+
+v1.2.36
+----------
+ * Merge pull request #947 from Ilhasoft/fix/change-name-Nic-countries_codes
+ * add s in countries_codes Nicaragua
+
+v1.2.35
+----------
+ * Merge pull request #946 from rapidpro/org-contacts-count-cache
+ * do not expire the org contact counts cache
+
+v1.2.34
+----------
+ * Merge pull request #945 from rapidpro/hide-menu-for-anon
+ * Hide left menu of forget password page
+
+v1.2.33
+----------
+ * Merge pull request #941 from rapidpro/sec-updates
+
+v1.2.31
+----------
+ * Merge pull request #940 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
+ * Merge pull request #942 from rapidpro/update-deps
+ * Run code checks
+ * Update deps
+ * Translate /locale/en/LC_MESSAGES/django.po in fr
+ * Merge pull request #897 from rapidpro/sec-updates
+
+v1.2.30
+----------
+ * Merge pull request #895 from rapidpro/percent-graphs
+ * Fix polls graphs percentage bar lengths
+
+v1.2.29
+----------
+ * Merge pull request #859 from rapidpro/update-deps
+
+v1.2.26
+----------
+ * Update deps
+ * Merge pull request #857 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
+ * Merge pull request #858 from rapidpro/django4
+ * Add migrations
+ * Run code checks
+ * Merge branch 'main' of github.com:rapidpro/ureport into HEAD
+ * Merge pull request #856 from rapidpro/django4
+ * Translate /locale/en/LC_MESSAGES/django.po in fr
+ * Update pillow to 9.0.0
+ * Update to support django 4
+ * Run code_checks
+ * Prep update for django 4.0
+
 v1.2.25
 ----------
  * Merge pull request #851 from alviriseup/main

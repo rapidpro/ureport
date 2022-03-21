@@ -11,7 +11,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration, ignore_logger
 
 from django.forms import Textarea
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from celery.schedules import crontab
 
@@ -108,6 +108,7 @@ LANGUAGES = (
     ("no", "Norwegian"),
     ("sv-se", "Swedish"),
     ("ru", "Russia"),
+    ("el", "Greek"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -1403,7 +1404,7 @@ COUNTRY_FLAGS_SITES = [
         name="Nicaragua",
         host="//nicaragua.ureport.in",
         flag="flag_nicaragua.png",
-        countries_code=["NIC"],
+        countries_codes=["NIC"],
         count_link="http://nicaragua.ureport.in/count/",
     ),
     dict(

@@ -1,0 +1,2164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Artemis Papakostouli, 2022
+# Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-18 09:42+0000\n"
+"PO-Revision-Date: 2021-03-30 14:28+0000\n"
+"Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
+"Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "The name of this category"
+msgstr "Το όνομα αυτής της κατηγορίας"
+
+msgid "An optional image that can describe this category"
+msgstr "Μια προαιρετική εικόνα που μπορεί να το περιγράψει"
+
+msgid "The organization this category applies to"
+msgstr "Ο οργανισμός στον οποίο συναντάται αυτή η κατηγορία"
+
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+msgid "The name to describe this image"
+msgstr "Το όνομα που περιγράφει αυτή την εικόνα"
+
+msgid "The category this image represents"
+msgstr "Η κατηγορία που αντιπροσωπεύει αυτή η εικόνα"
+
+msgid "The image file to use"
+msgstr "Το αρχείο εικόνας που θα χρησιμοποιήσετε"
+
+msgid "The human readable name for this content type"
+msgstr "To αναγνωρίσιμο όνομα γι'αυτόν τον τύπο περιεχομένου"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+"Το όνομα για την αναγνώριση αυτού του τύπου περιεχομένου, που "
+"χρησιμοποιείται με τις ετικέτες του προτύπου"
+
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
+msgstr ""
+"Μία περιγραφή για το πού χρησιμοποιείται αυτός ο τύπος περιεχομένου στον "
+"ιστότοπο και  πώς θα εμφανίζεται"
+
+msgid "Whether this content should include a title"
+msgstr "Εάν αυτό το περιεχόμενο πρέπει να περιλαμβάνει τίτλο"
+
+msgid "Whether this content should include an image"
+msgstr "Εάν αυτό το περιεχόμενο πρέπει να περιλαμβάνει μια εικόνα"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr ""
+"Εάν αυτό το περιεχόμενο πρέπει να χρησιμοποιεί ένα πλούσιο πρόγραμμα "
+"επεξεργασίας HTML"
+
+msgid "Whether this content should include a summary field"
+msgstr "Εάν αυτό το περιεχόμενο πρέπει να περιλαμβάνει μία περίληψη"
+
+msgid "Whether this content should include a link"
+msgstr "Εάν αυτό το περιεχόμενο πρέπει να περιλαμβάνει έναν σύνδεσμο"
+
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
+"Εάν αυτό το περιεχόμενο θα πρέπει να επιτρέπει τη μεταφόρτωση πρόσθετων "
+"εικόνων, π.χ. μιας συλλογής"
+
+msgid "Whether this content has a color field"
+msgstr "Εάν αυτό το περιεχόμενο έχει πεδίο χρώματος"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Εάν αυτό το περιεχόμενο επιτρέπει τη δημιουργία ενός YouTube id"
+
+msgid "Whether this content should allow tags"
+msgstr "Εάν αυτό το περιεχόμενο θα πρέπει να επιτρέπει ετικέτες"
+
+msgid "Content Type"
+msgstr "Τύπος περιεχομένου"
+
+msgid "The category, or type for this content block"
+msgstr "Η κατηγορία ή ο τύπος γι'αυτό το μπλοκ περιεχομένου"
+
+msgid "The title for this block of content, optional"
+msgstr "Ο τίτλος γι'αυτό το μπλοκ περιεχομένου, προαιρετικός"
+
+msgid "The summary for this item, should be short"
+msgstr "Η περίληψη γι'αυτό το κομμάτι πρέπει να είναι σύντομη"
+
+msgid "The body of text for this content block, optional"
+msgstr "Το σώμα κειμένου γι'αυτό το μπλοκ περιεχομένου, προαιρετικό"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr ""
+"Οποιαδήποτε εικόνα πρέπει να εμφφανίζεται με αυτό το μπλοκ περιεχομένου, "
+"προαιρετικό"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr ""
+"Ένα χρώμα φόντου που θα χρησιμοποιηθεί για την εικόνα με την μορφή: #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr ""
+"Οποιοσδήποτε σύνδεσμος που θα πρέπει να συσχετιστεί με αυτό το μπλοκ "
+"περιεχομένου είναι προαιρετικός"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr ""
+"Το id του Youtube βίντεο που θα πρέπει να συνδεθεί με αυτό το στοιχείο"
+
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr ""
+"Οποιεσδήποτε ετικέτες για αυτό το μπλοκ περιεχομένου, διαχωρισμένες με κενά,"
+" μπορούν να χρησιμοποιηθούν για πιο προηγμένο φιλτράρισμα, προαιρετικό"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+"Η προτεραιότητα γι' αυτό το μπλοκ περιεχομένου, τα μπλοκ υψηλότερης "
+"προτεραιότητας προηγούνται"
+
+msgid "The organization this content block belongs to"
+msgstr "Ο οργανισμός στον οποίο ανήκει αυτό το μπλοκ περιεχομένου"
+
+msgid "Gallery"
+msgstr "Γκαλερί"
+
+msgid "Add Image"
+msgstr "Προσθέστε εικόνα"
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "Add"
+msgstr "Προσθήκη"
+
+msgid "Content Types"
+msgstr "Τύποι περιεχομένου"
+
+msgid "Link Slug"
+msgstr "Σύνδεσμος "
+
+msgid "The slug or word to use in the link of the page"
+msgstr "Αργκό ή η λέξη που θα χρησιμοποιηθεί στον σύνδεσμο της σελίδας"
+
+msgid "Content Blocks"
+msgstr "Μπλοκ περιεχομένου"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "1%s Μπλοκ"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Επεξεργασία 1%s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Δημιουργία 1%s"
+
+msgid "Create Content Block"
+msgstr "Δημιουργία μπλοκ περιεχομένου"
+
+msgid "Your first name"
+msgstr "Το όνομά σας"
+
+msgid "Your last name"
+msgstr "Το επίθετό σας"
+
+msgid "Your email address"
+msgstr "Η ηλεκτρονική σας διεύθυνση"
+
+msgid "Your password, at least eight letters please"
+msgstr "Ο κωδικός σας, τουλάχιστον οκτώ γράμματα παρακαλώ"
+
+msgid "That email address is already used"
+msgstr "Αυτή η ηλεκτρονική διεύθυνση ήδη χρησιμοποιείται"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Οι κωδικοί πρόσβασης πρέπει να περιέχουν τουλάχιστον 8 γράμματα."
+
+msgid "This domain is used for subdomains"
+msgstr "Αυτό το domain χρησιμοποιείται για subdomain"
+
+msgid "Name"
+msgstr "Όνομα"
+
+msgid "The name of this organization"
+msgstr "Το όνομα αυτού του οργανισμού"
+
+msgid "The logo that should be used for this organization"
+msgstr "Το λογότυπο που πρέπει να χρησιμοποιηθεί γι' αυτόν τον οργανισμό"
+
+msgid "Administrators"
+msgstr "Διαχειριστές"
+
+msgid "The administrators in your organization"
+msgstr "Οι διαχειριστές στον οργανισμό σας"
+
+msgid "Viewers"
+msgstr "Θεατές"
+
+msgid "The viewers in your organization"
+msgstr "Οι θεατές στον οργανισμό σας"
+
+msgid "Editors"
+msgstr "Συντάκτες"
+
+msgid "The editors in your organization"
+msgstr "Οι συντάκτες στον οργανισμό σας"
+
+msgid "Language"
+msgstr "Γλώσσα"
+
+msgid "The main language used by this organization"
+msgstr "Η κύρια γλώσσα που χρησιμοποιείται από αυτόν τον οργανισμό"
+
+msgid "Subdomain"
+msgstr "Υποτομέας"
+
+msgid "This subdomain is not available"
+msgstr "Ο υποτομέας δεν είναι διαθέσιμος"
+
+msgid "The subdomain for this organization"
+msgstr "Ο υποτομέας γι'αυτόν τον οργανισμό"
+
+msgid "Domain"
+msgstr "Τομέας"
+
+msgid "This domain is not available"
+msgstr "Αυτός ο τομέας δεν είναι διαθέσιμος"
+
+msgid "The custom domain for this organization"
+msgstr "Ο προσαρμοσμένος τομέας γι' αυτόν τον οργανισμό"
+
+msgid "Timezone"
+msgstr "Ζώνη ώρας"
+
+msgid "The timezone your organization is in."
+msgstr "Η ζώνη ώρας στην οποία βρίσκεται ο οργανισμός σας."
+
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"Το JSON blob χρησιμοποιείται για την αποθήκευση πληροφοριών διαμόρφωσης που "
+"σχετίζονται με αυτόν τον οργανισμό"
+
+msgid "Administrator"
+msgstr "Διαχειριστής"
+
+msgid "Editor"
+msgstr "Συντάκτης"
+
+msgid "Viewer"
+msgstr "Θεατής"
+
+msgid "Org"
+msgstr "org"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Ο οργανισμός στον οποίο έχει προσκληθεί να προβληθεί ο λογαριασμός"
+
+msgid "Email"
+msgstr "Ηλεκτρονική διεύθυνση"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Η ηλεκτρονική διεύθυνση στην οποία στέλνουμε την πρόσκληση του θεατή"
+
+msgid "Secret"
+msgstr "Μυστικό "
+
+msgid "a unique code associated with this invitation"
+msgstr "Ένας μοναδικός κωδικός που σχετίζεται με αυτήν την πρόσκληση"
+
+msgid "User Role"
+msgstr "Ο ρόλος του χρήστη"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "1%s Πρόσκληση"
+
+msgid "Banner"
+msgstr "Πανό"
+
+msgid "Pattern"
+msgstr "Πρότυπο"
+
+msgid "The organization in which the image will be used"
+msgstr "Ο οργανισμός στον οποίο θα χρησιμοποιηθεί η εικόνα"
+
+msgid "The name to describe this background"
+msgstr "Το όνομα για να περιγράψει αυτόν τον φόντο"
+
+msgid "Background type"
+msgstr "Τύπος φόντου"
+
+msgid "The image file"
+msgstr "Το αρχείο εικόνας"
+
+msgid "The API token for this backend"
+msgstr "Το διακριτικό API για αυτό το backend"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"Έχετε προσκληθεί για να συμμετάσχετε . %(org_name)s.\n"
+"<br/>\n"
+"<a href='%(host)s%(join_url)s'>Κλικάρετε εδώ</a> προκειμένου να αποδεχτείτε την πρόσκληση"
+
+msgid "You are invited to join {{org.name}}."
+msgstr "Έχετε προσκληθεί να εγγραφείτε στο {{org.name}}."
+
+msgid "Click this link to join"
+msgstr "Κάντε κλικ σε αυτόν τον σύνδεσμο για να εγγραφείτε"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "Manage Backends"
+msgstr "Διαχείριση Backends"
+
+msgid "Manage Users"
+msgstr "Διαχείριση Χρηστών"
+
+msgid "Accounts"
+msgstr "Λογαριασμοί"
+
+msgid "Admins"
+msgstr "Διαχειριστές"
+
+msgid "Remove"
+msgstr "Αφαιρώ"
+
+msgid "You must have at least one administator"
+msgstr "Πρέπει να έχετε τουλάχιστον έναν διαχειριστή"
+
+msgid "Select your Organization"
+msgstr "Επιλέξτε τον οργανισμό σας"
+
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"Ο λογαριασμός σας δεν σχετίζεται με κάποιον οργανισμό. Επικοινωνήστε με τον "
+"διαχειριστή."
+
+msgid "Your Organization"
+msgstr "Ο οργανισμός σου"
+
+msgid "Invite people to your organization"
+msgstr "Προσκάλεσε άτομα στον οργανισμό σου"
+
+msgid "User group"
+msgstr "Ομάδα χρηστών"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Μία από τις ηλεκτρονικές διευθύνσεις που έδωσες δεν ισχύει."
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Διαχείριση %(name)s Λογαριασμών"
+
+msgid "Create"
+msgstr "Δημιουργώ"
+
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"Ο σύνδεσμος πρόσκλησής σας δεν είναι έγκυρος. Επικοινωνήστε με τον "
+"διαχειριστή του οργανισμού σας."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Συμμετοχή 1%(name)s"
+
+msgid "Join"
+msgstr "Συμμετοχή"
+
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"Ο σύνδεσμος πρόσκλησής σας έχει λήξει. Επικοινωνήστε με τον διαχειριστή του "
+"οργανισμού σας."
+
+msgid "Task"
+msgstr "Έργο"
+
+msgid "Tasks"
+msgstr "'Εργα"
+
+msgid "Only PDF files are supported."
+msgstr "Υποστηρίζονται μόνο αρχεία PDF."
+
+msgid "The title for this story"
+msgstr "Ο τίτλος αυτής της ιστορίας"
+
+msgid "Whether this story is featured"
+msgstr "Αν παρουσιάζεται αυτή η ιστορία"
+
+msgid "The summary for the story"
+msgstr "Η περίληψη της ιστορίας"
+
+msgid "The body of text for the story"
+msgstr "Το σώμα του κειμένου για την ιστορία"
+
+msgid "The writer of the story"
+msgstr "Ο συγγραφέας της ιστορίας"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr ""
+"Ένας σύνδεσμος προς ένα αρχείο mp3 για δημοσίευση σε αυτήν την ιστορία"
+
+msgid "The PDF report to attach"
+msgstr "Η αναφορά PDF προς επισύναψη"
+
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+" Το  id για το βίντεο του YouTube που θα πρέπει να συνδεθεί με αυτήν την "
+"ιστορία (αυτό είναι το κείμενο που έρχεται μετά από v= και πριν & στη "
+"διεύθυνση του YouTube)"
+
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Οποιεσδήποτε ετικέτες γι' αυτή την ιστορία, χωρισμένες με κενά, μπορούν να "
+"χρησιμοποιηθούν για πιο προηγμένο φιλτράρισμα, προαιρετικά"
+
+msgid "The category for this story"
+msgstr "Η κατηγορία γι'αυτή την ιστορία"
+
+msgid "The organization this story belongs to"
+msgstr "Ο οργανισμός γι'αυτή την ιστορία ανήκει σε"
+
+msgid "Stories"
+msgstr "Ιστορίες"
+
+msgid "The story to associate to"
+msgstr "Η ιστορία για να συσχετιστεί με"
+
+msgid "Yes"
+msgstr "Ναι"
+
+msgid "No"
+msgstr "Όχι"
+
+msgid "Story Images"
+msgstr "Εικόνες ιστορίας"
+
+#, python-format
+msgid "Image %d"
+msgstr "Εικόνα 1%d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+"Εικόνα για να εμφανίζεται στη σελίδα της ιστορίας και σε προεπισκοπήσεις. "
+"(προαιρετικό)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+"Εικόνα για εμφάνιση στη σελίδα ιστορίας και σε προεπισκοπήσεις. "
+"(προαιρετικό)"
+
+msgid "The name of this tag"
+msgstr "Το όνομα αυτής της ετικέτας"
+
+msgid "Delete"
+msgstr "Διαγράφω"
+
+msgid "Remove Item?"
+msgstr "Κατάργηση στοιχείου;"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Είστε σίγουρος/-η ότι θέλετε να διαγράψετε 1%(object)s1;"
+
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr ""
+"Μόλις αφαιρεθεί, δεν υπάρχει τρόπος να αναιρέσετε αυτήν τη λειτουργία."
+
+msgid "Cancel"
+msgstr "Ματαίωση"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"%(counter)sΑποτέλεσμα"
+msgstr[1] ""
+"\n"
+"%(counter)sΑποτελέσματα"
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tΑποτελέσματα%(start)s-%(end)sαπό%(count)s"
+
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+msgid "Next"
+msgstr "Επόμενο"
+
+msgid "edit"
+msgstr "Επεξεργασία"
+
+msgid "Sign in"
+msgstr "Συνδεθείτε"
+
+msgid "Login"
+msgstr "Σύνδεση"
+
+msgid "Forgot Password?"
+msgstr "Ξεχάσατε τον κωδικό;"
+
+msgid "Token Expired"
+msgstr "Το κουπόνι έληξε"
+
+msgid "Login Failure"
+msgstr "Αποτυχία σύνδεσης"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Συγγνώμη, δεν μπορείτε να συνδεθείτε αυτήν τη στιγμή επειδή λάβαμε %(failed_login_limit)s λανθασμένες προσπάθειες σύνδεσης"
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Περιμένετε %(lockout_timeout)s λεπτά προτού προσπαθήσετε να συνδεθείτε ξανά."
+
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+"Εναλλακτικά, μπορείτε να συμπληρώσετε την παρακάτω φόρμα για να επαναφέρετε "
+"τον κωδικό πρόσβασής σας μέσω e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr ""
+"Επικοινωνήστε με τον διαχειριστή του ιστότοπου για επαναφορά του κωδικού "
+"πρόσβασής σας."
+
+msgid "Email Address"
+msgstr "Ηλεκτρονική διεύθυνση"
+
+msgid "Recover"
+msgstr "Ανακτώ"
+
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+"Εισαγάγετε τη διεύθυνση email που χρησιμοποιήσατε για να εγγραφείτε και θα "
+"σας βοηθήσουμε να ανακτήσετε τον κωδικό πρόσβασής σας."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"Ο κωδικός πρόσβασής σας έχει λήξει. Η πολιτική του ιστότοπου αναφέρει ότι πρέπει να επιλέγετε νέο κωδικό πρόσβασης κάθε %(expire_days)s ημέρες και ότι οι κωδικοί πρόσβασης δεν πρέπει να έχουν χρησιμοποιηθεί εντός των προηγούμενων %(window_days)s ημερών."
+
+msgid "New Password"
+msgstr "Νέος κωδικός"
+
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
+"Οι κωδικοί πρόσβασης πρέπει να έχουν τουλάχιστον 8 χαρακτήρες, μεταξύ των "
+"οποίων ένας κεφαλαίος, ένας πεζός και ένας αριθμός"
+
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
+"Έχετε χρησιμοποιήσει αυτόν τον κωδικό πρόσβασης στο παρελθόν το προηγούμενο "
+"έτος, χρησιμοποιήστε έναν νέο κωδικό πρόσβασης."
+
+msgid "Password"
+msgstr "Κωδικός"
+
+msgid "Confirm Password"
+msgstr "Επιβεβαίωση κωδικού"
+
+msgid "Please enter your password to save changes."
+msgstr "Εισάγετε τον κωδικό πρόσβασής σας για να αποθηκεύσετε τις αλλαγές."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Επιβεβαιώστε τον νέο κωδικό πρόσβασης συμπληρώνοντας αυτό το πεδίο"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Ο νέος κωδικός πρόσβασης δεν ταιριάζει με την επιβεβαίωσή του"
+
+msgid "Your Email"
+msgstr "Η ηλεκτρονική σας διεύθυνση"
+
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
+"Η ανάκτηση e-mail δεν υποστηρίζεται, επικοινωνήστε με τον διαχειριστή του "
+"ιστότοπου για να επαναφέρετε τον κωδικό πρόσβασής σας με μη αυτόματο τρόπο."
+
+msgid "Current Password"
+msgstr "Τρέχων κωδικός πρόσβασης"
+
+msgid "Your current password"
+msgstr "Ο τρέχων κωδικός πρόσβασής σας"
+
+msgid "Your new password."
+msgstr "Ο νέος κωδικός πρόσβασής σας"
+
+msgid "Confirm new Password"
+msgstr "Επιβεβαιώστε τον νέο κωδικό πρόσβασης"
+
+msgid "Confirm your new password."
+msgstr "Επιβεβαιώστε τον νέο κωδικό πρόσβασής σας"
+
+msgid "Please enter your password to save changes"
+msgstr "Εισάγετε τον κωδικό πρόσβασής σας για να αποθηκεύσετε τις αλλαγές"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Επιβεβαιώστε τον νέο κωδικό πρόσβασης σας εισάγοντάς τον εδώ"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr ""
+"Αναντιστοιχία μεταξύ του νέου κωδικού πρόσβασης και της επιβεβαίωσης, "
+"δοκιμάστε ξανά"
+
+msgid "New user created successfully."
+msgstr "Ο νέος χρήστης δημιουργήθηκε με επιτυχία."
+
+msgid "Groups"
+msgstr "Ομάδες"
+
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr ""
+"Οι χρήστες θα λάβουν μόνο εκείνα τα δικαιώματα που επιτρέπονται για την "
+"ομάδα τους"
+
+msgid "Set the user's initial password here."
+msgstr "Ορίστε τον αρχικό κωδικό πρόσβασης του χρήστη εδώ."
+
+msgid "Last Login"
+msgstr "Τελευταία είσοδος"
+
+msgid "Is Active"
+msgstr "Είναι ενεργό"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Αν αυτός ο χρήστης επιτρέπεται να συνδεθεί στον ιστότοπο"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+"Οι χρήστες θα λάβουν μόνο εκείνα τα δικαιώματα που επιτρέπονται για την "
+"ομάδα τους"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr ""
+"Μπορείτε να επαναφέρετε τον κωδικό πρόσβασης του χρήστη εισάγοντας έναν νέο "
+"κωδικό εδώ"
+
+msgid "Username"
+msgstr "Όνομα χρήστη"
+
+msgid "Your password"
+msgstr "Ο κωδικός πρόσβασής σας"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Εάν θέλετε να ορίσετε νέο κωδικό πρόσβασης, πληκτρολογήστε τον εδώ"
+
+msgid "Confirm New Password"
+msgstr "Επιβεβαιώστε τον καινούριο κωδικό"
+
+msgid "Confirm your new password"
+msgstr "Επιβεβαιώστε τον καινούριο σας κωδικό"
+
+msgid "Edit your profile"
+msgstr "Επεξεργαστείτε το προφίλ σας"
+
+msgid "Password Recovery"
+msgstr "Επανάκτηση κωδικού"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Έχει σταλεί ένα email στον λογαριασμό σας με περαιτέρω οδηγίες."
+
+msgid "Password Recovery Request"
+msgstr "Αίτημα ανάκτησης κωδικού πρόσβασης"
+
+msgid "Pick a new password"
+msgstr "Επιλέξτε έναν νέο κωδικό πρόσβασης"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Ο κωδικός πρόσβασής σας ενημερώθηκε με επιτυχία, σας ευχαριστούμε"
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Είστε πλέον συνδεδεμένος/-η ως %s"
+
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+"Ο κωδικός πρόσβασης ενημερώθηκε με επιτυχία. Τώρα μπορείτε να συνδεθείτε "
+"χρησιμοποιώντας τον νέο σας κωδικό πρόσβασης."
+
+msgid "Reset your Password"
+msgstr "Επαναφορά του κωδικού πρόσβασής σας"
+
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr ""
+"Ο σύνδεσμός σας έχει λήξει για λόγους ασφαλείας. Παρακαλούμε ξεκινήστε ξανά "
+"τη διαδικασία εισάγοντας το email σας εδώ."
+
+msgid "Submit"
+msgstr "Υποβάλλετε"
+
+msgid "Form"
+msgstr "Φόρμα"
+
+msgid "Save Changes"
+msgstr "Αποθήκευσε τις αλλαγές"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Το νέο σας %s δημιουργήθηκε"
+
+#, python-format
+msgid "Import %s"
+msgstr "Εισάγετε %s "
+
+msgid "Back to Website"
+msgstr "Επιστροφή στον Ιστότοπο"
+
+msgid "Welcome, "
+msgstr "Καλωσήλθατε"
+
+msgid "Logout"
+msgstr "Αποσύνδεση"
+
+msgid "Opinions"
+msgstr "Απόψεις"
+
+msgid "Bots"
+msgstr "bots"
+
+msgid "Users"
+msgstr "Χρήστες"
+
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+msgid "Pages"
+msgstr "Σελίδες"
+
+msgid "Landing Pages"
+msgstr "Σελίδα Προορισμού"
+
+msgid "Jobs"
+msgstr "Θέσεις εργασίας"
+
+msgid "Tags"
+msgstr "Ετικέτες"
+
+msgid "Partners Logos"
+msgstr "Λογότυπα συνεργατών"
+
+msgid "Categories Images"
+msgstr "Κατηγορίεςαπό Εικόνες"
+
+msgid "News Items"
+msgstr "Ειδήσεις"
+
+msgid "Orgs"
+msgstr "Οργ."
+
+msgid "Images"
+msgstr "Εικόνες"
+
+msgid "About"
+msgstr "Σχετικά με"
+
+msgid "Engagement"
+msgstr "Σύμπλεξη"
+
+msgid "Reports"
+msgstr "Αναφορές"
+
+msgid "Category Images"
+msgstr "Εικόνες κατηγορίας"
+
+msgid "+ New "
+msgstr "+ Νέο"
+
+msgid "+ New Page"
+msgstr "+ Νέα σελίδα"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Διαχειριστής"
+
+msgid "Configuration"
+msgstr "Διαμόρφωση"
+
+msgid "Content"
+msgstr "Περιεχόμενο"
+
+msgid "Country Aliases"
+msgstr "Ψευδώνυμα Χώρας"
+
+msgid "Job Sources"
+msgstr "Πηγές εργασίας"
+
+msgid "Jobs Content"
+msgstr "Περιεχόμενο εργασίας"
+
+msgid "About Content"
+msgstr "Σχετικά με το περιεχόμενο"
+
+msgid "Videos"
+msgstr "Βίντεο"
+
+msgid "Contact Us Content"
+msgstr "Επικοινωνήστε μαζί μας Περιεχόμενο"
+
+msgid "Missions Content"
+msgstr "Περιεχόμενο αποστολών"
+
+msgid "Terms & Conditions"
+msgstr "Όροι και Προϋποθέσεις"
+
+msgid "U-Reporters Content"
+msgstr "Περιεχόμενο των U-Reporters"
+
+msgid "Join &amp; Engage Content"
+msgstr "Εγγραφείτε &amp; Ακολουθήστε το περιεχομένου"
+
+msgid "Join Steps Content"
+msgstr "Ενώστε τα βήματα περιεχομένου"
+
+msgid "Additional Menu"
+msgstr "Επιπλέον μενού"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "ΕΠΙΛΕΞΤΕ ΤΗ ΧΩΡΑ ΣΑΣ"
+
+msgid "Join Now"
+msgstr "Πάρτε μέρος τώρα"
+
+msgid "READ MORE"
+msgstr "Διαβάστε περισσότερα"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "Εξερευνήστε την παρακολούθηση"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"Για να προσθέσετε μια πηγή εργασίας στο Twitter, πρέπει να λάβετε ένα αναγνωριστικό widget από το twitter"
+
+msgid "Follow this step by step guide"
+msgstr "Ακολουθήστε αυτόν τον οδηγό βήμα προς βήμα"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"Αφού δημιουργήσετε το γραφικό στοιχείο, αντιγράψτε το αναγνωριστικό του γραφικού στοιχείου από τη διεύθυνση url όπως φαίνεται παρακάτω"
+
+msgid "Back"
+msgstr "Πίσω"
+
+msgid "Select bots"
+msgstr "Επιλέξτε bots"
+
+msgid "View public page"
+msgstr "Προβολή δημόσιας σελίδας"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "ΤΕΛΕΥΤΑΙΕΣ ΕΝΗΜΕΡΩΣΕΙΣ"
+
+msgid "Backends"
+msgstr "backends"
+
+msgid "Add os Select tags"
+msgstr "Προσθέστε ή επιλέξτε ετικέτες"
+
+#, python-format
+msgid ""
+"There is currently %(counter)s new poll syncing. Polls are displayed on the "
+"public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on "
+"the public site once they have completely synced their results."
+msgstr[0] ""
+"Αυτήν τη στιγμή υπάρχει %(counter)s συγχρονισμός νέας δημοσκόπησης"
+". Οι δημοσκοπήσεις εμφανίζονται στον δημόσιο ιστότοπο μόλις "
+"συγχρονιστούν πλήρως τα αποτελέσματά τους."
+msgstr[1] ""
+"Αυτήν τη στιγμή υπάρχει 1 %(counter)s συγχρονισμός νέας δημοσκόπησης . Οι "
+"δημοσκοπήσεις εμφανίζονται στον δημόσιο ιστότοπο μόλις συγχρονιστούν πλήρως "
+"τα αποτελέσματά τους."
+
+msgid "+ New Poll"
+msgstr "Νέα δημοσκόπηση"
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "%(counter)sΕρώτηση δημοσκόπησης"
+msgstr[1] "%(counter)sΕρωτήσεις δημοσκόπησης"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+"Οι αρχικοί συγχρονισμοί της νέας δημοσκόπησης προγραμματίζονται κάθε 10 "
+"λεπτά"
+
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+"Πλέον δεν γίνονται συγχρονισμένοι για τις παλιές δημοσκοπήσεις, αυτές "
+"αρχειοθετούνται"
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr " Οι κύριοι συγχρονισμοί για την δημοσκόπηση γίνονται κάθε 20 λεπτά."
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+" Οι πιο πρόσφατοι συγχρονισμοί για την δημοσκόπηση γίνονται κάθε 60 λεπτά."
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "Οι συγχρονισμοί δημοσκοπήσεων προγραμματίζονται κάθε 24 ώρες"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Δεν προγραμματίζονται συγχρονισμοί, δεν είναι ενεργοί"
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
+"Δεν υπάρχει προγραμματισμός για τους συγχρονισμούς, δεν υπάρχει ροή για την "
+"δημοσκόπηση"
+
+msgid "Refresh Results"
+msgstr "Ανανέωση αποτελεσμάτων"
+
+msgid "Partners"
+msgstr "Συνεργάτες"
+
+msgid "MORE POLLS"
+msgstr "Περισσότερες δημοσκοπήσεις"
+
+msgid "FILTER"
+msgstr "Φιλτράρισμα"
+
+msgid "All"
+msgstr "Όλα"
+
+msgid "POLL LIST"
+msgstr "ΛΙΣΤΑ ΔΗΜΟΚΟΠΗΣΗΣ"
+
+msgid "All polls from most recent to oldest"
+msgstr "Όλες οι δημοσκοπήσεις από τις πιο πρόσφατες έως τις παλαιότερες"
+
+msgid "ARCHIVED STORIES"
+msgstr "ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΙΣΤΟΡΙΕΣ"
+
+msgid "LIST"
+msgstr "ΛΙΣΤΑ"
+
+msgid "Send"
+msgstr "Στέλνω"
+
+msgid "to"
+msgstr "προς"
+
+msgid "LATEST OPINION"
+msgstr "ΤΕΛΕΥΤΑΙΑ ΓΝΩΜΗ"
+
+msgid "VIEW FULL RESULTS"
+msgstr "ΔΕΙΤΕ ΟΛΑ ΤΑ ΑΠΟΤΕΛΕΣΜΑΤΑ"
+
+msgid "U-REPORTERS IN"
+msgstr "U-REPORTERS ΣΕ"
+
+msgid "PARTNERING WITH"
+msgstr "ΣΥΝΕΡΓΑΖΟΜΑΣΤΕ ΜΕ"
+
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
+
+msgid "IN"
+msgstr "ΜΕΣΑ"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ΧΩΡΕΣ ΣΕ ΟΛΟ ΤΟΝ ΚΟΣΜΟ"
+
+msgid "AGES"
+msgstr "ΗΛΙΚΙΕΣ"
+
+msgid "Available bots"
+msgstr "Διαθέσιμα bots"
+
+msgid "More bots"
+msgstr "Περισσότερα bots"
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Εγγραφείτε στο U-Report, η φωνή σας έχει σημασία."
+
+msgid "FEATURED STORY"
+msgstr "Η ΣΥΓΚΕΚΡΙΜΕΝΗ ΙΣΤΟΡΙΑ"
+
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
+msgstr ""
+"Είμαστε μέρος μιας παγκόσμιας πλατφόρμας που εργάζεται για να αλλάξει τη ζωή"
+" των νέων σε όλο τον κόσμο."
+
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"Μάθετε περισσότερα για το πώς το U-Report ενδυναμώνει και συνδέει τους νέους"
+" δίνοντάς του τη δυνατότητα να μιλήσουν για θέματα που τους ενδιαφέρουν."
+
+msgid "LEARN MORE"
+msgstr "Μάθετε περισσότερα"
+
+msgid "Visit"
+msgstr "Επισκεφθείτε"
+
+msgid "How would you like to join?"
+msgstr "Πώς θα θέλατε να εγγραφείτε;"
+
+msgid "Text"
+msgstr "Κείμενο"
+
+msgid "PAGE"
+msgstr "Σελίδα"
+
+msgid "SEARCH"
+msgstr "ΑΝΑΖΗΤΗΣΗ"
+
+msgid "No results found"
+msgstr "Δεν βρέθηκαν αποτελέσματα"
+
+msgid "RESPONDERS"
+msgstr "ΑΠΑΝΤΗΣΕΙΣ"
+
+msgid "RESPONSE RATE"
+msgstr "ΠΟΣΟΣΤΟ ΑΠΑΝΤΗΣΗΣ"
+
+msgid "TOTAL RESPONDERS"
+msgstr "ΣΥΝΟΛΟ ΑΠΑΝΤΗΣΕΩΝ"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)sαπάντησαν από %(polled)s τους ερωτηθέντες"
+
+msgid "ALL"
+msgstr "ΟΛΑ"
+
+msgid "AGE"
+msgstr "ΗΛΙΚΙΑ"
+
+msgid "GENDER"
+msgstr "ΦΥΛΟ"
+
+msgid "LOCATION"
+msgstr "ΤΟΠΟΘΕΣΙΑ"
+
+msgid "Written by:"
+msgstr "Γράφτηκε αυτό:"
+
+msgid "No reports published yet"
+msgstr "Δεν έχουν δημοσιευθεί ακόμη αναφορές"
+
+msgid "REPORT"
+msgstr "ΑΝΑΦΟΡΑ"
+
+msgid "STORY"
+msgstr "ΙΣΤΟΡΙΑ"
+
+msgid "Download Report"
+msgstr "Λήψη αναφοράς"
+
+msgid "Even"
+msgstr "Ακόμη και"
+
+msgid "State"
+msgstr "Δήμος"
+
+msgid "Other"
+msgstr "Άλλο"
+
+msgid "District"
+msgstr "Περιοχή"
+
+msgid "Participation Level"
+msgstr "Επίπεδο Συμμετοχής"
+
+msgid "Responders"
+msgstr "Ανταποκριτές"
+
+msgid "Reporters in"
+msgstr "Reporters σε"
+
+msgid "Results"
+msgstr "Αποτελέσματα"
+
+msgid "*Other answers include"
+msgstr "*Οι υπόλοιπες απαντήσεις περιλαμβάνουν"
+
+msgid "Population"
+msgstr "Πληθυσμός"
+
+msgid "Registered in"
+msgstr "Εγγεγραμμένος σε"
+
+msgid "Density"
+msgstr "Πυκνότητα"
+
+msgid "total"
+msgstr "συνολικά"
+
+msgid "of"
+msgstr "από"
+
+msgid "the"
+msgstr "ο"
+
+msgid "OVERALL STATISTICS"
+msgstr "ΓΕΝΙΚΑ ΣΤΑΤΙΣΤΙΚΑ"
+
+msgid "THIS YEAR"
+msgstr "ΑΥΤΟ ΤΟ ΕΤΟΣ"
+
+msgid "AVG RESPONSE RATE"
+msgstr "ΜΕΣΟΣ ΠΟΣΟΣΤΟ ΑΠΑΝΤΗΣΗΣ"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS ΑΝΑ ΠΕΡΙΟΧΗ"
+
+msgid "FILTER RESULTS"
+msgstr "ΦΙΛΤΡΑΡΙΣΜΑ ΑΠΟΤΕΛΕΣΜΑΤΩΝ"
+
+msgid "Charts only visible for logged in admins"
+msgstr "Τα γραφήματα είναι ορατά μόνο για συνδεδεμένους διαχειριστές"
+
+msgid "Export and Share"
+msgstr "Εξαγωγή και Κοινοποίηση"
+
+msgid ""
+"Want to tell the world about this? Download this image to easily share on "
+"social media or for a beautiful presentation!"
+msgstr ""
+"Θέλετε να πείτε στον κόσμο για αυτό; Κατεβάστε αυτήν την εικόνα για να τη "
+"μοιραστείτε εύκολα στα μέσα κοινωνικής δικτύωσης ή για μια όμορφη "
+"παρουσίαση!"
+
+msgid "SELECT LANGUAGE"
+msgstr "ΕΠΙΛΕΞΕ ΓΛΩΣΣΑ"
+
+msgid "SELECT COUNTRY"
+msgstr "Eπίλεξε χώρα"
+
+msgid "Custom pages"
+msgstr "Προσαρμοσμένες σελίδες"
+
+msgid "Landing pages"
+msgstr "Σελίδες προορισμού"
+
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
+msgstr ""
+"Δείτε από τους αριθμούς πώς ενισχύουμε τις φωνές των νέων για μια θετική "
+"κοινωνική αλλαγή."
+
+msgid "Polled"
+msgstr "Δημοσκόπηση"
+
+msgid "Reporters"
+msgstr "Reporters"
+
+msgid "Top Region"
+msgstr "Κορυφαία Περιφέρεια"
+
+msgid "January"
+msgstr "Ιανουάριος"
+
+msgid "February"
+msgstr "Φεβρουάριος"
+
+msgid "March"
+msgstr "Μάρτιος"
+
+msgid "April"
+msgstr "Απρίλιος"
+
+msgid "May"
+msgstr "Μάιος"
+
+msgid "June"
+msgstr "Ιούνιος"
+
+msgid "July"
+msgstr "Ιούλιος"
+
+msgid "August"
+msgstr "Αύγουστος"
+
+msgid "September"
+msgstr "Σεπτέμβριος"
+
+msgid "October"
+msgstr "Οκτώβριος"
+
+msgid "November"
+msgstr "Νοέμβριος"
+
+msgid "December"
+msgstr "Δεκέμβριος"
+
+msgid "Jan"
+msgstr "Ιαν."
+
+msgid "Feb"
+msgstr "Φεβρ."
+
+msgid "Mar"
+msgstr "Μαρ."
+
+msgid "Apr"
+msgstr "Απρίλιος"
+
+msgid "Jun"
+msgstr "Ιούνιος"
+
+msgid "Jul"
+msgstr "Ιούλιος"
+
+msgid "Aug"
+msgstr "Αύγ."
+
+msgid "Sep"
+msgstr "Σεπ."
+
+msgid "Oct"
+msgstr "Οκτ."
+
+msgid "Nov"
+msgstr "Νοεμ."
+
+msgid "Dec"
+msgstr "Δεκ."
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Είστε σίγουρος/-η ότι επιθυμείτε να διαγράψετε <strong>%(object)s</strong>;"
+
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] "%(counter)sΑποτέλεσμα"
+msgstr[1] "%(counter)sΑποτελέσματα"
+
+#, python-format
+msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr "Αποτελέσματα %(start)s-%(end)sαπό%(count)s"
+
+msgid "Error"
+msgstr "Λάθος"
+
+msgid "Enter Dashboard"
+msgstr "Εισαγωγή Ταμπλό"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Λυπούμαστε, δεν μπορείτε να συνδεθείτε αυτήν τη στιγμή επειδή λάβαμε %(failed_login_limit)sλανθασμένες προσπάθειες σύνδεσης"
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Περιμένετε %(lockout_timeout)sλεπτά πριν προσπαθήσετε να συνδεθείτε ξανά."
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Ο κωδικός πρόσβασής σας έχει λήξει.</strong>Η πολιτική του ιστότοπου αναφέρει ότι πρέπει να επιλέγετε έναν νέο κωδικό πρόσβασης κάθε %(expire_days)sημέρες, και ότι οι κωδικοί πρόσβασης δεν πρέπει να έχουν χρησιμοποιηθεί τις προηγούμενες %(window_days)sημέρες."
+
+msgid "+ New Story"
+msgstr "+ Νέα ιστορία"
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "Ανανεώθηκε %sη προσωρινή μνήμη  για αυτόν τον οργανισμό"
+
+msgid "Flag"
+msgstr "Επισημαίνω"
+
+msgid "About Partner Logo"
+msgstr "Σχετικά με το λογότυπο του συνεργάτη"
+
+msgid "The organization to which the image will be used"
+msgstr "Ο οργανισμός στον οποίο θα χρησιμοποιηθεί η εικόνα"
+
+msgid "A short descriptive name for this image"
+msgstr "Ένα σύντομο περιγραφικό όνομα για αυτήν την εικόνα"
+
+msgid "Image type"
+msgstr "Τύπος εικόνας"
+
+msgid ""
+"The priority number for this image among others on a list, high priority "
+"comes first"
+msgstr ""
+"Ο αριθμός προτεραιότητας για αυτήν την εικόνα μεταξύ άλλων σε μια λίστα, η "
+"εικόνα υψηλής προτεραιότητας έρχεται πρώτη"
+
+msgid "The organization this bot is part of"
+msgstr "Ο οργανισμός στον οποίο ανήκει αυτό το bot"
+
+msgid ""
+"Whether this bot is displayed on the homepage, up to 3 only with the highest"
+" priorities are displayed"
+msgstr ""
+"Αν αυτό το bot εμφανίζεται στην αρχική σελίδα, εμφανίζονται μόνο έως και 3 "
+"με τις υψηλότερες προτεραιότητες"
+
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr ""
+"Εάν αυτό το bot είναι κρυφό σε δημόσιες σελίδες εκτός από σελίδες προορισμού"
+
+msgid "The title to display for this bot"
+msgstr "Ο τίτλος που θα εμφανιστεί για αυτό το bot"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+"Ο σύντομος κωδικός, ο αριθμός ή το όνομα bot του καναλιού γι' αυτό το bot"
+
+msgid "The keyword for this bot"
+msgstr "Η λέξη κλειδί γι' αυτό το bot"
+
+msgid "The Facebook bot deeplink, optional"
+msgstr "Ο σύνδεσμος στο Facebook bot, προαιρετικός"
+
+msgid "The Telegram bot deeplink, optional"
+msgstr "Ο σύνδεσμος στο Telegram bot, προαιρετικός"
+
+msgid "The Viber bot deeplink, optional"
+msgstr "Ο σύνδεσμος στο Viber bot, προαιρετικός"
+
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Ο σύνδεσμος στο What's App bot, προαιρετικός"
+
+msgid "A short description for this bot, required"
+msgstr "Aπαιτείται μια σύντομη περιγραφή για αυτό το bot"
+
+msgid ""
+"The priority number for this bot among others on a list, high priority comes"
+" first"
+msgstr ""
+"Η σειρά προτεραιότητας γι' αυτό το bot μεταξύ άλλων σε μια λίστα, τα bot "
+"υψηλής προτεραιότητας έρχονται πρώτη"
+
+msgid "Whether this bot should be shown to the public"
+msgstr "Εάν αυτό το bot θα πρέπει να εμφανίζεται στο κοινό"
+
+msgid "Label"
+msgstr "Επιγραφή"
+
+msgid "Key"
+msgstr "κλειδί"
+
+msgid "Male"
+msgstr "Άνδρας"
+
+msgid "Female"
+msgstr "Γυναίκα"
+
+msgid "Organization"
+msgstr "Οργανισμός"
+
+msgid "Gender"
+msgstr "Το φύλο"
+
+msgid "Gender of the contact"
+msgstr "Το φύλο της επαφής"
+
+msgid "Born Field"
+msgstr "Το πεδίο γέννησης"
+
+msgid "Occupation Field"
+msgstr "Το πεδίο του επαγγέλματος"
+
+msgid "Registration Date"
+msgstr "Ημερομηνία Εγγραφής"
+
+msgid "State Field"
+msgstr "Το πεδίο της Περιφέρειας"
+
+msgid "District Field"
+msgstr "Το πεδίο του Δήμου"
+
+msgid "Ward Field"
+msgstr "Πεδίο Ward"
+
+msgid "Number of items with this counter"
+msgstr "Ο αριθμός αντικειμένων ΄σύμφωνα με αυτόν τον μετρητή"
+
+msgid "No root user found. Please create a root user"
+msgstr "Δεν βρέθηκε χρήστης root. Δημιουργήστε έναν χρήστη root"
+
+msgid "The name for our alias"
+msgstr "Το όνομα για το ψευδώνυμό μας"
+
+msgid "The title or name to reference this Job source."
+msgstr "Ο τίτλος ή το όνομα για αναφορά σε αυτήν την πηγή εργασίας."
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr "Επιλέξτε τον τύπο για την πηγή εργασίας. Twitter, Facebook ή RSS feed"
+
+msgid "The full URL to navigate to this Job source."
+msgstr "Το πλήρες URL για πλοήγηση σε αυτήν την πηγή εργασίας."
+
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
+msgstr ""
+"Για το Twitter, απαιτείται ένα widget id για την ενσωμάτωση των tweets στον "
+"ιστότοπο. Διαβάστε προσεκτικά τις παραπάνω οδηγίες σχετικά με το πώς να "
+"αποκτήσετε το σωστό widget id"
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr "Οι επιλεγμένες πηγές εργασίας εμφανίζονται πρώτα στη σελίδα εργασιών."
+
+msgid "The organization this job source is for"
+msgstr "Ο οργανισμός για τον οποίο προορίζεται αυτή η πηγή εργασίας"
+
+msgid "Your job source has been added successfully"
+msgstr "Η πηγή εργασίας σας προστέθηκε με επιτυχία"
+
+msgid "Your job source has been updated successfully"
+msgstr "Η πηγή εργασίας σας ενημερώθηκε με επιτυχία"
+
+msgid "The organization this landing page is part of"
+msgstr "Ο οργανισμός στον οποίο ανήκει αυτή η σελίδα προορισμού"
+
+msgid "The title to display for this landing page"
+msgstr "Ο τίτλος που θα εμφανιστεί για αυτήν τη σελίδα προορισμού"
+
+msgid "The call to action text for this landing page"
+msgstr "Το κείμενο παρότρυνσης για δράση για αυτήν τη σελίδα προορισμού"
+
+msgid "The slug to use on the link for this landing page"
+msgstr ""
+"Ο όρος που χρησιμοποιείται στον σύνδεσμο για αυτήν τη σελίδα προορισμού"
+
+msgid "The body of text for the landing page"
+msgstr "Το σώμα του κειμένου για τη σελίδα προορισμού"
+
+msgid "The image file to use for the page"
+msgstr "Το αρχείο εικόνας που θα χρησιμοποιηθεί για τη σελίδα"
+
+msgid "Whether this page should be active to the public"
+msgstr "Εάν αυτή η σελίδα πρέπει να είναι ενεργή για το κοινό"
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr "Αυτό είναι το OSM id για αυτό το διοικητικό όριο"
+
+msgid "The name of our administrative boundary"
+msgstr "Το όνομα του διοικητικού μας ορίου"
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr ""
+"Το επίπεδο του ορίου, 0 για τη χώρα, 1 για την πολιτεία, 2 για την περιοχή"
+
+msgid "The parent to this political boundary if any"
+msgstr "Ο γονέας σε αυτό το πολιτικό όριο εάν υπάρχει"
+
+msgid "Geometry"
+msgstr "Γεωμετρία"
+
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr ""
+"Το json αντιπροσωπεύει τον τύπο γεωμετρίας και τις συντεταγμένες των ορίων"
+
+msgid "The title for this item"
+msgstr "Ο τίτλος για αυτό το στοιχείο"
+
+msgid "A short summary description for this item"
+msgstr "Μια σύντομη συνοπτική περιγραφή για αυτό το στοιχείο"
+
+msgid "A link that should be associated with this item"
+msgstr "Ένας σύνδεσμος που θα πρέπει να συσχετιστεί με αυτό το στοιχείο"
+
+msgid "The category this item belongs to"
+msgstr "Η κατηγορία στην οποία ανήκει αυτό το στοιχείο"
+
+msgid "The organization this item belongs to"
+msgstr "Ο οργανισμός στον οποίο ανήκει αυτό το στοιχείο"
+
+msgid "The title for this Video"
+msgstr "Ο τίτλος γι'αυτό το Βίντεο"
+
+msgid "A short summary description for this video"
+msgstr "Μια σύντομη περιγραφή για αυτό το βίντεο"
+
+msgid "The organization this video belongs to"
+msgstr "Ο οργανισμός στον οποίο ανήκει αυτό το βίντεο"
+
+msgid "The name of this poll category"
+msgstr "Το όνομα αυτής της κατηγορίας δημοσκοπήσεων"
+
+msgid "Poll Categories"
+msgstr "Κατηγορίες Δημοσκοπήσεων"
+
+msgid "The Flow this Poll is based on"
+msgstr "Η Ροή στην οποία βασίζεται αυτή η Δημοσκόπηση"
+
+msgid ""
+"The date to display for this poll. Leave empty to use flow creation date."
+msgstr ""
+"Η ημερομηνία που θα εμφανιστεί για αυτήν τη δημοσκόπηση. Αφήστε κενό για να "
+"χρησιμοποιήσετε την ημερομηνία δημιουργίας της ροής."
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "Εάν η ροή για αυτήν τη δημοσκόπηση έχει αρχειοθετηθεί στο RapidPro"
+
+msgid "The base language of the flow to use"
+msgstr "Η βασική γλώσσα της ροής προς χρήση"
+
+msgid "The number of polled reporters on this poll"
+msgstr "Ο αριθμός όσων συμμετείχαν σε αυτή τη δημοσκόπηση"
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr ""
+"Εάν η δημοσκόπηση ολοκλήρωσε τον συγχρονισμό των αρχικών αποτελεσμάτων."
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Αν η δημοσκόπηση πρέπει να σταματήσει να αναπαράγει τα στατιστικά."
+
+msgid "The title for this Poll"
+msgstr "Ο τίτλος γι'αυτή την δημοσκόπηση"
+
+msgid "The category this Poll belongs to"
+msgstr "Η κατηγορία στην οποία ανήκει αυτή η δημοσκόπηση"
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr "Εάν αυτή η δημοσκόπηση θα πρέπει να εμφανίζεται στην αρχική σελίδα"
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr ""
+"Η εικόνα της κατηγορίας splash προς εμφάνιση για τη δημοσκόπηση "
+"(προαιρετικό)"
+
+msgid "The organization this poll is part of"
+msgstr "Ο οργανισμός στον οποίο ανήκει αυτή η δημοσκόπηση"
+
+msgid "The title for this response story"
+msgstr "Ο τίτλος αυτής της ιστορίας ανταπόκρισης"
+
+msgid "The writer of the response story"
+msgstr "Ο συγγραφέας αυτής της ιστορίας ανταπόκρισης"
+
+msgid "The poll to associate to"
+msgstr "Η δημοσκόπηση με την οποία συσχετίζεται "
+
+msgid "The poll for this response"
+msgstr "Η δημοσκόπηση γι'αυτή την απάντηση"
+
+msgid "The location for this response"
+msgstr "Η τοποθεσία γι΄αυτή την απάντηση"
+
+msgid "The name of the sender of the message"
+msgstr "Το όνομα του αποστολέα του μηνύματος"
+
+msgid "The featured response message"
+msgstr "Το προτεινόμενο μήνυμα απάντησης"
+
+msgid "Dark 1 background and White text"
+msgstr "Σκούρο 1 φόντο και λευκό κείμενο"
+
+msgid "Light 1 background and Black text"
+msgstr "Φόντο ανοιχτό 1 και μαύρο κείμενο"
+
+msgid "Dark 2 background and White text"
+msgstr "Σκούρο 2 φόντο και λευκό κείμενο"
+
+msgid "Dark 3 background and Black text"
+msgstr "Σκούρο 3 φόντο και μαύρο κείμενο"
+
+msgid "Show Age, Gender and Location charts"
+msgstr "Εμφάνιση γραφημάτων Ηλικίας, Φύλου και Τοποθεσίας"
+
+msgid "Hide Age chart ONLY"
+msgstr "Απόκρυψη διαγράμματος Ηλικίας ΜΟΝΟ"
+
+msgid "Hide Gender chart ONLY"
+msgstr "Απόκρυψη διαγράμματος Φύλου ΜΟΝΟ"
+
+msgid "Hide Location chart ONLY"
+msgstr "Απόκρυψη διαγράμματος Τοποθεσίας ΜΟΝΟ"
+
+msgid "Hide Age and Gender charts"
+msgstr "Απόκρυψη διαγραμμάτων Ηλικίας και Φύλου"
+
+msgid "Hide Age and Location charts"
+msgstr "Απόκρυψη γραφημάτων Ηλικίας και Τοποθεσίας"
+
+msgid "Hide Gender and Location charts"
+msgstr "Απόκρυψη γραφημάτων Φύλου και Τοποθεσίας"
+
+msgid "Hide Age, Gender and Location charts"
+msgstr "Απόκρυψη γραφημάτων Ηλικίας, Φύλου και Τοποθεσίας"
+
+msgid "The poll this question is part of"
+msgstr "Η δημοσκόπηση μέρος της οποίας είναι αυτή η ερώτηση"
+
+msgid "The title of this question"
+msgstr "Ο τίτλος αυτής της ερώτησης"
+
+msgid "The RuleSet this question is based on"
+msgstr "Το σύνολο των κανόνων στο οποίο βασίζεται αυτή η ερώτηση"
+
+msgid "The label of the ruleset on RapidPro"
+msgstr " Η ετικέτα του συνόλου κανόνων στο RapidPro"
+
+msgid "The priority number for this question on the poll"
+msgstr "Ο αριθμός προτεραιότητας για αυτήν την ερώτηση στη δημοσκόπηση"
+
+msgid "The Rule this response category is based on"
+msgstr " Ο Κανόνας στον οποίο βασίζεται αυτή η κατηγορία απόκρισης"
+
+msgid "Select tags for this poll"
+msgstr "Επιλέξτε ετικέτες για αυτήν τη δημοσκόπηση"
+
+msgid "Your org does not have any API token configuration."
+msgstr "Το org σας δεν έχει καμία διαμόρφωση API token"
+
+msgid "You must include a title for every included question."
+msgstr ""
+"Πρέπει να συμπεριλάβετε έναν τίτλο για κάθε ερώτηση που περιλαμβάνεται."
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr ""
+"Ο τίτλος είναι πολύ μεγάλος. Το μέγιστο όριο είναι 255 χαρακτήρες για κάθε "
+"τίτλο"
+
+msgid "You must include at least one poll question."
+msgstr "Πρέπει να συμπεριλάβετε τουλάχιστον μία ερώτηση δημοσκόπησης."
+
+msgid "Adjust poll date"
+msgstr "Προσαρμογή ημερομηνίας δημσσκόπησης"
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr ""
+"Η δημοσκόπησή σας έχει ενημερωθεί, τώρα επιλέξτε ποιες ερωτήσεις θα "
+"συμπεριληφθούν."
+
+msgid "Configure flow"
+msgstr "Διαμόρφωση ροής"
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr ""
+"Η δημοσκόπησή σας έχει διαμορφωθεί, τώρα προσαρμόστε την ημερομηνία "
+"δημοσκόπησης."
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "Η δημοσκόπησή σας δημιουργήθηκε, τώρα διαμορφώστε τη ροή της."
+
+msgid "Poll Images"
+msgstr "Εικόνες της δημοσκόπησης"
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr ""
+"Τώρα εισάγετε τυχόν απαντήσεις που θέλετε να εμφανίζονται. (εάν υπάρχουν)"
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr ""
+"Εικόνα που θα εμφανίζεται στη σελίδα δημοσκόπησης και στις προεπισκοπήσεις. "
+"(προαιρετικά)"
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr ""
+"Εικόνα που θα εμφανίζεται στη σελίδα δημοσκόπησης και στις προεπισκοπήσεις. "
+"(προαιρετικά)"
+
+msgid "Poll Response"
+msgstr "Απάντηση Δημοσκόπησης"
+
+msgid "Your poll has been updated."
+msgstr " Η δημοσκόπησή σας έχει ενημερωθεί."
+
+msgid "Poll Questions"
+msgstr "Ερωτήσεις Δημοσκόπησης"
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr ""
+"Τώρα ορίστε ποιες εικόνες θέλετε να εμφανίζονται στη σελίδα δημοσκόπησης. "
+"(εάν υπάρχουν)"
+
+msgid "Include"
+msgstr "Περιλαμβάνω"
+
+msgid "Whether to include this question in your public results"
+msgstr "Εάν θα συμπεριλάβετε αυτήν την ερώτηση στα δημόσια αποτελέσματά σας"
+
+msgid "Priority"
+msgstr "Προτεραιότητα"
+
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
+msgstr ""
+"Η προτεραιότητα αυτής της ερώτησης στη σελίδα της δημοσκόπησης, η υψηλότερη "
+"προτεραιότητα έρχεται πρώτη"
+
+msgid "Ruleset Label"
+msgstr "Ετικέτα του συνόλου των κανόνων"
+
+msgid "The label of the ruleset from RapidPro"
+msgstr "Η ετικέτα του συνόλου κανόνων από το RapidPro"
+
+msgid "Title"
+msgstr "Τίτλος"
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Η ερώτηση που τίθεται στο κοινό σας θα εμφανίζεται δημόσια"
+
+msgid "Color Choice"
+msgstr "Επιλογή χρώματος"
+
+msgid "The color to use for the question block will be displayed publicly"
+msgstr ""
+"Το χρώμα που θα χρησιμοποιηθεί για το μπλοκ ερωτήσεων θα εμφανίζεται δημόσια"
+
+msgid "Hidden Charts Choice"
+msgstr "Επιλογή κρυφών γραφημάτων"
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
+"Επιλέξτε την ανάλυση των γραφημάτων για απόκρυψη για αυτήν την ερώτηση στο "
+"κοινό"
+
+msgid "Category {idx+1}"
+msgstr "Κατηγορία {idx+1}"
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Η ετικέτα της κατηγορίας από το backend (όπως το RapidPro)"
+
+msgid "Display {idx+1}"
+msgstr "Απεικόνιση {idx+1}"
+
+msgid "The label to display of the category on the public site"
+msgstr "Η ετικέτα για την εμφάνιση της κατηγορίας στον δημόσιο ιστότοπο"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr "Προγραμματισμένος συγχρονισμός σε εξέλιξη."
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr "Τα τελευταία αποτελέσματα συγχρονίστηκαν πριν από %(time)s "
+
+msgid "Synced"
+msgstr "Συγχρονισμένος"
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr "Συγχρονισμός σε εξέλιξη...{sync_progress:.1f}%"
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr "Επεξεργασία δημοσκόπησης για τη ροή [{flow_name} ({flow_date_hint})]"
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr ""
+"Προγραμματισμένη ανανέωση για τη δημοσκόπηση #  %(poll_id)dστο org "
+"#%(org_id)d"
+
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr ""
+"Το όνομα της Ομάδας Επικοινωνίας που περιέχει εγγεγραμμένους U-Reporters"
+
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr ""
+"Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει την ημερομηνία γέννησης των "
+"U-Reporters"
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr ""
+"Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει το φύλο των U-Reporters"
+
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr ""
+"Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει το επάγγελμα των U-Reporters"
+
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr ""
+"Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει την ημερομηνία εγγραφής των "
+"U-Reporters"
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr ""
+"Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει την Χώρα των U-Reporters"
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr ""
+"Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει την Περιφέρεια των "
+"U-Reporters"
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr "Η ετικέτα του Πεδίου Επαφής που περιέχει το σύνολο των Reporter"
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "Η ετικέτα που αποδίδεται στους U-Reporters που είναι Άνδρες"
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "Η ετικέτα που αποδίδεται στους U-Reporters που είναι Γυναίκες"
+
+msgid "Whether this org should be show on the landing page"
+msgstr "Εάν αυτό το org θα πρέπει να εμφανίζεται στη σελίδα προορισμού"
+
+msgid "Whether this org count should consider the count from link only"
+msgstr "Εάν αυτό το org θα πρέπει να ξεκινά το μέτρημα μόνο από τον σύνδεσμο"
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr ""
+"Ο σύντομος κώδικας που θα χρησιμοποιήσουν οι χρήστες για να επικοινωνήσουν "
+"τοπικά με το U-Report"
+
+msgid ""
+"The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr ""
+"Ο αριθμός WhatsApp που θα χρησιμοποιήσουν οι χρήστες για να επικοινωνήσουν "
+"με το U-Report, εάν έχετε"
+
+msgid ""
+"The Telegram bot that users will use to contact U-Report if you have one"
+msgstr ""
+"Το Telegram bot που θα χρησιμοποιήσουν οι χρήστες για να επικοινωνήσουν με "
+"το U-Report εάν έχετε"
+
+msgid ""
+"The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+"Το όνομα χρήστη viber που θα χρησιμοποιήσουν οι χρήστες για να "
+"επικοινωνήσουν με το U-Report, αν έχετε"
+
+msgid "The join button text"
+msgstr "Το κείμενο του κουμπιού σύνδεσης"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
+"Το σύντομο κείμενο που χρησιμοποιείται για να κατευθύνει τους επισκέπτες να "
+"συμμετάσχουν στο U-Report"
+
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "Το κείμενο παρότρυνσης για συμμετοχή στην επάνω ενότητα του U-Report"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+"Το id του Youtube βίντεο για το πώς να συμμετάσχετε στην ενότητα U-Report"
+
+msgid "The title of the photos section U-Report homepage"
+msgstr "Ο τίτλος της αρχικής σελίδας της ενότητας φωτογραφιών του U-Report"
+
+msgid "The description of the photos section U-Report homepage"
+msgstr "Η περιγραφή της αρχικής σελίδας της ενότητας φωτογραφιών U-Report"
+
+msgid "The description of the opinions page"
+msgstr "Η περιγραφή της σελίδας απόψεων"
+
+msgid "The description of the stories page"
+msgstr "Η περιγραφή της σελίδας ιστοριών"
+
+msgid "The description of the engagement page"
+msgstr "Η περιγραφή της σελίδας σύνδεσης"
+
+msgid "The callout message on the footer engagement section"
+msgstr "Το μήνυμα επεξήγησης στο υποσέλιδο της ενότητας σύνδεσης "
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr ""
+"Το κύριο στυλιστικό χρώμα για αυτόν τον οργανισμό θα πρέπει να είναι σκούρο"
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr ""
+"Το δεύτερο στυλιστικό χρώμα για αυτόν τον οργανισμό θα πρέπει να είναι το "
+"σκούρο"
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr ""
+"Το τρίτο στυλιστικό χρώμα για αυτόν τον οργανισμό, θα πρέπει να είναι σκούρο"
+
+msgid ""
+"The primary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Το κύριο στυλιστικό χρώμα για αυτόν τον οργανισμό θα πρέπει να είναι "
+"ανοιχτόχρωμο"
+
+msgid ""
+"The secondary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Το δεύτερο στυλιστικό χρώμα για αυτόν τον οργανισμό θα πρέπει να είναι "
+"ανοιχτόχρωμο"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr ""
+"Έως 6 χρώματα για να σχεδιάζετε γραφήματα, χρησιμοποιήστε κόμμα μεταξύ των "
+"χρωμάτων"
+
+msgid ""
+"11 colors for styling maps, use comma between colors, not used if not 11 "
+"colors"
+msgstr ""
+"11 χρώματα για να σχεδιάζονται χάρτες, χρησιμοποιήστε κόμμα μεταξύ των "
+"χρωμάτων, δεν χρησιμοποιούνται αν δεν είναι 11 χρώματα"
+
+msgid "The states to show on maps only"
+msgstr "Οι δήμοι που θα εμφανίζονται μόνο στους χάρτες"
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr ""
+"Οι δήμοι που εμφανίζονται μόνο στους χάρτες χρησιμοποιούνται για το "
+"φιλτράρισμα των αποτελεσμάτων των δημοσκοπήσεων"
+
+msgid "The Google Tag Manager ID for this organization"
+msgstr "Το id του διαχειριστή των Google ετικετών."
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "Το id του Google Analytics γι΄αυτό τον οργανισμό"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "Η διεύθυνση URL στο κανάλι YouTube για αυτόν τον οργανισμό"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
+"Το περιεχόμενο για τη μετα-ετικέτα για την επαλήθευση του domain του "
+"Facebook"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "Το URL της σελίδας του Facebook για αυτόν τον οργανισμό"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr ""
+"Το ακέραιο id στη σελίδα του Facebook γι' αυτόν τον οργανισμό (προαιρετικό)"
+
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr ""
+"Το ακέραιο id στο Facebook app για το Chat app αυτού του οργανισμού "
+"(προαιρετικό)"
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr ""
+"Το σύντομο κείμενο που χρησιμοποιείται για να χαιρετήσει τους χρήστες στο "
+"Facebook Messenger Plugin"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "Το id του Facebook Pixel για αυτόν τον οργανισμό (προαιρετικό)"
+
+msgid "The Instagram username for this organization"
+msgstr "Το όνομα χρήστη στο Instagram γι' αυτόν τον οργανισμό"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Το widget id στο Instagram από το lightwidget.com"
+
+msgid "The Twitter handle for this organization"
+msgstr "Ο χειρισμός του Twitter γι'αυτόν τον οργανισμό."
+
+msgid "The Twitter widget used for searching"
+msgstr "Το Twitter widget που χρησιμοποιήθηκε για την αναζήτηση"
+
+msgid "The words to filter out from the results on public site"
+msgstr ""
+"Οι λέξεις που χρειάζονται φιλτράρισμα από τα αποτελέσματα σε δημόσιο "
+"ιστότοπο"
+
+msgid "If there are jobs to be shown on the public site."
+msgstr ""
+"Εάν υπάρχουν θέσεις εργασίας που πρέπει να εμφανίζονται στον δημόσιο "
+"ιστότοπο."
+
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+"Εάν αυτό το org για παγκόσμια δεδομένα. π.χ.: Δείχνει έναν παγκόσμιο χάρτη "
+"αντί για έναν χάρτη χώρας."
+
+msgid "Whether to activate an extra gender."
+msgstr "Εάν θα ενεργοποιήσετε ένα επιπλέον φύλο"
+
+msgid "Whether to hide the engagement breakdown charts."
+msgstr "Εάν θα πρέπει να κρύψετε τα γραφήματα ανάλυσης της σύνδεσης."
+
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "Εάν θα εμφανίζεται το λογότυπο της UNICEF στο υποσέλιδο."
+
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
+msgstr ""
+"Ο alpha-3 κωδικός ISO του οργανισμού έτσι ώστε να εμφανίζεται το widget των "
+"ιστοριών U-Report App. Παράδειγμα: BRA, NIG, CMR (Χρησιμοποιήστε GLOBAL εάν "
+"η αναφορά U-Report είναι Global)."
+
+msgid "The font used for headline texts"
+msgstr "Η γραμματοσειρά που χρησιμοποιείται για τα κείμενα επικεφαλίδων"
+
+msgid "The font used for normal text"
+msgstr "Η γραμματοσειρά που χρησιμοποιείται για το κανονικό κείμενο"
+
+msgid "Hide participation stats"
+msgstr "Απόκρυψη στατιστικών συμμετοχής"
+
+msgid "The text to describe the sponsors of free messages"
+msgstr "Το κείμενο για να περιγράψει τους χορηγούς δωρεάν μηνυμάτων"
+
+msgid "The font used for small text"
+msgstr "Η γραμματοσειρά που χρησιμοποιείται για μικρό κείμενο"
+
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
+msgstr ""
+"Εάν χρειάζεται να συμπεριλάβετε ορισμένους προσαρμοσμένους κώδικες HTML στις"
+" σελίδες του οργανισμού σας, όπως προσαρμοσμένα αποσπάσματα κώδικα "
+"αναλυτικών στοιχείων"
+
+msgid "Other language sites links"
+msgstr "Σύνδεσμοι ιστοτόπων άλλων γλωσσών"
+
+msgid "90 Days"
+msgstr "90 μέρες"
+
+msgid "6 Months"
+msgstr "6 μήνες"
+
+msgid "12 Months"
+msgstr "12 μήνες"
+
+msgid "Age"
+msgstr "Ηλικία"
+
+msgid "Channels"
+msgstr "Κανάλια"
+
+msgid "Location"
+msgstr "Τοποθεσία"
+
+msgid "Opinion Responses"
+msgstr "Απαντήσεις γνώμης"
+
+msgid "Sign Up Rate"
+msgstr "Ποσοστό εγγραφής"
+
+msgid "Response Rate"
+msgstr "Ποσοστό απόκρισης"
+
+msgid "Active Users"
+msgstr "Ενεργοί Χρήστες"
+
+msgid "Whether this row was created by squashing"
+msgstr "Εάν αυτή η σειρά δημιουργήθηκε ύστερα από διάλυση"
+
+msgid "Something to trigger localizations"
+msgstr "Κάτι για να ενεργοποιήσει τους εντοπισμούς"
