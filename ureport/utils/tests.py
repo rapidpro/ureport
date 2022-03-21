@@ -244,7 +244,7 @@ class UtilsTest(UreportTest):
                         cache_set_mock.assert_called_with(
                             "org:global:reporters:old-site",
                             {"time": 500, "results": dict(size=300)},
-                            UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME,
+                            None,
                         )
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
