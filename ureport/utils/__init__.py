@@ -257,8 +257,6 @@ def fetch_old_sites_count():
 
     import requests
 
-    from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-
     start = time.time()
     this_time = datetime.now()
     linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
@@ -276,7 +274,7 @@ def fetch_old_sites_count():
                 key = "org:%s:reporters:%s" % (site.get("name").lower(), "old-site")
                 value = {"time": datetime_to_ms(this_time), "results": dict(size=count)}
                 old_site_values.append(value)
-                cache.set(key, value, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                cache.set(key, value, None)
             except Exception:
                 import traceback
 
@@ -314,7 +312,7 @@ def get_global_count():
         count = sum([elt["results"].get("size", 0) for elt in cached_values if elt.get("results", None)])
 
         # cached for 10 min
-        cache.set(GLOBAL_COUNT_CACHE_KEY, count, 60 * 10)
+        cache.set(GLOBAL_COUNT_CACHE_KEY, count, None)
     except AttributeError:
         import traceback
 
