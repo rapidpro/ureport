@@ -1,3 +1,8 @@
+v1.2.38
+----------
+ * Merge pull request #951 from rapidpro/cache-no-expire
+ * Do not expire the cached counts
+
 v1.2.37
 ----------
  * Merge pull request #950 from rapidpro/fix-pills
