@@ -236,31 +236,32 @@ $(->
     loadBoundary(url, null, null)
     map
 
-  # fetch our top level states
-  $.ajax({url:'/boundaries/', dataType: "json"}).done((states) ->
-    # now that we have states, initialize each map
-    $(".map").each(->
-      url = $(this).data("map-url")
-      id = $(this).attr("id")
-      districtZoom = $(this).data("district-zoom")
-      wardZoom = $(this).data("ward-zoom")
+  if $(".map").length > 0
+    # fetch our top level states
+    $.ajax({url:'/boundaries/', dataType: "json"}).done((states) ->
+      # now that we have states, initialize each map
+      $(".map").each(->
+        url = $(this).data("map-url")
+        id = $(this).attr("id")
+        districtZoom = $(this).data("district-zoom")
+        wardZoom = $(this).data("ward-zoom")
 
-      # no id? can't render, warn in console
-      if (id == undefined)
-        console.log("missing map id, not rendering")
-        return
+        # no id? can't render, warn in console
+        if (id == undefined)
+          console.log("missing map id, not rendering")
+          return
 
-      # no url? render empty map
-      if (url == undefined)
-        console.log("missing map url, rendering empty")
-        map = L.map(id, options)
-        boundaries = L.geoJSON(states, {style: emptyStyle})
-        boundaries.addTo(map);
-        map.fitBounds(boundaries.getBounds());
-        return
-      
-      map = initMap(id, states, url, districtZoom, wardZoom)
+        # no url? render empty map
+        if (url == undefined)
+          console.log("missing map url, rendering empty")
+          map = L.map(id, options)
+          boundaries = L.geoJSON(states, {style: emptyStyle})
+          boundaries.addTo(map);
+          map.fitBounds(boundaries.getBounds());
+          return
 
+        map = initMap(id, states, url, districtZoom, wardZoom)
+
+      )
     )
-  )
 )

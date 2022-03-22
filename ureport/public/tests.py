@@ -19,6 +19,7 @@ from dash.stories.models import Story
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.news.models import NewsItem
+from ureport.polls.models import Poll
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 
 
@@ -612,6 +613,7 @@ class PublicTest(UreportTest):
 
         poll1.is_featured = True
         poll1.save()
+        Poll.find_main_poll(poll1.org)
 
         response = self.client.get(polls_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.context["latest_poll"], poll1)

@@ -25,6 +25,10 @@
       %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
 
     -block meta-extra
+      %meta(property="og:url" content="{% org_host_link %}")
+      {% thumbnail org.get_logo "x180" format="PNG" as im %}
+      %meta(property="og:image" content="{{im.url}}")
+      {% endthumbnail %}
 
     // Google fonts we use
     %link(href="https://fonts.googleapis.com/css?family=Livvic:300,400,700|Montserrat:300,400,700&display=swap" rel="stylesheet")
