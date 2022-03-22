@@ -18,8 +18,8 @@ from dash.orgs.models import TaskState
 from dash.stories.models import Story
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
-from ureport.polls.models import Poll
 from ureport.news.models import NewsItem
+from ureport.polls.models import Poll
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 
 
