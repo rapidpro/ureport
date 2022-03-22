@@ -1,7 +1,7 @@
 from functools import partial
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
 from dash.utils import generate_file_path

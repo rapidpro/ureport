@@ -2,15 +2,15 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
+import zoneinfo
 from datetime import timedelta
+from urllib.parse import quote
 
 import mock
-import pytz
 
 from django.test import override_settings
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.http import urlquote
 
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
@@ -25,8 +25,8 @@ from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 class PublicTest(UreportTest):
     def setUp(self):
         super(PublicTest, self).setUp()
-        self.uganda = self.create_org("uganda", pytz.timezone("Africa/Kampala"), self.admin)
-        self.nigeria = self.create_org("nigeria", pytz.timezone("Africa/Lagos"), self.admin)
+        self.uganda = self.create_org("uganda", zoneinfo.ZoneInfo("Africa/Kampala"), self.admin)
+        self.nigeria = self.create_org("nigeria", zoneinfo.ZoneInfo("Africa/Lagos"), self.admin)
 
         self.health_uganda = Category.objects.create(
             org=self.uganda, name="Health", created_by=self.admin, modified_by=self.admin
@@ -1220,7 +1220,7 @@ class CountriesTest(UreportTest):
         # unicode aliases
         CountryAlias.objects.create(name="এ্যান্ডোরা", country="AD", created_by=self.admin, modified_by=self.admin)
 
-        response = self.client.get(countries_url + "?text=%s" % urlquote("এ্যান্ডোরা"))
+        response = self.client.get(countries_url + "?text=%s" % quote("এ্যান্ডোরা"))
 
         self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
@@ -1229,7 +1229,7 @@ class CountriesTest(UreportTest):
         self.assertEqual(response_json["exists"], "valid")
         self.assertEqual(response_json["country_code"], "AD")
 
-        response = self.client.get(countries_url + '?text="   %s   "' % urlquote("এ্যান্ডোরা"))
+        response = self.client.get(countries_url + '?text="   %s   "' % quote("এ্যান্ডোরা"))
 
         self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
@@ -1241,7 +1241,7 @@ class CountriesTest(UreportTest):
         # unicode aliases
         CountryAlias.objects.create(name="Madžarska", country="MD", created_by=self.admin, modified_by=self.admin)
 
-        response = self.client.get(countries_url + "?text=%s" % urlquote("Madžarska"))
+        response = self.client.get(countries_url + "?text=%s" % quote("Madžarska"))
 
         self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
@@ -1250,7 +1250,7 @@ class CountriesTest(UreportTest):
         self.assertEqual(response_json["exists"], "valid")
         self.assertEqual(response_json["country_code"], "MD")
 
-        response = self.client.get(countries_url + '?text="   %s   "' % urlquote("Madžarska"))
+        response = self.client.get(countries_url + '?text="   %s   "' % quote("Madžarska"))
 
         self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)

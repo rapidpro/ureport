@@ -132,7 +132,7 @@ module.exports = {
       contain: "contain"
     },
     borderWidth: {
-      default: "1px",
+      DEFAULT: "1px",
       "0": "0",
       "2": "2px",
       "4": "4px",
@@ -140,18 +140,18 @@ module.exports = {
     },
     borderColor: theme => ({
       ...theme("colors"),
-      default: theme("colors.gray.300", "currentColor")
+      DEFAULT: theme("colors.gray.300", "currentColor")
     }),
     borderRadius: {
       none: "0",
       sm: "0.125rem",
-      default: "0.25rem",
+      DEFAULT: "0.25rem",
       lg: "0.5rem",
       full: "9999px"
     },
     cursor: {
       auto: "auto",
-      default: "default",
+      DEFAULT: "default",
       pointer: "pointer",
       wait: "wait",
       text: "text",
