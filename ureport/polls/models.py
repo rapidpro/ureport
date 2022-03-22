@@ -85,6 +85,8 @@ class Poll(SmartModel):
     display and sharing in the UReport platform.
     """
 
+    ORG_MAIN_POLL_ID = "org:%d:main-poll-id"
+
     POLL_PULL_RESULTS_TASK_LOCK = "poll-pull-results-task-lock:%s:%s"
 
     POLL_REBUILD_COUNTS_LOCK = "poll-rebuild-counts-lock:org:%d:poll:%s"
@@ -516,6 +518,18 @@ class Poll(SmartModel):
 
     @classmethod
     def get_main_poll(cls, org):
+        cached_value = cache.get(Poll.ORG_MAIN_POLL_ID % org.id, None)
+        main_poll = None
+        if cached_value:
+            main_poll = Poll.objects.filter(is_active=True, id=cached_value, org=org).first()
+
+        if main_poll:
+            return main_poll
+        return Poll.find_main_poll(org)
+
+    @classmethod
+    def find_main_poll(cls, org):
+
         poll_with_questions = PollQuestion.objects.filter(is_active=True, poll__org=org).values_list("poll", flat=True)
 
         polls = Poll.get_public_polls(org=org).filter(pk__in=poll_with_questions).order_by("-created_on")
@@ -525,6 +539,8 @@ class Poll(SmartModel):
         if not main_poll:
             main_poll = polls.first()
 
+        if main_poll:
+            cache.set(Poll.ORG_MAIN_POLL_ID % org.id, main_poll.pk, None)
         return main_poll
 
     @classmethod
