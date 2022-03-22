@@ -218,3 +218,8 @@ UREPORT_RUN_FETCHED_DATA_CACHE_TIME = config('UREPORT_RUN_FETCHED_DATA_CACHE_TIM
 
 TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
 USER_TIME_ZONE = config('USER_TIME_ZONE', default='America/Sao_Paulo')
+
+
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS", default="https://*.ureport.in", cast=lambda v: [s.strip() for s in v.split(",")]
+)
