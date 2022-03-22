@@ -155,53 +155,53 @@ class PollTest(UreportTest):
 
         self.assertFalse(Poll.get_public_polls(self.uganda))
 
-    def test_poll_get_main_poll(self):
-        self.assertIsNone(Poll.get_main_poll(self.uganda))
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+    def test_poll_find_main_poll(self):
+        self.assertIsNone(Poll.find_main_poll(self.uganda))
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
         self.assertEqual(six.text_type(poll1), "Poll 1")
 
-        self.assertIsNone(Poll.get_main_poll(self.uganda))
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+        self.assertIsNone(Poll.find_main_poll(self.uganda))
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
         self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
-        self.assertEqual(Poll.get_main_poll(self.uganda), poll1)
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+        self.assertEqual(Poll.find_main_poll(self.uganda), poll1)
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
         self.create_poll_question(self.admin, poll2, "question poll 2", "uuid-202")
 
-        self.assertEqual(Poll.get_main_poll(self.uganda), poll2)
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+        self.assertEqual(Poll.find_main_poll(self.uganda), poll2)
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
         self.create_poll_question(self.admin, poll3, "question poll 3", "uuid-303")
 
-        self.assertEqual(Poll.get_main_poll(self.uganda), poll3)
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+        self.assertEqual(Poll.find_main_poll(self.uganda), poll3)
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
         poll1.is_featured = True
         poll1.save()
 
-        self.assertEqual(Poll.get_main_poll(self.uganda), poll1)
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+        self.assertEqual(Poll.find_main_poll(self.uganda), poll1)
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
         poll1.is_active = False
         poll1.save()
 
-        self.assertEqual(Poll.get_main_poll(self.uganda), poll3)
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+        self.assertEqual(Poll.find_main_poll(self.uganda), poll3)
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
         self.health_uganda.is_active = False
         self.health_uganda.save()
 
-        self.assertIsNone(Poll.get_main_poll(self.uganda))
-        self.assertIsNone(Poll.get_main_poll(self.nigeria))
+        self.assertIsNone(Poll.find_main_poll(self.uganda))
+        self.assertIsNone(Poll.find_main_poll(self.nigeria))
 
     @patch("django.core.cache.cache.get")
     def test_get_other_polls(self, mock_cache_get):

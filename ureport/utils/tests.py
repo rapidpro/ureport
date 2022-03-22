@@ -499,18 +499,27 @@ class UtilsTest(UreportTest):
     def test_get_org_contacts_counts(self):
 
         with patch("ureport.contacts.models.ReportersCounter.get_counts") as mock_get_counts:
-            mock_get_counts.return_value = "Counts"
+            mock_get_counts.return_value = {"total-reporters": 50}
             with patch("django.core.cache.cache.get") as mock_cache_get:
-                mock_cache_get.return_value = "Cached"
+                with patch("django.core.cache.cache.set") as mock_cache_set:
+                    mock_cache_get.return_value = {"total-reporters": 13}
 
-                self.assertEqual(get_org_contacts_counts(self.org), "Cached")
-                mock_cache_get.assert_called_once_with(ORG_CONTACT_COUNT_KEY % self.org.pk, None)
-                self.assertFalse(mock_get_counts.called)
+                    self.assertEqual(get_org_contacts_counts(self.org), {"total-reporters": 13})
+                    mock_cache_get.assert_called_once_with(ORG_CONTACT_COUNT_KEY % self.org.pk, None)
+                    mock_cache_set.assert_called_once_with(
+                        f"{ORG_CONTACT_COUNT_KEY % self.org.pk}-total-reporters", 13, None
+                    )
 
-                mock_cache_get.return_value = None
+                    self.assertFalse(mock_get_counts.called)
 
-                self.assertEqual(get_org_contacts_counts(self.org), "Counts")
-                mock_get_counts.assert_called_once_with(self.org)
+                    mock_cache_get.return_value = None
+                    mock_cache_set.reset_mock()
+
+                    self.assertEqual(get_org_contacts_counts(self.org), {"total-reporters": 50})
+                    mock_get_counts.assert_called_once_with(self.org)
+                    mock_cache_set.assert_called_once_with(
+                        ORG_CONTACT_COUNT_KEY % self.org.pk, {"total-reporters": 50}, None
+                    )
 
     def test_get_flows(self):
         with patch("ureport.utils.fetch_flows") as mock_fetch_flows:
