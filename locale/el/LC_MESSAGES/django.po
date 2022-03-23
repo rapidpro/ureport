@@ -6,6 +6,7 @@
 # Translators:
 # Artemis Papakostouli, 2022
 # Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022
+# Lina Antara, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
-"Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
+"Last-Translator: Lina Antara, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -398,7 +399,7 @@ msgid "Join %(name)s"
 msgstr "Συμμετοχή 1%(name)s"
 
 msgid "Join"
-msgstr "Συμμετοχή"
+msgstr "Εγγραφή"
 
 msgid ""
 "Your invitation link has expired. Please contact your organization "
@@ -460,7 +461,7 @@ msgid "The organization this story belongs to"
 msgstr "Ο οργανισμός γι'αυτή την ιστορία ανήκει σε"
 
 msgid "Stories"
-msgstr "Ιστορίες"
+msgstr "Δημοσιεύσεις"
 
 msgid "The story to associate to"
 msgstr "Η ιστορία για να συσχετιστεί με"
@@ -492,7 +493,7 @@ msgid "The name of this tag"
 msgstr "Το όνομα αυτής της ετικέτας"
 
 msgid "Delete"
-msgstr "Διαγράφω"
+msgstr "Διαγραφή"
 
 msgid "Remove Item?"
 msgstr "Κατάργηση στοιχείου;"
@@ -513,14 +514,14 @@ msgstr ""
 "Μόλις αφαιρεθεί, δεν υπάρχει τρόπος να αναιρέσετε αυτήν τη λειτουργία."
 
 msgid "Cancel"
-msgstr "Ματαίωση"
+msgstr "Ακύρωση"
 
 #, python-format
 msgid ""
 "\n"
 "\t %(counter)s result\n"
 "\t"
-msgid_plural
+msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
@@ -598,7 +599,7 @@ msgid "Email Address"
 msgstr "Ηλεκτρονική διεύθυνση"
 
 msgid "Recover"
-msgstr "Ανακτώ"
+msgstr "Ανάκτηση"
 
 msgid ""
 "Please enter the email address you used to sign up and we will help you "
@@ -798,10 +799,10 @@ msgid "Logout"
 msgstr "Αποσύνδεση"
 
 msgid "Opinions"
-msgstr "Απόψεις"
+msgstr "Δημοσκοπήσεις"
 
 msgid "Bots"
-msgstr "bots"
+msgstr "Chatbots"
 
 msgid "Users"
 msgstr "Χρήστες"
@@ -837,13 +838,13 @@ msgid "Images"
 msgstr "Εικόνες"
 
 msgid "About"
-msgstr "Σχετικά με"
+msgstr "Σχετικά με εμάς"
 
 msgid "Engagement"
-msgstr "Σύμπλεξη"
+msgstr "Στατιστικά"
 
 msgid "Reports"
-msgstr "Αναφορές"
+msgstr "Άρθρα"
 
 msgid "Category Images"
 msgstr "Εικόνες κατηγορίας"
@@ -912,7 +913,7 @@ msgid "READ MORE"
 msgstr "Διαβάστε περισσότερα"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "Εξερευνήστε την παρακολούθηση"
+msgstr "Στατιστικά συμμετοχής"
 
 msgid ""
 "\n"
@@ -937,7 +938,7 @@ msgid "Back"
 msgstr "Πίσω"
 
 msgid "Select bots"
-msgstr "Επιλέξτε bots"
+msgstr "Επιλέξτε chatbots"
 
 msgid "View public page"
 msgstr "Προβολή δημόσιας σελίδας"
@@ -955,12 +956,13 @@ msgstr "Προσθέστε ή επιλέξτε ετικέτες"
 msgid ""
 "There is currently %(counter)s new poll syncing. Polls are displayed on the "
 "public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on "
+msgid_plural ""
+"There are currently %(counter)s new polls syncing. Polls are displayed on "
 "the public site once they have completely synced their results."
 msgstr[0] ""
-"Αυτήν τη στιγμή υπάρχει %(counter)s συγχρονισμός νέας δημοσκόπησης"
-". Οι δημοσκοπήσεις εμφανίζονται στον δημόσιο ιστότοπο μόλις "
-"συγχρονιστούν πλήρως τα αποτελέσματά τους."
+"Αυτήν τη στιγμή υπάρχει %(counter)s συγχρονισμός νέας δημοσκόπησης. Οι "
+"δημοσκοπήσεις εμφανίζονται στον δημόσιο ιστότοπο μόλις συγχρονιστούν πλήρως "
+"τα αποτελέσματά τους."
 msgstr[1] ""
 "Αυτήν τη στιγμή υπάρχει 1 %(counter)s συγχρονισμός νέας δημοσκόπησης . Οι "
 "δημοσκοπήσεις εμφανίζονται στον δημόσιο ιστότοπο μόλις συγχρονιστούν πλήρως "
@@ -1025,7 +1027,7 @@ msgid "All polls from most recent to oldest"
 msgstr "Όλες οι δημοσκοπήσεις από τις πιο πρόσφατες έως τις παλαιότερες"
 
 msgid "ARCHIVED STORIES"
-msgstr "ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΙΣΤΟΡΙΕΣ"
+msgstr "ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΔΗΜΟΣΙΕΥΣΕΙΣ"
 
 msgid "LIST"
 msgstr "ΛΙΣΤΑ"
@@ -1061,10 +1063,10 @@ msgid "AGES"
 msgstr "ΗΛΙΚΙΕΣ"
 
 msgid "Available bots"
-msgstr "Διαθέσιμα bots"
+msgstr "Διαθέσιμα chatbots"
 
 msgid "More bots"
-msgstr "Περισσότερα bots"
+msgstr "Περισσότερα chatbots"
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Εγγραφείτε στο U-Report, η φωνή σας έχει σημασία."
@@ -1111,10 +1113,10 @@ msgid "RESPONDERS"
 msgstr "ΑΠΑΝΤΗΣΕΙΣ"
 
 msgid "RESPONSE RATE"
-msgstr "ΠΟΣΟΣΤΟ ΑΠΑΝΤΗΣΗΣ"
+msgstr "ΠΟΣΟΣΤΟ ΑΠΑΝΤΗΣΕΩΝ"
 
 msgid "TOTAL RESPONDERS"
-msgstr "ΣΥΝΟΛΟ ΑΠΑΝΤΗΣΕΩΝ"
+msgstr "ΣΥΝΟΛΟ ΣΥΜΜΕΤΕΧΟΝΤΩΝ"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1136,7 +1138,7 @@ msgid "Written by:"
 msgstr "Γράφτηκε αυτό:"
 
 msgid "No reports published yet"
-msgstr "Δεν έχουν δημοσιευθεί ακόμη αναφορές"
+msgstr "Δεν έχουν δημοσιευθεί ακόμη άρθρα"
 
 msgid "REPORT"
 msgstr "ΑΝΑΦΟΡΑ"
@@ -1163,7 +1165,7 @@ msgid "Participation Level"
 msgstr "Επίπεδο Συμμετοχής"
 
 msgid "Responders"
-msgstr "Ανταποκριτές"
+msgstr "Συμμετέχοντες"
 
 msgid "Reporters in"
 msgstr "Reporters σε"
@@ -1199,7 +1201,7 @@ msgid "THIS YEAR"
 msgstr "ΑΥΤΟ ΤΟ ΕΤΟΣ"
 
 msgid "AVG RESPONSE RATE"
-msgstr "ΜΕΣΟΣ ΠΟΣΟΣΤΟ ΑΠΑΝΤΗΣΗΣ"
+msgstr "ΜΕΣΟΣ ΟΡΟΣ ΑΠΑΝΤΗΣΕΩΝ"
 
 msgid "U-REPORTERS BY REGION"
 msgstr "U-REPORTERS ΑΝΑ ΠΕΡΙΟΧΗ"
@@ -1225,7 +1227,7 @@ msgid "SELECT LANGUAGE"
 msgstr "ΕΠΙΛΕΞΕ ΓΛΩΣΣΑ"
 
 msgid "SELECT COUNTRY"
-msgstr "Eπίλεξε χώρα"
+msgstr "Eπιλογή χώρας"
 
 msgid "Custom pages"
 msgstr "Προσαρμοσμένες σελίδες"
@@ -1960,10 +1962,10 @@ msgid "The description of the photos section U-Report homepage"
 msgstr "Η περιγραφή της αρχικής σελίδας της ενότητας φωτογραφιών U-Report"
 
 msgid "The description of the opinions page"
-msgstr "Η περιγραφή της σελίδας απόψεων"
+msgstr "Περιγραφή της σελίδας Δημοσκοπήσεις"
 
 msgid "The description of the stories page"
-msgstr "Η περιγραφή της σελίδας ιστοριών"
+msgstr "Η περιγραφή της σελίδας Δημοσιεύσεις"
 
 msgid "The description of the engagement page"
 msgstr "Η περιγραφή της σελίδας σύνδεσης"
@@ -2146,13 +2148,13 @@ msgid "Location"
 msgstr "Τοποθεσία"
 
 msgid "Opinion Responses"
-msgstr "Απαντήσεις γνώμης"
+msgstr "Απαντήσεις δημοσκόπησης"
 
 msgid "Sign Up Rate"
 msgstr "Ποσοστό εγγραφής"
 
 msgid "Response Rate"
-msgstr "Ποσοστό απόκρισης"
+msgstr "Ποσοστό απαντήσεων"
 
 msgid "Active Users"
 msgstr "Ενεργοί Χρήστες"
