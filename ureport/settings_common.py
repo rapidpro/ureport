@@ -1218,6 +1218,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://ghana.ureport.in/count/",
     ),
     dict(
+        name="Greece",
+        host="//greece.ureport.in/",
+        flag="flag_greece.png",
+        countries_codes=["GRC"],
+        count_link="http://greece.ureport.in/count/",
+    ),
+    dict(
         name="Guatemala",
         host="//guatemala.ureport.in/",
         flag="flag_guatemala.png",
