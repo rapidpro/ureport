@@ -324,6 +324,7 @@ class PollCRUDL(SmartCRUDL):
             for tag in Tag.objects.filter(id__in=poll_tag_ids):
                 obj.tags.add(tag)
 
+            Poll.find_main_poll(org)
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
@@ -585,6 +586,7 @@ class PollCRUDL(SmartCRUDL):
 
             obj.update_questions_results_cache_task()
 
+            Poll.find_main_poll(obj.org)
             return obj
 
         def derive_initial(self):
@@ -751,6 +753,7 @@ class PollCRUDL(SmartCRUDL):
             for tag in Tag.objects.filter(id__in=poll_tag_ids):
                 obj.tags.add(tag)
 
+            Poll.find_main_poll(org)
             return obj
 
     class PullRefresh(SmartUpdateView):

@@ -1,3 +1,8 @@
+v1.2.39
+----------
+ * Merge pull request #952 from rapidpro/optimize-home
+ * More optimization and update tests
+
 v1.2.38
 ----------
  * Merge pull request #951 from rapidpro/cache-no-expire
