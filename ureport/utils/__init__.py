@@ -327,6 +327,7 @@ def get_org_contacts_counts(org):
     key = ORG_CONTACT_COUNT_KEY % org.pk
     org_contacts_counts = cache.get(key, None)
     if org_contacts_counts:
+        cache.set(f"{key}-total-reporters", org_contacts_counts.get("total-reporters", 0), None)
         return org_contacts_counts
 
     return update_cache_org_contact_counts(org)
@@ -904,8 +905,12 @@ def get_ureporters_locations_response_rates(org, segment):
 
 
 def get_reporters_count(org):
-    org_contacts_counts = get_org_contacts_counts(org)
+    key = ORG_CONTACT_COUNT_KEY % org.pk
+    cached_value = cache.get(f"{key}-total-reporters", None)
+    if cached_value:
+        return cached_value
 
+    org_contacts_counts = get_org_contacts_counts(org)
     return org_contacts_counts.get("total-reporters", 0)
 
 

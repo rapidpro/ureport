@@ -69,17 +69,8 @@ class IndexView(SmartTemplateView):
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
         context["reporters"] = org.get_reporters_count()
-        context["feat_images"] = range(10)
 
         context["featured_bots"] = Bot.objects.filter(is_active=True, org=org, featured=True).order_by("-priority")
-
-        # fake photos, generated from stories that are featured and have a photo
-        context["stories_photos"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .exclude(images=None)
-            .order_by("-created_on")[4:]
-        )
 
         context["main_stories"] = (
             Story.objects.filter(org=org, featured=True, is_active=True)
