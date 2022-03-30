@@ -72,11 +72,7 @@ class IndexView(SmartTemplateView):
 
         context["featured_bots"] = Bot.objects.filter(is_active=True, org=org, featured=True).order_by("-priority")
 
-        context["main_stories"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .order_by("-created_on")
-        )
+        context["main_stories"] = Story.get_main_stories(org, 5)
 
         return context
 
@@ -212,7 +208,7 @@ class AboutView(SmartTemplateView):
         partners_logos = Image.objects.filter(org=org, is_active=True, image_type="A").order_by("-priority")
         context["partners_logos"] = partners_logos
 
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
+        context["main_stories"] = Story.get_main_stories(org, 5)
         return context
 
 
@@ -291,11 +287,7 @@ class PollContextMixin(object):
 
         context["polls"] = polls
 
-        context["main_stories"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .order_by("-created_on")
-        )
+        context["main_stories"] = Story.get_main_stories(org, 5)
         return context
 
 
@@ -353,11 +345,7 @@ class StoriesView(SmartTemplateView):
             .order_by("title")
         )
 
-        featured_stories = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .order_by("-created_on")
-        )
+        featured_stories = Story.get_main_stories(org, 5)
         context["main_stories"] = featured_stories
 
         return context
@@ -410,11 +398,7 @@ class StoryReadView(SmartReadView):
         context["org"] = org
         context["categories"] = Category.objects.filter(org=org, is_active=True).order_by("name")
 
-        context["main_stories"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .order_by("-created_on")
-        )
+        context["main_stories"] = Story.get_main_stories(org, 5)
         return context
 
 
@@ -499,11 +483,7 @@ class UreportersView(SmartTemplateView):
         context["scheme_bar_height"] = (50 * len(scheme_stats)) + 30
         context["schemes_stats"] = scheme_stats
         context["reporters"] = org.get_reporters_count()
-        context["main_stories"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .order_by("-created_on")
-        )
+        context["main_stories"] = Story.get_main_stories(org, 5)
 
         # global counter
         context["global_counter"] = get_global_count()
@@ -540,11 +520,7 @@ class JoinEngageView(SmartTemplateView):
         context = super(JoinEngageView, self).get_context_data(**kwargs)
         org = self.request.org
         context["org"] = org
-        context["main_stories"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .order_by("-created_on")
-        )
+        context["main_stories"] = Story.get_main_stories(org, 5)
         return context
 
 
@@ -576,11 +552,7 @@ class JobsView(SmartTemplateView):
         context["job_sources"] = JobSource.objects.filter(org=org, is_active=True).order_by(
             "-is_featured", "-created_on"
         )
-        context["main_stories"] = (
-            Story.objects.filter(org=org, featured=True, is_active=True)
-            .filter(Q(attachment="") | Q(attachment=None))
-            .order_by("-created_on")
-        )
+        context["main_stories"] = Story.get_main_stories(org, 5)
         return context
 
 
