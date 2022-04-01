@@ -1,3 +1,13 @@
+v1.2.40
+----------
+ * Merge pull request #1031 from Ilhasoft/update-el-language
+ * Merge pull request #1030 from rapidpro/inc_paths
+ * update .mo file for el language
+ * Pass paths=true to runs API endpoint
+ * Translate /locale/en/LC_MESSAGES/django.po in el
+ * Merge pull request #985 from Ilhasoft/feature/greece.flag
+ * Adding Greece's Flag
+
 v1.2.39
 ----------
  * Merge pull request #952 from rapidpro/optimize-home

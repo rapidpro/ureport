@@ -605,7 +605,9 @@ class RapidProBackend(BaseBackend):
                 start = time.time()
                 logger.info("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
 
-                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=latest_synced_obj_time, reverse=True)
+                poll_runs_query = client.get_runs(
+                    flow=poll.flow_uuid, after=latest_synced_obj_time, reverse=True, paths=True
+                )
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
                 try:

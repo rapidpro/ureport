@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ureport"
-version = "1.2.39"
+version = "1.2.40"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
@@ -33,7 +33,7 @@ pycountry = "^18.5.26"
 django-countries = "^7.2.1"
 GitPython = "^2.1.11"
 regex = "^2020.9.27"
-rapidpro-python = "^2.8.3"
+rapidpro-python = "^2.8.5"
 feedparser = "^6.0.2"
 Markdown = "^2.6.11"
 iso8601 = "^0.1.12"
