@@ -1337,7 +1337,7 @@ class RapidProBackendTest(UreportTest):
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
             (1, 0, 0, 0, 0, 1),
         )
-        mock_get_runs.assert_called_with(flow="flow-uuid", after=None, reverse=True)
+        mock_get_runs.assert_called_with(flow="flow-uuid", after=None, reverse=True, paths=True)
         mock_redis_lock.assert_called_once_with(
             Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid), timeout=7200
         )
@@ -2046,7 +2046,7 @@ class RapidProBackendTest(UreportTest):
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
             (1, 0, 0, 0, 0, 1),
         )
-        mock_get_runs.assert_called_with(flow="flow-uuid-3", after=None, reverse=True)
+        mock_get_runs.assert_called_with(flow="flow-uuid-3", after=None, reverse=True, paths=True)
 
         poll_result = PollResult.objects.filter(flow="flow-uuid-3", ruleset="ruleset-uuid", contact="C-021").first()
         self.assertEqual(poll_result.ward, "R-IKEJA")
@@ -2245,7 +2245,7 @@ class PerfTest(UreportTest):
             num_path_ignored,
         ) = self.backend.pull_results(poll, None, None)
 
-        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, reverse=True)
+        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, reverse=True, paths=True)
 
         self.assertEqual(
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
@@ -2905,7 +2905,7 @@ class PerfTest(UreportTest):
         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_delete)))
-        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, reverse=True)
+        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, reverse=True, paths=True)
 
     @override_settings(DEBUG=True)
     @patch("dash.orgs.models.TembaClient._request")
