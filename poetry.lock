@@ -52,14 +52,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.21.30"
+version = "1.21.31"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.24.30,<1.25.0"
+botocore = ">=1.24.31,<1.25.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -68,7 +68,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.24.30"
+version = "1.24.31"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -155,7 +155,7 @@ unicode_backport = ["unicodedata2"]
 
 [[package]]
 name = "click"
-version = "8.1.1"
+version = "8.1.2"
 description = "Composable command line interface toolkit"
 category = "main"
 optional = false
@@ -666,7 +666,7 @@ python-versions = ">=2.6"
 
 [[package]]
 name = "phonenumbers"
-version = "8.12.45"
+version = "8.12.46"
 description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
 category = "main"
 optional = false
@@ -798,11 +798,11 @@ sorl-thumbnail = "^12.7.0"
 type = "git"
 url = "https://github.com/rapidpro/dash.git"
 reference = "optimize-queries"
-resolved_reference = "24e0eab520785247e6a0967b265e6819289c4d3a"
+resolved_reference = "81e6f789f43f2d1d861f88fadf2d53f43da869c3"
 
 [[package]]
 name = "rapidpro-python"
-version = "2.8.3"
+version = "2.8.5"
 description = "Python client library for the RapidPro API"
 category = "main"
 optional = false
@@ -1129,12 +1129,12 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 boto3 = [
-    {file = "boto3-1.21.30-py3-none-any.whl", hash = "sha256:ef210f8e85cdb6d26a38ebad1cfe9cefdef2ab269207e5987653555375a7ef6b"},
-    {file = "boto3-1.21.30.tar.gz", hash = "sha256:f0af8f4ef5fe6353c794cd3cce627d469a618b58ace7ca75a63cfd719df615ce"},
+    {file = "boto3-1.21.31-py3-none-any.whl", hash = "sha256:35f68b60652bff50e7bc926238443cb578f29f120908bb945e5640e90c6dd53e"},
+    {file = "boto3-1.21.31.tar.gz", hash = "sha256:7f3f93ee97215862ccd1a216f37deb7d64055c71f826b821805904df7b84ee6a"},
 ]
 botocore = [
-    {file = "botocore-1.24.30-py3-none-any.whl", hash = "sha256:c622751093e3d0bf61343e66d6d06190ef30bf42b1557d5070ca84e9efa06d4b"},
-    {file = "botocore-1.24.30.tar.gz", hash = "sha256:af4bdc51eeecbe9fdcdadbed9ad58c5c91380ef30f3560022bbc2ee1d78f0ad6"},
+    {file = "botocore-1.24.31-py3-none-any.whl", hash = "sha256:424fd94bef86a11f5340dc15eb50602dedec2ecc01c3a25c4fea23a2c8195500"},
+    {file = "botocore-1.24.31.tar.gz", hash = "sha256:3bb21e3ee5e4de3ed76bb99b4496a46e9b5c82e7b7fdb62702f11dda1b57b769"},
 ]
 celery = [
     {file = "celery-5.2.3-py3-none-any.whl", hash = "sha256:8aacd02fc23a02760686d63dde1eb0daa9f594e735e73ea8fb15c2ff15cb608c"},
@@ -1149,8 +1149,8 @@ charset-normalizer = [
     {file = "charset_normalizer-2.0.12-py3-none-any.whl", hash = "sha256:6881edbebdb17b39b4eaaa821b438bf6eddffb4468cf344f09f89def34a8b1df"},
 ]
 click = [
-    {file = "click-8.1.1-py3-none-any.whl", hash = "sha256:5e0d195c2067da3136efb897449ec1e9e6c98282fbf30d7f9e164af9be901a6b"},
-    {file = "click-8.1.1.tar.gz", hash = "sha256:7ab900e38149c9872376e8f9b5986ddcaf68c0f413cf73678a0bca5547e6f976"},
+    {file = "click-8.1.2-py3-none-any.whl", hash = "sha256:24e1a4a9ec5bf6299411369b208c1df2188d9eb8d916302fe6bf03faed227f1e"},
+    {file = "click-8.1.2.tar.gz", hash = "sha256:479707fe14d9ec9a0757618b7a100a0ae4c4e236fac5b7f80ca68028141a1a72"},
 ]
 click-didyoumean = [
     {file = "click-didyoumean-0.3.0.tar.gz", hash = "sha256:f184f0d851d96b6d29297354ed981b7dd71df7ff500d82fa6d11f0856bee8035"},
@@ -1396,8 +1396,8 @@ pbr = [
     {file = "pbr-5.8.1.tar.gz", hash = "sha256:66bc5a34912f408bb3925bf21231cb6f59206267b7f63f3503ef865c1a292e25"},
 ]
 phonenumbers = [
-    {file = "phonenumbers-8.12.45-py2.py3-none-any.whl", hash = "sha256:e3af21c1e33a3dd063cddba3cad653abb8d23c37c62cedee597a3f3ea0f5365c"},
-    {file = "phonenumbers-8.12.45.tar.gz", hash = "sha256:94e30f59b2be6c4310a90f3d5da53d49900bdb440484506f3333c694ebb0cdab"},
+    {file = "phonenumbers-8.12.46-py2.py3-none-any.whl", hash = "sha256:ae300d40c3e0b581372294a43b04359b24af94f631dd9451881561d5c702a78d"},
+    {file = "phonenumbers-8.12.46.tar.gz", hash = "sha256:1c440f6336cb49893ff1a8326c70b4df693802ae981f210f545cd4215ac48133"},
 ]
 pillow = [
     {file = "Pillow-9.0.1-1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:a5d24e1d674dd9d72c66ad3ea9131322819ff86250b30dc5821cbafcfa0b96b4"},
@@ -1511,8 +1511,8 @@ pytz = [
 ]
 rapidpro-dash = []
 rapidpro-python = [
-    {file = "rapidpro-python-2.8.3.tar.gz", hash = "sha256:6f41f1a34bc2e8df7bcc54f29b5f1db8e50b1e95221ecf7ec040952e845b1b1e"},
-    {file = "rapidpro_python-2.8.3-py3-none-any.whl", hash = "sha256:cf69357a037d7dd6a487631f1350fe8fca73ce6ea0ae75f2c86ae22545261225"},
+    {file = "rapidpro-python-2.8.5.tar.gz", hash = "sha256:e87b3c85423c73f6b87ff768eb7ea82d0227e869fca67c1321b843907d157a82"},
+    {file = "rapidpro_python-2.8.5-py3-none-any.whl", hash = "sha256:21126fb9f1c860af74115437b664230c8afe46994b61ebe896331945624af5e6"},
 ]
 rcssmin = [
     {file = "rcssmin-1.1.0-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:2211a5c91ea14a5937b57904c9121f8bfef20987825e55368143da7d25446e3b"},
