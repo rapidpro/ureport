@@ -1017,7 +1017,7 @@ msgid "FILTER"
 msgstr "Φιλτράρισμα"
 
 msgid "All"
-msgstr "Όλα"
+msgstr "ΟΛΑ"
 
 msgid "POLL LIST"
 msgstr "ΛΙΣΤΑ ΔΗΜΟΣΚΟΠΗΣΕΩΝ"
@@ -1044,7 +1044,7 @@ msgid "VIEW FULL RESULTS"
 msgstr "ΔΕΙΤΕ ΟΛΑ ΤΑ ΑΠΟΤΕΛΕΣΜΑΤΑ"
 
 msgid "U-REPORTERS IN"
-msgstr "U-REPORTERS ΣΕ"
+msgstr "U-REPORTERS ΣΤΗΝ"
 
 msgid "PARTNERING WITH"
 msgstr "ΣΕ ΣΥΝΕΡΓΑΣΙΑ ΜΕ"
@@ -1053,7 +1053,7 @@ msgid "U-REPORTERS"
 msgstr "U-REPORTERS"
 
 msgid "IN"
-msgstr "ΜΕΣΑ"
+msgstr "ΣΕ"
 
 msgid "COUNTRIES WORLDWIDE"
 msgstr "ΧΩΡΕΣ ΣΕ ΟΛΟ ΤΟΝ ΚΟΣΜΟ"
@@ -1085,7 +1085,7 @@ msgid ""
 "speak out on issues that matter to them."
 msgstr ""
 "Μάθετε περισσότερα για το πώς το U-Report ενδυναμώνει και συνδέει τους νέους"
-" δίνοντάς του τη δυνατότητα να μιλήσουν για θέματα που τους αφορούν."
+" δίνοντάς τους τη δυνατότητα να μιλήσουν για θέματα που τους αφορούν."
 
 msgid "LEARN MORE"
 msgstr "Μάθετε περισσότερα"
@@ -1197,7 +1197,7 @@ msgid "OVERALL STATISTICS"
 msgstr "ΓΕΝΙΚΑ ΣΤΑΤΙΣΤΙΚΑ"
 
 msgid "THIS YEAR"
-msgstr "ΑΥΤΟ ΤΟ ΕΤΟΣ"
+msgstr "ΦΕΤΟΣ"
 
 msgid "AVG RESPONSE RATE"
 msgstr "ΜΕΣΟΣ ΟΡΟΣ ΑΠΑΝΤΗΣΕΩΝ"
@@ -1238,7 +1238,7 @@ msgid ""
 "See by the numbers how we are engaging youth voices for positive social "
 "change."
 msgstr ""
-"Δείτε από τους αριθμούς πώς ενισχύουμε τις φωνές των νέων για μια θετική "
+"Δείτε από τα στατιστικά πώς ενισχύουμε τις φωνές των νέων για μια θετική "
 "κοινωνική αλλαγή."
 
 msgid "Polled"
