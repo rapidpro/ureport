@@ -1044,7 +1044,7 @@ msgid "VIEW FULL RESULTS"
 msgstr "ΔΕΙΤΕ ΟΛΑ ΤΑ ΑΠΟΤΕΛΕΣΜΑΤΑ"
 
 msgid "U-REPORTERS IN"
-msgstr "U-REPORTERS ΣΕ"
+msgstr "U-REPORTERS ΣΤΗΝ"
 
 msgid "PARTNERING WITH"
 msgstr "ΣΕ ΣΥΝΕΡΓΑΣΙΑ ΜΕ"
