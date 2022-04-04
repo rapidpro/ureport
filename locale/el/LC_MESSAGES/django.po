@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Artemis Papakostouli, 2022
 # Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022
 # Lina Antara, 2022
+# Artemis Papakostouli, 2022
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-18 09:42+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
-"Last-Translator: Lina Antara, 2022\n"
+"Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -335,7 +335,7 @@ msgid "You are invited to join {{org.name}}."
 msgstr "Έχετε προσκληθεί να εγγραφείτε στο {{org.name}}."
 
 msgid "Click this link to join"
-msgstr "Κάντε κλικ σε αυτόν τον σύνδεσμο για να εγγραφείτε"
+msgstr "Κάνε κλικ σε αυτόν τον σύνδεσμο για να εγγραφείς"
 
 msgid "Edit"
 msgstr "Επεξεργασία"
@@ -396,7 +396,7 @@ msgstr ""
 
 #, python-format
 msgid "Join %(name)s"
-msgstr "Συμμετοχή 1%(name)s"
+msgstr "Εγγραφή %(name)s"
 
 msgid "Join"
 msgstr "Εγγραφή"
@@ -460,7 +460,7 @@ msgid "The organization this story belongs to"
 msgstr "Ο οργανισμός στον οποίο ανήκει η δημοσίευση"
 
 msgid "Stories"
-msgstr "Δημοσιεύσεις"
+msgstr "Νέα"
 
 msgid "The story to associate to"
 msgstr "Σχετική δημοσίευση"
@@ -873,19 +873,19 @@ msgid "Job Sources"
 msgstr "Πηγές εργασίας"
 
 msgid "Jobs Content"
-msgstr "Περιεχόμενο εργασίας"
+msgstr "Εργασία"
 
 msgid "About Content"
-msgstr "Περιεχόμενο Σχετικά με εμάς"
+msgstr "Σχετικά με εμάς"
 
 msgid "Videos"
 msgstr "Βίντεο"
 
 msgid "Contact Us Content"
-msgstr "Επικοινωνήστε μαζί μας Περιεχόμενο"
+msgstr "Επικοινωνία"
 
 msgid "Missions Content"
-msgstr "Περιεχόμενο αποστολών"
+msgstr "Αποστολές"
 
 msgid "Terms & Conditions"
 msgstr "Όροι και Προϋποθέσεις"
@@ -894,10 +894,10 @@ msgid "U-Reporters Content"
 msgstr "Περιεχόμενο από U-Reporters"
 
 msgid "Join &amp; Engage Content"
-msgstr "Εγγραφείτε &amp; Ακολουθήστε το περιεχομένου"
+msgstr "Εγγραφή και συμμετοχή"
 
 msgid "Join Steps Content"
-msgstr "Ενώστε τα βήματα περιεχομένου"
+msgstr "Εγγραφή"
 
 msgid "Additional Menu"
 msgstr "Επιπλέον μενού"
@@ -906,7 +906,7 @@ msgid "SELECT YOUR COUNTRY"
 msgstr "ΕΠΙΛΕΞΤΕ ΤΗ ΧΩΡΑ ΣΑΣ"
 
 msgid "Join Now"
-msgstr "Πάρτε μέρος τώρα"
+msgstr "Κάνε εγγραφή τώρα"
 
 msgid "READ MORE"
 msgstr "Διαβάστε περισσότερα"
@@ -1017,7 +1017,7 @@ msgid "FILTER"
 msgstr "Φιλτράρισμα"
 
 msgid "All"
-msgstr "Όλα"
+msgstr "ΟΛΑ"
 
 msgid "POLL LIST"
 msgstr "ΛΙΣΤΑ ΔΗΜΟΣΚΟΠΗΣΕΩΝ"
@@ -1044,7 +1044,7 @@ msgid "VIEW FULL RESULTS"
 msgstr "ΔΕΙΤΕ ΟΛΑ ΤΑ ΑΠΟΤΕΛΕΣΜΑΤΑ"
 
 msgid "U-REPORTERS IN"
-msgstr "U-REPORTERS ΣΕ"
+msgstr "U-REPORTERS ΣΤΗΝ"
 
 msgid "PARTNERING WITH"
 msgstr "ΣΕ ΣΥΝΕΡΓΑΣΙΑ ΜΕ"
@@ -1053,7 +1053,7 @@ msgid "U-REPORTERS"
 msgstr "U-REPORTERS"
 
 msgid "IN"
-msgstr "ΜΕΣΑ"
+msgstr "ΣΕ"
 
 msgid "COUNTRIES WORLDWIDE"
 msgstr "ΧΩΡΕΣ ΣΕ ΟΛΟ ΤΟΝ ΚΟΣΜΟ"
@@ -1068,7 +1068,7 @@ msgid "More bots"
 msgstr "Περισσότερα chatbots"
 
 msgid "Join U-Report, Your voice matters."
-msgstr "Εγγραφείτε στο U-Report, η φωνή σας έχει σημασία."
+msgstr "Γίνε μέλος του U-Report, η φωνή σου μετράει!"
 
 msgid "FEATURED STORY"
 msgstr "ΔΗΜΟΣΙΕΥΣΗ"
@@ -1085,7 +1085,7 @@ msgid ""
 "speak out on issues that matter to them."
 msgstr ""
 "Μάθετε περισσότερα για το πώς το U-Report ενδυναμώνει και συνδέει τους νέους"
-" δίνοντάς του τη δυνατότητα να μιλήσουν για θέματα που τους αφορούν."
+" δίνοντάς τους τη δυνατότητα να μιλήσουν για θέματα που τους αφορούν."
 
 msgid "LEARN MORE"
 msgstr "Μάθετε περισσότερα"
@@ -1094,7 +1094,7 @@ msgid "Visit"
 msgstr "Επισκεφθείτε"
 
 msgid "How would you like to join?"
-msgstr "Πώς θα θέλατε να εγγραφείτε;"
+msgstr "Πώς θα ήθελες να εγγραφείς;"
 
 msgid "Text"
 msgstr "Κείμενο"
@@ -1143,7 +1143,7 @@ msgid "REPORT"
 msgstr "ΑΝΑΦΟΡΑ"
 
 msgid "STORY"
-msgstr "ΔΗΜΟΣΙΕΥΣΗ"
+msgstr "ΠΡΟΣΦΑΤΑ"
 
 msgid "Download Report"
 msgstr "Λήψη αναφοράς"
@@ -1197,7 +1197,7 @@ msgid "OVERALL STATISTICS"
 msgstr "ΓΕΝΙΚΑ ΣΤΑΤΙΣΤΙΚΑ"
 
 msgid "THIS YEAR"
-msgstr "ΑΥΤΟ ΤΟ ΕΤΟΣ"
+msgstr "ΦΕΤΟΣ"
 
 msgid "AVG RESPONSE RATE"
 msgstr "ΜΕΣΟΣ ΟΡΟΣ ΑΠΑΝΤΗΣΕΩΝ"
@@ -1238,7 +1238,7 @@ msgid ""
 "See by the numbers how we are engaging youth voices for positive social "
 "change."
 msgstr ""
-"Δείτε από τους αριθμούς πώς ενισχύουμε τις φωνές των νέων για μια θετική "
+"Δείτε από τα στατιστικά πώς ενισχύουμε τις φωνές των νέων για μια θετική "
 "κοινωνική αλλαγή."
 
 msgid "Polled"
@@ -1465,7 +1465,7 @@ msgid "Organization"
 msgstr "Οργανισμός"
 
 msgid "Gender"
-msgstr "Φύλο"
+msgstr "ΦΥΛΟ"
 
 msgid "Gender of the contact"
 msgstr "Το φύλο της επαφής"
@@ -1940,7 +1940,7 @@ msgstr ""
 "επικοινωνήσουν με το U-Report, αν έχετε"
 
 msgid "The join button text"
-msgstr "Το κείμενο του κουμπιού σύνδεσης"
+msgstr "Το κείμενο του κουμπιού Εγγραφή"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
@@ -1964,7 +1964,7 @@ msgid "The description of the opinions page"
 msgstr "Περιγραφή της σελίδας ΔΗΜΟΣΚΟΠΗΣΕΙΣ"
 
 msgid "The description of the stories page"
-msgstr "Περιγραφή της σελίδας Δημοσιεύσεις"
+msgstr "Περιγραφή της σελίδας Νέα"
 
 msgid "The description of the engagement page"
 msgstr "Η περιγραφή της σελίδας σύνδεσης"
@@ -2138,13 +2138,13 @@ msgid "12 Months"
 msgstr "12 μήνες"
 
 msgid "Age"
-msgstr "Ηλικία"
+msgstr "ΗΛΙΚΙΑ"
 
 msgid "Channels"
-msgstr "Κανάλια"
+msgstr "ΚΑΝΑΛΙΑ"
 
 msgid "Location"
-msgstr "Τοποθεσία"
+msgstr "ΤΟΠΟΘΕΣΙΑ"
 
 msgid "Opinion Responses"
 msgstr "Απαντήσεις δημοσκόπησης"
