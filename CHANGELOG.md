@@ -1,3 +1,13 @@
+v1.2.41
+----------
+ * Merge pull request #986 from rapidpro/optimization-debug
+ * Update deps
+ * fix conflicts
+ * Update deps
+ * Remove unused dashblock types loading
+ * Reduce queries
+ * Update and activate django debug toolbar
+
 v1.2.40
 ----------
  * Merge pull request #1031 from Ilhasoft/update-el-language
