@@ -170,6 +170,7 @@ MIDDLEWARE = (
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
 X_FRAME_OPTIONS = "DENY"
@@ -621,6 +622,7 @@ INSTALLED_APPS = (
     "django.contrib.humanize",
     # the django admin
     "django.contrib.admin",
+    "debug_toolbar",
     # compress our CSS and js
     "compressor",
     # thumbnail
@@ -712,7 +714,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "dash.orgs.context_processors.user_group_perms_processor",
                 "dash.orgs.context_processors.set_org_processor",
-                "ureport.assets.context_processors.set_assets_processor",
                 "ureport.public.context_processors.set_has_better_domain",
                 "ureport.public.context_processors.set_is_iorg",
                 "ureport.public.context_processors.set_linked_sites",

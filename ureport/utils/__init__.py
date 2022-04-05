@@ -124,10 +124,14 @@ def chunk_list(iterable, size):
 
 
 def get_logo(org):
+    if hasattr(org, "_logo_field"):
+        return org._logo_field
+
     logo_field = org.logo
     logo = Image.objects.filter(org=org, is_active=True, image_type=LOGO).first()
     if logo:
         logo_field = logo.image
+    org._logo_field = logo_field
     return logo_field
 
 

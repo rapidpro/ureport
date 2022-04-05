@@ -109,7 +109,6 @@ class ImageTest(UreportTest):
 
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(len(response.context["object_list"]), Image.objects.filter(org=self.uganda).count())
-        self.assertTrue(isinstance(response.context["pattern_bg"], Image))
 
         response = self.client.get(nigeria_bg_update_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], nigeria_bg_update_url)

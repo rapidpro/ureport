@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, F, Q, Sum
+from django.db.models import Count, F, Prefetch, Q, Sum
 from django.db.models.functions import Lower
 from django.utils import timezone
 from django.utils.html import strip_tags
@@ -521,7 +521,28 @@ class Poll(SmartModel):
         cached_value = cache.get(Poll.ORG_MAIN_POLL_ID % org.id, None)
         main_poll = None
         if cached_value:
-            main_poll = Poll.objects.filter(is_active=True, id=cached_value, org=org).first()
+            main_poll = (
+                Poll.objects.filter(is_active=True, id=cached_value, org=org)
+                .prefetch_related(
+                    Prefetch(
+                        "questions",
+                        to_attr="prefetched_questions",
+                        queryset=PollQuestion.objects.filter(poll_id=cached_value, is_active=True)
+                        .select_related("flow_result")
+                        .prefetch_related(
+                            Prefetch(
+                                "response_categories",
+                                queryset=PollResponseCategory.objects.filter(is_active=True).exclude(
+                                    flow_result_category__category__icontains="no response"
+                                ),
+                                to_attr="prefetched_response_categories",
+                            )
+                        )
+                        .order_by("-priority", "pk"),
+                    )
+                )
+                .first()
+            )
 
         if main_poll:
             return main_poll
@@ -607,7 +628,10 @@ class Poll(SmartModel):
         return self.featured_responses.filter(is_active=True).order_by("-created_on")
 
     def get_first_question(self):
-        questions = self.get_questions()
+        if hasattr(self, "prefetched_questions"):
+            questions = self.prefetched_questions
+        else:
+            questions = self.get_questions()
 
         for question in questions:
             if not question.is_open_ended():
@@ -1132,6 +1156,9 @@ class PollQuestion(SmartModel):
         return dict()
 
     def is_open_ended(self):
+        if hasattr(self, "prefetched_response_categories"):
+            return len(self.prefetched_response_categories) == 1
+
         return (
             self.response_categories.filter(is_active=True)
             .exclude(flow_result_category__category__icontains="no response")
