@@ -36,7 +36,7 @@ from .views import (
 )
 
 urlpatterns = [
-    re_path(r"^$", IndexView.as_view(), {}, "public.index"),
+    re_path(r"^$", cache_page(30)(IndexView.as_view()), {}, "public.index"),
     re_path(r"^news/$", NewsView.as_view(), {}, "public.news"),
     re_path(r"^about/$", AboutView.as_view(), {}, "public.about"),
     re_path(r"^bots/$", Bots.as_view(), {}, "public.bots"),
