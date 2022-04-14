@@ -618,9 +618,9 @@
           -if org|config:"has_footer_unicef_logo"
             .block(class="md:block" style="max-width:185px")
               -if org.language != "ar" and org.language != "ru"
-                %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_en.png" class="md:-ml-0")
+                %img.-ml-2(src="{{STATIC_URL}}img/UNICEF_footer_Logo_black_en.png" class="md:-ml-0")
               -else
-                %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_{{org.language}}.png" class="md:-ml-0")
+                %img.-ml-2(src="{{STATIC_URL}}img/UNICEF_footer_Logo_black_{{org.language}}.png" class="md:-ml-0")
 
         %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
           .(style="width:180px")
@@ -632,9 +632,9 @@
             -if org|config:"has_footer_unicef_logo"
               .block(class="md:block" style="width:150px")
                 -if org.language != "ar" and org.language != "ru"
-                  %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_en.png")
+                  %img.-ml-2(src="{{STATIC_URL}}img/UNICEF_footer_Logo_black_en.png")
                 -else
-                  %img.-ml-2(src="{{STATIC_URL}}/img/UNICEF_footer_Logo_black_{{org.language}}.png")
+                  %img.-ml-2(src="{{STATIC_URL}}img/UNICEF_footer_Logo_black_{{org.language}}.png")
 
         .flex-1.flex(class="md:justify-end")
           .font-bold.text-2xl.flex-center-y(class="md:ml-6")
