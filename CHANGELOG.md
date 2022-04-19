@@ -1,3 +1,11 @@
+v1.2.42
+----------
+ * Merge pull request #1065 from pauloabreu/fix/unicef-logo
+ * fix unicef logo
+ * Merge pull request #1064 from Ilhasoft/locale-el-adjusts
+ * update locale for el language
+ * Translate /locale/en/LC_MESSAGES/django.po in el
+
 v1.2.41
 ----------
  * Merge pull request #986 from rapidpro/optimization-debug
