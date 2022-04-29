@@ -1,3 +1,8 @@
+v1.2.43
+----------
+ * Merge pull request #1066 from rapidpro/fix-week-number-bug
+ * Avoid using date that will match same week as the current week in the past year
+
 v1.2.42
 ----------
  * Merge pull request #1065 from pauloabreu/fix/unicef-logo
