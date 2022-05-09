@@ -2,10 +2,9 @@ import logging
 import time
 from datetime import timedelta
 
-from dash.orgs.tasks import org_task
-
 from django.utils import timezone
 
+from dash.orgs.tasks import org_task
 from ureport.utils import chunk_list
 
 logger = logging.getLogger(__name__)

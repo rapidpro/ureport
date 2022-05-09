@@ -11,8 +11,6 @@ from itertools import chain, islice
 
 import iso8601
 import six
-from dash.orgs.models import Org
-from dash.utils import datetime_to_ms
 from sentry_sdk import capture_exception
 
 from django.conf import settings
@@ -20,6 +18,8 @@ from django.core.cache import cache
 from django.db.models import Sum
 from django.utils import timezone, translation
 
+from dash.orgs.models import Org
+from dash.utils import datetime_to_ms
 from ureport.assets.models import LOGO, Image
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
