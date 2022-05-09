@@ -7,15 +7,15 @@ from datetime import timedelta
 from urllib.parse import quote
 
 import mock
+from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import TaskState
+from dash.stories.models import Story
 
 from django.test import override_settings
 from django.urls import reverse
 from django.utils import timezone
 
-from dash.categories.models import Category
-from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import TaskState
-from dash.stories.models import Story
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.news.models import NewsItem

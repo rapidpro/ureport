@@ -5,6 +5,10 @@ import json
 import uuid
 import zoneinfo
 
+from dash.orgs.middleware import SetOrgMiddleware
+from dash.orgs.models import Org
+from dash.test import DashTest
+from dash.utils import random_string
 from mock import Mock, patch
 from temba_client.v2 import TembaClient
 from temba_client.v2.types import (
@@ -23,10 +27,6 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.encoding import force_str
 
-from dash.orgs.middleware import SetOrgMiddleware
-from dash.orgs.models import Org
-from dash.test import DashTest
-from dash.utils import random_string
 from smartmin.tests import SmartminTest
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.flows.models import FlowResult, FlowResultCategory

@@ -1,7 +1,8 @@
+from dash.orgs.models import Org
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from dash.orgs.models import Org
 from smartmin.models import SmartModel
 
 

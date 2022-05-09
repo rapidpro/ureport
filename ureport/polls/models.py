@@ -8,6 +8,9 @@ from collections import defaultdict
 from datetime import timedelta
 
 import six
+from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import Org, OrgBackend
+from dash.tags.models import Tag
 from django_redis import get_redis_connection
 
 from django.conf import settings
@@ -21,9 +24,6 @@ from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from dash.categories.models import Category, CategoryImage
-from dash.orgs.models import Org, OrgBackend
-from dash.tags.models import Tag
 from smartmin.models import SmartModel
 from ureport.flows.models import FlowResult, FlowResultCategory
 
