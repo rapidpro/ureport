@@ -1,3 +1,8 @@
+v1.2.45
+----------
+ * Merge pull request #1069 from rapidpro/fix-lock-time
+ * Adjust lock timeout for rebuilding poll results
+
 v1.2.44
 ----------
  * Merge pull request #1067 from rapidpro/fix-rebuild-counts-task
