@@ -236,7 +236,7 @@ def rebuild_counts():
     r = get_redis_connection()
 
     key = "polls_rebuild_counts_task_running"
-    lock_timeout = 60 * 20
+    lock_timeout = 60 * 60 * 24 * 4 # 4 days
 
     if r.get(key):
         logger.info("Task: polls.rebuild_counts skipped")
