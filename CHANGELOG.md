@@ -1,3 +1,11 @@
+v1.2.46
+----------
+ * Merge pull request #1071 from rapidpro/dependabot/pip/django-4.0.4
+ * Merge pull request #1070 from rapidpro/dependabot/npm_and_yarn/minimist-1.2.6
+ * Bump django from 4.0.3 to 4.0.4
+ * Bump minimist from 1.2.5 to 1.2.6
+ * Run code checks
+
 v1.2.45
 ----------
  * Merge pull request #1069 from rapidpro/fix-lock-time
