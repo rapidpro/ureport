@@ -1185,10 +1185,10 @@ COUNTRY_FLAGS_SITES = [
     ),
     dict(
         name="Europe",
- 	    host="//europe-uk.ureport.in/",
- 	    flag="flag_europe.png",
- 	    countries_codes=["EUR"],
- 	    count_link="http://europe-uk.ureport.in/count/",
+        host="//europe-uk.ureport.in/",
+        flag="flag_europe.png",
+        countries_codes=["EUR"],
+        count_link="http://europe-uk.ureport.in/count/",
     ),
     dict(
         name="France",
@@ -1197,7 +1197,6 @@ COUNTRY_FLAGS_SITES = [
         countries_codes=["FRA"],
         count_link="http://france.ureport.in/count/",
     ),
-    
     dict(
         name="FSM",
         host="//fsm.ureport.in",
