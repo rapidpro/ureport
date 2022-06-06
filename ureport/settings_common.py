@@ -1186,8 +1186,8 @@ COUNTRY_FLAGS_SITES = [
     dict(
         name="Europe",
         host="//europe-uk.ureport.in/",
-        flag="flag_europe.png",
-        countries_codes=["EUR"],
+        flag="flag_europe-uk.png",
+        countries_codes=["UKR"],
         count_link="http://europe-uk.ureport.in/count/",
     ),
     dict(
