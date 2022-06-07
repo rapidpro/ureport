@@ -1,3 +1,13 @@
+v1.2.47
+----------
+ * Merge pull request #1073 from rapidpro/add-morocco
+ * Merge pull request #1072 from Ilhasoft/feature/europe.flag
+ * rename flag and countries code
+ * Adding favico europe
+ * Add Morocco flag
+ * fix identation
+ * Adding Europe's Flag
+
 v1.2.46
 ----------
  * Merge pull request #1071 from rapidpro/dependabot/pip/django-4.0.4
