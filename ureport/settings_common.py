@@ -1184,6 +1184,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://eswatini.ureport.in/count/",
     ),
     dict(
+        name="Europe",
+        host="//europe-uk.ureport.in/",
+        flag="flag_europe-uk.png",
+        countries_codes=["UKR"],
+        count_link="http://europe-uk.ureport.in/count/",
+    ),
+    dict(
         name="France",
         host="//france.ureport.in",
         flag="flag_france.png",
