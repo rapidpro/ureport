@@ -1401,6 +1401,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://moldova.ureport.in/count/",
     ),
     dict(
+        name="Morocco",
+        host="//morocco.ureport.in",
+        flag="flag_morocco.png",
+        countries_codes=["MAR"],
+        count_link="http://morocco.ureport.in/count/",
+    ),
+    dict(
         name="Mozambique",
         host="//smsbiz.co.mz/",
         flag="flag_mozambique.png",
