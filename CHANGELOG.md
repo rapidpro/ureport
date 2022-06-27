@@ -1,3 +1,37 @@
+v1.2.47
+----------
+ * Merge pull request #1073 from rapidpro/add-morocco
+ * Merge pull request #1072 from Ilhasoft/feature/europe.flag
+ * rename flag and countries code
+ * Adding favico europe
+ * Add Morocco flag
+ * fix identation
+ * Adding Europe's Flag
+
+v1.2.46
+----------
+ * Merge pull request #1071 from rapidpro/dependabot/pip/django-4.0.4
+ * Merge pull request #1070 from rapidpro/dependabot/npm_and_yarn/minimist-1.2.6
+ * Bump django from 4.0.3 to 4.0.4
+ * Bump minimist from 1.2.5 to 1.2.6
+ * Run code checks
+
+v1.2.45
+----------
+ * Merge pull request #1069 from rapidpro/fix-lock-time
+ * Adjust lock timeout for rebuilding poll results
+
+v1.2.44
+----------
+ * Merge pull request #1067 from rapidpro/fix-rebuild-counts-task
+ * Run code checks
+ * Add lock when  task rebuilding counts is running
+
+v1.2.43
+----------
+ * Merge pull request #1066 from rapidpro/fix-week-number-bug
+ * Avoid using date that will match same week as the current week in the past year
+
 v1.2.42
 ----------
  * Merge pull request #1065 from pauloabreu/fix/unicef-logo
