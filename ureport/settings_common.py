@@ -1185,6 +1185,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://eswatini.ureport.in/count/",
     ),
     dict(
+        name="Europe",
+        host="//europe-uk.ureport.in/",
+        flag="flag_europe-uk.png",
+        countries_codes=["UKR"],
+        count_link="http://europe-uk.ureport.in/count/",
+    ),
+    dict(
         name="France",
         host="//france.ureport.in",
         flag="flag_france.png",
@@ -1393,6 +1400,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_moldova.png",
         countries_codes=["MDA"],
         count_link="http://moldova.ureport.in/count/",
+    ),
+    dict(
+        name="Morocco",
+        host="//morocco.ureport.in",
+        flag="flag_morocco.png",
+        countries_codes=["MAR"],
+        count_link="http://morocco.ureport.in/count/",
     ),
     dict(
         name="Mozambique",

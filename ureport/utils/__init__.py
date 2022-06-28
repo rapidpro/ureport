@@ -780,7 +780,7 @@ def get_reporter_registration_dates(org):
 
     # build our final dict using week numbers
     categories = []
-    start = one_year_ago
+    start = one_year_ago + timedelta(days=7)
     while start < timezone.now():
         week_dict = start.strftime("%W")
         count = interval_dict.get(week_dict, 0)

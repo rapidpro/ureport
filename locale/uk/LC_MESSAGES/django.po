@@ -2,292 +2,313 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
-# LIliya <lilya.lyu@gmail.com>, 2019
-#
+# Nyaruka <info@textit.in>, 2021
+# Ksenia Y, 2022
+# Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
-"PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
+"POT-Creation-Date: 2021-11-18 09:42+0000\n"
+"PO-Revision-Date: 2021-03-30 14:28+0000\n"
+"Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
-"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 msgid "The name of this category"
-msgstr ""
+msgstr "Назва категорії"
 
 msgid "An optional image that can describe this category"
-msgstr ""
+msgstr "Зображення для опису категорії"
 
 msgid "The organization this category applies to"
-msgstr ""
+msgstr "Організація, до якої відноситься категорія"
 
 msgid "Categories"
-msgstr ""
+msgstr "Категорії"
 
 msgid "The name to describe this image"
-msgstr ""
+msgstr "Опис зображення"
 
 msgid "The category this image represents"
-msgstr ""
+msgstr "Категорія, яку ілюструє це зображення"
 
 msgid "The image file to use"
-msgstr ""
+msgstr "Файл зображення"
 
 msgid "The human readable name for this content type"
-msgstr ""
+msgstr "Читабельна назва контенту такого типу"
 
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr ""
+"Плагін для ідентифікації цього типу контенту, що використовується з тегами "
+"шаблонів"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
 msgstr ""
+"Опис того, де знаходиться цей тип контенту на сайті, і як він "
+"відображатиметься"
 
 msgid "Whether this content should include a title"
-msgstr ""
+msgstr "Чи має цей контент включати заголовок"
 
 msgid "Whether this content should include an image"
-msgstr ""
+msgstr "Чи має цей контент включати зображення"
 
 msgid "Whether this content should use a rich HTML editor"
-msgstr ""
+msgstr "Чи має цей контент включати повний HTML редактор"
 
 msgid "Whether this content should include a summary field"
-msgstr ""
+msgstr "Чи має цей контент включати блок  короткого опису"
 
 msgid "Whether this content should include a link"
-msgstr ""
+msgstr "Чи має цей контент включати лінк"
 
-msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
 msgstr ""
+"Чи має цей контент дозволяти завантаження додаткових зображень в галерею"
 
 msgid "Whether this content has a color field"
-msgstr ""
+msgstr "Чи має цей контент кольорове поле"
 
 msgid "Whether this content should allow setting a YouTube id"
-msgstr ""
+msgstr "Чи має цей контент дозволяти встановлення YouTube id"
 
 msgid "Whether this content should allow tags"
-msgstr ""
+msgstr "Чи має цей контент дозволяти теги"
 
 msgid "Content Type"
-msgstr ""
+msgstr "Вид контенту"
 
 msgid "The category, or type for this content block"
-msgstr ""
+msgstr "Категорія/тип для цього блоку контенту"
 
 msgid "The title for this block of content, optional"
-msgstr ""
+msgstr "Назва блоку контенту (вибірково)"
 
 msgid "The summary for this item, should be short"
-msgstr ""
+msgstr "Опис цього елементу повинен бути коротким"
 
 msgid "The body of text for this content block, optional"
-msgstr ""
+msgstr "Текст для блоку контенту (вибірково)"
 
 msgid "Any image that should be displayed with this content block, optional"
 msgstr ""
+"Зображення, яке має відображатися поряд із блоком контенту (вибірково)"
 
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr ""
+msgstr "Колір фону для зображення у форматі #rrggbb"
 
 msgid "Any link that should be associated with this content block, optional"
-msgstr ""
+msgstr "Посилання, пов'язане з цим блоком контенту (вибірково)"
 
 msgid "The id of the YouTube video that should be linked to this item"
-msgstr ""
+msgstr "ID відео YouTube, пов'зане з цим елементом"
 
-msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
 msgstr ""
+"Теги для цього блоку контенту, розділені пробілом, для розширеного "
+"фільтрування (вибірково)"
 
 msgid "The priority for this block, higher priority blocks come first"
 msgstr ""
+"Пріоритетність блоку. Блоки, які мають вищу пріорітетність будуть "
+"розташовані першими"
 
 msgid "The organization this content block belongs to"
-msgstr ""
+msgstr "Організація, якій належить блок"
 
 msgid "Gallery"
-msgstr ""
+msgstr "Галерея"
 
 msgid "Add Image"
-msgstr ""
+msgstr "Додати зображення"
 
 msgid "Search"
 msgstr "ПОШУК"
 
 msgid "Add"
-msgstr ""
+msgstr "Додати"
 
 msgid "Content Types"
-msgstr ""
+msgstr "Види контенту"
 
 msgid "Link Slug"
-msgstr ""
+msgstr "Link Slug"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "Слаг або слово, яке має бути використане у посиланні на сторінку"
 
 msgid "Content Blocks"
-msgstr ""
+msgstr "Блоки контенту"
 
 #, python-format
 msgid "%s Blocks"
-msgstr ""
+msgstr "Блоки з %s"
 
 #, python-format
 msgid "Edit %s"
-msgstr ""
+msgstr "Редагувати %s"
 
 #, python-format
 msgid "Create %s"
-msgstr ""
+msgstr "Створити %s"
 
 msgid "Create Content Block"
-msgstr ""
+msgstr "Створити контентний блок"
 
 msgid "Your first name"
-msgstr ""
+msgstr "Ваше ім'я"
 
 msgid "Your last name"
-msgstr ""
+msgstr "Ваше прізвище"
 
 msgid "Your email address"
-msgstr ""
+msgstr "Ваш Email "
 
 msgid "Your password, at least eight letters please"
-msgstr ""
+msgstr "Пароль (щонайменше 8 символів)"
 
 msgid "That email address is already used"
-msgstr ""
+msgstr "Email-адреса вже використовується"
 
 msgid "Passwords must contain at least 8 letters."
-msgstr ""
+msgstr "У паролі повинно бути не менш ніж 8 символів"
 
 msgid "This domain is used for subdomains"
-msgstr ""
+msgstr "Цей домен використовується для субдоменів"
 
 msgid "Name"
-msgstr ""
+msgstr "Назва"
 
 msgid "The name of this organization"
-msgstr ""
+msgstr "Назва організації"
 
 msgid "The logo that should be used for this organization"
-msgstr ""
+msgstr "Логотип організації"
 
 msgid "Administrators"
-msgstr ""
+msgstr "Адміністратори"
 
 msgid "The administrators in your organization"
-msgstr ""
+msgstr "Адміністратори у Вашій організації"
 
 msgid "Viewers"
-msgstr ""
+msgstr "Читачі"
 
 msgid "The viewers in your organization"
-msgstr ""
+msgstr "Читачі у Вашій організації"
 
 msgid "Editors"
-msgstr ""
+msgstr "Редактори"
 
 msgid "The editors in your organization"
-msgstr ""
+msgstr "Редактори у Вашій організації"
 
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
 msgid "The main language used by this organization"
-msgstr ""
+msgstr "Мова, що використовується цією організацією"
 
 msgid "Subdomain"
-msgstr ""
+msgstr "Субдомен"
 
 msgid "This subdomain is not available"
-msgstr ""
+msgstr "Цей субдомен недоступний "
 
 msgid "The subdomain for this organization"
-msgstr ""
+msgstr "Субдомен для цієї організації"
 
 msgid "Domain"
-msgstr ""
+msgstr "Домен"
 
 msgid "This domain is not available"
-msgstr ""
+msgstr "Цей домен недоступний"
 
 msgid "The custom domain for this organization"
-msgstr ""
+msgstr "Індивідуальний домен організації"
 
 msgid "Timezone"
-msgstr ""
+msgstr "Часовий пояс"
 
 msgid "The timezone your organization is in."
-msgstr ""
+msgstr "Часовий пояс Вашої організації"
 
-msgid "JSON blob used to store configuration information associated with this organization"
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
 msgstr ""
+"JSON blob, що зберігає конфігурацію інформації, пов'язаної з даною "
+"організацією"
 
 msgid "Administrator"
-msgstr ""
+msgstr "Адміністратор"
 
 msgid "Editor"
-msgstr ""
+msgstr "Редактор"
 
 msgid "Viewer"
-msgstr ""
+msgstr "Читач"
 
 msgid "Org"
-msgstr ""
+msgstr "Org"
 
 msgid "The organization to which the account is invited to view"
-msgstr ""
+msgstr "Організація, до якої акаунт запрошено в якості читача"
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "The email to which we send the invitation of the viewer"
-msgstr ""
+msgstr "Email, на який ми відсилаємо запрошення читача"
 
 msgid "Secret"
-msgstr ""
+msgstr "Секрет"
 
 msgid "a unique code associated with this invitation"
-msgstr ""
+msgstr "унікальний код запрошення"
 
 msgid "User Role"
-msgstr ""
+msgstr "Роль користувача"
 
 #, python-format
 msgid "%s Invitation"
-msgstr ""
+msgstr "Запрошення %s"
 
 msgid "Banner"
-msgstr ""
+msgstr "Банер"
 
 msgid "Pattern"
-msgstr ""
+msgstr "Шаблон"
 
 msgid "The organization in which the image will be used"
-msgstr ""
+msgstr "Організація, яка використовуватиме зображення"
 
 msgid "The name to describe this background"
-msgstr ""
+msgstr "Назва, що описує фон"
 
 msgid "Background type"
-msgstr ""
+msgstr "Тип фону"
 
 msgid "The image file"
-msgstr ""
+msgstr "Файл зображення"
 
 msgid "The API token for this backend"
-msgstr ""
+msgstr "Токен API для цього бекенду"
 
 #, python-format
 msgid ""
@@ -297,149 +318,170 @@ msgid ""
 "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
 msgstr ""
+"\n"
+"      Вас було запрошено до %(org_name)s.\n"
+"      <br/>\n"
+"      Щоб прийняти запрошення, <a href='%(host)s%(join_url)s'>натисніть сюди</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
-msgstr ""
+msgstr "Вас запрошено приєднатися до {{org.name}}."
 
 msgid "Click this link to join"
-msgstr ""
+msgstr "Натисніть тут, щоб приєднатися"
 
 msgid "Edit"
-msgstr ""
+msgstr "Редагувати"
 
 msgid "Manage Backends"
-msgstr ""
+msgstr "Керувати бекендами"
 
 msgid "Manage Users"
-msgstr ""
+msgstr "Керувати користувачами"
 
 msgid "Accounts"
-msgstr ""
+msgstr "Облікові записи"
 
 msgid "Admins"
-msgstr ""
+msgstr "Адміни"
 
 msgid "Remove"
-msgstr ""
+msgstr "Видалити"
 
 msgid "You must have at least one administator"
-msgstr ""
+msgstr "Вам потрібен хоча б один адміністратор"
 
 msgid "Select your Organization"
-msgstr ""
+msgstr "Оберіть організацію"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
 msgstr ""
+"Ваш обліковий запис не пов'язаний з жодною організацією. Будь ласка, "
+"зв'яжіться із адмінстратором"
 
 msgid "Your Organization"
-msgstr ""
+msgstr "Ваша організація"
 
 msgid "Invite people to your organization"
-msgstr ""
+msgstr "Запросити в організацію"
 
 msgid "User group"
-msgstr ""
+msgstr "Група користувачів"
 
 msgid "One of the emails you entered is invalid."
-msgstr ""
+msgstr "Один з е-мейлів, що ви вказали, неправильний"
 
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr ""
+msgstr "Керувати обл. записом %(name)s "
 
 msgid "Create"
-msgstr ""
+msgstr "Створити"
 
-msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
 msgstr ""
+"Посилання на ваше запрошення застаріло. Будь ласка, зв'яжіться з "
+"адміністратором"
 
 #, python-format
 msgid "Join %(name)s"
-msgstr ""
+msgstr "Приєднатись до %(name)s "
 
-#, fuzzy
-#| msgid "Join Now"
 msgid "Join"
 msgstr "Приєднатися"
 
-msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr ""
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr "Ваше запрошення застаріло. Будь ласка, зв'яжіться з адміністратором"
 
 msgid "Task"
-msgstr ""
+msgstr "Завдання"
 
 msgid "Tasks"
-msgstr ""
+msgstr "Завдання"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "Підтримуються лише файли у форматі PDF"
 
 msgid "The title for this story"
-msgstr ""
+msgstr "Назва цієї історії"
 
 msgid "Whether this story is featured"
-msgstr ""
+msgstr "Чи показувати історію на головній сторінці"
 
 msgid "The summary for the story"
-msgstr ""
+msgstr "Короткий опис історії"
 
 msgid "The body of text for the story"
-msgstr ""
+msgstr "Основний текст історії"
 
 msgid "The writer of the story"
-msgstr ""
+msgstr "Автор історії"
 
 msgid "A link to an mp3 file to publish on this story"
-msgstr ""
+msgstr "Посилання на файл mp3, пов'язаний з цією історією"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "Звіт у форматі PDF"
 
-msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr ""
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr "ID відео в YouTube до цієї історії (після v= і перед & в URL ролика)"
 
-msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
 msgstr ""
+"Теги для цієї історії, розділені пробілом, для розширеного фільтрування "
+"(вибірково)"
 
 msgid "The category for this story"
-msgstr ""
+msgstr "Категорія для цієї історії"
 
 msgid "The organization this story belongs to"
-msgstr ""
+msgstr "Організація, з якою пов'язана історія"
 
 msgid "Stories"
-msgstr ""
+msgstr "Блог"
 
 msgid "The story to associate to"
-msgstr ""
+msgstr "Історія має відношення до "
 
 msgid "Yes"
-msgstr ""
+msgstr "Так"
 
 msgid "No"
-msgstr ""
+msgstr "Ні"
 
 msgid "Story Images"
-msgstr ""
+msgstr "Зображення до історії"
 
 #, python-format
 msgid "Image %d"
-msgstr ""
+msgstr "Зображення %d"
 
 msgid "Image to display on story page and in previews. (optional)"
 msgstr ""
+"Зображення, яке буде розташовано на сторінці історії і в прев'ю (вибірково)"
 
 msgid "Image to display on story page and in previews (optional)"
 msgstr ""
+"Зображення, яке буде розташовано на сторінці історії і в прев'ю (вибірково)"
 
 msgid "The name of this tag"
-msgstr ""
+msgstr "Назва цього тега"
 
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Remove Item?"
-msgstr ""
+msgstr "Видалити елемент?"
 
 #, python-format
 msgid ""
@@ -447,12 +489,18 @@ msgid ""
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
 msgstr ""
+"\n"
+"Ви впевнені, що цього хочете видалити  <b>%(object)s</b>?"
 
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
 msgstr ""
+"Якщо видалити цей елемент, його вже не можна буде відновити. Скасувати "
+"видалення буде неможливо."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 #, python-format
 msgid ""
@@ -464,9 +512,17 @@ msgid_plural ""
 "         %(counter)s results\n"
 "        "
 msgstr[0] ""
+"\n"
+"%(counter)sрезультат"
 msgstr[1] ""
+"\n"
+"%(counter)sрезультатів"
 msgstr[2] ""
+"\n"
+"%(counter)sрезультатів"
 msgstr[3] ""
+"\n"
+"%(counter)s результатів"
 
 #, python-format
 msgid ""
@@ -474,30 +530,33 @@ msgid ""
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
 msgstr ""
+"\n"
+"\tРезультати%(start)s-%(end)s з %(count)s\n"
+"\t"
 
 msgid "Previous"
-msgstr ""
+msgstr "Попередній"
 
 msgid "Next"
-msgstr ""
+msgstr "Наступний"
 
 msgid "edit"
-msgstr ""
+msgstr "редагувати"
 
 msgid "Sign in"
-msgstr ""
+msgstr "Зареєструватись"
 
 msgid "Login"
-msgstr ""
+msgstr "Увійти"
 
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Забули пароль?"
 
 msgid "Token Expired"
-msgstr ""
+msgstr "Код застарілий"
 
 msgid "Login Failure"
-msgstr ""
+msgstr "Не вдалось увійти"
 
 #, python-format
 msgid ""
@@ -505,6 +564,8 @@ msgid ""
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
 msgstr ""
+"\n"
+"Вибачте, можливість увійти у ваш обліковий запис тимчасово заблоковано. Кількість невдалих спроб%(failed_login_limit)s."
 
 #, python-format
 msgid ""
@@ -512,21 +573,30 @@ msgid ""
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
 msgstr ""
+"\n"
+"Будь ласка, зачекайте %(lockout_timeout)s хв. і спробуйте увійти знову"
 
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
 msgstr ""
+"Щоб встановити новий пароль через електронну пошту, заповніть цю форму"
 
 msgid "Please contact the website administrator to have your password reset."
-msgstr ""
+msgstr "Зв'яжіться з адміністратором, щоб відновити пароль."
 
 msgid "Email Address"
-msgstr ""
+msgstr "Email"
 
 msgid "Recover"
-msgstr ""
+msgstr "Відновити"
 
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
 msgstr ""
+"Будь ласка, укажіть електронну адресу, за якою ви реєструвались, і ми "
+"допоможемо відновити пароль."
 
 #, python-format
 msgid ""
@@ -534,264 +604,285 @@ msgid ""
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
+"\n"
+"<strong> Ваш пароль більше не дійсний.</strong> Необхідно оновлювати потрібно кожні %(expire_days)s днів. Зверніть увагу, що пароль має відрінятись від попереднього, який використовувався протягом останніх %(window_days)s днів."
 
 msgid "New Password"
-msgstr ""
+msgstr "Новий пароль"
 
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
 msgstr ""
+"Пароль має містити 8 символів, серед яких великі букви, маленькі букви, і "
+"цифри"
 
-msgid "You have used this password before in the past year, please use a new password."
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
 msgstr ""
+"Ви вже використовували цей пароль минулого року. Будь ласка, введіть новий "
+"пароль."
 
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 msgid "Confirm Password"
-msgstr ""
+msgstr "Підтвердити пароль"
 
 msgid "Please enter your password to save changes."
-msgstr ""
+msgstr "Будь ласка, введіть Ваш пароль, щоб зберегти зміни."
 
 msgid "Confirm the new password by filling the this field"
-msgstr ""
+msgstr "Підтвердіть новий пароль, заповнивши це поле."
 
 msgid "New password doesn't match with its confirmation"
-msgstr ""
+msgstr "Новий пароль не відповідає повторно введеному паролю"
 
 msgid "Your Email"
-msgstr ""
+msgstr "Ваш Email"
 
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
 msgstr ""
+"Відновлення паролю через Email не можливе. Зв'яжіться з адміністратором для "
+"відновлення паролю вручну."
 
 msgid "Current Password"
-msgstr ""
+msgstr "Ваш теперішній пароль"
 
 msgid "Your current password"
-msgstr ""
+msgstr "Ваш теперішній пароль"
 
 msgid "Your new password."
-msgstr ""
+msgstr "Ваш новий пароль"
 
 msgid "Confirm new Password"
-msgstr ""
+msgstr "Підтвердити новий пароль"
 
 msgid "Confirm your new password."
-msgstr ""
+msgstr "Підтвердіть Ваш новий пароль"
 
 msgid "Please enter your password to save changes"
-msgstr ""
+msgstr "Будь ласка, введіть Ваш пароль, щоб зберегти зміни."
 
 msgid "Confirm your new password by entering it here"
-msgstr ""
+msgstr "Підтвердіть новий пароль, заповнивши це поле."
 
 msgid "Mismatch between your new password and confirmation, try again"
-msgstr ""
+msgstr "Не збігається, спробуйте ще раз"
 
 msgid "New user created successfully."
-msgstr ""
+msgstr "Успішно створено нового користувача"
 
 msgid "Groups"
-msgstr ""
+msgstr "Групи"
 
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr ""
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr "Користувачі маютимуть лише права, що були надані їхнім групам."
 
 msgid "Set the user's initial password here."
-msgstr ""
+msgstr "Встановити початковий пароль користувача."
 
 msgid "Last Login"
-msgstr ""
+msgstr "Останнє відвідування"
 
 msgid "Is Active"
-msgstr ""
+msgstr "Активний"
 
 msgid "Whether this user is allowed to log into the site"
-msgstr ""
+msgstr "Чи користувачу дозволено входити на сайт"
 
 msgid "Users will only get those permissions that are allowed for their group"
-msgstr ""
+msgstr "Користувачі матимуть лише ті права, що були надані їх групам"
 
 msgid "You can reset the user's password by entering a new password here"
 msgstr ""
+"Ви можете замінити пароль користувача, якщо ввдедете сюди новий пароль"
 
 msgid "Username"
-msgstr ""
+msgstr "Ім'я користувача"
 
 msgid "Your password"
-msgstr ""
+msgstr "Ваш пароль"
 
 msgid "If you want to set a new password, enter it here"
-msgstr ""
+msgstr "Якщо хочете встановити новий пароль, введіть його сюди"
 
 msgid "Confirm New Password"
-msgstr ""
+msgstr "Підтвердити новий пароль"
 
 msgid "Confirm your new password"
-msgstr ""
+msgstr "Підтвердіть Ваш новий пароль"
 
 msgid "Edit your profile"
-msgstr ""
+msgstr "Редагувати профіль"
 
 msgid "Password Recovery"
-msgstr ""
+msgstr "Відновлення паролю"
 
 msgid "An Email has been sent to your account with further instructions."
-msgstr ""
+msgstr "Вам надіслано листа на електронну пошту з подальшими інструкціями"
 
 msgid "Password Recovery Request"
-msgstr ""
+msgstr "Запит на відновлення паролю"
 
 msgid "Pick a new password"
-msgstr ""
+msgstr "Оберіть новий пароль"
 
 msgid "Your password has successfully been updated, thank you."
-msgstr ""
+msgstr "Ваш пароль змінено - дякуємо"
 
 #, python-format
 msgid "You are now logged in as %s"
-msgstr ""
+msgstr "Ви ввійшли на сайт як %s"
 
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr ""
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr "Пароль оновлено. Тепер можете використовувати його для входу на сайт"
 
 msgid "Reset your Password"
-msgstr ""
+msgstr "Змінити пароль"
 
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
 msgstr ""
+"Ваше посилання більше не дійсне з міркувань безпеки. Будь ласка, повторіть "
+"процедуру, ввівши ваш email."
 
 msgid "Submit"
-msgstr ""
+msgstr "Відправити"
 
 msgid "Form"
-msgstr ""
+msgstr "Форма"
 
 msgid "Save Changes"
-msgstr ""
+msgstr "Зберегти зміни"
 
 #, python-format
 msgid "Your new %s has been created."
-msgstr ""
+msgstr "Ваш новий %s створено"
 
 #, python-format
 msgid "Import %s"
-msgstr ""
+msgstr "Імпортувати %s"
 
 msgid "Back to Website"
-msgstr ""
+msgstr "Повернутися до сайту"
 
 msgid "Welcome, "
-msgstr ""
+msgstr "Вітаємо"
 
 msgid "Logout"
-msgstr ""
+msgstr "Вийти"
 
 msgid "Opinions"
 msgstr "Опитування"
 
 msgid "Bots"
-msgstr ""
+msgstr "Чат-бот"
 
 msgid "Users"
-msgstr ""
+msgstr "Користувачі"
 
 msgid "Settings"
-msgstr ""
+msgstr "Налаштування"
 
 msgid "Pages"
-msgstr ""
+msgstr "Сторінки"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "Цільова сторінка"
 
 msgid "Jobs"
-msgstr ""
+msgstr "Вакансії"
 
 msgid "Tags"
-msgstr ""
+msgstr "Теги"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "Лого партнерів"
 
 msgid "Categories Images"
-msgstr ""
+msgstr "Зображення категорій"
 
 msgid "News Items"
-msgstr ""
+msgstr "Новини"
 
 msgid "Orgs"
-msgstr ""
+msgstr "Організації"
 
 msgid "Images"
-msgstr ""
+msgstr "Зображення"
 
 msgid "About"
-msgstr ""
+msgstr "Про нас"
 
 msgid "Engagement"
 msgstr "U-репортери"
 
 msgid "Reports"
-msgstr ""
+msgstr "Звіти"
 
 msgid "Category Images"
-msgstr ""
+msgstr "Зображення до категорій"
 
 msgid "+ New "
-msgstr ""
+msgstr "+ Нові"
 
 msgid "+ New Page"
-msgstr ""
+msgstr "+ Нова сторінка"
 
 msgid "U-Report"
-msgstr ""
+msgstr "U-Report"
 
 msgid "Admin"
-msgstr ""
+msgstr "Адмін"
 
 msgid "Configuration"
-msgstr ""
+msgstr "Конфігурація"
 
 msgid "Content"
-msgstr ""
+msgstr "Контент"
 
 msgid "Country Aliases"
-msgstr ""
+msgstr "Альтернативна назва країни"
 
 msgid "Job Sources"
-msgstr ""
+msgstr "Вакансії"
 
 msgid "Jobs Content"
-msgstr ""
+msgstr "Контент про вакансії"
 
 msgid "About Content"
-msgstr ""
+msgstr "Контент \"Про нас\""
 
 msgid "Videos"
-msgstr ""
+msgstr "Відео"
 
 msgid "Contact Us Content"
-msgstr ""
+msgstr "Контент \"Контакти\""
 
 msgid "Missions Content"
-msgstr ""
+msgstr "Контент \"Про місії\""
 
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Терміни і умови"
 
 msgid "U-Reporters Content"
-msgstr ""
+msgstr "Конткнт \"U-репортери\""
 
 msgid "Join &amp; Engage Content"
-msgstr ""
+msgstr "Контент \"Приєднуйся!\""
 
 msgid "Join Steps Content"
-msgstr ""
+msgstr "Кроки приєднання - контент"
 
 msgid "Additional Menu"
-msgstr ""
+msgstr "Додаткове меню"
 
 msgid "SELECT YOUR COUNTRY"
 msgstr "Оберіть свою країну"
@@ -800,134 +891,157 @@ msgid "Join Now"
 msgstr "Приєднатися"
 
 msgid "READ MORE"
-msgstr ""
+msgstr "ДІЗНАТИСЯ БІЛЬШЕ"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "Дані про U-репортерів"
+msgstr "Про U-репортерів"
 
 msgid ""
 "\n"
 "        To add a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
+"\n"
+"        Щоб додати вакансію з Твіттера, отримайте ID віджета з Твіттер\n"
+"      "
 
 msgid "Follow this step by step guide"
-msgstr ""
+msgstr "Слідуйте покроковій інструкції"
 
 msgid ""
 "\n"
 "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
 msgstr ""
+"\n"
+"        <div>Коли створите віджет, скопіюйте його ID з URL, як показано тут </div>\n"
+"      "
 
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 msgid "Select bots"
-msgstr ""
+msgstr "Обрати чат-бот"
 
 msgid "View public page"
-msgstr ""
+msgstr "Переглянути сторінку"
 
 msgid "LATEST NOTIFICATIONS"
-msgstr ""
+msgstr "ОСТАННІ СПОВІЩЕННЯ"
 
 msgid "Backends"
-msgstr ""
+msgstr "Бекенди"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Додати os Виберіть теги"
 
 #, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid ""
+"There is currently %(counter)s new poll syncing. Polls are displayed on the "
+"public site once they have completely synced their results."
+msgid_plural ""
+"There are currently %(counter)s new polls syncing. Polls are displayed on "
+"the public site once they have completely synced their results."
 msgstr[0] ""
+"Наразі відбувається синхронізація %(counter)s нових опитувань. Опитування "
+"почнуть відображатися на загальнодоступному сайті після повної синхронізації"
+" результатів."
 msgstr[1] ""
+"Наразі відбувається синхронізація %(counter)s нових опитувань. Опитування "
+"почнуть відображатися на загальнодоступному сайті після повної синхронізації"
+" результатів."
 msgstr[2] ""
+"Наразі відбувається синхронізація %(counter)s нових опитувань. Опитування "
+"почнуть відображатися на загальнодоступному сайті після повної синхронізації"
+" результатів."
 msgstr[3] ""
+"Наразі відбувається синхронізація %(counter)s нових опитувань. Опитування "
+"почнуть відображатися на загальнодоступному сайті після повної синхронізації"
+" результатів."
 
 msgid "+ New Poll"
-msgstr ""
+msgstr "+ Нове опитування"
 
 #, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%(counter)s питання опитування"
+msgstr[1] "%(counter)sпитання опитування "
+msgstr[2] "%(counter)s питання опитування"
+msgstr[3] "%(counter)s питання опитування"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "Синхронізація нового опитування кожні 10 хвилин"
 
 msgid "No longer scheduling syncs for old polls, runs archived"
 msgstr ""
+"Більше не планувати синхронізацію для старих опитувань, запуск заархівовано"
 
 msgid "Main poll syncs scheduled every 20min"
-msgstr ""
+msgstr "Синхронізація основного опитування кожні 20 хвилин"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "Синхронізація останніх опитуваь кожні 60 хвилин"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "Синхронізація опитувань кожні 24 години"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "Синхронізація не планується, не активна"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "Не планується синхронізація, немає потоку для опитування"
 
 msgid "Refresh Results"
-msgstr ""
+msgstr "Оновити результати"
 
 msgid "Partners"
-msgstr ""
+msgstr "Партнери"
 
 msgid "MORE POLLS"
-msgstr ""
+msgstr "ІНШІ ОПИТУВАННЯ"
 
 msgid "FILTER"
-msgstr ""
+msgstr "ФІЛЬТР"
 
 msgid "All"
-msgstr ""
+msgstr "Усі"
 
 msgid "POLL LIST"
-msgstr ""
+msgstr "ПЕРЕЛІК ОПИТУВАНЬ"
 
 msgid "All polls from most recent to oldest"
-msgstr ""
+msgstr "Всі опитування від нових до старих"
 
 msgid "ARCHIVED STORIES"
-msgstr ""
+msgstr "Архів "
 
 msgid "LIST"
-msgstr ""
+msgstr "Список"
 
 msgid "Send"
-msgstr ""
+msgstr "Відправити"
 
 msgid "to"
-msgstr ""
+msgstr "до"
 
 msgid "LATEST OPINION"
-msgstr "Актуальне опитування"
+msgstr "Актуальні опитування"
 
 msgid "VIEW FULL RESULTS"
 msgstr "Детальні результати"
 
 msgid "U-REPORTERS IN"
-msgstr "U-Reporters в"
+msgstr "U-репортери в"
 
 msgid "PARTNERING WITH"
 msgstr "РАЗОМ ІЗ"
 
 msgid "U-REPORTERS"
-msgstr ""
+msgstr "U-РЕПОРТЕРИ"
 
 msgid "IN"
-msgstr ""
+msgstr "В"
 
 msgid "COUNTRIES WORLDWIDE"
 msgstr "КРАЇНАХ СВІТУ"
@@ -936,136 +1050,136 @@ msgid "AGES"
 msgstr "Вік"
 
 msgid "Available bots"
-msgstr ""
+msgstr "Доступні чат-боти"
 
 msgid "More bots"
-msgstr ""
+msgstr "Більше чат-ботів"
 
 msgid "Join U-Report, Your voice matters."
-msgstr ""
+msgstr "Приєднуйся до U-Report, твоя думка важлива!"
 
 msgid "FEATURED STORY"
+msgstr "РЕКОМЕНДОВАНЕ"
+
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
 msgstr ""
+"Ми частина глобальної платформи, яка змінює життя молодих людей по всьому "
+"світу"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Ми частина глобальної платформи, яка змінює життя молодих людей по всьому світу"
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Дізнайтеся більше про те, як U-Report дозволяє молодим людям висловлюватися про важливі для них проблеми"
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"Дізнайтеся більше про те, як U-Report дозволяє молодим людям висловлюватися "
+"про важливі для них проблеми"
 
 msgid "LEARN MORE"
 msgstr "ДІЗНАЙТЕСЯ БІЛЬШЕ"
 
 msgid "Visit"
-msgstr ""
+msgstr "Відвідати"
 
 msgid "How would you like to join?"
-msgstr ""
+msgstr "Яким чином Вам хотілося б приєднатися?"
 
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 msgid "PAGE"
-msgstr ""
+msgstr "СТОРІНКА"
 
 msgid "SEARCH"
-msgstr ""
+msgstr "ПОШУК"
 
 msgid "No results found"
-msgstr ""
+msgstr "За Вашим запитом нічого не знайдено."
 
-#, fuzzy
-#| msgid "RESPONSES"
 msgid "RESPONDERS"
-msgstr "Відповіді"
+msgstr "РЕСПОНДЕНТИ"
 
 msgid "RESPONSE RATE"
 msgstr "РІВЕНЬ АКТИВНОСТІ"
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
 msgid "TOTAL RESPONDERS"
-msgstr "ВСЬОГО ВІДПОВІДЕЙ"
+msgstr "УСЬОГО РЕСПОНДЕНТІВ"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s відповіли з %(polled)s опитаних"
 
 msgid "ALL"
-msgstr ""
+msgstr "ВСЕ"
 
 msgid "AGE"
 msgstr "ВІК"
 
 msgid "GENDER"
-msgstr ""
+msgstr "СТАТЬ"
 
 msgid "LOCATION"
-msgstr "ОБЛАСТЬ"
+msgstr "ЛОКАЦІЯ"
 
 msgid "Written by:"
-msgstr ""
+msgstr "Автор/ка:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "Поки що жодних звітів не опубліковано"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "REPORT"
-msgstr "U-Reporters в"
+msgstr "ЗВІТ"
 
 msgid "STORY"
-msgstr ""
+msgstr "ІСТОРІЯ"
 
 msgid "Download Report"
-msgstr ""
+msgstr "Завантажити звіт"
 
 msgid "Even"
-msgstr ""
+msgstr "Парный"
 
 msgid "State"
-msgstr ""
+msgstr "Країна"
 
 msgid "Other"
-msgstr ""
+msgstr "Інше"
 
 msgid "District"
-msgstr ""
+msgstr "Область"
 
 msgid "Participation Level"
-msgstr ""
+msgstr "Активність"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "Відповіді"
+msgstr "Респонденти"
 
 msgid "Reporters in"
-msgstr ""
+msgstr "Репортери в"
 
 msgid "Results"
-msgstr ""
+msgstr "Результати"
 
 msgid "*Other answers include"
-msgstr ""
+msgstr "*Інші відповіді включають"
 
 msgid "Population"
-msgstr ""
+msgstr "Населення"
 
 msgid "Registered in"
-msgstr ""
+msgstr "Зареєстровані в"
 
 msgid "Density"
-msgstr ""
+msgstr "Густота"
 
 msgid "total"
-msgstr ""
+msgstr "разом"
 
 msgid "of"
-msgstr ""
+msgstr "з"
 
 msgid "the"
-msgstr ""
+msgstr " "
 
 msgid "OVERALL STATISTICS"
 msgstr "ЗАГАЛЬНА СТАТИСТИКА"
@@ -1083,106 +1197,112 @@ msgid "FILTER RESULTS"
 msgstr "ФІЛЬТР РЕЗУЛЬТАТІВ"
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "Діаграми доступні лише для адміністраторів, які ввійшли в систему"
 
 msgid "Export and Share"
-msgstr ""
+msgstr "Експортувати і поширити"
 
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgid ""
+"Want to tell the world about this? Download this image to easily share on "
+"social media or for a beautiful presentation!"
 msgstr ""
+"Хочете розказати про це усьому світу? Завантажуйте це зображення, щоб легко "
+"поширити у соціальних мережах або використати у вашій презентації!"
 
 msgid "SELECT LANGUAGE"
-msgstr ""
+msgstr "ОБЕРІТЬ МОВУ"
 
 msgid "SELECT COUNTRY"
-msgstr ""
+msgstr "ОБЕРІТЬ КРАЇНУ"
 
 msgid "Custom pages"
-msgstr ""
+msgstr "Індивідуальні сторінки"
 
 msgid "Landing pages"
-msgstr ""
+msgstr "Цільові сторінки"
 
-msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
 msgstr "Ці люди змінюють країну на краще"
 
 msgid "Polled"
 msgstr "Опитано"
 
 msgid "Reporters"
-msgstr ""
+msgstr "Репортери"
 
 msgid "Top Region"
-msgstr "Топ-область"
+msgstr "Топ-регіон"
 
 msgid "January"
-msgstr ""
+msgstr "Січень"
 
 msgid "February"
-msgstr ""
+msgstr "Лютий"
 
 msgid "March"
-msgstr ""
+msgstr "Березень"
 
 msgid "April"
-msgstr ""
+msgstr "Квітень"
 
 msgid "May"
-msgstr ""
+msgstr "Травень"
 
 msgid "June"
-msgstr ""
+msgstr "Червень"
 
 msgid "July"
-msgstr ""
+msgstr "Липень"
 
 msgid "August"
-msgstr ""
+msgstr "Серпень"
 
 msgid "September"
-msgstr ""
+msgstr "Вересень"
 
 msgid "October"
-msgstr ""
+msgstr "Жовтень"
 
 msgid "November"
-msgstr ""
+msgstr "Листопад"
 
 msgid "December"
-msgstr ""
+msgstr "Грудень"
 
 msgid "Jan"
-msgstr ""
+msgstr "Січ"
 
 msgid "Feb"
-msgstr ""
+msgstr "Лют"
 
 msgid "Mar"
-msgstr ""
+msgstr "Бер"
 
 msgid "Apr"
-msgstr ""
+msgstr "Квіт"
 
 msgid "Jun"
-msgstr ""
+msgstr "Черв"
 
 msgid "Jul"
-msgstr ""
+msgstr "Лип"
 
 msgid "Aug"
-msgstr ""
+msgstr "Серп"
 
 msgid "Sep"
-msgstr ""
+msgstr "Верес"
 
 msgid "Oct"
-msgstr ""
+msgstr "Жовт"
 
 msgid "Nov"
-msgstr ""
+msgstr "Лист"
 
 msgid "Dec"
-msgstr ""
+msgstr "Гру"
 
 #, python-format
 msgid ""
@@ -1190,24 +1310,26 @@ msgid ""
 "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
 "          "
 msgstr ""
+"\n"
+"Ви впевнені, що хочете видалити  <strong>%(object)s</strong>?"
 
 #, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%(counter)s результат"
+msgstr[1] "%(counter)s результатів"
+msgstr[2] "%(counter)s результатів"
+msgstr[3] "%(counter)s результатів"
 
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
+msgstr "Результати%(start)s-%(end)s з %(count)s"
 
 msgid "Error"
-msgstr ""
+msgstr "Помилка"
 
 msgid "Enter Dashboard"
-msgstr ""
+msgstr "Відкрити консоль"
 
 #, python-format
 msgid ""
@@ -1215,6 +1337,8 @@ msgid ""
 "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "              "
 msgstr ""
+"\n"
+"Вибачте, можливість увійти у ваш обліковий запис тимчасово заблоковано. Кількість невдалих спроб%(failed_login_limit)s."
 
 #, python-format
 msgid ""
@@ -1222,6 +1346,9 @@ msgid ""
 "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "                  "
 msgstr ""
+"\n"
+"                    Будь ласка, зачекайте %(lockout_timeout)s і спробуйте увійти знову\n"
+"                  "
 
 #, python-format
 msgid ""
@@ -1229,86 +1356,92 @@ msgid ""
 "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "      "
 msgstr ""
+"\n"
+"        <strong>Ваш пароль більше не дійсний.</strong> Відповідно до політики сайту необхідно оновлювати пароль кожні %(expire_days)s днів. Зверніть увагу, що пароль має відрізнятись від попереднього, що використовувався протягом останніх %(window_days)s днів.\n"
+"      "
 
 msgid "+ New Story"
-msgstr ""
+msgstr "+ Нова історія"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
-msgstr ""
+msgstr "Оновлено %s кеш для цієї організації"
 
 msgid "Flag"
-msgstr ""
+msgstr "Прапор"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "Про Лого партнера"
 
 msgid "The organization to which the image will be used"
-msgstr ""
+msgstr "Організація, для якої буде використано зображення"
 
 msgid "A short descriptive name for this image"
-msgstr ""
+msgstr "Короткий опис зображення"
 
 msgid "Image type"
-msgstr ""
+msgstr "Вид зображення"
 
-msgid "The priority number for this image among others on a list, high priority comes first"
+msgid ""
+"The priority number for this image among others on a list, high priority "
+"comes first"
 msgstr ""
+"Пріорітетність питання на сторінці опитування. Питання з високою "
+"пріорітетністю будуть розташовані першими."
 
 msgid "The organization this bot is part of"
-msgstr ""
+msgstr "Організація, з якою пов'язаний бот"
 
-msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgid ""
+"Whether this bot is displayed on the homepage, up to 3 only with the highest"
+" priorities are displayed"
 msgstr ""
+"Незалежно від того, чи відображається цей бот на домашній сторінці, "
+"відображаються лише до 3 з найвищими пріоритетами"
 
 msgid "Whether this bot is hidden on public pages except landing pages"
 msgstr ""
+"Чи прихований цей бот на загальнодоступних сторінках, крім цільових сторінок"
 
 msgid "The title to display for this bot"
-msgstr ""
+msgstr "Заголовок для відображення цього бота"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "Короткий код, номер або ім'я каналу для цього бота"
 
 msgid "The keyword for this bot"
-msgstr ""
+msgstr "Ключове слово для цього бота"
 
-#, fuzzy
-#| msgid "The description of the opinions page"
 msgid "The Facebook bot deeplink, optional"
-msgstr "Опитування"
+msgstr "Facebook діплінк для бота (необов’язково)"
 
-#, fuzzy
-#| msgid "The description of the opinions page"
 msgid "The Telegram bot deeplink, optional"
-msgstr "Опитування"
+msgstr "Telegram діплінк для бота (необов’язково)"
 
-#, fuzzy
-#| msgid "The description of the opinions page"
 msgid "The Viber bot deeplink, optional"
-msgstr "Опитування"
+msgstr "Viber діплінк для бота (необов’язково)"
 
-#, fuzzy
-#| msgid "The description of the opinions page"
 msgid "The WhatsApp bot deeplink, optional"
-msgstr "Опитування"
+msgstr "WhatsApp діплінк для бота (необов’язково)"
 
-#, fuzzy
-#| msgid "The description of the opinions page"
 msgid "A short description for this bot, required"
-msgstr "Опитування"
+msgstr "Потрібен короткий опис цього бота"
 
-msgid "The priority number for this bot among others on a list, high priority comes first"
+msgid ""
+"The priority number for this bot among others on a list, high priority comes"
+" first"
 msgstr ""
+"Номер пріоритету для цього бота серед інших у списку, де високий пріоритет "
+"виводиться першим"
 
 msgid "Whether this bot should be shown to the public"
-msgstr ""
+msgstr "Чи показувати цей бот на загальнодоступній сторінці?"
 
 msgid "Label"
-msgstr ""
+msgstr "Ярлик"
 
 msgid "Key"
-msgstr ""
+msgstr "Ключ"
 
 msgid "Male"
 msgstr "Чоловіки"
@@ -1317,400 +1450,419 @@ msgid "Female"
 msgstr "Жінки"
 
 msgid "Organization"
-msgstr ""
+msgstr "Організація"
 
 msgid "Gender"
-msgstr ""
+msgstr "Стать"
 
 msgid "Gender of the contact"
-msgstr ""
+msgstr "Стать контакту"
 
 msgid "Born Field"
-msgstr ""
+msgstr "Дата народження"
 
 msgid "Occupation Field"
-msgstr ""
+msgstr "Рід занять "
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Дата реєстрації"
 
 msgid "State Field"
-msgstr ""
+msgstr "Країна"
 
 msgid "District Field"
-msgstr ""
+msgstr "Область"
 
 msgid "Ward Field"
-msgstr ""
+msgstr "Район міста"
 
 msgid "Number of items with this counter"
-msgstr ""
+msgstr "Кількість позицій у лічильнику"
 
 msgid "No root user found. Please create a root user"
-msgstr ""
+msgstr "Root-користувача не знайдено. Створіть Root-користувача, будь ласка."
 
 msgid "The name for our alias"
-msgstr ""
+msgstr "Назва нашого псевдоніму"
 
 msgid "The title or name to reference this Job source."
-msgstr ""
+msgstr "Заголовок чи назва джерела вакансій"
 
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
-msgstr ""
+msgstr "Оберіть тип джерела: Twitter, Facebook чи RSS"
 
 msgid "The full URL to navigate to this Job source."
-msgstr ""
+msgstr "Повна URL цього джерела вакансій"
 
-msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
 msgstr ""
+"Для Twitter необхідний ID віджета для вбудовування твітів на веб-сайт. "
+"Уважно прочитайте наведені вище інструкції про те, як отримати правильний ID"
+" віджета"
 
 msgid "Featured job sources are shown first on the jobs page."
-msgstr ""
+msgstr "Обрані вакансії показуватимуться першими на сторінці вакансій."
 
 msgid "The organization this job source is for"
-msgstr ""
+msgstr "Організація, з якою пов'язані вакансії"
 
 msgid "Your job source has been added successfully"
-msgstr ""
+msgstr "Джерело вакансій додано"
 
 msgid "Your job source has been updated successfully"
-msgstr ""
+msgstr "Джерело вакансій оновлено"
 
 msgid "The organization this landing page is part of"
-msgstr ""
+msgstr "Організація, з якою пов'язане це опитування"
 
 msgid "The title to display for this landing page"
-msgstr ""
+msgstr "Заголовок для відображення на цій посадковій сторінці"
 
-#, fuzzy
-#| msgid "The description of the opinions page"
 msgid "The call to action text for this landing page"
-msgstr "Опитування"
+msgstr "Заклик до дії для цієї посадкової сторінки"
 
 msgid "The slug to use on the link for this landing page"
-msgstr ""
+msgstr "Слаг для використання на посадковій сторінці"
 
-#, fuzzy
-#| msgid "The description of the opinions page"
 msgid "The body of text for the landing page"
-msgstr "Опитування"
+msgstr "Основний текст для посадкової сторінки"
 
 msgid "The image file to use for the page"
-msgstr ""
+msgstr "Файл зображення для використання на цій сторінці"
 
 msgid "Whether this page should be active to the public"
-msgstr ""
+msgstr "Чи повинна ця сторінка бути загальнодоступною?"
 
 msgid "This is the OSM id for this administrative boundary"
-msgstr ""
+msgstr "Це OSM id для цього адміністративного кордону"
 
 msgid "The name of our administrative boundary"
-msgstr ""
+msgstr "Назва адміністративного кордону"
 
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
-msgstr ""
+msgstr "Рівень кордону, 0 - країна, 1 - область, 2 - район"
 
 msgid "The parent to this political boundary if any"
-msgstr ""
+msgstr "Глава політичного кордону, якщо такий/а існує"
 
 msgid "Geometry"
-msgstr ""
+msgstr "Геомертія"
 
-msgid "The json representing the geometry type and coordinates of the boundaries"
-msgstr ""
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr "json, що реперезентує геометрію типу і координати кордонів"
 
 msgid "The title for this item"
-msgstr ""
+msgstr "Назва цього елементу"
 
 msgid "A short summary description for this item"
-msgstr ""
+msgstr "Короткий опис цього елементу"
 
 msgid "A link that should be associated with this item"
-msgstr ""
+msgstr "Посилання, пов'язане з цим елементом"
 
 msgid "The category this item belongs to"
-msgstr ""
+msgstr "Категорія для цього елементу"
 
 msgid "The organization this item belongs to"
-msgstr ""
+msgstr "Організація, якій належить цей елемент"
 
 msgid "The title for this Video"
-msgstr ""
+msgstr "Назва відео"
 
 msgid "A short summary description for this video"
-msgstr ""
+msgstr "Короткий опис відео"
 
 msgid "The organization this video belongs to"
-msgstr ""
+msgstr "Організація, якій належить відео"
 
 msgid "The name of this poll category"
-msgstr ""
+msgstr "Назва категорії опитування"
 
 msgid "Poll Categories"
-msgstr ""
+msgstr "Категорії опитувань"
 
 msgid "The Flow this Poll is based on"
-msgstr ""
+msgstr "Flow, з яким пов'язане опитування"
 
-msgid "The date to display for this poll. Leave empty to use flow creation date."
+msgid ""
+"The date to display for this poll. Leave empty to use flow creation date."
 msgstr ""
+"Дата демонстрації опитування. Залиште пустою, щоб використати дату початку "
+"перебігу."
 
 msgid "Whether the flow for this poll is archived on RapidPro"
-msgstr ""
+msgstr "Чи біло заархівовано в RapidPro перебіг цього опитування?"
 
 msgid "The base language of the flow to use"
-msgstr ""
+msgstr "Базова мова"
 
 msgid "The number of polled reporters on this poll"
 msgstr "Кількість опитаних"
 
 msgid "Whether the poll has finished the initial results sync."
-msgstr ""
+msgstr "Чи завершило опитування синхронізацію початкових результатів."
 
 msgid "Whether the poll should stop regenerating stats."
-msgstr ""
+msgstr "Чи має це опитування припинити відновлення статистичних даних?"
 
 msgid "The title for this Poll"
-msgstr ""
+msgstr "Назва опитування"
 
 msgid "The category this Poll belongs to"
-msgstr ""
+msgstr "Категорія для цього опитування"
 
 msgid "Whether this poll should be featured on the homepage"
-msgstr ""
+msgstr "Чи буде це опитування відображено на головній сторінці?"
 
 msgid "The splash category image to display for the poll (optional)"
 msgstr ""
+"Зображення з категорії, яке має відображатись разом із опитуванням "
+"(вибірково)"
 
 msgid "The organization this poll is part of"
-msgstr ""
+msgstr "Організація, з якою пов'язане це опитування"
 
 msgid "The title for this response story"
-msgstr ""
+msgstr "Назва ісорії до цієї відповіді"
 
 msgid "The writer of the response story"
-msgstr ""
+msgstr "Автор/ка історії "
 
 msgid "The poll to associate to"
-msgstr ""
+msgstr "З чим асоціюватиметься опитування"
 
 msgid "The poll for this response"
-msgstr ""
+msgstr "Опитування для цієї відповіді"
 
 msgid "The location for this response"
-msgstr ""
+msgstr "Місце знаходження для цієї відповіді"
 
 msgid "The name of the sender of the message"
-msgstr ""
+msgstr "Ім'я автора повідомлення"
 
 msgid "The featured response message"
-msgstr ""
+msgstr "Вибрана відповідь"
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "Темний 1 фон і білий текст"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "Світлий фон 1 і чорний текст"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "Темний фон 2 і білий текст"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "Темний фон 3 і чорний текст"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "Показати діаграми віку, статі та розташування"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "Сховати ТІЛЬКИ діаграму віку"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "Сховати ТІЛЬКИ діаграму статі"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "Приховати ТІЛЬКИ діаграму розташування"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "Приховати діаграми віку та статі"
 
 msgid "Hide Age and Location charts"
-msgstr ""
+msgstr "Приховати діаграми віку та розташування"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "Приховати діаграми статі та розташування"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "Приховати діаграми віку, статі та розташування"
 
 msgid "The poll this question is part of"
-msgstr ""
+msgstr "Опитування, частиною якого є це питання"
 
 msgid "The title of this question"
-msgstr ""
+msgstr "Назва питання"
 
 msgid "The RuleSet this question is based on"
-msgstr ""
+msgstr "Набір правил до цього питання"
 
 msgid "The label of the ruleset on RapidPro"
-msgstr ""
+msgstr "Мітка набору правил на RapidPro"
 
 msgid "The priority number for this question on the poll"
-msgstr ""
+msgstr "Пріорітетний номер цього питання в опитуванні"
 
 msgid "The Rule this response category is based on"
-msgstr ""
+msgstr "Правило, на якому базується ця категорія відповідей"
 
 msgid "Select tags for this poll"
-msgstr ""
+msgstr "Оберіть теги для цього опитування"
 
 msgid "Your org does not have any API token configuration."
-msgstr ""
+msgstr "У вашої організації немає жодної конфігурації маркера API."
 
 msgid "You must include a title for every included question."
-msgstr ""
+msgstr "Необхідно вказати назву кожного заданого питання"
 
 msgid "Title too long. The max limit is 255 characters for each title"
-msgstr ""
+msgstr "Назва надто довга. Макисмум 255 символів."
 
 msgid "You must include at least one poll question."
-msgstr ""
+msgstr "Додайте хоча б одне питання"
 
 msgid "Adjust poll date"
-msgstr ""
+msgstr "Налаштувати дату опитування"
 
 msgid "Your poll has been updated, now pick which questions to include."
-msgstr ""
+msgstr "Це опитування було оновлено. Тепер оберіть, які питання включити?"
 
 msgid "Configure flow"
-msgstr ""
+msgstr "Конфігурація"
 
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr ""
+msgstr "Ваше опитування налаштовано, тепер відрегулюйте дату опитування."
 
 msgid "Your poll has been created, now configure its flow."
-msgstr ""
+msgstr "Ваше опитування було створено, тепер налаштуйте його циркуляцію"
 
 msgid "Poll Images"
-msgstr ""
+msgstr "Зображення до опитувань"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
+msgstr "Введіть відповідь, яку б ви хотіли виділити (вибірково)."
 
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr ""
+msgstr "Зображення для сторінки опитування та в прев‘ю (вибірково)"
 
 msgid "Image to display on poll page and in previews (optional)"
-msgstr ""
+msgstr "Зображення для сторінки опитування та в прев‘ю (вибірково)"
 
 msgid "Poll Response"
-msgstr ""
+msgstr "Відповіді"
 
 msgid "Your poll has been updated."
-msgstr ""
+msgstr "Опитування змінено"
 
 msgid "Poll Questions"
-msgstr ""
+msgstr "Запитання опитувань"
 
 msgid "Now set what images you want displayed on your poll page. (if any)"
 msgstr ""
+"Тепер оберіть зображення, які мають доповнювати опитування на сторінці (якщо"
+" є)."
 
 msgid "Include"
-msgstr ""
+msgstr "Включити"
 
 msgid "Whether to include this question in your public results"
-msgstr ""
+msgstr "Чи включати це питання в опубліковані результати?"
 
 msgid "Priority"
-msgstr ""
+msgstr "Пріорітетність"
 
-msgid "The priority of this question on the poll page, higher priority comes first"
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
 msgstr ""
+"Пріорітетність питання на сторінці опитування. Питання з високою "
+"пріорітетністю будуть розташовані першими."
 
 msgid "Ruleset Label"
-msgstr ""
+msgstr "Ярлик набору правил"
 
 msgid "The label of the ruleset from RapidPro"
-msgstr ""
+msgstr "Ярлик набору правил з RapidPro"
 
 msgid "Title"
-msgstr ""
+msgstr "Назва"
 
 msgid "The question posed to your audience, will be displayed publicly"
-msgstr ""
+msgstr "Запитання, поставлене Вашій аудиторії, стане публічним."
 
 msgid "Color Choice"
-msgstr ""
+msgstr "Вибір кольору"
 
 msgid "The color to use for the question block will be displayed publicly"
 msgstr ""
+"Колір, який буде використовуватися для блоку запитань, буде відображатися "
+"для всіх"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Вибір прихованих діаграм"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Виберіть розбивку діаграм, щоб приховати це запитання "
 
 msgid "Category {idx+1}"
-msgstr ""
+msgstr "Категорія {idx+1}"
 
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr ""
+msgstr "Мітка категорії з бекенду (наприклад, RapidPro)"
 
 msgid "Display {idx+1}"
-msgstr ""
+msgstr "Відображення {idx+1}"
 
 msgid "The label to display of the category on the public site"
-msgstr ""
+msgstr "Мітка для відображення категорії на загальнодоступному сайті"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Триває запловананий процес сихронізації"
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Востаннє результати сихронізовано %(time)s тому"
 
 msgid "Synced"
-msgstr ""
+msgstr "Синхронізовано"
 
 #, python-brace-format
 msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr ""
+msgstr "Триває процес синхронізації... {sync_progress:.1f}%"
 
 #, python-brace-format
 msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr ""
+msgstr "Редагувати опитування для потоку [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr ""
+"Заплановано оновлення для опитування №%(poll_id)d щодо орг №%(org_id)d"
 
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr ""
+msgstr "Назва групи з зареєстрованими репортерами"
 
-msgid "The label of the Contact Field that contains the birth date of reporters"
-msgstr ""
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr "Мітка Contact field із датою народження репортера"
 
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr ""
+msgstr "Мітка Contact Field зі статтю репортера"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr ""
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr "Мітка Contact Field із посадою репортера"
 
-msgid "The label of the Contact Field that contains the registration date of reporters"
-msgstr ""
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr "Мітка Contact Field , що містить дату реєстрації репортера"
 
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr ""
+msgstr "Мітка Contact Field  із областю репортера"
 
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr ""
+msgstr "Мітка Contact Field із районом міста репортера"
 
 msgid "The label of the Contact Field that contains the Ward of reporters"
-msgstr ""
+msgstr "Мітка  Contact Field  із мікрорайоном міста репортера"
 
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "Чоловіки"
@@ -1719,46 +1871,58 @@ msgid "The label assigned to U-Reporters that are Female."
 msgstr "Жінки"
 
 msgid "Whether this org should be show on the landing page"
-msgstr ""
+msgstr "Чи показувати цю організацію на головній сторінці?"
 
 msgid "Whether this org count should consider the count from link only"
 msgstr ""
+"Чи має порядок організацій враховувати порядковий номер лише за посиланням"
 
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr ""
+msgstr "Короткий номер, який користувачі матимуть для контакту з U-Report"
 
-msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgid ""
+"The WhatsApp number that users will use to contact U-Report if you have one"
 msgstr ""
+"WhatsApp номер, який користувачі використовуватимуть для контакту з "
+"U-Report, якщо такий є"
 
-msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgid ""
+"The Telegram bot that users will use to contact U-Report if you have one"
 msgstr ""
+"Telegram номер, який користувачі використовуватимуть для контакту з "
+"U-Report, якщо такий є"
 
-msgid "The viber username that users will use to contact U-Report if you have one"
+msgid ""
+"The viber username that users will use to contact U-Report if you have one"
 msgstr ""
+"Viber номер, який користувачі використовуватимуть для контакту з U-Report, "
+"якщо такий є"
 
 msgid "The join button text"
-msgstr ""
+msgstr "Приєднатись"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
+"Щоб приєднатись, надішліть СТАРТ у телеграм-каналі U-Report Ukraine або у "
+"Facebook Messenger Щоб припинити розсилку, надішліть СТОП"
 
 msgid "The call to action text to join on the top section on U-Report"
-msgstr ""
+msgstr "Долучайся до U-report, твоя думка важлива!"
 
 msgid "The YouTube video ID for how to join U-Report section"
-msgstr ""
+msgstr "ID відео на YouTube, де пояснено, як приєнатися до U-Report"
 
 msgid "The title of the photos section U-Report homepage"
-msgstr ""
+msgstr "Заголовок фото на головній сторінці"
 
 msgid "The description of the photos section U-Report homepage"
-msgstr ""
+msgstr "Опис фото на головній сторінці"
 
 msgid "The description of the opinions page"
 msgstr "Опитування"
 
 msgid "The description of the stories page"
-msgstr ""
+msgstr "Блог"
 
 msgid "The description of the engagement page"
 msgstr "U-репортери"
@@ -1767,112 +1931,140 @@ msgid "The callout message on the footer engagement section"
 msgstr "U-репортери"
 
 msgid "The primary color for styling for this organization, should be dark"
-msgstr ""
+msgstr "Основний колір організації. Має бути темним."
 
 msgid "The secondary color for styling for this organization, should be dark"
-msgstr ""
+msgstr "Другий колір організації. Має бути темним."
 
 msgid "The tertiary color for styling for this organization, should be dark"
-msgstr ""
+msgstr "Третій колір організації. Має бути темним."
 
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr ""
+msgid ""
+"The primary highlight color for styling for this organization, should be "
+"light"
+msgstr "Основний колір виділення організації. Має бути світлим."
 
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr ""
+msgid ""
+"The secondary highlight color for styling for this organization, should be "
+"light"
+msgstr "Допоміжний колір виділення організації. Має бути світлим."
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr ""
+"До 6 кольорів для оформлення графіків. Використовуйте кому між кольорами."
 
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgid ""
+"11 colors for styling maps, use comma between colors, not used if not 11 "
+"colors"
 msgstr ""
+"11 кольорів для створення стилів мап. Використовуйте коми між кольорами. Не "
+"використовується у випадку, якщо кольорів менше ніж 11."
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "Країни, лише для показу на мапі"
 
 msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
+"Країни, які відображаються лише на картах, використовуються для фільтрації "
+"результатів опитування"
 
 msgid "The Google Tag Manager ID for this organization"
-msgstr ""
+msgstr "Google Tag Manager ID організації"
 
 msgid "The Google Analytics Tracking ID for this organization"
-msgstr ""
+msgstr "Google Analytics Tracking ID організації"
 
 msgid "The URL to the Youtube channel for this organization"
-msgstr ""
+msgstr "URL каналу Youtube організації"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Вміст для мета-тегу для перевірки домену Facebook"
 
 msgid "The URL to the Facebook page for this organization"
-msgstr ""
+msgstr "Посилання на Facebook-акаунт організації"
 
 msgid "The integer id to the Facebook page for this organization (optional)"
-msgstr ""
+msgstr "Числовий id Facebook сторінки організації (вибірково)"
 
-msgid "The integer id to the Facebook app for this organization's chat app (optional)"
-msgstr ""
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr "Числовий id Facebook app чату цієї організації (вибірково)"
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
 msgstr ""
+"Короткий текст для привітання користувачів на Facebook Messenger Plugin"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr ""
+msgstr "id Facebook Pixel цієї організації (вибірково)"
 
 msgid "The Instagram username for this organization"
-msgstr ""
+msgstr "Ім'я організації в Instagram "
 
 msgid "The Instagram widget id from lightwidget.com"
-msgstr ""
+msgstr "id віджету Instagram з lightwidget.com"
 
 msgid "The Twitter handle for this organization"
-msgstr ""
+msgstr "Маркер Twitter для цієї організації"
 
 msgid "The Twitter widget used for searching"
-msgstr ""
+msgstr "Віждет Твітер для пошуку"
 
 msgid "The words to filter out from the results on public site"
-msgstr ""
+msgstr "Слова для фільтрування результатів на загальнодоступному сайті"
 
 msgid "If there are jobs to be shown on the public site."
-msgstr ""
+msgstr "Чи показувати вакансії на загальнодоступному сайті?"
 
-msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
 msgstr ""
+"Чи ця організація для глобальних даних. наприклад: на ньому зображена карта "
+"світу замість карти країни."
 
 msgid "Whether to activate an extra gender."
-msgstr ""
+msgstr "Чи активувати \"додаткову\" стать?"
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Чи потрібно приховувати діаграми розбивки залученння?"
 
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr ""
+msgstr "Чи показувати логотип ЮНІСЕФ у нижньому колонтитулі?"
 
-msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
 msgstr ""
+"alpha-3 ISO код організації, який з'являється у віджеті історій U-Report "
+"App. Наприклад: BRA, NIG, CMR (Використовуйте GLOBAL якщо U-Report is "
+"Global)."
 
 msgid "The font used for headline texts"
-msgstr ""
+msgstr "Шрифт для заголовків"
 
 msgid "The font used for normal text"
-msgstr ""
+msgstr "Шрифт основного тексту"
 
 msgid "Hide participation stats"
-msgstr ""
+msgstr "Приховати статистику участі"
 
 msgid "The text to describe the sponsors of free messages"
-msgstr ""
+msgstr "Текст для опису спонсорів безкоштовних повідомлень"
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "Шрифт для маленького тексту"
 
-msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
 msgstr ""
+"Чи потрібно включити деякі користувацькі HTML-коди на ваші сторінки "
+"організації, наприклад фрагменти коду спеціальної аналітики"
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "Посилання на іншомовні версії сайту"
 
 msgid "90 Days"
 msgstr "90 днів"
@@ -1887,10 +2079,10 @@ msgid "Age"
 msgstr "Вік"
 
 msgid "Channels"
-msgstr ""
+msgstr "Канали"
 
 msgid "Location"
-msgstr "Область"
+msgstr "Локація"
 
 msgid "Opinion Responses"
 msgstr "Кількість відповідей"
@@ -1905,59 +2097,7 @@ msgid "Active Users"
 msgstr "Активні користувачі"
 
 msgid "Whether this row was created by squashing"
-msgstr ""
+msgstr "Чи створено цей рядок шляхом стискання"
 
 msgid "Something to trigger localizations"
-msgstr ""
-
-#~ msgid "Photos"
-#~ msgstr "Фото"
-
-#~ msgid "JOIN NOW"
-#~ msgstr "Приєднатися"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                    %(responded)s responded out of %(polled)s polled\n"
-#~| "                  "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ " %(responded)s відповіли з %(polled)s опитаних"
-#~ msgstr[1] ""
-#~ "\n"
-#~ " %(responded)s відповіли з %(polled)s опитаних"
-#~ msgstr[2] ""
-#~ "\n"
-#~ " %(responded)s відповіли з %(polled)s опитаних"
-#~ msgstr[3] ""
-#~ "\n"
-#~ " %(responded)s відповіли з %(polled)s опитаних"
-
-#~ msgid "View Full Results"
-#~ msgstr "Детальні результати"
-
-#~ msgid "FEATURED RESPONSES"
-#~ msgstr "ОБРАНІ ВІДПОВІДІ"
-
-#~ msgid "View full results"
-#~ msgstr "Детальні результати"
-
-#~ msgid "4 MOST ACTIVE REGIONS"
-#~ msgstr "4 НАЙБІЛЬШ АКТИВНІ ОБЛАСТІ"
-
-#~ msgid "response rate"
-#~ msgstr "Рівень активності"
-
-#~ msgid "polled"
-#~ msgstr "опитано"
+msgstr "Щось для запуску локалізації"

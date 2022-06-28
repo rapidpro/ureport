@@ -233,17 +233,27 @@ def pull_refresh_from_archives(poll_id):
 def rebuild_counts():
     from .models import Poll
 
-    start_time = time.time()
+    r = get_redis_connection()
 
-    logger.info("Task: polls.rebuild_counts started")
-    polls = Poll.objects.filter(is_active=True)
+    key = "polls_rebuild_counts_task_running"
+    lock_timeout = 60 * 60 * 24 * 4  # 4 days
 
-    for poll in polls:
-        poll.rebuild_poll_results_counts()
+    if r.get(key):
+        logger.info("Task: polls.rebuild_counts skipped")
+    else:
+        with r.lock(key, timeout=lock_timeout):
 
-    elapsed = time.time() - start_time
+            start_time = time.time()
 
-    logger.info(f"Task: polls.rebuild_counts finished in {elapsed:.1f} seconds")
+            logger.info("Task: polls.rebuild_counts started")
+            polls = Poll.objects.filter(is_active=True)
+
+            for poll in polls:
+                poll.rebuild_poll_results_counts()
+
+            elapsed = time.time() - start_time
+
+            logger.info(f"Task: polls.rebuild_counts finished in {elapsed:.1f} seconds")
 
 
 @app.task(name="update_results_age_gender")
