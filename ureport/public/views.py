@@ -24,6 +24,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import RedirectView
 
+from dash.orgs.views import OrgObjPermsMixin
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.orgs.models import Org, TaskState
@@ -307,6 +308,25 @@ class PollReadView(PollContextMixin, SmartReadView):
     def derive_queryset(self):
         queryset = super(PollReadView, self).derive_queryset()
         queryset = queryset.filter(org=self.request.org, is_active=True, has_synced=True)
+        return queryset
+
+    def derive_main_poll(self):
+        return self.get_object()
+
+
+class PollPreview(OrgObjPermsMixin, PollContextMixin, SmartReadView):
+    template_name = "public/polls.html"
+    model = Poll
+    permission = "polls.poll_read"
+
+    def get_context_data(self, **kwargs):
+        context = super(PollPreview, self).get_context_data(**kwargs)
+        context["poll_preview"] = True
+        return context
+
+    def derive_queryset(self):
+        queryset = super(PollPreview, self).derive_queryset()
+        queryset = queryset.filter(org=self.request.org)
         return queryset
 
     def derive_main_poll(self):

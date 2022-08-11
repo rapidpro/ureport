@@ -22,6 +22,7 @@ from .views import (
     NewsView,
     PollQuestionResultsView,
     PollReadView,
+    PollPreview,
     PollRedirectView,
     PollsView,
     ReportersResultsView,
@@ -43,6 +44,7 @@ urlpatterns = [
     re_path(r"^opinions/$", PollsView.as_view(), {}, "public.opinions"),
     re_path(r"^polls/$", RedirectView.as_view(pattern_name="public.opinions"), {}, "public.polls"),
     re_path(r"^opinion/(?P<pk>\d+)/$", PollReadView.as_view(), {}, "public.opinion_read"),
+    re_path(r"^preview/(?P<pk>\d+)/$", PollPreview.as_view(), {}, "public.opinion_preview"),
     re_path(r"^poll/(?P<pk>\d+)/$", PollRedirectView.as_view(), {}, "public.poll_read"),
     re_path(r"^contact_field_results/$", ReportersResultsView.as_view(), {}, "public.contact_field_results"),
     re_path(
