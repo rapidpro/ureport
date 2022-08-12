@@ -156,7 +156,10 @@ STATICFILES_FINDERS = (
     "compressor.finders.CompressorFinder",
 )
 
-COMPRESS_PRECOMPILERS = (("text/coffeescript", "coffee --compile --stdio"), ("text/less", "lessc {infile} {outfile}"))
+COMPRESS_PRECOMPILERS = (
+    ("text/coffeescript", "coffee --compile --stdio"),
+    ("text/less", "lessc {infile} {outfile}"),
+)
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r)bxo"
@@ -182,7 +185,11 @@ CSRF_COOKIE_AGE = 7200
 ROOT_URLCONF = "ureport.urls"
 
 DATA_API_BACKENDS_CONFIG = {
-    "rapidpro": {"name": "RapidPro", "slug": "rapidpro", "class_type": "ureport.backend.rapidpro.RapidProBackend"}
+    "rapidpro": {
+        "name": "RapidPro",
+        "slug": "rapidpro",
+        "class_type": "ureport.backend.rapidpro.RapidProBackend",
+    }
 }
 
 DATA_API_BACKEND_TYPES = (
@@ -196,53 +203,85 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
 BACKENDS_ORG_CONFIG_FIELDS = [
     dict(
         name="reporter_group",
-        field=dict(help_text=_("The name of the Contact Group that contains registered reporters")),
+        field=dict(
+            help_text=_(
+                "The name of the Contact Group that contains registered reporters"
+            )
+        ),
         superuser_only=True,
         read_only=True,
     ),
     dict(
         name="born_label",
-        field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")),
+        field=dict(
+            help_text=_(
+                "The label of the Contact Field that contains the birth date of reporters"
+            )
+        ),
         superuser_only=True,
         read_only=True,
     ),
     dict(
         name="gender_label",
-        field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")),
+        field=dict(
+            help_text=_(
+                "The label of the Contact Field that contains the gender of reporters"
+            )
+        ),
         superuser_only=True,
         read_only=True,
     ),
     dict(
         name="occupation_label",
         field=dict(
-            help_text=_("The label of the Contact Field that contains the occupation of reporters"), required=False
+            help_text=_(
+                "The label of the Contact Field that contains the occupation of reporters"
+            ),
+            required=False,
         ),
         superuser_only=True,
         read_only=True,
     ),
     dict(
         name="registration_label",
-        field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")),
+        field=dict(
+            help_text=_(
+                "The label of the Contact Field that contains the registration date of reporters"
+            )
+        ),
         superuser_only=True,
         read_only=True,
     ),
     dict(
         name="state_label",
-        field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"), required=False),
+        field=dict(
+            help_text=_(
+                "The label of the Contact Field that contains the State of reporters"
+            ),
+            required=False,
+        ),
         superuser_only=True,
         read_only=True,
     ),
     dict(
         name="district_label",
         field=dict(
-            help_text=_("The label of the Contact Field that contains the District of reporters"), required=False
+            help_text=_(
+                "The label of the Contact Field that contains the District of reporters"
+            ),
+            required=False,
         ),
         superuser_only=True,
         read_only=True,
     ),
     dict(
         name="ward_label",
-        field=dict(help_text=_("The label of the Contact Field that contains the Ward of reporters"), required=False),
+        field=dict(
+            help_text=_(
+                "The label of the Contact Field that contains the Ward of reporters"
+            ),
+            required=False,
+        ),
         superuser_only=True,
         read_only=True,
     ),
@@ -263,18 +302,28 @@ BACKENDS_ORG_CONFIG_FIELDS = [
 ORG_CONFIG_FIELDS = [
     dict(
         name="is_on_landing_page",
-        field=dict(help_text=_("Whether this org should be show on the landing page"), required=False),
+        field=dict(
+            help_text=_("Whether this org should be show on the landing page"),
+            required=False,
+        ),
         superuser_only=True,
     ),
     dict(
         name="has_count_on_link_only",
-        field=dict(help_text=_("Whether this org count should consider the count from link only"), required=False),
+        field=dict(
+            help_text=_(
+                "Whether this org count should consider the count from link only"
+            ),
+            required=False,
+        ),
         superuser_only=True,
     ),
     dict(
         name="shortcode",
         field=dict(
-            help_text=_("The shortcode that users will use to contact U-Report locally"),
+            help_text=_(
+                "The shortcode that users will use to contact U-Report locally"
+            ),
             label="Shortcode",
             required=False,
         ),
@@ -282,7 +331,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="whatsapp_number",
         field=dict(
-            help_text=_("The WhatsApp number that users will use to contact U-Report if you have one"),
+            help_text=_(
+                "The WhatsApp number that users will use to contact U-Report if you have one"
+            ),
             label="WhatApp Number",
             required=False,
         ),
@@ -290,7 +341,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="telegram_bot",
         field=dict(
-            help_text=_("The Telegram bot that users will use to contact U-Report if you have one"),
+            help_text=_(
+                "The Telegram bot that users will use to contact U-Report if you have one"
+            ),
             label="Telegram Bot",
             required=False,
         ),
@@ -298,25 +351,35 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="viber_username",
         field=dict(
-            help_text=_("The viber username that users will use to contact U-Report if you have one"),
+            help_text=_(
+                "The viber username that users will use to contact U-Report if you have one"
+            ),
             label="Viber Username",
             required=False,
         ),
     ),
     dict(
         name="join_button_text",
-        field=dict(help_text=_("The join button text"), label="Join Button Text", required=False),
+        field=dict(
+            help_text=_("The join button text"),
+            label="Join Button Text",
+            required=False,
+        ),
     ),
     dict(
         name="join_text",
         field=dict(
-            help_text=_("The short text used to direct visitors to join U-Report"), label="Join Text", required=False
+            help_text=_("The short text used to direct visitors to join U-Report"),
+            label="Join Text",
+            required=False,
         ),
     ),
     dict(
         name="join_text_top",
         field=dict(
-            help_text=_("The call to action text to join on the top section on U-Report"),
+            help_text=_(
+                "The call to action text to join on the top section on U-Report"
+            ),
             label="Join Call to Action Text",
             required=False,
         ),
@@ -347,16 +410,26 @@ ORG_CONFIG_FIELDS = [
     ),
     dict(
         name="opinions_description",
-        field=dict(help_text=_("The description of the opinions page"), label="Opinions Description", required=False),
+        field=dict(
+            help_text=_("The description of the opinions page"),
+            label="Opinions Description",
+            required=False,
+        ),
     ),
     dict(
         name="stories_description",
-        field=dict(help_text=_("The description of the stories page"), label="Stories Description", required=False),
+        field=dict(
+            help_text=_("The description of the stories page"),
+            label="Stories Description",
+            required=False,
+        ),
     ),
     dict(
         name="engagement_description",
         field=dict(
-            help_text=_("The description of the engagement page"), label="Engagement Description", required=False
+            help_text=_("The description of the engagement page"),
+            label="Engagement Description",
+            required=False,
         ),
     ),
     dict(
@@ -369,27 +442,40 @@ ORG_CONFIG_FIELDS = [
     ),
     dict(
         name="dark1_color",
-        field=dict(help_text=_("The primary color for styling for this organization, should be dark"), required=False),
+        field=dict(
+            help_text=_(
+                "The primary color for styling for this organization, should be dark"
+            ),
+            required=False,
+        ),
         superuser_only=True,
     ),
     dict(
         name="dark2_color",
         field=dict(
-            help_text=_("The secondary color for styling for this organization, should be dark"), required=False
+            help_text=_(
+                "The secondary color for styling for this organization, should be dark"
+            ),
+            required=False,
         ),
         superuser_only=True,
     ),
     dict(
         name="dark3_color",
         field=dict(
-            help_text=_("The tertiary color for styling for this organization, should be dark"), required=False
+            help_text=_(
+                "The tertiary color for styling for this organization, should be dark"
+            ),
+            required=False,
         ),
         superuser_only=True,
     ),
     dict(
         name="light1_color",
         field=dict(
-            help_text=_("The primary highlight color for styling for this organization, should be light"),
+            help_text=_(
+                "The primary highlight color for styling for this organization, should be light"
+            ),
             required=False,
         ),
         superuser_only=True,
@@ -397,20 +483,27 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="light2_color",
         field=dict(
-            help_text=_("The secondary highlight color for styling for this organization, should be light"),
+            help_text=_(
+                "The secondary highlight color for styling for this organization, should be light"
+            ),
             required=False,
         ),
         superuser_only=True,
     ),
     dict(
         name="colors",
-        field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False),
+        field=dict(
+            help_text=_("Up to 6 colors for styling charts, use comma between colors"),
+            required=False,
+        ),
         superuser_only=True,
     ),
     dict(
         name="colors_map",
         field=dict(
-            help_text=_("11 colors for styling maps, use comma between colors, not used if not 11 colors"),
+            help_text=_(
+                "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+            ),
             required=False,
         ),
         superuser_only=True,
@@ -422,7 +515,10 @@ ORG_CONFIG_FIELDS = [
     ),
     dict(
         name="limit_poll_states",
-        field=dict(help_text=_("The states to show on maps only, used to filter poll results"), required=False),
+        field=dict(
+            help_text=_("The states to show on maps only, used to filter poll results"),
+            required=False,
+        ),
         superuser_only=True,
     ),
     dict(
@@ -452,7 +548,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="facebook_meta_verification",
         field=dict(
-            help_text=_("The content for the meta tag for Facebook Domain Verification"),
+            help_text=_(
+                "The content for the meta tag for Facebook Domain Verification"
+            ),
             label="Facebook Domain Verification",
             required=False,
         ),
@@ -469,7 +567,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="facebook_page_id",
         field=dict(
-            help_text=_("The integer id to the Facebook page for this organization (optional)"),
+            help_text=_(
+                "The integer id to the Facebook page for this organization (optional)"
+            ),
             label="Facebook Page ID",
             required=False,
         ),
@@ -477,7 +577,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="facebook_app_id",
         field=dict(
-            help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"),
+            help_text=_(
+                "The integer id to the Facebook app for this organization's chat app (optional)"
+            ),
             label="Facebook App ID",
             required=False,
         ),
@@ -485,7 +587,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="facebook_welcome_text",
         field=dict(
-            help_text=_("The short text used to greet users on Facebook Messenger Plugin"),
+            help_text=_(
+                "The short text used to greet users on Facebook Messenger Plugin"
+            ),
             label="Facebook Welcome Text",
             required=False,
         ),
@@ -493,7 +597,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="facebook_pixel_id",
         field=dict(
-            help_text=_("The id of the Facebook Pixel for this organization (optional)"),
+            help_text=_(
+                "The id of the Facebook Pixel for this organization (optional)"
+            ),
             label="Facebook Pixel ID",
             required=False,
         ),
@@ -501,7 +607,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="instagram_username",
         field=dict(
-            help_text=_("The Instagram username for this organization"), label="Instagram Username", required=False
+            help_text=_("The Instagram username for this organization"),
+            label="Instagram Username",
+            required=False,
         ),
     ),
     dict(
@@ -514,12 +622,18 @@ ORG_CONFIG_FIELDS = [
     ),
     dict(
         name="twitter_handle",
-        field=dict(help_text=_("The Twitter handle for this organization"), label="Twitter Handle", required=False),
+        field=dict(
+            help_text=_("The Twitter handle for this organization"),
+            label="Twitter Handle",
+            required=False,
+        ),
     ),
     dict(
         name="twitter_search_widget",
         field=dict(
-            help_text=_("The Twitter widget used for searching"), label="Twitter Search Widget ID", required=False
+            help_text=_("The Twitter widget used for searching"),
+            label="Twitter Search Widget ID",
+            required=False,
         ),
     ),
     dict(
@@ -533,13 +647,17 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="has_jobs",
         field=dict(
-            help_text=_("If there are jobs to be shown on the public site."), label="Display Jobs Tab", required=False
+            help_text=_("If there are jobs to be shown on the public site."),
+            label="Display Jobs Tab",
+            required=False,
         ),
     ),
     dict(
         name="is_global",
         field=dict(
-            help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."),
+            help_text=_(
+                "If this org if for global data. e.g: It shows a world map instead of a country map."
+            ),
             required=False,
         ),
         superuser_only=True,
@@ -552,11 +670,17 @@ ORG_CONFIG_FIELDS = [
     ),
     dict(
         name="has_charts_hidden",
-        field=dict(help_text=_("Whether to hide the engagement breakdown charts."), required=False),
+        field=dict(
+            help_text=_("Whether to hide the engagement breakdown charts."),
+            required=False,
+        ),
     ),
     dict(
         name="has_footer_unicef_logo",
-        field=dict(help_text=_("Whether to show the UNICEF logo in the footer."), required=False),
+        field=dict(
+            help_text=_("Whether to show the UNICEF logo in the footer."),
+            required=False,
+        ),
     ),
     dict(
         name="iso_code",
@@ -574,7 +698,9 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
-        name="text_font", field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True
+        name="text_font",
+        field=dict(help_text=_("The font used for normal text"), required=False),
+        superuser_only=True,
     ),
     dict(
         name="is_participation_hidden",
@@ -584,7 +710,9 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="ureport_announcement",
         field=dict(
-            help_text=_("The text to describe the sponsors of free messages"), label="Announcement", required=False
+            help_text=_("The text to describe the sponsors of free messages"),
+            label="Announcement",
+            required=False,
         ),
         superuser_only=True,
     ),
@@ -669,10 +797,18 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"},
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
         "simple": {"format": "%(levelname)s %(message)s"},
     },
-    "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "verbose"}},
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
     "loggers": {
         "httprouterthread": {"handlers": ["console"], "level": "INFO"},
         "django.request": {"handlers": ["console"], "level": "ERROR"},
@@ -689,7 +825,10 @@ RESOURCES_DIR = os.path.join(PROJECT_DIR, "../resources")
 LOCALE_PATHS = (os.path.join(PROJECT_DIR, "../locale"),)
 FIXTURE_DIRS = (os.path.join(PROJECT_DIR, "../fixtures"),)
 TESTFILES_DIR = os.path.join(PROJECT_DIR, "../testfiles")
-STATICFILES_DIRS = (os.path.join(PROJECT_DIR, "../static"), os.path.join(PROJECT_DIR, "../media"))
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIR, "../static"),
+    os.path.join(PROJECT_DIR, "../media"),
+)
 STATIC_ROOT = os.path.join(PROJECT_DIR, "../sitestatic")
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "../media")
 MEDIA_URL = "/media/"
@@ -747,8 +886,23 @@ PERMISSIONS = {
         "list",
     ),  # can view a list of the objects
     "dashblocks.dashblock": ("html",),
-    "orgs.org": ("choose", "edit", "home", "manage_accounts", "create_login", "join", "refresh_cache"),
-    "polls.poll": ("questions", "responses", "images", "pull_refresh", "poll_date", "poll_flow"),
+    "orgs.org": (
+        "choose",
+        "edit",
+        "home",
+        "manage_accounts",
+        "create_login",
+        "join",
+        "refresh_cache",
+    ),
+    "polls.poll": (
+        "questions",
+        "responses",
+        "images",
+        "pull_refresh",
+        "poll_date",
+        "poll_flow",
+    ),
     "stories.story": ("html", "images"),
 }
 
@@ -817,8 +971,13 @@ LOGOUT_REDIRECT_URL = "/"
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", "OPTIONS": {"min_length": 8}},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {"min_length": 8},
+    },
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
@@ -878,7 +1037,11 @@ INTERNAL_IPS = ("127.0.0.1",)
 CELERY_TIMEZONE = "UTC"
 
 CELERY_BEAT_SCHEDULE = {
-    "refresh_flows": {"task": "polls.refresh_org_flows", "schedule": timedelta(minutes=20), "relative": True},
+    "refresh_flows": {
+        "task": "polls.refresh_org_flows",
+        "schedule": timedelta(minutes=20),
+        "relative": True,
+    },
     "recheck_poll_flow_data": {
         "task": "polls.recheck_poll_flow_data",
         "schedule": timedelta(minutes=15),
@@ -937,7 +1100,10 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(hour=22, minute=0),
         "args": ("ureport.stats.tasks.update_used_contact_activities", "slow"),
     },
-    "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
+    "rebuild-poll-results-count": {
+        "task": "polls.rebuild_counts",
+        "schedule": crontab(hour=4, minute=0),
+    },
     "populate-schemes": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=6, minute=0),
@@ -1387,6 +1553,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://mali.ureport.in/count/",
     ),
     dict(
+        name="Mauritania",
+        host="//mauritania.ureport.in/",
+        flag="flag_mauritania.png",
+        countries_codes=["MRT"],
+        count_link="https://mauritania.ureport.in/count/",
+    ),
+    dict(
         name="Mexico",
         host="//mexico.ureport.in/",
         flag="flag_mexico.png",
@@ -1467,7 +1640,9 @@ COUNTRY_FLAGS_SITES = [
         name="OECS",
         host="//oecs.ureport.in",
         flag="flag_oecs.png",
-        countries_codes=["ATG"],  # ["ATG", "VGB", "DMA", "GRD", "MSR", "KNA", "LCA", "VCT", "TCA"],
+        countries_codes=[
+            "ATG"
+        ],  # ["ATG", "VGB", "DMA", "GRD", "MSR", "KNA", "LCA", "VCT", "TCA"],
         count_link="http://oecs.ureport.in/count/",
     ),
     dict(
@@ -1481,7 +1656,9 @@ COUNTRY_FLAGS_SITES = [
         name="Pacific",
         host="//pacific.ureport.in",
         flag="flag_pacific.png",
-        countries_codes=["FJI"],  # ["COK", "FJI", "MHL", "NRU", "NIU", "PLW", "WSM", "TKL", "TON", "TUV", "VUT"],
+        countries_codes=[
+            "FJI"
+        ],  # ["COK", "FJI", "MHL", "NRU", "NIU", "PLW", "WSM", "TKL", "TON", "TUV", "VUT"],
         count_link="http://pacific.ureport.in/count/",
     ),
     dict(
@@ -1730,14 +1907,26 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
     "root": {"level": "WARNING", "handlers": ["console"]},
-    "formatters": {"verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"}},
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        }
+    },
     "handlers": {
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "verbose"},
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
         "null": {"class": "logging.NullHandler"},
     },
     "loggers": {
         "pycountry": {"level": "ERROR", "handlers": ["console"], "propagate": False},
         "django.security.DisallowedHost": {"handlers": ["null"], "propagate": False},
-        "django.db.backends": {"level": "ERROR", "handlers": ["console"], "propagate": False},
+        "django.db.backends": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": False,
+        },
     },
 }
