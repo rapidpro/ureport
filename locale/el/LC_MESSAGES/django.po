@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -893,6 +893,11 @@ msgstr "Δεν προγραμματίζονται συγχρονισμοί, δε
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Δεν υπάρχει προγραμματισμός για τους συγχρονισμούς, δεν υπάρχει ροή για την δημοσκόπηση"
+
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Προηγούμενο"
 
 msgid "Refresh Results"
 msgstr "Ανανέωση αποτελεσμάτων"

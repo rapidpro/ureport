@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -897,6 +897,11 @@ msgstr ""
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
+
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Anterior"
 
 msgid "Refresh Results"
 msgstr "Actualizar resultados"

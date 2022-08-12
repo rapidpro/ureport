@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -909,6 +909,11 @@ msgstr ""
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
+
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Vezi toate rezultatele"
 
 msgid "Refresh Results"
 msgstr "Actualizare Rezultate"
@@ -2244,9 +2249,6 @@ msgstr "Ceva care să seteze localizările"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "RĂSPUNSURI RECOMANDATE"
-
-#~ msgid "View full results"
-#~ msgstr "Vezi toate rezultatele"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "TOTAL # DIN U-REPORTERI"

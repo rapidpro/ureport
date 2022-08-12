@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -903,6 +903,11 @@ msgstr ""
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
+
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Veja os resultados completos"
 
 #, fuzzy
 #| msgid "Results"
@@ -2234,9 +2239,6 @@ msgstr ""
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "RESPOSTAS SELECIONADAS"
-
-#~ msgid "View full results"
-#~ msgstr "Veja os resultados completos"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "NÚMERO TOTAL DE UTILIZADORES DO SMS BIZ"

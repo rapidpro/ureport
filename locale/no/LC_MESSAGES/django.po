@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -902,6 +902,11 @@ msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for undersøkelsen"
+
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Forrige"
 
 msgid "Refresh Results"
 msgstr "Oppdater resultatene"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -907,6 +907,11 @@ msgstr ""
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
+
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Veja Todos os Resultados"
 
 msgid "Refresh Results"
 msgstr "Atualizar resultados"
@@ -2236,9 +2241,6 @@ msgstr "Algo para disparar localizações"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "RESPOSTAS EM DESTAQUE"
-
-#~ msgid "View full results"
-#~ msgstr "Veja Todos os Resultados"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "TOTAL DE # U-REPORTERS"

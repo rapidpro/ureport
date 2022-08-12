@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -911,6 +911,11 @@ msgstr "Nenaplánovaná synchronizace, není aktivní"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Žádné plánování synchronizací, žádný tok pro průzkum"
+
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Předchozí"
 
 msgid "Refresh Results"
 msgstr "Obnovit výsledky"

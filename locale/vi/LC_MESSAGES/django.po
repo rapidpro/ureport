@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -932,6 +932,11 @@ msgstr ""
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
+
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Xem toàn bộ kết quả"
 
 #, fuzzy
 #| msgid "Results"
@@ -2344,9 +2349,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "PHẢN HỒI NỔI BẬT"
-
-#~ msgid "View full results"
-#~ msgstr "Xem toàn bộ kết quả"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "TỔNG SỐ U-REPORTERS"

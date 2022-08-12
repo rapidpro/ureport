@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -902,6 +902,11 @@ msgstr ""
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
+
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Vedi tutti i risultati "
 
 msgid "Refresh Results"
 msgstr "Aggiorna i risultati"
@@ -2241,9 +2246,6 @@ msgstr "Qualcosa per avviare localizzazione"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "Risposte in primo piano"
-
-#~ msgid "View full results"
-#~ msgstr "Vedi tutti i risultati "
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "N. TOTALE DI U-REPORTER"

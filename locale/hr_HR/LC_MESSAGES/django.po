@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 14:09+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -916,6 +916,11 @@ msgstr "Ne sinkronizira se, neaktivno"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Ne planira sinkronizaciju, nema flowa za anketu"
+
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Prethodni"
 
 msgid "Refresh Results"
 msgstr "Osvježi rezultate"
