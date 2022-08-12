@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 09:42+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -900,6 +900,11 @@ msgstr "Synkronisering inte schemalagd, inte aktiv"
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Synkroniseringar är inte planerade, inget flöde finns för undersökningen"
 
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Tidigare"
+
 msgid "Refresh Results"
 msgstr "Uppdaterar resultaten"
 
@@ -995,6 +1000,15 @@ msgstr "SÖK"
 
 msgid "No results found"
 msgstr "Inga resultat"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"

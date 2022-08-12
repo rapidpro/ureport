@@ -625,6 +625,7 @@ class PollCRUDL(SmartCRUDL):
             "sync_status",
             "created_on",
             "tags",
+            "preview",
         )
         link_fields = ("title", "poll_date", "questions", "opinion_response", "images")
         default_order = ("-created_on", "id")
@@ -688,6 +689,8 @@ class PollCRUDL(SmartCRUDL):
                 return reverse("polls.poll_poll_date", args=[obj.pk])
             elif field == "images":
                 return reverse("polls.poll_images", args=[obj.pk])
+            elif field == "preview":
+                return reverse("public.opinion_preview", args=[obj.pk])
             elif field == "opinion_response":
                 return reverse("polls.poll_responses", args=[obj.pk])
             else:
