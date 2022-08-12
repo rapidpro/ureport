@@ -1,3 +1,12 @@
+v1.2.49
+----------
+ * Merge pull request #1076 from rapidpro/poll-preview
+ * Run code checks
+ * Add preview button on poll admin list
+ * Run code_checks
+ * Add poll preview view for admin to see stats for unpublished polls
+ * Move black setting into pyproject.toml
+
 v1.2.48
 ----------
  * Merge pull request #1077 from rapidpro/add-mauritania
