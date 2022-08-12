@@ -1,3 +1,12 @@
+v1.2.48
+----------
+ * Merge pull request #1077 from rapidpro/add-mauritania
+ * Run code checks
+ * Add Mauritania flag
+ * Merge pull request #1075 from Ilhasoft/uk-language
+ * update locale mo file for uk language
+ * Translate /locale/en/LC_MESSAGES/django.po in uk
+
 v1.2.47
 ----------
  * Merge pull request #1073 from rapidpro/add-morocco
