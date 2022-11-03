@@ -1,3 +1,11 @@
+v1.2.50
+----------
+ * Merge pull request #1081 from rapidpro/update-cg-logo
+ * Update CG logo
+ * Merge pull request #1079 from rapidpro/update-test-db
+ * Update deps
+ * Start testing PG 13
+
 v1.2.49
 ----------
  * Merge pull request #1076 from rapidpro/poll-preview
