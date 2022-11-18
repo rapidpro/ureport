@@ -1300,13 +1300,6 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://france.ureport.in/count/",
     ),
     dict(
-        name="FSM",
-        host="//fsm.ureport.in",
-        flag="flag_fsm.png",
-        countries_codes=["FSM"],
-        count_link="http://fsm.ureport.in/count/",
-    ),
-    dict(
         name="Gabon",
         host="//gabon.ureport.in/",
         flag="flag_gabon.png",
@@ -1501,6 +1494,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_mexico.png",
         countries_codes=["MEX"],
         count_link="http://mexico.ureport.in/count/",
+    ),
+    dict(
+        name="Micronesia",
+        host="//micronesia.ureport.in",
+        flag="flag_micronesia.png",
+        countries_codes=["FSM"],
+        count_link="http://micronesia.ureport.in/count/",
     ),
     dict(
         name="Moldova",
