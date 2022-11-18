@@ -1,3 +1,12 @@
+v1.2.51
+----------
+ * Merge pull request #1084 from rapidpro/micronesia
+ * Add micronesia
+ * Merge pull request #1083 from rapidpro/test-pg-14
+ * Test on redis 6.2
+ * Merge pull request #1082 from rapidpro/test-pg-14
+ * Test on PG 14
+
 v1.2.50
 ----------
  * Merge pull request #1081 from rapidpro/update-cg-logo
