@@ -960,7 +960,7 @@ class RapidProBackend(BaseBackend):
             ruleset_uuid = temba_path.node
             category = None
             text = ""
-            value_date = temba_path.time
+            value_date = temba_run.created_on
 
             if ruleset_uuid in questions_uuids:
                 existing_poll_result = existing_db_poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
