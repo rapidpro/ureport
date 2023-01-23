@@ -47,14 +47,14 @@ class FieldSyncer(BaseSyncer):
             "backend": self.backend,
             "org": org,
             "key": remote.key,
-            "label": remote.label,
-            "value_type": self.model.TEMBA_TYPES.get(remote.value_type, self.model.TYPE_TEXT),
+            "label": remote.name,
+            "value_type": self.model.TEMBA_TYPES.get(remote.type, self.model.TYPE_TEXT),
         }
 
     def update_required(self, local, remote, local_kwargs):
         if local_kwargs and local_kwargs["backend"] != local.backend:
             return False
-        return any([local.label != remote.label, local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)])
+        return any([local.label != remote.name, local.value_type != self.model.TEMBA_TYPES.get(remote.type)])
 
     def delete_local(self, local):
         local.release()
