@@ -10,8 +10,6 @@ from collections import defaultdict
 from datetime import timedelta
 
 import requests
-from dash.utils import is_dict_equal
-from dash.utils.sync import BaseSyncer, sync_local_to_changes, sync_local_to_set
 from django_redis import get_redis_connection
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import Run
@@ -19,6 +17,8 @@ from temba_client.v2.types import Run
 from django.core.cache import cache
 from django.utils import timezone
 
+from dash.utils import is_dict_equal
+from dash.utils.sync import BaseSyncer, sync_local_to_changes, sync_local_to_set
 from ureport.contacts.models import Contact, ContactField
 from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary

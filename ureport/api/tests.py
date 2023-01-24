@@ -7,10 +7,6 @@ from datetime import datetime
 from random import randint
 
 import six
-from dash.categories.models import Category
-from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import Org
-from dash.stories.models import Story
 from mock import patch
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -18,6 +14,10 @@ from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import Org
+from dash.stories.models import Story
 from ureport.api.serializers import CategoryReadSerializer, StoryReadSerializer, generate_absolute_url_from_file
 from ureport.contacts.models import ReportersCounter
 from ureport.flows.models import FlowResult
