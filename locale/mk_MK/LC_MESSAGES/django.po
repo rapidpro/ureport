@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-01-24 08:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -114,18 +114,6 @@ msgstr "Приоритет на овој блок, блоковите со по�
 
 msgid "The organization this content block belongs to"
 msgstr "На која организација припаѓа овој блок"
-
-msgid "Gallery"
-msgstr "Галерија"
-
-msgid "Add Image"
-msgstr "Додади слика"
-
-msgid "Search"
-msgstr "Барај"
-
-msgid "Add"
-msgstr "Додади"
 
 msgid "Content Types"
 msgstr "Типови на Содржина"
@@ -310,27 +298,6 @@ msgstr "Поканети сте да се придружите на {{org.name}}
 msgid "Click this link to join"
 msgstr "Доколку сакате да се регистрирате, кликнете на линкот"
 
-msgid "Edit"
-msgstr "Уреди"
-
-msgid "Manage Backends"
-msgstr "Управување со позадините"
-
-msgid "Manage Users"
-msgstr "Управувач со корисници"
-
-msgid "Accounts"
-msgstr "Кориснички сметки"
-
-msgid "Admins"
-msgstr "Администратори"
-
-msgid "Remove"
-msgstr "Отстрани"
-
-msgid "You must have at least one administator"
-msgstr "Мора да има барем еден администратор"
-
 msgid "Select your Organization"
 msgstr "Изберете ја вашата организација"
 
@@ -462,6 +429,15 @@ msgstr "Штом се отстрани, ќе биде трајно избриш�
 
 msgid "Cancel"
 msgstr "Откажи"
+
+msgid "Remove"
+msgstr "Отстрани"
+
+msgid "Search"
+msgstr "Барај"
+
+msgid "Add"
+msgstr "Додади"
 
 #, python-format
 msgid ""
@@ -704,368 +680,27 @@ msgstr "Креиран е нов %s."
 msgid "Import %s"
 msgstr "Вчитај %s"
 
-msgid "Back to Website"
-msgstr "Назад кон веб страната"
-
-msgid "Welcome, "
-msgstr "Добредојдовте,"
-
-msgid "Logout"
-msgstr "Одјавување"
-
-msgid "Opinions"
-msgstr "Мислења"
-
-msgid "Bots"
-msgstr ""
-
-msgid "Users"
-msgstr "Корисници"
-
-msgid "Settings"
-msgstr "Подесувања"
-
-msgid "Pages"
-msgstr "Страни"
-
-msgid "Landing Pages"
-msgstr ""
-
-msgid "Jobs"
-msgstr "Работни места"
-
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
-
-msgid "Categories Images"
-msgstr "Категории слики"
-
-msgid "News Items"
-msgstr "Нови ставки"
-
-msgid "Orgs"
-msgstr "Организации"
-
-msgid "Images"
-msgstr "Слики"
-
-msgid "About"
-msgstr "За нас"
-
-msgid "Engagement"
-msgstr "Вклученост"
-
-#, fuzzy
-#| msgid "Reporters"
-msgid "Reports"
-msgstr "Известувачи"
-
-msgid "Category Images"
-msgstr "Категорија слики"
-
-msgid "+ New "
-msgstr "+ Ново"
-
-msgid "+ New Page"
-msgstr "+ Нова страна"
-
-msgid "U-Report"
-msgstr "U-Report"
-
-msgid "Admin"
-msgstr "Администратор"
-
-msgid "Configuration"
-msgstr "Конфигурација"
-
-msgid "Content"
-msgstr "Содржина"
-
-msgid "Country Aliases"
-msgstr "Синоними за држава"
-
-msgid "Job Sources"
-msgstr "Извор на задачи"
-
-msgid "Jobs Content"
-msgstr "Содржина на задачи"
-
-msgid "About Content"
-msgstr "За нас, содржина"
-
-msgid "Videos"
-msgstr "Видеа"
-
-msgid "Contact Us Content"
-msgstr "Контактирајте нè, содржина"
-
-msgid "Missions Content"
-msgstr "Мисија, содржина"
-
-msgid "Terms & Conditions"
-msgstr "Услови за користење"
-
-msgid "U-Reporters Content"
-msgstr "U-репортери, содржина"
-
-msgid "Join &amp; Engage Content"
-msgstr "Придружи се на &amp; Прикажи содржина"
-
-msgid "Join Steps Content"
-msgstr "Чекори за придружување, содржина"
-
-msgid "Additional Menu"
-msgstr "Дополнително мени"
-
-msgid "SELECT YOUR COUNTRY"
-msgstr "ИЗБЕРИ ЗЕМЈА"
-
-msgid "Join Now"
-msgstr "Регистрирај се"
-
-msgid "READ MORE"
-msgstr "ПРОЧИТАЈ ПОВЕЌЕ"
-
-msgid "EXPLORE ENGAGEMENT"
-msgstr "ИСТРАЖИ "
-
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"        За да се додаде Twitter job source потребен е  widget id од twitter.\n"
-"      "
-
-msgid "Follow this step by step guide"
-msgstr "Следете го овој чекор-по-чекор водич"
-
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
-"\n"
-"        <div>По креирањето на widget копирајте го widget id од url како што е прикажано на</div>\n"
-"      "
-
-msgid "Back"
-msgstr "Назад"
-
 msgid "Select bots"
 msgstr ""
-
-msgid "View public page"
-msgstr ""
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "ПОСЛЕДНИ ИЗВЕСТУВАЊА"
-
-msgid "Backends"
-msgstr "Позадини"
 
 msgid "Add os Select tags"
 msgstr ""
 
-#, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] "Во моментов се синхронизираат %(counter)s гласања. Истите ќе бидат прикажани на јавната страна откако ќе заврши синхронизирањето."
-msgstr[1] "Во моментов се синхронизираат %(counter)sанкети. Истите ќе бидат прикажани на јавната страна откако ќе заврши синхронизирањето."
-
-msgid "+ New Poll"
-msgstr "+ Нова анкета"
-
-#, python-format
-msgid "%(counter)s poll question"
-msgid_plural "%(counter)s poll questions"
-msgstr[0] "%(counter)s прашања"
-msgstr[1] "%(counter)s анкетни прашања"
-
-msgid "New poll initial syncs scheduled every 10min"
-msgstr "Првичната синхронизацијата на новите анкети се врши на секои 10 минути "
-
-#, fuzzy
-#| msgid "No longer scheduling syncs, runs archived"
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr "Не се закажуваат синхронизации"
-
-#, fuzzy
-#| msgid "Main poll syncs scheduled every 10min"
-msgid "Main poll syncs scheduled every 20min"
-msgstr "Синхронизацијата на главните анкети се врши на секои 10 минути"
-
-msgid "Recent poll syncs scheduled every 60min"
-msgstr "Синхронизацијата на последните анкети се врши на секои 60 минути"
-
-msgid "Poll syncs scheduled every 24h"
-msgstr "Синхронизацијата на анкетите се врши на секои 24 часа"
-
-msgid "Not scheduling syncs, not active"
-msgstr "Нема закажана синхронизација, неактивно"
-
-msgid "Not scheduling syncs, no flow for poll"
-msgstr "Нема закажана синхронизација, нема анкети"
-
-#, fuzzy
-#| msgid "Previous"
-msgid "Preview results"
-msgstr "Претходно"
-
-msgid "Refresh Results"
-msgstr "Освежи резултати"
-
-msgid "Partners"
-msgstr ""
-
-msgid "MORE POLLS"
-msgstr "ПОВЕЌЕ АНКЕТИ"
-
-msgid "FILTER"
-msgstr "ФИЛТЕР"
-
-msgid "All"
-msgstr "Се"
-
-msgid "POLL LIST"
-msgstr "ЛИСТА НА АНКЕТИ"
-
-msgid "All polls from most recent to oldest"
-msgstr "Сите анкети од најнови до најстари"
-
-msgid "ARCHIVED STORIES"
-msgstr "АРХИВА НА ПРИКАЗНИ"
-
-msgid "LIST"
-msgstr "ЛИСТА"
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "LATEST OPINION"
-msgstr "ПОСЛЕДНИ МИСЛЕЊА"
-
-msgid "VIEW FULL RESULTS"
-msgstr "ВИДИ ЦЕЛОСНИ РЕЗУЛТАТИ"
-
-msgid "U-REPORTERS IN"
-msgstr "U-РЕПОРТЕРИ ВО"
-
-msgid "PARTNERING WITH"
-msgstr "ВО СОРАБОТКА СО"
-
-msgid "U-REPORTERS"
-msgstr "U-РЕПОРТЕРИ "
-
-msgid "IN"
-msgstr "ВО"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "ЗЕМЈИ ВО СВЕТОТ"
-
-msgid "AGES"
-msgstr "ВОЗРАСТ"
-
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Придружи се на U-Report, твоето мислење е важно"
-
 msgid "FEATURED STORY"
 msgstr "ПРИКАЗНА"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Ние сме дел од глобална платформа којашто работи на промени на животот на младите луѓе во целиот свет."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Откриј како U-Report ги поврзува младите луѓе и им овозможува да го искажат своето мислење за прашања кои се важни за нив. "
-
-msgid "LEARN MORE"
-msgstr "ДОЗНАЈ ПОВЕЌЕ"
-
-msgid "Visit"
-msgstr "Посети"
-
-msgid "How would you like to join?"
-msgstr "Како би сакал/а да се придружиш?"
-
-msgid "Text"
-msgstr "Текст"
-
-msgid "PAGE"
-msgstr ""
+msgid "READ MORE"
+msgstr "ПРОЧИТАЈ ПОВЕЌЕ"
 
 msgid "SEARCH"
 msgstr "БАРАЈ"
-
-msgid "No results found"
-msgstr "Не се пронајдени резултати"
-
-msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
-
-msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
-
-msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSES"
-msgid "RESPONDERS"
-msgstr "ОДГОВОРИ"
-
-msgid "RESPONSE RATE"
-msgstr "СТАПКА НА ОДГОВОРИ"
-
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
-msgid "TOTAL RESPONDERS"
-msgstr "ВКУПНО ОДГОВОРИ"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s одговориле од %(polled)s анкети"
 
-msgid "ALL"
-msgstr "СИТЕ"
-
-msgid "AGE"
-msgstr "ВОЗРАСТ"
-
-msgid "GENDER"
-msgstr "ПОЛ"
-
-msgid "LOCATION"
-msgstr "ЛОКАЦИЈА"
-
-msgid "Written by:"
-msgstr "Автор:"
-
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS"
-msgid "REPORT"
-msgstr "U-РЕПОРТЕРИ "
-
-msgid "STORY"
-msgstr ""
-
-msgid "Download Report"
-msgstr ""
+msgid "All"
+msgstr "Се"
 
 msgid "Even"
 msgstr "Еднакво/парно"
@@ -1113,45 +748,6 @@ msgstr "од"
 
 msgid "the"
 msgstr "на"
-
-msgid "OVERALL STATISTICS"
-msgstr "ВКУПНА СТАТИСТИКА"
-
-msgid "THIS YEAR"
-msgstr "ОВАА ГОДИНА"
-
-msgid "AVG RESPONSE RATE"
-msgstr "ПРОСЕЧНА СТАПКА НА ОДГОВОРИ"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-РЕПОРТЕРИ ПО РЕГИОН"
-
-msgid "FILTER RESULTS"
-msgstr "ФИЛТРИРАЈ РЕЗУЛТАТИ"
-
-msgid "Charts only visible for logged in admins"
-msgstr ""
-
-msgid "Export and Share"
-msgstr "Експортирај и сподели"
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "Дали сакаш светот да дознае за ова? Спушти ја сликата и сподели ја на социјалните мрежи или креирај прекрасна презентација! "
-
-msgid "SELECT LANGUAGE"
-msgstr "ИЗБЕРИ ЈАЗИК"
-
-msgid "SELECT COUNTRY"
-msgstr "ИЗБЕРИ ЗЕМЈА"
-
-msgid "Custom pages"
-msgstr "Кориснички приспособени страни"
-
-msgid "Landing pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "Погледнете како го вклучуваме гласот на младите за позитивна социјална промена."
 
 msgid "Polled"
 msgstr "Анкетирани"
@@ -1232,16 +828,6 @@ msgid "Dec"
 msgstr "Дек"
 
 #, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-"            Дали сте сигурни дека сакате да го избришете <strong>%(object)s</strong>?\n"
-"          "
-
-#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] "%(counter)s резултати"
@@ -1250,45 +836,6 @@ msgstr[1] "%(counter)s резултати"
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Резултати %(start)s-%(end)s од %(count)s"
-
-msgid "Error"
-msgstr "Грешка"
-
-msgid "Enter Dashboard"
-msgstr "Влез во контролна табла"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"                За жал, не може да се најавите бидејќи имаше %(failed_login_limit)sпогрешни обиди за најава\n"
-"              "
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"                    Ве молиме почекајте %(lockout_timeout)s минути пред да се најавите повторно.\n"
-"                  "
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"        <strong>Вашата лозинка е застарена.</strong> Политика на веб-локацијата е да изберете нова лозинка на секои %(expire_days)s дена, и истата да не е користен %(window_days)s дена.\n"
-"      "
-
-msgid "+ New Story"
-msgstr "+ Нова статија"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -2008,6 +1555,402 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+#~ msgid "Gallery"
+#~ msgstr "Галерија"
+
+#~ msgid "Add Image"
+#~ msgstr "Додади слика"
+
+#~ msgid "Edit"
+#~ msgstr "Уреди"
+
+#~ msgid "Manage Backends"
+#~ msgstr "Управување со позадините"
+
+#~ msgid "Manage Users"
+#~ msgstr "Управувач со корисници"
+
+#~ msgid "Accounts"
+#~ msgstr "Кориснички сметки"
+
+#~ msgid "Admins"
+#~ msgstr "Администратори"
+
+#~ msgid "You must have at least one administator"
+#~ msgstr "Мора да има барем еден администратор"
+
+#~ msgid "Back to Website"
+#~ msgstr "Назад кон веб страната"
+
+#~ msgid "Welcome, "
+#~ msgstr "Добредојдовте,"
+
+#~ msgid "Logout"
+#~ msgstr "Одјавување"
+
+#~ msgid "Opinions"
+#~ msgstr "Мислења"
+
+#~ msgid "Users"
+#~ msgstr "Корисници"
+
+#~ msgid "Settings"
+#~ msgstr "Подесувања"
+
+#~ msgid "Pages"
+#~ msgstr "Страни"
+
+#~ msgid "Jobs"
+#~ msgstr "Работни места"
+
+#~ msgid "Categories Images"
+#~ msgstr "Категории слики"
+
+#~ msgid "News Items"
+#~ msgstr "Нови ставки"
+
+#~ msgid "Orgs"
+#~ msgstr "Организации"
+
+#~ msgid "Images"
+#~ msgstr "Слики"
+
+#~ msgid "About"
+#~ msgstr "За нас"
+
+#~ msgid "Engagement"
+#~ msgstr "Вклученост"
+
+#, fuzzy
+#~| msgid "Reporters"
+#~ msgid "Reports"
+#~ msgstr "Известувачи"
+
+#~ msgid "Category Images"
+#~ msgstr "Категорија слики"
+
+#~ msgid "+ New "
+#~ msgstr "+ Ново"
+
+#~ msgid "+ New Page"
+#~ msgstr "+ Нова страна"
+
+#~ msgid "U-Report"
+#~ msgstr "U-Report"
+
+#~ msgid "Admin"
+#~ msgstr "Администратор"
+
+#~ msgid "Configuration"
+#~ msgstr "Конфигурација"
+
+#~ msgid "Content"
+#~ msgstr "Содржина"
+
+#~ msgid "Country Aliases"
+#~ msgstr "Синоними за држава"
+
+#~ msgid "Job Sources"
+#~ msgstr "Извор на задачи"
+
+#~ msgid "Jobs Content"
+#~ msgstr "Содржина на задачи"
+
+#~ msgid "About Content"
+#~ msgstr "За нас, содржина"
+
+#~ msgid "Videos"
+#~ msgstr "Видеа"
+
+#~ msgid "Contact Us Content"
+#~ msgstr "Контактирајте нè, содржина"
+
+#~ msgid "Missions Content"
+#~ msgstr "Мисија, содржина"
+
+#~ msgid "Terms & Conditions"
+#~ msgstr "Услови за користење"
+
+#~ msgid "U-Reporters Content"
+#~ msgstr "U-репортери, содржина"
+
+#~ msgid "Join &amp; Engage Content"
+#~ msgstr "Придружи се на &amp; Прикажи содржина"
+
+#~ msgid "Join Steps Content"
+#~ msgstr "Чекори за придружување, содржина"
+
+#~ msgid "Additional Menu"
+#~ msgstr "Дополнително мени"
+
+#~ msgid "SELECT YOUR COUNTRY"
+#~ msgstr "ИЗБЕРИ ЗЕМЈА"
+
+#~ msgid "Join Now"
+#~ msgstr "Регистрирај се"
+
+#~ msgid "EXPLORE ENGAGEMENT"
+#~ msgstr "ИСТРАЖИ "
+
+#~ msgid ""
+#~ "\n"
+#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        За да се додаде Twitter job source потребен е  widget id од twitter.\n"
+#~ "      "
+
+#~ msgid "Follow this step by step guide"
+#~ msgstr "Следете го овој чекор-по-чекор водич"
+
+#~ msgid ""
+#~ "\n"
+#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <div>По креирањето на widget копирајте го widget id од url како што е прикажано на</div>\n"
+#~ "      "
+
+#~ msgid "Back"
+#~ msgstr "Назад"
+
+#~ msgid "LATEST NOTIFICATIONS"
+#~ msgstr "ПОСЛЕДНИ ИЗВЕСТУВАЊА"
+
+#~ msgid "Backends"
+#~ msgstr "Позадини"
+
+#, python-format
+#~ msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+#~ msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+#~ msgstr[0] "Во моментов се синхронизираат %(counter)s гласања. Истите ќе бидат прикажани на јавната страна откако ќе заврши синхронизирањето."
+#~ msgstr[1] "Во моментов се синхронизираат %(counter)sанкети. Истите ќе бидат прикажани на јавната страна откако ќе заврши синхронизирањето."
+
+#~ msgid "+ New Poll"
+#~ msgstr "+ Нова анкета"
+
+#, python-format
+#~ msgid "%(counter)s poll question"
+#~ msgid_plural "%(counter)s poll questions"
+#~ msgstr[0] "%(counter)s прашања"
+#~ msgstr[1] "%(counter)s анкетни прашања"
+
+#~ msgid "New poll initial syncs scheduled every 10min"
+#~ msgstr "Првичната синхронизацијата на новите анкети се врши на секои 10 минути "
+
+#, fuzzy
+#~| msgid "No longer scheduling syncs, runs archived"
+#~ msgid "No longer scheduling syncs for old polls, runs archived"
+#~ msgstr "Не се закажуваат синхронизации"
+
+#, fuzzy
+#~| msgid "Main poll syncs scheduled every 10min"
+#~ msgid "Main poll syncs scheduled every 20min"
+#~ msgstr "Синхронизацијата на главните анкети се врши на секои 10 минути"
+
+#~ msgid "Recent poll syncs scheduled every 60min"
+#~ msgstr "Синхронизацијата на последните анкети се врши на секои 60 минути"
+
+#~ msgid "Poll syncs scheduled every 24h"
+#~ msgstr "Синхронизацијата на анкетите се врши на секои 24 часа"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "Нема закажана синхронизација, неактивно"
+
+#~ msgid "Not scheduling syncs, no flow for poll"
+#~ msgstr "Нема закажана синхронизација, нема анкети"
+
+#, fuzzy
+#~| msgid "Previous"
+#~ msgid "Preview results"
+#~ msgstr "Претходно"
+
+#~ msgid "Refresh Results"
+#~ msgstr "Освежи резултати"
+
+#~ msgid "MORE POLLS"
+#~ msgstr "ПОВЕЌЕ АНКЕТИ"
+
+#~ msgid "FILTER"
+#~ msgstr "ФИЛТЕР"
+
+#~ msgid "POLL LIST"
+#~ msgstr "ЛИСТА НА АНКЕТИ"
+
+#~ msgid "All polls from most recent to oldest"
+#~ msgstr "Сите анкети од најнови до најстари"
+
+#~ msgid "ARCHIVED STORIES"
+#~ msgstr "АРХИВА НА ПРИКАЗНИ"
+
+#~ msgid "LIST"
+#~ msgstr "ЛИСТА"
+
+#~ msgid "LATEST OPINION"
+#~ msgstr "ПОСЛЕДНИ МИСЛЕЊА"
+
+#~ msgid "VIEW FULL RESULTS"
+#~ msgstr "ВИДИ ЦЕЛОСНИ РЕЗУЛТАТИ"
+
+#~ msgid "U-REPORTERS IN"
+#~ msgstr "U-РЕПОРТЕРИ ВО"
+
+#~ msgid "PARTNERING WITH"
+#~ msgstr "ВО СОРАБОТКА СО"
+
+#~ msgid "U-REPORTERS"
+#~ msgstr "U-РЕПОРТЕРИ "
+
+#~ msgid "IN"
+#~ msgstr "ВО"
+
+#~ msgid "COUNTRIES WORLDWIDE"
+#~ msgstr "ЗЕМЈИ ВО СВЕТОТ"
+
+#~ msgid "AGES"
+#~ msgstr "ВОЗРАСТ"
+
+#~ msgid "Join U-Report, Your voice matters."
+#~ msgstr "Придружи се на U-Report, твоето мислење е важно"
+
+#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
+#~ msgstr "Ние сме дел од глобална платформа којашто работи на промени на животот на младите луѓе во целиот свет."
+
+#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+#~ msgstr "Откриј како U-Report ги поврзува младите луѓе и им овозможува да го искажат своето мислење за прашања кои се важни за нив. "
+
+#~ msgid "LEARN MORE"
+#~ msgstr "ДОЗНАЈ ПОВЕЌЕ"
+
+#~ msgid "Visit"
+#~ msgstr "Посети"
+
+#~ msgid "How would you like to join?"
+#~ msgstr "Како би сакал/а да се придружиш?"
+
+#~ msgid "Text"
+#~ msgstr "Текст"
+
+#~ msgid "No results found"
+#~ msgstr "Не се пронајдени резултати"
+
+#, fuzzy
+#~| msgid "RESPONSES"
+#~ msgid "RESPONDERS"
+#~ msgstr "ОДГОВОРИ"
+
+#~ msgid "RESPONSE RATE"
+#~ msgstr "СТАПКА НА ОДГОВОРИ"
+
+#, fuzzy
+#~| msgid "TOTAL RESPONSES"
+#~ msgid "TOTAL RESPONDERS"
+#~ msgstr "ВКУПНО ОДГОВОРИ"
+
+#~ msgid "ALL"
+#~ msgstr "СИТЕ"
+
+#~ msgid "AGE"
+#~ msgstr "ВОЗРАСТ"
+
+#~ msgid "GENDER"
+#~ msgstr "ПОЛ"
+
+#~ msgid "LOCATION"
+#~ msgstr "ЛОКАЦИЈА"
+
+#~ msgid "Written by:"
+#~ msgstr "Автор:"
+
+#, fuzzy
+#~| msgid "U-REPORTERS"
+#~ msgid "REPORT"
+#~ msgstr "U-РЕПОРТЕРИ "
+
+#~ msgid "OVERALL STATISTICS"
+#~ msgstr "ВКУПНА СТАТИСТИКА"
+
+#~ msgid "THIS YEAR"
+#~ msgstr "ОВАА ГОДИНА"
+
+#~ msgid "AVG RESPONSE RATE"
+#~ msgstr "ПРОСЕЧНА СТАПКА НА ОДГОВОРИ"
+
+#~ msgid "U-REPORTERS BY REGION"
+#~ msgstr "U-РЕПОРТЕРИ ПО РЕГИОН"
+
+#~ msgid "FILTER RESULTS"
+#~ msgstr "ФИЛТРИРАЈ РЕЗУЛТАТИ"
+
+#~ msgid "Export and Share"
+#~ msgstr "Експортирај и сподели"
+
+#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+#~ msgstr "Дали сакаш светот да дознае за ова? Спушти ја сликата и сподели ја на социјалните мрежи или креирај прекрасна презентација! "
+
+#~ msgid "SELECT LANGUAGE"
+#~ msgstr "ИЗБЕРИ ЈАЗИК"
+
+#~ msgid "SELECT COUNTRY"
+#~ msgstr "ИЗБЕРИ ЗЕМЈА"
+
+#~ msgid "Custom pages"
+#~ msgstr "Кориснички приспособени страни"
+
+#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
+#~ msgstr "Погледнете како го вклучуваме гласот на младите за позитивна социјална промена."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ "            Дали сте сигурни дека сакате да го избришете <strong>%(object)s</strong>?\n"
+#~ "          "
+
+#~ msgid "Error"
+#~ msgstr "Грешка"
+
+#~ msgid "Enter Dashboard"
+#~ msgstr "Влез во контролна табла"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "                За жал, не може да се најавите бидејќи имаше %(failed_login_limit)sпогрешни обиди за најава\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    Ве молиме почекајте %(lockout_timeout)s минути пред да се најавите повторно.\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>Вашата лозинка е застарена.</strong> Политика на веб-локацијата е да изберете нова лозинка на секои %(expire_days)s дена, и истата да не е користен %(window_days)s дена.\n"
+#~ "      "
+
+#~ msgid "+ New Story"
+#~ msgstr "+ Нова статија"
 
 #~ msgid "Photos"
 #~ msgstr "Фотографии"

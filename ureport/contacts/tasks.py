@@ -3,6 +3,9 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import time
 
+from dash.orgs.models import Org, TaskState
+from dash.orgs.tasks import org_task
+from dash.utils.sync import SyncOutcome
 from django_redis import get_redis_connection
 
 from django.core.cache import cache
@@ -10,9 +13,6 @@ from django.utils import timezone
 
 from celery.utils.log import get_task_logger
 
-from dash.orgs.models import Org, TaskState
-from dash.orgs.tasks import org_task
-from dash.utils.sync import SyncOutcome
 from ureport.celery import app
 from ureport.contacts.models import Contact, ReportersCounter
 from ureport.stats.models import ContactActivity

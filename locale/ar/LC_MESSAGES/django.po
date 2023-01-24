@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-01-24 08:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -114,18 +114,6 @@ msgstr "الأفضلية لهذه الكتلة، الكتل ذات الأفضل�
 
 msgid "The organization this content block belongs to"
 msgstr "المنظمة التي تعود لها كتلة المحتوى"
-
-msgid "Gallery"
-msgstr "معرض الصور "
-
-msgid "Add Image"
-msgstr "إضافة صورة "
-
-msgid "Search"
-msgstr "بحث "
-
-msgid "Add"
-msgstr "إضافة "
 
 msgid "Content Types"
 msgstr "نوع المحتوى "
@@ -311,29 +299,6 @@ msgstr ""
 msgid "Click this link to join"
 msgstr ""
 
-msgid "Edit"
-msgstr "تعديل "
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "إدارة حسابات المستخدمين "
-
-msgid "Manage Users"
-msgstr "إدارة حسابات المستخدمين "
-
-msgid "Accounts"
-msgstr "حسابات "
-
-msgid "Admins"
-msgstr "المشرف "
-
-msgid "Remove"
-msgstr "حذف "
-
-msgid "You must have at least one administator"
-msgstr "يجب أن يكون لديك مشرف واحد على الأقل"
-
 msgid "Select your Organization"
 msgstr "قم بإختيار المنظمة التي تتبع لها "
 
@@ -469,6 +434,15 @@ msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إع�
 
 msgid "Cancel"
 msgstr "إلغاء"
+
+msgid "Remove"
+msgstr "حذف "
+
+msgid "Search"
+msgstr "بحث "
+
+msgid "Add"
+msgstr "إضافة "
 
 #, python-format
 msgid ""
@@ -697,372 +671,27 @@ msgstr "تم خلق مستخدم جديد %s"
 msgid "Import %s"
 msgstr "استيراد %s"
 
-msgid "Back to Website"
-msgstr ""
-
-msgid "Welcome, "
-msgstr ""
-
-msgid "Logout"
-msgstr "تسجيل الخروج "
-
-msgid "Opinions"
-msgstr "استطلاع الرأي"
-
-msgid "Bots"
-msgstr ""
-
-msgid "Users"
-msgstr "المستخدمين"
-
-msgid "Settings"
-msgstr ""
-
-msgid "Pages"
-msgstr ""
-
-msgid "Landing Pages"
-msgstr ""
-
-msgid "Jobs"
-msgstr "الأعمال"
-
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
-
-msgid "Categories Images"
-msgstr ""
-
-msgid "News Items"
-msgstr "مواد الأخبار"
-
-msgid "Orgs"
-msgstr "المؤسسات"
-
-msgid "Images"
-msgstr "الصور"
-
-msgid "About"
-msgstr "نبذة عن "
-
-msgid "Engagement"
-msgstr "مشاركة"
-
-#, fuzzy
-#| msgid "U-Report"
-msgid "Reports"
-msgstr "يو-ريبورت"
-
-msgid "Category Images"
-msgstr "صور الفئة"
-
-msgid "+ New "
-msgstr ""
-
-msgid "+ New Page"
-msgstr ""
-
-msgid "U-Report"
-msgstr "يو-ريبورت"
-
-msgid "Admin"
-msgstr "مسؤول"
-
-msgid "Configuration"
-msgstr "ترتيب"
-
-msgid "Content"
-msgstr "المحتوى"
-
-msgid "Country Aliases"
-msgstr "الأسماء المستعارة للمدن"
-
-msgid "Job Sources"
-msgstr "مصادر العمل"
-
-msgid "Jobs Content"
-msgstr "محتوى الأعمال"
-
-msgid "About Content"
-msgstr "عن المحتوى"
-
-msgid "Videos"
-msgstr "فيديو"
-
-msgid "Contact Us Content"
-msgstr "للتواصل معنا - المحتوى "
-
-msgid "Missions Content"
-msgstr "مهمتنا - المحتوى "
-
-msgid "Terms & Conditions"
-msgstr "الأحكام والشروط"
-
-msgid "U-Reporters Content"
-msgstr "المحتوى المضاف من قبل المشاركين في يوريبورت U-REPORT"
-
-msgid "Join &amp; Engage Content"
-msgstr "شارك  &  - محتوى تفاعلي "
-
-msgid "Join Steps Content"
-msgstr "خطوات المشاركة - المحتوى "
-
-msgid "Additional Menu"
-msgstr "القائمة الإضافية"
-
-msgid "SELECT YOUR COUNTRY"
-msgstr "اختر بلدك"
-
-msgid "Join Now"
-msgstr "انضم الآن!"
-
-msgid "READ MORE"
-msgstr "إقرأ المزيد "
-
-msgid "EXPLORE ENGAGEMENT"
-msgstr " استكشف كيفية المشاركة"
-
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"لإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
-
-msgid "Follow this step by step guide"
-msgstr "تابع هذا الدليل خطوة بخطوة"
-
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
-"\n"
-"        <div>بعد إنشاء التطبيق المصغر، قم بنسخ هويته من عنوان الموقع كما هو موضح في</div>\n"
-"      "
-
-msgid "Back"
-msgstr "العودة"
-
 msgid "Select bots"
-msgstr ""
-
-msgid "View public page"
-msgstr ""
-
-msgid "LATEST NOTIFICATIONS"
-msgstr ""
-
-msgid "Backends"
 msgstr ""
 
 msgid "Add os Select tags"
 msgstr ""
 
-#, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-msgid "+ New Poll"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "Poll Questions"
-msgid "%(counter)s poll question"
-msgid_plural "%(counter)s poll questions"
-msgstr[0] "أسئلة الإستطلاع "
-msgstr[1] "أسئلة الإستطلاع "
-msgstr[2] "أسئلة الإستطلاع "
-msgstr[3] "أسئلة الإستطلاع "
-msgstr[4] "أسئلة الإستطلاع "
-msgstr[5] "أسئلة الإستطلاع "
-
-msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
-
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
-
-msgid "Main poll syncs scheduled every 20min"
-msgstr ""
-
-msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "Poll syncs scheduled every 24h"
-msgstr ""
-
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
-msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
-
-#, fuzzy
-#| msgid "View full results"
-msgid "Preview results"
-msgstr "إظهار النتائج كاملة"
-
-msgid "Refresh Results"
-msgstr ""
-
-msgid "Partners"
-msgstr ""
-
-msgid "MORE POLLS"
-msgstr "المزيد من إستطلاعات الرأي العام والمسوحات"
-
-msgid "FILTER"
-msgstr "صنف "
-
-msgid "All"
-msgstr "الجميع"
-
-msgid "POLL LIST"
-msgstr "قائمة الإستطلاعات والمسوحات المتوافرة "
-
-msgid "All polls from most recent to oldest"
-msgstr "جميع الإستطلاعات المتوافرة من الأحدث وحتى الأقدم "
-
-msgid "ARCHIVED STORIES"
-msgstr "أرشيف المقالات "
-
-msgid "LIST"
-msgstr "القائمة "
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "LATEST OPINION"
-msgstr "آخر استطلاعات الرأي"
-
-msgid "VIEW FULL RESULTS"
-msgstr "عرض نتائج الاستطلاع"
-
-msgid "U-REPORTERS IN"
-msgstr "المشاركين في يو-ريبورت في"
-
-msgid "PARTNERING WITH"
-msgstr ""
-
-msgid "U-REPORTERS"
-msgstr ""
-
-msgid "IN"
-msgstr ""
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr ""
-
-msgid "AGES"
-msgstr "الأعمار"
-
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
-msgstr ""
-
 msgid "FEATURED STORY"
 msgstr "مقالة إستثنائية "
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "نحن جزء من منصة عالمية تعمل على تغيير حياة الشباب في جميع أنحاء العالم"
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr " عن القضايا التي تهمهم إعرف أكثر كيف يقوم يو-ريبورت بتمكين الشباب للتواصل والتعبير "
-
-msgid "LEARN MORE"
-msgstr "إعرف أكثر"
-
-msgid "Visit"
-msgstr "زيارة"
-
-msgid "How would you like to join?"
-msgstr "كيف تريد الانضمام"
-
-msgid "Text"
-msgstr ""
-
-msgid "PAGE"
-msgstr ""
+msgid "READ MORE"
+msgstr "إقرأ المزيد "
 
 msgid "SEARCH"
 msgstr "ابحث "
-
-msgid "No results found"
-msgstr ""
-
-msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
-
-msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
-
-msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSES"
-msgid "RESPONDERS"
-msgstr "ستجابات"
-
-msgid "RESPONSE RATE"
-msgstr "نسبة التجاوب "
-
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
-msgid "TOTAL RESPONDERS"
-msgstr "مجموع الردود"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
 
-msgid "ALL"
-msgstr ""
-
-msgid "AGE"
-msgstr "العمر "
-
-msgid "GENDER"
-msgstr "الجنس "
-
-msgid "LOCATION"
-msgstr ""
-
-msgid "Written by:"
-msgstr ""
-
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "JOIN U-REPORT"
-msgid "REPORT"
-msgstr "شارك في يوريبورت U-REPORT الآن "
-
-msgid "STORY"
-msgstr "قصة"
-
-msgid "Download Report"
-msgstr ""
+msgid "All"
+msgstr "الجميع"
 
 msgid "Even"
 msgstr "حتى"
@@ -1110,45 +739,6 @@ msgstr "من"
 
 msgid "the"
 msgstr "ال"
-
-msgid "OVERALL STATISTICS"
-msgstr "إحصائيات عامة"
-
-msgid "THIS YEAR"
-msgstr "السنة الحالية "
-
-msgid "AVG RESPONSE RATE"
-msgstr "متوسط ​​معدل الاستجابة"
-
-msgid "U-REPORTERS BY REGION"
-msgstr ""
-
-msgid "FILTER RESULTS"
-msgstr "تصفية النتائج"
-
-msgid "Charts only visible for logged in admins"
-msgstr ""
-
-msgid "Export and Share"
-msgstr ""
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr ""
-
-msgid "SELECT LANGUAGE"
-msgstr ""
-
-msgid "SELECT COUNTRY"
-msgstr ""
-
-msgid "Custom pages"
-msgstr ""
-
-msgid "Landing pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "بالأرقام – احصائيات مراسلي يو-ريبورت"
 
 msgid "Polled"
 msgstr ""
@@ -1228,13 +818,6 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-
 #, fuzzy, python-format
 #| msgid "Poll Questions"
 msgid "%(counter)s result"
@@ -1248,36 +831,6 @@ msgstr[5] "أسئلة الإستطلاع "
 
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Enter Dashboard"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-
-msgid "+ New Story"
 msgstr ""
 
 #, python-format
@@ -2004,6 +1557,250 @@ msgstr "هل هذه المقالة إستثنائية أو مميزة "
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+#~ msgid "Gallery"
+#~ msgstr "معرض الصور "
+
+#~ msgid "Add Image"
+#~ msgstr "إضافة صورة "
+
+#~ msgid "Edit"
+#~ msgstr "تعديل "
+
+#, fuzzy
+#~| msgid "Manage Users"
+#~ msgid "Manage Backends"
+#~ msgstr "إدارة حسابات المستخدمين "
+
+#~ msgid "Manage Users"
+#~ msgstr "إدارة حسابات المستخدمين "
+
+#~ msgid "Accounts"
+#~ msgstr "حسابات "
+
+#~ msgid "Admins"
+#~ msgstr "المشرف "
+
+#~ msgid "You must have at least one administator"
+#~ msgstr "يجب أن يكون لديك مشرف واحد على الأقل"
+
+#~ msgid "Logout"
+#~ msgstr "تسجيل الخروج "
+
+#~ msgid "Opinions"
+#~ msgstr "استطلاع الرأي"
+
+#~ msgid "Users"
+#~ msgstr "المستخدمين"
+
+#~ msgid "Jobs"
+#~ msgstr "الأعمال"
+
+#~ msgid "News Items"
+#~ msgstr "مواد الأخبار"
+
+#~ msgid "Orgs"
+#~ msgstr "المؤسسات"
+
+#~ msgid "Images"
+#~ msgstr "الصور"
+
+#~ msgid "About"
+#~ msgstr "نبذة عن "
+
+#~ msgid "Engagement"
+#~ msgstr "مشاركة"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Reports"
+#~ msgstr "يو-ريبورت"
+
+#~ msgid "Category Images"
+#~ msgstr "صور الفئة"
+
+#~ msgid "U-Report"
+#~ msgstr "يو-ريبورت"
+
+#~ msgid "Admin"
+#~ msgstr "مسؤول"
+
+#~ msgid "Configuration"
+#~ msgstr "ترتيب"
+
+#~ msgid "Content"
+#~ msgstr "المحتوى"
+
+#~ msgid "Country Aliases"
+#~ msgstr "الأسماء المستعارة للمدن"
+
+#~ msgid "Job Sources"
+#~ msgstr "مصادر العمل"
+
+#~ msgid "Jobs Content"
+#~ msgstr "محتوى الأعمال"
+
+#~ msgid "About Content"
+#~ msgstr "عن المحتوى"
+
+#~ msgid "Videos"
+#~ msgstr "فيديو"
+
+#~ msgid "Contact Us Content"
+#~ msgstr "للتواصل معنا - المحتوى "
+
+#~ msgid "Missions Content"
+#~ msgstr "مهمتنا - المحتوى "
+
+#~ msgid "Terms & Conditions"
+#~ msgstr "الأحكام والشروط"
+
+#~ msgid "U-Reporters Content"
+#~ msgstr "المحتوى المضاف من قبل المشاركين في يوريبورت U-REPORT"
+
+#~ msgid "Join &amp; Engage Content"
+#~ msgstr "شارك  &  - محتوى تفاعلي "
+
+#~ msgid "Join Steps Content"
+#~ msgstr "خطوات المشاركة - المحتوى "
+
+#~ msgid "Additional Menu"
+#~ msgstr "القائمة الإضافية"
+
+#~ msgid "SELECT YOUR COUNTRY"
+#~ msgstr "اختر بلدك"
+
+#~ msgid "Join Now"
+#~ msgstr "انضم الآن!"
+
+#~ msgid "EXPLORE ENGAGEMENT"
+#~ msgstr " استكشف كيفية المشاركة"
+
+#~ msgid ""
+#~ "\n"
+#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "لإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
+
+#~ msgid "Follow this step by step guide"
+#~ msgstr "تابع هذا الدليل خطوة بخطوة"
+
+#~ msgid ""
+#~ "\n"
+#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <div>بعد إنشاء التطبيق المصغر، قم بنسخ هويته من عنوان الموقع كما هو موضح في</div>\n"
+#~ "      "
+
+#~ msgid "Back"
+#~ msgstr "العودة"
+
+#, fuzzy, python-format
+#~| msgid "Poll Questions"
+#~ msgid "%(counter)s poll question"
+#~ msgid_plural "%(counter)s poll questions"
+#~ msgstr[0] "أسئلة الإستطلاع "
+#~ msgstr[1] "أسئلة الإستطلاع "
+#~ msgstr[2] "أسئلة الإستطلاع "
+#~ msgstr[3] "أسئلة الإستطلاع "
+#~ msgstr[4] "أسئلة الإستطلاع "
+#~ msgstr[5] "أسئلة الإستطلاع "
+
+#, fuzzy
+#~| msgid "View full results"
+#~ msgid "Preview results"
+#~ msgstr "إظهار النتائج كاملة"
+
+#~ msgid "MORE POLLS"
+#~ msgstr "المزيد من إستطلاعات الرأي العام والمسوحات"
+
+#~ msgid "FILTER"
+#~ msgstr "صنف "
+
+#~ msgid "POLL LIST"
+#~ msgstr "قائمة الإستطلاعات والمسوحات المتوافرة "
+
+#~ msgid "All polls from most recent to oldest"
+#~ msgstr "جميع الإستطلاعات المتوافرة من الأحدث وحتى الأقدم "
+
+#~ msgid "ARCHIVED STORIES"
+#~ msgstr "أرشيف المقالات "
+
+#~ msgid "LIST"
+#~ msgstr "القائمة "
+
+#~ msgid "LATEST OPINION"
+#~ msgstr "آخر استطلاعات الرأي"
+
+#~ msgid "VIEW FULL RESULTS"
+#~ msgstr "عرض نتائج الاستطلاع"
+
+#~ msgid "U-REPORTERS IN"
+#~ msgstr "المشاركين في يو-ريبورت في"
+
+#~ msgid "AGES"
+#~ msgstr "الأعمار"
+
+#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
+#~ msgstr "نحن جزء من منصة عالمية تعمل على تغيير حياة الشباب في جميع أنحاء العالم"
+
+#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+#~ msgstr " عن القضايا التي تهمهم إعرف أكثر كيف يقوم يو-ريبورت بتمكين الشباب للتواصل والتعبير "
+
+#~ msgid "LEARN MORE"
+#~ msgstr "إعرف أكثر"
+
+#~ msgid "Visit"
+#~ msgstr "زيارة"
+
+#~ msgid "How would you like to join?"
+#~ msgstr "كيف تريد الانضمام"
+
+#, fuzzy
+#~| msgid "RESPONSES"
+#~ msgid "RESPONDERS"
+#~ msgstr "ستجابات"
+
+#~ msgid "RESPONSE RATE"
+#~ msgstr "نسبة التجاوب "
+
+#, fuzzy
+#~| msgid "TOTAL RESPONSES"
+#~ msgid "TOTAL RESPONDERS"
+#~ msgstr "مجموع الردود"
+
+#~ msgid "AGE"
+#~ msgstr "العمر "
+
+#~ msgid "GENDER"
+#~ msgstr "الجنس "
+
+#, fuzzy
+#~| msgid "JOIN U-REPORT"
+#~ msgid "REPORT"
+#~ msgstr "شارك في يوريبورت U-REPORT الآن "
+
+#~ msgid "STORY"
+#~ msgstr "قصة"
+
+#~ msgid "OVERALL STATISTICS"
+#~ msgstr "إحصائيات عامة"
+
+#~ msgid "THIS YEAR"
+#~ msgstr "السنة الحالية "
+
+#~ msgid "AVG RESPONSE RATE"
+#~ msgstr "متوسط ​​معدل الاستجابة"
+
+#~ msgid "FILTER RESULTS"
+#~ msgstr "تصفية النتائج"
+
+#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
+#~ msgstr "بالأرقام – احصائيات مراسلي يو-ريبورت"
 
 #, fuzzy
 #~| msgid "The title for this item"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-01-24 08:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -114,18 +114,6 @@ msgstr "Prioriteringen av denne innholdsblokken, høyest prioritet vises først 
 
 msgid "The organization this content block belongs to"
 msgstr "Organisasjonen denne innholdsblokken tilhører"
-
-msgid "Gallery"
-msgstr "Galleri"
-
-msgid "Add Image"
-msgstr "Legg til bilde"
-
-msgid "Search"
-msgstr "Søk"
-
-msgid "Add"
-msgstr "Legg til"
 
 msgid "Content Types"
 msgstr "Innholdstyper"
@@ -309,27 +297,6 @@ msgstr "Du er invitert til å bli med i {{org.navn}}."
 msgid "Click this link to join"
 msgstr "Klikk her for å bli med"
 
-msgid "Edit"
-msgstr "Rediger"
-
-msgid "Manage Backends"
-msgstr "Administrer Backends"
-
-msgid "Manage Users"
-msgstr "Administrer Brukere"
-
-msgid "Accounts"
-msgstr "Kontoer"
-
-msgid "Admins"
-msgstr "Administratorer"
-
-msgid "Remove"
-msgstr "Fjern"
-
-msgid "You must have at least one administator"
-msgstr "Du må ha minst én administrator"
-
 msgid "Select your Organization"
 msgstr "Velg din Organisasjon"
 
@@ -460,6 +427,15 @@ msgstr "Dersom du sletter dette, er det borte for alltid. Denne operasjonen er i
 
 msgid "Cancel"
 msgstr "Avbryt"
+
+msgid "Remove"
+msgstr "Fjern"
+
+msgid "Search"
+msgstr "Søk"
+
+msgid "Add"
+msgstr "Legg til"
 
 #, python-format
 msgid ""
@@ -698,366 +674,27 @@ msgstr "Ditt nye %s har blitt opprettet."
 msgid "Import %s"
 msgstr "Importer %s"
 
-msgid "Back to Website"
-msgstr "Tilbake til nettsiden"
-
-msgid "Welcome, "
-msgstr "Velkommen, "
-
-msgid "Logout"
-msgstr "Logg ut"
-
-msgid "Opinions"
-msgstr "Meninger"
-
-msgid "Bots"
-msgstr ""
-
-msgid "Users"
-msgstr "Brukere"
-
-msgid "Settings"
-msgstr "Innstillinger"
-
-msgid "Pages"
-msgstr "Sider"
-
-msgid "Landing Pages"
-msgstr ""
-
-msgid "Jobs"
-msgstr "Jobber"
-
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
-
-msgid "Categories Images"
-msgstr "Kategori Bilder"
-
-msgid "News Items"
-msgstr "Nyheter "
-
-msgid "Orgs"
-msgstr "Organisasjoner"
-
-msgid "Images"
-msgstr "Bilder"
-
-msgid "About"
-msgstr "Om oss"
-
-msgid "Engagement"
-msgstr "Engasjement"
-
-#, fuzzy
-#| msgid "Reporters"
-msgid "Reports"
-msgstr "U-Reporters"
-
-msgid "Category Images"
-msgstr "Bildekategorier"
-
-msgid "+ New "
-msgstr "+ Ny"
-
-msgid "+ New Page"
-msgstr "+ Ny side"
-
-msgid "U-Report"
-msgstr "U-Report"
-
-msgid "Admin"
-msgstr "Admin"
-
-msgid "Configuration"
-msgstr "Konfigurasjon"
-
-msgid "Content"
-msgstr "Innhold"
-
-msgid "Country Aliases"
-msgstr "Landaliaser"
-
-msgid "Job Sources"
-msgstr "Jobbkilder"
-
-msgid "Jobs Content"
-msgstr "Jobbinnhold"
-
-msgid "About Content"
-msgstr "Om innhold"
-
-msgid "Videos"
-msgstr "Videoer"
-
-msgid "Contact Us Content"
-msgstr "Kontakt oss innhold"
-
-msgid "Missions Content"
-msgstr "Oppdragets innhold"
-
-msgid "Terms & Conditions"
-msgstr "Vilkår og betingelser"
-
-msgid "U-Reporters Content"
-msgstr "U-Reporters innhold"
-
-msgid "Join &amp; Engage Content"
-msgstr "Delta &amp; innholdsengasjement"
-
-msgid "Join Steps Content"
-msgstr "Delta Steg Innhold"
-
-msgid "Additional Menu"
-msgstr "Tilleggsmeny"
-
-msgid "SELECT YOUR COUNTRY"
-msgstr "VELG DITT LAND"
-
-msgid "Join Now"
-msgstr "Slik deltar du"
-
-msgid "READ MORE"
-msgstr "LES MER"
-
-msgid "EXPLORE ENGAGEMENT"
-msgstr "UTFORSK ENGASJEMENT"
-
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"For å legge til Twitter jobbkilde må du ha en widget id fra twitter."
-
-msgid "Follow this step by step guide"
-msgstr "Følg denne steg for steg manualen"
-
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
-"\n"
-"<div>Etter du har laget din widget, kopiér widget id fra url som vist på</div>"
-
-msgid "Back"
-msgstr "Tilbake"
-
 msgid "Select bots"
 msgstr ""
-
-msgid "View public page"
-msgstr ""
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "SISTE VARSLER"
-
-msgid "Backends"
-msgstr "Backends"
 
 msgid "Add os Select tags"
 msgstr ""
 
-#, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] "Det er nå %(counter)s ny undersøkelse som synkroniseres. Resultatene blir vist på den offentlige siden når synkroniseringen er fullført."
-msgstr[1] "Det er nå %(counter)s nye undersøkelser som synkroniseres. Resultatene blir vist på den offentlige siden når synkroniseringen er fullført."
-
-msgid "+ New Poll"
-msgstr "+ Ny undersøkelse"
-
-#, python-format
-msgid "%(counter)s poll question"
-msgid_plural "%(counter)s poll questions"
-msgstr[0] "%(counter)s undersøkelsespørsmål"
-msgstr[1] "%(counter)s undersøkelsesspørsmål"
-
-msgid "New poll initial syncs scheduled every 10min"
-msgstr "Nye undersøkelser synkroniseres hvert 10 minutt"
-
-#, fuzzy
-#| msgid "No longer scheduling syncs, runs archived"
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr "Planlegger ikke lenger synkroniseringer, sykroniserte løp er arkivert"
-
-#, fuzzy
-#| msgid "Main poll syncs scheduled every 10min"
-msgid "Main poll syncs scheduled every 20min"
-msgstr "Hovedundersøkelsen synkroniseres hvert 10 minutt"
-
-msgid "Recent poll syncs scheduled every 60min"
-msgstr "Nylige undersøkelser synkronieres hvert 60 minutt"
-
-msgid "Poll syncs scheduled every 24h"
-msgstr "Undersøkelsen synkroniseres som helhet hver 24 time"
-
-msgid "Not scheduling syncs, not active"
-msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
-
-msgid "Not scheduling syncs, no flow for poll"
-msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for undersøkelsen"
-
-#, fuzzy
-#| msgid "Previous"
-msgid "Preview results"
-msgstr "Forrige"
-
-msgid "Refresh Results"
-msgstr "Oppdater resultatene"
-
-msgid "Partners"
-msgstr ""
-
-msgid "MORE POLLS"
-msgstr "FLERE UNDERSØKELSER"
-
-msgid "FILTER"
-msgstr "FILTER"
-
-msgid "All"
-msgstr "Alle"
-
-msgid "POLL LIST"
-msgstr "LISTE OVER UNDERSØKELSER "
-
-msgid "All polls from most recent to oldest"
-msgstr "Alle undersøkelser er rangert nyest til eldst "
-
-msgid "ARCHIVED STORIES"
-msgstr "ARKIVERTE HISTORIER"
-
-msgid "LIST"
-msgstr "LISTE"
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "LATEST OPINION"
-msgstr "NYESTE ALTERNATIV  "
-
-msgid "VIEW FULL RESULTS"
-msgstr "VIS ALLE RESULTATER"
-
-msgid "U-REPORTERS IN"
-msgstr "U-REPORTERS I"
-
-msgid "PARTNERING WITH"
-msgstr "SAMARBEIDER MED"
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTERS"
-
-msgid "IN"
-msgstr "I"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "LAND VERDEN OVER"
-
-msgid "AGES"
-msgstr "ALDER"
-
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Bli en U-Reporter, din stemme betyr noe. "
-
 msgid "FEATURED STORY"
 msgstr "FEATURE-ARTIKKEL"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Vi er en del av en global plattform som har som målsetting å endre livene til barn og unge verden over."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Les mer om hvordan U-Report engasjerer og kobler unge mennesker til å si sin mening i saker som betyr noe for dem."
-
-msgid "LEARN MORE"
+msgid "READ MORE"
 msgstr "LES MER"
-
-msgid "Visit"
-msgstr "Besøk"
-
-msgid "How would you like to join?"
-msgstr "Hvordan ønsker du å bli med?"
-
-msgid "Text"
-msgstr "Tekst"
-
-msgid "PAGE"
-msgstr ""
 
 msgid "SEARCH"
 msgstr "SØK"
-
-msgid "No results found"
-msgstr "Ingen resultater"
-
-msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
-
-msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
-
-msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSES"
-msgid "RESPONDERS"
-msgstr "SVAR"
-
-msgid "RESPONSE RATE"
-msgstr "SVARPROSENT"
-
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
-msgid "TOTAL RESPONDERS"
-msgstr "TOTALT ANTALL SVAR"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s har svart av %(polled)s spurte"
 
-msgid "ALL"
-msgstr "ALLE"
-
-msgid "AGE"
-msgstr "ALDER"
-
-msgid "GENDER"
-msgstr "KJØNNSIDENTITET"
-
-msgid "LOCATION"
-msgstr "BOSTED"
-
-msgid "Written by:"
-msgstr "Skrevet av:"
-
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS"
-msgid "REPORT"
-msgstr "U-REPORTERS"
-
-msgid "STORY"
-msgstr ""
-
-msgid "Download Report"
-msgstr ""
+msgid "All"
+msgstr "Alle"
 
 msgid "Even"
 msgstr "Til og med"
@@ -1105,45 +742,6 @@ msgstr "av"
 
 msgid "the"
 msgstr "den"
-
-msgid "OVERALL STATISTICS"
-msgstr "SAMLET STATISTIKK"
-
-msgid "THIS YEAR"
-msgstr "DETTE ÅRET"
-
-msgid "AVG RESPONSE RATE"
-msgstr "GJENNOMSNITTLIG SVARPROSENT"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS I REGIONEN"
-
-msgid "FILTER RESULTS"
-msgstr "FILTRER SVAR"
-
-msgid "Charts only visible for logged in admins"
-msgstr ""
-
-msgid "Export and Share"
-msgstr "Eksporter og del"
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "Har du lyst til å fortelle vennene dine om dette? Da kan du enkelt dele dette bilde på sosiale medier!"
-
-msgid "SELECT LANGUAGE"
-msgstr "VELG SPRÅK"
-
-msgid "SELECT COUNTRY"
-msgstr "VELG LAND"
-
-msgid "Custom pages"
-msgstr "Egendefinerte sider"
-
-msgid "Landing pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "Se hvor mange barn og unge som ønsker at vi skal høre akkurat deres stemme som bidrar til en positiv endring."
 
 msgid "Polled"
 msgstr "Spurte"
@@ -1224,15 +822,6 @@ msgid "Dec"
 msgstr "Des"
 
 #, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-"Er du sikker på at du vil fjerne <strong>%(object)s</strong>?"
-
-#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] "%(counter)s resultat"
@@ -1241,42 +830,6 @@ msgstr[1] "%(counter)s resultater"
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Resultater %(start)s-%(end)s av %(count)s"
-
-msgid "Error"
-msgstr "Feilmelding"
-
-msgid "Enter Dashboard"
-msgstr "Gå til dashbord"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Beklager, du kan ikke logge inn fordi vi har registerert %(failed_login_limit)s ukorrekte innloggingsforsøk. "
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Passordet ditt er utdatert. </strong>Du må endre ditt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene. "
-
-msgid "+ New Story"
-msgstr "+ Ny historie"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1998,6 +1551,396 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#~ msgid "Gallery"
+#~ msgstr "Galleri"
+
+#~ msgid "Add Image"
+#~ msgstr "Legg til bilde"
+
+#~ msgid "Edit"
+#~ msgstr "Rediger"
+
+#~ msgid "Manage Backends"
+#~ msgstr "Administrer Backends"
+
+#~ msgid "Manage Users"
+#~ msgstr "Administrer Brukere"
+
+#~ msgid "Accounts"
+#~ msgstr "Kontoer"
+
+#~ msgid "Admins"
+#~ msgstr "Administratorer"
+
+#~ msgid "You must have at least one administator"
+#~ msgstr "Du må ha minst én administrator"
+
+#~ msgid "Back to Website"
+#~ msgstr "Tilbake til nettsiden"
+
+#~ msgid "Welcome, "
+#~ msgstr "Velkommen, "
+
+#~ msgid "Logout"
+#~ msgstr "Logg ut"
+
+#~ msgid "Opinions"
+#~ msgstr "Meninger"
+
+#~ msgid "Users"
+#~ msgstr "Brukere"
+
+#~ msgid "Settings"
+#~ msgstr "Innstillinger"
+
+#~ msgid "Pages"
+#~ msgstr "Sider"
+
+#~ msgid "Jobs"
+#~ msgstr "Jobber"
+
+#~ msgid "Categories Images"
+#~ msgstr "Kategori Bilder"
+
+#~ msgid "News Items"
+#~ msgstr "Nyheter "
+
+#~ msgid "Orgs"
+#~ msgstr "Organisasjoner"
+
+#~ msgid "Images"
+#~ msgstr "Bilder"
+
+#~ msgid "About"
+#~ msgstr "Om oss"
+
+#~ msgid "Engagement"
+#~ msgstr "Engasjement"
+
+#, fuzzy
+#~| msgid "Reporters"
+#~ msgid "Reports"
+#~ msgstr "U-Reporters"
+
+#~ msgid "Category Images"
+#~ msgstr "Bildekategorier"
+
+#~ msgid "+ New "
+#~ msgstr "+ Ny"
+
+#~ msgid "+ New Page"
+#~ msgstr "+ Ny side"
+
+#~ msgid "U-Report"
+#~ msgstr "U-Report"
+
+#~ msgid "Admin"
+#~ msgstr "Admin"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfigurasjon"
+
+#~ msgid "Content"
+#~ msgstr "Innhold"
+
+#~ msgid "Country Aliases"
+#~ msgstr "Landaliaser"
+
+#~ msgid "Job Sources"
+#~ msgstr "Jobbkilder"
+
+#~ msgid "Jobs Content"
+#~ msgstr "Jobbinnhold"
+
+#~ msgid "About Content"
+#~ msgstr "Om innhold"
+
+#~ msgid "Videos"
+#~ msgstr "Videoer"
+
+#~ msgid "Contact Us Content"
+#~ msgstr "Kontakt oss innhold"
+
+#~ msgid "Missions Content"
+#~ msgstr "Oppdragets innhold"
+
+#~ msgid "Terms & Conditions"
+#~ msgstr "Vilkår og betingelser"
+
+#~ msgid "U-Reporters Content"
+#~ msgstr "U-Reporters innhold"
+
+#~ msgid "Join &amp; Engage Content"
+#~ msgstr "Delta &amp; innholdsengasjement"
+
+#~ msgid "Join Steps Content"
+#~ msgstr "Delta Steg Innhold"
+
+#~ msgid "Additional Menu"
+#~ msgstr "Tilleggsmeny"
+
+#~ msgid "SELECT YOUR COUNTRY"
+#~ msgstr "VELG DITT LAND"
+
+#~ msgid "Join Now"
+#~ msgstr "Slik deltar du"
+
+#~ msgid "EXPLORE ENGAGEMENT"
+#~ msgstr "UTFORSK ENGASJEMENT"
+
+#~ msgid ""
+#~ "\n"
+#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "For å legge til Twitter jobbkilde må du ha en widget id fra twitter."
+
+#~ msgid "Follow this step by step guide"
+#~ msgstr "Følg denne steg for steg manualen"
+
+#~ msgid ""
+#~ "\n"
+#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<div>Etter du har laget din widget, kopiér widget id fra url som vist på</div>"
+
+#~ msgid "Back"
+#~ msgstr "Tilbake"
+
+#~ msgid "LATEST NOTIFICATIONS"
+#~ msgstr "SISTE VARSLER"
+
+#~ msgid "Backends"
+#~ msgstr "Backends"
+
+#, python-format
+#~ msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+#~ msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+#~ msgstr[0] "Det er nå %(counter)s ny undersøkelse som synkroniseres. Resultatene blir vist på den offentlige siden når synkroniseringen er fullført."
+#~ msgstr[1] "Det er nå %(counter)s nye undersøkelser som synkroniseres. Resultatene blir vist på den offentlige siden når synkroniseringen er fullført."
+
+#~ msgid "+ New Poll"
+#~ msgstr "+ Ny undersøkelse"
+
+#, python-format
+#~ msgid "%(counter)s poll question"
+#~ msgid_plural "%(counter)s poll questions"
+#~ msgstr[0] "%(counter)s undersøkelsespørsmål"
+#~ msgstr[1] "%(counter)s undersøkelsesspørsmål"
+
+#~ msgid "New poll initial syncs scheduled every 10min"
+#~ msgstr "Nye undersøkelser synkroniseres hvert 10 minutt"
+
+#, fuzzy
+#~| msgid "No longer scheduling syncs, runs archived"
+#~ msgid "No longer scheduling syncs for old polls, runs archived"
+#~ msgstr "Planlegger ikke lenger synkroniseringer, sykroniserte løp er arkivert"
+
+#, fuzzy
+#~| msgid "Main poll syncs scheduled every 10min"
+#~ msgid "Main poll syncs scheduled every 20min"
+#~ msgstr "Hovedundersøkelsen synkroniseres hvert 10 minutt"
+
+#~ msgid "Recent poll syncs scheduled every 60min"
+#~ msgstr "Nylige undersøkelser synkronieres hvert 60 minutt"
+
+#~ msgid "Poll syncs scheduled every 24h"
+#~ msgstr "Undersøkelsen synkroniseres som helhet hver 24 time"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
+
+#~ msgid "Not scheduling syncs, no flow for poll"
+#~ msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for undersøkelsen"
+
+#, fuzzy
+#~| msgid "Previous"
+#~ msgid "Preview results"
+#~ msgstr "Forrige"
+
+#~ msgid "Refresh Results"
+#~ msgstr "Oppdater resultatene"
+
+#~ msgid "MORE POLLS"
+#~ msgstr "FLERE UNDERSØKELSER"
+
+#~ msgid "FILTER"
+#~ msgstr "FILTER"
+
+#~ msgid "POLL LIST"
+#~ msgstr "LISTE OVER UNDERSØKELSER "
+
+#~ msgid "All polls from most recent to oldest"
+#~ msgstr "Alle undersøkelser er rangert nyest til eldst "
+
+#~ msgid "ARCHIVED STORIES"
+#~ msgstr "ARKIVERTE HISTORIER"
+
+#~ msgid "LIST"
+#~ msgstr "LISTE"
+
+#~ msgid "LATEST OPINION"
+#~ msgstr "NYESTE ALTERNATIV  "
+
+#~ msgid "VIEW FULL RESULTS"
+#~ msgstr "VIS ALLE RESULTATER"
+
+#~ msgid "U-REPORTERS IN"
+#~ msgstr "U-REPORTERS I"
+
+#~ msgid "PARTNERING WITH"
+#~ msgstr "SAMARBEIDER MED"
+
+#~ msgid "U-REPORTERS"
+#~ msgstr "U-REPORTERS"
+
+#~ msgid "IN"
+#~ msgstr "I"
+
+#~ msgid "COUNTRIES WORLDWIDE"
+#~ msgstr "LAND VERDEN OVER"
+
+#~ msgid "AGES"
+#~ msgstr "ALDER"
+
+#~ msgid "Join U-Report, Your voice matters."
+#~ msgstr "Bli en U-Reporter, din stemme betyr noe. "
+
+#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
+#~ msgstr "Vi er en del av en global plattform som har som målsetting å endre livene til barn og unge verden over."
+
+#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+#~ msgstr "Les mer om hvordan U-Report engasjerer og kobler unge mennesker til å si sin mening i saker som betyr noe for dem."
+
+#~ msgid "LEARN MORE"
+#~ msgstr "LES MER"
+
+#~ msgid "Visit"
+#~ msgstr "Besøk"
+
+#~ msgid "How would you like to join?"
+#~ msgstr "Hvordan ønsker du å bli med?"
+
+#~ msgid "Text"
+#~ msgstr "Tekst"
+
+#~ msgid "No results found"
+#~ msgstr "Ingen resultater"
+
+#, fuzzy
+#~| msgid "RESPONSES"
+#~ msgid "RESPONDERS"
+#~ msgstr "SVAR"
+
+#~ msgid "RESPONSE RATE"
+#~ msgstr "SVARPROSENT"
+
+#, fuzzy
+#~| msgid "TOTAL RESPONSES"
+#~ msgid "TOTAL RESPONDERS"
+#~ msgstr "TOTALT ANTALL SVAR"
+
+#~ msgid "ALL"
+#~ msgstr "ALLE"
+
+#~ msgid "AGE"
+#~ msgstr "ALDER"
+
+#~ msgid "GENDER"
+#~ msgstr "KJØNNSIDENTITET"
+
+#~ msgid "LOCATION"
+#~ msgstr "BOSTED"
+
+#~ msgid "Written by:"
+#~ msgstr "Skrevet av:"
+
+#, fuzzy
+#~| msgid "U-REPORTERS"
+#~ msgid "REPORT"
+#~ msgstr "U-REPORTERS"
+
+#~ msgid "OVERALL STATISTICS"
+#~ msgstr "SAMLET STATISTIKK"
+
+#~ msgid "THIS YEAR"
+#~ msgstr "DETTE ÅRET"
+
+#~ msgid "AVG RESPONSE RATE"
+#~ msgstr "GJENNOMSNITTLIG SVARPROSENT"
+
+#~ msgid "U-REPORTERS BY REGION"
+#~ msgstr "U-REPORTERS I REGIONEN"
+
+#~ msgid "FILTER RESULTS"
+#~ msgstr "FILTRER SVAR"
+
+#~ msgid "Export and Share"
+#~ msgstr "Eksporter og del"
+
+#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+#~ msgstr "Har du lyst til å fortelle vennene dine om dette? Da kan du enkelt dele dette bilde på sosiale medier!"
+
+#~ msgid "SELECT LANGUAGE"
+#~ msgstr "VELG SPRÅK"
+
+#~ msgid "SELECT COUNTRY"
+#~ msgstr "VELG LAND"
+
+#~ msgid "Custom pages"
+#~ msgstr "Egendefinerte sider"
+
+#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
+#~ msgstr "Se hvor mange barn og unge som ønsker at vi skal høre akkurat deres stemme som bidrar til en positiv endring."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ "Er du sikker på at du vil fjerne <strong>%(object)s</strong>?"
+
+#~ msgid "Error"
+#~ msgstr "Feilmelding"
+
+#~ msgid "Enter Dashboard"
+#~ msgstr "Gå til dashbord"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Beklager, du kan ikke logge inn fordi vi har registerert %(failed_login_limit)s ukorrekte innloggingsforsøk. "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Passordet ditt er utdatert. </strong>Du må endre ditt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene. "
+
+#~ msgid "+ New Story"
+#~ msgstr "+ Ny historie"
 
 #~ msgid "Photos"
 #~ msgstr "Bilder"

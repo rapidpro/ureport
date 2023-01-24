@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-01-24 08:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,18 +111,6 @@ msgstr "Ushbu to'plam uchun ustivorlik, ustivorligi yuqori bo'lgan to'plamlar av
 
 msgid "The organization this content block belongs to"
 msgstr "Mazkur kontent to'plami mansub bo'lgan tashkilot"
-
-msgid "Gallery"
-msgstr "Galereya"
-
-msgid "Add Image"
-msgstr "Tasvir qo'shish"
-
-msgid "Search"
-msgstr "Izlash"
-
-msgid "Add"
-msgstr "Qo'shish"
 
 msgid "Content Types"
 msgstr "Kontent turlari"
@@ -307,27 +295,6 @@ msgstr "Siz {{tashk.nomi}}ga qo'shilishga taklif qilindingiz"
 msgid "Click this link to join"
 msgstr "Qo'shilish uchun bosing"
 
-msgid "Edit"
-msgstr "Tahrir qilish"
-
-msgid "Manage Backends"
-msgstr "Bekendlarni boshqarish"
-
-msgid "Manage Users"
-msgstr "Foydalanuvchilarni boshqarish"
-
-msgid "Accounts"
-msgstr "Akkauntlar"
-
-msgid "Admins"
-msgstr "Administratorlar"
-
-msgid "Remove"
-msgstr "Olib tashlash"
-
-msgid "You must have at least one administator"
-msgstr "Sizda eng kamida bitta administrator bo'lishi lozim"
-
 msgid "Select your Organization"
 msgstr "O'z tashkilotingizni tanlang"
 
@@ -459,6 +426,15 @@ msgstr "Olib tashlasangiz, uni keyin tiklab bo'lmaydi. Ushbu amaliyotni ortga qa
 
 msgid "Cancel"
 msgstr "Bekor qilish"
+
+msgid "Remove"
+msgstr "Olib tashlash"
+
+msgid "Search"
+msgstr "Izlash"
+
+msgid "Add"
+msgstr "Qo'shish"
 
 #, python-format
 msgid ""
@@ -696,363 +672,27 @@ msgstr "Sizning yangi %s giz yaratildi."
 msgid "Import %s"
 msgstr "%simporti"
 
-msgid "Back to Website"
-msgstr "Vebsaytga qaytish"
-
-msgid "Welcome, "
-msgstr "Xush kelibsiz, "
-
-msgid "Logout"
-msgstr "Chiqish"
-
-msgid "Opinions"
-msgstr "Mulohazalar"
-
-msgid "Bots"
-msgstr ""
-
-msgid "Users"
-msgstr "Foydalanuvchilar"
-
-msgid "Settings"
-msgstr "Sozlashlar"
-
-msgid "Pages"
-msgstr "Sahifalar"
-
-msgid "Landing Pages"
-msgstr ""
-
-msgid "Jobs"
-msgstr "Ish o'rinlari"
-
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
-
-msgid "Categories Images"
-msgstr "Toifalar tasvirlari"
-
-msgid "News Items"
-msgstr "Yangiliklar"
-
-msgid "Orgs"
-msgstr "Tashkr"
-
-msgid "Images"
-msgstr "Suratlar"
-
-msgid "About"
-msgstr "Haqida"
-
-msgid "Engagement"
-msgstr "Mashg'ullik"
-
-#, fuzzy
-#| msgid "Reporters"
-msgid "Reports"
-msgstr "Reportyorlar"
-
-msgid "Category Images"
-msgstr "Toifa tasvirlari"
-
-msgid "+ New "
-msgstr "+ Yangi"
-
-msgid "+ New Page"
-msgstr "+ Yangi Sahifa"
-
-msgid "U-Report"
-msgstr "U-Report"
-
-msgid "Admin"
-msgstr "Admin"
-
-msgid "Configuration"
-msgstr "Configurasiya"
-
-msgid "Content"
-msgstr "Kontent"
-
-msgid "Country Aliases"
-msgstr "Mamlakatning shartli nomi"
-
-msgid "Job Sources"
-msgstr "Ish o'rni manbalari"
-
-msgid "Jobs Content"
-msgstr "Ish o'rni kontenti"
-
-msgid "About Content"
-msgstr "Kontent to'g'risida"
-
-msgid "Videos"
-msgstr "Videolavhalar"
-
-msgid "Contact Us Content"
-msgstr "Biz bilan bog'laning kontenti"
-
-msgid "Missions Content"
-msgstr "Vazifalar kontenti"
-
-msgid "Terms & Conditions"
-msgstr "Shart-sharoitlar"
-
-msgid "U-Reporters Content"
-msgstr "U-Reportyorlar kontenti"
-
-msgid "Join &amp; Engage Content"
-msgstr "Join &amp; Jalb bo'lish kontenti"
-
-msgid "Join Steps Content"
-msgstr "Qo'shilish bosqichlari kontenti"
-
-msgid "Additional Menu"
-msgstr "Qo'shimcha menyu"
-
-msgid "SELECT YOUR COUNTRY"
-msgstr "MAMLAKATINGIZNI TANLANG"
-
-msgid "Join Now"
-msgstr "Hozir qo'shiling"
-
-msgid "READ MORE"
-msgstr "KO'PROQ O'QISH"
-
-msgid "EXPLORE ENGAGEMENT"
-msgstr "MASHG'ULLIK BAYONI"
-
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"Twitter ish o'rinlari manbaini qo'shmoqchi bo'lsangiz, siz twitterdan vidjet-ilova identifikatorini olishingiz kerak.\n"
-" "
-
-msgid "Follow this step by step guide"
-msgstr "Ushbu qadamma-qadam yo'rig'ga rioya eting"
-
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
-"\n"
-"<div>Vidjetni yaratganingizdan so'ng, vidjet identifikatori </div>\\da ko'rsatilganidek, url dan nusxa ko'chiring\n"
-" "
-
-msgid "Back"
-msgstr "Ortga"
-
 msgid "Select bots"
 msgstr ""
-
-msgid "View public page"
-msgstr ""
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "SO'NGGI BILDIRISHLAR"
-
-msgid "Backends"
-msgstr "Bekendlar"
 
 msgid "Add os Select tags"
 msgstr ""
 
-#, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
-
-msgid "+ New Poll"
-msgstr "+ Yangi ovoz berish"
-
-#, fuzzy, python-format
-#| msgid "Poll Questions"
-msgid "%(counter)s poll question"
-msgid_plural "%(counter)s poll questions"
-msgstr[0] "So'rovnoma savollari"
-
-msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
-
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
-
-msgid "Main poll syncs scheduled every 20min"
-msgstr ""
-
-msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "Poll syncs scheduled every 24h"
-msgstr ""
-
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
-msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
-
-#, fuzzy
-#| msgid "Previous"
-msgid "Preview results"
-msgstr "Avvalgisi"
-
-msgid "Refresh Results"
-msgstr "Natijalarni yangilash"
-
-msgid "Partners"
-msgstr ""
-
-msgid "MORE POLLS"
-msgstr "YANADA KO'PROQ SO'ROVLAR"
-
-msgid "FILTER"
-msgstr "FILTER"
-
-msgid "All"
-msgstr "Barchasi"
-
-msgid "POLL LIST"
-msgstr "SO'ROVNOMA RO'YXATI"
-
-msgid "All polls from most recent to oldest"
-msgstr "Eng yangisidan to eng dastlabkisigacha bo'lgan barcha so'rovnomalar"
-
-msgid "ARCHIVED STORIES"
-msgstr "ARXIVDAGI HIKOYALAR"
-
-msgid "LIST"
-msgstr "RO'YXAT"
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "LATEST OPINION"
-msgstr "ENG SO'NGGI MULOHAZA"
-
-msgid "VIEW FULL RESULTS"
-msgstr "BARCHA NATIJALARNI KO'RISH"
-
-msgid "U-REPORTERS IN"
-msgstr "U-Reportyorlar"
-
-msgid "PARTNERING WITH"
-msgstr "...BILAN HAMKORLIKDA"
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTYORLAR"
-
-msgid "IN"
-msgstr "...DA"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "DUNYO BO'YICHA MAMLAKATLAR"
-
-msgid "AGES"
-msgstr "YOSHLAR"
-
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
-msgstr "U-Reportga qo'shiling, Sizning fikringiz muhimdir."
-
 msgid "FEATURED STORY"
 msgstr "ALOHIDA AJRAB TURADIGAN HIKOYA"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Biz yoshlarning hayotini o'zgartirish maqsadida butun dunyo bo'ylab ish olib borayotgan global platformaning bir qismimiz"
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "U-Report yoshlarni ular uchun muhim bo'lgan masalalar yuzasidan o'z fikrlarini bildirishiga qanday imkon yaratayotganligi va ularni o'zaro qanday bog'layotganligini o'rganing. "
-
-msgid "LEARN MORE"
-msgstr "BATAFSIL O'RGANISH"
-
-msgid "Visit"
-msgstr "Tashrif buyurish"
-
-msgid "How would you like to join?"
-msgstr "Qay tarzda qo'shilishni istaysiz?"
-
-msgid "Text"
-msgstr "Matn"
-
-msgid "PAGE"
-msgstr ""
+msgid "READ MORE"
+msgstr "KO'PROQ O'QISH"
 
 msgid "SEARCH"
 msgstr "IZLASH"
-
-msgid "No results found"
-msgstr "Hech qanday natija topilmadi"
-
-msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
-
-msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
-
-msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSES"
-msgid "RESPONDERS"
-msgstr "JAVOBLAR"
-
-msgid "RESPONSE RATE"
-msgstr "JAVOB BERGANLAR ULUSHI"
-
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
-msgid "TOTAL RESPONDERS"
-msgstr "JA'MI JAVOBLAR"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr " So'rovnomada ishtirok etgan %(polled)s dan%(responded)stasi javob berdi"
 
-msgid "ALL"
-msgstr "BARCHASI"
-
-msgid "AGE"
-msgstr "YOSH"
-
-msgid "GENDER"
-msgstr "GENDER"
-
-msgid "LOCATION"
-msgstr "JOYLASHGAN O'RNI"
-
-msgid "Written by:"
-msgstr "Muallif:"
-
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS"
-msgid "REPORT"
-msgstr "U-REPORTYORLAR"
-
-msgid "STORY"
-msgstr ""
-
-msgid "Download Report"
-msgstr ""
+msgid "All"
+msgstr "Barchasi"
 
 msgid "Even"
 msgstr "Hatto"
@@ -1100,45 +740,6 @@ msgstr "ning"
 
 msgid "the"
 msgstr "aniq artikl"
-
-msgid "OVERALL STATISTICS"
-msgstr "UMUMIY STATISTIKA"
-
-msgid "THIS YEAR"
-msgstr "JORIY YILDA"
-
-msgid "AVG RESPONSE RATE"
-msgstr "JAVOB BERISH O'RTACHA KO'RSATKICHI"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "MINTAQALAR BO'YICHA U-REPORTYORLAR"
-
-msgid "FILTER RESULTS"
-msgstr "FILTR NATIJALARI"
-
-msgid "Charts only visible for logged in admins"
-msgstr ""
-
-msgid "Export and Share"
-msgstr "Chiqarish va Bo'lishish"
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "Bu haqida butun dunyoga ma'lum qilmoqchimisiz? Ijtimoiy tarmoqlarda oson o'rtoqlashish yoki taqdimotingizni bezash uchun ushbu tasvirni yuklab oling!"
-
-msgid "SELECT LANGUAGE"
-msgstr ""
-
-msgid "SELECT COUNTRY"
-msgstr "MAMLAKATNI TANLANG"
-
-msgid "Custom pages"
-msgstr "Maxsus yaratiluvchi sahifalar"
-
-msgid "Landing pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "Ijobiy ijtimoiy o'zgarishlarga erishishda yoshlarning fikrlarini qanday qo'llayotganimizni raqamlarda ko'ring."
 
 msgid "Polled"
 msgstr "So'rovnoma o'tkazildi"
@@ -1218,16 +819,6 @@ msgstr "Noy."
 msgid "Dec"
 msgstr "Dek."
 
-#, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-"             <strong>%(object)s</strong>ni olib tashlashga ishonchingiz komilmi?\n"
-"          "
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1254,44 +845,6 @@ msgstr ""
 "\n"
 "\tNatijalar%(start)s-%(end)s of %(count)s\n"
 "\t"
-
-msgid "Error"
-msgstr "Xato"
-
-msgid "Enter Dashboard"
-msgstr "Ko'rsatkichlar taxtasiga kirish"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Kechirasiz, siz hozir kira olmaysiz, chunki bizda %(failed_login_limit)s noto'g'ri kirish harakatlari\n"
-" qayd etildi."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqa kuting."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq har %(expire_days)s kunda siz yangi parol tanlashingiz kerak, hamda ushbu parollar oldingi%(window_days)s kun ichida ishlatilmagan bo'lishi lozim.\n"
-" "
-
-msgid "+ New Story"
-msgstr "+ Yangi Hikoya"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -2021,6 +1574,367 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "Gallery"
+#~ msgstr "Galereya"
+
+#~ msgid "Add Image"
+#~ msgstr "Tasvir qo'shish"
+
+#~ msgid "Edit"
+#~ msgstr "Tahrir qilish"
+
+#~ msgid "Manage Backends"
+#~ msgstr "Bekendlarni boshqarish"
+
+#~ msgid "Manage Users"
+#~ msgstr "Foydalanuvchilarni boshqarish"
+
+#~ msgid "Accounts"
+#~ msgstr "Akkauntlar"
+
+#~ msgid "Admins"
+#~ msgstr "Administratorlar"
+
+#~ msgid "You must have at least one administator"
+#~ msgstr "Sizda eng kamida bitta administrator bo'lishi lozim"
+
+#~ msgid "Back to Website"
+#~ msgstr "Vebsaytga qaytish"
+
+#~ msgid "Welcome, "
+#~ msgstr "Xush kelibsiz, "
+
+#~ msgid "Logout"
+#~ msgstr "Chiqish"
+
+#~ msgid "Opinions"
+#~ msgstr "Mulohazalar"
+
+#~ msgid "Users"
+#~ msgstr "Foydalanuvchilar"
+
+#~ msgid "Settings"
+#~ msgstr "Sozlashlar"
+
+#~ msgid "Pages"
+#~ msgstr "Sahifalar"
+
+#~ msgid "Jobs"
+#~ msgstr "Ish o'rinlari"
+
+#~ msgid "Categories Images"
+#~ msgstr "Toifalar tasvirlari"
+
+#~ msgid "News Items"
+#~ msgstr "Yangiliklar"
+
+#~ msgid "Orgs"
+#~ msgstr "Tashkr"
+
+#~ msgid "Images"
+#~ msgstr "Suratlar"
+
+#~ msgid "About"
+#~ msgstr "Haqida"
+
+#~ msgid "Engagement"
+#~ msgstr "Mashg'ullik"
+
+#, fuzzy
+#~| msgid "Reporters"
+#~ msgid "Reports"
+#~ msgstr "Reportyorlar"
+
+#~ msgid "Category Images"
+#~ msgstr "Toifa tasvirlari"
+
+#~ msgid "+ New "
+#~ msgstr "+ Yangi"
+
+#~ msgid "+ New Page"
+#~ msgstr "+ Yangi Sahifa"
+
+#~ msgid "U-Report"
+#~ msgstr "U-Report"
+
+#~ msgid "Admin"
+#~ msgstr "Admin"
+
+#~ msgid "Configuration"
+#~ msgstr "Configurasiya"
+
+#~ msgid "Content"
+#~ msgstr "Kontent"
+
+#~ msgid "Country Aliases"
+#~ msgstr "Mamlakatning shartli nomi"
+
+#~ msgid "Job Sources"
+#~ msgstr "Ish o'rni manbalari"
+
+#~ msgid "Jobs Content"
+#~ msgstr "Ish o'rni kontenti"
+
+#~ msgid "About Content"
+#~ msgstr "Kontent to'g'risida"
+
+#~ msgid "Videos"
+#~ msgstr "Videolavhalar"
+
+#~ msgid "Contact Us Content"
+#~ msgstr "Biz bilan bog'laning kontenti"
+
+#~ msgid "Missions Content"
+#~ msgstr "Vazifalar kontenti"
+
+#~ msgid "Terms & Conditions"
+#~ msgstr "Shart-sharoitlar"
+
+#~ msgid "U-Reporters Content"
+#~ msgstr "U-Reportyorlar kontenti"
+
+#~ msgid "Join &amp; Engage Content"
+#~ msgstr "Join &amp; Jalb bo'lish kontenti"
+
+#~ msgid "Join Steps Content"
+#~ msgstr "Qo'shilish bosqichlari kontenti"
+
+#~ msgid "Additional Menu"
+#~ msgstr "Qo'shimcha menyu"
+
+#~ msgid "SELECT YOUR COUNTRY"
+#~ msgstr "MAMLAKATINGIZNI TANLANG"
+
+#~ msgid "Join Now"
+#~ msgstr "Hozir qo'shiling"
+
+#~ msgid "EXPLORE ENGAGEMENT"
+#~ msgstr "MASHG'ULLIK BAYONI"
+
+#~ msgid ""
+#~ "\n"
+#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Twitter ish o'rinlari manbaini qo'shmoqchi bo'lsangiz, siz twitterdan vidjet-ilova identifikatorini olishingiz kerak.\n"
+#~ " "
+
+#~ msgid "Follow this step by step guide"
+#~ msgstr "Ushbu qadamma-qadam yo'rig'ga rioya eting"
+
+#~ msgid ""
+#~ "\n"
+#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<div>Vidjetni yaratganingizdan so'ng, vidjet identifikatori </div>\\da ko'rsatilganidek, url dan nusxa ko'chiring\n"
+#~ " "
+
+#~ msgid "Back"
+#~ msgstr "Ortga"
+
+#~ msgid "LATEST NOTIFICATIONS"
+#~ msgstr "SO'NGGI BILDIRISHLAR"
+
+#~ msgid "Backends"
+#~ msgstr "Bekendlar"
+
+#~ msgid "+ New Poll"
+#~ msgstr "+ Yangi ovoz berish"
+
+#, fuzzy, python-format
+#~| msgid "Poll Questions"
+#~ msgid "%(counter)s poll question"
+#~ msgid_plural "%(counter)s poll questions"
+#~ msgstr[0] "So'rovnoma savollari"
+
+#, fuzzy
+#~| msgid "Previous"
+#~ msgid "Preview results"
+#~ msgstr "Avvalgisi"
+
+#~ msgid "Refresh Results"
+#~ msgstr "Natijalarni yangilash"
+
+#~ msgid "MORE POLLS"
+#~ msgstr "YANADA KO'PROQ SO'ROVLAR"
+
+#~ msgid "FILTER"
+#~ msgstr "FILTER"
+
+#~ msgid "POLL LIST"
+#~ msgstr "SO'ROVNOMA RO'YXATI"
+
+#~ msgid "All polls from most recent to oldest"
+#~ msgstr "Eng yangisidan to eng dastlabkisigacha bo'lgan barcha so'rovnomalar"
+
+#~ msgid "ARCHIVED STORIES"
+#~ msgstr "ARXIVDAGI HIKOYALAR"
+
+#~ msgid "LIST"
+#~ msgstr "RO'YXAT"
+
+#~ msgid "LATEST OPINION"
+#~ msgstr "ENG SO'NGGI MULOHAZA"
+
+#~ msgid "VIEW FULL RESULTS"
+#~ msgstr "BARCHA NATIJALARNI KO'RISH"
+
+#~ msgid "U-REPORTERS IN"
+#~ msgstr "U-Reportyorlar"
+
+#~ msgid "PARTNERING WITH"
+#~ msgstr "...BILAN HAMKORLIKDA"
+
+#~ msgid "U-REPORTERS"
+#~ msgstr "U-REPORTYORLAR"
+
+#~ msgid "IN"
+#~ msgstr "...DA"
+
+#~ msgid "COUNTRIES WORLDWIDE"
+#~ msgstr "DUNYO BO'YICHA MAMLAKATLAR"
+
+#~ msgid "AGES"
+#~ msgstr "YOSHLAR"
+
+#~ msgid "Join U-Report, Your voice matters."
+#~ msgstr "U-Reportga qo'shiling, Sizning fikringiz muhimdir."
+
+#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
+#~ msgstr "Biz yoshlarning hayotini o'zgartirish maqsadida butun dunyo bo'ylab ish olib borayotgan global platformaning bir qismimiz"
+
+#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+#~ msgstr "U-Report yoshlarni ular uchun muhim bo'lgan masalalar yuzasidan o'z fikrlarini bildirishiga qanday imkon yaratayotganligi va ularni o'zaro qanday bog'layotganligini o'rganing. "
+
+#~ msgid "LEARN MORE"
+#~ msgstr "BATAFSIL O'RGANISH"
+
+#~ msgid "Visit"
+#~ msgstr "Tashrif buyurish"
+
+#~ msgid "How would you like to join?"
+#~ msgstr "Qay tarzda qo'shilishni istaysiz?"
+
+#~ msgid "Text"
+#~ msgstr "Matn"
+
+#~ msgid "No results found"
+#~ msgstr "Hech qanday natija topilmadi"
+
+#, fuzzy
+#~| msgid "RESPONSES"
+#~ msgid "RESPONDERS"
+#~ msgstr "JAVOBLAR"
+
+#~ msgid "RESPONSE RATE"
+#~ msgstr "JAVOB BERGANLAR ULUSHI"
+
+#, fuzzy
+#~| msgid "TOTAL RESPONSES"
+#~ msgid "TOTAL RESPONDERS"
+#~ msgstr "JA'MI JAVOBLAR"
+
+#~ msgid "ALL"
+#~ msgstr "BARCHASI"
+
+#~ msgid "AGE"
+#~ msgstr "YOSH"
+
+#~ msgid "GENDER"
+#~ msgstr "GENDER"
+
+#~ msgid "LOCATION"
+#~ msgstr "JOYLASHGAN O'RNI"
+
+#~ msgid "Written by:"
+#~ msgstr "Muallif:"
+
+#, fuzzy
+#~| msgid "U-REPORTERS"
+#~ msgid "REPORT"
+#~ msgstr "U-REPORTYORLAR"
+
+#~ msgid "OVERALL STATISTICS"
+#~ msgstr "UMUMIY STATISTIKA"
+
+#~ msgid "THIS YEAR"
+#~ msgstr "JORIY YILDA"
+
+#~ msgid "AVG RESPONSE RATE"
+#~ msgstr "JAVOB BERISH O'RTACHA KO'RSATKICHI"
+
+#~ msgid "U-REPORTERS BY REGION"
+#~ msgstr "MINTAQALAR BO'YICHA U-REPORTYORLAR"
+
+#~ msgid "FILTER RESULTS"
+#~ msgstr "FILTR NATIJALARI"
+
+#~ msgid "Export and Share"
+#~ msgstr "Chiqarish va Bo'lishish"
+
+#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+#~ msgstr "Bu haqida butun dunyoga ma'lum qilmoqchimisiz? Ijtimoiy tarmoqlarda oson o'rtoqlashish yoki taqdimotingizni bezash uchun ushbu tasvirni yuklab oling!"
+
+#~ msgid "SELECT COUNTRY"
+#~ msgstr "MAMLAKATNI TANLANG"
+
+#~ msgid "Custom pages"
+#~ msgstr "Maxsus yaratiluvchi sahifalar"
+
+#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
+#~ msgstr "Ijobiy ijtimoiy o'zgarishlarga erishishda yoshlarning fikrlarini qanday qo'llayotganimizni raqamlarda ko'ring."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ "             <strong>%(object)s</strong>ni olib tashlashga ishonchingiz komilmi?\n"
+#~ "          "
+
+#~ msgid "Error"
+#~ msgstr "Xato"
+
+#~ msgid "Enter Dashboard"
+#~ msgstr "Ko'rsatkichlar taxtasiga kirish"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Kechirasiz, siz hozir kira olmaysiz, chunki bizda %(failed_login_limit)s noto'g'ri kirish harakatlari\n"
+#~ " qayd etildi."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqa kuting."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq har %(expire_days)s kunda siz yangi parol tanlashingiz kerak, hamda ushbu parollar oldingi%(window_days)s kun ichida ishlatilmagan bo'lishi lozim.\n"
+#~ " "
+
+#~ msgid "+ New Story"
+#~ msgstr "+ Yangi Hikoya"
 
 #~ msgid "Photos"
 #~ msgstr "Fotosur'atlar"

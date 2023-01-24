@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-01-24 08:26+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,18 +108,6 @@ msgstr "Mức độ ưu tiên của khối này, các khối ưu tiên hơn sẽ
 
 msgid "The organization this content block belongs to"
 msgstr "Khối nội dung này thuộc về tổ chức"
-
-msgid "Gallery"
-msgstr "Thư viện ảnh"
-
-msgid "Add Image"
-msgstr "Thêm hình ảnh"
-
-msgid "Search"
-msgstr "Tìm kiếm"
-
-msgid "Add"
-msgstr "Thêm "
 
 msgid "Content Types"
 msgstr "Các loại nội dung"
@@ -305,29 +293,6 @@ msgstr ""
 msgid "Click this link to join"
 msgstr ""
 
-msgid "Edit"
-msgstr "Chỉnh sửa"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Quản lý người dùng"
-
-msgid "Manage Users"
-msgstr "Quản lý người dùng"
-
-msgid "Accounts"
-msgstr "Các tài khoản"
-
-msgid "Admins"
-msgstr "Quản trị viên"
-
-msgid "Remove"
-msgstr "Xóa"
-
-msgid "You must have at least one administator"
-msgstr "Bạn phải có ít nhất một quản trị viên"
-
 msgid "Select your Organization"
 msgstr "Lựa chọn tổ chức của bạn"
 
@@ -466,6 +431,15 @@ msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Khôn
 
 msgid "Cancel"
 msgstr "Đóng"
+
+msgid "Remove"
+msgstr "Xóa"
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+msgid "Add"
+msgstr "Thêm "
 
 #, fuzzy, python-format
 #| msgid ""
@@ -723,350 +697,20 @@ msgstr "%s mới của bạn đã được tạo."
 msgid "Import %s"
 msgstr "Nhập %s"
 
-msgid "Back to Website"
-msgstr ""
-
-msgid "Welcome, "
-msgstr ""
-
-msgid "Logout"
-msgstr "Đăng xuất"
-
-msgid "Opinions"
-msgstr ""
-
-msgid "Bots"
-msgstr ""
-
-msgid "Users"
-msgstr "Người dùng"
-
-msgid "Settings"
-msgstr ""
-
-#, fuzzy
-#| msgid "Images"
-msgid "Pages"
-msgstr "Hình ảnh"
-
-msgid "Landing Pages"
-msgstr ""
-
-msgid "Jobs"
-msgstr "Công việc"
-
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
-
-#, fuzzy
-#| msgid "Category Images"
-msgid "Categories Images"
-msgstr "Các hình ảnh cho danh mục"
-
-msgid "News Items"
-msgstr "Các mục mới"
-
-msgid "Orgs"
-msgstr "Tổ chức"
-
-msgid "Images"
-msgstr "Hình ảnh"
-
-msgid "About"
-msgstr "Thông tin"
-
-msgid "Engagement"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-Reporters"
-msgid "Reports"
-msgstr "U-Reporters"
-
-msgid "Category Images"
-msgstr "Các hình ảnh cho danh mục"
-
-msgid "+ New "
-msgstr ""
-
-msgid "+ New Page"
-msgstr ""
-
-msgid "U-Report"
-msgstr "U-Report"
-
-msgid "Admin"
-msgstr "Quản trị viên"
-
-msgid "Configuration"
-msgstr "Cấu hình"
-
-msgid "Content"
-msgstr "Nội dung"
-
-msgid "Country Aliases"
-msgstr "Biệt hiệu Quốc gia"
-
-msgid "Job Sources"
-msgstr "Nguồn công việc"
-
-msgid "Jobs Content"
-msgstr "Nội dung Công việc"
-
-msgid "About Content"
-msgstr "Nội dung Thông tin"
-
-msgid "Videos"
-msgstr "Video"
-
-msgid "Contact Us Content"
-msgstr "Nội dung Thông tin liên lạc"
-
-msgid "Missions Content"
-msgstr "Nội dung Sứ mệnh"
-
-msgid "Terms & Conditions"
-msgstr "Điều khoản & Điều kiện"
-
-msgid "U-Reporters Content"
-msgstr "Nội dung U-Reporters"
-
-msgid "Join &amp; Engage Content"
-msgstr "Nội dung Tham gia & Kết nối "
-
-msgid "Join Steps Content"
-msgstr "Nội dung các Bước Tham gia "
-
-msgid "Additional Menu"
-msgstr "Menu bổ sung"
-
-msgid "SELECT YOUR COUNTRY"
-msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "Tham gia"
-
-msgid "READ MORE"
-msgstr "XEM THÊM"
-
-msgid "EXPLORE ENGAGEMENT"
-msgstr ""
-
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"Để thêm một nguồn công việc Twitter, bạn phải có được một id widget từ twitter."
-
-msgid "Follow this step by step guide"
-msgstr "Thực hiện theo hướng dẫn từng bước này"
-
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
-"\n"
-"<div>Sau khi bạn tạo tiện ích, hãy sao chép id tiện ích từ url như được hiển thị trên</div>"
-
-msgid "Back"
-msgstr "Quay lại"
-
 msgid "Select bots"
 msgstr ""
 
-msgid "View public page"
-msgstr ""
-
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "ĐỊA ĐIỂM"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Backends"
-msgstr "Quản lý người dùng"
-
 msgid "Add os Select tags"
-msgstr ""
-
-#, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
-
-msgid "+ New Poll"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "Poll Questions"
-msgid "%(counter)s poll question"
-msgid_plural "%(counter)s poll questions"
-msgstr[0] "Câu hỏi khảo sát"
-
-msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
-
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
-
-msgid "Main poll syncs scheduled every 20min"
-msgstr ""
-
-msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "Poll syncs scheduled every 24h"
-msgstr ""
-
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
-msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
-
-#, fuzzy
-#| msgid "View full results"
-msgid "Preview results"
-msgstr "Xem toàn bộ kết quả"
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Kết quả"
-
-msgid "Partners"
-msgstr ""
-
-msgid "MORE POLLS"
-msgstr "THÊM KHẢO SÁT"
-
-msgid "FILTER"
-msgstr "BỘ LỌC"
-
-msgid "All"
-msgstr "Tất cả"
-
-msgid "POLL LIST"
-msgstr "DANH SÁCH KHẢO SÁT"
-
-msgid "All polls from most recent to oldest"
-msgstr "Tất cả khảo sát từ gần nhất đến xa nhất"
-
-msgid "ARCHIVED STORIES"
-msgstr "CÁC CÂU CHUYỆN ĐÃ LƯU TRỮ"
-
-msgid "LIST"
-msgstr "DANH SÁCH"
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST OPINION"
-msgstr "ĐỊA ĐIỂM"
-
-#, fuzzy
-#| msgid "POLL RESULTS"
-msgid "VIEW FULL RESULTS"
-msgstr "KẾT QUẢ KHẢO SÁT"
-
-msgid "U-REPORTERS IN"
-msgstr "U-REPORTERS TẠI"
-
-msgid "PARTNERING WITH"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "U-REPORTERS"
-msgstr "U-REPORTERS TẠI"
-
-msgid "IN"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "COUNTRIES WORLDWIDE"
-msgstr "U-REPORTERS TẠI"
-
-msgid "AGES"
-msgstr ""
-
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "FEATURED STORY"
 msgstr "CÂU CHUYỆN NỔI BẬT"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
-
-#, fuzzy
-#| msgid "READ MORE"
-msgid "LEARN MORE"
+msgid "READ MORE"
 msgstr "XEM THÊM"
-
-msgid "Visit"
-msgstr "Ghé thăm"
-
-msgid "How would you like to join?"
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "PAGE"
-msgstr ""
 
 msgid "SEARCH"
 msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
-
-msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
-
-msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSE RATE"
-msgid "RESPONDERS"
-msgstr "TỶ LỆ PHẢN HỒI"
-
-msgid "RESPONSE RATE"
-msgstr "TỶ LỆ PHẢN HỒI"
-
-#, fuzzy
-#| msgid "RESPONSE RATE"
-msgid "TOTAL RESPONDERS"
-msgstr "TỶ LỆ PHẢN HỒI"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1078,36 +722,8 @@ msgstr ""
 "\n"
 "%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
 
-msgid "ALL"
-msgstr ""
-
-msgid "AGE"
-msgstr "TUỔI"
-
-msgid "GENDER"
-msgstr "GIỚI TÍNH"
-
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LOCATION"
-msgstr "ĐỊA ĐIỂM"
-
-msgid "Written by:"
-msgstr ""
-
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "REPORT"
-msgstr "U-REPORTERS TẠI"
-
-msgid "STORY"
-msgstr "Câu chuyện"
-
-msgid "Download Report"
-msgstr ""
+msgid "All"
+msgstr "Tất cả"
 
 msgid "Even"
 msgstr "Thậm chí"
@@ -1154,53 +770,6 @@ msgid "of"
 msgstr "của"
 
 msgid "the"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTER STATISTICS"
-msgid "OVERALL STATISTICS"
-msgstr "SỐ LIỆU VỀ U-REPORTERS"
-
-msgid "THIS YEAR"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSE RATE"
-msgid "AVG RESPONSE RATE"
-msgstr "TỶ LỆ PHẢN HỒI"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS TẠI"
-
-#, fuzzy
-#| msgid "POLL RESULTS"
-msgid "FILTER RESULTS"
-msgstr "KẾT QUẢ KHẢO SÁT"
-
-msgid "Charts only visible for logged in admins"
-msgstr ""
-
-msgid "Export and Share"
-msgstr ""
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr ""
-
-msgid "SELECT LANGUAGE"
-msgstr ""
-
-msgid "SELECT COUNTRY"
-msgstr ""
-
-msgid "Custom pages"
-msgstr ""
-
-msgid "Landing pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
 #, fuzzy
@@ -1292,19 +861,6 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-"Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
 #| "\t\t%(counter)s result\n"
 #| "\t"
 #| msgid_plural ""
@@ -1326,54 +882,6 @@ msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "\t Kết quả %(start)s-%(end)s trong số %(count)s"
-
-msgid "Error"
-msgstr ""
-
-msgid "Enter Dashboard"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
-
-msgid "+ New Story"
-msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -2148,6 +1656,325 @@ msgstr "Câu chuyện này có nổi bật hay không"
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+#~ msgid "Gallery"
+#~ msgstr "Thư viện ảnh"
+
+#~ msgid "Add Image"
+#~ msgstr "Thêm hình ảnh"
+
+#~ msgid "Edit"
+#~ msgstr "Chỉnh sửa"
+
+#, fuzzy
+#~| msgid "Manage Users"
+#~ msgid "Manage Backends"
+#~ msgstr "Quản lý người dùng"
+
+#~ msgid "Manage Users"
+#~ msgstr "Quản lý người dùng"
+
+#~ msgid "Accounts"
+#~ msgstr "Các tài khoản"
+
+#~ msgid "Admins"
+#~ msgstr "Quản trị viên"
+
+#~ msgid "You must have at least one administator"
+#~ msgstr "Bạn phải có ít nhất một quản trị viên"
+
+#~ msgid "Logout"
+#~ msgstr "Đăng xuất"
+
+#~ msgid "Users"
+#~ msgstr "Người dùng"
+
+#, fuzzy
+#~| msgid "Images"
+#~ msgid "Pages"
+#~ msgstr "Hình ảnh"
+
+#~ msgid "Jobs"
+#~ msgstr "Công việc"
+
+#, fuzzy
+#~| msgid "Category Images"
+#~ msgid "Categories Images"
+#~ msgstr "Các hình ảnh cho danh mục"
+
+#~ msgid "News Items"
+#~ msgstr "Các mục mới"
+
+#~ msgid "Orgs"
+#~ msgstr "Tổ chức"
+
+#~ msgid "Images"
+#~ msgstr "Hình ảnh"
+
+#~ msgid "About"
+#~ msgstr "Thông tin"
+
+#, fuzzy
+#~| msgid "U-Reporters"
+#~ msgid "Reports"
+#~ msgstr "U-Reporters"
+
+#~ msgid "Category Images"
+#~ msgstr "Các hình ảnh cho danh mục"
+
+#~ msgid "U-Report"
+#~ msgstr "U-Report"
+
+#~ msgid "Admin"
+#~ msgstr "Quản trị viên"
+
+#~ msgid "Configuration"
+#~ msgstr "Cấu hình"
+
+#~ msgid "Content"
+#~ msgstr "Nội dung"
+
+#~ msgid "Country Aliases"
+#~ msgstr "Biệt hiệu Quốc gia"
+
+#~ msgid "Job Sources"
+#~ msgstr "Nguồn công việc"
+
+#~ msgid "Jobs Content"
+#~ msgstr "Nội dung Công việc"
+
+#~ msgid "About Content"
+#~ msgstr "Nội dung Thông tin"
+
+#~ msgid "Videos"
+#~ msgstr "Video"
+
+#~ msgid "Contact Us Content"
+#~ msgstr "Nội dung Thông tin liên lạc"
+
+#~ msgid "Missions Content"
+#~ msgstr "Nội dung Sứ mệnh"
+
+#~ msgid "Terms & Conditions"
+#~ msgstr "Điều khoản & Điều kiện"
+
+#~ msgid "U-Reporters Content"
+#~ msgstr "Nội dung U-Reporters"
+
+#~ msgid "Join &amp; Engage Content"
+#~ msgstr "Nội dung Tham gia & Kết nối "
+
+#~ msgid "Join Steps Content"
+#~ msgstr "Nội dung các Bước Tham gia "
+
+#~ msgid "Additional Menu"
+#~ msgstr "Menu bổ sung"
+
+#, fuzzy
+#~| msgid "Join"
+#~ msgid "Join Now"
+#~ msgstr "Tham gia"
+
+#~ msgid ""
+#~ "\n"
+#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Để thêm một nguồn công việc Twitter, bạn phải có được một id widget từ twitter."
+
+#~ msgid "Follow this step by step guide"
+#~ msgstr "Thực hiện theo hướng dẫn từng bước này"
+
+#~ msgid ""
+#~ "\n"
+#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<div>Sau khi bạn tạo tiện ích, hãy sao chép id tiện ích từ url như được hiển thị trên</div>"
+
+#~ msgid "Back"
+#~ msgstr "Quay lại"
+
+#, fuzzy
+#~| msgid "LOCATIONS"
+#~ msgid "LATEST NOTIFICATIONS"
+#~ msgstr "ĐỊA ĐIỂM"
+
+#, fuzzy
+#~| msgid "Manage Users"
+#~ msgid "Backends"
+#~ msgstr "Quản lý người dùng"
+
+#, fuzzy, python-format
+#~| msgid "Poll Questions"
+#~ msgid "%(counter)s poll question"
+#~ msgid_plural "%(counter)s poll questions"
+#~ msgstr[0] "Câu hỏi khảo sát"
+
+#, fuzzy
+#~| msgid "View full results"
+#~ msgid "Preview results"
+#~ msgstr "Xem toàn bộ kết quả"
+
+#, fuzzy
+#~| msgid "Results"
+#~ msgid "Refresh Results"
+#~ msgstr "Kết quả"
+
+#~ msgid "MORE POLLS"
+#~ msgstr "THÊM KHẢO SÁT"
+
+#~ msgid "FILTER"
+#~ msgstr "BỘ LỌC"
+
+#~ msgid "POLL LIST"
+#~ msgstr "DANH SÁCH KHẢO SÁT"
+
+#~ msgid "All polls from most recent to oldest"
+#~ msgstr "Tất cả khảo sát từ gần nhất đến xa nhất"
+
+#~ msgid "ARCHIVED STORIES"
+#~ msgstr "CÁC CÂU CHUYỆN ĐÃ LƯU TRỮ"
+
+#~ msgid "LIST"
+#~ msgstr "DANH SÁCH"
+
+#, fuzzy
+#~| msgid "LOCATIONS"
+#~ msgid "LATEST OPINION"
+#~ msgstr "ĐỊA ĐIỂM"
+
+#, fuzzy
+#~| msgid "POLL RESULTS"
+#~ msgid "VIEW FULL RESULTS"
+#~ msgstr "KẾT QUẢ KHẢO SÁT"
+
+#~ msgid "U-REPORTERS IN"
+#~ msgstr "U-REPORTERS TẠI"
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "U-REPORTERS"
+#~ msgstr "U-REPORTERS TẠI"
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "COUNTRIES WORLDWIDE"
+#~ msgstr "U-REPORTERS TẠI"
+
+#, fuzzy
+#~| msgid "READ MORE"
+#~ msgid "LEARN MORE"
+#~ msgstr "XEM THÊM"
+
+#~ msgid "Visit"
+#~ msgstr "Ghé thăm"
+
+#, fuzzy
+#~| msgid "RESPONSE RATE"
+#~ msgid "RESPONDERS"
+#~ msgstr "TỶ LỆ PHẢN HỒI"
+
+#~ msgid "RESPONSE RATE"
+#~ msgstr "TỶ LỆ PHẢN HỒI"
+
+#, fuzzy
+#~| msgid "RESPONSE RATE"
+#~ msgid "TOTAL RESPONDERS"
+#~ msgstr "TỶ LỆ PHẢN HỒI"
+
+#~ msgid "AGE"
+#~ msgstr "TUỔI"
+
+#~ msgid "GENDER"
+#~ msgstr "GIỚI TÍNH"
+
+#, fuzzy
+#~| msgid "LOCATIONS"
+#~ msgid "LOCATION"
+#~ msgstr "ĐỊA ĐIỂM"
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "REPORT"
+#~ msgstr "U-REPORTERS TẠI"
+
+#~ msgid "STORY"
+#~ msgstr "Câu chuyện"
+
+#, fuzzy
+#~| msgid "U-REPORTER STATISTICS"
+#~ msgid "OVERALL STATISTICS"
+#~ msgstr "SỐ LIỆU VỀ U-REPORTERS"
+
+#, fuzzy
+#~| msgid "RESPONSE RATE"
+#~ msgid "AVG RESPONSE RATE"
+#~ msgstr "TỶ LỆ PHẢN HỒI"
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "U-REPORTERS BY REGION"
+#~ msgstr "U-REPORTERS TẠI"
+
+#, fuzzy
+#~| msgid "POLL RESULTS"
+#~ msgid "FILTER RESULTS"
+#~ msgstr "KẾT QUẢ KHẢO SÁT"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#~| "    "
+#~ msgid ""
+#~ "\n"
+#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ "Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~| "      "
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~| "      "
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~| "  "
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
 
 #, fuzzy
 #~| msgid "The location of the responder."
