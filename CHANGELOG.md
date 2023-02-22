@@ -1,3 +1,9 @@
+v1.2.54 (2023-02-22)
+-------------------------
+ * Update dash and poetry lock file
+ * Use latest deps updates
+ * Update Thailand icons
+
 v1.2.51
 ----------
  * Merge pull request #1084 from rapidpro/micronesia
