@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-01-24 08:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -114,18 +114,6 @@ msgstr "Priorità per questo blocco, i blocco con priorità più alta hanno prec
 
 msgid "The organization this content block belongs to"
 msgstr "L'organizzazione a cui questo blocco appartiene"
-
-msgid "Gallery"
-msgstr "Galleria"
-
-msgid "Add Image"
-msgstr "Aggiungi immagine"
-
-msgid "Search"
-msgstr "Cerca"
-
-msgid "Add"
-msgstr "Aggiungi"
 
 msgid "Content Types"
 msgstr "Tipi di contenuto"
@@ -309,27 +297,6 @@ msgstr "Sei invitato ad unirti {{org.name}}."
 msgid "Click this link to join"
 msgstr "Clicca questo link per unirti"
 
-msgid "Edit"
-msgstr "Modifica"
-
-msgid "Manage Backends"
-msgstr "Gestisci backends"
-
-msgid "Manage Users"
-msgstr "Gestisci utenti"
-
-msgid "Accounts"
-msgstr "Account"
-
-msgid "Admins"
-msgstr "Amministratori"
-
-msgid "Remove"
-msgstr "Rimuovi"
-
-msgid "You must have at least one administator"
-msgstr "Devi avere almeno un amministratore"
-
 msgid "Select your Organization"
 msgstr "Seleziona la tua organizzazione"
 
@@ -462,6 +429,15 @@ msgstr "Una volta rimosso, sparirà per sempre. Non c'è modo di annullare quest
 
 msgid "Cancel"
 msgstr "Annulla"
+
+msgid "Remove"
+msgstr "Rimuovi"
+
+msgid "Search"
+msgstr "Cerca"
+
+msgid "Add"
+msgstr "Aggiungi"
 
 #, python-format
 msgid ""
@@ -701,363 +677,27 @@ msgstr "la tua nuova %s è stata creata"
 msgid "Import %s"
 msgstr "Importa %s"
 
-msgid "Back to Website"
-msgstr "Ritorna al sito"
-
-msgid "Welcome, "
-msgstr "Benvenuto,"
-
-msgid "Logout"
-msgstr "Esci"
-
-msgid "Opinions"
-msgstr "Opinioni"
-
-msgid "Bots"
-msgstr ""
-
-msgid "Users"
-msgstr "Utenti"
-
-msgid "Settings"
-msgstr "Impostazioni"
-
-msgid "Pages"
-msgstr "Pagine"
-
-msgid "Landing Pages"
-msgstr ""
-
-msgid "Jobs"
-msgstr "Opportunità di lavoro"
-
-msgid "Tags"
-msgstr ""
-
-msgid "Partners Logos"
-msgstr ""
-
-msgid "Categories Images"
-msgstr "Immagini di categoria"
-
-msgid "News Items"
-msgstr "Elementi della news"
-
-msgid "Orgs"
-msgstr "Organizzazioni"
-
-msgid "Images"
-msgstr "Immagini"
-
-msgid "About"
-msgstr "Chi siamo"
-
-msgid "Engagement"
-msgstr "Partecipazione"
-
-#, fuzzy
-#| msgid "Reporters"
-msgid "Reports"
-msgstr "Reporters"
-
-msgid "Category Images"
-msgstr "Immagini Categoria"
-
-msgid "+ New "
-msgstr "+ Nuovo "
-
-msgid "+ New Page"
-msgstr "+ Nuova Pagina"
-
-msgid "U-Report"
-msgstr "U-Report"
-
-msgid "Admin"
-msgstr "Amministratore"
-
-msgid "Configuration"
-msgstr "Configurazione"
-
-msgid "Content"
-msgstr "Contenuto"
-
-msgid "Country Aliases"
-msgstr "Alias Paese"
-
-msgid "Job Sources"
-msgstr "Risorse di lavoro"
-
-msgid "Jobs Content"
-msgstr "Contenuto Lavori"
-
-msgid "About Content"
-msgstr "Contenuto Chi siamo"
-
-msgid "Videos"
-msgstr "Video"
-
-msgid "Contact Us Content"
-msgstr "Contenuto Contattaci"
-
-msgid "Missions Content"
-msgstr "Contenuto Mission"
-
-msgid "Terms & Conditions"
-msgstr "Termini e condizioni"
-
-msgid "U-Reporters Content"
-msgstr "Contenuto U-Reporter"
-
-msgid "Join &amp; Engage Content"
-msgstr "Aderisci &amp;  Contenuto Partecipa"
-
-msgid "Join Steps Content"
-msgstr "Contenuto Passaggi adesione"
-
-msgid "Additional Menu"
-msgstr "Menu addizionale"
-
-msgid "SELECT YOUR COUNTRY"
-msgstr "SELEZIONA IL TUO PAESE"
-
-msgid "Join Now"
-msgstr "Aderisci ora"
-
-msgid "READ MORE"
-msgstr "LEGGI DI PIÙ"
-
-msgid "EXPLORE ENGAGEMENT"
-msgstr "ESPLORA IL LIVELLO DI PARTECIPAZIONE"
-
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"Per aggiungere un'offerta di lavoro via Twitter devi prima ottenere un widget id da twitter."
-
-msgid "Follow this step by step guide"
-msgstr "Segui questa guida passo per passo"
-
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
-"\n"
-"<div> Dopo che hai creato il widget copia il widget id dall'url come mostrato su </div>"
-
-msgid "Back"
-msgstr "Indietro"
-
 msgid "Select bots"
 msgstr ""
-
-msgid "View public page"
-msgstr ""
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "Ultime notifiche"
-
-msgid "Backends"
-msgstr "Backends"
 
 msgid "Add os Select tags"
 msgstr ""
 
-#, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "+ New Poll"
-msgstr "+ Nuovo Sondaggio"
-
-#, fuzzy, python-format
-#| msgid "Poll Questions"
-msgid "%(counter)s poll question"
-msgid_plural "%(counter)s poll questions"
-msgstr[0] "Domande sondaggio"
-msgstr[1] "Domande sondaggio"
-
-msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
-
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
-
-msgid "Main poll syncs scheduled every 20min"
-msgstr ""
-
-msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "Poll syncs scheduled every 24h"
-msgstr ""
-
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
-msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
-
-#, fuzzy
-#| msgid "View full results"
-msgid "Preview results"
-msgstr "Vedi tutti i risultati "
-
-msgid "Refresh Results"
-msgstr "Aggiorna i risultati"
-
-msgid "Partners"
-msgstr ""
-
-msgid "MORE POLLS"
-msgstr "ALTRI SONDAGGI"
-
-msgid "FILTER"
-msgstr "FILTRA"
-
-msgid "All"
-msgstr "Tutti"
-
-msgid "POLL LIST"
-msgstr "LISTA SONDAGGI"
-
-msgid "All polls from most recent to oldest"
-msgstr "Tutti i sondaggi dal più recente al più vecchio"
-
-msgid "ARCHIVED STORIES"
-msgstr "STORIE ARCHIVIATE"
-
-msgid "LIST"
-msgstr "LISTA"
-
-msgid "Send"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "LATEST OPINION"
-msgstr "Ultima opinione"
-
-msgid "VIEW FULL RESULTS"
-msgstr "Guarda tutti i risultati"
-
-msgid "U-REPORTERS IN"
-msgstr "U-REPORTERS IN "
-
-msgid "PARTNERING WITH"
-msgstr "In partenariato con"
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTERS"
-
-msgid "IN"
-msgstr "IN"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "PAESI NEL MONDO"
-
-msgid "AGES"
-msgstr "ETÀ"
-
-msgid "Available bots"
-msgstr ""
-
-msgid "More bots"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Unisciti a U-Report, la tua voce conta"
-
 msgid "FEATURED STORY"
 msgstr "STORIA IN PRIMO PIANO"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Siamo parte di una piattaforma globale con lo scopo di cambiare la vita dei giovani nel mondo."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Scopri di più su come U-Report sta potenziando e connettendo giovani per parlare delle tematiche li riguardano."
-
-msgid "LEARN MORE"
-msgstr "PER SAPERNE DI PIU'"
-
-msgid "Visit"
-msgstr "Visita"
-
-msgid "How would you like to join?"
-msgstr "Come vorresti aderire?"
-
-msgid "Text"
-msgstr "Testo"
-
-msgid "PAGE"
-msgstr ""
+msgid "READ MORE"
+msgstr "LEGGI DI PIÙ"
 
 msgid "SEARCH"
 msgstr ""
-
-msgid "No results found"
-msgstr "Nessun risultato trovato"
-
-msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
-
-msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
-
-msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSES"
-msgid "RESPONDERS"
-msgstr "RISPOSTE"
-
-msgid "RESPONSE RATE"
-msgstr "TASSO DI RISPOSTA"
-
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
-msgid "TOTAL RESPONDERS"
-msgstr "RISPOSTE TOTALI"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s risposte su %(polled)s sondati"
 
-msgid "ALL"
-msgstr "TUTTO"
-
-msgid "AGE"
-msgstr "ETÀ"
-
-msgid "GENDER"
-msgstr "GENERE"
-
-msgid "LOCATION"
-msgstr "DOVE"
-
-msgid "Written by:"
-msgstr "Scritto da:"
-
-msgid "No reports published yet"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS"
-msgid "REPORT"
-msgstr "U-REPORTERS"
-
-msgid "STORY"
-msgstr "STORIA"
-
-msgid "Download Report"
-msgstr ""
+msgid "All"
+msgstr "Tutti"
 
 msgid "Even"
 msgstr "Anche"
@@ -1105,45 +745,6 @@ msgstr "di"
 
 msgid "the"
 msgstr "il"
-
-msgid "OVERALL STATISTICS"
-msgstr "Statistiche generali"
-
-msgid "THIS YEAR"
-msgstr "QUESTO ANNO"
-
-msgid "AVG RESPONSE RATE"
-msgstr "TASSO RISPOSTA MEDIO"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS PER REGIONE"
-
-msgid "FILTER RESULTS"
-msgstr "FILTRA I RISULTATI"
-
-msgid "Charts only visible for logged in admins"
-msgstr ""
-
-msgid "Export and Share"
-msgstr "Esporta e condividi"
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "Vuoi condividere il risultato ad utenti esterni? scarica questa immagine per i tuoi social media o inseriscila in una presentazione!"
-
-msgid "SELECT LANGUAGE"
-msgstr ""
-
-msgid "SELECT COUNTRY"
-msgstr "SELEZIONA IL PAESE"
-
-msgid "Custom pages"
-msgstr "Pagine Custom"
-
-msgid "Landing pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "Guarda attraverso i numeri come stiamo coinvolgendo le voci dei giovani per un cambiamento sociale positivo."
 
 msgid "Polled"
 msgstr "sondati"
@@ -1229,16 +830,6 @@ msgstr "No"
 msgid "Dec"
 msgstr ""
 
-#, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-"            Sei sicuro di voler rimuovere <strong>%(object)s</strong>?\n"
-"          "
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1269,42 +860,6 @@ msgstr ""
 "\n"
 "\tRisultati %(start)s-%(end)s di %(count)s\n"
 "\t"
-
-msgid "Error"
-msgstr "Errore"
-
-msgid "Enter Dashboard"
-msgstr "Inserisci Dashboard"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Spiacenti, in questo momento non puoi accedere perché abbiamo registrato %(failed_login_limit)s tentativi di accesso sbagliati."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Per favore attendi %(lockout_timeout)s minuti prima di tentare di accedere di nuovo."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong> La tua password è scaduta. </strong> La politica del sito richiede che tu debba selezionare una nuova password ogni %(expire_days)s giorni, e che le password non devono essere già state utilizzate nei %(window_days)s giorni precedenti."
-
-msgid "+ New Story"
-msgstr "+ Nuova Storia"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -2046,6 +1601,367 @@ msgstr "Se questa storia è apparsa"
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+#~ msgid "Gallery"
+#~ msgstr "Galleria"
+
+#~ msgid "Add Image"
+#~ msgstr "Aggiungi immagine"
+
+#~ msgid "Edit"
+#~ msgstr "Modifica"
+
+#~ msgid "Manage Backends"
+#~ msgstr "Gestisci backends"
+
+#~ msgid "Manage Users"
+#~ msgstr "Gestisci utenti"
+
+#~ msgid "Accounts"
+#~ msgstr "Account"
+
+#~ msgid "Admins"
+#~ msgstr "Amministratori"
+
+#~ msgid "You must have at least one administator"
+#~ msgstr "Devi avere almeno un amministratore"
+
+#~ msgid "Back to Website"
+#~ msgstr "Ritorna al sito"
+
+#~ msgid "Welcome, "
+#~ msgstr "Benvenuto,"
+
+#~ msgid "Logout"
+#~ msgstr "Esci"
+
+#~ msgid "Opinions"
+#~ msgstr "Opinioni"
+
+#~ msgid "Users"
+#~ msgstr "Utenti"
+
+#~ msgid "Settings"
+#~ msgstr "Impostazioni"
+
+#~ msgid "Pages"
+#~ msgstr "Pagine"
+
+#~ msgid "Jobs"
+#~ msgstr "Opportunità di lavoro"
+
+#~ msgid "Categories Images"
+#~ msgstr "Immagini di categoria"
+
+#~ msgid "News Items"
+#~ msgstr "Elementi della news"
+
+#~ msgid "Orgs"
+#~ msgstr "Organizzazioni"
+
+#~ msgid "Images"
+#~ msgstr "Immagini"
+
+#~ msgid "About"
+#~ msgstr "Chi siamo"
+
+#~ msgid "Engagement"
+#~ msgstr "Partecipazione"
+
+#, fuzzy
+#~| msgid "Reporters"
+#~ msgid "Reports"
+#~ msgstr "Reporters"
+
+#~ msgid "Category Images"
+#~ msgstr "Immagini Categoria"
+
+#~ msgid "+ New "
+#~ msgstr "+ Nuovo "
+
+#~ msgid "+ New Page"
+#~ msgstr "+ Nuova Pagina"
+
+#~ msgid "U-Report"
+#~ msgstr "U-Report"
+
+#~ msgid "Admin"
+#~ msgstr "Amministratore"
+
+#~ msgid "Configuration"
+#~ msgstr "Configurazione"
+
+#~ msgid "Content"
+#~ msgstr "Contenuto"
+
+#~ msgid "Country Aliases"
+#~ msgstr "Alias Paese"
+
+#~ msgid "Job Sources"
+#~ msgstr "Risorse di lavoro"
+
+#~ msgid "Jobs Content"
+#~ msgstr "Contenuto Lavori"
+
+#~ msgid "About Content"
+#~ msgstr "Contenuto Chi siamo"
+
+#~ msgid "Videos"
+#~ msgstr "Video"
+
+#~ msgid "Contact Us Content"
+#~ msgstr "Contenuto Contattaci"
+
+#~ msgid "Missions Content"
+#~ msgstr "Contenuto Mission"
+
+#~ msgid "Terms & Conditions"
+#~ msgstr "Termini e condizioni"
+
+#~ msgid "U-Reporters Content"
+#~ msgstr "Contenuto U-Reporter"
+
+#~ msgid "Join &amp; Engage Content"
+#~ msgstr "Aderisci &amp;  Contenuto Partecipa"
+
+#~ msgid "Join Steps Content"
+#~ msgstr "Contenuto Passaggi adesione"
+
+#~ msgid "Additional Menu"
+#~ msgstr "Menu addizionale"
+
+#~ msgid "SELECT YOUR COUNTRY"
+#~ msgstr "SELEZIONA IL TUO PAESE"
+
+#~ msgid "Join Now"
+#~ msgstr "Aderisci ora"
+
+#~ msgid "EXPLORE ENGAGEMENT"
+#~ msgstr "ESPLORA IL LIVELLO DI PARTECIPAZIONE"
+
+#~ msgid ""
+#~ "\n"
+#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Per aggiungere un'offerta di lavoro via Twitter devi prima ottenere un widget id da twitter."
+
+#~ msgid "Follow this step by step guide"
+#~ msgstr "Segui questa guida passo per passo"
+
+#~ msgid ""
+#~ "\n"
+#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<div> Dopo che hai creato il widget copia il widget id dall'url come mostrato su </div>"
+
+#~ msgid "Back"
+#~ msgstr "Indietro"
+
+#~ msgid "LATEST NOTIFICATIONS"
+#~ msgstr "Ultime notifiche"
+
+#~ msgid "Backends"
+#~ msgstr "Backends"
+
+#~ msgid "+ New Poll"
+#~ msgstr "+ Nuovo Sondaggio"
+
+#, fuzzy, python-format
+#~| msgid "Poll Questions"
+#~ msgid "%(counter)s poll question"
+#~ msgid_plural "%(counter)s poll questions"
+#~ msgstr[0] "Domande sondaggio"
+#~ msgstr[1] "Domande sondaggio"
+
+#, fuzzy
+#~| msgid "View full results"
+#~ msgid "Preview results"
+#~ msgstr "Vedi tutti i risultati "
+
+#~ msgid "Refresh Results"
+#~ msgstr "Aggiorna i risultati"
+
+#~ msgid "MORE POLLS"
+#~ msgstr "ALTRI SONDAGGI"
+
+#~ msgid "FILTER"
+#~ msgstr "FILTRA"
+
+#~ msgid "POLL LIST"
+#~ msgstr "LISTA SONDAGGI"
+
+#~ msgid "All polls from most recent to oldest"
+#~ msgstr "Tutti i sondaggi dal più recente al più vecchio"
+
+#~ msgid "ARCHIVED STORIES"
+#~ msgstr "STORIE ARCHIVIATE"
+
+#~ msgid "LIST"
+#~ msgstr "LISTA"
+
+#~ msgid "LATEST OPINION"
+#~ msgstr "Ultima opinione"
+
+#~ msgid "VIEW FULL RESULTS"
+#~ msgstr "Guarda tutti i risultati"
+
+#~ msgid "U-REPORTERS IN"
+#~ msgstr "U-REPORTERS IN "
+
+#~ msgid "PARTNERING WITH"
+#~ msgstr "In partenariato con"
+
+#~ msgid "U-REPORTERS"
+#~ msgstr "U-REPORTERS"
+
+#~ msgid "IN"
+#~ msgstr "IN"
+
+#~ msgid "COUNTRIES WORLDWIDE"
+#~ msgstr "PAESI NEL MONDO"
+
+#~ msgid "AGES"
+#~ msgstr "ETÀ"
+
+#~ msgid "Join U-Report, Your voice matters."
+#~ msgstr "Unisciti a U-Report, la tua voce conta"
+
+#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
+#~ msgstr "Siamo parte di una piattaforma globale con lo scopo di cambiare la vita dei giovani nel mondo."
+
+#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+#~ msgstr "Scopri di più su come U-Report sta potenziando e connettendo giovani per parlare delle tematiche li riguardano."
+
+#~ msgid "LEARN MORE"
+#~ msgstr "PER SAPERNE DI PIU'"
+
+#~ msgid "Visit"
+#~ msgstr "Visita"
+
+#~ msgid "How would you like to join?"
+#~ msgstr "Come vorresti aderire?"
+
+#~ msgid "Text"
+#~ msgstr "Testo"
+
+#~ msgid "No results found"
+#~ msgstr "Nessun risultato trovato"
+
+#, fuzzy
+#~| msgid "RESPONSES"
+#~ msgid "RESPONDERS"
+#~ msgstr "RISPOSTE"
+
+#~ msgid "RESPONSE RATE"
+#~ msgstr "TASSO DI RISPOSTA"
+
+#, fuzzy
+#~| msgid "TOTAL RESPONSES"
+#~ msgid "TOTAL RESPONDERS"
+#~ msgstr "RISPOSTE TOTALI"
+
+#~ msgid "ALL"
+#~ msgstr "TUTTO"
+
+#~ msgid "AGE"
+#~ msgstr "ETÀ"
+
+#~ msgid "GENDER"
+#~ msgstr "GENERE"
+
+#~ msgid "LOCATION"
+#~ msgstr "DOVE"
+
+#~ msgid "Written by:"
+#~ msgstr "Scritto da:"
+
+#, fuzzy
+#~| msgid "U-REPORTERS"
+#~ msgid "REPORT"
+#~ msgstr "U-REPORTERS"
+
+#~ msgid "STORY"
+#~ msgstr "STORIA"
+
+#~ msgid "OVERALL STATISTICS"
+#~ msgstr "Statistiche generali"
+
+#~ msgid "THIS YEAR"
+#~ msgstr "QUESTO ANNO"
+
+#~ msgid "AVG RESPONSE RATE"
+#~ msgstr "TASSO RISPOSTA MEDIO"
+
+#~ msgid "U-REPORTERS BY REGION"
+#~ msgstr "U-REPORTERS PER REGIONE"
+
+#~ msgid "FILTER RESULTS"
+#~ msgstr "FILTRA I RISULTATI"
+
+#~ msgid "Export and Share"
+#~ msgstr "Esporta e condividi"
+
+#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+#~ msgstr "Vuoi condividere il risultato ad utenti esterni? scarica questa immagine per i tuoi social media o inseriscila in una presentazione!"
+
+#~ msgid "SELECT COUNTRY"
+#~ msgstr "SELEZIONA IL PAESE"
+
+#~ msgid "Custom pages"
+#~ msgstr "Pagine Custom"
+
+#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
+#~ msgstr "Guarda attraverso i numeri come stiamo coinvolgendo le voci dei giovani per un cambiamento sociale positivo."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ "            Sei sicuro di voler rimuovere <strong>%(object)s</strong>?\n"
+#~ "          "
+
+#~ msgid "Error"
+#~ msgstr "Errore"
+
+#~ msgid "Enter Dashboard"
+#~ msgstr "Inserisci Dashboard"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Spiacenti, in questo momento non puoi accedere perché abbiamo registrato %(failed_login_limit)s tentativi di accesso sbagliati."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Per favore attendi %(lockout_timeout)s minuti prima di tentare di accedere di nuovo."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong> La tua password è scaduta. </strong> La politica del sito richiede che tu debba selezionare una nuova password ogni %(expire_days)s giorni, e che le password non devono essere già state utilizzate nei %(window_days)s giorni precedenti."
+
+#~ msgid "+ New Story"
+#~ msgstr "+ Nuova Storia"
 
 #~ msgid "Photos"
 #~ msgstr "Foto"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-01-24 08:26+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -113,18 +113,6 @@ msgstr "Priorita pro tento blok, bloky s vyšší prioritou mají přednost."
 
 msgid "The organization this content block belongs to"
 msgstr "Organizace, do které tento blok obsahu patří"
-
-msgid "Gallery"
-msgstr "Galerie"
-
-msgid "Add Image"
-msgstr "Přidat obrázek"
-
-msgid "Search"
-msgstr "Hledat"
-
-msgid "Add"
-msgstr "Přidat"
 
 msgid "Content Types"
 msgstr "Typy obsahu"
@@ -308,27 +296,6 @@ msgstr "Jste zváni, abyste se připojili k {{org.name}}."
 msgid "Click this link to join"
 msgstr "Pro připojení klikněte na tento odkaz "
 
-msgid "Edit"
-msgstr "Upravit"
-
-msgid "Manage Backends"
-msgstr "Správa backendů"
-
-msgid "Manage Users"
-msgstr "Správa uživatelů"
-
-msgid "Accounts"
-msgstr "Účty"
-
-msgid "Admins"
-msgstr "Administrátoři"
-
-msgid "Remove"
-msgstr "Odstranit"
-
-msgid "You must have at least one administator"
-msgstr "Musíte mít alespoň jednoho správce"
-
 msgid "Select your Organization"
 msgstr "Vyberte svou organizaci"
 
@@ -458,6 +425,15 @@ msgstr "Jakmile je odstraněn, navždy zmizí. Tuto operaci nelze vrátit zpět.
 
 msgid "Cancel"
 msgstr "Zrušit"
+
+msgid "Remove"
+msgstr "Odstranit"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "Add"
+msgstr "Přidat"
 
 #, python-format
 msgid ""
@@ -707,360 +683,27 @@ msgstr "Váš nový %s byl vytvořen."
 msgid "Import %s"
 msgstr "Import %s"
 
-msgid "Back to Website"
-msgstr "Zpět na webové stránky"
-
-msgid "Welcome, "
-msgstr "Vítejte, "
-
-msgid "Logout"
-msgstr "Odhlásit"
-
-msgid "Opinions"
-msgstr "Názory"
-
-msgid "Bots"
-msgstr "Boti"
-
-msgid "Users"
-msgstr "Uživatelé"
-
-msgid "Settings"
-msgstr "Nastavení"
-
-msgid "Pages"
-msgstr "Strany"
-
-msgid "Landing Pages"
-msgstr "Vstupní strany"
-
-msgid "Jobs"
-msgstr "Úkoly"
-
-msgid "Tags"
-msgstr "Štítky"
-
-msgid "Partners Logos"
-msgstr "Loga partnerů"
-
-msgid "Categories Images"
-msgstr "Obrázky kategorií"
-
-msgid "News Items"
-msgstr "Položky Zpráv"
-
-msgid "Orgs"
-msgstr "Organizace"
-
-msgid "Images"
-msgstr "Obrázky"
-
-msgid "About"
-msgstr "O"
-
-msgid "Engagement"
-msgstr "Zapojení"
-
-msgid "Reports"
-msgstr "Zprávy"
-
-msgid "Category Images"
-msgstr "Obrázky kategorií"
-
-msgid "+ New "
-msgstr "+ Nový"
-
-msgid "+ New Page"
-msgstr "+ Nová Strana"
-
-msgid "U-Report"
-msgstr "U-Report"
-
-msgid "Admin"
-msgstr "Administrátor"
-
-msgid "Configuration"
-msgstr "Konfigurace"
-
-msgid "Content"
-msgstr "Obsah"
-
-msgid "Country Aliases"
-msgstr "Aliasy zemí"
-
-msgid "Job Sources"
-msgstr "Zdroje Úloh"
-
-msgid "Jobs Content"
-msgstr "Obsah Úloh"
-
-msgid "About Content"
-msgstr "O Obsahu"
-
-msgid "Videos"
-msgstr "Videa"
-
-msgid "Contact Us Content"
-msgstr "Obsah Kontaktujte nás"
-
-msgid "Missions Content"
-msgstr "Obsah Mise"
-
-msgid "Terms & Conditions"
-msgstr "Podmínky a pravidla"
-
-msgid "U-Reporters Content"
-msgstr "Obsah strany U-Reportéři"
-
-msgid "Join &amp; Engage Content"
-msgstr "Připojte se a zapojte se do obsahu"
-
-msgid "Join Steps Content"
-msgstr "Připojte se k obsahu kroků"
-
-msgid "Additional Menu"
-msgstr "Další nabídka"
-
-msgid "SELECT YOUR COUNTRY"
-msgstr "VYBERTE SVOU ZEMI"
-
-msgid "Join Now"
-msgstr "Připojte se"
-
-msgid "READ MORE"
-msgstr "PŘEČTĚTE SI VÍCE"
-
-msgid "EXPLORE ENGAGEMENT"
-msgstr "PROZKOUMEJTE ZAPOJENÍ"
-
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-" Chcete-li přidat zdroj Pracovních nabídek Twitter, musíte získat id widgetu z Twitteru.\n"
-"     "
-
-msgid "Follow this step by step guide"
-msgstr "Postupujte podle tohoto průvodce krok za krokem"
-
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
-"\n"
-" <div>Po vytvoření widgetu zkopírujte id widgetu z url adresy, jak je uvedeno na</div>\n"
-"    "
-
-msgid "Back"
-msgstr "Zpět"
-
 msgid "Select bots"
 msgstr "Výběr botů"
-
-msgid "View public page"
-msgstr "Zobrazit veřejnou stránku"
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "NEJNOVĚJŠÍ OZNÁMENÍ"
-
-msgid "Backends"
-msgstr "Backendy"
 
 msgid "Add os Select tags"
 msgstr "Přidat nebo Vybrat značky"
 
-#, python-format
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] "V současné době je k dispozici %(counter)s nová synchronizace průzkumů. Ankety se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
-msgstr[1] "V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
-msgstr[2] "V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
-msgstr[3] "V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
-
-msgid "+ New Poll"
-msgstr "+ Nový Průzkum"
-
-#, python-format
-msgid "%(counter)s poll question"
-msgid_plural "%(counter)s poll questions"
-msgstr[0] "%(counter)s otázka průzkumu"
-msgstr[1] "%(counter)s otázky průzkumu"
-msgstr[2] "%(counter)s otázek průzkumu"
-msgstr[3] "%(counter)s otázek průzkumu"
-
-msgid "New poll initial syncs scheduled every 10min"
-msgstr "Nová počáteční synchronizace průzkumu naplánovaná každých 10 minut"
-
-msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr "Již není možné plánovat synchronizace pro staré průzkumy, jsou archivovány"
-
-msgid "Main poll syncs scheduled every 20min"
-msgstr "Synchronizace hlavního průzkumu naplánovaná každých 20 minut"
-
-msgid "Recent poll syncs scheduled every 60min"
-msgstr "Poslední synchronizace průzkumů naplánovaná každých 60 minut"
-
-msgid "Poll syncs scheduled every 24h"
-msgstr "Synchronizace průzkumů naplánovaná každých 24 hodin"
-
-msgid "Not scheduling syncs, not active"
-msgstr "Nenaplánovaná synchronizace, není aktivní"
-
-msgid "Not scheduling syncs, no flow for poll"
-msgstr "Žádné plánování synchronizací, žádný tok pro průzkum"
-
-#, fuzzy
-#| msgid "Previous"
-msgid "Preview results"
-msgstr "Předchozí"
-
-msgid "Refresh Results"
-msgstr "Obnovit výsledky"
-
-msgid "Partners"
-msgstr "Partneři"
-
-msgid "MORE POLLS"
-msgstr "VÍCE PRŮZKUMŮ"
-
-msgid "FILTER"
-msgstr "FILTR"
-
-msgid "All"
-msgstr "Vše"
-
-msgid "POLL LIST"
-msgstr "SEZNAM PRŮZKUMŮ"
-
-msgid "All polls from most recent to oldest"
-msgstr "Všechny průzkumy od nejnovějšího po nejstarší"
-
-msgid "ARCHIVED STORIES"
-msgstr "ARCHIVOVANÉ PŘÍBĚHY"
-
-msgid "LIST"
-msgstr "SEZNAM"
-
-msgid "Send"
-msgstr "Odeslat"
-
-msgid "to"
-msgstr "do"
-
-msgid "LATEST OPINION"
-msgstr "NEJNOVĚJŠÍ NÁZOR"
-
-msgid "VIEW FULL RESULTS"
-msgstr "ZOBRAZIT KOMPLETNÍ VÝSLEDKY"
-
-msgid "U-REPORTERS IN"
-msgstr "U-REPORTÉŘI V"
-
-msgid "PARTNERING WITH"
-msgstr "PARTNERSTVÍ S"
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTÉŘI"
-
-msgid "IN"
-msgstr "V"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "ZEMĚ PO CELÉM SVĚTĚ"
-
-msgid "AGES"
-msgstr "VĚKOVÉ SKUPINY"
-
-msgid "Available bots"
-msgstr "Dostupní boti"
-
-msgid "More bots"
-msgstr "Více botů"
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Přidejte se k U-Report, na vašem hlase záleží."
-
 msgid "FEATURED STORY"
 msgstr "DOPORUČENÝ PŘÍBĚH"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Jsme součástí globální platformy, která se snaží změnit životy mladých lidí na celém světě."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Zjistěte více o tom, jak U-Report posiluje a propojuje mladé lidi, aby se vyjadřovali k otázkám, na kterých jim záleží."
-
-msgid "LEARN MORE"
-msgstr "DALŠÍ INFORMACE"
-
-msgid "Visit"
-msgstr "Navštívít"
-
-msgid "How would you like to join?"
-msgstr "Jak byste se chtěli připojit?"
-
-msgid "Text"
-msgstr "Text"
-
-msgid "PAGE"
-msgstr "STRANA"
+msgid "READ MORE"
+msgstr "PŘEČTĚTE SI VÍCE"
 
 msgid "SEARCH"
 msgstr "HLEDAT"
-
-msgid "No results found"
-msgstr "Nenalezeny žádné výsledky"
-
-msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
-
-msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
-
-msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
-
-msgid "RESPONDERS"
-msgstr "PŘISPĚVATELÉ"
-
-msgid "RESPONSE RATE"
-msgstr "RYCHLOST ODEZVY"
-
-msgid "TOTAL RESPONDERS"
-msgstr "CELKEM PŘISPĚVATELŮ"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s odpovědělo z %(polled)s dotázaných"
 
-msgid "ALL"
-msgstr "VŠE"
-
-msgid "AGE"
-msgstr "VĚK"
-
-msgid "GENDER"
-msgstr "POHLAVÍ"
-
-msgid "LOCATION"
-msgstr "LOKALITA"
-
-msgid "Written by:"
-msgstr "Napsal:"
-
-msgid "No reports published yet"
-msgstr "Zatím nebyly zveřejněny žádné zprávy"
-
-msgid "REPORT"
-msgstr "ZPRÁVA"
-
-msgid "STORY"
-msgstr "PŘÍBĚH"
-
-msgid "Download Report"
-msgstr "Stáhnout zprávu"
+msgid "All"
+msgstr "Vše"
 
 msgid "Even"
 msgstr "Také"
@@ -1106,45 +749,6 @@ msgstr "z"
 
 msgid "the"
 msgstr " "
-
-msgid "OVERALL STATISTICS"
-msgstr "CELKOVÉ STATISTIKY"
-
-msgid "THIS YEAR"
-msgstr "TENTO ROK"
-
-msgid "AVG RESPONSE RATE"
-msgstr "PRŮMĚRNÁ RYCHLOST ODEZVY"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTÉŘI PODLE REGIONŮ"
-
-msgid "FILTER RESULTS"
-msgstr "VÝSLEDKY FILTROVÁNÍ"
-
-msgid "Charts only visible for logged in admins"
-msgstr "Grafy viditelné pouze pro přihlášené správce"
-
-msgid "Export and Share"
-msgstr "Export a sdílení"
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "Chcete o tom říct světu? Stáhněte si tento obrázek a snadno ho sdílejte na sociálních sítích nebo pro krásnou prezentaci!"
-
-msgid "SELECT LANGUAGE"
-msgstr "VYBRAT JAZYK"
-
-msgid "SELECT COUNTRY"
-msgstr "VYBRAT ZEMI"
-
-msgid "Custom pages"
-msgstr "Uživatelské stránky"
-
-msgid "Landing pages"
-msgstr "Vstupní strany"
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "Podívejte se na čísla, jak zapojujeme hlasy mladých lidí do pozitivní sociální změny."
 
 msgid "Polled"
 msgstr "Proveden výzkum"
@@ -1225,16 +829,6 @@ msgid "Dec"
 msgstr "Pro"
 
 #, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-" Opravdu chcete odstranit <strong>%(object)s</strong>?\n"
-"      "
-
-#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] "%(counter)s výsledek"
@@ -1245,42 +839,6 @@ msgstr[3] "%(counter)s výsledků"
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Výsledky %(start)s-%(end)s z %(count)s"
-
-msgid "Error"
-msgstr "Chyba"
-
-msgid "Enter Dashboard"
-msgstr "Vstup na ovládací panel"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Je nám líto, ale v tuto chvíli se nemůžete přihlásit, protože jsme obdrželi %(failed_login_limit)s nesprávných pokusů o přihlášení."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-" Počkejte prosím %(lockout_timeout)s minut, než se zkusíte přihlásit znovu."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-" <strong>Platnost vašeho hesla vypršela</strong>. Zásady webu stanoví, že si musíte každý %(expire_days)s den zvolit nové heslo a že hesla nesměla být v předchozích %(window_days)s dnech použita."
-
-msgid "+ New Story"
-msgstr "+ Nový příběh"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1944,3 +1502,436 @@ msgstr "Zda byl tento řádek vytvořen stlačením"
 
 msgid "Something to trigger localizations"
 msgstr "Něco pro spouštění lokalizací"
+
+#~ msgid "Gallery"
+#~ msgstr "Galerie"
+
+#~ msgid "Add Image"
+#~ msgstr "Přidat obrázek"
+
+#~ msgid "Edit"
+#~ msgstr "Upravit"
+
+#~ msgid "Manage Backends"
+#~ msgstr "Správa backendů"
+
+#~ msgid "Manage Users"
+#~ msgstr "Správa uživatelů"
+
+#~ msgid "Accounts"
+#~ msgstr "Účty"
+
+#~ msgid "Admins"
+#~ msgstr "Administrátoři"
+
+#~ msgid "You must have at least one administator"
+#~ msgstr "Musíte mít alespoň jednoho správce"
+
+#~ msgid "Back to Website"
+#~ msgstr "Zpět na webové stránky"
+
+#~ msgid "Welcome, "
+#~ msgstr "Vítejte, "
+
+#~ msgid "Logout"
+#~ msgstr "Odhlásit"
+
+#~ msgid "Opinions"
+#~ msgstr "Názory"
+
+#~ msgid "Bots"
+#~ msgstr "Boti"
+
+#~ msgid "Users"
+#~ msgstr "Uživatelé"
+
+#~ msgid "Settings"
+#~ msgstr "Nastavení"
+
+#~ msgid "Pages"
+#~ msgstr "Strany"
+
+#~ msgid "Landing Pages"
+#~ msgstr "Vstupní strany"
+
+#~ msgid "Jobs"
+#~ msgstr "Úkoly"
+
+#~ msgid "Tags"
+#~ msgstr "Štítky"
+
+#~ msgid "Partners Logos"
+#~ msgstr "Loga partnerů"
+
+#~ msgid "Categories Images"
+#~ msgstr "Obrázky kategorií"
+
+#~ msgid "News Items"
+#~ msgstr "Položky Zpráv"
+
+#~ msgid "Orgs"
+#~ msgstr "Organizace"
+
+#~ msgid "Images"
+#~ msgstr "Obrázky"
+
+#~ msgid "About"
+#~ msgstr "O"
+
+#~ msgid "Engagement"
+#~ msgstr "Zapojení"
+
+#~ msgid "Reports"
+#~ msgstr "Zprávy"
+
+#~ msgid "Category Images"
+#~ msgstr "Obrázky kategorií"
+
+#~ msgid "+ New "
+#~ msgstr "+ Nový"
+
+#~ msgid "+ New Page"
+#~ msgstr "+ Nová Strana"
+
+#~ msgid "U-Report"
+#~ msgstr "U-Report"
+
+#~ msgid "Admin"
+#~ msgstr "Administrátor"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfigurace"
+
+#~ msgid "Content"
+#~ msgstr "Obsah"
+
+#~ msgid "Country Aliases"
+#~ msgstr "Aliasy zemí"
+
+#~ msgid "Job Sources"
+#~ msgstr "Zdroje Úloh"
+
+#~ msgid "Jobs Content"
+#~ msgstr "Obsah Úloh"
+
+#~ msgid "About Content"
+#~ msgstr "O Obsahu"
+
+#~ msgid "Videos"
+#~ msgstr "Videa"
+
+#~ msgid "Contact Us Content"
+#~ msgstr "Obsah Kontaktujte nás"
+
+#~ msgid "Missions Content"
+#~ msgstr "Obsah Mise"
+
+#~ msgid "Terms & Conditions"
+#~ msgstr "Podmínky a pravidla"
+
+#~ msgid "U-Reporters Content"
+#~ msgstr "Obsah strany U-Reportéři"
+
+#~ msgid "Join &amp; Engage Content"
+#~ msgstr "Připojte se a zapojte se do obsahu"
+
+#~ msgid "Join Steps Content"
+#~ msgstr "Připojte se k obsahu kroků"
+
+#~ msgid "Additional Menu"
+#~ msgstr "Další nabídka"
+
+#~ msgid "SELECT YOUR COUNTRY"
+#~ msgstr "VYBERTE SVOU ZEMI"
+
+#~ msgid "Join Now"
+#~ msgstr "Připojte se"
+
+#~ msgid "EXPLORE ENGAGEMENT"
+#~ msgstr "PROZKOUMEJTE ZAPOJENÍ"
+
+#~ msgid ""
+#~ "\n"
+#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ " Chcete-li přidat zdroj Pracovních nabídek Twitter, musíte získat id widgetu z Twitteru.\n"
+#~ "     "
+
+#~ msgid "Follow this step by step guide"
+#~ msgstr "Postupujte podle tohoto průvodce krok za krokem"
+
+#~ msgid ""
+#~ "\n"
+#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ " <div>Po vytvoření widgetu zkopírujte id widgetu z url adresy, jak je uvedeno na</div>\n"
+#~ "    "
+
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+#~ msgid "View public page"
+#~ msgstr "Zobrazit veřejnou stránku"
+
+#~ msgid "LATEST NOTIFICATIONS"
+#~ msgstr "NEJNOVĚJŠÍ OZNÁMENÍ"
+
+#~ msgid "Backends"
+#~ msgstr "Backendy"
+
+#, python-format
+#~ msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+#~ msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+#~ msgstr[0] "V současné době je k dispozici %(counter)s nová synchronizace průzkumů. Ankety se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
+#~ msgstr[1] "V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
+#~ msgstr[2] "V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
+#~ msgstr[3] "V současné době probíhá synchronizace %(counter)s nových průzkumů. Průzkumy se na veřejném webu zobrazí, jakmile se kompletně synchronizují jejich výsledky."
+
+#~ msgid "+ New Poll"
+#~ msgstr "+ Nový Průzkum"
+
+#, python-format
+#~ msgid "%(counter)s poll question"
+#~ msgid_plural "%(counter)s poll questions"
+#~ msgstr[0] "%(counter)s otázka průzkumu"
+#~ msgstr[1] "%(counter)s otázky průzkumu"
+#~ msgstr[2] "%(counter)s otázek průzkumu"
+#~ msgstr[3] "%(counter)s otázek průzkumu"
+
+#~ msgid "New poll initial syncs scheduled every 10min"
+#~ msgstr "Nová počáteční synchronizace průzkumu naplánovaná každých 10 minut"
+
+#~ msgid "No longer scheduling syncs for old polls, runs archived"
+#~ msgstr "Již není možné plánovat synchronizace pro staré průzkumy, jsou archivovány"
+
+#~ msgid "Main poll syncs scheduled every 20min"
+#~ msgstr "Synchronizace hlavního průzkumu naplánovaná každých 20 minut"
+
+#~ msgid "Recent poll syncs scheduled every 60min"
+#~ msgstr "Poslední synchronizace průzkumů naplánovaná každých 60 minut"
+
+#~ msgid "Poll syncs scheduled every 24h"
+#~ msgstr "Synchronizace průzkumů naplánovaná každých 24 hodin"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "Nenaplánovaná synchronizace, není aktivní"
+
+#~ msgid "Not scheduling syncs, no flow for poll"
+#~ msgstr "Žádné plánování synchronizací, žádný tok pro průzkum"
+
+#, fuzzy
+#~| msgid "Previous"
+#~ msgid "Preview results"
+#~ msgstr "Předchozí"
+
+#~ msgid "Refresh Results"
+#~ msgstr "Obnovit výsledky"
+
+#~ msgid "Partners"
+#~ msgstr "Partneři"
+
+#~ msgid "MORE POLLS"
+#~ msgstr "VÍCE PRŮZKUMŮ"
+
+#~ msgid "FILTER"
+#~ msgstr "FILTR"
+
+#~ msgid "POLL LIST"
+#~ msgstr "SEZNAM PRŮZKUMŮ"
+
+#~ msgid "All polls from most recent to oldest"
+#~ msgstr "Všechny průzkumy od nejnovějšího po nejstarší"
+
+#~ msgid "ARCHIVED STORIES"
+#~ msgstr "ARCHIVOVANÉ PŘÍBĚHY"
+
+#~ msgid "LIST"
+#~ msgstr "SEZNAM"
+
+#~ msgid "Send"
+#~ msgstr "Odeslat"
+
+#~ msgid "to"
+#~ msgstr "do"
+
+#~ msgid "LATEST OPINION"
+#~ msgstr "NEJNOVĚJŠÍ NÁZOR"
+
+#~ msgid "VIEW FULL RESULTS"
+#~ msgstr "ZOBRAZIT KOMPLETNÍ VÝSLEDKY"
+
+#~ msgid "U-REPORTERS IN"
+#~ msgstr "U-REPORTÉŘI V"
+
+#~ msgid "PARTNERING WITH"
+#~ msgstr "PARTNERSTVÍ S"
+
+#~ msgid "U-REPORTERS"
+#~ msgstr "U-REPORTÉŘI"
+
+#~ msgid "IN"
+#~ msgstr "V"
+
+#~ msgid "COUNTRIES WORLDWIDE"
+#~ msgstr "ZEMĚ PO CELÉM SVĚTĚ"
+
+#~ msgid "AGES"
+#~ msgstr "VĚKOVÉ SKUPINY"
+
+#~ msgid "Available bots"
+#~ msgstr "Dostupní boti"
+
+#~ msgid "More bots"
+#~ msgstr "Více botů"
+
+#~ msgid "Join U-Report, Your voice matters."
+#~ msgstr "Přidejte se k U-Report, na vašem hlase záleží."
+
+#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
+#~ msgstr "Jsme součástí globální platformy, která se snaží změnit životy mladých lidí na celém světě."
+
+#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+#~ msgstr "Zjistěte více o tom, jak U-Report posiluje a propojuje mladé lidi, aby se vyjadřovali k otázkám, na kterých jim záleží."
+
+#~ msgid "LEARN MORE"
+#~ msgstr "DALŠÍ INFORMACE"
+
+#~ msgid "Visit"
+#~ msgstr "Navštívít"
+
+#~ msgid "How would you like to join?"
+#~ msgstr "Jak byste se chtěli připojit?"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "PAGE"
+#~ msgstr "STRANA"
+
+#~ msgid "No results found"
+#~ msgstr "Nenalezeny žádné výsledky"
+
+#~ msgid "RESPONDERS"
+#~ msgstr "PŘISPĚVATELÉ"
+
+#~ msgid "RESPONSE RATE"
+#~ msgstr "RYCHLOST ODEZVY"
+
+#~ msgid "TOTAL RESPONDERS"
+#~ msgstr "CELKEM PŘISPĚVATELŮ"
+
+#~ msgid "ALL"
+#~ msgstr "VŠE"
+
+#~ msgid "AGE"
+#~ msgstr "VĚK"
+
+#~ msgid "GENDER"
+#~ msgstr "POHLAVÍ"
+
+#~ msgid "LOCATION"
+#~ msgstr "LOKALITA"
+
+#~ msgid "Written by:"
+#~ msgstr "Napsal:"
+
+#~ msgid "No reports published yet"
+#~ msgstr "Zatím nebyly zveřejněny žádné zprávy"
+
+#~ msgid "REPORT"
+#~ msgstr "ZPRÁVA"
+
+#~ msgid "STORY"
+#~ msgstr "PŘÍBĚH"
+
+#~ msgid "Download Report"
+#~ msgstr "Stáhnout zprávu"
+
+#~ msgid "OVERALL STATISTICS"
+#~ msgstr "CELKOVÉ STATISTIKY"
+
+#~ msgid "THIS YEAR"
+#~ msgstr "TENTO ROK"
+
+#~ msgid "AVG RESPONSE RATE"
+#~ msgstr "PRŮMĚRNÁ RYCHLOST ODEZVY"
+
+#~ msgid "U-REPORTERS BY REGION"
+#~ msgstr "U-REPORTÉŘI PODLE REGIONŮ"
+
+#~ msgid "FILTER RESULTS"
+#~ msgstr "VÝSLEDKY FILTROVÁNÍ"
+
+#~ msgid "Charts only visible for logged in admins"
+#~ msgstr "Grafy viditelné pouze pro přihlášené správce"
+
+#~ msgid "Export and Share"
+#~ msgstr "Export a sdílení"
+
+#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+#~ msgstr "Chcete o tom říct světu? Stáhněte si tento obrázek a snadno ho sdílejte na sociálních sítích nebo pro krásnou prezentaci!"
+
+#~ msgid "SELECT LANGUAGE"
+#~ msgstr "VYBRAT JAZYK"
+
+#~ msgid "SELECT COUNTRY"
+#~ msgstr "VYBRAT ZEMI"
+
+#~ msgid "Custom pages"
+#~ msgstr "Uživatelské stránky"
+
+#~ msgid "Landing pages"
+#~ msgstr "Vstupní strany"
+
+#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
+#~ msgstr "Podívejte se na čísla, jak zapojujeme hlasy mladých lidí do pozitivní sociální změny."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+#~ "          "
+#~ msgstr ""
+#~ "\n"
+#~ " Opravdu chcete odstranit <strong>%(object)s</strong>?\n"
+#~ "      "
+
+#~ msgid "Error"
+#~ msgstr "Chyba"
+
+#~ msgid "Enter Dashboard"
+#~ msgstr "Vstup na ovládací panel"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Je nám líto, ale v tuto chvíli se nemůžete přihlásit, protože jsme obdrželi %(failed_login_limit)s nesprávných pokusů o přihlášení."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ " Počkejte prosím %(lockout_timeout)s minut, než se zkusíte přihlásit znovu."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ " <strong>Platnost vašeho hesla vypršela</strong>. Zásady webu stanoví, že si musíte každý %(expire_days)s den zvolit nové heslo a že hesla nesměla být v předchozích %(window_days)s dnech použita."
+
+#~ msgid "+ New Story"
+#~ msgstr "+ Nový příběh"

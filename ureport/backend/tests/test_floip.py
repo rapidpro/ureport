@@ -553,8 +553,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="Customers")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                     TembaContact.create(
                         uuid="C-002",
@@ -563,8 +562,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                 ],
                 [
@@ -575,8 +573,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="blocked",
                     )
                 ],
             ),
@@ -590,8 +587,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ]
             ),
@@ -616,8 +612,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                     TembaContact.create(
                         uuid="C-002",
@@ -626,8 +621,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                 ],
                 [
@@ -638,8 +632,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ],
             ),
@@ -653,8 +646,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ]
             ),
@@ -681,8 +673,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                     TembaContact.create(
                         uuid="C-002",
@@ -691,8 +682,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                 ],
                 [
@@ -703,8 +693,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ],
             ),
@@ -718,8 +707,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ]
             ),
@@ -747,8 +735,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                     TembaContact.create(
                         uuid="C-002",
@@ -757,8 +744,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                 ],
                 [
@@ -769,8 +755,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ],
             ),
@@ -784,8 +769,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ]
             ),
@@ -824,6 +808,7 @@ class FLOIPBackendTest(UreportTest):
                             "gender": "Male",
                         },
                         language="eng",
+                        status="active",
                     ),
                     TembaContact.create(
                         uuid="C-002",
@@ -832,8 +817,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "67", "born": "1992"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                 ]
             ),
@@ -847,8 +831,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                     )
                 ]
             ),
@@ -884,8 +867,7 @@ class FLOIPBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                     )
                 ]
             ),
