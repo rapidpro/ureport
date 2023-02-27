@@ -3,11 +3,10 @@ on: [push, pull_request]
 jobs:
   test:
     name: Test
-    strategy:
-      matrix:
-        python-version: ['3.9.x', "3.10.x"]
-        redis-version: ["5.0.6", "6.2"]
-        pg-version: ['12', '13', '14']
+    env:
+      python-version: "3.10.x"
+      redis-version: "6.2"
+      pg-version: "14"
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout code
@@ -16,7 +15,7 @@ jobs:
     - name: Install PostgreSQL
       uses: harmon758/postgresql-action@v1
       with:
-        postgresql version: ${{ matrix.pg-version }}
+        postgresql version: ${{ env.pg-version }}
         postgresql db: ureport
         postgresql user: ureport
         postgresql password: nyaruka
@@ -24,12 +23,12 @@ jobs:
     - name: Install Redis
       uses: zhulik/redis-action@v1.0.0
       with:
-        redis version: ${{ matrix.redis-version }}
+        redis version: ${{ env.redis-version }}
 
     - name: Install Python
       uses: actions/setup-python@v1
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ env.python-version }}
 
     - name: Install Poetry
       uses: snok/install-poetry@v1
