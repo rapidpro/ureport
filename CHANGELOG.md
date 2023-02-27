@@ -1,3 +1,8 @@
+v1.2.55 (2023-02-27)
+-------------------------
+ * Merge pull request #1094 from rapidpro/fix-story-errors
+ * Fix stories validation and have the errors well noticeable
+
 v1.2.54 (2023-02-22)
 -------------------------
  * Update dash and poetry lock file
