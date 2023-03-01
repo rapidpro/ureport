@@ -715,6 +715,86 @@ class PollStats(models.Model):
         return percentage
 
 
+class PollContactResult(models.Model):
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_contact_results", db_index=False)
+
+    contact = models.CharField(max_length=36)
+
+    flow = models.CharField(max_length=36)
+
+    flow_result = models.ForeignKey(FlowResult, null=True, on_delete=models.SET_NULL)
+
+    flow_result_category = models.ForeignKey(FlowResultCategory, null=True, on_delete=models.SET_NULL)
+
+    text = models.TextField(null=True)
+
+    age_segment = models.ForeignKey(AgeSegment, null=True, on_delete=models.SET_NULL)
+
+    gender_segment = models.ForeignKey(GenderSegment, null=True, on_delete=models.SET_NULL)
+
+    scheme_segment = models.ForeignKey(SchemeSegment, null=True, on_delete=models.SET_NULL)
+
+    location = models.ForeignKey(Boundary, null=True, on_delete=models.SET_NULL)
+
+    date = models.DateTimeField(null=True)
+
+    class Meta:
+        indexes = [
+            models.Index(name="%(app_label)s_pcr_contact", fields=["contact"]),
+            models.Index(name="%(app_label)s_pcr_org_flow_contact", fields=["org", "flow", "contact"]),
+            models.Index(name="%(app_label)s_pcr_org_flow", fields=["org", "flow"]),
+            models.Index(name="%(app_label)s_pcr_org_flow_result_text", fields=["org", "flow", "flow_result", "text"]),
+        ]
+
+
+class ContactEngagementActivity(models.Model):
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_engagement_activities")
+
+    contact = models.CharField(max_length=36)
+
+    age_segment = models.ForeignKey(AgeSegment, null=True, on_delete=models.SET_NULL)
+
+    gender_segment = models.ForeignKey(GenderSegment, null=True, on_delete=models.SET_NULL)
+
+    scheme_segment = models.ForeignKey(SchemeSegment, null=True, on_delete=models.SET_NULL)
+
+    location = models.ForeignKey(Boundary, null=True, on_delete=models.SET_NULL)
+
+    date = models.DateField(help_text="The starting date for for the month")
+
+    used = models.BooleanField(null=True)
+
+    class Meta:
+        indexes = [
+            models.Index(name="%(app_label)s_cea_org_contact", fields=["org", "contact"]),
+            models.Index(name="%(app_label)s_cea_org_date", fields=["org", "date"]),
+            models.Index(
+                name="%(app_label)s_cea_org_date_used", fields=["org", "date", "used"], condition=Q(used=True)
+            ),
+            models.Index(
+                name="%(app_label)s_cea_org_date_state_used",
+                fields=["org", "date", "location", "used"],
+                condition=Q(location__isnull=False) & Q(used=True),
+            ),
+            models.Index(
+                name="%(app_label)s_cea_org_date_age_used",
+                fields=["org", "date", "age_segment", "used"],
+                condition=Q(age_segment__isnull=False) & Q(used=True),
+            ),
+            models.Index(
+                name="%(app_label)s_cea_org_date_scheme_used",
+                fields=["org", "date", "scheme_segment", "used"],
+                condition=Q(scheme_segment__isnull=False) & Q(used=True),
+            ),
+            models.Index(
+                name="%(app_label)s_cea_org_date_gender_used",
+                fields=["org", "date", "gender_segment", "used"],
+                condition=Q(gender_segment__isnull=False) & Q(used=True),
+            ),
+        ]
+        unique_together = ("org", "contact", "date")
+
+
 class ContactActivity(models.Model):
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_activities")
 
