@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 08:26+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -110,6 +110,18 @@ msgstr "A prioridade para este bloco, blocos de mais elevada prioridade vêm em 
 
 msgid "The organization this content block belongs to"
 msgstr "A organização deste bloco de conteúdo pertence à"
+
+msgid "Gallery"
+msgstr "Galeria"
+
+msgid "Add Image"
+msgstr "Adicionar uma Imagem"
+
+msgid "Search"
+msgstr "Procurar"
+
+msgid "Add"
+msgstr "Adicionar"
 
 msgid "Content Types"
 msgstr "Tipos de Conteúdo"
@@ -291,6 +303,29 @@ msgstr ""
 msgid "Click this link to join"
 msgstr ""
 
+msgid "Edit"
+msgstr "Editar"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Gerir utilizadores"
+
+msgid "Manage Users"
+msgstr "Gerir utilizadores"
+
+msgid "Accounts"
+msgstr "Contas"
+
+msgid "Admins"
+msgstr "Administradores"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "You must have at least one administator"
+msgstr "Você deve ter pelo menos um administrador"
+
 msgid "Select your Organization"
 msgstr "Escolha a sua Organização"
 
@@ -431,15 +466,6 @@ msgstr "Uma vez  removido, desaparecerá para sempre. Não há forma de desfazer
 
 msgid "Cancel"
 msgstr "Cancelar"
-
-msgid "Remove"
-msgstr "Remover"
-
-msgid "Search"
-msgstr "Procurar"
-
-msgid "Add"
-msgstr "Adicionar"
 
 #, python-format
 msgid ""
@@ -670,20 +696,348 @@ msgstr "O teu novo %s foi criado."
 msgid "Import %s"
 msgstr ""
 
+msgid "Back to Website"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Logout"
+msgstr "Sair"
+
+msgid "Opinions"
+msgstr ""
+
+msgid "Bots"
+msgstr ""
+
+msgid "Users"
+msgstr "Utilizadores"
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "Imagens"
+
+msgid "Landing Pages"
+msgstr ""
+
+msgid "Jobs"
+msgstr "Emprego"
+
+msgid "Tags"
+msgstr ""
+
+msgid "Partners Logos"
+msgstr ""
+
+#, fuzzy
+#| msgid "Category Images"
+msgid "Categories Images"
+msgstr "Categoria de Imagens"
+
+msgid "News Items"
+msgstr "Notícias"
+
+msgid "Orgs"
+msgstr "Orgs."
+
+msgid "Images"
+msgstr "Imagens"
+
+msgid "About"
+msgstr "Sobre Nós"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reports"
+msgstr "A malta SMS BIZ"
+
+msgid "Category Images"
+msgstr "Categoria de Imagens"
+
+msgid "+ New "
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
+msgid "U-Report"
+msgstr "SMS BIZ"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Configuration"
+msgstr "Configuração"
+
+msgid "Content"
+msgstr "Conteúdo"
+
+msgid "Country Aliases"
+msgstr ""
+
+msgid "Job Sources"
+msgstr "Fontes de Emprego"
+
+msgid "Jobs Content"
+msgstr "Conteúdo de Emprego"
+
+msgid "About Content"
+msgstr "Sobre Conteúdo"
+
+msgid "Videos"
+msgstr "Vídeos "
+
+msgid "Contact Us Content"
+msgstr "Conteúdo sobre Contacte-nos"
+
+msgid "Missions Content"
+msgstr "Conteúdo das Missões"
+
+msgid "Terms & Conditions"
+msgstr "Termos e Condições"
+
+msgid "U-Reporters Content"
+msgstr "O conteúdo partilhado pela malta SMS BIZ"
+
+msgid "Join &amp; Engage Content"
+msgstr ""
+
+msgid "Join Steps Content"
+msgstr "Conteúdo dos passos de registo."
+
+msgid "Additional Menu"
+msgstr "Menú adicional"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Conecta-te"
+
+msgid "READ MORE"
+msgstr "LEIA MAIS"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+
+msgid "Follow this step by step guide"
+msgstr "Siga esta guia, passo a passo"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+
+msgid "Back"
+msgstr "Voltar"
+
 msgid "Select bots"
 msgstr ""
 
+msgid "View public page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "LOCALIZAÇÕES"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Gerir utilizadores"
+
 msgid "Add os Select tags"
+msgstr ""
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "+ New Poll"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Perguntas do Inquérito"
+msgstr[1] "Perguntas do Inquérito"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
+
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Veja os resultados completos"
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Resultados"
+
+msgid "Partners"
+msgstr ""
+
+msgid "MORE POLLS"
+msgstr "MAIS INQUÉRITOS"
+
+msgid "FILTER"
+msgstr "FILTRAR"
+
+msgid "All"
+msgstr "Todo o País"
+
+msgid "POLL LIST"
+msgstr "LISTA DE INQUÉRITOS"
+
+msgid "All polls from most recent to oldest"
+msgstr "Todos os inquéritos do mais recente até o mais antigo."
+
+msgid "ARCHIVED STORIES"
+msgstr "HISTÓRIAS ARQUIVADAS"
+
+msgid "LIST"
+msgstr "LISTAR"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST OPINION"
+msgstr "LOCALIZAÇÕES"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "RESULTADOS DOS INQUÉRITOS"
+
+msgid "U-REPORTERS IN"
+msgstr "SMS BIZ EM"
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS"
+msgstr "SMS BIZ EM"
+
+msgid "IN"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "SMS BIZ EM"
+
+msgid "AGES"
+msgstr ""
+
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
+msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "FEATURED STORY"
 msgstr "HISTÓRIAS SELECIONADAS"
 
-msgid "READ MORE"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
 msgstr "LEIA MAIS"
+
+msgid "Visit"
+msgstr "Visite"
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "PAGE"
+msgstr ""
 
 msgid "SEARCH"
 msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONDERS"
+msgstr "TAXA DE RESPOSTAS"
+
+msgid "RESPONSE RATE"
+msgstr "TAXA DE RESPOSTAS"
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "TOTAL RESPONDERS"
+msgstr "TAXA DE RESPOSTAS"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -695,8 +1049,36 @@ msgstr ""
 "\n"
 "%(responded)s responderam dos %(polled)s alcançados"
 
-msgid "All"
-msgstr "Todo o País"
+msgid "ALL"
+msgstr ""
+
+msgid "AGE"
+msgstr "IDADE"
+
+msgid "GENDER"
+msgstr "SEXO"
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "LOCALIZAÇÕES"
+
+msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "REPORT"
+msgstr "SMS BIZ EM"
+
+msgid "STORY"
+msgstr "HISTÓRIA"
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Equilibrado"
@@ -744,6 +1126,53 @@ msgstr "de"
 
 msgid "the"
 msgstr "do"
+
+#, fuzzy
+#| msgid "U-REPORTER STATISTICS"
+msgid "OVERALL STATISTICS"
+msgstr "ESTATÍSTICAS DO SMS BIZ"
+
+msgid "THIS YEAR"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "AVG RESPONSE RATE"
+msgstr "TAXA DE RESPOSTAS"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS BY REGION"
+msgstr "SMS BIZ EM"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "FILTER RESULTS"
+msgstr "RESULTADOS DOS INQUÉRITOS"
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT LANGUAGE"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr ""
 
 #, fuzzy
 #| msgid "polled"
@@ -832,6 +1261,19 @@ msgid "Dec"
 msgstr ""
 
 #, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Tens a certeza que desejas remover <b>%(object)s</b>?"
+
+#, fuzzy, python-format
 #| msgid "Poll Questions"
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
@@ -847,6 +1289,36 @@ msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "⇥Resultados %(start)s-%(end)s de %(count)s"
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+
+msgid "+ New Story"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1610,265 +2082,6 @@ msgstr "Se esta história é selecionada"
 
 msgid "Something to trigger localizations"
 msgstr ""
-
-#~ msgid "Gallery"
-#~ msgstr "Galeria"
-
-#~ msgid "Add Image"
-#~ msgstr "Adicionar uma Imagem"
-
-#~ msgid "Edit"
-#~ msgstr "Editar"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "Gerir utilizadores"
-
-#~ msgid "Manage Users"
-#~ msgstr "Gerir utilizadores"
-
-#~ msgid "Accounts"
-#~ msgstr "Contas"
-
-#~ msgid "Admins"
-#~ msgstr "Administradores"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Você deve ter pelo menos um administrador"
-
-#~ msgid "Logout"
-#~ msgstr "Sair"
-
-#~ msgid "Users"
-#~ msgstr "Utilizadores"
-
-#, fuzzy
-#~| msgid "Images"
-#~ msgid "Pages"
-#~ msgstr "Imagens"
-
-#~ msgid "Jobs"
-#~ msgstr "Emprego"
-
-#, fuzzy
-#~| msgid "Category Images"
-#~ msgid "Categories Images"
-#~ msgstr "Categoria de Imagens"
-
-#~ msgid "News Items"
-#~ msgstr "Notícias"
-
-#~ msgid "Orgs"
-#~ msgstr "Orgs."
-
-#~ msgid "Images"
-#~ msgstr "Imagens"
-
-#~ msgid "About"
-#~ msgstr "Sobre Nós"
-
-#, fuzzy
-#~| msgid "U-Reporters"
-#~ msgid "Reports"
-#~ msgstr "A malta SMS BIZ"
-
-#~ msgid "Category Images"
-#~ msgstr "Categoria de Imagens"
-
-#~ msgid "U-Report"
-#~ msgstr "SMS BIZ"
-
-#~ msgid "Admin"
-#~ msgstr "Admin"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuração"
-
-#~ msgid "Content"
-#~ msgstr "Conteúdo"
-
-#~ msgid "Job Sources"
-#~ msgstr "Fontes de Emprego"
-
-#~ msgid "Jobs Content"
-#~ msgstr "Conteúdo de Emprego"
-
-#~ msgid "About Content"
-#~ msgstr "Sobre Conteúdo"
-
-#~ msgid "Videos"
-#~ msgstr "Vídeos "
-
-#~ msgid "Contact Us Content"
-#~ msgstr "Conteúdo sobre Contacte-nos"
-
-#~ msgid "Missions Content"
-#~ msgstr "Conteúdo das Missões"
-
-#~ msgid "Terms & Conditions"
-#~ msgstr "Termos e Condições"
-
-#~ msgid "U-Reporters Content"
-#~ msgstr "O conteúdo partilhado pela malta SMS BIZ"
-
-#~ msgid "Join Steps Content"
-#~ msgstr "Conteúdo dos passos de registo."
-
-#~ msgid "Additional Menu"
-#~ msgstr "Menú adicional"
-
-#, fuzzy
-#~| msgid "Join"
-#~ msgid "Join Now"
-#~ msgstr "Conecta-te"
-
-#~ msgid "Follow this step by step guide"
-#~ msgstr "Siga esta guia, passo a passo"
-
-#~ msgid "Back"
-#~ msgstr "Voltar"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LATEST NOTIFICATIONS"
-#~ msgstr "LOCALIZAÇÕES"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Backends"
-#~ msgstr "Gerir utilizadores"
-
-#, fuzzy, python-format
-#~| msgid "Poll Questions"
-#~ msgid "%(counter)s poll question"
-#~ msgid_plural "%(counter)s poll questions"
-#~ msgstr[0] "Perguntas do Inquérito"
-#~ msgstr[1] "Perguntas do Inquérito"
-
-#, fuzzy
-#~| msgid "View full results"
-#~ msgid "Preview results"
-#~ msgstr "Veja os resultados completos"
-
-#, fuzzy
-#~| msgid "Results"
-#~ msgid "Refresh Results"
-#~ msgstr "Resultados"
-
-#~ msgid "MORE POLLS"
-#~ msgstr "MAIS INQUÉRITOS"
-
-#~ msgid "FILTER"
-#~ msgstr "FILTRAR"
-
-#~ msgid "POLL LIST"
-#~ msgstr "LISTA DE INQUÉRITOS"
-
-#~ msgid "All polls from most recent to oldest"
-#~ msgstr "Todos os inquéritos do mais recente até o mais antigo."
-
-#~ msgid "ARCHIVED STORIES"
-#~ msgstr "HISTÓRIAS ARQUIVADAS"
-
-#~ msgid "LIST"
-#~ msgstr "LISTAR"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LATEST OPINION"
-#~ msgstr "LOCALIZAÇÕES"
-
-#, fuzzy
-#~| msgid "POLL RESULTS"
-#~ msgid "VIEW FULL RESULTS"
-#~ msgstr "RESULTADOS DOS INQUÉRITOS"
-
-#~ msgid "U-REPORTERS IN"
-#~ msgstr "SMS BIZ EM"
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "U-REPORTERS"
-#~ msgstr "SMS BIZ EM"
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "COUNTRIES WORLDWIDE"
-#~ msgstr "SMS BIZ EM"
-
-#, fuzzy
-#~| msgid "READ MORE"
-#~ msgid "LEARN MORE"
-#~ msgstr "LEIA MAIS"
-
-#~ msgid "Visit"
-#~ msgstr "Visite"
-
-#, fuzzy
-#~| msgid "RESPONSE RATE"
-#~ msgid "RESPONDERS"
-#~ msgstr "TAXA DE RESPOSTAS"
-
-#~ msgid "RESPONSE RATE"
-#~ msgstr "TAXA DE RESPOSTAS"
-
-#, fuzzy
-#~| msgid "RESPONSE RATE"
-#~ msgid "TOTAL RESPONDERS"
-#~ msgstr "TAXA DE RESPOSTAS"
-
-#~ msgid "AGE"
-#~ msgstr "IDADE"
-
-#~ msgid "GENDER"
-#~ msgstr "SEXO"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "LOCALIZAÇÕES"
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "REPORT"
-#~ msgstr "SMS BIZ EM"
-
-#~ msgid "STORY"
-#~ msgstr "HISTÓRIA"
-
-#, fuzzy
-#~| msgid "U-REPORTER STATISTICS"
-#~ msgid "OVERALL STATISTICS"
-#~ msgstr "ESTATÍSTICAS DO SMS BIZ"
-
-#, fuzzy
-#~| msgid "RESPONSE RATE"
-#~ msgid "AVG RESPONSE RATE"
-#~ msgstr "TAXA DE RESPOSTAS"
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "U-REPORTERS BY REGION"
-#~ msgstr "SMS BIZ EM"
-
-#, fuzzy
-#~| msgid "POLL RESULTS"
-#~ msgid "FILTER RESULTS"
-#~ msgstr "RESULTADOS DOS INQUÉRITOS"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#~| "    "
-#~ msgid ""
-#~ "\n"
-#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-#~ "          "
-#~ msgstr ""
-#~ "\n"
-#~ "Tens a certeza que desejas remover <b>%(object)s</b>?"
 
 #, fuzzy
 #~| msgid "The location of the responder."

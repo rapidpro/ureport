@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 08:26+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2021\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -114,6 +114,18 @@ msgstr "Prioritet ovog bloka, blokovi sa većim prioritetom postavljaju se prvi"
 
 msgid "The organization this content block belongs to"
 msgstr "Organizacija kojoj sadržaj pripada"
+
+msgid "Gallery"
+msgstr "Galerija"
+
+msgid "Add Image"
+msgstr "Dodaj sliku"
+
+msgid "Search"
+msgstr "Traži"
+
+msgid "Add"
+msgstr "Dodaj"
 
 msgid "Content Types"
 msgstr "Vrste sadržaja"
@@ -297,6 +309,27 @@ msgstr "Pozvani ste da se pridružite {{org.name}}."
 msgid "Click this link to join"
 msgstr "Kliknite na link da biste se pridružili"
 
+msgid "Edit"
+msgstr "Uredi"
+
+msgid "Manage Backends"
+msgstr "Upravljanje pozadinskim sistemima"
+
+msgid "Manage Users"
+msgstr "Upravljanje korisnicima"
+
+msgid "Accounts"
+msgstr "Nalozi"
+
+msgid "Admins"
+msgstr "Administratori"
+
+msgid "Remove"
+msgstr "Ukloni"
+
+msgid "You must have at least one administator"
+msgstr "Morate imati najmanje jednog administratora"
+
 msgid "Select your Organization"
 msgstr "Odaberite vašu organizaciju"
 
@@ -427,15 +460,6 @@ msgstr "Kada uklonite, nema načina da vratite sadržaj."
 
 msgid "Cancel"
 msgstr "Otkaži"
-
-msgid "Remove"
-msgstr "Ukloni"
-
-msgid "Search"
-msgstr "Traži"
-
-msgid "Add"
-msgstr "Dodaj"
 
 #, python-format
 msgid ""
@@ -678,27 +702,368 @@ msgstr "Vaš novi %s je kreiran"
 msgid "Import %s"
 msgstr "Uvezi %s"
 
-msgid "Select bots"
+msgid "Back to Website"
+msgstr "Nazad na sajt"
+
+msgid "Welcome, "
+msgstr "Dobrodošli,"
+
+msgid "Logout"
+msgstr "Odjava"
+
+msgid "Opinions"
+msgstr "Ankete"
+
+msgid "Bots"
 msgstr ""
 
-msgid "Add os Select tags"
+msgid "Users"
+msgstr "Korisnici"
+
+msgid "Settings"
+msgstr "Podešavanja"
+
+msgid "Pages"
+msgstr "Stranice"
+
+msgid "Landing Pages"
 msgstr ""
 
-msgid "FEATURED STORY"
-msgstr "ISTAKNUTE PRIČE"
+msgid "Jobs"
+msgstr "Poslovi"
+
+msgid "Tags"
+msgstr ""
+
+msgid "Partners Logos"
+msgstr ""
+
+msgid "Categories Images"
+msgstr "Slike kategorija"
+
+msgid "News Items"
+msgstr "Stavke novosti"
+
+msgid "Orgs"
+msgstr "Orgs"
+
+msgid "Images"
+msgstr "Slike"
+
+msgid "About"
+msgstr "O nama"
+
+msgid "Engagement"
+msgstr "Statistika"
+
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reportera"
+
+msgid "Category Images"
+msgstr "Slike kategorija"
+
+msgid "+ New "
+msgstr "+ Novo"
+
+msgid "+ New Page"
+msgstr "+ Nova Stranica"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Administrator"
+
+msgid "Configuration"
+msgstr "Konfiguracija"
+
+msgid "Content"
+msgstr "Sadržaj"
+
+msgid "Country Aliases"
+msgstr "Sinonimi za državu"
+
+msgid "Job Sources"
+msgstr "Izvori zadataka"
+
+msgid "Jobs Content"
+msgstr "Sadržaj zadataka"
+
+msgid "About Content"
+msgstr "O nama, sadržaj"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Contact Us Content"
+msgstr "Kontaktirajte nas, sadržaj"
+
+msgid "Missions Content"
+msgstr "Misija, sadržaj"
+
+msgid "Terms & Conditions"
+msgstr "Uslovi korišćenja"
+
+msgid "U-Reporters Content"
+msgstr "U-Reporteri, sadržaj"
+
+msgid "Join &amp; Engage Content"
+msgstr "Pridruži se i angažuj, sadržaj"
+
+msgid "Join Steps Content"
+msgstr "Koraci za pridruživanje, sadržaj"
+
+msgid "Additional Menu"
+msgstr "Dodatni meni"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "ODABERI SVOJU ZEMLJU"
+
+msgid "Join Now"
+msgstr "Pridruži se"
 
 msgid "READ MORE"
 msgstr "PROČITAJ VIŠE"
 
+msgid "EXPLORE ENGAGEMENT"
+msgstr "Statistika"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"za Twitter zadatke morate imati widget id Twittera."
+
+msgid "Follow this step by step guide"
+msgstr "Pratite ovo uputstvo korak po korak"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"<div>Nakon što kreirate widget kopirajte widget ID iz URL kako je prikazano na</div>"
+
+msgid "Back"
+msgstr "Povratak nazad"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "POSLEDNJA OBAVEŠTENJA"
+
+msgid "Backends"
+msgstr "Pozadinski sistemi"
+
+msgid "Add os Select tags"
+msgstr ""
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] "Trenutno se sinhronizuje %(counter)s novih anketa. Ankete će se prikazati na web stranici nakon što sinhronizacija bude gotova."
+msgstr[1] "Trenutno se sinhronizuje %(counter)s novih anketa. Ankete će se prikazati na web stranici nakon što sinhronizacija bude gotova."
+msgstr[2] "Trenutno se sinhronizuje %(counter)s novih anketa. Ankete će se prikazati na web stranici nakon što sinhronizacija bude gotova."
+
+msgid "+ New Poll"
+msgstr "+ Nova Anketa"
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "%(counter)s anketna pitanja"
+msgstr[1] "%(counter)s  anketna pitanja"
+msgstr[2] "%(counter)s anketna pitanja"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr "Sinhronizacije nove ankete obavljaju se na svakih 10 minuta"
+
+#, fuzzy
+#| msgid "No longer scheduling syncs, runs archived"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr "Nema više sinhronizacije, sve je arhivirano"
+
+#, fuzzy
+#| msgid "Main poll syncs scheduled every 10min"
+msgid "Main poll syncs scheduled every 20min"
+msgstr "Sinhronizacije glavne ankete obavljaju se na svakih 10 minuta"
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr "Sinhronizacije nedavne ankete obavljaju se na svakih 60 minuta"
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "Sinhronizacije ankete obavljaju se na svakih 24h"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Nema sinhronizacije, nije aktivno"
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr "Nema sinhronizacije, nema flow-ova za anketu"
+
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Prethodni"
+
+msgid "Refresh Results"
+msgstr "Osveži rezultate"
+
+msgid "Partners"
+msgstr ""
+
+msgid "MORE POLLS"
+msgstr "VIŠE ANKETA"
+
+msgid "FILTER"
+msgstr "FILTER"
+
+msgid "All"
+msgstr "Sve"
+
+msgid "POLL LIST"
+msgstr "LISTA ANKETA"
+
+msgid "All polls from most recent to oldest"
+msgstr "Sve ankete od poslednje do prve"
+
+msgid "ARCHIVED STORIES"
+msgstr "ARHIVIRANE PRIČE"
+
+msgid "LIST"
+msgstr "LISTA"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "LATEST OPINION"
+msgstr "POSLEDNJE MIŠLJENJE"
+
+msgid "VIEW FULL RESULTS"
+msgstr "POGLEDAJ SVE REZULTATE"
+
+msgid "U-REPORTERS IN"
+msgstr "U-REPORTERA U"
+
+msgid "PARTNERING WITH"
+msgstr "PARTNERSTVO SA"
+
+msgid "U-REPORTERS"
+msgstr "U-REPORTERA"
+
+msgid "IN"
+msgstr "U"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ZEMALJA ŠIROM SVETA"
+
+msgid "AGES"
+msgstr "GODINE"
+
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Pridruži se U-Reportu, Tvoj glas je bitan."
+
+msgid "FEATURED STORY"
+msgstr "ISTAKNUTE PRIČE"
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Mi smo deo globalne platforme koja radi na poboljšanju života mladih ljudi širom sveta."
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Saznajte više o tome kako U-Report osnažuje i povezuje mlade da govore o temama koje su za njih bitne."
+
+msgid "LEARN MORE"
+msgstr "NAUČI VIŠE"
+
+msgid "Visit"
+msgstr "Poseti"
+
+msgid "How would you like to join?"
+msgstr "Kako želiš da se pridružiš?"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "PRETRAGA"
+
+msgid "No results found"
+msgstr "Nema rezultata"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
+msgstr "ODGOVORA"
+
+msgid "RESPONSE RATE"
+msgstr "STOPA ODGOVORA"
+
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
+msgstr "SVI ODGOVORI"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s je odgovorilo od %(polled)s anketiranih"
 
-msgid "All"
-msgstr "Sve"
+msgid "ALL"
+msgstr "SVE"
+
+msgid "AGE"
+msgstr "GODINE"
+
+msgid "GENDER"
+msgstr "POL"
+
+msgid "LOCATION"
+msgstr "LOKACIJA"
+
+msgid "Written by:"
+msgstr "Napisao:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERA"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Jednako"
@@ -746,6 +1111,45 @@ msgstr "od"
 
 msgid "the"
 msgstr " "
+
+msgid "OVERALL STATISTICS"
+msgstr "STATISTIKA"
+
+msgid "THIS YEAR"
+msgstr "OVE GODINE"
+
+msgid "AVG RESPONSE RATE"
+msgstr "PROSEČNA STOPA ODGOVORA"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERI PO REGIONIMA"
+
+msgid "FILTER RESULTS"
+msgstr "FILTRIRANI REZULTATI"
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
+msgid "Export and Share"
+msgstr "Preuzmi i Podeli"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "Želite reći svetu o ovome? Preuzmite sliku da biste je lakše podelili na društvenim mrežama ili za kreiranje lepše prezentacije!"
+
+msgid "SELECT LANGUAGE"
+msgstr "ODABERI JEZIK"
+
+msgid "SELECT COUNTRY"
+msgstr "ODABERI SVOJU ZEMLJU"
+
+msgid "Custom pages"
+msgstr "Dodatni meni"
+
+msgid "Landing pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "Pogledajte po brojevima na koji način uključujemo glasove mladih u pozitivne društvene promene."
 
 msgid "Polled"
 msgstr "Anketiranih"
@@ -826,6 +1230,16 @@ msgid "Dec"
 msgstr "Dec"
 
 #, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            Da li ste sigurni da želite da uklonite <strong>%(object)s</strong>?\n"
+"          "
+
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] "%(counter)s rezultati"
@@ -835,6 +1249,44 @@ msgstr[2] "%(counter)s rezultati"
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Rezultati %(start)s-%(end)s od %(count)s"
+
+msgid "Error"
+msgstr "Greška"
+
+msgid "Enter Dashboard"
+msgstr "Vidi Grafikon"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"                Izvinite, trenutno se ne možete prijaviti jer smo primili %(failed_login_limit)s pogrešnih pokušaja prijave.\n"
+"              "
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"                    Molimo sačekajte %(lockout_timeout)s minuta pre nego što pokušate da se prijavite ponovo.\n"
+"                  "
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Lozinka vam je istekla. </strong> Morate da obnovite lozinku svakih %(expire_days)sdana, a lozinka ne sme biti ista kao ona koju ste koristili u poslednjih %(window_days)s dana."
+
+msgid "+ New Story"
+msgstr "+ Nova Priča"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1554,401 +2006,6 @@ msgstr "Da li je ovaj red stvoren zbijanjem"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
-
-#~ msgid "Gallery"
-#~ msgstr "Galerija"
-
-#~ msgid "Add Image"
-#~ msgstr "Dodaj sliku"
-
-#~ msgid "Edit"
-#~ msgstr "Uredi"
-
-#~ msgid "Manage Backends"
-#~ msgstr "Upravljanje pozadinskim sistemima"
-
-#~ msgid "Manage Users"
-#~ msgstr "Upravljanje korisnicima"
-
-#~ msgid "Accounts"
-#~ msgstr "Nalozi"
-
-#~ msgid "Admins"
-#~ msgstr "Administratori"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Morate imati najmanje jednog administratora"
-
-#~ msgid "Back to Website"
-#~ msgstr "Nazad na sajt"
-
-#~ msgid "Welcome, "
-#~ msgstr "Dobrodošli,"
-
-#~ msgid "Logout"
-#~ msgstr "Odjava"
-
-#~ msgid "Opinions"
-#~ msgstr "Ankete"
-
-#~ msgid "Users"
-#~ msgstr "Korisnici"
-
-#~ msgid "Settings"
-#~ msgstr "Podešavanja"
-
-#~ msgid "Pages"
-#~ msgstr "Stranice"
-
-#~ msgid "Jobs"
-#~ msgstr "Poslovi"
-
-#~ msgid "Categories Images"
-#~ msgstr "Slike kategorija"
-
-#~ msgid "News Items"
-#~ msgstr "Stavke novosti"
-
-#~ msgid "Orgs"
-#~ msgstr "Orgs"
-
-#~ msgid "Images"
-#~ msgstr "Slike"
-
-#~ msgid "About"
-#~ msgstr "O nama"
-
-#~ msgid "Engagement"
-#~ msgstr "Statistika"
-
-#, fuzzy
-#~| msgid "Reporters"
-#~ msgid "Reports"
-#~ msgstr "Reportera"
-
-#~ msgid "Category Images"
-#~ msgstr "Slike kategorija"
-
-#~ msgid "+ New "
-#~ msgstr "+ Novo"
-
-#~ msgid "+ New Page"
-#~ msgstr "+ Nova Stranica"
-
-#~ msgid "U-Report"
-#~ msgstr "U-Report"
-
-#~ msgid "Admin"
-#~ msgstr "Administrator"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguracija"
-
-#~ msgid "Content"
-#~ msgstr "Sadržaj"
-
-#~ msgid "Country Aliases"
-#~ msgstr "Sinonimi za državu"
-
-#~ msgid "Job Sources"
-#~ msgstr "Izvori zadataka"
-
-#~ msgid "Jobs Content"
-#~ msgstr "Sadržaj zadataka"
-
-#~ msgid "About Content"
-#~ msgstr "O nama, sadržaj"
-
-#~ msgid "Videos"
-#~ msgstr "Video"
-
-#~ msgid "Contact Us Content"
-#~ msgstr "Kontaktirajte nas, sadržaj"
-
-#~ msgid "Missions Content"
-#~ msgstr "Misija, sadržaj"
-
-#~ msgid "Terms & Conditions"
-#~ msgstr "Uslovi korišćenja"
-
-#~ msgid "U-Reporters Content"
-#~ msgstr "U-Reporteri, sadržaj"
-
-#~ msgid "Join &amp; Engage Content"
-#~ msgstr "Pridruži se i angažuj, sadržaj"
-
-#~ msgid "Join Steps Content"
-#~ msgstr "Koraci za pridruživanje, sadržaj"
-
-#~ msgid "Additional Menu"
-#~ msgstr "Dodatni meni"
-
-#~ msgid "SELECT YOUR COUNTRY"
-#~ msgstr "ODABERI SVOJU ZEMLJU"
-
-#~ msgid "Join Now"
-#~ msgstr "Pridruži se"
-
-#~ msgid "EXPLORE ENGAGEMENT"
-#~ msgstr "Statistika"
-
-#~ msgid ""
-#~ "\n"
-#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "za Twitter zadatke morate imati widget id Twittera."
-
-#~ msgid "Follow this step by step guide"
-#~ msgstr "Pratite ovo uputstvo korak po korak"
-
-#~ msgid ""
-#~ "\n"
-#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "<div>Nakon što kreirate widget kopirajte widget ID iz URL kako je prikazano na</div>"
-
-#~ msgid "Back"
-#~ msgstr "Povratak nazad"
-
-#~ msgid "LATEST NOTIFICATIONS"
-#~ msgstr "POSLEDNJA OBAVEŠTENJA"
-
-#~ msgid "Backends"
-#~ msgstr "Pozadinski sistemi"
-
-#, python-format
-#~ msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-#~ msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-#~ msgstr[0] "Trenutno se sinhronizuje %(counter)s novih anketa. Ankete će se prikazati na web stranici nakon što sinhronizacija bude gotova."
-#~ msgstr[1] "Trenutno se sinhronizuje %(counter)s novih anketa. Ankete će se prikazati na web stranici nakon što sinhronizacija bude gotova."
-#~ msgstr[2] "Trenutno se sinhronizuje %(counter)s novih anketa. Ankete će se prikazati na web stranici nakon što sinhronizacija bude gotova."
-
-#~ msgid "+ New Poll"
-#~ msgstr "+ Nova Anketa"
-
-#, python-format
-#~ msgid "%(counter)s poll question"
-#~ msgid_plural "%(counter)s poll questions"
-#~ msgstr[0] "%(counter)s anketna pitanja"
-#~ msgstr[1] "%(counter)s  anketna pitanja"
-#~ msgstr[2] "%(counter)s anketna pitanja"
-
-#~ msgid "New poll initial syncs scheduled every 10min"
-#~ msgstr "Sinhronizacije nove ankete obavljaju se na svakih 10 minuta"
-
-#, fuzzy
-#~| msgid "No longer scheduling syncs, runs archived"
-#~ msgid "No longer scheduling syncs for old polls, runs archived"
-#~ msgstr "Nema više sinhronizacije, sve je arhivirano"
-
-#, fuzzy
-#~| msgid "Main poll syncs scheduled every 10min"
-#~ msgid "Main poll syncs scheduled every 20min"
-#~ msgstr "Sinhronizacije glavne ankete obavljaju se na svakih 10 minuta"
-
-#~ msgid "Recent poll syncs scheduled every 60min"
-#~ msgstr "Sinhronizacije nedavne ankete obavljaju se na svakih 60 minuta"
-
-#~ msgid "Poll syncs scheduled every 24h"
-#~ msgstr "Sinhronizacije ankete obavljaju se na svakih 24h"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Nema sinhronizacije, nije aktivno"
-
-#~ msgid "Not scheduling syncs, no flow for poll"
-#~ msgstr "Nema sinhronizacije, nema flow-ova za anketu"
-
-#, fuzzy
-#~| msgid "Previous"
-#~ msgid "Preview results"
-#~ msgstr "Prethodni"
-
-#~ msgid "Refresh Results"
-#~ msgstr "Osveži rezultate"
-
-#~ msgid "MORE POLLS"
-#~ msgstr "VIŠE ANKETA"
-
-#~ msgid "FILTER"
-#~ msgstr "FILTER"
-
-#~ msgid "POLL LIST"
-#~ msgstr "LISTA ANKETA"
-
-#~ msgid "All polls from most recent to oldest"
-#~ msgstr "Sve ankete od poslednje do prve"
-
-#~ msgid "ARCHIVED STORIES"
-#~ msgstr "ARHIVIRANE PRIČE"
-
-#~ msgid "LIST"
-#~ msgstr "LISTA"
-
-#~ msgid "LATEST OPINION"
-#~ msgstr "POSLEDNJE MIŠLJENJE"
-
-#~ msgid "VIEW FULL RESULTS"
-#~ msgstr "POGLEDAJ SVE REZULTATE"
-
-#~ msgid "U-REPORTERS IN"
-#~ msgstr "U-REPORTERA U"
-
-#~ msgid "PARTNERING WITH"
-#~ msgstr "PARTNERSTVO SA"
-
-#~ msgid "U-REPORTERS"
-#~ msgstr "U-REPORTERA"
-
-#~ msgid "IN"
-#~ msgstr "U"
-
-#~ msgid "COUNTRIES WORLDWIDE"
-#~ msgstr "ZEMALJA ŠIROM SVETA"
-
-#~ msgid "AGES"
-#~ msgstr "GODINE"
-
-#~ msgid "Join U-Report, Your voice matters."
-#~ msgstr "Pridruži se U-Reportu, Tvoj glas je bitan."
-
-#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
-#~ msgstr "Mi smo deo globalne platforme koja radi na poboljšanju života mladih ljudi širom sveta."
-
-#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-#~ msgstr "Saznajte više o tome kako U-Report osnažuje i povezuje mlade da govore o temama koje su za njih bitne."
-
-#~ msgid "LEARN MORE"
-#~ msgstr "NAUČI VIŠE"
-
-#~ msgid "Visit"
-#~ msgstr "Poseti"
-
-#~ msgid "How would you like to join?"
-#~ msgstr "Kako želiš da se pridružiš?"
-
-#~ msgid "Text"
-#~ msgstr "Tekst"
-
-#~ msgid "No results found"
-#~ msgstr "Nema rezultata"
-
-#, fuzzy
-#~| msgid "RESPONSES"
-#~ msgid "RESPONDERS"
-#~ msgstr "ODGOVORA"
-
-#~ msgid "RESPONSE RATE"
-#~ msgstr "STOPA ODGOVORA"
-
-#, fuzzy
-#~| msgid "TOTAL RESPONSES"
-#~ msgid "TOTAL RESPONDERS"
-#~ msgstr "SVI ODGOVORI"
-
-#~ msgid "ALL"
-#~ msgstr "SVE"
-
-#~ msgid "AGE"
-#~ msgstr "GODINE"
-
-#~ msgid "GENDER"
-#~ msgstr "POL"
-
-#~ msgid "LOCATION"
-#~ msgstr "LOKACIJA"
-
-#~ msgid "Written by:"
-#~ msgstr "Napisao:"
-
-#, fuzzy
-#~| msgid "U-REPORTERS"
-#~ msgid "REPORT"
-#~ msgstr "U-REPORTERA"
-
-#~ msgid "OVERALL STATISTICS"
-#~ msgstr "STATISTIKA"
-
-#~ msgid "THIS YEAR"
-#~ msgstr "OVE GODINE"
-
-#~ msgid "AVG RESPONSE RATE"
-#~ msgstr "PROSEČNA STOPA ODGOVORA"
-
-#~ msgid "U-REPORTERS BY REGION"
-#~ msgstr "U-REPORTERI PO REGIONIMA"
-
-#~ msgid "FILTER RESULTS"
-#~ msgstr "FILTRIRANI REZULTATI"
-
-#~ msgid "Export and Share"
-#~ msgstr "Preuzmi i Podeli"
-
-#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-#~ msgstr "Želite reći svetu o ovome? Preuzmite sliku da biste je lakše podelili na društvenim mrežama ili za kreiranje lepše prezentacije!"
-
-#~ msgid "SELECT LANGUAGE"
-#~ msgstr "ODABERI JEZIK"
-
-#~ msgid "SELECT COUNTRY"
-#~ msgstr "ODABERI SVOJU ZEMLJU"
-
-#~ msgid "Custom pages"
-#~ msgstr "Dodatni meni"
-
-#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
-#~ msgstr "Pogledajte po brojevima na koji način uključujemo glasove mladih u pozitivne društvene promene."
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-#~ "          "
-#~ msgstr ""
-#~ "\n"
-#~ "            Da li ste sigurni da želite da uklonite <strong>%(object)s</strong>?\n"
-#~ "          "
-
-#~ msgid "Error"
-#~ msgstr "Greška"
-
-#~ msgid "Enter Dashboard"
-#~ msgstr "Vidi Grafikon"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~ "              "
-#~ msgstr ""
-#~ "\n"
-#~ "                Izvinite, trenutno se ne možete prijaviti jer smo primili %(failed_login_limit)s pogrešnih pokušaja prijave.\n"
-#~ "              "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "                    Molimo sačekajte %(lockout_timeout)s minuta pre nego što pokušate da se prijavite ponovo.\n"
-#~ "                  "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "<strong>Lozinka vam je istekla. </strong> Morate da obnovite lozinku svakih %(expire_days)sdana, a lozinka ne sme biti ista kao ona koju ste koristili u poslednjih %(window_days)s dana."
-
-#~ msgid "+ New Story"
-#~ msgstr "+ Nova Priča"
 
 #~ msgid "Photos"
 #~ msgstr "Slike"
