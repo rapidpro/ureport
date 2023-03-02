@@ -1,3 +1,12 @@
+v1.2.56 (2023-03-02)
+-------------------------
+ * Merge pull request #1096 from rapidpro/fix-translations
+ * Add caching to the shared sites count view
+ * Disable update PO files
+ * Revert to correct locale PO files
+ * Merge pull request #1095 from rapidpro/update-GA-actions
+ * Remove testing on old versions
+
 v1.2.55 (2023-02-27)
 -------------------------
  * Merge pull request #1094 from rapidpro/fix-story-errors
