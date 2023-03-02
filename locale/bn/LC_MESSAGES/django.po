@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 08:26+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -114,6 +114,18 @@ msgstr "এই সারির গুরুত্ব, বেশি গুরু�
 
 msgid "The organization this content block belongs to"
 msgstr "এই সারির বিষয়গুলো যে  প্রতিষ্ঠানের অন্তর্ভুক্ত"
+
+msgid "Gallery"
+msgstr "গ্যালারি"
+
+msgid "Add Image"
+msgstr "ছবি যোগ করুন"
+
+msgid "Search"
+msgstr "খুঁজুন "
+
+msgid "Add"
+msgstr "যোগ করুন"
 
 msgid "Content Types"
 msgstr "বিষয়ের ধরণ "
@@ -299,6 +311,27 @@ msgstr "আপনাকে যোগদান করতে আমন্ত্র
 msgid "Click this link to join"
 msgstr "যুক্ত হতে এই লিংকে ক্লিক করুন"
 
+msgid "Edit"
+msgstr "সম্পাদনা করুন"
+
+msgid "Manage Backends"
+msgstr "ব্যাকএন্ড নিয়ন্ত্রন করুন"
+
+msgid "Manage Users"
+msgstr "ব্যবহারকারীদের পরিচালনা করুন "
+
+msgid "Accounts"
+msgstr "একাউন্টস"
+
+msgid "Admins"
+msgstr "অ্যাডমিনস"
+
+msgid "Remove"
+msgstr "মুছে ফেলুন"
+
+msgid "You must have at least one administator"
+msgstr "আপনার কমপক্ষে একজন অ্যাডমিন থাকতে  হবে"
+
 msgid "Select your Organization"
 msgstr "আপনার প্রতিষ্ঠান নিশ্চিত করুন "
 
@@ -432,15 +465,6 @@ msgstr "আপনি যদি একবার বাদ দেন, তাহল
 
 msgid "Cancel"
 msgstr "বাতিল করুন "
-
-msgid "Remove"
-msgstr "মুছে ফেলুন"
-
-msgid "Search"
-msgstr "খুঁজুন "
-
-msgid "Add"
-msgstr "যোগ করুন"
 
 #, python-format
 msgid ""
@@ -680,27 +704,363 @@ msgstr "আপনার নতুন %s তৈরি সম্পূর্ণ �
 msgid "Import %s"
 msgstr "আনুন %s"
 
-msgid "Select bots"
+msgid "Back to Website"
+msgstr "ওয়েবসাইটে ফিরে যান"
+
+msgid "Welcome, "
+msgstr "স্বাগতম"
+
+msgid "Logout"
+msgstr "প্রস্থান করুন "
+
+msgid "Opinions"
+msgstr "মতামতগুলো"
+
+msgid "Bots"
 msgstr ""
 
-msgid "Add os Select tags"
+msgid "Users"
+msgstr "ব্যবহারকারী গণ  "
+
+msgid "Settings"
+msgstr "সেটিংস"
+
+msgid "Pages"
+msgstr "পেইজগুলো"
+
+msgid "Landing Pages"
 msgstr ""
 
-msgid "FEATURED STORY"
-msgstr "বিশেষায়িত ঘটনা "
+msgid "Jobs"
+msgstr "কাজ গুলো"
+
+msgid "Tags"
+msgstr ""
+
+msgid "Partners Logos"
+msgstr ""
+
+msgid "Categories Images"
+msgstr "বিভাগগুলোর সবছবি"
+
+msgid "News Items"
+msgstr "সংবাদ এর অংশ গুলো "
+
+msgid "Orgs"
+msgstr "অরগ "
+
+msgid "Images"
+msgstr "ছবি গুলো "
+
+msgid "About"
+msgstr "সম্পর্কিত "
+
+msgid "Engagement"
+msgstr "কতজন যুক্ত হয়েছেন"
+
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "Reporters"
+
+msgid "Category Images"
+msgstr "বিভাগের ছবিগুলো "
+
+msgid "+ New "
+msgstr "+ নতুন"
+
+msgid "+ New Page"
+msgstr "+ নতুন পেইজ"
+
+msgid "U-Report"
+msgstr "u-report "
+
+msgid "Admin"
+msgstr "প্রশাসক গণ "
+
+msgid "Configuration"
+msgstr "কনফিগারেশন "
+
+msgid "Content"
+msgstr "বিষয়বস্তু "
+
+msgid "Country Aliases"
+msgstr "দেশের উপনাম সমূহ "
+
+msgid "Job Sources"
+msgstr "কাজের উৎস গুলো "
+
+msgid "Jobs Content"
+msgstr "কাজের বিষয়বস্তু "
+
+msgid "About Content"
+msgstr "বিষয়বস্তু সম্পর্কিত "
+
+msgid "Videos"
+msgstr "ভিডিও গুলো "
+
+msgid "Contact Us Content"
+msgstr "বিষয়বস্তু নিয়ে আমাদের সাথে যোগাযোগ করুন "
+
+msgid "Missions Content"
+msgstr "উদ্দেশ্যর বিষয়বস্তু "
+
+msgid "Terms & Conditions"
+msgstr "শর্তাবলী "
+
+msgid "U-Reporters Content"
+msgstr "U-reporters এর বিষয়বস্তু "
+
+msgid "Join &amp; Engage Content"
+msgstr "যোগ দিন এবং amp;  বিষয়বস্তু কাজে লাগান "
+
+msgid "Join Steps Content"
+msgstr "বিষয়বস্তুর পদক্ষেপ এ যোগদান করুন "
+
+msgid "Additional Menu"
+msgstr "অতিরিক্ত মেনু "
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "আপনার দেশের নাম বেছে নিন"
+
+msgid "Join Now"
+msgstr "এখনি যোগদান করুন"
 
 msgid "READ MORE"
 msgstr "আরও পড়ুন "
 
+msgid "EXPLORE ENGAGEMENT"
+msgstr "কতজন যুক্ত হয়েছেন সেটা খুঁজে বের করা"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"twitter এ কাজের উৎস যোগ করতে আপনাকে twitter থেকে একটি widget id নিতে হবে"
+
+msgid "Follow this step by step guide"
+msgstr "এই ধাপে ধাপে নির্দেশনা টি অনুসরণ করুন "
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"আপনি widget টি তৈরি করার পরে url থেকে widget id টি কপি করুন যেভাবে 1 এ দেখানো হয়েছে "
+
+msgid "Back"
+msgstr "ফিরে আসুন "
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "সর্বশেষ নটিফিকেশন"
+
+msgid "Backends"
+msgstr "ব্যাকএন্ড"
+
+msgid "Add os Select tags"
+msgstr ""
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "+ New Poll"
+msgstr "+ নতুন পোল"
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "পোল এর প্রশ্নগুলো "
+msgstr[1] "পোল এর প্রশ্নগুলো "
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
+
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "সম্পূর্ণ ফলাফল দেখুন "
+
+msgid "Refresh Results"
+msgstr "ফলাফল রিফ্রেশ করুন"
+
+msgid "Partners"
+msgstr ""
+
+msgid "MORE POLLS"
+msgstr "নতুন পোলগুলো "
+
+msgid "FILTER"
+msgstr "আলাদা করুন "
+
+msgid "All"
+msgstr "সব "
+
+msgid "POLL LIST"
+msgstr "পোল এর তালিকা "
+
+msgid "All polls from most recent to oldest"
+msgstr "সব চেয়ে পুরনো থেকে সব চেয়ে নতুন ক্রমে পোলের তালিকা "
+
+msgid "ARCHIVED STORIES"
+msgstr "সংরক্ষিত ঘটনাবলি "
+
+msgid "LIST"
+msgstr "তালিকা"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "LATEST OPINION"
+msgstr "সর্বশেষ মতামত "
+
+msgid "VIEW FULL RESULTS"
+msgstr "পুরো ফলাফল দেখুন"
+
+msgid "U-REPORTERS IN"
+msgstr "U-REPORTERS দের "
+
+msgid "PARTNERING WITH"
+msgstr "অংশীদারী"
+
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
+
+msgid "IN"
+msgstr "প্রবেশ"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "বিশ্বব্যাপি দেশগুলো"
+
+msgid "AGES"
+msgstr "বয়স"
+
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
+msgid "Join U-Report, Your voice matters."
+msgstr "U-Report-এর সাথে যুক্ত হোন, আপনার কথা গুরুত্বপূর্ণ"
+
+msgid "FEATURED STORY"
+msgstr "বিশেষায়িত ঘটনা "
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "আমরা একটি গ্রোবাল প্লাটফর্ম যারা বিশ্বব্যাপি তরুনদের জীবনযাত্রার পরিবর্তন আনতে কাজ করে চলেছি"
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "U-Report তরুণদের কাছে গুরুত্বপূর্ণ বিষয়গুলি বলার জন্য কীভাবে তাদের ক্ষমতায়িত এবং সংযুক্ত করছে সে সম্পর্কে আরও জানুন"
+
+msgid "LEARN MORE"
+msgstr "আরো জানুন"
+
+msgid "Visit"
+msgstr "দেখুন "
+
+msgid "How would you like to join?"
+msgstr "আপনি কিভাবে যুক্ত হতে চান?"
+
+msgid "Text"
+msgstr "টেক্সট"
+
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "সার্চ"
+
+msgid "No results found"
+msgstr "কোন ফলাফল খুঁজে পাওয়া যায়নি"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
+msgstr "প্রতিক্রিয়া"
+
+msgid "RESPONSE RATE"
+msgstr "প্রতিক্রিয়া হার"
+
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
+msgstr "সকল প্রতিক্রিয়া"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s জন উত্তর দিয়েছেন %(polled)s জনের মধ্যে"
 
-msgid "All"
-msgstr "সব "
+msgid "ALL"
+msgstr "সব"
+
+msgid "AGE"
+msgstr "বয়স "
+
+msgid "GENDER"
+msgstr "লিংঙ্গ "
+
+msgid "LOCATION"
+msgstr "ঠিকানা "
+
+msgid "Written by:"
+msgstr "লিখেছেন :"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr "ঘটনা "
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "সমান "
@@ -748,6 +1108,45 @@ msgstr "এর "
 
 msgid "the"
 msgstr "এটি "
+
+msgid "OVERALL STATISTICS"
+msgstr "সামগ্রিক পরিসংখ্যান "
+
+msgid "THIS YEAR"
+msgstr "এই বছর"
+
+msgid "AVG RESPONSE RATE"
+msgstr "গড় প্রতিক্রিয়া হার"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "অঞ্চলভেদে U-REPORTERS "
+
+msgid "FILTER RESULTS"
+msgstr "ফলাফল ফিল্টার করুন"
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
+msgid "Export and Share"
+msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
+
+msgid "SELECT LANGUAGE"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr "দেশের নাম বেছে নিন"
+
+msgid "Custom pages"
+msgstr "কাস্টম পেইজেস"
+
+msgid "Landing pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "সংখ্যার মাধ্যমে দেখুন কীভাবে আমরা সমাজের ইতিবাচক পরিবর্তনের জন্য যুবকদের মতামতগুলোকে যুক্ত করছি।"
 
 msgid "Polled"
 msgstr "পোল করা হয়েছে"
@@ -827,6 +1226,15 @@ msgstr "নভেম্বর"
 msgid "Dec"
 msgstr "ডিসেম্বর"
 
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+" আপনি নিশ্চিত আপনি বাদ দিতে চান %(object)s?"
+
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -857,6 +1265,42 @@ msgstr ""
 "\n"
 "\tফলাফল %(start)s-%(end)s / %(count)s\n"
 "\t"
+
+msgid "Error"
+msgstr "ভুল"
+
+msgid "Enter Dashboard"
+msgstr "ড্যাশবোর্ড-এ প্রবেশ করুন"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"দুঃখিত, আপনি এই মূহুর্তে লগ ইন করতে পারবেন না কারন আমরা %(failed_login_limit)s ভুল লগ ইন প্রচেষ্টা সনাক্ত করেছি "
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"অনুগ্রহ করে আবার লগ ইন করতে %(lockout_timeout)s মিনিট অপেক্ষা করুন"
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"আপনার পাসওয়ার্ডটির মেয়াদ শেষ। 1 সাইট এর নিয়ম অনুযায়ী আপনাকে প্রতি 1 %(expire_days)s দিনে নতুন পাসওয়ার্ড ঠিক করতে হবে, এবং সেই পাসওয়ার্ডটি  2 %(window_days)s দিনের আগে অবশ্যই ব্যবহার করা যাবে না "
+
+msgid "+ New Story"
+msgstr "+ নতুন ঘটনা"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1594,366 +2038,6 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
-
-#~ msgid "Gallery"
-#~ msgstr "গ্যালারি"
-
-#~ msgid "Add Image"
-#~ msgstr "ছবি যোগ করুন"
-
-#~ msgid "Edit"
-#~ msgstr "সম্পাদনা করুন"
-
-#~ msgid "Manage Backends"
-#~ msgstr "ব্যাকএন্ড নিয়ন্ত্রন করুন"
-
-#~ msgid "Manage Users"
-#~ msgstr "ব্যবহারকারীদের পরিচালনা করুন "
-
-#~ msgid "Accounts"
-#~ msgstr "একাউন্টস"
-
-#~ msgid "Admins"
-#~ msgstr "অ্যাডমিনস"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "আপনার কমপক্ষে একজন অ্যাডমিন থাকতে  হবে"
-
-#~ msgid "Back to Website"
-#~ msgstr "ওয়েবসাইটে ফিরে যান"
-
-#~ msgid "Welcome, "
-#~ msgstr "স্বাগতম"
-
-#~ msgid "Logout"
-#~ msgstr "প্রস্থান করুন "
-
-#~ msgid "Opinions"
-#~ msgstr "মতামতগুলো"
-
-#~ msgid "Users"
-#~ msgstr "ব্যবহারকারী গণ  "
-
-#~ msgid "Settings"
-#~ msgstr "সেটিংস"
-
-#~ msgid "Pages"
-#~ msgstr "পেইজগুলো"
-
-#~ msgid "Jobs"
-#~ msgstr "কাজ গুলো"
-
-#~ msgid "Categories Images"
-#~ msgstr "বিভাগগুলোর সবছবি"
-
-#~ msgid "News Items"
-#~ msgstr "সংবাদ এর অংশ গুলো "
-
-#~ msgid "Orgs"
-#~ msgstr "অরগ "
-
-#~ msgid "Images"
-#~ msgstr "ছবি গুলো "
-
-#~ msgid "About"
-#~ msgstr "সম্পর্কিত "
-
-#~ msgid "Engagement"
-#~ msgstr "কতজন যুক্ত হয়েছেন"
-
-#, fuzzy
-#~| msgid "Reporters"
-#~ msgid "Reports"
-#~ msgstr "Reporters"
-
-#~ msgid "Category Images"
-#~ msgstr "বিভাগের ছবিগুলো "
-
-#~ msgid "+ New "
-#~ msgstr "+ নতুন"
-
-#~ msgid "+ New Page"
-#~ msgstr "+ নতুন পেইজ"
-
-#~ msgid "U-Report"
-#~ msgstr "u-report "
-
-#~ msgid "Admin"
-#~ msgstr "প্রশাসক গণ "
-
-#~ msgid "Configuration"
-#~ msgstr "কনফিগারেশন "
-
-#~ msgid "Content"
-#~ msgstr "বিষয়বস্তু "
-
-#~ msgid "Country Aliases"
-#~ msgstr "দেশের উপনাম সমূহ "
-
-#~ msgid "Job Sources"
-#~ msgstr "কাজের উৎস গুলো "
-
-#~ msgid "Jobs Content"
-#~ msgstr "কাজের বিষয়বস্তু "
-
-#~ msgid "About Content"
-#~ msgstr "বিষয়বস্তু সম্পর্কিত "
-
-#~ msgid "Videos"
-#~ msgstr "ভিডিও গুলো "
-
-#~ msgid "Contact Us Content"
-#~ msgstr "বিষয়বস্তু নিয়ে আমাদের সাথে যোগাযোগ করুন "
-
-#~ msgid "Missions Content"
-#~ msgstr "উদ্দেশ্যর বিষয়বস্তু "
-
-#~ msgid "Terms & Conditions"
-#~ msgstr "শর্তাবলী "
-
-#~ msgid "U-Reporters Content"
-#~ msgstr "U-reporters এর বিষয়বস্তু "
-
-#~ msgid "Join &amp; Engage Content"
-#~ msgstr "যোগ দিন এবং amp;  বিষয়বস্তু কাজে লাগান "
-
-#~ msgid "Join Steps Content"
-#~ msgstr "বিষয়বস্তুর পদক্ষেপ এ যোগদান করুন "
-
-#~ msgid "Additional Menu"
-#~ msgstr "অতিরিক্ত মেনু "
-
-#~ msgid "SELECT YOUR COUNTRY"
-#~ msgstr "আপনার দেশের নাম বেছে নিন"
-
-#~ msgid "Join Now"
-#~ msgstr "এখনি যোগদান করুন"
-
-#~ msgid "EXPLORE ENGAGEMENT"
-#~ msgstr "কতজন যুক্ত হয়েছেন সেটা খুঁজে বের করা"
-
-#~ msgid ""
-#~ "\n"
-#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "twitter এ কাজের উৎস যোগ করতে আপনাকে twitter থেকে একটি widget id নিতে হবে"
-
-#~ msgid "Follow this step by step guide"
-#~ msgstr "এই ধাপে ধাপে নির্দেশনা টি অনুসরণ করুন "
-
-#~ msgid ""
-#~ "\n"
-#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "আপনি widget টি তৈরি করার পরে url থেকে widget id টি কপি করুন যেভাবে 1 এ দেখানো হয়েছে "
-
-#~ msgid "Back"
-#~ msgstr "ফিরে আসুন "
-
-#~ msgid "LATEST NOTIFICATIONS"
-#~ msgstr "সর্বশেষ নটিফিকেশন"
-
-#~ msgid "Backends"
-#~ msgstr "ব্যাকএন্ড"
-
-#~ msgid "+ New Poll"
-#~ msgstr "+ নতুন পোল"
-
-#, fuzzy, python-format
-#~| msgid "Poll Questions"
-#~ msgid "%(counter)s poll question"
-#~ msgid_plural "%(counter)s poll questions"
-#~ msgstr[0] "পোল এর প্রশ্নগুলো "
-#~ msgstr[1] "পোল এর প্রশ্নগুলো "
-
-#, fuzzy
-#~| msgid "View full results"
-#~ msgid "Preview results"
-#~ msgstr "সম্পূর্ণ ফলাফল দেখুন "
-
-#~ msgid "Refresh Results"
-#~ msgstr "ফলাফল রিফ্রেশ করুন"
-
-#~ msgid "MORE POLLS"
-#~ msgstr "নতুন পোলগুলো "
-
-#~ msgid "FILTER"
-#~ msgstr "আলাদা করুন "
-
-#~ msgid "POLL LIST"
-#~ msgstr "পোল এর তালিকা "
-
-#~ msgid "All polls from most recent to oldest"
-#~ msgstr "সব চেয়ে পুরনো থেকে সব চেয়ে নতুন ক্রমে পোলের তালিকা "
-
-#~ msgid "ARCHIVED STORIES"
-#~ msgstr "সংরক্ষিত ঘটনাবলি "
-
-#~ msgid "LIST"
-#~ msgstr "তালিকা"
-
-#~ msgid "LATEST OPINION"
-#~ msgstr "সর্বশেষ মতামত "
-
-#~ msgid "VIEW FULL RESULTS"
-#~ msgstr "পুরো ফলাফল দেখুন"
-
-#~ msgid "U-REPORTERS IN"
-#~ msgstr "U-REPORTERS দের "
-
-#~ msgid "PARTNERING WITH"
-#~ msgstr "অংশীদারী"
-
-#~ msgid "U-REPORTERS"
-#~ msgstr "U-REPORTERS"
-
-#~ msgid "IN"
-#~ msgstr "প্রবেশ"
-
-#~ msgid "COUNTRIES WORLDWIDE"
-#~ msgstr "বিশ্বব্যাপি দেশগুলো"
-
-#~ msgid "AGES"
-#~ msgstr "বয়স"
-
-#~ msgid "Join U-Report, Your voice matters."
-#~ msgstr "U-Report-এর সাথে যুক্ত হোন, আপনার কথা গুরুত্বপূর্ণ"
-
-#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
-#~ msgstr "আমরা একটি গ্রোবাল প্লাটফর্ম যারা বিশ্বব্যাপি তরুনদের জীবনযাত্রার পরিবর্তন আনতে কাজ করে চলেছি"
-
-#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-#~ msgstr "U-Report তরুণদের কাছে গুরুত্বপূর্ণ বিষয়গুলি বলার জন্য কীভাবে তাদের ক্ষমতায়িত এবং সংযুক্ত করছে সে সম্পর্কে আরও জানুন"
-
-#~ msgid "LEARN MORE"
-#~ msgstr "আরো জানুন"
-
-#~ msgid "Visit"
-#~ msgstr "দেখুন "
-
-#~ msgid "How would you like to join?"
-#~ msgstr "আপনি কিভাবে যুক্ত হতে চান?"
-
-#~ msgid "Text"
-#~ msgstr "টেক্সট"
-
-#~ msgid "No results found"
-#~ msgstr "কোন ফলাফল খুঁজে পাওয়া যায়নি"
-
-#, fuzzy
-#~| msgid "RESPONSES"
-#~ msgid "RESPONDERS"
-#~ msgstr "প্রতিক্রিয়া"
-
-#~ msgid "RESPONSE RATE"
-#~ msgstr "প্রতিক্রিয়া হার"
-
-#, fuzzy
-#~| msgid "TOTAL RESPONSES"
-#~ msgid "TOTAL RESPONDERS"
-#~ msgstr "সকল প্রতিক্রিয়া"
-
-#~ msgid "ALL"
-#~ msgstr "সব"
-
-#~ msgid "AGE"
-#~ msgstr "বয়স "
-
-#~ msgid "GENDER"
-#~ msgstr "লিংঙ্গ "
-
-#~ msgid "LOCATION"
-#~ msgstr "ঠিকানা "
-
-#~ msgid "Written by:"
-#~ msgstr "লিখেছেন :"
-
-#, fuzzy
-#~| msgid "U-REPORTERS"
-#~ msgid "REPORT"
-#~ msgstr "U-REPORTERS"
-
-#~ msgid "STORY"
-#~ msgstr "ঘটনা "
-
-#~ msgid "OVERALL STATISTICS"
-#~ msgstr "সামগ্রিক পরিসংখ্যান "
-
-#~ msgid "THIS YEAR"
-#~ msgstr "এই বছর"
-
-#~ msgid "AVG RESPONSE RATE"
-#~ msgstr "গড় প্রতিক্রিয়া হার"
-
-#~ msgid "U-REPORTERS BY REGION"
-#~ msgstr "অঞ্চলভেদে U-REPORTERS "
-
-#~ msgid "FILTER RESULTS"
-#~ msgstr "ফলাফল ফিল্টার করুন"
-
-#~ msgid "Export and Share"
-#~ msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"
-
-#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-#~ msgstr "এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
-
-#~ msgid "SELECT COUNTRY"
-#~ msgstr "দেশের নাম বেছে নিন"
-
-#~ msgid "Custom pages"
-#~ msgstr "কাস্টম পেইজেস"
-
-#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
-#~ msgstr "সংখ্যার মাধ্যমে দেখুন কীভাবে আমরা সমাজের ইতিবাচক পরিবর্তনের জন্য যুবকদের মতামতগুলোকে যুক্ত করছি।"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-#~ "          "
-#~ msgstr ""
-#~ "\n"
-#~ " আপনি নিশ্চিত আপনি বাদ দিতে চান %(object)s?"
-
-#~ msgid "Error"
-#~ msgstr "ভুল"
-
-#~ msgid "Enter Dashboard"
-#~ msgstr "ড্যাশবোর্ড-এ প্রবেশ করুন"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~ "              "
-#~ msgstr ""
-#~ "\n"
-#~ "দুঃখিত, আপনি এই মূহুর্তে লগ ইন করতে পারবেন না কারন আমরা %(failed_login_limit)s ভুল লগ ইন প্রচেষ্টা সনাক্ত করেছি "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "অনুগ্রহ করে আবার লগ ইন করতে %(lockout_timeout)s মিনিট অপেক্ষা করুন"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "আপনার পাসওয়ার্ডটির মেয়াদ শেষ। 1 সাইট এর নিয়ম অনুযায়ী আপনাকে প্রতি 1 %(expire_days)s দিনে নতুন পাসওয়ার্ড ঠিক করতে হবে, এবং সেই পাসওয়ার্ডটি  2 %(window_days)s দিনের আগে অবশ্যই ব্যবহার করা যাবে না "
-
-#~ msgid "+ New Story"
-#~ msgstr "+ নতুন ঘটনা"
 
 #~ msgid "Photos"
 #~ msgstr "ছবিগুলো"

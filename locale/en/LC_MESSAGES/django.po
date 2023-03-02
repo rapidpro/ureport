@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 08:26+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,6 +108,18 @@ msgid "The priority for this block, higher priority blocks come first"
 msgstr ""
 
 msgid "The organization this content block belongs to"
+msgstr ""
+
+msgid "Gallery"
+msgstr ""
+
+msgid "Add Image"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Add"
 msgstr ""
 
 msgid "Content Types"
@@ -288,6 +300,27 @@ msgstr ""
 msgid "Click this link to join"
 msgstr ""
 
+msgid "Edit"
+msgstr ""
+
+msgid "Manage Backends"
+msgstr ""
+
+msgid "Manage Users"
+msgstr ""
+
+msgid "Accounts"
+msgstr ""
+
+msgid "Admins"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "You must have at least one administator"
+msgstr ""
+
 msgid "Select your Organization"
 msgstr ""
 
@@ -413,15 +446,6 @@ msgid "Once it is removed, it will be gone forever. There is no way to undo this
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "Add"
 msgstr ""
 
 #, python-format
@@ -647,26 +671,347 @@ msgstr ""
 msgid "Import %s"
 msgstr ""
 
-msgid "Select bots"
+msgid "Back to Website"
 msgstr ""
 
-msgid "Add os Select tags"
+msgid "Welcome, "
 msgstr ""
 
-msgid "FEATURED STORY"
+msgid "Logout"
+msgstr ""
+
+msgid "Opinions"
+msgstr ""
+
+msgid "Bots"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Landing Pages"
+msgstr ""
+
+msgid "Jobs"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Partners Logos"
+msgstr ""
+
+msgid "Categories Images"
+msgstr ""
+
+msgid "News Items"
+msgstr ""
+
+msgid "Orgs"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Engagement"
+msgstr ""
+
+msgid "Reports"
+msgstr ""
+
+msgid "Category Images"
+msgstr ""
+
+msgid "+ New "
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
+msgid "U-Report"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Country Aliases"
+msgstr ""
+
+msgid "Job Sources"
+msgstr ""
+
+msgid "Jobs Content"
+msgstr ""
+
+msgid "About Content"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Contact Us Content"
+msgstr ""
+
+msgid "Missions Content"
+msgstr ""
+
+msgid "Terms & Conditions"
+msgstr ""
+
+msgid "U-Reporters Content"
+msgstr ""
+
+msgid "Join &amp; Engage Content"
+msgstr ""
+
+msgid "Join Steps Content"
+msgstr ""
+
+msgid "Additional Menu"
+msgstr ""
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Join Now"
 msgstr ""
 
 msgid "READ MORE"
 msgstr ""
 
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+
+msgid "Follow this step by step guide"
+msgstr ""
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr ""
+
+msgid "Backends"
+msgstr ""
+
+msgid "Add os Select tags"
+msgstr ""
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "+ New Poll"
+msgstr ""
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
+
+msgid "Preview results"
+msgstr ""
+
+msgid "Refresh Results"
+msgstr ""
+
+msgid "Partners"
+msgstr ""
+
+msgid "MORE POLLS"
+msgstr ""
+
+msgid "FILTER"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "POLL LIST"
+msgstr ""
+
+msgid "All polls from most recent to oldest"
+msgstr ""
+
+msgid "ARCHIVED STORIES"
+msgstr ""
+
+msgid "LIST"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "LATEST OPINION"
+msgstr ""
+
+msgid "VIEW FULL RESULTS"
+msgstr ""
+
+msgid "U-REPORTERS IN"
+msgstr ""
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+msgid "U-REPORTERS"
+msgstr ""
+
+msgid "IN"
+msgstr ""
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr ""
+
+msgid "AGES"
+msgstr ""
+
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
+msgid "FEATURED STORY"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
+
+msgid "LEARN MORE"
+msgstr ""
+
+msgid "Visit"
+msgstr ""
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
+
+msgid "RESPONDERS"
+msgstr ""
+
+msgid "RESPONSE RATE"
+msgstr ""
+
+msgid "TOTAL RESPONDERS"
 msgstr ""
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
 
-msgid "All"
+msgid "ALL"
+msgstr ""
+
+msgid "AGE"
+msgstr ""
+
+msgid "GENDER"
+msgstr ""
+
+msgid "LOCATION"
+msgstr ""
+
+msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "REPORT"
+msgstr ""
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
 msgstr ""
 
 msgid "Even"
@@ -712,6 +1057,45 @@ msgid "of"
 msgstr ""
 
 msgid "the"
+msgstr ""
+
+msgid "OVERALL STATISTICS"
+msgstr ""
+
+msgid "THIS YEAR"
+msgstr ""
+
+msgid "AVG RESPONSE RATE"
+msgstr ""
+
+msgid "U-REPORTERS BY REGION"
+msgstr ""
+
+msgid "FILTER RESULTS"
+msgstr ""
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT LANGUAGE"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
 msgid "Polled"
@@ -793,6 +1177,13 @@ msgid "Dec"
 msgstr ""
 
 #, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] ""
@@ -800,6 +1191,36 @@ msgstr[1] ""
 
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+
+msgid "+ New Story"
 msgstr ""
 
 #, python-format

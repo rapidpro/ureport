@@ -71,7 +71,9 @@ urlpatterns = [
     re_path(r"^page/(?P<link>\w+)/$", CustomPage.as_view(), {}, "public.custom_page"),
     re_path(r"^lp/(?P<slug>\w+)/$", LandingPageView.as_view(), {}, "public.landing_page"),
     re_path(r"^count/$", Count.as_view(), {}, "public.count"),
-    re_path(r"^shared_sites_count/$", SharedSitesCount.as_view(), {}, "public.shared_sites_count"),
+    re_path(
+        r"^shared_sites_count/$", cache_page(60 * 10)(SharedSitesCount.as_view()), {}, "public.shared_sites_count"
+    ),
     re_path(r"^icons_display/$", IconsDisplay.as_view(), {}, "public.icons_display"),
     re_path(r"^status/$", status, {}, "public.status"),
     re_path(r"^task_status/$", task_status, {}, "public.task_status"),

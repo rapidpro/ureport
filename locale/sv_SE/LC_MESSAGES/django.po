@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 08:26+0000\n"
+"POT-Creation-Date: 2022-08-12 09:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -113,6 +113,18 @@ msgstr "Prioriteringen för det här innehållsblocket, högst prioritet visas f
 
 msgid "The organization this content block belongs to"
 msgstr "Organisationen det här innehållsblocket tillhör"
+
+msgid "Gallery"
+msgstr "Galleri"
+
+msgid "Add Image"
+msgstr "Välj bild"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Add"
+msgstr "Lägg till"
 
 msgid "Content Types"
 msgstr "Innehållstyper"
@@ -296,6 +308,27 @@ msgstr "Du har blivit inbjuden att gå med i {{org.namn}}."
 msgid "Click this link to join"
 msgstr "Klicka här för att gå med"
 
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Manage Backends"
+msgstr "Hantera backends"
+
+msgid "Manage Users"
+msgstr "Hantera användare"
+
+msgid "Accounts"
+msgstr "Konton"
+
+msgid "Admins"
+msgstr "Administratörer"
+
+msgid "Remove"
+msgstr "Ta bort"
+
+msgid "You must have at least one administator"
+msgstr "Du måste ha minst en administratör"
+
 msgid "Select your Organization"
 msgstr "Välj din organisation"
 
@@ -426,15 +459,6 @@ msgstr "När du har raderat, går det inte att ångra. "
 
 msgid "Cancel"
 msgstr "Avbryt"
-
-msgid "Remove"
-msgstr "Ta bort"
-
-msgid "Search"
-msgstr "Sök"
-
-msgid "Add"
-msgstr "Lägg till"
 
 #, python-format
 msgid ""
@@ -671,27 +695,366 @@ msgstr "Ditt nya %s har skapats"
 msgid "Import %s"
 msgstr "Importera %s"
 
-msgid "Select bots"
+msgid "Back to Website"
+msgstr "Tillbaka till webbsidan"
+
+msgid "Welcome, "
+msgstr "Välkommen,"
+
+msgid "Logout"
+msgstr "Logga ut"
+
+msgid "Opinions"
+msgstr "Åsikter"
+
+msgid "Bots"
 msgstr ""
 
-msgid "Add os Select tags"
+msgid "Users"
+msgstr "Användare"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Pages"
+msgstr "Sidor"
+
+msgid "Landing Pages"
 msgstr ""
 
-msgid "FEATURED STORY"
-msgstr "HUVUDBERÄTTELSE"
+msgid "Jobs"
+msgstr "Jobb"
+
+msgid "Tags"
+msgstr ""
+
+msgid "Partners Logos"
+msgstr ""
+
+msgid "Categories Images"
+msgstr "Bildkategorier"
+
+msgid "News Items"
+msgstr "Nyheter"
+
+msgid "Orgs"
+msgstr "Organisationer"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "About"
+msgstr "Om oss"
+
+msgid "Engagement"
+msgstr "Engagemang"
+
+#, fuzzy
+#| msgid "Reporters"
+msgid "Reports"
+msgstr "U-Reporters"
+
+msgid "Category Images"
+msgstr "Kategori bilder"
+
+msgid "+ New "
+msgstr "+ Ny"
+
+msgid "+ New Page"
+msgstr "+ Ny sida"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Configuration"
+msgstr "Konfiguration"
+
+msgid "Content"
+msgstr "Innehåll"
+
+msgid "Country Aliases"
+msgstr "Landalianser"
+
+msgid "Job Sources"
+msgstr "Jobbkällor"
+
+msgid "Jobs Content"
+msgstr "Jobbinnehåll"
+
+msgid "About Content"
+msgstr "Om innehåll"
+
+msgid "Videos"
+msgstr "Videos"
+
+msgid "Contact Us Content"
+msgstr "Kontakta oss innehåll"
+
+msgid "Missions Content"
+msgstr "Uppdragets innehåll"
+
+msgid "Terms & Conditions"
+msgstr "Allmänna villkor"
+
+msgid "U-Reporters Content"
+msgstr "U-Reporters innehåll"
+
+msgid "Join &amp; Engage Content"
+msgstr "Delta &amp; innehållsengagemang"
+
+msgid "Join Steps Content"
+msgstr "Delta Steg Innehåll"
+
+msgid "Additional Menu"
+msgstr "Tilläggsmeny"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "VÄLJ DITT LAND"
+
+msgid "Join Now"
+msgstr "Så deltar du"
 
 msgid "READ MORE"
 msgstr "LÄS MER"
 
+msgid "EXPLORE ENGAGEMENT"
+msgstr "UTFORSKA ENGAGEMANG"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"För att lägga till Twitter-jobbkälla behöver du ett widget-id från Twitter."
+
+msgid "Follow this step by step guide"
+msgstr "Följ den här manualen steg för steg"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"<div>När du har skapat din widget kopierar du widget-id från webbadressen som visas på</div>"
+
+msgid "Back"
+msgstr "Tillbaka"
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "SENASTE NOTIFIKATIONERNA"
+
+msgid "Backends"
+msgstr "Backends"
+
+msgid "Add os Select tags"
+msgstr ""
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] "Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på den offentliga sidan när synkroniseringen är klar."
+msgstr[1] "Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på den offentliga sidan när synkroniseringen är klar."
+
+msgid "+ New Poll"
+msgstr "+ Ny undersökning"
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "%(counter)s undersökningsfrågor"
+msgstr[1] "%(counter)s undersökningsfrågor"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr "Nya undersökningar synkroniseras var 10:e minut"
+
+#, fuzzy
+#| msgid "No longer scheduling syncs, runs archived"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr "Planerar inte längre synkroniseringar, synkroniserade resultat har sparats"
+
+#, fuzzy
+#| msgid "Main poll syncs scheduled every 10min"
+msgid "Main poll syncs scheduled every 20min"
+msgstr "Huvudundersökningen synkroniseras var 10:e minut"
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr "De senaste undersökningarna synkroniseras varje var 60:e minut"
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "Undersökningen synkroniseras i sin helhet var 24:e timme"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Synkronisering inte schemalagd, inte aktiv"
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr "Synkroniseringar är inte planerade, inget flöde finns för undersökningen"
+
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Tidigare"
+
+msgid "Refresh Results"
+msgstr "Uppdaterar resultaten"
+
+msgid "Partners"
+msgstr ""
+
+msgid "MORE POLLS"
+msgstr "FLER UNDERSÖKNINGAR"
+
+msgid "FILTER"
+msgstr "FILTRERA"
+
+msgid "All"
+msgstr "Alla"
+
+msgid "POLL LIST"
+msgstr "Lista över undersökningar"
+
+msgid "All polls from most recent to oldest"
+msgstr "Alla undersökningar från nyast till äldst"
+
+msgid "ARCHIVED STORIES"
+msgstr "ARKIVERADE BERÄTTELSER"
+
+msgid "LIST"
+msgstr "LISTA"
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "LATEST OPINION"
+msgstr "SENASTE ÅSIKTERNA"
+
+msgid "VIEW FULL RESULTS"
+msgstr "SE ALLA RESULTAT"
+
+msgid "U-REPORTERS IN"
+msgstr "U-REPORTERS I"
+
+msgid "PARTNERING WITH"
+msgstr "SAMARBETAR MED"
+
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
+
+msgid "IN"
+msgstr "I"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "LÄNDER VÄRLDEN ÖVER"
+
+msgid "AGES"
+msgstr "ÅLDER"
+
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Gå med i U-Report. Din röst är viktig."
+
+msgid "FEATURED STORY"
+msgstr "HUVUDBERÄTTELSE"
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Vi är en del av en global plattform, som syftar till att förändra barn och ungas liv runt om i världen."
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Läs mer om hur U-Report engagerar barn och unga att göra sina röster hörda i frågor som är viktiga för dem."
+
+msgid "LEARN MORE"
+msgstr "LÄS MER"
+
+msgid "Visit"
+msgstr "Besök"
+
+msgid "How would you like to join?"
+msgstr "Hur vill du delta?"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "PAGE"
+msgstr ""
+
 msgid "SEARCH"
 msgstr "SÖK"
+
+msgid "No results found"
+msgstr "Inga resultat"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
+msgstr "SVAR"
+
+msgid "RESPONSE RATE"
+msgstr "SVARSFREKVENS"
+
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
+msgstr "TOTALT ANTAL SVAR"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)shar svarat av %(polled)s tillfrågade"
 
-msgid "All"
-msgstr "Alla"
+msgid "ALL"
+msgstr "ALLA"
+
+msgid "AGE"
+msgstr "ÅLDER"
+
+msgid "GENDER"
+msgstr "KÖNSIDENTITET"
+
+msgid "LOCATION"
+msgstr "PLATS"
+
+msgid "Written by:"
+msgstr "Skriven av:"
+
+msgid "No reports published yet"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS"
+msgid "REPORT"
+msgstr "U-REPORTERS"
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
 
 msgid "Even"
 msgstr "Till och med"
@@ -739,6 +1102,45 @@ msgstr "av"
 
 msgid "the"
 msgstr "den"
+
+msgid "OVERALL STATISTICS"
+msgstr "SAMLAD STATISTIK"
+
+msgid "THIS YEAR"
+msgstr "I ÅR"
+
+msgid "AVG RESPONSE RATE"
+msgstr "GENOMSNITTLIG SVARSFREKVENS"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS I REGIONEN"
+
+msgid "FILTER RESULTS"
+msgstr "FILTRERADE RESULTAT"
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
+msgid "Export and Share"
+msgstr "Exportera och dela"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "Vill du berätta för dina vänner om det här? Dela på sociala medier!"
+
+msgid "SELECT LANGUAGE"
+msgstr "VÄLJ SPRÅK"
+
+msgid "SELECT COUNTRY"
+msgstr "VÄLJ LAND"
+
+msgid "Custom pages"
+msgstr "Anpassade sidor"
+
+msgid "Landing pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "Se hur många barn och unga som vill att vi ska lyssna på deras röster för att skapa en positiv förändring."
 
 msgid "Polled"
 msgstr "Tillfrågade"
@@ -819,6 +1221,15 @@ msgid "Dec"
 msgstr "Dec"
 
 #, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Är du säker på att du vill radera <strong>%(object)s</strong>?"
+
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] "%(counter)s resultat"
@@ -827,6 +1238,42 @@ msgstr[1] "%(counter)s resultat"
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Resultat %(start)s-%(end)s av %(count)s"
+
+msgid "Error"
+msgstr "Felmeddelande"
+
+msgid "Enter Dashboard"
+msgstr "Gå till dashboard"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Du kan tyvärr inte logga in just nu eftersom vi har upptäckt%(failed_login_limit)sfelaktiga inloggningsförsök."
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Vänligen vänta %(lockout_timeout)s minuter innan du försöker logga in igen."
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Ditt lösenord har gått ut. </strong>Du måste ändra ditt lösenord var %(expire_days)s dag, och det lösenordet får inte ha använts inom de senaste %(window_days)s dagarna."
+
+msgid "+ New Story"
+msgstr "+ Ny berättelse"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1546,396 +1993,6 @@ msgstr "Raden skapades genom squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
-
-#~ msgid "Gallery"
-#~ msgstr "Galleri"
-
-#~ msgid "Add Image"
-#~ msgstr "Välj bild"
-
-#~ msgid "Edit"
-#~ msgstr "Redigera"
-
-#~ msgid "Manage Backends"
-#~ msgstr "Hantera backends"
-
-#~ msgid "Manage Users"
-#~ msgstr "Hantera användare"
-
-#~ msgid "Accounts"
-#~ msgstr "Konton"
-
-#~ msgid "Admins"
-#~ msgstr "Administratörer"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Du måste ha minst en administratör"
-
-#~ msgid "Back to Website"
-#~ msgstr "Tillbaka till webbsidan"
-
-#~ msgid "Welcome, "
-#~ msgstr "Välkommen,"
-
-#~ msgid "Logout"
-#~ msgstr "Logga ut"
-
-#~ msgid "Opinions"
-#~ msgstr "Åsikter"
-
-#~ msgid "Users"
-#~ msgstr "Användare"
-
-#~ msgid "Settings"
-#~ msgstr "Inställningar"
-
-#~ msgid "Pages"
-#~ msgstr "Sidor"
-
-#~ msgid "Jobs"
-#~ msgstr "Jobb"
-
-#~ msgid "Categories Images"
-#~ msgstr "Bildkategorier"
-
-#~ msgid "News Items"
-#~ msgstr "Nyheter"
-
-#~ msgid "Orgs"
-#~ msgstr "Organisationer"
-
-#~ msgid "Images"
-#~ msgstr "Bilder"
-
-#~ msgid "About"
-#~ msgstr "Om oss"
-
-#~ msgid "Engagement"
-#~ msgstr "Engagemang"
-
-#, fuzzy
-#~| msgid "Reporters"
-#~ msgid "Reports"
-#~ msgstr "U-Reporters"
-
-#~ msgid "Category Images"
-#~ msgstr "Kategori bilder"
-
-#~ msgid "+ New "
-#~ msgstr "+ Ny"
-
-#~ msgid "+ New Page"
-#~ msgstr "+ Ny sida"
-
-#~ msgid "U-Report"
-#~ msgstr "U-Report"
-
-#~ msgid "Admin"
-#~ msgstr "Admin"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
-
-#~ msgid "Content"
-#~ msgstr "Innehåll"
-
-#~ msgid "Country Aliases"
-#~ msgstr "Landalianser"
-
-#~ msgid "Job Sources"
-#~ msgstr "Jobbkällor"
-
-#~ msgid "Jobs Content"
-#~ msgstr "Jobbinnehåll"
-
-#~ msgid "About Content"
-#~ msgstr "Om innehåll"
-
-#~ msgid "Videos"
-#~ msgstr "Videos"
-
-#~ msgid "Contact Us Content"
-#~ msgstr "Kontakta oss innehåll"
-
-#~ msgid "Missions Content"
-#~ msgstr "Uppdragets innehåll"
-
-#~ msgid "Terms & Conditions"
-#~ msgstr "Allmänna villkor"
-
-#~ msgid "U-Reporters Content"
-#~ msgstr "U-Reporters innehåll"
-
-#~ msgid "Join &amp; Engage Content"
-#~ msgstr "Delta &amp; innehållsengagemang"
-
-#~ msgid "Join Steps Content"
-#~ msgstr "Delta Steg Innehåll"
-
-#~ msgid "Additional Menu"
-#~ msgstr "Tilläggsmeny"
-
-#~ msgid "SELECT YOUR COUNTRY"
-#~ msgstr "VÄLJ DITT LAND"
-
-#~ msgid "Join Now"
-#~ msgstr "Så deltar du"
-
-#~ msgid "EXPLORE ENGAGEMENT"
-#~ msgstr "UTFORSKA ENGAGEMANG"
-
-#~ msgid ""
-#~ "\n"
-#~ "        To add a Twitter job source you are required to get a widget id from twitter.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "För att lägga till Twitter-jobbkälla behöver du ett widget-id från Twitter."
-
-#~ msgid "Follow this step by step guide"
-#~ msgstr "Följ den här manualen steg för steg"
-
-#~ msgid ""
-#~ "\n"
-#~ "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "<div>När du har skapat din widget kopierar du widget-id från webbadressen som visas på</div>"
-
-#~ msgid "Back"
-#~ msgstr "Tillbaka"
-
-#~ msgid "LATEST NOTIFICATIONS"
-#~ msgstr "SENASTE NOTIFIKATIONERNA"
-
-#~ msgid "Backends"
-#~ msgstr "Backends"
-
-#, python-format
-#~ msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-#~ msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-#~ msgstr[0] "Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på den offentliga sidan när synkroniseringen är klar."
-#~ msgstr[1] "Just nu synkroniseras %(counter)s nya undersökningar. Resultaten visas på den offentliga sidan när synkroniseringen är klar."
-
-#~ msgid "+ New Poll"
-#~ msgstr "+ Ny undersökning"
-
-#, python-format
-#~ msgid "%(counter)s poll question"
-#~ msgid_plural "%(counter)s poll questions"
-#~ msgstr[0] "%(counter)s undersökningsfrågor"
-#~ msgstr[1] "%(counter)s undersökningsfrågor"
-
-#~ msgid "New poll initial syncs scheduled every 10min"
-#~ msgstr "Nya undersökningar synkroniseras var 10:e minut"
-
-#, fuzzy
-#~| msgid "No longer scheduling syncs, runs archived"
-#~ msgid "No longer scheduling syncs for old polls, runs archived"
-#~ msgstr "Planerar inte längre synkroniseringar, synkroniserade resultat har sparats"
-
-#, fuzzy
-#~| msgid "Main poll syncs scheduled every 10min"
-#~ msgid "Main poll syncs scheduled every 20min"
-#~ msgstr "Huvudundersökningen synkroniseras var 10:e minut"
-
-#~ msgid "Recent poll syncs scheduled every 60min"
-#~ msgstr "De senaste undersökningarna synkroniseras varje var 60:e minut"
-
-#~ msgid "Poll syncs scheduled every 24h"
-#~ msgstr "Undersökningen synkroniseras i sin helhet var 24:e timme"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Synkronisering inte schemalagd, inte aktiv"
-
-#~ msgid "Not scheduling syncs, no flow for poll"
-#~ msgstr "Synkroniseringar är inte planerade, inget flöde finns för undersökningen"
-
-#, fuzzy
-#~| msgid "Previous"
-#~ msgid "Preview results"
-#~ msgstr "Tidigare"
-
-#~ msgid "Refresh Results"
-#~ msgstr "Uppdaterar resultaten"
-
-#~ msgid "MORE POLLS"
-#~ msgstr "FLER UNDERSÖKNINGAR"
-
-#~ msgid "FILTER"
-#~ msgstr "FILTRERA"
-
-#~ msgid "POLL LIST"
-#~ msgstr "Lista över undersökningar"
-
-#~ msgid "All polls from most recent to oldest"
-#~ msgstr "Alla undersökningar från nyast till äldst"
-
-#~ msgid "ARCHIVED STORIES"
-#~ msgstr "ARKIVERADE BERÄTTELSER"
-
-#~ msgid "LIST"
-#~ msgstr "LISTA"
-
-#~ msgid "LATEST OPINION"
-#~ msgstr "SENASTE ÅSIKTERNA"
-
-#~ msgid "VIEW FULL RESULTS"
-#~ msgstr "SE ALLA RESULTAT"
-
-#~ msgid "U-REPORTERS IN"
-#~ msgstr "U-REPORTERS I"
-
-#~ msgid "PARTNERING WITH"
-#~ msgstr "SAMARBETAR MED"
-
-#~ msgid "U-REPORTERS"
-#~ msgstr "U-REPORTERS"
-
-#~ msgid "IN"
-#~ msgstr "I"
-
-#~ msgid "COUNTRIES WORLDWIDE"
-#~ msgstr "LÄNDER VÄRLDEN ÖVER"
-
-#~ msgid "AGES"
-#~ msgstr "ÅLDER"
-
-#~ msgid "Join U-Report, Your voice matters."
-#~ msgstr "Gå med i U-Report. Din röst är viktig."
-
-#~ msgid "We are a part of a global platform working to change the lives of young people around the world."
-#~ msgstr "Vi är en del av en global plattform, som syftar till att förändra barn och ungas liv runt om i världen."
-
-#~ msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-#~ msgstr "Läs mer om hur U-Report engagerar barn och unga att göra sina röster hörda i frågor som är viktiga för dem."
-
-#~ msgid "LEARN MORE"
-#~ msgstr "LÄS MER"
-
-#~ msgid "Visit"
-#~ msgstr "Besök"
-
-#~ msgid "How would you like to join?"
-#~ msgstr "Hur vill du delta?"
-
-#~ msgid "Text"
-#~ msgstr "Text"
-
-#~ msgid "No results found"
-#~ msgstr "Inga resultat"
-
-#, fuzzy
-#~| msgid "RESPONSES"
-#~ msgid "RESPONDERS"
-#~ msgstr "SVAR"
-
-#~ msgid "RESPONSE RATE"
-#~ msgstr "SVARSFREKVENS"
-
-#, fuzzy
-#~| msgid "TOTAL RESPONSES"
-#~ msgid "TOTAL RESPONDERS"
-#~ msgstr "TOTALT ANTAL SVAR"
-
-#~ msgid "ALL"
-#~ msgstr "ALLA"
-
-#~ msgid "AGE"
-#~ msgstr "ÅLDER"
-
-#~ msgid "GENDER"
-#~ msgstr "KÖNSIDENTITET"
-
-#~ msgid "LOCATION"
-#~ msgstr "PLATS"
-
-#~ msgid "Written by:"
-#~ msgstr "Skriven av:"
-
-#, fuzzy
-#~| msgid "U-REPORTERS"
-#~ msgid "REPORT"
-#~ msgstr "U-REPORTERS"
-
-#~ msgid "OVERALL STATISTICS"
-#~ msgstr "SAMLAD STATISTIK"
-
-#~ msgid "THIS YEAR"
-#~ msgstr "I ÅR"
-
-#~ msgid "AVG RESPONSE RATE"
-#~ msgstr "GENOMSNITTLIG SVARSFREKVENS"
-
-#~ msgid "U-REPORTERS BY REGION"
-#~ msgstr "U-REPORTERS I REGIONEN"
-
-#~ msgid "FILTER RESULTS"
-#~ msgstr "FILTRERADE RESULTAT"
-
-#~ msgid "Export and Share"
-#~ msgstr "Exportera och dela"
-
-#~ msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-#~ msgstr "Vill du berätta för dina vänner om det här? Dela på sociala medier!"
-
-#~ msgid "SELECT LANGUAGE"
-#~ msgstr "VÄLJ SPRÅK"
-
-#~ msgid "SELECT COUNTRY"
-#~ msgstr "VÄLJ LAND"
-
-#~ msgid "Custom pages"
-#~ msgstr "Anpassade sidor"
-
-#~ msgid "See by the numbers how we are engaging youth voices for positive social change."
-#~ msgstr "Se hur många barn och unga som vill att vi ska lyssna på deras röster för att skapa en positiv förändring."
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-#~ "          "
-#~ msgstr ""
-#~ "\n"
-#~ "Är du säker på att du vill radera <strong>%(object)s</strong>?"
-
-#~ msgid "Error"
-#~ msgstr "Felmeddelande"
-
-#~ msgid "Enter Dashboard"
-#~ msgstr "Gå till dashboard"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~ "              "
-#~ msgstr ""
-#~ "\n"
-#~ "Du kan tyvärr inte logga in just nu eftersom vi har upptäckt%(failed_login_limit)sfelaktiga inloggningsförsök."
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "Vänligen vänta %(lockout_timeout)s minuter innan du försöker logga in igen."
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "<strong>Ditt lösenord har gått ut. </strong>Du måste ändra ditt lösenord var %(expire_days)s dag, och det lösenordet får inte ha använts inom de senaste %(window_days)s dagarna."
-
-#~ msgid "+ New Story"
-#~ msgstr "+ Ny berättelse"
 
 #~ msgid "Photos"
 #~ msgstr "Bilder"
