@@ -54,7 +54,6 @@ class PollForm(forms.ModelForm):
         ).order_by("category__name", "name")
 
     def clean(self):
-
         cleaned_data = self.cleaned_data
 
         poll_tags = cleaned_data.get("poll_tags", "[]")

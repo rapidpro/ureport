@@ -75,7 +75,6 @@ class ContactTest(UreportTest):
         self.gender_field = ContactField.objects.create(org=self.nigeria, key="gender", label="Gender", value_type="T")
 
     def test_get_or_create(self):
-
         self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").first())
 
         created_contact = Contact.get_or_create(self.nigeria, "contact-uuid")
@@ -109,7 +108,6 @@ class ContactTest(UreportTest):
         self.assertEqual(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").count(), 1)
 
     def test_contact_ward_field(self):
-
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
         Contact.objects.create(
             uuid="C-007",

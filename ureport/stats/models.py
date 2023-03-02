@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 
 class GenderSegment(models.Model):
-
     GENDERS = {"M": _("Male"), "F": _("Female"), "O": _("Other")}
 
     gender = models.CharField(max_length=1)
@@ -36,7 +35,6 @@ class AgeSegment(models.Model):
 
 
 class SchemeSegment(models.Model):
-
     SCHEME_DISPLAY = {"tel": "SMS", "twitterid": "TWITTER", "ext": None}
 
     scheme = models.CharField(max_length=16, unique=True)
@@ -122,7 +120,6 @@ class PollStats(models.Model):
 
         for distinct_set in stats_objs:
             with connection.cursor() as cursor:
-
                 where_sql = ""
                 if distinct_set.org_id is not None:
                     where_sql += '"org_id" = %s AND ' % distinct_set.org_id
@@ -230,7 +227,6 @@ class PollStats(models.Model):
 
     @classmethod
     def refresh_engagement_data(cls, org, metric, segment_slug, time_filter):
-
         key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"
 
         output_data = []
@@ -678,7 +674,6 @@ class PollStats(models.Model):
 
     @classmethod
     def get_average_response_rate(cls, org):
-
         key = f"org:{org.id}:average_response_rate"
         output_data = cache.get(key, None)
         if output_data:
@@ -688,7 +683,6 @@ class PollStats(models.Model):
 
     @classmethod
     def calculate_average_response_rate(cls, org):
-
         key = f"org:{org.id}:average_response_rate"
 
         flow_result_ids = list(

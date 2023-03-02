@@ -29,7 +29,6 @@ class ContactSyncer(BaseSyncer):
     prefetch_related = ("backend",)
 
     def get_boundaries_data(self, org):
-
         cache_attr = "__boundaries__%d:%s" % (org.pk, self.backend.slug)
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
@@ -213,7 +212,6 @@ class FLOIPBackend(BaseBackend):
         )
 
     def fetch_flows(self, org):
-
         flow_url = "https://go.votomobile.org/flow-results/packages/"
 
         headers = {
@@ -248,7 +246,6 @@ class FLOIPBackend(BaseBackend):
         return all_flows
 
     def get_definition(self, org, flow_uuid):
-
         flow_url = "https://go.votomobile.org/flow-results/packages/" + flow_uuid
 
         headers = {
@@ -502,7 +499,6 @@ class FLOIPBackend(BaseBackend):
         poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
         if existing_poll_result is not None:
-
             update_required = self._check_update_required(
                 existing_poll_result, category, text, state, district, ward, born, gender, completed, value_date
             )
@@ -539,13 +535,11 @@ class FLOIPBackend(BaseBackend):
                 stats_dict["num_val_ignored"] += 1
 
         elif poll_result_to_save is not None:
-
             replace_save_map = self._check_update_required(
                 poll_result_to_save, category, text, state, district, ward, born, gender, completed, value_date
             )
 
             if replace_save_map:
-
                 result_obj = PollResult(
                     org=org,
                     flow=flow_uuid,
@@ -566,7 +560,6 @@ class FLOIPBackend(BaseBackend):
 
             stats_dict["num_val_ignored"] += 1
         else:
-
             result_obj = PollResult(
                 org=org,
                 flow=flow_uuid,

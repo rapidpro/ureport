@@ -88,7 +88,6 @@ class UtilsTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient.get_flows")
     def test_fetch_flows(self, mock_get_flows):
-
         mock_get_flows.side_effect = [
             MockClientQuery(
                 [
@@ -357,7 +356,6 @@ class UtilsTest(UreportTest):
 
         tz = zoneinfo.ZoneInfo("UTC")
         with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 6, tzinfo=tz)):
-
             stats = json.loads(get_registration_stats(self.org))
 
             for entry in stats:
@@ -382,7 +380,6 @@ class UtilsTest(UreportTest):
                     self.assertEqual(entry["count"], non_zero_keys[entry["label"]])
 
     def test_get_ureporters_locations_stats(self):
-
         self.assertEqual(get_ureporters_locations_stats(self.org, dict()), [])
         self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="map")), [])
         self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="state")), [])
@@ -497,7 +494,6 @@ class UtilsTest(UreportTest):
         self.assertEqual(get_regions_stats(self.org), [dict(name="Nigeria", count=30)])
 
     def test_get_org_contacts_counts(self):
-
         with patch("ureport.contacts.models.ReportersCounter.get_counts") as mock_get_counts:
             mock_get_counts.return_value = {"total-reporters": 50}
             with patch("django.core.cache.cache.get") as mock_cache_get:
@@ -557,7 +553,6 @@ class UtilsTest(UreportTest):
                 }
             }
         ):
-
             with patch("ureport.utils.fetch_old_sites_count") as mock_old_sites_count:
                 mock_old_sites_count.return_value = []
 

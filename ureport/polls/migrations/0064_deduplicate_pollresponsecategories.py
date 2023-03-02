@@ -51,7 +51,6 @@ def deduplicate_pollresponsecategories(apps, schema_editor):  # pragma: no cover
     )
 
     for duplicate in duplicates:
-
         duplicate_objs = PollResponseCategory.objects.filter(
             question_id=duplicate["question"],
             flow_result_category_id=duplicate["flow_result_category"],
@@ -110,7 +109,6 @@ def apply_manual():  # pragma: no cover
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("polls", "0063_auto_20210716_1503"),
     ]

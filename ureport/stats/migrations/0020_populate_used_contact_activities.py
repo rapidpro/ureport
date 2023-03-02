@@ -70,7 +70,6 @@ def apply_manual():  # pragma: no cover
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0019_contactactivity_used"),
     ]

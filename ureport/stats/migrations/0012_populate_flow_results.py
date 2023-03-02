@@ -71,7 +71,6 @@ def apply_manual():  # pragma: no cover
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0011_auto_20210716_1854"),
     ]

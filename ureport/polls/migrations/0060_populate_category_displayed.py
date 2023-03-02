@@ -21,7 +21,6 @@ def populate_category_displayed(apps, schema_editor):  # pragma: no cover
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("polls", "0059_pollresponsecategory_category_displayed"),
     ]

@@ -522,7 +522,6 @@ class FLOIPBackendTest(UreportTest):
 
     @patch("ureport.backend.floip.TembaClient.get_contacts")
     def test_pull_contacts(self, mock_get_contacts):
-
         Contact.objects.all().delete()
 
         # empty fetches

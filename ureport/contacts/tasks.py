@@ -185,7 +185,6 @@ def populate_contact_schemes(org, since, until):
         r.delete(contact_pull_key)
 
     with r.lock(contact_pull_key):
-
         last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.id, "rapidpro")
         cache.delete(last_fetch_date_key)
 
@@ -269,7 +268,6 @@ def populate_contact_schemes(org, since, until):
 
 @app.task(name="contacts.populate_contact_activities_schemes")
 def populate_contact_activities_schemes(org_id):
-
     contact_activities_schemes_populated_key = f"contact_activities_schemes_populated:{org_id}"
 
     if cache.get(contact_activities_schemes_populated_key):

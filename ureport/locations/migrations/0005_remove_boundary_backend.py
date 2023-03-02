@@ -6,7 +6,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("locations", "0004_boundary_backend")]
 
     operations = [migrations.RemoveField(model_name="boundary", name="backend")]

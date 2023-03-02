@@ -27,7 +27,6 @@ def normalize_country_aliases(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("countries", "0001_initial")]
 
     operations = [migrations.RunPython(normalize_country_aliases)]

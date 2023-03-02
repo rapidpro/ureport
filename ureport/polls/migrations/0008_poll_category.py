@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("categories", "0002_auto_20140820_1415"), ("polls", "0007_remove_poll_category")]
 
     operations = [

@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("locations", "0003_remove_inactive_boundaries")]
 
     operations = [

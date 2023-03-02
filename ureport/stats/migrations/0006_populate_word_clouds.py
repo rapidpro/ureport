@@ -24,7 +24,6 @@ def populate_poll_word_clouds(apps, schema_editor):
             )
 
             if open_ended:
-
                 custom_sql = """
                           SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL AND polls_pollresult.text NOT ILIKE '%s') w group by w.label;
                           """ % (
@@ -57,7 +56,6 @@ def apply_manual():  # pragma: no cover
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("stats", "0005_pollwordcloud")]
 
     operations = [migrations.RunPython(populate_poll_word_clouds, reverse)]

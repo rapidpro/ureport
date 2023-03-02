@@ -10,7 +10,6 @@ ON polls_pollquestion (ruleset_uuid);
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0053_poll_backend")]
 
     operations = [migrations.RunSQL(INDEX_SQL)]
