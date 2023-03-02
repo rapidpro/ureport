@@ -80,10 +80,10 @@ if __name__ == "__main__":
     cmd("ruff ureport")
     status("Running isort")
     cmd("isort ureport")
-    # status("Updating locale PO files")
-    # update_po_files()
-    # status("Recompiling locale MO files")
-    # cmd("python manage.py compilemessages")
+    status("Updating locale PO files")
+    update_po_files()
+    status("Recompiling locale MO files")
+    cmd("python manage.py compilemessages")
 
     # if any code changes were made, exit with error
     if cmd("git diff ureport locale"):

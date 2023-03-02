@@ -630,7 +630,7 @@ regex = ">=2020.1.1"
 type = "git"
 url = "https://github.com/nyaruka/django-hamlpy.git"
 reference = "fix-templatize"
-resolved_reference = "2f8e90614a8360ac5923cead9bb30e79613ff354"
+resolved_reference = "880ae119ffc064f2b619f192589aee91d684f714"
 
 [[package]]
 name = "django-redis"
