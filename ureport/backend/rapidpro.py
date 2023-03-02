@@ -172,7 +172,7 @@ class ContactSyncer(BaseSyncer):
         reporter_group = org.get_config("%s.reporter_group" % self.backend.slug, default="")
         contact_groups_names = [group.name.lower() for group in remote.groups]
 
-        if not reporter_group.lower() in contact_groups_names:
+        if reporter_group.lower() not in contact_groups_names:
             return None
 
         org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data = self.get_boundaries_data(
