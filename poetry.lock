@@ -105,18 +105,18 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "boto3"
-version = "1.26.82"
+version = "1.26.83"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "boto3-1.26.82-py3-none-any.whl", hash = "sha256:f618f2e8a4b9d5cb9f05d3a5628ca2afa4bcd3e8b4b8413d11dea0f4c4480b3c"},
-    {file = "boto3-1.26.82.tar.gz", hash = "sha256:f50c048b4f3223dd57afb6eee1189ef9a472bf0ed9b26ff9db65ec13275c4414"},
+    {file = "boto3-1.26.83-py3-none-any.whl", hash = "sha256:c07ed643aa72940f92b2c807591e1ba803c1b79d20ca129a6f8cccf846c40ff8"},
+    {file = "boto3-1.26.83.tar.gz", hash = "sha256:df81bfa4f8dfb3a645c43b7fd317f48df3e7fa402115ef21fc2f6430d73a1821"},
 ]
 
 [package.dependencies]
-botocore = ">=1.29.82,<1.30.0"
+botocore = ">=1.29.83,<1.30.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -125,14 +125,14 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.29.82"
+version = "1.29.83"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "botocore-1.29.82-py3-none-any.whl", hash = "sha256:b31e86f9b51eced5506a0f6038370fe8c1355000379610def1bb9e91cae9e77e"},
-    {file = "botocore-1.29.82.tar.gz", hash = "sha256:913ca09a184cf4428f05838afc631c4fb93f3b173871b69d66230fd14656a3a1"},
+    {file = "botocore-1.29.83-py3-none-any.whl", hash = "sha256:b7df2a1413f32992f350dd66bc5c8747b7211b776cf6500f64aebba7eddbe4f0"},
+    {file = "botocore-1.29.83.tar.gz", hash = "sha256:2e3d215b94df4e4c0ce3da250db43fb39ef7834f8f8fd19e5b223b35edb4d073"},
 ]
 
 [package.dependencies]
@@ -614,23 +614,19 @@ files = [
 
 [[package]]
 name = "django-hamlpy"
-version = "1.4.4"
+version = "1.5.0"
 description = "HAML like syntax for Django templates"
 category = "main"
 optional = false
-python-versions = "^3.7"
-files = []
-develop = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "django_hamlpy-1.5.0-py3-none-any.whl", hash = "sha256:aac66ef1e50dcdbabb9cdca3de3873c44eb49753f908c06c14753a77c9868cea"},
+    {file = "django_hamlpy-1.5.0.tar.gz", hash = "sha256:05ac64fc3dd9cf0e5931436a6e4781841475bda26301d31a0ccf64ea03c9d2ae"},
+]
 
 [package.dependencies]
 django = ">=3.2,<5.0"
 regex = ">=2020.1.1"
-
-[package.source]
-type = "git"
-url = "https://github.com/nyaruka/django-hamlpy.git"
-reference = "fix-templatize"
-resolved_reference = "880ae119ffc064f2b619f192589aee91d684f714"
 
 [[package]]
 name = "django-redis"
@@ -1979,4 +1975,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "094ebda77c65fe8ec4c0176ffdf2b8bfa233c6a99cdaf9459ea9c72ec777b147"
+content-hash = "27888c01c750396d52e5676f5e1644b72619504e3760bcf091e5fa223f33462a"

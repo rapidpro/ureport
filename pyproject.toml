@@ -29,7 +29,7 @@ django-redis = "^5.2.0"
 psycopg2-binary = "^2.9.5"
 xlutils = "^2.0.0"
 mock = "^2.0.0"
-django-hamlpy = {git = "https://github.com/nyaruka/django-hamlpy.git", branch = "fix-templatize"}
+django-hamlpy = "^1.5.0"
 pycountry = "^18.5.26"
 django-countries = "^7.2.1"
 GitPython = "^2.1.11"
