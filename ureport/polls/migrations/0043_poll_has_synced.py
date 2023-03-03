@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0042_add_index_on_poll_result_org_flow_contact")]
 
     operations = [

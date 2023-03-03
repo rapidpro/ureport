@@ -231,7 +231,6 @@ class BoundarySyncerTest(UreportTest):
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
     def test_delete_local(self):
-
         local = Boundary.objects.create(
             org=self.nigeria,
             osm_id="OLD123",
@@ -327,7 +326,6 @@ class ContactSyncerTest(UreportTest):
         )
 
     def test_local_kwargs(self):
-
         temba_contact = TembaContact.create(
             uuid="C-006",
             name="Jan",
@@ -515,7 +513,6 @@ class ContactSyncerTest(UreportTest):
 
     @patch("django.utils.timezone.now")
     def test_create_local(self, mock_timezone_now):
-
         now_date = json_date_to_datetime("2020-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
@@ -686,7 +683,6 @@ class RapidProBackendTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient.get_contacts")
     def test_pull_contacts(self, mock_get_contacts):
-
         Contact.objects.all().delete()
 
         # empty fetches
@@ -1065,7 +1061,6 @@ class RapidProBackendTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient.get_fields")
     def test_pull_fields(self, mock_get_fields):
-
         ContactField.objects.all().delete()
 
         mock_get_fields.return_value = MockClientQuery(
@@ -2683,7 +2678,6 @@ class PerfTest(UreportTest):
         mock_cache_delete,
         mock_pull_refresh,
     ):
-
         mock_max_runs.return_value = 300
         mock_rebuild_counts.return_value = "REBUILT"
         mock_get_pull_cached_params.side_effect = [(None, None)]
@@ -2903,7 +2897,6 @@ class PerfTest(UreportTest):
         mock_pull_refresh,
         mock_base_client_request,
     ):
-
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 

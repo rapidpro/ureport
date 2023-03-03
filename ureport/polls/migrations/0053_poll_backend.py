@@ -15,7 +15,6 @@ def populate_poll_backend(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("orgs", "0025_auto_20180322_1415"), ("polls", "0052_remove_poll_backend")]
 
     operations = [

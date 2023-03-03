@@ -51,7 +51,6 @@ DROP INDEX IF EXISTS stats_contactactivity_org_id_date_state;
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0022_better_indexes"),
     ]

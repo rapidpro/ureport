@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("bots", "0004_alter_bot_description"),
         ("landingpages", "0001_initial"),

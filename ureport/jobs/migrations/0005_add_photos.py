@@ -31,7 +31,6 @@ def generate_job_block_types(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("jobs", "0004_auto_20170615_1455")]
 
     operations = [migrations.RunPython(generate_job_block_types)]

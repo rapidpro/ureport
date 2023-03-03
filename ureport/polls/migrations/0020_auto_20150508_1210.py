@@ -66,7 +66,6 @@ def populate_uuid_fields(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0019_auto_20150508_1209")]
 
     operations = [migrations.RunPython(populate_uuid_fields)]

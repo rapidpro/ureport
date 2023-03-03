@@ -181,7 +181,6 @@ def get_flows(org, backend):
 
 
 def update_poll_flow_data(org):
-
     backends = org.backends.filter(is_active=True)
     for backend_obj in backends:
         flows = get_flows(org, backend_obj)
@@ -292,7 +291,6 @@ def fetch_old_sites_count():
 
 
 def get_global_count():
-
     count_cached_value = cache.get(GLOBAL_COUNT_CACHE_KEY, None)
     if count_cached_value:
         return count_cached_value
@@ -327,7 +325,6 @@ def get_global_count():
 
 
 def get_org_contacts_counts(org):
-
     key = ORG_CONTACT_COUNT_KEY % org.pk
     org_contacts_counts = cache.get(key, None)
     if org_contacts_counts:
@@ -919,7 +916,6 @@ def get_reporters_count(org):
 
 
 def get_occupation_stats(org):
-
     org_contacts_counts = get_org_contacts_counts(org)
 
     occupation_counts = {k[11:]: v for k, v in org_contacts_counts.items() if k.startswith("occupation")}
@@ -938,7 +934,6 @@ def get_occupation_stats(org):
 
 
 def get_regions_stats(org):
-
     org_contacts_counts = get_org_contacts_counts(org)
     boundaries_name = Boundary.get_org_top_level_boundaries_name(org)
 

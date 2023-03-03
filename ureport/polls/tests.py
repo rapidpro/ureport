@@ -115,7 +115,6 @@ class PollTest(UreportTest):
     def test_pull_refresh_task(self, mock_cache_set, mock_pull_refresh):
         tz = zoneinfo.ZoneInfo("Africa/Kigali")
         with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 0, tzinfo=tz)):
-
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
             poll1.pull_refresh_task()
@@ -130,7 +129,6 @@ class PollTest(UreportTest):
             mock_pull_refresh.assert_called_once_with((poll1.pk,), queue="sync")
 
     def test_get_public_polls(self):
-
         self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
@@ -332,7 +330,6 @@ class PollTest(UreportTest):
         self.assertEqual(len(poll1.get_featured_images()), 1)
 
     def test_get_categoryimage(self):
-
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertEqual(poll1.get_category_image(), self.health_uganda.get_first_image())
@@ -797,7 +794,6 @@ class PollTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_questions_poll(self):
-
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)

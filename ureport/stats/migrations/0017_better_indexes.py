@@ -13,7 +13,6 @@ CREATE INDEX IF NOT EXISTS stats_pollstats_org_qstn_rslt_cat_age_gndr_schm_date_
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0016_pollstats_scheme_segment"),
     ]

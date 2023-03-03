@@ -8,7 +8,6 @@ CREATE INDEX IF NOT EXISTS stats_pollstats_org_question on stats_pollstats (org_
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0009_add_better_indexes"),
     ]

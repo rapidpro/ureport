@@ -6,7 +6,6 @@ from ureport.sql import InstallSQL
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("polls", "0069_pollquestion_color_choice"),
     ]

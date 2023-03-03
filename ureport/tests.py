@@ -163,7 +163,6 @@ class UreportTest(SmartminTest, DashTest):
         self.floip_backend = floip_backend
 
     def create_org(self, subdomain, timezone, user):
-
         name = subdomain
 
         orgs = Org.objects.filter(subdomain=subdomain)
@@ -330,7 +329,6 @@ class SetOrgMiddlewareTest(UreportTest):
         self.assertEqual(self.request.org, None)
 
     def test_process_request_with_org(self):
-
         ug_org = self.create_org("uganda", zoneinfo.ZoneInfo("Africa/Kampala"), self.admin)
         ug_dash_url = ug_org.subdomain + ".ureport.io"
         self.request.get_host.return_value = ug_dash_url

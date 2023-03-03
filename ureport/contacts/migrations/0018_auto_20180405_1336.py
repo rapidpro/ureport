@@ -36,7 +36,6 @@ def populate_contacts_backend(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("orgs", "0025_auto_20180322_1415"), ("contacts", "0017_auto_20180405_1330")]
 
     operations = [

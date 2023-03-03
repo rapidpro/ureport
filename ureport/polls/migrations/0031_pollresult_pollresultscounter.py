@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("orgs", "0016_taskstate_is_disabled"), ("polls", "0030_auto_20160314_2036")]
 
     operations = [

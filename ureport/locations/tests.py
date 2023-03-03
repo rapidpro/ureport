@@ -17,7 +17,6 @@ class LocationTest(UreportTest):
         super(LocationTest, self).setUp()
 
     def test_get_org_top_level_boundaries_name(self):
-
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), dict())
 
         Boundary.objects.create(

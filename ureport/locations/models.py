@@ -60,7 +60,6 @@ class Boundary(models.Model):
 
     @classmethod
     def build_global_boundaries(cls):
-
         from temba_client.v2.types import Boundary as TembaBoundary
 
         from django.conf import settings

@@ -103,7 +103,6 @@ class IconsDisplay(SmartTemplateView):
         icon_sites = []
         for elt in linked_sites:
             if elt.get("show_icon", True) and elt.get("flag", ""):
-
                 icon_sites.append(elt)
 
         context["icon_sites"] = icon_sites
@@ -139,7 +138,6 @@ class SharedSitesCount(SmartTemplateView):
 
 class NewsView(SmartTemplateView):
     def render_to_response(self, context, **kwargs):
-
         org = self.request.org
 
         news_items = NewsItem.objects.filter(is_active=True, org=org).order_by("-created_on")
@@ -708,7 +706,6 @@ def status(request):
     body = json.dumps(dict(db_up=db_up, redis_up=redis_up))
 
     if not db_up or not redis_up:
-
         return HttpResponse(body, status=500, content_type="application/json")
     else:
         return HttpResponse(body, status=200, content_type="application/json")

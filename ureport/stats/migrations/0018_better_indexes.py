@@ -9,7 +9,6 @@ CREATE INDEX IF NOT EXISTS stats_contactactivity_org_id_date_scheme_not_null on 
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0017_better_indexes"),
     ]

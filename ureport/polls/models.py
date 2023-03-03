@@ -227,7 +227,6 @@ class Poll(SmartModel):
         return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
     def get_pull_cached_params(self):
-
         latest_synced_obj_time = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid), None)
 
         pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org.pk, self.pk), None)
@@ -550,7 +549,6 @@ class Poll(SmartModel):
 
     @classmethod
     def find_main_poll(cls, org):
-
         poll_with_questions = PollQuestion.objects.filter(is_active=True, poll__org=org).values_list("poll", flat=True)
 
         polls = Poll.get_public_polls(org=org).filter(pk__in=poll_with_questions).order_by("-created_on")
@@ -927,7 +925,6 @@ class PollQuestion(SmartModel):
         results = []
 
         if open_ended and not segment:
-
             poll_word_cloud = PollWordCloud.get_question_poll_cloud(org, self)
 
             unclean_categories = []
@@ -962,13 +959,11 @@ class PollQuestion(SmartModel):
             )
 
             if segment:
-
                 location_part = segment.get("location", "").lower()
                 age_part = segment.get("age", "").lower()
                 gender_part = segment.get("gender", "").lower()
 
                 if location_part in ["state", "district", "ward"]:
-
                     location_boundaries = org.get_segment_org_boundaries(segment)
 
                     for boundary in location_boundaries:
@@ -1081,7 +1076,6 @@ class PollQuestion(SmartModel):
 
                     results = []
                     for gender in genders:
-
                         categories_results = (
                             PollStats.get_question_stats(org.id, self)
                             .filter(gender_segment_id=gender["id"])
@@ -1287,7 +1281,6 @@ class PollResponseCategory(models.Model):
 
 
 class PollResult(models.Model):
-
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)

@@ -31,7 +31,6 @@ class Command(BaseCommand):
                 CountryAlias.get_or_create(country, name, user)
 
     def handle(self, *args, **options):
-
         if os.path.exists("./country-list/") and os.path.isdir("./country-list"):
             logger.info("Fetching country-list...")
             os.chdir("./country-list")
