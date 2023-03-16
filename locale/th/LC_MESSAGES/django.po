@@ -77,7 +77,7 @@ msgstr ""
 "เนื้อหานี้ควรอนุญาตให้สามารถอัพโหลดรูปภาพเพิ่มเติมหรือไม่ เช่น แกลเลอรี่"
 
 msgid "Whether this content has a color field"
-msgstr "เนื้อหานี้มีช่องสำหรับใส่สีหรือไม่"
+msgstr "เนื้อหานี้ควรมีช่องสำหรับใส่สีหรือไม่"
 
 msgid "Whether this content should allow setting a YouTube id"
 msgstr "เนื้อหานี้ควรอนุญาตให้ตั้งค่า YouTube ID หรือไม่"
