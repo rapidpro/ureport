@@ -107,6 +107,7 @@ LANGUAGES = (
     ("no", "Norwegian"),
     ("ru", "Russia"),
     ("el", "Greek"),
+    ("th", "Thai"),
 )
 
 DEFAULT_LANGUAGE = "en"
