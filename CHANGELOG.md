@@ -1,3 +1,26 @@
+v1.2.57 (2023-03-16)
+-------------------------
+ * Merge pull request #1111 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in th
+ * Merge pull request #1107 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in th
+ * Merge pull request #1089 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
+ * Merge pull request #1090 from rapidpro/translations_locale-en-lc-messages-django-po--main_el
+ * Merge pull request #1092 from rapidpro/translations_locale-en-lc-messages-django-po--main_cs
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in fr
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in el
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in cs
+ * Merge pull request #1097 from rapidpro/update-haml
+ * Update hamply
+ * enable makemessages to generate PO files
+ * Run black
+ * Remove flake8, Add ruff
+
 v1.2.56 (2023-03-02)
 -------------------------
  * Merge pull request #1096 from rapidpro/fix-translations
