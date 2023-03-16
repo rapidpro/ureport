@@ -1,3 +1,7 @@
+v1.2.58 (2023-03-16)
+-------------------------
+ * Add Thai
+
 v1.2.57 (2023-03-16)
 -------------------------
  * Merge pull request #1111 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
