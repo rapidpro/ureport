@@ -1078,7 +1078,7 @@ msgstr "จำนวนผู้ตอบทั้งหมด"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)sตอบโพลจากจำนวน %(polled)s ที่ได้รับโพลสำรวจ"
+msgstr "%(responded)s ตอบโพลจากจำนวน %(polled)s ที่ได้รับโพลสำรวจ"
 
 msgid "ALL"
 msgstr "ทั้งหมด"
