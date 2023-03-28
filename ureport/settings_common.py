@@ -1039,10 +1039,10 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(hour=2, minute=0),
         "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
     },
-    "update-old-contact-activity": {
+    "delete-old-contact-activity": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=22, minute=0),
-        "args": ("ureport.stats.tasks.update_used_contact_activities", "slow"),
+        "args": ("ureport.stats.tasks.delete_old_contact_activities", "slow"),
     },
     "rebuild-poll-results-count": {
         "task": "polls.rebuild_counts",
