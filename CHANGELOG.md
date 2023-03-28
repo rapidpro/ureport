@@ -1,3 +1,8 @@
+v1.2.60 (2023-03-28)
+-------------------------
+ * Merge pull request #1127 from rapidpro/delete-old-contact-activities
+ * Delete old contact activities task
+
 v1.2.59 (2023-03-28)
 -------------------------
  * Merge pull request #1126 from rapidpro/line-button
