@@ -799,7 +799,7 @@ msgid "About"
 msgstr "เกี่ยวกับ"
 
 msgid "Engagement"
-msgstr "การมีส่วนร่วม"
+msgstr "ยูรีพอร์ตเตอร์"
 
 msgid "Reports"
 msgstr "รายงาน"
@@ -1034,8 +1034,7 @@ msgid ""
 "Learn more about how U-Report is empowering and connecting young people to "
 "speak out on issues that matter to them."
 msgstr ""
-"เรียนรู้เพิ่มเติมว่า U-Report "
-"ส่งเสริมและเชื่อมโยงเด็กและเยาวชนต่อประเด็นที่สำคัญต่อความเป็นอยู่ของเขาอย่างไร"
+"เรียนรู้เพิ่มเติมว่ายูรีพอร์ตสนับสนุนและส่งเสริมการมีส่วนร่วมของคนรุ่นใหม่เพื่อให้เกิดความเปลี่ยนแปลงทางสังคมอย่างไร"
 
 msgid "LEARN MORE"
 msgstr "เรียนรู้เพิ่มเติม"
@@ -1078,7 +1077,7 @@ msgstr "จำนวนผู้ตอบทั้งหมด"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)sตอบโพลจากจำนวน %(polled)s ที่ได้รับโพลสำรวจ"
+msgstr "%(responded)s ตอบโพลจากจำนวน %(polled)s ที่ได้รับโพลสำรวจ"
 
 msgid "ALL"
 msgstr "ทั้งหมด"
@@ -2034,7 +2033,7 @@ msgid "Location"
 msgstr "ที่อยู่"
 
 msgid "Opinion Responses"
-msgstr "ความคิดเห็นจากคำตอบโพล"
+msgstr "ความคิดเห็นจากยูรีพอร์ตเตอร์ "
 
 msgid "Sign Up Rate"
 msgstr "อัตราการลงทะเบียน"
@@ -2043,7 +2042,7 @@ msgid "Response Rate"
 msgstr "อัตราการตอบโพล"
 
 msgid "Active Users"
-msgstr "จำนวน Users ที่ใช้งานอยู่"
+msgstr "จำนวนผู้ใช้งาน"
 
 msgid "Whether this row was created by squashing"
 msgstr "Row นี้ถูกสร้างขึ้นโดยการบีบอัดเข้ามาหรือไม่"
