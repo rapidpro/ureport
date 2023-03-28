@@ -1,3 +1,13 @@
+v1.2.59 (2023-03-28)
+-------------------------
+ * Merge pull request #1126 from rapidpro/line-button
+ * Run code checks
+ * Fix conflicts
+ * Add line link on join page
+ * Merge pull request #1125 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in th
+
 v1.2.58 (2023-03-16)
 -------------------------
  * Add Thai
