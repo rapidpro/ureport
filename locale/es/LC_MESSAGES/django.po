@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1799,6 +1799,11 @@ msgstr ""
 
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr ""
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "El código corto que los usuarios deben usar para contactar localmente a U-Report "
 
 msgid "The join button text"
 msgstr ""

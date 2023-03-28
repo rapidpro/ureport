@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2021\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1823,6 +1823,11 @@ msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Korisničko ime za viber koje će korisnici koristiti za kontaktiranje U-Report-a ako ga imate"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Korisničko ime za viber koje će korisnici koristiti za kontaktiranje U-Report-a ako ga imate"
+
+#, fuzzy
+#| msgid "The viber username that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Korisničko ime za viber koje će korisnici koristiti za kontaktiranje U-Report-a ako ga imate"
 
 msgid "The join button text"

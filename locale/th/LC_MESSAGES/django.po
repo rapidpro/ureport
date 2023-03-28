@@ -2,24 +2,24 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Tippawan <tyaiya@unicef.org>, 2023
 # M. S., 2023
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "The name of this category"
@@ -49,12 +49,8 @@ msgstr "ชื่อสำหรับประเภทเนื้อหาน
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr "Slug เพื่อระบุประเภทเนื้อหานี้ เพื่อใช้กับแท็กของเทมเพลต"
 
-msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
-msgstr ""
-"คำอธิบายว่าประเภทเนื้อหานี้จะใช้ที่ใดบนหน้าเว็บไซต์ "
-"และจะแสดงผลให้เห็นอย่างไร"
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "คำอธิบายว่าประเภทเนื้อหานี้จะใช้ที่ใดบนหน้าเว็บไซต์ และจะแสดงผลให้เห็นอย่างไร"
 
 msgid "Whether this content should include a title"
 msgstr "เนื้อหานี้ควรมีชื่อหัวข้อหรือไม่"
@@ -71,10 +67,8 @@ msgstr "เนื้อหานี้ควรมีช่องใส่ข้
 msgid "Whether this content should include a link"
 msgstr "เนื้อหานี้ควรมีลิงก์หรือไม่"
 
-msgid ""
-"Whether this content should allow upload of additional images, ie a gallery"
-msgstr ""
-"เนื้อหานี้ควรอนุญาตให้สามารถอัพโหลดรูปภาพเพิ่มเติมหรือไม่ เช่น แกลเลอรี่"
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "เนื้อหานี้ควรอนุญาตให้สามารถอัพโหลดรูปภาพเพิ่มเติมหรือไม่ เช่น แกลเลอรี่"
 
 msgid "Whether this content has a color field"
 msgstr "เนื้อหานี้ควรมีช่องสำหรับใส่สีหรือไม่"
@@ -112,12 +106,8 @@ msgstr "ลิงก์ที่เกี่ยวข้องกับกลุ
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "ID ของวิดีโอ YouTube ที่เกี่ยวข้องกับรายการนี้"
 
-msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
-msgstr ""
-"แท็กที่ควรใช้สำหรับกลุ่มเนื้อหานี้ แยกแต่ละแท็กด้วยการเว้นวรรค "
-"สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ -ไม่จำเป็นต้องใส่"
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "แท็กที่ควรใช้สำหรับกลุ่มเนื้อหานี้ แยกแต่ละแท็กด้วยการเว้นวรรค สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ -ไม่จำเป็นต้องใส่"
 
 msgid "The priority for this block, higher priority blocks come first"
 msgstr "ลำดับความสำคัญของกลุ่มเนื้อหานี้ - ลำดับความสำคัญที่สูงจะมาก่อน"
@@ -242,9 +232,7 @@ msgstr "โซนเวลา"
 msgid "The timezone your organization is in."
 msgstr "ตำแหน่งโซนเวลาที่องค์กรตั้งอยู่"
 
-msgid ""
-"JSON blob used to store configuration information associated with this "
-"organization"
+msgid "JSON blob used to store configuration information associated with this organization"
 msgstr "JSON blob ที่ใช้เก็บข้อมูลการตั้งค่าต่าง ๆ ที่เกี่ยวข้องกับองค์กรนี้"
 
 msgid "Administrator"
@@ -346,9 +334,7 @@ msgstr "คุณต้องมีผู้ดูแลระบบอย่า
 msgid "Select your Organization"
 msgstr "เลือกองค์กรของคุณ"
 
-msgid ""
-"Your account is not associated to an organization. Please Contact the "
-"adminstrator."
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgstr "บัญชีของคุณยังไม่ได้เชื่อมโยงกับองค์กร กรุณาติดต่อผู้ดูแลระบบ"
 
 msgid "Your Organization"
@@ -370,9 +356,7 @@ msgstr "บริหารจัดการบัญชีของ %(name)s"
 msgid "Create"
 msgstr "สร้าง"
 
-msgid ""
-"Your invitation link is invalid. Please contact your organization "
-"administrator."
+msgid "Your invitation link is invalid. Please contact your organization administrator."
 msgstr "ลิงก์คำเชิญของคุณไม่ถูกต้อง กรุณาติดต่อผู้ดูแลระบบขององค์กรของคุณ"
 
 #, python-format
@@ -382,9 +366,7 @@ msgstr "เข้าร่วมกับ %(name)s"
 msgid "Join"
 msgstr "เข้าร่วม"
 
-msgid ""
-"Your invitation link has expired. Please contact your organization "
-"administrator."
+msgid "Your invitation link has expired. Please contact your organization administrator."
 msgstr "ลิงก์คำเชิญของคุณหมดอายุแล้ว กรุณาติดต่อผู้ดูแลระบบขององค์กรของคุณ"
 
 msgid "Task"
@@ -417,19 +399,11 @@ msgstr "ลิงก์ไปยังไฟล์ MP3 สำหรับเร�
 msgid "The PDF report to attach"
 msgstr "แนบรายงาน PDF"
 
-msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
-msgstr ""
-"ID ของวิดี YouTube ที่เกี่ยวข้องกับเรื่องราวนี้ (เป็นข้อความที่มาหลังจาก v= "
-"และก่อน & ใน URL ของ YouTube)"
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "ID ของวิดี YouTube ที่เกี่ยวข้องกับเรื่องราวนี้ (เป็นข้อความที่มาหลังจาก v= และก่อน & ใน URL ของ YouTube)"
 
-msgid ""
-"Any tags for this story, separated by spaces, can be used to do more "
-"advanced filtering, optional"
-msgstr ""
-"แท็กสำหรับเรื่องราวนี้ แยกแต่ละแท็กด้วยการเว้นวรรค "
-"สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ -ไม่จำเป็นต้องใส่"
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "แท็กสำหรับเรื่องราวนี้ แยกแต่ละแท็กด้วยการเว้นวรรค สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ -ไม่จำเป็นต้องใส่"
 
 msgid "The category for this story"
 msgstr "หมวดหมู่ของเรื่องราวนี้"
@@ -481,9 +455,7 @@ msgstr ""
 "คุณแน่ใจแล้วหรือ ว่าจะเอา <b>%(object)s</b> ออก?\n"
 " "
 
-msgid ""
-"Once it is removed, it will be gone forever. There is no way to undo this "
-"operation."
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "เมื่อเอาออกแล้วมันจะสูญหายไปตลอดกาล ไม่สามารถยกเลิกการกระทำนี้ได้"
 
 msgid "Cancel"
@@ -557,11 +529,8 @@ msgstr ""
 "      กรุณารอ %(lockout_timeout)s นาที ก่อนลองลงชื่อเข้าใช้ใหม่\n"
 "      "
 
-msgid ""
-"Alternatively, you can fill out the form below to have your password reset "
-"via e-mail."
-msgstr ""
-"นอกจากนี้ คุณสามารถกรอกแบบฟอร์มด้านล่าง เพื่อรีเซ็ตรหัสผ่านของคุณทางอีเมล"
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "นอกจากนี้ คุณสามารถกรอกแบบฟอร์มด้านล่าง เพื่อรีเซ็ตรหัสผ่านของคุณทางอีเมล"
 
 msgid "Please contact the website administrator to have your password reset."
 msgstr "กรุณาติดต่อผู้ดูแลเว็บไซต์เพื่อรีเซ็ตรหัสผ่านของคุณ"
@@ -572,11 +541,8 @@ msgstr "ที่อยู่อีเมล"
 msgid "Recover"
 msgstr "กู้คืน"
 
-msgid ""
-"Please enter the email address you used to sign up and we will help you "
-"recover your password."
-msgstr ""
-"กรุณาใส่ที่อยู่อีเมลที่คุณใช้ในการลงทะเบียน เราจะช่วยคุณกู้คืนรหัสผ่านของคุณ"
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "กรุณาใส่ที่อยู่อีเมลที่คุณใช้ในการลงทะเบียน เราจะช่วยคุณกู้คืนรหัสผ่านของคุณ"
 
 #, python-format
 msgid ""
@@ -591,16 +557,10 @@ msgstr ""
 msgid "New Password"
 msgstr "รหัสผ่านใหม่"
 
-msgid ""
-"Passwords must have at least 8 characters, including one uppercase, one "
-"lowercase and one number"
-msgstr ""
-"รหัสผ่านจะต้องมีอย่างน้อย 8 ตัวอักษร มีตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว "
-"ตัวพิมพ์เล็กอย่างน้อย 1 ตัว และมีตัวเลขอย่างน้อย 1 ตัว"
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "รหัสผ่านจะต้องมีอย่างน้อย 8 ตัวอักษร มีตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว ตัวพิมพ์เล็กอย่างน้อย 1 ตัว และมีตัวเลขอย่างน้อย 1 ตัว"
 
-msgid ""
-"You have used this password before in the past year, please use a new "
-"password."
+msgid "You have used this password before in the past year, please use a new password."
 msgstr "คุณได้ใช้รหัสผ่านนี้ในปีที่ผ่านมา กรุณาเลือกใช้รหัสผ่านใหม่"
 
 msgid "Password"
@@ -621,12 +581,8 @@ msgstr "รหัสผ่านใหม่ไม่ตรงกับรหั
 msgid "Your Email"
 msgstr "อีเมลของคุณ"
 
-msgid ""
-"E-mail recovery is not supported, please contact the website administrator "
-"to reset your password manually."
-msgstr ""
-"ระบบไม่รองรับการกู้คืนอีเมล "
-"กรุณาติดต่อผู้ดูแลเว็บไซต์เพื่อรีเซ็ตรหัสผ่านของคูณ"
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "ระบบไม่รองรับการกู้คืนอีเมล กรุณาติดต่อผู้ดูแลเว็บไซต์เพื่อรีเซ็ตรหัสผ่านของคูณ"
 
 msgid "Current Password"
 msgstr "รหัสผ่านปัจจุบัน"
@@ -658,8 +614,7 @@ msgstr "สร้างบัญชีผู้ใช้งานใหม่เ
 msgid "Groups"
 msgstr "กลุ่ม"
 
-msgid ""
-"Users will only get those permissions that are allowed for their group."
+msgid "Users will only get those permissions that are allowed for their group."
 msgstr "ผู้ใช้งานจะได้รับสิทธิ์ตามที่กำหนดในกลุ่มของพวกเขา"
 
 msgid "Set the user's initial password here."
@@ -717,18 +672,14 @@ msgstr "ขอบคุณนะ รหัสผ่านของคุณอ�
 msgid "You are now logged in as %s"
 msgstr "คุณกำลังลงชื่อเข้าใช้เป็น %s"
 
-msgid ""
-"Password Updated Successfully. Now you can log in using your new password."
+msgid "Password Updated Successfully. Now you can log in using your new password."
 msgstr "อัพเดตรหัสผ่านเรียบร้อย คุณสามารถลงชื่อเข้าใช้ด้วยรหัสผ่านใหม่ได้แล้ว"
 
 msgid "Reset your Password"
 msgstr "รีเซ็ตรหัสผ่านของคุณ"
 
-msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
-msgstr ""
-"ลิงก์ของคุณหมดอายุแล้ว กรุณาเริ่มกระบวนการใหม่ด้วยการกรอกอีเมลของคุณที่นี่"
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "ลิงก์ของคุณหมดอายุแล้ว กรุณาเริ่มกระบวนการใหม่ด้วยการกรอกอีเมลของคุณที่นี่"
 
 msgid "Submit"
 msgstr "ส่ง"
@@ -913,15 +864,9 @@ msgid "Add os Select tags"
 msgstr "เพิ่มหรือเลือกแท็ก"
 
 #, python-format
-msgid ""
-"There is currently %(counter)s new poll syncing. Polls are displayed on the "
-"public site once they have completely synced their results."
-msgid_plural ""
-"There are currently %(counter)s new polls syncing. Polls are displayed on "
-"the public site once they have completely synced their results."
-msgstr[0] ""
-"ขณะนี้มี %(counter)sโพลใหม่ที่กำลังซิงค์อยู่ "
-"ผลสำรวจจะแสดงผลบนหน้าเว็บไซต์สาธารณะเมื่อการซิงค์เสร็จสมบูรณ์แล้ว"
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] "ขณะนี้มี %(counter)sโพลใหม่ที่กำลังซิงค์อยู่ ผลสำรวจจะแสดงผลบนหน้าเว็บไซต์สาธารณะเมื่อการซิงค์เสร็จสมบูรณ์แล้ว"
 
 msgid "+ New Poll"
 msgstr "+ เพิ่มโพล"
@@ -1024,17 +969,11 @@ msgstr "ร่วมทีม U-Report เสียงของคุณมี�
 msgid "FEATURED STORY"
 msgstr "เรื่องราวแนะนำ"
 
-msgid ""
-"We are a part of a global platform working to change the lives of young "
-"people around the world."
-msgstr ""
-"เราเป็นส่วนหนึ่งของแพลตฟอร์มระดับโลกเพื่อสร้างการเปลี่ยนแปลงให้กับเด็กและเยาวชนทั่วโลก"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "เราเป็นส่วนหนึ่งของแพลตฟอร์มระดับโลกเพื่อสร้างการเปลี่ยนแปลงให้กับเด็กและเยาวชนทั่วโลก"
 
-msgid ""
-"Learn more about how U-Report is empowering and connecting young people to "
-"speak out on issues that matter to them."
-msgstr ""
-"เรียนรู้เพิ่มเติมว่ายูรีพอร์ตสนับสนุนและส่งเสริมการมีส่วนร่วมของคนรุ่นใหม่เพื่อให้เกิดความเปลี่ยนแปลงทางสังคมอย่างไร"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "เรียนรู้เพิ่มเติมว่า U-Report ส่งเสริมและเชื่อมโยงเด็กและเยาวชนต่อประเด็นที่สำคัญต่อความเป็นอยู่ของเขาอย่างไร"
 
 msgid "LEARN MORE"
 msgstr "เรียนรู้เพิ่มเติม"
@@ -1172,12 +1111,8 @@ msgstr "กราฟสามารถดูได้สําหรับผู
 msgid "Export and Share"
 msgstr "ดึงข้อมูลออกและแชร์"
 
-msgid ""
-"Want to tell the world about this? Download this image to easily share on "
-"social media or for a beautiful presentation!"
-msgstr ""
-"ต้องการแชร์เรื่องนี้ให้โลกรู้? "
-"ดาวน์โหลดภาพนี้เพื่อแชร์บนโซเชียลมีเดียหรือเพื่อการนําเสนอที่สวยงาม!"
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "ต้องการแชร์เรื่องนี้ให้โลกรู้? ดาวน์โหลดภาพนี้เพื่อแชร์บนโซเชียลมีเดียหรือเพื่อการนําเสนอที่สวยงาม!"
 
 msgid "SELECT LANGUAGE"
 msgstr "เลือกภาษา"
@@ -1191,11 +1126,8 @@ msgstr "หน้าเว็บที่กำหนดเอง"
 msgid "Landing pages"
 msgstr "หน้าเว็บไซต์"
 
-msgid ""
-"See by the numbers how we are engaging youth voices for positive social "
-"change."
-msgstr ""
-"ดูจากตัวเลขว่าเราร่วมผลักดันเสียงเด็กและเยาวชนเพื่อการเปลี่ยนแปลงทางสังคมเชิงบวกอย่างไร"
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "ดูจากตัวเลขว่าเราร่วมผลักดันเสียงเด็กและเยาวชนเพื่อการเปลี่ยนแปลงทางสังคมเชิงบวกอย่างไร"
 
 msgid "Polled"
 msgstr "โพล"
@@ -1352,22 +1284,14 @@ msgstr "คำอธิบายสั้น ๆ สำหรับรูปภ�
 msgid "Image type"
 msgstr "ประเภทรูปภาพ"
 
-msgid ""
-"The priority number for this image among others on a list, high priority "
-"comes first"
-msgstr ""
-"ลำดับความสำคัญของรูปภาพนี้เมื่อเทียบกับรูปภาพอื่น ๆ - "
-"ลำดับความสำคัญที่สูงจะมาก่อน"
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "ลำดับความสำคัญของรูปภาพนี้เมื่อเทียบกับรูปภาพอื่น ๆ - ลำดับความสำคัญที่สูงจะมาก่อน"
 
 msgid "The organization this bot is part of"
 msgstr "องค์กรที่บอทนี้เป็นส่วนหนึ่งของ"
 
-msgid ""
-"Whether this bot is displayed on the homepage, up to 3 only with the highest"
-" priorities are displayed"
-msgstr ""
-"บอทนี้จะแสดงในหน้าแรกหรือไม่ แสดงได้ถึง 3 "
-"รายการที่มีลําดับความสําคัญสูงสุดเท่านั้น"
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr "บอทนี้จะแสดงในหน้าแรกหรือไม่ แสดงได้ถึง 3 รายการที่มีลําดับความสําคัญสูงสุดเท่านั้น"
 
 msgid "Whether this bot is hidden on public pages except landing pages"
 msgstr "บอทนี้จะถูกซ่อนบนหน้าสาธารณะหรือไม่ ยกเว้นบนหน้าเว็บไซต์"
@@ -1396,11 +1320,8 @@ msgstr "Deeplink ของ WhatsApp บอท - ไม่จำเป็นต�
 msgid "A short description for this bot, required"
 msgstr "คําอธิบายสั้น ๆ สําหรับบอทนี้ - ข้อมูลจําเป็น"
 
-msgid ""
-"The priority number for this bot among others on a list, high priority comes"
-" first"
-msgstr ""
-"ลำดับความสำคัญของบอทนี้เมื่อเทียบกับบอทอื่น ๆ - ลำดับความสำคัญที่สูงจะมาก่อน"
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "ลำดับความสำคัญของบอทนี้เมื่อเทียบกับบอทอื่น ๆ - ลำดับความสำคัญที่สูงจะมาก่อน"
 
 msgid "Whether this bot should be shown to the public"
 msgstr "บอทนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
@@ -1462,17 +1383,11 @@ msgstr "เลือกประเภทของแหล่งข้อมู
 msgid "The full URL to navigate to this Job source."
 msgstr "ใส่ URL ของแหล่งข้อมูลตำแหน่งงาน"
 
-msgid ""
-"For Twitter, a widget Id is required to embed tweets on the website. Read "
-"carefully the instructions above on how to get the right widget Id"
-msgstr ""
-"สำหรับทวิตเตอร์ จะต้องมี Widget ID เพื่อฝังทวีตลงในเว็บไซต์ "
-"กรุณาอ่านวิธีการหา Widget ID ที่ได้ระบุไว้ด้านบน"
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
+msgstr "สำหรับทวิตเตอร์ จะต้องมี Widget ID เพื่อฝังทวีตลงในเว็บไซต์ กรุณาอ่านวิธีการหา Widget ID ที่ได้ระบุไว้ด้านบน"
 
 msgid "Featured job sources are shown first on the jobs page."
-msgstr ""
-"ตำแหน่งงานที่ได้จากแหล่งข้อมูลตำแหน่งงานที่ได้รับการแนะนำ "
-"จะถูกแสดงเป็นอันดับแรกในหน้าตำแหน่งงาน"
+msgstr "ตำแหน่งงานที่ได้จากแหล่งข้อมูลตำแหน่งงานที่ได้รับการแนะนำ จะถูกแสดงเป็นอันดับแรกในหน้าตำแหน่งงาน"
 
 msgid "The organization this job source is for"
 msgstr "องค์กรที่ตำแหน่งงานนี้เป็นส่วนหนึ่งของ"
@@ -1511,8 +1426,7 @@ msgid "The name of our administrative boundary"
 msgstr "ชื่อของเขตการปกครองของเรา"
 
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
-msgstr ""
-"ระดับของเขตการปกครอง: 0 สำหรับ ประเทศ, 1 สำหรับ ภูมิภาค และ 2 สำหรับ จังหวัด"
+msgstr "ระดับของเขตการปกครอง: 0 สำหรับ ประเทศ, 1 สำหรับ ภูมิภาค และ 2 สำหรับ จังหวัด"
 
 msgid "The parent to this political boundary if any"
 msgstr "ผู้รับผิดชอบของขอบเขตทางการเมืองนี้ ถ้ามี"
@@ -1520,8 +1434,7 @@ msgstr "ผู้รับผิดชอบของขอบเขตทาง
 msgid "Geometry"
 msgstr "เรขาคณิต"
 
-msgid ""
-"The json representing the geometry type and coordinates of the boundaries"
+msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr "ข้อมูล Json ระบุประเภทเรขาคณิตและพิกัดของขอบเขต"
 
 msgid "The title for this item"
@@ -1557,8 +1470,7 @@ msgstr "หมวดหมู่โพล"
 msgid "The Flow this Poll is based on"
 msgstr "Flow ที่ใช้สำหรับหมวดหมู่นี้"
 
-msgid ""
-"The date to display for this poll. Leave empty to use flow creation date."
+msgid "The date to display for this poll. Leave empty to use flow creation date."
 msgstr "วันที่จะแสดงโพลนี้ ให้ปล่อยว่างหากต้องการใช้วันที่สร้าง Flow "
 
 msgid "Whether the flow for this poll is archived on RapidPro"
@@ -1729,8 +1641,7 @@ msgstr "จะให้นำคำถามนี้ไปรวมในหน
 msgid "Priority"
 msgstr "ลำดับความสำคัญ"
 
-msgid ""
-"The priority of this question on the poll page, higher priority comes first"
+msgid "The priority of this question on the poll page, higher priority comes first"
 msgstr "ลำดับความสำคัญของคำถามนี้บนหน้าเพจโพล ลำดับความสำคัญที่สูงจะมาก่อน"
 
 msgid "Ruleset Label"
@@ -1798,20 +1709,16 @@ msgstr "%s"
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr "ชื่อของ Contact Group ที่มีข้อมูลของยูรีพอร์ตเตอร์"
 
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
+msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันเดือนปีเกิดของยูรีพอร์ตเตอร์"
 
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลเพศของยูรีพอร์ตเตอร์"
 
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
+msgid "The label of the Contact Field that contains the occupation of reporters"
 msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลอาชีพของยูรีพอร์ตเตอร์"
 
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
+msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันที่ลงทะเบียนของยูรีพอร์ตเตอร์"
 
 msgid "The label of the Contact Field that contains the State of reporters"
@@ -1833,23 +1740,24 @@ msgid "Whether this org should be show on the landing page"
 msgstr "จะให้แสดงองค์กรนี้บนหน้าเว็บไซต์หรือไม่"
 
 msgid "Whether this org count should consider the count from link only"
-msgstr ""
-"ตัวเลขที่เกี่ยวข้องกับองค์กรนี้ควรพิจารณาจากการนับจากลิงก์เท่านั้นหรือไม่"
+msgstr "ตัวเลขที่เกี่ยวข้องกับองค์กรนี้ควรพิจารณาจากการนับจากลิงก์เท่านั้นหรือไม่"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "หมายเลขที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตในประเทศได้"
 
-msgid ""
-"The WhatsApp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
 msgstr "หมายเลข WhatsApp ที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
 
-msgid ""
-"The Telegram bot that users will use to contact U-Report if you have one"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Telegram บอทที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
 
-msgid ""
-"The viber username that users will use to contact U-Report if you have one"
+msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Username ของ Viber ที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
+
+#, fuzzy
+#| msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Telegram บอทที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
 
 msgid "The join button text"
 msgstr "ข้อความของปุ่มเข้าร่วม"
@@ -1858,9 +1766,7 @@ msgid "The short text used to direct visitors to join U-Report"
 msgstr "ข้อความสั้น ๆ เชิญชวนให้ผู้ชมมาเข้าร่วมยูรีพอร์ต"
 
 msgid "The call to action text to join on the top section on U-Report"
-msgstr ""
-"ข้อความ Call to Action เชิญชวนเข้าร่วมยูรีพอร์ต "
-"ที่จะอยู่ด้านบนสุดของเพจยูรีพอร์ต"
+msgstr "ข้อความ Call to Action เชิญชวนเข้าร่วมยูรีพอร์ต ที่จะอยู่ด้านบนสุดของเพจยูรีพอร์ต"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "วิดีโอ YouTube ID สำหรับวิธีเข้าร่วมบนหน้าเพจยูรีพอร์ต"
@@ -1892,27 +1798,17 @@ msgstr "สีรองสำหรับองค์กรนี้ ควร�
 msgid "The tertiary color for styling for this organization, should be dark"
 msgstr "สีที่สามสำหรับองค์กรนี้ ควรเป็นสีเข้ม"
 
-msgid ""
-"The primary highlight color for styling for this organization, should be "
-"light"
+msgid "The primary highlight color for styling for this organization, should be light"
 msgstr "สีหลักสำหรับองค์กรนี้ ควรเป็นสีอ่อน"
 
-msgid ""
-"The secondary highlight color for styling for this organization, should be "
-"light"
+msgid "The secondary highlight color for styling for this organization, should be light"
 msgstr "สีรองสำหรับองค์กรนี้ ควรเป็นสีอ่อน"
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
-"เลือกได้ถึง 6 สีเพื่อตกแต่งกราฟ เลือกสีโดยใส่เครื่องหมายจุลภาค หรือ comma "
-"ระหว่างสี"
+msgstr "เลือกได้ถึง 6 สีเพื่อตกแต่งกราฟ เลือกสีโดยใส่เครื่องหมายจุลภาค หรือ comma ระหว่างสี"
 
-msgid ""
-"11 colors for styling maps, use comma between colors, not used if not 11 "
-"colors"
-msgstr ""
-"เลือกได้ถึง 11 สีเพื่อตกแต่งแผนที่ เลือกสีโดยใส่เครื่องหมายจุลภาค หรือ comma"
-" ระหว่างสี"
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr "เลือกได้ถึง 11 สีเพื่อตกแต่งแผนที่ เลือกสีโดยใส่เครื่องหมายจุลภาค หรือ comma ระหว่างสี"
 
 msgid "The states to show on maps only"
 msgstr "ภูมิภาคที่จะแสดงบนแผนที่เท่านั้น"
@@ -1938,11 +1834,8 @@ msgstr "URL สำหรับ Facebook Page ขององค์กรนี�
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr "เลข ID ของ Facebook Page ขององค์กรนี้  (ไม่จำเป็นต้องใส่)"
 
-msgid ""
-"The integer id to the Facebook app for this organization's chat app "
-"(optional)"
-msgstr ""
-"เลข ID ของ Facebook app สำหรับโปรแกรมแชทขององค์กรนี้ (ไม่จำเป็นต้องใส่)"
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr "เลข ID ของ Facebook app สำหรับโปรแกรมแชทขององค์กรนี้ (ไม่จำเป็นต้องใส่)"
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
 msgstr "ข้อความสั้น ๆ ที่ใช้ทักทายผู้เข้าชมใน Facebook Messenger Plugin"
@@ -1968,9 +1861,7 @@ msgstr "คำที่ใช้กรองผลลัพธ์ออกบน
 msgid "If there are jobs to be shown on the public site."
 msgstr "ถ้ามีตำแหน่งงานแสดงบนเว็บไซต์สาธารณะ"
 
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "ถ้าองค์กรนี้แสดงผลข้อมูลทั่วโลก เช่น แสดงแผนที่โลกแทนแผนที่ประเทศ"
 
 msgid "Whether to activate an extra gender."
@@ -1982,13 +1873,8 @@ msgstr "ซ่อนรายละเอียดกราฟของการ
 msgid "Whether to show the UNICEF logo in the footer."
 msgstr "จะแสดงโลโก้ยูนิเซฟตรงด้านล่างของเพจหรือไม่"
 
-msgid ""
-"The alpha-3 ISO code of the organization so that it appears the stories "
-"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
-"Global)."
-msgstr ""
-"รหัส alpha-3 ISO ขององค์กรเพื่อปรากฏ Widget ของเรื่องราว U-Report App "
-"ตัวอย่าง: BRA, NIG, CMR (ใช้ GLOBAL หากเป็นยูรีพอร์ต Global)"
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
+msgstr "รหัส alpha-3 ISO ขององค์กรเพื่อปรากฏ Widget ของเรื่องราว U-Report App ตัวอย่าง: BRA, NIG, CMR (ใช้ GLOBAL หากเป็นยูรีพอร์ต Global)"
 
 msgid "The font used for headline texts"
 msgstr "Font ที่ใช้สำหรับข้อความพาดหัว"
@@ -2005,11 +1891,8 @@ msgstr "ข้อความอธิบายผู้ให้การสน
 msgid "The font used for small text"
 msgstr "Font ที่ใช้สำหรับข้อความขนาดเล็ก"
 
-msgid ""
-"If you need to include some custom HTML codes in you org pages, like custom "
-"analytics code snippets"
-msgstr ""
-"ถ้าคุณต้องการใส่โค้ด HTML ของคุณบนหน้าเพจขององค์กร เช่น โค้ดสำหรับ Analytics"
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr "ถ้าคุณต้องการใส่โค้ด HTML ของคุณบนหน้าเพจขององค์กร เช่น โค้ดสำหรับ Analytics"
 
 msgid "Other language sites links"
 msgstr "ลิงก์เว็บไซต์ภาษาอื่น ๆ"

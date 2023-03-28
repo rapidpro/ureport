@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1937,6 +1937,11 @@ msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
 
 msgid "The join button text"

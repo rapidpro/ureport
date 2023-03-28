@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1710,6 +1710,9 @@ msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr ""
 
 msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr ""
 
 msgid "The join button text"
