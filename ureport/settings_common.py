@@ -325,6 +325,14 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="line_link",
+        field=dict(
+            help_text=_("The Line bot link that users will use to contact U-Report if you have one"),
+            label="Line Link",
+            required=False,
+        ),
+    ),
+    dict(
         name="join_button_text",
         field=dict(
             help_text=_("The join button text"),
