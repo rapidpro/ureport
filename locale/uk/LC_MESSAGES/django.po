@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 09:17+0000\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1767,6 +1767,11 @@ msgstr "Telegram номер, який користувачі використо�
 
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Viber номер, який користувачі використовуватимуть для контакту з U-Report, якщо такий є"
+
+#, fuzzy
+#| msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Telegram номер, який користувачі використовуватимуть для контакту з U-Report, якщо такий є"
 
 msgid "The join button text"
 msgstr "Приєднатись"
