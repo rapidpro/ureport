@@ -1035,7 +1035,7 @@ msgid ""
 "speak out on issues that matter to them."
 msgstr ""
 "เรียนรู้เพิ่มเติมว่า U-Report "
-"ส่งเสริมและเชื่อมโยงเด็กและเยาวชนต่อประเด็นที่สำคัญต่อความเป็นอยู่ของเขาอย่างไร"
+"สนับสนุนและเป็นกระบอกเสียงแก่เยาวชนรุ่นใหม่เพื่อสร้างการเปลี่ยนแปลงในสังคมอย่างไร"
 
 msgid "LEARN MORE"
 msgstr "เรียนรู้เพิ่มเติม"
@@ -1078,7 +1078,7 @@ msgstr "จำนวนผู้ตอบทั้งหมด"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)sตอบโพลจากจำนวน %(polled)s ที่ได้รับโพลสำรวจ"
+msgstr "%(responded)s ตอบโพลจากจำนวน %(polled)s ที่ได้รับโพลสำรวจ"
 
 msgid "ALL"
 msgstr "ทั้งหมด"
