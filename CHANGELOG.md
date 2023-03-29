@@ -1,3 +1,7 @@
+v1.2.61 (2023-03-29)
+-------------------------
+ * Fix delete old contact activities
+
 v1.2.60 (2023-03-28)
 -------------------------
  * Merge pull request #1127 from rapidpro/delete-old-contact-activities
