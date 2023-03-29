@@ -50,7 +50,7 @@ def delete_old_contact_activities(org, since, until):
 
     for batch in chunk_list(old_contact_activities_ids, 1000):
         batch_ids = list(batch)
-        deleted = ContactActivity.objects.filter(id__in=batch_ids).delete()
+        deleted, old_objects_deleted = ContactActivity.objects.filter(id__in=batch_ids).delete()
 
         org_count += deleted
 
