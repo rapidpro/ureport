@@ -677,6 +677,9 @@ class Poll(SmartModel):
     def __str__(self):
         return self.title
 
+    class Meta:
+        index_together = ("org", "is_active", "id")
+
 
 @six.python_2_unicode_compatible
 class PollImage(SmartModel):
@@ -1233,6 +1236,7 @@ class PollQuestion(SmartModel):
 
     class Meta:
         unique_together = (("poll", "ruleset_uuid"), ("poll", "flow_result"))
+        index_together = ("poll", "is_active", "flow_result")
 
 
 class PollResponseCategory(models.Model):

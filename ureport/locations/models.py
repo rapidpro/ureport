@@ -53,6 +53,7 @@ class Boundary(models.Model):
 
     class Meta:
         unique_together = ("org", "osm_id")
+        index_together = ("org", "level", "name", "osm_id")
 
     @classmethod
     def lock(cls, org, osm_id):

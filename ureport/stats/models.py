@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from dash.orgs.models import Org
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollQuestion, PollResponseCategory
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
 
 logger = logging.getLogger(__name__)
 
@@ -685,8 +685,10 @@ class PollStats(models.Model):
     def calculate_average_response_rate(cls, org):
         key = f"org:{org.id}:average_response_rate"
 
+        poll_ids = list(Poll.objects.filter(org_id=org.id, is_active=True).only("id").values_list("id", flat=True))
+
         flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
+            PollQuestion.objects.filter(is_active=True, poll_id__in=poll_ids).values_list("flow_result_id", flat=True)
         )
 
         polled_stats = PollStats.objects.filter(org=org, flow_result_id__in=flow_result_ids).aggregate(Sum("count"))
