@@ -1,3 +1,8 @@
+v1.2.62 (2023-03-30)
+-------------------------
+ * Merge pull request #1128 from rapidpro/more-optimizations
+ * Add indexes to optimize more the page loading
+
 v1.2.61 (2023-03-29)
 -------------------------
  * Fix delete old contact activities
