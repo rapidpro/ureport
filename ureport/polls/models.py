@@ -644,7 +644,7 @@ class Poll(SmartModel):
         """
         The response rate for this flow
         """
-        top_question = self.get_questions()[0]
+        top_question = self.get_top_question()
         if top_question:
             return top_question.get_response_percentage()
         return "---"
@@ -678,17 +678,23 @@ class Poll(SmartModel):
             .order_by("-priority", "pk")
         )
 
+    def get_top_question(self):
+        questions = self.get_questions()
+        if questions:
+            return questions[0]
+        return None
+
     def get_images(self):
         return self.images.filter(is_active=True).order_by("pk")
 
     def runs(self):
-        top_question = self.get_questions()[0]
+        top_question = self.get_top_question()
         if top_question:
             return top_question.get_polled()
         return "----"
 
     def responded_runs(self):
-        top_question = self.get_questions()[0]
+        top_question = self.get_top_question()
         if top_question:
             return top_question.get_responded()
         return "---"

@@ -232,7 +232,7 @@ class PollContextMixin(object):
         context["latest_poll"] = main_poll
 
         if main_poll:
-            top_question = main_poll.get_questions()[0]
+            top_question = main_poll.get_top_question()
             context["top_question"] = top_question
 
             if top_question:
