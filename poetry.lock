@@ -742,36 +742,6 @@ files = [
 sgmllib3k = "*"
 
 [[package]]
-name = "gitdb2"
-version = "2.0.6"
-description = "Git Object Database"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-files = [
-    {file = "gitdb2-2.0.6-py2.py3-none-any.whl", hash = "sha256:96bbb507d765a7f51eb802554a9cfe194a174582f772e0d89f4e87288c288b7b"},
-    {file = "gitdb2-2.0.6.tar.gz", hash = "sha256:1b6df1433567a51a4a9c1a5a0de977aa351a405cc56d7d35f3388bad1f630350"},
-]
-
-[package.dependencies]
-smmap2 = ">=2.0.0"
-
-[[package]]
-name = "gitpython"
-version = "2.1.15"
-description = "Python Git Library"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-files = [
-    {file = "GitPython-2.1.15-py2.py3-none-any.whl", hash = "sha256:23b4de99c5fc1564701301cead04e16aa3e47019034668327206d1b52e1e54f7"},
-    {file = "GitPython-2.1.15.tar.gz", hash = "sha256:838c38d882a97b2fd146dbd4eb9baaf857cb65ebaa64e4c06fca48aaa491e1c6"},
-]
-
-[package.dependencies]
-gitdb2 = ">=2,<3"
-
-[[package]]
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
@@ -1775,33 +1745,6 @@ xlrd = ">=1.2.0,<2.0.0"
 xlwt = ">=1.3.0,<2.0.0"
 
 [[package]]
-name = "smmap"
-version = "5.0.0"
-description = "A pure Python implementation of a sliding window memory map manager"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "smmap-5.0.0-py3-none-any.whl", hash = "sha256:2aba19d6a040e78d8b09de5c57e96207b09ed71d8e55ce0959eeee6c8e190d94"},
-    {file = "smmap-5.0.0.tar.gz", hash = "sha256:c840e62059cd3be204b0c9c9f74be2c09d5648eddd4580d9314c3ecde0b30936"},
-]
-
-[[package]]
-name = "smmap2"
-version = "3.0.1"
-description = "A mirror package for smmap"
-category = "main"
-optional = false
-python-versions = "*"
-files = [
-    {file = "smmap2-3.0.1-py3-none-any.whl", hash = "sha256:0cb6ea470b1ad9a65a02ca7f4c7ae601861f7dd24a43812ca51cfca2892bb524"},
-    {file = "smmap2-3.0.1.tar.gz", hash = "sha256:44cc8bdaf96442dbb9a8e2e14377d074b3d0eea292eee3c95c8c449b6c92c557"},
-]
-
-[package.dependencies]
-smmap = ">=3.0.1"
-
-[[package]]
 name = "sorl-thumbnail"
 version = "12.9.0"
 description = "Thumbnails for Django"
@@ -1972,4 +1915,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "e35e3ac2989f7eb9332cc3ceffa2cd2b0088ef29a37cb7071a4d93490cfddca2"
+content-hash = "e033a9a8997116952c1d98a872ede526571a35a14a46f1da9621eddf25dba95f"
