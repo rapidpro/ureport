@@ -232,7 +232,7 @@ class PollContextMixin(object):
         context["latest_poll"] = main_poll
 
         if main_poll:
-            top_question = main_poll.get_questions().first()
+            top_question = main_poll.get_top_question()
             context["top_question"] = top_question
 
             if top_question:
@@ -264,11 +264,11 @@ class PollContextMixin(object):
                 ]
                 context["locations_stats"] = top_question.get_location_stats()
 
-        if not main_poll or not main_poll.get_questions().first():
+        if not main_poll or not main_poll.get_questions():
             context["gender_stats"] = org.get_gender_stats()
             context["age_stats"] = org.get_age_stats()
 
-        polls = Poll.get_public_polls(org=org).order_by("-poll_date").select_related("category")
+        polls = Poll.get_public_polls(org=org).order_by("-poll_date")
 
         categories_dict = defaultdict(list)
         date_categories_dict = defaultdict(list)
