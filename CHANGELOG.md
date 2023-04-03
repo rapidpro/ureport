@@ -1,3 +1,13 @@
+v1.2.63 (2023-04-03)
+-------------------------
+ * Merge pull request #1131 from rapidpro/update-deps
+ * Update deps
+ * Merge pull request #1129 from rapidpro/more-optimizations
+ * Merge pull request #1130 from rapidpro/dependabot/pip/redis-4.5.4
+ * Bump redis from 4.5.1 to 4.5.4
+ * Fix tests
+ * WIP more optimizations to reduce queries with prefetch
+
 v1.2.62 (2023-03-30)
 -------------------------
  * Merge pull request #1128 from rapidpro/more-optimizations
