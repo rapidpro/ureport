@@ -4,7 +4,9 @@ from datetime import timedelta
 
 from django.utils import timezone
 
+from dash.orgs.models import Org
 from dash.orgs.tasks import org_task
+from ureport.celery import app
 from ureport.utils import chunk_list
 
 logger = logging.getLogger(__name__)
@@ -62,3 +64,21 @@ def delete_old_contact_activities(org, since, until):
     logger.info(
         f"Task: Finished deleting {org_count} old contact activities until {last_used_time} on org #{org.id} in {elapsed:.1f} seconds"
     )
+
+
+@app.task(name="stats.squash_contact_activities_counts")
+def squash_contact_activities_counts():
+    from .models import ContactActivityCounter
+
+    ContactActivityCounter.squash()
+
+
+@app.task(name="stats.rebuild_contacts_activities_counts")
+def rebuild_contacts_activities_counts():
+    from .models import ContactActivity
+
+    orgs = Org.objects.filter(is_active=True)
+    for org in orgs:
+        ContactActivity.recalculate_contact_activity_counts(org)
+
+    # TODO: we need to refresh the cache for the graphs after this
