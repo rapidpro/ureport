@@ -2267,7 +2267,8 @@ class PollResultsTest(UreportTest):
 
             age_activity_counts = (
                 ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_AGE)
-                .values("date", "type", "value")
+                .annotate(age=Cast("value", output_field=IntegerField()))
+                .values("date", "type", "age")
                 .annotate(Sum("count"))
             )
             age_activities = (
@@ -2276,9 +2277,8 @@ class PollResultsTest(UreportTest):
                 .exclude(date=None)
                 .annotate(year=ExtractYear("date"))
                 .annotate(age=ExpressionWrapper(F("year") - F("born"), output_field=IntegerField()))
-                .annotate(value=Cast("age", output_field=TextField()))
                 .annotate(type=Value("B"))
-                .values("date", "type", "value")
+                .values("date", "type", "age")
                 .annotate(count__sum=Count("id"))
             )
 
