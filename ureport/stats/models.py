@@ -737,6 +737,72 @@ class ContactActivity(models.Model):
         index_together = (("org", "contact"), ("org", "date"))
         unique_together = ("org", "contact", "date")
 
+    def generate_counters(self):
+        generated_counters = dict()
+        if not self.org_id:
+            return generated_counters
+
+        generated_counters[(self.org_id, self.date, "A", "")] = 1
+
+        if self.born:
+            generated_counters[(self.org_id, self.date, "B", self.date.year - self.born)] = 1
+
+        if self.gender:
+            generated_counters[(self.org_id, self.date, "G", self.gender)] = 1
+
+        if self.state:
+            generated_counters[(self.org_id, self.date, "L", self.state)] = 1
+
+        if self.scheme:
+            generated_counters[(self.org_id, self.date, "S", self.scheme)] = 1
+
+        return generated_counters
+
+    @classmethod
+    def recalculate_contact_activity_counts(cls, org):
+        from ureport.utils import chunk_list
+
+        ContactActivityCounter.objects.filter(org_id=org.id).delete()
+
+        all_contacts_activities = ContactActivity.objects.filter(org=org).values_list("id", flat=True).order_by("id")
+        start = time.time()
+        i = 0
+
+        all_contacts_activities = list(all_contacts_activities)
+        all_contacts_activities_count = len(all_contacts_activities)
+
+        counters_dict = defaultdict(int)
+
+        for activity_id_batch in chunk_list(all_contacts_activities, 1000):
+            activity_batch = list(activity_id_batch)
+            activities = ContactActivity.objects.filter(id__in=activity_batch)
+            for activity in activities:
+                i += 1
+                gen_counters = activity.generate_counters()
+                for dict_tuple_key in gen_counters.keys():
+                    counters_dict[dict_tuple_key] += gen_counters[dict_tuple_key]
+
+        counters_to_insert = []
+        for counter_tuple in counters_dict.keys():
+            count = counters_dict[counter_tuple]
+            counters_to_insert.append(
+                ContactActivityCounter(
+                    org_id=counter_tuple[0],
+                    date=counter_tuple[1],
+                    type=counter_tuple[2],
+                    value=counter_tuple[3],
+                    count=count,
+                )
+            )
+        ContactActivityCounter.objects.bulk_create(counters_to_insert)
+
+        logger.info(
+            "Finished Rebuilding the contacts activitiies counters for org #%d in %ds, inserted %d counters objects for %s activities"
+            % (org.id, time.time() - start, len(counters_to_insert), all_contacts_activities_count)
+        )
+
+        return counters_dict
+
     @classmethod
     def get_activity_data(cls, activities_qs, time_filter):
         from ureport.utils import get_time_filter_dates_map
