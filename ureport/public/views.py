@@ -28,7 +28,7 @@ from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.orgs.models import Org, TaskState
 from dash.orgs.views import OrgObjPermsMixin
-from dash.stories.models import Story
+from dash.stories.models import Story, StoryImage
 from smartmin.views import SmartReadView, SmartTemplateView
 from ureport.assets.models import Image
 from ureport.bots.models import Bot
@@ -352,6 +352,15 @@ class StoriesView(SmartTemplateView):
                     "story_set",
                     queryset=Story.objects.filter(is_active=True)
                     .filter(Q(attachment="") | Q(attachment=None))
+                    .prefetch_related(
+                        Prefetch(
+                            "images",
+                            queryset=StoryImage.objects.filter(is_active=True)
+                            .exclude(image="")
+                            .only("is_active", "image", "story_id"),
+                            to_attr="prefetched_images",
+                        )
+                    )
                     .order_by("-created_on"),
                 )
             )
@@ -384,6 +393,15 @@ class ReportsView(SmartTemplateView):
                 Prefetch(
                     "story_set",
                     queryset=Story.objects.filter(is_active=True)
+                    .prefetch_related(
+                        Prefetch(
+                            "images",
+                            queryset=StoryImage.objects.filter(is_active=True)
+                            .exclude(image="")
+                            .only("is_active", "image", "story_id"),
+                            to_attr="prefetched_images",
+                        )
+                    )
                     .exclude(Q(attachment="") | Q(attachment=None))
                     .order_by("-created_on"),
                 )
@@ -405,7 +423,15 @@ class StoryReadView(SmartReadView):
 
     def derive_queryset(self):
         queryset = super(StoryReadView, self).derive_queryset()
-        queryset = queryset.filter(org=self.request.org, is_active=True)
+        queryset = queryset.filter(org=self.request.org, is_active=True).prefetch_related(
+            Prefetch(
+                "images",
+                queryset=StoryImage.objects.filter(is_active=True)
+                .exclude(image="")
+                .only("is_active", "story_id", "image"),
+                to_attr="prefetched_images",
+            )
+        )
         return queryset
 
     def get_context_data(self, **kwargs):
