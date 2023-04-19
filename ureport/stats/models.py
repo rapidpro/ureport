@@ -14,6 +14,7 @@ from dash.orgs.models import Org
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
+from ureport.utils.models import SquashableModel
 
 logger = logging.getLogger(__name__)
 
@@ -880,6 +881,57 @@ class ContactActivity(models.Model):
             output_data.append(dict(name=name, data=series))
 
         return output_data
+
+
+class ContactActivityCounter(SquashableModel):
+    TYPE_ALL = "A"
+    TYPE_AGE = "B"
+    TYPE_GENDER = "G"
+    TYPE_LOCATION = "L"
+    TYPE_SCHEME = "S"
+
+    TYPE_CHOICES = (
+        (TYPE_ALL, "All"),
+        (TYPE_AGE, "Age"),
+        (TYPE_GENDER, "Gender"),
+        (TYPE_LOCATION, "Location"),
+        (TYPE_SCHEME, "Scheme"),
+    )
+
+    squash_over = ("org_id", "date", "type", "value")
+
+    org = models.ForeignKey(Org, on_delete=models.PROTECT)
+
+    date = models.DateField(help_text="The starting date for for the month")
+
+    type = models.CharField(
+        max_length=1,
+        choices=TYPE_CHOICES,
+        help_text="The type of alert the counter segment",
+    )
+
+    value = models.CharField(max_length=255)
+
+    count = models.IntegerField(default=0, help_text="Number of items with this counter")
+
+    @classmethod
+    def get_squash_query(cls, distinct_set):
+        sql = """
+        WITH deleted as (
+            DELETE FROM %(table)s WHERE "org_id" = %%s AND "date" = %%s AND "type" = %%s AND "value" = %%s RETURNING "count"
+        )
+        INSERT INTO %(table)s("org_id", "date", "type", "value", "count", "is_squashed")
+        VALUES (%%s, %%s, %%s, %%s, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
+        """ % {
+            "table": cls._meta.db_table
+        }
+
+        return sql, (distinct_set.org_id, distinct_set.date, distinct_set.type, distinct_set.value) * 2
+
+    class Meta:
+        indexes = [
+            models.Index(name="contact_activitycntr_org_count", fields=["org", "date", "type", "value", "count"]),
+        ]
 
 
 class PollWordCloud(models.Model):
