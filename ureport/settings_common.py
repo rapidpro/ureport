@@ -1064,6 +1064,12 @@ CELERY_BEAT_SCHEDULE = {
         "relative": True,
         "options": {"queue": "slow"},
     },
+    "stats_activities_squash": {
+        "task": "stats.squash_contact_activities_counts",
+        "schedule": timedelta(hours=6),
+        "relative": True,
+        "options": {"queue": "slow"},
+    },
 }
 
 # -----------------------------------------------------------------------------------
