@@ -898,7 +898,7 @@ class ContactActivityCounter(SquashableModel):
         (TYPE_SCHEME, "Scheme"),
     )
 
-    squash_over = ("org", "date", "type", "value")
+    squash_over = ("org_id", "date", "type", "value")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT)
 
