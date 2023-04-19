@@ -75,10 +75,29 @@ def squash_contact_activities_counts():
 
 @app.task(name="stats.rebuild_contacts_activities_counts")
 def rebuild_contacts_activities_counts():
-    from .models import ContactActivity
+    from .models import ContactActivity, PollStats
+
+    time_filters = list(PollStats.DATA_TIME_FILTERS.keys())
+    segments = list(PollStats.DATA_SEGMENTS.keys())
+    metric = "active-users"
 
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
-        ContactActivity.recalculate_contact_activity_counts(org)
+        start_rebuild = time.time()
 
-    # TODO: we need to refresh the cache for the graphs after this
+        ContactActivity.recalculate_contact_activity_counts(org)
+        logger.info(
+            f"Task: rebuild_contacts_activities_counts finished recalculating contact activity counts for org {org.id} in {time.time() - start_rebuild}s"
+        )
+
+        start_refresh = time.time()
+
+        for time_filter in time_filters:
+            for segment in segments:
+                PollStats.refresh_engagement_data(org, metric, segment, time_filter)
+                logger.info(
+                    f"Task: rebuild_contacts_activities_counts refreshing contacts activities engagement stats for org {org.id} in progress for {time.time() - start_refresh}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
+                )
+        logger.info(
+            f"Task: rebuild_contacts_activities_counts finished recalculating contact activity and refreshing contacts activities engagement stats for org {org.id} in {time.time() - start_rebuild}s"
+        )
