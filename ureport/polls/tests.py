@@ -2374,6 +2374,16 @@ class PollResultsTest(UreportTest):
 
         verify_counts()
 
+        ContactActivity.recalculate_contact_activity_counts(self.nigeria)
+
+        self.assertEqual(96, ContactActivityCounter.objects.all().count())
+        verify_counts()
+
+        # manually delete, then regenarate
+        ContactActivityCounter.objects.filter(org_id=self.nigeria).delete()
+        ContactActivity.recalculate_contact_activity_counts(self.nigeria)
+        verify_counts()
+
     def test_contact_activity(self):
         self.assertFalse(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid"))
         self.assertFalse(ContactActivityCounter.objects.filter(org=self.nigeria))
