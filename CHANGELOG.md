@@ -1,3 +1,19 @@
+v1.2.65 (2023-04-19)
+-------------------------
+ * Merge pull request #1138 from rapidpro/contact-activities-counters-4
+ * Merge pull request #1139 from rapidpro/contact-activities-counters-3
+ * Merge pull request #1137 from rapidpro/contact-activities-counters-2
+ * Merge pull request #1135 from rapidpro/contact-activities-counters
+ * Add task to squash contact activities counts, manual task to recalculate the counts
+ * Add methods to recalcuate the activities counts from the DB
+ * fix conflicts
+ * fix conflicts
+ * Add and install contact activity DB triggers for counts
+ * Fix squash_over org_id
+ * Add Squashable abstract model, and use that on contact activity counter
+ * Merge pull request #1142 from rapidpro/fix-coverage
+ * Replace codecov with coverage
+
 v1.2.64 (2023-04-19)
 -------------------------
  * Merge pull request #1134 from rapidpro/more-optimizations
