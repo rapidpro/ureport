@@ -1,3 +1,15 @@
+v1.2.64 (2023-04-19)
+-------------------------
+ * Merge pull request #1134 from rapidpro/more-optimizations
+ * More queries optimizations
+ * Merge pull request #1141 from rapidpro/update-dash
+ * Update dash
+ * Merge pull request #1133 from rapidpro/update-deps
+ * update postcss
+ * Merge pull request #1132 from rapidpro/update-deps
+ * Update npm deps
+ * Remove unused deps
+
 v1.2.63 (2023-04-03)
 -------------------------
  * Merge pull request #1131 from rapidpro/update-deps
