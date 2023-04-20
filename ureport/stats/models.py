@@ -897,7 +897,7 @@ class ContactActivity(models.Model):
                     type=ContactActivityCounter.TYPE_GENDER,
                     date__lte=today,
                     date__gte=start,
-                    gender=gender["gender"],
+                    value__iexact=gender["gender"],
                 )
                 .values("date")
                 .annotate(Sum("count"))
@@ -919,7 +919,11 @@ class ContactActivity(models.Model):
         for osm_id, name in top_boundaries.items():
             activities = (
                 ContactActivityCounter.objects.filter(
-                    org=org, type=ContactActivityCounter.TYPE_LOCATION, date__lte=today, date__gte=start, state=osm_id
+                    org=org,
+                    type=ContactActivityCounter.TYPE_LOCATION,
+                    date__lte=today,
+                    date__gte=start,
+                    value__iexact=osm_id,
                 )
                 .values("date")
                 .annotate(Sum("count"))
@@ -942,7 +946,11 @@ class ContactActivity(models.Model):
         for scheme in schemes:
             activities = (
                 ContactActivityCounter.objects.filter(
-                    org=org, type=ContactActivityCounter.TYPE_SCHEME, date__lte=today, date__gte=start, scheme=scheme
+                    org=org,
+                    type=ContactActivityCounter.TYPE_SCHEME,
+                    date__lte=today,
+                    date__gte=start,
+                    value__iexact=scheme,
                 )
                 .values("date")
                 .annotate(Count("count"))
