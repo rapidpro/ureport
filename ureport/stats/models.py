@@ -953,7 +953,7 @@ class ContactActivity(models.Model):
                     value__iexact=scheme,
                 )
                 .values("date")
-                .annotate(Count("count"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
 
