@@ -1,3 +1,9 @@
+v1.2.66 (2023-04-20)
+-------------------------
+ * Merge pull request #1140 from rapidpro/contact-activities-counters-5
+ * Make sure to refresh the engagement counts after recalculation
+ * Switch to use contact activities counts for the graph stats
+
 v1.2.65 (2023-04-19)
 -------------------------
  * Merge pull request #1138 from rapidpro/contact-activities-counters-4
