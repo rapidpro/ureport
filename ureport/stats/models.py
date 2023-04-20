@@ -5,7 +5,7 @@ from datetime import timedelta
 
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, IntegerField, JSONField, Q, Sum
+from django.db.models import IntegerField, JSONField, Q, Sum
 from django.db.models.functions import Cast
 from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
