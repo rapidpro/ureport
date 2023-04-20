@@ -1,3 +1,8 @@
+v1.2.69 (2023-04-20)
+-------------------------
+ * Fix scheme count query
+ * Fix scheme count query
+
 v1.2.68 (2023-04-20)
 -------------------------
  * Merge pull request #1144 from rapidpro/fix-activity-counts
