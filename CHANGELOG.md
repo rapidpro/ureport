@@ -1,3 +1,8 @@
+v1.2.68 (2023-04-20)
+-------------------------
+ * Merge pull request #1144 from rapidpro/fix-activity-counts
+ * Fix activity counters counts queries
+
 v1.2.67 (2023-04-20)
 -------------------------
  * Merge pull request #1143 from rapidpro/fix-activity-counts
