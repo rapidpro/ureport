@@ -5,8 +5,8 @@ from datetime import timedelta
 
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, ExpressionWrapper, F, IntegerField, JSONField, Q, Sum
-from django.db.models.functions import ExtractYear
+from django.db.models import Count, IntegerField, JSONField, Q, Sum
+from django.db.models.functions import Cast
 from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
 
@@ -831,9 +831,11 @@ class ContactActivity(models.Model):
         translation.activate(org.language)
 
         activities = (
-            ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, used=True)
+            ContactActivityCounter.objects.filter(
+                org=org, type=ContactActivityCounter.TYPE_ALL, date__lte=today, date__gte=start
+            )
             .values("date")
-            .annotate(Count("id"))
+            .annotate(Sum("count"))
         )
         return [dict(name=str(_("Active Users")), data=ContactActivity.get_activity_data(activities, time_filter))]
 
@@ -861,11 +863,10 @@ class ContactActivity(models.Model):
                 data_key = "35+"
 
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, used=True)
-                .exclude(born=None)
-                .exclude(date=None)
-                .annotate(year=ExtractYear("date"))
-                .annotate(age=ExpressionWrapper(F("year") - F("born"), output_field=IntegerField()))
+                ContactActivityCounter.objects.filter(
+                    org=org, type=ContactActivityCounter.TYPE_AGE, date__lte=today, date__gte=start
+                )
+                .annotate(age=Cast("value", output_field=IntegerField()))
                 .filter(age__gte=age["min_age"], age__lte=age["max_age"])
                 .values("date")
                 .annotate(Count("id"))
@@ -891,8 +892,12 @@ class ContactActivity(models.Model):
         output_data = []
         for gender in genders:
             activities = (
-                ContactActivity.objects.filter(
-                    org=org, date__lte=today, date__gte=start, gender=gender["gender"], used=True
+                ContactActivityCounter.objects.filter(
+                    org=org,
+                    type=ContactActivityCounter.TYPE_GENDER,
+                    date__lte=today,
+                    date__gte=start,
+                    gender=gender["gender"],
                 )
                 .values("date")
                 .annotate(Count("id"))
@@ -913,7 +918,9 @@ class ContactActivity(models.Model):
         output_data = []
         for osm_id, name in top_boundaries.items():
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, state=osm_id, used=True)
+                ContactActivityCounter.objects.filter(
+                    org=org, type=ContactActivityCounter.TYPE_LOCATION, date__lte=today, date__gte=start, state=osm_id
+                )
                 .values("date")
                 .annotate(Count("id"))
             )
@@ -934,7 +941,9 @@ class ContactActivity(models.Model):
         output_data = []
         for scheme in schemes:
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, scheme=scheme, used=True)
+                ContactActivityCounter.objects.filter(
+                    org=org, type=ContactActivityCounter.TYPE_SCHEME, date__lte=today, date__gte=start, scheme=scheme
+                )
                 .values("date")
                 .annotate(Count("id"))
             )
