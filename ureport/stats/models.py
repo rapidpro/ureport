@@ -813,7 +813,7 @@ class ContactActivity(models.Model):
         activity_data = defaultdict(int)
         for elt in activities_qs:
             key = dates_map.get(str(elt["date"]))
-            activity_data[key] += elt["id__count"]
+            activity_data[key] += elt["count__sum"]
 
         data = dict()
         for key in keys:
@@ -869,7 +869,7 @@ class ContactActivity(models.Model):
                 .annotate(age=Cast("value", output_field=IntegerField()))
                 .filter(age__gte=age["min_age"], age__lte=age["max_age"])
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=data_key, data=series))
@@ -900,7 +900,7 @@ class ContactActivity(models.Model):
                     gender=gender["gender"],
                 )
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=series))
@@ -922,7 +922,7 @@ class ContactActivity(models.Model):
                     org=org, type=ContactActivityCounter.TYPE_LOCATION, date__lte=today, date__gte=start, state=osm_id
                 )
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=name, osm_id=osm_id, data=series))
@@ -945,7 +945,7 @@ class ContactActivity(models.Model):
                     org=org, type=ContactActivityCounter.TYPE_SCHEME, date__lte=today, date__gte=start, scheme=scheme
                 )
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Count("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
 
