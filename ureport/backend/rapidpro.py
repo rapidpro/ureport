@@ -346,7 +346,9 @@ class RapidProBackend(BaseBackend):
         def convert_old_fields(clazz, item):
             if clazz == Field:
                 item["name"] = item.get("name") or item.get("label")
-                item["type"] = "number" if item.get("value_type") == "numeric" else item.get("type") or item.get("value_type")
+                item["type"] = (
+                    "number" if item.get("value_type") == "numeric" else item.get("type") or item.get("value_type")
+                )
             return item
 
         return org.get_temba_client(api_version=api_version, transformer=convert_old_fields)
