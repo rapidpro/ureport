@@ -1,3 +1,11 @@
+v1.2.70 (2023-05-10)
+-------------------------
+ * Merge pull request #1145 from rapidpro/fix-fields
+ * Run code checks
+ * Remove pisa
+ * Update django
+ * Add transformer to client to support old fields
+
 v1.2.69 (2023-04-20)
 -------------------------
  * Fix scheme count query
