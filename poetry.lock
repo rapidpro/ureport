@@ -1112,15 +1112,6 @@ docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
-name = "pisa"
-version = "3.0.33"
-description = "PDF generator using HTML and CSS"
-category = "main"
-optional = false
-python-versions = "*"
-files = []
-
-[[package]]
 name = "platformdirs"
 version = "3.5.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -1896,4 +1887,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f435c05255c1313aade4d8e489e1e315fe4f87c5a382085589e7216de5f8a928"
+content-hash = "36c644a1beabfc60a9496cbc265b02ec153e89b2b0940aa8cb1175f8e12c9a42"
