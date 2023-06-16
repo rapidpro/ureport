@@ -1,3 +1,9 @@
+v1.2.71 (2023-06-16)
+-------------------------
+ * Merge pull request #1098 from rapidpro/south-pacific
+ * Add Somalia icon
+ * Update South Pacific icon
+
 v1.2.70 (2023-05-10)
 -------------------------
  * Merge pull request #1145 from rapidpro/fix-fields
