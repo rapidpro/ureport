@@ -1177,7 +1177,7 @@ msgid "of"
 msgstr "od"
 
 msgid "the"
-msgstr " "
+msgstr "the"
 
 msgid "OVERALL STATISTICS"
 msgstr "STATISTIKA"
