@@ -1685,6 +1685,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://solomonislands.ureport.in/count/",
     ),
     dict(
+        name="Somalia",
+        host="//somalia.ureport.in",
+        flag="flag_somalia.png",
+        countries_codes=["SOM"],
+        count_link="http://somalia.ureport.in/count/",
+    ),
+    dict(
         name="South Africa",
         host="//sa.ureport.in",
         flag="flag_sa.png",
