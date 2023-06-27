@@ -2004,6 +2004,11 @@ msgstr "Raden ble opprettet av squashing"
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
 
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
 #~ msgid "Photos"
 #~ msgstr "Bilder"
 

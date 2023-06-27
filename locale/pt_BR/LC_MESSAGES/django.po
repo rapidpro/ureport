@@ -2044,6 +2044,11 @@ msgstr "Se esta história é destaque"
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
 
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
 #~ msgid "Photos"
 #~ msgstr "Fotos"
 

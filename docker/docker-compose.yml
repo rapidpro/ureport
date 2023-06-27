@@ -1,0 +1,59 @@
+version: '3.6'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+  database:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-ureport}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ureport}
+      - POSTGRES_DB=${POSTGRES_DB:-ureport}
+  ureport:
+    image: ${DOCKER_IMAGE_NAME:-ilhasoft/ureport}:${DOCKER_IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - ${APP_PORT:-8000}:8000
+    environment:
+      - APP_PORT=${APP_PORT:-8000}
+      - DEBUG=${DEBUG:-false}
+      - APP_HOSTNAME=${APP_HOSTNAME:-localhost}
+      - EMPTY_SUBDOMAIN_HOST=${EMPTY_SUBDOMAIN_HOST:-http://localhost}
+      - SESSION_COOKIE_DOMAIN=${SESSION_COOKIE_DOMAIN:-localhost}
+      - ADMINS=${ADMINS:-Ilhasoft|contato@ilhasoft.com.br}
+      - TIME_ZONE=${TIME_ZONE:-America/Sao_Paulo}
+      - USER_TIME_ZONE=${USER_TIME_ZONE:-America/Sao_Paulo}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT:-587}      
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - EMAIL_USE_TLS=${EMAIL_USE_TLS}
+      - RAVEN_CONFIG=${RAVEN_CONFIG}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
+      - MEDIA_URL=${MEDIA_URL}
+      - SITE_API_HOST=${SITE_API_HOST}
+      - API_ENDPOINT=${API_ENDPOINT}
+      - DEFAULT_DATABASE=${DEFAULT_DATABASE:-postgres://ureport:ureport@database:5432/ureport}
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_DATABASE=${REDIS_DATABASE:-1}
+      - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
+      - COMPRESS_ENABLED=${COMPRESS_ENABLED:-true}
+      - COMPRESS_OFFLINE=${COMPRESS_OFFLINE:-true}
+      - PREVIOUS_ORG_SITES=${PREVIOUS_ORG_SITES:-Burkina Faso,burkinafaso.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Burkina_Faso_Landing_Page_Icon.png|Burundi,burundi.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_bi.png|Cameroon,cameroon.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_cm.png|Republique Centrafricaine,centrafrique.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_cf.png|Chile,chile.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Chile_Landing_Page_Icon_2.png|Guinea,guinea.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Guinea_Landing_Page_Icon.png|Indonesia,indonesia.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Indonesia_Landing_Page_Icon.png|Liberia,liberia.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_lr.png|Malawi,ureport.mw,dl-ureport.s3.amazonaws.com/images/Malawi_Web_Deployment-01.png|Malaysia,malaysia.ureport.in,dl-ureport.s3.amazonaws.com/images/Malaysia_Web_Deployment-01.png|Mali,mali.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_ml.png|Mexico,mexico.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Mexico_Landing_Page_Icon.png|Mozambique,mozambique.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Mozambique_Landing_Page_Icon.png|Nigeria,nigeria.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_ng.png|Pakistan,ureport.pk,dl-ureport.s3.amazonaws.com/images/U-Report_Pakistan_Landing_Page_Icon.png|Senegal,senegal.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Senegal_Landing_Page_Icon.png|Sierra Leone,sierraleone.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_sl.png|Uganda,ureport.ug,dl-ureport.s3.amazonaws.com/images/U-Report_Uganda_Landing_Page_Icon.png|Ukraine,ukraine.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Ukraine_Landing_Page_Icon.png|Vietnam,vietnam.ureport.in,dl-ureport.s3.amazonaws.com/images/Vietnam_Web_Deployment-01.png|Zambia,zambiaureport.org/home,s3.amazonaws.com/ureport-app/images/flag_zm.png|Zimbabwe,zimbabwe.ureport.in,dl-ureport.s3.amazonaws.com/images/flag_zw.png|India,india.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_India_Landing_Page_Icon.png|Myanmar,myanmar.ureport.in,s3.amazonaws.com/ureport-app/images/U-Report+Myanmar_Landing+Page+Icon.png|Papua New Guinea,png.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Papua_New_Guinea_Landing_Page_Icon_1_PNG.png|Cote dIvoire,cotedivoire.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Cote_dIvoire_Landing_Page_Icon.png|Tunisie,tunisie.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_Tunisia_Landing_Page_Icon.png|Tanzania,tanzania.ureport.in,dl-ureport.s3.amazonaws.com/images/Tanzania_Web_Deployment-01_flag1.png|Tchad,tchad.ureport.in,dl-ureport.s3.amazonaws.com/images/Chad_flag.png|South Africa,sa.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_South_Africa_Landing_Page_Icon.png|On The Move,onthemove.ureport.in,dl-ureport.s3.amazonaws.com/images/U-Report_On_The_Move_Landing_Page_Icon.png|Ghana,ghana.ureport.in,dl-ureport.s3.amazonaws.com/images/Ghana_Web_Deployment-01.png|Eswatini,eswatini.ureport.in,dl-ureport.s3.amazonaws.com/images/Eswatini_Web_Deployment-01.png}
+      - APM_SERVICE_NAME=${APM_SERVICE_NAME}
+      - APM_SECRET_TOKEN=${APM_SECRET_TOKEN}
+      - APM_DISABLE_SEND=${APM_DISABLE_SEND}
+      - APM_SERVICE_DEBUG=${APM_SERVICE_DEBUG}
+      - APM_SERVER_URL=${APM_SERVER_URL}
+      - APM_SERVICE_ENVIRONMENT=${APM_SERVICE_ENVIRONMENT}
+    depends_on:
+      - database
+      - redis

@@ -2021,6 +2021,11 @@ msgstr "Je li priča objavljena"
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "ZABUM voice"
+
 #~ msgid "Photos"
 #~ msgstr "Slike"
 

@@ -2028,6 +2028,11 @@ msgstr "Дали тази редица е създадена чрез сбива
 msgid "Something to trigger localizations"
 msgstr "Нещо, което да задейства локализиране"
 
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
 #~ msgid "Photos"
 #~ msgstr "Снимки"
 

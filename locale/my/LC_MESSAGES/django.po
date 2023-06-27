@@ -1927,6 +1927,11 @@ msgid "Something to trigger localizations"
 msgstr ""
 
 #, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
+#, fuzzy
 #~| msgid "A short descriptive name for this image"
 #~ msgid "The description of this bot, optional"
 #~ msgstr "A short descriptive name for this image"

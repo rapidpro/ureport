@@ -1035,7 +1035,7 @@ msgstr "TOATE RĂSPUNSURILE "
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr " 1 %(responded)s răspondenți din 2 %(polled)s intervievați"
+msgstr "%(responded)s răspondenți din %(polled)s intervievați"
 
 msgid "ALL"
 msgstr "TOȚI"
@@ -2045,6 +2045,11 @@ msgstr "Dacă acest articol este recomandat"
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
 
 #~ msgid "Photos"
 #~ msgstr "Fotografii"

@@ -1985,6 +1985,11 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
 
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
 #~ msgid "Photos"
 #~ msgstr "Fotos"
 

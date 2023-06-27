@@ -2089,6 +2089,11 @@ msgid "Something to trigger localizations"
 msgstr ""
 
 #, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "SMS BIZ"
+
+#, fuzzy
 #~| msgid "The location of the responder."
 #~ msgid "The description of this bot, optional"
 #~ msgstr "A localização da pessoa que responde."

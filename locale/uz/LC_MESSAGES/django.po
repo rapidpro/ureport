@@ -1081,13 +1081,13 @@ msgid "Results"
 msgstr "Natijalar"
 
 msgid "*Other answers include"
-msgstr "Boshqa javoblar o'zida mujassam etadi"
+msgstr "Boshqa javoblar o′zida mujassam etadi"
 
 msgid "Population"
 msgstr "Aholi"
 
 msgid "Registered in"
-msgstr "Ro'yxatdan o'tganlar"
+msgstr "Ro′yxatdan o′tganlar"
 
 msgid "Density"
 msgstr "Zichlik"
@@ -2026,6 +2026,11 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
 
 #~ msgid "Photos"
 #~ msgstr "Fotosur'atlar"

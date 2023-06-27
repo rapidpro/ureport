@@ -2044,6 +2044,11 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
 
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "u-report "
+
 #~ msgid "Photos"
 #~ msgstr "ছবিগুলো"
 

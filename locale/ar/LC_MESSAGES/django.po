@@ -2011,6 +2011,11 @@ msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
 
 #, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "يو-ريبورت"
+
+#, fuzzy
 #~| msgid "The title for this item"
 #~ msgid "The description of this bot, optional"
 #~ msgstr "عنوان البند "

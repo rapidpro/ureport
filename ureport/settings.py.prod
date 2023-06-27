@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
-# import our default settings
-from ureport.settings_common import *
-import os
 import dj_database_url
+import sentry_sdk
 
-IS_PROD=True
-DEBUG = False
+from decouple import config
+from sentry_sdk.integrations.django import DjangoIntegration
+from ureport.settings_common import *  # noqa
+
+IS_PROD = config('IS_PROD', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 THUMBNAIL_DEBUG = DEBUG
-COMPRESS_ENABLED = True
+TEMPLATE_DEBUG = DEBUG
 
+EMPTY_SUBDOMAIN_HOST = config('EMPTY_SUBDOMAIN_HOST', 'https://ureport.in')
+HOSTNAME = config('APP_HOSTNAME', 'ureport.in')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [
+                       s.strip() for s in v.split(',')])
 
-EMPTY_SUBDOMAIN_HOST = 'http://ureport.in'
-HOSTNAME = 'ureport.in'
-ALLOWED_HOSTS = ['*']
-
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_DOMAIN = config('SESSION_COOKIE_DOMAIN', 'ureport.in')
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=True, cast=bool)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1209600  # 2 weeks
 
@@ -35,63 +37,69 @@ SECURE_REDIRECT_EXEMPT =  []
 SECURE_SSL_HOST = None
 SECURE_SSL_REDIRECT = False
 
-# these guys will get email from sentry
-ADMINS = (
-    ('Nyaruka Ops', 'ops@nyaruka.com'),
-)
+ADMINS = config('ADMINS',
+                default='Ilhasoft|contato@ilhasoft.com.br',
+                cast=lambda v: [
+                    (
+                        s.strip().split('|')[0],
+                        s.strip().split('|')[1],
+                    ) for s in v.split(',')] if v else [])
 
 # set the mail settings, we send through gmail
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '${gmail_user}')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '${gmail_user}')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '${gmail_password}')
-EMAIL_USE_TLS = True
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', 'no-reply@ilhasoft.com.br')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='no-reply@ilhasoft.com.br')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 
 MANAGERS = ADMINS
 
-# add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'storages')
+INSTALLED_APPS = INSTALLED_APPS + (
+    'gunicorn', 'raven.contrib.django.raven_compat', 'storages', 'elasticapm.contrib.django'
+)
+
+# Set your DSN value
+sentry_sdk.init(
+    config("RAVEN_DSN", default="https://c91ad31f95454bcf8d659c6914f6b417@sentry.ilhasoft.mobi/5"),
+    integrations=[DjangoIntegration()]
+)
 
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
-AWS_S3_SECURE_URLS = True
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
+AWS_S3_SECURE_URLS = False
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# these two settings will cause our aws files to never expire
-# see http://developer.yahoo.com/performance/rules.html#expires
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 
 }
 
-# static dir is different for prod
-STATIC_URL = '/sitestatic/'
-COMPRESS_URL = '/sitestatic/'
-
-# our media is all on S3
-MEDIA_URL = 'https://dl-ureport.s3.amazonaws.com/'
-
-# List of finder classes that know how to find static files in
-# various locations.
+MEDIA_URL = config('MEDIA_URL', default='https://ureport.ilhasoft.mobi/media/')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
-SITE_API_HOST = 'https://api.rapidpro.io'
+
+SITE_API_HOST = config(
+    'SITE_API_HOST', default='https://rapidpro.ilhasoft.mobi')
+API_ENDPOINT = config(
+    'SITE_API_HOST', default='https://rapidpro.ilhasoft.mobi')
 
 
-DATABASES['default'] = dj_database_url.config()
-
-# reuse our connections for up to 60 seconds
+DATABASES = {}
+DATABASES['default'] = dj_database_url.parse(config('DEFAULT_DATABASE'))
 DATABASES['default']['CONN_MAX_AGE'] = 60
 
 # no debug toolbar in prod
 MIDDLEWARE = (
+    'elasticapm.contrib.django.middleware.TracingMiddleware',
+    'elasticapm.contrib.django.middleware.Catch404Middleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -99,9 +107,12 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'dash.orgs.middleware.SetOrgMiddleware',
 )
+
+MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGGING = {
     'version': 1,
@@ -121,6 +132,10 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
+        'elasticapm': {
+            'level': 'WARNING',
+            'class': 'elasticapm.contrib.django.handlers.LoggingHandler',
+        },
     },
     'loggers': {
         'django.db.backends': {
@@ -137,31 +152,49 @@ LOGGING = {
             'handlers': ['null'],
             'propagate': False,
         },
+        'elasticapm.errors': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
     },
 }
 
-# use our cache backend for sessions
-SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+ELASTIC_APM = {
+    "SERVICE_NAME": config("APM_SERVICE_NAME", default=""),
+    "SECRET_TOKEN": config("APM_SECRET_TOKEN", default=""),
+    "DISABLE_SEND": config("APM_DISABLE_SEND", default=False, cast=bool),
+    "DEBUG": config("APM_SERVICE_DEBUG", default=False, cast=bool),
+    "SERVER_URL": config("APM_SERVER_URL", default=""),
+    "ENVIRONMENT": config("APM_SERVICE_ENVIRONMENT", default="production"),
+    "DJANGO_TRANSACTION_NAME_FROM_ROUTE": True,
+    "PROCESSORS": (),
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_CACHE_ALIAS = "default"
 
 # trust connections that are coming in on this protocol
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 
 # compress arguments
+COMPRESS_ENABLED = config('COMPRESS_ENABLED', default=True, cast=bool)
 COMPRESS_CSS_HASHING_METHOD = 'content'
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = config('COMPRESS_OFFLINE', default=True, cast=bool)
 COMPRESS_OFFLINE_CONTEXT = [
     dict(STATIC_URL=STATIC_URL, base_template='frame.html', org=None, debug=False, testing=False),
     dict(STATIC_URL=STATIC_URL, base_template='public_base.html', org=None, debug=False, testing=False)
 ]
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
-REDIS_HOST = 'redis-internal.ureport.in'
 
-REDIS_HOST = REDIS_HOST
-REDIS_PORT = 6379
-REDIS_DB = '1'
+# redis configuration
+REDIS_HOST = config('REDIS_HOST')
+REDIS_DATABASE = config('REDIS_DATABASE', default='1')
 
-CELERY_BROKER_URL = 'redis://%s:%s/%s' % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+CELERY_BROKER_URL = 'redis://{}:6379/{}'.format(REDIS_HOST, REDIS_DATABASE)
 
 CACHES = {
     'default': {
@@ -173,4 +206,20 @@ CACHES = {
     }
 }
 
-CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=CELERY_BROKER_URL)
+CELERY_ALWAYS_EAGER = config('CELERY_ALWAYS_EAGER', default=False, cast=bool)
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = config(
+    'CELERY_EAGER_PROPAGATES_EXCEPTIONS', default=True, cast=bool)
+
+
+UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME = config('UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME', default=3600)
+UREPORT_RUN_FETCHED_DATA_CACHE_TIME = config('UREPORT_RUN_FETCHED_DATA_CACHE_TIME', default=600)
+
+
+TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
+USER_TIME_ZONE = config('USER_TIME_ZONE', default='America/Sao_Paulo')
+
+
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS", default="https://*.ureport.in", cast=lambda v: [s.strip() for s in v.split(",")]
+)

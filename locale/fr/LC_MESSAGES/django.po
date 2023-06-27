@@ -1938,3 +1938,49 @@ msgstr "Si cette ligne a été créée en écrasant"
 
 msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
+#~ msgid "Photos"
+#~ msgstr "Photos"
+
+#, fuzzy
+#~| msgid "The description of the opinions page"
+#~ msgid "The description of this bot, optional"
+#~ msgstr "La description de la page Opinions"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this bot is featured and displayed on the homepage"
+#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+
+#, fuzzy
+#~| msgid "Org"
+#~ msgid "Or"
+#~ msgstr "Organisation"
+
+#, fuzzy
+#~| msgid "The description of the stories page"
+#~ msgid "The description text for this bot"
+#~ msgstr "La description de la page Articles"
+
+#~ msgid "The color used to draw the text on the join bar"
+#~ msgstr "La couleur du texte de la barre «Rejoindre»"
+
+#~ msgid "The color used to draw the background on the join bar"
+#~ msgstr "La couleur de fond du bandeau «Rejoindre»"
+
+#~ msgid "The primary color for styling for this organization"
+#~ msgstr "Couleur principale à utiliser pour cette organisation"
+
+#~ msgid "The secondary color for styling for this organization"
+#~ msgstr "Couleur secondaire à utiliser pour cette organisation"
+
+#~ msgid "The background color for the site"
+#~ msgstr "La couleur de fond du site"
+
+#~ msgid "Whether to activate the new design."
+#~ msgstr "Si pour activer le nouveau design"

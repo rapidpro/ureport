@@ -2180,6 +2180,11 @@ msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
 #, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
+#, fuzzy
 #~| msgid "The location of the responder."
 #~ msgid "The description of this bot, optional"
 #~ msgstr "Lokacija ispitanika"

@@ -2155,6 +2155,11 @@ msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
 
 #, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
+
+#, fuzzy
 #~| msgid "The location of the responder."
 #~ msgid "The description of this bot, optional"
 #~ msgstr "Địa phương của phóng viên."

@@ -229,6 +229,9 @@ class PollStats(models.Model):
     @classmethod
     def refresh_engagement_data(cls, org, metric, segment_slug, time_filter):
         key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"
+        skip_flag = f"skip:{key}"
+        if cache.get(skip_flag, None):
+            return
 
         output_data = []
         if metric == "opinion-responses":
@@ -281,6 +284,7 @@ class PollStats(models.Model):
 
         if output_data:
             cache.set(key, {"results": output_data}, None)
+            cache.set(skip_flag, True, 60 * 60 * 12)
         return output_data
 
     @classmethod

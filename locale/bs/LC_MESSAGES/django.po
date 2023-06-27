@@ -53,7 +53,7 @@ msgstr ""
 " "
 
 msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "Kojom frazom će se definisati sadržaj u okviru template tagova"
+msgstr "Umetak (dio URL-a) za identifikaciju ove vrste sadržaja, koristi se sa oznakama predloška"
 
 msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgstr ""
@@ -2134,6 +2134,11 @@ msgstr "Da li je priča objavljena"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#, fuzzy
+#~| msgid "U-Report"
+#~ msgid "Ureport API"
+#~ msgstr "U-Report"
 
 #~ msgid "Photos"
 #~ msgstr "Slike"

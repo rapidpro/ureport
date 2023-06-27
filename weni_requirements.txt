@@ -1,0 +1,6 @@
+python-decouple==3.6
+raven==6.9.0
+typed-ast==1.4.1
+toml==0.10.1
+whitenoise==5.0.1
+elastic-apm==6.1.1
