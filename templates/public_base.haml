@@ -567,7 +567,7 @@
      
       -block content
   
-      {% if main_stories|slice:"1:" %}
+      {% if main_stories|length > 1 %}
       // footer stories
       .bg-dark-blue
         .max-w-page.mx-auto.text-white.px-home.pt-home.hover-parent(class="md:flex")

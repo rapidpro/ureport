@@ -11,7 +11,6 @@ import dash.utils
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [

@@ -1,3 +1,182 @@
+v1.2.71 (2023-06-16)
+-------------------------
+ * Merge pull request #1098 from rapidpro/south-pacific
+ * Add Somalia icon
+ * Update South Pacific icon
+
+v1.2.70 (2023-05-10)
+-------------------------
+ * Merge pull request #1145 from rapidpro/fix-fields
+ * Run code checks
+ * Remove pisa
+ * Update django
+ * Add transformer to client to support old fields
+
+v1.2.69 (2023-04-20)
+-------------------------
+ * Fix scheme count query
+ * Fix scheme count query
+
+v1.2.68 (2023-04-20)
+-------------------------
+ * Merge pull request #1144 from rapidpro/fix-activity-counts
+ * Fix activity counters counts queries
+
+v1.2.67 (2023-04-20)
+-------------------------
+ * Merge pull request #1143 from rapidpro/fix-activity-counts
+ * Fix activity counters counts queries
+
+v1.2.66 (2023-04-20)
+-------------------------
+ * Merge pull request #1140 from rapidpro/contact-activities-counters-5
+ * Make sure to refresh the engagement counts after recalculation
+ * Switch to use contact activities counts for the graph stats
+
+v1.2.65 (2023-04-19)
+-------------------------
+ * Merge pull request #1138 from rapidpro/contact-activities-counters-4
+ * Merge pull request #1139 from rapidpro/contact-activities-counters-3
+ * Merge pull request #1137 from rapidpro/contact-activities-counters-2
+ * Merge pull request #1135 from rapidpro/contact-activities-counters
+ * Add task to squash contact activities counts, manual task to recalculate the counts
+ * Add methods to recalcuate the activities counts from the DB
+ * fix conflicts
+ * fix conflicts
+ * Add and install contact activity DB triggers for counts
+ * Fix squash_over org_id
+ * Add Squashable abstract model, and use that on contact activity counter
+ * Merge pull request #1142 from rapidpro/fix-coverage
+ * Replace codecov with coverage
+
+v1.2.64 (2023-04-19)
+-------------------------
+ * Merge pull request #1134 from rapidpro/more-optimizations
+ * More queries optimizations
+ * Merge pull request #1141 from rapidpro/update-dash
+ * Update dash
+ * Merge pull request #1133 from rapidpro/update-deps
+ * update postcss
+ * Merge pull request #1132 from rapidpro/update-deps
+ * Update npm deps
+ * Remove unused deps
+
+v1.2.63 (2023-04-03)
+-------------------------
+ * Merge pull request #1131 from rapidpro/update-deps
+ * Update deps
+ * Merge pull request #1129 from rapidpro/more-optimizations
+ * Merge pull request #1130 from rapidpro/dependabot/pip/redis-4.5.4
+ * Bump redis from 4.5.1 to 4.5.4
+ * Fix tests
+ * WIP more optimizations to reduce queries with prefetch
+
+v1.2.62 (2023-03-30)
+-------------------------
+ * Merge pull request #1128 from rapidpro/more-optimizations
+ * Add indexes to optimize more the page loading
+
+v1.2.61 (2023-03-29)
+-------------------------
+ * Fix delete old contact activities
+
+v1.2.60 (2023-03-28)
+-------------------------
+ * Merge pull request #1127 from rapidpro/delete-old-contact-activities
+ * Delete old contact activities task
+
+v1.2.59 (2023-03-28)
+-------------------------
+ * Merge pull request #1126 from rapidpro/line-button
+ * Run code checks
+ * Fix conflicts
+ * Add line link on join page
+ * Merge pull request #1125 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in th
+
+v1.2.58 (2023-03-16)
+-------------------------
+ * Add Thai
+
+v1.2.57 (2023-03-16)
+-------------------------
+ * Merge pull request #1111 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in th
+ * Merge pull request #1107 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in th
+ * Merge pull request #1089 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
+ * Merge pull request #1090 from rapidpro/translations_locale-en-lc-messages-django-po--main_el
+ * Merge pull request #1092 from rapidpro/translations_locale-en-lc-messages-django-po--main_cs
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in fr
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in el
+ * Run code_checks
+ * Translate locale/en/LC_MESSAGES/django.po in cs
+ * Merge pull request #1097 from rapidpro/update-haml
+ * Update hamply
+ * enable makemessages to generate PO files
+ * Run black
+ * Remove flake8, Add ruff
+
+v1.2.56 (2023-03-02)
+-------------------------
+ * Merge pull request #1096 from rapidpro/fix-translations
+ * Add caching to the shared sites count view
+ * Disable update PO files
+ * Revert to correct locale PO files
+ * Merge pull request #1095 from rapidpro/update-GA-actions
+ * Remove testing on old versions
+
+v1.2.55 (2023-02-27)
+-------------------------
+ * Merge pull request #1094 from rapidpro/fix-story-errors
+ * Fix stories validation and have the errors well noticeable
+
+v1.2.54 (2023-02-22)
+-------------------------
+ * Update dash and poetry lock file
+ * Use latest deps updates
+ * Update Thailand icons
+
+v1.2.51
+----------
+ * Merge pull request #1084 from rapidpro/micronesia
+ * Add micronesia
+ * Merge pull request #1083 from rapidpro/test-pg-14
+ * Test on redis 6.2
+ * Merge pull request #1082 from rapidpro/test-pg-14
+ * Test on PG 14
+
+v1.2.50
+----------
+ * Merge pull request #1081 from rapidpro/update-cg-logo
+ * Update CG logo
+ * Merge pull request #1079 from rapidpro/update-test-db
+ * Update deps
+ * Start testing PG 13
+
+v1.2.49
+----------
+ * Merge pull request #1076 from rapidpro/poll-preview
+ * Run code checks
+ * Add preview button on poll admin list
+ * Run code_checks
+ * Add poll preview view for admin to see stats for unpublished polls
+ * Move black setting into pyproject.toml
+
+v1.2.48
+----------
+ * Merge pull request #1077 from rapidpro/add-mauritania
+ * Run code checks
+ * Add Mauritania flag
+ * Merge pull request #1075 from Ilhasoft/uk-language
+ * update locale mo file for uk language
+ * Translate /locale/en/LC_MESSAGES/django.po in uk
+
 v1.2.47
 ----------
  * Merge pull request #1073 from rapidpro/add-morocco

@@ -6,7 +6,6 @@ from ureport.sql import InstallSQL
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0054_add_index_poll_question_ruleset_uuid"), ("stats", "0003_contactactivity")]
 
     operations = [InstallSQL("polls_0055")]

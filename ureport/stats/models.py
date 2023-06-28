@@ -5,21 +5,21 @@ from datetime import timedelta
 
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, ExpressionWrapper, F, IntegerField, JSONField, Q, Sum
-from django.db.models.functions import ExtractYear
+from django.db.models import IntegerField, JSONField, Q, Sum
+from django.db.models.functions import Cast
 from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollQuestion, PollResponseCategory
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
+from ureport.utils.models import SquashableModel
 
 logger = logging.getLogger(__name__)
 
 
 class GenderSegment(models.Model):
-
     GENDERS = {"M": _("Male"), "F": _("Female"), "O": _("Other")}
 
     gender = models.CharField(max_length=1)
@@ -36,7 +36,6 @@ class AgeSegment(models.Model):
 
 
 class SchemeSegment(models.Model):
-
     SCHEME_DISPLAY = {"tel": "SMS", "twitterid": "TWITTER", "ext": None}
 
     scheme = models.CharField(max_length=16, unique=True)
@@ -122,7 +121,6 @@ class PollStats(models.Model):
 
         for distinct_set in stats_objs:
             with connection.cursor() as cursor:
-
                 where_sql = ""
                 if distinct_set.org_id is not None:
                     where_sql += '"org_id" = %s AND ' % distinct_set.org_id
@@ -230,7 +228,6 @@ class PollStats(models.Model):
 
     @classmethod
     def refresh_engagement_data(cls, org, metric, segment_slug, time_filter):
-
         key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"
         skip_flag = f"skip:{key}"
         if cache.get(skip_flag, None):
@@ -682,7 +679,6 @@ class PollStats(models.Model):
 
     @classmethod
     def get_average_response_rate(cls, org):
-
         key = f"org:{org.id}:average_response_rate"
         output_data = cache.get(key, None)
         if output_data:
@@ -692,11 +688,12 @@ class PollStats(models.Model):
 
     @classmethod
     def calculate_average_response_rate(cls, org):
-
         key = f"org:{org.id}:average_response_rate"
 
+        poll_ids = list(Poll.objects.filter(org_id=org.id, is_active=True).only("id").values_list("id", flat=True))
+
         flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
+            PollQuestion.objects.filter(is_active=True, poll_id__in=poll_ids).values_list("flow_result_id", flat=True)
         )
 
         polled_stats = PollStats.objects.filter(org=org, flow_result_id__in=flow_result_ids).aggregate(Sum("count"))
@@ -744,6 +741,72 @@ class ContactActivity(models.Model):
         index_together = (("org", "contact"), ("org", "date"))
         unique_together = ("org", "contact", "date")
 
+    def generate_counters(self):
+        generated_counters = dict()
+        if not self.org_id:
+            return generated_counters
+
+        generated_counters[(self.org_id, self.date, "A", "")] = 1
+
+        if self.born:
+            generated_counters[(self.org_id, self.date, "B", self.date.year - self.born)] = 1
+
+        if self.gender:
+            generated_counters[(self.org_id, self.date, "G", self.gender)] = 1
+
+        if self.state:
+            generated_counters[(self.org_id, self.date, "L", self.state)] = 1
+
+        if self.scheme:
+            generated_counters[(self.org_id, self.date, "S", self.scheme)] = 1
+
+        return generated_counters
+
+    @classmethod
+    def recalculate_contact_activity_counts(cls, org):
+        from ureport.utils import chunk_list
+
+        ContactActivityCounter.objects.filter(org_id=org.id).delete()
+
+        all_contacts_activities = ContactActivity.objects.filter(org=org).values_list("id", flat=True).order_by("id")
+        start = time.time()
+        i = 0
+
+        all_contacts_activities = list(all_contacts_activities)
+        all_contacts_activities_count = len(all_contacts_activities)
+
+        counters_dict = defaultdict(int)
+
+        for activity_id_batch in chunk_list(all_contacts_activities, 1000):
+            activity_batch = list(activity_id_batch)
+            activities = ContactActivity.objects.filter(id__in=activity_batch)
+            for activity in activities:
+                i += 1
+                gen_counters = activity.generate_counters()
+                for dict_tuple_key in gen_counters.keys():
+                    counters_dict[dict_tuple_key] += gen_counters[dict_tuple_key]
+
+        counters_to_insert = []
+        for counter_tuple in counters_dict.keys():
+            count = counters_dict[counter_tuple]
+            counters_to_insert.append(
+                ContactActivityCounter(
+                    org_id=counter_tuple[0],
+                    date=counter_tuple[1],
+                    type=counter_tuple[2],
+                    value=counter_tuple[3],
+                    count=count,
+                )
+            )
+        ContactActivityCounter.objects.bulk_create(counters_to_insert)
+
+        logger.info(
+            "Finished Rebuilding the contacts activitiies counters for org #%d in %ds, inserted %d counters objects for %s activities"
+            % (org.id, time.time() - start, len(counters_to_insert), all_contacts_activities_count)
+        )
+
+        return counters_dict
+
     @classmethod
     def get_activity_data(cls, activities_qs, time_filter):
         from ureport.utils import get_time_filter_dates_map
@@ -754,7 +817,7 @@ class ContactActivity(models.Model):
         activity_data = defaultdict(int)
         for elt in activities_qs:
             key = dates_map.get(str(elt["date"]))
-            activity_data[key] += elt["id__count"]
+            activity_data[key] += elt["count__sum"]
 
         data = dict()
         for key in keys:
@@ -772,9 +835,11 @@ class ContactActivity(models.Model):
         translation.activate(org.language)
 
         activities = (
-            ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, used=True)
+            ContactActivityCounter.objects.filter(
+                org=org, type=ContactActivityCounter.TYPE_ALL, date__lte=today, date__gte=start
+            )
             .values("date")
-            .annotate(Count("id"))
+            .annotate(Sum("count"))
         )
         return [dict(name=str(_("Active Users")), data=ContactActivity.get_activity_data(activities, time_filter))]
 
@@ -802,14 +867,13 @@ class ContactActivity(models.Model):
                 data_key = "35+"
 
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, used=True)
-                .exclude(born=None)
-                .exclude(date=None)
-                .annotate(year=ExtractYear("date"))
-                .annotate(age=ExpressionWrapper(F("year") - F("born"), output_field=IntegerField()))
+                ContactActivityCounter.objects.filter(
+                    org=org, type=ContactActivityCounter.TYPE_AGE, date__lte=today, date__gte=start
+                )
+                .annotate(age=Cast("value", output_field=IntegerField()))
                 .filter(age__gte=age["min_age"], age__lte=age["max_age"])
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=data_key, data=series))
@@ -832,11 +896,15 @@ class ContactActivity(models.Model):
         output_data = []
         for gender in genders:
             activities = (
-                ContactActivity.objects.filter(
-                    org=org, date__lte=today, date__gte=start, gender=gender["gender"], used=True
+                ContactActivityCounter.objects.filter(
+                    org=org,
+                    type=ContactActivityCounter.TYPE_GENDER,
+                    date__lte=today,
+                    date__gte=start,
+                    value__iexact=gender["gender"],
                 )
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=series))
@@ -854,9 +922,15 @@ class ContactActivity(models.Model):
         output_data = []
         for osm_id, name in top_boundaries.items():
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, state=osm_id, used=True)
+                ContactActivityCounter.objects.filter(
+                    org=org,
+                    type=ContactActivityCounter.TYPE_LOCATION,
+                    date__lte=today,
+                    date__gte=start,
+                    value__iexact=osm_id,
+                )
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=name, osm_id=osm_id, data=series))
@@ -875,9 +949,15 @@ class ContactActivity(models.Model):
         output_data = []
         for scheme in schemes:
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, scheme=scheme, used=True)
+                ContactActivityCounter.objects.filter(
+                    org=org,
+                    type=ContactActivityCounter.TYPE_SCHEME,
+                    date__lte=today,
+                    date__gte=start,
+                    value__iexact=scheme,
+                )
                 .values("date")
-                .annotate(Count("id"))
+                .annotate(Sum("count"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
 
@@ -888,6 +968,57 @@ class ContactActivity(models.Model):
             output_data.append(dict(name=name, data=series))
 
         return output_data
+
+
+class ContactActivityCounter(SquashableModel):
+    TYPE_ALL = "A"
+    TYPE_AGE = "B"
+    TYPE_GENDER = "G"
+    TYPE_LOCATION = "L"
+    TYPE_SCHEME = "S"
+
+    TYPE_CHOICES = (
+        (TYPE_ALL, "All"),
+        (TYPE_AGE, "Age"),
+        (TYPE_GENDER, "Gender"),
+        (TYPE_LOCATION, "Location"),
+        (TYPE_SCHEME, "Scheme"),
+    )
+
+    squash_over = ("org_id", "date", "type", "value")
+
+    org = models.ForeignKey(Org, on_delete=models.PROTECT)
+
+    date = models.DateField(help_text="The starting date for for the month")
+
+    type = models.CharField(
+        max_length=1,
+        choices=TYPE_CHOICES,
+        help_text="The type of alert the counter segment",
+    )
+
+    value = models.CharField(max_length=255)
+
+    count = models.IntegerField(default=0, help_text="Number of items with this counter")
+
+    @classmethod
+    def get_squash_query(cls, distinct_set):
+        sql = """
+        WITH deleted as (
+            DELETE FROM %(table)s WHERE "org_id" = %%s AND "date" = %%s AND "type" = %%s AND "value" = %%s RETURNING "count"
+        )
+        INSERT INTO %(table)s("org_id", "date", "type", "value", "count", "is_squashed")
+        VALUES (%%s, %%s, %%s, %%s, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
+        """ % {
+            "table": cls._meta.db_table
+        }
+
+        return sql, (distinct_set.org_id, distinct_set.date, distinct_set.type, distinct_set.value) * 2
+
+    class Meta:
+        indexes = [
+            models.Index(name="contact_activitycntr_org_count", fields=["org", "date", "type", "value", "count"]),
+        ]
 
 
 class PollWordCloud(models.Model):

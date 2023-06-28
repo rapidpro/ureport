@@ -11,7 +11,6 @@ ON polls_pollresult (org_id, flow, contact);
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0041_auto_20160510_0757")]
 
     operations = [migrations.RunSQL(INDEX_SQL)]

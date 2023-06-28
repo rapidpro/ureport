@@ -22,7 +22,6 @@ class CountryAlias(SmartModel):
 
     @classmethod
     def get_or_create(cls, country, name, user):
-
         name = CountryAlias.normalize_name(name)
         alias = cls.objects.filter(country=country, name=name).first()
 

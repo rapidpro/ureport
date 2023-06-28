@@ -43,14 +43,14 @@ class FieldSyncerTest(UreportTest):
         self.syncer2 = FieldSyncer(backend=self.floip_backend)
 
     def test_local_kwargs(self):
-        kwargs = self.syncer.local_kwargs(self.nigeria, TembaField.create(key="foo", label="Bar", value_type="text"))
+        kwargs = self.syncer.local_kwargs(self.nigeria, TembaField.create(key="foo", name="Bar", type="text"))
 
         self.assertEqual(
             kwargs,
             {"backend": self.rapidpro_backend, "org": self.nigeria, "key": "foo", "label": "Bar", "value_type": "T"},
         )
 
-        kwargs = self.syncer2.local_kwargs(self.nigeria, TembaField.create(key="foo", label="Bar", value_type="text"))
+        kwargs = self.syncer2.local_kwargs(self.nigeria, TembaField.create(key="foo", name="Bar", type="text"))
 
         self.assertEqual(
             kwargs,
@@ -62,20 +62,20 @@ class FieldSyncerTest(UreportTest):
             org=self.nigeria, key="foo", label="Bar", value_type="T", backend=self.rapidpro_backend
         )
 
-        remote = TembaField.create(key="foo", label="Bar", value_type="text")
+        remote = TembaField.create(key="foo", name="Bar", type="text")
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaField.create(key="foo", label="Baz", value_type="text")
+        remote = TembaField.create(key="foo", name="Baz", type="text")
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaField.create(key="foo", label="Bar", value_type="numeric")
+        remote = TembaField.create(key="foo", name="Bar", type="numeric")
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaField.create(key="foo", label="Baz", value_type="numeric")
+        remote = TembaField.create(key="foo", name="Baz", type="numeric")
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
@@ -231,7 +231,6 @@ class BoundarySyncerTest(UreportTest):
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
     def test_delete_local(self):
-
         local = Boundary.objects.create(
             org=self.nigeria,
             osm_id="OLD123",
@@ -327,7 +326,6 @@ class ContactSyncerTest(UreportTest):
         )
 
     def test_local_kwargs(self):
-
         temba_contact = TembaContact.create(
             uuid="C-006",
             name="Jan",
@@ -515,7 +513,6 @@ class ContactSyncerTest(UreportTest):
 
     @patch("django.utils.timezone.now")
     def test_create_local(self, mock_timezone_now):
-
         now_date = json_date_to_datetime("2020-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
@@ -686,7 +683,6 @@ class RapidProBackendTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient.get_contacts")
     def test_pull_contacts(self, mock_get_contacts):
-
         Contact.objects.all().delete()
 
         # empty fetches
@@ -717,8 +713,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="Customers")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                     TembaContact.create(
                         uuid="C-002",
@@ -727,8 +722,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                     ),
                 ],
                 [
@@ -739,8 +733,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                     )
                 ],
             ),
@@ -754,8 +747,7 @@ class RapidProBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                     )
                 ]
             ),
@@ -780,8 +772,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     ),
                     TembaContact.create(
@@ -791,8 +782,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     ),
                 ],
@@ -804,8 +794,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ],
@@ -820,8 +809,7 @@ class RapidProBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ]
@@ -849,8 +837,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     ),
                     TembaContact.create(
@@ -860,8 +847,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     ),
                 ],
@@ -873,8 +859,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ],
@@ -889,8 +874,7 @@ class RapidProBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ]
@@ -919,8 +903,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "34"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     ),
                     TembaContact.create(
@@ -930,8 +913,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "67"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     ),
                 ],
@@ -943,8 +925,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835664"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "35"},
-                        stopped=True,
-                        blocked=False,
+                        status="stopped",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ],
@@ -959,8 +940,7 @@ class RapidProBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ]
@@ -1000,6 +980,7 @@ class RapidProBackendTest(UreportTest):
                             "gender": "Male",
                         },
                         language="eng",
+                        status="active",
                         created_on="2013-01-02T03:04:05.000000Z",
                     ),
                     TembaContact.create(
@@ -1009,8 +990,7 @@ class RapidProBackendTest(UreportTest):
                         urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
                         fields={"age": "67", "born": "1992"},
-                        stopped=False,
-                        blocked=False,
+                        status="active",
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     ),
                 ]
@@ -1025,8 +1005,7 @@ class RapidProBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ]
@@ -1063,8 +1042,7 @@ class RapidProBackendTest(UreportTest):
                         urns=[],
                         groups=[],
                         fields=None,
-                        stopped=True,
-                        blocked=False,
+                        status=None,
                         created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
                     )
                 ]
@@ -1083,13 +1061,12 @@ class RapidProBackendTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient.get_fields")
     def test_pull_fields(self, mock_get_fields):
-
         ContactField.objects.all().delete()
 
         mock_get_fields.return_value = MockClientQuery(
             [
-                TembaField.create(key="nick_name", label="Nickname", value_type="text"),
-                TembaField.create(key="age", label="Age", value_type="numeric"),
+                TembaField.create(key="nick_name", name="Nickname", type="text"),
+                TembaField.create(key="age", name="Age", type="numeric"),
             ]
         )
 
@@ -1106,8 +1083,8 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_fields.return_value = MockClientQuery(
             [
-                TembaField.create(key="age", label="Age (Years)", value_type="numeric"),
-                TembaField.create(key="homestate", label="Homestate", value_type="state"),
+                TembaField.create(key="age", name="Age (Years)", type="numeric"),
+                TembaField.create(key="homestate", name="Homestate", type="state"),
             ]
         )
 
@@ -1305,7 +1282,7 @@ class RapidProBackendTest(UreportTest):
 
         now = timezone.now()
         temba_run = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
@@ -1352,7 +1329,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll win today")
 
         temba_run_1 = TembaRun.create(
-            id=1235,
+            uuid=1235,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-002", name="Davido"),
             responded=True,
@@ -1369,7 +1346,7 @@ class RapidProBackendTest(UreportTest):
         )
 
         temba_run_2 = TembaRun.create(
-            id=1236,
+            uuid=1236,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-003", name="Lebron"),
             responded=True,
@@ -1413,7 +1390,7 @@ class RapidProBackendTest(UreportTest):
         contact.save()
 
         temba_run_3 = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
@@ -1496,7 +1473,7 @@ class RapidProBackendTest(UreportTest):
 
         # actionset uuid are ignored
         temba_run_4 = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
@@ -1540,7 +1517,7 @@ class RapidProBackendTest(UreportTest):
 
         # ruleset without values are considered
         temba_run_4 = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
@@ -1628,7 +1605,7 @@ class RapidProBackendTest(UreportTest):
 
         long_text = "Long Text moree " * 100000
         temba_run_long_text = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-007", name="Lebron James"),
             responded=True,
@@ -1664,7 +1641,7 @@ class RapidProBackendTest(UreportTest):
         )
 
         temba_run_none_value = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-008", name="James Harden"),
             responded=True,
@@ -1699,7 +1676,7 @@ class RapidProBackendTest(UreportTest):
 
         # no response
         temba_run_no_response = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
@@ -1762,7 +1739,7 @@ class RapidProBackendTest(UreportTest):
         # When a contact loops into the same node, prevent overwriting the result with a set category
         # with one from path unless they are more that 5 seconds older
         temba_run = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
@@ -1843,7 +1820,7 @@ class RapidProBackendTest(UreportTest):
 
         now = timezone.now()
         temba_run = TembaRun.create(
-            id=1234,
+            uuid=1234,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
@@ -1906,7 +1883,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll win today")
 
         temba_run_1 = TembaRun.create(
-            id=1235,
+            uuid=1235,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-002", name="Davido"),
             responded=True,
@@ -1923,7 +1900,7 @@ class RapidProBackendTest(UreportTest):
         )
 
         temba_run_2 = TembaRun.create(
-            id=1236,
+            uuid=1236,
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-003", name="Lebron"),
             responded=True,
@@ -2016,7 +1993,7 @@ class RapidProBackendTest(UreportTest):
 
         now = timezone.now()
         temba_run = TembaRun.create(
-            id=4321,
+            uuid=4321,
             flow=ObjectRef.create(uuid="flow-uuid-3", name="Flow 2"),
             contact=ObjectRef.create(uuid="C-021", name="Hyped"),
             responded=True,
@@ -2205,7 +2182,7 @@ class PerfTest(UreportTest):
                 num = b * fetch_size + r
                 batch.append(
                     TembaRun.create(
-                        id=num,
+                        uuid=num,
                         flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
                         contact=ObjectRef.create(uuid="C-00%d" % num, name=names[num % len(names)]),
                         responded=True,
@@ -2526,7 +2503,7 @@ class PerfTest(UreportTest):
                 num = b * fetch_size + r
                 batch.append(
                     TembaRun.create(
-                        id=num,
+                        uuid=num,
                         flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
                         contact=ObjectRef.create(uuid="C-001", name="Will"),
                         responded=True,
@@ -2701,7 +2678,6 @@ class PerfTest(UreportTest):
         mock_cache_delete,
         mock_pull_refresh,
     ):
-
         mock_max_runs.return_value = 300
         mock_rebuild_counts.return_value = "REBUILT"
         mock_get_pull_cached_params.side_effect = [(None, None)]
@@ -2731,7 +2707,7 @@ class PerfTest(UreportTest):
                 num = b * fetch_size + r
                 batch.append(
                     TembaRun.create(
-                        id=num,
+                        uuid=num,
                         flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
                         contact=ObjectRef.create(uuid="C-00%d" % num, name=names[num % len(names)]),
                         responded=True,
@@ -2921,7 +2897,6 @@ class PerfTest(UreportTest):
         mock_pull_refresh,
         mock_base_client_request,
     ):
-
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 

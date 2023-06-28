@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -906,6 +906,11 @@ msgstr ""
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "সম্পূর্ণ ফলাফল দেখুন "
+
 msgid "Refresh Results"
 msgstr "ফলাফল রিফ্রেশ করুন"
 
@@ -1001,6 +1006,15 @@ msgstr "সার্চ"
 
 msgid "No results found"
 msgstr "কোন ফলাফল খুঁজে পাওয়া যায়নি"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1836,6 +1850,11 @@ msgid "The viber username that users will use to contact U-Report if you have on
 msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
 
 #, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
+
+#, fuzzy
 #| msgid "The font used for normal text"
 msgid "The join button text"
 msgstr "সাধারন টেক্সটের জন্য যে ফন্ট ব্যবহার করা হবে"
@@ -2232,9 +2251,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "বিশেষায়িত উত্তর গুলো "
-
-#~ msgid "View full results"
-#~ msgstr "সম্পূর্ণ ফলাফল দেখুন "
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "মোট U-REPORTERS "

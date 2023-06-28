@@ -26,7 +26,7 @@
               %img(src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" width="80%" style="margin: 0 auto;")
               {% endthumbnail %}
         
-        - if partners_logos
+        - if partners_logos|length > 0
           .block.mt-4.font-bold.text-3xl.hover-parent
             .flex.justify-center
               -trans "Partners"

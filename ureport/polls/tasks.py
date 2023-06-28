@@ -96,7 +96,6 @@ def pull_results_other_polls(org, since, until):
     other_polls_ids = other_polls_ids.order_by("flow_uuid").distinct("flow_uuid").values_list("id", flat=True)
     other_polls = Poll.objects.filter(id__in=other_polls_ids).order_by("-created_on")
     for poll in other_polls:
-
         key = Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid)
         if not cache.get(key):
             try:
@@ -171,7 +170,6 @@ def clear_old_poll_results(org, since, until):
         .order_by("pk")
     )
     for poll in old_polls:
-
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
         if r.get(key):
             logger.info(
@@ -190,7 +188,6 @@ def clear_old_poll_results(org, since, until):
                             "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
                         )
                 except Exception:
-
                     logger.error(
                         "Error clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
                         exc_info=True,
@@ -242,7 +239,6 @@ def rebuild_counts():
         logger.info("Task: polls.rebuild_counts skipped")
     else:
         with r.lock(key, timeout=lock_timeout):
-
             start_time = time.time()
 
             logger.info("Task: polls.rebuild_counts started")
@@ -314,7 +310,6 @@ def fetch_old_sites_count():
 
 @app.task(track_started=True, name="polls.recheck_poll_flow_data")
 def recheck_poll_flow_data(org_id=None):
-
     active_orgs = Org.objects.filter(is_active=True)
     if org_id:
         active_orgs = Org.objects.filter(pk=org_id)

@@ -155,7 +155,6 @@ class NewsTest(UreportTest):
         self.assertFalse(self.nigeria_news1 in response.context["object_list"])
 
     def test_update_newsItem(self):
-
         self.uganda_news1 = NewsItem.objects.create(
             title="uganda news 1",
             description="uganda description 1",

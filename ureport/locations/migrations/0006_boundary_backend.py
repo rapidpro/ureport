@@ -34,7 +34,6 @@ def populate_boundary_backend(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("orgs", "0025_auto_20180322_1415"), ("locations", "0005_remove_boundary_backend")]
 
     operations = [

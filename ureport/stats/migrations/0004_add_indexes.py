@@ -36,7 +36,6 @@ CREATE INDEX IF NOT EXISTS stats_pollstats_org_id_date_location
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("stats", "0003_contactactivity")]
 
     operations = [

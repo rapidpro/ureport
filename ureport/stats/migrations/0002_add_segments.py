@@ -20,7 +20,6 @@ def populate_segments(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("stats", "0001_initial")]
 
     operations = [migrations.RunPython(populate_segments)]

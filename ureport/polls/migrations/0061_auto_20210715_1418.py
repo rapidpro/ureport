@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("flows", "0001_initial"),
         ("polls", "0060_populate_category_displayed"),

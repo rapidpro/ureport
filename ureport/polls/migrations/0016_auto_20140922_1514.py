@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("categories", "0005_auto_20140922_1514"), ("polls", "0015_remove_poll_image")]
 
     operations = [

@@ -53,6 +53,7 @@ class Boundary(models.Model):
 
     class Meta:
         unique_together = ("org", "osm_id")
+        index_together = ("org", "level", "name", "osm_id")
 
     @classmethod
     def lock(cls, org, osm_id):
@@ -60,7 +61,6 @@ class Boundary(models.Model):
 
     @classmethod
     def build_global_boundaries(cls):
-
         from temba_client.v2.types import Boundary as TembaBoundary
 
         from django.conf import settings

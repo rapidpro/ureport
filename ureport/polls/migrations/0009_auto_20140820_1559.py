@@ -16,7 +16,6 @@ def populate_categories(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0008_poll_category")]
 
     operations = [migrations.RunPython(populate_categories)]

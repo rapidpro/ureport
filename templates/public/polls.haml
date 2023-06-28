@@ -61,6 +61,20 @@
 
 
   .max-w-page.mx-auto
+    -if poll_preview and latest_poll
+      .block
+        .flex-1.my-home.self-center.hover-parent.bg-gray-400
+          .px-home.hover-parent
+            .font-bold.leading-tight.hover-parent.text-3xl.p-8.text-center
+              {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+              -if not latest_poll.is_active
+                -trans "Unpublished poll preview. Click Edit to publish it"
+              -else
+                -trans "Published poll. Click Edit to unpublish it"
+              -if not latest_poll.has_synced
+                .text-xl
+                  -trans "Poll has not synced yet to be displayed to the public"
+
     .bg-white(class="md:flex" id="poll-top-{{latest_poll.id}}")
       .flex-1.my-home.self-center.hover-parent(class="rtl:border-l ltr:border-r")
         .px-home.hover-parent

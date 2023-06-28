@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -937,6 +937,11 @@ msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 #, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Sebelumnya"
+
+#, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
 msgstr "Hasil"
@@ -1042,6 +1047,15 @@ msgid "SEARCH"
 msgstr ""
 
 msgid "No results found"
+msgstr ""
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
 msgstr ""
 
 #, fuzzy
@@ -1933,6 +1947,11 @@ msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
 msgid "The join button text"

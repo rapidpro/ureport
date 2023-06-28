@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -917,6 +917,11 @@ msgstr "Ne sinkronizira se, neaktivno"
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Ne planira sinkronizaciju, nema flowa za anketu"
 
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Prethodni"
+
 msgid "Refresh Results"
 msgstr "Osvježi rezultate"
 
@@ -1012,6 +1017,15 @@ msgstr "PRETRAŽI"
 
 msgid "No results found"
 msgstr "Rezultati nisu pronađjeni"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1818,6 +1832,11 @@ msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Korisničko ime za Viber koje će korisnici koristiti za kontaktiranje ZABUM voicea, ukoliko je primjenjivo"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Korisničko ime za Viber koje će korisnici koristiti za kontaktiranje ZABUM voicea, ukoliko je primjenjivo"
+
+#, fuzzy
+#| msgid "The viber username that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Korisničko ime za Viber koje će korisnici koristiti za kontaktiranje ZABUM voicea, ukoliko je primjenjivo"
 
 msgid "The join button text"

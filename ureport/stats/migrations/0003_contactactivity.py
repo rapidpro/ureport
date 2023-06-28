@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("orgs", "0026_fix_org_config_rapidpro"), ("stats", "0002_add_segments")]
 
     operations = [

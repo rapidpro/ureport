@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -900,6 +900,11 @@ msgstr "Synkronisering inte schemalagd, inte aktiv"
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Synkroniseringar är inte planerade, inget flöde finns för undersökningen"
 
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Tidigare"
+
 msgid "Refresh Results"
 msgstr "Uppdaterar resultaten"
 
@@ -995,6 +1000,15 @@ msgstr "SÖK"
 
 msgid "No results found"
 msgstr "Inga resultat"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1796,6 +1810,11 @@ msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Viber-användarnamnet som användarna måste använda för att kontakta U-Report Sverige"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Viber-användarnamnet som användarna måste använda för att kontakta U-Report Sverige"
+
+#, fuzzy
+#| msgid "The viber username that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Viber-användarnamnet som användarna måste använda för att kontakta U-Report Sverige"
 
 msgid "The join button text"

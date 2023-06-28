@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -903,6 +903,11 @@ msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for undersøkelsen"
 
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Forrige"
+
 msgid "Refresh Results"
 msgstr "Oppdater resultatene"
 
@@ -998,6 +1003,15 @@ msgstr "SØK"
 
 msgid "No results found"
 msgstr "Ingen resultater"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1801,6 +1815,13 @@ msgstr "Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Repo
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Report Norge"
 
+#, fuzzy
+#| msgid "The viber username that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Report Norge"
+
+#, fuzzy
+#| msgid "The font used for normal text"
 msgid "The join button text"
 msgstr "Font til normal tekst"
 

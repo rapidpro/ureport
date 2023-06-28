@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -905,6 +905,11 @@ msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 #, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Veja os resultados completos"
+
+#, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
 msgstr "Resultados"
@@ -1010,6 +1015,15 @@ msgid "SEARCH"
 msgstr ""
 
 msgid "No results found"
+msgstr ""
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
 msgstr ""
 
 #, fuzzy
@@ -1859,6 +1873,11 @@ msgstr "O código curto que os utilizadores usarão para contactar a nível loca
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "O código curto que os utilizadores usarão para contactar a nível local o SMS BIZ"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "O código curto que os utilizadores usarão para contactar a nível local o SMS BIZ"
+
 msgid "The join button text"
 msgstr ""
 
@@ -2230,9 +2249,6 @@ msgstr ""
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "RESPOSTAS SELECIONADAS"
-
-#~ msgid "View full results"
-#~ msgstr "Veja os resultados completos"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "NÚMERO TOTAL DE UTILIZADORES DO SMS BIZ"

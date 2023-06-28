@@ -25,7 +25,6 @@ CREATE INDEX IF NOT EXISTS stats_contactactivity_org_id_date_used on stats_conta
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0020_populate_used_contact_activities"),
     ]

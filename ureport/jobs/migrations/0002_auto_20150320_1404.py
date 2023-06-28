@@ -32,7 +32,6 @@ def generate_job_block_types(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("jobs", "0001_initial"), ("dashblocks", "0006_auto_20140922_1514")]
 
     operations = [migrations.RunPython(generate_job_block_types)]

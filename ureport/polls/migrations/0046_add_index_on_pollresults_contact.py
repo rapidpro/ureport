@@ -11,7 +11,6 @@ ON polls_pollresult (contact);
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0045_fix_has_synced_field")]
 
     operations = [migrations.RunSQL(INDEX_SQL)]

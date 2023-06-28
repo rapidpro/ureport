@@ -43,7 +43,6 @@ def apply_manual():  # pragma: no cover
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0025_more_indexes"),
     ]

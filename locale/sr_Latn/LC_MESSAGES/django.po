@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -950,6 +950,11 @@ msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 #, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Pogledaj kompletne rezultate"
+
+#, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
 msgstr "Rezultati"
@@ -1055,6 +1060,15 @@ msgid "SEARCH"
 msgstr ""
 
 msgid "No results found"
+msgstr ""
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
 msgstr ""
 
 #, fuzzy
@@ -1950,6 +1964,11 @@ msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
+
 msgid "The join button text"
 msgstr ""
 
@@ -2383,9 +2402,6 @@ msgstr "Nešto što inicira lokalizaciju"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "ISTAKNUTI ODGOVORI"
-
-#~ msgid "View full results"
-#~ msgstr "Pogledaj kompletne rezultate"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "UKUPAN # U-REPORTERA"

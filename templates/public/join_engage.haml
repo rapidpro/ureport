@@ -80,6 +80,15 @@
               Viber
           {% endif %}
 
+          {% if org|config:"line_link" %}
+          .mb-4.text-center(class="md:mx-4")
+            %a(href='{{ org|config:"line_link" }}')
+              .bg-circle-lg.bg-white.text-black.border.border-black
+                %i.fab.fa-line
+            .block
+              Line
+          {% endif %}
+
   - for join_step in join_steps
     .py-12(class="{% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %}")
       .max-w-page.mx-auto.p-home(class="md:flex " id="{% if forloop.first %}text{% endif %}")

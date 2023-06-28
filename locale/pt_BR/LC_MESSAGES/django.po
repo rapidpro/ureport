@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -908,6 +908,11 @@ msgstr ""
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Veja Todos os Resultados"
+
 msgid "Refresh Results"
 msgstr "Atualizar resultados"
 
@@ -1003,6 +1008,15 @@ msgstr "BUSCAR"
 
 msgid "No results found"
 msgstr "Os resultados não foram encontrados"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1840,6 +1854,11 @@ msgid "The viber username that users will use to contact U-Report if you have on
 msgstr "O número do Whatsapp que os usuários usarão para entrar em contato com o U-Report se você tiver um"
 
 #, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "O número do Whatsapp que os usuários usarão para entrar em contato com o U-Report se você tiver um"
+
+#, fuzzy
 #| msgid "The font used for normal text"
 msgid "The join button text"
 msgstr "Nenhuma fonte usada para texto normal"
@@ -2232,9 +2251,6 @@ msgstr "Algo para disparar localizações"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "RESPOSTAS EM DESTAQUE"
-
-#~ msgid "View full results"
-#~ msgstr "Veja Todos os Resultados"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "TOTAL DE # U-REPORTERS"

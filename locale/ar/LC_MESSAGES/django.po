@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -908,6 +908,11 @@ msgstr ""
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "إظهار النتائج كاملة"
+
 msgid "Refresh Results"
 msgstr ""
 
@@ -1002,6 +1007,15 @@ msgid "SEARCH"
 msgstr "ابحث "
 
 msgid "No results found"
+msgstr ""
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
 msgstr ""
 
 #, fuzzy
@@ -1809,6 +1823,11 @@ msgstr "الرمز الذي سيستعمله المستخدمون للتواصل
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
+
 msgid "The join button text"
 msgstr ""
 
@@ -2159,9 +2178,6 @@ msgstr "أداة تفعيل التعريب"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "ردود إستثنائية "
-
-#~ msgid "View full results"
-#~ msgstr "إظهار النتائج كاملة"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "عدد المشاركين في يوريبورت U-REPORT"

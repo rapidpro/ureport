@@ -47,14 +47,14 @@ class FieldSyncer(BaseSyncer):
             "backend": self.backend,
             "org": org,
             "key": remote.key,
-            "label": remote.label,
-            "value_type": self.model.TEMBA_TYPES.get(remote.value_type, self.model.TYPE_TEXT),
+            "label": remote.name,
+            "value_type": self.model.TEMBA_TYPES.get(remote.type, self.model.TYPE_TEXT),
         }
 
     def update_required(self, local, remote, local_kwargs):
         if local_kwargs and local_kwargs["backend"] != local.backend:
             return False
-        return any([local.label != remote.label, local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)])
+        return any([local.label != remote.name, local.value_type != self.model.TEMBA_TYPES.get(remote.type)])
 
     def delete_local(self, local):
         local.release()
@@ -126,7 +126,6 @@ class ContactSyncer(BaseSyncer):
     local_backend_attr = "backend"
 
     def get_boundaries_data(self, org):
-
         cache_attr = "__boundaries__%d:%s" % (org.pk, self.backend.slug)
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
@@ -172,7 +171,7 @@ class ContactSyncer(BaseSyncer):
         reporter_group = org.get_config("%s.reporter_group" % self.backend.slug, default="")
         contact_groups_names = [group.name.lower() for group in remote.groups]
 
-        if not reporter_group.lower() in contact_groups_names:
+        if reporter_group.lower() not in contact_groups_names:
             return None
 
         org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data = self.get_boundaries_data(
@@ -342,7 +341,17 @@ class RapidProBackend(BaseBackend):
 
     @staticmethod
     def _get_client(org, api_version):
-        return org.get_temba_client(api_version=api_version)
+        from temba_client.v2.types import Field
+
+        def convert_old_fields(clazz, item):
+            if clazz == Field:
+                item["name"] = item.get("name") or item.get("label")
+                item["type"] = (
+                    "number" if item.get("value_type") == "numeric" else item.get("type") or item.get("value_type")
+                )
+            return item
+
+        return org.get_temba_client(api_version=api_version, transformer=convert_old_fields)
 
     def fetch_flows(self, org):
         client = self._get_client(org, 2)
@@ -410,7 +419,6 @@ class RapidProBackend(BaseBackend):
         return sync_local_to_set(org, FieldSyncer(backend=self.backend), incoming_objects)
 
     def pull_boundaries(self, org):
-
         if org.get_config("common.is_global"):
             incoming_objects = Boundary.build_global_boundaries()
         else:
@@ -447,7 +455,6 @@ class RapidProBackend(BaseBackend):
                 yield json.loads(line_decoded)
 
     def _iter_poll_record_runs(self, archive, poll_flow_uuid):
-
         for record_batch in chunk_list(self._iter_archive_records(archive, poll_flow_uuid), 1000):
             matching = []
             for record in record_batch:
@@ -497,7 +504,6 @@ class RapidProBackend(BaseBackend):
 
             i = 0
             for archives in archives_fetches:
-
                 for archive in archives:
                     i += 1
                     logger.info("Archive %d with %d records, size %d" % (i, archive.record_count, archive.size))
@@ -512,7 +518,6 @@ class RapidProBackend(BaseBackend):
                         flow_uuid = poll.flow_uuid
 
                         for fetch in self._iter_poll_record_runs(archive, flow_uuid):
-
                             fetch_start = time.time()
 
                             (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(
@@ -520,7 +525,6 @@ class RapidProBackend(BaseBackend):
                             )
 
                             for temba_run in fetch:
-
                                 contact_obj = contacts_map.get(temba_run.contact.uuid, None)
                                 self._process_run_poll_results(
                                     org,
@@ -613,7 +617,6 @@ class RapidProBackend(BaseBackend):
                 try:
                     fetch_start = time.time()
                     for fetch in fetches:
-
                         logger.info(
                             "RapidPro API fetch for poll #%d "
                             "on org #%d %d - %d took %ds"
@@ -631,7 +634,6 @@ class RapidProBackend(BaseBackend):
                         )
 
                         for temba_run in fetch:
-
                             if latest_synced_obj_time is None or temba_run.modified_on > json_date_to_datetime(
                                 latest_synced_obj_time
                             ):
@@ -810,7 +812,6 @@ class RapidProBackend(BaseBackend):
             poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
             if existing_poll_result is not None:
-
                 update_required = self._check_update_required(
                     existing_poll_result,
                     category,
@@ -859,7 +860,6 @@ class RapidProBackend(BaseBackend):
                     stats_dict["num_val_ignored"] += 1
 
             elif poll_result_to_save is not None:
-
                 replace_save_map = self._check_update_required(
                     poll_result_to_save,
                     category,
@@ -875,7 +875,6 @@ class RapidProBackend(BaseBackend):
                 )
 
                 if replace_save_map:
-
                     result_obj = PollResult(
                         org=org,
                         flow=flow_uuid,
@@ -897,7 +896,6 @@ class RapidProBackend(BaseBackend):
 
                 stats_dict["num_val_ignored"] += 1
             else:
-
                 result_obj = PollResult(
                     org=org,
                     flow=flow_uuid,
@@ -989,7 +987,6 @@ class RapidProBackend(BaseBackend):
                     stats_dict["num_path_ignored"] += 1
 
                 else:
-
                     result_obj = PollResult(
                         org=org,
                         flow=flow_uuid,

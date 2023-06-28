@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0048_populate_age_and_gender_on_poll_results")]
 
     operations = [

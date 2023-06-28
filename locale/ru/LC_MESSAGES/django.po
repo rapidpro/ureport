@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -912,6 +912,11 @@ msgstr "Синхронизация не запланирована, не акт�
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Не запланирована синхронизация, нет потока для опроса "
 
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Предыдущий"
+
 msgid "Refresh Results"
 msgstr "Обновить результат"
 
@@ -1007,6 +1012,15 @@ msgstr "ПОИСК"
 
 msgid "No results found"
 msgstr "Результаты не найдены"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1802,6 +1816,11 @@ msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Имя пользователя viber, которое пользователи будут использовать для связи с Ю-Репорт, если он у вас есть"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Имя пользователя viber, которое пользователи будут использовать для связи с Ю-Репорт, если он у вас есть"
+
+#, fuzzy
+#| msgid "The viber username that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Имя пользователя viber, которое пользователи будут использовать для связи с Ю-Репорт, если он у вас есть"
 
 msgid "The join button text"

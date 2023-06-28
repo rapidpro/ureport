@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -910,6 +910,11 @@ msgstr ""
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Vezi toate rezultatele"
+
 msgid "Refresh Results"
 msgstr "Actualizare Rezultate"
 
@@ -1005,6 +1010,15 @@ msgstr "CAUTĂ"
 
 msgid "No results found"
 msgstr "Nici un rezultat găsit"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1842,6 +1856,11 @@ msgid "The viber username that users will use to contact U-Report if you have on
 msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
 
 #, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
+
+#, fuzzy
 #| msgid "The font used for normal text"
 msgid "The join button text"
 msgstr "Fontul folosit pentru textul normal"
@@ -2240,9 +2259,6 @@ msgstr "Ceva care să seteze localizările"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "RĂSPUNSURI RECOMANDATE"
-
-#~ msgid "View full results"
-#~ msgstr "Vezi toate rezultatele"
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "TOTAL # DIN U-REPORTERI"

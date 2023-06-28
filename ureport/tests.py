@@ -17,6 +17,7 @@ from temba_client.v2.types import (
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.http.request import HttpRequest
 from django.test import override_settings
 from django.urls import reverse
@@ -162,7 +163,6 @@ class UreportTest(SmartminTest, DashTest):
         self.floip_backend = floip_backend
 
     def create_org(self, subdomain, timezone, user):
-
         name = subdomain
 
         orgs = Org.objects.filter(subdomain=subdomain)
@@ -313,12 +313,15 @@ class SetOrgMiddlewareTest(UreportTest):
     def setUp(self):
         super(SetOrgMiddlewareTest, self).setUp()
 
-        self.middleware = SetOrgMiddleware()
+        self.middleware = SetOrgMiddleware(self.get_response)
         self.request = Mock(spec=HttpRequest)
         self.request.user = self.anon
         self.request.path = "/"
         self.request.get_host.return_value = "ureport.io"
         self.request.META = dict(HTTP_HOST=None)
+
+    def get_response(request):
+        return HttpResponse()
 
     def test_process_request_without_org(self):
         response = self.middleware.process_request(self.request)
@@ -326,7 +329,6 @@ class SetOrgMiddlewareTest(UreportTest):
         self.assertEqual(self.request.org, None)
 
     def test_process_request_with_org(self):
-
         ug_org = self.create_org("uganda", zoneinfo.ZoneInfo("Africa/Kampala"), self.admin)
         ug_dash_url = ug_org.subdomain + ".ureport.io"
         self.request.get_host.return_value = ug_dash_url

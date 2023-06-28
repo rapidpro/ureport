@@ -13,7 +13,6 @@ def move_category_to_poll_category(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0005_poll_poll_category")]
 
     operations = [migrations.RunPython(move_category_to_poll_category)]

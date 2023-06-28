@@ -5,7 +5,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("polls", "0040_delete_all_polls_results_and_counts")]
 
     operations = [

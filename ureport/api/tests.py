@@ -203,7 +203,6 @@ class UreportAPITests(APITestCase):
         )
 
     def test_api_docs_page(self):
-
         response = self.client.get("/api/v1/docs/")
         self.assertEqual(response.status_code, 200)
 
@@ -344,7 +343,6 @@ class UreportAPITests(APITestCase):
         tz = zoneinfo.ZoneInfo("UTC")
 
         with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 6, tzinfo=tz)):
-
             for entry in registration_stats:
                 self.assertEqual(entry["count"], 0)
 

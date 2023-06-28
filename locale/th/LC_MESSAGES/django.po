@@ -1,0 +1,1934 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Tippawan <tyaiya@unicef.org>, 2023
+# M. S., 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
+"PO-Revision-Date: 2021-03-30 14:28+0000\n"
+"Last-Translator: M. S., 2023\n"
+"Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The name of this category"
+msgstr "ชื่อหมวดหมู่"
+
+msgid "An optional image that can describe this category"
+msgstr "ตัวเลือกรูปภาพที่ใช้อธิบายหมวดหมู่นี้"
+
+msgid "The organization this category applies to"
+msgstr "องค์กรที่เป็นเจ้าของกลุ่มเนื้อหานี้"
+
+msgid "Categories"
+msgstr "หมวดหมู่"
+
+msgid "The name to describe this image"
+msgstr "ชื่อที่ใช้อธิบายรูปภาพนี้"
+
+msgid "The category this image represents"
+msgstr "หมวดหมู่ของรูปภาพนี้"
+
+msgid "The image file to use"
+msgstr "ไฟล์รูปภาพที่จะใช้"
+
+msgid "The human readable name for this content type"
+msgstr "ชื่อสำหรับประเภทเนื้อหานี้"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Slug เพื่อระบุประเภทเนื้อหานี้ เพื่อใช้กับแท็กของเทมเพลต"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "คำอธิบายว่าประเภทเนื้อหานี้จะใช้ที่ใดบนหน้าเว็บไซต์ และจะแสดงผลให้เห็นอย่างไร"
+
+msgid "Whether this content should include a title"
+msgstr "เนื้อหานี้ควรมีชื่อหัวข้อหรือไม่"
+
+msgid "Whether this content should include an image"
+msgstr "เนื้อหานี้ควรมีรูปภาพประกอบหรือไม่"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "เนื้อหานี้ควรใช้ rich HTML editor หรือไม่"
+
+msgid "Whether this content should include a summary field"
+msgstr "เนื้อหานี้ควรมีช่องใส่ข้อมูลสรุปหรือไม่"
+
+msgid "Whether this content should include a link"
+msgstr "เนื้อหานี้ควรมีลิงก์หรือไม่"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "เนื้อหานี้ควรอนุญาตให้สามารถอัพโหลดรูปภาพเพิ่มเติมหรือไม่ เช่น แกลเลอรี่"
+
+msgid "Whether this content has a color field"
+msgstr "เนื้อหานี้ควรมีช่องสำหรับใส่สีหรือไม่"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "เนื้อหานี้ควรอนุญาตให้ตั้งค่า YouTube ID หรือไม่"
+
+msgid "Whether this content should allow tags"
+msgstr "เนื้อหานี้ควรอนุญาตให้ใช้แท็กได้หรือไม่"
+
+msgid "Content Type"
+msgstr "ประเภทเนื้อหา"
+
+msgid "The category, or type for this content block"
+msgstr "หมวดหมู่ หรือ ประเภท ของกลุ่มเนื้อหานี้"
+
+msgid "The title for this block of content, optional"
+msgstr "ชื่อของกลุ่มเนื้อหา -ไม่จำเป็นต้องใส่"
+
+msgid "The summary for this item, should be short"
+msgstr "คำอธิบาย สรุปแบบสั้น ๆ "
+
+msgid "The body of text for this content block, optional"
+msgstr "ข้อความที่เกี่ยวข้องกับกลุ่มเนื้อหานี้ - ไม่จำเป็นต้องใส่"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "รูปภาพที่ควรแสดงร่วมกับกลุ่มเนื้อหานี้ -ไม่จำเป็นต้องใส่"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "สีพื้นหลังที่ใช้กับรูปภาพ ในรูปแบบ #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "ลิงก์ที่เกี่ยวข้องกับกลุ่มเนื้อหานี้ -ไม่จำเป็นต้องใส่"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ID ของวิดีโอ YouTube ที่เกี่ยวข้องกับรายการนี้"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "แท็กที่ควรใช้สำหรับกลุ่มเนื้อหานี้ แยกแต่ละแท็กด้วยการเว้นวรรค สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ -ไม่จำเป็นต้องใส่"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "ลำดับความสำคัญของกลุ่มเนื้อหานี้ - ลำดับความสำคัญที่สูงจะมาก่อน"
+
+msgid "The organization this content block belongs to"
+msgstr "องค์กรที่เป็นเจ้าของกลุ่มเนื้อหานี้"
+
+msgid "Gallery"
+msgstr "แกลเลอรี่"
+
+msgid "Add Image"
+msgstr "เพิ่มรูปภาพ"
+
+msgid "Search"
+msgstr "ค้นหา"
+
+msgid "Add"
+msgstr "เพิ่ม"
+
+msgid "Content Types"
+msgstr "ประเภทเนื้อหา"
+
+msgid "Link Slug"
+msgstr "ลิงก์ Slug"
+
+msgid "The slug or word to use in the link of the page"
+msgstr "Slug หรือ คำที่ใช้ในการเชื่อมโยงไปที่หน้าแสดงข้อมูล"
+
+msgid "Content Blocks"
+msgstr "กลุ่มเนื้อหา"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%s กลุ่ม"
+
+#, python-format
+msgid "Edit %s"
+msgstr "แก้ไข %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "สร้าง %s"
+
+msgid "Create Content Block"
+msgstr "สร้างกลุ่มเนื้อหา"
+
+msgid "Your first name"
+msgstr "ชื่อจริงของคุณ"
+
+msgid "Your last name"
+msgstr "นามสกุลของคุณ"
+
+msgid "Your email address"
+msgstr "ที่อยู่อีเมลของคุณ"
+
+msgid "Your password, at least eight letters please"
+msgstr "รหัสผ่านของคุณ กรุณาระบุอย่างน้อย 8 ตัวอักษร"
+
+msgid "That email address is already used"
+msgstr "ที่อยู่อีเมลนั้นถูกใช้ไปแล้ว"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "รหัสผ่านจะต้องมีอย่างน้อย 8 ตัวอักษร"
+
+msgid "This domain is used for subdomains"
+msgstr "ชื่อโดเมนนี้ถูกใช้สำหรับโดเมนย่อยแล้ว"
+
+msgid "Name"
+msgstr "ชื่อ"
+
+msgid "The name of this organization"
+msgstr "ชื่อขององค์กรนี้"
+
+msgid "The logo that should be used for this organization"
+msgstr "โลโก้ที่ควรใช้สำหรับองค์กรนี้"
+
+msgid "Administrators"
+msgstr "ผู้ดูแลระบบ"
+
+msgid "The administrators in your organization"
+msgstr "ผู้ดูแลระบบในองค์กรของคุณ"
+
+msgid "Viewers"
+msgstr "ผู้ชม"
+
+msgid "The viewers in your organization"
+msgstr "ผู้ชมในองค์กรของคุณ"
+
+msgid "Editors"
+msgstr "บรรณาธิการ"
+
+msgid "The editors in your organization"
+msgstr "บรรณาธิการในองค์กรของคุณ"
+
+msgid "Language"
+msgstr "ภาษา"
+
+msgid "The main language used by this organization"
+msgstr "ภาษาหลักที่ใช้ในองค์กรของคุณ"
+
+msgid "Subdomain"
+msgstr "โดเมนย่อย"
+
+msgid "This subdomain is not available"
+msgstr "ชื่อโดเมนย่อยนี้ถูกใช้ไปแล้ว"
+
+msgid "The subdomain for this organization"
+msgstr "ชื่อโดเมนย่อยสำหรับองค์กรนี้"
+
+msgid "Domain"
+msgstr "ชื่อโดเมน"
+
+msgid "This domain is not available"
+msgstr "ชื่อโดเมนนี้ถูกใช้ไปแล้ว"
+
+msgid "The custom domain for this organization"
+msgstr "ชื่อโดเมนตั้งเองสำหรับองค์กรนี้"
+
+msgid "Timezone"
+msgstr "โซนเวลา"
+
+msgid "The timezone your organization is in."
+msgstr "ตำแหน่งโซนเวลาที่องค์กรตั้งอยู่"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "JSON blob ที่ใช้เก็บข้อมูลการตั้งค่าต่าง ๆ ที่เกี่ยวข้องกับองค์กรนี้"
+
+msgid "Administrator"
+msgstr "ผู้ดูแลระบบ"
+
+msgid "Editor"
+msgstr "บรรณาธิการ"
+
+msgid "Viewer"
+msgstr "ผู้ชม"
+
+msgid "Org"
+msgstr "องค์กร"
+
+msgid "The organization to which the account is invited to view"
+msgstr "บัญชีองค์กรที่ได้รับการเชิญเข้าชม"
+
+msgid "Email"
+msgstr "อีเมล"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "อีเมลที่ส่งคำเชิญไปให้เพื่อเป็นผู้ชม"
+
+msgid "Secret"
+msgstr "ความลับ"
+
+msgid "a unique code associated with this invitation"
+msgstr "รหัสผ่านเฉพาะที่เกี่ยวข้องกับคําเชิญนี้"
+
+msgid "User Role"
+msgstr "บทบาทของผู้ใช้งาน"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s การเชิญ"
+
+msgid "Banner"
+msgstr "แบนเนอร์"
+
+msgid "Pattern"
+msgstr "รูปแบบ"
+
+msgid "The organization in which the image will be used"
+msgstr "องค์กรที่จะใช้รูปภาพนี้"
+
+msgid "The name to describe this background"
+msgstr "ชื่อสำหรับอธิบายภาพพื้นหลังนี้"
+
+msgid "Background type"
+msgstr "ประเภทของภาพพื้นหลัง"
+
+msgid "The image file"
+msgstr "ไฟล์รูปภาพ"
+
+msgid "The API token for this backend"
+msgstr "API Token สำหรับระบบ Backend"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"คุณได้รับคำเชิญให้เข้าร่วม %(org_name)s\n"
+"<br/>\n"
+"หากต้องการตอบรับคำเชิญ <a href='%(host)s%(join_url)s'>คลิกที่นี่</a>\n"
+" "
+
+msgid "You are invited to join {{org.name}}."
+msgstr "คุณได้รับคำเชิญให้เข้าร่วม {{org.name}}"
+
+msgid "Click this link to join"
+msgstr "กดที่ลิงก์นี้เพื่อเข้าร่วม"
+
+msgid "Edit"
+msgstr "แก้ไข"
+
+msgid "Manage Backends"
+msgstr "การจัดการระบบ Backend"
+
+msgid "Manage Users"
+msgstr "บริหารจัดการผู้ใช้งาน"
+
+msgid "Accounts"
+msgstr "ชื่อบัญชี"
+
+msgid "Admins"
+msgstr "ผู้ดูแลระบบ"
+
+msgid "Remove"
+msgstr "ลบออก"
+
+msgid "You must have at least one administator"
+msgstr "คุณต้องมีผู้ดูแลระบบอย่างน้อย 1 คน"
+
+msgid "Select your Organization"
+msgstr "เลือกองค์กรของคุณ"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "บัญชีของคุณยังไม่ได้เชื่อมโยงกับองค์กร กรุณาติดต่อผู้ดูแลระบบ"
+
+msgid "Your Organization"
+msgstr "องค์กรของคุณ"
+
+msgid "Invite people to your organization"
+msgstr "เชิญผู้อื่นมาอยู่ในองค์กรของคุณ"
+
+msgid "User group"
+msgstr "กลุ่มผู้ใช้"
+
+msgid "One of the emails you entered is invalid."
+msgstr "ข้อมูลของบางอีเมล์ที่คุณใส่ไม่ถูกต้อง"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "บริหารจัดการบัญชีของ %(name)s"
+
+msgid "Create"
+msgstr "สร้าง"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "ลิงก์คำเชิญของคุณไม่ถูกต้อง กรุณาติดต่อผู้ดูแลระบบขององค์กรของคุณ"
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "เข้าร่วมกับ %(name)s"
+
+msgid "Join"
+msgstr "เข้าร่วม"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "ลิงก์คำเชิญของคุณหมดอายุแล้ว กรุณาติดต่อผู้ดูแลระบบขององค์กรของคุณ"
+
+msgid "Task"
+msgstr "งาน"
+
+msgid "Tasks"
+msgstr "งาน"
+
+msgid "Only PDF files are supported."
+msgstr "รองรับไฟล์ PDF เท่านั้น"
+
+msgid "The title for this story"
+msgstr "ชื่อหัวข้อของเรื่องนี้"
+
+msgid "Whether this story is featured"
+msgstr "เรื่องราวนี้เป็นเรื่องแนะนำหรือไม่"
+
+msgid "The summary for the story"
+msgstr "ใจความสรุปของเรื่องราวนี้"
+
+msgid "The body of text for the story"
+msgstr "เนื้อหาของเรื่องราว"
+
+msgid "The writer of the story"
+msgstr "ผู้เขียนเรื่องราว"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "ลิงก์ไปยังไฟล์ MP3 สำหรับเรื่องราวนี้"
+
+msgid "The PDF report to attach"
+msgstr "แนบรายงาน PDF"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "ID ของวิดี YouTube ที่เกี่ยวข้องกับเรื่องราวนี้ (เป็นข้อความที่มาหลังจาก v= และก่อน & ใน URL ของ YouTube)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "แท็กสำหรับเรื่องราวนี้ แยกแต่ละแท็กด้วยการเว้นวรรค สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ -ไม่จำเป็นต้องใส่"
+
+msgid "The category for this story"
+msgstr "หมวดหมู่ของเรื่องราวนี้"
+
+msgid "The organization this story belongs to"
+msgstr "องค์กรที่เป็นเจ้าของเรื่องราวนี้"
+
+msgid "Stories"
+msgstr "เรื่องราว"
+
+msgid "The story to associate to"
+msgstr "เรื่องราวที่เกี่ยวข้อง"
+
+msgid "Yes"
+msgstr "ใช่"
+
+msgid "No"
+msgstr "ไม่ใช่"
+
+msgid "Story Images"
+msgstr "รูปภาพประกอบเรื่องราว"
+
+#, python-format
+msgid "Image %d"
+msgstr "รูปภาพ %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเว็บเรื่องราวและในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเว็บเรื่องราวและในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+msgid "The name of this tag"
+msgstr "ชื่อของแท็กนี้"
+
+msgid "Delete"
+msgstr "ลบ"
+
+msgid "Remove Item?"
+msgstr "เอารายการนี้ออก?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"คุณแน่ใจแล้วหรือ ว่าจะเอา <b>%(object)s</b> ออก?\n"
+" "
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "เมื่อเอาออกแล้วมันจะสูญหายไปตลอดกาล ไม่สามารถยกเลิกการกระทำนี้ได้"
+
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"%(counter)s ผลลัพธ์\n"
+" "
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tผลลัพธ์ที่ %(start)s-%(end)s จากทั้งหมด %(count)s\n"
+"\t"
+
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+msgid "Next"
+msgstr "ถัดไป"
+
+msgid "edit"
+msgstr "แก้ไข"
+
+msgid "Sign in"
+msgstr "ลงชื่อเข้าใช้"
+
+msgid "Login"
+msgstr "ลงชื่อเข้าใช้"
+
+msgid "Forgot Password?"
+msgstr "ลืมรหัสผ่าน?"
+
+msgid "Token Expired"
+msgstr "Token หมดอายุ"
+
+msgid "Login Failure"
+msgstr "ลงชื่อเข้าใช้ไม่สำเร็จ"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"      ขออภัย คุณไม่สามารถลงชื่อเข้าใช้งานขณะนี้ได้ เนื่องจากคุณลงชื่อเข้าใช้ไม่สำเร็จแล้ว %(failed_login_limit)s ครั้ง\n"
+"      "
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"      กรุณารอ %(lockout_timeout)s นาที ก่อนลองลงชื่อเข้าใช้ใหม่\n"
+"      "
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "นอกจากนี้ คุณสามารถกรอกแบบฟอร์มด้านล่าง เพื่อรีเซ็ตรหัสผ่านของคุณทางอีเมล"
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "กรุณาติดต่อผู้ดูแลเว็บไซต์เพื่อรีเซ็ตรหัสผ่านของคุณ"
+
+msgid "Email Address"
+msgstr "ที่อยู่อีเมล"
+
+msgid "Recover"
+msgstr "กู้คืน"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "กรุณาใส่ที่อยู่อีเมลที่คุณใช้ในการลงทะเบียน เราจะช่วยคุณกู้คืนรหัสผ่านของคุณ"
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>รหัสผ่านของคุณหมดอายุแล้ว</strong> ตามนโยบายของระบบ คุณจะต้องเปลี่ยนรหัสผ่านใหม่ทุก ๆ %(expire_days)s วัน และรหัสผ่านนั้นจะต้องไม่ถูกใช้ภายใน %(window_days)s วันก่อน\n"
+"  "
+
+msgid "New Password"
+msgstr "รหัสผ่านใหม่"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "รหัสผ่านจะต้องมีอย่างน้อย 8 ตัวอักษร มีตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว ตัวพิมพ์เล็กอย่างน้อย 1 ตัว และมีตัวเลขอย่างน้อย 1 ตัว"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "คุณได้ใช้รหัสผ่านนี้ในปีที่ผ่านมา กรุณาเลือกใช้รหัสผ่านใหม่"
+
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+msgid "Confirm Password"
+msgstr "ยืนยันรหัสผ่าน"
+
+msgid "Please enter your password to save changes."
+msgstr "กรุณาใส่รหัสผ่านของคุณเพื่อบันทึกการเปลี่ยนแปลง"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "ยืนยันรหัสผ่านใหม่โดยการกรอกช่องนี้"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "รหัสผ่านใหม่ไม่ตรงกับรหัสที่ยืนยัน"
+
+msgid "Your Email"
+msgstr "อีเมลของคุณ"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "ระบบไม่รองรับการกู้คืนอีเมล กรุณาติดต่อผู้ดูแลเว็บไซต์เพื่อรีเซ็ตรหัสผ่านของคูณ"
+
+msgid "Current Password"
+msgstr "รหัสผ่านปัจจุบัน"
+
+msgid "Your current password"
+msgstr "รหัสผ่านปัจจุบันของคุณ"
+
+msgid "Your new password."
+msgstr "รหัสผ่านใหม่ของคุณ"
+
+msgid "Confirm new Password"
+msgstr "ยืนยันรหัสผ่านใหม่"
+
+msgid "Confirm your new password."
+msgstr "ยืนยันรหัสผ่านใหม่ของคุณ"
+
+msgid "Please enter your password to save changes"
+msgstr "กรุณาใส่รหัสผ่านของคุณเพื่อบันทึกการเปลี่ยนแปลง"
+
+msgid "Confirm your new password by entering it here"
+msgstr "ยืนยันรหัสผ่านใหม่ของคุณด้วยการกรอกที่นี่"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "รหัสผ่านใหม่และรหัสผ่านยืนยันไม่ตรงกัน กรุณาลองใหม่อีกครั้ง"
+
+msgid "New user created successfully."
+msgstr "สร้างบัญชีผู้ใช้งานใหม่เรียบร้อย"
+
+msgid "Groups"
+msgstr "กลุ่ม"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "ผู้ใช้งานจะได้รับสิทธิ์ตามที่กำหนดในกลุ่มของพวกเขา"
+
+msgid "Set the user's initial password here."
+msgstr "กำหนดรหัสผ่านตั้งต้นของผู้ใช้งานที่นี่"
+
+msgid "Last Login"
+msgstr "ลงชื่อเข้าใช้ครั้งสุดท้าย"
+
+msgid "Is Active"
+msgstr "ใช้งานอยู่"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "ให้ผู้ใช้งานคนนี้ลงชื่อเข้าเว็บไซต์หรือไม่"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "ผู้ใช้งานจะได้รับสิทธิ์ตามที่กำหนดในกลุ่มของพวกเขา"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "คุณสามารถรีเซ็ตรหัสผ่านของผู้ใช้งานได้ด้วยการกรอกรหัสผ่านใหม่ที่นี่"
+
+msgid "Username"
+msgstr "ชื่อผู้ใช้งาน"
+
+msgid "Your password"
+msgstr "รหัสผ่านของคุณ"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "ถ้าคุณต้องการตั้งรหัสผ่านใหม่ กรุณากรอกที่นี่"
+
+msgid "Confirm New Password"
+msgstr "ยืนยันรหัสผ่านใหม่"
+
+msgid "Confirm your new password"
+msgstr "ยืนยันรหัสผ่านใหม่ของคุณ"
+
+msgid "Edit your profile"
+msgstr "แก้ไขโปรไฟล์ของคุณ"
+
+msgid "Password Recovery"
+msgstr "กู้คืนรหัสผ่าน"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "อีเมลได้ถูกส่งไปหาคุณแล้วเพื่อแนะนำขั้นตอนเพิ่มเติม"
+
+msgid "Password Recovery Request"
+msgstr "ส่งคำขอกู้คืนรหัสผ่าน"
+
+msgid "Pick a new password"
+msgstr "เลือกรหัสผ่านใหม่"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "ขอบคุณนะ รหัสผ่านของคุณอัพเดตเรียบร้อยแล้ว "
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "คุณกำลังลงชื่อเข้าใช้เป็น %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "อัพเดตรหัสผ่านเรียบร้อย คุณสามารถลงชื่อเข้าใช้ด้วยรหัสผ่านใหม่ได้แล้ว"
+
+msgid "Reset your Password"
+msgstr "รีเซ็ตรหัสผ่านของคุณ"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "ลิงก์ของคุณหมดอายุแล้ว กรุณาเริ่มกระบวนการใหม่ด้วยการกรอกอีเมลของคุณที่นี่"
+
+msgid "Submit"
+msgstr "ส่ง"
+
+msgid "Form"
+msgstr "แบบฟอร์ม"
+
+msgid "Save Changes"
+msgstr "บันทึกการเปลี่ยนแปลง"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "%s ใหม่ของคุณได้ถูกสร้างแล้ว"
+
+#, python-format
+msgid "Import %s"
+msgstr "นำเข้า %s"
+
+msgid "Back to Website"
+msgstr "กลับไปที่เว็ปไซด์"
+
+msgid "Welcome, "
+msgstr "ยินดีตอนรับ"
+
+msgid "Logout"
+msgstr "ออกจากระบบ"
+
+msgid "Opinions"
+msgstr "ความคิดเห็น"
+
+msgid "Bots"
+msgstr "บอท"
+
+msgid "Users"
+msgstr "ผู้ใช้งาน"
+
+msgid "Settings"
+msgstr "การตั้งค่า"
+
+msgid "Pages"
+msgstr "หน้า"
+
+msgid "Landing Pages"
+msgstr "หน้าเว็บไซต์"
+
+msgid "Jobs"
+msgstr "ตำแหน่งงาน"
+
+msgid "Tags"
+msgstr "แท็ก"
+
+msgid "Partners Logos"
+msgstr "โลโก้เครือข่าย"
+
+msgid "Categories Images"
+msgstr "ภาพหมวดหมู่"
+
+msgid "News Items"
+msgstr "ข่าว"
+
+msgid "Orgs"
+msgstr "องค์กร"
+
+msgid "Images"
+msgstr "รูปภาพ"
+
+msgid "About"
+msgstr "รู้จักยูรีพอร์ต"
+
+msgid "Engagement"
+msgstr "ยูรีพอร์ตเตอร์"
+
+msgid "Reports"
+msgstr "รายงาน"
+
+msgid "Category Images"
+msgstr "ภาพหมวดหมู่"
+
+msgid "+ New "
+msgstr "+ เพิ่ม"
+
+msgid "+ New Page"
+msgstr "+ เพิ่มหน้า"
+
+msgid "U-Report"
+msgstr "ยูรีพอร์ต"
+
+msgid "Admin"
+msgstr "ผู้ดูแลระบบ"
+
+msgid "Configuration"
+msgstr "การกำหนดค่าระบบ"
+
+msgid "Content"
+msgstr "เนื้อหา"
+
+msgid "Country Aliases"
+msgstr "นามแฝงของประเทศ"
+
+msgid "Job Sources"
+msgstr "แหล่งข้อมูลตำแหน่งงาน"
+
+msgid "Jobs Content"
+msgstr "เนื้อหาสำหรับตำแหน่งงาน"
+
+msgid "About Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"เกี่ยวกับ\""
+
+msgid "Videos"
+msgstr "วิดีโอ"
+
+msgid "Contact Us Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"ติดต่อเรา\""
+
+msgid "Missions Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"พันธกิจ\""
+
+msgid "Terms & Conditions"
+msgstr "ข้อตกลงและเงื่อนไข"
+
+msgid "U-Reporters Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"ยูรีพอร์ตเตอร์\""
+
+msgid "Join &amp; Engage Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"เข้าร่วมยูรีพอร์ต\""
+
+msgid "Join Steps Content"
+msgstr "เนื้อหาสำหรับ \"ขั้นตอนการเข้าร่วม\""
+
+msgid "Additional Menu"
+msgstr "เมนูเพิ่มเติม"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "เลือกประเทศของคุณ"
+
+msgid "Join Now"
+msgstr "สมัครวันนี้"
+
+msgid "READ MORE"
+msgstr "อ่านเพิ่มเติม"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "เรียนรู้เพิ่มเติม"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"        การใส่แหล่งข้อมูลตำแหน่งงานจากทวิตเตอร์ คุณจะต้องมี Widget ID จากทวิตเตอร์เสียก่อน\n"
+"      "
+
+msgid "Follow this step by step guide"
+msgstr "ทำตามคำแนะนำนี้ทีละขั้น"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"        <div>หลังจากที่คุณสร้างวิดเจ็ตแล้ว ก็อปปี้ ID ของวิดเจ็ตจาก URL ตามที่แสดงให้ดูในรูปต่อไปนี้</div>\n"
+"      "
+
+msgid "Back"
+msgstr "ย้อนกลับ"
+
+msgid "Select bots"
+msgstr "เลือกบอท"
+
+msgid "View public page"
+msgstr "ดูหน้าสาธารณะ"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "ข้อความแจ้งเตือนล่าสุด"
+
+msgid "Backends"
+msgstr "ฺBackends"
+
+msgid "Add os Select tags"
+msgstr "เพิ่มหรือเลือกแท็ก"
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] "ขณะนี้มี %(counter)sโพลใหม่ที่กำลังซิงค์อยู่ ผลสำรวจจะแสดงผลบนหน้าเว็บไซต์สาธารณะเมื่อการซิงค์เสร็จสมบูรณ์แล้ว"
+
+msgid "+ New Poll"
+msgstr "+ เพิ่มโพล"
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "%(counter)sคำถามโพล"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr "กำหนดเวลาซิงค์ข้อมูลโพลใหม่ไว้ทุก 10 นาที"
+
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr "ไม่กำหนดเวลาการซิงค์ข้อมูลโพลเก่า ย้ายข้อมูลเข้าแฟ้มจัดเก็บ"
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr "กำหนดเวลาซิงค์ข้อมูลโพลหลักไว้ทุก 20 นาที"
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr "กำหนดเวลาซิงค์ข้อมูลโพลล่าสุดไว้ทุก 60 นาที"
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "กำหนดเวลาซิงค์ข้อมูลโพลไว้ทุก 24 ชั่วโมง"
+
+msgid "Not scheduling syncs, not active"
+msgstr "ไม่ได้กำหนดเวลาการซิงค์ข้อมูล ไม่ทำงาน"
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr "ไม่กำหนดเวลาการซิงค์ข้อมูล ไม่พบ Flow ของโพลสำรวจ"
+
+msgid "Preview results"
+msgstr "ดูตัวอย่างผลสำรวจ"
+
+msgid "Refresh Results"
+msgstr "รีเฟรชผลสำรวจ"
+
+msgid "Partners"
+msgstr "เครือข่าย"
+
+msgid "MORE POLLS"
+msgstr "โพลอื่น ๆ"
+
+msgid "FILTER"
+msgstr "ตัวกรอง"
+
+msgid "All"
+msgstr "ทั้งหมด"
+
+msgid "POLL LIST"
+msgstr "รายการโพลสำรวจ"
+
+msgid "All polls from most recent to oldest"
+msgstr "โพลสำรวจทั้งหมดตั้งแต่ล่าสุดจนถึงเก่าสุด"
+
+msgid "ARCHIVED STORIES"
+msgstr "เรื่องราวที่ถูกจัดเก็บ"
+
+msgid "LIST"
+msgstr "รายการ"
+
+msgid "Send"
+msgstr "ส่ง"
+
+msgid "to"
+msgstr "ถึง"
+
+msgid "LATEST OPINION"
+msgstr "ความคิดเห็นล่าสุด"
+
+msgid "VIEW FULL RESULTS"
+msgstr "ดูผลสำรวจทั้งหมด"
+
+msgid "U-REPORTERS IN"
+msgstr "ยูรีพอร์ตเตอร์ ใน"
+
+msgid "PARTNERING WITH"
+msgstr "เป็นเครือข่ายกับ"
+
+msgid "U-REPORTERS"
+msgstr "ยูรีพอร์ตเตอร์"
+
+msgid "IN"
+msgstr "ใน"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ประเทศทั่วโลก"
+
+msgid "AGES"
+msgstr "อายุ"
+
+msgid "Available bots"
+msgstr "บอทที่มีอยู่"
+
+msgid "More bots"
+msgstr "บอทอื่น ๆ "
+
+msgid "Join U-Report, Your voice matters."
+msgstr "ร่วมทีม U-Report เสียงของคุณมีความหมาย"
+
+msgid "FEATURED STORY"
+msgstr "เรื่องราวแนะนำ"
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "เราเป็นส่วนหนึ่งของแพลตฟอร์มระดับโลกเพื่อสร้างการเปลี่ยนแปลงให้กับเด็กและเยาวชนทั่วโลก"
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "เรียนรู้เพิ่มเติมว่า U-Report ส่งเสริมและเชื่อมโยงเด็กและเยาวชนต่อประเด็นที่สำคัญต่อความเป็นอยู่ของเขาอย่างไร"
+
+msgid "LEARN MORE"
+msgstr "เรียนรู้เพิ่มเติม"
+
+msgid "Visit"
+msgstr "เยี่ยมชม"
+
+msgid "How would you like to join?"
+msgstr "คุณต้องการเข้าร่วมอย่างไร?"
+
+msgid "Text"
+msgstr "ข้อความ"
+
+msgid "PAGE"
+msgstr "หน้า"
+
+msgid "SEARCH"
+msgstr "ค้นหา"
+
+msgid "No results found"
+msgstr "ไม่พบผลลัพธ์"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr "ตัวอย่างโพลที่ยังไม่ได้เผยแพร่ คลิก 'แก้ไข' เพื่อเผยแพร่"
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr "เผยแพร่โพล คลิก 'แก้ไข' เพื่อยกเลิกการเผยแพร่"
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr "โพลยังไม่ได้รับการซิงค์ ผลสำรวจจะยังไม่แสดงผลบนหน้าเว็บไซต์สาธารณะ"
+
+msgid "RESPONDERS"
+msgstr "ผู้ตอบ"
+
+msgid "RESPONSE RATE"
+msgstr "อัตราการตอบโพล"
+
+msgid "TOTAL RESPONDERS"
+msgstr "จำนวนผู้ตอบทั้งหมด"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s ตอบโพลจากจำนวน %(polled)s ที่ได้รับโพลสำรวจ"
+
+msgid "ALL"
+msgstr "ทั้งหมด"
+
+msgid "AGE"
+msgstr "อายุ"
+
+msgid "GENDER"
+msgstr "เพศ"
+
+msgid "LOCATION"
+msgstr "ที่อยู่"
+
+msgid "Written by:"
+msgstr "เขียนโดย:"
+
+msgid "No reports published yet"
+msgstr "ยังไม่มีการเผยแพร่รายงาน"
+
+msgid "REPORT"
+msgstr "รายงาน"
+
+msgid "STORY"
+msgstr "เรื่องราว"
+
+msgid "Download Report"
+msgstr "ดาวน์โหลดรายงาน"
+
+msgid "Even"
+msgstr "แม้"
+
+msgid "State"
+msgstr "ภาค"
+
+msgid "Other"
+msgstr "อื่น ๆ"
+
+msgid "District"
+msgstr "จังหวัด"
+
+msgid "Participation Level"
+msgstr "ระดับการมีส่วนร่วม"
+
+msgid "Responders"
+msgstr "ผู้ตอบ"
+
+msgid "Reporters in"
+msgstr "ยูรีพอร์ตเตอร์ ใน"
+
+msgid "Results"
+msgstr "ผลลัพธ์"
+
+msgid "*Other answers include"
+msgstr "* รวมคำตอบอื่น ๆ ด้วย"
+
+msgid "Population"
+msgstr "ประชากร"
+
+msgid "Registered in"
+msgstr "ลงทะเบียนใน"
+
+msgid "Density"
+msgstr "ความหนาแน่น"
+
+msgid "total"
+msgstr "ทั้งหมด"
+
+msgid "of"
+msgstr "จาก"
+
+msgid "the"
+msgstr " "
+
+msgid "OVERALL STATISTICS"
+msgstr "สถิติโดยรวม"
+
+msgid "THIS YEAR"
+msgstr "ปีนี้"
+
+msgid "AVG RESPONSE RATE"
+msgstr "อัตราเฉลี่ยการตอบโพล"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "ยูรีพอร์ตเตอร์ตามภูมิภาค"
+
+msgid "FILTER RESULTS"
+msgstr "กรองผลลัพธ์"
+
+msgid "Charts only visible for logged in admins"
+msgstr "กราฟสามารถดูได้สําหรับผู้ดูแลระบบที่ล็อกอินแล้วเท่านั้น"
+
+msgid "Export and Share"
+msgstr "ดึงข้อมูลออกและแชร์"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "ต้องการแชร์เรื่องนี้ให้โลกรู้? ดาวน์โหลดภาพนี้เพื่อแชร์บนโซเชียลมีเดียหรือเพื่อการนําเสนอที่สวยงาม!"
+
+msgid "SELECT LANGUAGE"
+msgstr "เลือกภาษา"
+
+msgid "SELECT COUNTRY"
+msgstr "เลือกประเทศ"
+
+msgid "Custom pages"
+msgstr "หน้าเว็บที่กำหนดเอง"
+
+msgid "Landing pages"
+msgstr "หน้าเว็บไซต์"
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "ดูจากตัวเลขว่าเราร่วมผลักดันเสียงเด็กและเยาวชนเพื่อการเปลี่ยนแปลงทางสังคมเชิงบวกอย่างไร"
+
+msgid "Polled"
+msgstr "โพล"
+
+msgid "Reporters"
+msgstr "ยูรีพอร์ตเตอร์"
+
+msgid "Top Region"
+msgstr "ภูมิภาคยอดนิยม"
+
+msgid "January"
+msgstr "มกราคม"
+
+msgid "February"
+msgstr "กุมภาพันธ์"
+
+msgid "March"
+msgstr "มีนาคม"
+
+msgid "April"
+msgstr "เมษายน"
+
+msgid "May"
+msgstr "พฤษภาคม"
+
+msgid "June"
+msgstr "มิถุนายน"
+
+msgid "July"
+msgstr "กรกฎาคม"
+
+msgid "August"
+msgstr "สิงหาคม"
+
+msgid "September"
+msgstr "กันยายน"
+
+msgid "October"
+msgstr "ตุลาคม"
+
+msgid "November"
+msgstr "พฤศจิกายน"
+
+msgid "December"
+msgstr "ธันวาคม"
+
+msgid "Jan"
+msgstr "ม.ค."
+
+msgid "Feb"
+msgstr "ก.พ."
+
+msgid "Mar"
+msgstr "มี.ค."
+
+msgid "Apr"
+msgstr "เม.ย."
+
+msgid "Jun"
+msgstr "มิ.ย."
+
+msgid "Jul"
+msgstr "ก.ค."
+
+msgid "Aug"
+msgstr "ส.ค."
+
+msgid "Sep"
+msgstr "ก.ย."
+
+msgid "Oct"
+msgstr "ต.ค."
+
+msgid "Nov"
+msgstr "พ.ย."
+
+msgid "Dec"
+msgstr "ธ.ค."
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"คุณแน่ใจแล้วหรือ ว่าจะเอา <b>%(object)s</b> ออก?\n"
+" "
+
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] "%(counter)sผลลัพธ์"
+
+#, python-format
+msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr "ผลลัพธ์%(start)s-%(end)sจาก%(count)s"
+
+msgid "Error"
+msgstr "เกิดข้อผิดพลาด"
+
+msgid "Enter Dashboard"
+msgstr "เข้าสู่แดชบอร์ด"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"      ขออภัย คุณไม่สามารถลงชื่อเข้าใช้งานขณะนี้ได้ เนื่องจากคุณลงชื่อเข้าใช้ไม่สำเร็จแล้ว %(failed_login_limit)s ครั้ง\n"
+"      "
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"      กรุณารอ %(lockout_timeout)s นาที ก่อนลองลงชื่อเข้าใช้ใหม่\n"
+"      "
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"  <strong>รหัสผ่านของคุณหมดอายุแล้ว</strong> ตามนโยบายของระบบ คุณจะต้องเปลี่ยนรหัสผ่านใหม่ทุก ๆ %(expire_days)s วัน และรหัสผ่านนั้นจะต้องไม่ถูกใช้ภายใน %(window_days)s วันก่อน\n"
+"  "
+
+msgid "+ New Story"
+msgstr "+ เพิ่ม เรื่อง"
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "รีเฟรช %s แคชสำหรับองค์กรนี้"
+
+msgid "Flag"
+msgstr "ธง"
+
+msgid "About Partner Logo"
+msgstr "เกี่ยวกับโลโก้เครือข่าย"
+
+msgid "The organization to which the image will be used"
+msgstr "องค์กรที่จะใช้รูปภาพนี้"
+
+msgid "A short descriptive name for this image"
+msgstr "คำอธิบายสั้น ๆ สำหรับรูปภาพนี้"
+
+msgid "Image type"
+msgstr "ประเภทรูปภาพ"
+
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "ลำดับความสำคัญของรูปภาพนี้เมื่อเทียบกับรูปภาพอื่น ๆ - ลำดับความสำคัญที่สูงจะมาก่อน"
+
+msgid "The organization this bot is part of"
+msgstr "องค์กรที่บอทนี้เป็นส่วนหนึ่งของ"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr "บอทนี้จะแสดงในหน้าแรกหรือไม่ แสดงได้ถึง 3 รายการที่มีลําดับความสําคัญสูงสุดเท่านั้น"
+
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "บอทนี้จะถูกซ่อนบนหน้าสาธารณะหรือไม่ ยกเว้นบนหน้าเว็บไซต์"
+
+msgid "The title to display for this bot"
+msgstr "ชื่อที่ควรใช้สําหรับบอทนี้"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr "รหัสย่อ หมายเลข หรือชื่อของบอทนี้"
+
+msgid "The keyword for this bot"
+msgstr "คีย์เวิร์ดสําหรับบอทนี้"
+
+msgid "The Facebook bot deeplink, optional"
+msgstr "Deeplink ของ Facebook บอท - ไม่จำเป็นต้องใส่"
+
+msgid "The Telegram bot deeplink, optional"
+msgstr "Deeplink ของ Telegram บอท - ไม่จำเป็นต้องใส่"
+
+msgid "The Viber bot deeplink, optional"
+msgstr "Deeplink ของ Viber บอท - ไม่จำเป็นต้องใส่"
+
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "Deeplink ของ WhatsApp บอท - ไม่จำเป็นต้องใส่"
+
+msgid "A short description for this bot, required"
+msgstr "คําอธิบายสั้น ๆ สําหรับบอทนี้ - ข้อมูลจําเป็น"
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "ลำดับความสำคัญของบอทนี้เมื่อเทียบกับบอทอื่น ๆ - ลำดับความสำคัญที่สูงจะมาก่อน"
+
+msgid "Whether this bot should be shown to the public"
+msgstr "บอทนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
+
+msgid "Label"
+msgstr "ป้าย"
+
+msgid "Key"
+msgstr "หลัก"
+
+msgid "Male"
+msgstr "ชาย"
+
+msgid "Female"
+msgstr "หญิง"
+
+msgid "Organization"
+msgstr "องค์กร"
+
+msgid "Gender"
+msgstr "เพศ"
+
+msgid "Gender of the contact"
+msgstr "เพศของผู้ติดต่อ"
+
+msgid "Born Field"
+msgstr "Field วันเกิด"
+
+msgid "Occupation Field"
+msgstr "Field อาชีพ"
+
+msgid "Registration Date"
+msgstr "วันที่ลงทะเบียน"
+
+msgid "State Field"
+msgstr "Field ภูมิภาค"
+
+msgid "District Field"
+msgstr "Field จังหวัด"
+
+msgid "Ward Field"
+msgstr "Field เขต"
+
+msgid "Number of items with this counter"
+msgstr "จํานวนรายการจากคำขอนี้"
+
+msgid "No root user found. Please create a root user"
+msgstr "ไม่มีผู้ใช้งานระดับ root กรุณาสร้างผู้ใช้งานระดับ root"
+
+msgid "The name for our alias"
+msgstr "ชื่อสำหรับนามแฝงของพวกเรา"
+
+msgid "The title or name to reference this Job source."
+msgstr "ชื่อที่ใช้เรียกแหล่งข้อมูลตำแหน่งงานนี้"
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr "เลือกประเภทของแหล่งข้อมูลตำแหน่งงาน ทวิตเตอร์ เฟซบุ๊ก หรือ RSS Feed"
+
+msgid "The full URL to navigate to this Job source."
+msgstr "ใส่ URL ของแหล่งข้อมูลตำแหน่งงาน"
+
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
+msgstr "สำหรับทวิตเตอร์ จะต้องมี Widget ID เพื่อฝังทวีตลงในเว็บไซต์ กรุณาอ่านวิธีการหา Widget ID ที่ได้ระบุไว้ด้านบน"
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr "ตำแหน่งงานที่ได้จากแหล่งข้อมูลตำแหน่งงานที่ได้รับการแนะนำ จะถูกแสดงเป็นอันดับแรกในหน้าตำแหน่งงาน"
+
+msgid "The organization this job source is for"
+msgstr "องค์กรที่ตำแหน่งงานนี้เป็นส่วนหนึ่งของ"
+
+msgid "Your job source has been added successfully"
+msgstr "เพิ่มแหล่งข้อมูลตำแหน่งของคุณเรียบร้อย"
+
+msgid "Your job source has been updated successfully"
+msgstr "อัพเดตแหล่งข้อมูลตำแหน่งของคุณเรียบร้อย"
+
+msgid "The organization this landing page is part of"
+msgstr "องค์กรที่เป็นเจ้าของหน้าเว็บไซต์นี้"
+
+msgid "The title to display for this landing page"
+msgstr "ชื่อที่จะแสดงบนหน้าเว็บไซต์นี้"
+
+msgid "The call to action text for this landing page"
+msgstr "ข้อความ Call to Action บนหน้าเว็บไซต์นี้"
+
+msgid "The slug to use on the link for this landing page"
+msgstr "ลิงก์ Slug ที่จะใช้สําหรับหน้าเว็บไซต์นี้"
+
+msgid "The body of text for the landing page"
+msgstr "เนื้อหาที่จะแสดงบนหน้าเว็บไซต์"
+
+msgid "The image file to use for the page"
+msgstr "ไฟล์รูปภาพที่จะใช้บนหน้าเพจ"
+
+msgid "Whether this page should be active to the public"
+msgstr "เพจนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr "นี่คือ OSM ID (OpenStreetMap ID) สำหรับเขตการปกครองนี้"
+
+msgid "The name of our administrative boundary"
+msgstr "ชื่อของเขตการปกครองของเรา"
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr "ระดับของเขตการปกครอง: 0 สำหรับ ประเทศ, 1 สำหรับ ภูมิภาค และ 2 สำหรับ จังหวัด"
+
+msgid "The parent to this political boundary if any"
+msgstr "ผู้รับผิดชอบของขอบเขตทางการเมืองนี้ ถ้ามี"
+
+msgid "Geometry"
+msgstr "เรขาคณิต"
+
+msgid "The json representing the geometry type and coordinates of the boundaries"
+msgstr "ข้อมูล Json ระบุประเภทเรขาคณิตและพิกัดของขอบเขต"
+
+msgid "The title for this item"
+msgstr "ชื่อของรายการนี้"
+
+msgid "A short summary description for this item"
+msgstr "คำอธิบายสรุปสั้นๆ สำหรับรายการนี้"
+
+msgid "A link that should be associated with this item"
+msgstr "ลิงก์ที่เกี่ยวข้องกับรายการนี้"
+
+msgid "The category this item belongs to"
+msgstr "หมวดหมู่ของรายการนี้"
+
+msgid "The organization this item belongs to"
+msgstr "องค์กรที่เป็นเจ้าของรายการนี้"
+
+msgid "The title for this Video"
+msgstr "ชื่อของวิดีโอนี้"
+
+msgid "A short summary description for this video"
+msgstr "คำอธิบายสรุปสั้นๆ สำหรับวิดีโอนี้"
+
+msgid "The organization this video belongs to"
+msgstr "องค์กรที่เป็นเจ้าของวิดีโอนี้"
+
+msgid "The name of this poll category"
+msgstr "ชื่อของหมวดหมู่โพลนี้"
+
+msgid "Poll Categories"
+msgstr "หมวดหมู่โพล"
+
+msgid "The Flow this Poll is based on"
+msgstr "Flow ที่ใช้สำหรับหมวดหมู่นี้"
+
+msgid "The date to display for this poll. Leave empty to use flow creation date."
+msgstr "วันที่จะแสดงโพลนี้ ให้ปล่อยว่างหากต้องการใช้วันที่สร้าง Flow "
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "จะจัดเก็บ Flow สำหรับโพลนี้บน RapidPro หรือไม่"
+
+msgid "The base language of the flow to use"
+msgstr "ภาษาตั้งต้นที่ใช้สำหรับ Flow"
+
+msgid "The number of polled reporters on this poll"
+msgstr "จำนวนของยูรีพอร์ตเตอร์ที่ถูกสอบถามในโพลนี้"
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr "โพลสำรวจเสร็จสิ้นการซิงค์ผลลัพธ์หรือไม่"
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr "โพลสำรวจควรหยุดสร้างสถิติใหม่หรือไม่"
+
+msgid "The title for this Poll"
+msgstr "ชื่อของโพลนี้"
+
+msgid "The category this Poll belongs to"
+msgstr "หมวดหมู่ของโพลนี้"
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr "จะให้โพลนี้เป็นโพลแนะนำบนหน้าโฮมเพจหรือไม่"
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr "ภาพประเภท Splash ที่จะแสดงพร้อมกับโพลสํารวจ (ไม่บังคับ)"
+
+msgid "The organization this poll is part of"
+msgstr "องค์กรที่เป็นเจ้าของโพลนี้"
+
+msgid "The title for this response story"
+msgstr "ชื่อหัวข้อของเรื่องนี้"
+
+msgid "The writer of the response story"
+msgstr "ผู้เขียนเรื่องราว"
+
+msgid "The poll to associate to"
+msgstr "เรื่องราวที่เกี่ยวข้อง"
+
+msgid "The poll for this response"
+msgstr "โพลสำรวจที่เกี่ยวข้องกับคำตอบนี้"
+
+msgid "The location for this response"
+msgstr "ที่อยู่ของโพลสำรวจนี้"
+
+msgid "The name of the sender of the message"
+msgstr "ชื่อของผู้ส่งข้อความ"
+
+msgid "The featured response message"
+msgstr "ข้อความตอบโพลที่โดดเด่น"
+
+msgid "Dark 1 background and White text"
+msgstr "พื้นหลังสีเข้ม 1 และข้อความสีขาว"
+
+msgid "Light 1 background and Black text"
+msgstr "พื้นหลังสีอ่อน 1 และข้อความสีดำ"
+
+msgid "Dark 2 background and White text"
+msgstr "พื้นหลังสีเข้ม 2 และข้อความสีขาว"
+
+msgid "Dark 3 background and Black text"
+msgstr "พื้นหลังสีเข้ม 3 และข้อความสีดำ"
+
+msgid "Show Age, Gender and Location charts"
+msgstr "แสดงกราฟ อายุ เพศ และที่อยู่"
+
+msgid "Hide Age chart ONLY"
+msgstr "ซ่อนกราฟอายุเท่านั้น"
+
+msgid "Hide Gender chart ONLY"
+msgstr "ซ่อนกราฟเพศเท่านั้น"
+
+msgid "Hide Location chart ONLY"
+msgstr "ซ่อนกราฟที่อยู่เท่านั้น"
+
+msgid "Hide Age and Gender charts"
+msgstr "ซ่อนกราฟอายุและเพศเท่านั้น"
+
+msgid "Hide Age and Location charts"
+msgstr "ซ่อนกราฟอายุและที่อยู่"
+
+msgid "Hide Gender and Location charts"
+msgstr "ซ่อนกราฟเพศและที่อยู่เท่านั้น"
+
+msgid "Hide Age, Gender and Location charts"
+msgstr "ซ่อนกราฟอายุ เพศ และที่อยู่"
+
+msgid "The poll this question is part of"
+msgstr "คำถามนี้เป็นส่วนหนึ่งของโพล"
+
+msgid "The title of this question"
+msgstr "ชื่อของคำถามนี้"
+
+msgid "The RuleSet this question is based on"
+msgstr "RuleSet ที่คำถามนี้มีพื้นฐานมาจาก"
+
+msgid "The label of the ruleset on RapidPro"
+msgstr "ป้าย RuleSet ที่ตั้งไว้ใน RapidPro"
+
+msgid "The priority number for this question on the poll"
+msgstr "เลขลำดับความสำคัญของคำถามนี้บนโพล"
+
+msgid "The Rule this response category is based on"
+msgstr "กฎของหมวดหมู่การตอบโพลนี้มีพื้นฐานมาจาก"
+
+msgid "Select tags for this poll"
+msgstr "เลือกแท็กสำหรับโพลนี้"
+
+msgid "Your org does not have any API token configuration."
+msgstr "องค์กรของคุณไม่มีการกำหนดค่า API token"
+
+msgid "You must include a title for every included question."
+msgstr "คุณต้องใส่ชื่อให้กับทุกคำถามที่นำมาใช้บนโพล"
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr "ชื่อยาวเกินไป ชื่อหัวข้อต้องมีความยาวไม่เกิน 255 ตัวอักษร"
+
+msgid "You must include at least one poll question."
+msgstr "คุณต้องมีคำถามสำหรับโพลอย่างน้อย 1 คำถาม"
+
+msgid "Adjust poll date"
+msgstr "เปลี่ยนวันที่โพลสำรวจ"
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr "โพลของคุณได้รับการอัพเดทเรียบร้อย กรุณาเลือกคำถามที่จะใช้ในโพล"
+
+msgid "Configure flow"
+msgstr "กำหนดค่า Flow"
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr "โพลสำรวจของคุณได้รับการกำหนดค่าแล้ว กรุณาปรับวันที่ของโพลสำรวจ"
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "โพลของคุณถูกสร้างขึ้นมาแล้ว กรุณาเลือกคำถามที่จะใช้ในโพล"
+
+msgid "Poll Images"
+msgstr "รูปภาพประกอบโพล"
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr "กรุณาใส่คำตอบโพลที่ต้องการให้ขึ้นเป็นข้อความเด่น (ถ้ามี)"
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเพจโพลและในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเพจโพลและในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+msgid "Poll Response"
+msgstr "คำตอบโพล"
+
+msgid "Your poll has been updated."
+msgstr "โพลของคุณถูกอัพเดตแล้ว"
+
+msgid "Poll Questions"
+msgstr "คำถามโพล"
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr "กรุณาเลือกรูปภาพที่คุณต้องการให้แสดงบนหน้าเพจโพล (ถ้ามี)"
+
+msgid "Include"
+msgstr "รวมอยู่"
+
+msgid "Whether to include this question in your public results"
+msgstr "จะให้นำคำถามนี้ไปรวมในหน้าผลลัพธ์ที่เป็นสาธารณะของคุณหรือไม่"
+
+msgid "Priority"
+msgstr "ลำดับความสำคัญ"
+
+msgid "The priority of this question on the poll page, higher priority comes first"
+msgstr "ลำดับความสำคัญของคำถามนี้บนหน้าเพจโพล ลำดับความสำคัญที่สูงจะมาก่อน"
+
+msgid "Ruleset Label"
+msgstr "ป้าย RuleSet"
+
+msgid "The label of the ruleset from RapidPro"
+msgstr "ป้าย RuleSet ที่ตั้งไว้ใน RapidPro"
+
+msgid "Title"
+msgstr "ชื่อหัวข้อ"
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr "คำถามที่แสดงต่อผู้ชมของคุณจะถูกแสดงเป็นแบบสาธารณะ"
+
+msgid "Color Choice"
+msgstr "ตัวเลือกสี"
+
+msgid "The color to use for the question block will be displayed publicly"
+msgstr "สีที่จะใช้สำหรับกลุ่มคำถามนี้ที่จะแสดงต่อสาธารณะ"
+
+msgid "Hidden Charts Choice"
+msgstr "ตัวเลือกซ่อนกราฟ"
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr "เลือกรายละเอียดกราฟของคำถามนี้ที่จะไม่โชว์ต่อสาธารณะ"
+
+msgid "Category {idx+1}"
+msgstr "หมวดหมู่ {idx+1}"
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "ป้ายกำกับหมวดหมู่ของระบบ Backend (เช่น RapidPro)"
+
+msgid "Display {idx+1}"
+msgstr "แสดง {idx+1}"
+
+msgid "The label to display of the category on the public site"
+msgstr "ป้ายที่จะแสดงหมวดหมู่บนหน้าเว็บไซต์สาธารณะ"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr "ระบบกำลังซิงค์ข้อมูลตามเวลาที่กำหนดไว้..."
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr "ระบบกำลังซิงค์ผลลัพธ์ล่าสุด %(time)s ที่ผ่านมา"
+
+msgid "Synced"
+msgstr "ซิงค์"
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr "ระบบกำลังซิงค์ข้อมูล... {sync_progress:.1f}%"
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr "แก้ไขโพลสำหรับ Flow [{flow_name} ({flow_date_hint})]"
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr "ตั้งเวลาให้ดึงโพล #%(poll_id)d บนองค์กร #%(org_id)d"
+
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr "ชื่อของ Contact Group ที่มีข้อมูลของยูรีพอร์ตเตอร์"
+
+msgid "The label of the Contact Field that contains the birth date of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันเดือนปีเกิดของยูรีพอร์ตเตอร์"
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลเพศของยูรีพอร์ตเตอร์"
+
+msgid "The label of the Contact Field that contains the occupation of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลอาชีพของยูรีพอร์ตเตอร์"
+
+msgid "The label of the Contact Field that contains the registration date of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันที่ลงทะเบียนของยูรีพอร์ตเตอร์"
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลภูมิภาคที่อยู่ของยูรีพอร์ตเตอร์"
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลจังหวัดที่อยู่ของยูรีพอร์ตเตอร์"
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลเขตของยูรีพอร์ตเตอร์"
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "ป้ายที่ระบุว่ายูรีพอร์ตเตอร์เป็นเพศชาย"
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "ป้ายที่ระบุว่ายูรีพอร์ตเตอร์เป็นเพศหญิง"
+
+msgid "Whether this org should be show on the landing page"
+msgstr "จะให้แสดงองค์กรนี้บนหน้าเว็บไซต์หรือไม่"
+
+msgid "Whether this org count should consider the count from link only"
+msgstr "ตัวเลขที่เกี่ยวข้องกับองค์กรนี้ควรพิจารณาจากการนับจากลิงก์เท่านั้นหรือไม่"
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr "หมายเลขที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตในประเทศได้"
+
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "หมายเลข WhatsApp ที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
+
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgstr "Telegram บอทที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
+
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Username ของ Viber ที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
+
+#, fuzzy
+#| msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Telegram บอทที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
+
+msgid "The join button text"
+msgstr "ข้อความของปุ่มเข้าร่วม"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr "ข้อความสั้น ๆ เชิญชวนให้ผู้ชมมาเข้าร่วมยูรีพอร์ต"
+
+msgid "The call to action text to join on the top section on U-Report"
+msgstr "ข้อความ Call to Action เชิญชวนเข้าร่วมยูรีพอร์ต ที่จะอยู่ด้านบนสุดของเพจยูรีพอร์ต"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr "วิดีโอ YouTube ID สำหรับวิธีเข้าร่วมบนหน้าเพจยูรีพอร์ต"
+
+msgid "The title of the photos section U-Report homepage"
+msgstr "ชื่อเรื่องของโซนรูปภาพ บนหน้าแรกของยูรีพอร์ต"
+
+msgid "The description of the photos section U-Report homepage"
+msgstr "คำอธิบายของโซนรูปภาพ บนหน้าแรกของยูรีพอร์ต"
+
+msgid "The description of the opinions page"
+msgstr "คำอธิบายของหน้าความคิดเห็น"
+
+msgid "The description of the stories page"
+msgstr "คำอธิบายของหน้าเรื่องราว"
+
+msgid "The description of the engagement page"
+msgstr "คำอธิบายของหน้าการมีส่วนร่วม"
+
+msgid "The callout message on the footer engagement section"
+msgstr "Callout Message ตรงด้านล่างของเพจการมีส่วนร่วม"
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "สีหลักสำหรับองค์กรนี้ ควรเป็นสีเข้ม"
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "สีรองสำหรับองค์กรนี้ ควรเป็นสีเข้ม"
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "สีที่สามสำหรับองค์กรนี้ ควรเป็นสีเข้ม"
+
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "สีหลักสำหรับองค์กรนี้ ควรเป็นสีอ่อน"
+
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "สีรองสำหรับองค์กรนี้ ควรเป็นสีอ่อน"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "เลือกได้ถึง 6 สีเพื่อตกแต่งกราฟ เลือกสีโดยใส่เครื่องหมายจุลภาค หรือ comma ระหว่างสี"
+
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr "เลือกได้ถึง 11 สีเพื่อตกแต่งแผนที่ เลือกสีโดยใส่เครื่องหมายจุลภาค หรือ comma ระหว่างสี"
+
+msgid "The states to show on maps only"
+msgstr "ภูมิภาคที่จะแสดงบนแผนที่เท่านั้น"
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr "ภูมิภาคที่จะแสดงบนแผนที่เท่านั้น ใช้เพื่อกรองผลสำรวจความคิดเห็น"
+
+msgid "The Google Tag Manager ID for this organization"
+msgstr "Google Tag Manager ID สำหรับองค์กรนี้"
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "Google Analytics Tracking ID สำหรับองค์กรนี้"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "URL สำหรับ YouTube Channel ขององค์กรนี้"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr "ข้อมูลของ Meta Tag สำหรับการยืนยันโดเมน Facebook"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "URL สำหรับ Facebook Page ขององค์กรนี้"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr "เลข ID ของ Facebook Page ขององค์กรนี้  (ไม่จำเป็นต้องใส่)"
+
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr "เลข ID ของ Facebook app สำหรับโปรแกรมแชทขององค์กรนี้ (ไม่จำเป็นต้องใส่)"
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr "ข้อความสั้น ๆ ที่ใช้ทักทายผู้เข้าชมใน Facebook Messenger Plugin"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "ID ของ Facebook Pixel ขององค์กรนี้  (ไม่จำเป็นต้องใส่)"
+
+msgid "The Instagram username for this organization"
+msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Widget ID ของอินสตาแกรมจาก lightwidget.com"
+
+msgid "The Twitter handle for this organization"
+msgstr "ชื่อทวิตเตอร์ขององค์กรนี้"
+
+msgid "The Twitter widget used for searching"
+msgstr "Widget ของทวิตเตอร์สำหรับใช้ในการค้นหา"
+
+msgid "The words to filter out from the results on public site"
+msgstr "คำที่ใช้กรองผลลัพธ์ออกบนเพจสาธารณะ"
+
+msgid "If there are jobs to be shown on the public site."
+msgstr "ถ้ามีตำแหน่งงานแสดงบนเว็บไซต์สาธารณะ"
+
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr "ถ้าองค์กรนี้แสดงผลข้อมูลทั่วโลก เช่น แสดงแผนที่โลกแทนแผนที่ประเทศ"
+
+msgid "Whether to activate an extra gender."
+msgstr "เปิดใช้งานเพศรายการอื่นเพิ่มเติมหรือไม่"
+
+msgid "Whether to hide the engagement breakdown charts."
+msgstr "ซ่อนรายละเอียดกราฟของการมีส่วนร่วมหรือไม่"
+
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr "จะแสดงโลโก้ยูนิเซฟตรงด้านล่างของเพจหรือไม่"
+
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
+msgstr "รหัส alpha-3 ISO ขององค์กรเพื่อปรากฏ Widget ของเรื่องราว U-Report App ตัวอย่าง: BRA, NIG, CMR (ใช้ GLOBAL หากเป็นยูรีพอร์ต Global)"
+
+msgid "The font used for headline texts"
+msgstr "Font ที่ใช้สำหรับข้อความพาดหัว"
+
+msgid "The font used for normal text"
+msgstr "Font ที่ใช้สำหรับข้อความทั่วไป"
+
+msgid "Hide participation stats"
+msgstr "ซ่อนสถิติการมีส่วนร่วม"
+
+msgid "The text to describe the sponsors of free messages"
+msgstr "ข้อความอธิบายผู้ให้การสนับสนุนข้อความส่งฟรี"
+
+msgid "The font used for small text"
+msgstr "Font ที่ใช้สำหรับข้อความขนาดเล็ก"
+
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr "ถ้าคุณต้องการใส่โค้ด HTML ของคุณบนหน้าเพจขององค์กร เช่น โค้ดสำหรับ Analytics"
+
+msgid "Other language sites links"
+msgstr "ลิงก์เว็บไซต์ภาษาอื่น ๆ"
+
+msgid "90 Days"
+msgstr "90 วัน"
+
+msgid "6 Months"
+msgstr "6 เดือน"
+
+msgid "12 Months"
+msgstr "12 เดือน"
+
+msgid "Age"
+msgstr "อายุ"
+
+msgid "Channels"
+msgstr "ช่องทาง"
+
+msgid "Location"
+msgstr "ที่อยู่"
+
+msgid "Opinion Responses"
+msgstr "ความคิดเห็นจากยูรีพอร์ตเตอร์ "
+
+msgid "Sign Up Rate"
+msgstr "อัตราการลงทะเบียน"
+
+msgid "Response Rate"
+msgstr "อัตราการตอบโพล"
+
+msgid "Active Users"
+msgstr "จำนวนผู้ใช้งาน"
+
+msgid "Whether this row was created by squashing"
+msgstr "Row นี้ถูกสร้างขึ้นโดยการบีบอัดเข้ามาหรือไม่"
+
+msgid "Something to trigger localizations"
+msgstr "สิ่งที่จะเริ่มต้นการแปลภาษาท้องถิ่น"

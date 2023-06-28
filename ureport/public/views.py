@@ -27,7 +27,8 @@ from django.views.generic.base import RedirectView
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.orgs.models import Org, TaskState
-from dash.stories.models import Story
+from dash.orgs.views import OrgObjPermsMixin
+from dash.stories.models import Story, StoryImage
 from smartmin.views import SmartReadView, SmartTemplateView
 from ureport.assets.models import Image
 from ureport.bots.models import Bot
@@ -102,7 +103,6 @@ class IconsDisplay(SmartTemplateView):
         icon_sites = []
         for elt in linked_sites:
             if elt.get("show_icon", True) and elt.get("flag", ""):
-
                 icon_sites.append(elt)
 
         context["icon_sites"] = icon_sites
@@ -138,7 +138,6 @@ class SharedSitesCount(SmartTemplateView):
 
 class NewsView(SmartTemplateView):
     def render_to_response(self, context, **kwargs):
-
         org = self.request.org
 
         news_items = NewsItem.objects.filter(is_active=True, org=org).order_by("-created_on")
@@ -233,7 +232,7 @@ class PollContextMixin(object):
         context["latest_poll"] = main_poll
 
         if main_poll:
-            top_question = main_poll.get_questions().first()
+            top_question = main_poll.get_top_question()
             context["top_question"] = top_question
 
             if top_question:
@@ -265,11 +264,11 @@ class PollContextMixin(object):
                 ]
                 context["locations_stats"] = top_question.get_location_stats()
 
-        if not main_poll or not main_poll.get_questions().first():
+        if not main_poll or not main_poll.get_questions():
             context["gender_stats"] = org.get_gender_stats()
             context["age_stats"] = org.get_age_stats()
 
-        polls = Poll.get_public_polls(org=org).order_by("-poll_date").select_related("category")
+        polls = Poll.get_public_polls(org=org).order_by("-poll_date")
 
         categories_dict = defaultdict(list)
         date_categories_dict = defaultdict(list)
@@ -313,6 +312,25 @@ class PollReadView(PollContextMixin, SmartReadView):
         return self.get_object()
 
 
+class PollPreview(OrgObjPermsMixin, PollContextMixin, SmartReadView):
+    template_name = "public/polls.html"
+    model = Poll
+    permission = "polls.poll_read"
+
+    def get_context_data(self, **kwargs):
+        context = super(PollPreview, self).get_context_data(**kwargs)
+        context["poll_preview"] = True
+        return context
+
+    def derive_queryset(self):
+        queryset = super(PollPreview, self).derive_queryset()
+        queryset = queryset.filter(org=self.request.org)
+        return queryset
+
+    def derive_main_poll(self):
+        return self.get_object()
+
+
 class PollRedirectView(RedirectView):
     def get_redirect_url(*args, **kwargs):
         return reverse("public.opinion_read", args=[kwargs["pk"]])
@@ -334,6 +352,15 @@ class StoriesView(SmartTemplateView):
                     "story_set",
                     queryset=Story.objects.filter(is_active=True)
                     .filter(Q(attachment="") | Q(attachment=None))
+                    .prefetch_related(
+                        Prefetch(
+                            "images",
+                            queryset=StoryImage.objects.filter(is_active=True)
+                            .exclude(image="")
+                            .only("is_active", "image", "story_id"),
+                            to_attr="prefetched_images",
+                        )
+                    )
                     .order_by("-created_on"),
                 )
             )
@@ -366,6 +393,15 @@ class ReportsView(SmartTemplateView):
                 Prefetch(
                     "story_set",
                     queryset=Story.objects.filter(is_active=True)
+                    .prefetch_related(
+                        Prefetch(
+                            "images",
+                            queryset=StoryImage.objects.filter(is_active=True)
+                            .exclude(image="")
+                            .only("is_active", "image", "story_id"),
+                            to_attr="prefetched_images",
+                        )
+                    )
                     .exclude(Q(attachment="") | Q(attachment=None))
                     .order_by("-created_on"),
                 )
@@ -387,7 +423,15 @@ class StoryReadView(SmartReadView):
 
     def derive_queryset(self):
         queryset = super(StoryReadView, self).derive_queryset()
-        queryset = queryset.filter(org=self.request.org, is_active=True)
+        queryset = queryset.filter(org=self.request.org, is_active=True).prefetch_related(
+            Prefetch(
+                "images",
+                queryset=StoryImage.objects.filter(is_active=True)
+                .exclude(image="")
+                .only("is_active", "story_id", "image"),
+                to_attr="prefetched_images",
+            )
+        )
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -688,7 +732,6 @@ def status(request):
     body = json.dumps(dict(db_up=db_up, redis_up=redis_up))
 
     if not db_up or not redis_up:
-
         return HttpResponse(body, status=500, content_type="application/json")
     else:
         return HttpResponse(body, status=200, content_type="application/json")

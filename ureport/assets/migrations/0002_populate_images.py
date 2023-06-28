@@ -38,7 +38,6 @@ def populate_images(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("assets", "0001_initial")]
 
     operations = [migrations.RunPython(populate_images)]

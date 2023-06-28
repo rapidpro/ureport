@@ -29,7 +29,6 @@ def remove_cache_and_lock_keys(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("contacts", "0005_auto_20150921_0855")]
 
     operations = [migrations.RunSQL(CLEAR_CONTACT_SQL), migrations.RunPython(remove_cache_and_lock_keys)]

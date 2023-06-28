@@ -9,7 +9,6 @@ CREATE INDEX IF NOT EXISTS stats_pollstats_org_question_category_age_gender_date
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0007_pollstats_is_squashed"),
     ]

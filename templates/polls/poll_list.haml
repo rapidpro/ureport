@@ -31,6 +31,8 @@
           Sync schedule
         %th
           Sync status
+        %th
+          Preview
         %th(style="text-align: right;")
           Created On
 
@@ -93,6 +95,10 @@
           %td(style="min-width: 120px;")
             - get_value obj 'sync_status'
 
+          %td(style="min-width: 120px;")
+            %a.small-detail-link(href="{% get_field_link 'preview' obj %}")
+              %span.small-poll-detail
+                -trans "Preview results"
 
           %td(style="{% if is_rtl_org %}text-align: left;{% else %}text-align: right;{% endif %} max-width: 150px;")
             {{ obj.created_on }}

@@ -111,7 +111,6 @@ class Contact(models.Model):
 
     @classmethod
     def get_or_create(cls, org, uuid):
-
         existing = cls.objects.filter(org=org, uuid=uuid)
 
         if existing:
@@ -236,7 +235,6 @@ class Contact(models.Model):
 
 
 class ReportersCounter(models.Model):
-
     COUNTS_SQUASH_LOCK = "org-reporters-counts-squash-lock"
     LAST_SQUASHED_ID_KEY = "org-reporters-last-squashed-id"
 
@@ -255,7 +253,6 @@ class ReportersCounter(models.Model):
             logger.info("Squash reporters counts already running.")
         else:
             with r.lock(key):
-
                 last_squash = r.get(ReportersCounter.LAST_SQUASHED_ID_KEY)
                 if not last_squash:
                     last_squash = 0
@@ -285,7 +282,6 @@ class ReportersCounter(models.Model):
 
                 # get all the new added counters
                 for counter in counters:
-
                     # perform our atomic squash in SQL by calling our squash method
                     with connection.cursor() as c:
                         c.execute(

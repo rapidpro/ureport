@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# trendspotter <jirka.p@volny.cz>, 2021
+# Jiří Podhorecký, 2021
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
-"Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
+"Last-Translator: Jiří Podhorecký, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/rapidpro/teams/226/cs/)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -912,6 +912,11 @@ msgstr "Nenaplánovaná synchronizace, není aktivní"
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Žádné plánování synchronizací, žádný tok pro průzkum"
 
+#, fuzzy
+#| msgid "Previous"
+msgid "Preview results"
+msgstr "Předchozí"
+
 msgid "Refresh Results"
 msgstr "Obnovit výsledky"
 
@@ -1007,6 +1012,15 @@ msgstr "HLEDAT"
 
 msgid "No results found"
 msgstr "Nenalezeny žádné výsledky"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 msgid "RESPONDERS"
 msgstr "PŘISPĚVATELÉ"
@@ -1756,6 +1770,11 @@ msgstr "Bot Telegramu, který budou uživatelé používat ke kontaktování U-R
 
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Uživatelské jméno Viber, které budou uživatelé používat pro kontaktování U-Report, pokud ho máte."
+
+#, fuzzy
+#| msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Bot Telegramu, který budou uživatelé používat ke kontaktování U-Report, pokud ho máte."
 
 msgid "The join button text"
 msgstr "Text tlačítka pro připojení"

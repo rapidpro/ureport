@@ -14,7 +14,6 @@ CREATE INDEX IF NOT EXISTS stats_pollstats_org_result_cat_not_null on stats_poll
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("stats", "0024_update_indexes_properly"),
     ]

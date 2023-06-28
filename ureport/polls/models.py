@@ -227,7 +227,6 @@ class Poll(SmartModel):
         return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
     def get_pull_cached_params(self):
-
         latest_synced_obj_time = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid), None)
 
         pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org.pk, self.pk), None)
@@ -512,8 +511,29 @@ class Poll(SmartModel):
     @classmethod
     def get_public_polls(cls, org):
         categories = Category.objects.filter(org=org, is_active=True).only("id")
-        return Poll.objects.filter(org=org, is_active=True, category_id__in=categories, has_synced=True).exclude(
-            flow_uuid=""
+        return (
+            Poll.objects.filter(org=org, is_active=True, category_id__in=categories, has_synced=True)
+            .exclude(flow_uuid="")
+            .prefetch_related(
+                Prefetch(
+                    "questions",
+                    to_attr="prefetched_questions",
+                    queryset=PollQuestion.objects.filter(is_active=True)
+                    .select_related("flow_result")
+                    .prefetch_related(
+                        Prefetch(
+                            "response_categories",
+                            queryset=PollResponseCategory.objects.filter(is_active=True)
+                            .exclude(flow_result_category__category__icontains="no response")
+                            .only("id", "question_id"),
+                            to_attr="prefetched_response_categories",
+                        )
+                    )
+                    .order_by("-priority", "id"),
+                ),
+                Prefetch("tags", queryset=Tag.objects.filter(is_active=True, org=org).only("name", "id")),
+                Prefetch("category", queryset=Category.objects.filter(is_active=True, org=org).only("name")),
+            )
         )
 
     @classmethod
@@ -532,14 +552,16 @@ class Poll(SmartModel):
                         .prefetch_related(
                             Prefetch(
                                 "response_categories",
-                                queryset=PollResponseCategory.objects.filter(is_active=True).exclude(
-                                    flow_result_category__category__icontains="no response"
-                                ),
+                                queryset=PollResponseCategory.objects.filter(is_active=True)
+                                .exclude(flow_result_category__category__icontains="no response")
+                                .only("id", "question_id"),
                                 to_attr="prefetched_response_categories",
                             )
                         )
-                        .order_by("-priority", "pk"),
-                    )
+                        .order_by("-priority", "id"),
+                    ),
+                    Prefetch("tags", queryset=Tag.objects.filter(is_active=True, org=org).only("name", "id")),
+                    Prefetch("category", queryset=Category.objects.filter(is_active=True, org=org).only("name")),
                 )
                 .first()
             )
@@ -550,8 +572,11 @@ class Poll(SmartModel):
 
     @classmethod
     def find_main_poll(cls, org):
-
-        poll_with_questions = PollQuestion.objects.filter(is_active=True, poll__org=org).values_list("poll", flat=True)
+        poll_with_questions = (
+            PollQuestion.objects.filter(is_active=True, poll__org=org)
+            .only("poll_id")
+            .values_list("poll_id", flat=True)
+        )
 
         polls = Poll.get_public_polls(org=org).filter(pk__in=poll_with_questions).order_by("-created_on")
 
@@ -619,7 +644,7 @@ class Poll(SmartModel):
         """
         The response rate for this flow
         """
-        top_question = self.get_questions().first()
+        top_question = self.get_top_question()
         if top_question:
             return top_question.get_response_percentage()
         return "---"
@@ -628,29 +653,48 @@ class Poll(SmartModel):
         return self.featured_responses.filter(is_active=True).order_by("-created_on")
 
     def get_first_question(self):
-        if hasattr(self, "prefetched_questions"):
-            questions = self.prefetched_questions
-        else:
-            questions = self.get_questions()
+        questions = self.get_questions()
 
         for question in questions:
             if not question.is_open_ended():
                 return question
 
     def get_questions(self):
-        return self.questions.filter(is_active=True).select_related("flow_result").order_by("-priority", "pk")
+        if hasattr(self, "prefetched_questions"):
+            return self.prefetched_questions
+
+        return (
+            self.questions.filter(is_active=True)
+            .select_related("flow_result")
+            .prefetch_related(
+                Prefetch(
+                    "response_categories",
+                    queryset=PollResponseCategory.objects.filter(is_active=True)
+                    .exclude(flow_result_category__category__icontains="no response")
+                    .only("id", "question_id"),
+                    to_attr="prefetched_response_categories",
+                )
+            )
+            .order_by("-priority", "pk")
+        )
+
+    def get_top_question(self):
+        questions = self.get_questions()
+        if questions:
+            return questions[0]
+        return None
 
     def get_images(self):
         return self.images.filter(is_active=True).order_by("pk")
 
     def runs(self):
-        top_question = self.get_questions().first()
+        top_question = self.get_top_question()
         if top_question:
             return top_question.get_polled()
         return "----"
 
     def responded_runs(self):
-        top_question = self.get_questions().first()
+        top_question = self.get_top_question()
         if top_question:
             return top_question.get_responded()
         return "---"
@@ -678,6 +722,9 @@ class Poll(SmartModel):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        index_together = ("org", "is_active", "id")
 
 
 @six.python_2_unicode_compatible
@@ -927,7 +974,6 @@ class PollQuestion(SmartModel):
         results = []
 
         if open_ended and not segment:
-
             poll_word_cloud = PollWordCloud.get_question_poll_cloud(org, self)
 
             unclean_categories = []
@@ -962,13 +1008,11 @@ class PollQuestion(SmartModel):
             )
 
             if segment:
-
                 location_part = segment.get("location", "").lower()
                 age_part = segment.get("age", "").lower()
                 gender_part = segment.get("gender", "").lower()
 
                 if location_part in ["state", "district", "ward"]:
-
                     location_boundaries = org.get_segment_org_boundaries(segment)
 
                     for boundary in location_boundaries:
@@ -1081,7 +1125,6 @@ class PollQuestion(SmartModel):
 
                     results = []
                     for gender in genders:
-
                         categories_results = (
                             PollStats.get_question_stats(org.id, self)
                             .filter(gender_segment_id=gender["id"])
@@ -1239,6 +1282,7 @@ class PollQuestion(SmartModel):
 
     class Meta:
         unique_together = (("poll", "ruleset_uuid"), ("poll", "flow_result"))
+        index_together = ("poll", "is_active", "flow_result")
 
 
 class PollResponseCategory(models.Model):
@@ -1287,7 +1331,6 @@ class PollResponseCategory(models.Model):
 
 
 class PollResult(models.Model):
-
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)

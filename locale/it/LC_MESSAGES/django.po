@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:35-0300\n"
+"POT-Creation-Date: 2023-03-28 10:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -903,6 +903,11 @@ msgstr ""
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
+#, fuzzy
+#| msgid "View full results"
+msgid "Preview results"
+msgstr "Vedi tutti i risultati "
+
 msgid "Refresh Results"
 msgstr "Aggiorna i risultati"
 
@@ -998,6 +1003,15 @@ msgstr ""
 
 msgid "No results found"
 msgstr "Nessun risultato trovato"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSES"
@@ -1844,6 +1858,11 @@ msgid "The viber username that users will use to contact U-Report if you have on
 msgstr "Il numero whatsapp che gli utenti useranno per contattare U-Report, se disponibile"
 
 #, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr "Il numero whatsapp che gli utenti useranno per contattare U-Report, se disponibile"
+
+#, fuzzy
 #| msgid "The font used for normal text"
 msgid "The join button text"
 msgstr "Il font usato per i testi normali"
@@ -2237,9 +2256,6 @@ msgstr "Qualcosa per avviare localizzazione"
 
 #~ msgid "FEATURED RESPONSES"
 #~ msgstr "Risposte in primo piano"
-
-#~ msgid "View full results"
-#~ msgstr "Vedi tutti i risultati "
 
 #~ msgid "TOTAL # OF U-REPORTERS"
 #~ msgstr "N. TOTALE DI U-REPORTER"

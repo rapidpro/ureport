@@ -49,12 +49,12 @@ class PublicTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 45)
+        self.assertEqual(len(response.context["form"].fields), 46)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 64)
+        self.assertEqual(len(response.context["form"].fields), 65)
 
     def test_count(self):
         count_url = reverse("public.count")
@@ -403,7 +403,6 @@ class PublicTest(UreportTest):
         # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
 
     def test_poll_results(self):
-
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
         question1 = self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
@@ -709,10 +708,58 @@ class PublicTest(UreportTest):
         response = self.client.get(uganda_poll_read_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 404)
 
+        poll2.is_active = False
+        poll2.save()
+
+        response = self.client.get(nigeria_poll_read_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
+    @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
+    def test_polls_preview(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
+
+        uganda_poll_preview_url = reverse("public.opinion_preview", args=[poll1.pk])
+        nigeria_poll_preview_url = reverse("public.opinion_preview", args=[poll2.pk])
+
+        response = self.client.get(uganda_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertLoginRedirect(response)
+
+        self.login(self.admin)
+
+        response = self.client.get(uganda_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["object"], poll1)
+        self.assertContains(response, "Poll has not synced yet to be displayed to the public")
+
+        poll1.has_synced = True
+        poll1.save()
+
+        response = self.client.get(uganda_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["object"], poll1)
+        self.assertNotContains(response, "Poll has not synced yet to be displayed to the public")
+
+        response = self.client.get(nigeria_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
+        poll2.has_synced = True
+        poll2.save()
+
+        response = self.client.get(nigeria_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
         poll1.is_active = False
         poll1.save()
 
-        response = self.client.get(uganda_poll_read_url, SERVER_NAME="uganda.ureport.io")
+        response = self.client.get(uganda_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
+        poll2.is_active = False
+        poll2.save()
+
+        response = self.client.get(nigeria_poll_preview_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 404)
 
     def test_stories_list(self):
@@ -795,7 +842,6 @@ class PublicTest(UreportTest):
         self.assertFalse(story4 in response.context["stories"])
 
     def test_story_read(self):
-
         education_uganda = Category.objects.create(
             org=self.uganda, name="Education", created_by=self.admin, modified_by=self.admin
         )

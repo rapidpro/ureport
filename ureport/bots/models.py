@@ -6,7 +6,6 @@ from smartmin.models import SmartModel
 
 
 class Bot(SmartModel):
-
     org = models.ForeignKey(
         Org, on_delete=models.PROTECT, related_name="bots", help_text=_("The organization this bot is part of")
     )
