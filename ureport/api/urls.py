@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from rest_framework_swagger.views import get_swagger_view
-
 from django.urls import re_path
 from django.views.generic import RedirectView
 
@@ -23,6 +21,8 @@ from ureport.api.views import (
     VideoDetails,
     VideoList,
 )
+from .swagger import get_swagger_view
+
 
 schema_view = get_swagger_view(title="API")
 
