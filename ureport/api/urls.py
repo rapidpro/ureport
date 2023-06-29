@@ -21,8 +21,8 @@ from ureport.api.views import (
     VideoDetails,
     VideoList,
 )
-from .swagger import get_swagger_view
 
+from .swagger import get_swagger_view
 
 schema_view = get_swagger_view(title="API")
 
