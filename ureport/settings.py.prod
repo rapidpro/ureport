@@ -56,12 +56,12 @@ EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 MANAGERS = ADMINS
 
 INSTALLED_APPS = INSTALLED_APPS + (
-    'gunicorn', 'raven.contrib.django.raven_compat', 'storages', 'elasticapm.contrib.django'
+    'gunicorn', 'sentry_sdk', 'storages', 'elasticapm.contrib.django'
 )
 
 # Set your DSN value
 sentry_sdk.init(
-    config("RAVEN_DSN", default="https://c91ad31f95454bcf8d659c6914f6b417@sentry.ilhasoft.mobi/5"),
+    config("SENTRY_DSN", default="https://c91ad31f95454bcf8d659c6914f6b417@sentry.ilhasoft.mobi/5"),
     integrations=[DjangoIntegration()]
 )
 
