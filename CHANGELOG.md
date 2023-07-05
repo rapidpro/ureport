@@ -1,3 +1,12 @@
+v1.2.72 (2023-07-05)
+-------------------------
+ * Merge pull request #1147 from rapidpro/add-sudan
+ * Add Sudan to countries dropdown
+ * Merge pull request #1146 from rapidpro/translations_locale-en-lc-messages-django-po--main_sr_RS@latin
+ * Run code_checks
+ * Translate django.po in sr_RS@latin
+ * Translate django.po in sr_RS@latin
+
 v1.2.71 (2023-06-16)
 -------------------------
  * Merge pull request #1098 from rapidpro/south-pacific
