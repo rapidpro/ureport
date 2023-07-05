@@ -1706,6 +1706,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://southasia.ureport.in/count/",
     ),
     dict(
+        name="Sudan",
+        host="//sudan.ureport.in",
+        flag="flag_sudan.png",
+        countries_codes=["SDN"],
+        count_link="http://sudan.ureport.in/count/",
+    ),
+    dict(
         name="Sverige",
         host="//sverige.ureport.in",
         flag="flag_sverige.png",
