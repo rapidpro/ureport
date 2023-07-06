@@ -1,3 +1,7 @@
+v1.2.74 (2023-07-06)
+-------------------------
+ * Merge pull request #1149 from rapidpro/update-django
+
 v1.2.72 (2023-07-05)
 -------------------------
  * Merge pull request #1147 from rapidpro/add-sudan
