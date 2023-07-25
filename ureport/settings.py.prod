@@ -50,7 +50,7 @@ EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 # add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'storages')
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn',)
 
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
