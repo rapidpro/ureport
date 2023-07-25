@@ -1,3 +1,7 @@
+v1.2.76 (2023-07-25)
+-------------------------
+ * Proper variable for STORAGES
+
 v1.2.75 (2023-07-25)
 -------------------------
  * Merge pull request #1151 from rapidpro/fix-storage-settings
