@@ -59,7 +59,7 @@ AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
 AWS_S3_SECURE_URLS = True
 STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}
 
-THUMBNAIL_STORAGE = settings.STORAGES['default']['BACKEND']
+THUMBNAIL_STORAGE = STORAGES['default']['BACKEND']
 
 # these two settings will cause our aws files to never expire
 # see http://developer.yahoo.com/performance/rules.html#expires
