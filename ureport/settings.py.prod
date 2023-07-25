@@ -50,7 +50,7 @@ EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 # add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'storages')
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn',)
 
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
@@ -58,6 +58,8 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SEC
 AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
 AWS_S3_SECURE_URLS = True
 STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}
+
+THUMBNAIL_STORAGE = settings.STORAGES['default']['BACKEND']
 
 # these two settings will cause our aws files to never expire
 # see http://developer.yahoo.com/performance/rules.html#expires
