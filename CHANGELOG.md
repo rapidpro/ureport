@@ -1,3 +1,8 @@
+v1.2.75 (2023-07-25)
+-------------------------
+ * Merge pull request #1151 from rapidpro/fix-storage-settings
+ * Update django storages, fix thumbnail storage setting
+
 v1.2.74 (2023-07-06)
 -------------------------
  * Merge pull request #1149 from rapidpro/update-django
