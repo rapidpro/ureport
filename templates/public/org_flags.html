@@ -1,0 +1,15 @@
+<div class="welcome-flags-global">
+    {% if is_iorg %}
+        {% for site in linked_orgs %}<a href="{{ site.host }}" class="footer-orgs-name">{{ site.name }}</a>{% endfor %}
+    {% else %}
+        {% for site in linked_orgs %}
+            <a href="{{ site.host }}" class="flag">
+                {% if site.is_static %}
+                    <img src="{{ STATIC_URL }}img/site_flags/{{ site.flag }}" width="70px">
+                {% else %}
+                    <img src="{{ site.flag }}" width="70px">
+                {% endif %}
+            </a>
+        {% endfor %}
+    {% endif %}
+</div>

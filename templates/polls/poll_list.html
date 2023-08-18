@@ -1,0 +1,167 @@
+{% extends "smartmin/list.html" %}
+{% load i18n smartmin %}
+{% block content-title %}
+    <h2 class="is-size-2 has-text-weight-bold">
+        <img src="{{ STATIC_URL }}img/polls_icon.png">
+        <div class="is-inline-block content-title-text">{% trans "Opinions" %}</div>
+    </h2>
+{% endblock content-title %}
+{% block pre-content %}
+    {% if unsynced_polls %}
+        <div class="is-info notification">
+            {% blocktrans trimmed count counter=unsynced_polls|length %}
+                There is currently {{ counter }} new poll syncing. Polls are displayed on the public site once they have completely synced their results.
+            {% plural %}
+                There are currently {{ counter }} new polls syncing. Polls are displayed on the public site once they have completely synced their results.
+            {% endblocktrans %}
+        </div>
+    {% endif %}
+{% endblock pre-content %}
+{% block table-buttons %}
+    {% if view.add_button %}
+        <a href="./create/"
+           class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">
+            {% trans "+ New Poll" %}
+        </a>
+    {% endif %}
+{% endblock table-buttons %}
+{% block table %}
+    <table class="{% get_list_class object_list %} table is-striped is-fullwidth is-hoverable list-table">
+        <thead>
+            <tr>
+                <th>Poll details</th>
+                <th>Sync schedule</th>
+                <th>Sync status</th>
+                <th>Preview</th>
+                <th style="text-align: right;">Created On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+                <tr class="{% cycle 'row2' 'row1' %} {% if not obj.is_active and obj|is_smartobject %}inactive{% endif %}">
+                    <td style="max-width: 500px;min-width: 300px;">
+                        <b class="detail-link">
+                            {% get_value obj 'category' %}
+                        </b>
+                        <div class="detail-link">
+                            <a href="{% get_field_link 'title' obj %}">
+                                <span class="big-poll-detail">{% get_value obj 'title' %}</span>
+                                <div class="tags">
+                                    {% for tag in obj.tags.all %}<span class="tag is-light">{{ tag.name }}</span>{% endfor %}
+                                </div>
+                            </a>
+                        </div>
+                        <div class="detail-link">
+                            <div style="margin: 0 10px;">-</div>
+                            <a href="{% get_field_link 'poll_date' obj %}" class="small-detail-link">
+                                <span class="small-poll-detail">{% get_value obj 'poll_date' %}</span>
+                            </a>
+                        </div>
+                        <div class="detail-link">
+                            <div style="margin: 0 10px;">-</div>
+                            <a href="{% get_field_link 'questions' obj %}" class="small-detail-link">
+                                <span class="small-poll-detail">
+                                    {% blocktrans trimmed count counter=obj.get_questions|length %}
+                                        {{ counter }} poll question
+                                    {% plural %}
+                                        {{ counter }} poll questions
+                                    {% endblocktrans %}
+                                </span>
+                            </a>
+                        </div>
+                        <div class="detail-link">
+                            <div style="margin: 0 10px;">Opinion response</div>
+                            <a href="{% get_field_link 'opinion_response' obj %}"
+                               class="small-detail-link">
+                                <span class="small-poll-detail">{% get_value obj 'opinion_response' %}</span>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        {% if obj in unsynced_polls %}
+                            {% trans "New poll initial syncs scheduled every 10min" %}
+                        {% elif obj.stopped_syncing %}
+                            {% trans "No longer scheduling syncs for old polls, runs archived" %}
+                        {% elif obj == main_poll %}
+                            {% trans "Main poll syncs scheduled every 20min" %}
+                        {% elif obj in recent_polls %}
+                            {% trans "Recent poll syncs scheduled every 60min" %}
+                        {% elif obj in other_polls %}
+                            {% trans "Poll syncs scheduled every 24h" %}
+                        {% elif not obj.is_active %}
+                            {% trans "Not scheduling syncs, not active" %}
+                        {% elif not obj.flow_uuid %}
+                            {% trans "Not scheduling syncs, no flow for poll" %}
+                        {% endif %}
+                    </td>
+                    <td style="min-width: 120px;">{% get_value obj 'sync_status' %}</td>
+                    <td style="min-width: 120px;">
+                        <a href="{% get_field_link 'preview' obj %}" class="small-detail-link">
+                            <span class="small-poll-detail">{% trans "Preview results" %}</span>
+                        </a>
+                    </td>
+                    <td style="{% if is_rtl_org %}text-align: left;
+                               {% else %}text-align: right;
+                               {% endif %} max-width: 150px">{{ obj.created_on }}</td>
+                </tr>
+            {% empty %}
+                <tr class="empty_list">
+                    {% for field in fields %}<td></td>{% endfor %}
+                </tr>
+            {% endfor %}
+            {% block extra-rows %}
+            {% endblock extra-rows %}
+        </tbody>
+    </table>
+{% endblock table %}
+{% block extra-style %}
+    {{ block.super }}
+    <style type="text/css">
+    td.field_created_on, td.field_poll_date {
+      white-space: nowrap;
+    }
+    
+    td.field_sync_status {
+      width: 150px;
+    }
+    
+    td.field_category {
+      max-width: 150px;
+    }
+    
+    td.field_questions {
+      text-align: center;
+    }
+    
+    td.field_featured_responses {
+      text-align: center;
+    }
+    
+    td.field_images {
+      text-align: center;
+    }
+    
+    td .detail-link a .big-poll-detail {
+      padding: 20px 5px;
+      display: inline-block;
+    }
+    
+    td .detail-link a .small-poll-detail {
+      padding: 5px 10px;
+      display: inline-block;
+    }
+    
+    td .detail-link a.small-detail-link {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    
+    td .detail-link a {
+      min-width: 50%;
+    }
+    
+    td .detail-link {
+      margin: 15px 0px;
+    }
+    </style>
+{% endblock extra-style %}

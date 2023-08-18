@@ -1,0 +1,158 @@
+{% extends "public_base.html" %}
+{% load thumbnail ureport i18n compress %}
+{% block content %}
+    <div class="bg-grid border-t border-b">
+        <div class="md:flex max-w-page mx-auto p-home">
+            <div class="flex-1 flex-center-y hover-parent">
+                {% edit_content 'orgs.org_edit' "" "#id_common.stories_description" "" "dark" %}
+                <div class="text-5xl font-bold">{% trans "Stories" %}</div>
+                <div class="text-xl">{{ org|config:"stories_description"|default:"" }}</div>
+            </div>
+            <div class="{% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %} flex-center-y">
+                <div style="width:285px" class="ltr:text-right rtl:text-left block mt-4">
+                    <div class="bg-black text-white text-lg px-4 py-2 rounded">
+                        <div class="flex bg-black border-b border-white">
+                            <div class="flex-1">
+                                <input type="text"
+                                       data-results-id="story-search-results"
+                                       placeholder="{% trans 'SEARCH' %}"
+                                       size="14"
+                                       class="bg-black search-box text-sm">
+                            </div>
+                            <div class="flex-none">
+                                <a href="#" data-results-id="story-search-results" class="search-close">
+                                    <i class="fas fa-caret-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div style="z-index:100000;
+                                width:285px"
+                         class="lrt:right-0 rtl:left-0 absolute bg-white search-results h-64 border"
+                         id="story-search-results">
+                        <div class="no-results p-4 italic hidden">{% trans "No results found" %}</div>
+                        {% for category in categories %}
+                            {% if category.story_set.all %}
+                                <div class="block py-1 bg-white search-category">
+                                    <a href="#" class="text-sm font-bold px-2 block">
+                                        <i style="padding-top:2px"
+                                           class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fa closed"></i>
+                                        <i style="padding-top:4px"
+                                           class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
+                                        <div class="pl-3">{{ category.name }}</div>
+                                    </a>
+                                    <div class="category-results">
+                                        {% for story in category.story_set.all %}
+                                            <a href="{% url 'public.story_read' story.pk %}"
+                                               data-search-value="{{ story.title|addslashes }} {{ story.created_on|date:'F' }} {{ story.created_on|date:'Y' }}"
+                                               class="hover:bg-gray-200 block px-4 py-1 searchable">
+                                                <div class="ml-2 text-sm">
+                                                    {{ story.title }}
+                                                    <div class="inline text-xs font-bold">{{ story.created_on|date:"F" }} {{ story.created_on|date:"Y" }}</div>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- first and second stories -->
+    <div class="max-w-page mx-auto">
+        {% for story in main_stories|slice:"2" %}
+            <!-- first-story-full -->
+            <div class="md:block hidden">
+                <div class="flex">
+                    {% if forloop.first %}
+                        <div class="flex-1 h-10"></div>
+                        <div class="flex-1 bg-dark1">&nbsp;</div>
+                    {% else %}
+                        <div class="flex-1 h-10 bg-dark2"></div>
+                        <div class="flex-1 h-10"></div>
+                    {% endif %}
+                </div>
+                <div>
+                    <div class="{% if is_rtl_org %}{% cycle 'border-dark1 border-l-25rem' 'border-dark2 border-r-25rem' %}{% else %}{% cycle 'border-dark1 border-r-25rem' 'border-dark2 border-l-25rem' %}{% endif %} border-solid flex">
+                        {% if not forloop.first %}
+                            <div class="w-2/3 block p-10 bg-white flex flex-col justify-center hover-parent">
+                                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
+                                <a href="{% url 'public.story_read' story.pk %}">
+                                    {% if story.get_image %}
+                                        {% thumbnail story.get_image "800x600" crop="center" as im %}
+                                            <img width="100%" height="100%" src="{{ im.url }}" />
+                                        {% endthumbnail %}
+                                    {% else %}
+                                        <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                                    {% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        <div class="w-1/3 flex flex-col justify-center">
+                            <div class="{% if is_rtl_org %}pr-home{% else %}pl-home{% endif %} block">
+                                <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
+                                <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4 hover-parent">
+                                    {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "dark" %}
+                                    <a href="{% url 'public.story_read' story.pk %}">{{ story.title }}</a>
+                                </div>
+                                <div class="block mb-6 hover-parent">
+                                    {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
+                                    {{ story.summary|truncatewords:50|linebreaksbr }}
+                                </div>
+                                <a href="{% url 'public.story_read' story.pk %}"
+                                   class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</a>
+                            </div>
+                        </div>
+                        {% if forloop.first %}
+                            <div class="w-2/3 block p-10 bg-white flex flex-col justify-center hover-parent">
+                                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
+                                <a href="{% url 'public.story_read' story.pk %}">
+                                    {% if story.get_image %}
+                                        {% thumbnail story.get_image "800x600" crop="center" as im %}
+                                            <img width="100%" height="100%" src="{{ im.url }}" />
+                                        {% endthumbnail %}
+                                    {% else %}
+                                        <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                                    {% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex">
+                    {% if forloop.first %}
+                        <div class="flex-1 h-10"></div>
+                        <div class="flex-1 bg-dark1">&nbsp;</div>
+                    {% else %}
+                        <div class="flex-1 h-20 bg-dark2"></div>
+                        <div class="flex-1 h-20"></div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- first-story-mobile -->
+            <div class="md:hidden">
+                {% if story.get_image %}
+                    {% thumbnail story.get_image "800x600" crop="center" as im %}
+                        <img width="100%" height="100%" src="{{ im.url }}" />
+                    {% endthumbnail %}
+                {% else %}
+                    <img src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                {% endif %}
+                <div class="p-home">
+                    <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
+                    <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4">
+                        {{ story.title }}
+                    </div>
+                    <div class="block mb-6">{{ story.summary|truncatewords:50|linebreaksbr }}</div>
+                    <a href="{% url 'public.story_read' story.pk %}"
+                       class="btn bg-black text-white">{% trans "READ MORE" %}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

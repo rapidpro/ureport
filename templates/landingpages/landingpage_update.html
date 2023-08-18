@@ -1,0 +1,74 @@
+{% extends "smartmin/form.html" %}
+{% load thumbnail i18n %}
+{% block post-form %}
+    {% if object.is_active %}
+        <a href="{% url 'public.landing_page' object.slug %}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="button is-info">{% trans "View public page" %}</a>
+    {% endif %}
+{% endblock post-form %}
+{% block extra-style %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ STATIC_URL }}css/prettify.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ STATIC_URL }}css/summernote-lite.css">
+    <style type="text/css">
+    #id_content {
+      width: 93%;
+      height: 250px;
+      margin-right: 20px;
+    }
+    .select2-container {
+        width: 75%
+    }
+    
+    .select2-container .selection {
+        width: 100%
+    }
+    
+    .select2-results__option--selected {
+      display: none;
+    }
+    
+    .select2-selection, .select2-container--default .select2-selection--multiple {
+      height: 2.25rem;
+      border-color: #dbdbdb;
+    }
+    
+    .select2-selection:hover, .select2-container--default .select2-selection--multiple:hover {
+      border-color: #b5b5b5;
+    }
+    
+    .select2-container .select2-search--inline .select2-search__field {
+      height: 80%;
+    }
+    </style>
+{% endblock extra-style %}
+{% block extra-script %}
+    <script src="{{ STATIC_URL }}js/prettify.js"></script>
+    <script src="{{ STATIC_URL }}js/summernote-lite.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+      $("#id_content").summernote({
+        maximumImageFileSize: 1048576,
+        callbacks: {
+          onImageUploadError: function(message) {
+            message += "(1MB)"
+            alert(message);
+          }
+        }
+      })
+    });
+    
+    $(document).ready(function() {
+      $('#id_bots').select2({
+          placeholder: '{{ _("Select bots")|escapejs }}',
+          width: '100%',
+          tags: true,
+      });
+    });
+    </script>
+{% endblock extra-script %}
