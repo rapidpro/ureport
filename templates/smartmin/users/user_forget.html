@@ -1,0 +1,9 @@
+{% extends "smartmin/form.html" %}
+{% load i18n %}
+{% block pre-form %}
+    <div class="message is-info">
+        <div class="message-body">
+            {% trans "Please enter the email address you used to sign up and we will help you recover your password." %}
+        </div>
+    </div>
+{% endblock pre-form %}

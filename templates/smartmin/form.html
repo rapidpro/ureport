@@ -1,0 +1,81 @@
+{% extends "smartmin/base.html" %}
+{% load smartmin i18n %}
+{% block content %}
+    {% block pjax %}
+        <div class="columns" id="pjax">
+            <div class="{% block form-span %}is-12{% endblock %} column">
+                {% block pre-form %}
+                {% endblock pre-form %}
+                <form method="post"
+                      enctype="multipart/form-data"
+                      role="form"
+                      class="smartmin-form">
+                    {% block pre-form-errors %}
+                    {% endblock pre-form-errors %}
+                    {% if form.non_field_errors %}<div class="message is-danger form-errors">{{ form.non_field_errors }}</div>{% endif %}
+                    {% block post-form-errors %}
+                    {% endblock post-form-errors %}
+                    {% block pre-fields %}
+                    {% endblock pre-fields %}
+                    {% block form-help %}
+                    {% endblock form-help %}
+                    {% block fields %}
+                        <fieldset>
+                            {% for field in fields %}
+                                {% render_field field %}
+                            {% endfor %}
+                            {% block extra-fields %}
+                            {% endblock extra-fields %}
+                        </fieldset>
+                    {% endblock fields %}
+                    {% block post-fields %}
+                    {% endblock post-fields %}
+                    {% csrf_token %}
+                    {% block form-buttons %}
+                        <div class="field smartmin-form-buttons is-horizontal">
+                            <div class="field-label"></div>
+                            <div class="field-body">
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button type="submit" class="button is-primary">{{ submit_button_name }}</button>
+                                    </div>
+                                    <div class="control">
+                                        <a onclick="javascript:history.go(-1)" class="button">{% trans "Cancel" %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock form-buttons %}
+                </form>
+                {% block post-form %}
+                {% endblock post-form %}
+            </div>
+            {% block form-right %}
+            {% endblock form-right %}
+        </div>
+    {% endblock pjax %}
+{% endblock content %}
+{% block extra-script %}
+    {{ block.super }}
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('input[readonly]').prop('disabled', true);
+    });
+    </script>
+    {% if javascript_submit %}
+        <script type="text/javascript">
+      // attach a submit handler to the form
+      $("#smartmin_form").submit(function(event) {
+      
+      // stop form from submitting normally
+      event.preventDefault();
+      event.stopPropagation();
+      
+      // get some values from elements on the page:
+      var form = $(this);
+      var data = form.serialize();
+      {{ javascript_submit }}(form, data);
+      });
+        </script>
+    {% endif %}
+{% endblock extra-script %}

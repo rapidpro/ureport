@@ -1,0 +1,43 @@
+{% extends "smartmin/base.html" %}
+{% load smartmin i18n %}
+{% block content %}
+    {% block pjax %}
+        <div id="read-view">
+            <div class="columns">
+                <div class="column is-12 buttons">
+                    {% block read-buttons %}
+                    {% endblock read-buttons %}
+                    {% if view.edit_button %}
+                        <a href="../../update/{{ object.id }}/"
+                           class="button is-primary is-pulled-right">{% trans "edit" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column is-12">
+                    {% block pre-fields %}
+                    {% endblock pre-fields %}
+                    {% block fields %}
+                        <table class="table table-striped">
+                            <tbody>
+                                {% for field in fields %}
+                                    <tr class="read-{{ field }}">
+                                        <td class="read-label">{% get_label field %}</td>
+                                        <td class="read-value">
+                                            {% get_value object field %}
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                {% block extra-fields %}
+                                {% endblock extra-fields %}
+                            </tbody>
+                        </table>
+                    {% endblock fields %}
+                    {% block post-fields %}
+                    {% endblock post-fields %}
+                </div>
+            </div>
+        </div>
+    {% endblock pjax %}
+{% endblock content %}

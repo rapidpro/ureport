@@ -1,0 +1,40 @@
+{% extends "base_admin_dashboard.html" %}
+{% load smartmin i18n ureport %}
+{% block login %}
+{% endblock login %}
+{% block welcome-text %}
+{% endblock welcome-text %}
+{% block content-section %}
+    <div class="content-section">
+        {% block content %}
+            <div class="columns login-form is-centered is-desktop">
+                <div class="column is-half">
+                    <form method="post" id="login-form">
+                        {% for field, errors in form.errors.items %}
+                            {% if field == '__all__' %}
+                                <div class="alert alert-danger form-errors notification is-warning">
+                                    <h3>{% trans "Error" %}</h3>
+                                    {{ errors }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <fieldset>
+                            {% for field in form %}
+                                <div class="{% if field.error %}is-danger{% endif %} field login-input">
+                                    {{ field|add_placeholder|add_css:"input" }}
+                                    {% if field.error %}<span class="help-block">{{ field.error }}</span>{% endif %}
+                                </div>
+                            {% endfor %}
+                            {% csrf_token %}
+                            <button type="submit" class="button is-info login-button">{% trans "Enter Dashboard" %}</button>
+                            {% if allow_email_recovery %}{% endif %}
+                            <div class="forgot-password-link">
+                                <a href="{% url 'users.user_forget' %}" class="has-text-info is-large">{% trans "Forgot Password?" %}</a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        {% endblock content %}
+    </div>
+{% endblock content-section %}

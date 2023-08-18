@@ -1,0 +1,60 @@
+{% extends "base_admin_dashboard.html" %}
+{% load smartmin i18n %}
+{% block login %}
+{% endblock login %}
+{% block welcome-text %}
+{% endblock welcome-text %}
+{% block content-section %}
+    <div style="padding: 3rem 80px;" class="has-background-grey">
+        {% block content %}
+            <div class="columns">
+                <div class="column is-8 is-offset-2">
+                    <div class="message is-danger">
+                        <div class="message-header">{% trans "Login Failure" %}</div>
+                        <div class="message-body">
+                            {% blocktrans %}
+                Sorry, you cannot log in at this time because we received {{failed_login_limit}} incorrect login attempts.
+              {% endblocktrans %}
+                            {% if lockout_timeout >= 0 %}
+                                <p>
+                                    {% blocktrans %}
+                    Please wait {{lockout_timeout}} minutes before to try log in again.
+                  {% endblocktrans %}
+                                </p>
+                            {% endif %}
+                            {% if allow_email_recovery %}
+                                <p>{% trans "Alternatively, you can fill out the form below to have your password reset via e-mail." %}</p>
+                            {% else %}
+                                <p>{% trans "Please contact the website administrator to have your password reset." %}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if allow_email_recovery %}
+                <div class="columns">
+                    <div class="column is-offset-2">
+                        <form method="post" action="{% url 'users.user_forget' %}">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="field is-horizontal">
+                                    <div class="field-label">
+                                        <label class="label">{% trans "Email Address" %}</label>
+                                    </div>
+                                    <div class="field-body">
+                                        <div class="field is-expanded">
+                                            <input type="text" name="email" class="input">
+                                        </div>
+                                        <div class="field is-expanded">
+                                            <button type="submit" class="button is-primary">{% trans "Recover" %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock content %}
+    </div>
+{% endblock content-section %}
