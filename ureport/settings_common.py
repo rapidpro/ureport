@@ -62,7 +62,7 @@ EMPTY_SUBDOMAIN_HOST = "http://localhost:8000"
 SITE_API_HOST = "http://localhost:8001"
 SITE_API_USER_AGENT = "ureport/0.1"
 HOSTNAME = "localhost:8000"
-SITE_CHOOSER_TEMPLATE = "public/index.haml"
+SITE_CHOOSER_TEMPLATE = "public/index.html"
 SITE_CHOOSER_URL_NAME = "public.index"
 
 
@@ -733,7 +733,6 @@ INSTALLED_APPS = (
     "django_countries",
     "rest_framework",
     "rest_framework_swagger",
-    "hamlpy",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -816,8 +815,6 @@ TEMPLATES = [
                 "ureport.public.context_processors.set_story_widget_url",
             ],
             "loaders": [
-                "dash.utils.haml.HamlFilesystemLoader",
-                "dash.utils.haml.HamlAppDirectoriesLoader",
                 "django.template.loaders.filesystem.Loader",
                 "django.template.loaders.app_directories.Loader",
             ],

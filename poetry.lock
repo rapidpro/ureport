@@ -581,21 +581,6 @@ files = [
 ]
 
 [[package]]
-name = "django-hamlpy"
-version = "1.7.0"
-description = "HAML like syntax for Django templates"
-optional = false
-python-versions = ">=3.9,<4.0"
-files = [
-    {file = "django_hamlpy-1.7.0-py3-none-any.whl", hash = "sha256:e11f611ae9d39bfcfa1d349fb532a7c2a318d9ff99ac1482d6219ffbdcb4b661"},
-    {file = "django_hamlpy-1.7.0.tar.gz", hash = "sha256:cbb003f0888ad8adb2615192916c3f7ff0ed8e5a0c2a15d02a7f273ffca92d5c"},
-]
-
-[package.dependencies]
-django = ">=3.2,<5.0"
-regex = ">=2020.1.1"
-
-[[package]]
 name = "django-redis"
 version = "5.3.0"
 description = "Full featured redis cache backend for Django."
@@ -1320,27 +1305,30 @@ name = "rapidpro-dash"
 version = "1.13.0"
 description = "Support library for RapidPro dashboards"
 optional = false
-python-versions = ">=3.10,<4.0"
-files = [
-    {file = "rapidpro_dash-1.13.0-py3-none-any.whl", hash = "sha256:f678819d4de8bf95388c1e020894b64ee3d1eec3f802b9117c2d598606c343b2"},
-    {file = "rapidpro_dash-1.13.0.tar.gz", hash = "sha256:fc00d2b52f7b8cea65bece3967c9b0b6efed085898b3c35a2760301621297226"},
-]
+python-versions = "^3.10"
+files = []
+develop = false
 
 [package.dependencies]
-celery = ">=5.1,<6.0"
-Django = ">=4.2.3,<5.0.0"
-django-compressor = ">=4.0,<5.0"
-django-hamlpy = ">=1.5.0,<2.0.0"
-django-redis = ">=5.2.0,<6.0.0"
-django-timezone-field = ">=4.1.1,<5.0.0"
-isort = {version = ">=5.10.1,<6.0.0", extras = ["pyproject"]}
-phonenumbers = ">=8.12.16,<9.0.0"
-Pillow = ">=9.4.0,<10.0.0"
-psycopg = ">=3.1.9,<4.0.0"
-python-dateutil = ">=2.8.2,<3.0.0"
-rapidpro-python = ">=2.12.0,<3.0.0"
-smartmin = ">=4.2.1,<5.0.0"
-sorl-thumbnail = ">=12.9.0,<13.0.0"
+celery = "^5.1"
+Django = "^4.2.3"
+django-compressor = "^4.0"
+django-redis = "^5.2.0"
+django-timezone-field = "^4.1.1"
+isort = {version = "^5.10.1", extras = ["pyproject"]}
+phonenumbers = "^8.12.16"
+Pillow = "^9.4.0"
+psycopg = "^3.1.9"
+python-dateutil = "^2.8.2"
+rapidpro-python = "^2.12.0"
+smartmin = "^4.2.1"
+sorl-thumbnail = "^12.9.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/rapidpro/dash.git"
+reference = "convert_templates"
+resolved_reference = "26c13ff3f175a8bc999ad03c8e79b557fd3a4596"
 
 [[package]]
 name = "rapidpro-python"
@@ -1977,4 +1965,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a22d5109fa4c820d3d60cff7834f7c04a3cc13db5f513e1d5c05e3ab5389e764"
+content-hash = "2ccfc838efb8a812ee5576ad81b3168f758550908c7e1a0b350d1e76f7c159fb"
