@@ -50,7 +50,7 @@ def update_po_files():
     ignore_paths = ("env/*", "src/*", "fabric/*", "media/*", "sitestatic/*", "static/*", "node_modules/*")
     ignore_args = " ".join([f'--ignore="{p}"' for p in ignore_paths])
 
-    cmd(f"python manage.py makemessages -a -e haml,html,txt,py --no-location --no-wrap --symlinks {ignore_args}")
+    cmd(f"python manage.py makemessages -a -e html,txt,py --no-location --no-wrap --symlinks {ignore_args}")
 
     # get the new set of msgids
     actual_msgids = get_current_msgids()
