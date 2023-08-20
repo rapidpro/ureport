@@ -6,7 +6,7 @@ jobs:
     env:
       python-version: "3.10.x"
       redis-version: "6.2"
-      pg-version: "14"
+      pg-version: "15"
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout code
