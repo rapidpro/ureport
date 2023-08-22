@@ -1,0 +1,181 @@
+{% extends 'smartmin/form.html' %}
+{% load smartmin i18n %}
+{% block pre-content %}
+{% endblock pre-content %}
+{% block post-form-errors %}
+    <div class="columns">
+        <div class="column">
+            {% block content-title %}
+                <h2 class="is-size-2 has-text-weight-bold">
+                    <img src="{{ STATIC_URL }}img/users_icon.png">
+                    <div class="is-inline-block content-title-text">{% trans "Users" %}</div>
+                </h2>
+            {% endblock content-title %}
+        </div>
+        <div class="column">
+            <div class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} field is-horizontal">
+                <div class="field-label"></div>
+                <div class="field-body">
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button type="submit" class="button is-primary">{{ submit_button_name }}</button>
+                        </div>
+                        <div class="control">
+                            <a onclick="javascript:history.go(-1)" class="button">{% trans "Cancel" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock post-form-errors %}
+{% block form-buttons %}
+{% endblock form-buttons %}
+{% block form-span %}
+    is-12
+{% endblock form-span %}
+{% block form-help %}
+    <div class="notification">{% trans "You must have at least one administator" %}</div>
+{% endblock form-help %}
+{% block fields %}
+    <table class="table is-striped is-fullwidth is-hoverable">
+        <thead>
+            <tr>
+                <th>{% trans "Accounts" %}</th>
+                <th class="permission">{% trans "Admins" %}</th>
+                <th class="permission">{% trans "Editors" %}</th>
+                <th class="permission">{% trans "Remove" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in org_users %}
+                <tr class="{% cycle 'row2' 'row1' %}">
+                    <td>
+                        {{ user.email }}
+                        {% if user.first_name or user.last_name %}({{ user.first_name }} {{ user.last_name }}){% endif %}
+                    </td>
+                    {% with group_fields|get:user as row_fields %}
+                        {% for check_name in row_fields %}<td class="check permission">{{ form|field:check_name }}</td>{% endfor %}
+                    {% endwith %}
+                    <td class="check permission">
+                        <input type="checkbox">
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for invite in invites %}
+                <tr class="{% cycle 'row2' 'row1' %} invite">
+                    <td>{{ invite.email }} (Invite Sent)</td>
+                    <td class="permission">
+                        {% if invite.user_group == 'A' %}
+                            <input type="checkbox" disabled>
+                        {% else %}
+                            <input type="checkbox" disabled>
+                        {% endif %}
+                    </td>
+                    <td class="permission">
+                        {% if invite.user_group == 'E' %}
+                            <input type="checkbox" disabled>
+                        {% else %}
+                            <input type="checkbox" disabled>
+                        {% endif %}
+                    </td>
+                    <td height="3px"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock fields %}
+{% block pre-fields %}
+    <div class="columns">
+        <div class="column is-8">
+            <div class="field">
+                <label for="" class="label">Invite people to your organization</label>
+                <div class="field is-expanded">
+                    <input type="text" name="emails" class="input" id="id_emails">
+                </div>
+            </div>
+        </div>
+        <div class="column is-4">
+            <div class="field is-expanded">
+                <label class="label">{% trans "User group" %}</label>
+                <div class="control is-expanded">
+                    <div class="select">
+                        <select name="user_group" id="id_user_group">
+                            <option value="A">Administrators</option>
+                            <option value="E" selected>Editors</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock pre-fields %}
+{% block extra-style %}
+    <style type="text/css">
+    input[type="checkbox"] {
+      width: 50px;
+    }
+    .form-horizontal .control-label {
+      width: 100%;
+      text-align: left;
+    }
+    
+    input.form-control, textarea.form-control, select.form-control {
+      width: 100%;
+    }
+    </style>
+{% endblock extra-style %}
+{% block extra-script %}
+    {{ block.super }}
+    <script type="text/javascript">
+    $(function() {
+      // initialize the table cell checkboxes
+      var boxes = $("td.check");
+      boxes.each(function() {
+        var list_input = $(this).children("input[type='checkbox']");
+        if (list_input[0].checked) {
+          $(this).addClass("checked");
+        } else {
+          $(this).removeClass("checked");
+        }
+      });
+    });
+    
+    $(function() {
+      // update the cells checkbox on click
+    
+      $("td.check input[type='checkbox']").on('click', function(){
+        var cell = $(this).parent("td.check");
+        var ipt = $(this);
+    
+        if (!cell.hasClass("checked")) {
+          allCells = cell.parent().children('td.check');
+          allHiddenInputs = allCells.find("input[type='checkbox']");
+    
+          // Uncheck everything First
+          allCells.removeClass('checked');
+          allHiddenInputs.prop('checked', false);
+    
+          // Check the clicked cell
+          cell.addClass('checked');
+          ipt.prop('checked', true);
+    
+        }
+    
+        hasAdmin = false;
+        // validate that we always have an admin first
+        // to show error if no admin is remaining
+        $("td.check").parent().find("input[id*='administrators']").each(function() {
+           hasAdmin = hasAdmin || $(this).prop('checked')
+        })
+    
+        if (!hasAdmin) {
+          $('#admin-error').show();
+        } else {
+          $('#admin-error').hide();
+        }
+    
+      });
+    });
+    </script>
+{% endblock extra-script %}

@@ -1,0 +1,11 @@
+{% for site in icon_sites %}
+    <a href="{{ site.host }}" class="flag">
+        <img src="{{ STATIC_URL }}img/site_flags/{{ site.flag }}" width="70px">
+    </a>
+{% endfor %}
+<style type="text/css">
+  body {
+      background-color: #000;
+      padding: 40px;
+  }
+</style>

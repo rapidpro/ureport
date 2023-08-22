@@ -79,7 +79,7 @@ class PublicTest(UreportTest):
         # using subdomain wihout domain on org, login is shown and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertNotContains(response, "<meta name='robots' content='noindex'")
+        self.assertNotContains(response, '<meta name="robots" content="noindex"')
         # self.assertContains(response, "nigeria.ureport.io/users/login/")
 
         self.nigeria.domain = "ureport.ng"
@@ -88,13 +88,13 @@ class PublicTest(UreportTest):
         # using subdomain without domain on org, indexing is disallowed but login should be shown
         response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertContains(response, "<meta name='robots' content='noindex'")
+        self.assertContains(response, '<meta name="robots" content="noindex"')
         # self.assertContains(response, "nigeria.ureport.io/users/login/")
 
         # using custom domain, login is hidden  and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST="ureport.ng")
         self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertNotContains(response, "<meta name='robots' content='noindex'")
+        self.assertNotContains(response, '<meta name="robots" content="noindex"')
         self.assertNotContains(response, "nigeria.ureport.io/users/login/")
 
     def test_org_lang_params_processors(self):

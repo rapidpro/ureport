@@ -1,8 +1,7 @@
 <html>
-<head>
-
-    <title>U-Report Problem - Uh oh!</title>
-    <style>
+    <head>
+        <title>U-Report Problem - Uh oh!</title>
+        <style>
         body {
             background-color:#FFFFFF;
             font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
@@ -41,30 +40,26 @@
             margin: 30px auto 0;
         }
 
-    </style>
-</head>
-<body>
-
-<div class="logo">
-<img src="/sitestatic/img/logo_placeholder.png"/>
-</div>
-<div style="text-align: center;">
-<h3>
-Sometimes bad things happen to good people.
-</h3>
-</div>
-<div class="message">
-While we do our best to write bug-free code, every now and again things do go wrong. Good news though!
-We've already been notified of the problem.
-<br/><br/>
-</div>
-
-{% if request.sentry.id %}
-    <div class='reference'>
-        If you'd like to contact us about this error, please be sure to include your reference number
-        <b>{{ request.sentry.id }}</b>
-    </div>
-{% endif %}
-
-</body>
+        </style>
+    </head>
+    <body>
+        <div class="logo">
+            <img src="/sitestatic/img/logo_placeholder.png" />
+        </div>
+        <div style="text-align: center;">
+            <h3>Sometimes bad things happen to good people.</h3>
+        </div>
+        <div class="message">
+            While we do our best to write bug-free code, every now and again things do go wrong. Good news though!
+            We've already been notified of the problem.
+            <br />
+            <br />
+        </div>
+        {% if request.sentry.id %}
+            <div class='reference'>
+                If you'd like to contact us about this error, please be sure to include your reference number
+                <b>{{ request.sentry.id }}</b>
+            </div>
+        {% endif %}
+    </body>
 </html>

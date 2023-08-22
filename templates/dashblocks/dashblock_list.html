@@ -1,0 +1,36 @@
+{% extends "smartmin/list.html" %}
+{% load i18n %}
+{% block content-title %}
+    <h2 class="is-size-2 has-text-weight-bold">
+        {% if filtered_type %}
+            <img src="{{ STATIC_URL }}img/{{ filtered_type.slug }}_icon.png">
+        {% else %}
+            <img src="{{ STATIC_URL }}img/pages_icon.png">
+        {% endif %}
+        <div class="is-inline-block content-title-text">
+            {% if filtered_type %}
+                {{ filtered_type.name }}
+            {% else %}
+                {% trans "Pages" %}
+            {% endif %}
+        </div>
+    </h2>
+{% endblock content-title %}
+{% block search-form %}
+{% endblock search-form %}
+{% block table-buttons %}
+    {% if view.add_button %}
+        {% if filtered_type %}
+            <a href="./create/?type={{ filtered_type.pk }}"
+               class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">
+                {% trans "+ New " %}
+                {{ filtered_type.name }}
+            </a>
+        {% else %}
+            <a href="./create/"
+               class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">
+                {% trans "+ New Page" %}
+            </a>
+        {% endif %}
+    {% endif %}
+{% endblock table-buttons %}

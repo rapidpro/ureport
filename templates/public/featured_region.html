@@ -1,0 +1,12 @@
+{% load ureport %}
+<div class="row">
+    <div class="col-md-9">
+        <div data-question="={ question.id }"
+             data-region="{{ org|config:'featured_state' }}"
+             class="poll-map"
+             id="map-{{ question.id }}"></div>
+    </div>
+    <div class="col-md-3">
+        <div class="question">{{ latest_poll.title }}</div>
+    </div>
+</div>

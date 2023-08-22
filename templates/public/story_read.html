@@ -1,0 +1,110 @@
+{% extends "public_base.html" %}
+{% load thumbnail compress i18n ureport %}
+{% block meta-extra %}
+    {% if org|config:"facebook_page_id" and org|config:"facebook_app_id" %}
+        <meta property="og:url"
+              content="{% org_host_link %}{% url 'public.story_read' story.pk %}">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="{{ story.title }}">
+        <meta property="fb:app_id" content="{{ org|config:'facebook_app_id' }}">
+        <meta property="og:description"
+              content="{{ story.summary|truncatewords:50|linebreaksbr }}">
+        {% thumbnail story.get_image "900" crop="top" as im %}
+            <meta property="og:image" content="{{ im.url }}">
+        {% endthumbnail %}
+    {% endif %}
+{% endblock meta-extra %}
+{% block content %}
+    <div class="md:flex max-w-page mx-auto bg-dark-blue">
+        <div class="md:w-1/2 block bg-dark-blue outside-vertical-angle">
+            <div class="py-12 h-full">
+                <div class="px-home text-white flex items-center h-full">
+                    <div class="block hover-parent">
+                        <div class="text-light1 font-bold">
+                            {% if story.attachment %}
+                                {% trans "REPORT" %}
+                            {% else %}
+                                {% trans "STORY" %}
+                            {% endif %}
+                        </div>
+                        <div class="font-alt font-bold text-4xl leading-tight italic hover-parent">
+                            {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "white" %}
+                            {{ story.title }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 {% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %} block">
+            {% thumbnail story.get_image "900" crop="top" as im %}
+                <img src="{{ im.url }}" width="100%" style="object-fit:cover;">
+            {% endthumbnail %}
+            <!-- .block-vertical-angle.w-4 -->
+            <!-- &nbsp; -->
+        </div>
+    </div>
+    <div class="max-w-page mx-auto">
+        <div class="md:flex block justify-between bg-white m-12">
+            <div class="flex-none">
+                <div class="share">
+                    <a href="#"
+                       data-url="{% org_host_link %}{% url 'public.story_read' story.pk %}"
+                       class="mb-2 bg-circle-xs border border-black facebook-share">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.story_read' story.pk %}"
+                       class="mb-2 block bg-circle-xs border border-black">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.story_read' story.pk %}"
+                       class="mb-2 block bg-circle-xs border border-black">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:?subject=Check out {{ story.title|urlencode:'' }} results&amp;body={% org_host_link %}{% url 'public.story_read' story.pk %}"
+                       uk-icon="icon: mail; ratio: 1.5"
+                       class="mb-2 block bg-circle-xs border border-black">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="flex-auto px-home story-content hover-parent">
+                {% edit_content 'stories.story_update' story.pk "#id_content" "-m-8" "dark" %}
+                {{ story.content|safe }}
+            </div>
+            <div class="flex-none w-10">
+                <img src="{{ STATIC_URL }}img/u-icon-small.png">
+            </div>
+        </div>
+        {% if story.attachment %}
+            <div class="block px-home">
+                <div class="flex-auto px-home story-attachment hover-parent">
+                    {% edit_content 'stories.story_update' story.pk "#id_attachment" "-m-8" "dark" %}
+                    <div class="px-home">
+                        <object data="{{ story.attachment.url }}#toolbar=0&navpanes=0&scrollbar=0&title={{ story.title }}"
+                                type="application/pdf"
+                                width="100%"
+                                height="800px"
+                                class="overflow-hidden"></object>
+                    </div>
+                </div>
+            </div>
+            <div class="block p-home">
+                <div class="px-home">
+                    <div class="px-home">
+                        <a href="{{ story.attachment.url }}"
+                           download="{{ story.title }}"
+                           class="hover:bg-gray-700 btn bg-black text-white">{% trans "Download Report" %}</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="block p-home">
+            <div class="px-home">
+                <div data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}"
+                     data-width="100%"
+                     data-numposts="5"
+                     class="px-6 fb-comments"></div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

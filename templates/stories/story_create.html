@@ -1,0 +1,37 @@
+{% extends "smartmin/create.html" %}
+{% block extra-style %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ STATIC_URL }}css/prettify.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ STATIC_URL }}css/summernote-lite.css">
+    <style type="text/css">
+    #id_content {
+      width: 93%;
+      height: 250px;
+      margin-right: 20px;
+    }
+    
+    .note-editable {
+      min-height: 250px;
+    }
+    </style>
+{% endblock extra-style %}
+{% block extra-script %}
+    <script src="{{ STATIC_URL }}js/prettify.js"></script>
+    <script src="{{ STATIC_URL }}js/summernote-lite.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+      $("#id_content").summernote({
+        maximumImageFileSize: 1048576,
+        callbacks: {
+          onImageUploadError: function(message) {
+            message += "(1MB)"
+            alert(message);
+          }
+        }
+      })
+    });
+    </script>
+{% endblock extra-script %}

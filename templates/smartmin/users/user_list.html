@@ -1,0 +1,30 @@
+{% extends "smartmin/list.html" %}
+{% load smartmin i18n %}
+{% block search-form %}
+    <form role="form">
+        <div class="field has-addons">
+            <div class="control is-normal">
+                <div style="width: 100px;" class="select">
+                    <select name="group_id">
+                        <option value="0" {% if group_id == 0 %}selected="selected"{% endif %}>All</option>
+                        {% for group in groups %}
+                            <option value="{{ group.id }}"
+                                    {% if group_id == group.id %}selected="selected"{% endif %}>
+                                {{ group.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="control is-expanded">
+                <input type="text"
+                       name="search"
+                       value="{{ search }}"
+                       class="input search-query">
+            </div>
+            <div class="control">
+                <button type="submit" class="button">{% trans "Search" %}</button>
+            </div>
+        </div>
+    </form>
+{% endblock search-form %}

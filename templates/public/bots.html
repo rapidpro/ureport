@@ -1,0 +1,60 @@
+{% extends "public_base.html" %}
+{% load thumbnail compress i18n ureport %}
+{% block content %}
+    <div class="bg-grid">
+        <div class="md:flex max-w-page mx-auto p-home">
+            <div class="flex-1 flex-center-y hover-parent">
+                <div class="text-5xl font-bold">{% trans "Bots" %}</div>
+            </div>
+        </div>
+        {% for bot in bots %}
+            <div class="max-w-page mx-auto my-8 py-2 px-4">
+                <div class="md:flex border p-home bg-white hover-parent">
+                    <div class="md:w-1/2 block p-home hover-parent">
+                        <div class="mb-4 text-3xl hover-parent">
+                            {{ bot.title }}
+                            <div class="block hover-parent">
+                                <div class="block no-wrap">
+                                    <div class="text-sm inline">{% trans "Send" %}</div>
+                                    <div class="text-xl inline">"{{ bot.keyword }}"</div>
+                                    <div class="text-sm inline">{% trans "to" %}</div>
+                                    <div class="text-xl inline">{{ bot.channel }}</div>
+                                </div>
+                            </div>
+                            <div class="block flex mt-4">
+                                {% if bot.facebook_deeplink %}
+                                    <a href="{{ bot.facebook_deeplink }}"
+                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                {% endif %}
+                                {% if bot.telegram_deeplink %}
+                                    <a href="{{ bot.telegram_deeplink }}"
+                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                        <i class="fab fa-telegram"></i>
+                                    </a>
+                                {% endif %}
+                                {% if bot.viber_deeplink %}
+                                    <a href="{{ bot.viber_deeplink }}"
+                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                        <i class="fab fa-viber"></i>
+                                    </a>
+                                {% endif %}
+                                {% if bot.whatsapp_deeplink %}
+                                    <a href="{{ bot.whatsapp_deeplink }}"
+                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 block p-home hover-parent">
+                        {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
+                        <div class="block hover-parent overflow-hidden text-ellipsis">{{ bot.description|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
