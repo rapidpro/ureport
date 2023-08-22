@@ -1,3 +1,10 @@
+v1.2.78 (2023-08-22)
+-------------------------
+ * Merge pull request #1152 from rapidpro/convert_templates
+ * Update deps
+ * Merge pull request #1154 from rapidpro/rowanseymour-patch-1
+ * Update ci.yml
+
 v1.2.76 (2023-07-25)
 -------------------------
  * Proper variable for STORAGES
