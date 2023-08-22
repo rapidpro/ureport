@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.10"
 Django = "^4.2.0"
 smartmin = "^4.2.2"
-rapidpro-dash = { git = "https://github.com/rapidpro/dash.git", branch = "convert_templates" }
+rapidpro-dash = "^1.14.0"
 colorama = "^0.4.3"
 celery = "^5.1"
 django-compressor = "^4.0"
