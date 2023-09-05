@@ -1099,9 +1099,7 @@ msgid "RESPONSE RATE"
 msgstr "STOPA ODGOVORA"
 
 msgid "TOTAL RESPONDERS"
-msgstr ""
-"UKUPNO ISPITANIKA\n"
-"*** U skladu sa Rezolucijom Saveta bezbednosti Ujedinjenih nacija 1244"
+msgstr "UKUPNO ISPITANIKA<br>*** U skladu sa Rezolucijom Saveta bezbednosti<br>Ujedinjenih nacija 1244"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
