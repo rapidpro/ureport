@@ -1,3 +1,15 @@
+v1.2.79 (2023-09-11)
+-------------------------
+ * Merge pull request #1148 from rapidpro/translations_locale-en-lc-messages-django-po--main_sr_RS@latin
+ * Run code checks
+ * Translate django.po in sr_RS@latin
+ * Merge pull request #1155 from rapidpro/translations_locale-en-lc-messages-django-po--main_sl
+ * Merge pull request #1156 from rapidpro/translations_locale-en-lc-messages-django-po--main_pt
+ * Fix tests
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in pt
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+
 v1.2.78 (2023-08-22)
 -------------------------
  * Merge pull request #1152 from rapidpro/convert_templates
