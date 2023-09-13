@@ -70,7 +70,7 @@ AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
 AWS_S3_SECURE_URLS = False
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}
 THUMBNAIL_STORAGE = STORAGES['default']['BACKEND']
 
 AWS_QUERYSTRING_AUTH = False
@@ -113,7 +113,6 @@ MIDDLEWARE = (
 )
 
 MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGGING = {
     'version': 1,

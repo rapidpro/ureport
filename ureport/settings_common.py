@@ -109,6 +109,7 @@ LANGUAGES = (
     ("ru", "Russia"),
     ("el", "Greek"),
     ("th", "Thai"),
+    ("sl", "Slovenian"),
 )
 
 DEFAULT_LANGUAGE = "en"
