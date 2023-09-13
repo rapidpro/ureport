@@ -1,0 +1,372 @@
+{% extends "public_base.html" %}
+{% load thumbnail humanize ureport compress i18n dashblocks %}
+{% block content %}
+    <!-- latest poll if we have it -->
+    {% if latest_poll and latest_poll.get_first_question %}
+        <div class="max-w-page mx-auto bg-white mt-6">
+            <div class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %} {% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1 text-white{% endif %}">
+                <div class="{% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1 text-white{% endif %} flex-1 self-stretch p-home self-center">
+                    <div class="text-l mb-10">{% trans "LATEST OPINION" %}</div>
+                    <div class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl leading-tight{% else %}text-2xl leading-tight{% endif %} font-bold mt-2 hover-parent">
+                        {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                        {{ latest_poll.title }}
+                    </div>
+                    <div class="{% if latest_poll.get_first_question.get_border_color_choice %} border-{{ latest_poll.get_first_question.get_border_color_choice }} {% else %}border-{{ border_color }}{% endif %} font-alt font-bold italic left-border mt-8 hover-parent">
+                        {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.flow_result.result_uuid|add:"_title"  "-m-8" "dark" %}
+                        {{ latest_poll.get_first_question.title }}
+                    </div>
+                    <div class="flex">
+                        <div class="block tags mt-8">
+                            {% for tag in latest_poll.tags.all %}
+                                <div class="inline-block px-2 py-1 leading-none text-xs mb-1 border-gray-400 border">
+                                    <div class="whitespace-nowrap">{{ tag.name }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %} flex-1 self-stretch p-home bg-grid self-center">
+                    <div style="min-height:20rem;" class="relative w-full">
+                        <div data-question="{{ latest_poll.get_first_question.id }}"
+                             data-segment="all"
+                             data-bar-color="{% if latest_poll.get_first_question.get_bg_color_choice %} {{ latest_poll.get_first_question.get_bg_color_choice }} {% else %}{{ org|config:'dark1_color'|default:'#439932' }}{% endif %}"
+                             class="w-full h-full absolute poll-chart block"
+                             id="chart-{{ latest_poll.get_first_question.id }}"></div>
+                    </div>
+                    <div class="md:mb-0 mb-6 text-center">
+                        <a href="{% url 'public.opinion_read' latest_poll.pk %}"
+                           class="btn bg-light1 text-black hover-dark">{% trans "VIEW FULL RESULTS" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- ureporters graph -->
+    <div class="bg-black text-light1 bg-white-u">
+        <div class="md:flex max-w-page mx-auto p-home">
+            <div class="md:w-1/2 md:mt-0 md:p-0 flex-center-y mt-4 p-8">
+                <div class="font-bold text-l">
+                    {% trans "U-REPORTERS IN" %}
+                    {{ org.name|upper }}
+                </div>
+                <div class="md:text-6xl font-light text-white text-4xl">{{ reporters|intcomma }}</div>
+                <div class="font-bold text-l min-w-sm">
+                    <div>
+                        <div class="md:whitespace-nowrap">
+                            {% trans "PARTNERING WITH" %}
+                            <span class="text-white whitespace-nowrap">{{ global_contact_count|intcomma }}</span>
+                            {% trans "U-REPORTERS" %}
+                        </div>
+                        <div class="md:whitespace-nowrap">
+                            {% trans "IN" %}
+                            <span class="text-white whitespace-nowrap">{{ global_org_count|intcomma }}</span>
+                            {% trans "COUNTRIES WORLDWIDE" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:ml-4 md:w-1/2 md:my-0 md:p-0 my-16 p-4">
+                <div class="flex-col">
+                    <div class="block w-full font-bold text-center">{% trans "AGES" %}</div>
+                    <div style="min-width:260px;" class="mt-4 block w-full">
+                        <div class="md:h-64 relative w-full h-40">
+                            {{ age_stats|json_script:"age_stats" }}
+                            <div data-aos="fade"
+                                 data-graph-type="age-chart"
+                                 data-bar-color="{{ org|config:'light1_color'|default:'#FFD100' }}"
+                                 data-label-color="#AAA"
+                                 data-label-position="top"
+                                 data-stats="age_stats"
+                                 class="w-full h-full absolute age-chart"
+                                 id="age-bars"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if featured_bots %}
+        <div class="max-w-page mx-auto border-black border-b">
+            <div class="font-bold text-xl text-center mt-4 border-b py-2">{% trans "Available bots" %}</div>
+            {% for bot in featured_bots|slice:"3" %}
+                <div class="md:flex border-b hover-parent">
+                    <div class="md:w-1/2 block pb-6 pt-12 px-16 my-auto hover-parent">
+                        <div class="font-bold hover-parent">{{ bot.title }}</div>
+                        <div class="block hover-parent">
+                            <div class="block no-wrap">
+                                <div class="text-sm inline">{% trans "Send" %}</div>
+                                <div class="text-xl inline">"{{ bot.keyword }}"</div>
+                                <div class="text-sm inline">{% trans "to" %}</div>
+                                <div class="text-xl inline">{{ bot.channel }}</div>
+                            </div>
+                        </div>
+                        <div class="block flex mt-4">
+                            {% if bot.facebook_deeplink %}
+                                <a href="{{ bot.facebook_deeplink }}"
+                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            {% endif %}
+                            {% if bot.telegram_deeplink %}
+                                <a href="{{ bot.telegram_deeplink }}"
+                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <i class="fab fa-telegram"></i>
+                                </a>
+                            {% endif %}
+                            {% if bot.viber_deeplink %}
+                                <a href="{{ bot.viber_deeplink }}"
+                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <i class="fab fa-viber"></i>
+                                </a>
+                            {% endif %}
+                            {% if bot.whatsapp_deeplink %}
+                                <a href="{{ bot.whatsapp_deeplink }}"
+                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 block px-16 pt-12 pb-6 hover-parent">
+                        {% edit_content 'bots.bot_update' bot.pk "" "-m-8" "dark" %}
+                        <div class="block hover-parent h-32 overflow-hidden text-ellipsis text-sm">{{ bot.description|safe }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="md:flex">
+                <div class="inline-block w-full p-8">
+                    <div class="text-center">
+                        <a href="{% url 'public.bots' %}"
+                           class="hover:bg-gray-700 btn bg-black text-white">{% trans "More bots" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- join video and social -->
+    <div class="max-w-page mx-auto">
+        <div class="md:flex">
+            <div class="flex-1">
+                <div class="bg-light1 p-12 hover-parent">
+                    {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark" %}
+                    <div class="text-3xl font-bold leading-tight text-center">
+                        {% if org|config:"join_text" %}
+                            {{ org|config:"join_text" }}
+                        {% else %}
+                            {% trans "Join U-Report, Your voice matters." %}
+                        {% endif %}
+                    </div>
+                    <div class="mt-8 text-center">
+                        <a href="{% url 'public.join' %}"
+                           class="hover:bg-gray-700 btn bg-black text-white">
+                            {% if org|config:"join_button_text" %}
+                                {{ org|config:"join_button_text" }}
+                            {% else %}
+                                {% trans "Join Now" %}
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-black p-12 text-white hover-parent">
+                    {% edit_content 'orgs.org_edit' "" "#id_common.homepage_join_video_id"  "-m-8" "white" %}
+                    {% if org|config:"homepage_join_video_id" %}
+                        <div class="video">
+                            <iframe width="560"
+                                    height="349"
+                                    src="https://www.youtube.com/embed/{{ org|config:"homepage_join_video_id" }}?rel=0&autohide=1&showinfo=0"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    {% else %}
+                        <div style="min-height:349px" class="flex justify-content">
+                            <div class="inline-block mx-auto my-auto text-center">
+                                <div class="w-64">
+                                    <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png">
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="md:block flex-1 hidden">
+                <div style="min-height:45rem;" class="bg-white p-home">
+                    <div class="block w-full h-full">
+                        <div class="flex justify-center social-media-block-tabs mb-8 mt-4">
+                            {% if org|config:"facebook_page_url" %}
+                                <a target="_blank"
+                                   class="hover:text-white hover:bg-black {% if org|config:"twitter_handle" %}open{% endif %} cursor-pointer bg-circle-xs border border-black social-media-block-tab mr-2">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            {% endif %}
+                            {% if org|config:"twitter_handle" %}
+                                <a target="_blank"
+                                   class="hover:text-white hover:bg-black cursor-pointer bg-circle-xs border border-black social-media-block-tab">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div style="min-height:400px;
+                                    max-height:450px"
+                             class="flex justify-center relative social-media-blocks mb-4">
+                            {% if org|config:"facebook_page_url" %}
+                                <div class="{% if org|config:"twitter_handle" %}open{% endif %} absolute social-media-block hover-parent">
+                                    {% edit_content 'orgs.org_edit' "" "#id_common.facebook_page_url" "-m-8" "dark" %}
+                                    <div data-href="{{ org|config:'facebook_page_url' }}"
+                                         data-tabs="timeline"
+                                         data-width="400"
+                                         data-height="550"
+                                         data-small-header="false"
+                                         data-adapt-container-width="true"
+                                         data-hide-cover="false"
+                                         data-show-facepile="false"
+                                         class="fb-page"></div>
+                                </div>
+                            {% endif %}
+                            {% if org|config:"twitter_handle" %}
+                                <div class="absolute social-media-block hover-parent">
+                                    {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" "dark" %}
+                                    <div class="mb-6 flex justify-center">
+                                        <a href="https://twitter.com/{{ org|config:'twitter_handle' }}"
+                                           data-show-count="true"
+                                           data-lang="en"
+                                           target="_blank"
+                                           class="twitter-follow-button"></a>
+                                    </div>
+                                    <a href="https://twitter.com/{{ org|config:'twitter_handle' }}"
+                                       width="400px"
+                                       height="500px"
+                                       data-chrome="noheader nofooter"
+                                       data-link-color="#4aaad4"
+                                       target="_blank"
+                                       class="twitter-timeline"></a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if main_stories %}
+        <!-- featured-story-full -->
+        <div class="md:block max-w-page mx-auto hidden bg-squares">
+            <div class="flex">
+                <div class="flex-1 h-20"></div>
+                <div class="flex-1 bg-dark1 h-20"></div>
+            </div>
+            <div class="flex">
+                <div class="flex-1 h-10"></div>
+                <div class="flex-1 bg-dark1">
+                    <div class="rtl:mr-20 rtl:ml-10 ltr:ml-20 ltr:mr-10 bg-dark2 h-10">&nbsp;</div>
+                </div>
+            </div>
+            <div>
+                {% for story in main_stories|slice:"1" %}
+                    <div class="{% if is_rtl_org %}border-l-25rem{% else %}border-r-25rem{% endif %} border-solid border-dark1">
+                        <div class="{% if is_rtl_org %}border-l-25rem{% else %}border-r-25rem{% endif %} border-solid border-light1 flex">
+                            <div class="w-1/3 rtl:pr-10 ltr:pl-10 pl-10 flex flex-col justify-center">
+                                <div class="block">
+                                    <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
+                                    <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4 hover-parent">
+                                        {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "dark" %}
+                                        {{ story.title }}
+                                    </div>
+                                    <div class="block mb-6 hover-parent">
+                                        {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
+                                        {{ story.summary|truncatewords:50|linebreaksbr }}
+                                    </div>
+                                    <a href="{% url 'public.story_read' story.pk %}"
+                                       class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</a>
+                                </div>
+                            </div>
+                            <div class="w-2/3 block p-10 bg-white flex flex-col justify-center hover-parent">
+                                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
+                                {% if story.get_image %}
+                                    {% thumbnail story.get_image "800x500" crop="center" as im %}
+                                        <img width="100%" src="{{ im.url }}">
+                                    {% endthumbnail %}
+                                {% else %}
+                                    <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="flex">
+                <div class="flex-1 h-10"></div>
+                <div class="flex-1 bg-dark1">
+                    <div class="rtl:mr-20 rtl:ml-10 ltr:ml-20 ltr:mr-10 bg-dark2 h-10"></div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex-1 h-20"></div>
+                <div class="flex-1 bg-dark1 h-20"></div>
+            </div>
+        </div>
+        <!-- featured-story-mobile -->
+        <div class="md:hidden">
+            {% for story in main_stories|slice:"1" %}
+                {% if story.get_image %}
+                    {% thumbnail story.get_image "800x500" crop="top" as im %}
+                        <img width="100%" src="{{ im.url }}">
+                    {% endthumbnail %}
+                {% else %}
+                    <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                {% endif %}
+                <div class="p-home">
+                    <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
+                    <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4">
+                        {{ story.title }}
+                    </div>
+                    <div class="block mb-6">{{ story.summary|truncatewords:50|linebreaksbr }}</div>
+                    <a href="{% url 'public.story_read' story.pk %}"
+                       class="btn bg-black text-white">{% trans "READ MORE" %}</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-dark1 h-20"></div>
+    {% endif %}
+    <!-- world-map -->
+    <div class="bg-black text-white">
+        <div class="md:flex rtl:pl-10 ltr:pr-10 max-w-page mx-auto bg-black p-home">
+            <div class="md:w-3/5 flex flex-center-y my-4">
+                <img src="{{ STATIC_URL }}img/homemap_bg.png">
+            </div>
+            <div class="md:w-2/5 flex flex-center-y">
+                <div class="rtl:pr-10 ltr:pl-10">
+                    <div class="font-bold mb-4 text-3xl leading-tight">
+                        {% trans "We are a part of a global platform working to change the lives of young people around the world." %}
+                    </div>
+                    <div class="mb-6">
+                        {% trans "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them." %}
+                    </div>
+                    <a href="{% url 'public.about' %}"
+                       class="btn bg-light1 text-black hover-dark">{% trans "LEARN MORE" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    {{ block.super }}
+    <script type="text/javascript">
+    $(function(){
+    if($(".social-media-blocks").children().length == 1) {
+        $(".social-media-blocks").children().addClass("open", 1000, "easeOutSine");
+        $(".social-media-block-tabs").children().addClass("open", 1000, "easeOutSine");
+    } else {
+      $(".social-media-block-tab").on("click", function(){
+        if(!$(this).hasClass("open")){
+          if($(".social-media-blocks").children().length > 1) {
+            $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
+            $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
+          }
+        }
+      });
+    }
+    });
+    </script>
+{% endblock script %}

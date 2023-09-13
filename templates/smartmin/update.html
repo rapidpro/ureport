@@ -1,0 +1,24 @@
+{% extends "smartmin/form.html" %}
+{% load i18n %}
+{% block form-buttons %}
+    <div class="field smartmin-form-buttons is-horizontal">
+        <div class="field-label"></div>
+        <div class="field-body">
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-primary">{{ submit_button_name }}</button>
+                </div>
+                <div class="control">
+                    <a onclick="javascript:history.go(-1)" class="button">{% trans "Cancel" %}</a>
+                </div>
+            </div>
+            {% if delete_url %}
+                <div class="field">
+                    <div class="control">
+                        <a href="{{ delete_url }}" class="button is-danger is-pulled-right">{% trans "Remove" %}</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock form-buttons %}

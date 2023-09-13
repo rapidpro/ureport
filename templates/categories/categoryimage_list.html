@@ -1,0 +1,46 @@
+{% extends "smartmin/list.html" %}
+{% load thumbnail smartmin i18n %}
+{% block content-title %}
+    <h2 class="is-size-2 has-text-weight-bold">
+        <img src="{{ STATIC_URL }}img/settings_icon.png">
+        <div class="is-inline-block content-title-text">{% trans "Category Images" %}</div>
+    </h2>
+{% endblock content-title %}
+{% block table %}
+    <div class="columns is-multiline">
+        {% for obj in object_list %}
+            <div class="column is-one-fifth">
+                <div class="category-obj">
+                    {% for field in fields %}
+                        {% if field in link_fields %}
+                            <a href="{% get_field_link field obj %}">
+                                <div class="category-name">{% get_value obj field %}</div>
+                                <div class="category-image">
+                                    {% thumbnail obj.image "640x360" crop="top" as im %}
+                                        <img width="100%" src="{{ im.url }}" />
+                                    {% empty %}
+                                        <img width="100%" src="{{ STATIC_URL }}img/missing-image.png">
+                                    {% endthumbnail %}
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock table %}
+{% block extra-style %}
+    {{ block.super }}
+    <style type="text/css">
+    .category-obj{
+      margin-bottom: 25px;
+    }
+    
+    .category-name {
+      text-align: center;
+      color: #aaaaaa;
+      text-decoration: none;
+    }
+    </style>
+{% endblock extra-style %}

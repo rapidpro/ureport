@@ -1,0 +1,51 @@
+{% load smartmin ureport i18n %}
+{% with form|field:field as form_field %}
+    {% getblock "before_field_" field %}
+    {% if form_field and form_field.is_hidden %}
+        {{ form_field }}
+    {% else %}
+        {% if form_field != None %}
+            <div class="{% if form_field.errors %}is-danger{% endif %} field is-horizontal">
+                <div class="field-label is-normal">
+                    <label for="{{ field.name }}" class="label">{% get_label field %}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-expanded">
+                        <div class="{% if form_field|is_multiple_checkbox %}multiple-checkbox{% endif %} control">
+                            {% if form_field|is_checkbox %}
+                                <label class="checkbox">{{ form_field }}</label>
+                            {% elif form_field|is_input %}
+                                {{ form_field|add_css:"input" }}
+                            {% elif form_field|is_textarea %}
+                                {{ form_field|add_css:"textarea" }}
+                            {% elif form_field|is_select %}
+                                <span class="{% if form_field|is_multiple_select %} is-multiple{% endif %} select">{{ form_field }}</span>
+                            {% else %}
+                                {{ form_field }}
+                            {% endif %}
+                            {% with view|field_help:field as help %}
+                                {% if help %}<p class="help">{{ help }}</p>{% endif %}
+                            {% endwith %}
+                            {% if form_field.errors %}<p class="help is-danger">{{ form_field.errors }}</p>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label for="{{ field.name }}" class="label">{% get_label field %}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-expanded">
+                        <div class="control is-static">{% get_value_from_view field %}</div>
+                        {% with view|field_help:field as help %}
+                            {% if help %}<p class="help">{{ help }}</p>{% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% getblock "after_field_" field %}
+{% endwith %}

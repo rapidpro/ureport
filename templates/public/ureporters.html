@@ -1,0 +1,283 @@
+{% extends "public_base.html" %}
+{% load compress ureport dashblocks thumbnail i18n humanize %}
+{% block content %}
+    <div class="bg-grid">
+        <div class="md:flex max-w-page mx-auto p-home">
+            <div class="flex-1 flex-center-y">
+                <div class="md:text-5xl text-2xl font-bold">{% trans "Engagement" %}</div>
+            </div>
+            <div class="flex-1 flex-center-y hover-parent">
+                <div class="md:pl-12 ltr:text-right rtl:text-left text-xl hover-parent">
+                    {% edit_content 'orgs.org_edit' "" "#id_common.engagement_description" "-m-8" "dark" %}
+                    {{ org|config:"engagement_description"|default:"" }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-dark-blue">
+        <div class="md:flex max-w-page mx-auto bg-black">
+            <div class="flex-1 p-home">
+                <div class="font-alt text-light1 mb-4 font-bold mt-6">{% trans "OVERALL STATISTICS" %}</div>
+                <div class="text-white font-light mt-12">
+                    <div class="{% if is_rtl_org %}md:border-l pl-8{% else %}md:border-r pr-8{% endif %} inline-block border-white">
+                        <div class="md:text-5xl text-2xl leading-none">{{ org.get_reporters_count|intcomma }}</div>
+                        <div class="text-xs font-bold">
+                            {% trans "U-REPORTERS" %}
+                            <div class="inline text-light1">
+                                +{{ org.get_signup_rate|floatformat }}%
+                                {% trans "THIS YEAR" %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:mt-0 {% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %} inline-block mt-2">
+                        <div class="md:text-5xl text-2xl leading-none">{{ average_response_rate|floatformat }} %</div>
+                        <div class="text-xs font-bold">{% trans "AVG RESPONSE RATE" %}</div>
+                    </div>
+                </div>
+                <div class="md:mt-12 md:mb-0 mt-4 flex flex-wrap mb-8">
+                    <div class="flex-none mr-8">
+                        <div class="ltr:pr-4 ltr:border-r rtl:border-l rtl:pl-4 text-white text-center inline-block border-white">
+                            <img src="{{ STATIC_URL }}img/gender-male-w.png" width="40">
+                            <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.male_percentage }}</div>
+                            <div class="text-light1 text-sm leading-none">{{ gender_stats.male_count|intcomma }}</div>
+                        </div>
+                        <div class="text-white text-center inline-block px-4">
+                            <img src="{{ STATIC_URL }}img/gender-female-w.png" width="40">
+                            <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.female_percentage }}</div>
+                            <div class="text-light1 text-sm leading-none">{{ gender_stats.female_count|intcomma }}</div>
+                        </div>
+                        {% if org|config:"has_extra_gender" %}
+                            <div class="ltr:border-l rtl:border-r text-white text-center inline-block px-4 border-white">
+                                <img src="{{ STATIC_URL }}img/gender-other-w.png" width="40">
+                                <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.other_percentage }}</div>
+                                <div class="text-light1 text-sm leading-none">{{ gender_stats.other_count|intcomma }}</div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div style="min-width:220px;
+                                max-width:320px"
+                         class="md:mt-0 flex-1 inline-block mt-2">
+                        <div style="height:105px" class="relative w-full">
+                            {{ age_stats|json_script:"age_stats" }}
+                            <div data-aos="fade"
+                                 data-graph-type="age-chart"
+                                 data-bar-color="{{ org|config:'light1_color'|default:'#FFD100' }}"
+                                 data-label-color="white"
+                                 data-stats="age_stats"
+                                 class="w-full h-full absolute age-chart"
+                                 id="age-bars"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:mt-12 md:mb-0 mt-4 flex flex-wrap mb-8">
+                    <div class="flex inline-block">
+                        <div style="height:{{ scheme_bar_height }}px" class="relative w-full">
+                            {{ schemes_stats|json_script:"schemes_stats" }}
+                            <div data-aos="fade"
+                                 data-graph-type="scheme-chart"
+                                 data-stats="schemes_stats"
+                                 data-bar-color="{{ org|config:'light1_color'|default:'#FFD100' }}"
+                                 data-label-color="white"
+                                 class="h-full absolute scheme-chart"
+                                 id="schemes-pie"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if show_maps %}
+                <div class="{% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %} flex-1 text-white bg-dark-blue">
+                    <div class="ltr:pl-6 rtl:pr-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %} py-32 text-center">
+                        <div class="text-sm font-bold mb-12">{% trans "U-REPORTERS BY REGION" %}</div>
+                        <div data-map-url="/contact_field_results/"
+                             data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}"
+                             data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}"
+                             style="min-height:300px;
+                                    min-width:300px"
+                             class="h-full w-full map block"
+                             id="ureporter-map">
+                            <div style="min-height:300px;
+                                        min-width:300px"
+                                 class="flex text-center h-full w-full"
+                                 id="poll-map-placeholder">
+                                <div class="fa-3x inline-block m-auto self-center">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative h-full w-full mt-2 flex justify-center" id="map-info"></div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if hide_charts_breakdown %}
+        <div class="border-t border-b bg-dark-gray sticky z-480 border-gray-600"></div>
+    {% else %}
+        <div class="{% if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser %}top-45{% else %}top-0{% endif %} border-t border-b bg-dark-gray sticky z-480 border-gray-600">
+            <div class="md:flex md:justify-between max-w-page mx-auto px-home py-4 border-gray-600">
+                <div class="md:flex-col text-white font-bold flex-center-y flex-row">{% trans "FILTER RESULTS" %}</div>
+                {% if org|config:"common.has_charts_hidden" %}
+                    <div class="mx-auto px-home">
+                        <div class="px-home py-2 text-white flex-center border-white border text-center">
+                            {% trans "Charts only visible for logged in admins" %}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="md:flex-col flex-center-y flex-row">
+                    <div class="text-white text-xs flex">
+                        {% for time_filter in data_time_filters %}
+                            <div data-time-filter="{{ time_filter.time_filter_number }}"
+                                 class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %} cursor-pointer border-white pill-black tab-button-time-filter whitespace-nowrap">
+                                {{ time_filter.label }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-dark-blue border-b border-gray-600">
+            <div class="max-w-page mx-auto p-home text-white">
+                {% for time_filter in data_time_filters %}
+                    <div class="{% if not forloop.last %}hidden{% endif %} engagemment-content hover-parent"
+                         id="tab-content-block-{{ time_filter.time_filter_number }}">
+                        {% for metric in data_metrics %}
+                            <div style="min-height:30rem;
+                                        max-height:45rem"
+                                 data-page="engagement"
+                                 data-aos="fade"
+                                 data-aos-anchor-placement="center-bottom"
+                                 class="md:flex engagement-graph-block hover-parent block mt-16 p-2 bg-dark-blue"
+                                 id="graph-block-{{ metric.slug }}-{{ time_filter.time_filter_number }}">
+                                <div class="md:w-2/5 hover-parent">
+                                    <div class="bg-light1 h-1 w-16 mb-4"></div>
+                                    <div class="text-3xl mb-4 font-bold">{{ metric.title }}</div>
+                                    <div data-page="engagement"
+                                         class="text-xs flex mb-6 text-black random-pill">
+                                        {% for segment in data_segments %}
+                                            {% if forloop.first %}
+                                                <a href="#"
+                                                   data-page="engagement"
+                                                   data-metric-slug="{{ metric.slug }}"
+                                                   data-segment-type="{{ segment.segment_type }}"
+                                                   data-time-filter="{{ time_filter.time_filter_number }}"
+                                                   class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %} pill-dark-blue-inverted segment-pill">
+                                                    {{ segment.label|upper }}
+                                                </a>
+                                            {% elif forloop.last %}
+                                                {% if show_maps %}
+                                                    <a href="#"
+                                                       data-page="engagement"
+                                                       data-metric-slug="{{ metric.slug }}"
+                                                       data-segment-type="{{ segment.segment_type }}"
+                                                       data-time-filter="{{ time_filter.time_filter_number }}"
+                                                       data-graph-id="engagement-graph-{{ metric.slug }}-{{ segment.segment_type }}-{{ time_filter.time_filter_number }}"
+                                                       class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %} pill-dark-blue-inverted segment-pill state-pill relative whitespace-nowrap"
+                                                       id="location-pill-{{ metric.slug }}-{{ segment.segment_type }}-{{ time_filter.time_filter_number }}">
+                                                        {{ segment.label|upper }}
+                                                        <i class="fas fa-caret-down"></i>
+                                                        <div style="margin-left:-1px"
+                                                             data-html2canvas-ignore
+                                                             class="state-dropdown absolute z-50"
+                                                             id="location-pill-{{ metric.slug }}-{{ segment.segment_type }}-{{ time_filter.time_filter_number }}">
+                                                            <div style="overflow-y:scroll;
+                                                                        margin-top:.5rem;
+                                                                        margin-left:-1rem"
+                                                                 class="ltr:text-left rtl:text-right border border-gray-400 bg-white h-64">
+                                                                <div class="pt-1 text-black">
+                                                                    {% for state in states %}
+                                                                        <div data-state="{{ state.id }}"
+                                                                             data-page="engagement"
+                                                                             data-metric-slug="{{ metric.slug }}"
+                                                                             data-segment-type="{{ segment.segment_type }}"
+                                                                             data-time-filter="{{ time_filter.time_filter_number }}"
+                                                                             class="ltr:pl-2 ltr:pr-4 rtl:pr-2 rtl:pl-4  hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} py-1 state-segment">
+                                                                            <div class="ltr:float-left rtl:float-right checkbox">
+                                                                                <i class="fas fa-check"></i>
+                                                                            </div>
+                                                                            <div class="ltr:ml-4 rtl:mr-4 whitespace-nowrap">{{ state.name }}</div>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                {% else %}
+                                                    <a href="#"
+                                                       data-page="engagement"
+                                                       data-metric-slug="{{ metric.slug }}"
+                                                       data-segment-type="{{ segment.segment_type }}"
+                                                       data-time-filter="{{ time_filter.time_filter_number }}"
+                                                       data-graph-id="engagement-graph-{{ metric.slug }}-{{ segment.segment_type }}-{{ time_filter.time_filter_number }}"
+                                                       class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %} pill-dark-blue-inverted segment-pill state-pill relative whitespace-nowrap"
+                                                       id="location-pill-{{ metric.slug }}-{{ segment.segment_type }}-{{ time_filter.time_filter_number }}">
+                                                        {{ segment.label|upper }}
+                                                    </a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a href="#"
+                                                   data-page="engagement"
+                                                   data-metric-slug="{{ metric.slug }}"
+                                                   data-segment-type="{{ segment.segment_type }}"
+                                                   data-time-filter="{{ time_filter.time_filter_number }}"
+                                                   class="pill pill-dark-blue-inverted segment-pill">
+                                                    {{ segment.label|upper }}
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="share flex-none mb-4 flex-center-y hover-show">
+                                        <div class="block">
+                                            <a data-url="{% org_host_link %}{% url 'public.engagement' %}"
+                                               class="cursor-pointer bg-circle-xs border border-white text-white facebook-share">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                            <a href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.engagement' %}"
+                                               class="bg-circle-xs border border-white text-white">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.engagement' %}"
+                                               class="bg-circle-xs border border-white text-white">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                            <a href="mailto:?subject=Check out {{ poll.title|urlencode:'' }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.engagement' %}"
+                                               uk-icon="icon: mail; ratio: 1.5"
+                                               class="bg-circle-xs border border-white text-white">
+                                                <i class="fas fa-envelope"></i>
+                                            </a>
+                                            <a data-screen-id="graph-block-{{ metric.slug }}-{{ time_filter.time_filter_number }}"
+                                               class="cursor-pointer bg-circle-xs border border-white text-white screenshot-share">
+                                                <i class="fas fa-file-image"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="md:w-3/5 block">
+                                    <div class="engagement-graph-tabs"
+                                         id="graph-tabs-{{ metric.slug }}-{{ time_filter.time_filter_number }}">
+                                        {% for segment in data_segments %}
+                                            <div class="engagement-graph hidden"
+                                                 id="graph-tabs-{{ metric.slug }}-{{ segment.segment_type }}-{{ time_filter.time_filter_number }}">
+                                                <div data-metric-slug="{{ metric.slug }}"
+                                                     data-segment-type="{{ segment.segment_type }}"
+                                                     data-time-filter="{{ time_filter.time_filter_number }}"
+                                                     data-page="engagement"
+                                                     class="engagement-chart has-graph"
+                                                     id="engagement-graph-{{ metric.slug }}-{{ segment.segment_type }}-{{ time_filter.time_filter_number }}">
+                                                    <div class="chart-progress flex text-center w-full h-full">
+                                                        <div class="fa-5x inline-block m-auto self-center">
+                                                            <i class="fas fa-spinner fa-spin"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
