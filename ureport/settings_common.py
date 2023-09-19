@@ -62,7 +62,7 @@ EMPTY_SUBDOMAIN_HOST = "http://localhost:8000"
 SITE_API_HOST = "http://localhost:8001"
 SITE_API_USER_AGENT = "ureport/0.1"
 HOSTNAME = "localhost:8000"
-SITE_CHOOSER_TEMPLATE = "public/index.haml"
+SITE_CHOOSER_TEMPLATE = "public/index.html"
 SITE_CHOOSER_URL_NAME = "public.index"
 
 
@@ -109,6 +109,7 @@ LANGUAGES = (
     ("ru", "Russia"),
     ("el", "Greek"),
     ("th", "Thai"),
+    ("sl", "Slovenian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -734,7 +735,6 @@ INSTALLED_APPS = (
     "django_countries",
     "rest_framework",
     "rest_framework_swagger",
-    "hamlpy",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -782,6 +782,15 @@ MEDIA_URL = "/media/"
 
 
 # -----------------------------------------------------------------------------------
+# Storage
+# -----------------------------------------------------------------------------------
+
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
+}
+
+# -----------------------------------------------------------------------------------
 # Templates Configuration
 # -----------------------------------------------------------------------------------
 
@@ -808,8 +817,6 @@ TEMPLATES = [
                 "ureport.public.context_processors.set_story_widget_url",
             ],
             "loaders": [
-                "dash.utils.haml.HamlFilesystemLoader",
-                "dash.utils.haml.HamlAppDirectoriesLoader",
                 "django.template.loaders.filesystem.Loader",
                 "django.template.loaders.app_directories.Loader",
             ],
@@ -1705,6 +1712,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_southasia.png",
         countries_codes=[],  # ["AFG", "BGD", "BTN", "IND", "MDV", "NPL", "PAK", "LKA"],
         count_link="http://southasia.ureport.in/count/",
+    ),
+    dict(
+        name="Sudan",
+        host="//sudan.ureport.in",
+        flag="flag_sudan.png",
+        countries_codes=["SDN"],
+        count_link="http://sudan.ureport.in/count/",
     ),
     dict(
         name="Sverige",

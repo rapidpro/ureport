@@ -28,7 +28,8 @@ ARG RUNTIME_DEPS="\
   tzdata \
   curl \
   gosu \
-  gettext"
+  gettext \
+  libpq5"
 
 ARG NODE_RUNTIME_DEPS=${NODE_BUILD_DEPS}
 

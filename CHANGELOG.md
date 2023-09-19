@@ -1,3 +1,44 @@
+v1.2.79 (2023-09-11)
+-------------------------
+ * Merge pull request #1148 from rapidpro/translations_locale-en-lc-messages-django-po--main_sr_RS@latin
+ * Run code checks
+ * Translate django.po in sr_RS@latin
+ * Merge pull request #1155 from rapidpro/translations_locale-en-lc-messages-django-po--main_sl
+ * Merge pull request #1156 from rapidpro/translations_locale-en-lc-messages-django-po--main_pt
+ * Fix tests
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in pt
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+
+v1.2.78 (2023-08-22)
+-------------------------
+ * Merge pull request #1152 from rapidpro/convert_templates
+ * Update deps
+ * Merge pull request #1154 from rapidpro/rowanseymour-patch-1
+ * Update ci.yml
+
+v1.2.76 (2023-07-25)
+-------------------------
+ * Proper variable for STORAGES
+
+v1.2.75 (2023-07-25)
+-------------------------
+ * Merge pull request #1151 from rapidpro/fix-storage-settings
+ * Update django storages, fix thumbnail storage setting
+
+v1.2.74 (2023-07-06)
+-------------------------
+ * Merge pull request #1149 from rapidpro/update-django
+
+v1.2.72 (2023-07-05)
+-------------------------
+ * Merge pull request #1147 from rapidpro/add-sudan
+ * Add Sudan to countries dropdown
+ * Merge pull request #1146 from rapidpro/translations_locale-en-lc-messages-django-po--main_sr_RS@latin
+ * Run code_checks
+ * Translate django.po in sr_RS@latin
+ * Translate django.po in sr_RS@latin
+
 v1.2.71 (2023-06-16)
 -------------------------
  * Merge pull request #1098 from rapidpro/south-pacific

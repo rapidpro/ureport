@@ -2158,7 +2158,11 @@ class PollResultsTest(UreportTest):
         self.assertFalse(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid"))
         self.assertFalse(ContactActivityCounter.objects.filter(org=self.nigeria))
 
-        result_date = date(2022, 9, 15)
+        current_year = timezone.now().year
+        next_year = current_year + 1
+        eight_years_ago = current_year - 8
+
+        result_date = date(next_year, 9, 15)
 
         PollResult.objects.create(
             org=self.nigeria,
@@ -2201,7 +2205,7 @@ class PollResultsTest(UreportTest):
             category="Yes",
             text="Yeah",
             completed=False,
-            born=2015,
+            born=eight_years_ago,
             gender="M",
             date=result_date,
             state="R-LAGOS",
@@ -2218,7 +2222,7 @@ class PollResultsTest(UreportTest):
             category="Yes",
             text="Yeah",
             completed=False,
-            born=2015,
+            born=eight_years_ago,
             gender="M",
             date=result_date,
             state="R-ABUJA",
@@ -2235,7 +2239,7 @@ class PollResultsTest(UreportTest):
             category="Yes",
             text="Yeah",
             completed=False,
-            born=2015,
+            born=eight_years_ago,
             gender="F",
             date=result_date,
             state="R-LAGOS",

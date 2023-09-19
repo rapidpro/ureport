@@ -1,6 +1,0 @@
-- if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
-  .relative.hover-parent.hidden(class="md:block")
-    .hover-show.absolute.top-0(class="{{ extra_css_classes }} {% if is_rtl_org %}float-left left-0{% else %}float-right right-0{% endif %}")
-      %a.text-3xl(href="{{ edit_url }}" target="_blank" rel="noopener noreferrer")
-        .w-8
-          %img(src="{{ STATIC_URL }}img/edit-icon-{{icon_color}}.png")

@@ -2,49 +2,45 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>UReport API</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
-  <link href="{{STATIC_URL}}rest_framework_swagger/bundles/vendors.bundle.css" rel="stylesheet" type="text/css">
-  <link href="{{STATIC_URL}}rest_framework_swagger/bundles/app.bundle.css" rel="stylesheet" type="text/css">
-  {% block extra_styles %}
-  {# -- Add any additional CSS scripts here -- #}
-  {% endblock %}
-
-  <style type="text/css">
-  .swagger-ui .topbar {
-    padding: 8px 0;
-    background-color: #fff;
-  }
-  </style>
-</head>
-
-<body>
-  <div class="swagger-ui">
-    <div class="topbar">
-      <div class="wrapper">
-        <div class="topbar-wrapper">
-          <a href="#" class="link">
-            <img src="{{STATIC_URL}}img/logo_placeholder.png" alt="U-Report Logo">
-          </a>
+    <head>
+        <meta charset="UTF-8">
+        <title>UReport API</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700"
+              rel="stylesheet">
+        <link href="{% static 'rest_framework_swagger/bundles/vendors.bundle.css' %}"
+              rel="stylesheet"
+              type="text/css">
+        <link href="{% static 'rest_framework_swagger/bundles/app.bundle.css' %}"
+              rel="stylesheet"
+              type="text/css">
+        {% block extra_styles %}{# -- Add any additional CSS scripts here -- #}{% endblock %}
+        <style type="text/css">
+          .swagger-ui .topbar {
+            padding: 8px 0;
+            background-color: #fff;
+          }
+        </style>
+    </head>
+    <body>
+        <div class="swagger-ui">
+            <div class="topbar">
+                <div class="wrapper">
+                    <div class="topbar-wrapper">
+                        <a href="#" class="link">
+                            <img src="{% static 'img/logo_placeholder.png' %}" alt="U-Report Logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="rest-swagger-ui"></div>
-  {% csrf_token %}
-
-  <script>
+        <div id="rest-swagger-ui"></div>
+        {% csrf_token %}
+        <script>
     window.drsSettings = {{ drs_settings|safe }};
     window.drsSpec = {{ spec|safe }};
-  </script>
-  <script src="{{STATIC_URL}}rest_framework_swagger/bundles/vendors.bundle.js"></script>
-  <script src="{{STATIC_URL}}rest_framework_swagger/bundles/app.bundle.js"></script>
-  {% block extra_scripts %}
-  {# -- Add any additional scripts here -- #}
-  {% endblock %}
-</body>
-
+        </script>
+        <script src="{% static 'rest_framework_swagger/bundles/vendors.bundle.js' %}"></script>
+        <script src="{% static 'rest_framework_swagger/bundles/app.bundle.js' %}"></script>
+        {% block extra_scripts %}{# -- Add any additional scripts here -- #}{% endblock %}
+    </body>
 </html>

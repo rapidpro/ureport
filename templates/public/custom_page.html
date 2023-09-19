@@ -1,0 +1,18 @@
+{% extends "public_base.html" %}
+{% load dashblocks thumbnail i18n ureport %}
+{% block content %}
+    <div class="bg-grid border-t">
+        <div class="max-w-page mx-auto p-home pb-0">
+            <div class="border p-home bg-white">
+                <div class="block mt-4 font-bold text-5xl hover-parent">
+                    {% edit_content 'dashblocks.dashblock_update' object.pk "#id_title" "-m-8" "dark" %}
+                    {{ object.title }}
+                </div>
+                <div class="block mt-4 hover-parent">
+                    {% edit_content 'dashblocks.dashblock_update' object.pk "#id_content" "-m-8" "dark" %}
+                    {{ object.content|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

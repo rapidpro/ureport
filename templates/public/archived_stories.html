@@ -1,0 +1,48 @@
+{% load i18n %}
+<div class="section">
+    <h1 class="level-1-title">{% trans "ARCHIVED STORIES" %}</h1>
+    <div class="level-1-title-description secondary-color"></div>
+    <div class="card card-padding">
+        <div class="row">
+            <div class="col-md-4 hide-on-small">
+                <div class="filter-title primary-color">{% trans "FILTER" %}</div>
+                <hr class="hr12 primary-border-color">
+                <ul class="categories stories-filters">
+                    <li>
+                        <input type="radio"
+                               name="category"
+                               value="-1"
+                               checked="true"
+                               class="category"
+                               id="category-all">
+                        <label for="category-all">{% trans "All" %}</label>
+                    </li>
+                    {% for category in categories %}
+                        <li>
+                            <input type="radio"
+                                   name="category"
+                                   value="{{ category.id }}"
+                                   class="category"
+                                   id="category-{{ category.id }}">
+                            <label for="category-{{ category.id }}">{{ category.name }}</label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-8 left-col-border">
+                <div class="filter-title primary-color">{% trans "LIST" %}</div>
+                <hr class="hr12 primary-border-color">
+                <ul class="archived-stories">
+                    {% for archived_story in other_stories %}
+                        <li data-category="{{ archived_story.category.id }}"
+                            class="archived-story">
+                            <div>
+                                <a href="{% url 'public.story_read' archived_story.id %}">{{ archived_story.title }};</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

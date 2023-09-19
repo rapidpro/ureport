@@ -1,0 +1,426 @@
+{% extends "public_base.html" %}
+{% load compress thumbnail humanize ureport i18n %}
+{% block content %}
+    <div class="bg-grid">
+        <div class="md:flex max-w-page mx-auto p-home">
+            <div class="flex-1 flex-center-y hover-parent">
+                <div class="md:text-5xl text-2xl font-bold hover-parent">
+                    {% edit_content 'orgs.org_edit' "" "#id_common.opinions_description" "" "dark" %}
+                    {% trans "Opinions" %}
+                </div>
+                <div class="text-xl max-w-lg">{{ org|config:"opinions_description"|default:"" }}</div>
+            </div>
+            <div class="{% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %} flex-center-y">
+                <div style="width:285px" class="rtl:text-left ltr:text-right block mt-4">
+                    <div class="inline-block bg-black text-white text-lg px-4 py-2 rounded w-full">
+                        <div class="flex bg-black border-b border-white w-full">
+                            <div class="flex-1">
+                                <input type="text"
+                                       data-results-id="poll-search-results"
+                                       placeholder="{% trans 'SEARCH' %}"
+                                       size="14"
+                                       class="bg-black search-box text-sm">
+                            </div>
+                            <div class="flex-none">
+                                <a data-results-id="poll-search-results"
+                                   class="search-close cursor-pointer">
+                                    <i class="fas fa-caret-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div style="z-index:100000;
+                                width:285px"
+                         class="rtl:right-0 ltr:left-0 absolute bg-white search-results h-64 border"
+                         id="poll-search-results">
+                        <div class="no-results p-4 italic hidden">{% trans "No results found" %}</div>
+                        {% for category in categories %}
+                            {% if category.polls|length > 0 %}
+                                <div class="block py-1 bg-white search-category">
+                                    <a href="#" class="font-bold px-2 block">
+                                        <i style="padding-top:2px"
+                                           class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fas fa-caret-right closed"></i>
+                                        <i style="padding-top:4px"
+                                           class="rtl:float-right ltr:float-left fas fa-caret-down hidden open"></i>
+                                        <div class="rtl:pr-3 ltr:pl-3 text-sm">{{ category.name }}</div>
+                                    </a>
+                                    <div class="category-results">
+                                        {% for poll in category.polls %}
+                                            <a href="{% url 'public.opinion_read' poll.pk %}"
+                                               data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:'F' }} {{ poll.poll_date|date:'Y' }} {% for tag in poll.tags.all %}{{ tag.name|addslashes }}{% endfor %}"
+                                               class="hover:bg-gray-200 block px-2 py-1 searchable">
+                                                <div class="rtl:mr-2 ltr:ml-2 text-sm">
+                                                    {{ poll.title }}
+                                                    <div class="inline text-xs font-bold">{{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}</div>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% for category in categories_by_date %}
+                            {% if category.polls|length > 0 %}
+                                <div class="block py-1 bg-white search-category date-category hidden">
+                                    <a href="#" class="font-bold px-2 block">
+                                        <i style="padding-top:2px"
+                                           class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fas fa-caret-right closed"></i>
+                                        <i style="padding-top:4px"
+                                           class="rtl:float-right ltr:float-left fas fa-caret-down hidden open"></i>
+                                        <div class="rtl:pr-3 ltr:pl-3 text-sm">{{ category.name|date:"F" }} {{ category.name|date:"Y" }}</div>
+                                    </a>
+                                    <div class="category-results">
+                                        {% for poll in category.polls %}
+                                            <a href="{% url 'public.opinion_read' poll.pk %}"
+                                               data-search-value="{{ poll.poll_date|date:'F' }} {{ poll.poll_date|date:'Y' }}"
+                                               class="hover:bg-gray-200 block px-2 py-1 searchable">
+                                                <div class="rtl:mr-2 ltr:ml-2 text-sm">
+                                                    {{ poll.title }} - ({{ poll.category.name }})
+                                                    <div class="inline text-xs font-bold">{{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}</div>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-page mx-auto">
+        {% if poll_preview and latest_poll %}
+            <div class="block">
+                <div class="flex-1 my-home self-center hover-parent bg-gray-400">
+                    <div class="px-home hover-parent">
+                        <div class="font-bold leading-tight hover-parent text-3xl p-8 text-center">
+                            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                            {% if not latest_poll.is_active %}
+                                {% trans "Unpublished poll preview. Click Edit to publish it" %}
+                            {% else %}
+                                {% trans "Published poll. Click Edit to unpublish it" %}
+                            {% endif %}
+                            {% if not latest_poll.has_synced %}
+                                <div class="text-xl">{% trans "Poll has not synced yet to be displayed to the public" %}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="md:flex bg-white" id="poll-top-{{ latest_poll.id }}">
+            <div class="rtl:border-l ltr:border-r flex-1 my-home self-center hover-parent">
+                <div class="px-home hover-parent">
+                    {% if latest_poll %}
+                        <div class="bg-dark2 inline-block px-4 py-2 uppercase leading-none font-bold text-sm text-white mb-6">
+                            {{ latest_poll.category.name }}
+                        </div>
+                        <div class="rtl:float-left ltr:float-right share flex-none mb-4 flex-center-y hover-show">
+                            <div class="block">
+                                <a data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{ latest_poll.id }}"
+                                   class="cursor-pointer bg-circle-xs border border-black facebook-share">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{ latest_poll.id }}"
+                                   class="bg-circle-xs border border-black">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{ latest_poll.id }}"
+                                   class="bg-circle-xs border border-black">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="mailto:?subject=Check out {{ poll.title|urlencode:'' }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#poll-top-{{ latest_poll.id }}"
+                                   class="bg-circle-xs border border-black">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                <a data-screen-id="poll-top-{{ latest_poll.id }}"
+                                   class="cursor-pointer bg-circle-xs border border-black screenshot-share">
+                                    <i class="fas fa-file-image"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight hover-parent">
+                            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                            {{ latest_poll.title }}
+                        </div>
+                        <div class="block hover-parent">
+                            {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                            {{ latest_poll.poll_date|date:"F j, Y" }}
+                        </div>
+                        <div class="font-light mt-6">
+                            <div class="{% if is_rtl_org %}md:border-l pl-16 md:pl-8{% else %}md:border-r pr-16 md:pr-8{% endif %} inline-block border-black">
+                                <div class="md:text-5xl text-3xl leading-none">{{ latest_poll.responded_runs|intcomma }}</div>
+                                <div class="text-xs font-bold">{% trans "RESPONDERS" %}</div>
+                            </div>
+                            <div class="md:mx-0 md:mt-0 {% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %} inline-block mt-2 mx-auto">
+                                <div class="md:text-5xl text-3xl leading-none">{{ latest_poll.response_percentage }}</div>
+                                <div class="text-xs font-bold">{% trans "RESPONSE RATE" %}</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="mt-6 flex flex-wrap">
+                        <div class="md:mx-0 {% if is_rtl_org %}md:ml-8 {% else %}md:mr-8{% endif %} flex-none mx-auto">
+                            <div class="{% if is_rtl_org %}md:pl-4 {% else %}md:pr-4{% endif %} text-center inline-block">
+                                <img src="{{ STATIC_URL }}img/gender-male.png" width="40">
+                                <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.m.percentage|default:"0" }}%</div>
+                                <div class="text-sm leading-none">{{ gender_stats.m.count|default:"0"|intcomma }}</div>
+                            </div>
+                            <div class="rtl:border-r ltr:border-l text-center inline-block px-4 border-black">
+                                <img src="{{ STATIC_URL }}img/gender-female.png" width="40">
+                                <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.f.percentage|default:"0" }}%</div>
+                                <div class="text-sm leading-none">{{ gender_stats.f.count|default:"0"|intcomma }}</div>
+                            </div>
+                            {% if org|config:"has_extra_gender" %}
+                                <div class="rtl:border-r ltr:border-l text-center inline-block px-4 border-black">
+                                    <img src="{{ STATIC_URL }}img/gender-other.png" width="40">
+                                    <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.o.percentage|default:"0" }}%</div>
+                                    <div class="text-sm leading-none">{{ gender_stats.o.count|default:"0"|intcomma }}</div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div style="min-width:220px;
+                                    max-width:350px"
+                             class="md:mt-0 flex-1 inline-block mt-4">
+                            <div style="height:105px" class="relative w-full">
+                                {{ age_stats|json_script:"age_stats" }}
+                                <div data-aos="fade"
+                                     data-graph-type="age-chart"
+                                     data-bar-color="{{ org|config:'dark1_color' }}"
+                                     data-label-color="black"
+                                     data-stats="age_stats"
+                                     data-label-weight="400"
+                                     class="w-full h-full absolute age-chart"
+                                     id="age-bars"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="block tags mt-8">
+                            {% for tag in latest_poll.tags.all %}
+                                <div class="inline-block px-2 py-1 leading-none text-xs mb-1 border-gray-400 border">
+                                    <div class="whitespace-nowrap">{{ tag.name }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if show_maps %}
+                <div class="flex-1 text-black">
+                    <div class="rtl:pr-6 ltr:pl-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %} py-home text-center">
+                        <div class="text-sm font-bold mb-8">{% trans "TOTAL RESPONDERS" %}</div>
+                        <div data-map-url="/pollquestion/{{ top_question.id }}/results/"
+                             data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}"
+                             data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}"
+                             style="min-height:300px;
+                                    min-width:300px"
+                             class="h-full w-full map block"
+                             id="poll-map">
+                            <div style="min-height:300px;
+                                        min-width:300px"
+                                 class="flex text-center h-full w-full"
+                                 id="poll-map-placeholder">
+                                <div class="fa-3x inline-block m-auto self-center">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative h-full w-full mt-1 flex justify-center" id="map-info"></div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {% for question in latest_poll.get_questions %}
+            <div data-page="opinions"
+                 data-aos="fade"
+                 data-aos-anchor-placement="center-bottom"
+                 style="min-height:30rem"
+                 data-bar-color="{% cycle org|config:'dark1_color'|default:'#439932'  org|config:'light1_color'|default:'#FFD100' org|config:'dark2_color'|default:'#1751af' org|config:'dark3_color'|default:'#5eb3e0' as bar_color silent %}{% if question.get_bg_color_choice %} {{ question.get_bg_color_choice }} {% else %}{{ bar_color }}{% endif %}"
+                 class="md:flex {% cycle '' 'md:flex-row-reverse' %} block"
+                 id="question-block-{{ question.id }}">
+                <div class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg silent %}{% if question.get_color_choice_css %} {{ question.get_color_choice_css }} {% else %}{{ bg }}{% endif %} flex-1">
+                    <div class="md:py-24 p-home h-full flex-center-y">
+                        <div class="{% cycle '' 'md:flex-row-reverse' as reverse %} flex">
+                            <div data-html2canvas-ignore
+                                 class="flex-none bg-circle bg-black text-white font-bold">{{ forloop.counter }}</div>
+                            <div class="flex-1 flex-center-y">
+                                <div class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'white' 'black' 'white' 'white' as border_color silent %}{% if question.get_border_color_choice %} border-{{ question.get_border_color_choice }} {% else %}border-{{ border_color }}{% endif %} h-1 border-t">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <div class="{% if question.title|length < 50 %}text-3xl{% elif question.title|length < 120 %}text-2xl{% else %}text-xl{% endif %} font-alt font-bold leading-tight italic hover-parent">
+                                {% if forloop.counter|divisibleby:"2" %}
+                                    {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.flow_result.result_uuid|add:"_title"  "-m-8" "dark" %}
+                                {% else %}
+                                    {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.flow_result.result_uuid|add:"_title"  "-m-8" "white" %}
+                                {% endif %}
+                                {{ question.title }}
+                            </div>
+                            <div class="mt-4">
+                                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}{{ responded }} responded out of {{ polled }} polled{% endblocktrans %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 bg-white text-black hover-parent">
+                    <div class="md:border-t mx-home py-home hover-parent">
+                        <div data-html2canvas-ignore
+                             class="block justify-center flex flex-wrap hover-parent">
+                            {% if not question.is_open_ended %}
+                                <div class="text-xs flex-none mb-4">
+                                    <a href="#"
+                                       data-question="{{ question.id }}"
+                                       data-segment="all"
+                                       data-page="opinions"
+                                       class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %} {% if question.hide_all_chart_pills %}hidden{% endif %} pill-white selected segment-pill">
+                                        <div class="whitespace-nowrap">{% trans "ALL" %}</div>
+                                    </a>
+                                    {% if question.show_age %}
+                                        <a href="#"
+                                           data-question="{{ question.id }}"
+                                           data-segment="age"
+                                           data-page="opinions"
+                                           class="{% if question.get_last_pill == 'age' and not show_maps or not question.show_locations %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %} pill-white segment-pill">
+                                            <div class="whitespace-nowrap">{% trans "AGE" %}</div>
+                                        </a>
+                                    {% endif %}
+                                    {% if question.show_gender %}
+                                        <a href="#"
+                                           data-question="{{ question.id }}"
+                                           data-segment="gender"
+                                           data-page="opinions"
+                                           class="{% if question.get_last_pill == 'gender' and not show_maps or not question.show_locations %}{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %}{% else %}pill {% if is_rtl_org %}-mr-1{% else %}-ml-1{% endif %}{% endif %} pill-white segment-pill">
+                                            <div class="whitespace-nowrap">{% trans "GENDER" %}</div>
+                                        </a>
+                                    {% endif %}
+                                    {% if show_maps and question.show_locations %}
+                                        <a href="#"
+                                           data-question="{{ question.id }}"
+                                           data-segment="state"
+                                           data-page="opinions"
+                                           class="{% if is_rtl_org %}pill-first -mr-1{% else %}pill-last -ml-1{% endif %} pill-white segment-pill relative state-pill">
+                                            <span class="whitespace-nowrap">{% trans "LOCATION" %}</span>
+                                            <i class="fas fa-caret-down"></i>
+                                            <div style="margin-left:-1px"
+                                                 data-html2canvas-ignore
+                                                 class="state-dropdown absolute z-50"
+                                                 id="states-{{ question.id }}">
+                                                <div style="overflow-y:scroll;
+                                                            margin-top:.5rem;
+                                                            margin-left:-1rem"
+                                                     class="rtl:text-right ltr:text-left border border-gray-400 bg-white h-64">
+                                                    <div class="pt-1 text-black">
+                                                        {% for state in states %}
+                                                            <div data-state="{{ state.id }}"
+                                                                 data-click-handler=""
+                                                                 data-question="{{ question.id }}"
+                                                                 data-page="opinions"
+                                                                 class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} rtl:pr-2 rtl:pl-4 ltr:pl-2 ltr:pr-4 py-1 state-segment">
+                                                                <div class="rtl:float-right ltr:float-left checkbox">
+                                                                    <i class="fas fa-check"></i>
+                                                                </div>
+                                                                <div class="ml-4 whitespace-nowrap">{{ state.name }}</div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                <div class="block"></div>
+                            {% endif %}
+                            <div class="rtl:float-left ltr:float-right share flex-none mx-32 mb-4 flex-center-y hover-show">
+                                <div class="block">
+                                    <a data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{ question.id }}"
+                                       class="cursor-pointer bg-circle-xs border border-black facebook-share">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{ question.id }}"
+                                       class="bg-circle-xs border border-black">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{ question.id }}"
+                                       class="bg-circle-xs border border-black">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="mailto:?subject=Check out {{ poll.title|urlencode:'' }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{ question.id }}"
+                                       class="bg-circle-xs border border-black">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a data-screen-id="question-block-{{ question.id }}"
+                                       class="cursor-pointer bg-circle-xs border border-black screenshot-share">
+                                        <i class="fas fa-file-image"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="min-height:24rem;" class="relative w-full">
+                            <div data-question="{{ question.id }}"
+                                 data-segment="all"
+                                 class="w-full h-full absolute poll-chart block"
+                                 id="chart-{{ question.id }}">
+                                <div class="chart-progress flex text-center w-full h-full">
+                                    <div class="fa-5x inline-block m-auto self-center">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if latest_poll and latest_poll.response_title and latest_poll.response_content %}
+        <div class="md:mt-12 bg-grid pt-20">
+            <div class="md:pt-20 md:pt-16 bg-dark-blue mt-10 pt-8">
+                <div class="md:pb-12 max-w-page mx-auto bg-white p-home">
+                    <div class="p-home">
+                        <div class="w=1/4 float-right">
+                            <div class="md:block flex-none w-16 hidden">
+                                <img src="{{ STATIC_URL }}img/u-icon-small.png">
+                            </div>
+                        </div>
+                        <div class="md:text-5xl w-3/4 text-3xl font-bold hover-parent hover-parent inline-block">
+                            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_title"  "-m-8" "dark" %}
+                            {{ latest_poll.response_title }}
+                        </div>
+                        {% if latest_poll.response_author %}
+                            <div class="md:mt-6 text-base font-bold mt-4 hover-parent inline-block">
+                                {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_author"  "-m-8" "dark" %}
+                                {% trans "Written by:" %}
+                                {{ latest_poll.response_author }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-grid pt-16">
+            <div class="bg-white pt-8">
+                <div class="md:-mt-40 max-w-page mx-auto bg-white -mt-24">
+                    <div class="block hover-parent p-home pt-0">
+                        <div class="px-home">
+                            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_content"  "-m-8" "dark" %}
+                            {{ latest_poll.response_content|safe }}
+                        </div>
+                    </div>
+                    <div class="block p-home pt-0">
+                        <div class="block w-full px-home">
+                            <div data-href="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}"
+                                 data-width="100%"
+                                 data-numposts="5"
+                                 class="fb-comments"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}

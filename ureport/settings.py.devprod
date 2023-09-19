@@ -23,7 +23,7 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID_UREPORT', 'MISSING_AWS_ACC
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY_UREPORT', 'MISSING_AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
 AWS_S3_SECURE_URLS = False
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}
 
 # these two settings will cause our aws files to never expire
 # see http://developer.yahoo.com/performance/rules.html#expires

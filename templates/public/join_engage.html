@@ -1,0 +1,137 @@
+{% extends "public_base.html" %}
+{% load dashblocks thumbnail ureport i18n %}
+{% block top-join-call %}
+{% endblock top-join-call %}
+{% block content %}
+    {% load_qbs request.org 'join_engage' %}
+    {% load_qbs request.org 'join_steps' %}
+    <div class="bg-grid border-t border-b">
+        <div class="md:flex max-w-page mx-auto p-home hover-parent">
+            <div class="flex-1 flex-center-y">
+                <div class="text-5xl font-bold">
+                    {% if org|config:"join_button_text" %}
+                        {{ org|config:"join_button_text" }}
+                    {% else %}
+                        {% trans "Join Now" %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex-1 flex-center-y hover-parent">
+                <div class="md:pl-12 rtl:text-left ltr:text-right text-xl hover-parent">
+                    {% for d_block in join_engage|slice:":1" %}
+                        {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_content" "-m-8" "dark" %}
+                        {{ d_block.short_content_teaser|safe }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light1 py-12">
+        <div class="md:flex max-w-page mx-auto p-home">
+            <div class="md:md:w-1/2 flex-1">
+                <div class="text-3xl font-bold flex border-b border-black pb-4 mb-4">
+                    <div class="flex-none flex-center-y">
+                        <div class="bg-circle bg-black text-white">1</div>
+                    </div>
+                    <div class="pl-4 pr-12 flex-center-y">{% trans "How would you like to join?" %}</div>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex-1 flex-center">
+                <div class="md:pl-24 md:pr-12 grid grid-cols-3 text-xl font-bold flex justify-around">
+                    {% if org|config:"shortcode" %}
+                        <div class="md:mx-4 mb-4 text-center">
+                            <a href="#text">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </a>
+                            <div class="block">{% trans "Text" %}</div>
+                        </div>
+                    {% endif %}
+                    {% if org|config:"facebook_page_id" %}
+                        <div class="md:mx-4 mb-4 text-center">
+                            <a href="http://m.me/{{ org|config:'facebook_page_id' }}">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                            </a>
+                            <div class="block">Facebook</div>
+                        </div>
+                    {% endif %}
+                    {% if org|config:"whatsapp_number" %}
+                        <div class="md:mx-4 mb-4 text-center">
+                            <a href="https://wa.me/{{ org|config:'whatsapp_number' }}">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                            </a>
+                            <div class="block">WhatsApp</div>
+                        </div>
+                    {% endif %}
+                    {% if org|config:"telegram_bot" %}
+                        <div class="md:mx-4 mb-4 text-center">
+                            <a href="https://t.me/{{ org|config:'telegram_bot' }}">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-telegram"></i>
+                                </div>
+                            </a>
+                            <div class="block">Telegram</div>
+                        </div>
+                    {% endif %}
+                    {% if org|config:"viber_username" %}
+                        <div class="md:mx-4 mb-4 text-center">
+                            <a href="https://chats.viber.com/{{ org|config:'viber_username' }}">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-viber"></i>
+                                </div>
+                            </a>
+                            <div class="block">Viber</div>
+                        </div>
+                    {% endif %}
+                    {% if org|config:"line_link" %}
+                        <div class="md:mx-4 mb-4 text-center">
+                            <a href="{{ org|config:'line_link' }}">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-line"></i>
+                                </div>
+                            </a>
+                            <div class="block">Line</div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for join_step in join_steps %}
+        <div class="{% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %} py-12">
+            <div class="md:flex  max-w-page mx-auto p-home"
+                 id="{% if forloop.first %}text{% endif %}">
+                <div class="flex-1">
+                    <div class="{% cycle 'border-white' 'border-white' 'border-white' 'border-black' %} text-3xl font-bold flex border-b pb-4 mb-4">
+                        <div class="flex-none flex-center-y">
+                            <div class="bg-circle bg-black text-white">{{ forloop.counter|add:1 }}</div>
+                        </div>
+                        <div class="pl-4 pr-12 flex-center-y hover-parent">
+                            {% if forloop.counter|divisibleby:'4' %}
+                                {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "dark" %}
+                            {% else %}
+                                {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "white" %}
+                            {% endif %}
+                            {{ join_step.title|upper }}
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 flex-center-y">
+                    <div class="md:pl-24 md:pr-12 text-xl hover-parent">
+                        {% if forloop.counter|divisibleby:'4' %}
+                            {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "dark" %}
+                        {% else %}
+                            {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "white" %}
+                        {% endif %}
+                        {{ join_step.content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

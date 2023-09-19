@@ -1,0 +1,83 @@
+{% load i18n compress ureport %}
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}
+            {% trans "U-Report" %}
+        {% endblock title %}
+        {% block subtitle %}
+            &nbsp;
+        {% endblock subtitle %}
+    </title>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+    <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+    <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png">
+    <style type="text/css">
+    body {
+      background-image: url('/sitestatic/img/landing_bg.jpg');
+      background-size: cover;
+    }
+    .welcome-container {
+      width: 100%;
+      padding: 200px 15% 0px 15%;
+      position: relative;
+    }
+    
+    .welcome-logo {
+      position: absolute;
+      top: 0px;
+      height: 125px;
+      width: 301px;
+      background-image: url('/sitestatic/img/landing_logo.png');
+    }
+    </style>
+    <style type="text/css">
+    @font-face {
+      font-family: MontserratBold;
+      src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
+    }
+    
+    @font-face {
+      font-family: RobotoSlab;
+      src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
+    }
+    
+    @font-face {
+      font-family: DroidSerif;
+      src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
+    }
+    </style>
+    {% compress css %}
+        {% block styles %}
+            <link type="text/css"
+                  rel="stylesheet"
+                  href="{{ STATIC_URL }}css/bootstrap.css">
+            <link type="text/css"
+                  rel="stylesheet"
+                  href="{{ STATIC_URL }}css/bootstrap-theme.css">
+            <link type="text/less"
+                  rel="stylesheet"
+                  href="{{ STATIC_URL }}less/ureport2.less">
+        {% endblock styles %}
+    {% endcompress %}
+    <body>
+        <div class="welcome-container">
+            <div class="welcome-logo"></div>
+            <div class="welcome-text">
+                U-Report is a free youth-facing engagement application led by UNICEF to amplify the voices of youth and empower
+                them to speak out about the issues that matter most to them.
+                <br>
+                <br>
+                Using this free application, U-Reporters can connect through a range of communication channels to voice their
+                opinions about what is happening in their communities and work together with leaders at the community and
+                national level for positive social change.
+            </div>
+            <div class="welcome-flags">{% show_org_flags %}</div>
+        </div>
+    </body>
+</head>
