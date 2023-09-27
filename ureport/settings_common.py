@@ -1684,6 +1684,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://sierraleone.ureport.in/count/",
     ),
     dict(
+        name="Slovenija",
+        host="//slovenija.ureport.in",
+        flag="flag_slovenija.png",
+        countries_codes=["SVN"],
+        count_link="http://slovenija.ureport.in/count/",
+    ),
+    dict(
         name="Solomon Islands",
         host="//solomonislands.ureport.in",
         flag="flag_solomonislands.png",
