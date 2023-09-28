@@ -1,3 +1,8 @@
+v1.2.80 (2023-09-28)
+-------------------------
+ * Merge pull request #1157 from Ilhasoft/add-slovenija
+ * Add Slovenija Flag
+
 v1.2.79 (2023-09-11)
 -------------------------
  * Merge pull request #1148 from rapidpro/translations_locale-en-lc-messages-django-po--main_sr_RS@latin
