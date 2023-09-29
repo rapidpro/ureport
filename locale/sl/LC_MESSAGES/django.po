@@ -1038,7 +1038,7 @@ msgid "IN"
 msgstr "V"
 
 msgid "COUNTRIES WORLDWIDE"
-msgstr "DRŽAVE SVETA"
+msgstr "DRŽAVAH SVETA"
 
 msgid "AGES"
 msgstr "STAROST"
