@@ -2035,7 +2035,7 @@ msgid "Whether to activate an extra gender."
 msgstr "Ali naj se aktivira dodaten spol."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr "Ali naj se skrije razčlenitvene diagrame odziva uporabnikov."
+msgstr "Ali naj se skrije razčlenitvene diagrame odziva U-Reporterjev."
 
 msgid "Whether to show the UNICEF logo in the footer."
 msgstr "Ali naj se v nogi prikaže logotip UNICEF-a."
