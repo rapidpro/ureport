@@ -889,7 +889,7 @@ msgid "READ MORE"
 msgstr "PREBERI VEČ"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "VEČ O VPLETENOSTI"
+msgstr "VEČ O U-REPORTERJIH"
 
 msgid ""
 "\n"
