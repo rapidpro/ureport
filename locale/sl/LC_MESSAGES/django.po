@@ -817,7 +817,7 @@ msgid "About"
 msgstr "O nas"
 
 msgid "Engagement"
-msgstr "Vpletenost"
+msgstr "U-Reporterji"
 
 msgid "Reports"
 msgstr "Poročila"
