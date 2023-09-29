@@ -2028,7 +2028,7 @@ msgid ""
 "If this org if for global data. e.g: It shows a world map instead of a "
 "country map."
 msgstr ""
-"Če je ta namenjeno globalnim podatkom, npr.: namesto zemljevida državese "
+"Če je ta namenjeno globalnim podatkom, npr.: namesto zemljevida države se "
 "prikazuje zemljevid sveta."
 
 msgid "Whether to activate an extra gender."
