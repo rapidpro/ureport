@@ -1342,7 +1342,7 @@ msgid ""
 "              "
 msgstr ""
 "\n"
-"               Žal se trenutno ne moreš prijaviti, ker smo prejeli %(failed_login_limit)s napačno prijavo.\n"
+"               Žal se trenutno ne moreš prijaviti, ker smo prejeli %(failed_login_limit)s napačnih prijav.\n"
 "              "
 
 #, python-format
