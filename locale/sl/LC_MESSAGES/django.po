@@ -1933,7 +1933,7 @@ msgid "The description of the stories page"
 msgstr "Opis za stran s prispevki"
 
 msgid "The description of the engagement page"
-msgstr "Opis za stran z odzivom uporabnikov"
+msgstr "Opis za stran z U-Reporterji"
 
 msgid "The callout message on the footer engagement section"
 msgstr "Poziv v nogi, ki se navezuje na razdelek o vpletenosti uporabnikov"
