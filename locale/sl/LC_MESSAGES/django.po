@@ -1936,7 +1936,7 @@ msgid "The description of the engagement page"
 msgstr "Opis za stran z U-Reporterji"
 
 msgid "The callout message on the footer engagement section"
-msgstr "Poziv v nogi, ki se navezuje na razdelek o vpletenosti uporabnikov"
+msgstr "Poziv v nogi, ki se navezuje na razdelek o U-Reporterjih"
 
 msgid "The primary color for styling for this organization, should be dark"
 msgstr "Primarna barva za oblikovanje za to organizacijo mora biti temna"
