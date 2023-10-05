@@ -35,7 +35,11 @@
     is-12
 {% endblock form-span %}
 {% block form-help %}
-    <div class="notification">{% trans "You must have at least one administator" %}</div>
+    <div class="notification">
+        - {% trans "You must have at least one administator" %}
+        </br>
+        - {% trans "You can resend an invite using the field above" %}
+    </div>
 {% endblock form-help %}
 {% block fields %}
     <table class="table is-striped is-fullwidth is-hoverable">
@@ -64,7 +68,7 @@
             {% endfor %}
             {% for invite in invites %}
                 <tr class="{% cycle 'row2' 'row1' %} invite">
-                    <td>{{ invite.email }} (Invite Sent)</td>
+                    <td>{{ invite.email }} (Invite Sent on <span class="italic is-size-7">{{ invite.modified_on  }}</span>)</td>
                     <td class="permission">
                         {% if invite.user_group == 'A' %}
                             <input type="checkbox" disabled>
