@@ -5,6 +5,7 @@ from html import unescape
 
 import feedparser
 import six
+from smartmin.models import SmartModel
 
 from django.conf import settings
 from django.core.cache import cache
@@ -13,7 +14,6 @@ from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
-from smartmin.models import SmartModel
 
 RSS_JOBS_FEED_CACHE_TIME = getattr(settings, "RSS_JOBS_FEED_CACHE_TIME", 60 * 60 * 6)
 RSS_JOBS_KEY = "jobsource:%d:%d"

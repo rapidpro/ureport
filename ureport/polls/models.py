@@ -9,6 +9,7 @@ from datetime import timedelta
 
 import six
 from django_redis import get_redis_connection
+from smartmin.models import SmartModel
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -24,7 +25,6 @@ from django.utils.translation import gettext_lazy as _
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import Org, OrgBackend
 from dash.tags.models import Tag
-from smartmin.models import SmartModel
 from ureport.flows.models import FlowResult, FlowResultCategory
 
 logger = logging.getLogger(__name__)
