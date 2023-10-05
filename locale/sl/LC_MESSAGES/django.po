@@ -1076,7 +1076,7 @@ msgid "Visit"
 msgstr "Obišči"
 
 msgid "How would you like to join?"
-msgstr "Kako bi se rad_a pridružil_a?"
+msgstr "Izberi aplikacijo in pošlji SODELUJEM."
 
 msgid "Text"
 msgstr "Tekst"
