@@ -9,7 +9,7 @@
     "is-svg": "^4.4.0",
     "less": "4.1.2",
     "lessc": "^1.0.2",
-    "postcss": "^8.4.7",
+    "postcss": "^8.4.31",
     "postcss-cli": "^9.1.0",
     "postcss-nested": "^5.0.6",
     "postcss-scss": "^4.0.3",

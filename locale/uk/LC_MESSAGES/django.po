@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-18 11:30+0000\n"
+"POT-Creation-Date: 2023-10-05 11:43+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -870,6 +870,9 @@ msgstr "ОСТАННІ СПОВІЩЕННЯ"
 
 msgid "Backends"
 msgstr "Бекенди"
+
+msgid "You can resend an invite using the field above"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr "Додати os Виберіть теги"
