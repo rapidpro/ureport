@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-18 11:30+0000\n"
+"POT-Creation-Date: 2023-10-05 11:43+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -862,6 +862,9 @@ msgstr "SENASTE NOTIFIKATIONERNA"
 
 msgid "Backends"
 msgstr "Backends"
+
+msgid "You can resend an invite using the field above"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr ""
