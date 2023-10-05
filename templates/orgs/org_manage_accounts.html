@@ -64,7 +64,7 @@
             {% endfor %}
             {% for invite in invites %}
                 <tr class="{% cycle 'row2' 'row1' %} invite">
-                    <td>{{ invite.email }} (Invite Sent)</td>
+                    <td>{{ invite.email }} (Invite Sent on <span class="italic is-size-7">{{ invite.modified_on  }}</span>)</td>
                     <td class="permission">
                         {% if invite.user_group == 'A' %}
                             <input type="checkbox" disabled>
