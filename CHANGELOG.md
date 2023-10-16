@@ -1,3 +1,16 @@
+v1.2.81 (2023-10-05)
+-------------------------
+ * Merge pull request #1162 from rapidpro/invite-date-display
+ * Run code checks
+ * Add notification message for resending invites
+ * Show date on invites
+ * Merge pull request #1161 from rapidpro/update-deps
+ * Update deps
+ * Merge pull request #1160 from rapidpro/dependabot/pip/urllib3-1.26.17
+ * Merge pull request #1159 from rapidpro/dependabot/npm_and_yarn/postcss-8.4.31
+ * Bump urllib3 from 1.26.16 to 1.26.17
+ * Bump postcss from 8.4.21 to 8.4.31
+
 v1.2.80 (2023-09-28)
 -------------------------
  * Merge pull request #1157 from Ilhasoft/add-slovenija
