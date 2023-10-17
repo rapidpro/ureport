@@ -1,3 +1,20 @@
+v1.2.82 (2023-10-17)
+-------------------------
+ * Merge pull request #1163 from Ilhasoft/fix/update-translations-locale-for-en-lc
+ * Fix conflict on locale/sl/LC_MESSAGES/django.po file
+ * Update the django.mo file
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Removing locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+ * Translate locale/en/LC_MESSAGES/django.po in sl
+
 v1.2.81 (2023-10-05)
 -------------------------
  * Merge pull request #1162 from rapidpro/invite-date-display

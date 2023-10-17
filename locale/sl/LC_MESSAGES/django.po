@@ -757,7 +757,7 @@ msgid "About"
 msgstr "O nas"
 
 msgid "Engagement"
-msgstr "Vpletenost"
+msgstr "U-Reporterji"
 
 msgid "Reports"
 msgstr "Poročila"
@@ -829,7 +829,7 @@ msgid "READ MORE"
 msgstr "PREBERI VEČ"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "VEČ O VPLETENOSTI"
+msgstr "VEČ O U-REPORTERJIH"
 
 msgid ""
 "\n"
@@ -868,7 +868,7 @@ msgid "Backends"
 msgstr "Backends"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Ponovno lahko pošlješ povabilo s pomočjo zgornjega okenca"
 
 msgid "Add os Select tags"
 msgstr "Dodaj ali izberi oznake"
@@ -968,7 +968,7 @@ msgid "IN"
 msgstr "V"
 
 msgid "COUNTRIES WORLDWIDE"
-msgstr "DRŽAVE SVETA"
+msgstr "DRŽAVAH SVETA"
 
 msgid "AGES"
 msgstr "STAROST"
@@ -998,7 +998,7 @@ msgid "Visit"
 msgstr "Obišči"
 
 msgid "How would you like to join?"
-msgstr "Kako bi se rad_a pridružil_a?"
+msgstr "Izberi aplikacijo in pošlji SODELUJEM."
 
 msgid "Text"
 msgstr "Tekst"
@@ -1258,7 +1258,7 @@ msgid ""
 "              "
 msgstr ""
 "\n"
-"               Žal se trenutno ne moreš prijaviti, ker smo prejeli %(failed_login_limit)s napačno prijavo.\n"
+"               Žal se trenutno ne moreš prijaviti, ker smo prejeli %(failed_login_limit)s napačnih prijav.\n"
 "              "
 
 #, python-format
@@ -1801,10 +1801,10 @@ msgid "The description of the stories page"
 msgstr "Opis za stran s prispevki"
 
 msgid "The description of the engagement page"
-msgstr "Opis za stran z odzivom uporabnikov"
+msgstr "Opis za stran z U-Reporterji"
 
 msgid "The callout message on the footer engagement section"
-msgstr "Poziv v nogi, ki se navezuje na razdelek o vpletenosti uporabnikov"
+msgstr "Poziv v nogi, ki se navezuje na razdelek o U-Reporterjih"
 
 msgid "The primary color for styling for this organization, should be dark"
 msgstr "Primarna barva za oblikovanje za to organizacijo mora biti temna"
@@ -1878,14 +1878,18 @@ msgstr "Besede, ki jih želite izločiti iz rezultatov na spletni strani"
 msgid "If there are jobs to be shown on the public site."
 msgstr "Ali so prosta delovna mesta za prikaz na spletni strani."
 
-msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
-msgstr "Če je ta namenjeno globalnim podatkom, npr.: namesto zemljevida državese prikazuje zemljevid sveta."
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+"Če je ta namenjeno globalnim podatkom, npr.: namesto zemljevida države se "
+"prikazuje zemljevid sveta."
 
 msgid "Whether to activate an extra gender."
 msgstr "Ali naj se aktivira dodaten spol."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr "Ali naj se skrije razčlenitvene diagrame odziva uporabnikov."
+msgstr "Ali naj se skrije razčlenitvene diagrame odziva U-Reporterjev."
 
 msgid "Whether to show the UNICEF logo in the footer."
 msgstr "Ali naj se v nogi prikaže logotip UNICEF-a."
