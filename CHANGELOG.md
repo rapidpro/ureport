@@ -1,3 +1,8 @@
+v1.2.83 (2023-10-18)
+-------------------------
+ * Merge pull request #1164 from rapidpro/update-dash
+ * Update deps
+
 v1.2.82 (2023-10-17)
 -------------------------
  * Merge pull request #1163 from Ilhasoft/fix/update-translations-locale-for-en-lc
