@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Rodolfo Pedro, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/rapidpro/teams/226/pt/)\n"
@@ -1479,6 +1479,11 @@ msgstr "O nome da categoria deste inquérito"
 
 msgid "Poll Categories"
 msgstr "Categorias de Inquérito"
+
+#, fuzzy
+#| msgid "Whether this bot should be shown to the public"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Se este bot deve aparecer na página de destino"
 
 msgid "The Flow this Poll is based on"
 msgstr "O fluxo na qual este inquérito é baseado em"

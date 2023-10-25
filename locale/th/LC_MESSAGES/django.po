@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -1475,6 +1475,11 @@ msgstr "ชื่อของหมวดหมู่โพลนี้"
 
 msgid "Poll Categories"
 msgstr "หมวดหมู่โพล"
+
+#, fuzzy
+#| msgid "Whether this bot should be shown to the public"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "บอทนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
 
 msgid "The Flow this Poll is based on"
 msgstr "Flow ที่ใช้สำหรับหมวดหมู่นี้"
