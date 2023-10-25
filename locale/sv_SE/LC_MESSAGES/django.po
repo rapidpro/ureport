@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 10:15+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -902,6 +902,9 @@ msgstr "De senaste undersökningarna synkroniseras varje var 60:e minut"
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Undersökningen synkroniseras i sin helhet var 24:e timme"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Synkronisering inte schemalagd, inte aktiv"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Synkroniseringar är inte planerade, inget flöde finns för undersökningen"
@@ -2009,9 +2012,6 @@ msgstr "Raden skapades genom squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Synkronisering inte schemalagd, inte aktiv"
 
 #~ msgid "Photos"
 #~ msgstr "Bilder"

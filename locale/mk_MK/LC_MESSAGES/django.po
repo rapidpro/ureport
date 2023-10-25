@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 10:15+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -913,6 +913,9 @@ msgstr "Синхронизацијата на последните анкети 
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Синхронизацијата на анкетите се врши на секои 24 часа"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Нема закажана синхронизација, неактивно"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Нема закажана синхронизација, нема анкети"
@@ -2024,9 +2027,6 @@ msgstr "Дали овој ред е создаден со збивање"
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Нема закажана синхронизација, неактивно"
 
 #~ msgid "Photos"
 #~ msgstr "Фотографии"

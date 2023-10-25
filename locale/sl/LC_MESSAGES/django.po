@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 10:15+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Neja Čopi, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -906,6 +906,9 @@ msgstr "Sinhronizacija nedavnih anket je načrtovana vsakih 60min"
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Sinhronizacija ankete je načrtovana vsakih 24 ur"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Ni načrtovane sinhronizacije, ni aktivna"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Ni načrtovane sinhronizacije, ni flow-a za anketo"
@@ -1951,6 +1954,3 @@ msgstr "Ali je bila ta vrstica ustvarjena z združevanjem"
 
 msgid "Something to trigger localizations"
 msgstr "Nekaj za zagon lokalizacije"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Ni načrtovane sinhronizacije, ni aktivna"

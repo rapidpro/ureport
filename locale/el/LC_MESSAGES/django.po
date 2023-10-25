@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 10:15+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -896,6 +896,9 @@ msgstr " Οι πιο πρόσφατοι συγχρονισμοί για την �
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Οι συγχρονισμοί δημοσκοπήσεων προγραμματίζονται κάθε 24 ώρες"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Δεν προγραμματίζονται συγχρονισμοί, δεν είναι ενεργοί"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Δεν υπάρχει προγραμματισμός για τους συγχρονισμούς, δεν υπάρχει ροή για την δημοσκόπηση"
@@ -1939,6 +1942,3 @@ msgstr "Εάν αυτή η σειρά δημιουργήθηκε ύστερα α
 
 msgid "Something to trigger localizations"
 msgstr "Κάτι για να ενεργοποιήσει τους εντοπισμούς"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Δεν προγραμματίζονται συγχρονισμοί, δεν είναι ενεργοί"

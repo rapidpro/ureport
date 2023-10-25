@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 10:15+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -910,6 +910,9 @@ msgstr "Синхронізація останніх опитуваь кожні 
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Синхронізація опитувань кожні 24 години"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Синхронізація не планується, не активна"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Не планується синхронізація, немає потоку для опитування"
@@ -1957,6 +1960,3 @@ msgstr "Чи створено цей рядок шляхом стискання"
 
 msgid "Something to trigger localizations"
 msgstr "Щось для запуску локалізації"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Синхронізація не планується, не активна"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 10:15+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -914,6 +914,9 @@ msgstr "Poslední synchronizace průzkumů naplánovaná každých 60 minut"
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Synchronizace průzkumů naplánovaná každých 24 hodin"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Nenaplánovaná synchronizace, není aktivní"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Žádné plánování synchronizací, žádný tok pro průzkum"
@@ -1960,6 +1963,3 @@ msgstr "Zda byl tento řádek vytvořen stlačením"
 
 msgid "Something to trigger localizations"
 msgstr "Něco pro spouštění lokalizací"
-
-#~ msgid "Not scheduling syncs, not active"
-#~ msgstr "Nenaplánovaná synchronizace, není aktivní"

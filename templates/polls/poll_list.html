@@ -88,6 +88,8 @@
                             {% trans "Recent poll syncs scheduled every 60min" %}
                         {% elif obj in other_polls %}
                             {% trans "Poll syncs scheduled every 24h" %}
+                        {% elif not obj.is_active %}
+                            {% trans "Not scheduling syncs, not active" %}
                         {% elif not obj.flow_uuid %}
                             {% trans "Not scheduling syncs, no flow for poll" %}
                         {% endif %}
