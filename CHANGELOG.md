@@ -1,3 +1,8 @@
+v1.2.85 (2023-10-25)
+-------------------------
+ * Merge pull request #1166 from rapidpro/poll-published
+ * Add back the sync status message for inactive polls
+
 v1.2.83 (2023-10-18)
 -------------------------
  * Merge pull request #1164 from rapidpro/update-dash
