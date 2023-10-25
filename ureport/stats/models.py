@@ -686,7 +686,9 @@ class PollStats(models.Model):
     def calculate_average_response_rate(cls, org):
         key = f"org:{org.id}:average_response_rate"
 
-        poll_ids = list(Poll.objects.filter(org_id=org.id, is_active=True).only("id").values_list("id", flat=True))
+        poll_ids = list(
+            Poll.objects.filter(org_id=org.id, published=True, is_active=True).only("id").values_list("id", flat=True)
+        )
 
         flow_result_ids = list(
             PollQuestion.objects.filter(is_active=True, poll_id__in=poll_ids).values_list("flow_result_id", flat=True)

@@ -239,6 +239,7 @@ class PollCRUDL(SmartCRUDL):
                 flow_uuid=obj.flow_uuid,
                 backend=obj.backend,
                 is_active=True,
+                published=True,
                 created_on__gte=five_minutes_ago,
             ).first()
             if similar_poll:

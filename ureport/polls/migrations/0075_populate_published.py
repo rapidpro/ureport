@@ -14,7 +14,7 @@ def populate_poll_published(apps, schema_editor):  # pragma: no cover
     Poll.objects.filter(is_active=False).update(published=False)
 
     # make all poll have is_active=True
-    Poll.objects.filter(is_active=False).update(is_active=True)
+    Poll.objects.filter(is_active=False).exclude(flow_uuid="").update(is_active=True)
 
 
 class Migration(migrations.Migration):
