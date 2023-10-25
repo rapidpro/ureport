@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -903,9 +903,6 @@ msgstr ""
 msgid "Poll syncs scheduled every 24h"
 msgstr ""
 
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
@@ -1542,6 +1539,11 @@ msgstr "Името на тази категория от допитвания"
 
 msgid "Poll Categories"
 msgstr "Категории допитвания"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Дали тази организация трябва да бъде показана на целевата страница"
 
 msgid "The Flow this Poll is based on"
 msgstr "Потокът, на който е базирано това допитване"

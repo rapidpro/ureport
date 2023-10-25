@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -900,9 +900,6 @@ msgstr "กำหนดเวลาซิงค์ข้อมูลโพลล
 msgid "Poll syncs scheduled every 24h"
 msgstr "กำหนดเวลาซิงค์ข้อมูลโพลไว้ทุก 24 ชั่วโมง"
 
-msgid "Not scheduling syncs, not active"
-msgstr "ไม่ได้กำหนดเวลาการซิงค์ข้อมูล ไม่ทำงาน"
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "ไม่กำหนดเวลาการซิงค์ข้อมูล ไม่พบ Flow ของโพลสำรวจ"
 
@@ -1476,6 +1473,11 @@ msgstr "ชื่อของหมวดหมู่โพลนี้"
 msgid "Poll Categories"
 msgstr "หมวดหมู่โพล"
 
+#, fuzzy
+#| msgid "Whether this bot should be shown to the public"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "บอทนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
+
 msgid "The Flow this Poll is based on"
 msgstr "Flow ที่ใช้สำหรับหมวดหมู่นี้"
 
@@ -1941,3 +1943,6 @@ msgstr "Row นี้ถูกสร้างขึ้นโดยการบ�
 
 msgid "Something to trigger localizations"
 msgstr "สิ่งที่จะเริ่มต้นการแปลภาษาท้องถิ่น"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "ไม่ได้กำหนดเวลาการซิงค์ข้อมูล ไม่ทำงาน"

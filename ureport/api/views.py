@@ -289,7 +289,7 @@ class PollList(BaseListAPIView):
 
     def get_queryset(self):
         q = super(PollList, self).get_queryset()
-        q = q.filter(is_active=True, has_synced=True).exclude(flow_uuid="")
+        q = q.filter(is_active=True, published=True, has_synced=True).exclude(flow_uuid="")
         if self.request.query_params.get("flow_uuid", None):
             q = q.filter(flow_uuid=self.request.query_params.get("flow_uuid"))
 
@@ -438,7 +438,7 @@ class PollDetails(RetrieveAPIView):
     """
 
     serializer_class = PollReadSerializer
-    queryset = Poll.objects.filter(is_active=True, has_synced=True).exclude(flow_uuid="")
+    queryset = Poll.objects.filter(is_active=True, published=True, has_synced=True).exclude(flow_uuid="")
 
 
 class FeaturedPollList(BaseListAPIView):
@@ -601,14 +601,14 @@ class FeaturedPollList(BaseListAPIView):
 
         if self.request.query_params.get("sort", None) == "modified_on":
             q = (
-                q.filter(is_active=True, has_synced=True)
+                q.filter(is_active=True, published=True, has_synced=True)
                 .exclude(flow_uuid="")
                 .filter(is_featured=True)
                 .order_by("-modified_on")
             )
         else:
             q = (
-                q.filter(is_active=True, has_synced=True)
+                q.filter(is_active=True, published=True, has_synced=True)
                 .exclude(flow_uuid="")
                 .filter(is_featured=True)
                 .order_by("-created_on")

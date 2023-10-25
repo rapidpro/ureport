@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -939,9 +939,6 @@ msgstr ""
 msgid "Poll syncs scheduled every 24h"
 msgstr ""
 
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
@@ -1627,6 +1624,11 @@ msgstr "Nama kategori jajak pendapat ini"
 
 msgid "Poll Categories"
 msgstr "Kategori Jajak Pendapat"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Centang jika ingin ditampilkan di halaman depan"
 
 msgid "The Flow this Poll is based on"
 msgstr "Arus Poll ini berdasarkan"

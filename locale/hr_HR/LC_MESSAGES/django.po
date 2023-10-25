@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -920,9 +920,6 @@ msgstr "Sinkroniziranje posljednje ankete zakazano je svakih 60 minuta"
 msgid "Poll syncs scheduled every 24h"
 msgstr "Anketa se sinkronizira svakih 24 sata"
 
-msgid "Not scheduling syncs, not active"
-msgstr "Ne sinkronizira se, neaktivno"
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Ne planira sinkronizaciju, nema flowa za anketu"
 
@@ -1546,6 +1543,11 @@ msgstr "Naziv kategorije ove ankete"
 msgid "Poll Categories"
 msgstr "Kategorije ankete"
 
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Treba li se ova org prikazati na glavnoj stranici."
+
 msgid "The Flow this Poll is based on"
 msgstr "Dijagram na kojem je ova anketa zasnovana"
 
@@ -2029,6 +2031,9 @@ msgstr "Je li priča objavljena"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "Ne sinkronizira se, neaktivno"
 
 #~ msgid "Photos"
 #~ msgstr "Slike"

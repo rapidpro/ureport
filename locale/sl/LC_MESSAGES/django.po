@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Neja Čopi, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -907,9 +907,6 @@ msgstr "Sinhronizacija nedavnih anket je načrtovana vsakih 60min"
 msgid "Poll syncs scheduled every 24h"
 msgstr "Sinhronizacija ankete je načrtovana vsakih 24 ur"
 
-msgid "Not scheduling syncs, not active"
-msgstr "Ni načrtovane sinhronizacije, ni aktivna"
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Ni načrtovane sinhronizacije, ni flow-a za anketo"
 
@@ -1486,6 +1483,11 @@ msgstr "Ime kategorije, ki ji anketa pripada"
 msgid "Poll Categories"
 msgstr "Kategorije anket"
 
+#, fuzzy
+#| msgid "Whether this bot should be shown to the public"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Ali naj bo ta bot prikazan javno"
+
 msgid "The Flow this Poll is based on"
 msgstr "Flow, na katerem temelji ta anketa"
 
@@ -1878,12 +1880,8 @@ msgstr "Besede, ki jih želite izločiti iz rezultatov na spletni strani"
 msgid "If there are jobs to be shown on the public site."
 msgstr "Ali so prosta delovna mesta za prikaz na spletni strani."
 
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
-msgstr ""
-"Če je ta namenjeno globalnim podatkom, npr.: namesto zemljevida države se "
-"prikazuje zemljevid sveta."
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr "Če je ta namenjeno globalnim podatkom, npr.: namesto zemljevida države se prikazuje zemljevid sveta."
 
 msgid "Whether to activate an extra gender."
 msgstr "Ali naj se aktivira dodaten spol."
@@ -1953,3 +1951,6 @@ msgstr "Ali je bila ta vrstica ustvarjena z združevanjem"
 
 msgid "Something to trigger localizations"
 msgstr "Nekaj za zagon lokalizacije"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "Ni načrtovane sinhronizacije, ni aktivna"

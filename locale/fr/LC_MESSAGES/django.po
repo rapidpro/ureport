@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -906,9 +906,6 @@ msgstr "Synchronisations de sondages récentes planifiées toutes les 60 minutes
 msgid "Poll syncs scheduled every 24h"
 msgstr "Synchronisation des sondages programmée toutes les 24h"
 
-msgid "Not scheduling syncs, not active"
-msgstr "Ne planifie pas les synchronisations, n'est pas actif"
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Pas de planification des synchronisations, pas de flux pour le sondage"
 
@@ -1482,6 +1479,11 @@ msgstr "Le nom de la rubrique de ce sondage"
 msgid "Poll Categories"
 msgstr "Rubriques des sondages"
 
+#, fuzzy
+#| msgid "Whether this bot should be shown to the public"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Si ce bot doit être montré au public"
+
 msgid "The Flow this Poll is based on"
 msgstr "Le Flow RapidPro sur lequel ce sondage s’appuie."
 
@@ -1947,3 +1949,6 @@ msgstr "Si cette ligne a été créée en écrasant"
 
 msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "Ne planifie pas les synchronisations, n'est pas actif"

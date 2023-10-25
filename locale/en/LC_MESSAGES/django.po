@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -863,9 +863,6 @@ msgstr ""
 msgid "Poll syncs scheduled every 24h"
 msgstr ""
 
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
@@ -1426,6 +1423,9 @@ msgid "The name of this poll category"
 msgstr ""
 
 msgid "Poll Categories"
+msgstr ""
+
+msgid "Whether this poll should be visible/hidden on the public site"
 msgstr ""
 
 msgid "The Flow this Poll is based on"

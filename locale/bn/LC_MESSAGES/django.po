@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -909,9 +909,6 @@ msgstr ""
 msgid "Poll syncs scheduled every 24h"
 msgstr ""
 
-msgid "Not scheduling syncs, not active"
-msgstr ""
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
@@ -1550,6 +1547,11 @@ msgstr "এই পোল এর ধরণের নাম "
 
 msgid "Poll Categories"
 msgstr "পোল এর ধরণ"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
 msgid "The Flow this Poll is based on"
 msgstr "এই পোল টি যে ধারার অন্তর্ভুক্ত "

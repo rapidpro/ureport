@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 10:15+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -906,9 +906,6 @@ msgstr "Nylige undersøkelser synkronieres hvert 60 minutt"
 msgid "Poll syncs scheduled every 24h"
 msgstr "Undersøkelsen synkroniseres som helhet hver 24 time"
 
-msgid "Not scheduling syncs, not active"
-msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
-
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for undersøkelsen"
 
@@ -1527,6 +1524,11 @@ msgstr "Navnet på denne avstemningskategorien"
 msgid "Poll Categories"
 msgstr "Avstemningskategorier"
 
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Organisasjonen skal vises på landingssiden"
+
 msgid "The Flow this Poll is based on"
 msgstr "Flowen denne avstemningen er basert på"
 
@@ -2012,6 +2014,9 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#~ msgid "Not scheduling syncs, not active"
+#~ msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
 
 #~ msgid "Photos"
 #~ msgstr "Bilder"

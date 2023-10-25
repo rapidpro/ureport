@@ -33,6 +33,7 @@ from .models import Poll, PollImage, PollQuestion, PollResponseCategory
 
 class PollForm(forms.ModelForm):
     is_active = forms.BooleanField(required=False)
+    published = forms.BooleanField(required=False)
     backend = forms.ModelChoiceField(OrgBackend.objects.none(), required=False)
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
@@ -79,7 +80,16 @@ class PollForm(forms.ModelForm):
 
     class Meta:
         model = Poll
-        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image", "poll_tags")
+        fields = (
+            "is_active",
+            "published",
+            "is_featured",
+            "backend",
+            "title",
+            "category",
+            "category_image",
+            "poll_tags",
+        )
 
 
 class PollResponseForm(forms.ModelForm):
@@ -699,6 +709,11 @@ class PollCRUDL(SmartCRUDL):
         form_class = PollForm
         fields = ("is_active", "is_featured", "title", "category", "category_image", "poll_tags")
         success_url = "id@polls.poll_poll_flow"
+
+        def derive_fields(self):
+            if self.request.user.is_superuser:
+                return ("is_active", "published", "is_featured", "title", "category", "category_image", "poll_tags")
+            return ("published", "is_featured", "title", "category", "category_image", "poll_tags")
 
         def derive_title(self):
             obj = self.get_object()

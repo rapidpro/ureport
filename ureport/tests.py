@@ -193,13 +193,14 @@ class UreportTest(SmartminTest, DashTest):
 
         return Org.objects.get(subdomain=subdomain)
 
-    def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False):
+    def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False, published=True):
         now = timezone.now()
         backend = org.backends.filter(slug="rapidpro", is_active=True).first()
         poll = Poll.objects.create(
             flow_uuid=flow_uuid,
             title=title,
             category=category,
+            published=published,
             is_featured=featured,
             has_synced=has_synced,
             backend=backend,
