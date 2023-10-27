@@ -1,3 +1,8 @@
+v1.2.86 (2023-10-27)
+-------------------------
+ * Merge pull request #1165 from rapidpro/namibia-icon
+ * Add Namibia icon
+
 v1.2.85 (2023-10-25)
 -------------------------
  * Merge pull request #1166 from rapidpro/poll-published
