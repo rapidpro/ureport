@@ -1,3 +1,8 @@
+v1.2.87 (2023-11-03)
+-------------------------
+ * Merge pull request #1167 from rapidpro/update-deps-1
+ * Update deps
+
 v1.2.86 (2023-10-27)
 -------------------------
  * Merge pull request #1165 from rapidpro/namibia-icon
