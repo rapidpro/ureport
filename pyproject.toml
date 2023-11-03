@@ -7,9 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Django = "^4.2.0"
-smartmin = "^4.2.4"
-rapidpro-dash = "^1.14.1"
+Django = "^4.2.7"
+smartmin = "^4.2.5"
+rapidpro-dash = "^1.14.3"
 colorama = "^0.4.3"
 celery = "^5.1"
 django-compressor = "^4.0"
