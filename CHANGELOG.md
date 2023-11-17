@@ -1,3 +1,8 @@
+v1.2.88 (2023-11-17)
+-------------------------
+ * Merge pull request #1168 from rapidpro/update-ro
+ * Fix romanian translations
+
 v1.2.87 (2023-11-03)
 -------------------------
  * Merge pull request #1167 from rapidpro/update-deps-1
