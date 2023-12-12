@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import json
 import zoneinfo
-from datetime import datetime
+from datetime import datetime, timezone as tzone
 
 import mock
 import redis
@@ -58,7 +58,7 @@ class UtilsTest(UreportTest):
         r.flushdb()
 
     def test_datetime_to_json_date(self):
-        d1 = datetime(2014, 1, 2, 3, 4, 5, tzinfo=timezone.utc)
+        d1 = datetime(2014, 1, 2, 3, 4, 5, tzinfo=tzone.utc)
         self.assertEqual(datetime_to_json_date(d1), "2014-01-02T03:04:05.000Z")
         self.assertEqual(json_date_to_datetime("2014-01-02T03:04:05.000+00:00"), d1)
         self.assertEqual(json_date_to_datetime("2014-01-02T03:04:05.000Z"), d1)
