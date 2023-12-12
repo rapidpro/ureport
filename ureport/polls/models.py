@@ -5,7 +5,7 @@ import json
 import logging
 import uuid
 from collections import defaultdict
-from datetime import timedelta
+from datetime import timedelta, timezone as tzone
 
 import six
 from django_redis import get_redis_connection
@@ -317,7 +317,7 @@ class Poll(SmartModel):
         now = timezone.now()
         cache.set(
             Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk),
-            datetime_to_json_date(now.replace(tzinfo=timezone.utc)),
+            datetime_to_json_date(now.replace(tzinfo=tzone.utc)),
             None,
         )
 
