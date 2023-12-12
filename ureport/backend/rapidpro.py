@@ -7,7 +7,7 @@ import json
 import logging
 import time
 from collections import defaultdict
-from datetime import timedelta
+from datetime import timedelta, timezone as tzone
 
 import requests
 from django_redis import get_redis_connection
@@ -638,7 +638,7 @@ class RapidProBackend(BaseBackend):
                                 latest_synced_obj_time
                             ):
                                 latest_synced_obj_time = datetime_to_json_date(
-                                    temba_run.modified_on.replace(tzinfo=timezone.utc)
+                                    temba_run.modified_on.replace(tzinfo=tzone.utc)
                                 )
 
                             contact_obj = contacts_map.get(temba_run.contact.uuid, None)

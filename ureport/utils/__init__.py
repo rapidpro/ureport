@@ -6,7 +6,7 @@ import logging
 import time
 import zoneinfo
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone as tzone
 from itertools import chain, islice
 
 import iso8601
@@ -43,7 +43,7 @@ def datetime_to_json_date(dt):
     Formats a datetime as a string for inclusion in JSON
     """
     # always output as UTC / Z and always include milliseconds
-    as_utc = dt.astimezone(timezone.utc)
+    as_utc = dt.astimezone(tzone.utc)
     return as_utc.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
 
 

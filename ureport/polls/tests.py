@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import uuid
 import zoneinfo
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone as tzone
 
 import six
 from mock import Mock, patch
@@ -130,7 +130,7 @@ class PollTest(UreportTest):
             now = timezone.now()
             mock_cache_set.assert_called_once_with(
                 Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll1.org_id, poll1.pk),
-                datetime_to_json_date(now.replace(tzinfo=timezone.utc)),
+                datetime_to_json_date(now.replace(tzinfo=tzone.utc)),
                 None,
             )
 
@@ -663,7 +663,7 @@ class PollTest(UreportTest):
             self.assertEqual(poll.org, self.uganda)
             self.assertEqual(poll.title, "Poll 1")
             self.assertEqual(
-                poll.poll_date.astimezone(self.uganda.timezone).replace(tzinfo=timezone.utc),
+                poll.poll_date.astimezone(self.uganda.timezone).replace(tzinfo=tzone.utc),
                 yesterday.replace(microsecond=0),
             )
 
