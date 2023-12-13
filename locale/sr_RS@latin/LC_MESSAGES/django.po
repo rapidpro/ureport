@@ -1019,7 +1019,7 @@ msgid "RESPONSE RATE"
 msgstr "STOPA ODGOVORA"
 
 msgid "TOTAL RESPONDERS"
-msgstr "U-REPORTERI PO REGIONIMA<br> (Mapa je prikazana u skladu sa Rezolucijom Saveta bezbednosti Ujedinjenih nacija 1244)"
+msgstr "U-REPORTERI PO REGIONIMA<br>(Mapa je prikazana u skladu sa Rezolucijom Saveta bezbednosti<br>Ujedinjenih nacija 1244)"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
