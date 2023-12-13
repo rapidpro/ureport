@@ -750,11 +750,23 @@ class PublicTest(UreportTest):
         response = self.client.get(nigeria_poll_preview_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 404)
 
-        poll1.is_active = False
+        poll1.published = False
         poll1.save()
 
         response = self.client.get(uganda_poll_preview_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
+
+        poll1.is_active = False
+        poll1.save()
+
+        response = self.client.get(uganda_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
+        poll2.published = False
+        poll2.save()
+
+        response = self.client.get(nigeria_poll_preview_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
 
         poll2.is_active = False
         poll2.save()

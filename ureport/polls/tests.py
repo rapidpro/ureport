@@ -144,14 +144,14 @@ class PollTest(UreportTest):
 
         self.create_poll(self.nigeria, "Poll 4", "", self.education_nigeria, self.admin, has_synced=True)
 
-        self.assertTrue(Poll.get_public_polls(self.uganda))
-        self.assertEqual(Poll.get_public_polls(self.uganda).count(), 1)
-        self.assertTrue(poll2 in Poll.get_public_polls(self.uganda))
+        self.assertTrue(Poll.get_valid_polls(self.uganda))
+        self.assertEqual(Poll.get_valid_polls(self.uganda).count(), 1)
+        self.assertTrue(poll2 in Poll.get_valid_polls(self.uganda))
 
         self.health_uganda.is_active = False
         self.health_uganda.save()
 
-        self.assertFalse(Poll.get_public_polls(self.uganda))
+        self.assertFalse(Poll.get_valid_polls(self.uganda))
 
         self.health_uganda.is_active = True
         self.health_uganda.save()
@@ -159,7 +159,7 @@ class PollTest(UreportTest):
         poll2.is_active = False
         poll2.save()
 
-        self.assertFalse(Poll.get_public_polls(self.uganda))
+        self.assertFalse(Poll.get_valid_polls(self.uganda))
 
     def test_poll_find_main_poll(self):
         self.assertIsNone(Poll.find_main_poll(self.uganda))
@@ -730,7 +730,7 @@ class PollTest(UreportTest):
             self.assertIn("form", response.context)
 
             self.assertEqual(len(response.context["form"].fields), 7)
-            self.assertIn("is_active", response.context["form"].fields)
+            self.assertIn("published", response.context["form"].fields)
             self.assertIn("is_featured", response.context["form"].fields)
             self.assertIn("title", response.context["form"].fields)
             self.assertIn("category", response.context["form"].fields)

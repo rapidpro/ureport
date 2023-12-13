@@ -305,7 +305,7 @@ class PollReadView(PollContextMixin, SmartReadView):
 
     def derive_queryset(self):
         queryset = super(PollReadView, self).derive_queryset()
-        queryset = queryset.filter(org=self.request.org, is_active=True, has_synced=True)
+        queryset = queryset.filter(org=self.request.org, is_active=True, published=True, has_synced=True)
         return queryset
 
     def derive_main_poll(self):
@@ -324,7 +324,7 @@ class PollPreview(OrgObjPermsMixin, PollContextMixin, SmartReadView):
 
     def derive_queryset(self):
         queryset = super(PollPreview, self).derive_queryset()
-        queryset = queryset.filter(org=self.request.org)
+        queryset = queryset.filter(org=self.request.org, is_active=True)
         return queryset
 
     def derive_main_poll(self):

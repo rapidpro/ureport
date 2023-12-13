@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1426,6 +1426,9 @@ msgid "The name of this poll category"
 msgstr ""
 
 msgid "Poll Categories"
+msgstr ""
+
+msgid "Whether this poll should be visible/hidden on the public site"
 msgstr ""
 
 msgid "The Flow this Poll is based on"

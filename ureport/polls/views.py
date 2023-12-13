@@ -33,6 +33,7 @@ from .models import Poll, PollImage, PollQuestion, PollResponseCategory
 
 class PollForm(forms.ModelForm):
     is_active = forms.BooleanField(required=False)
+    published = forms.BooleanField(required=False)
     backend = forms.ModelChoiceField(OrgBackend.objects.none(), required=False)
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
@@ -79,7 +80,16 @@ class PollForm(forms.ModelForm):
 
     class Meta:
         model = Poll
-        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image", "poll_tags")
+        fields = (
+            "is_active",
+            "published",
+            "is_featured",
+            "backend",
+            "title",
+            "category",
+            "category_image",
+            "poll_tags",
+        )
 
 
 class PollResponseForm(forms.ModelForm):
@@ -171,6 +181,15 @@ class QuestionForm(ModelForm):
         fields = ("id",)
 
 
+class ActivePollMixin(OrgObjPermsMixin):
+    def get_queryset(self):
+        queryset = super(ActivePollMixin, self).get_queryset()
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(is_active=True)
+
+        return queryset
+
+
 class PollCRUDL(SmartCRUDL):
     model = Poll
     actions = (
@@ -185,7 +204,7 @@ class PollCRUDL(SmartCRUDL):
         "poll_flow",
     )
 
-    class PollDate(OrgObjPermsMixin, SmartUpdateView):
+    class PollDate(ActivePollMixin, SmartUpdateView):
         form_class = PollFlowForm
         title = _("Adjust poll date")
         success_url = "id@polls.poll_questions"
@@ -198,7 +217,7 @@ class PollCRUDL(SmartCRUDL):
             kwargs["backend"] = self.object.backend
             return kwargs
 
-    class PollFlow(OrgObjPermsMixin, SmartUpdateView):
+    class PollFlow(ActivePollMixin, SmartUpdateView):
         form_class = PollFlowForm
         title = _("Configure flow")
         success_url = "id@polls.poll_poll_date"
@@ -229,6 +248,7 @@ class PollCRUDL(SmartCRUDL):
                 flow_uuid=obj.flow_uuid,
                 backend=obj.backend,
                 is_active=True,
+                published=True,
                 created_on__gte=five_minutes_ago,
             ).first()
             if similar_poll:
@@ -326,7 +346,7 @@ class PollCRUDL(SmartCRUDL):
             Poll.find_main_poll(org)
             return obj
 
-    class Images(OrgObjPermsMixin, SmartUpdateView):
+    class Images(ActivePollMixin, SmartUpdateView):
         success_url = "id@polls.poll_responses"
         title = _("Poll Images")
         success_message = _("Now enter any responses you'd like to feature. (if any)")
@@ -380,7 +400,7 @@ class PollCRUDL(SmartCRUDL):
 
             return obj
 
-    class Responses(OrgObjPermsMixin, SmartUpdateView):
+    class Responses(ActivePollMixin, SmartUpdateView):
         form_class = PollResponseForm
         title = _("Poll Response")
         success_url = "@polls.poll_list"
@@ -392,7 +412,7 @@ class PollCRUDL(SmartCRUDL):
             kwargs["org"] = self.request.org
             return kwargs
 
-    class Questions(OrgObjPermsMixin, SmartUpdateView):
+    class Questions(ActivePollMixin, SmartUpdateView):
         success_url = "id@polls.poll_images"
         title = _("Poll Questions")
         form_class = QuestionForm
@@ -632,6 +652,9 @@ class PollCRUDL(SmartCRUDL):
 
         def get_queryset(self):
             queryset = super(PollCRUDL.List, self).get_queryset().filter(org=self.request.org)
+            if not self.request.user.is_superuser:
+                queryset = queryset.filter(is_active=True)
+
             return queryset
 
         def get_context_data(self, **kwargs):
@@ -695,10 +718,15 @@ class PollCRUDL(SmartCRUDL):
             else:
                 return super(PollCRUDL.List, self).lookup_field_link(context, field, obj)
 
-    class Update(OrgObjPermsMixin, SmartUpdateView):
+    class Update(ActivePollMixin, SmartUpdateView):
         form_class = PollForm
         fields = ("is_active", "is_featured", "title", "category", "category_image", "poll_tags")
         success_url = "id@polls.poll_poll_flow"
+
+        def derive_fields(self):
+            if self.request.user.is_superuser:
+                return ("is_active", "published", "is_featured", "title", "category", "category_image", "poll_tags")
+            return ("published", "is_featured", "title", "category", "category_image", "poll_tags")
 
         def derive_title(self):
             obj = self.get_object()
