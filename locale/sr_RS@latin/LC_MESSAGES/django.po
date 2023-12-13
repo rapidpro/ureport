@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1019,7 +1019,7 @@ msgid "RESPONSE RATE"
 msgstr "STOPA ODGOVORA"
 
 msgid "TOTAL RESPONDERS"
-msgstr "U-REPORTERI PO REGIONIMA<br> (Mapa je prikazana u skladu sa Rezolucijom Saveta bezbednosti Ujedinjenih nacija 1244)"
+msgstr "U-REPORTERI PO REGIONIMA<br>(Mapa je prikazana u skladu sa Rezolucijom Saveta bezbednosti<br>Ujedinjenih nacija 1244)"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1476,6 +1476,11 @@ msgstr "Naziv kategorije ove ankete"
 
 msgid "Poll Categories"
 msgstr "Kategorije ankete"
+
+#, fuzzy
+#| msgid "Whether this bot should be shown to the public"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Da li ovaj bot treba da se prikaže javnosti"
 
 msgid "The Flow this Poll is based on"
 msgstr "Dijagram na kome je ova anketa zasnovana"

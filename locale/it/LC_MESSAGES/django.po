@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1554,6 +1554,11 @@ msgstr "Il nome di questa categoria di sondaggio"
 
 msgid "Poll Categories"
 msgstr "Categorie di sondaggio"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Se questa org deve essere mostrato nella pagina di destinazione"
 
 msgid "The Flow this Poll is based on"
 msgstr "Il flusso su cui questo sondaggio è basato"

@@ -1553,6 +1553,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://myanmar.ureport.in/count/",
     ),
     dict(
+        name="Namibia",
+        host="//namibia.ureport.in",
+        flag="flag_namibia.png",
+        countries_codes=["NAM"],
+        count_link="http://namibia.ureport.in/count/",
+    ),
+    dict(
         name="Nicaragua",
         host="//nicaragua.ureport.in",
         flag="flag_nicaragua.png",

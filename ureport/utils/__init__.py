@@ -1038,7 +1038,7 @@ def populate_contact_activity(org):
     start_date = now - timedelta(days=365)
 
     flows = list(
-        Poll.objects.filter(org_id=org.id, poll_date__gte=start_date)
+        Poll.objects.filter(org_id=org.id, published=True, poll_date__gte=start_date)
         .only("flow_uuid")
         .values_list("flow_uuid", flat=True)
     )

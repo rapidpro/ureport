@@ -105,6 +105,10 @@ class Poll(SmartModel):
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
+    published = models.BooleanField(
+        default=True, help_text=_("Whether this poll should be visible/hidden on the public site")
+    )
+
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(
@@ -510,6 +514,10 @@ class Poll(SmartModel):
 
     @classmethod
     def get_public_polls(cls, org):
+        return Poll.get_valid_polls(org).filter(published=True)
+
+    @classmethod
+    def get_valid_polls(cls, org):
         categories = Category.objects.filter(org=org, is_active=True).only("id")
         return (
             Poll.objects.filter(org=org, is_active=True, category_id__in=categories, has_synced=True)
@@ -542,7 +550,7 @@ class Poll(SmartModel):
         main_poll = None
         if cached_value:
             main_poll = (
-                Poll.objects.filter(is_active=True, id=cached_value, org=org)
+                Poll.objects.filter(is_active=True, published=True, id=cached_value, org=org)
                 .prefetch_related(
                     Prefetch(
                         "questions",
@@ -578,7 +586,9 @@ class Poll(SmartModel):
             .values_list("poll_id", flat=True)
         )
 
-        polls = Poll.get_public_polls(org=org).filter(pk__in=poll_with_questions).order_by("-created_on")
+        polls = (
+            Poll.get_valid_polls(org=org).filter(pk__in=poll_with_questions, published=True).order_by("-created_on")
+        )
 
         main_poll = polls.filter(is_featured=True).first()
 
@@ -598,7 +608,7 @@ class Poll(SmartModel):
             exclude_polls.append(main_poll.pk)
 
         other_polls = (
-            Poll.get_public_polls(org=org)
+            Poll.get_valid_polls(org=org)
             .exclude(pk__in=exclude_polls)
             .exclude(is_active=False)
             .exclude(flow_uuid="")
@@ -613,7 +623,7 @@ class Poll(SmartModel):
         recent_window = now - timedelta(days=45)
         main_poll = Poll.get_main_poll(org)
 
-        recent_other_polls = Poll.get_public_polls(org)
+        recent_other_polls = Poll.get_valid_polls(org)
         if main_poll:
             recent_other_polls = recent_other_polls.exclude(pk=main_poll.pk)
         recent_other_polls = recent_other_polls.exclude(created_on__lte=recent_window).order_by("-created_on")
@@ -724,7 +734,7 @@ class Poll(SmartModel):
         return self.title
 
     class Meta:
-        index_together = ("org", "is_active", "id")
+        index_together = ("org", "published", "id")
 
 
 @six.python_2_unicode_compatible

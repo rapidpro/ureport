@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 11:43+0000\n"
+"POT-Creation-Date: 2023-10-25 13:34+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -533,7 +533,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit 1 %(failed_login_limit)s încercări de conectare nereușite."
+"Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit %(failed_login_limit)s încercări de conectare nereușite."
 
 #, python-format
 msgid ""
@@ -542,7 +542,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"Vă rugăm să așteptați 1 %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
+"Vă rugăm să așteptați %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "În caz contrar, poți completa formularul de mai jos pentru a-ți reseta parola prin e-mail."
@@ -566,7 +566,7 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"1 Pai parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare 1 %(expire_days)s zile, și că parolele nu trebuie să fi fost utilizate în precedentele 1 %(window_days)s zile."
+"1 Pai parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare %(expire_days)s zile, și că parolele nu trebuie să fi fost utilizate în precedentele %(window_days)s zile."
 
 msgid "New Password"
 msgstr "Parola nouă"
@@ -1246,7 +1246,7 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"Ești sigur că vrei să elimini 1 %(object)s1?"
+"Ești sigur că vrei să elimini %(object)s?"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1296,7 +1296,7 @@ msgid ""
 "              "
 msgstr ""
 "\n"
-"Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit 1 %(failed_login_limit)s încercări de conectare incorecte."
+"Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit %(failed_login_limit)s încercări de conectare incorecte."
 
 #, python-format
 msgid ""
@@ -1305,7 +1305,7 @@ msgid ""
 "                  "
 msgstr ""
 "\n"
-"Vă rugăm să așteptați 1 %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
+"Vă rugăm să așteptați %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
 
 #, python-format
 msgid ""
@@ -1314,7 +1314,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"1 Parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare 1 %(expire_days)s days, și că parolele nu trebuie să fi fost utilizate în precedentele 2 %(window_days)s days."
+"1 Parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare %(expire_days)s days, și că parolele nu trebuie să fi fost utilizate în precedentele %(window_days)s days."
 
 msgid "+ New Story"
 msgstr "+ Istorie Nouă"
@@ -1558,6 +1558,11 @@ msgstr "Denumirea acestei categorii de sondaje"
 
 msgid "Poll Categories"
 msgstr "Categorii de sondaje"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
 
 msgid "The Flow this Poll is based on"
 msgstr "Fluxul care stă la baza acestui sondaj"
@@ -1804,7 +1809,7 @@ msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr "S-a programat un refresh pentru sondajul # 1 %(poll_id)d pe org # 2 %(org_id)d"
+msgstr "S-a programat un refresh pentru sondajul #%(poll_id)d pe org #%(org_id)d"
 
 #, python-format
 msgid "%s"
@@ -2131,7 +2136,7 @@ msgstr "Ceva care să seteze localizările"
 #~ "           "
 #~ msgstr ""
 #~ "\n"
-#~ "Results 1 %(start)s-%(end)s din %(count)s"
+#~ "Results %(start)s-%(end)s din %(count)s"
 
 #, fuzzy
 #~| msgid ""

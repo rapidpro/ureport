@@ -1,3 +1,28 @@
+v1.2.88 (2023-11-17)
+-------------------------
+ * Merge pull request #1168 from rapidpro/update-ro
+ * Fix romanian translations
+
+v1.2.87 (2023-11-03)
+-------------------------
+ * Merge pull request #1167 from rapidpro/update-deps-1
+ * Update deps
+
+v1.2.86 (2023-10-27)
+-------------------------
+ * Merge pull request #1165 from rapidpro/namibia-icon
+ * Add Namibia icon
+
+v1.2.85 (2023-10-25)
+-------------------------
+ * Merge pull request #1166 from rapidpro/poll-published
+ * Add back the sync status message for inactive polls
+
+v1.2.83 (2023-10-18)
+-------------------------
+ * Merge pull request #1164 from rapidpro/update-dash
+ * Update deps
+
 v1.2.82 (2023-10-17)
 -------------------------
  * Merge pull request #1163 from Ilhasoft/fix/update-translations-locale-for-en-lc
