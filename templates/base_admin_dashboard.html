@@ -92,10 +92,19 @@
                         <div class="level-left">
                             <div style="justify-content: start;" class="level-item square-logo">
                                 <div style="width:360px">
+                                    {% if org|config:"has_new_brand" %}
+                                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                    {% else %}
                                     {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                         <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
                                     {% endthumbnail %}
+                                    {% endif %}
                                 </div>
+                                {% if org|config:"has_new_brand" %}
+                                <div class="flex-1 text-center font-bold text-2xl flex-center-y mx-4 mt-8" style="font-family:'Noto Sans', sans-serif;">
+                                    {{ org.name }}
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     {% endif %}

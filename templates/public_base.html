@@ -32,8 +32,7 @@
             {% endthumbnail %}
         {% endblock meta-extra %}
         <!-- Google fonts we use -->
-        <link href="https://fonts.googleapis.com/css?family=Livvic:300,400,700|Montserrat:300,400,700&display=swap"
-              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
         <!-- Font awesome icons -->
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -48,7 +47,7 @@
             <link rel="stylesheet" href="{{ STATIC_URL }}css/tailwind.css">
         {% endcompress %}
         <style type="text/css">
-      .bg-dark1 {
+      .bg-dark1, .bg-dark1-home {
         background: {{ org|config:'dark1_color'|default:'#439932'  }};
       }
       
@@ -60,7 +59,7 @@
         border-color: {{ org|config:'dark1_color'|default:'#439932' }};
       }
       
-      .bg-dark2 {
+      .bg-dark2, .bg-dark2-home {
         background: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
       
@@ -72,7 +71,7 @@
         border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
       
-      .bg-dark3 {
+      .bg-dark3, .bg-dark3-home {
         background: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
       }
       
@@ -88,7 +87,7 @@
         border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
       
-      .bg-light1 {
+      .bg-light1, .bg-light1-home {
         background: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
       
@@ -96,11 +95,11 @@
         background: #ffda33;
       }
       
-      .text-light1 {
+      .text-light1, .text-light1-home {
         color: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
       
-      .bg-light2 {
+      .bg-light2, .bg-light2-home {
         background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
       }
       
@@ -150,6 +149,33 @@
       .slideout-open .slideout-menu {
         display: block;
       }
+      {% if org|config:"has_new_brand" %}
+      .bg-dark1-home {
+        background: #00aeef;
+      }
+
+      .bg-dark2-home {
+        background: #00aeef;
+      }
+
+      .bg-dark3-home {
+        background: #00aeef;
+      }
+
+      .bg-light1-home {
+        background: #00aeef;
+      }
+
+      .bg-light2-home {
+        background: #00aeef;
+      }
+
+      .text-light1-home {
+        color: #00aeef;
+      }
+
+      {% endif %}
+
         </style>
         <script type="text/javascript">
       var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
@@ -596,6 +622,40 @@
             </div>
         </ul>
         <!-- header menu -->
+        {% if org|config:"has_new_brand" %}
+        <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
+            <a href="{% url 'public.index' %}" class="flex-initial text-center">
+                <div style="width:360px">
+                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                </div>
+            </a>
+            <div class="flex-1 text-center font-bold text-2xl flex-center-y" style="font-family:'Noto Sans', sans-serif;">
+                <a href="{% url 'public.index' %}" class="flex-initial text-center">
+                    {{ org.name }}
+                </a>
+            </div>
+            <div class="md:flex flex-1">
+                <div class="flex-1 text-center font-bold text-2xl flex-center-y">
+                    <div>
+                        <a href="{% url 'public.opinions' %}"
+                            class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                        {% trans "Opinions" %}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex-1 text-center font-bold text-2xl flex-center-y">
+                    <div>
+                        <a href="{% url 'public.stories' %}"
+                            class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                            {% trans "Stories" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
         <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 px-home hidden border-b pb-6">
             <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                 <div>
@@ -621,6 +681,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
     <!-- mobile header -->
     <div class="md:hidden block">
@@ -628,10 +689,19 @@
             <div class="p-home">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:180px">
+                        {% if org|config:"has_new_brand" %}
+                            <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                        {% else %}
                         {% thumbnail org.get_logo "x180" format="PNG" as im %}
                             <img src="{{ im.url }}" alt="{{ org.name }}" class="logo" alt="">
                         {% endthumbnail %}
+                        {% endif %}
                     </div>
+                </a>
+            </div>
+            <div class="flex-1 text-center font-bold flex-center-y -mb-2 text-sm" style="font-family:'Noto Sans', sans-serif;">
+                <a href="{% url 'public.index' %}" class="flex-initial text-center">
+                    {{ org.name }}
                 </a>
             </div>
             <div class="flex-center-y p-home">
@@ -648,17 +718,17 @@
         <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 px-home border-b pb-6">
             <div class="flex-1">
                 <div class="p-8 hover-parent">
-                    {% edit_content "orgs.org_edit" "" "#id_common.join_text_top" "-m-8" "dark" %}
-                    <div class="text-3xl font-bold leading-tight text-center">
+                    {% edit_content 'orgs.org_edit' "" "#id_common.join_text_top" "-m-8" "dark" %}
+                    <div class="text-3xl font-bold leading-tight {% if not org|config:"has_new_brand" %}text-center{% endif %}">
                         {% if org|config:"join_text_top" %}
                             {{ org|config:"join_text_top" }}
                         {% else %}
                             {% trans "Join U-Report, Your voice matters." %}
                         {% endif %}
                     </div>
-                    <div class="mt-8 text-center">
+                    <div class="mt-8 {% if not org|config:"has_new_brand" %}text-center{% endif %}">
                         <a href="{% url 'public.join' %}"
-                           class="btn bg-light1 text-black hover-dark">
+                           class="btn bg-light1-home hover-dark {% if org|config:"has_new_brand" %}text-white{% else %}text-black{% endif %}">
                             {% if org|config:"join_button_text" %}
                                 {{ org|config:"join_button_text" }}
                             {% else %}
