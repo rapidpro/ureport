@@ -732,7 +732,7 @@
         </a>
         <div class="md:flex justify-center hidden">
             {% if org|config:"has_footer_unicef_logo" %}
-                <div style="max-width:185px" class="md:block block">
+                <div style="max-width:360px" class="md:block block">
                     {% if org.language != "ar" and org.language != "ru" %}
                         <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
                              class="md:-ml-0 -ml-2" alt="">
@@ -750,9 +750,9 @@
                     <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
                 {% endthumbnail %}
             </div>
-            <div class="md:hidden flex flex-1 -mt-2 justify-end float-right">
+            <div class="md:hidden flex flex-1 justify-end float-right">
                 {% if org|config:"has_footer_unicef_logo" %}
-                    <div style="width:150px" class="md:block block">
+                    <div style="width:180px" class="md:block block">
                         {% if org.language != "ar" and org.language != "ru" %}
                             <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
                                  class="-ml-2" alt="">
