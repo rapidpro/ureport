@@ -32,8 +32,7 @@
             {% endthumbnail %}
         {% endblock meta-extra %}
         <!-- Google fonts we use -->
-        <link href="https://fonts.googleapis.com/css?family=Livvic:300,400,700|Montserrat:300,400,700&display=swap"
-              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
         <!-- Font awesome icons -->
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -596,6 +595,40 @@
             </div>
         </ul>
         <!-- header menu -->
+        {% if org|config:"has_new_brand" %}
+        <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
+            <a href="{% url 'public.index' %}" class="flex-initial text-center">
+                <div style="width:360px">
+                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                </div>
+            </a>
+            <div class="flex-1 text-center font-bold text-2xl flex-center-y" style="font-family:'Noto Sans', sans-serif;">
+                <a href="{% url 'public.index' %}" class="flex-initial text-center">
+                    {{ org.name }}
+                </a>
+            </div>
+            <div class="md:flex flex-1">
+                <div class="flex-1 text-center font-bold text-2xl flex-center-y">
+                    <div>
+                        <a href="{% url 'public.opinions' %}"
+                            class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                        {% trans "Opinions" %}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex-1 text-center font-bold text-2xl flex-center-y">
+                    <div>
+                        <a href="{% url 'public.stories' %}"
+                            class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                            {% trans "Stories" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
         <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 px-home hidden border-b pb-6">
             <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                 <div>
@@ -621,6 +654,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
     <!-- mobile header -->
     <div class="md:hidden block">
@@ -628,10 +662,19 @@
             <div class="p-home">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:180px">
+                        {% if org|config:"has_new_brand" %}
+                            <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                        {% else %}
                         {% thumbnail org.get_logo "x180" format="PNG" as im %}
                             <img src="{{ im.url }}" alt="{{ org.name }}" class="logo" alt="">
                         {% endthumbnail %}
+                        {% endif %}
                     </div>
+                </a>
+            </div>
+            <div class="flex-1 text-center font-bold flex-center-y -mb-2 text-sm" style="font-family:'Noto Sans', sans-serif;">
+                <a href="{% url 'public.index' %}" class="flex-initial text-center">
+                    {{ org.name }}
                 </a>
             </div>
             <div class="flex-center-y p-home">
