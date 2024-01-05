@@ -617,6 +617,14 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
+        name="has_new_brand",
+        field=dict(
+            help_text=_("Whether to use the new 2024 brand with UNICEF in the logo and a common theme."),
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="has_charts_hidden",
         field=dict(
             help_text=_("Whether to hide the engagement breakdown charts."),
