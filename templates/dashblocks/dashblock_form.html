@@ -11,7 +11,7 @@
                             <img class="thumb"
                                  src="{{ im.url }}"
                                  width="{{ img.x }}"
-                                 height="{{ img.y }}" />
+                                 height="{{ img.y }}" alt=""/>
                         </a>
                     {% endthumbnail %}
                     <a href="{% url 'dashblocks.dashblockimage_create' %}?dashblock={{ object.id }}"

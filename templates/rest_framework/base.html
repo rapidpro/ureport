@@ -1,38 +1,42 @@
 {% load static %}
 {% load rest_framework %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         {% block head %}
             {% block meta %}
+                <meta charset="utf-8">
+                <meta name="description" content="">
+                <meta name="keywords" content="">
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <meta name="robots" content="NONE,NOARCHIVE" />
-            {% endblock %}
+            {% endblock meta %}
             <title>
-                {% block title %}Ureport API{% endblock %}
+                {% block title %}Ureport API{% endblock title %}
             </title>
             {% block style %}
                 {% block bootstrap_theme %}
                     <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}" />
                     <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}" />
-                {% endblock %}
+                {% endblock bootstrap_theme %}
                 <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}" />
                 <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}" />
-            {% endblock %}
-        {% endblock %}
+            {% endblock style %}
+        {% endblock head %}
     </head>
     {% block body %}
-        <body class="{% block bodyclass %}{% endblock %}">
+        <body class="{% block bodyclass %}{% endblock bodyclass %}">
             <div class="wrapper">
                 {% block navbar %}
-                    <div class="navbar navbar-static-top {% block bootstrap_navbar_variant %}navbar-inverse{% endblock %}">
+                    <div class="navbar navbar-static-top {% block bootstrap_navbar_variant %}navbar-inverse{% endblock bootstrap_navbar_variant %}">
                         <div class="container">
                             <span>
                                 {% block branding %}
-                                    <a class='navbar-brand' rel="nofollow" href='/'>
+                                    <a class="navbar-brand" rel="nofollow" href='{% url "public.index" %}'>
                                         Ureport API <span class="version">0.1.0</span>
                                     </a>
-                                {% endblock %}
+                                {% endblock branding %}
                             </span>
                             <ul class="nav navbar-nav pull-right">
                                 {% block userlinks %}
@@ -41,11 +45,11 @@
                                     {% else %}
                                         {% optional_login request %}
                                     {% endif %}
-                                {% endblock %}
+                                {% endblock userlinks %}
                             </ul>
                         </div>
                     </div>
-                {% endblock %}
+                {% endblock navbar %}
                 <div class="container">
                     {% block breadcrumbs %}
                         <ul class="breadcrumb">
@@ -61,7 +65,7 @@
                                 {% endif %}
                             {% endfor %}
                         </ul>
-                    {% endblock %}
+                    {% endblock breadcrumbs %}
                     <!-- Content -->
                     <div id="content">
                         {% if 'GET' in allowed_methods %}
@@ -99,27 +103,17 @@
                             </form>
                         {% endif %}
                         {% if options_form %}
-                            <form class="button-form"
-                                  action="{{ request.get_full_path }}"
-                                  method="POST">
+                            <form class="button-form" action="{{ request.get_full_path }}" method="post">
                                 {% csrf_token %}
-                                <input type="hidden"
-                                       name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
-                                       value="OPTIONS" />
-                                <button class="btn btn-primary js-tooltip"
-                                        title="Make an OPTIONS request on the {{ name }} resource">OPTIONS</button>
+                                <input type="hidden" name="{{ api_settings.FORM_METHOD_OVERRIDE }}" value="OPTIONS" />
+                                <button class="btn btn-primary js-tooltip" title="Make an OPTIONS request on the {{ name }} resource">OPTIONS</button>
                             </form>
                         {% endif %}
                         {% if delete_form %}
-                            <form class="button-form"
-                                  action="{{ request.get_full_path }}"
-                                  method="POST">
+                            <form class="button-form" action="{{ request.get_full_path }}" method="post">
                                 {% csrf_token %}
-                                <input type="hidden"
-                                       name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
-                                       value="DELETE" />
-                                <button class="btn btn-danger js-tooltip"
-                                        title="Make a DELETE request on the {{ name }} resource">DELETE</button>
+                                <input type="hidden" name="{{ api_settings.FORM_METHOD_OVERRIDE }}" value="DELETE" />
+                                <button class="btn btn-danger js-tooltip" title="Make a DELETE request on the {{ name }} resource">DELETE</button>
                             </form>
                         {% endif %}
                         <div class="content-main">
@@ -127,7 +121,7 @@
                                 <h1>{{ name }}</h1>
                             </div>
                             <div style="float:left">
-                                {% block description %}{{ description }}{% endblock %}
+                                {% block description %}{{ description }}{% endblock description %}
                             </div>
                             {% if paginator %}
                                 <nav style="float: right">
@@ -139,8 +133,7 @@
                             </div>
                             <div class="response-info">
                                 <pre class="prettyprint"><span class="meta nocode"><b>HTTP {{ response.status_code }} {{ response.status_text }}</b>{% autoescape off %}
-{% for key, val in response_headers.items %}<b>{{ key }}:</b> <span class="lit">{{ val|break_long_headers|urlize }}</span>
-{% endfor %}
+{% for key, val in response_headers.items %}<b>{{ key }}:</b> <span class="lit">{{ val|break_long_headers|urlize }}</span>{% endfor %}
 </span>{{ content|urlize }}</pre>
                             {% endautoescape %}
                         </div>
@@ -163,36 +156,27 @@
                                         <div class="tab-pane" id="post-object-form">
                                             {% with form=post_form %}
                                                 <form action="{{ request.get_full_path }}"
-                                                      method="POST"
+                                                      method="post"
                                                       enctype="multipart/form-data"
                                                       class="form-horizontal"
                                                       novalidate>
                                                     <fieldset>
                                                         {{ post_form }}
                                                         <div class="form-actions">
-                                                            <button class="btn btn-primary"
-                                                                    title="Make a POST request on the {{ name }} resource">
-                                                                POST
-                                                            </button>
+                                                            <button class="btn btn-primary" title="Make a POST request on the {{ name }} resource">POST</button>
                                                         </div>
                                                     </fieldset>
                                                 </form>
                                             {% endwith %}
                                         </div>
                                     {% endif %}
-                                    <div {% if post_form %}class="tab-pane"{% endif %}
-                                         id="post-generic-content-form">
+                                    <div {% if post_form %}class="tab-pane"{% endif %} id="post-generic-content-form">
                                         {% with form=raw_data_post_form %}
-                                            <form action="{{ request.get_full_path }}"
-                                                  method="POST"
-                                                  class="form-horizontal">
+                                            <form action="{{ request.get_full_path }}" method="post" class="form-horizontal">
                                                 <fieldset>
                                                     {% include "rest_framework/raw_data_form.html" %}
                                                     <div class="form-actions">
-                                                        <button class="btn btn-primary"
-                                                                title="Make a POST request on the {{ name }} resource">
-                                                            POST
-                                                        </button>
+                                                        <button class="btn btn-primary" title="Make a POST request on the {{ name }} resource">POST</button>
                                                     </div>
                                                 </fieldset>
                                             </form>
@@ -217,7 +201,7 @@
                                     {% if put_form %}
                                         <div class="tab-pane" id="put-object-form">
                                             <form action="{{ request.get_full_path }}"
-                                                  method="POST"
+                                                  method="post"
                                                   enctype="multipart/form-data"
                                                   class="form-horizontal"
                                                   novalidate>
@@ -227,20 +211,15 @@
                                                         <button class="btn btn-primary js-tooltip"
                                                                 name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
                                                                 value="PUT"
-                                                                title="Make a PUT request on the {{ name }} resource">
-                                                            PUT
-                                                        </button>
+                                                                title="Make a PUT request on the {{ name }} resource">PUT</button>
                                                     </div>
                                                 </fieldset>
                                             </form>
                                         </div>
                                     {% endif %}
-                                    <div {% if put_form %}class="tab-pane"{% endif %}
-                                         id="put-generic-content-form">
+                                    <div {% if put_form %}class="tab-pane"{% endif %} id="put-generic-content-form">
                                         {% with form=raw_data_put_or_patch_form %}
-                                            <form action="{{ request.get_full_path }}"
-                                                  method="POST"
-                                                  class="form-horizontal">
+                                            <form action="{{ request.get_full_path }}" method="post" class="form-horizontal">
                                                 <fieldset>
                                                     {% include "rest_framework/raw_data_form.html" %}
                                                     <div class="form-actions">
@@ -248,17 +227,13 @@
                                                             <button class="btn btn-primary js-tooltip"
                                                                     name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
                                                                     value="PUT"
-                                                                    title="Make a PUT request on the {{ name }} resource">
-                                                                PUT
-                                                            </button>
+                                                                    title="Make a PUT request on the {{ name }} resource">PUT</button>
                                                         {% endif %}
                                                         {% if raw_data_patch_form %}
                                                             <button class="btn btn-primary js-tooltip"
                                                                     name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
                                                                     value="PATCH"
-                                                                    title="Make a PATCH request on the {{ name }} resource">
-                                                                PATCH
-                                                            </button>
+                                                                    title="Make a PATCH request on the {{ name }} resource">PATCH</button>
                                                         {% endif %}
                                                     </div>
                                                 </fieldset>
@@ -280,7 +255,7 @@
             <script src="{% static "rest_framework/js/bootstrap.min.js" %}"></script>
             <script src="{% static "rest_framework/js/prettify-min.js" %}"></script>
             <script src="{% static "rest_framework/js/default.js" %}"></script>
-        {% endblock %}
+        {% endblock script %}
     </body>
-{% endblock %}
+{% endblock body %}
 </html>

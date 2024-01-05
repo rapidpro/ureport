@@ -1,4 +1,4 @@
-{% extends 'smartmin/form.html' %}
+{% extends "smartmin/form.html" %}
 {% load smartmin i18n %}
 {% block pre-content %}
 {% endblock pre-content %}
@@ -7,7 +7,7 @@
         <div class="column">
             {% block content-title %}
                 <h2 class="is-size-2 has-text-weight-bold">
-                    <img src="{{ STATIC_URL }}img/users_icon.png">
+                    <img src="{{ STATIC_URL }}img/users_icon.png" alt="">
                     <div class="is-inline-block content-title-text">{% trans "Users" %}</div>
                 </h2>
             {% endblock content-title %}
@@ -68,7 +68,7 @@
             {% endfor %}
             {% for invite in invites %}
                 <tr class="{% cycle 'row2' 'row1' %} invite">
-                    <td>{{ invite.email }} (Invite Sent on <span class="italic is-size-7">{{ invite.modified_on  }}</span>)</td>
+                    <td>{{ invite.email }} (Invite Sent on <span class="italic is-size-7">{{ invite.modified_on }}</span>)</td>
                     <td class="permission">
                         {% if invite.user_group == 'A' %}
                             <input type="checkbox" disabled>

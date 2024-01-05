@@ -185,6 +185,7 @@
             <noscript>
                 <img height="1"
                      width="1"
+                     alt=""
                      style="display:none"
                      src="https://www.facebook.com/tr?id={{ org|config:"facebook_pixel_id" }}&amp;ev=PageView&amp;noscript=1" />
             </noscript>
@@ -357,7 +358,7 @@
                 <div class="p-4">
                     <a href="https://ureport.in/"
                        class="hover:bg-gray-900 inline-block border-white p-2">
-                        <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png">
+                        <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                     </a>
                 </div>
             </div>
@@ -389,7 +390,7 @@
                             <div class="hidden dropdown-content absolute bg-gray-800 text-white z-auto">
                                 <a href="{% url 'orgs.org_list' %}"
                                    class="admin-menu small-link-no-wrap">{% trans "Orgs" %}</a>
-                                <a href="/users/user/" class="admin-menu small-link-no-wrap">{% trans "Users" %}</a>
+                                <a href="{% url 'users.user_list' %}" class="admin-menu small-link-no-wrap">{% trans "Users" %}</a>
                                 <a href="{% url 'dashblocks.dashblocktype_list' %}"
                                    class="admin-menu small-link-no-wrap">{% trans "Content Types" %}</a>
                                 {% if request.user.is_superuser or org_perms.assets.image_list %}
@@ -505,7 +506,7 @@
                    class="hover:text-gray-750 flex items-center"
                    id="countries-toggler">
                     <div class="w-12 flex mx-1">
-                        <img src="{{ STATIC_URL }}img/selectcountry.png" class="inline">
+                        <img src="{{ STATIC_URL }}img/selectcountry.png" class="inline" alt="">
                     </div>
                     <i class="fas fa-chevron-circle-down"></i>
                     <div class="mx-2">{% trans "SELECT YOUR COUNTRY" %}</div>
@@ -628,7 +629,7 @@
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:180px">
                         {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                            <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
+                            <img src="{{ im.url }}" alt="{{ org.name }}" class="logo" alt="">
                         {% endthumbnail %}
                     </div>
                 </a>
@@ -647,7 +648,7 @@
         <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 px-home border-b pb-6">
             <div class="flex-1">
                 <div class="p-8 hover-parent">
-                    {% edit_content 'orgs.org_edit' "" "#id_common.join_text_top"  "-m-8"  "dark" %}
+                    {% edit_content "orgs.org_edit" "" "#id_common.join_text_top" "-m-8" "dark" %}
                     <div class="text-3xl font-bold leading-tight text-center">
                         {% if org|config:"join_text_top" %}
                             {{ org|config:"join_text_top" }}
@@ -680,7 +681,7 @@
                        class="md:mt-4 {% if not forloop.first %}md:ml-4{% endif %} md:w-1/3 md:p-0 block mt-6 p-4">
                         <div class="block">
                             {% thumbnail story.get_image "400x250" crop="top" as im %}
-                                <img width="100%" src="{{ im.url }}">
+                                <img width="100%" src="{{ im.url }}" alt="">
                             {% endthumbnail %}
                         </div>
                         <div class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %} font-bold mt-4 h-20">
@@ -700,7 +701,7 @@
         <div class="md:flex max-w-page mx-auto text-white p-home">
             <div class="md:w-1/3 md:block hidden">
                 <div class="w-40">
-                    <img src="{{ STATIC_URL }}img/blue_u.png">
+                    <img src="{{ STATIC_URL }}img/blue_u.png" alt="">
                 </div>
             </div>
             <div class="md:w-2/3 {% if is_rtl_org %}md:text-left{% else %}md:text-right{% endif %} text-center">
@@ -734,10 +735,10 @@
                 <div style="max-width:185px" class="md:block block">
                     {% if org.language != "ar" and org.language != "ru" %}
                         <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
-                             class="md:-ml-0 -ml-2">
+                             class="md:-ml-0 -ml-2" alt="">
                     {% else %}
                         <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                             class="md:-ml-0 -ml-2">
+                             class="md:-ml-0 -ml-2" alt="">
                     {% endif %}
                 </div>
             {% endif %}
@@ -754,10 +755,10 @@
                     <div style="width:150px" class="md:block block">
                         {% if org.language != "ar" and org.language != "ru" %}
                             <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
-                                 class="-ml-2">
+                                 class="-ml-2" alt="">
                         {% else %}
                             <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                                 class="-ml-2">
+                                 class="-ml-2" alt="">
                         {% endif %}
                     </div>
                 {% endif %}
