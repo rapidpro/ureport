@@ -807,17 +807,13 @@
             </div>
         </a>
         <div class="md:flex justify-center hidden">
-            {% if org|config:"has_footer_unicef_logo" %}
-                <div style="max-width:185px" class="md:block block">
-                    {% if org.language != "ar" and org.language != "ru" %}
-                        <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
-                             class="md:-ml-0 -ml-2" alt="">
-                    {% else %}
-                        <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                             class="md:-ml-0 -ml-2" alt="">
-                    {% endif %}
-                </div>
-            {% endif %}
+            <div style="max-width:360px" class="md:block block">
+                {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
+                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2">
+                {% else %}
+                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language }}.png" class="md:-ml-0 -ml-2">
+                {% endif %}
+            </div>
         </div>
         <a href="{% url 'public.index' %}"
            class="md:hidden flex-1 text-center mb-6 inline-flex">
@@ -830,18 +826,14 @@
                     {% endthumbnail %}
                     {% endif %}
             </div>
-            <div class="md:hidden flex flex-1 -mt-2 justify-end float-right">
-                {% if org|config:"has_footer_unicef_logo" %}
-                    <div style="width:150px" class="md:block block">
-                        {% if org.language != "ar" and org.language != "ru" %}
-                            <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
-                                 class="-ml-2" alt="">
-                        {% else %}
-                            <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                                 class="-ml-2" alt="">
-                        {% endif %}
-                    </div>
-                {% endif %}
+            <div class="md:hidden flex flex-1 justify-end float-right">
+                <div style="width:180px" class="md:block block">
+                    {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
+                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2">
+                    {% else %}
+                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language }}.png" class="md:-ml-0 -ml-2">
+                    {% endif %}
+                </div>
             </div>
         </a>
         <div class="md:justify-end flex-1 flex">
