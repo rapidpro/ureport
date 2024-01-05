@@ -92,10 +92,19 @@
                         <div class="level-left">
                             <div style="justify-content: start;" class="level-item square-logo">
                                 <div style="width:360px">
+                                    {% if org|config:"has_new_brand" %} 
+                                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                    {% else %}
                                     {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                         <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
                                     {% endthumbnail %}
+                                    {% endif %}
                                 </div>
+                                {% if org|config:"has_new_brand" %} 
+                                <div class="flex-1 text-center font-bold text-2xl flex-center-y mx-4 mt-8" style="font-family:'Noto Sans', sans-serif;">
+                                    {{ org.name }}
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     {% endif %}
@@ -323,7 +332,7 @@
                     </a>
                     <div class="md:flex justify-center hidden">
                         {% if org|config:"has_footer_unicef_logo" %}
-                            <div style="max-width:185px" class="md:block block">
+                            <div style="max-width:360px" class="md:block block">
                                 {% if org.language != "ar" and org.language != "ru" %}
                                     <img src="{{ STATIC_URL }}/img/UNICEF_footer_Logo_black_en.png"
                                          class="md:-ml-0 -ml-2">
@@ -341,9 +350,9 @@
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
                             {% endthumbnail %}
                         </div>
-                        <div class="md:hidden flex flex-1 -mt-2 justify-end float-right">
+                        <div class="md:hidden flex flex-1 justify-end float-right">
                             {% if org|config:"has_footer_unicef_logo" %}
-                                <div style="width:150px" class="md:block block">
+                                <div style="width:180px" class="md:block block">
                                     {% if org.language != "ar" and org.language != "ru" %}
                                         <img src="{{ STATIC_URL }}/img/UNICEF_footer_Logo_black_en.png"
                                              class="-ml-2">

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1971,6 +1971,11 @@ msgstr "Ако тази организация е за глобални данн
 
 msgid "Whether to activate an extra gender."
 msgstr "Дали да бъде активирана допълнителна опция за пол"
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Дали този потребител има разрешение да влиза в сайта"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""

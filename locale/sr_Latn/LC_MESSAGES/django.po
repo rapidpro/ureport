@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -2112,6 +2112,11 @@ msgstr "Da li ova postavka uključuje globalne podatke, npr. mapu sveta umesto m
 
 msgid "Whether to activate an extra gender."
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1985,6 +1985,11 @@ msgstr "যদি এই প্রতিষ্ঠান এর তথ্যগ�
 
 msgid "Whether to activate an extra gender."
 msgstr "বাড়তি কোন লিঙ্গ সক্রিয় করা হবে কি না"
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "ব্যবহারকারী এই সাইটে প্রবেশ করার অনুমতি প্রাপ্ত কি না"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""

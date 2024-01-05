@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1876,6 +1876,11 @@ msgstr "Εάν αυτό το org για παγκόσμια δεδομένα. π.
 
 msgid "Whether to activate an extra gender."
 msgstr "Εάν θα ενεργοποιήσετε ένα επιπλέον φύλο"
+
+#, fuzzy
+#| msgid "Whether to show the UNICEF logo in the footer."
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Εάν θα εμφανίζεται το λογότυπο της UNICEF στο υποσέλιδο."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Εάν θα πρέπει να κρύψετε τα γραφήματα ανάλυσης της σύνδεσης."

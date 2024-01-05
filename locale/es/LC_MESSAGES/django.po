@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1928,6 +1928,11 @@ msgstr "Si la org es para información mundial. P.ej: si se muestra un mapa del 
 
 msgid "Whether to activate an extra gender."
 msgstr "Si hay que activar otro género."
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Si el usuario tiene permiso de acceder al sitio"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""

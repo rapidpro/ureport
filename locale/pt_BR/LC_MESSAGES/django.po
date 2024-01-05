@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -1985,6 +1985,11 @@ msgstr "Se esta organização é para dados globais. Por exemplo: Ela mostra um 
 
 msgid "Whether to activate an extra gender."
 msgstr "Se deve ativar um gênero extra."
+
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Se o usuário tem permissão para entrar no site"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""

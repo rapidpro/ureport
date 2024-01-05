@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1886,6 +1886,11 @@ msgstr "Si cette organisation concerne les données globales, par exemple : il m
 
 msgid "Whether to activate an extra gender."
 msgstr "Si pour activer un genre supplémentaire"
+
+#, fuzzy
+#| msgid "Whether to show the UNICEF logo in the footer."
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Afficher ou non le logo de l'UNICEF en bas de page"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Masquer ou non les tableaux de répartition des engagements"

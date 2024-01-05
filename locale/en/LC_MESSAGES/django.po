@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-05 10:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1827,6 +1827,9 @@ msgid "If this org if for global data. e.g: It shows a world map instead of a co
 msgstr ""
 
 msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
 msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
