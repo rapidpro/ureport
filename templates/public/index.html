@@ -4,8 +4,8 @@
     <!-- latest poll if we have it -->
     {% if latest_poll and latest_poll.get_first_question %}
         <div class="max-w-page mx-auto bg-white mt-6">
-            <div class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %} {% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1 text-white{% endif %}">
-                <div class="{% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1 text-white{% endif %} flex-1 self-stretch p-home self-center">
+            <div class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %} {% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1-home text-white{% endif %}">
+                <div class="{% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1-home text-white{% endif %} flex-1 self-stretch p-home self-center">
                     <div class="text-l mb-10">{% trans "LATEST OPINION" %}</div>
                     <div class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl leading-tight{% else %}text-2xl leading-tight{% endif %} font-bold mt-2 hover-parent">
                         {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
@@ -29,20 +29,20 @@
                     <div style="min-height:20rem;" class="relative w-full">
                         <div data-question="{{ latest_poll.get_first_question.id }}"
                              data-segment="all"
-                             data-bar-color="{% if latest_poll.get_first_question.get_bg_color_choice %} {{ latest_poll.get_first_question.get_bg_color_choice }} {% else %}{{ org|config:'dark1_color'|default:'#439932' }}{% endif %}"
+                             data-bar-color="{% if org|config:"has_new_brand" %}#00aeef{% else %}{% if latest_poll.get_first_question.get_bg_color_choice %} {{ latest_poll.get_first_question.get_bg_color_choice }} {% else %}{{ org|config:'dark1_color'|default:'#439932' }}{% endif %}{% endif %}"
                              class="w-full h-full absolute poll-chart block"
                              id="chart-{{ latest_poll.get_first_question.id }}"></div>
                     </div>
                     <div class="md:mb-0 mb-6 text-center">
                         <a href="{% url 'public.opinion_read' latest_poll.pk %}"
-                           class="btn bg-light1 text-black hover-dark">{% trans "VIEW FULL RESULTS" %}</a>
+                           class="btn hover-dark {% if org|config:"has_new_brand" %}bg-black text-white{% else %}bg-light1-home text-black{% endif %}">{% trans "VIEW FULL RESULTS" %}</a>
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
     <!-- ureporters graph -->
-    <div class="bg-black text-light1 bg-white-u">
+    <div class="bg-black text-light1-home bg-white-u">
         <div class="md:flex max-w-page mx-auto p-home">
             <div class="md:w-1/2 md:mt-0 md:p-0 flex-center-y mt-4 p-8">
                 <div class="font-bold text-l">
@@ -73,7 +73,7 @@
                             {{ age_stats|json_script:"age_stats" }}
                             <div data-aos="fade"
                                  data-graph-type="age-chart"
-                                 data-bar-color="{{ org|config:'light1_color'|default:'#FFD100' }}"
+                                 data-bar-color="{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:'light1_color'|default:'#FFD100' }}{% endif %}"
                                  data-label-color="#AAA"
                                  data-label-position="top"
                                  data-stats="age_stats"
