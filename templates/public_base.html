@@ -629,7 +629,7 @@
                     <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                 </div>
             </a>
-            <div class="flex-1 text-center font-bold text-2xl flex-center-y" style="font-family:'Noto Sans', sans-serif;">
+            <div class="flex-1 font-bold mt-12" style="font-family:'Noto Sans', sans-serif;">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     {{ org.name }}
                 </a>
@@ -699,7 +699,7 @@
                     </div>
                 </a>
             </div>
-            <div class="flex-1 text-center font-bold flex-center-y -mb-2 text-sm" style="font-family:'Noto Sans', sans-serif;">
+            <div class="flex-1 font-bold mt-6 -ml-12 text-xs p-home" style="font-family:'Noto Sans', sans-serif;">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     {{ org.name }}
                 </a>
@@ -795,9 +795,13 @@
         <a href="{% url 'public.index' %}"
            class="md:block flex-1 text-center mb-2 hidden">
             <div style="max-width:360px">
+                {% if org|config:"has_new_brand" %}
+                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                {% else %}
                 {% thumbnail org.get_logo "x180" format="PNG" as im %}
                     <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
                 {% endthumbnail %}
+                {% endif %}
             </div>
         </a>
         <div class="md:flex justify-center hidden">
@@ -812,9 +816,13 @@
         <a href="{% url 'public.index' %}"
            class="md:hidden flex-1 text-center mb-6 inline-flex">
             <div style="width:180px">
-                {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                    <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                {% endthumbnail %}
+                {% if org|config:"has_new_brand" %}
+                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                {% else %}
+                    {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                        <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
+                    {% endthumbnail %}
+                    {% endif %}
             </div>
             <div class="md:hidden flex flex-1 justify-end float-right">
                 <div style="width:120px" class="md:block block">
