@@ -152,7 +152,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
           type: chartType
           backgroundColor: "#060e26"
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         credits: { enabled: false }
@@ -290,7 +290,7 @@ showChart = (questionID, segmentName) ->
           paddingTop: 0
           paddingBottom: 0
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         series: [{
@@ -322,7 +322,7 @@ showChart = (questionID, segmentName) ->
           marginTop: 0
           marginBottom: 0
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         credits: { enabled: false }
@@ -386,7 +386,7 @@ showChart = (questionID, segmentName) ->
         chart: {
           type: "column"
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         credits: { enabled: false }
