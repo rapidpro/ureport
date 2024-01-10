@@ -150,24 +150,12 @@
         display: block;
       }
       {% if org|config:"has_new_brand" %}
-      .bg-dark1-home {
+      .bg-dark1-home, .bg-dark2-home,  .bg-dark3-home, .bg-light1-home, .bg-light2-home {
         background: #00aeef;
       }
 
-      .bg-dark2-home {
-        background: #00aeef;
-      }
-
-      .bg-dark3-home {
-        background: #00aeef;
-      }
-
-      .bg-light1-home {
-        background: #00aeef;
-      }
-
-      .bg-light2-home {
-        background: #00aeef;
+      .bg-dark1-home.hover-dark:hover, .bg-dark2-home.hover-dark:hover,  .bg-dark3-home.hover-dark:hover, .bg-light1-home.hover-dark:hover, .bg-light2-home.hover-dark:hover {
+        background: #42ccff;
       }
 
       .text-light1-home {
@@ -271,7 +259,7 @@
             </div>
             <div class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right   inline-block mb-4">
                 <a href="#"
-                   class="btn bg-light1 text-black inline-block download-screenshot hover-dark">Download</a>
+                   class="btn bg-light1-home text-black inline-block download-screenshot hover-dark">Download</a>
             </div>
             <div class="mt-4 shadow">
                 <img src="#" alt="" class="screenshot-rendered">
@@ -784,7 +772,7 @@
                         {% endif %}
                     </div>
                     <a href="{% url 'public.ureporters' %}"
-                       class="btn bg-light2 text-white inline-block hover-dark">{% trans "EXPLORE ENGAGEMENT" %}</a>
+                       class="btn bg-light2-home text-white inline-block hover-dark">{% trans "EXPLORE ENGAGEMENT" %}</a>
                 </div>
             </div>
         </div>
