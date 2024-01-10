@@ -35,7 +35,7 @@
                     </div>
                     <div class="md:mb-0 mb-6 text-center">
                         <a href="{% url 'public.opinion_read' latest_poll.pk %}"
-                           class="btn hover-dark {% if org|config:"has_new_brand" %}bg-black text-white{% else %}bg-light1-home text-black{% endif %}">{% trans "VIEW FULL RESULTS" %}</a>
+                           class="btn hover-dark {% if org|config:"has_new_brand" %}hover:bg-gray-700 bg-black text-white{% else %}bg-light1-home text-black{% endif %}">{% trans "VIEW FULL RESULTS" %}</a>
                     </div>
                 </div>
             </div>
@@ -147,8 +147,8 @@
     <div class="max-w-page mx-auto">
         <div class="md:flex">
             <div class="flex-1">
-                <div class="bg-light1 p-12 hover-parent">
-                    {% edit_content "orgs.org_edit" "" "#id_common.join_text" "-m-8" "dark" %}
+                <div class="bg-light1-home p-12 hover-parent">
+                    {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark" %}
                     <div class="text-3xl font-bold leading-tight text-center">
                         {% if org|config:"join_text" %}
                             {{ org|config:"join_text" }}
@@ -182,7 +182,11 @@
                         <div style="min-height:349px" class="flex justify-content">
                             <div class="inline-block mx-auto my-auto text-center">
                                 <div class="w-64">
-                                    <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
+                                    {% if org|config:"has_new_brand" %}
+                                        <img src="{{ STATIC_URL }}/img/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
+                                    {% else %}
+                                    <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png">
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -344,7 +348,7 @@
                         {% trans "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them." %}
                     </div>
                     <a href="{% url 'public.about' %}"
-                       class="btn bg-light1 text-black hover-dark">{% trans "LEARN MORE" %}</a>
+                       class="btn bg-light1-home text-black hover-dark">{% trans "LEARN MORE" %}</a>
                 </div>
             </div>
         </div>
