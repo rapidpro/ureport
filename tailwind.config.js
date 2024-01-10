@@ -48,7 +48,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        "Montserrat",
+        "Noto Sans",
         "Roboto",
         "sans-serif",
       ],

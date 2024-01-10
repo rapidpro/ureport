@@ -26,7 +26,7 @@ showSchemeChart = (id, data, barColor, labelColor) ->
       marginTop: if labelPosition == "top" then labelSize*2.2 else 0
       marginBottom: if labelPosition == "bottom" then labelSize*2.2 else 0
       style: {
-          fontFamily: "Montserrat"
+          fontFamily: "Noto Sans"
       }
     }
     title: null
