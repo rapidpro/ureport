@@ -101,7 +101,7 @@
                                     {% endif %}
                                 </div>
                                 {% if org|config:"has_new_brand" %}
-                                <div class="flex-1 text-center font-bold text-2xl flex-center-y mx-4 mt-8" style="font-family:'Noto Sans', sans-serif;">
+                                <div class="flex-1 text-center font-bold flex-center-y mx-4 mt-4" style="font-family:'Noto Sans', sans-serif;">
                                     {{ org.name }}
                                 </div>
                                 {% endif %}
@@ -325,9 +325,13 @@
                     <a href="{% url 'public.index' %}"
                        class="md:block flex-1 text-center mb-2 hidden">
                         <div style="max-width:360px">
+                            {% if org|config:"has_new_brand" %}
+                            <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                            {% else %}
                             {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
                             {% endthumbnail %}
+                            {% endif %}
                         </div>
                     </a>
                     <div class="md:flex justify-center hidden">
@@ -346,9 +350,13 @@
                     <a href="{% url 'public.index' %}"
                        class="md:hidden flex-1 text-center mb-6 inline-flex">
                         <div style="width:180px">
+                            {% if org|config:"has_new_brand" %}
+                                <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                            {% else %}
                             {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
                             {% endthumbnail %}
+                            {% endif %}
                         </div>
                         <div class="md:hidden flex flex-1 -mt-2 justify-end float-right">
                             {% if org|config:"has_footer_unicef_logo" %}
@@ -361,7 +369,7 @@
                                              class="-ml-2" alt="">
                                     {% endif %}
                                 </div>
-                            {% endif %}
+                                {% endif %}
                         </div>
                     </a>
                     <div class="md:justify-end flex-1 flex">
