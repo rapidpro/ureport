@@ -749,9 +749,9 @@
             <div class="md:hidden flex flex-1 justify-end float-right">
                 <div style="width:120px" class="md:block block">
                     {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
-                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2">
+                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="UNICEF logo">
                     {% else %}
-                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language }}.png" class="md:-ml-0 -ml-2">
+                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language }}.png" class="md:-ml-0 -ml-2" alt="UNICEF logo">
                     {% endif %}
                 </div>
             </div>
