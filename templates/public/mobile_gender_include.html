@@ -1,9 +1,10 @@
 {% load humanize ureport i18n %}
+
 <table class="gender">
     <tbody>
         <tr>
             <td>
-                <img src="{{ STATIC_URL }}img/male.png">
+                <img src="{{ STATIC_URL }}img/male.png" alt="">
             </td>
             <td>
                 <div class="primary-border-color percentage-gender" id="male-percentage">
@@ -12,7 +13,7 @@
                 <div class="summary-gender" id="male-summary">{{ gender_stats.male_count|intcomma }}</div>
             </td>
             <td class="female-gender">
-                <img src="{{ STATIC_URL }}img/female.png">
+                <img src="{{ STATIC_URL }}img/female.png" alt="">
             </td>
             <td>
                 <div class="primary-border-color percentage-gender" id="female-percentage">

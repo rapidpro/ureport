@@ -1,15 +1,13 @@
 {% extends "smartmin/base.html" %}
 {% load smartmin i18n %}
+
 {% block content %}
     {% block pjax %}
         <div class="columns" id="pjax">
             <div class="{% block form-span %}is-12{% endblock %} column">
                 {% block pre-form %}
                 {% endblock pre-form %}
-                <form method="post"
-                      enctype="multipart/form-data"
-                      role="form"
-                      class="smartmin-form">
+                <form method="post" enctype="multipart/form-data" role="form" class="smartmin-form">
                     {% block pre-form-errors %}
                     {% endblock pre-form-errors %}
                     {% if form.non_field_errors %}<div class="message is-danger form-errors">{{ form.non_field_errors }}</div>{% endif %}
@@ -58,24 +56,24 @@
 {% block extra-script %}
     {{ block.super }}
     <script type="text/javascript">
-    $(document).ready(function() {
-      $('input[readonly]').prop('disabled', true);
-    });
+      $(document).ready(function() {
+        $('input[readonly]').prop('disabled', true);
+      });
     </script>
     {% if javascript_submit %}
         <script type="text/javascript">
-      // attach a submit handler to the form
-      $("#smartmin_form").submit(function(event) {
-      
-      // stop form from submitting normally
-      event.preventDefault();
-      event.stopPropagation();
-      
-      // get some values from elements on the page:
-      var form = $(this);
-      var data = form.serialize();
-      {{ javascript_submit }}(form, data);
-      });
+          // attach a submit handler to the form
+          $("#smartmin_form").submit(function(event) {
+
+            // stop form from submitting normally
+            event.preventDefault();
+            event.stopPropagation();
+
+            // get some values from elements on the page:
+            var form = $(this);
+            var data = form.serialize();
+            {{ javascript_submit }}(form, data);
+          });
         </script>
     {% endif %}
 {% endblock extra-script %}

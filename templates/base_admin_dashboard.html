@@ -72,7 +72,7 @@
                 <div class="level">
                     {% if is_rtl_org %}<div class="level-left"></div>{% endif %}
                     <div class="{% if is_rtl_org %}level-right{% else %}level-left{% endif %}">
-                        <a href="/"
+                        <a href="{% url 'public.index' %}"
                            style="justify-content: start"
                            class="level-item has-text-black">
                             <div style="{% if is_rtl_org %}margin-right:0;
@@ -145,7 +145,7 @@
                                         <li>
                                             <a href="{% url 'polls.poll_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/polls_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/polls_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Opinions" %}</span>
                                             </a>
@@ -153,7 +153,7 @@
                                         <li>
                                             <a href="{% url 'stories.story_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/stories_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/stories_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Stories" %}</span>
                                             </a>
@@ -161,7 +161,7 @@
                                         <li>
                                             <a href="{% url 'bots.bot_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Bots" %}</span>
                                             </a>
@@ -169,7 +169,7 @@
                                         <li>
                                             <a href="{% url 'orgs.org_manage_accounts' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/users_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/users_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Users" %}</span>
                                             </a>
@@ -177,7 +177,7 @@
                                         <li>
                                             <a href="{% url 'orgs.org_edit' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Settings" %}</span>
                                             </a>
@@ -185,14 +185,14 @@
                                         <li>
                                             <a href="{% url 'dashblocks.dashblock_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/pages_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/pages_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Pages" %}</span>
                                             </a>
                                             <li>
                                                 <a href="{% url 'landingpages.landingpage_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/pages_icon.png">
+                                                        <img src="{{ STATIC_URL }}img/pages_icon.png" alt="">
                                                     </span>
                                                     <span class="menu-link-title">{% trans "Landing Pages" %}</span>
                                                 </a>
@@ -201,7 +201,7 @@
                                         <li>
                                             <a href="{% url 'jobs.jobsource_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/jobs_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/jobs_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Jobs" %}</span>
                                             </a>
@@ -209,7 +209,7 @@
                                         <li>
                                             <a href="{% url 'categories.category_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/categories_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/categories_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Categories" %}</span>
                                             </a>
@@ -217,7 +217,7 @@
                                         <li>
                                             <a href="{% url 'tags.tag_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/categories_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/categories_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Tags" %}</span>
                                             </a>
@@ -225,7 +225,7 @@
                                         <li>
                                             <a href="{% url 'assets.image_list' %}">
                                                 <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/photos_icon.png">
+                                                    <img src="{{ STATIC_URL }}img/photos_icon.png" alt="">
                                                 </span>
                                                 <span class="menu-link-title">{% trans "Partners Logos" %}</span>
                                             </a>
@@ -234,7 +234,7 @@
                                             <li>
                                                 <a href="{% url 'categories.categoryimage_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/photos_icon.png">
+                                                        <img src="{{ STATIC_URL }}img/photos_icon.png" alt="">
                                                     </span>
                                                     <span class="menu-link-title">{% trans "Categories Images" %}</span>
                                                 </a>
@@ -244,7 +244,7 @@
                                             <li>
                                                 <a href="{% url 'news.newsitem_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/news_icon.png">
+                                                        <img src="{{ STATIC_URL }}img/news_icon.png" alt="">
                                                     </span>
                                                     <span class="menu-link-title">{% trans "News Items" %}</span>
                                                 </a>
@@ -254,15 +254,15 @@
                                             <li>
                                                 <a href="{% url 'orgs.org_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                                        <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                                     </span>
                                                     <span class="menu-link-title">{% trans "Orgs" %}</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/users/user/">
+                                                <a href="{% url 'users.user_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                                        <img src="{{ STATIC_URL }}img/settings_icon.png" alt="" >
                                                     </span>
                                                     <span class="menu-link-title">{% trans "Users" %}</span>
                                                 </a>
@@ -270,7 +270,7 @@
                                             <li>
                                                 <a href="{% url 'dashblocks.dashblocktype_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                                        <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                                     </span>
                                                     <span class="menu-link-title">{% trans "Content Types" %}</span>
                                                 </a>
@@ -278,7 +278,7 @@
                                             <li>
                                                 <a href="{% url 'assets.image_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                                        <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                                     </span>
                                                     <span class="menu-link-title">{% trans "Images" %}</span>
                                                 </a>
@@ -326,10 +326,10 @@
                             <div style="max-width:185px" class="md:block block">
                                 {% if org.language != "ar" and org.language != "ru" %}
                                     <img src="{{ STATIC_URL }}/img/UNICEF_footer_Logo_black_en.png"
-                                         class="md:-ml-0 -ml-2">
+                                         class="md:-ml-0 -ml-2" alt="">
                                 {% else %}
                                     <img src="{{ STATIC_URL }}/img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                                         class="md:-ml-0 -ml-2">
+                                         class="md:-ml-0 -ml-2" alt="">
                                 {% endif %}
                             </div>
                         {% endif %}
@@ -346,10 +346,10 @@
                                 <div style="width:150px" class="md:block block">
                                     {% if org.language != "ar" and org.language != "ru" %}
                                         <img src="{{ STATIC_URL }}/img/UNICEF_footer_Logo_black_en.png"
-                                             class="-ml-2">
+                                             class="-ml-2" alt="">
                                     {% else %}
                                         <img src="{{ STATIC_URL }}/img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                                             class="-ml-2">
+                                             class="-ml-2" alt="">
                                     {% endif %}
                                 </div>
                             {% endif %}

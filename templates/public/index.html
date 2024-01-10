@@ -8,7 +8,7 @@
                 <div class="{% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1 text-white{% endif %} flex-1 self-stretch p-home self-center">
                     <div class="text-l mb-10">{% trans "LATEST OPINION" %}</div>
                     <div class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl leading-tight{% else %}text-2xl leading-tight{% endif %} font-bold mt-2 hover-parent">
-                        {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                        {% edit_content 'polls.poll_update' latest_poll.pk "#id_title" "-m-8" "dark" %}
                         {{ latest_poll.title }}
                     </div>
                     <div class="{% if latest_poll.get_first_question.get_border_color_choice %} border-{{ latest_poll.get_first_question.get_border_color_choice }} {% else %}border-{{ border_color }}{% endif %} font-alt font-bold italic left-border mt-8 hover-parent">
@@ -148,7 +148,7 @@
         <div class="md:flex">
             <div class="flex-1">
                 <div class="bg-light1 p-12 hover-parent">
-                    {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark" %}
+                    {% edit_content "orgs.org_edit" "" "#id_common.join_text" "-m-8" "dark" %}
                     <div class="text-3xl font-bold leading-tight text-center">
                         {% if org|config:"join_text" %}
                             {{ org|config:"join_text" }}
@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <div class="bg-black p-12 text-white hover-parent">
-                    {% edit_content 'orgs.org_edit' "" "#id_common.homepage_join_video_id"  "-m-8" "white" %}
+                    {% edit_content "orgs.org_edit" "" "#id_common.homepage_join_video_id" "-m-8" "white" %}
                     {% if org|config:"homepage_join_video_id" %}
                         <div class="video">
                             <iframe width="560"
@@ -182,7 +182,7 @@
                         <div style="min-height:349px" class="flex justify-content">
                             <div class="inline-block mx-auto my-auto text-center">
                                 <div class="w-64">
-                                    <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png">
+                                    <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -284,10 +284,10 @@
                                 {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
                                 {% if story.get_image %}
                                     {% thumbnail story.get_image "800x500" crop="center" as im %}
-                                        <img width="100%" src="{{ im.url }}">
+                                        <img width="100%" src="{{ im.url }}" alt="">
                                     {% endthumbnail %}
                                 {% else %}
-                                    <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                                    <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" alt="">
                                 {% endif %}
                             </div>
                         </div>
@@ -310,10 +310,10 @@
             {% for story in main_stories|slice:"1" %}
                 {% if story.get_image %}
                     {% thumbnail story.get_image "800x500" crop="top" as im %}
-                        <img width="100%" src="{{ im.url }}">
+                        <img width="100%" src="{{ im.url }}" alt="">
                     {% endthumbnail %}
                 {% else %}
-                    <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                    <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" alt="">
                 {% endif %}
                 <div class="p-home">
                     <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
@@ -333,7 +333,7 @@
     <div class="bg-black text-white">
         <div class="md:flex rtl:pl-10 ltr:pr-10 max-w-page mx-auto bg-black p-home">
             <div class="md:w-3/5 flex flex-center-y my-4">
-                <img src="{{ STATIC_URL }}img/homemap_bg.png">
+                <img src="{{ STATIC_URL }}img/homemap_bg.png" alt="">
             </div>
             <div class="md:w-2/5 flex flex-center-y">
                 <div class="rtl:pr-10 ltr:pl-10">

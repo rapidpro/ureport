@@ -1,8 +1,9 @@
 {% extends "smartmin/list.html" %}
 {% load thumbnail smartmin i18n %}
+
 {% block content-title %}
     <h2 class="is-size-2 has-text-weight-bold">
-        <img src="{{ STATIC_URL }}img/settings_icon.png">
+        <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
         <div class="is-inline-block content-title-text">{% trans "Category Images" %}</div>
     </h2>
 {% endblock content-title %}
@@ -17,9 +18,9 @@
                                 <div class="category-name">{% get_value obj field %}</div>
                                 <div class="category-image">
                                     {% thumbnail obj.image "640x360" crop="top" as im %}
-                                        <img width="100%" src="{{ im.url }}" />
+                                        <img width="100%" src="{{ im.url }}"  alt="" />
                                     {% empty %}
-                                        <img width="100%" src="{{ STATIC_URL }}img/missing-image.png">
+                                        <img width="100%" src="{{ STATIC_URL }}img/missing-image.png" alt="">
                                     {% endthumbnail %}
                                 </div>
                             </a>
@@ -33,14 +34,14 @@
 {% block extra-style %}
     {{ block.super }}
     <style type="text/css">
-    .category-obj{
-      margin-bottom: 25px;
-    }
-    
-    .category-name {
-      text-align: center;
-      color: #aaaaaa;
-      text-decoration: none;
-    }
+      .category-obj {
+        margin-bottom: 25px;
+      }
+
+      .category-name {
+        text-align: center;
+        color: #aaaaaa;
+        text-decoration: none;
+      }
     </style>
 {% endblock extra-style %}

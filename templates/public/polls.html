@@ -17,7 +17,7 @@
                             <div class="flex-1">
                                 <input type="text"
                                        data-results-id="poll-search-results"
-                                       placeholder="{% trans 'SEARCH' %}"
+                                       placeholder='{% trans "SEARCH" %}'
                                        size="14"
                                        class="bg-black search-box text-sm">
                             </div>
@@ -97,7 +97,7 @@
                 <div class="flex-1 my-home self-center hover-parent bg-gray-400">
                     <div class="px-home hover-parent">
                         <div class="font-bold leading-tight hover-parent text-3xl p-8 text-center">
-                            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                            {% edit_content "polls.poll_update" latest_poll.pk "#id_title" "-m-8" "dark" %}
                             {% if not latest_poll.is_active %}
                                 {% trans "Unpublished poll preview. Click Edit to publish it" %}
                             {% else %}
@@ -143,11 +143,11 @@
                             </div>
                         </div>
                         <div class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight hover-parent">
-                            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                            {% edit_content "polls.poll_update" latest_poll.pk "#id_title" "-m-8" "dark" %}
                             {{ latest_poll.title }}
                         </div>
                         <div class="block hover-parent">
-                            {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+                            {% edit_content "polls.poll_poll_date" latest_poll.pk "#id_title" "-m-8" "dark" %}
                             {{ latest_poll.poll_date|date:"F j, Y" }}
                         </div>
                         <div class="font-light mt-6">
@@ -164,18 +164,18 @@
                     <div class="mt-6 flex flex-wrap">
                         <div class="md:mx-0 {% if is_rtl_org %}md:ml-8 {% else %}md:mr-8{% endif %} flex-none mx-auto">
                             <div class="{% if is_rtl_org %}md:pl-4 {% else %}md:pr-4{% endif %} text-center inline-block">
-                                <img src="{{ STATIC_URL }}img/gender-male.png" width="40">
+                                <img src="{{ STATIC_URL }}img/gender-male.png" width="40" alt="">
                                 <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.m.percentage|default:"0" }}%</div>
                                 <div class="text-sm leading-none">{{ gender_stats.m.count|default:"0"|intcomma }}</div>
                             </div>
                             <div class="rtl:border-r ltr:border-l text-center inline-block px-4 border-black">
-                                <img src="{{ STATIC_URL }}img/gender-female.png" width="40">
+                                <img src="{{ STATIC_URL }}img/gender-female.png" width="40" alt="">
                                 <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.f.percentage|default:"0" }}%</div>
                                 <div class="text-sm leading-none">{{ gender_stats.f.count|default:"0"|intcomma }}</div>
                             </div>
                             {% if org|config:"has_extra_gender" %}
                                 <div class="rtl:border-r ltr:border-l text-center inline-block px-4 border-black">
-                                    <img src="{{ STATIC_URL }}img/gender-other.png" width="40">
+                                    <img src="{{ STATIC_URL }}img/gender-other.png" width="40" alt="">
                                     <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.o.percentage|default:"0" }}%</div>
                                     <div class="text-sm leading-none">{{ gender_stats.o.count|default:"0"|intcomma }}</div>
                                 </div>
@@ -384,16 +384,16 @@
                     <div class="p-home">
                         <div class="w=1/4 float-right">
                             <div class="md:block flex-none w-16 hidden">
-                                <img src="{{ STATIC_URL }}img/u-icon-small.png">
+                                <img src="{{ STATIC_URL }}img/u-icon-small.png" alt="">
                             </div>
                         </div>
                         <div class="md:text-5xl w-3/4 text-3xl font-bold hover-parent hover-parent inline-block">
-                            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_title"  "-m-8" "dark" %}
+                            {% edit_content "polls.poll_responses" latest_poll.pk "#id_response_title" "-m-8" "dark" %}
                             {{ latest_poll.response_title }}
                         </div>
                         {% if latest_poll.response_author %}
                             <div class="md:mt-6 text-base font-bold mt-4 hover-parent inline-block">
-                                {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_author"  "-m-8" "dark" %}
+                                {% edit_content "polls.poll_responses" latest_poll.pk "#id_response_author" "-m-8" "dark" %}
                                 {% trans "Written by:" %}
                                 {{ latest_poll.response_author }}
                             </div>
@@ -407,7 +407,7 @@
                 <div class="md:-mt-40 max-w-page mx-auto bg-white -mt-24">
                     <div class="block hover-parent p-home pt-0">
                         <div class="px-home">
-                            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_content"  "-m-8" "dark" %}
+                            {% edit_content "polls.poll_responses" latest_poll.pk "#id_response_content" "-m-8" "dark" %}
                             {{ latest_poll.response_content|safe }}
                         </div>
                     </div>

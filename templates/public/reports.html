@@ -1,5 +1,6 @@
 {% extends "public_base.html" %}
 {% load thumbnail ureport i18n compress %}
+
 {% block content %}
     <div class="bg-grid border-t border-b">
         <div class="md:flex max-w-page mx-auto p-home">
@@ -13,7 +14,7 @@
                             <div class="flex-1">
                                 <input type="text"
                                        data-results-id="story-search-results"
-                                       placeholder="{% trans 'SEARCH' %}"
+                                       placeholder='{% trans "SEARCH" %}'
                                        size="14"
                                        class="bg-black search-box text-sm">
                             </div>
@@ -37,8 +38,7 @@
                                     <a href="#" class="text-sm font-bold px-2 block">
                                         <i style="padding-top:2px"
                                            class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fa closed"></i>
-                                        <i style="padding-top:4px"
-                                           class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
+                                        <i style="padding-top:4px" class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
                                         <div class="pl-3">{{ category.name }}</div>
                                     </a>
                                     <div class="category-results">
@@ -67,12 +67,10 @@
                class="md:mt-4 {% if not forloop.first %}md:ml-4{% endif %} md:m-4 md:p-0 block mt-6 p-4 border">
                 <div class="block">
                     {% thumbnail story.get_image "400x250" crop="top" as im %}
-                        <img width="100%" src="{{ im.url }}">
+                        <img width="100%" src="{{ im.url }}" alt="">
                     {% endthumbnail %}
                 </div>
-                <div class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %} p-4 font-bold mt-4 h-20">
-                    {{ story.title }}
-                </div>
+                <div class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %} p-4 font-bold mt-4 h-20">{{ story.title }}</div>
                 <div class="md:block m-4 hidden">
                     <button class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</button>
                 </div>

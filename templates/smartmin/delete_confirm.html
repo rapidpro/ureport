@@ -1,5 +1,6 @@
 {% extends "smartmin/base.html" %}
 {% load smartmin i18n %}
+
 {% block pre-content %}
 {% endblock pre-content %}
 {% block content %}
@@ -12,26 +13,26 @@
             Are you sure you want to remove <strong>{{ object }}</strong>?
           {% endblocktrans %}
                 </p>
-                <div></div>
-                <p>{% trans "Once it is removed, it will be gone forever. There is no way to undo this operation." %}</p>
-            </div>
-        </article>
-        <form method="POST">
-            {% block delete_form %}
-            {% endblock delete_form %}
-            <div class="field smartmin-form-buttons is-horizontal">
-                <div class="field-label"></div>
-                <div class="field-body"></div>
-                <div class="field is-grouped">
-                    <div class="control">
-                        <a href="{{ cancel_url }}" class="button">{% trans "Cancel" %}</a>
-                        {% csrf_token %}
-                    </div>
-                    <div class="control">
-                        <button type="submit" class="button is-danger">{% trans "Remove" %}</button>
-                    </div>
+            </br>
+            <p>{% trans "Once it is removed, it will be gone forever. There is no way to undo this operation." %}</p>
+        </div>
+    </article>
+    <form method="post">
+        {% block delete_form %}
+        {% endblock delete_form %}
+        <div class="field smartmin-form-buttons is-horizontal">
+            <div class="field-label"></div>
+            <div class="field-body"></div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <a href="{{ cancel_url }}" class="button">{% trans "Cancel" %}</a>
+                    {% csrf_token %}
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-danger">{% trans "Remove" %}</button>
                 </div>
             </div>
-        </form>
-    {% endblock pjax %}
+        </div>
+    </form>
+{% endblock pjax %}
 {% endblock content %}
