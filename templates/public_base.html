@@ -18,7 +18,11 @@
         <meta name="keywords" content="">
         <meta name="author" content="">
         {% if has_better_domain %}<meta name="robots" content="noindex">{% endif %}
-        {% if org.subdomain %}
+        {% if org|config:"has_new_brand" %}
+        <link rel="icon"
+              type="image/x-icon"
+              href="{{ STATIC_URL }}img/favicon-v2024.png">
+        {% elif org.subdomain %}
             <link rel="icon"
                   type="image/x-icon"
                   href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
@@ -47,63 +51,63 @@
             <link rel="stylesheet" href="{{ STATIC_URL }}css/tailwind.css">
         {% endcompress %}
         <style type="text/css">
-      .bg-dark1, .bg-dark1-home {
+      .bg-dark1, .bg-dark1-v2024 {
         background: {{ org|config:'dark1_color'|default:'#439932'  }};
       }
       
-      .border-dark1 {
+      .border-dark1, .border-dark1-v2024 {
         border-color: {{ org|config:'dark1_color'|default:'#439932' }};
       }
       
-      .hover\:border-dark1:hover {
+      .hover\:border-dark1:hover, .hover\:border-dark1-v2024:hover {
         border-color: {{ org|config:'dark1_color'|default:'#439932' }};
       }
       
-      .bg-dark2, .bg-dark2-home {
+      .bg-dark2, .bg-dark2-v2024 {
         background: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
       
-      .border-dark2 {
+      .border-dark2, .border-dark2-v2024 {
         border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
       
-      .hover\:border-dark2:hover {
+      .hover\:border-dark2:hover, .hover\:border-dark2-v2024:hover {
         border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
       }
       
-      .bg-dark3, .bg-dark3-home {
+      .bg-dark3, .bg-dark3-v2024 {
         background: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
       }
       
-      .border-dark3 {
+      .border-dark3, .border-dark3-v2024  {
         border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
       }
       
-      .hover\:border-dark3:hover {
+      .hover\:border-dark3:hover, .hover\:border-dark3-v2024:hover {
         border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
       }
       
-      .border-light1 {
+      .border-light1, .border-light1-v2024 {
         border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
       
-      .bg-light1, .bg-light1-home {
+      .bg-light1, .bg-light1-v2024 {
         background: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
       
-      .bg-light1.hover-dark:hover {
+      .bg-light1.hover-dark:hover, .bg-light1-v2024.hover-dark:hover {
         background: #ffda33;
       }
       
-      .text-light1, .text-light1-home {
+      .text-light1, .text-light1-v2024 {
         color: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
       
-      .bg-light2, .bg-light2-home {
+      .bg-light2, .bg-light2-v2024 {
         background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
       }
       
-      .bg-light2.hover-dark:hover {
+      .bg-light2.hover-dark:hover, .bg-light2-v2024.hover-dark:hover {
         background: #89c7e8;
       }
       
@@ -150,7 +154,7 @@
         display: block;
       }
       {% if org|config:"has_new_brand" %}
-      .bg-dark1-home, .bg-dark2-home,  .bg-dark3-home, .bg-light1-home, .bg-light2-home {
+      .bg-dark1-v2024, .bg-dark2-v2024,  .bg-dark3-v2024, .bg-light1-v2024, .bg-light2-v2024 {
         background: #00aeef;
       }
 
@@ -158,7 +162,15 @@
         background: #42ccff;
       }
 
-      .text-light1-home {
+      .border-dark1-v2024, .border-dark2-v2024, .border-dark3-v2024, .border-light1-v2024 {
+        border-color: #00aeef;
+      }
+
+      .hover\:border-dark1-v2024:hover,  .hover\:border-dark2-v2024:hover,  .hover\:border-dark3-v2024:hover {
+        border-color: #00aeef;
+      }
+
+      .text-light1-v2024 {
         color: #00aeef;
       }
 
@@ -260,7 +272,7 @@
             </div>
             <div class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right   inline-block mb-4">
                 <a href="#"
-                   class="btn bg-light1-home text-black inline-block download-screenshot hover-dark">Download</a>
+                   class="btn bg-light1-v2024 text-black inline-block download-screenshot hover-dark">Download</a>
             </div>
             <div class="mt-4 shadow">
                 <img src="#" alt="" class="screenshot-rendered">
@@ -626,7 +638,7 @@
                 <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                     <div>
                         <a href="{% url 'public.opinions' %}"
-                            class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                            class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
                         {% trans "Opinions" %}
                         </a>
                     </div>
@@ -635,7 +647,7 @@
                 <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                     <div>
                         <a href="{% url 'public.stories' %}"
-                            class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                            class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
                             {% trans "Stories" %}
                         </a>
                     </div>
@@ -648,7 +660,7 @@
             <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                 <div>
                     <a href="{% url 'public.opinions' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                       class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
                         {% trans "Opinions" %}
                     </a>
                 </div>
@@ -663,7 +675,7 @@
             <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                 <div>
                     <a href="{% url 'public.stories' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                       class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
                         {% trans "Stories" %}
                     </a>
                 </div>
@@ -716,7 +728,7 @@
                     </div>
                     <div class="mt-8 {% if not org|config:"has_new_brand" %}text-center{% endif %}">
                         <a href="{% url 'public.join' %}"
-                           class="btn bg-light1-home hover-dark {% if org|config:"has_new_brand" %}text-white{% else %}text-black{% endif %}">
+                           class="btn bg-light1-v2024 hover-dark {% if org|config:"has_new_brand" %}text-white{% else %}text-black{% endif %}">
                             {% if org|config:"join_button_text" %}
                                 {{ org|config:"join_button_text" }}
                             {% else %}
@@ -759,7 +771,9 @@
         <div class="md:flex max-w-page mx-auto text-white p-home">
             <div class="md:w-1/3 md:block hidden">
                 <div class="w-40">
-                    <img src="{{ STATIC_URL }}img/blue_u.png" alt="">
+                    {% if not org|config:"has_new_brand" %}
+                    <img src="{{ STATIC_URL }}img/blue_u.png">
+                    {% endif %}
                 </div>
             </div>
             <div class="md:w-2/3 {% if is_rtl_org %}md:text-left{% else %}md:text-right{% endif %} text-center">
@@ -773,7 +787,7 @@
                         {% endif %}
                     </div>
                     <a href="{% url 'public.ureporters' %}"
-                       class="btn bg-light2-home text-white inline-block hover-dark">{% trans "EXPLORE ENGAGEMENT" %}</a>
+                       class="btn bg-light2-v2024 text-white inline-block hover-dark">{% trans "EXPLORE ENGAGEMENT" %}</a>
                 </div>
             </div>
         </div>
@@ -834,7 +848,7 @@
             <div class="md:ml-6 font-bold text-2xl flex-center-y">
                 <div>
                     <a href="{% url 'public.opinions' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                       class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
                         {% trans "Opinions" %}
                     </a>
                 </div>
@@ -842,7 +856,7 @@
             <div class="font-bold text-2xl ml-6 flex-center-y">
                 <div>
                     <a href="{% url 'public.stories' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
+                       class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
                         {% trans "Stories" %}
                     </a>
                 </div>

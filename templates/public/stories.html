@@ -71,14 +71,14 @@
                 <div class="flex">
                     {% if forloop.first %}
                         <div class="flex-1 h-10"></div>
-                        <div class="flex-1 bg-dark1">&nbsp;</div>
+                        <div class="flex-1 bg-dark1-v2024">&nbsp;</div>
                     {% else %}
-                        <div class="flex-1 h-10 bg-dark2"></div>
+                        <div class="flex-1 h-10 bg-dark2-v2024"></div>
                         <div class="flex-1 h-10"></div>
                     {% endif %}
                 </div>
                 <div>
-                    <div class="{% if is_rtl_org %}{% cycle 'border-dark1 border-l-25rem' 'border-dark2 border-r-25rem' %}{% else %}{% cycle 'border-dark1 border-r-25rem' 'border-dark2 border-l-25rem' %}{% endif %} border-solid flex">
+                    <div class="{% if is_rtl_org %}{% cycle 'border-dark1-v2024 border-l-25rem' 'border-dark2-v2024 border-r-25rem' %}{% else %}{% cycle 'border-dark1-v2024 border-r-25rem' 'border-dark2-v2024 border-l-25rem' %}{% endif %} border-solid flex">
                         {% if not forloop.first %}
                             <div class="w-2/3 block p-10 bg-white flex flex-col justify-center hover-parent">
                                 {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
@@ -126,9 +126,9 @@
                 <div class="flex">
                     {% if forloop.first %}
                         <div class="flex-1 h-10"></div>
-                        <div class="flex-1 bg-dark1">&nbsp;</div>
+                        <div class="flex-1 bg-dark1-v2024">&nbsp;</div>
                     {% else %}
-                        <div class="flex-1 h-20 bg-dark2"></div>
+                        <div class="flex-1 h-20 bg-dark2-v2024"></div>
                         <div class="flex-1 h-20"></div>
                     {% endif %}
                 </div>

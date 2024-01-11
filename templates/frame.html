@@ -20,7 +20,11 @@
 <![endif]-->
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if org.subdomain %}
+    {% if org|config:"has_new_brand" %}
+        <link rel="icon"
+              type="image/x-icon"
+              href="{{ STATIC_URL }}img/favicon-v2024.png">
+    {% elif org.subdomain %}
         <link rel="icon"
               type="image/x-icon"
               href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
