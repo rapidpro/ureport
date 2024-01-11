@@ -1,5 +1,6 @@
 {% extends "smartmin/update.html" %}
 {% load smartmin %}
+
 {% block post-form %}
     {% if perms.auth.user_mimic %}
         <form action="{% url 'users.user_mimic' object.id %}"

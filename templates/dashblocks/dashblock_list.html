@@ -3,9 +3,9 @@
 {% block content-title %}
     <h2 class="is-size-2 has-text-weight-bold">
         {% if filtered_type %}
-            <img src="{{ STATIC_URL }}img/{{ filtered_type.slug }}_icon.png">
+            <img src="{{ STATIC_URL }}img/{{ filtered_type.slug }}_icon.png" alt="icon">
         {% else %}
-            <img src="{{ STATIC_URL }}img/pages_icon.png">
+            <img src="{{ STATIC_URL }}img/pages_icon.png" alt="icon">
         {% endif %}
         <div class="is-inline-block content-title-text">
             {% if filtered_type %}

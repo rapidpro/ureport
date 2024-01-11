@@ -146,9 +146,9 @@
                                     <div>
                                         <a href="{{ site.host }}" class="flag">
                                             {% if site.is_static %}
-                                                <img src="{{ STATIC_URL }}img/flags/{{ site.flag }}">
+                                                <img src="{{ STATIC_URL }}img/flags/{{ site.flag }}" alt="">
                                             {% else %}
-                                                <img src="{{ site.flag }}">
+                                                <img src="{{ site.flag }}" alt="">
                                             {% endif %}
                                         </a>
                                     </div>
@@ -180,7 +180,7 @@
                                                 <a href="{% url 'orgs.org_list' %}">{% trans "Orgs" %}</a>
                                             </li>
                                             <li>
-                                                <a href="/users/user/">{% trans "Users" %}</a>
+                                                <a href="{% url 'users.user_list' %}">{% trans "Users" %}</a>
                                             </li>
                                             <li>
                                                 <a href="{% url 'dashblocks.dashblocktype_list' %}">{% trans "Content Types" %}</a>
@@ -408,7 +408,7 @@
                                     <div uk-grid>
                                         <div class="uk-width-1-1">
                                             {% thumbnail story.get_image "450x240" crop="top" as im %}
-                                                <img width="100%" src="{{ im.url }}" />
+                                                <img width="100%" src="{{ im.url }}" alt="" />
                                             {% endthumbnail %}
                                         </div>
                                         <div class="uk-width-1-1 main-story-title is-clipped">{{ story.title }}</div>
@@ -425,7 +425,7 @@
                     </div>
                     <div uk-grid>
                         <div class="uk-visible@s uk-width-1-3@s">
-                            <img width="50%" src="{{ STATIC_URL }}img/u-icon-large.png" />
+                            <img width="50%" src="{{ STATIC_URL }}img/u-icon-large.png" alt=""/>
                         </div>
                         <div class="uk-width-2-3@s">
                             <div class="pre-footer-call-to-action">
@@ -619,6 +619,6 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 {# media associated with any form we are displaying #}
 {% if form %}{{ form.media }}{% endif %}
-{% block extra-script %}{% endblock %}
-{% block script %}{% endblock %}
+{% block extra-script %}{% endblock extra-script %}
+{% block script %}{% endblock script %}
 </body>

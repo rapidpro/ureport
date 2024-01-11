@@ -87,7 +87,7 @@
         </div>
         <div class="md:w-1/2 {% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %} block">
             {% thumbnail object.image "900" crop="top" as im %}
-                <img src="{{ im.url }}" width="100%" style="object-fit:cover;">
+                <img src="{{ im.url }}" width="100%" style="object-fit:cover;" alt="">
             {% endthumbnail %}
         </div>
     </div>
@@ -120,7 +120,7 @@
                 {{ object.content|safe }}
             </div>
             <div class="flex-none w-10">
-                <img src="{{ STATIC_URL }}img/u-icon-small.png">
+                <img src="{{ STATIC_URL }}img/u-icon-small.png" alt="">
             </div>
         </div>
     </div>

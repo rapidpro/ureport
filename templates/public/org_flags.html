@@ -5,9 +5,9 @@
         {% for site in linked_orgs %}
             <a href="{{ site.host }}" class="flag">
                 {% if site.is_static %}
-                    <img src="{{ STATIC_URL }}img/site_flags/{{ site.flag }}" width="70px">
+                    <img src="{{ STATIC_URL }}img/site_flags/{{ site.flag }}" width="70px" alt="">
                 {% else %}
-                    <img src="{{ site.flag }}" width="70px">
+                    <img src="{{ site.flag }}" width="70px" alt="">
                 {% endif %}
             </a>
         {% endfor %}

@@ -1,4 +1,4 @@
-{% extends 'smartmin/create.html' %}
+{% extends "smartmin/create.html" %}
 {% load i18n %}
 {% block pre-form %}
     {% if 'widget_id' in fields %}
@@ -13,6 +13,7 @@
         <div>After you create the widget copy the widget id from the url as shown on</div>
       {% endblocktrans %}
             <img src="{{ STATIC_URL }}img/widget_id_example.jpg"
+                 alt=""
                  style=""
                  class="widget-id-example">
         </p>

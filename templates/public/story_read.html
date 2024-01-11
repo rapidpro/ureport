@@ -1,14 +1,13 @@
 {% extends "public_base.html" %}
 {% load thumbnail compress i18n ureport %}
+
 {% block meta-extra %}
     {% if org|config:"facebook_page_id" and org|config:"facebook_app_id" %}
-        <meta property="og:url"
-              content="{% org_host_link %}{% url 'public.story_read' story.pk %}">
+        <meta property="og:url" content="{% org_host_link %}{% url 'public.story_read' story.pk %}">
         <meta property="og:type" content="article">
         <meta property="og:title" content="{{ story.title }}">
         <meta property="fb:app_id" content="{{ org|config:'facebook_app_id' }}">
-        <meta property="og:description"
-              content="{{ story.summary|truncatewords:50|linebreaksbr }}">
+        <meta property="og:description" content="{{ story.summary|truncatewords:50|linebreaksbr }}">
         {% thumbnail story.get_image "900" crop="top" as im %}
             <meta property="og:image" content="{{ im.url }}">
         {% endthumbnail %}
@@ -37,7 +36,7 @@
         </div>
         <div class="md:w-1/2 {% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %} block">
             {% thumbnail story.get_image "900" crop="top" as im %}
-                <img src="{{ im.url }}" width="100%" style="object-fit:cover;">
+                <img src="{{ im.url }}" width="100%" style="object-fit:cover;" alt="">
             {% endthumbnail %}
             <!-- .block-vertical-angle.w-4 -->
             <!-- &nbsp; -->
@@ -72,7 +71,7 @@
                 {{ story.content|safe }}
             </div>
             <div class="flex-none w-10">
-                <img src="{{ STATIC_URL }}img/u-icon-small.png">
+                <img src="{{ STATIC_URL }}img/u-icon-small.png" alt="">
             </div>
         </div>
         {% if story.attachment %}

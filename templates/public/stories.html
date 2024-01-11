@@ -1,5 +1,6 @@
 {% extends "public_base.html" %}
 {% load thumbnail ureport i18n compress %}
+
 {% block content %}
     <div class="bg-grid border-t border-b">
         <div class="md:flex max-w-page mx-auto p-home">
@@ -15,7 +16,7 @@
                             <div class="flex-1">
                                 <input type="text"
                                        data-results-id="story-search-results"
-                                       placeholder="{% trans 'SEARCH' %}"
+                                       placeholder='{% trans "SEARCH" %}'
                                        size="14"
                                        class="bg-black search-box text-sm">
                             </div>
@@ -39,8 +40,7 @@
                                     <a href="#" class="text-sm font-bold px-2 block">
                                         <i style="padding-top:2px"
                                            class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fa closed"></i>
-                                        <i style="padding-top:4px"
-                                           class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
+                                        <i style="padding-top:4px" class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
                                         <div class="pl-3">{{ category.name }}</div>
                                     </a>
                                     <div class="category-results">
@@ -85,10 +85,10 @@
                                 <a href="{% url 'public.story_read' story.pk %}">
                                     {% if story.get_image %}
                                         {% thumbnail story.get_image "800x600" crop="center" as im %}
-                                            <img width="100%" height="100%" src="{{ im.url }}" />
+                                            <img width="100%" height="100%" src="{{ im.url }}" alt="" />
                                         {% endthumbnail %}
                                     {% else %}
-                                        <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                                        <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg " alt="">
                                     {% endif %}
                                 </a>
                             </div>
@@ -104,8 +104,7 @@
                                     {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
                                     {{ story.summary|truncatewords:50|linebreaksbr }}
                                 </div>
-                                <a href="{% url 'public.story_read' story.pk %}"
-                                   class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</a>
+                                <a href="{% url 'public.story_read' story.pk %}" class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</a>
                             </div>
                         </div>
                         {% if forloop.first %}
@@ -114,10 +113,10 @@
                                 <a href="{% url 'public.story_read' story.pk %}">
                                     {% if story.get_image %}
                                         {% thumbnail story.get_image "800x600" crop="center" as im %}
-                                            <img width="100%" height="100%" src="{{ im.url }}" />
+                                            <img width="100%" height="100%" src="{{ im.url }}" alt="" />
                                         {% endthumbnail %}
                                     {% else %}
-                                        <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                                        <img height="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" alt="">
                                     {% endif %}
                                 </a>
                             </div>
@@ -138,19 +137,16 @@
             <div class="md:hidden">
                 {% if story.get_image %}
                     {% thumbnail story.get_image "800x600" crop="center" as im %}
-                        <img width="100%" height="100%" src="{{ im.url }}" />
+                        <img width="100%" height="100%" src="{{ im.url }}" alt="" />
                     {% endthumbnail %}
                 {% else %}
-                    <img src="{{ STATIC_URL }}img/missing_image_placeholder.jpg">
+                    <img src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" alt="">
                 {% endif %}
                 <div class="p-home">
                     <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
-                    <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4">
-                        {{ story.title }}
-                    </div>
+                    <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4">{{ story.title }}</div>
                     <div class="block mb-6">{{ story.summary|truncatewords:50|linebreaksbr }}</div>
-                    <a href="{% url 'public.story_read' story.pk %}"
-                       class="btn bg-black text-white">{% trans "READ MORE" %}</a>
+                    <a href="{% url 'public.story_read' story.pk %}" class="btn bg-black text-white">{% trans "READ MORE" %}</a>
                 </div>
             </div>
         {% endfor %}
