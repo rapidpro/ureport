@@ -18,7 +18,11 @@
         <meta name="keywords" content="">
         <meta name="author" content="">
         {% if has_better_domain %}<meta name="robots" content="noindex">{% endif %}
-        {% if org.subdomain %}
+        {% if org|config:"has_new_brand" %}
+        <link rel="icon"
+              type="image/x-icon"
+              href="{{ STATIC_URL }}img/favicon-v2024.png">
+        {% elif org.subdomain %}
             <link rel="icon"
                   type="image/x-icon"
                   href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
@@ -766,7 +770,9 @@
         <div class="md:flex max-w-page mx-auto text-white p-home">
             <div class="md:w-1/3 md:block hidden">
                 <div class="w-40">
+                    {% if not org|config:"has_new_brand" %}
                     <img src="{{ STATIC_URL }}img/blue_u.png">
+                    {% endif %}
                 </div>
             </div>
             <div class="md:w-2/3 {% if is_rtl_org %}md:text-left{% else %}md:text-right{% endif %} text-center">
