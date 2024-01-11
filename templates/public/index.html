@@ -4,8 +4,8 @@
     <!-- latest poll if we have it -->
     {% if latest_poll and latest_poll.get_first_question %}
         <div class="max-w-page mx-auto bg-white mt-6">
-            <div class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %} {% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1-home text-white{% endif %}">
-                <div class="{% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1-home text-white{% endif %} flex-1 self-stretch p-home self-center">
+            <div class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %} {% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1-v2024 text-white{% endif %}">
+                <div class="{% if latest_poll.get_first_question.get_color_choice_css %} {{ latest_poll.get_first_question.get_color_choice_css }} {% else %}bg-dark1-v2024 text-white{% endif %} flex-1 self-stretch p-home self-center">
                     <div class="text-l mb-10">{% trans "LATEST OPINION" %}</div>
                     <div class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl leading-tight{% else %}text-2xl leading-tight{% endif %} font-bold mt-2 hover-parent">
                         {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
@@ -35,14 +35,14 @@
                     </div>
                     <div class="md:mb-0 mb-6 text-center">
                         <a href="{% url 'public.opinion_read' latest_poll.pk %}"
-                           class="btn hover-dark {% if org|config:"has_new_brand" %}hover:bg-gray-700 bg-black text-white{% else %}bg-light1-home text-black{% endif %}">{% trans "VIEW FULL RESULTS" %}</a>
+                           class="btn hover-dark {% if org|config:"has_new_brand" %}hover:bg-gray-700 bg-black text-white{% else %}bg-light1-v2024 text-black{% endif %}">{% trans "VIEW FULL RESULTS" %}</a>
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
     <!-- ureporters graph -->
-    <div class="bg-black text-light1-home bg-white-u">
+    <div class="bg-black text-light1-v2024 bg-white-u">
         <div class="md:flex max-w-page mx-auto p-home">
             <div class="md:w-1/2 md:mt-0 md:p-0 flex-center-y mt-4 p-8">
                 <div class="font-bold text-l">
@@ -74,7 +74,7 @@
                             <div data-aos="fade"
                                  data-graph-type="age-chart"
                                  data-bar-color="{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:'light1_color'|default:'#FFD100' }}{% endif %}"
-                                 data-label-color="#AAA"
+                                 data-label-color="#FFF"
                                  data-label-position="top"
                                  data-stats="age_stats"
                                  class="w-full h-full absolute age-chart"
@@ -147,7 +147,7 @@
     <div class="max-w-page mx-auto">
         <div class="md:flex">
             <div class="flex-1">
-                <div class="bg-light1-home p-12 hover-parent">
+                <div class="bg-light1-v2024 p-12 hover-parent">
                     {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark" %}
                     <div class="text-3xl font-bold leading-tight text-center">
                         {% if org|config:"join_text" %}
@@ -257,18 +257,18 @@
         <div class="md:block max-w-page mx-auto hidden bg-squares">
             <div class="flex">
                 <div class="flex-1 h-20"></div>
-                <div class="flex-1 bg-dark1 h-20"></div>
+                <div class="flex-1 bg-dark1-v2024 h-20"></div>
             </div>
             <div class="flex">
                 <div class="flex-1 h-10"></div>
-                <div class="flex-1 bg-dark1">
-                    <div class="rtl:mr-20 rtl:ml-10 ltr:ml-20 ltr:mr-10 bg-dark2 h-10">&nbsp;</div>
+                <div class="flex-1 bg-dark1-v2024">
+                    <div class="rtl:mr-20 rtl:ml-10 ltr:ml-20 ltr:mr-10 bg-dark2-v2024 h-10">&nbsp;</div>
                 </div>
             </div>
             <div>
                 {% for story in main_stories|slice:"1" %}
-                    <div class="{% if is_rtl_org %}border-l-25rem{% else %}border-r-25rem{% endif %} border-solid border-dark1">
-                        <div class="{% if is_rtl_org %}border-l-25rem{% else %}border-r-25rem{% endif %} border-solid border-light1 flex">
+                    <div class="{% if is_rtl_org %}border-l-25rem{% else %}border-r-25rem{% endif %} border-solid border-dark1-v2024">
+                        <div class="{% if is_rtl_org %}border-l-25rem{% else %}border-r-25rem{% endif %} border-solid border-light1-v2024 flex">
                             <div class="w-1/3 rtl:pr-10 ltr:pl-10 pl-10 flex flex-col justify-center">
                                 <div class="block">
                                     <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
@@ -300,13 +300,13 @@
             </div>
             <div class="flex">
                 <div class="flex-1 h-10"></div>
-                <div class="flex-1 bg-dark1">
-                    <div class="rtl:mr-20 rtl:ml-10 ltr:ml-20 ltr:mr-10 bg-dark2 h-10"></div>
+                <div class="flex-1 bg-dark1-v2024">
+                    <div class="rtl:mr-20 rtl:ml-10 ltr:ml-20 ltr:mr-10 bg-dark2-v2024 h-10"></div>
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 h-20"></div>
-                <div class="flex-1 bg-dark1 h-20"></div>
+                <div class="flex-1 bg-dark1-v2024 h-20"></div>
             </div>
         </div>
         <!-- featured-story-mobile -->
@@ -348,7 +348,7 @@
                         {% trans "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them." %}
                     </div>
                     <a href="{% url 'public.about' %}"
-                       class="btn bg-light1-home text-black hover-dark">{% trans "LEARN MORE" %}</a>
+                       class="btn bg-light1-v2024 text-black hover-dark">{% trans "LEARN MORE" %}</a>
                 </div>
             </div>
         </div>

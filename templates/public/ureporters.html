@@ -17,13 +17,13 @@
     <div class="bg-dark-blue">
         <div class="md:flex max-w-page mx-auto bg-black">
             <div class="flex-1 p-home">
-                <div class="font-alt text-light1 mb-4 font-bold mt-6">{% trans "OVERALL STATISTICS" %}</div>
+                <div class="font-alt text-light1-v2024 mb-4 font-bold mt-6">{% trans "OVERALL STATISTICS" %}</div>
                 <div class="text-white font-light mt-12">
                     <div class="{% if is_rtl_org %}md:border-l pl-8{% else %}md:border-r pr-8{% endif %} inline-block border-white">
                         <div class="md:text-5xl text-2xl leading-none">{{ org.get_reporters_count|intcomma }}</div>
                         <div class="text-xs font-bold">
                             {% trans "U-REPORTERS" %}
-                            <div class="inline text-light1">
+                            <div class="inline text-light1-v2024">
                                 +{{ org.get_signup_rate|floatformat }}%
                                 {% trans "THIS YEAR" %}
                             </div>
@@ -39,18 +39,18 @@
                         <div class="ltr:pr-4 ltr:border-r rtl:border-l rtl:pl-4 text-white text-center inline-block border-white">
                             <img src="{{ STATIC_URL }}img/gender-male-w.png" width="40">
                             <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.male_percentage }}</div>
-                            <div class="text-light1 text-sm leading-none">{{ gender_stats.male_count|intcomma }}</div>
+                            <div class="text-light1-v2024 text-sm leading-none">{{ gender_stats.male_count|intcomma }}</div>
                         </div>
                         <div class="text-white text-center inline-block px-4">
                             <img src="{{ STATIC_URL }}img/gender-female-w.png" width="40">
                             <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.female_percentage }}</div>
-                            <div class="text-light1 text-sm leading-none">{{ gender_stats.female_count|intcomma }}</div>
+                            <div class="text-light1-v2024 text-sm leading-none">{{ gender_stats.female_count|intcomma }}</div>
                         </div>
                         {% if org|config:"has_extra_gender" %}
                             <div class="ltr:border-l rtl:border-r text-white text-center inline-block px-4 border-white">
                                 <img src="{{ STATIC_URL }}img/gender-other-w.png" width="40">
                                 <div class="font-bold text-xl leading-none mt-2">{{ gender_stats.other_percentage }}</div>
-                                <div class="text-light1 text-sm leading-none">{{ gender_stats.other_count|intcomma }}</div>
+                                <div class="text-light1-v2024 text-sm leading-none">{{ gender_stats.other_count|intcomma }}</div>
                             </div>
                         {% endif %}
                     </div>
@@ -61,7 +61,7 @@
                             {{ age_stats|json_script:"age_stats" }}
                             <div data-aos="fade"
                                  data-graph-type="age-chart"
-                                 data-bar-color="{{ org|config:'light1_color'|default:'#FFD100' }}"
+                                 data-bar-color="{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:'light1_color'|default:'#FFD100' }}{% endif %}"
                                  data-label-color="white"
                                  data-stats="age_stats"
                                  class="w-full h-full absolute age-chart"
@@ -76,7 +76,7 @@
                             <div data-aos="fade"
                                  data-graph-type="scheme-chart"
                                  data-stats="schemes_stats"
-                                 data-bar-color="{{ org|config:'light1_color'|default:'#FFD100' }}"
+                                 data-bar-color="{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:'light1_color'|default:'#FFD100' }}{% endif %}"
                                  data-label-color="white"
                                  class="h-full absolute scheme-chart"
                                  id="schemes-pie"></div>
@@ -149,7 +149,7 @@
                                  class="md:flex engagement-graph-block hover-parent block mt-16 p-2 bg-dark-blue"
                                  id="graph-block-{{ metric.slug }}-{{ time_filter.time_filter_number }}">
                                 <div class="md:w-2/5 hover-parent">
-                                    <div class="bg-light1-home h-1 w-16 mb-4"></div>
+                                    <div class="bg-light1-v2024 h-1 w-16 mb-4"></div>
                                     <div class="text-3xl mb-4 font-bold">{{ metric.title }}</div>
                                     <div data-page="engagement"
                                          class="text-xs flex mb-6 text-black random-pill">

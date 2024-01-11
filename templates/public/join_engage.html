@@ -26,12 +26,12 @@
             </div>
         </div>
     </div>
-    <div class="bg-light1 py-12">
+    <div class="bg-light1-v2024 py-12">
         <div class="md:flex max-w-page mx-auto p-home">
             <div class="md:md:w-1/2 flex-1">
                 <div class="text-3xl font-bold flex border-b border-black pb-4 mb-4">
                     <div class="flex-none flex-center-y">
-                        <div class="bg-circle bg-black text-white">1</div>
+                        <div class="bg-circle {% if org|config:"has_new_brand" %}bg-white text-black {% else %} bg-black text-white {% endif %}">1</div>
                     </div>
                     <div class="pl-4 pr-12 flex-center-y">{% trans "How would you like to join?" %}</div>
                 </div>
@@ -103,13 +103,13 @@
         </div>
     </div>
     {% for join_step in join_steps %}
-        <div class="{% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %} py-12">
+        <div class="{% if org|config:"has_new_brand" %}{% cycle 'bg-black text-white' 'bg-dark1-v2024 text-black'  %}{% else %}{% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %}{% endif %} py-12">
             <div class="md:flex  max-w-page mx-auto p-home"
                  id="{% if forloop.first %}text{% endif %}">
                 <div class="flex-1">
                     <div class="{% cycle 'border-white' 'border-white' 'border-white' 'border-black' %} text-3xl font-bold flex border-b pb-4 mb-4">
                         <div class="flex-none flex-center-y">
-                            <div class="bg-circle bg-black text-white">{{ forloop.counter|add:1 }}</div>
+                            <div class="bg-circle {% if org|config:"has_new_brand" %}{% cycle  'bg-dark1-v2024 text-white' 'bg-white text-black' %}{% else %} bg-black text-white {% endif %} ">{{ forloop.counter|add:1 }}</div>
                         </div>
                         <div class="pl-4 pr-12 flex-center-y hover-parent">
                             {% if forloop.counter|divisibleby:'4' %}
