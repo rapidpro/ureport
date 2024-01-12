@@ -159,7 +159,7 @@
       }
 
       .bg-dark1-home.hover-dark:hover, .bg-dark2-home.hover-dark:hover,  .bg-dark3-home.hover-dark:hover, .bg-light1-home.hover-dark:hover, .bg-light2-home.hover-dark:hover {
-        background: #42ccff;
+        background: #98DFF9;
       }
 
       .border-dark1-v2024, .border-dark2-v2024, .border-dark3-v2024, .border-light1-v2024 {
@@ -171,7 +171,7 @@
       }
 
       .bg-light1-v2024.hover-dark:hover {
-        background: #42ccff;
+        background: #98DFF9;
       }
 
       .text-light1-v2024 {
@@ -762,7 +762,7 @@
                             {{ story.title }}
                         </div>
                         <div class="md:block mt-4 hidden">
-                            <button class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</button>
+                            <button class="btn {% if org|config:"has_new_brand" %} bg-light1-v2024 hover-dark{% else %}bg-black hover:bg-gray-700{% endif %} text-white">{% trans "READ MORE" %}</button>
                         </div>
                     </a>
                     {% edit_content 'stories.story_update' story.pk "" "bg-black p-2 md:mt-4" "white" %}
