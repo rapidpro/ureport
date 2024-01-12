@@ -337,7 +337,11 @@
     <div class="bg-black text-white">
         <div class="md:flex rtl:pl-10 ltr:pr-10 max-w-page mx-auto bg-black p-home">
             <div class="md:w-3/5 flex flex-center-y my-4">
+                {% if org|config:"has_new_brand" %}
+                <img src="{{ STATIC_URL }}img/dropdown-bkg.png" alt="">
+                {% else %}
                 <img src="{{ STATIC_URL }}img/homemap_bg.png" alt="">
+                {% endif %}
             </div>
             <div class="md:w-2/5 flex flex-center-y">
                 <div class="rtl:pr-10 ltr:pl-10">
