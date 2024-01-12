@@ -964,7 +964,7 @@
 {% block script %}
     <script type="text/javascript">
       // global primary color
-      var primaryColor = '{{ org|config:"dark1_color"}}';
+      var primaryColor = '{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:"dark1_color" }}{% endif %}';
       window.string_Responders = "{% trans "Responders" %}";
       window.string_Polled = "{% trans "Polled" %}";
       window.string_Reporters = "{% trans "Reporters" %}";
