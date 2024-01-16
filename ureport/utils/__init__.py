@@ -17,6 +17,7 @@ from django.conf import settings
 from django.core.cache import cache
 from django.db.models import Sum
 from django.utils import timezone, translation
+from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
 from dash.utils import datetime_to_ms
@@ -32,6 +33,18 @@ ORG_CONTACT_COUNT_TIMEOUT = 3600
 
 logger = logging.getLogger(__name__)
 
+
+UNICEF_REGIONS = [
+    dict(name="All", label=_("All locations")),
+    dict(name="EAPRO", label=_("East Asia and Pacific")),
+    dict(name="ESARO", label=_("Eastern and Southern Africa")),
+    dict(name="ECARO", label=_("Europe and Central Asia")),
+    dict(name="LACRO", label=_("Latin America and the Caribbean")),
+    dict(name="MENA", label=_("Middle East and North Africa")),
+    dict(name="ROSA", label=_("South Asia")),
+    dict(name="NATCOM", label=_("UNICEF’s National Committee countries")),
+    dict(name="WCARO", label=_("West and Central Africa")),
+]
 
 def offline_context():
     for org in list(Org.objects.filter(is_active=True)):
