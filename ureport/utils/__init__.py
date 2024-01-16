@@ -46,6 +46,7 @@ UNICEF_REGIONS = [
     dict(name="WCARO", label=_("West and Central Africa")),
 ]
 
+
 def offline_context():
     for org in list(Org.objects.filter(is_active=True)):
         yield dict(STATIC_URL=settings.STATIC_URL, base_template="frame.html", org=org, debug=False, testing=False)
