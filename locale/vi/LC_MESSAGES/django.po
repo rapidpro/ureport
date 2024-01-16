@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 13:19+0000\n"
+"POT-Creation-Date: 2024-01-16 14:27+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2172,6 +2172,35 @@ msgstr "Câu chuyện này có nổi bật hay không"
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+#, fuzzy
+#| msgid "Population"
+msgid "All locations"
+msgstr "Dân số"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""
 
 #, fuzzy
 #~| msgid "The location of the responder."

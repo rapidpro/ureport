@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 13:19+0000\n"
+"POT-Creation-Date: 2024-01-16 14:27+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1957,3 +1957,32 @@ msgstr "Si cette ligne a été créée en écrasant"
 
 msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
+
+#, fuzzy
+#| msgid "Location"
+msgid "All locations"
+msgstr "Lieu"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""

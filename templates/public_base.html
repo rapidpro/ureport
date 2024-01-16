@@ -384,11 +384,15 @@
             <i class="fas fa-times text-3xl"></i>
         </a>
         <div class="flex p-home">
-            <div class="md:w-1/6 flex-center-y">
-                <div class="p-4">
+            <div class="md:w-1/6 {% if not org|config:"has_new_brand" %}flex-center-y{% endif %}">
+                <div class="p-4 ">
                     <a href="https://ureport.in/"
                        class="hover:bg-gray-900 inline-block border-white p-2">
+                       {% if org|config:"has_new_brand" %}
+                       <img src="{{ STATIC_URL }}/img/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
+                   {% else %}
                         <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
+                        {% endif %}
                     </a>
                 </div>
             </div>
@@ -948,6 +952,9 @@
     <!-- Search -->
     <script type="text/coffeescript"
             src="{{ STATIC_URL }}coffee/v2_search.coffee"></script>
+    <!-- countries list -->
+    <script type="text/coffeescript"
+            src="{{ STATIC_URL }}coffee/v2_countries.coffee"></script>
 {% endcompress %}
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 {% if org and org|config:"google_tracking_id" %}
