@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-16 14:27+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1130,6 +1130,11 @@ msgstr "Exporter et Partager"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Vous voulez raconter cela au monde ? Téléchargez cette image pour partager facilement sur les réseaux sociaux ou pour une belle présentation !"
+
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Créer"
 
 msgid "SELECT LANGUAGE"
 msgstr "CHOISIR LA LANGUE"

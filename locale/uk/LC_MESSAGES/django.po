@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-16 14:27+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1135,6 +1135,11 @@ msgstr "Експортувати і поширити"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Хочете розказати про це усьому світу? Завантажуйте це зображення, щоб легко поширити у соціальних мережах або використати у вашій презентації!"
+
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Створити"
 
 msgid "SELECT LANGUAGE"
 msgstr "ОБЕРІТЬ МОВУ"

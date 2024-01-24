@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-16 14:27+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1121,6 +1121,11 @@ msgstr "Εξαγωγή και Κοινοποίηση"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Θέλετε να πείτε στον κόσμο για αυτό; Κατεβάστε αυτήν την εικόνα για να τη μοιραστείτε εύκολα στα μέσα κοινωνικής δικτύωσης ή για μια όμορφη παρουσίαση!"
+
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Δημιουργώ"
 
 msgid "SELECT LANGUAGE"
 msgstr "ΕΠΙΛΟΓΗ ΓΛΩΣΣΑΣ"
