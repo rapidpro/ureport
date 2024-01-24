@@ -1,3 +1,10 @@
+v1.2.89 (2024-01-24)
+-------------------------
+ * Merge pull request #1179 from rapidpro/dependabot/pip/pillow-10.2.0
+ * Bump pillow from 10.1.0 to 10.2.0
+ * Merge pull request #1177 from rapidpro/djlint
+ * HTML templates linting
+
 v1.2.88 (2023-11-17)
 -------------------------
  * Merge pull request #1168 from rapidpro/update-ro
