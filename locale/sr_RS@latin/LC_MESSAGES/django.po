@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-16 14:27+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1124,6 +1124,11 @@ msgstr "Preuzmi i Podeli"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Želiš podeliti rezultate sa drugima? Preuzmi sliku da bi je lakše objavio/la na društvenim mrežama ili je možeš koristiti za kreiranje prezentacije."
+
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Kreiraj"
 
 msgid "SELECT LANGUAGE"
 msgstr "ODABERI JEZIK"
