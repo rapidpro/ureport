@@ -291,6 +291,8 @@
            class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
         <a href="{% url 'public.stories' %}"
            class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
+        <a href="https://www.voicesofyouth.org/"
+           class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
         <a href="{% url 'public.about' %}"
            class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
         <a href="{% url 'public.ureporters' %}"
@@ -660,7 +662,6 @@
                         </a>
                     </div>
                 </div>
-                {% if org|config:"is_global" %}
                 <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                     <div>
                         <a href="https://www.voicesofyouth.org/"
@@ -669,7 +670,6 @@
                         </a>
                     </div>
                 </div>
-                {% endif %}
             </div>
         </div>
 
