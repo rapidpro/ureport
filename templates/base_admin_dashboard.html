@@ -93,7 +93,7 @@
                             <div style="justify-content: start;" class="level-item square-logo">
                                 <div style="width:360px">
                                     {% if org|config:"has_new_brand" %}
-                                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                    <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                                     {% else %}
                                     {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                         <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
@@ -326,7 +326,7 @@
                        class="md:block flex-1 text-center mb-2 hidden">
                         <div style="max-width:360px">
                             {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                             {% else %}
                             {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
@@ -347,7 +347,7 @@
                        class="md:hidden flex-1 text-center mb-6 inline-flex">
                         <div style="width:180px">
                             {% if org|config:"has_new_brand" %}
-                                <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                             {% else %}
                             {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
