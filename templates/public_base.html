@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 {% load static compress dashblocks dashorgs thumbnail ureport smartmin i18n %}
+
 {% load_qbs request.org 'additional_menu' %}
 <html dir="{% if is_rtl_org %}rtl{% else %}ltr{% endif %}">
     <head>
         <meta charset="UTF-8">
-        {% if org|config:"facebook_meta_verification" %}
-            <meta name="facebook-domain-verification"
-                  content="{{ org|config:'facebook_meta_verification' }}">
-        {% endif %}
+        {% if org|config:"facebook_meta_verification" %}<meta name="facebook-domain-verification" content="{{ org|config:'facebook_meta_verification' }}">{% endif %}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
@@ -19,9 +17,7 @@
         <meta name="author" content="">
         {% if has_better_domain %}<meta name="robots" content="noindex">{% endif %}
         {% if org.subdomain %}
-            <link rel="icon"
-                  type="image/x-icon"
-                  href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
+            <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
         {% else %}
             <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png">
         {% endif %}
@@ -35,152 +31,251 @@
         <link href="https://fonts.googleapis.com/css?family=Livvic:300,400,700|Montserrat:300,400,700&display=swap"
               rel="stylesheet">
         <!-- Font awesome icons -->
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
         <!-- Leaflet for maps -->
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css">
         <!-- AOS, animation library -->
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
         <!-- U-Report styles, compress so they cache bust -->
         {% compress css %}
             <link rel="stylesheet" href="{{ STATIC_URL }}css/tailwind.css">
         {% endcompress %}
         <style type="text/css">
-      .bg-dark1 {
-        background: {{ org|config:'dark1_color'|default:'#439932'  }};
-      }
-      
-      .border-dark1 {
-        border-color: {{ org|config:'dark1_color'|default:'#439932' }};
-      }
-      
-      .hover\:border-dark1:hover {
-        border-color: {{ org|config:'dark1_color'|default:'#439932' }};
-      }
-      
-      .bg-dark2 {
-        background: {{ org|config:'dark2_color'|default:'#1751af' }};
-      }
-      
-      .border-dark2 {
-        border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
-      }
-      
-      .hover\:border-dark2:hover {
-        border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
-      }
-      
-      .bg-dark3 {
-        background: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
-      }
-      
-      .border-dark3 {
-        border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
-      }
-      
-      .hover\:border-dark3:hover {
-        border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
-      }
-      
-      .border-light1 {
-        border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
-      }
-      
-      .bg-light1 {
-        background: {{ org|config:'light1_color'|default:'#FFD100' }};
-      }
-      
-      .bg-light1.hover-dark:hover {
-        background: #ffda33;
-      }
-      
-      .text-light1 {
-        color: {{ org|config:'light1_color'|default:'#FFD100' }};
-      }
-      
-      .bg-light2 {
-        background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
-      }
-      
-      .bg-light2.hover-dark:hover {
-        background: #89c7e8;
-      }
-      
-      .ligth-black {
-        background: lighten(#000000, 10%);
-      }
-      
-      .slideout-menu {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        width: 230px;
-        min-height: 100vh;
-        will-change: transform;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        z-index: 0;
-        display: none;
-      }
-      
-      .slideout-menu-left {
-        left: 0;
-      }
-      
-      .slideout-menu-right {
-        right: 0;
-      }
-      
-      .slideout-panel {
-        position: relative;
-        z-index: 1;
-        will-change: transform;
-        background-color: #FFF; /* A background-color is required */
-        min-height: 100vh;
-      }
-      
-      .slideout-open,
-      .slideout-open body,
-      .slideout-open .slideout-panel {
-        overflow: hidden;
-      }
-      
-      .slideout-open .slideout-menu {
-        display: block;
-      }
+          .bg-dark1 {
+            background: {
+                {
+                org|config: 'dark1_color' |default:'#439932'
+              }
+            }
+
+            ;
+          }
+
+          .border-dark1 {
+            border-color: {
+                {
+                org|config: 'dark1_color' |default:'#439932'
+              }
+            }
+
+            ;
+          }
+
+          .hover\:border-dark1:hover {
+            border-color: {
+                {
+                org|config: 'dark1_color' |default:'#439932'
+              }
+            }
+
+            ;
+          }
+
+          .bg-dark2 {
+            background: {
+                {
+                org|config: 'dark2_color' |default:'#1751af'
+              }
+            }
+
+            ;
+          }
+
+          .border-dark2 {
+            border-color: {
+                {
+                org|config: 'dark2_color' |default:'#1751af'
+              }
+            }
+
+            ;
+          }
+
+          .hover\:border-dark2:hover {
+            border-color: {
+                {
+                org|config: 'dark2_color' |default:'#1751af'
+              }
+            }
+
+            ;
+          }
+
+          .bg-dark3 {
+            background: {
+                {
+                org|config: 'dark3_color' |default:'#5eb3e0'
+              }
+            }
+
+            ;
+          }
+
+          .border-dark3 {
+            border-color: {
+                {
+                org|config: 'dark3_color' |default:'#5eb3e0'
+              }
+            }
+
+            ;
+          }
+
+          .hover\:border-dark3:hover {
+            border-color: {
+                {
+                org|config: 'dark3_color' |default:'#5eb3e0'
+              }
+            }
+
+            ;
+          }
+
+          .border-light1 {
+            border-color: {
+                {
+                org|config: 'light1_color' |default:'#FFD100'
+              }
+            }
+
+            ;
+          }
+
+          .bg-light1 {
+            background: {
+                {
+                org|config: 'light1_color' |default:'#FFD100'
+              }
+            }
+
+            ;
+          }
+
+          .bg-light1.hover-dark:hover {
+            background: #ffda33;
+          }
+
+          .text-light1 {
+            color: {
+                {
+                org|config: 'light1_color' |default:'#FFD100'
+              }
+            }
+
+            ;
+          }
+
+          .bg-light2 {
+            background: {
+                {
+                org|config: 'light2_color' |default:'#5eb3e0'
+              }
+            }
+
+            ;
+          }
+
+          .bg-light2.hover-dark:hover {
+            background: #89c7e8;
+          }
+
+          .ligth-black {
+            background: lighten(#000000, 10%);
+          }
+
+          .slideout-menu {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 230px;
+            min-height: 100vh;
+            will-change: transform;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            z-index: 0;
+            display: none;
+          }
+
+          .slideout-menu-left {
+            left: 0;
+          }
+
+          .slideout-menu-right {
+            right: 0;
+          }
+
+          .slideout-panel {
+            position: relative;
+            z-index: 1;
+            will-change: transform;
+            background-color: #FFF;
+            /* A background-color is required */
+            min-height: 100vh;
+          }
+
+          .slideout-open,
+          .slideout-open body,
+          .slideout-open .slideout-panel {
+            overflow: hidden;
+          }
+
+          .slideout-open .slideout-menu {
+            display: block;
+          }
         </style>
         <script type="text/javascript">
-      var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
-      var orgColors = '{{org|config:"colors"|default:""}}'.toUpperCase().split(',');
-      
-      for (var i = 0; i < defaultColors.length; i++) {
-        var elt = defaultColors[i].trim().toUpperCase();
-        if ((orgColors.length <= 6) && (!orgColors.includes(elt))) {
-          orgColors.push(elt);
-        }
-      }
+          var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
+          var orgColors = '{{org|config:"colors"|default:""}}'.toUpperCase().split(',');
+
+          for (var i = 0; i < defaultColors.length; i++) {
+            var elt = defaultColors[i].trim().toUpperCase();
+            if ((orgColors.length <= 6) && (!orgColors.includes(elt))) {
+              orgColors.push(elt);
+            }
+          }
         </script>
         {% if org and org|config:"google_tag_manager_id" %}
             <!-- Google Tag Manager -->
-            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','{{ org|config:"google_tag_manager_id" }}');
+            <script>
+              (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                  'gtm.start': new Date().getTime(),
+                  event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                  j = d.createElement(s),
+                  dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                  'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+              })(window, document, 'script', 'dataLayer', '{{ org|config:"google_tag_manager_id" }}');
             </script>
             <!-- End Google Tag Manager -->
         {% endif %}
         {% if org|config:"facebook_pixel_id" %}
             <script>
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-        document,'script','//connect.facebook.net/{{ org_lang }}/fbevents.js');
-        fbq('init', '{{ org|config:"facebook_pixel_id" }}');
-        fbq('track', 'PageView');
+              ! function(f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function() {
+                  n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+              }(window,
+                document, 'script', '//connect.facebook.net/{{ org_lang }}/fbevents.js');
+              fbq('init', '{{ org|config:"facebook_pixel_id" }}');
+              fbq('track', 'PageView');
             </script>
             <noscript>
                 <img height="1"
@@ -195,29 +290,30 @@
         <div id="fb-root"></div>
         {% if org|config:"facebook_page_id" and org|config:"facebook_app_id" %}
             <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '{{ org|config:"facebook_app_id" }}',
-            autoLogAppEvents: true,
-            xfbml      : true,
-            version    : 'v4.0'
-          });
-        };
+              window.fbAsyncInit = function() {
+                FB.init({
+                  appId: '{{ org|config:"facebook_app_id" }}',
+                  autoLogAppEvents: true,
+                  xfbml: true,
+                  version: 'v4.0'
+                });
+              };
             </script>
             <div class="fb-customerchat"
                  page_id="{{ org|config:"facebook_page_id" }}"
                  greeting_dialog_display="icon"
                  logged_in_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}"
-                 logged_out_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}">
-            </div>
+                 logged_out_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}"></div>
         {% endif %}
-        <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v12.0{% endif %}";
-      fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+        <script>
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v12.0{% endif %}";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
         </script>
         {% if org and org|config:"google_tag_manager_id" %}
             <!-- Google Tag Manager (noscript) -->
@@ -234,19 +330,15 @@
     <div class="w-3/5 modal-content mx-auto my-40 p-6 border border-black bg-white sticky top-45">
         <div class="font-bold text-xl mb-2 inline-block">{% trans "Export and Share" %}</div>
         <i class="rtl:float-left ltr:float-right fas fa-times text-xl export-modal-close cursor-pointer"></i>
-        <div style="min-height:30rem"
-             class="export-modal-progress flex text-center">
+        <div style="min-height:30rem" class="export-modal-progress flex text-center">
             <div class="fa-5x inline-block m-auto self-center">
                 <i class="fas fa-spinner fa-spin"></i>
             </div>
         </div>
         <div class="export-modal-content">
-            <div class="md:w-3/4 inline-block mb-4">
-                {% trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!" %}
-            </div>
+            <div class="md:w-3/4 inline-block mb-4">{% trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!" %}</div>
             <div class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right   inline-block mb-4">
-                <a href="#"
-                   class="btn bg-light1 text-black inline-block download-screenshot hover-dark">Download</a>
+                <a href="#" class="btn bg-light1 text-black inline-block download-screenshot hover-dark">Download</a>
             </div>
             <div class="mt-4 shadow">
                 <img src="#" alt="" class="screenshot-rendered">
@@ -257,25 +349,19 @@
 <!-- mobile menu -->
 <div class="md:hidden flex bg-black" id="mobile-menu-container">
     <div class="bg-black text-white py-home pl-home pr-16 h-auto">
-        <a href="{% url 'public.opinions' %}"
-           class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
-        <a href="{% url 'public.stories' %}"
-           class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
-        <a href="{% url 'public.about' %}"
-           class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
-        <a href="{% url 'public.ureporters' %}"
-           class="hover:text-gray-600 block mt-4">{% trans "Engagement" %}</a>
+        <a href="{% url 'public.opinions' %}" class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
+        <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
+        <a href="{% url 'public.about' %}" class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
+        <a href="{% url 'public.ureporters' %}" class="hover:text-gray-600 block mt-4">{% trans "Engagement" %}</a>
         {% if show_bots_link %}
             <a href="{% url 'public.bots' %}" class="hover:text-gray-600 block mt-4">{% trans "Bots" %}</a>
         {% endif %}
-        <a href="{% url 'public.reports' %}"
-           class="hover:text-gray-600 block mt-4">{% trans "Reports" %}</a>
+        <a href="{% url 'public.reports' %}" class="hover:text-gray-600 block mt-4">{% trans "Reports" %}</a>
         {% if org|config:"has_jobs" %}
             <a href="{% url 'public.jobs' %}" class="hover:text-gray-600 block mt-4">{% trans "Jobs" %}</a>
         {% endif %}
         {% for custom_page in additional_menu|slice:":3" %}
-            <a href="{% url 'public.custom_page' custom_page.link %}"
-               class="hover:text-gray-600 block mt-4">{{ custom_page.title }}</a>
+            <a href="{% url 'public.custom_page' custom_page.link %}" class="hover:text-gray-600 block mt-4">{{ custom_page.title }}</a>
         {% endfor %}
         <div class="block mt-4">
             {% if org|config:"instagram_username" %}
@@ -300,8 +386,7 @@
                 </a>
             {% endif %}
         </div>
-        <a href="{% url 'public.join' %}"
-           class="hover:text-gray-600 block font-bold mt-4">
+        <a href="{% url 'public.join' %}" class="hover:text-gray-600 block font-bold mt-4">
             {% if org|config:"join_button_text" %}
                 {{ org|config:"join_button_text" }}
             {% else %}
@@ -312,8 +397,7 @@
             <div class="block mt-4 font-bold mobile-accordion text-sm cursor-pointer">
                 <i style="padding-top:2px"
                    class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fas closed"></i>
-                <i style="padding-top:4px"
-                   class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
+                <i style="padding-top:4px" class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
                 <div class="hover:text-gray-750 px-3 whitespace-nowrap">{% trans "SELECT LANGUAGE" %}</div>
                 <div class="mobile-accordion-content text-white">
                     {% for lang in other_languages_sites %}
@@ -332,13 +416,10 @@
         <div class="block mt-4 font-bold mobile-accordion text-sm cursor-pointer">
             <i style="padding-top:2px"
                class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fas closed"></i>
-            <i style="padding-top:4px"
-               class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
+            <i style="padding-top:4px" class="ltr:float-left rtl:float-right fas fa-caret-down hidden open"></i>
             <div class="hover:text-gray-750 px-3 whitespace-nowrap">{% trans "SELECT COUNTRY" %}</div>
             <div class="mobile-accordion-content text-white">
-                {% for site in linked_orgs %}
-                    <a href="{{ site.host }}" class="hover:text-gray-600 block p-1">{{ site.name }}</a>
-                {% endfor %}
+                {% for site in linked_orgs %}<a href="{{ site.host }}" class="hover:text-gray-600 block p-1">{{ site.name }}</a>{% endfor %}
             </div>
         </div>
     </div>
@@ -348,16 +429,13 @@
     <div class="block bg-black h-2"></div>
     <!-- countries (off screen to start) -->
     <div class="bg-black text-white z-600" id="countries">
-        <a href="javascript:void(0)"
-           class="rtl:float-left ltr:float-right p-4"
-           id="countries-closer">
+        <a href="javascript:void(0)" class="rtl:float-left ltr:float-right p-4" id="countries-closer">
             <i class="fas fa-times text-3xl"></i>
         </a>
         <div class="flex p-home">
             <div class="md:w-1/6 flex-center-y">
                 <div class="p-4">
-                    <a href="https://ureport.in/"
-                       class="hover:bg-gray-900 inline-block border-white p-2">
+                    <a href="https://ureport.in/" class="hover:bg-gray-900 inline-block border-white p-2">
                         <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                     </a>
                 </div>
@@ -374,8 +452,7 @@
             <ul class="flex">
                 {% if request.user.is_superuser %}
                     <li>
-                        <a href="{% url 'orgs.org_home' %}"
-                           class="inline-block px-1 pl-4 py-2 text-lg">
+                        <a href="{% url 'orgs.org_home' %}" class="inline-block px-1 pl-4 py-2 text-lg">
                             <i class="fas fa-cog"></i>
                         </a>
                     </li>
@@ -388,59 +465,49 @@
                                 <i class="fas fa-caret-down"></i>
                             </a>
                             <div class="hidden dropdown-content absolute bg-gray-800 text-white z-auto">
-                                <a href="{% url 'orgs.org_list' %}"
-                                   class="admin-menu small-link-no-wrap">{% trans "Orgs" %}</a>
+                                <a href="{% url 'orgs.org_list' %}" class="admin-menu small-link-no-wrap">{% trans "Orgs" %}</a>
                                 <a href="{% url 'users.user_list' %}" class="admin-menu small-link-no-wrap">{% trans "Users" %}</a>
-                                <a href="{% url 'dashblocks.dashblocktype_list' %}"
-                                   class="admin-menu small-link-no-wrap">{% trans "Content Types" %}</a>
+                                <a href="{% url 'dashblocks.dashblocktype_list' %}" class="admin-menu small-link-no-wrap">{% trans "Content Types" %}</a>
                                 {% if request.user.is_superuser or org_perms.assets.image_list %}
-                                    <a href="{% url 'assets.image_list' %}"
-                                       class="admin-menu small-link-no-wrap">{% trans "Images" %}</a>
+                                    <a href="{% url 'assets.image_list' %}" class="admin-menu small-link-no-wrap">{% trans "Images" %}</a>
                                 {% endif %}
                             </div>
                         </div>
                     </li>
                     <li>
-                        <a href="{% url 'dashblocks.dashblock_list' %}"
-                           class="admin-menu text-sm leading-loose">{% trans "Content" %}</a>
+                        <a href="{% url 'dashblocks.dashblock_list' %}" class="admin-menu text-sm leading-loose">{% trans "Content" %}</a>
                     </li>
                 {% endif %}
                 {% if org|config:"is_global" %}
                     {% if request.user.is_superuser or perms.countries.countryalias_list %}
                         <li>
-                            <a href="{% url 'countries.countryalias_list' %}"
-                               class="admin-menu text-sm leading-loose">{% trans "Country Aliases" %}</a>
+                            <a href="{% url 'countries.countryalias_list' %}" class="admin-menu text-sm leading-loose">{% trans "Country Aliases" %}</a>
                         </li>
                     {% endif %}
                 {% endif %}
                 {% if request.user.is_superuser or org_perms.polls.poll_list %}
                     <li>
-                        <a href="{% url 'polls.poll_list' %}"
-                           class="admin-menu text-sm leading-loose">{% trans "Opinions" %}</a>
+                        <a href="{% url 'polls.poll_list' %}" class="admin-menu text-sm leading-loose">{% trans "Opinions" %}</a>
                     </li>
                 {% endif %}
                 {% if request.user.is_superuser or org_perms.stories.story_list %}
                     <li>
-                        <a href="{% url 'stories.story_list' %}"
-                           class="admin-menu text-sm leading-loose">{% trans "Stories" %}</a>
+                        <a href="{% url 'stories.story_list' %}" class="admin-menu text-sm leading-loose">{% trans "Stories" %}</a>
                     </li>
                 {% endif %}
                 {% if request.user.is_superuser or org_perms.bots.bot_list %}
                     <li>
-                        <a href="{% url 'bots.bot_list' %}"
-                           class="admin-menu text-sm leading-loose">{% trans "Bots" %}</a>
+                        <a href="{% url 'bots.bot_list' %}" class="admin-menu text-sm leading-loose">{% trans "Bots" %}</a>
                     </li>
                 {% endif %}
                 {% if request.user.is_superuser or org_perms.categories.category_list %}
                     <li>
-                        <a href="{% url 'categories.category_list' %}"
-                           class="admin-menu text-sm leading-loose">{% trans "Categories" %}</a>
+                        <a href="{% url 'categories.category_list' %}" class="admin-menu text-sm leading-loose">{% trans "Categories" %}</a>
                     </li>
                 {% endif %}
                 {% if request.user.is_superuser or org_perms.tags.tag_list %}
                     <li>
-                        <a href="{% url 'tags.tag_list' %}"
-                           class="admin-menu text-sm leading-loose">{% trans "Tags" %}</a>
+                        <a href="{% url 'tags.tag_list' %}" class="admin-menu text-sm leading-loose">{% trans "Tags" %}</a>
                     </li>
                 {% endif %}
                 <li>
@@ -451,42 +518,34 @@
                         </a>
                         <div class="hidden dropdown-content absolute bg-gray-800 text-white z-700">
                             {% if request.user.is_superuser or org_perms.jobs.jobsource_list %}
-                                <a href="{% url 'jobs.jobsource_list' %}"
-                                   class="admin-menu small-link-no-wrap separator">{% trans "Job Sources" %}</a>
+                                <a href="{% url 'jobs.jobsource_list' %}" class="admin-menu small-link-no-wrap separator">{% trans "Job Sources" %}</a>
                             {% endif %}
                             {% if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list %}
-                                <a href="{% url 'dashblocks.dashblock_list' %}?slug=jobs"
-                                   class="admin-menu small-link-no-wrap">{% trans "Jobs Content" %}</a>
+                                <a href="{% url 'dashblocks.dashblock_list' %}?slug=jobs" class="admin-menu small-link-no-wrap">{% trans "Jobs Content" %}</a>
                             {% endif %}
                             {% if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list %}
                                 <a href="{% url 'dashblocks.dashblock_list' %}?slug=about"
                                    class="admin-menu small-link-no-wrap separator">{% trans "About Content" %}</a>
                             {% endif %}
                             {% if perms.assets.image_list or org_perms.assets.image_list %}
-                                <a href="{% url 'assets.image_list' %}"
-                                   class="admin-menu small-link-no-wrap separator">{% trans "Partners Logos" %}</a>
+                                <a href="{% url 'assets.image_list' %}" class="admin-menu small-link-no-wrap separator">{% trans "Partners Logos" %}</a>
                             {% endif %}
                             {% if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list %}
                                 <a href="{% url 'dashblocks.dashblock_list' %}?slug=ureporters"
-                                   class="admin-menu small-link-no-wrap separator">
-                                    {% trans "U-Reporters Content" %}
-                                </a>
+                                   class="admin-menu small-link-no-wrap separator">{% trans "U-Reporters Content" %}</a>
                                 <hr>
-                                <a href="{% url 'dashblocks.dashblock_list' %}?slug=join_engage"
-                                   class="admin-menu small-link-no-wrap">{% trans "Join &amp; Engage Content" %}</a>
+                                <a href="{% url 'dashblocks.dashblock_list' %}?slug=join_engage" class="admin-menu small-link-no-wrap">{% trans "Join &amp; Engage Content" %}</a>
                                 <hr>
                                 <a href="{% url 'dashblocks.dashblock_list' %}?slug=additional_menu"
                                    class="admin-menu small-link-no-wrap">{% trans "Custom pages" %}</a>
-                                <a href="{% url 'landingpages.landingpage_list' %}"
-                                   class="admin-menu small-link-no-wrap separator">{% trans "Landing pages" %}</a>
+                                <a href="{% url 'landingpages.landingpage_list' %}" class="admin-menu small-link-no-wrap separator">{% trans "Landing pages" %}</a>
                             {% endif %}
                         </div>
                     </div>
                 </li>
                 {% block login %}
                     <li class="{% if is_rtl_org %}mr-auto{% else %}ml-auto{% endif %}">
-                        <a href="{% org_host_link %}{% url 'users.user_profile' request.user.pk %}"
-                           class="admin-menu text-lg">
+                        <a href="{% org_host_link %}{% url 'users.user_profile' request.user.pk %}" class="admin-menu text-lg">
                             <i class="fas fa-user-circle"></i>
                         </a>
                         <a href="{% url 'users.user_logout' %}?go=/" class="admin-menu text-lg">
@@ -502,9 +561,7 @@
         <!-- desktop header nav -->
         <ul class="md:flex md:justify-between my-5 px-home text-sm font-bold">
             <div class="li flex-none mr-4 py-menu">
-                <a href="javascript:void(0)"
-                   class="hover:text-gray-750 flex items-center"
-                   id="countries-toggler">
+                <a href="javascript:void(0)" class="hover:text-gray-750 flex items-center" id="countries-toggler">
                     <div class="w-12 flex mx-1">
                         <img src="{{ STATIC_URL }}img/selectcountry.png" class="inline" alt="">
                     </div>
@@ -513,20 +570,15 @@
                 </a>
             </div>
             <div class="md:justify-end li flex-grow flex">
-                <a href="{% url 'public.ureporters' %}"
-                   class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
-                <a href="{% url 'public.about' %}"
-                   class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "About" %}</a>
+                <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
+                <a href="{% url 'public.about' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "About" %}</a>
                 {% if show_bots_link %}
-                    <a href="{% url 'public.bots' %}"
-                       class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Bots" %}</a>
+                    <a href="{% url 'public.bots' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Bots" %}</a>
                 {% endif %}
                 {% if org|config:"has_jobs" %}
-                    <a href="{% url 'public.jobs' %}"
-                       class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Jobs" %}</a>
+                    <a href="{% url 'public.jobs' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Jobs" %}</a>
                 {% endif %}
-                <a href="{% url 'public.reports' %}"
-                   class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Reports" %}</a>
+                <a href="{% url 'public.reports' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Reports" %}</a>
                 {% for custom_page in additional_menu|slice:":3" %}
                     <a href="{% url 'public.custom_page' custom_page.link %}"
                        class="hover:text-gray-750 flex-initial ml-4 py-menu">{{ custom_page.title }}</a>
@@ -600,9 +652,7 @@
             <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                 <div>
                     <a href="{% url 'public.opinions' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
-                        {% trans "Opinions" %}
-                    </a>
+                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">{% trans "Opinions" %}</a>
                 </div>
             </div>
             <a href="{% url 'public.index' %}" class="flex-initial text-center">
@@ -615,9 +665,7 @@
             <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                 <div>
                     <a href="{% url 'public.stories' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
-                        {% trans "Stories" %}
-                    </a>
+                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                 </div>
             </div>
         </div>
@@ -657,8 +705,7 @@
                         {% endif %}
                     </div>
                     <div class="mt-8 text-center">
-                        <a href="{% url 'public.join' %}"
-                           class="btn bg-light1 text-black hover-dark">
+                        <a href="{% url 'public.join' %}" class="btn bg-light1 text-black hover-dark">
                             {% if org|config:"join_button_text" %}
                                 {{ org|config:"join_button_text" }}
                             {% else %}
@@ -684,9 +731,7 @@
                                 <img width="100%" src="{{ im.url }}" alt="">
                             {% endthumbnail %}
                         </div>
-                        <div class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %} font-bold mt-4 h-20">
-                            {{ story.title }}
-                        </div>
+                        <div class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %} font-bold mt-4 h-20">{{ story.title }}</div>
                         <div class="md:block mt-4 hidden">
                             <button class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</button>
                         </div>
@@ -714,16 +759,14 @@
                             {% trans "See by the numbers how we are engaging youth voices for positive social change." %}
                         {% endif %}
                     </div>
-                    <a href="{% url 'public.ureporters' %}"
-                       class="btn bg-light2 text-white inline-block hover-dark">{% trans "EXPLORE ENGAGEMENT" %}</a>
+                    <a href="{% url 'public.ureporters' %}" class="btn bg-light2 text-white inline-block hover-dark">{% trans "EXPLORE ENGAGEMENT" %}</a>
                 </div>
             </div>
         </div>
     </div>
     <!-- footer navbar -->
     <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 px-home mt-12 mb-3">
-        <a href="{% url 'public.index' %}"
-           class="md:block flex-1 text-center mb-2 hidden">
+        <a href="{% url 'public.index' %}" class="md:block flex-1 text-center mb-2 hidden">
             <div style="max-width:360px">
                 {% thumbnail org.get_logo "x180" format="PNG" as im %}
                     <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
@@ -734,17 +777,16 @@
             {% if org|config:"has_footer_unicef_logo" %}
                 <div style="max-width:185px" class="md:block block">
                     {% if org.language != "ar" and org.language != "ru" %}
-                        <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
-                             class="md:-ml-0 -ml-2" alt="">
+                        <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png" class="md:-ml-0 -ml-2" alt="">
                     {% else %}
                         <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                             class="md:-ml-0 -ml-2" alt="">
+                             class="md:-ml-0 -ml-2"
+                             alt="">
                     {% endif %}
                 </div>
             {% endif %}
         </div>
-        <a href="{% url 'public.index' %}"
-           class="md:hidden flex-1 text-center mb-6 inline-flex">
+        <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
             <div style="width:180px">
                 {% thumbnail org.get_logo "x180" format="PNG" as im %}
                     <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
@@ -754,11 +796,9 @@
                 {% if org|config:"has_footer_unicef_logo" %}
                     <div style="width:150px" class="md:block block">
                         {% if org.language != "ar" and org.language != "ru" %}
-                            <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png"
-                                 class="-ml-2" alt="">
+                            <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_en.png" class="-ml-2" alt="">
                         {% else %}
-                            <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_{{ org.language }}.png"
-                                 class="-ml-2" alt="">
+                            <img src="{{ STATIC_URL }}img/UNICEF_footer_Logo_black_{{ org.language }}.png" class="-ml-2" alt="">
                         {% endif %}
                     </div>
                 {% endif %}
@@ -768,34 +808,25 @@
             <div class="md:ml-6 font-bold text-2xl flex-center-y">
                 <div>
                     <a href="{% url 'public.opinions' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
-                        {% trans "Opinions" %}
-                    </a>
+                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">{% trans "Opinions" %}</a>
                 </div>
             </div>
             <div class="font-bold text-2xl ml-6 flex-center-y">
                 <div>
                     <a href="{% url 'public.stories' %}"
-                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">
-                        {% trans "Stories" %}
-                    </a>
+                       class="hover:text-gray-750 hover:border-dark1 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="md:grid grid-cols-2 gap-4 px-home mt-5 mb-12">
         <div class="text-sm font-bold">
-            <a href="{% url 'public.about' %}"
-               class="hover:text-gray-750 flex-initial py-menu">{% trans "About" %}</a>
-            <a href="{% url 'public.ureporters' %}"
-               class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
-            <a href="{% url 'public.bots' %}"
-               class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Bots" %}</a>
-            <a href="{% url 'public.reports' %}"
-               class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Reports" %}</a>
+            <a href="{% url 'public.about' %}" class="hover:text-gray-750 flex-initial py-menu">{% trans "About" %}</a>
+            <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
+            <a href="{% url 'public.bots' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Bots" %}</a>
+            <a href="{% url 'public.reports' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Reports" %}</a>
             {% if org|config:"has_jobs" %}
-                <a href="{% url 'public.jobs' %}"
-                   class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Jobs" %}</a>
+                <a href="{% url 'public.jobs' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Jobs" %}</a>
             {% endif %}
         </div>
         <div class="md:justify-end flex text-sm font-bold">
@@ -823,14 +854,10 @@
             {% if show_login %}
                 {% if request.user and request.user.is_authenticated %}
                     <a href="{% url 'users.user_logout' %}?go=/"
-                       class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                        {% trans "Logout" %}
-                    </a>
+                       class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Logout" %}</a>
                 {% else %}
                     <a href="{% org_host_link %}{% url 'users.user_login' %}"
-                       class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                        {% trans "Login" %}
-                    </a>
+                       class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Login" %}</a>
                 {% endif %}
             {% endif %}
         </div>
@@ -859,30 +886,44 @@
     <!-- Age charts -->
     <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_age.coffee"></script>
     <!-- Scheme charts -->
-    <script type="text/coffeescript"
-            src="{{ STATIC_URL }}coffee/v2_scheme_bar.coffee"></script>
+    <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_scheme_bar.coffee"></script>
     <!-- FB Shares -->
-    <script type="text/coffeescript"
-            src="{{ STATIC_URL }}coffee/v2_fb_share.coffee"></script>
+    <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_fb_share.coffee"></script>
     <!-- Locations -->
-    <script type="text/coffeescript"
-            src="{{ STATIC_URL }}coffee/v2_locations.coffee"></script>
+    <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_locations.coffee"></script>
     <!-- Polls -->
     <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_polls.coffee"></script>
     <!-- Search -->
-    <script type="text/coffeescript"
-            src="{{ STATIC_URL }}coffee/v2_search.coffee"></script>
+    <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_search.coffee"></script>
 {% endcompress %}
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script>
+  ! function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      p = /^http:/.test(d.location) ? 'http' : 'https';
+    if (!d.getElementById(id)) {
+      js = d.createElement(s);
+      js.id = id;
+      js.src = p + "://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+  }(document, "script", "twitter-wjs");
+</script>
 {% if org and org|config:"google_tracking_id" %}
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', '{{ org|config:"google_tracking_id" }}', 'auto');
-    ga('send', 'pageview');
+      ga('create', '{{ org|config:"google_tracking_id" }}', 'auto');
+      ga('send', 'pageview');
     </script>
 {% endif %}
 {% block script %}
@@ -893,7 +934,7 @@
       window.string_Polled = "{% trans "Polled" %}";
       window.string_Reporters = "{% trans "Reporters" %}";
       window.string_TopRegion = "{% trans "Top Region" %}";
-      
+
       Highcharts.setOptions({
         lang: {
           months: [
@@ -926,61 +967,63 @@
           ],
         }
       });
-      
+
       // country menu toggling
-      $("#countries-toggler").click(function(){
+      $("#countries-toggler").click(function() {
         $("#countries").toggleClass("open");
       });
-      $("#countries-closer").click(function(){
+      $("#countries-closer").click(function() {
         $("#countries").removeClass("open");
       });
-      
-      $("#languages-toggler").click(function(){
+
+      $("#languages-toggler").click(function() {
         $(this).toggleClass("open");
       });
-      
+
       $(".export-modal-close").on('click', function() {
         $(".export-modal").addClass('hidden');
       });
-      
+
       $(".mobile-accordion").on('click', function() {
         $(this).toggleClass('open');
       })
-      
-      
+
+
       $(".screenshot-share").on("click", function() {
-        var eltID= $(this).attr("data-screen-id");
+        var eltID = $(this).attr("data-screen-id");
         $(".export-modal-progress").show();
         $(".export-modal-content").hide();
-      
+
         $('.export-modal').toggleClass('hidden');
-        $('.modal-content').offset({top: $(window).scrollTop() + 150})
+        $('.modal-content').offset({
+          top: $(window).scrollTop() + 150
+        })
         var region = document.body.querySelector("#" + eltID);
-      
+
         html2canvas(region).then(canvas => {
           var imageData = canvas.toDataURL("image/png");
           $("img.screenshot-rendered").attr("src", imageData);
           $("a.download-screenshot").attr("download", "ureport-screenshare-" + eltID + Date.now() + ".png")
           $("a.download-screenshot").attr("href", imageData);
-      
+
           $(".export-modal-progress").hide();
           $(".export-modal-content").show();
         });
       });
-      
-      $(".dropdown-button").on('click', function(event){
+
+      $(".dropdown-button").on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
-      
-        if($(this).parent().children(".dropdown-content").hasClass("hidden")) {
+
+        if ($(this).parent().children(".dropdown-content").hasClass("hidden")) {
           $(".dropdown-content").addClass("hidden");
           $(this).parent().children(".dropdown-content").removeClass("hidden");
         } else {
           $(this).parent().children(".dropdown-content").addClass("hidden");
         }
-      
+
       });
-      
+
       var slideout = new Slideout({
         'panel': document.getElementById('mobile-sliding-panel'),
         'menu': document.getElementById('mobile-menu-container'),
@@ -988,19 +1031,19 @@
         'tolerance': 70,
         'side': 'right',
       });
-      
+
       // mobile menu toggling
       //$("#mobile-menu-toggler").click(function(){
       //  slideout.toggle();
       //});
-      
+
       // Toggle button
       document.querySelector('#mobile-menu-toggler').addEventListener('click', function() {
         //$("#mobile-menu-container").toggleClass("open");
         $("#mobile-menu-toggler").children().toggleClass("hidden");
         slideout.toggle();
       });
-      
+
       // initialize our animations
       AOS.init({
         "duration": 1200,
