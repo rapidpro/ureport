@@ -1,65 +1,84 @@
 {% extends "frame.html" %}
 {% load smartmin i18n thumbnail ureport compress %}
+
 {% block styles %}
     {% compress css %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/tailwind.css">
     {% endcompress %}
     {% if is_rtl_org %}
         {% compress css %}
-            <link type="text/css"
-                  rel="stylesheet"
-                  href="{{ STATIC_URL }}css/bulma0.7.1.css">
-            <link type="text/css"
-                  rel="stylesheet"
-                  href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css">
-            <link type="text/less"
-                  rel="stylesheet"
-                  href="{{ STATIC_URL }}less/styles.less">
+            <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css">
+            <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css">
+            <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
         {% endcompress %}
     {% else %}
         {% compress css %}
             <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css">
-            <link type="text/css"
-                  rel="stylesheet"
-                  href="{{ STATIC_URL }}css/Chart.min.css">
-            <link type="text/less"
-                  rel="stylesheet"
-                  href="{{ STATIC_URL }}less/styles.less">
+            <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css">
+            <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
         {% endcompress %}
     {% endif %}
     <style type="text/css">
-    table.list-table {
-      font-size: 0.85rem;
-    }
-    
-    .row1 a, .row2 a {
-      display: block;
-      padding-left: 5px;
-    
-      color: {{ org|config:'dark1_color'|default:'#439932' }};
-      border-left: 5px solid {{ org|config:'dark1_color'|default:'#439932' }};
-    }
-    
-    .row1 a:hover, .row2 a:hover {
-      background-color: #E6E7E8;
-      color: {{ org|config:'dark1_color'|default:'#439932' }};
-    }
-    
-    .row1.inactive a, .row2.inactive a, {
+      table.list-table {
+        font-size: 0.85rem;
+      }
+
+      .row1 a,
+      .row2 a {
+        display: block;
+        padding-left: 5px;
+
+        color: {
+            {
+            org|config: 'dark1_color' |default:'#439932'
+          }
+        }
+
+        ;
+
+        border-left: 5px solid {
+            {
+            org|config: 'dark1_color' |default:'#439932'
+          }
+        }
+
+        ;
+      }
+
+      .row1 a:hover,
+      .row2 a:hover {
+        background-color: #E6E7E8;
+
+        color: {
+            {
+            org|config: 'dark1_color' |default:'#439932'
+          }
+        }
+
+        ;
+      }
+
+      .row1.inactive a,
+      .row2.inactive a,
+      {
       border-left: 5px solid #bbb;
       padding-left: 5px;
-    }
-    
-    .row1.inactive a, .row2.inactive a, .row1.inactive td, .row2.inactive td {
-      color: #ccc;
-    }
-    
-    .row1.inactive a:hover, .row2.inactive a:hover {
-      color: #ccc;
-      text-decoration: none;
-      font-weight: normal;
-    
-    }
+      }
+
+      .row1.inactive a,
+      .row2.inactive a,
+      .row1.inactive td,
+      .row2.inactive td {
+        color: #ccc;
+      }
+
+      .row1.inactive a:hover,
+      .row2.inactive a:hover {
+        color: #ccc;
+        text-decoration: none;
+        font-weight: normal;
+
+      }
     </style>
 {% endblock styles %}
 {% block body-content %}
@@ -72,13 +91,8 @@
                 <div class="level">
                     {% if is_rtl_org %}<div class="level-left"></div>{% endif %}
                     <div class="{% if is_rtl_org %}level-right{% else %}level-left{% endif %}">
-                        <a href="{% url 'public.index' %}"
-                           style="justify-content: start"
-                           class="level-item has-text-black">
-                            <div style="{% if is_rtl_org %}margin-right:0;
-                                        margin-left:1.25rem;
-                                        {% endif %}"
-                                 class="icon">
+                        <a href="{% url 'public.index' %}" style="justify-content: start" class="level-item has-text-black">
+                            <div style="{% if is_rtl_org %}margin-right:0; margin-left:1.25rem; {% endif %}" class="icon">
                                 <i class="{% if is_rtl_org %}fa-arrow-circle-right{% else %}fa-arrow-circle-left{% endif %} fas"></i>
                             </div>
                             {% trans "Back to Website" %}
@@ -93,17 +107,16 @@
                             <div style="justify-content: start;" class="level-item square-logo">
                                 <div style="width:360px">
                                     {% if org|config:"has_new_brand" %}
-                                    <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                        <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                                     {% else %}
-                                    {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                        <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                                    {% endthumbnail %}
+                                        {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                                            <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
+                                        {% endthumbnail %}
                                     {% endif %}
                                 </div>
                                 {% if org|config:"has_new_brand" %}
-                                <div class="flex-1 text-center font-bold flex-center-y mx-4 mt-4" style="font-family:'Noto Sans', sans-serif;">
-                                    {{ org.name }}
-                                </div>
+                                    <div class="flex-1 text-center font-bold flex-center-y mx-4 mt-4"
+                                         style="font-family:'Noto Sans', sans-serif">{{ org.name }}</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -117,19 +130,15 @@
                                     <br class="is-hidden-mobile">
                                     {{ request.user.username }}
                                 </div>
-                                <a href="{% url 'users.user_logout' %}?go=/"
-                                   class="level-item button is-outlined logout-button">{% trans "Logout" %}</a>
+                                <a href="{% url 'users.user_logout' %}?go=/" class="level-item button is-outlined logout-button">{% trans "Logout" %}</a>
                             {% else %}
-                                <a href="{% org_host_link %}{% url 'users.user_login' %}"
-                                   class="level-item button is-outlined">{% trans "Login" %}</a>
+                                <a href="{% org_host_link %}{% url 'users.user_login' %}" class="level-item button is-outlined">{% trans "Login" %}</a>
                             {% endif %}
                         {% endblock login %}
                     </div>
                     {% if is_rtl_org %}
                         <div class="level-right">
-                            <div style="justify-content: start;
-                                        margin-right: 0rem"
-                                 class="level-item square-logo">
+                            <div style="justify-content: start; margin-right: 0rem" class="level-item square-logo">
                                 <div style="width:360px">
                                     {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                         <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
@@ -271,7 +280,7 @@
                                             <li>
                                                 <a href="{% url 'users.user_list' %}">
                                                     <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/settings_icon.png" alt="" >
+                                                        <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                                     </span>
                                                     <span class="menu-link-title">{% trans "Users" %}</span>
                                                 </a>
@@ -322,44 +331,50 @@
             {% block footer %}
                 <!-- footer navbar -->
                 <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 px-home mt-12 mb-3">
-                    <a href="{% url 'public.index' %}"
-                       class="md:block flex-1 text-center mb-2 hidden">
-                        <div style="max-width:360px">
-                            {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
-                            {% else %}
-                            {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                            {% endthumbnail %}
-                            {% endif %}
-                        </div>
+                    <a href="{% url 'public.index' %}" class="md:block flex-1 text-center mb-2 hidden">
+                        {% if org|config:"has_new_brand" %}
+                            <div style="max-width:220px">
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
+                            </div>
+                        {% else %}
+                            <div style="max-width:360px">
+                                {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                                    <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
+                                {% endthumbnail %}
+                            </div>
+                        {% endif %}
                     </a>
                     <div class="md:flex justify-center hidden">
                         <div style="max-width:150px" class="md:block block">
                             {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
-                                <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2">
+                                <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="">
                             {% else %}
-                                <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png" class="md:-ml-0 -ml-2">
+                                <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
+                                     class="md:-ml-0 -ml-2"
+                                     alt="">
                             {% endif %}
                         </div>
                     </div>
-                    <a href="{% url 'public.index' %}"
-                       class="md:hidden flex-1 text-center mb-6 inline-flex">
+                    <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
                         <div style="width:180px">
                             {% if org|config:"has_new_brand" %}
-                                <img src="{{ STATIC_URL }}/img/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                             {% else %}
-                            {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                            {% endthumbnail %}
+                                {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                                    <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
+                                {% endthumbnail %}
                             {% endif %}
                         </div>
                         <div class="md:hidden flex flex-1 justify-end float-right">
                             <div style="width:120px" class="md:block block">
                                 {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
-                                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="UNICEF logo">
+                                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png"
+                                         class="md:-ml-0 -ml-2"
+                                         alt="UNICEF logo">
                                 {% else %}
-                                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png" class="md:-ml-0 -ml-2" alt="UNICEF logo">
+                                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
+                                         class="md:-ml-0 -ml-2"
+                                         alt="UNICEF logo">
                                 {% endif %}
                             </div>
                         </div>
@@ -368,40 +383,28 @@
                         <div class="md:ml-6 font-bold text-2xl flex-center-y">
                             <div>
                                 <a href="{% url 'public.opinions' %}"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
-                                    {% trans "Opinions" %}
-                                </a>
+                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Opinions" %}</a>
                             </div>
                         </div>
                         <div class="font-bold text-2xl ml-6 flex-center-y">
                             <div>
                                 <a href="{% url 'public.stories' %}"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">
-                                    {% trans "Stories" %}
-                                </a>
+                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="md:grid grid-cols-2 gap-4 px-home mt-5 mb-12">
                     <div class="text-sm font-bold">
-                        <a href="{% url 'public.about' %}"
-                           class="hover:text-gray-750 flex-initial py-menu">{% trans "About" %}</a>
-                        <a href="{% url 'public.ureporters' %}"
-                           class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
+                        <a href="{% url 'public.about' %}" class="hover:text-gray-750 flex-initial py-menu">{% trans "About" %}</a>
+                        <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
                         <a href="{% url 'public.bots' %}"
-                           class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                            {% trans "Bots" %}
-                        </a>
+                           class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Bots" %}</a>
                         <a href="{% url 'public.reports' %}"
-                           class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                            {% trans "Reports" %}
-                        </a>
+                           class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Reports" %}</a>
                         {% if org|config:"has_jobs" %}
                             <a href="{% url 'public.jobs' %}"
-                               class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                                {% trans "Jobs" %}
-                            </a>
+                               class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Jobs" %}</a>
                         {% endif %}
                     </div>
                     <div class="md:justify-end flex text-sm font-bold">
@@ -429,14 +432,10 @@
                         {% if show_login %}
                             {% if request.user and request.user.is_authenticated %}
                                 <a href="{% url 'users.user_logout' %}?go=/"
-                                   class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                                    {% trans "Logout" %}
-                                </a>
+                                   class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Logout" %}</a>
                             {% else %}
                                 <a href="{% org_host_link %}{% url 'users.user_login' %}"
-                                   class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                                    {% trans "Login" %}
-                                </a>
+                                   class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Login" %}</a>
                             {% endif %}
                         {% endif %}
                     </div>
