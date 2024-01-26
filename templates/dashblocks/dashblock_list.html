@@ -1,5 +1,6 @@
 {% extends "smartmin/list.html" %}
 {% load i18n %}
+
 {% block content-title %}
     <h2 class="is-size-2 has-text-weight-bold">
         {% if filtered_type %}
@@ -28,9 +29,7 @@
             </a>
         {% else %}
             <a href="./create/"
-               class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">
-                {% trans "+ New Page" %}
-            </a>
+               class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">{% trans "+ New Page" %}</a>
         {% endif %}
     {% endif %}
 {% endblock table-buttons %}

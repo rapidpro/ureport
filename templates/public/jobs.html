@@ -1,5 +1,6 @@
 {% extends "public_base.html" %}
 {% load dashblocks thumbnail ureport i18n compress %}
+
 {% block content %}
     {% load_qbs request.org 'jobs' %}
     <div class="bg-grid">
@@ -27,8 +28,7 @@
                                                 {{ source.title|title }}
                                             </a>
                                         </div>
-                                        <div style="max-height:45rem"
-                                             class="text-xl pr-8 hover-parent overflow-scroll">
+                                        <div style="max-height:45rem" class="text-xl pr-8 hover-parent overflow-scroll">
                                             {% edit_content 'jobs.jobsource_update' source.pk "#id_source_url" "-m-8 -mt-12" "dark" %}
                                             <div data-href="{{ source.source_url }}"
                                                  data-width="400"
@@ -48,8 +48,7 @@
                                             {{ source.title|upper }}
                                         </div>
                                         <div class="pr-8">
-                                            <a href="{{ source.get_return_page }}"
-                                               class="text-dark-blue social-link">
+                                            <a href="{{ source.get_return_page }}" class="text-dark-blue social-link">
                                                 {% trans "Visit" %}
                                                 {{ source.title|title }}
                                             </a>
@@ -59,10 +58,7 @@
                                                 <div class="text-2xl">{{ entry.title }}</div>
                                                 <div class="text">{{ entry.summary|safe }}</div>
                                                 <div class="text-xl mt-2 mb-12">
-                                                    <a href="{{ entry.link }}"
-                                                       class="hover:bg-gray-600 btn bg-black px-4 py-2 text-sm text-white">
-                                                        {% trans "READ MORE" %}
-                                                    </a>
+                                                    <a href="{{ entry.link }}" class="hover:bg-gray-600 btn bg-black px-4 py-2 text-sm text-white">{% trans "READ MORE" %}</a>
                                                 </div>
                                             {% endfor %}
                                         </div>
