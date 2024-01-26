@@ -1,5 +1,6 @@
 {% extends "public_base.html" %}
 {% load thumbnail humanize ureport compress i18n dashblocks %}
+
 {% block content %}
     <!-- latest poll if we have it -->
     {% if latest_poll and latest_poll.get_first_question %}
@@ -42,7 +43,7 @@
         </div>
     {% endif %}
     <!-- ureporters graph -->
-    <div class="bg-black text-light1-v2024 {% if not org|config:"has_new_brand" %} bg-white-u{% endif %}">
+    <div class="bg-black text-light1-v2024 {% if not org|config:"has_new_brand" %}bg-white-u{% endif %}">
         <div class="md:flex max-w-page mx-auto p-home">
             <div class="md:w-1/2 md:mt-0 md:p-0 flex-center-y mt-4 p-8">
                 <div class="font-bold text-l">
@@ -102,26 +103,22 @@
                         </div>
                         <div class="block flex mt-4">
                             {% if bot.facebook_deeplink %}
-                                <a href="{{ bot.facebook_deeplink }}"
-                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                <a href="{{ bot.facebook_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                             {% endif %}
                             {% if bot.telegram_deeplink %}
-                                <a href="{{ bot.telegram_deeplink }}"
-                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                <a href="{{ bot.telegram_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                     <i class="fab fa-telegram"></i>
                                 </a>
                             {% endif %}
                             {% if bot.viber_deeplink %}
-                                <a href="{{ bot.viber_deeplink }}"
-                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                <a href="{{ bot.viber_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                     <i class="fab fa-viber"></i>
                                 </a>
                             {% endif %}
                             {% if bot.whatsapp_deeplink %}
-                                <a href="{{ bot.whatsapp_deeplink }}"
-                                   class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                <a href="{{ bot.whatsapp_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                             {% endif %}
@@ -136,8 +133,7 @@
             <div class="md:flex">
                 <div class="inline-block w-full p-8">
                     <div class="text-center">
-                        <a href="{% url 'public.bots' %}"
-                           class="hover:bg-gray-700 btn bg-black text-white">{% trans "More bots" %}</a>
+                        <a href="{% url 'public.bots' %}" class="hover:bg-gray-700 btn bg-black text-white">{% trans "More bots" %}</a>
                     </div>
                 </div>
             </div>
@@ -157,8 +153,7 @@
                         {% endif %}
                     </div>
                     <div class="mt-8 text-center">
-                        <a href="{% url 'public.join' %}"
-                           class="hover:bg-gray-700 btn bg-black text-white">
+                        <a href="{% url 'public.join' %}" class="hover:bg-gray-700 btn bg-black text-white">
                             {% if org|config:"join_button_text" %}
                                 {{ org|config:"join_button_text" }}
                             {% else %}
@@ -185,7 +180,7 @@
                                     {% if org|config:"has_new_brand" %}
                                         <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
                                     {% else %}
-                                    <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png">
+                                        <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                                     {% endif %}
                                 </div>
                             </div>
@@ -280,8 +275,7 @@
                                         {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
                                         {{ story.summary|truncatewords:50|linebreaksbr }}
                                     </div>
-                                    <a href="{% url 'public.story_read' story.pk %}"
-                                       class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</a>
+                                    <a href="{% url 'public.story_read' story.pk %}" class="hover:bg-gray-700 btn bg-black text-white">{% trans "READ MORE" %}</a>
                                 </div>
                             </div>
                             <div class="w-2/3 block p-10 bg-white flex flex-col justify-center hover-parent">
@@ -321,12 +315,9 @@
                 {% endif %}
                 <div class="p-home">
                     <div class="font-bold mb-4">{% trans "FEATURED STORY" %}</div>
-                    <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4">
-                        {{ story.title }}
-                    </div>
+                    <div class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %} font-bold leading-tight mb-4">{{ story.title }}</div>
                     <div class="block mb-6">{{ story.summary|truncatewords:50|linebreaksbr }}</div>
-                    <a href="{% url 'public.story_read' story.pk %}"
-                       class="btn bg-black text-white">{% trans "READ MORE" %}</a>
+                    <a href="{% url 'public.story_read' story.pk %}" class="btn bg-black text-white">{% trans "READ MORE" %}</a>
                 </div>
             {% endfor %}
         </div>
@@ -338,21 +329,16 @@
         <div class="md:flex rtl:pl-10 ltr:pr-10 max-w-page mx-auto bg-black p-home">
             <div class="md:w-3/5 flex flex-center-y my-4">
                 {% if org|config:"has_new_brand" %}
-                <img src="{{ STATIC_URL }}img/homemap_bg-v2024.png" alt="">
+                    <img src="{{ STATIC_URL }}img/homemap_bg-v2024.png" alt="">
                 {% else %}
-                <img src="{{ STATIC_URL }}img/homemap_bg.png" alt="">
+                    <img src="{{ STATIC_URL }}img/homemap_bg.png" alt="">
                 {% endif %}
             </div>
             <div class="md:w-2/5 flex flex-center-y">
                 <div class="rtl:pr-10 ltr:pl-10">
-                    <div class="font-bold mb-4 text-3xl leading-tight">
-                        {% trans "We are a part of a global platform working to change the lives of young people around the world." %}
-                    </div>
-                    <div class="mb-6">
-                        {% trans "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them." %}
-                    </div>
-                    <a href="{% url 'public.about' %}"
-                       class="btn bg-light1-v2024 text-black hover-dark">{% trans "LEARN MORE" %}</a>
+                    <div class="font-bold mb-4 text-3xl leading-tight">{% trans "We are a part of a global platform working to change the lives of young people around the world." %}</div>
+                    <div class="mb-6">{% trans "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them." %}</div>
+                    <a href="{% url 'public.about' %}" class="btn bg-light1-v2024 text-black hover-dark">{% trans "LEARN MORE" %}</a>
                 </div>
             </div>
         </div>
@@ -361,20 +347,20 @@
 {% block script %}
     {{ block.super }}
     <script type="text/javascript">
-    $(function(){
-    if($(".social-media-blocks").children().length == 1) {
-        $(".social-media-blocks").children().addClass("open", 1000, "easeOutSine");
-        $(".social-media-block-tabs").children().addClass("open", 1000, "easeOutSine");
-    } else {
-      $(".social-media-block-tab").on("click", function(){
-        if(!$(this).hasClass("open")){
-          if($(".social-media-blocks").children().length > 1) {
-            $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
-            $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
-          }
+      $(function() {
+        if ($(".social-media-blocks").children().length == 1) {
+          $(".social-media-blocks").children().addClass("open", 1000, "easeOutSine");
+          $(".social-media-block-tabs").children().addClass("open", 1000, "easeOutSine");
+        } else {
+          $(".social-media-block-tab").on("click", function() {
+            if (!$(this).hasClass("open")) {
+              if ($(".social-media-blocks").children().length > 1) {
+                $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
+                $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
+              }
+            }
+          });
         }
       });
-    }
-    });
     </script>
 {% endblock script %}

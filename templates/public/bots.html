@@ -1,5 +1,6 @@
 {% extends "public_base.html" %}
 {% load thumbnail compress i18n ureport %}
+
 {% block content %}
     <div class="bg-grid">
         <div class="md:flex max-w-page mx-auto p-home">
@@ -23,26 +24,22 @@
                             </div>
                             <div class="block flex mt-4">
                                 {% if bot.facebook_deeplink %}
-                                    <a href="{{ bot.facebook_deeplink }}"
-                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <a href="{{ bot.facebook_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 {% endif %}
                                 {% if bot.telegram_deeplink %}
-                                    <a href="{{ bot.telegram_deeplink }}"
-                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <a href="{{ bot.telegram_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                         <i class="fab fa-telegram"></i>
                                     </a>
                                 {% endif %}
                                 {% if bot.viber_deeplink %}
-                                    <a href="{{ bot.viber_deeplink }}"
-                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <a href="{{ bot.viber_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                         <i class="fab fa-viber"></i>
                                     </a>
                                 {% endif %}
                                 {% if bot.whatsapp_deeplink %}
-                                    <a href="{{ bot.whatsapp_deeplink }}"
-                                       class="cursor-pointer bg-circle-lg border border-black mx-2">
+                                    <a href="{{ bot.whatsapp_deeplink }}" class="cursor-pointer bg-circle-lg border border-black mx-2">
                                         <i class="fab fa-whatsapp"></i>
                                     </a>
                                 {% endif %}

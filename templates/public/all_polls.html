@@ -1,4 +1,5 @@
 {% load i18n %}
+
 <div class="section">
     <h1 class="level-1-title">{% trans "MORE POLLS" %}</h1>
     <div class="level-1-title-description secondary-color"></div>
@@ -9,12 +10,7 @@
                 <hr class="hr12 primary-border-color">
                 <ul class="categories poll-filters">
                     <li>
-                        <input type="radio"
-                               name="category"
-                               value="-1"
-                               checked="true"
-                               class="category"
-                               id="category-all">
+                        <input type="radio" name="category" value="-1" checked="true" class="category" id="category-all">
                         <label for="category-all">{% trans "All" %}</label>
                     </li>
                     {% for category in categories %}

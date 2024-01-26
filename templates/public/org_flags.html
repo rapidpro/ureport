@@ -3,28 +3,27 @@
 <div class="welcome-flags-global">
     {% if is_new_brand %}
         <div class="countries-dropdown grid grid-cols-4">
-        {% for region in regions %}
-            <div class="block py-1 region-dropdown {% if region.name == 'All'%}col-span-4{% endif %}">
-                <a href="#" class="font-bold px-4 py-2 inline-block">
-                    <i style="padding-top:2px"
-                       class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fas fa-caret-right closed"></i>
-                    <i style="padding-top:4px"
-                       class="rtl:float-right ltr:float-left fas fa-caret-down hidden open"></i>
-                    <div class="rtl:pr-3 ltr:pl-3 text-sm">{{ region.label }}</div>
-                </a>
-                <div class="countries-results grid {% if region.name == 'All'%}grid-cols-6{% else %}grid-cols-1{% endif %}">
-                    {% for site in linked_orgs %}
-                    {% if site.region == region.name or region.name == 'All' %}
-                    <div class="">
-                    <a href="{{ site.host }}" class="hover:bg-gray-700 inline-block px-4 py-2">
-                        <div class="rtl:mr-2 ltr:ml-2 text-sm">{{ site.name }}</div>
+            {% for region in regions %}
+                <div class="block py-1 region-dropdown {% if region.name == 'All' %}col-span-4{% endif %}">
+                    <a href="#" class="font-bold px-4 py-2 inline-block">
+                        <i style="padding-top:2px"
+                           class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %} fas fa-caret-right closed"></i>
+                        <i style="padding-top:4px" class="rtl:float-right ltr:float-left fas fa-caret-down hidden open"></i>
+                        <div class="rtl:pr-3 ltr:pl-3 text-sm">{{ region.label }}</div>
                     </a>
+                    <div class="countries-results grid {% if region.name == 'All' %}grid-cols-6{% else %}grid-cols-1{% endif %}">
+                        {% for site in linked_orgs %}
+                            {% if site.region == region.name or region.name == 'All' %}
+                                <div>
+                                    <a href="{{ site.host }}" class="hover:bg-gray-700 inline-block px-4 py-2">
+                                        <div class="rtl:mr-2 ltr:ml-2 text-sm">{{ site.name }}</div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                    {% endif %}
-                    {% endfor %}
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     {% elif is_iorg %}
         {% for site in linked_orgs %}<a href="{{ site.host }}" class="footer-orgs-name">{{ site.name }}</a>{% endfor %}
