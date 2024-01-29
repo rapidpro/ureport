@@ -1,3 +1,7 @@
+v1.2.91 (2024-01-29)
+-------------------------
+ * Fix configured colors load CSS classes
+
 v1.2.90 (2024-01-29)
 -------------------------
  * Merge pull request #1180 from rapidpro/staging-pushes
