@@ -413,8 +413,10 @@
     <div class="bg-black text-white py-home pl-home pr-16 h-auto">
         <a href="{% url 'public.opinions' %}" class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
         <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
-        {% if org|config:"is_global" %}
-            <a href="https://www.voicesofyouth.org/" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
+        {% if org|config:"has_new_brand" %}
+            {% if org|config:"is_global" %}
+                <a href="https://www.voicesofyouth.org/" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
+            {% endif %}
         {% endif %}
         <a href="{% url 'public.about' %}" class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
         <a href="{% url 'public.ureporters' %}" class="hover:text-gray-600 block mt-4">{% trans "Engagement" %}</a>
