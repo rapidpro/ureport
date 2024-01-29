@@ -45,57 +45,57 @@
         <style type="text/css">
           .bg-dark1,
           .bg-dark1-v2024 {
-            background: {{ org|config: 'dark1_color' |default:'#439932' }};
+            background: {{ org|config:'dark1_color'|default:'#439932' }};
           }
 
           .border-dark1,
           .border-dark1-v2024 {
-            border-color: {{ org|config: 'dark1_color' |default:'#439932' }};
+            border-color: {{ org|config:'dark1_color'|default:'#439932' }};
           }
 
           .hover\:border-dark1:hover,
           .hover\:border-dark1-v2024:hover {
-            border-color: {{ org|config: 'dark1_color' |default:'#439932' }};
+            border-color: {{ org|config:'dark1_color'|default:'#439932' }};
           }
 
           .bg-dark2,
           .bg-dark2-v2024 {
-            background: {{ org|config: 'dark2_color' |default:'#1751af' }};
+            background: {{ org|config:'dark2_color' |default:'#1751af' }};
           }
 
           .border-dark2,
           .border-dark2-v2024 {
-            border-color: {{ org|config: 'dark2_color' |default:'#1751af' }};
+            border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
           }
 
           .hover\:border-dark2:hover,
           .hover\:border-dark2-v2024:hover {
-            border-color: {{ org|config: 'dark2_color' |default:'#1751af' }};
+            border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
           }
 
           .bg-dark3,
           .bg-dark3-v2024 {
-            background: {{ org|config: 'dark3_color' |default:'#5eb3e0' }};
+            background: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
           }
 
           .border-dark3,
           .border-dark3-v2024 {
-            border-color: {{ org|config: 'dark3_color' |default:'#5eb3e0' }};
+            border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
           }
 
           .hover\:border-dark3:hover,
           .hover\:border-dark3-v2024:hover {
-            border-color: {{ org|config: 'dark3_color' |default:'#5eb3e0' }};
+            border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
           }
 
           .border-light1,
           .border-light1-v2024 {
-            border-color: {{ org|config: 'light1_color' |default:'#FFD100' }};
+            border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
           }
 
           .bg-light1,
           .bg-light1-v2024 {
-            background: {{ org|config: 'light1_color' |default:'#FFD100' }};
+            background: {{ org|config:'light1_color'|default:'#FFD100' }};
           }
 
           .bg-light1.hover-dark:hover,
@@ -105,12 +105,12 @@
 
           .text-light1,
           .text-light1-v2024 {
-            color: {{ org|config: 'light1_color' |default:'#FFD100' }};
+            color: {{ org|config:'light1_color'|default:'#FFD100' }};
           }
 
           .bg-light2,
           .bg-light2-v2024 {
-            background: {{ org|config: 'light2_color' |default:'#5eb3e0' }};
+            background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
           }
 
           .bg-light2.hover-dark:hover,
@@ -162,7 +162,7 @@
             display: block;
           }
 
-        {% if org|config: "has_new_brand" %}
+        {% if org|config:"has_new_brand" %}
 
           .bg-dark1-v2024,
           .bg-dark2-v2024,
