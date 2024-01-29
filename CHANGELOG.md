@@ -1,3 +1,29 @@
+v1.2.90 (2024-01-29)
+-------------------------
+ * Merge pull request #1180 from rapidpro/staging-pushes
+ * Show co create link for new brand only
+ * Format templates
+ * Adjust footer logo
+ * Add Co-create link
+ * Change the countries dropdown for new brand
+ * Update favicon and homemap
+ * Fix primary color for new brand
+ * Adjust cyan button hover color
+ * Fix bg color for button on mobile
+ * Adjust size for UNICEF footer logo
+ * Adjust the UNICEF logo in the footer
+ * Adjust favicon
+ * Adjust border and chart colors
+ * Adjust name after logo
+ * Update fonts to Noto Sans
+ * Switch to use new header logo
+ * Add config for switching new brand
+ * Update CHANGELOG.md for v1.2.89
+ * Merge pull request #1179 from rapidpro/dependabot/pip/pillow-10.2.0
+ * Bump pillow from 10.1.0 to 10.2.0
+ * Merge pull request #1177 from rapidpro/djlint
+ * HTML templates linting
+
 v1.2.89 (2024-01-24)
 -------------------------
  * Merge pull request #1179 from rapidpro/dependabot/pip/pillow-10.2.0
