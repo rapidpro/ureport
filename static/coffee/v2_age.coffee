@@ -22,7 +22,7 @@ showAgeChart = (id, data, barColor, labelColor, labelPosition, labelSize, labelW
       marginTop: if labelPosition == "top" then labelSize*2.2 else 0
       marginBottom: if labelPosition == "bottom" then labelSize*2.2 else 0
       style: {
-          fontFamily: "Montserrat"
+          fontFamily: "Noto Sans"
       }
     }
     credits: { enabled: false }

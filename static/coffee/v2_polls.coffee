@@ -106,12 +106,10 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
     )
   $('#engagement-graph-' + dataSlug).parent().parent().children().addClass("hidden");
 
-  colors = ['#E3002B', '#00B5A6', '#FFD100', '#40B5E5', '#FF8200', '#009917']
-  if segmentType == "all"
-    colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a']
-
+  colors = ['#98DFF9', '#FFC20E', '#FF7100', '#143E49', '#2653B9', '#e4002b']
+  
   if segmentType == "gender"
-    colors = ['#40B5E5', '#FF8200', '#019B17']
+    colors = ['#98DFF9', '#FFC20E', '#FF7100']
 
   $.getJSON(url, (results) ->
     total = 0
@@ -152,7 +150,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
           type: chartType
           backgroundColor: "#060e26"
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         credits: { enabled: false }
@@ -290,7 +288,7 @@ showChart = (questionID, segmentName) ->
           paddingTop: 0
           paddingBottom: 0
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         series: [{
@@ -322,7 +320,7 @@ showChart = (questionID, segmentName) ->
           marginTop: 0
           marginBottom: 0
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         credits: { enabled: false }
@@ -386,7 +384,7 @@ showChart = (questionID, segmentName) ->
         chart: {
           type: "column"
           style: {
-            fontFamily: "Montserrat"
+            fontFamily: "Noto Sans"
           }
         }
         credits: { enabled: false }

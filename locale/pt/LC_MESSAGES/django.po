@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Rodolfo Pedro, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/rapidpro/teams/226/pt/)\n"
@@ -1125,6 +1125,11 @@ msgstr "Exportar e Compartilhar"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Quer contar ao mundo sobre isso? Faça o download desta imagem para compartilhar facilmente nas redes sociais ou para uma bela apresentação!"
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Criar "
+
 msgid "SELECT LANGUAGE"
 msgstr "SELECIONE A LINGUAGEM"
 
@@ -1883,6 +1888,11 @@ msgstr "Se esta organização é para dados globais. Por exemplo: Ela mostra um 
 msgid "Whether to activate an extra gender."
 msgstr "Se deve ativar um gênero extra."
 
+#, fuzzy
+#| msgid "Whether to show the UNICEF logo in the footer."
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Mostrar ou não o logótipo da UNICEF no rodapé."
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Se pretende ocultar os gráficos de repartição do compromisso."
 
@@ -1948,3 +1958,32 @@ msgstr "Se esta linha foi criada por esmagamento"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para inicializar as localizações"
+
+#, fuzzy
+#| msgid "Location"
+msgid "All locations"
+msgstr "Localização"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""

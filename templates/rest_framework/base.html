@@ -13,7 +13,9 @@
                 <meta name="robots" content="NONE,NOARCHIVE" />
             {% endblock meta %}
             <title>
-                {% block title %}Ureport API{% endblock title %}
+                {% block title %}
+                    Ureport API
+                {% endblock title %}
             </title>
             {% block style %}
                 {% block bootstrap_theme %}
@@ -121,7 +123,9 @@
                                 <h1>{{ name }}</h1>
                             </div>
                             <div style="float:left">
-                                {% block description %}{{ description }}{% endblock description %}
+                                {% block description %}
+                                    {{ description }}
+                                {% endblock description %}
                             </div>
                             {% if paginator %}
                                 <nav style="float: right">

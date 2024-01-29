@@ -20,39 +20,24 @@
 <![endif]-->
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if org.subdomain %}
+    {% if org|config:"has_new_brand" %}
+        <link rel="icon"
+              type="image/x-icon"
+              href="{{ STATIC_URL }}img/favicon-v2024.png">
+    {% elif org.subdomain %}
         <link rel="icon"
               type="image/x-icon"
               href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
     {% else %}
         <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png">
     {% endif %}
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Condensed|Roboto:500&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@300;400;700&family=Noto+Sans:wght@400;700&family=Roboto+Condensed:wght@500&family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/leaflet.css">
     <link type="text/css"
           rel="stylesheet"
           href="{{ STATIC_URL }}css/jqcloud.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
           rel="stylesheet">
-    <style type="text/css">
-    <!-- color overloads for countries -->
-    .primary-border {
-       border-color: {{ org|config:"dark1_color"}} !important;
-    }
-    
-    .primary-background {
-       background: {{ org|config:"dark1_color"}} !important;
-    }
-    
-    .highlight-background {
-       background: #FFD100;
-    }
-    
-    .highlight-color {
-       color: #FFD100;
-    }
-    </style>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     {% block styles %}
         {% if is_rtl_org %}

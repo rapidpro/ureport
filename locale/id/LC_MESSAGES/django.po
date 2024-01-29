@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1200,6 +1200,11 @@ msgstr ""
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Buat"
+
 msgid "SELECT LANGUAGE"
 msgstr ""
 
@@ -2100,6 +2105,11 @@ msgstr "Jika org ini jika untuk data global. mis: Ini menunjukkan peta dunia buk
 msgid "Whether to activate an extra gender."
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
@@ -2179,6 +2189,35 @@ msgstr "Cerita ini di tampilkan di halaman depan"
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+#, fuzzy
+#| msgid "Population"
+msgid "All locations"
+msgstr "Populasi"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""
 
 #, fuzzy
 #~| msgid "The location of the responder."
