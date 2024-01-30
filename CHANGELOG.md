@@ -1,3 +1,8 @@
+v1.2.92 (2024-01-30)
+-------------------------
+ * Merge pull request #1182 from rapidpro/staging-pushes
+ * Hide name for global site
+
 v1.2.91 (2024-01-29)
 -------------------------
  * Fix configured colors load CSS classes
