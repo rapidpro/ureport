@@ -1436,6 +1436,14 @@ COUNTRY_FLAGS_SITES = [
         region="WCARO",
     ),
     dict(
+        name="Guinea Ecuatorial",
+        host="//guineaecuatorial.ureport.in/",
+        flag="flag_guineaecuatorial.png",
+        countries_codes=["GNQ"],
+        count_link="http://guineaecuatorial.ureport.in/count/",
+        region="WCARO",
+    ),
+    dict(
         name="Haiti",
         host="//haiti.ureport.in/",
         flag="flag_haiti.png",
