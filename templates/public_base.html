@@ -332,7 +332,7 @@
         <a href="{% url 'public.opinions' %}" class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
         <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
         {% if org|config:"has_new_brand" %}
-            {% if org|config:"is_global" %}
+            {% if org|config:"is_global" and org.subdomain != "" %}
                 <a href="https://www.voicesofyouth.org/" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
             {% endif %}
         {% endif %}
@@ -640,28 +640,30 @@
         {% if org|config:"has_new_brand" %}
             <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
-                    <div style="width:360px">
+                    <div style="width:500px">
                         <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                     </div>
                 </a>
-                <div class="flex-1 font-bold mt-12" style="font-family:'Noto Sans', sans-serif;">
+                {% if not org|config:"is_global" %}
+                <div class="flex-1 font-bold text-2xl mt-16" style="font-family:'Noto Sans', sans-serif;">
                     <a href="{% url 'public.index' %}" class="flex-initial text-center">{{ org.name }}</a>
                 </div>
-                <div class="md:flex flex-1">
-                    <div class="flex-1 text-center font-bold text-2xl flex-center-y">
+                {% endif %}
+                <div class="md:flex flex-1 mt-8">
+                    <div class="flex-1 text-center font-bold text-xl flex-center-y">
                         <div>
                             <a href="{% url 'public.opinions' %}"
                                class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Opinions" %}</a>
                         </div>
                     </div>
-                    <div class="flex-1 text-center font-bold text-2xl flex-center-y">
+                    <div class="flex-1 text-center font-bold text-xl flex-center-y">
                         <div>
                             <a href="{% url 'public.stories' %}"
                                class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                         </div>
                     </div>
-                    {% if org|config:"is_global" %}
-                        <div class="flex-1 text-center font-bold text-2xl flex-center-y">
+                    {% if org|config:"is_global" and org.subdomain != "" %}
+                        <div class="flex-1 text-center font-bold text-xl flex-center-y">
                             <div>
                                 <a href="https://www.voicesofyouth.org/"
                                    class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Co-Create" %}</a>
