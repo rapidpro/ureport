@@ -9,7 +9,7 @@ from django.template import TemplateSyntaxError
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from ureport.utils import get_linked_orgs
+from ureport.utils import UNICEF_REGIONS, get_linked_orgs
 
 register = template.Library()
 logger = logging.getLogger(__name__)
@@ -153,11 +153,14 @@ lessblock = register.tag(lessblock)
 def show_org_flags(context):
     request = context["request"]
     linked_orgs = get_linked_orgs(request.user.is_authenticated)
+    regions = UNICEF_REGIONS.copy()
     return dict(
         linked_orgs=linked_orgs,
+        regions=regions,
         break_pos=min(len(linked_orgs) / 2, 9),
         STATIC_URL=settings.STATIC_URL,
         is_iorg=context["is_iorg"],
+        is_new_brand=context["is_new_brand"],
     )
 
 

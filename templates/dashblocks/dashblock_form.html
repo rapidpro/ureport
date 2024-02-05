@@ -1,64 +1,59 @@
 {% extends "smartmin/form.html" %}
 {% load thumbnail i18n %}
+
 {% block extra-fields %}
-    {% if object and type.has_gallery %}
-        <div class="form-group">
-            <label for="" class="col-sm-2 control-label">{% trans "Gallery" %}</label>
-            <div class="col-sm-10">
-                {% for img in object.sorted_images %}
-                    {% thumbnail img.image "100x100" crop="center" as im %}
-                        <a href="{% url 'dashblocks.dashblockimage_update' img.id %}">
-                            <img class="thumb"
-                                 src="{{ im.url }}"
-                                 width="{{ img.x }}"
-                                 height="{{ img.y }}" />
-                        </a>
-                    {% endthumbnail %}
-                    <a href="{% url 'dashblocks.dashblockimage_create' %}?dashblock={{ object.id }}"
-                       class="btn btn-default btn-small">{% trans "Add Image" %}</a>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
+  {% if object and type.has_gallery %}
+    <div class="form-group">
+      <label for="" class="col-sm-2 control-label">{% trans "Gallery" %}</label>
+      <div class="col-sm-10">
+        {% for img in object.sorted_images %}
+          {% thumbnail img.image "100x100" crop="center" as im %}
+            <a href="{% url 'dashblocks.dashblockimage_update' img.id %}">
+              <img class="thumb" src="{{ im.url }}" width="{{ img.x }}" height="{{ img.y }}" alt="" />
+            </a>
+          {% endthumbnail %}
+          <a href="{% url 'dashblocks.dashblockimage_create' %}?dashblock={{ object.id }}"
+             class="btn btn-default btn-small">{% trans "Add Image" %}</a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 {% endblock extra-fields %}
 {% block extra-style %}
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{ STATIC_URL }}css/prettify.css">
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{ STATIC_URL }}css/summernote-lite.css">
-    {% if type.has_rich_text %}
-        <style type="text/css">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/prettify.css">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/summernote-lite.css">
+  {% if type.has_rich_text %}
+    <style type="text/css">
       #id_content {
         width: 93%;
         height: 250px;
         margin-right: 20px;
       }
+
       #id_summary {
         width: 93%;
         height: 150px;
         margin-right: 20px;
       }
-      
+
       label.checkbox {
         padding-left: 20px;
       }
-        </style>
-    {% endif %}
-    <style type="text/css">
+    </style>
+  {% endif %}
+  <style type="text/css">
     img.thumb {
       margin: 5px;
       border: 1px solid #ccc;
     }
-    </style>
+  </style>
 {% endblock extra-style %}
 {% block extra-script %}
-    <script src="{{ STATIC_URL }}js/prettify.js"></script>
-    <script src="{{ STATIC_URL }}js/summernote-lite.min.js"></script>
-    {% if type.has_rich_text %}
-        <script type="text/javascript">
-      $(function(){
+  <script src="{{ STATIC_URL }}js/prettify.js"></script>
+  <script src="{{ STATIC_URL }}js/summernote-lite.min.js"></script>
+  {% if type.has_rich_text %}
+    <script type="text/javascript">
+      $(function() {
         $("#id_content").summernote({
           maximumImageFileSize: 1048576,
           callbacks: {
@@ -78,6 +73,6 @@
           }
         })
       });
-        </script>
-    {% endif %}
+    </script>
+  {% endif %}
 {% endblock extra-script %}

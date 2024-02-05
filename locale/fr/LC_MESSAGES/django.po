@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1131,6 +1131,11 @@ msgstr "Exporter et Partager"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Vous voulez raconter cela au monde ? Téléchargez cette image pour partager facilement sur les réseaux sociaux ou pour une belle présentation !"
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Créer"
+
 msgid "SELECT LANGUAGE"
 msgstr "CHOISIR LA LANGUE"
 
@@ -1887,6 +1892,11 @@ msgstr "Si cette organisation concerne les données globales, par exemple : il m
 msgid "Whether to activate an extra gender."
 msgstr "Si pour activer un genre supplémentaire"
 
+#, fuzzy
+#| msgid "Whether to show the UNICEF logo in the footer."
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Afficher ou non le logo de l'UNICEF en bas de page"
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Masquer ou non les tableaux de répartition des engagements"
 
@@ -1954,47 +1964,30 @@ msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
 
 #, fuzzy
-#~| msgid "U-Report"
-#~ msgid "Ureport API"
-#~ msgstr "U-Report"
+#| msgid "Location"
+msgid "All locations"
+msgstr "Lieu"
 
-#~ msgid "Photos"
-#~ msgstr "Photos"
+msgid "East Asia and Pacific"
+msgstr ""
 
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "La description de la page Opinions"
+msgid "Eastern and Southern Africa"
+msgstr ""
 
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgid "Europe and Central Asia"
+msgstr ""
 
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Organisation"
+msgid "Latin America and the Caribbean"
+msgstr ""
 
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "La description de la page Articles"
+msgid "Middle East and North Africa"
+msgstr ""
 
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "La couleur du texte de la barre «Rejoindre»"
+msgid "South Asia"
+msgstr ""
 
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "La couleur de fond du bandeau «Rejoindre»"
+msgid "UNICEF’s National Committee countries"
+msgstr ""
 
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Couleur principale à utiliser pour cette organisation"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Couleur secondaire à utiliser pour cette organisation"
-
-#~ msgid "The background color for the site"
-#~ msgstr "La couleur de fond du site"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Si pour activer le nouveau design"
+msgid "West and Central Africa"
+msgstr ""

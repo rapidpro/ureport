@@ -619,6 +619,14 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
+        name="has_new_brand",
+        field=dict(
+            help_text=_("Whether to use the new 2024 brand with UNICEF in the logo and a common theme."),
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="has_charts_hidden",
         field=dict(
             help_text=_("Whether to hide the engagement breakdown charts."),
@@ -1124,6 +1132,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_afghanistan.png",
         countries_codes=["AFG"],
         count_link="http://afghanistan.ureport.in/count/",
+        region="ROSA",
     ),
     dict(
         name="Angola",
@@ -1131,6 +1140,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_angola.png",
         countries_codes=["AGO"],
         count_link="http://angola.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Argentina",
@@ -1138,6 +1148,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_argentina.png",
         countries_codes=["ARG"],
         count_link="http://argentina.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Bangladesh",
@@ -1145,6 +1156,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_bangladesh.png",
         countries_codes=["BGD"],
         count_link="http://bangladesh.ureport.in/count/",
+        region="ROSA",
     ),
     dict(
         name="Barbados",
@@ -1152,6 +1164,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_barbados.png",
         countries_codes=["BRB"],
         count_link="http://barbados.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Belize",
@@ -1159,6 +1172,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_belize.png",
         countries_codes=["BLZ"],
         count_link="http://belize.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Benin",
@@ -1166,6 +1180,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_benin.png",
         countries_codes=["BEN"],
         count_link="http://benin.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Bolivia",
@@ -1173,6 +1188,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_bolivia.png",
         countries_codes=["BOL"],
         count_link="http://bolivia.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Bosnia and Herzegovina",
@@ -1180,6 +1196,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_bih.png",
         countries_codes=["BIH"],
         count_link="http://bih.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Brazil",
@@ -1187,6 +1204,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_brasil.png",
         countries_codes=["BRA"],
         count_link="http://brasil.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Bulgaria",
@@ -1194,6 +1212,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_bulgaria.png",
         countries_codes=["BGA"],
         count_link="http://bulgaria.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Botswana",
@@ -1201,6 +1220,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_botswana.png",
         countries_codes=["BWA"],
         count_link="http://botswana.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Burkina Faso",
@@ -1208,6 +1228,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_burkinafaso.png",
         countries_codes=["BFA"],
         count_link="http://burkinafaso.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Burundi",
@@ -1215,6 +1236,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_burundi.png",
         countries_codes=["BDI"],
         count_link="http://burundi.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Canada",
@@ -1222,6 +1244,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_canada-en.png",
         countries_codes=["CAN"],
         count_link="http://canada-en.ureport.in/count/",
+        region="NATCOM",
     ),
     dict(
         name="Cameroun",
@@ -1229,6 +1252,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_cameroon.png",
         countries_codes=["CMR"],
         count_link="http://cameroon.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="CAR",
@@ -1236,6 +1260,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_centrafrique.png",
         countries_codes=["CAF"],
         count_link="http://centrafrique.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Chile",
@@ -1243,6 +1268,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_chile.png",
         countries_codes=["CHL"],
         count_link="http://chile.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Congo Brazzaville",
@@ -1250,6 +1276,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_congobrazzaville.png",
         countries_codes=["COG"],
         count_link="http://congobrazzaville.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Costa Rica",
@@ -1257,6 +1284,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_costarica.png",
         countries_codes=["CRI"],
         count_link="https://costarica.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Cote d'ivoire",
@@ -1264,6 +1292,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_cotedivoire.png",
         countries_codes=["CIV"],
         count_link="http://cotedivoire.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Croatia",
@@ -1271,6 +1300,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_croatia.png",
         countries_codes=["HRV"],
         count_link="http://croatia.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="DRC",
@@ -1278,6 +1308,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_drc.png",
         countries_codes=["COD"],
         count_link="http://drc.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Eastern Caribbean Area",
@@ -1285,6 +1316,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_eca.png",
         countries_codes=["ECA"],
         count_link="http://eca.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Ecuador",
@@ -1292,6 +1324,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_ecuador.png",
         countries_codes=["ECU"],
         count_link="http://ecuador.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="El Salvador",
@@ -1299,6 +1332,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_elsalvador.png",
         countries_codes=["SLV"],
         count_link="http://elsalvador.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Eswatini",
@@ -1306,6 +1340,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_eswatini.png",
         countries_codes=["SWZ"],
         count_link="http://eswatini.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Europe",
@@ -1313,6 +1348,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_europe-uk.png",
         countries_codes=["UKR"],
         count_link="http://europe-uk.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="France",
@@ -1320,6 +1356,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_france.png",
         countries_codes=["FRA"],
         count_link="http://france.ureport.in/count/",
+        region="NATCOM",
     ),
     dict(
         name="Gabon",
@@ -1327,6 +1364,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_gabon.png",
         countries_codes=["GAB"],
         count_link="http://gabon.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Gambia",
@@ -1334,6 +1372,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_gambia.png",
         countries_codes=["GMB"],
         count_link="http://gambia.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Ghana",
@@ -1341,6 +1380,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_ghana.png",
         countries_codes=["GHA"],
         count_link="http://ghana.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Greece",
@@ -1348,6 +1388,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_greece.png",
         countries_codes=["GRC"],
         count_link="http://greece.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Guatemala",
@@ -1355,6 +1396,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_guatemala.png",
         countries_codes=["GTM"],
         count_link="http://guatemala.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Guinea",
@@ -1362,6 +1404,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_guinea.png",
         countries_codes=["GIN"],
         count_link="http://guinea.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Haiti",
@@ -1369,6 +1412,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_haiti.png",
         countries_codes=["HTI"],
         count_link="http://haiti.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Honduras",
@@ -1376,6 +1420,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_honduras.png",
         countries_codes=["HND"],
         count_link="http://honduras.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="India",
@@ -1383,6 +1428,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_india.png",
         countries_codes=["IND"],
         count_link="http://india.ureport.in/count/",
+        region="ROSA",
     ),
     dict(
         name="Indonesia",
@@ -1390,6 +1436,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_indonesia.png",
         countries_codes=["IDN"],
         count_link="http://indonesia.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Iraq",
@@ -1397,6 +1444,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_iraq.png",
         countries_codes=["IRQ"],
         count_link="http://iraq.ureport.in/count/",
+        region="MENA",
     ),
     dict(
         name="Ireland",
@@ -1404,6 +1452,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_ireland.png",
         countries_codes=["IRL"],
         count_link="http://ireland.ureport.in/count/",
+        region="NATCOM",
     ),
     dict(
         name="Italia",
@@ -1411,6 +1460,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_italia.png",
         countries_codes=["ITA"],
         count_link="http://italia.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Jamaica",
@@ -1418,6 +1468,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_jamaica.png",
         countries_codes=["JAM"],
         count_link="http://jamaica.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Jordan",
@@ -1425,6 +1476,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_jordan.png",
         countries_codes=["JOR"],
         count_link="http://jordan.ureport.in/count/",
+        region="MENA",
     ),
     dict(
         name="Kenya",
@@ -1432,6 +1484,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_kenya.png",
         countries_codes=["KEN"],
         count_link="http://kenya.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Kiribati",
@@ -1439,6 +1492,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_kiribati.png",
         countries_codes=["KIR"],
         count_link="http://kiribati.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Kyrgyzstan",
@@ -1446,6 +1500,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_kyrgyzstan.png",
         countries_codes=["KGZ"],
         count_link="http://kyrgyzstan.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Lebanon",
@@ -1453,6 +1508,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_lebanon.png",
         countries_codes=["LBN"],
         count_link="http://lebanon.ureport.in/count/",
+        region="MENA",
     ),
     dict(
         name="Lesotho",
@@ -1460,6 +1516,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_les.png",
         countries_codes=["LSO"],
         count_link="http://les.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Liberia",
@@ -1467,6 +1524,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_liberia.png",
         countries_codes=["LBR"],
         count_link="http://liberia.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Macedona",
@@ -1474,6 +1532,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_mk.png",
         countries_codes=["MKD"],
         count_link="http://mk.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Madagascar",
@@ -1481,6 +1540,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_madagascar.png",
         countries_codes=["MG"],
         count_link="http://madagascar.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Malawi",
@@ -1488,6 +1548,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_malawi.png",
         countries_codes=["MWI"],
         count_link="http://ureport.mw/count/",
+        region="ESARO",
     ),
     dict(
         name="Malaysia",
@@ -1495,6 +1556,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_malaysia.png",
         countries_codes=["MYS"],
         count_link="http://malaysia.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Mali",
@@ -1502,6 +1564,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_mali.png",
         countries_codes=["MLI"],
         count_link="http://mali.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Mauritania",
@@ -1509,6 +1572,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_mauritania.png",
         countries_codes=["MRT"],
         count_link="https://mauritania.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Mexico",
@@ -1516,6 +1580,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_mexico.png",
         countries_codes=["MEX"],
         count_link="http://mexico.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Micronesia",
@@ -1523,6 +1588,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_micronesia.png",
         countries_codes=["FSM"],
         count_link="http://micronesia.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Moldova",
@@ -1530,6 +1596,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_moldova.png",
         countries_codes=["MDA"],
         count_link="http://moldova.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Morocco",
@@ -1537,6 +1604,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_morocco.png",
         countries_codes=["MAR"],
         count_link="http://morocco.ureport.in/count/",
+        region="MENA",
     ),
     dict(
         name="Mozambique",
@@ -1544,6 +1612,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_mozambique.png",
         countries_codes=["MOZ"],
         count_link="http://smsbiz.co.mz/count/",
+        region="ESARO",
     ),
     dict(
         name="Myanmar",
@@ -1551,6 +1620,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_myanmar.png",
         countries_codes=["MMR"],
         count_link="http://myanmar.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Namibia",
@@ -1558,6 +1628,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_namibia.png",
         countries_codes=["NAM"],
         count_link="http://namibia.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Nicaragua",
@@ -1565,6 +1636,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_nicaragua.png",
         countries_codes=["NIC"],
         count_link="http://nicaragua.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Niger",
@@ -1572,6 +1644,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_niger.png",
         countries_codes=["NER"],
         count_link="http://niger.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Nigeria",
@@ -1579,6 +1652,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_nigeria.png",
         countries_codes=["NGA"],
         count_link="http://nigeria.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Nigeria24x7",
@@ -1586,6 +1660,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_nigeria24x7.png",
         countries_codes=["NGA"],
         count_link="http://nigeria24x7.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Nepal",
@@ -1593,6 +1668,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_nepal.png",
         countries_codes=["NPL"],
         count_link="http://nepal.ureport.in/count/",
+        region="ROSA",
     ),
     dict(
         name="Norge",
@@ -1600,6 +1676,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_norge.png",
         countries_codes=["NOR"],
         count_link="http://norge.ureport.in/count/",
+        region="NATCOM",
     ),
     dict(
         name="OECS",
@@ -1607,6 +1684,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_oecs.png",
         countries_codes=["ATG"],  # ["ATG", "VGB", "DMA", "GRD", "MSR", "KNA", "LCA", "VCT", "TCA"],
         count_link="http://oecs.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="On the move",
@@ -1614,6 +1692,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_onthemove.png",
         countries_codes=["ITA"],
         count_link="http://onthemove.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Pacific",
@@ -1621,6 +1700,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_pacific.png",
         countries_codes=["FJI"],  # ["COK", "FJI", "MHL", "NRU", "NIU", "PLW", "WSM", "TKL", "TON", "TUV", "VUT"],
         count_link="http://pacific.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Pakistan",
@@ -1628,6 +1708,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_pakistan.png",
         countries_codes=["PAK"],
         count_link="http://ureport.pk/count/",
+        region="ROSA",
     ),
     dict(
         name="Panama",
@@ -1635,6 +1716,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_panama.png",
         countries_codes=["PAN"],
         count_link="http://panama.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Paraguay",
@@ -1642,6 +1724,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_paraguay.png",
         countries_codes=["PAR"],
         count_link="http://paraguay.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Philippines",
@@ -1649,6 +1732,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_philippines.png",
         countries_codes=["PHL"],
         count_link="http://philippines.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="PNG",
@@ -1656,6 +1740,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_png.png",
         countries_codes=["PNG"],
         count_link="http://png.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="România",
@@ -1663,6 +1748,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_romania.png",
         countries_codes=["ROU"],
         count_link="http://romania.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="São Tomé and Príncipe",
@@ -1670,6 +1756,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_stp.png",
         countries_codes=["STP"],
         count_link="http://stp.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Senegal",
@@ -1677,6 +1764,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_senegal.png",
         countries_codes=["SEN"],
         count_link="http://senegal.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Serbia",
@@ -1684,6 +1772,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_serbia.png",
         countries_codes=["SRB"],
         count_link="http://serbia.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Sierra Leone",
@@ -1691,6 +1780,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_sierraleone.png",
         countries_codes=["SLE"],
         count_link="http://sierraleone.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Slovenija",
@@ -1698,6 +1788,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_slovenija.png",
         countries_codes=["SVN"],
         count_link="http://slovenija.ureport.in/count/",
+        region="NATCOM  ",
     ),
     dict(
         name="Solomon Islands",
@@ -1705,6 +1796,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_solomonislands.png",
         countries_codes=["SLB"],
         count_link="http://solomonislands.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Somalia",
@@ -1712,6 +1804,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_somalia.png",
         countries_codes=["SOM"],
         count_link="http://somalia.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="South Africa",
@@ -1719,6 +1812,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_sa.png",
         countries_codes=["ZAF"],
         count_link="http://sa.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="South Asia",
@@ -1726,6 +1820,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_southasia.png",
         countries_codes=[],  # ["AFG", "BGD", "BTN", "IND", "MDV", "NPL", "PAK", "LKA"],
         count_link="http://southasia.ureport.in/count/",
+        region="ROSA",
     ),
     dict(
         name="Sudan",
@@ -1733,6 +1828,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_sudan.png",
         countries_codes=["SDN"],
         count_link="http://sudan.ureport.in/count/",
+        region="MENA",
     ),
     dict(
         name="Sverige",
@@ -1740,6 +1836,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_sverige.png",
         countries_codes=["SWE"],
         count_link="http://sverige.ureport.in/count/",
+        region="NATCOM",
     ),
     dict(
         name="Tanzania",
@@ -1747,6 +1844,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_tanzania.png",
         countries_codes=["TZA"],
         count_link="http://tanzania.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Tchad",
@@ -1754,6 +1852,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_tchad.png",
         countries_codes=["TCD"],
         count_link="http://tchad.ureport.in/count/",
+        region="WCARO",
     ),
     dict(
         name="Thailand",
@@ -1761,6 +1860,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_thailand.png",
         countries_codes=["THA"],
         count_link="http://thailand.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Trinidad and Tobago",
@@ -1768,6 +1868,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_tt.png",
         countries_codes=["TTO"],
         count_link="http://tt.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Tunisia",
@@ -1775,6 +1876,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_tunisie.png",
         countries_codes=["TUN"],
         count_link="http://tunisie.ureport.in/count/",
+        region="MENA",
     ),
     dict(
         name="Uganda",
@@ -1782,6 +1884,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_uganda.png",
         countries_codes=["UGA"],
         count_link="http://ureport.ug/count/",
+        region="ESARO",
     ),
     dict(
         name="Uniendo Voces - Bolivia",
@@ -1789,6 +1892,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_uniendovoces-bol.png",
         countries_codes=["BOL"],
         count_link="http://uniendovoces-bol.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Uniendo Voces - Brasil",
@@ -1796,6 +1900,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_uniendovoces-br.png",
         countries_codes=["BRA"],
         count_link="http://uniendovoces-br.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Uniendo Voces - Ecuador",
@@ -1803,6 +1908,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_uniendovoces-ec.png",
         countries_codes=["ECU"],
         count_link="http://uniendovoces-ec.ureport.in/count/",
+        region="LACRO",
     ),
     dict(
         name="Ukraine",
@@ -1810,6 +1916,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_ukraine.png",
         countries_codes=["UKR"],
         count_link="http://ukraine.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Uzbekistan",
@@ -1817,6 +1924,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_uzberkistan.png",
         countries_codes=["UZB"],
         count_link="http://uzbekistan.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Vietnam",
@@ -1824,6 +1932,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_vietnam.png",
         countries_codes=["VNM"],
         count_link="http://vietnam.ureport.in/count/",
+        region="EAPRO",
     ),
     dict(
         name="Western Balkans",
@@ -1831,6 +1940,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_westernbalkans.png",
         countries_codes=["ALB", "XKX", "MNE"],
         count_link="http://westernbalkans.ureport.in/count/",
+        region="ECARO",
     ),
     dict(
         name="Zambia",
@@ -1838,6 +1948,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_zm.png",
         countries_codes=["ZMB"],
         count_link="http://zm.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Zimbabwe",
@@ -1845,6 +1956,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_zimbabwe.png",
         countries_codes=["ZWE"],
         count_link="http://zimbabwe.ureport.in/count/",
+        region="ESARO",
     ),
     dict(
         name="Global",
@@ -1853,6 +1965,7 @@ COUNTRY_FLAGS_SITES = [
         countries_codes=[],
         show_icon=False,
         count_link="https://www.ureport.in/count/",
+        region="All",
     ),
 ]
 

@@ -1,5 +1,6 @@
 {% extends "smartmin/read.html" %}
 {% load i18n %}
+
 {% block content-section %}
     <div style="padding: 3rem 80px;" class="admin-home-bg">
         {% block content %}
@@ -23,40 +24,34 @@
                 <div class="column is-8 right-block">
                     <div class="tile is-ancestor">
                         <div class="tile is-parent">
-                            <a href="{% url 'polls.poll_list' %}"
-                               class="tile is-child box has-text-centered link-button">
-                                <div style="padding: 50px"
-                                     class="tile is-parent is-vertical big-button-link">
+                            <a href="{% url 'polls.poll_list' %}" class="tile is-child box has-text-centered link-button">
+                                <div style="padding: 50px" class="tile is-parent is-vertical big-button-link">
                                     <div class="tile is-child">
-                                        <img src="{{ STATIC_URL }}img/polls_icon.png">
+                                        <img src="{{ STATIC_URL }}img/polls_icon.png" alt="">
                                     </div>
                                     <div class="tile is-child is-size-3">{% trans "Opinions" %}</div>
                                 </div>
                             </a>
                         </div>
                         <div class="tile is-parent">
-                            <a href="{% url 'stories.story_list' %}"
-                               class="tile is-child box has-text-centered link-button">
+                            <a href="{% url 'stories.story_list' %}" class="tile is-child box has-text-centered link-button">
                                 <div class="tile is-parent is-vertical big-button-link">
                                     <div class="tile is-child">
-                                        <img src="{{ STATIC_URL }}img/stories_icon.png">
+                                        <img src="{{ STATIC_URL }}img/stories_icon.png" alt="">
                                     </div>
                                     <div class="tile is-child is-size-3">{% trans "Stories" %}</div>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div style="margin: 20px 0px 30px 0px;
-                                height: 2px"
-                         class="has-background-white"></div>
+                    <div style="margin: 20px 0px 30px 0px; height: 2px" class="has-background-white"></div>
                     <div class="tile is-ancestor">
                         {% if request.user.is_superuser or org_perms.orgs.org_manage_accounts %}
                             <div class="tile is-parent">
-                                <a href="{% url 'orgs.org_manage_accounts' %}"
-                                   class="tile is-child box has-text-centered link-button">
+                                <a href="{% url 'orgs.org_manage_accounts' %}" class="tile is-child box has-text-centered link-button">
                                     <div class="tile is-parent is-vertical small-button-link">
                                         <div class="tile is-child">
-                                            <img src="{{ STATIC_URL }}img/users_icon.png">
+                                            <img src="{{ STATIC_URL }}img/users_icon.png" alt="">
                                         </div>
                                         <div class="tile is-child is-size-4">{% trans "Users" %}</div>
                                     </div>
@@ -65,11 +60,10 @@
                         {% endif %}
                         {% if request.user.is_superuser or org_perms.orgs.org_edit %}
                             <div class="tile is-parent">
-                                <a href="{% url 'orgs.org_edit' %}"
-                                   class="tile is-child box has-text-centered link-button">
+                                <a href="{% url 'orgs.org_edit' %}" class="tile is-child box has-text-centered link-button">
                                     <div class="tile is-parent is-vertical small-button-link">
                                         <div class="tile is-child">
-                                            <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                            <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                         </div>
                                         <div class="tile is-child is-size-4">{% trans "Settings" %}</div>
                                     </div>
@@ -81,7 +75,7 @@
                                class="tile is-child box has-text-centered link-button">
                                 <div class="tile is-parent is-vertical small-button-link">
                                     <div class="tile is-child">
-                                        <img src="{{ STATIC_URL }}img/pages_icon.png">
+                                        <img src="{{ STATIC_URL }}img/pages_icon.png" alt="">
                                     </div>
                                     <div class="tile is-child is-size-4">{% trans "Pages" %}</div>
                                 </div>
@@ -91,11 +85,10 @@
                     <div class="tile is-ancestor">
                         <div class="tile is-parent">
                             {% if request.user.is_superuser or org_perms.orgs.orgbackend_list %}
-                                <a href="{% url 'orgs.orgbackend_list' %}"
-                                   class="tile is-child box has-text-centered link-button">
+                                <a href="{% url 'orgs.orgbackend_list' %}" class="tile is-child box has-text-centered link-button">
                                     <div class="tile is-parent is-vertical small-button-link">
                                         <div class="tile is-child">
-                                            <img src="{{ STATIC_URL }}img/settings_icon.png">
+                                            <img src="{{ STATIC_URL }}img/settings_icon.png" alt="">
                                         </div>
                                         <div class="tile is-child is-size-4">{% trans "Backends" %}</div>
                                     </div>
@@ -110,17 +103,18 @@
 {% endblock content-section %}
 {% block extra-style %}
     <style type="text/css">
-    td.read-label {
-      width: 200px;
-    }
-    
-    a.manage, a.backends {
-      margin-right: 10px;
-    }
-    
-    .last-reporters-sync {
-      font-size: 16px;
-      font-weight: bold;
-    }
+      td.read-label {
+        width: 200px;
+      }
+
+      a.manage,
+      a.backends {
+        margin-right: 10px;
+      }
+
+      .last-reporters-sync {
+        font-size: 16px;
+        font-weight: bold;
+      }
     </style>
 {% endblock extra-style %}

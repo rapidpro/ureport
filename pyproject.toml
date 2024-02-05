@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ureport"
-version = "1.2.88"
+version = "1.2.92"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
@@ -20,7 +20,7 @@ django-storages = "^1.13.2"
 django-rest-swagger = "^2.2.0"
 djangorestframework = "3.14.0"
 dj-database-url = "^0.5.0"
-Pillow = "^10.0.1"
+Pillow = "^10.2.0"
 gunicorn = "^20.1.0"
 sentry-sdk = "^1.18.0"
 django-redis = "^5.2.0"
@@ -64,6 +64,24 @@ include_trailing_comma = true
 combine_as_imports = true
 sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
 known_django = ["django"]
+
+[tool.djlint]
+blank_line_after_tag = "load"
+custom_blocks = "render"
+format_css = true
+format_js = true
+ignore = "H006,H019,H021,H023"
+indent = 2
+max_attribute_length = 100
+max_line_length = 200
+
+[tool.djlint.css]
+indent_size = 2
+
+[tool.djlint.js]
+indent_size = 2
+templating = "django"
+
 
 [tool.coverage.run]
 source = ["ureport"]

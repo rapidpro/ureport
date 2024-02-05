@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -1123,6 +1123,11 @@ msgstr "ดึงข้อมูลออกและแชร์"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "ต้องการแชร์เรื่องนี้ให้โลกรู้? ดาวน์โหลดภาพนี้เพื่อแชร์บนโซเชียลมีเดียหรือเพื่อการนําเสนอที่สวยงาม!"
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "สร้าง"
+
 msgid "SELECT LANGUAGE"
 msgstr "เลือกภาษา"
 
@@ -1881,6 +1886,11 @@ msgstr "ถ้าองค์กรนี้แสดงผลข้อมูล
 msgid "Whether to activate an extra gender."
 msgstr "เปิดใช้งานเพศรายการอื่นเพิ่มเติมหรือไม่"
 
+#, fuzzy
+#| msgid "Whether to show the UNICEF logo in the footer."
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "จะแสดงโลโก้ยูนิเซฟตรงด้านล่างของเพจหรือไม่"
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "ซ่อนรายละเอียดกราฟของการมีส่วนร่วมหรือไม่"
 
@@ -1946,3 +1956,32 @@ msgstr "Row นี้ถูกสร้างขึ้นโดยการบ�
 
 msgid "Something to trigger localizations"
 msgstr "สิ่งที่จะเริ่มต้นการแปลภาษาท้องถิ่น"
+
+#, fuzzy
+#| msgid "Location"
+msgid "All locations"
+msgstr "ที่อยู่"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""

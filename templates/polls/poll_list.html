@@ -1,8 +1,9 @@
 {% extends "smartmin/list.html" %}
 {% load i18n smartmin %}
+
 {% block content-title %}
     <h2 class="is-size-2 has-text-weight-bold">
-        <img src="{{ STATIC_URL }}img/polls_icon.png">
+        <img src="{{ STATIC_URL }}img/polls_icon.png" alt="">
         <div class="is-inline-block content-title-text">{% trans "Opinions" %}</div>
     </h2>
 {% endblock content-title %}
@@ -20,9 +21,7 @@
 {% block table-buttons %}
     {% if view.add_button %}
         <a href="./create/"
-           class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">
-            {% trans "+ New Poll" %}
-        </a>
+           class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">{% trans "+ New Poll" %}</a>
     {% endif %}
 {% endblock table-buttons %}
 {% block table %}
@@ -71,8 +70,7 @@
                         </div>
                         <div class="detail-link">
                             <div style="margin: 0 10px;">Opinion response</div>
-                            <a href="{% get_field_link 'opinion_response' obj %}"
-                               class="small-detail-link">
+                            <a href="{% get_field_link 'opinion_response' obj %}" class="small-detail-link">
                                 <span class="small-poll-detail">{% get_value obj 'opinion_response' %}</span>
                             </a>
                         </div>
@@ -117,51 +115,52 @@
 {% block extra-style %}
     {{ block.super }}
     <style type="text/css">
-    td.field_created_on, td.field_poll_date {
-      white-space: nowrap;
-    }
-    
-    td.field_sync_status {
-      width: 150px;
-    }
-    
-    td.field_category {
-      max-width: 150px;
-    }
-    
-    td.field_questions {
-      text-align: center;
-    }
-    
-    td.field_featured_responses {
-      text-align: center;
-    }
-    
-    td.field_images {
-      text-align: center;
-    }
-    
-    td .detail-link a .big-poll-detail {
-      padding: 20px 5px;
-      display: inline-block;
-    }
-    
-    td .detail-link a .small-poll-detail {
-      padding: 5px 10px;
-      display: inline-block;
-    }
-    
-    td .detail-link a.small-detail-link {
-      display: inline-block;
-      margin: 0 10px;
-    }
-    
-    td .detail-link a {
-      min-width: 50%;
-    }
-    
-    td .detail-link {
-      margin: 15px 0px;
-    }
+      td.field_created_on,
+      td.field_poll_date {
+        white-space: nowrap;
+      }
+
+      td.field_sync_status {
+        width: 150px;
+      }
+
+      td.field_category {
+        max-width: 150px;
+      }
+
+      td.field_questions {
+        text-align: center;
+      }
+
+      td.field_featured_responses {
+        text-align: center;
+      }
+
+      td.field_images {
+        text-align: center;
+      }
+
+      td .detail-link a .big-poll-detail {
+        padding: 20px 5px;
+        display: inline-block;
+      }
+
+      td .detail-link a .small-poll-detail {
+        padding: 5px 10px;
+        display: inline-block;
+      }
+
+      td .detail-link a.small-detail-link {
+        display: inline-block;
+        margin: 0 10px;
+      }
+
+      td .detail-link a {
+        min-width: 50%;
+      }
+
+      td .detail-link {
+        margin: 15px 0px;
+      }
     </style>
 {% endblock extra-style %}

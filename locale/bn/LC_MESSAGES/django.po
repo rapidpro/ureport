@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1142,6 +1142,11 @@ msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "তৈরি করুন "
+
 msgid "SELECT LANGUAGE"
 msgstr ""
 
@@ -1986,6 +1991,11 @@ msgstr "যদি এই প্রতিষ্ঠান এর তথ্যগ�
 msgid "Whether to activate an extra gender."
 msgstr "বাড়তি কোন লিঙ্গ সক্রিয় করা হবে কি না"
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "ব্যবহারকারী এই সাইটে প্রবেশ করার অনুমতি প্রাপ্ত কি না"
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
@@ -2059,9 +2069,33 @@ msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
 
 #, fuzzy
-#~| msgid "U-Report"
-#~ msgid "Ureport API"
-#~ msgstr "u-report "
+#| msgid "Location"
+msgid "All locations"
+msgstr "অবস্থান"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""
 
 #~ msgid "Photos"
 #~ msgstr "ছবিগুলো"
