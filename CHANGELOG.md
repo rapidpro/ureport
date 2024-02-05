@@ -1,3 +1,8 @@
+v1.2.94 (2024-02-05)
+-------------------------
+ * Merge pull request #1185 from rapidpro/fix-org-name-spacing
+ * Fix site name spacing for global site
+
 v1.2.93 (2024-02-05)
 -------------------------
  * Merge pull request #1183 from rapidpro/fix-co-create
