@@ -332,7 +332,7 @@
         <a href="{% url 'public.opinions' %}" class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
         <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
         {% if org|config:"has_new_brand" %}
-            {% if org|config:"is_global" and org.subdomain != "" %}
+            {% if org|config:"is_global" and org.subdomain == "" %}
                 <a href="https://www.voicesofyouth.org/" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
             {% endif %}
         {% endif %}
@@ -662,7 +662,7 @@
                                class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                         </div>
                     </div>
-                    {% if org|config:"is_global" and org.subdomain != "" %}
+                    {% if org|config:"is_global" and org.subdomain == "" %}
                         <div class="flex-1 text-center font-bold text-xl flex-center-y">
                             <div>
                                 <a href="https://www.voicesofyouth.org/"
