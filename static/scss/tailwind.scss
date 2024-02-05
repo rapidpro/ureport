@@ -44,6 +44,8 @@ html {
   width: 100%;
   overflow:hidden;
   opacity: 1;
+  min-height: 500px;
+  border-bottom: 2px #FFF solid;
 
   background-image: url("/sitestatic/img/dropdown-bkg.png");
   background-repeat: no-repeat;
@@ -351,7 +353,7 @@ html {
 
 // leaflet info container in top right
 .leaflet-info {
-  font-family: Montserrat;
+  font-family: Noto Sans;
   font-weight: 700;
   font-size: 1.25rem;
 
@@ -545,6 +547,38 @@ html {
     }
   }
 
+  &.shown {
+    display: block;
+  }
+}
+
+.countries-dropdown {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
+  .region-dropdown {
+    
+    .countries-results {
+      display: none;
+    }
+
+    &.open {
+      a i {
+        height: 1rem;
+
+        &.closed {
+          display: none;
+        }
+        &.open {
+          display: inline;
+        }
+      }
+
+      .countries-results {
+        display: grid;
+      }
+    }
+  }
   &.shown {
     display: block;
   }

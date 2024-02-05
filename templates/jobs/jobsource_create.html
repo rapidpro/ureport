@@ -1,20 +1,17 @@
-{% extends 'smartmin/create.html' %}
+{% extends "smartmin/create.html" %}
 {% load i18n %}
+
 {% block pre-form %}
     {% if 'widget_id' in fields %}
         <p>
             {% blocktrans %}
         To add a Twitter job source you are required to get a widget id from twitter.
       {% endblocktrans %}
-            <a href="https://support.twitter.com/articles/20170071-how-to-embed-a-timeline">
-                {% trans "Follow this step by step guide" %}
-            </a>
+            <a href="https://support.twitter.com/articles/20170071-how-to-embed-a-timeline">{% trans "Follow this step by step guide" %}</a>
             {% blocktrans %}
         <div>After you create the widget copy the widget id from the url as shown on</div>
       {% endblocktrans %}
-            <img src="{{ STATIC_URL }}img/widget_id_example.jpg"
-                 style=""
-                 class="widget-id-example">
+            <img src="{{ STATIC_URL }}img/widget_id_example.jpg" alt="" style="" class="widget-id-example">
         </p>
     {% endif %}
 {% endblock pre-form %}
@@ -34,24 +31,24 @@
 {% block extra-script %}
     {{ block.super }}
     <script type="text/javascript">
-    $(document).ready(function() {
-      $('.next-part').on('click', function(event){
-        event.preventDefault();
-        selectedSourceType = $('select#id_source_type').val();
-        window.location.href = "{% url 'jobs.jobsource_create'%}?source_type=" + selectedSourceType;
-    
+      $(document).ready(function() {
+        $('.next-part').on('click', function(event) {
+          event.preventDefault();
+          selectedSourceType = $('select#id_source_type').val();
+          window.location.href = "{% url 'jobs.jobsource_create'%}?source_type=" + selectedSourceType;
+
+        });
       });
-    });
     </script>
 {% endblock extra-script %}
 {% block extra-style %}
     <style type="text/css">
-    .widget-id-example{
-      height: 100px;
-      border: 2px black solid;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-    }
+      .widget-id-example {
+        height: 100px;
+        border: 2px black solid;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
     </style>
 {% endblock extra-style %}

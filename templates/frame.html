@@ -20,39 +20,24 @@
 <![endif]-->
     <!-- Mobile viewport optimized: j.mp/bplateviewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if org.subdomain %}
+    {% if org|config:"has_new_brand" %}
+        <link rel="icon"
+              type="image/x-icon"
+              href="{{ STATIC_URL }}img/favicon-v2024.png">
+    {% elif org.subdomain %}
         <link rel="icon"
               type="image/x-icon"
               href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
     {% else %}
         <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png">
     {% endif %}
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Condensed|Roboto:500&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@300;400;700&family=Noto+Sans:wght@400;700&family=Roboto+Condensed:wght@500&family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/leaflet.css">
     <link type="text/css"
           rel="stylesheet"
           href="{{ STATIC_URL }}css/jqcloud.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
           rel="stylesheet">
-    <style type="text/css">
-    <!-- color overloads for countries -->
-    .primary-border {
-       border-color: {{ org|config:"dark1_color"}} !important;
-    }
-    
-    .primary-background {
-       background: {{ org|config:"dark1_color"}} !important;
-    }
-    
-    .highlight-background {
-       background: #FFD100;
-    }
-    
-    .highlight-color {
-       color: #FFD100;
-    }
-    </style>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     {% block styles %}
         {% if is_rtl_org %}
@@ -143,9 +128,9 @@
                                     <div>
                                         <a href="{{ site.host }}" class="flag">
                                             {% if site.is_static %}
-                                                <img src="{{ STATIC_URL }}img/flags/{{ site.flag }}">
+                                                <img src="{{ STATIC_URL }}img/flags/{{ site.flag }}" alt="">
                                             {% else %}
-                                                <img src="{{ site.flag }}">
+                                                <img src="{{ site.flag }}" alt="">
                                             {% endif %}
                                         </a>
                                     </div>
@@ -177,7 +162,7 @@
                                                 <a href="{% url 'orgs.org_list' %}">{% trans "Orgs" %}</a>
                                             </li>
                                             <li>
-                                                <a href="/users/user/">{% trans "Users" %}</a>
+                                                <a href="{% url 'users.user_list' %}">{% trans "Users" %}</a>
                                             </li>
                                             <li>
                                                 <a href="{% url 'dashblocks.dashblocktype_list' %}">{% trans "Content Types" %}</a>
@@ -405,7 +390,7 @@
                                     <div uk-grid>
                                         <div class="uk-width-1-1">
                                             {% thumbnail story.get_image "450x240" crop="top" as im %}
-                                                <img width="100%" src="{{ im.url }}" />
+                                                <img width="100%" src="{{ im.url }}" alt="" />
                                             {% endthumbnail %}
                                         </div>
                                         <div class="uk-width-1-1 main-story-title is-clipped">{{ story.title }}</div>
@@ -422,7 +407,7 @@
                     </div>
                     <div uk-grid>
                         <div class="uk-visible@s uk-width-1-3@s">
-                            <img width="50%" src="{{ STATIC_URL }}img/u-icon-large.png" />
+                            <img width="50%" src="{{ STATIC_URL }}img/u-icon-large.png" alt=""/>
                         </div>
                         <div class="uk-width-2-3@s">
                             <div class="pre-footer-call-to-action">
@@ -616,6 +601,6 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 {# media associated with any form we are displaying #}
 {% if form %}{{ form.media }}{% endif %}
-{% block extra-script %}{% endblock %}
-{% block script %}{% endblock %}
+{% block extra-script %}{% endblock extra-script %}
+{% block script %}{% endblock script %}
 </body>

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -1136,6 +1136,11 @@ msgstr "Exportera och dela"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Vill du berätta för dina vänner om det här? Dela på sociala medier!"
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Skapa"
+
 msgid "SELECT LANGUAGE"
 msgstr "VÄLJ SPRÅK"
 
@@ -1943,6 +1948,11 @@ msgstr "Bör denna organisation ha global data? Ska det vara en världskarta ist
 msgid "Whether to activate an extra gender."
 msgstr "Aktivera fler könsidentiteter"
 
+#, fuzzy
+#| msgid "Whether this user is allowed to log into the site"
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Användaren kan logga in på webbplatsen"
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr ""
 
@@ -2012,6 +2022,35 @@ msgstr "Raden skapades genom squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
+
+#, fuzzy
+#| msgid "Location"
+msgid "All locations"
+msgstr "Plats"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""
 
 #~ msgid "Photos"
 #~ msgstr "Bilder"

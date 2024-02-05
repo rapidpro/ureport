@@ -1,5 +1,6 @@
-{% extends 'smartmin/form.html' %}
+{% extends "smartmin/form.html" %}
 {% load smartmin i18n %}
+
 {% block pre-content %}
 {% endblock pre-content %}
 {% block post-form-errors %}
@@ -7,7 +8,7 @@
         <div class="column">
             {% block content-title %}
                 <h2 class="is-size-2 has-text-weight-bold">
-                    <img src="{{ STATIC_URL }}img/users_icon.png">
+                    <img src="{{ STATIC_URL }}img/users_icon.png" alt="">
                     <div class="is-inline-block content-title-text">{% trans "Users" %}</div>
                 </h2>
             {% endblock content-title %}
@@ -37,9 +38,9 @@
 {% block form-help %}
     <div class="notification">
         - {% trans "You must have at least one administator" %}
-        </br>
-        - {% trans "You can resend an invite using the field above" %}
-    </div>
+    </br>
+    - {% trans "You can resend an invite using the field above" %}
+</div>
 {% endblock form-help %}
 {% block fields %}
     <table class="table is-striped is-fullwidth is-hoverable">
@@ -68,7 +69,9 @@
             {% endfor %}
             {% for invite in invites %}
                 <tr class="{% cycle 'row2' 'row1' %} invite">
-                    <td>{{ invite.email }} (Invite Sent on <span class="italic is-size-7">{{ invite.modified_on  }}</span>)</td>
+                    <td>
+                        {{ invite.email }} (Invite Sent on <span class="italic is-size-7">{{ invite.modified_on }}</span>)
+                    </td>
                     <td class="permission">
                         {% if invite.user_group == 'A' %}
                             <input type="checkbox" disabled>
@@ -116,70 +119,73 @@
 {% endblock pre-fields %}
 {% block extra-style %}
     <style type="text/css">
-    input[type="checkbox"] {
-      width: 50px;
-    }
-    .form-horizontal .control-label {
-      width: 100%;
-      text-align: left;
-    }
-    
-    input.form-control, textarea.form-control, select.form-control {
-      width: 100%;
-    }
+      input[type="checkbox"] {
+        width: 50px;
+      }
+
+      .form-horizontal .control-label {
+        width: 100%;
+        text-align: left;
+      }
+
+      input.form-control,
+      textarea.form-control,
+      select.form-control {
+        width: 100%;
+      }
     </style>
 {% endblock extra-style %}
 {% block extra-script %}
     {{ block.super }}
     <script type="text/javascript">
-    $(function() {
-      // initialize the table cell checkboxes
-      var boxes = $("td.check");
-      boxes.each(function() {
-        var list_input = $(this).children("input[type='checkbox']");
-        if (list_input[0].checked) {
-          $(this).addClass("checked");
-        } else {
-          $(this).removeClass("checked");
-        }
+      $(function() {
+        // initialize the table cell checkboxes
+        var boxes = $("td.check");
+        boxes.each(function() {
+          var list_input = $(this).children("input[type='checkbox']");
+          if (list_input[0].checked) {
+            $(this).addClass("checked");
+          } else {
+            $(this).removeClass("checked");
+          }
+        });
       });
-    });
-    
-    $(function() {
-      // update the cells checkbox on click
-    
-      $("td.check input[type='checkbox']").on('click', function(){
-        var cell = $(this).parent("td.check");
-        var ipt = $(this);
-    
-        if (!cell.hasClass("checked")) {
-          allCells = cell.parent().children('td.check');
-          allHiddenInputs = allCells.find("input[type='checkbox']");
-    
-          // Uncheck everything First
-          allCells.removeClass('checked');
-          allHiddenInputs.prop('checked', false);
-    
-          // Check the clicked cell
-          cell.addClass('checked');
-          ipt.prop('checked', true);
-    
-        }
-    
-        hasAdmin = false;
-        // validate that we always have an admin first
-        // to show error if no admin is remaining
-        $("td.check").parent().find("input[id*='administrators']").each(function() {
-           hasAdmin = hasAdmin || $(this).prop('checked')
-        })
-    
-        if (!hasAdmin) {
-          $('#admin-error').show();
-        } else {
-          $('#admin-error').hide();
-        }
-    
+
+      $(function() {
+        // update the cells checkbox on click
+
+        $("td.check input[type='checkbox']").on('click', function() {
+          var cell = $(this).parent("td.check");
+          var ipt = $(this);
+
+          if (!cell.hasClass("checked")) {
+            allCells = cell.parent().children('td.check');
+            allHiddenInputs = allCells.find("input[type='checkbox']");
+
+            // Uncheck everything First
+            allCells.removeClass('checked');
+            allHiddenInputs.prop('checked', false);
+
+            // Check the clicked cell
+            cell.addClass('checked');
+            ipt.prop('checked', true);
+
+          }
+
+          hasAdmin = false;
+          // validate that we always have an admin first
+          // to show error if no admin is remaining
+          $("td.check").parent().find("input[id*='administrators']").each(function() {
+            hasAdmin = hasAdmin || $(this).prop('checked')
+          })
+
+          if (!hasAdmin) {
+            $('#admin-error').show();
+          } else {
+            $('#admin-error').hide();
+          }
+
+        });
       });
-    });
     </script>
 {% endblock extra-script %}

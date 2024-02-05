@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Rodolfo Pedro, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/rapidpro/teams/226/pt/)\n"
@@ -1125,6 +1125,11 @@ msgstr "Exportar e Compartilhar"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Quer contar ao mundo sobre isso? Faça o download desta imagem para compartilhar facilmente nas redes sociais ou para uma bela apresentação!"
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Criar "
+
 msgid "SELECT LANGUAGE"
 msgstr "SELECIONE A LINGUAGEM"
 
@@ -1883,6 +1888,11 @@ msgstr "Se esta organização é para dados globais. Por exemplo: Ela mostra um 
 msgid "Whether to activate an extra gender."
 msgstr "Se deve ativar um gênero extra."
 
+#, fuzzy
+#| msgid "Whether to show the UNICEF logo in the footer."
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Mostrar ou não o logótipo da UNICEF no rodapé."
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Se pretende ocultar os gráficos de repartição do compromisso."
 
@@ -1950,386 +1960,30 @@ msgid "Something to trigger localizations"
 msgstr "Algo para inicializar as localizações"
 
 #, fuzzy
-#~| msgid "U-Report"
-#~ msgid "Ureport API"
-#~ msgstr "SMS BIZ"
+#| msgid "Location"
+msgid "All locations"
+msgstr "Localização"
 
-#, fuzzy
-#~| msgid "The location of the responder."
-#~ msgid "The description of this bot, optional"
-#~ msgstr "A localização da pessoa que responde."
+msgid "East Asia and Pacific"
+msgstr ""
 
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Org."
+msgid "Eastern and Southern Africa"
+msgstr ""
 
-#, fuzzy
-#~| msgid "The location of the responder."
-#~ msgid "The description text for this bot"
-#~ msgstr "A localização da pessoa que responde."
+msgid "Europe and Central Asia"
+msgstr ""
 
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "A cor usada para desenhar o texto na barra de registro"
+msgid "Latin America and the Caribbean"
+msgstr ""
 
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "A cor usada para desenhar o fundo na barra de registro"
+msgid "Middle East and North Africa"
+msgstr ""
 
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "A cor primária para definir o estilo para esta organização."
+msgid "South Asia"
+msgstr ""
 
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "A cor secundária para definir o estilo para esta organização."
+msgid "UNICEF’s National Committee countries"
+msgstr ""
 
-#~ msgid "The background color for the site"
-#~ msgstr "A cor de fundo para o site"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "\tResults %(start)s-%(end)s of %(count)s\n"
-#~| "\t"
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "⇥Resultados %(start)s-%(end)s de %(count)s"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                    %(responded)s responded out of %(polled)s polled\n"
-#~| "                  "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(responded)s responderam dos %(polled)s alcançados"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(responded)s responderam dos %(polled)s alcançados"
-
-#, fuzzy
-#~| msgid "Poll Questions"
-#~ msgid "questions"
-#~ msgstr "Perguntas do Inquérito"
-
-#~ msgid "Polls"
-#~ msgstr "Inquéritos"
-
-#~ msgid "U-Reporters"
-#~ msgstr "A malta SMS BIZ"
-
-#~ msgid "Join & Engage"
-#~ msgstr "Inscreva & Participe"
-
-#~ msgid "FOLLOW US ON"
-#~ msgstr "SIGA-NOS NO"
-
-#~ msgid "ABOUT U-REPORT"
-#~ msgstr "SOBRE O SMS BIZ"
-
-#~ msgid "Scroll to Learn more"
-#~ msgstr "Leia mais abaixo"
-
-#~ msgid "The mission of U-Report"
-#~ msgstr "A missão da malta SMS BIZ"
-
-#~ msgid "Why Join U-Report?"
-#~ msgstr "Porquê fazer parte do SMS BIZ?"
-
-#~ msgid "Speak out on what's happening in your community"
-#~ msgstr "Porque podes partilhar as tuas duvidas, receber conselhos e manter-te informado sobre a tua Saúde Sexual e Reprodutiva; "
-
-#, fuzzy
-#~| msgid "Use Ureport results and information to update and increase citizen's awareness"
-#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
-#~ msgstr "Porque torna possível a redução de numero de jovens e adolescentes infectados pelo HIV."
-
-#~ msgid "Participate in nationwide campaigns to help improve your country"
-#~ msgstr "Porque é seguro e confidencial."
-
-#~ msgid "Share what's happening around %(country)s with other U-Reporters"
-#~ msgstr ""
-#~ "Porque fornece informação credível acerca da saúde sexual e reprodutiva, de forma aberta e sem nenhum tipo de discriminação ou tabus.\n"
-#~ "%(country)s"
-
-#~ msgid "CLICK HERE TO JOIN"
-#~ msgstr "PRESSIONE AQUI PARA SABER COMO TE REGISTAR"
-
-#~ msgid "U-REPORT VIDEOS"
-#~ msgstr "AUDIO-VÍDEO DO SMS BIZ"
-
-#~ msgid "No videos yet."
-#~ msgstr "Ainda não há vídeos."
-
-#~ msgid "WATCH IT ON YOUTUBE"
-#~ msgstr "ASSISTA NO YOUTUBE"
-
-#~ msgid "Follow"
-#~ msgstr "Seguir"
-
-#~ msgid "CURRENT POLL"
-#~ msgstr "INQUÉRITO ACTUAL"
-
-#~ msgid "View Full Results"
-#~ msgstr "Veja os Resultados Completos"
-
-#~ msgid "All U-Report members"
-#~ msgstr "Todos os membros do SMS BIZ"
-
-#~ msgid "Responded out of"
-#~ msgstr "Responderam dos  "
-
-#~ msgid "RESPONDER'S RATE BY LOCATION"
-#~ msgstr "TAXA DE RESPOSTA POR PROVÍNCIA"
-
-#~ msgid "Most responded"
-#~ msgstr "A maioria respondeu"
-
-#~ msgid ""
-#~ "\n"
-#~ "                                  %(responded)s of %(total)s\n"
-#~ "                                  "
-#~ msgstr ""
-#~ "\n"
-#~ "%(responded)s dos %(total)s"
-
-#~ msgid "TRENDING WORDS"
-#~ msgstr "PALAVRAS DOMINANTES"
-
-#~ msgid "FEATURED RESPONSES"
-#~ msgstr "RESPOSTAS SELECIONADAS"
-
-#~ msgid "TOTAL # OF U-REPORTERS"
-#~ msgstr "NÚMERO TOTAL DE UTILIZADORES DO SMS BIZ"
-
-#~ msgid "4 MOST ACTIVE REGIONS"
-#~ msgstr "4 PROVÍNCIAS COM MAIOR ADESÃO"
-
-#~ msgid "RATE BY GENDER"
-#~ msgstr "TAXA POR SEXO"
-
-#~ msgid "RATE BY AGE"
-#~ msgstr "TAXA POR IDADE"
-
-#~ msgid "WHAT U-REPORTERS ARE SAYING"
-#~ msgstr "AS HISTÓRIAS DA MALTA SMS BIZ"
-
-#~ msgid "FEATURED VIDEO"
-#~ msgstr "VÍDEOS SELECIONADOS"
-
-#~ msgid "Watch more videos"
-#~ msgstr "Veja mais vídeos"
-
-#~ msgid "FEATURED REGION"
-#~ msgstr "REGIÃO SELECIONADA"
-
-#~ msgid "Check more stories in U-Report app"
-#~ msgstr "Veja mais histórias no aplicativo do U-Report"
-
-#~ msgid "View more stories on Facebook"
-#~ msgstr "Veja mais histórias no Facebook"
-
-#~ msgid "View more on Instagram"
-#~ msgstr "Veja mais no Instagram"
-
-#~ msgid "Read more tweets on Twitter"
-#~ msgstr "Leia mais tweets no Twitter"
-
-#~ msgid "NEWS FEED"
-#~ msgstr "NOTÍCIAS"
-
-#~ msgid "Read full story"
-#~ msgstr "Leia a história completa."
-
-#, fuzzy
-#~| msgid "Read This Story"
-#~ msgid "Read this story"
-#~ msgstr "Leia esta história."
-
-#~ msgid "JOBS"
-#~ msgstr "VAGAS DE EMPREGO"
-
-#~ msgid "Scroll to see job details"
-#~ msgstr "Veja abaixo as vagas de emprego."
-
-#~ msgid "Tweet to"
-#~ msgstr "Faça um tweet para"
-
-#~ msgid "Read more"
-#~ msgstr "Leia mais."
-
-#~ msgid "JOIN U-REPORT"
-#~ msgstr "FAÇA PARTE DO SMS BIZ"
-
-#~ msgid "HOW TO JOIN"
-#~ msgstr "COMO PARTICIPAR"
-
-#~ msgid "U-REPORT ON SOCIAL MEDIA"
-#~ msgstr "SMS BIZ NAS REDES SOCIAIS"
-
-#~ msgid "Compose new Tweet"
-#~ msgstr "Escreva um novo tweet"
-
-#~ msgid "CURRENT POLL IN"
-#~ msgstr "INQUÉRITO DESTA SEMANA"
-
-#~ msgid "response rate"
-#~ msgstr "taxa de resposta"
-
-#~ msgid "responded out of"
-#~ msgstr "responderam dos"
-
-#~ msgid "polled"
-#~ msgstr "alcançados"
-
-#~ msgid "POLL RESULTS"
-#~ msgstr "RESULTADOS DOS INQUÉRITOS"
-
-#~ msgid "KEYWORDS"
-#~ msgstr "PALAVRAS-CHAVES"
-
-#~ msgid "STATISTICS"
-#~ msgstr "ESTATÍSTICAS"
-
-#~ msgid "LOCATIONS"
-#~ msgstr "LOCALIZAÇÕES"
-
-#~ msgid "FEATURED ANSWERS"
-#~ msgstr "RESPOSTAS SELECIONADAS"
-
-#~ msgid "No featured answers."
-#~ msgstr "Não há respostas selecionadas."
-
-#~ msgid "U-Reporter in"
-#~ msgstr "SMS BIZ em"
-
-#~ msgid "RELATED STORIES"
-#~ msgstr "HISTÓRIAS RELACIONADAS"
-
-#~ msgid "No related stories."
-#~ msgstr "Nenhuma história relacionada."
-
-#~ msgid "FEATURED IMAGES"
-#~ msgstr "IMAGENS SELECIONADAS"
-
-#~ msgid "No featured images yet."
-#~ msgstr "Ainda não há imagens selecionadas."
-
-#~ msgid "BY"
-#~ msgstr "POR"
-
-#~ msgid "LATEST STORIES"
-#~ msgstr "ÚLTIMAS HISTÓRIAS"
-
-#~ msgid "FILTERED BY"
-#~ msgstr "FILTRADO POR"
-
-#~ msgid "Scroll to read more"
-#~ msgstr "Saiba mais abaixo"
-
-#~ msgid "STORY CONTINUES"
-#~ msgstr "A HISTÓRIA CONTINUA"
-
-#~ msgid "AUDIO"
-#~ msgstr "AÚDIO"
-
-#~ msgid "RELATED POLLS"
-#~ msgstr "INQUÉRITOS RELACIONADOS"
-
-#~ msgid "No related polls."
-#~ msgstr "Não há inquéritos relacionados."
-
-#~ msgid "No featured images."
-#~ msgstr "Não há imagens selecionadas."
-
-#~ msgid "WHO WE ARE"
-#~ msgstr "QUEM SOMOS"
-
-#~ msgid "U-REPORTER STATISTICS"
-#~ msgstr "ESTATÍSTICAS DO SMS BIZ"
-
-#~ msgid "WHERE ARE U-REPORTERS FROM?"
-#~ msgstr "DE ONDE VÊEM A MALTA SMS BIZ"
-
-#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-#~ msgstr "TAXA DE REGISTO: NOS ÚLTIMOS 6 MESES"
-
-#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-#~ msgstr "OCUPAÇÃO: OS TOP 9 MAIS MENCIONADOS"
-
-#~ msgid "Registered"
-#~ msgstr "Registado"
-
-#~ msgid "Week of"
-#~ msgstr "Semana de"
-
-#~ msgid "Featured Poll Responses"
-#~ msgstr "Respostas do Inquérito selecionado "
-
-#~ msgid "Response %d Reporter"
-#~ msgstr "Resposta %d do brada SMS BIZ"
-
-#~ msgid "The name or alias of the responder."
-#~ msgstr "O nome ou alcunha da pessoa que responde."
-
-#~ msgid "Response %d Location"
-#~ msgstr "Resposta %d Localização"
-
-#~ msgid "The location of the responder."
-#~ msgstr "A localização da pessoa que responde."
-
-#~ msgid "Response %d Message"
-#~ msgstr "Resposta %d Mensagem"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "O texto da resposta selecionada."
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                    %(responded)s responded out of %(polled)s polled\n"
-#~| "                  "
-#~ msgid ""
-#~ "\n"
-#~ "                  %(responded)s responded out of %(polled)s polled\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "%(responded)s responderam dos %(polled)s alcançados"
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "TOTAL U-REPORTERS IN"
-#~ msgstr "SMS BIZ EM"
-
-#, fuzzy
-#~| msgid "Join & Engage"
-#~ msgid "Engage"
-#~ msgstr "Inscreva & Participe"
-
-#, fuzzy
-#~| msgid "FILTERED BY"
-#~ msgid "FILTER BY:"
-#~ msgstr "FILTRADO POR"
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr "O token de API para a conta RapidPro que este painel está ligado a"
-
-#~ msgid "Not Set"
-#~ msgstr "Não configurado"
-
-#~ msgid "National"
-#~ msgstr "Nacional"
-
+msgid "West and Central Africa"
+msgstr ""

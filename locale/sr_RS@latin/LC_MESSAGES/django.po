@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 13:34+0000\n"
+"POT-Creation-Date: 2024-01-24 10:03+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1121,6 +1121,11 @@ msgstr "Preuzmi i Podeli"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Želiš podeliti rezultate sa drugima? Preuzmi sliku da bi je lakše objavio/la na društvenim mrežama ili je možeš koristiti za kreiranje prezentacije."
 
+#, fuzzy
+#| msgid "Create"
+msgid "Co-Create"
+msgstr "Kreiraj"
+
 msgid "SELECT LANGUAGE"
 msgstr "ODABERI JEZIK"
 
@@ -1878,6 +1883,11 @@ msgstr "Da li ova postavka uključuje globalne podatke, npr. mapu sveta umesto m
 msgid "Whether to activate an extra gender."
 msgstr "Da li aktivirati dodatni pol."
 
+#, fuzzy
+#| msgid "Whether to show the UNICEF logo in the footer."
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr "Da li da se u footer-u prikaže logo UNICEF-a."
+
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Da li da sakrijete grafikone razlaganja uključenosti."
 
@@ -1943,3 +1953,32 @@ msgstr "Da li je ovaj red stvoren zbijanjem"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#, fuzzy
+#| msgid "Location"
+msgid "All locations"
+msgstr "Lokacija"
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""

@@ -1,12 +1,12 @@
 {% load humanize ureport i18n %}
+
 <div class="age-graph">
     {% for age_category in age_stats|slice:"0:7" %}
         <div class="age-category">
             <div class="age-container">
                 <div class="age-percent">{{ age_category.percentage }}%</div>
                 <div class="age-label-below">{{ age_category.label }}</div>
-                <div style="width:{{ age_category.percentage }}%"
-                     class="age-bar primary-bg-color">&nbsp;</div>
+                <div style="width:{{ age_category.percentage }}%" class="age-bar primary-bg-color">&nbsp;</div>
                 <div class="age-label-above">{{ age_category.label }}</div>
             </div>
         </div>

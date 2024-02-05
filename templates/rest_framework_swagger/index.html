@@ -1,9 +1,12 @@
 {% load i18n %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
         <title>UReport API</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700"
               rel="stylesheet">
@@ -36,8 +39,8 @@
         <div id="rest-swagger-ui"></div>
         {% csrf_token %}
         <script>
-    window.drsSettings = {{ drs_settings|safe }};
-    window.drsSpec = {{ spec|safe }};
+          window.drsSettings = {{ drs_settings|safe }};
+          window.drsSpec = {{ spec|safe }};
         </script>
         <script src="{% static 'rest_framework_swagger/bundles/vendors.bundle.js' %}"></script>
         <script src="{% static 'rest_framework_swagger/bundles/app.bundle.js' %}"></script>
