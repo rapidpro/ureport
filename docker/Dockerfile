@@ -13,7 +13,7 @@ FROM python:3.10.6-slim-buster AS base
 ARG APP_UID=1000
 ARG APP_GID=1000
 
-ARG NODE_VERSION="10"
+ARG NODE_VERSION="18"
 
 ARG BUILD_DEPS="\
   python3-dev \
