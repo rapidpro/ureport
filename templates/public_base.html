@@ -644,11 +644,11 @@
                         <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                     </div>
                 </a>
-                {% if not org|config:"is_global" %}
                 <div class="flex-1 font-bold text-2xl mt-16" style="font-family:'Noto Sans', sans-serif;">
+                    {% if org.subdomain != "" %}
                     <a href="{% url 'public.index' %}" class="flex-initial text-center">{{ org.name }}</a>
+                    {% endif %}
                 </div>
-                {% endif %}
                 <div class="md:flex flex-1 mt-8">
                     <div class="flex-1 text-center font-bold text-xl flex-center-y">
                         <div>
