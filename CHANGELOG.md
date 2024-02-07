@@ -1,3 +1,8 @@
+v1.2.95 (2024-02-07)
+-------------------------
+ * Merge pull request #1186 from rapidpro/links-updates
+ * Update VOY links
+
 v1.2.94 (2024-02-05)
 -------------------------
  * Merge pull request #1185 from rapidpro/fix-org-name-spacing
