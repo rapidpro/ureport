@@ -333,10 +333,10 @@
         <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
         {% if org|config:"has_new_brand" %}
             {% if org|config:"is_global" and org.subdomain == "" %}
-                <a href="https://www.voicesofyouth.org/" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
+                <a href="https://www.voicesofyouth.org/voices-youth-co-creation-opportunities-young-people" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
             {% endif %}
         {% endif %}
-        <a href="{% url 'public.about' %}" class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
+        <a href="{% if org|config:"is_global" and org.subdomain == "" %}https://www.voicesofyouth.org/aboutureport{% else %}{% url 'public.about' %}{% endif %}" class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
         <a href="{% url 'public.ureporters' %}" class="hover:text-gray-600 block mt-4">{% trans "Engagement" %}</a>
         {% if show_bots_link %}
             <a href="{% url 'public.bots' %}" class="hover:text-gray-600 block mt-4">{% trans "Bots" %}</a>
@@ -560,7 +560,7 @@
             </div>
             <div class="md:justify-end li flex-grow flex">
                 <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
-                <a href="{% url 'public.about' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "About" %}</a>
+                <a href="{% if org|config:"is_global" and org.subdomain == "" %}https://www.voicesofyouth.org/aboutureport{% else %}{% url 'public.about' %}{% endif %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "About" %}</a>
                 {% if show_bots_link %}
                     <a href="{% url 'public.bots' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Bots" %}</a>
                 {% endif %}
@@ -665,7 +665,7 @@
                     {% if org|config:"is_global" and org.subdomain == "" %}
                         <div class="flex-1 text-center font-bold text-xl flex-center-y">
                             <div>
-                                <a href="https://www.voicesofyouth.org/"
+                                <a href="https://www.voicesofyouth.org/voices-youth-co-creation-opportunities-young-people"
                                    class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Co-Create" %}</a>
                             </div>
                         </div>
