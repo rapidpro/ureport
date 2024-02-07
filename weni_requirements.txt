@@ -4,3 +4,4 @@ typed-ast==1.4.3
 toml==0.10.1
 whitenoise==5.0.1
 elastic-apm==6.1.1
+urllib3==2.1.0
