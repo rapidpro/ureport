@@ -10,7 +10,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
             {% trans "U-Report" %}
+            {% if org.subdomain %}
             {{ org.name }}
+            {% endif %}
         </title>
         <meta name="description" content="">
         <meta name="keywords" content="">
