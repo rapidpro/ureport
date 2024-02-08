@@ -422,7 +422,7 @@
                 <div class="p-4 ">
                     <a href="https://ureport.in/" class="hover:bg-gray-900 inline-block border-white p-2">
                         {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
+                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
                         {% else %}
                             <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                         {% endif %}
@@ -641,7 +641,7 @@
             <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:500px">
-                        <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                     </div>
                 </a>
                 <div class="flex-1 font-bold text-2xl mt-16" style="font-family:'Noto Sans', sans-serif;">
@@ -703,7 +703,7 @@
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:180px">
                         {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
                         {% else %}
                             {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo" alt="">
@@ -803,7 +803,7 @@
         <a href="{% url 'public.index' %}" class="md:block flex-1 text-center mb-2 hidden">
             {% if org|config:"has_new_brand" %}
                 <div style="max-width:220px">
-                    <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
                 </div>
             {% else %}
                 <div style="max-width:360px">
@@ -816,9 +816,9 @@
         <div class="md:flex justify-center hidden">
             <div style="max-width:150px" class="md:block block">
                 {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
-                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="">
+                    <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="">
                 {% else %}
-                    <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
+                    <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
                          class="md:-ml-0 -ml-2"
                          alt="">
                 {% endif %}
@@ -827,7 +827,7 @@
         <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
             <div style="width:180px">
                 {% if org|config:"has_new_brand" %}
-                    <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
                 {% else %}
                     {% thumbnail org.get_logo "x180" format="PNG" as im %}
                         <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
@@ -837,11 +837,11 @@
             <div class="md:hidden flex flex-1 justify-end float-right">
                 <div style="width:120px" class="md:block block">
                     {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
-                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_EN.png"
+                        <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png"
                              class="md:-ml-0 -ml-2"
                              alt="UNICEF logo">
                     {% else %}
-                        <img src="{{ STATIC_URL }}/img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
+                        <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
                              class="md:-ml-0 -ml-2"
                              alt="UNICEF logo">
                     {% endif %}
