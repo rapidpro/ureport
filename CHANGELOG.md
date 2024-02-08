@@ -1,3 +1,7 @@
+v1.2.96 (2024-02-08)
+-------------------------
+ * Fix tab title
+
 v1.2.95 (2024-02-07)
 -------------------------
  * Merge pull request #1186 from rapidpro/links-updates
