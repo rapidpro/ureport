@@ -13,9 +13,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 THUMBNAIL_DEBUG = DEBUG
 TEMPLATE_DEBUG = DEBUG
 
-STATIC_URL = "/sitestatic"
-COMPRESS_URL = "/sitestatic"
-ADMIN_MEDIA_PREFIX = "/sitestatic/admin"
 
 EMPTY_SUBDOMAIN_HOST = config('EMPTY_SUBDOMAIN_HOST', 'https://ureport.in')
 HOSTNAME = config('APP_HOSTNAME', 'ureport.in')
