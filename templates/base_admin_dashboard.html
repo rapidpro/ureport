@@ -89,7 +89,11 @@
                             <div style="justify-content: start;" class="level-item square-logo">
                                 <div style="width:360px">
                                     {% if org|config:"has_new_brand" %}
-                                        <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                        {% if org.language != "ar" and org.language != "ru" %}
+                                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                                        {% else %}
+                                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                                        {% endif %}
                                     {% else %}
                                         {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                             <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
@@ -340,7 +344,11 @@
                     <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
                         <div style="width:180px">
                             {% if org|config:"has_new_brand" %}
-                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                                {% if org.language != "ar" and org.language != "ru" %}
+                                    <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                                {% else %}
+                                    <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                                {% endif %}
                             {% else %}
                                 {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                     <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">

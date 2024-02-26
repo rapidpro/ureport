@@ -178,7 +178,11 @@
                             <div class="inline-block mx-auto my-auto text-center">
                                 <div class="w-64">
                                     {% if org|config:"has_new_brand" %}
-                                        <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
+                                        {% if org.language != "ar" and org.language != "ru" %}
+                                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert_EN.png" alt="{{ org.name }}" class="logo">
+                                        {% else %}
+                                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                                        {% endif %}
                                     {% else %}
                                         <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                                     {% endif %}
