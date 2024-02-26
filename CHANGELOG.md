@@ -1,3 +1,7 @@
+v1.2.98 (2024-02-26)
+-------------------------
+ * Merge pull request #1187 from rapidpro/logo-lang
+
 v1.2.96 (2024-02-08)
 -------------------------
  * Fix tab title
