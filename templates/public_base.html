@@ -424,7 +424,11 @@
                 <div class="p-4 ">
                     <a href="https://ureport.in/" class="hover:bg-gray-900 inline-block border-white p-2">
                         {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
+                            {% if org.language != "ar" and org.language != "ru" %}
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert_EN.png" alt="{{ org.name }}" class="logo">
+                            {% else %}
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_invert_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                            {% endif %}
                         {% else %}
                             <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                         {% endif %}
@@ -643,7 +647,11 @@
             <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:500px">
-                        <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                        {% if org.language != "ar" and org.language != "ru" %}
+                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                        {% else %}
+                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                        {% endif %}
                     </div>
                 </a>
                 <div class="flex-1 font-bold text-2xl mt-16" style="font-family:'Noto Sans', sans-serif;">
@@ -705,7 +713,11 @@
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:180px">
                         {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                            {% if org.language != "ar" and org.language != "ru" %}
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                            {% else %}
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                            {% endif %}
                         {% else %}
                             {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo" alt="">
