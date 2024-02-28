@@ -1,3 +1,10 @@
+v1.2.99 (2024-02-28)
+-------------------------
+ * Merge pull request #1189 from rapidpro/drc-logo
+ * Quick workaround custom DRC logo
+ * Merge pull request #1188 from rapidpro/drc-logo
+ * Quick workaround custom DRC logo
+
 v1.2.98 (2024-02-26)
 -------------------------
  * Merge pull request #1187 from rapidpro/logo-lang
