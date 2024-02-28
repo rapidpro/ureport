@@ -648,7 +648,7 @@
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:500px">
                         {% if org.subdomain == "drc" %}
-                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_DRC.jpg" alt="{{ org.name }}" class="logo">
+                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
                         {% elif org.language != "ar" and org.language != "ru" %}
                             <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
                         {% else %}
@@ -716,7 +716,7 @@
                     <div style="width:180px">
                         {% if org|config:"has_new_brand" %}
                             {% if org.subdomain == "drc" %}
-                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_DRC.jpg" alt="{{ org.name }}" class="logo">
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
                             {% elif org.language != "ar" and org.language != "ru" %}
                                 <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
                             {% else %}
