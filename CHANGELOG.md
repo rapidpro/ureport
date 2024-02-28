@@ -1,3 +1,7 @@
+v1.2.100 (2024-02-28)
+-------------------------
+ * Merge pull request #1190 from rapidpro/fix-drc-logo
+
 v1.2.99 (2024-02-28)
 -------------------------
  * Merge pull request #1189 from rapidpro/drc-logo
