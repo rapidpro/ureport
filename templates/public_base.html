@@ -647,7 +647,9 @@
             <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:500px">
-                        {% if org.language != "ar" and org.language != "ru" %}
+                        {% if org.subdomain == "drc" %}
+                            <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_DRC.jpg" alt="{{ org.name }}" class="logo">
+                        {% elif org.language != "ar" and org.language != "ru" %}
                             <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
                         {% else %}
                             <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
@@ -713,7 +715,9 @@
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:180px">
                         {% if org|config:"has_new_brand" %}
-                            {% if org.language != "ar" and org.language != "ru" %}
+                            {% if org.subdomain == "drc" %}
+                                <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_DRC.jpg" alt="{{ org.name }}" class="logo">
+                            {% elif org.language != "ar" and org.language != "ru" %}
                                 <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
                             {% else %}
                                 <img src="{{ STATIC_URL }}/img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
