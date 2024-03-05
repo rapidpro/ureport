@@ -1,3 +1,12 @@
+v1.2.101 (2024-03-05)
+-------------------------
+ * Merge pull request #1193 from rapidpro/polls-cyan
+ * Use cyan, black and white colors for new brand on polls page
+ * Merge pull request #1191 from rapidpro/dependabot/pip/jinja2-3.1.3
+ * Merge pull request #1192 from rapidpro/dependabot/pip/django-4.2.10
+ * Bump django from 4.2.7 to 4.2.10
+ * Bump jinja2 from 3.1.2 to 3.1.3
+
 v1.2.100 (2024-02-28)
 -------------------------
  * Merge pull request #1190 from rapidpro/fix-drc-logo
