@@ -1,3 +1,36 @@
+v1.2.101 (2024-03-05)
+-------------------------
+ * Merge pull request #1193 from rapidpro/polls-cyan
+ * Use cyan, black and white colors for new brand on polls page
+ * Merge pull request #1191 from rapidpro/dependabot/pip/jinja2-3.1.3
+ * Merge pull request #1192 from rapidpro/dependabot/pip/django-4.2.10
+ * Bump django from 4.2.7 to 4.2.10
+ * Bump jinja2 from 3.1.2 to 3.1.3
+
+v1.2.100 (2024-02-28)
+-------------------------
+ * Merge pull request #1190 from rapidpro/fix-drc-logo
+
+v1.2.99 (2024-02-28)
+-------------------------
+ * Merge pull request #1189 from rapidpro/drc-logo
+ * Quick workaround custom DRC logo
+ * Merge pull request #1188 from rapidpro/drc-logo
+ * Quick workaround custom DRC logo
+
+v1.2.98 (2024-02-26)
+-------------------------
+ * Merge pull request #1187 from rapidpro/logo-lang
+
+v1.2.96 (2024-02-08)
+-------------------------
+ * Fix tab title
+
+v1.2.95 (2024-02-07)
+-------------------------
+ * Merge pull request #1186 from rapidpro/links-updates
+ * Update VOY links
+
 v1.2.94 (2024-02-05)
 -------------------------
  * Merge pull request #1185 from rapidpro/fix-org-name-spacing
