@@ -188,7 +188,7 @@
                                 {{ age_stats|json_script:"age_stats" }}
                                 <div data-aos="fade"
                                      data-graph-type="age-chart"
-                                     data-bar-color="{{ org|config:'dark1_color' }}"
+                                     data-bar-color="{% if org|config:'has_new_brand' %}#00aeef {% else %}{{ org|config:'dark1_color' }}{% endif %}"
                                      data-label-color="black"
                                      data-stats="age_stats"
                                      data-label-weight="400"
@@ -238,10 +238,10 @@
                  data-aos="fade"
                  data-aos-anchor-placement="center-bottom"
                  style="min-height:30rem"
-                 data-bar-color="{% cycle org|config:'dark1_color'|default:'#439932'  org|config:'light1_color'|default:'#FFD100' org|config:'dark2_color'|default:'#1751af' org|config:'dark3_color'|default:'#5eb3e0' as bar_color silent %}{% if question.get_bg_color_choice %} {{ question.get_bg_color_choice }} {% else %}{{ bar_color }}{% endif %}"
+                 data-bar-color="{% cycle org|config:'dark1_color'|default:'#439932'  org|config:'light1_color'|default:'#FFD100' org|config:'dark2_color'|default:'#1751af' org|config:'dark3_color'|default:'#5eb3e0' as bar_color silent %}{% if org|config:"has_new_brand" %}#00aeef {% else %}{% if question.get_bg_color_choice %} {{ question.get_bg_color_choice }} {% else %}{{ bar_color }}{% endif %}{% endif %}"
                  class="md:flex {% cycle '' 'md:flex-row-reverse' %} block"
                  id="question-block-{{ question.id }}">
-                <div class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg silent %}{% if question.get_color_choice_css %} {{ question.get_color_choice_css }} {% else %}{{ bg }}{% endif %} flex-1">
+                <div class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg silent %}{% if org|config:"has_new_brand" %} bg-dark1-v2024 text-white {% else %} {% if question.get_color_choice_css %} {{ question.get_color_choice_css }} {% else %}{{ bg }}{% endif %}{% endif %} flex-1">
                     <div class="md:py-24 p-home h-full flex-center-y">
                         <div class="{% cycle '' 'md:flex-row-reverse' as reverse %} flex">
                             <div data-html2canvas-ignore

@@ -10,7 +10,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
             {% trans "U-Report" %}
+            {% if org.subdomain %}
             {{ org.name }}
+            {% endif %}
         </title>
         <meta name="description" content="">
         <meta name="keywords" content="">
@@ -333,10 +335,10 @@
         <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
         {% if org|config:"has_new_brand" %}
             {% if org|config:"is_global" and org.subdomain == "" %}
-                <a href="https://www.voicesofyouth.org/" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
+                <a href="https://www.voicesofyouth.org/voices-youth-co-creation-opportunities-young-people" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
             {% endif %}
         {% endif %}
-        <a href="{% url 'public.about' %}" class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
+        <a href="{% if org|config:"is_global" and org.subdomain == "" %}https://www.voicesofyouth.org/aboutureport{% else %}{% url 'public.about' %}{% endif %}" class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
         <a href="{% url 'public.ureporters' %}" class="hover:text-gray-600 block mt-4">{% trans "Engagement" %}</a>
         {% if show_bots_link %}
             <a href="{% url 'public.bots' %}" class="hover:text-gray-600 block mt-4">{% trans "Bots" %}</a>
@@ -422,7 +424,11 @@
                 <div class="p-4 ">
                     <a href="https://ureport.in/" class="hover:bg-gray-900 inline-block border-white p-2">
                         {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert.png" alt="{{ org.name }}" class="logo">
+                            {% if org.language != "ar" and org.language != "ru" %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert_EN.png" alt="{{ org.name }}" class="logo">
+                            {% else %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                            {% endif %}
                         {% else %}
                             <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
                         {% endif %}
@@ -560,7 +566,7 @@
             </div>
             <div class="md:justify-end li flex-grow flex">
                 <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
-                <a href="{% url 'public.about' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "About" %}</a>
+                <a href="{% if org|config:"is_global" and org.subdomain == "" %}https://www.voicesofyouth.org/aboutureport{% else %}{% url 'public.about' %}{% endif %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "About" %}</a>
                 {% if show_bots_link %}
                     <a href="{% url 'public.bots' %}" class="hover:text-gray-750 flex-initial ml-4 py-menu">{% trans "Bots" %}</a>
                 {% endif %}
@@ -641,7 +647,13 @@
             <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:500px">
-                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                        {% if org.subdomain == "drc" %}
+                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                        {% elif org.language != "ar" and org.language != "ru" %}
+                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                        {% else %}
+                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                        {% endif %}
                     </div>
                 </a>
                 <div class="flex-1 font-bold text-2xl mt-16" style="font-family:'Noto Sans', sans-serif;">
@@ -665,7 +677,7 @@
                     {% if org|config:"is_global" and org.subdomain == "" %}
                         <div class="flex-1 text-center font-bold text-xl flex-center-y">
                             <div>
-                                <a href="https://www.voicesofyouth.org/"
+                                <a href="https://www.voicesofyouth.org/voices-youth-co-creation-opportunities-young-people"
                                    class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Co-Create" %}</a>
                             </div>
                         </div>
@@ -703,7 +715,13 @@
                 <a href="{% url 'public.index' %}" class="flex-initial text-center">
                     <div style="width:180px">
                         {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo.png" alt="{{ org.name }}" class="logo">
+                            {% if org.subdomain == "drc" %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                            {% elif org.language != "ar" and org.language != "ru" %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                            {% else %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                            {% endif %}
                         {% else %}
                             {% thumbnail org.get_logo "x180" format="PNG" as im %}
                                 <img src="{{ im.url }}" alt="{{ org.name }}" class="logo" alt="">
@@ -815,7 +833,7 @@
         </a>
         <div class="md:flex justify-center hidden">
             <div style="max-width:150px" class="md:block block">
-                {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
+                {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" %}
                     <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="">
                 {% else %}
                     <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
@@ -836,7 +854,7 @@
             </div>
             <div class="md:hidden flex flex-1 justify-end float-right">
                 <div style="width:120px" class="md:block block">
-                    {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" %}
+                    {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" %}
                         <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png"
                              class="md:-ml-0 -ml-2"
                              alt="UNICEF logo">
