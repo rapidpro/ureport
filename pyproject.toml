@@ -40,11 +40,11 @@ boto3 = "^1.27.1"
 
 
 [tool.poetry.dev-dependencies]
-black = "^23.1"
-isort = "^5.11.0"
+black = "^24.3.0"
+isort = "^5.13.2"
 coverage = {extras = ["toml"], version = "^7.2.2"}
-ruff = "^0.0.253"
-djlint = "^1.32.1"
+ruff = "^0.3.3"
+djlint = "^1.34.1"
 
 [tool.black]
 line-length = 119
