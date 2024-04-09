@@ -75,9 +75,8 @@
         window.fbAsyncInit = function() {
           FB.init({
             appId      : '{{ org|config:"facebook_app_id" }}',
-            autoLogAppEvents: true,
             xfbml      : true,
-            version    : 'v3.2'
+            version    : 'v19.0'
           });
         };
             </script>
@@ -91,7 +90,7 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v3.2{% endif %}";
+      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&version=v19.0{% endif %}";
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
         </script>
