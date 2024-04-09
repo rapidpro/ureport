@@ -1,3 +1,14 @@
+v1.2.102 (2024-04-09)
+-------------------------
+ * Update FB JS SDK versions
+ * Merge pull request #1171 from rapidpro/prep-django5
+ * Update DRF to 3.15.0
+ * Use datetime timezone aliased as tzone
+ * Prep and start testing on django 5.0
+ * Merge pull request #1196 from rapidpro/update-deps
+ * Update django
+ * Update to latest black, ruff, isort and djlint
+
 v1.2.101 (2024-03-05)
 -------------------------
  * Merge pull request #1193 from rapidpro/polls-cyan
