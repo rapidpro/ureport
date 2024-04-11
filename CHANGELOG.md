@@ -1,3 +1,7 @@
+v1.2.108 (2024-04-11)
+-------------------------
+ * Merge pull request #1200 from rapidpro/message-storage-sessions
+
 v1.2.106 (2024-04-11)
 -------------------------
  * Merge pull request #1199 from rapidpro/update-js-libraries
