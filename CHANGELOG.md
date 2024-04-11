@@ -1,3 +1,7 @@
+v1.2.104 (2024-04-11)
+-------------------------
+ * Merge pull request #1198 from rapidpro/error-page
+
 v1.2.102 (2024-04-09)
 -------------------------
  * Update FB JS SDK versions
