@@ -1,3 +1,7 @@
+v1.2.106 (2024-04-11)
+-------------------------
+ * Merge pull request #1199 from rapidpro/update-js-libraries
+
 v1.2.104 (2024-04-11)
 -------------------------
  * Merge pull request #1198 from rapidpro/error-page
