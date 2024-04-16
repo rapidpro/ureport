@@ -75,9 +75,8 @@
         window.fbAsyncInit = function() {
           FB.init({
             appId      : '{{ org|config:"facebook_app_id" }}',
-            autoLogAppEvents: true,
             xfbml      : true,
-            version    : 'v3.2'
+            version    : 'v19.0'
           });
         };
             </script>
@@ -91,7 +90,7 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v3.2{% endif %}";
+      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&version=v19.0{% endif %}";
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
         </script>
@@ -530,9 +529,9 @@
     <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
     <script>
     if (window.location.hostname == "localhost"){
-    document.write(unescape('%3Cscript src="{{ STATIC_URL }}js/libs/jquery-1.12.4.min.js"%3E%3C/script%3E'));
+    document.write(unescape('%3Cscript src="{{ STATIC_URL }}js/libs/jquery-3.7.1.min.js"%3E%3C/script%3E'));
     } else {
-    document.write(unescape('%3Cscript src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"%3E%3C/script%3E'));
+    document.write(unescape('%3Cscript src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"%3E%3C/script%3E'));
     }
 
     </script>

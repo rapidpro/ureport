@@ -3,8 +3,11 @@ on: [push, pull_request]
 jobs:
   test:
     name: Test
+    strategy:
+      matrix:
+        python-version: ["3.10.x", "3.11.x"]
+        django-version: ["4.2.x", "5.0.x"]
     env:
-      python-version: "3.10.x"
       redis-version: "6.2"
       pg-version: "15"
     runs-on: ubuntu-22.04
@@ -28,7 +31,7 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v1
       with:
-        python-version: ${{ env.python-version }}
+        python-version: ${{ matrix.python-version }}
 
     - name: Install Poetry
       uses: snok/install-poetry@v1
@@ -38,6 +41,7 @@ jobs:
     - name: Initialize environment
       run: |
         poetry install --no-root
+        poetry add django==${{ matrix.django-version }}
         sudo npm install -g coffee-script less
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
 

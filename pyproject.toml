@@ -1,15 +1,15 @@
 [tool.poetry]
 name = "ureport"
-version = "1.2.101"
+version = "1.2.110"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Django = "^4.2.10"
-smartmin = "^4.2.5"
-rapidpro-dash = "^1.14.3"
+Django = ">= 4.2.7, < 5.1"
+smartmin = "^5.0.0"
+rapidpro-dash = "^1.15.0"
 colorama = "^0.4.3"
 celery = "^5.1"
 django-compressor = "^4.0"
@@ -18,7 +18,7 @@ django-digest = "^1.13"
 django-rosetta = "^0.8.1"
 django-storages = "^1.13.2"
 django-rest-swagger = "^2.2.0"
-djangorestframework = "3.14.0"
+djangorestframework = "3.15.0"
 dj-database-url = "^0.5.0"
 Pillow = "^10.2.0"
 gunicorn = "^20.1.0"
@@ -40,11 +40,11 @@ boto3 = "^1.27.1"
 
 
 [tool.poetry.dev-dependencies]
-black = "^23.1"
-isort = "^5.11.0"
+black = "^24.3.0"
+isort = "^5.13.2"
 coverage = {extras = ["toml"], version = "^7.2.2"}
-ruff = "^0.0.253"
-djlint = "^1.32.1"
+ruff = "^0.3.3"
+djlint = "^1.34.1"
 
 [tool.black]
 line-length = 119
