@@ -1,3 +1,12 @@
+v1.2.111 (2024-04-16)
+-------------------------
+ * Merge pull request #1205 from rapidpro/update-depsss
+ * Run poetry lock
+ * Run poetry lock
+ * Test on Django 5.0.x only
+ * Merge pull request #1202 from Ilhasoft/fix/check-new-brand-in-rtl-orgs
+ * Check new brand in RTL organizations
+
 v1.2.110 (2024-04-16)
 -------------------------
  * Merge pull request #1201 from rapidpro/fix-drf-base-template
