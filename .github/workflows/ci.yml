@@ -6,7 +6,6 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10.x", "3.11.x"]
-        django-version: ["4.2.x", "5.0.x"]
     env:
       redis-version: "6.2"
       pg-version: "15"
@@ -41,7 +40,6 @@ jobs:
     - name: Initialize environment
       run: |
         poetry install --no-root
-        poetry add django==${{ matrix.django-version }}
         sudo npm install -g coffee-script less
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
 
