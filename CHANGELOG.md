@@ -1,3 +1,7 @@
+v1.2.110 (2024-04-16)
+-------------------------
+ * Merge pull request #1201 from rapidpro/fix-drf-base-template
+
 v1.2.108 (2024-04-11)
 -------------------------
  * Merge pull request #1200 from rapidpro/message-storage-sessions
