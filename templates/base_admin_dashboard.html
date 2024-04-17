@@ -128,9 +128,19 @@
                         <div class="level-right">
                             <div style="justify-content: start; margin-right: 0rem" class="level-item square-logo">
                                 <div style="width:360px">
-                                    {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                        <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                                    {% endthumbnail %}
+                                    {% if org|config:"has_new_brand" %}
+                                        {% if org.subdomain == "drc" %}
+                                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                                        {% elif org.language != "ar" and org.language != "ru" %}
+                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                                        {% else %}
+                                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                                        {% endif %}
+                                    {% else %}
+                                        {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                                            <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
+                                        {% endthumbnail %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

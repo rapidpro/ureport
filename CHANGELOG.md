@@ -1,3 +1,30 @@
+v1.2.110 (2024-04-16)
+-------------------------
+ * Merge pull request #1201 from rapidpro/fix-drf-base-template
+
+v1.2.108 (2024-04-11)
+-------------------------
+ * Merge pull request #1200 from rapidpro/message-storage-sessions
+
+v1.2.106 (2024-04-11)
+-------------------------
+ * Merge pull request #1199 from rapidpro/update-js-libraries
+
+v1.2.104 (2024-04-11)
+-------------------------
+ * Merge pull request #1198 from rapidpro/error-page
+
+v1.2.102 (2024-04-09)
+-------------------------
+ * Update FB JS SDK versions
+ * Merge pull request #1171 from rapidpro/prep-django5
+ * Update DRF to 3.15.0
+ * Use datetime timezone aliased as tzone
+ * Prep and start testing on django 5.0
+ * Merge pull request #1196 from rapidpro/update-deps
+ * Update django
+ * Update to latest black, ruff, isort and djlint
+
 v1.2.101 (2024-03-05)
 -------------------------
  * Merge pull request #1193 from rapidpro/polls-cyan

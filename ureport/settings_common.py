@@ -175,7 +175,7 @@ MIDDLEWARE = (
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
 X_FRAME_OPTIONS = "DENY"
@@ -708,7 +708,7 @@ INSTALLED_APPS = (
     "django.contrib.humanize",
     # the django admin
     "django.contrib.admin",
-    "debug_toolbar",
+    # "debug_toolbar",
     # compress our CSS and js
     "compressor",
     # thumbnail
