@@ -912,7 +912,9 @@ class StoryList(BaseListAPIView):
 
     serializer_class = StoryReadSerializer
     model = Story
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_active=True).filter(Q(attachment="") | Q(attachment=None))
 
 class StoryDetails(RetrieveAPIView):
     """
