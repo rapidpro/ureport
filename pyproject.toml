@@ -51,8 +51,8 @@ line-length = 119
 
 [tool.ruff]
 line-length = 120
-select = ["E", "F", "W"]
-ignore = ["E501", "F405"]
+lint.select = ["E", "F", "W"]
+lint.ignore = ["E501", "F405"]
 fix = true
 exclude = ["./.tox/*", "./.venv/*", "./env/*", "*/migrations/*", "./build/*"]
 
