@@ -1,3 +1,15 @@
+v1.2.112 (2024-04-17)
+-------------------------
+ * Merge pull request #1209 from rapidpro/fix-stories-api
+ * Run code checks
+ * Fix stories API queryset
+ * Merge pull request #1208 from rapidpro/update-deps
+ * Update deps
+ * Merge pull request #1207 from rapidpro/update-deps
+ * Update deps
+ * Merge pull request #1206 from rapidpro/dependabot/pip/gunicorn-22.0.0
+ * Bump gunicorn from 20.1.0 to 22.0.0
+
 v1.2.111 (2024-04-16)
 -------------------------
  * Merge pull request #1205 from rapidpro/update-depsss
