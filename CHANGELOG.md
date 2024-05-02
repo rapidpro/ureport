@@ -1,3 +1,7 @@
+v1.2.114 (2024-05-02)
+-------------------------
+ * Merge pull request #1210 from rapidpro/fix-homepage-poll-bg-color-new-brand
+
 v1.2.112 (2024-04-17)
 -------------------------
  * Merge pull request #1209 from rapidpro/fix-stories-api
