@@ -59,6 +59,16 @@
                             <div class="block">Facebook</div>
                         </div>
                     {% endif %}
+                    {% if org|config:"instagram_username" %}
+                        <div class="md:mx-4 mb-4 text-center">
+                            <a href="https://ig.me/m/{{ org|config:'instagram_username' }}">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                            </a>
+                            <div class="block">Instagram</div>
+                        </div>
+                    {% endif %}
                     {% if org|config:"whatsapp_number" %}
                         <div class="md:mx-4 mb-4 text-center">
                             <a href="https://wa.me/{{ org|config:'whatsapp_number' }}">
