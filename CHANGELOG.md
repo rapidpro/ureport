@@ -1,3 +1,11 @@
+v1.2.115 (2024-05-23)
+-------------------------
+ * Merge pull request #1214 from rapidpro/support-IG-deeplinks
+ * Run poetry lock
+ * Add Instagram deeplink on join page
+ * Merge pull request #1212 from rapidpro/update-CI-actions
+ * Update Github actions to latest versions
+
 v1.2.114 (2024-05-02)
 -------------------------
  * Merge pull request #1210 from rapidpro/fix-homepage-poll-bg-color-new-brand
