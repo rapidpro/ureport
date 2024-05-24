@@ -563,6 +563,14 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="has_instagram_deeplink",
+        field=dict(
+            help_text=_("The Instagram username should be shown on the join page as deeplink for this organization"),
+            label="Instagram Deeplink",
+            required=False,
+        ),
+    ),
+    dict(
         name="instagram_lightwidget_id",
         field=dict(
             help_text=_("The Instagram widget id from lightwidget.com"),

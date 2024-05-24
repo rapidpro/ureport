@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-05-24 10:22+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2068,6 +2068,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "Id của Facebook Pixel cho tổ chức này (tùy chọn)"
 
 msgid "The Instagram username for this organization"
+msgstr "Tên đăng nhập Instagram của tổ chức này"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Tên đăng nhập Instagram của tổ chức này"
 
 msgid "The Instagram widget id from lightwidget.com"
