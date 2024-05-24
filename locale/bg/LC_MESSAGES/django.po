@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-05-24 10:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1954,6 +1954,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "Идентификация на Facebook Pixel за тази организация (по избор)"
 
 msgid "The Instagram username for this organization"
+msgstr "Потребителското име в Instagram за тази организация"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Потребителското име в Instagram за тази организация"
 
 msgid "The Instagram widget id from lightwidget.com"

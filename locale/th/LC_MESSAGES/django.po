@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-05-24 10:22+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -1863,6 +1863,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "ID ของ Facebook Pixel ขององค์กรนี้  (ไม่จำเป็นต้องใส่)"
 
 msgid "The Instagram username for this organization"
+msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
 
 msgid "The Instagram widget id from lightwidget.com"

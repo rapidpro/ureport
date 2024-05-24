@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-05-24 10:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -1947,6 +1947,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "ID Facebook Pixela vaše organizacije (izborno)"
 
 msgid "The Instagram username for this organization"
+msgstr "Instagram korisnično ime organizacije"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Instagram korisnično ime organizacije"
 
 msgid "The Instagram widget id from lightwidget.com"

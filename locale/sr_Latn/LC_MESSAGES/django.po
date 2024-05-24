@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-05-24 10:22+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -2093,6 +2093,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "ID Facebook Pixela vaše organizacije (opciono)"
 
 msgid "The Instagram username for this organization"
+msgstr "Instagram korisnicko ime organizacije"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Instagram korisnicko ime organizacije"
 
 msgid "The Instagram widget id from lightwidget.com"

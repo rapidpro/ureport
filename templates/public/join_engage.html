@@ -59,7 +59,7 @@
                             <div class="block">Facebook</div>
                         </div>
                     {% endif %}
-                    {% if org|config:"instagram_username" %}
+                    {% if org|config:"instagram_username" and org|config:"has_instagram_deeplink" %}
                         <div class="md:mx-4 mb-4 text-center">
                             <a href="https://ig.me/m/{{ org|config:'instagram_username' }}">
                                 <div class="bg-circle-lg bg-white text-black border border-black">
