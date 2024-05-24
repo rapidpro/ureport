@@ -1,3 +1,8 @@
+v1.2.116 (2024-05-24)
+-------------------------
+ * Merge pull request #1218 from rapidpro/support-IG-deeplinks
+ * Add config for Instagram deeplink checkbox
+
 v1.2.115 (2024-05-23)
 -------------------------
  * Merge pull request #1214 from rapidpro/support-IG-deeplinks
