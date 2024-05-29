@@ -1,3 +1,7 @@
+v1.2.117 (2024-05-29)
+-------------------------
+ * Fix extra spaces typo
+
 v1.2.116 (2024-05-24)
 -------------------------
  * Merge pull request #1218 from rapidpro/support-IG-deeplinks
