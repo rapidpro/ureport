@@ -1794,7 +1794,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_slovenija.png",
         countries_codes=["SVN"],
         count_link="http://slovenija.ureport.in/count/",
-        region="NATCOM  ",
+        region="NATCOM",
     ),
     dict(
         name="Solomon Islands",
