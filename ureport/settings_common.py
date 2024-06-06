@@ -105,7 +105,8 @@ LANGUAGES = (
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
     ("no", "Norwegian"),
-    ("ru", "Russia"),
+    ("ru", "Russian"),
+    ("kk", "Kazakh"),
     ("el", "Greek"),
     ("th", "Thai"),
 )
