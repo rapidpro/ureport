@@ -1,3 +1,8 @@
+v1.2.118 (2024-06-06)
+-------------------------
+ * Merge pull request #1219 from rapidpro/add-kazakh
+ * Add Kazakh
+
 v1.2.117 (2024-05-29)
 -------------------------
  * Fix extra spaces typo
