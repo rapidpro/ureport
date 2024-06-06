@@ -1,0 +1,1932 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-06 11:20+0000\n"
+"PO-Revision-Date: 2021-03-30 14:28+0000\n"
+"Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "The name of this category"
+msgstr ""
+
+msgid "An optional image that can describe this category"
+msgstr ""
+
+msgid "The organization this category applies to"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "The name to describe this image"
+msgstr ""
+
+msgid "The category this image represents"
+msgstr ""
+
+msgid "The image file to use"
+msgstr ""
+
+msgid "The human readable name for this content type"
+msgstr ""
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr ""
+
+msgid "Whether this content should include a title"
+msgstr ""
+
+msgid "Whether this content should include an image"
+msgstr ""
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr ""
+
+msgid "Whether this content should include a summary field"
+msgstr ""
+
+msgid "Whether this content should include a link"
+msgstr ""
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
+
+msgid "Whether this content has a color field"
+msgstr ""
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr ""
+
+msgid "Whether this content should allow tags"
+msgstr ""
+
+msgid "Content Type"
+msgstr ""
+
+msgid "The category, or type for this content block"
+msgstr ""
+
+msgid "The title for this block of content, optional"
+msgstr ""
+
+msgid "The summary for this item, should be short"
+msgstr ""
+
+msgid "The body of text for this content block, optional"
+msgstr ""
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr ""
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr ""
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr ""
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr ""
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr ""
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+
+msgid "The organization this content block belongs to"
+msgstr ""
+
+msgid "Gallery"
+msgstr ""
+
+msgid "Add Image"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Content Types"
+msgstr ""
+
+msgid "Link Slug"
+msgstr ""
+
+msgid "The slug or word to use in the link of the page"
+msgstr ""
+
+msgid "Content Blocks"
+msgstr ""
+
+#, python-format
+msgid "%s Blocks"
+msgstr ""
+
+#, python-format
+msgid "Edit %s"
+msgstr ""
+
+#, python-format
+msgid "Create %s"
+msgstr ""
+
+msgid "Create Content Block"
+msgstr ""
+
+msgid "Your first name"
+msgstr ""
+
+msgid "Your last name"
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "Your password, at least eight letters please"
+msgstr ""
+
+msgid "That email address is already used"
+msgstr ""
+
+msgid "Passwords must contain at least 8 letters."
+msgstr ""
+
+msgid "This domain is used for subdomains"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "The name of this organization"
+msgstr ""
+
+msgid "The logo that should be used for this organization"
+msgstr ""
+
+msgid "Administrators"
+msgstr ""
+
+msgid "The administrators in your organization"
+msgstr ""
+
+msgid "Viewers"
+msgstr ""
+
+msgid "The viewers in your organization"
+msgstr ""
+
+msgid "Editors"
+msgstr ""
+
+msgid "The editors in your organization"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "The main language used by this organization"
+msgstr ""
+
+msgid "Subdomain"
+msgstr ""
+
+msgid "This subdomain is not available"
+msgstr ""
+
+msgid "The subdomain for this organization"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "This domain is not available"
+msgstr ""
+
+msgid "The custom domain for this organization"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
+msgid "The timezone your organization is in."
+msgstr ""
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr ""
+
+msgid "Administrator"
+msgstr ""
+
+msgid "Editor"
+msgstr ""
+
+msgid "Viewer"
+msgstr ""
+
+msgid "Org"
+msgstr ""
+
+msgid "The organization to which the account is invited to view"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr ""
+
+msgid "Secret"
+msgstr ""
+
+msgid "a unique code associated with this invitation"
+msgstr ""
+
+msgid "User Role"
+msgstr ""
+
+#, python-format
+msgid "%s Invitation"
+msgstr ""
+
+msgid "Banner"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "The organization in which the image will be used"
+msgstr ""
+
+msgid "The name to describe this background"
+msgstr ""
+
+msgid "Background type"
+msgstr ""
+
+msgid "The image file"
+msgstr ""
+
+msgid "The API token for this backend"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Manage Backends"
+msgstr ""
+
+msgid "Manage Users"
+msgstr ""
+
+msgid "Accounts"
+msgstr ""
+
+msgid "Admins"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "You must have at least one administator"
+msgstr ""
+
+msgid "Select your Organization"
+msgstr ""
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr ""
+
+msgid "Your Organization"
+msgstr ""
+
+msgid "Invite people to your organization"
+msgstr ""
+
+msgid "User group"
+msgstr ""
+
+msgid "One of the emails you entered is invalid."
+msgstr ""
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr ""
+
+#, python-format
+msgid "Join %(name)s"
+msgstr ""
+
+msgid "Join"
+msgstr ""
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr ""
+
+msgid "Task"
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "Only PDF files are supported."
+msgstr ""
+
+msgid "The title for this story"
+msgstr ""
+
+msgid "Whether this story is featured"
+msgstr ""
+
+msgid "The summary for the story"
+msgstr ""
+
+msgid "The body of text for the story"
+msgstr ""
+
+msgid "The writer of the story"
+msgstr ""
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr ""
+
+msgid "The PDF report to attach"
+msgstr ""
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr ""
+
+msgid "The category for this story"
+msgstr ""
+
+msgid "The organization this story belongs to"
+msgstr ""
+
+msgid "Stories"
+msgstr ""
+
+msgid "The story to associate to"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Story Images"
+msgstr ""
+
+#, python-format
+msgid "Image %d"
+msgstr ""
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+
+msgid "The name of this tag"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Remove Item?"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "Sign in"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Forgot Password?"
+msgstr ""
+
+msgid "Token Expired"
+msgstr ""
+
+msgid "Login Failure"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr ""
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr ""
+
+msgid "Email Address"
+msgstr ""
+
+msgid "Recover"
+msgstr ""
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+
+msgid "New Password"
+msgstr ""
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr ""
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Confirm Password"
+msgstr ""
+
+msgid "Please enter your password to save changes."
+msgstr ""
+
+msgid "Confirm the new password by filling the this field"
+msgstr ""
+
+msgid "New password doesn't match with its confirmation"
+msgstr ""
+
+msgid "Your Email"
+msgstr ""
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr ""
+
+msgid "Current Password"
+msgstr ""
+
+msgid "Your current password"
+msgstr ""
+
+msgid "Your new password."
+msgstr ""
+
+msgid "Confirm new Password"
+msgstr ""
+
+msgid "Confirm your new password."
+msgstr ""
+
+msgid "Please enter your password to save changes"
+msgstr ""
+
+msgid "Confirm your new password by entering it here"
+msgstr ""
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr ""
+
+msgid "New user created successfully."
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr ""
+
+msgid "Set the user's initial password here."
+msgstr ""
+
+msgid "Last Login"
+msgstr ""
+
+msgid "Is Active"
+msgstr ""
+
+msgid "Whether this user is allowed to log into the site"
+msgstr ""
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Your password"
+msgstr ""
+
+msgid "If you want to set a new password, enter it here"
+msgstr ""
+
+msgid "Confirm New Password"
+msgstr ""
+
+msgid "Confirm your new password"
+msgstr ""
+
+msgid "Edit your profile"
+msgstr ""
+
+msgid "Password Recovery"
+msgstr ""
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr ""
+
+msgid "Password Recovery Request"
+msgstr ""
+
+msgid "Pick a new password"
+msgstr ""
+
+msgid "Your password has successfully been updated, thank you."
+msgstr ""
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr ""
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+
+msgid "Reset your Password"
+msgstr ""
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Form"
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr ""
+
+#, python-format
+msgid "Import %s"
+msgstr ""
+
+msgid "Back to Website"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Opinions"
+msgstr ""
+
+msgid "Bots"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Landing Pages"
+msgstr ""
+
+msgid "Jobs"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Partners Logos"
+msgstr ""
+
+msgid "Categories Images"
+msgstr ""
+
+msgid "News Items"
+msgstr ""
+
+msgid "Orgs"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Engagement"
+msgstr ""
+
+msgid "Reports"
+msgstr ""
+
+msgid "Category Images"
+msgstr ""
+
+msgid "+ New "
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
+msgid "U-Report"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Country Aliases"
+msgstr ""
+
+msgid "Job Sources"
+msgstr ""
+
+msgid "Jobs Content"
+msgstr ""
+
+msgid "About Content"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Contact Us Content"
+msgstr ""
+
+msgid "Missions Content"
+msgstr ""
+
+msgid "Terms & Conditions"
+msgstr ""
+
+msgid "U-Reporters Content"
+msgstr ""
+
+msgid "Join &amp; Engage Content"
+msgstr ""
+
+msgid "Join Steps Content"
+msgstr ""
+
+msgid "Additional Menu"
+msgstr ""
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Join Now"
+msgstr ""
+
+msgid "READ MORE"
+msgstr ""
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+
+msgid "Follow this step by step guide"
+msgstr ""
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Select bots"
+msgstr ""
+
+msgid "View public page"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr ""
+
+msgid "Backends"
+msgstr ""
+
+msgid "You can resend an invite using the field above"
+msgstr ""
+
+msgid "Add os Select tags"
+msgstr ""
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "+ New Poll"
+msgstr ""
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
+
+msgid "Preview results"
+msgstr ""
+
+msgid "Refresh Results"
+msgstr ""
+
+msgid "Partners"
+msgstr ""
+
+msgid "MORE POLLS"
+msgstr ""
+
+msgid "FILTER"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "POLL LIST"
+msgstr ""
+
+msgid "All polls from most recent to oldest"
+msgstr ""
+
+msgid "ARCHIVED STORIES"
+msgstr ""
+
+msgid "LIST"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "LATEST OPINION"
+msgstr ""
+
+msgid "VIEW FULL RESULTS"
+msgstr ""
+
+msgid "U-REPORTERS IN"
+msgstr ""
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+msgid "U-REPORTERS"
+msgstr ""
+
+msgid "IN"
+msgstr ""
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr ""
+
+msgid "AGES"
+msgstr ""
+
+msgid "Available bots"
+msgstr ""
+
+msgid "More bots"
+msgstr ""
+
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
+msgid "FEATURED STORY"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
+
+msgid "LEARN MORE"
+msgstr ""
+
+msgid "Visit"
+msgstr ""
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "PAGE"
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr ""
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr ""
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr ""
+
+msgid "RESPONDERS"
+msgstr ""
+
+msgid "RESPONSE RATE"
+msgstr ""
+
+msgid "TOTAL RESPONDERS"
+msgstr ""
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr ""
+
+msgid "ALL"
+msgstr ""
+
+msgid "AGE"
+msgstr ""
+
+msgid "GENDER"
+msgstr ""
+
+msgid "LOCATION"
+msgstr ""
+
+msgid "Written by:"
+msgstr ""
+
+msgid "No reports published yet"
+msgstr ""
+
+msgid "REPORT"
+msgstr ""
+
+msgid "STORY"
+msgstr ""
+
+msgid "Download Report"
+msgstr ""
+
+msgid "Even"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid "Other"
+msgstr ""
+
+msgid "District"
+msgstr ""
+
+msgid "Participation Level"
+msgstr ""
+
+msgid "Responders"
+msgstr ""
+
+msgid "Reporters in"
+msgstr ""
+
+msgid "Results"
+msgstr ""
+
+msgid "*Other answers include"
+msgstr ""
+
+msgid "Population"
+msgstr ""
+
+msgid "Registered in"
+msgstr ""
+
+msgid "Density"
+msgstr ""
+
+msgid "total"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "the"
+msgstr ""
+
+msgid "OVERALL STATISTICS"
+msgstr ""
+
+msgid "THIS YEAR"
+msgstr ""
+
+msgid "AVG RESPONSE RATE"
+msgstr ""
+
+msgid "U-REPORTERS BY REGION"
+msgstr ""
+
+msgid "FILTER RESULTS"
+msgstr ""
+
+msgid "Charts only visible for logged in admins"
+msgstr ""
+
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "Co-Create"
+msgstr ""
+
+msgid "SELECT LANGUAGE"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "Landing pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr ""
+
+msgid "Polled"
+msgstr ""
+
+msgid "Reporters"
+msgstr ""
+
+msgid "Top Region"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+
+msgid "+ New Story"
+msgstr ""
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr ""
+
+msgid "Flag"
+msgstr ""
+
+msgid "About Partner Logo"
+msgstr ""
+
+msgid "The organization to which the image will be used"
+msgstr ""
+
+msgid "A short descriptive name for this image"
+msgstr ""
+
+msgid "Image type"
+msgstr ""
+
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr ""
+
+msgid "The organization this bot is part of"
+msgstr ""
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr ""
+
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr ""
+
+msgid "The title to display for this bot"
+msgstr ""
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr ""
+
+msgid "The keyword for this bot"
+msgstr ""
+
+msgid "The Facebook bot deeplink, optional"
+msgstr ""
+
+msgid "The Telegram bot deeplink, optional"
+msgstr ""
+
+msgid "The Viber bot deeplink, optional"
+msgstr ""
+
+msgid "The WhatsApp bot deeplink, optional"
+msgstr ""
+
+msgid "A short description for this bot, required"
+msgstr ""
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr ""
+
+msgid "Whether this bot should be shown to the public"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Male"
+msgstr ""
+
+msgid "Female"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Gender"
+msgstr ""
+
+msgid "Gender of the contact"
+msgstr ""
+
+msgid "Born Field"
+msgstr ""
+
+msgid "Occupation Field"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "State Field"
+msgstr ""
+
+msgid "District Field"
+msgstr ""
+
+msgid "Ward Field"
+msgstr ""
+
+msgid "Number of items with this counter"
+msgstr ""
+
+msgid "No root user found. Please create a root user"
+msgstr ""
+
+msgid "The name for our alias"
+msgstr ""
+
+msgid "The title or name to reference this Job source."
+msgstr ""
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr ""
+
+msgid "The full URL to navigate to this Job source."
+msgstr ""
+
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
+msgstr ""
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr ""
+
+msgid "The organization this job source is for"
+msgstr ""
+
+msgid "Your job source has been added successfully"
+msgstr ""
+
+msgid "Your job source has been updated successfully"
+msgstr ""
+
+msgid "The organization this landing page is part of"
+msgstr ""
+
+msgid "The title to display for this landing page"
+msgstr ""
+
+msgid "The call to action text for this landing page"
+msgstr ""
+
+msgid "The slug to use on the link for this landing page"
+msgstr ""
+
+msgid "The body of text for the landing page"
+msgstr ""
+
+msgid "The image file to use for the page"
+msgstr ""
+
+msgid "Whether this page should be active to the public"
+msgstr ""
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr ""
+
+msgid "The name of our administrative boundary"
+msgstr ""
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr ""
+
+msgid "The parent to this political boundary if any"
+msgstr ""
+
+msgid "Geometry"
+msgstr ""
+
+msgid "The json representing the geometry type and coordinates of the boundaries"
+msgstr ""
+
+msgid "The title for this item"
+msgstr ""
+
+msgid "A short summary description for this item"
+msgstr ""
+
+msgid "A link that should be associated with this item"
+msgstr ""
+
+msgid "The category this item belongs to"
+msgstr ""
+
+msgid "The organization this item belongs to"
+msgstr ""
+
+msgid "The title for this Video"
+msgstr ""
+
+msgid "A short summary description for this video"
+msgstr ""
+
+msgid "The organization this video belongs to"
+msgstr ""
+
+msgid "The name of this poll category"
+msgstr ""
+
+msgid "Poll Categories"
+msgstr ""
+
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr ""
+
+msgid "The Flow this Poll is based on"
+msgstr ""
+
+msgid "The date to display for this poll. Leave empty to use flow creation date."
+msgstr ""
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr ""
+
+msgid "The base language of the flow to use"
+msgstr ""
+
+msgid "The number of polled reporters on this poll"
+msgstr ""
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr ""
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr ""
+
+msgid "The title for this Poll"
+msgstr ""
+
+msgid "The category this Poll belongs to"
+msgstr ""
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr ""
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr ""
+
+msgid "The organization this poll is part of"
+msgstr ""
+
+msgid "The title for this response story"
+msgstr ""
+
+msgid "The writer of the response story"
+msgstr ""
+
+msgid "The poll to associate to"
+msgstr ""
+
+msgid "The poll for this response"
+msgstr ""
+
+msgid "The location for this response"
+msgstr ""
+
+msgid "The name of the sender of the message"
+msgstr ""
+
+msgid "The featured response message"
+msgstr ""
+
+msgid "Dark 1 background and White text"
+msgstr ""
+
+msgid "Light 1 background and Black text"
+msgstr ""
+
+msgid "Dark 2 background and White text"
+msgstr ""
+
+msgid "Dark 3 background and Black text"
+msgstr ""
+
+msgid "Show Age, Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age chart ONLY"
+msgstr ""
+
+msgid "Hide Gender chart ONLY"
+msgstr ""
+
+msgid "Hide Location chart ONLY"
+msgstr ""
+
+msgid "Hide Age and Gender charts"
+msgstr ""
+
+msgid "Hide Age and Location charts"
+msgstr ""
+
+msgid "Hide Gender and Location charts"
+msgstr ""
+
+msgid "Hide Age, Gender and Location charts"
+msgstr ""
+
+msgid "The poll this question is part of"
+msgstr ""
+
+msgid "The title of this question"
+msgstr ""
+
+msgid "The RuleSet this question is based on"
+msgstr ""
+
+msgid "The label of the ruleset on RapidPro"
+msgstr ""
+
+msgid "The priority number for this question on the poll"
+msgstr ""
+
+msgid "The Rule this response category is based on"
+msgstr ""
+
+msgid "Select tags for this poll"
+msgstr ""
+
+msgid "Your org does not have any API token configuration."
+msgstr ""
+
+msgid "You must include a title for every included question."
+msgstr ""
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr ""
+
+msgid "You must include at least one poll question."
+msgstr ""
+
+msgid "Adjust poll date"
+msgstr ""
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr ""
+
+msgid "Configure flow"
+msgstr ""
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr ""
+
+msgid "Your poll has been created, now configure its flow."
+msgstr ""
+
+msgid "Poll Images"
+msgstr ""
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr ""
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr ""
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr ""
+
+msgid "Poll Response"
+msgstr ""
+
+msgid "Your poll has been updated."
+msgstr ""
+
+msgid "Poll Questions"
+msgstr ""
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr ""
+
+msgid "Include"
+msgstr ""
+
+msgid "Whether to include this question in your public results"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "The priority of this question on the poll page, higher priority comes first"
+msgstr ""
+
+msgid "Ruleset Label"
+msgstr ""
+
+msgid "The label of the ruleset from RapidPro"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+
+msgid "Color Choice"
+msgstr ""
+
+msgid "The color to use for the question block will be displayed publicly"
+msgstr ""
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
+
+msgid "Category {idx+1}"
+msgstr ""
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+msgid "Display {idx+1}"
+msgstr ""
+
+msgid "The label to display of the category on the public site"
+msgstr ""
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr ""
+
+#, python-format
+msgid "%s"
+msgstr ""
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the birth date of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the occupation of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the registration date of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr ""
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr ""
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr ""
+
+msgid "Whether this org should be show on the landing page"
+msgstr ""
+
+msgid "Whether this org count should consider the count from link only"
+msgstr ""
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr ""
+
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The join button text"
+msgstr ""
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
+
+msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+
+msgid "The title of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the opinions page"
+msgstr ""
+
+msgid "The description of the stories page"
+msgstr ""
+
+msgid "The description of the engagement page"
+msgstr ""
+
+msgid "The callout message on the footer engagement section"
+msgstr ""
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr ""
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr ""
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr ""
+
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr ""
+
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr ""
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr ""
+
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr ""
+
+msgid "The states to show on maps only"
+msgstr ""
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr ""
+
+msgid "The Google Tag Manager ID for this organization"
+msgstr ""
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr ""
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr ""
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
+
+msgid "The URL to the Facebook page for this organization"
+msgstr ""
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr ""
+
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr ""
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr ""
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr ""
+
+msgid "The Instagram username for this organization"
+msgstr ""
+
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
+msgstr ""
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr ""
+
+msgid "The Twitter handle for this organization"
+msgstr ""
+
+msgid "The Twitter widget used for searching"
+msgstr ""
+
+msgid "The words to filter out from the results on public site"
+msgstr ""
+
+msgid "If there are jobs to be shown on the public site."
+msgstr ""
+
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr ""
+
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr ""
+
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
+
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr ""
+
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
+msgstr ""
+
+msgid "The font used for headline texts"
+msgstr ""
+
+msgid "The font used for normal text"
+msgstr ""
+
+msgid "Hide participation stats"
+msgstr ""
+
+msgid "The text to describe the sponsors of free messages"
+msgstr ""
+
+msgid "The font used for small text"
+msgstr ""
+
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr ""
+
+msgid "Other language sites links"
+msgstr ""
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+msgid "Channels"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Opinion Responses"
+msgstr ""
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Response Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
+
+msgid "Whether this row was created by squashing"
+msgstr ""
+
+msgid "Something to trigger localizations"
+msgstr ""
+
+msgid "All locations"
+msgstr ""
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""
