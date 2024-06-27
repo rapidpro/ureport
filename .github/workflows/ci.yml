@@ -5,7 +5,7 @@ jobs:
     name: Test
     strategy:
       matrix:
-        python-version: ["3.10.x", "3.11.x"]
+        python-version: ["3.11.x"]
     env:
       redis-version: "6.2"
       pg-version: "15"
