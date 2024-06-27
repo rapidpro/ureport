@@ -514,13 +514,14 @@ class Poll(SmartModel):
 
     @classmethod
     def get_public_polls(cls, org):
-        return Poll.get_valid_polls(org).filter(published=True)
+        categories = Category.objects.filter(org=org, is_active=True).only("id")
+        return Poll.get_valid_polls(org).filter(published=True, category_id__in=categories)
 
     @classmethod
     def get_valid_polls(cls, org):
-        categories = Category.objects.filter(org=org, is_active=True).only("id")
+
         return (
-            Poll.objects.filter(org=org, is_active=True, category_id__in=categories, has_synced=True)
+            Poll.objects.filter(org=org, is_active=True, has_synced=True)
             .exclude(flow_uuid="")
             .prefetch_related(
                 Prefetch(
@@ -587,7 +588,7 @@ class Poll(SmartModel):
         )
 
         polls = (
-            Poll.get_valid_polls(org=org).filter(pk__in=poll_with_questions, published=True).order_by("-created_on")
+            Poll.get_public_polls(org=org).filter(pk__in=poll_with_questions, published=True).order_by("-created_on")
         )
 
         main_poll = polls.filter(is_featured=True).first()
