@@ -1,3 +1,11 @@
+v1.2.119 (2024-06-28)
+-------------------------
+ * Merge pull request #1220 from rapidpro/GA4
+ * Merge pull request #1221 from rapidpro/fix-polls-queries-for-sync
+ * Make sure polls with inactive category are hidden from the public
+ * Support GA4 measurement ID
+ * fix queries for polls used to sync results to always sync polls even if there categories are inactive
+
 v1.2.118 (2024-06-06)
 -------------------------
  * Merge pull request #1219 from rapidpro/add-kazakh
