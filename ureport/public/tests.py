@@ -693,6 +693,12 @@ class PublicTest(UreportTest):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["object"], poll1)
 
+        self.health_uganda.is_active = False
+        self.health_uganda.save()
+
+        response = self.client.get(uganda_poll_read_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
         response = self.client.get(nigeria_poll_read_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 404)
 

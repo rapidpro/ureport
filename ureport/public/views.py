@@ -305,7 +305,7 @@ class PollReadView(PollContextMixin, SmartReadView):
 
     def derive_queryset(self):
         queryset = super(PollReadView, self).derive_queryset()
-        queryset = queryset.filter(org=self.request.org, is_active=True, published=True, has_synced=True)
+        queryset = Poll.get_public_polls(self.request.org)
         return queryset
 
     def derive_main_poll(self):

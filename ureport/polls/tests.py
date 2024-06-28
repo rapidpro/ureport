@@ -144,6 +144,36 @@ class PollTest(UreportTest):
 
         self.create_poll(self.nigeria, "Poll 4", "", self.education_nigeria, self.admin, has_synced=True)
 
+        self.assertTrue(Poll.get_public_polls(self.uganda))
+        self.assertEqual(Poll.get_public_polls(self.uganda).count(), 1)
+        self.assertTrue(poll2 in Poll.get_public_polls(self.uganda))
+
+        self.health_uganda.is_active = False
+        self.health_uganda.save()
+
+        self.assertFalse(Poll.get_public_polls(self.uganda))
+
+        poll2.published = False
+        poll2.save()
+
+        self.assertFalse(Poll.get_public_polls(self.uganda))
+
+        self.health_uganda.is_active = True
+        self.health_uganda.save()
+
+        poll2.is_active = False
+        poll2.save()
+
+        self.assertFalse(Poll.get_public_polls(self.uganda))
+
+    def test_get_valid_polls(self):
+        self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
+
+        self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin, has_synced=True)
+
+        self.create_poll(self.nigeria, "Poll 4", "", self.education_nigeria, self.admin, has_synced=True)
+
         self.assertTrue(Poll.get_valid_polls(self.uganda))
         self.assertEqual(Poll.get_valid_polls(self.uganda).count(), 1)
         self.assertTrue(poll2 in Poll.get_valid_polls(self.uganda))
@@ -151,11 +181,17 @@ class PollTest(UreportTest):
         self.health_uganda.is_active = False
         self.health_uganda.save()
 
-        self.assertFalse(Poll.get_valid_polls(self.uganda))
+        self.assertTrue(poll2 in Poll.get_valid_polls(self.uganda))
+
+        poll2.published = False
+        poll2.save()
+
+        self.assertTrue(poll2 in Poll.get_valid_polls(self.uganda))
 
         self.health_uganda.is_active = True
         self.health_uganda.save()
 
+        poll2.published = True
         poll2.is_active = False
         poll2.save()
 
