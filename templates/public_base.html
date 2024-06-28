@@ -971,7 +971,7 @@
     }
   }(document, "script", "twitter-wjs");
 </script>
-{% if org and org|config:"google_tracking_id" %}
+{% if org and org|config:"google_tracking_id" and org|config:"google_tracking_id"|slice:":2" == "UA"  %}
     <script>
       (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -988,7 +988,18 @@
       ga('create', '{{ org|config:"google_tracking_id" }}', 'auto');
       ga('send', 'pageview');
     </script>
+{% elif org and org|config:"google_tracking_id" %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ org|config:"google_tracking_id" }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ org|config:"google_tracking_id" }}');
+    </script>
 {% endif %}
+
 {% block script %}
     <script type="text/javascript">
       // global primary color
