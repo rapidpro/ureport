@@ -6,7 +6,7 @@ authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "~3.11.0"
 Django = "^5.0.0"
 smartmin = "^5.0.0"
 rapidpro-dash = "^1.15.0"
@@ -18,7 +18,7 @@ django-digest = "^1.13"
 django-rosetta = "^0.8.1"
 django-storages = "^1.13.2"
 django-rest-swagger = "^2.2.0"
-djangorestframework = "3.15.0"
+djangorestframework = "3.15.1"
 dj-database-url = "^0.5.0"
 Pillow = "^10.2.0"
 gunicorn = "^22.0.0"
