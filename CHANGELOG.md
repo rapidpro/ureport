@@ -1,3 +1,7 @@
+v1.2.123 (2024-07-02)
+-------------------------
+ * Merge pull request #1222 from rapidpro/use-py-3.11
+
 v1.2.119 (2024-06-28)
 -------------------------
  * Merge pull request #1220 from rapidpro/GA4
