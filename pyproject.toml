@@ -6,7 +6,7 @@ authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.11.0"
 Django = "^5.0.0"
 smartmin = "^5.0.0"
 rapidpro-dash = "^1.15.0"
