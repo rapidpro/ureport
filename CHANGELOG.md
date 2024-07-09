@@ -1,3 +1,9 @@
+v1.2.124 (2024-07-09)
+-------------------------
+ * Merge pull request #1223 from rapidpro/kaz-updates
+ * Fix type for Macedonia
+ * Update KK translations
+
 v1.2.123 (2024-07-02)
 -------------------------
  * Merge pull request #1222 from rapidpro/use-py-3.11
