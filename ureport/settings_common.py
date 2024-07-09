@@ -1534,7 +1534,7 @@ COUNTRY_FLAGS_SITES = [
         region="WCARO",
     ),
     dict(
-        name="Macedona",
+        name="North Macedonia",
         host="//mk.ureport.in/",
         flag="flag_mk.png",
         countries_codes=["MKD"],
