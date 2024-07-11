@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:22+0000\n"
+"POT-Creation-Date: 2024-07-11 14:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -699,8 +699,8 @@ msgstr "Поднеси"
 msgid "Form"
 msgstr "Формулар"
 
-msgid "Save Changes"
-msgstr "Зачувај промени"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -2071,6 +2071,9 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "Save Changes"
+#~ msgstr "Зачувај промени"
 
 #~ msgid "Photos"
 #~ msgstr "Фотографии"

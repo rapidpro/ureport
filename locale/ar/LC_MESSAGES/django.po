@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:22+0000\n"
+"POT-Creation-Date: 2024-07-11 14:47+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -692,8 +692,8 @@ msgstr "إدخال"
 msgid "Form"
 msgstr "نموذج"
 
-msgid "Save Changes"
-msgstr "حفظ التغييرات"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -2065,6 +2065,9 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "Save Changes"
+#~ msgstr "حفظ التغييرات"
 
 #, fuzzy
 #~| msgid "The title for this item"

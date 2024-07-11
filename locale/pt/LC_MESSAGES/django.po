@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:22+0000\n"
+"POT-Creation-Date: 2024-07-11 14:47+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Rodolfo Pedro, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/rapidpro/teams/226/pt/)\n"
@@ -693,8 +693,8 @@ msgstr "Submeter"
 msgid "Form"
 msgstr "Formulário"
 
-msgid "Save Changes"
-msgstr "Guardar Alterações"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1992,3 +1992,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "Save Changes"
+#~ msgstr "Guardar Alterações"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:22+0000\n"
+"POT-Creation-Date: 2024-07-11 14:47+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -730,8 +730,8 @@ msgstr "Pošalji"
 msgid "Form"
 msgstr "Formular"
 
-msgid "Save Changes"
-msgstr "Sačuvaj promene"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -2236,6 +2236,9 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "Save Changes"
+#~ msgstr "Sačuvaj promene"
 
 #, fuzzy
 #~| msgid "The location of the responder."
