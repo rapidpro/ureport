@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:22+0000\n"
+"POT-Creation-Date: 2024-07-11 14:47+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -698,8 +698,8 @@ msgstr "Soumettre"
 msgid "Form"
 msgstr "Formulaire"
 
-msgid "Save Changes"
-msgstr "Enregistrer les modifications"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1996,3 +1996,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "Save Changes"
+#~ msgstr "Enregistrer les modifications"
