@@ -1,3 +1,11 @@
+v1.2.125 (2024-07-11)
+-------------------------
+ * Merge pull request #1226 from rapidpro/update-deps
+ * Update JS deps
+ * Merge pull request #1225 from rapidpro/update-deps
+ * Run code checks
+ * Update deps
+
 v1.2.124 (2024-07-09)
 -------------------------
  * Merge pull request #1223 from rapidpro/kaz-updates
