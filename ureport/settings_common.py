@@ -891,7 +891,6 @@ GROUP_PERMISSIONS = {
         "orgs.org_edit",
         "orgs.org_home",
         "orgs.org_manage_accounts",
-        "orgs.org_profile",
         "polls.poll.*",
         "polls.pollcategory.*",
         "polls.pollimage.*",
@@ -899,7 +898,6 @@ GROUP_PERMISSIONS = {
         "stories.story.*",
         "stories.storyimage.*",
         "tags.tag.*",
-        "users.user_profile",
     ),
     "Editors": (
         "assets.image.*",
@@ -913,7 +911,6 @@ GROUP_PERMISSIONS = {
         "news.newsitem.*",
         "news.video.*",
         "orgs.org_home",
-        "orgs.org_profile",
         "polls.poll.*",
         "polls.pollcategory.*",
         "polls.pollimage.*",
@@ -921,7 +918,6 @@ GROUP_PERMISSIONS = {
         "stories.story.*",
         "stories.storyimage.*",
         "tags.tag.*",
-        "users.user_profile",
     ),
     "Global": ("countries.countryalias.*",),
 }
