@@ -1482,6 +1482,13 @@ COUNTRY_FLAGS_SITES = [
         region="MENA",
     ),
     dict(
+        name="Kazakhstan",
+        host="//kazakhstan-ru.ureport.in/",
+        countries_codes=["KAZ"],
+        count_link="http://kazakhstan-ru.ureport.in/count/",
+        region="ECARO",
+    ),
+    dict(
         name="Kenya",
         host="//yunitok.in/",
         flag="flag_kenya.png",
