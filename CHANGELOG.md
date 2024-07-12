@@ -1,3 +1,8 @@
+v1.2.126 (2024-07-12)
+-------------------------
+ * Merge pull request #1227 from rapidpro/add-kazakhstan
+ * Add Kazakhstan
+
 v1.2.125 (2024-07-11)
 -------------------------
  * Merge pull request #1226 from rapidpro/update-deps
