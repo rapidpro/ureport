@@ -1,3 +1,10 @@
+v1.2.127 (2024-07-26)
+-------------------------
+ * Merge pull request #1229 from rapidpro/kazakh-unicef-logo
+ * Adjust UNICEF logo for Kazakh
+ * Merge pull request #1228 from rapidpro/update_dash
+ * Update dash to order admins on org forms
+
 v1.2.126 (2024-07-12)
 -------------------------
  * Merge pull request #1227 from rapidpro/add-kazakhstan
