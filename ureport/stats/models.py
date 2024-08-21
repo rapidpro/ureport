@@ -736,7 +736,10 @@ class ContactActivity(models.Model):
     used = models.BooleanField(null=True)
 
     class Meta:
-        index_together = (("org", "contact"), ("org", "date"))
+        indexes = [
+            models.Index(name=None, fields=["org", "contact"]),
+            models.Index(name=None, fields=["org", "date"]),
+        ]
         constraints = [
             models.UniqueConstraint(
                 fields=["org", "contact", "date"], name="stats_contactactivity_org_id_contact_date_348227aa_uniq"

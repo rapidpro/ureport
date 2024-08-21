@@ -320,7 +320,7 @@ class ReportersCounter(models.Model):
         return {c["type"]: c["count_sum"] for c in counter_counts}
 
     class Meta:
-        index_together = ("org", "type")
         indexes = [
             models.Index(name="contacts_rptrscntr_org_typ_cnt", fields=["org", "type", "count"]),
+            models.Index(name=None, fields=["org", "type"]),
         ]

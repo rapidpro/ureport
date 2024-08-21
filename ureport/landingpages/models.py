@@ -37,7 +37,9 @@ class LandingPage(SmartModel):
     bots = models.ManyToManyField(Bot, blank=True)
 
     class Meta:
-        index_together = (("org", "slug"),)
+        indexes = [
+            models.Index(name=None, fields=["org", "slug"]),
+        ]
         constraints = [
             models.UniqueConstraint(fields=["org", "slug"], name="landingpages_landingpage_org_id_slug_f7f1304e_uniq")
         ]

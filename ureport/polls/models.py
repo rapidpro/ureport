@@ -737,7 +737,9 @@ class Poll(SmartModel):
         return self.title
 
     class Meta:
-        index_together = ("org", "published", "id")
+        indexes = [
+            models.Index(name=None, fields=["org", "published", "id"]),
+        ]
 
 
 @six.python_2_unicode_compatible
@@ -1302,7 +1304,9 @@ class PollQuestion(SmartModel):
                 fields=["poll", "flow_result"], name="polls_pollquestion_poll_id_flow_result_id_608a2446_uniq"
             ),
         ]
-        index_together = ("poll", "is_active", "flow_result")
+        indexes = [
+            models.Index(name=None, fields=["poll", "is_active", "flow_result"]),
+        ]
 
 
 class PollResponseCategory(models.Model):
@@ -1451,4 +1455,7 @@ class PollResult(models.Model):
         return generated_stats
 
     class Meta:
-        index_together = [["org", "flow"], ["org", "flow", "ruleset", "text"]]
+        indexes = [
+            models.Index(name=None, fields=["org", "flow"]),
+            models.Index(name=None, fields=["org", "flow", "ruleset", "text"]),
+        ]

@@ -55,7 +55,9 @@ class Boundary(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["org", "osm_id"], name="locations_boundary_org_id_5c2d99160b82334a_uniq")
         ]
-        index_together = ("org", "level", "name", "osm_id")
+        indexes = [
+            models.Index(name=None, fields=["org", "level", "name", "osm_id"]),
+        ]
 
     @classmethod
     def lock(cls, org, osm_id):
