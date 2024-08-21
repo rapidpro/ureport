@@ -26,5 +26,10 @@ class Migration(migrations.Migration):
                 ),
             ],
         ),
-        migrations.AlterUniqueTogether(name="pollresponsecategory", unique_together=set([("question", "rule_uuid")])),
+        migrations.AddConstraint(
+            model_name="pollresponsecategory",
+            constraint=models.UniqueConstraint(
+                fields=["question", "rule_uuid"], name="polls_pollresponsecategory_question_id_3a161715511bd77d_uniq"
+            ),
+        ),
     ]

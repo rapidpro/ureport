@@ -13,5 +13,11 @@ class Migration(migrations.Migration):
             name="ruleset_type",
             field=models.CharField(default="wait_message", max_length=32),
         ),
-        migrations.AlterUniqueTogether(name="pollquestion", unique_together=set([("poll", "ruleset_uuid")])),
+        migrations.AddConstraint(
+            model_name="pollquestion",
+            constraint=models.UniqueConstraint(
+                fields=["poll", "ruleset_uuid"],
+                name="polls_pollquestion_poll_id_4202706c8106f06_uniq",
+            ),
+        ),
     ]

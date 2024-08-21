@@ -22,9 +22,13 @@ class Migration(migrations.Migration):
                 ("result_name", models.CharField(blank=True, max_length=255, null=True)),
                 ("org", models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to="orgs.Org")),
             ],
-            options={
-                "unique_together": {("org", "flow_uuid", "result_uuid")},
-            },
+        ),
+        migrations.AddConstraint(
+            model_name="flowresult",
+            constraint=models.UniqueConstraint(
+                fields=["org", "flow_uuid", "result_uuid"],
+                name="flows_flowresult_org_id_flow_uuid_result_uuid_5efa8f2d_uniq",
+            ),
         ),
         migrations.CreateModel(
             name="FlowResultCategory",

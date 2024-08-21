@@ -27,8 +27,13 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "unique_together": {("org", "contact", "date")},
                 "index_together": {("org", "contact"), ("org", "date")},
             },
-        )
+        ),
+        migrations.AddConstraint(
+            model_name="contactactivity",
+            constraint=models.UniqueConstraint(
+                fields=["org", "contact", "date"], name="stats_contactactivity_org_id_contact_date_348227aa_uniq"
+            ),
+        ),
     ]

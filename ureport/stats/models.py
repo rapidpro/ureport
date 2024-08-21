@@ -737,7 +737,11 @@ class ContactActivity(models.Model):
 
     class Meta:
         index_together = (("org", "contact"), ("org", "date"))
-        unique_together = ("org", "contact", "date")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["org", "contact", "date"], name="stats_contactactivity_org_id_contact_date_348227aa_uniq"
+            )
+        ]
 
     def generate_counters(self):
         generated_counters = dict()

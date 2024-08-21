@@ -48,5 +48,11 @@ class Migration(migrations.Migration):
                 ),
             ],
         ),
-        migrations.AlterUniqueTogether(name="boundary", unique_together=set([("org", "osm_id")])),
+        migrations.AddConstraint(
+            model_name="boundary",
+            constraint=models.UniqueConstraint(
+                fields=["org", "osm_id"],
+                name="locations_boundary_org_id_5c2d99160b82334a_uniq",
+            ),
+        ),
     ]

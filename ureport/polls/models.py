@@ -74,7 +74,9 @@ class PollCategory(SmartModel):
         return self.name
 
     class Meta:
-        unique_together = ("name", "org")
+        constraints = [
+            models.UniqueConstraint(fields=["name", "org"], name="polls_pollcategory_name_156693e034f96627_uniq")
+        ]
         verbose_name_plural = _("Poll Categories")
 
 
@@ -1292,7 +1294,14 @@ class PollQuestion(SmartModel):
         return self.title
 
     class Meta:
-        unique_together = (("poll", "ruleset_uuid"), ("poll", "flow_result"))
+        constraints = [
+            models.UniqueConstraint(
+                fields=["poll", "ruleset_uuid"], name="polls_pollquestion_poll_id_4202706c8106f06_uniq"
+            ),
+            models.UniqueConstraint(
+                fields=["poll", "flow_result"], name="polls_pollquestion_poll_id_flow_result_id_608a2446_uniq"
+            ),
+        ]
         index_together = ("poll", "is_active", "flow_result")
 
 
@@ -1338,7 +1347,15 @@ class PollResponseCategory(models.Model):
         return existing
 
     class Meta:
-        unique_together = (("question", "rule_uuid"), ("question", "flow_result_category"))
+        constraints = [
+            models.UniqueConstraint(
+                fields=["question", "rule_uuid"], name="polls_pollresponsecategory_question_id_3a161715511bd77d_uniq"
+            ),
+            models.UniqueConstraint(
+                fields=["question", "flow_result_category"],
+                name="polls_pollresponsecatego_question_id_flow_result__4db1cb7e_uniq",
+            ),
+        ]
 
 
 class PollResult(models.Model):

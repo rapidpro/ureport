@@ -91,8 +91,13 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "unique_together": {("org", "slug")},
                 "index_together": {("org", "slug")},
             },
+        ),
+        migrations.AddConstraint(
+            model_name="landingpage",
+            constraint=models.UniqueConstraint(
+                fields=["org", "slug"], name="landingpages_landingpage_org_id_slug_f7f1304e_uniq"
+            ),
         ),
     ]

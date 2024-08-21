@@ -21,8 +21,10 @@ class Migration(migrations.Migration):
             name="flow_result_category",
             field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to="flows.FlowResultCategory"),
         ),
-        migrations.AlterUniqueTogether(
-            name="pollquestion",
-            unique_together={("poll", "ruleset_uuid"), ("poll", "flow_result")},
+        migrations.AddConstraint(
+            model_name="pollquestion",
+            constraint=models.UniqueConstraint(
+                fields=["poll", "flow_result"], name="polls_pollquestion_poll_id_flow_result_id_608a2446_uniq"
+            ),
         ),
     ]

@@ -52,7 +52,9 @@ class Boundary(models.Model):
     )
 
     class Meta:
-        unique_together = ("org", "osm_id")
+        constraints = [
+            models.UniqueConstraint(fields=["org", "osm_id"], name="locations_boundary_org_id_5c2d99160b82334a_uniq")
+        ]
         index_together = ("org", "level", "name", "osm_id")
 
     @classmethod

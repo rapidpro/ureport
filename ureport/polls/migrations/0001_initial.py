@@ -146,7 +146,13 @@ class Migration(migrations.Migration):
             ),
             preserve_default=True,
         ),
-        migrations.AlterUniqueTogether(name="pollcategory", unique_together=set([("name", "org")])),
+        migrations.AddConstraint(
+            model_name="pollcategory",
+            constraint=models.UniqueConstraint(
+                fields=["name", "org"],
+                name="polls_pollcategory_name_156693e034f96627_uniq",
+            ),
+        ),
         migrations.CreateModel(
             name="PollQuestion",
             fields=[
