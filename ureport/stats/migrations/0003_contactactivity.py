@@ -28,7 +28,14 @@ class Migration(migrations.Migration):
             ],
             options={
                 "unique_together": {("org", "contact", "date")},
-                "index_together": {("org", "contact"), ("org", "date")},
             },
-        )
+        ),
+        migrations.AddIndex(
+            model_name="contactactivity",
+            index=models.Index(fields=["org", "contact"], name="stats_contactactivity_org_id_contact_dec2fa2d_idx"),
+        ),
+        migrations.AddIndex(
+            model_name="contactactivity",
+            index=models.Index(fields=["org", "date"], name="stats_contactactivity_org_id_date_fff018fc_idx"),
+        ),
     ]
