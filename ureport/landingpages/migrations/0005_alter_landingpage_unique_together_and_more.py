@@ -18,10 +18,6 @@ class Migration(migrations.Migration):
             name="landingpage",
             unique_together=set(),
         ),
-        migrations.AlterIndexTogether(
-            name="landingpage",
-            index_together=set(),
-        ),
         migrations.AddConstraint(
             model_name="landingpage",
             constraint=models.UniqueConstraint(

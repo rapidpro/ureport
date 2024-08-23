@@ -17,5 +17,8 @@ class Migration(migrations.Migration):
                 ("org", models.ForeignKey(related_name="reporters_counters", on_delete=models.PROTECT, to="orgs.Org")),
             ],
         ),
-        migrations.AlterIndexTogether(name="reporterscounter", index_together=set([("org", "type")])),
+        migrations.AddIndex(
+            model_name="reporterscounter",
+            index=models.Index(fields=["org", "type"], name="contacts_reporterscounter_org_id_6e256be32b9ee5bf_idx"),
+        ),
     ]
