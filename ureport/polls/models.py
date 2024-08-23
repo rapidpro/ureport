@@ -74,7 +74,9 @@ class PollCategory(SmartModel):
         return self.name
 
     class Meta:
-        unique_together = ("name", "org")
+        constraints = [
+            models.UniqueConstraint(fields=["name", "org"], name="polls_pollcategory_name_156693e034f96627_uniq")
+        ]
         verbose_name_plural = _("Poll Categories")
 
 
@@ -735,7 +737,9 @@ class Poll(SmartModel):
         return self.title
 
     class Meta:
-        index_together = ("org", "published", "id")
+        indexes = [
+            models.Index(fields=["org", "published", "id"], name="polls_poll_org_pblshd_id_idx"),
+        ]
 
 
 @six.python_2_unicode_compatible
@@ -1292,8 +1296,17 @@ class PollQuestion(SmartModel):
         return self.title
 
     class Meta:
-        unique_together = (("poll", "ruleset_uuid"), ("poll", "flow_result"))
-        index_together = ("poll", "is_active", "flow_result")
+        indexes = [
+            models.Index(fields=["poll", "is_active", "flow_result"], name="polls_qstn_poll_actv_fl_rs_idx"),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["poll", "flow_result"], name="polls_pollquestion_poll_id_flow_result_id_608a2446_uniq"
+            ),
+            models.UniqueConstraint(
+                fields=["poll", "ruleset_uuid"], name="polls_pollquestion_poll_id_4202706c8106f06_uniq"
+            ),
+        ]
 
 
 class PollResponseCategory(models.Model):
@@ -1338,7 +1351,15 @@ class PollResponseCategory(models.Model):
         return existing
 
     class Meta:
-        unique_together = (("question", "rule_uuid"), ("question", "flow_result_category"))
+        constraints = [
+            models.UniqueConstraint(
+                fields=["question", "rule_uuid"], name="polls_pollresponsecategory_question_id_3a161715511bd77d_uniq"
+            ),
+            models.UniqueConstraint(
+                fields=["question", "flow_result_category"],
+                name="polls_pollresponsecatego_question_id_flow_result__4db1cb7e_uniq",
+            ),
+        ]
 
 
 class PollResult(models.Model):
@@ -1434,4 +1455,7 @@ class PollResult(models.Model):
         return generated_stats
 
     class Meta:
-        index_together = [["org", "flow"], ["org", "flow", "ruleset", "text"]]
+        indexes = [
+            models.Index(fields=["org", "flow"], name="polls_pollresult_org_flow_idx"),
+            models.Index(fields=["org", "flow", "ruleset", "text"], name="polls_rslt_org_flw_rst_txt_idx"),
+        ]

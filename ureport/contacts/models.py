@@ -231,7 +231,9 @@ class Contact(models.Model):
         return generated_counters
 
     class Meta:
-        unique_together = ("org", "uuid")
+        constraints = [
+            models.UniqueConstraint(fields=["org", "uuid"], name="contacts_contact_org_id_563dcefdcba190b9_uniq")
+        ]
 
 
 class ReportersCounter(models.Model):
@@ -318,7 +320,7 @@ class ReportersCounter(models.Model):
         return {c["type"]: c["count_sum"] for c in counter_counts}
 
     class Meta:
-        index_together = ("org", "type")
         indexes = [
+            models.Index(name="contacts_rptrscntr_org_id_idx", fields=["org", "type"]),
             models.Index(name="contacts_rptrscntr_org_typ_cnt", fields=["org", "type", "count"]),
         ]
