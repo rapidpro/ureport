@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-11 14:47+0000\n"
+"POT-Creation-Date: 2024-08-27 09:46+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1891,6 +1891,14 @@ msgstr "Textul scurt care va fi utilizat pentru a direcționa vizitatorii să se
 #| msgid "The title of the photos section U-Report homepage"
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Titlul secțiunii fotografii pe Pagina de pornire U-Report"
+
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Regiunea la care aparţine acest răspuns"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Codul video YouTube pentru a vă alătura secțiunii U-Report"

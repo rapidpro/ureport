@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-11 14:47+0000\n"
+"POT-Creation-Date: 2024-08-27 09:46+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -1803,6 +1803,14 @@ msgstr "Krátký text, který návštěvníky nasměruje k připojení k U-Repor
 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Text výzvy k akci, abyste se připojili, v horní části U-Report"
+
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Umístění této reakce"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "ID videa na YouTube, jak se připojit k sekci U-Report"

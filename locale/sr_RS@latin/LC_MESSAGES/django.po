@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-11 14:47+0000\n"
+"POT-Creation-Date: 2024-08-27 09:46+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1787,6 +1787,14 @@ msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"
 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Tekst poziva da se pridružite u gornjem odeljku U-Reporta"
+
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Lokacija za ovaj odgovor"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "YouTube video ID za priključivanje U-Reportu"

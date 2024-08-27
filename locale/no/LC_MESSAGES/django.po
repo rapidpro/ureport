@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-11 14:47+0000\n"
+"POT-Creation-Date: 2024-08-27 09:46+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -1851,6 +1851,14 @@ msgstr "En enkel tekst som brukes til å veilede besøkende til å bli med i U-R
 #| msgid "The title of the photos section U-Report homepage"
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Tittel på bildeseksjonen for U-Report landingssiden"
+
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Lokasjon for denne responsen "
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "YouTube video ID til video for \"Hvordan bli en U-Reporter\" - seksjonen"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-11 14:47+0000\n"
+"POT-Creation-Date: 2024-08-27 09:46+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1768,6 +1768,12 @@ msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
 
 msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
+msgid "A short text for the extra menu."
+msgstr ""
+
+msgid "The link for the extra menu."
 msgstr ""
 
 msgid "The YouTube video ID for how to join U-Report section"
