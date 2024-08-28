@@ -1306,7 +1306,7 @@ COUNTRY_FLAGS_SITES = [
         region="ECARO",
     ),
     dict(
-        name="República Dominicana  ",
+        name="Dominican Republic",
         host="//republicadominicana.ureport.in/",
         flag="",
         countries_codes=["DOM"],
