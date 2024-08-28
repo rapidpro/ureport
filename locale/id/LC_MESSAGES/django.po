@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-11 14:47+0000\n"
+"POT-Creation-Date: 2024-08-27 09:46+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1982,6 +1982,16 @@ msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
 
+#, fuzzy
+#| msgid "The text of the featured response."
+msgid "A short text for the extra menu."
+msgstr "Respon unggulan"
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Lokasi dari tanggapan ini"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -2615,9 +2625,6 @@ msgstr ""
 
 #~ msgid "Response %d Message"
 #~ msgstr "Tanggapan %d Pesan"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "Respon unggulan"
 
 #, fuzzy
 #~| msgid ""

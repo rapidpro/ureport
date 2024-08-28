@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-11 14:47+0000\n"
+"POT-Creation-Date: 2024-08-27 09:46+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1972,6 +1972,16 @@ msgstr "Văn bản ngắn sử dụng để hướng khách truy cập tham gia 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
 
+#, fuzzy
+#| msgid "The text of the featured response."
+msgid "A short text for the extra menu."
+msgstr "Văn bản của phản hồi nổi bật."
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Địa điểm của phản hồi"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -2618,9 +2628,6 @@ msgstr ""
 
 #~ msgid "Response %d Message"
 #~ msgstr "Phản hồi %d Tin nhắn"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "Văn bản của phản hồi nổi bật."
 
 #, fuzzy
 #~| msgid ""

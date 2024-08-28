@@ -358,6 +358,24 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="extra_menu_text",
+        field=dict(
+            help_text=_("A short text for the extra menu."),
+            label="Extra Menu Text",
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
+        name="extra_menu_link",
+        field=dict(
+            help_text=_("The link for the extra menu."),
+            label="Extra Menu Link",
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="homepage_join_video_id",
         field=dict(
             help_text=_("The YouTube video ID for how to join U-Report section"),
