@@ -1,3 +1,16 @@
+v1.2.128 (2024-08-28)
+-------------------------
+ * Merge pull request #1237 from rapidpro/add-dominicana
+ * Merge pull request #1235 from rapidpro/fix-index-together-unique-toghether-use
+ * Add Dominicana link
+ * Merge pull request #1233 from rapidpro/updates
+ * Adjust indexes and constraints
+ * Update deps
+ * Merge pull request #1231 from rapidpro/update-deps
+ * Update sentry-sdk
+ * Update deps
+ * Reduce size of logo images to load faster on pages
+
 v1.2.127 (2024-07-26)
 -------------------------
  * Merge pull request #1229 from rapidpro/kazakh-unicef-logo
