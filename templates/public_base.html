@@ -671,11 +671,11 @@
                                class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                         </div>
                     </div>
-                    {% if org|config:"is_global" and org.subdomain == "" %}
+                    {% if org|config:"has_new_brand" and org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
                         <div class="flex-1 text-center font-bold text-xl flex-center-y">
                             <div>
-                                <a href="https://www.voicesofyouth.org/voices-youth-co-creation-opportunities-young-people"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Co-Create" %}</a>
+                                <a href="{{ org|config:"extra_menu_link" }}"
+                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{{ org|config:"extra_menu_text" }}</a>
                             </div>
                         </div>
                     {% endif %}

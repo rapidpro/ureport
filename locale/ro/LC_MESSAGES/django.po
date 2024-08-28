@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-27 09:46+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1146,11 +1146,6 @@ msgstr "Exportă și Partajează"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Vrei să spui lumii despre asta? Descărcați această imagine pentru a partaja cu ușurință pe rețelile sociale sau pentru o prezentare frumoasă!"
 
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Creează"
-
 msgid "SELECT LANGUAGE"
 msgstr ""
 
@@ -2111,6 +2106,11 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Creează"
 
 #~ msgid "Save Changes"
 #~ msgstr "Salvează modificările"
