@@ -1,3 +1,10 @@
+v1.2.129 (2024-08-28)
+-------------------------
+ * Merge pull request #1236 from rapidpro/extra-menu
+ * Merge pull request #1238 from rapidpro/add-dominicana
+ * Fix name
+ * Add support for extra link on menu
+
 v1.2.128 (2024-08-28)
 -------------------------
  * Merge pull request #1237 from rapidpro/add-dominicana
