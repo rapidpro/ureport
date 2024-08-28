@@ -1306,6 +1306,14 @@ COUNTRY_FLAGS_SITES = [
         region="ECARO",
     ),
     dict(
+        name="República Dominicana  ",
+        host="//republicadominicana.ureport.in/",
+        flag="",
+        countries_codes=["DOM"],
+        count_link="https://republicadominicana.ureport.in/count/",
+        region="LACRO",
+    ),
+    dict(
         name="DRC",
         host="//drc.ureport.in/",
         flag="flag_drc.png",
@@ -1484,6 +1492,7 @@ COUNTRY_FLAGS_SITES = [
     dict(
         name="Kazakhstan",
         host="//kazakhstan-ru.ureport.in/",
+        flag="",
         countries_codes=["KAZ"],
         count_link="http://kazakhstan-ru.ureport.in/count/",
         region="ECARO",
