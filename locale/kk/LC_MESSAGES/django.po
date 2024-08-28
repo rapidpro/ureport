@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-27 09:46+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Askhat Makitov, 2024\n"
 "Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
@@ -1090,9 +1090,6 @@ msgstr "Экспорттау және бөлісу"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Осы туралы бүкіл әлемге айтып бергіңіз келе ме? Әлеуметтік желіде оңай бөлісу үшін немесе әдемі презентация жасау үшін осы суретті жүктеп алыңыз!"
 
-msgid "Co-Create"
-msgstr "Бірлесіп жасау"
-
 msgid "SELECT LANGUAGE"
 msgstr "ТІЛДІ ТАҢДАУ"
 
@@ -1942,6 +1939,9 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "Co-Create"
+#~ msgstr "Бірлесіп жасау"
 
 #~ msgid "Save Changes"
 #~ msgstr "Өзгерістерді сақтау"

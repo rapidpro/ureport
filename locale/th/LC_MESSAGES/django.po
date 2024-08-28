@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-27 09:46+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -1123,11 +1123,6 @@ msgstr "ดึงข้อมูลออกและแชร์"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "ต้องการแชร์เรื่องนี้ให้โลกรู้? ดาวน์โหลดภาพนี้เพื่อแชร์บนโซเชียลมีเดียหรือเพื่อการนําเสนอที่สวยงาม!"
 
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "สร้าง"
-
 msgid "SELECT LANGUAGE"
 msgstr "เลือกภาษา"
 
@@ -1998,6 +1993,11 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "สร้าง"
 
 #~ msgid "Save Changes"
 #~ msgstr "บันทึกการเปลี่ยนแปลง"

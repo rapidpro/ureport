@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-27 09:46+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Tjaša Jazbinšek, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -1130,11 +1130,6 @@ msgstr "Izvozi in deli"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Želiš razširiti glas o tem? Prenesi si to sliko in jo deli na družbenih omrežjih ali v svoji predstavitvi."
 
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Ustvari"
-
 msgid "SELECT LANGUAGE"
 msgstr "IZBERI JEZIK"
 
@@ -2004,6 +1999,11 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Ustvari"
 
 #~ msgid "Save Changes"
 #~ msgstr "Shrani spremembe"
