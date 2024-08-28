@@ -1,3 +1,8 @@
+v1.2.130 (2024-08-28)
+-------------------------
+ * Merge pull request #1239 from rapidpro/extra-menu
+ * Use extra menu link config for global site
+
 v1.2.129 (2024-08-28)
 -------------------------
  * Merge pull request #1236 from rapidpro/extra-menu
