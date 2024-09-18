@@ -1,3 +1,8 @@
+v1.2.131 (2024-09-18)
+-------------------------
+ * Set the max length for poll result text
+ * Do not sync empty contacts not having URNs set
+
 v1.2.130 (2024-08-28)
 -------------------------
  * Merge pull request #1239 from rapidpro/extra-menu
