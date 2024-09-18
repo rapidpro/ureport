@@ -804,7 +804,7 @@ class RapidProBackend(BaseBackend):
         for temba_value in sorted(temba_run.values.values(), key=lambda val: val.time):
             ruleset_uuid = temba_value.node
             category = temba_value.category
-            text = temba_value.value[:2560] if temba_value.value is not None else temba_value.value
+            text = temba_value.value[:1600] if temba_value.value is not None else temba_value.value
             value_date = temba_value.time
 
             existing_poll_result = existing_db_poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
