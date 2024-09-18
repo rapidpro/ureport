@@ -174,6 +174,9 @@ class ContactSyncer(BaseSyncer):
         if reporter_group.lower() not in contact_groups_names:
             return None
 
+        if not remote.urns:
+            return None
+
         org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data = self.get_boundaries_data(
             org
         )
@@ -271,10 +274,7 @@ class ContactSyncer(BaseSyncer):
             else:
                 gender = ""
 
-        scheme = ""
-        if remote.urns:
-            primary_urn = remote.urns[0]
-            scheme, path = primary_urn.split(":", 1)
+        scheme, path = remote.urns[0].split(":", 1)
 
         return {
             "backend": self.backend,

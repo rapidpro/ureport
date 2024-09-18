@@ -347,6 +347,25 @@ class ContactSyncerTest(UreportTest):
         temba_contact = TembaContact.create(
             uuid="C-006",
             name="Jan",
+            urns=[],
+            groups=[ObjectRef.create(uuid="G-001", name="ureporters"), ObjectRef.create(uuid="G-007", name="Actors")],
+            fields={
+                "registration_date": None,
+                "state": None,
+                "lga": None,
+                "occupation": None,
+                "born": None,
+                "gender": None,
+            },
+            language="eng",
+            created_on=json_date_to_datetime("2013-01-02T03:04:05.000"),
+        )
+
+        self.assertIsNone(self.syncer.local_kwargs(self.nigeria, temba_contact))
+
+        temba_contact = TembaContact.create(
+            uuid="C-006",
+            name="Jan",
             urns=["tel:123"],
             groups=[ObjectRef.create(uuid="G-001", name="ureporters"), ObjectRef.create(uuid="G-007", name="Actors")],
             fields={
