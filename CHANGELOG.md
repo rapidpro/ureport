@@ -1,3 +1,9 @@
+v1.2.132 (2024-09-24)
+-------------------------
+ * Squash contacts activities counts every 15min
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in cs
+
 v1.2.131 (2024-09-18)
 -------------------------
  * Set the max length for poll result text
