@@ -1,3 +1,7 @@
+v1.2.133 (2024-09-26)
+-------------------------
+ * Add lock to run the contacts activities squash once
+
 v1.2.132 (2024-09-24)
 -------------------------
  * Squash contacts activities counts every 15min
