@@ -35,7 +35,7 @@ class SquashableModel(models.Model):
 
         time_taken = time.time() - start
 
-        logging.debug("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
+        logging.info("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
 
     @classmethod
     @abstractmethod

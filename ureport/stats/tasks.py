@@ -2,6 +2,8 @@ import logging
 import time
 from datetime import timedelta
 
+from django_redis import get_redis_connection
+
 from django.utils import timezone
 
 from dash.orgs.models import Org
@@ -70,7 +72,16 @@ def delete_old_contact_activities(org, since, until):
 def squash_contact_activities_counts():
     from .models import ContactActivityCounter
 
-    ContactActivityCounter.squash()
+    r = get_redis_connection()
+    key = "squash_contact_activity_counts_lock"
+
+    lock_timeout = 60 * 60
+
+    if r.get(key):
+        logger.info("Skipping squashing contact activity counts as it is still running")
+    else:
+        with r.lock(key, timeout=lock_timeout):
+            ContactActivityCounter.squash()
 
 
 @app.task(name="stats.rebuild_contacts_activities_counts")
