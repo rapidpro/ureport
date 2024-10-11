@@ -24,6 +24,10 @@ $(->
     fillOpacity: 1
   }
 
+  L.CRS.EPSG3857.Pacific = L.CRS.EPSG3857.extend({
+    wrapLng: [0, 360]
+  });
+
   # our leaflet options
   options = {
       # no user controlled zooming
@@ -40,7 +44,10 @@ $(->
 
       # don't allow dragging
       dragging: false
+      crs: L.CRS.EPSG3857.Pacific
   }
+
+
 
   initMap = (id, geojson, url, districtZoom, wardZoom) ->
     map = L.map(id, options)
@@ -154,7 +161,6 @@ $(->
       states.setStyle(countStyle)
       map.addLayer(states)
       map.fitBounds(states.getBounds())
-      map.flyToBounds(states.getBounds())
   
       info.update()
   
