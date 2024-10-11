@@ -144,7 +144,14 @@ $(->
         mouseout: reset
         click: clickFeature
       });
-  
+
+    coordsToLatLng = (coords) ->
+      lon = coords[0]
+      lat = coords[1]
+      if lon < -120
+        lon += 360
+      L.latLng(lat, lon)
+
     resetBoundaries = ->
       map.removeLayer(boundaries) 
   
@@ -215,7 +222,8 @@ $(->
 
           boundaries = L.geoJSON(data, {
             style: countStyle,
-            onEachFeature: onEachFeature
+            onEachFeature: onEachFeature,
+            coordsToLatLng: coordsToLatLng
           })
           boundaries.addTo(map);
 
