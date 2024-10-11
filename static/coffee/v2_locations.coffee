@@ -154,6 +154,7 @@ $(->
       states.setStyle(countStyle)
       map.addLayer(states)
       map.fitBounds(states.getBounds())
+      map.flyToBounds(states.getBounds())
   
       info.update()
   
