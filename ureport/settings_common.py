@@ -644,6 +644,12 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
+        name="has_wrap_coords",
+        field=dict(help_text=_("Whether to activate an wrap coordinates."), required=False),
+        superuser_only=True,
+        read_only=True,
+    ),
+    dict(
         name="has_new_brand",
         field=dict(
             help_text=_("Whether to use the new 2024 brand with UNICEF in the logo and a common theme."),

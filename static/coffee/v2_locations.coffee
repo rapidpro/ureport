@@ -42,7 +42,7 @@ $(->
       dragging: false
   }
 
-  initMap = (id, geojson, url, districtZoom, wardZoom) ->
+  initMap = (id, geojson, url, districtZoom, wardZoom, wrapCoordinates) ->
     map = L.map(id, options)
 
     # constants
@@ -148,7 +148,7 @@ $(->
     coordsToLatLng = (coords) ->
       lon = coords[0]
       lat = coords[1]
-      if lon < -120
+      if lon < 0 and wrapCoordinates
         lon += 360
       L.latLng(lat, lon)
 
@@ -253,6 +253,7 @@ $(->
         id = $(this).attr("id")
         districtZoom = $(this).data("district-zoom")
         wardZoom = $(this).data("ward-zoom")
+        wrapCoordinates = $(this).data("wrap-coords")
 
         # no id? can't render, warn in console
         if (id == undefined)
@@ -268,7 +269,7 @@ $(->
           map.fitBounds(boundaries.getBounds());
           return
 
-        map = initMap(id, states, url, districtZoom, wardZoom)
+        map = initMap(id, states, url, districtZoom, wardZoom, wrapCoordinates)
 
       )
     )
