@@ -153,7 +153,11 @@ $(->
   
       states.setStyle(countStyle)
       map.addLayer(states)
-      map.fitBounds(states.getBounds())
+      bounds = states.getBounds()
+      fitBoundsAdjust = [[bounds.getNorth(), bounds.getEast()], [bounds.getSouth(), bounds.getWest()]]
+      if bounds.getEast() == 180 and bounds.getWest() == -180
+        fitBoundsAdjust = [[bounds.getNorth(), 120], [bounds.getSouth(), 190]]
+      map.fitBounds(fitBoundsAdjust)
   
       info.update()
   
@@ -227,9 +231,17 @@ $(->
             stateResults = countMap
           
           $("#poll-map-placeholder").addClass('hidden')
-          map.fitBounds(boundaries.getBounds());
+          bounds = boundaries.getBounds()
+          fitBoundsAdjust = [[bounds.getNorth(), bounds.getEast()], [bounds.getSouth(), bounds.getWest()]]
+          if bounds.getEast() == 180 and bounds.getWest() == -180
+            fitBoundsAdjust = [[bounds.getNorth(), 120], [bounds.getSouth(), 190]]
+          map.fitBounds(fitBoundsAdjust);
           map.on 'resize', (e) ->
-            map.fitBounds(boundaries.getBounds())
+            bounds = boundaries.getBounds()
+            fitBoundsAdjust = [[bounds.getNorth(), bounds.getEast()], [bounds.getSouth(), bounds.getWest()]]
+            if bounds.getEast() == 180 and bounds.getWest() == -180
+              fitBoundsAdjust = [[bounds.getNorth(), 120], [bounds.getSouth(), 190]]
+            map.fitBounds(fitBoundsAdjust)
           info.update()
 
     info.addTo(map);
@@ -257,7 +269,11 @@ $(->
           map = L.map(id, options)
           boundaries = L.geoJSON(states, {style: emptyStyle})
           boundaries.addTo(map);
-          map.fitBounds(boundaries.getBounds());
+          bounds = boundaries.getBounds()
+          fitBoundsAdjust = [[bounds.getNorth(), bounds.getEast()], [bounds.getSouth(), bounds.getWest()]]
+          if bounds.getEast() == 180 and bounds.getWest() == -180
+            fitBoundsAdjust = [[bounds.getNorth(), 120], [bounds.getSouth(), 190]]
+          map.fitBounds(fitBoundsAdjust);
           return
 
         map = initMap(id, states, url, districtZoom, wardZoom)
