@@ -24,9 +24,6 @@ $(->
     fillOpacity: 1
   }
 
-  PacificCRS = JSON.parse(JSON.stringify(L.CRS.EPSG3857))
-  PacificCRS.wrapLng = [0, 360]
-
   # our leaflet options
   options = {
       # no user controlled zooming
@@ -43,7 +40,6 @@ $(->
 
       # don't allow dragging
       dragging: false
-      crs: PacificCRS
   }
 
 
@@ -159,7 +155,11 @@ $(->
   
       states.setStyle(countStyle)
       map.addLayer(states)
-      map.fitBounds(states.getBounds())
+      bounds = states.getBounds()
+      map.fitBounds([
+        [bounds.getNorth(), bounds.getEast() ? bounds.getEast() > 0 : bounds.getEast() + 360],
+        [bounds.getNorth(), bounds.getWest() ? bounds.getWest() > 0 : bounds.getWest() + 360]
+      ])
   
       info.update()
   
@@ -233,9 +233,16 @@ $(->
             stateResults = countMap
           
           $("#poll-map-placeholder").addClass('hidden')
-          map.fitBounds(boundaries.getBounds());
+          bounds = boundaries.getBounds()
+          map.fitBounds([
+            [bounds.getNorth(), bounds.getEast() ? bounds.getEast() > 0 : bounds.getEast() + 360 ],
+            [bounds.getNorth(), bounds.getWest() ? bounds.getWest() > 0 : bounds.getWest() + 360]
+          ]);
           map.on 'resize', (e) ->
-            map.fitBounds(boundaries.getBounds())
+            map.fitBounds([
+              [bounds.getNorth(), bounds.getEast() ? bounds.getEast() > 0 : bounds.getEast() + 360],
+              [bounds.getNorth(), bounds.getWest() ? bounds.getWest() > 0 : bounds.getWest() + 360]
+            ])
           info.update()
 
     info.addTo(map);
@@ -263,7 +270,11 @@ $(->
           map = L.map(id, options)
           boundaries = L.geoJSON(states, {style: emptyStyle})
           boundaries.addTo(map);
-          map.fitBounds(boundaries.getBounds());
+          bounds = boundaries.getBounds()
+          map.fitBounds([
+            [bounds.getNorth(), bounds.getEast() ? bounds.getEast() > 0 : bounds.getEast() + 360 ],
+            [bounds.getNorth(), bounds.getWest() ? bounds.getWest() > 0 : bounds.getWest() + 360]
+          ]);
           return
 
         map = initMap(id, states, url, districtZoom, wardZoom)
