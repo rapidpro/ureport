@@ -24,9 +24,8 @@ $(->
     fillOpacity: 1
   }
 
-  L.CRS.EPSG3857.Pacific = L.CRS.EPSG3857.extend({
-    wrapLng: [0, 360]
-  });
+  PacificCRS = JSON.parse(JSON.stringify(L.CRS.EPSG3857))
+  PacificCRS.wrapLng = [0, 360]
 
   # our leaflet options
   options = {
@@ -44,7 +43,7 @@ $(->
 
       # don't allow dragging
       dragging: false
-      crs: L.CRS.EPSG3857.Pacific
+      crs: PacificCRS
   }
 
 
