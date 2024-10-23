@@ -834,7 +834,7 @@ class PollTest(UreportTest):
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["object_list"]), 1)
-        self.assertRegexpMatches(response.content.decode("utf-8"), "Last results synced 5(.*)minutes ago")
+        self.assertRegex(response.content.decode("utf-8"), "Last results synced 5(.*)minutes ago")
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_questions_poll(self):
