@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from rest_framework_swagger.views import get_swagger_view
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 
 from django.urls import re_path
 from django.views.generic import RedirectView
@@ -24,12 +26,20 @@ from ureport.api.views import (
     VideoList,
 )
 
-schema_view = get_swagger_view(title="API")
-
+schema_view = get_schema_view(
+    openapi.Info(
+        title="U-Report API",
+        default_version="v1",
+        description="U-Report API",
+        x_logo={"url": "", "backgroundColor": "#f1f1f1", "href": "/"},
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     re_path(r"^$", RedirectView.as_view(pattern_name="api.v1.docs", permanent=False), name="api.v1"),
-    re_path(r"^docs/", schema_view, name="api.v1.docs"),
+    re_path(r"^docs/", schema_view.with_ui("swagger", cache_timeout=0), name="api.v1.docs"),
     re_path(r"^orgs/$", OrgList.as_view(), name="api.v1.org_list"),
     re_path(r"^orgs/(?P<pk>[\d]+)/$", OrgDetails.as_view(), name="api.v1.org_details"),
     re_path(r"^polls/org/(?P<org>[\d]+)/$", PollList.as_view(), name="api.v1.org_poll_list"),

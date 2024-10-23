@@ -767,7 +767,7 @@ INSTALLED_APPS = (
     "ureport.stats",
     "django_countries",
     "rest_framework",
-    "rest_framework_swagger",
+    "drf_yasg",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -2065,4 +2065,8 @@ LOGGING = {
             "propagate": False,
         },
     },
+}
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {"basic": {"type": "basic"}},
 }
