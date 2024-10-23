@@ -215,6 +215,7 @@
                         <div data-map-url="/pollquestion/{{ top_question.id }}/results/"
                              data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}"
                              data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}"
+                             data-wrap-coords="{% if org|config:"has_wrap_coords" %}true{% else %}false{% endif %}"
                              style="min-height:300px;
                                     min-width:300px"
                              class="h-full w-full map block"
