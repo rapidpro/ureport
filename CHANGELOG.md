@@ -1,3 +1,10 @@
+v1.2.134 (2024-10-23)
+-------------------------
+ * Update deps
+ * Support django 5.1
+ * Adjust old migrations to not use index_together
+ * Use GH actions services for Redis and Postgres
+
 v1.2.133 (2024-09-26)
 -------------------------
  * Add lock to run the contacts activities squash once
