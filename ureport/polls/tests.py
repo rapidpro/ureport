@@ -306,7 +306,7 @@ class PollTest(UreportTest):
 
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-            self.assertEquals(poll1.get_flow(), "Flow")
+            self.assertEqual(poll1.get_flow(), "Flow")
             mock.assert_called_once_with(backend=poll1.backend)
 
     def test_runs(self):
@@ -465,9 +465,9 @@ class PollTest(UreportTest):
             self.assertTrue(Poll.objects.all())
 
             poll = Poll.objects.get()
-            self.assertEquals(poll.title, "Poll 1")
-            self.assertEquals(poll.backend.slug, "rapidpro")
-            self.assertEquals(poll.org, self.uganda)
+            self.assertEqual(poll.title, "Poll 1")
+            self.assertEqual(poll.backend.slug, "rapidpro")
+            self.assertEqual(poll.org, self.uganda)
 
             self.assertEqual(poll.tags.all().count(), 2)
             self.assertEqual(set(poll.tags.all().values_list("name", flat=True)), {"Books", "sports"})
@@ -562,8 +562,8 @@ class PollTest(UreportTest):
                 self.assertIn("loc", response.context["form"].fields)
 
                 self.assertIn("backend", response.context["form"].fields)
-                self.assertEquals(len(response.context["form"].fields["backend"].choices), 3)
-                self.assertEquals(
+                self.assertEqual(len(response.context["form"].fields["backend"].choices), 3)
+                self.assertEqual(
                     set(
                         [
                             (getattr(elt[0], "value", ""), elt[1])
@@ -834,7 +834,7 @@ class PollTest(UreportTest):
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["object_list"]), 1)
-        self.assertRegexpMatches(response.content.decode("utf-8"), "Last results synced 5(.*)minutes ago")
+        self.assertRegex(response.content.decode("utf-8"), "Last results synced 5(.*)minutes ago")
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_questions_poll(self):
@@ -1051,7 +1051,7 @@ class PollTest(UreportTest):
             mock.return_value = "Done"
 
             self.assertIsNone(config(None, "field_name"))
-            self.assertEquals(config(self.uganda, "field_name"), "Done")
+            self.assertEqual(config(self.uganda, "field_name"), "Done")
             mock.assert_called_with("field_name")
 
         self.assertIsNone(org_color(None, 1))
@@ -1456,12 +1456,12 @@ class PollQuestionTest(UreportTest):
             self.assertFalse(PollWordCloud.objects.all())
             poll_question1.generate_word_cloud()
             self.assertTrue(PollWordCloud.objects.all())
-            self.assertEquals(PollWordCloud.objects.all().count(), 1)
+            self.assertEqual(PollWordCloud.objects.all().count(), 1)
 
             # another run will keep the same DB object
             poll_question1.generate_word_cloud()
             self.assertTrue(PollWordCloud.objects.all())
-            self.assertEquals(PollWordCloud.objects.all().count(), 1)
+            self.assertEqual(PollWordCloud.objects.all().count(), 1)
 
             results = poll_question1.calculate_results()
             result = results[0]

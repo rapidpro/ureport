@@ -4,10 +4,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        python-version: ["3.11.x"]
-
+    env:
+      python-version: "3.12.x"
     services:
       redis:
         image: redis:6.2-alpine
@@ -30,7 +28,7 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ env.python-version }}
 
     - name: Install Poetry
       uses: snok/install-poetry@v1
