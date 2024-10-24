@@ -1,3 +1,7 @@
+v1.2.136 (2024-10-24)
+-------------------------
+ * Merge pull request #1249 from rapidpro/update-python
+
 v1.2.134 (2024-10-23)
 -------------------------
  * Update deps
