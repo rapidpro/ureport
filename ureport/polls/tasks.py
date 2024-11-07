@@ -325,7 +325,7 @@ def polls_stats_squash():
     from ureport.stats.models import PollStats
 
     r = get_redis_connection()
-    key = "squesh_stats_lock"
+    key = "squash_stats_lock"
 
     lock_timeout = 60 * 60 * 2
 

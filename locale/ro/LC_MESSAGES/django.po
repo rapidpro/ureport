@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -701,8 +701,8 @@ msgstr "Trimite"
 msgid "Form"
 msgstr "Formular"
 
-msgid "Save Changes"
-msgstr "Salvează modificările"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1145,11 +1145,6 @@ msgstr "Exportă și Partajează"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Vrei să spui lumii despre asta? Descărcați această imagine pentru a partaja cu ușurință pe rețelile sociale sau pentru o prezentare frumoasă!"
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Creează"
 
 msgid "SELECT LANGUAGE"
 msgstr ""
@@ -1892,6 +1887,14 @@ msgstr "Textul scurt care va fi utilizat pentru a direcționa vizitatorii să se
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Titlul secțiunii fotografii pe Pagina de pornire U-Report"
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Regiunea la care aparţine acest răspuns"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Codul video YouTube pentru a vă alătura secțiunii U-Report"
 
@@ -1970,6 +1973,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "ID-ul pixelului Facebook al acestei organizații (opțional)"
 
 msgid "The Instagram username for this organization"
+msgstr "Numele de utilizator pe Instagram al acestei organizații"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Numele de utilizator pe Instagram al acestei organizații"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -2098,6 +2106,14 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Creează"
+
+#~ msgid "Save Changes"
+#~ msgstr "Salvează modificările"
 
 #~ msgid "Photos"
 #~ msgstr "Fotografii"

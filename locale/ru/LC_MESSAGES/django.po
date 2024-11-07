@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -698,8 +698,8 @@ msgstr "Отправить"
 msgid "Form"
 msgstr "Форма"
 
-msgid "Save Changes"
-msgstr "Сохранить изменения"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1147,11 +1147,6 @@ msgstr "Экспортировать и Поделиться"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Хотите рассказать об этом миру? Загрузите это изображение, чтобы поделиться в социальных сетях или для красивой презентации! "
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Создать"
 
 msgid "SELECT LANGUAGE"
 msgstr "ВЫБЕРИТЕ ЯЗЫК"
@@ -1853,6 +1848,14 @@ msgstr "Краткий текст, используемый для направ�
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Название раздела фотографий на домашней странице Ю-Репорт"
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Место для этого ответа"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "ID видео YouTube для того, как присоединиться к разделу Ю-Репорт"
 
@@ -1931,6 +1934,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "Идентификатор пикселя Facebook для этой организации (необязательно)"
 
 msgid "The Instagram username for this organization"
+msgstr "Instagram аккаунт этой организации"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Instagram аккаунт этой организации"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -2057,6 +2065,14 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Создать"
+
+#~ msgid "Save Changes"
+#~ msgstr "Сохранить изменения"
 
 #~ msgid "Photos"
 #~ msgstr "Фотографии"

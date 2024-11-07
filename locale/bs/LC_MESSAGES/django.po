@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -783,8 +783,8 @@ msgstr "Pošalji"
 msgid "Form"
 msgstr "Formular"
 
-msgid "Save Changes"
-msgstr "Sačuvaj promjene"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1227,11 +1227,6 @@ msgstr "Eksportuj i podijeli"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Želiš podijeliti ovo? Preuzmi ovu sliku, koju možeš podijeliti ili iskoristiti za prezentaciju."
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Kreiraj"
 
 msgid "SELECT LANGUAGE"
 msgstr ""
@@ -1983,6 +1978,14 @@ msgstr "Kratak tekst kojim se posjetitelji upućuju da se pridruže U-Reportu"
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Naslov foto sekcije na U Report naslovnoj strani"
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Lokacija za ovaj odgovor"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Youtube video ID o tome kako se pridružiti U-Reportu"
 
@@ -2061,6 +2064,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "ID Facebook Pixela vaše organizacije (opciono)"
 
 msgid "The Instagram username for this organization"
+msgstr "Instagram user name organizacije"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Instagram user name organizacije"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -2187,6 +2195,14 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Kreiraj"
+
+#~ msgid "Save Changes"
+#~ msgstr "Sačuvaj promjene"
 
 #~ msgid "Photos"
 #~ msgstr "Slike"

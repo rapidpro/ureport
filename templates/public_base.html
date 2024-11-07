@@ -332,10 +332,8 @@
     <div class="bg-black text-white py-home pl-home pr-16 h-auto">
         <a href="{% url 'public.opinions' %}" class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
         <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
-        {% if org|config:"has_new_brand" %}
-            {% if org|config:"is_global" and org.subdomain == "" %}
-                <a href="https://www.voicesofyouth.org/voices-youth-co-creation-opportunities-young-people" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Co-Create" %}</a>
-            {% endif %}
+        {% if org|config:"has_new_brand" and org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
+            <a href='{{ org|config:"extra_menu_link" }}' class="hover:text-gray-600 block mt-4 font-bold">{{ org|config:"extra_menu_text" }}</a>
         {% endif %}
         <a href="{% if org|config:"is_global" and org.subdomain == "" %}https://www.voicesofyouth.org/aboutureport{% else %}{% url 'public.about' %}{% endif %}" class="hover:text-gray-600 block mt-8">{% trans "About" %}</a>
         <a href="{% url 'public.ureporters' %}" class="hover:text-gray-600 block mt-4">{% trans "Engagement" %}</a>
@@ -673,11 +671,11 @@
                                class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                         </div>
                     </div>
-                    {% if org|config:"is_global" and org.subdomain == "" %}
+                    {% if org|config:"has_new_brand" and org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
                         <div class="flex-1 text-center font-bold text-xl flex-center-y">
                             <div>
-                                <a href="https://www.voicesofyouth.org/voices-youth-co-creation-opportunities-young-people"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Co-Create" %}</a>
+                                <a href="{{ org|config:"extra_menu_link" }}"
+                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{{ org|config:"extra_menu_text" }}</a>
                             </div>
                         </div>
                     {% endif %}
@@ -832,7 +830,7 @@
         </a>
         <div class="md:flex justify-center hidden">
             <div style="max-width:150px" class="md:block block">
-                {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" %}
+                {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" and org.language != "kk" %}
                     <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="">
                 {% else %}
                     <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
@@ -971,7 +969,7 @@
     }
   }(document, "script", "twitter-wjs");
 </script>
-{% if org and org|config:"google_tracking_id" %}
+{% if org and org|config:"google_tracking_id" and org|config:"google_tracking_id"|slice:":2" == "UA"  %}
     <script>
       (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -988,7 +986,18 @@
       ga('create', '{{ org|config:"google_tracking_id" }}', 'auto');
       ga('send', 'pageview');
     </script>
+{% elif org and org|config:"google_tracking_id" %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ org|config:"google_tracking_id" }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ org|config:"google_tracking_id" }}');
+    </script>
 {% endif %}
+
 {% block script %}
     <script type="text/javascript">
       // global primary color

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -690,8 +690,8 @@ msgstr "Υποβάλλετε"
 msgid "Form"
 msgstr "Φόρμα"
 
-msgid "Save Changes"
-msgstr "Αποθήκευσε τις αλλαγές"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1121,11 +1121,6 @@ msgstr "Εξαγωγή και Κοινοποίηση"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Θέλετε να πείτε στον κόσμο για αυτό; Κατεβάστε αυτήν την εικόνα για να τη μοιραστείτε εύκολα στα μέσα κοινωνικής δικτύωσης ή για μια όμορφη παρουσίαση!"
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Δημιουργώ"
 
 msgid "SELECT LANGUAGE"
 msgstr "ΕΠΙΛΟΓΗ ΓΛΩΣΣΑΣ"
@@ -1783,6 +1778,14 @@ msgstr "Το σύντομο κείμενο που χρησιμοποιείται
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Το κείμενο παρότρυνσης για συμμετοχή στην επάνω ενότητα του U-Report"
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Η τοποθεσία γι΄αυτή την απάντηση"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Το id του Youtube βίντεο για το πώς να συμμετάσχετε στην ενότητα U-Report"
 
@@ -1859,6 +1862,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "Το id του Facebook Pixel για αυτόν τον οργανισμό (προαιρετικό)"
 
 msgid "The Instagram username for this organization"
+msgstr "Το όνομα χρήστη στο Instagram γι' αυτόν τον οργανισμό"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Το όνομα χρήστη στο Instagram γι' αυτόν τον οργανισμό"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -1981,3 +1989,11 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Δημιουργώ"
+
+#~ msgid "Save Changes"
+#~ msgstr "Αποθήκευσε τις αλλαγές"

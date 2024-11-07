@@ -31,7 +31,12 @@ class FlowResult(models.Model):
         return obj
 
     class Meta:
-        unique_together = ("org", "flow_uuid", "result_uuid")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["org", "flow_uuid", "result_uuid"],
+                name="flows_flowresult_org_id_flow_uuid_result_uuid_5efa8f2d_uniq",
+            )
+        ]
 
 
 class FlowResultCategory(models.Model):

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -692,8 +692,8 @@ msgstr "إدخال"
 msgid "Form"
 msgstr "نموذج"
 
-msgid "Save Changes"
-msgstr "حفظ التغييرات"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1143,11 +1143,6 @@ msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "إنشاء "
 
 msgid "SELECT LANGUAGE"
 msgstr ""
@@ -1856,6 +1851,14 @@ msgstr "النص القصير المستخدم لتوجيه الزائرين ل�
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "الموقع الجغرافي الذي أتى منه هذا الرد "
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -1934,6 +1937,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr ""
 
 msgid "The Instagram username for this organization"
+msgstr "اسم حساب الإنستغرام الخاص بهذه المؤسسة"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "اسم حساب الإنستغرام الخاص بهذه المؤسسة"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -2062,9 +2070,12 @@ msgid "West and Central Africa"
 msgstr ""
 
 #, fuzzy
-#~| msgid "U-Report"
-#~ msgid "Ureport API"
-#~ msgstr "يو-ريبورت"
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "إنشاء "
+
+#~ msgid "Save Changes"
+#~ msgstr "حفظ التغييرات"
 
 #, fuzzy
 #~| msgid "The title for this item"

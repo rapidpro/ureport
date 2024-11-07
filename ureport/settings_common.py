@@ -106,7 +106,8 @@ LANGUAGES = (
     ("hr-hr", "Croatian"),
     ("no", "Norwegian"),
     ("sv-se", "Swedish"),
-    ("ru", "Russia"),
+    ("ru", "Russian"),
+    ("kk", "Kazakh"),
     ("el", "Greek"),
     ("th", "Thai"),
     ("sl", "Slovenian"),
@@ -359,6 +360,24 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="extra_menu_text",
+        field=dict(
+            help_text=_("A short text for the extra menu."),
+            label="Extra Menu Text",
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
+        name="extra_menu_link",
+        field=dict(
+            help_text=_("The link for the extra menu."),
+            label="Extra Menu Link",
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="homepage_join_video_id",
         field=dict(
             help_text=_("The YouTube video ID for how to join U-Report section"),
@@ -565,6 +584,14 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="has_instagram_deeplink",
+        field=dict(
+            help_text=_("The Instagram username should be shown on the join page as deeplink for this organization"),
+            label="Instagram Deeplink",
+            required=False,
+        ),
+    ),
+    dict(
         name="instagram_lightwidget_id",
         field=dict(
             help_text=_("The Instagram widget id from lightwidget.com"),
@@ -742,7 +769,7 @@ INSTALLED_APPS = (
     "ureport.stats",
     "django_countries",
     "rest_framework",
-    "rest_framework_swagger",
+    "drf_yasg",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -884,7 +911,6 @@ GROUP_PERMISSIONS = {
         "orgs.org_edit",
         "orgs.org_home",
         "orgs.org_manage_accounts",
-        "orgs.org_profile",
         "polls.poll.*",
         "polls.pollcategory.*",
         "polls.pollimage.*",
@@ -892,7 +918,6 @@ GROUP_PERMISSIONS = {
         "stories.story.*",
         "stories.storyimage.*",
         "tags.tag.*",
-        "users.user_profile",
     ),
     "Editors": (
         "assets.image.*",
@@ -906,7 +931,6 @@ GROUP_PERMISSIONS = {
         "news.newsitem.*",
         "news.video.*",
         "orgs.org_home",
-        "orgs.org_profile",
         "polls.poll.*",
         "polls.pollcategory.*",
         "polls.pollimage.*",
@@ -914,7 +938,6 @@ GROUP_PERMISSIONS = {
         "stories.story.*",
         "stories.storyimage.*",
         "tags.tag.*",
-        "users.user_profile",
     ),
     "Global": ("countries.countryalias.*",),
 }
@@ -1082,7 +1105,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     "stats_activities_squash": {
         "task": "stats.squash_contact_activities_counts",
-        "schedule": timedelta(hours=6),
+        "schedule": timedelta(minutes=15),
         "relative": True,
         "options": {"queue": "slow"},
     },
@@ -1303,6 +1326,14 @@ COUNTRY_FLAGS_SITES = [
         region="ECARO",
     ),
     dict(
+        name="Dominican Republic",
+        host="//republicadominicana.ureport.in/",
+        flag="",
+        countries_codes=["DOM"],
+        count_link="https://republicadominicana.ureport.in/count/",
+        region="LACRO",
+    ),
+    dict(
         name="DRC",
         host="//drc.ureport.in/",
         flag="flag_drc.png",
@@ -1407,6 +1438,14 @@ COUNTRY_FLAGS_SITES = [
         region="WCARO",
     ),
     dict(
+        name="Guinea Ecuatorial",
+        host="//guineaecuatorial.ureport.in/",
+        flag="flag_guineaecuatorial.png",
+        countries_codes=["GNQ"],
+        count_link="http://guineaecuatorial.ureport.in/count/",
+        region="WCARO",
+    ),
+    dict(
         name="Haiti",
         host="//haiti.ureport.in/",
         flag="flag_haiti.png",
@@ -1479,6 +1518,14 @@ COUNTRY_FLAGS_SITES = [
         region="MENA",
     ),
     dict(
+        name="Kazakhstan",
+        host="//kazakhstan-ru.ureport.in/",
+        flag="",
+        countries_codes=["KAZ"],
+        count_link="http://kazakhstan-ru.ureport.in/count/",
+        region="ECARO",
+    ),
+    dict(
         name="Kenya",
         host="//yunitok.in/",
         flag="flag_kenya.png",
@@ -1527,7 +1574,7 @@ COUNTRY_FLAGS_SITES = [
         region="WCARO",
     ),
     dict(
-        name="Macedona",
+        name="North Macedonia",
         host="//mk.ureport.in/",
         flag="flag_mk.png",
         countries_codes=["MKD"],
@@ -1788,7 +1835,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_slovenija.png",
         countries_codes=["SVN"],
         count_link="http://slovenija.ureport.in/count/",
-        region="NATCOM  ",
+        region="NATCOM",
     ),
     dict(
         name="Solomon Islands",
@@ -2020,4 +2067,8 @@ LOGGING = {
             "propagate": False,
         },
     },
+}
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {"basic": {"type": "basic"}},
 }

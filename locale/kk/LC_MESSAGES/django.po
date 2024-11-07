@@ -1,0 +1,1947 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Askhat Makitov, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
+"PO-Revision-Date: 2021-03-30 14:28+0000\n"
+"Last-Translator: Askhat Makitov, 2024\n"
+"Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "The name of this category"
+msgstr "Осы санаттың атауы"
+
+msgid "An optional image that can describe this category"
+msgstr "Осы санатты сипаттай алатын қосымша сурет"
+
+msgid "The organization this category applies to"
+msgstr "Осы санат қолданылатын ұйым"
+
+msgid "Categories"
+msgstr "Санаттар"
+
+msgid "The name to describe this image"
+msgstr "Осы суретті сипаттайтын атау"
+
+msgid "The category this image represents"
+msgstr "Осы сурет сипаттайтын санат"
+
+msgid "The image file to use"
+msgstr "Пайдаланылатын сурет файлы"
+
+msgid "The human readable name for this content type"
+msgstr "Осы контент түрінің адам оқи алатын атауы"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Үлгілік тегтермен бірге пайдаланылатын осы контент түрін сәйкестендіретін слаг"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "Осы контент түрі сайтта қай жерде қолданылатынының және қалай көрсетілетінінің сипаттамасы"
+
+msgid "Whether this content should include a title"
+msgstr "Осы контентте тақырып болуы керек пе"
+
+msgid "Whether this content should include an image"
+msgstr "Осы контентте сурет болуы керек пе"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Осы контентте күрделі HTML редакторын пайдалану керек пе"
+
+msgid "Whether this content should include a summary field"
+msgstr "Осы контентте қорытындылау алаңы болуы керек пе"
+
+msgid "Whether this content should include a link"
+msgstr "Осы контентте сілтеме болуы керек пе"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Осы контент қосымша суреттерді, яғни галереяны жүктеп салуға рұқсат беруі керек пе"
+
+msgid "Whether this content has a color field"
+msgstr "Осы контентте түс алаңы бар ма"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Осы контент YouTube идентификаторын орнатуға рұқсат беруі керек пе"
+
+msgid "Whether this content should allow tags"
+msgstr "Осы контент тегтерге рұқсат беруі керек пе"
+
+msgid "Content Type"
+msgstr "Контент түрі"
+
+msgid "The category, or type for this content block"
+msgstr "Осы контент блогының санаты немесе түрі"
+
+msgid "The title for this block of content, optional"
+msgstr "Осы контент блогының тақырыбы, міндетті емес"
+
+msgid "The summary for this item, should be short"
+msgstr "Осы нысанның мазмұндамасы, қысқаша болуы керек"
+
+msgid "The body of text for this content block, optional"
+msgstr "Осы контент блогына арналған мәтіннің негізгі бөлігі, міндетті емес"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Осы контент блогымен бірге көрсетілетін кез келген сурет, міндетті емес"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Сурет үшін пайдаланылатын фон түсі, форматы: # rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Осы контент блогымен байланыстырылуы керек кез келген сілтеме, міндетті емес"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Осы нысанмен байланыстырылу керек YouTube бейнесінің идентификаторы"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Осы контент блогына арналған бос орындармен бөлінген кез келген тегтер, кеңейтілген сүзгілеу үшін пайдалануға болады, міндетті емес"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Осы блок үшін басымдық, басымдығы жоғары блоктар бірінші болады"
+
+msgid "The organization this content block belongs to"
+msgstr "Осы контент блогы тиесілі ұйым"
+
+msgid "Gallery"
+msgstr "Галерея"
+
+msgid "Add Image"
+msgstr "Сурет қосу"
+
+msgid "Search"
+msgstr "Іздеу"
+
+msgid "Add"
+msgstr "Қосу"
+
+msgid "Content Types"
+msgstr "Контент түрлері"
+
+msgid "Link Slug"
+msgstr "Сілтеме слагы"
+
+msgid "The slug or word to use in the link of the page"
+msgstr "Парақшаның сілтемесінде қолданылатын слаг немесе сөз"
+
+msgid "Content Blocks"
+msgstr "Контент блоктары"
+
+#, python-format
+msgid "%s Blocks"
+msgstr " %sблоктары"
+
+#, python-format
+msgid "Edit %s"
+msgstr " %sөзгерту "
+
+#, python-format
+msgid "Create %s"
+msgstr "%s жасау"
+
+msgid "Create Content Block"
+msgstr "Контент блогын жасау"
+
+msgid "Your first name"
+msgstr "Сіздің есіміңіз"
+
+msgid "Your last name"
+msgstr "Сіздің тегіңіз"
+
+msgid "Your email address"
+msgstr "Сіздің электрондық поштаңыздың мекенжайы"
+
+msgid "Your password, at least eight letters please"
+msgstr "Сіздің кілтсөзіңіз, өтінеміз, кем дегенде сегіз әріп"
+
+msgid "That email address is already used"
+msgstr "Осы электрондық пошта мекенжайы бұрын қолданылған"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Кілтсөздер кемінде 8 әріптен тұруы керек"
+
+msgid "This domain is used for subdomains"
+msgstr "Осы домен қосалқы домендер үшін пайдаланылады"
+
+msgid "Name"
+msgstr "Атауы"
+
+msgid "The name of this organization"
+msgstr "Осы ұйымның атауы"
+
+msgid "The logo that should be used for this organization"
+msgstr "Осы ұйым үшін пайдаланылуы тиіс логотип"
+
+msgid "Administrators"
+msgstr "Әкімшілер"
+
+msgid "The administrators in your organization"
+msgstr "Ұйымыңыздағы әкімшілер"
+
+msgid "Viewers"
+msgstr "Көрушілер"
+
+msgid "The viewers in your organization"
+msgstr "Ұйымыңыздағы көрушілер"
+
+msgid "Editors"
+msgstr "Редакторлар"
+
+msgid "The editors in your organization"
+msgstr "Ұйымыңыздағы редакторлар"
+
+msgid "Language"
+msgstr "Тіл"
+
+msgid "The main language used by this organization"
+msgstr "Осы ұйым қолданатын негізгі тіл"
+
+msgid "Subdomain"
+msgstr "Қосалқы домен"
+
+msgid "This subdomain is not available"
+msgstr "Бұл қосалқы домен бос емес"
+
+msgid "The subdomain for this organization"
+msgstr "Осы ұйымның қосалқы домені"
+
+msgid "Domain"
+msgstr "Домен"
+
+msgid "This domain is not available"
+msgstr "Бұл домен бос емес"
+
+msgid "The custom domain for this organization"
+msgstr "Осы ұйымға арналған арнаулы домен"
+
+msgid "Timezone"
+msgstr "Уақыт белдеуі"
+
+msgid "The timezone your organization is in."
+msgstr "Ұйымыңыз орналасқан уақыт белдеуі"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "Осы ұйыммен байланысты конфигурация туралы ақпаратты сақтау үшін пайдаланылады JSON blob-нысаны"
+
+msgid "Administrator"
+msgstr "Әкімші"
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Viewer"
+msgstr "Көруші"
+
+msgid "Org"
+msgstr "Ұйым"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Аккаунт көруге шақыру алған ұйым"
+
+msgid "Email"
+msgstr "Электрондық пошта"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Көрушінің шақыру жіберілетін электрондық поштасы"
+
+msgid "Secret"
+msgstr "Құпия"
+
+msgid "a unique code associated with this invitation"
+msgstr "осы шақырумен байланысты бірегей код"
+
+msgid "User Role"
+msgstr "Пайдаланушы рөлі"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s шақыру"
+
+msgid "Banner"
+msgstr "Баннер"
+
+msgid "Pattern"
+msgstr "Паттерн"
+
+msgid "The organization in which the image will be used"
+msgstr "Сурет пайдаланылатын ұйым"
+
+msgid "The name to describe this background"
+msgstr "Осы фонды сипаттайтын атау"
+
+msgid "Background type"
+msgstr "Фон түрі"
+
+msgid "The image file"
+msgstr "Сурет файлы"
+
+msgid "The API token for this backend"
+msgstr "Осы сервер бөлігіне арналған API-токен"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+
+msgid "You are invited to join {{org.name}}."
+msgstr "Сіз {{org.name}} қосылуға шақыру алдыңыз"
+
+msgid "Click this link to join"
+msgstr "Қосылу үшін мына сілтемені басыңыз"
+
+msgid "Edit"
+msgstr "Өзгерту"
+
+msgid "Manage Backends"
+msgstr "Сервер бөлігін басқару"
+
+msgid "Manage Users"
+msgstr "Пайдаланушыларды басқару"
+
+msgid "Accounts"
+msgstr "Аккаунттар"
+
+msgid "Admins"
+msgstr "Әкімшілер"
+
+msgid "Remove"
+msgstr "Алып тастау"
+
+msgid "You must have at least one administator"
+msgstr "Сізде кем дегенде бір әкімші болуы керек"
+
+msgid "Select your Organization"
+msgstr "Ұйымыңызды таңдаңыз"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Сіздің аккаунтыңыз ұйыммен байланысты емес. Өтінеміз, әкімшіге хабарласыңыз"
+
+msgid "Your Organization"
+msgstr "Сіздің ұйымыңыз"
+
+msgid "Invite people to your organization"
+msgstr "Ұйымыңызға адамдарды шақырыңыз"
+
+msgid "User group"
+msgstr "Пайдаланушылар тобы"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Сіз енгізген электрондық пошталардың бірі жарамсыз"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "%(name)s аккаунтарын басқару"
+
+msgid "Create"
+msgstr "Жасау"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Шақыру сілтемесі жарамсыз. Өтінеміз, ұйымыңыздың әкімшісіне хабарласыңыз"
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "%(name)s қосылу"
+
+msgid "Join"
+msgstr "Қосылу"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Шақыру сілтемесінің мерзімі аяқталған. Өтінеміз, ұйымыңыздың әкімшісіне хабарласыңыз"
+
+msgid "Task"
+msgstr "Тапсырма"
+
+msgid "Tasks"
+msgstr "Тапсырмалар"
+
+msgid "Only PDF files are supported."
+msgstr "Тек PDF-файлдар рұқсат етілген"
+
+msgid "The title for this story"
+msgstr "Осы әңгіменің тақырыбы"
+
+msgid "Whether this story is featured"
+msgstr "Осы әңгіме таңдаулы бола ма"
+
+msgid "The summary for the story"
+msgstr "Әңгіменің қысқаша мазмұндамасы"
+
+msgid "The body of text for the story"
+msgstr "Әңгіме мәтінінің негізгі бөлігі"
+
+msgid "The writer of the story"
+msgstr "Әңгіменің авторы"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Әңгімені жариялау үшін mp3 файлға сілтеме"
+
+msgid "The PDF report to attach"
+msgstr "Қосымша түрінде жіберілетін PDF-есеп"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "Осы әңгімемен байланыстырылуы керек YouTube бейнесінің идентификаторы (YouTube URL-мекенжайында v= артында және & алдында келетін мәтін)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Осы әңгімеге арналған бос орындармен бөлінген кез келген тегтер, кеңейтілген сүзгілеу үшін пайдалануға болады, міндетті емес"
+
+msgid "The category for this story"
+msgstr "Осы әңгіменің санаты"
+
+msgid "The organization this story belongs to"
+msgstr "Осы әңгіме тиесілі ұйым"
+
+msgid "Stories"
+msgstr "Әңгімелер"
+
+msgid "The story to associate to"
+msgstr "Байланыстырылатын әңгіме"
+
+msgid "Yes"
+msgstr "Иә"
+
+msgid "No"
+msgstr "Жоқ"
+
+msgid "Story Images"
+msgstr "Әңгімеге қатысты суреттер"
+
+#, python-format
+msgid "Image %d"
+msgstr "Сурет %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Әңгіме парақшасында және алдын ала қарау режимінде көрсетілетін сурет. (міндетті емес)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Әңгіме парақшасында және алдын ала қарау режимінде көрсетілетін сурет (міндетті емес)"
+
+msgid "The name of this tag"
+msgstr "Осы тегтің аты"
+
+msgid "Delete"
+msgstr "Жою"
+
+msgid "Remove Item?"
+msgstr "Нысанды алып тастау керек пе?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Оны алып тастаған соң, ол мәңгілікке жойылады. Қалпына келтірудің ешқандай жолы жоқ"
+
+msgid "Cancel"
+msgstr "Болдырмау"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+
+msgid "Previous"
+msgstr "Алдыңғы"
+
+msgid "Next"
+msgstr "Келесі"
+
+msgid "edit"
+msgstr "өзгерту"
+
+msgid "Sign in"
+msgstr "Кіру"
+
+msgid "Login"
+msgstr "Логин"
+
+msgid "Forgot Password?"
+msgstr "Кілтсөзді ұмыттыңыз ба?"
+
+msgid "Token Expired"
+msgstr "Токеннің мерзімі аяқталған"
+
+msgid "Login Failure"
+msgstr "Жүйеге кіру сәтсіз болды"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Мүмкіндігінше, төмендегі нысанды толтырып, құпия сөзді электрондық пошта арқылы қалпына келтіре аласыз"
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Құпия сөзіңізді қалпына келтіру үшін веб-сайт әкімшісіне хабарласыңыз"
+
+msgid "Email Address"
+msgstr "Электрондық пошта"
+
+msgid "Recover"
+msgstr "Қалпына келтіру"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Тіркелу кезінде пайдаланған электрондық поштаңызды енгізіңіз, біз сізге құпия сөзіңізді қалпына келтіруге көмектесеміз"
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+
+msgid "New Password"
+msgstr "Жаңа құпия сөз"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Құпия сөздер кемінде 8 таңбадан тұруы керек, оның ішінде бір бас әріп, бір кіші әріп және бір сан болуы қажет"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Сіз бұл құпия сөзді өткен жылы қолданғансыз, басқа жаңа құпия сөзді енгізіңіз."
+
+msgid "Password"
+msgstr "Құпия сөз"
+
+msgid "Confirm Password"
+msgstr "Кілтсөзді растау"
+
+msgid "Please enter your password to save changes."
+msgstr "Өтінеміз, өзгерістерді сақтау үшін кілтсөзіңізді енгізіңіз."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Осы алаңды толтыру арқылы жаңа кілтсөзді растаңыз"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Жаңа кілтсөз оны растаумен сәйкес келмейді"
+
+msgid "Your Email"
+msgstr "Сіздің электрондық поштаңыз"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Электрондық поштаны қалпына келтіру қарастырылмаған, кілтсөзді қолмен қалпына келтіру үшін, өтінеміз, веб-сайт әкімшісіне хабарласыңыз."
+
+msgid "Current Password"
+msgstr "Қазіргі кілтсөз"
+
+msgid "Your current password"
+msgstr "Қазіргі кілтсөзіңіз"
+
+msgid "Your new password."
+msgstr "Жаңа кілтсөзіңіз"
+
+msgid "Confirm new Password"
+msgstr "Жаңа кілтсөзді растау"
+
+msgid "Confirm your new password."
+msgstr "Жаңа кілтсөзіңізді растаңыз"
+
+msgid "Please enter your password to save changes"
+msgstr "Өтінеміз, өзгерістерді сақтау үшін кілтсөзіңізді енгізіңіз"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Жаңа кілтсөзіңізді осы жерге енгізу арқылы растаңыз"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Жаңа кілтсөзіңіз және оны растау сәйкес емес, әрекетті қайталаңыз"
+
+msgid "New user created successfully."
+msgstr "Жаңа пайдаланушы сәтті тіркелді"
+
+msgid "Groups"
+msgstr "Топтар"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Пайдаланушылар тек өз тобына берілген рұқсаттарды ғана алады"
+
+msgid "Set the user's initial password here."
+msgstr "Пайдаланушының бастапқы кілтсөзін мұнда орнатыңыз"
+
+msgid "Last Login"
+msgstr "Жүйеге соңғы рет кірген кез"
+
+msgid "Is Active"
+msgstr "Белсенді"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Осы пайдаланушыға сайтқа кіруге рұқсат етілген бе"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Пайдаланушылар тек өз тобына берілген рұқсаттарды ғана алады"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Жаңа кілтсөзді мұнда енгізу арқылы пайдаланушының кілтсөзін ауыстыруға болады"
+
+msgid "Username"
+msgstr "Пайдаланушы аты"
+
+msgid "Your password"
+msgstr "Сіздің кілтсөзіңіз"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Жаңа кілтсөз орнатқыңыз келсе, оны мұнда енгізіңіз"
+
+msgid "Confirm New Password"
+msgstr "Жаңа кілтсөзді растау"
+
+msgid "Confirm your new password"
+msgstr "Жаңа кілтсөзіңізді растаңыз"
+
+msgid "Edit your profile"
+msgstr "Парақшаңызды өзгерту"
+
+msgid "Password Recovery"
+msgstr "Кілтсөзді ауыстыру"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Әрі қарайғы нұсқаулары бар электрондық хат аккаунтыңызға жіберілді"
+
+msgid "Password Recovery Request"
+msgstr "Кілтсөзді ауыстыру туралы өтініш"
+
+msgid "Pick a new password"
+msgstr "Жаңа кілтсөз таңдаңыз"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Кілтсөзіңіз сәтті жаңартылды, рахмет"
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Сіз қазір жүйеге %s ретінде кірдіңіз"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Кілтсөз сәтті жаңартылды. Енді жүйеге жаңа кілтсөзіңізбен кіре аласыз"
+
+msgid "Reset your Password"
+msgstr "Кілтсөзіңізді ауыстырыңыз"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Қауіпсіздік мақсатында сілтемеңіздің мерзімі аяқталды. Электрондық поштаңызды осы жерге енгізу арқылы процесті қайта бастаңыз"
+
+msgid "Submit"
+msgstr "Жіберу"
+
+msgid "Form"
+msgstr "Пішін"
+
+msgid "Save"
+msgstr ""
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Жаңа %s жасалды."
+
+#, python-format
+msgid "Import %s"
+msgstr "%s импорттау"
+
+msgid "Back to Website"
+msgstr "Веб-сайтқа оралу"
+
+msgid "Welcome, "
+msgstr "Қош келдіңіз,"
+
+msgid "Logout"
+msgstr "Жүйеден шығу"
+
+msgid "Opinions"
+msgstr "Пікірлер"
+
+msgid "Bots"
+msgstr "Боттар"
+
+msgid "Users"
+msgstr "Пайдаланушылар"
+
+msgid "Settings"
+msgstr "Баптаулар"
+
+msgid "Pages"
+msgstr "Парақшалар"
+
+msgid "Landing Pages"
+msgstr "Лендинг-парақшалар"
+
+msgid "Jobs"
+msgstr "Жұмыстар"
+
+msgid "Tags"
+msgstr "Тегтер"
+
+msgid "Partners Logos"
+msgstr "Серіктестердің логотиптері"
+
+msgid "Categories Images"
+msgstr "Суреттердің санаттары"
+
+msgid "News Items"
+msgstr "Жаңалықтар нысандары"
+
+msgid "Orgs"
+msgstr "Ұйымдар"
+
+msgid "Images"
+msgstr "Суреттер"
+
+msgid "About"
+msgstr "Туралы"
+
+msgid "Engagement"
+msgstr "Әрекеттестік"
+
+msgid "Reports"
+msgstr "Есептер"
+
+msgid "Category Images"
+msgstr "Суреттердің санаттары"
+
+msgid "+ New "
+msgstr "+ Жаңа"
+
+msgid "+ New Page"
+msgstr "+ Жаңа парақша"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Әкімші"
+
+msgid "Configuration"
+msgstr "Конфигурация"
+
+msgid "Content"
+msgstr "Контент"
+
+msgid "Country Aliases"
+msgstr "Елдің қосалқы атаулары"
+
+msgid "Job Sources"
+msgstr "Жұмыс көздері"
+
+msgid "Jobs Content"
+msgstr "Жұмыстардың контенты"
+
+msgid "About Content"
+msgstr "Контент туралы"
+
+msgid "Videos"
+msgstr "Бейнелер"
+
+msgid "Contact Us Content"
+msgstr "Бізге хабарласыңыз контенті"
+
+msgid "Missions Content"
+msgstr "Миссиялар контенті"
+
+msgid "Terms & Conditions"
+msgstr "Шарттар мен талаптар"
+
+msgid "U-Reporters Content"
+msgstr "U-Reporters контенты"
+
+msgid "Join &amp; Engage Content"
+msgstr "&amp қосылу; Контентпен әрекеттестік"
+
+msgid "Join Steps Content"
+msgstr "Қосылу қадамдары контенті"
+
+msgid "Additional Menu"
+msgstr "Қосымша мәзір"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "ЕЛІҢІЗДІ ТАҢДАҢЫЗ"
+
+msgid "Join Now"
+msgstr "Қазір қосылыңыз"
+
+msgid "READ MORE"
+msgstr "ӘРІ ҚАРАЙ ОҚУ"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "ӘРЕКЕТТЕСТІКТІ ЗЕРТТЕУ"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+
+msgid "Follow this step by step guide"
+msgstr "Осы қадам-қадамдық нұсқаулықты орындаңыз"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+
+msgid "Back"
+msgstr "Артқа"
+
+msgid "Select bots"
+msgstr "Боттарды таңдау"
+
+msgid "View public page"
+msgstr "Қосымша мәзір"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "СОҢҒЫ ХАБАРЛАМАЛАР"
+
+msgid "Backends"
+msgstr "Артқы жүйелер"
+
+msgid "You can resend an invite using the field above"
+msgstr "Жоғарыдағы кестен пайдалана отырып, шақыруды қайта жібере аласыз"
+
+msgid "Add os Select tags"
+msgstr ""
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "+ New Poll"
+msgstr "+ Жаңа сауалнама"
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr "Жаңа сауалнаманы бастапқы синхрондауды әр 10 минут сайын жасау жоспарланған"
+
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr "Енді ескі сауалнамалар үшін синхрондау жасалмайды, әрекеттер мұрағатталған"
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr "Негізгі сауалнаманы синхрондауды 20 минут сайын жасау жоспарланған"
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr "Соңғы сауалнамаларды синхрондауды әр 60 минут сайын жасау жоспарланған"
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "Сауалнамаларды синхрондауды әр 24 сағат сайын жасау жоспарланған"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Синхрондау жоспарланбаған, белсенді емес"
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr "Синхрондау жоспарланбаған, сауалнама ағыны жоқ"
+
+msgid "Preview results"
+msgstr "Нәтижелерді алдын ала көру"
+
+msgid "Refresh Results"
+msgstr "Нәтижелерді жаңарту"
+
+msgid "Partners"
+msgstr "Серіктестер"
+
+msgid "MORE POLLS"
+msgstr "КӨБІРЕК САУАЛНАМАЛАР"
+
+msgid "FILTER"
+msgstr "СҮЗГІ"
+
+msgid "All"
+msgstr "Барлығы"
+
+msgid "POLL LIST"
+msgstr "САУАЛНАМАЛАР ТІЗІМІ"
+
+msgid "All polls from most recent to oldest"
+msgstr "Ең соңғысынан ең ескісіне дейін барлық сауалнамалар"
+
+msgid "ARCHIVED STORIES"
+msgstr "МҰРАҒАТТАЛҒАН ӘҢГІМЕЛЕР"
+
+msgid "LIST"
+msgstr "ТІЗІМ"
+
+msgid "Send"
+msgstr "Жіберу"
+
+msgid "to"
+msgstr "қайда"
+
+msgid "LATEST OPINION"
+msgstr "СОҢҒЫ ПІКІР"
+
+msgid "VIEW FULL RESULTS"
+msgstr "ТОЛЫҚ НӘТИЖЕЛЕРДІ КӨРУ"
+
+msgid "U-REPORTERS IN"
+msgstr "ҚАЗАҚСТАНДАҒЫ U-REPORTERS"
+
+msgid "PARTNERING WITH"
+msgstr "СЕРІКТЕСТІКТЕ "
+
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
+
+msgid "IN"
+msgstr "САНЫ"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ДҮНИЕ ЖҮЗІНДЕГІ"
+
+msgid "AGES"
+msgstr "ЖАС САНАТТАРЫ"
+
+msgid "Available bots"
+msgstr "Қолжетімді боттар"
+
+msgid "More bots"
+msgstr "Көбірек боттар"
+
+msgid "Join U-Report, Your voice matters."
+msgstr "U-Report қатарына қосылыңыз, Сіздің дауысыңыз маңызды."
+
+msgid "FEATURED STORY"
+msgstr "ТАҢДАУЛЫ ӘҢГІМЕ"
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Біз - бүкіл әлемдегі жастардың өмірін өзгертуге арналған  жаһандық платформаның бір бөлігіміз."
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "U-Report жастарға өздері үшін маңызды мәселелер туралы сөйлесуге және өзара ұйымдасуға қалай мүмкіндік беретіні туралы көбірек біліңіз."
+
+msgid "LEARN MORE"
+msgstr "КӨБІРЕК БІЛУ "
+
+msgid "Visit"
+msgstr "Барып көру"
+
+msgid "How would you like to join?"
+msgstr "Қалай қосылғыңыз келеді?"
+
+msgid "Text"
+msgstr "Мәтін"
+
+msgid "PAGE"
+msgstr "ПАРАҚША"
+
+msgid "SEARCH"
+msgstr "ІЗДЕУ"
+
+msgid "No results found"
+msgstr "Еш нәтиже табылмады"
+
+msgid "Unpublished poll preview. Click Edit to publish it"
+msgstr "Жарияланбаған сауалнаманы алдын ала көру. Оны жариялау үшін Өзгерту түймесін басыңыз"
+
+msgid "Published poll. Click Edit to unpublish it"
+msgstr "Жарияланған сауалнама. Жариялаудан бас тарту үшін Өзгерту түймесін басыңыз"
+
+msgid "Poll has not synced yet to be displayed to the public"
+msgstr "Көпшілікке көрсету үшін сауалнама әлі синхрондалған жоқ"
+
+msgid "RESPONDERS"
+msgstr "ЖАУАП БЕРУШІЛЕР"
+
+msgid "RESPONSE RATE"
+msgstr "ЖАУАП БЕРГЕНДЕР ҮЛЕСІ"
+
+msgid "TOTAL RESPONDERS"
+msgstr "ЖАЛПЫ ЖАУАП БЕРГЕНДЕР САНЫ"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s қатысқандардың %(polled)s жауап берді"
+
+msgid "ALL"
+msgstr "БАРЛЫҒЫ"
+
+msgid "AGE"
+msgstr "ЖАС САНАТТАРЫ"
+
+msgid "GENDER"
+msgstr "ЖЫНЫСЫ"
+
+msgid "LOCATION"
+msgstr "ОРНАЛАСҚАН ЖЕРІ"
+
+msgid "Written by:"
+msgstr "Жазған:"
+
+msgid "No reports published yet"
+msgstr "Әзірге есептер жарияланған жоқ"
+
+msgid "REPORT"
+msgstr "ЕСЕП"
+
+msgid "STORY"
+msgstr "ӘҢГІМЕ"
+
+msgid "Download Report"
+msgstr "Есепті жүктеп алу"
+
+msgid "Even"
+msgstr "Тіпті"
+
+msgid "State"
+msgstr "Облыс"
+
+msgid "Other"
+msgstr "Басқа"
+
+msgid "District"
+msgstr "Аудан"
+
+msgid "Participation Level"
+msgstr "Қатысу деңгейі"
+
+msgid "Responders"
+msgstr "Жауап берушілер"
+
+msgid "Reporters in"
+msgstr "Репортерлер"
+
+msgid "Results"
+msgstr "Нәтижелер"
+
+msgid "*Other answers include"
+msgstr "*Басқа жауаптар мыналарды қамтиды"
+
+msgid "Population"
+msgstr "Халық"
+
+msgid "Registered in"
+msgstr "Тіркелген"
+
+msgid "Density"
+msgstr "Тығыздығы"
+
+msgid "total"
+msgstr "Жалпы"
+
+msgid "of"
+msgstr "алғандағы"
+
+msgid "the"
+msgstr "саны"
+
+msgid "OVERALL STATISTICS"
+msgstr "ЖАЛПЫ СТАТИСТИКА"
+
+msgid "THIS YEAR"
+msgstr "БИЫЛҒЫ ЖЫЛЫ"
+
+msgid "AVG RESPONSE RATE"
+msgstr "ЖАУАП БЕРГЕНДЕРДІҢ ОРТАША ҮЛЕСІ"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS АЙМАҚ БОЙЫНША"
+
+msgid "FILTER RESULTS"
+msgstr "НӘТИЖЕЛЕРДІ СҮЗГІЛЕУ"
+
+msgid "Charts only visible for logged in admins"
+msgstr "Диаграммалар жүйеге кірген әкімшілер үшін ғана көрінеді"
+
+msgid "Export and Share"
+msgstr "Экспорттау және бөлісу"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "Осы туралы бүкіл әлемге айтып бергіңіз келе ме? Әлеуметтік желіде оңай бөлісу үшін немесе әдемі презентация жасау үшін осы суретті жүктеп алыңыз!"
+
+msgid "SELECT LANGUAGE"
+msgstr "ТІЛДІ ТАҢДАУ"
+
+msgid "SELECT COUNTRY"
+msgstr "ЕЛДІ ТАҢДАУ"
+
+msgid "Custom pages"
+msgstr "Арнаулы парақшалар"
+
+msgid "Landing pages"
+msgstr "Лендинг-парақшалар"
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "Қоғамға оңды өзгерістер енгізу үшін жастарды қалай тартатынымыз туралы сандар айтып береді."
+
+msgid "Polled"
+msgstr "Сауалнама жүргізілді"
+
+msgid "Reporters"
+msgstr "Репортерлер"
+
+msgid "Top Region"
+msgstr "Үздік аймақ"
+
+msgid "January"
+msgstr "Қаңтар"
+
+msgid "February"
+msgstr "Ақпан"
+
+msgid "March"
+msgstr "Наурыз"
+
+msgid "April"
+msgstr "Сәуір"
+
+msgid "May"
+msgstr "Мамыр"
+
+msgid "June"
+msgstr "Маусым"
+
+msgid "July"
+msgstr "Шілде"
+
+msgid "August"
+msgstr "Тамыз"
+
+msgid "September"
+msgstr "Қыркүйек"
+
+msgid "October"
+msgstr "Қазан"
+
+msgid "November"
+msgstr "Қараша"
+
+msgid "December"
+msgstr "Желтоқсан"
+
+msgid "Jan"
+msgstr "Қаңтар"
+
+msgid "Feb"
+msgstr "Ақпан"
+
+msgid "Mar"
+msgstr "Наурыз"
+
+msgid "Apr"
+msgstr "Сәуір"
+
+msgid "Jun"
+msgstr "Маусым"
+
+msgid "Jul"
+msgstr "Шілде"
+
+msgid "Aug"
+msgstr "Тамыз"
+
+msgid "Sep"
+msgstr "Қыркүйек"
+
+msgid "Oct"
+msgstr "Қазан"
+
+msgid "Nov"
+msgstr "Қараша"
+
+msgid "Dec"
+msgstr "Желтоқсан"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr ""
+
+msgid "Error"
+msgstr "Қате"
+
+msgid "Enter Dashboard"
+msgstr "Бақылау тақтасын енгізіңіз"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+
+msgid "+ New Story"
+msgstr "+ Жаңа әңгіме"
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "Осы ұйым үшін %s кэш жаңартылды"
+
+msgid "Flag"
+msgstr "Жалау"
+
+msgid "About Partner Logo"
+msgstr "Серіктес логотипі туралы"
+
+msgid "The organization to which the image will be used"
+msgstr "Осы сурет пайдаланылатын ұйым"
+
+msgid "A short descriptive name for this image"
+msgstr "Осы суреттің қысқаша сипаттамалық атауы"
+
+msgid "Image type"
+msgstr "Сурет түрі"
+
+msgid "The priority number for this image among others on a list, high priority comes first"
+msgstr "Тізімдегі басқалардың арасында осы сурет үшін басым нөмір, басымдығы жоғарысы бірінші болады"
+
+msgid "The organization this bot is part of"
+msgstr "Осы бот бір бөлігі болып табылатын ұйым"
+
+msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
+msgstr "Осы бот басты бетте көрсетіле ме, тек ең жоғары басымдыққа ие, ең көбі 3 бот көрсетіледі"
+
+msgid "Whether this bot is hidden on public pages except landing pages"
+msgstr "Осы бот лендинг-парақшалардан басқа баршаға қолжетімді парақшаларда жасырылған ба"
+
+msgid "The title to display for this bot"
+msgstr "Осы бот үшін көрсетілетін тақырып"
+
+msgid "The shortcode, number or bot name of the channel for this bot"
+msgstr "Осы ботқа арналған арнаның қысқа коды, нөмірі немесе бот атауы"
+
+msgid "The keyword for this bot"
+msgstr "Осы ботқа арналған кілтсөз"
+
+msgid "The Facebook bot deeplink, optional"
+msgstr "Facebook ботына апаратын диплинк, міндетті емес"
+
+msgid "The Telegram bot deeplink, optional"
+msgstr "Telegram ботына апаратын диплинк, міндетті емес"
+
+msgid "The Viber bot deeplink, optional"
+msgstr "Viber ботына апаратын диплинк, міндетті емес"
+
+msgid "The WhatsApp bot deeplink, optional"
+msgstr "WhatsApp ботына апаратын диплинк, міндетті емес"
+
+msgid "A short description for this bot, required"
+msgstr "Осы ботқа арналған қысқаша сипаттама, міндетті"
+
+msgid "The priority number for this bot among others on a list, high priority comes first"
+msgstr "Тізімдегі басқалардың арасында осы бот үшін басым нөмір, басымдығы жоғарысы бірінші болады"
+
+msgid "Whether this bot should be shown to the public"
+msgstr "Осы ботты көпшілікке көрсету керек пе"
+
+msgid "Label"
+msgstr "Заттаңба"
+
+msgid "Key"
+msgstr "Кілт"
+
+msgid "Male"
+msgstr "Ер"
+
+msgid "Female"
+msgstr "Әйел"
+
+msgid "Organization"
+msgstr "Ұйым"
+
+msgid "Gender"
+msgstr "Жынысы"
+
+msgid "Gender of the contact"
+msgstr "Байланыс тұлғасының жынысы"
+
+msgid "Born Field"
+msgstr "Туған күні алаңы"
+
+msgid "Occupation Field"
+msgstr "Кәсіп алаңы"
+
+msgid "Registration Date"
+msgstr "Тіркеу күні"
+
+msgid "State Field"
+msgstr "Ел алаңы"
+
+msgid "District Field"
+msgstr "Ауданалаңы"
+
+msgid "Ward Field"
+msgstr "Әкімшілік аудан алаңы"
+
+msgid "Number of items with this counter"
+msgstr "Осы санағыштағы нысандар саны"
+
+msgid "No root user found. Please create a root user"
+msgstr "Шектеусіз құқықтары бар пайдаланушы табылмады. Шектеусіз құқықтары бар пайдаланушыны тіркеңіз"
+
+msgid "The name for our alias"
+msgstr "Лақап атымыздың атауы"
+
+msgid "The title or name to reference this Job source."
+msgstr "Осы Жұмыс көзіне сілтеме жасайтын атау немесе ат"
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr "Тапсырма көзінің түрін таңдаңыз. Twitter, Facebook немесе RSS-арна"
+
+msgid "The full URL to navigate to this Job source."
+msgstr "Осы Жұмыс көзіне өтетін толық URL-мекенжай"
+
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
+msgstr "Twitter үшін твиттерді сайтқа енгізу үшін виджет идентификаторы қажет. Дұрыс виджет идентификаторын алу туралы жоғарыдағы нұсқауларды мұқият оқып шығыңыз"
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr "Жұмыс көздері бетінде таңдаулы жұмыс көздері бірінші болып көрсетіледі."
+
+msgid "The organization this job source is for"
+msgstr "Жұмыс көзіңіз сәтті қосылды"
+
+msgid "Your job source has been added successfully"
+msgstr "Жұмыс көзіңіз сәтті жаңартылды"
+
+msgid "Your job source has been updated successfully"
+msgstr "Жұмыс көзіңіз сәтті жаңартылды"
+
+msgid "The organization this landing page is part of"
+msgstr "Осы лендинг-парақша бір бөлігі болып табылатын ұйым"
+
+msgid "The title to display for this landing page"
+msgstr "Осы лендинг-парақша үшін көрсетілетін тақырып"
+
+msgid "The call to action text for this landing page"
+msgstr "Осы лендинг-парақшаға арналған әрекетке шақыру мәтіні"
+
+msgid "The slug to use on the link for this landing page"
+msgstr "Осы лендинг-парақшаның сілтемесінде қолданылатын слаг"
+
+msgid "The body of text for the landing page"
+msgstr "Лендинг-парақшаға арналған мәтіннің негізгі бөлігі"
+
+msgid "The image file to use for the page"
+msgstr "Осы парақша үшін пайдаланылатын сурет файлы"
+
+msgid "Whether this page should be active to the public"
+msgstr "Осы парақша көпшілік үшін белсенді болуы керек пе"
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr "Бұл - осы әкімшілік шекара үшін OSM идентификаторы"
+
+msgid "The name of our administrative boundary"
+msgstr "Әкімшілік шекарамыздың атауы"
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr "Шекара деңгейі, 0 ел үшін, 1 облыс үшін, 2 аудан үшін"
+
+msgid "The parent to this political boundary if any"
+msgstr "Егер бар болса, осы саяси шекараның түпкі аумағы"
+
+msgid "Geometry"
+msgstr "Геометрия"
+
+msgid "The json representing the geometry type and coordinates of the boundaries"
+msgstr "Шекараның геометрия түрі мен координаттарын көрсететін json"
+
+msgid "The title for this item"
+msgstr "Осы нысанның тақырыбы"
+
+msgid "A short summary description for this item"
+msgstr "Осы нысанның қысқаша мазмұндамасы"
+
+msgid "A link that should be associated with this item"
+msgstr "Осы нысанмен байланыстырылуы керек сілтеме"
+
+msgid "The category this item belongs to"
+msgstr "Осы нысан жататын санат"
+
+msgid "The organization this item belongs to"
+msgstr "Осы нысан тиесілі ұйым"
+
+msgid "The title for this Video"
+msgstr "Осы бейненің тақырыбы"
+
+msgid "A short summary description for this video"
+msgstr "Осы бейненің қысқаша мазмұндамасы"
+
+msgid "The organization this video belongs to"
+msgstr "Осы бейне тиесілі ұйым"
+
+msgid "The name of this poll category"
+msgstr "Осы сауалнама санатының атауы"
+
+msgid "Poll Categories"
+msgstr "Сауалнама санаттары"
+
+msgid "Whether this poll should be visible/hidden on the public site"
+msgstr "Осы сауалнама баршаға қолжетімді сайтта көрініп тұруы/жасырын болуы керек пе"
+
+msgid "The Flow this Poll is based on"
+msgstr "Осы сауалнамаға негіз болған ағын"
+
+msgid "The date to display for this poll. Leave empty to use flow creation date."
+msgstr "Осы сауалнама үшін көрсетілетін күн. Ағын жасалған күнді пайдалану үшін бос қалдырыңыз."
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "Осы сауалнама ағыны RapidPro-да мұрағатталады ма"
+
+msgid "The base language of the flow to use"
+msgstr "Ағынның негізгі қолданылатын тілі"
+
+msgid "The number of polled reporters on this poll"
+msgstr "Осы сауалнамаға қатысқан репортерлер"
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr "Сауалнамада бастапқы нәтижелерді синхрондау аяқтады ма"
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Сауалнама барысынла статистиканы қайта жасауды тоқтату керек пе."
+
+msgid "The title for this Poll"
+msgstr "Осы сауалнаманың тақырыбы"
+
+msgid "The category this Poll belongs to"
+msgstr "Осы сауалнама жататын санат"
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr "Осы сауалнаманы басты бетте көрсету керек пе"
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr "Сауалнама үшін көрсетілетін көрнекі сурет (міндетті емес)"
+
+msgid "The organization this poll is part of"
+msgstr "Осы сауалнаманың бір бөлігі болып табылатын ұйым"
+
+msgid "The title for this response story"
+msgstr "Осы әңгіме-жауаптың тақырыбы"
+
+msgid "The writer of the response story"
+msgstr "Әңгіме-жауаптың авторы"
+
+msgid "The poll to associate to"
+msgstr "Байланыстырылатын сауалнама"
+
+msgid "The poll for this response"
+msgstr "Осы жауап үшін сауалнама"
+
+msgid "The location for this response"
+msgstr "Осы жауаптың орналасқан жері"
+
+msgid "The name of the sender of the message"
+msgstr "Хабарлама жіберушінің аты-жөні"
+
+msgid "The featured response message"
+msgstr "Таңдаулы хабарлама-жауап"
+
+msgid "Dark 1 background and White text"
+msgstr "Қараңғы 1 фон және Ақ мәтін"
+
+msgid "Light 1 background and Black text"
+msgstr "Ашық 1 фон және Қара мәтін"
+
+msgid "Dark 2 background and White text"
+msgstr "Қараңғы 2 фон және Ақ мәтін"
+
+msgid "Dark 3 background and Black text"
+msgstr "Қараңғы 3 фон және Қара мәтін"
+
+msgid "Show Age, Gender and Location charts"
+msgstr "Жас, жыныс және орналасқан жер диаграммаларын көрсету"
+
+msgid "Hide Age chart ONLY"
+msgstr "ТЕК Жас диаграммасын жасыру"
+
+msgid "Hide Gender chart ONLY"
+msgstr "ТЕК Жыныс диаграммасын жасыру"
+
+msgid "Hide Location chart ONLY"
+msgstr "ТЕК Орналасқан жер диаграммасын жасыру"
+
+msgid "Hide Age and Gender charts"
+msgstr "Жас және жыныс диаграммаларын жасыру"
+
+msgid "Hide Age and Location charts"
+msgstr "Жас және Орналасқан жер диаграммаларын жасыру"
+
+msgid "Hide Gender and Location charts"
+msgstr "Жыныс және Орналасқан жер диаграммаларын жасыру"
+
+msgid "Hide Age, Gender and Location charts"
+msgstr "Жас, жыныс және орналасқан жер диаграммаларын жасыру"
+
+msgid "The poll this question is part of"
+msgstr "Осы сұрақ бір бөлігі болып табылатын сауалнама"
+
+msgid "The title of this question"
+msgstr "Осы сұрақтың тақырыбы"
+
+msgid "The RuleSet this question is based on"
+msgstr "Осы сұраққа негіз болған ережелер жинағы"
+
+msgid "The label of the ruleset on RapidPro"
+msgstr "RapidPro-дағы ережелер жинағының затбелгісі"
+
+msgid "The priority number for this question on the poll"
+msgstr "Сауалнамадағы осы сұрақтың басымдық нөмірі"
+
+msgid "The Rule this response category is based on"
+msgstr "Жауаптардың осы санатына негіз болған ереже"
+
+msgid "Select tags for this poll"
+msgstr ""
+
+msgid "Your org does not have any API token configuration."
+msgstr "Ұйымыңызда API-токен конфигурациясы жоқ."
+
+msgid "You must include a title for every included question."
+msgstr "Әрбір енгізілген сұраққа тақырып қоюыңыз керек."
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr "Тақырып тым ұзын. Әр тақырып үшін ең көбі - 255 таңба"
+
+msgid "You must include at least one poll question."
+msgstr "Сіз кемінде бір сауалнама сұрағын қосуыңыз керек."
+
+msgid "Adjust poll date"
+msgstr "Сауалнама күнін дұрыстаңыз"
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr "Сауалнама жаңартылды, енді қай сұрақтарды қосу керек екенін таңдаңыз."
+
+msgid "Configure flow"
+msgstr "Ағынды конфигурациялау"
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr "Сауалнамаңыз конфигурацияланды, енді сауалнама күнін дұрыстаңыз."
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "Сауалнама жасалды, енді оның ағынын конфигурациялаңыз."
+
+msgid "Poll Images"
+msgstr "Сауалнама суреттері"
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr "Енді көрсеткіңіз келетін кез келген жауаптарды енгізіңіз. (бар болса)"
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr "Сауалнама бетінде және алдын ала көру режимінде көрсетілетін сурет. (міндетті емес)"
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr "Сауалнама бетінде және алдын ала көру режимінде көрсетілетін сурет (міндетті емес)"
+
+msgid "Poll Response"
+msgstr "Сауалнамаға жауап"
+
+msgid "Your poll has been updated."
+msgstr "Сауалнама жаңартылды."
+
+msgid "Poll Questions"
+msgstr "Сауалнама сұрақтары"
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr ""
+
+msgid "Include"
+msgstr ""
+
+msgid "Whether to include this question in your public results"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "The priority of this question on the poll page, higher priority comes first"
+msgstr ""
+
+msgid "Ruleset Label"
+msgstr ""
+
+msgid "The label of the ruleset from RapidPro"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+
+msgid "Color Choice"
+msgstr ""
+
+msgid "The color to use for the question block will be displayed publicly"
+msgstr ""
+
+msgid "Hidden Charts Choice"
+msgstr ""
+
+msgid "Choose the charts breakdown to hide to for this question to the public"
+msgstr ""
+
+msgid "Category {idx+1}"
+msgstr ""
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+msgid "Display {idx+1}"
+msgstr ""
+
+msgid "The label to display of the category on the public site"
+msgstr ""
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr ""
+
+#, python-format
+msgid "%s"
+msgstr ""
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the birth date of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the occupation of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the registration date of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr ""
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr ""
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr ""
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr ""
+
+msgid "Whether this org should be show on the landing page"
+msgstr ""
+
+msgid "Whether this org count should consider the count from link only"
+msgstr ""
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr ""
+
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "The join button text"
+msgstr ""
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
+
+msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Осы жауаптың орналасқан жері"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+
+msgid "The title of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the opinions page"
+msgstr ""
+
+msgid "The description of the stories page"
+msgstr ""
+
+msgid "The description of the engagement page"
+msgstr ""
+
+msgid "The callout message on the footer engagement section"
+msgstr ""
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr ""
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr ""
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr ""
+
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr ""
+
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr ""
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr ""
+
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr ""
+
+msgid "The states to show on maps only"
+msgstr ""
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr ""
+
+msgid "The Google Tag Manager ID for this organization"
+msgstr ""
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr ""
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr ""
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
+
+msgid "The URL to the Facebook page for this organization"
+msgstr ""
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr ""
+
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr ""
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr ""
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr ""
+
+msgid "The Instagram username for this organization"
+msgstr ""
+
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
+msgstr ""
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr ""
+
+msgid "The Twitter handle for this organization"
+msgstr ""
+
+msgid "The Twitter widget used for searching"
+msgstr ""
+
+msgid "The words to filter out from the results on public site"
+msgstr ""
+
+msgid "If there are jobs to be shown on the public site."
+msgstr ""
+
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr ""
+
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+msgstr ""
+
+msgid "Whether to hide the engagement breakdown charts."
+msgstr ""
+
+msgid "Whether to show the UNICEF logo in the footer."
+msgstr ""
+
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
+msgstr ""
+
+msgid "The font used for headline texts"
+msgstr ""
+
+msgid "The font used for normal text"
+msgstr ""
+
+msgid "Hide participation stats"
+msgstr ""
+
+msgid "The text to describe the sponsors of free messages"
+msgstr ""
+
+msgid "The font used for small text"
+msgstr ""
+
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr ""
+
+msgid "Other language sites links"
+msgstr ""
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+msgid "Channels"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Opinion Responses"
+msgstr ""
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Response Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
+
+msgid "Whether this row was created by squashing"
+msgstr ""
+
+msgid "Something to trigger localizations"
+msgstr ""
+
+msgid "All locations"
+msgstr ""
+
+msgid "East Asia and Pacific"
+msgstr ""
+
+msgid "Eastern and Southern Africa"
+msgstr ""
+
+msgid "Europe and Central Asia"
+msgstr ""
+
+msgid "Latin America and the Caribbean"
+msgstr ""
+
+msgid "Middle East and North Africa"
+msgstr ""
+
+msgid "South Asia"
+msgstr ""
+
+msgid "UNICEF’s National Committee countries"
+msgstr ""
+
+msgid "West and Central Africa"
+msgstr ""
+
+#~ msgid "Co-Create"
+#~ msgstr "Бірлесіп жасау"
+
+#~ msgid "Save Changes"
+#~ msgstr "Өзгерістерді сақтау"

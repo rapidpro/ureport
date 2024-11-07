@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -666,7 +666,7 @@ msgstr ""
 msgid "Form"
 msgstr ""
 
-msgid "Save Changes"
+msgid "Save"
 msgstr ""
 
 #, python-format
@@ -1096,9 +1096,6 @@ msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr ""
-
-msgid "Co-Create"
 msgstr ""
 
 msgid "SELECT LANGUAGE"
@@ -1770,6 +1767,12 @@ msgstr ""
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+msgid "The link for the extra menu."
+msgstr ""
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -1846,6 +1849,9 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr ""
 
 msgid "The Instagram username for this organization"
+msgstr ""
+
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr ""
 
 msgid "The Instagram widget id from lightwidget.com"
