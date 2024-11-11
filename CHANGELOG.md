@@ -1,3 +1,139 @@
+v1.2.136 (2024-10-24)
+-------------------------
+ * Merge pull request #1249 from rapidpro/update-python
+
+v1.2.134 (2024-10-23)
+-------------------------
+ * Update deps
+ * Support django 5.1
+ * Adjust old migrations to not use index_together
+ * Use GH actions services for Redis and Postgres
+
+v1.2.133 (2024-09-26)
+-------------------------
+ * Add lock to run the contacts activities squash once
+
+v1.2.132 (2024-09-24)
+-------------------------
+ * Squash contacts activities counts every 15min
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in cs
+
+v1.2.131 (2024-09-18)
+-------------------------
+ * Set the max length for poll result text
+ * Do not sync empty contacts not having URNs set
+
+v1.2.130 (2024-08-28)
+-------------------------
+ * Merge pull request #1239 from rapidpro/extra-menu
+ * Use extra menu link config for global site
+
+v1.2.129 (2024-08-28)
+-------------------------
+ * Merge pull request #1236 from rapidpro/extra-menu
+ * Merge pull request #1238 from rapidpro/add-dominicana
+ * Fix name
+ * Add support for extra link on menu
+
+v1.2.128 (2024-08-28)
+-------------------------
+ * Merge pull request #1237 from rapidpro/add-dominicana
+ * Merge pull request #1235 from rapidpro/fix-index-together-unique-toghether-use
+ * Add Dominicana link
+ * Merge pull request #1233 from rapidpro/updates
+ * Adjust indexes and constraints
+ * Update deps
+ * Merge pull request #1231 from rapidpro/update-deps
+ * Update sentry-sdk
+ * Update deps
+ * Reduce size of logo images to load faster on pages
+
+v1.2.127 (2024-07-26)
+-------------------------
+ * Merge pull request #1229 from rapidpro/kazakh-unicef-logo
+ * Adjust UNICEF logo for Kazakh
+ * Merge pull request #1228 from rapidpro/update_dash
+ * Update dash to order admins on org forms
+
+v1.2.126 (2024-07-12)
+-------------------------
+ * Merge pull request #1227 from rapidpro/add-kazakhstan
+ * Add Kazakhstan
+
+v1.2.125 (2024-07-11)
+-------------------------
+ * Merge pull request #1226 from rapidpro/update-deps
+ * Update JS deps
+ * Merge pull request #1225 from rapidpro/update-deps
+ * Run code checks
+ * Update deps
+
+v1.2.124 (2024-07-09)
+-------------------------
+ * Merge pull request #1223 from rapidpro/kaz-updates
+ * Fix type for Macedonia
+ * Update KK translations
+
+v1.2.123 (2024-07-02)
+-------------------------
+ * Merge pull request #1222 from rapidpro/use-py-3.11
+
+v1.2.119 (2024-06-28)
+-------------------------
+ * Merge pull request #1220 from rapidpro/GA4
+ * Merge pull request #1221 from rapidpro/fix-polls-queries-for-sync
+ * Make sure polls with inactive category are hidden from the public
+ * Support GA4 measurement ID
+ * fix queries for polls used to sync results to always sync polls even if there categories are inactive
+
+v1.2.118 (2024-06-06)
+-------------------------
+ * Merge pull request #1219 from rapidpro/add-kazakh
+ * Add Kazakh
+
+v1.2.117 (2024-05-29)
+-------------------------
+ * Fix extra spaces typo
+
+v1.2.116 (2024-05-24)
+-------------------------
+ * Merge pull request #1218 from rapidpro/support-IG-deeplinks
+ * Add config for Instagram deeplink checkbox
+
+v1.2.115 (2024-05-23)
+-------------------------
+ * Merge pull request #1214 from rapidpro/support-IG-deeplinks
+ * Run poetry lock
+ * Add Instagram deeplink on join page
+ * Merge pull request #1212 from rapidpro/update-CI-actions
+ * Update Github actions to latest versions
+
+v1.2.114 (2024-05-02)
+-------------------------
+ * Merge pull request #1210 from rapidpro/fix-homepage-poll-bg-color-new-brand
+
+v1.2.112 (2024-04-17)
+-------------------------
+ * Merge pull request #1209 from rapidpro/fix-stories-api
+ * Run code checks
+ * Fix stories API queryset
+ * Merge pull request #1208 from rapidpro/update-deps
+ * Update deps
+ * Merge pull request #1207 from rapidpro/update-deps
+ * Update deps
+ * Merge pull request #1206 from rapidpro/dependabot/pip/gunicorn-22.0.0
+ * Bump gunicorn from 20.1.0 to 22.0.0
+
+v1.2.111 (2024-04-16)
+-------------------------
+ * Merge pull request #1205 from rapidpro/update-depsss
+ * Run poetry lock
+ * Run poetry lock
+ * Test on Django 5.0.x only
+ * Merge pull request #1202 from Ilhasoft/fix/check-new-brand-in-rtl-orgs
+ * Check new brand in RTL organizations
+
 v1.2.110 (2024-04-16)
 -------------------------
  * Merge pull request #1201 from rapidpro/fix-drf-base-template

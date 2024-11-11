@@ -92,7 +92,6 @@ class Migration(migrations.Migration):
             ],
             options={
                 "unique_together": {("org", "slug")},
-                "index_together": {("org", "slug")},
             },
         ),
     ]

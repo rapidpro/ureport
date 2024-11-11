@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -730,8 +730,8 @@ msgstr "Pošalji"
 msgid "Form"
 msgstr "Formular"
 
-msgid "Save Changes"
-msgstr "Sačuvaj promene"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1212,11 +1212,6 @@ msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Kreiraj"
 
 msgid "SELECT LANGUAGE"
 msgstr ""
@@ -1997,6 +1992,16 @@ msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
 
+#, fuzzy
+#| msgid "The text of the featured response."
+msgid "A short text for the extra menu."
+msgstr "Tekst objavljenih karakterističnih odgovora"
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Lokacija za ovaj odgovor"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -2093,6 +2098,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "ID Facebook Pixela vaše organizacije (opciono)"
 
 msgid "The Instagram username for this organization"
+msgstr "Instagram korisnicko ime organizacije"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Instagram korisnicko ime organizacije"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -2231,6 +2241,14 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Kreiraj"
+
+#~ msgid "Save Changes"
+#~ msgstr "Sačuvaj promene"
 
 #, fuzzy
 #~| msgid "The location of the responder."
@@ -2655,9 +2673,6 @@ msgstr ""
 
 #~ msgid "Response %d Message"
 #~ msgstr "Odgovor %d Poruka"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "Tekst objavljenih karakterističnih odgovora"
 
 #, fuzzy
 #~| msgid ""

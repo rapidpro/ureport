@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -693,8 +693,8 @@ msgstr "ส่ง"
 msgid "Form"
 msgstr "แบบฟอร์ม"
 
-msgid "Save Changes"
-msgstr "บันทึกการเปลี่ยนแปลง"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1122,11 +1122,6 @@ msgstr "ดึงข้อมูลออกและแชร์"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "ต้องการแชร์เรื่องนี้ให้โลกรู้? ดาวน์โหลดภาพนี้เพื่อแชร์บนโซเชียลมีเดียหรือเพื่อการนําเสนอที่สวยงาม!"
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "สร้าง"
 
 msgid "SELECT LANGUAGE"
 msgstr "เลือกภาษา"
@@ -1787,6 +1782,14 @@ msgstr "ข้อความสั้น ๆ เชิญชวนให้ผ�
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "ข้อความ Call to Action เชิญชวนเข้าร่วมยูรีพอร์ต ที่จะอยู่ด้านบนสุดของเพจยูรีพอร์ต"
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "ที่อยู่ของโพลสำรวจนี้"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "วิดีโอ YouTube ID สำหรับวิธีเข้าร่วมบนหน้าเพจยูรีพอร์ต"
 
@@ -1863,6 +1866,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "ID ของ Facebook Pixel ขององค์กรนี้  (ไม่จำเป็นต้องใส่)"
 
 msgid "The Instagram username for this organization"
+msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -1985,3 +1993,11 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "สร้าง"
+
+#~ msgid "Save Changes"
+#~ msgstr "บันทึกการเปลี่ยนแปลง"

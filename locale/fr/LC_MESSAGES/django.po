@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -698,8 +698,8 @@ msgstr "Soumettre"
 msgid "Form"
 msgstr "Formulaire"
 
-msgid "Save Changes"
-msgstr "Enregistrer les modifications"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1130,11 +1130,6 @@ msgstr "Exporter et Partager"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Vous voulez raconter cela au monde ? Téléchargez cette image pour partager facilement sur les réseaux sociaux ou pour une belle présentation !"
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Créer"
 
 msgid "SELECT LANGUAGE"
 msgstr "CHOISIR LA LANGUE"
@@ -1793,6 +1788,14 @@ msgstr "Le mot-clé utilisé pour inciter les visiteurs a s'inscrire sur U-Repor
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Le texte d'appel à l'action pour adhérer à la rubrique du haut sur U-Report"
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "La localité pour cette réponse"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "L’ID de la vidéo YouTube pour la rubrique Comment rejoindre U-Report"
 
@@ -1869,6 +1872,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "L'identifiant du pixel Facebook pour cette organisation (facultatif)"
 
 msgid "The Instagram username for this organization"
+msgstr "Le nom utilisateur Instagram pour cette organisation"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "Le nom utilisateur Instagram pour cette organisation"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -1991,3 +1999,11 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Créer"
+
+#~ msgid "Save Changes"
+#~ msgstr "Enregistrer les modifications"

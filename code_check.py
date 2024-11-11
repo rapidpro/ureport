@@ -77,7 +77,7 @@ if __name__ == "__main__":
     status("Running black")
     cmd("black ureport")
     status("Running ruff")
-    cmd("ruff ureport")
+    cmd("ruff check ureport")
     status("Running isort")
     cmd("isort ureport")
     status("Updating locale PO files")

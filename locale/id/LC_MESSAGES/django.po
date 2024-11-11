@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -721,8 +721,8 @@ msgstr "Proses"
 msgid "Form"
 msgstr "Form"
 
-msgid "Save Changes"
-msgstr "Simpan Perubahan"
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1199,11 +1199,6 @@ msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "Buat"
 
 msgid "SELECT LANGUAGE"
 msgstr ""
@@ -1982,6 +1977,16 @@ msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
 
+#, fuzzy
+#| msgid "The text of the featured response."
+msgid "A short text for the extra menu."
+msgstr "Respon unggulan"
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "Lokasi dari tanggapan ini"
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
@@ -2080,6 +2085,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "Integer id ke halaman Facebook untuk organisasi ini (opsional)"
 
 msgid "The Instagram username for this organization"
+msgstr "nama pengguna Instagram untuk organisasi ini"
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "nama pengguna Instagram untuk organisasi ini"
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -2218,6 +2228,14 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "Buat"
+
+#~ msgid "Save Changes"
+#~ msgstr "Simpan Perubahan"
 
 #, fuzzy
 #~| msgid "The location of the responder."
@@ -2607,9 +2625,6 @@ msgstr ""
 
 #~ msgid "Response %d Message"
 #~ msgstr "Tanggapan %d Pesan"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "Respon unggulan"
 
 #, fuzzy
 #~| msgid ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 10:03+0000\n"
+"POT-Creation-Date: 2024-08-28 18:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -699,8 +699,8 @@ msgstr "জমা দিন "
 msgid "Form"
 msgstr "ফর্ম "
 
-msgid "Save Changes"
-msgstr "পরিবর্তনগুলো সংরক্ষণ করুন "
+msgid "Save"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
@@ -1141,11 +1141,6 @@ msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
-
-#, fuzzy
-#| msgid "Create"
-msgid "Co-Create"
-msgstr "তৈরি করুন "
 
 msgid "SELECT LANGUAGE"
 msgstr ""
@@ -1886,6 +1881,14 @@ msgstr "ক্ষুদ্র বর্ণনা যা দর্শনার্
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "U-Report হোমপেজের ছবি বিভাগের শিরোনাম"
 
+msgid "A short text for the extra menu."
+msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the extra menu."
+msgstr "এই মতামত এর স্থান টি "
+
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "U-Report-এর সাথে কিভাবে যুক্ত হবেন বিভাগের জন্য YouTube ভিডিওর আইডি"
 
@@ -1968,6 +1971,11 @@ msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "এই প্রতিষ্ঠান এর ফেসবুক পিক্সেল এর আইডি "
 
 msgid "The Instagram username for this organization"
+msgstr "এই প্রতিষ্ঠান এর জন্য instagram ব্যবহারকারী আইডি  "
+
+#, fuzzy
+#| msgid "The Instagram username for this organization"
+msgid "The Instagram username should be shown on the join page as deeplink for this organization"
 msgstr "এই প্রতিষ্ঠান এর জন্য instagram ব্যবহারকারী আইডি  "
 
 msgid "The Instagram widget id from lightwidget.com"
@@ -2096,6 +2104,14 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "Co-Create"
+#~ msgstr "তৈরি করুন "
+
+#~ msgid "Save Changes"
+#~ msgstr "পরিবর্তনগুলো সংরক্ষণ করুন "
 
 #~ msgid "Photos"
 #~ msgstr "ছবিগুলো"
