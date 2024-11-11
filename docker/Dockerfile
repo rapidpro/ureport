@@ -1,4 +1,4 @@
-FROM python:3.12.0-slim as build-poetry
+FROM python:3.12-slim as build-poetry
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ COPY ./poetry.lock .
 RUN python -m pip install -U poetry
 RUN poetry export --without-hashes --output requirements.txt
 
-FROM python:3.12.0-slim-buster AS base
+FROM python:3.12-slim AS base
 
 ARG APP_UID=1000
 ARG APP_GID=1000
