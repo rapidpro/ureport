@@ -1,5 +1,4 @@
 python-decouple==3.6
-sentry-sdk>=1.18.0,<2.0.0
 toml==0.10.1
 whitenoise==5.0.1
 elastic-apm==6.1.1
