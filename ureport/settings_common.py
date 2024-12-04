@@ -358,6 +358,15 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="external_stories_link",
+        field=dict(
+            help_text=_("The link for the external stories."),
+            label="External Stories URL",
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="extra_menu_text",
         field=dict(
             help_text=_("A short text for the extra menu."),

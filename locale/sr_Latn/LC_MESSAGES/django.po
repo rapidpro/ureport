@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-28 18:22+0000\n"
+"POT-Creation-Date: 2024-12-04 14:37+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1991,6 +1991,11 @@ msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"
 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the external stories."
+msgstr "Lokacija za ovaj odgovor"
 
 #, fuzzy
 #| msgid "The text of the featured response."
