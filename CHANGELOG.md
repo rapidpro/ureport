@@ -1,3 +1,14 @@
+v1.2.137 (2024-12-04)
+-------------------------
+ * Merge pull request #1254 from rapidpro/custom-stories-link
+ * Merge pull request #1253 from rapidpro/comment-sync
+ * Merge pull request #1240 from rapidpro/cleanup-used-files
+ * Add external stories link support in config
+ * Add comment to results sync
+ * Merge pull request #1252 from rapidpro/update-rapidpro-client
+ * Update rapidpro python client to 2.16.0
+ * Cleanup old unused files
+
 v1.2.136 (2024-10-24)
 -------------------------
  * Merge pull request #1249 from rapidpro/update-python
