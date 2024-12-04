@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-28 18:22+0000\n"
+"POT-Creation-Date: 2024-12-04 14:37+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1777,6 +1777,11 @@ msgstr "Το σύντομο κείμενο που χρησιμοποιείται
 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Το κείμενο παρότρυνσης για συμμετοχή στην επάνω ενότητα του U-Report"
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the external stories."
+msgstr "Η τοποθεσία γι΄αυτή την απάντηση"
 
 msgid "A short text for the extra menu."
 msgstr ""

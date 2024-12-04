@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-28 18:22+0000\n"
+"POT-Creation-Date: 2024-12-04 14:37+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Tjaša Jazbinšek, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -1787,6 +1787,11 @@ msgstr "Kratko besedilo za usmerjanje obiskovalcev, da se pridružijo U-Reportu"
 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Besedilo poziva k akciji za pridružitev v zgornjem razdelku na U-Reportu"
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the external stories."
+msgstr "Lokacija odgovora"
 
 msgid "A short text for the extra menu."
 msgstr ""
