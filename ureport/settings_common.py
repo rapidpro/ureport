@@ -1598,10 +1598,10 @@ COUNTRY_FLAGS_SITES = [
     ),
     dict(
         name="Malawi",
-        host="//ureport.mw/",
+        host="//malawi.ureport.in/",
         flag="flag_malawi.png",
         countries_codes=["MWI"],
-        count_link="http://ureport.mw/count/",
+        count_link="http://malawi.ureport.in/count/",
         region="ESARO",
     ),
     dict(
