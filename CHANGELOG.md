@@ -1,3 +1,10 @@
+v1.2.138 (2024-12-10)
+-------------------------
+ * Merge pull request #1257 from rapidpro/dependabot/pip/django-5.1.4
+ * Bump django from 5.1.2 to 5.1.4
+ * Merge pull request #1256 from rapidpro/malawi-site-fix
+ * Fix Malawi site domain
+
 v1.2.137 (2024-12-04)
 -------------------------
  * Merge pull request #1254 from rapidpro/custom-stories-link
