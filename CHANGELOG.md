@@ -1,3 +1,8 @@
+v1.2.139 (2024-12-12)
+-------------------------
+ * Merge pull request #1255 from rapidpro/sync-paths-no-time
+ * Sync results from paths without time
+
 v1.2.138 (2024-12-10)
 -------------------------
  * Merge pull request #1257 from rapidpro/dependabot/pip/django-5.1.4
