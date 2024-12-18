@@ -1,3 +1,8 @@
+v1.2.140 (2024-12-18)
+-------------------------
+ * Merge pull request #1258 from rapidpro/fix-clearing-results
+ * Prevent clearing results for polls with the same flow
+
 v1.2.139 (2024-12-12)
 -------------------------
  * Merge pull request #1255 from rapidpro/sync-paths-no-time
