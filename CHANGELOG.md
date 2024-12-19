@@ -1,3 +1,7 @@
+v1.2.141 (2024-12-19)
+-------------------------
+ * Fix set
+
 v1.2.140 (2024-12-18)
 -------------------------
  * Merge pull request #1258 from rapidpro/fix-clearing-results
