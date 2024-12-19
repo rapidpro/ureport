@@ -162,7 +162,7 @@ def clear_old_poll_results(org, since, until):
     syncing_window = now - timedelta(days=365)
     new_window = now - timedelta(days=14)
 
-    dupes_flow_uuid = {}
+    dupes_flow_uuid = set()
 
     old_polls = (
         Poll.objects.filter(org=org)
