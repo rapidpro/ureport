@@ -1230,7 +1230,7 @@ COUNTRY_FLAGS_SITES = [
     ),
     dict(
         name="Brazil",
-        host="//ureportbrasil.org.br/",
+        host="//brasil.ureport.in/",
         flag="flag_brasil.png",
         countries_codes=["BRA"],
         count_link="http://brasil.ureport.in/count/",
