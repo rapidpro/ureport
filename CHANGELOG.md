@@ -1,3 +1,8 @@
+v1.2.143 (2025-01-06)
+-------------------------
+ * Merge pull request #1260 from rapidpro/poll-results-big-int
+ * Change poll result id to big int
+
 v1.2.142 (2025-01-02)
 -------------------------
  * Update Brasil host url
