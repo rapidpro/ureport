@@ -1363,6 +1363,8 @@ class PollResponseCategory(models.Model):
 
 
 class PollResult(models.Model):
+    id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
+
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)
