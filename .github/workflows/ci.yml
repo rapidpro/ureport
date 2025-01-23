@@ -12,7 +12,7 @@ jobs:
         ports:
           - 6379:6379
       postgres:
-        image: postgis/postgis:15-3.3-alpine
+        image: postgres:15-alpine
         env:
           POSTGRES_DB: ureport
           POSTGRES_USER: ureport
