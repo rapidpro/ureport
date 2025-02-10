@@ -331,7 +331,7 @@
 <div class="md:hidden flex bg-black" id="mobile-menu-container">
     <div class="bg-black text-white py-home pl-home pr-16 h-auto">
         <a href="{% url 'public.opinions' %}" class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
-        <a href="{% url 'public.stories' %}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
+        <a href="{{ stories_link }}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
         {% if org|config:"has_new_brand" and org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
             <a href='{{ org|config:"extra_menu_link" }}' class="hover:text-gray-600 block mt-4 font-bold">{{ org|config:"extra_menu_text" }}</a>
         {% endif %}
@@ -667,7 +667,7 @@
                     </div>
                     <div class="flex-1 text-center font-bold text-xl flex-center-y">
                         <div>
-                            <a href="{% url 'public.stories' %}"
+                            <a href="{{ stories_link }}"
                                class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                         </div>
                     </div>
@@ -698,7 +698,7 @@
                 </a>
                 <div class="flex-1 text-center font-bold text-2xl flex-center-y">
                     <div>
-                        <a href="{% url 'public.stories' %}"
+                        <a href="{{ stories_link }}"
                            class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                     </div>
                 </div>
@@ -872,7 +872,7 @@
             </div>
             <div class="font-bold text-2xl ml-6 flex-center-y">
                 <div>
-                    <a href="{% url 'public.stories' %}"
+                    <a href="{{ stories_link }}"
                        class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                 </div>
             </div>

@@ -1,3 +1,44 @@
+v1.2.143 (2025-01-06)
+-------------------------
+ * Merge pull request #1260 from rapidpro/poll-results-big-int
+ * Change poll result id to big int
+
+v1.2.142 (2025-01-02)
+-------------------------
+ * Update Brasil host url
+
+v1.2.141 (2024-12-19)
+-------------------------
+ * Fix set
+
+v1.2.140 (2024-12-18)
+-------------------------
+ * Merge pull request #1258 from rapidpro/fix-clearing-results
+ * Prevent clearing results for polls with the same flow
+
+v1.2.139 (2024-12-12)
+-------------------------
+ * Merge pull request #1255 from rapidpro/sync-paths-no-time
+ * Sync results from paths without time
+
+v1.2.138 (2024-12-10)
+-------------------------
+ * Merge pull request #1257 from rapidpro/dependabot/pip/django-5.1.4
+ * Bump django from 5.1.2 to 5.1.4
+ * Merge pull request #1256 from rapidpro/malawi-site-fix
+ * Fix Malawi site domain
+
+v1.2.137 (2024-12-04)
+-------------------------
+ * Merge pull request #1254 from rapidpro/custom-stories-link
+ * Merge pull request #1253 from rapidpro/comment-sync
+ * Merge pull request #1240 from rapidpro/cleanup-used-files
+ * Add external stories link support in config
+ * Add comment to results sync
+ * Merge pull request #1252 from rapidpro/update-rapidpro-client
+ * Update rapidpro python client to 2.16.0
+ * Cleanup old unused files
+
 v1.2.136 (2024-10-24)
 -------------------------
  * Merge pull request #1249 from rapidpro/update-python

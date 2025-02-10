@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-28 18:22+0000\n"
+"POT-Creation-Date: 2024-12-04 14:37+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Askhat Makitov, 2024\n"
 "Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
@@ -1733,6 +1733,11 @@ msgstr ""
 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr ""
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the external stories."
+msgstr "Осы жауаптың орналасқан жері"
 
 msgid "A short text for the extra menu."
 msgstr ""

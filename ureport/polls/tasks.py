@@ -162,6 +162,8 @@ def clear_old_poll_results(org, since, until):
     syncing_window = now - timedelta(days=365)
     new_window = now - timedelta(days=14)
 
+    dupes_flow_uuid = set()
+
     old_polls = (
         Poll.objects.filter(org=org)
         .exclude(poll_date__gte=syncing_window)
@@ -175,8 +177,17 @@ def clear_old_poll_results(org, since, until):
             logger.info(
                 "Skipping clearing old results for poll #%d on org #%d as it is still syncing" % (poll.pk, org.pk)
             )
+        elif poll.flow_uuid in dupes_flow_uuid:
+            logger.info(
+                "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated"
+                % (poll.pk, org.pk)
+            )
         else:
+
+            dupes_flow_uuid.add(poll.flow_uuid)
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
+                # refresh the object from the DB
+                poll.refresh_from_db()
                 try:
                     # one last stats rebuild for the poll
                     poll.rebuild_poll_results_counts()

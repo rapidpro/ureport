@@ -1306,9 +1306,7 @@ class RapidProBackendTest(UreportTest):
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
             values={
-                "win": TembaRun.Value.create(
-                    value="We'll win today", input="We'll win today", category="Win", node="ruleset-uuid", time=now
-                )
+                "win": TembaRun.Value.create(value="We'll win today", category="Win", node="ruleset-uuid", time=now)
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
@@ -1352,11 +1350,7 @@ class RapidProBackendTest(UreportTest):
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-002", name="Davido"),
             responded=True,
-            values={
-                "sing": TembaRun.Value.create(
-                    value="I sing", input="I sing", category="Sing", node="ruleset-uuid", time=now
-                )
-            },
+            values={"sing": TembaRun.Value.create(value="I sing", category="Sing", node="ruleset-uuid", time=now)},
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
             modified_on=now,
@@ -1372,7 +1366,6 @@ class RapidProBackendTest(UreportTest):
             values={
                 "play": TembaRun.Value.create(
                     value="I play basketball",
-                    input="I play basketball",
                     category="Play",
                     node="ruleset-uuid",
                     time=now,
@@ -1416,7 +1409,6 @@ class RapidProBackendTest(UreportTest):
             values={
                 "party": TembaRun.Value.create(
                     value="We'll celebrate today",
-                    input="We'll celebrate today",
                     category="Party",
                     node="ruleset-uuid",
                     time=now + timedelta(minutes=1),
@@ -1499,7 +1491,6 @@ class RapidProBackendTest(UreportTest):
             values={
                 "dance": TembaRun.Value.create(
                     value="We'll dance today",
-                    input="We'll dance today",
                     category="Dance",
                     node="ruleset-uuid",
                     time=now,
@@ -1543,7 +1534,6 @@ class RapidProBackendTest(UreportTest):
             values={
                 "dance": TembaRun.Value.create(
                     value="We'll dance today",
-                    input="We'll dance today",
                     category="Dance",
                     node="ruleset-uuid",
                     time=now,
@@ -1631,7 +1621,6 @@ class RapidProBackendTest(UreportTest):
             values={
                 "party": TembaRun.Value.create(
                     value=long_text,
-                    input=long_text,
                     category="Party",
                     node="ruleset-uuid",
                     time=now + timedelta(minutes=1),
@@ -1666,7 +1655,7 @@ class RapidProBackendTest(UreportTest):
             responded=True,
             values={
                 "party": TembaRun.Value.create(
-                    value=None, input="Party", category="Party", node="ruleset-uuid", time=now + timedelta(minutes=1)
+                    value=None, category="Party", node="ruleset-uuid", time=now + timedelta(minutes=1)
                 )
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
@@ -1700,9 +1689,7 @@ class RapidProBackendTest(UreportTest):
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
             values={
-                "dance": TembaRun.Value.create(
-                    value="Whatever", input=None, category="No Response", node="ruleset-uuid", time=now
-                )
+                "dance": TembaRun.Value.create(value="Whatever", category="No Response", node="ruleset-uuid", time=now)
             },
             path=[
                 TembaRun.Step.create(node="ruleset-uuid", time=now),
@@ -1763,9 +1750,7 @@ class RapidProBackendTest(UreportTest):
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
             values={
-                "win": TembaRun.Value.create(
-                    value="We'll win today", input="We'll win today", category="Win", node="ruleset-uuid", time=now
-                )
+                "win": TembaRun.Value.create(value="We'll win today", category="Win", node="ruleset-uuid", time=now)
             },
             path=[
                 TembaRun.Step.create(node="ruleset-uuid", time=now),
@@ -1844,9 +1829,7 @@ class RapidProBackendTest(UreportTest):
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
             values={
-                "win": TembaRun.Value.create(
-                    value="We'll win today", input="We'll win today", category="Win", node="ruleset-uuid", time=now
-                )
+                "win": TembaRun.Value.create(value="We'll win today", category="Win", node="ruleset-uuid", time=now)
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
@@ -1906,11 +1889,7 @@ class RapidProBackendTest(UreportTest):
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-002", name="Davido"),
             responded=True,
-            values={
-                "sing": TembaRun.Value.create(
-                    value="I sing", input="I sing", category="Sing", node="ruleset-uuid", time=now
-                )
-            },
+            values={"sing": TembaRun.Value.create(value="I sing", category="Sing", node="ruleset-uuid", time=now)},
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
             modified_on=now,
@@ -1926,7 +1905,6 @@ class RapidProBackendTest(UreportTest):
             values={
                 "play": TembaRun.Value.create(
                     value="I play basketball",
-                    input="I play basketball",
                     category="Play",
                     node="ruleset-uuid",
                     time=now,

@@ -360,6 +360,15 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="external_stories_link",
+        field=dict(
+            help_text=_("The link for the external stories."),
+            label="External Stories URL",
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="extra_menu_text",
         field=dict(
             help_text=_("A short text for the extra menu."),
@@ -1591,10 +1600,10 @@ COUNTRY_FLAGS_SITES = [
     ),
     dict(
         name="Malawi",
-        host="//ureport.mw/",
+        host="//malawi.ureport.in/",
         flag="flag_malawi.png",
         countries_codes=["MWI"],
-        count_link="http://ureport.mw/count/",
+        count_link="http://malawi.ureport.in/count/",
         region="ESARO",
     ),
     dict(

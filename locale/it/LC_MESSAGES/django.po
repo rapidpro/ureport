@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-28 18:22+0000\n"
+"POT-Creation-Date: 2024-12-04 14:37+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1888,6 +1888,11 @@ msgstr "Il testo abbreviato usato per invitare i visitatori ad aderire a U-Repor
 #| msgid "The title of the photos section U-Report homepage"
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Il titolo della sezione foto nella homepage U-Report"
+
+#, fuzzy
+#| msgid "The location for this response"
+msgid "The link for the external stories."
+msgstr "Il luogo per questa risposta"
 
 msgid "A short text for the extra menu."
 msgstr ""
