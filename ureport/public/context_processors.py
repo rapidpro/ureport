@@ -6,6 +6,7 @@ import operator
 from functools import reduce
 
 from django.conf import settings
+from django.urls import reverse
 
 from ureport.bots.models import Bot
 from ureport.utils import get_linked_orgs
@@ -98,6 +99,10 @@ def set_config_display_flags(request):
         context["other_languages_sites"] = sorted(
             [dict(name=key, link=val) for key, val in other_languages_sites.items()], key=lambda q: q["name"]
         )
+
+        context["stories_link"] = reverse("public.stories")
+        if org.get_config("external_stories_link"):
+            context["stories_link"] = org.get_config("external_stories_link")
 
     return context
 

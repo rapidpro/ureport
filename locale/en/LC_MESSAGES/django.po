@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-28 18:22+0000\n"
+"POT-Creation-Date: 2024-12-04 14:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1728,6 +1728,9 @@ msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
 
 msgid "The call to action text to join on the top section on U-Report"
+msgstr ""
+
+msgid "The link for the external stories."
 msgstr ""
 
 msgid "A short text for the extra menu."
