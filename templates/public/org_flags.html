@@ -29,6 +29,7 @@
         {% for site in linked_orgs %}<a href="{{ site.host }}" class="footer-orgs-name">{{ site.name }}</a>{% endfor %}
     {% else %}
         {% for site in linked_orgs %}
+            {% if site.flag %}
             <a href="{{ site.host }}" class="flag">
                 {% if site.is_static %}
                     <img src="{{ STATIC_URL }}img/site_flags/{{ site.flag }}" width="70px" alt="">
@@ -36,6 +37,7 @@
                     <img src="{{ site.flag }}" width="70px" alt="">
                 {% endif %}
             </a>
+            {% endif %}
         {% endfor %}
     {% endif %}
 </div>
