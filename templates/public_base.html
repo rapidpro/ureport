@@ -998,6 +998,12 @@
     </script>
 {% endif %}
 
+{% if org and org|config:"custom_html" %}
+    {% autoescape off %}
+      {{ org|config:"custom_html" }}
+    {% endautoescape %}
+{% endif %}
+
 {% block script %}
     <script type="text/javascript">
       // global primary color
