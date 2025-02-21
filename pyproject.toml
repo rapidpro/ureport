@@ -9,8 +9,8 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "Django ~= 5.1.4",
-    "smartmin ~= 5.1.0",
-    "rapidpro-dash ~= 1.16.0",
+    "smartmin ~= 5.1.2",
+    "rapidpro-dash ~= 1.17.0",
     "colorama ~= 0.4.3",
     "celery ~= 5.1",
     "django-compressor ~= 4.0",
@@ -30,7 +30,7 @@ dependencies = [
     "pycountry >= 24.5.1",
     "django-countries ~= 7.6.1",
     "regex ~= 2024.11.6",
-    "rapidpro-python ~= 2.16.0",
+    "rapidpro-python ~= 2.17.0",
     "feedparser ~= 6.0.2",
     "Markdown ~= 3.7",
     "iso8601 ~= 0.1.12",
@@ -39,6 +39,9 @@ dependencies = [
     "boto3 >= 1.27.1",
     "drf-yasg ~= 1.21.8",
 ]
+
+[project.urls]
+repository = "http://github.com/rapidpro/ureport"
 
 
 [tool.poetry.group.dev.dependencies]
