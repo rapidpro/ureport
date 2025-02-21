@@ -1,3 +1,9 @@
+v1.2.144 (2025-02-21)
+-------------------------
+ * Fix logout button to use POST method
+ * Update GH action to use postgress image on CI
+ * Update pyproject.toml for poetry 2
+
 v1.2.143 (2025-01-06)
 -------------------------
  * Merge pull request #1260 from rapidpro/poll-results-big-int
