@@ -1,12 +1,11 @@
 from functools import partial
 
-from smartmin.models import SmartModel
-
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
 from dash.utils import generate_file_path
+from smartmin.models import SmartModel
 from ureport.bots.models import Bot
 
 

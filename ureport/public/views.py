@@ -11,7 +11,6 @@ from functools import reduce
 import pycountry
 import six
 from django_redis import get_redis_connection
-from smartmin.views import SmartReadView, SmartTemplateView
 
 from django.conf import settings
 from django.core.cache import cache
@@ -30,6 +29,7 @@ from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.orgs.models import Org, TaskState
 from dash.orgs.views import OrgObjPermsMixin
 from dash.stories.models import Story, StoryImage
+from smartmin.views import SmartReadView, SmartTemplateView
 from ureport.assets.models import Image
 from ureport.bots.models import Bot
 from ureport.countries.models import CountryAlias

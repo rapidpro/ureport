@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
-
 from django import forms
 
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
+from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 
 from .models import NewsItem, Video
 
