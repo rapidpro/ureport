@@ -118,7 +118,10 @@
                                     <br class="is-hidden-mobile">
                                     {{ request.user.username }}
                                 </div>
-                                <a href="{% url 'users.user_logout' %}?go=/" class="level-item button is-outlined logout-button">{% trans "Logout" %}</a>
+                                <form method="post" action="{% url 'users.user_logout' %}?go=/">
+                                    {% csrf_token %}
+                                    <button type="submit" class="level-item button is-outlined logout-button">{% trans "Logout" %}</button>
+                                </form>
                             {% else %}
                                 <a href="{% org_host_link %}{% url 'users.user_login' %}" class="level-item button is-outlined">{% trans "Login" %}</a>
                             {% endif %}
@@ -435,8 +438,10 @@
                         {% endif %}
                         {% if show_login %}
                             {% if request.user and request.user.is_authenticated %}
-                                <a href="{% url 'users.user_logout' %}?go=/"
-                                   class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Logout" %}</a>
+                            <form method="post" action="{% url 'users.user_logout' %}?go=/">
+                                {% csrf_token %}
+                                <button type="submit" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu font-bold">{% trans "Logout" %}</i></button>
+                            </form>
                             {% else %}
                                 <a href="{% org_host_link %}{% url 'users.user_login' %}"
                                    class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Login" %}</a>
