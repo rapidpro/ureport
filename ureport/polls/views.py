@@ -6,6 +6,7 @@ import re
 from datetime import timedelta
 
 from django_redis import get_redis_connection
+from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 
 from django import forms
 from django.core.cache import cache
@@ -25,7 +26,6 @@ from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import OrgBackend
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
 from dash.tags.models import Tag
-from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 from ureport.utils import json_date_to_datetime
 
 from .models import Poll, PollImage, PollQuestion, PollResponseCategory

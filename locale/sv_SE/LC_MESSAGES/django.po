@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-21 12:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -696,10 +696,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Ditt nya %s har skapats"
-
-#, python-format
-msgid "Import %s"
-msgstr "Importera %s"
 
 msgid "Back to Website"
 msgstr "Tillbaka till webbsidan"
@@ -1736,14 +1732,8 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-msgid "Category {idx+1}"
-msgstr "Kategori {idx+1}"
-
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Etikett för backend-kategori (t.ex. RapidPro)"
-
-msgid "Display {idx+1}"
-msgstr "Display {idx+1}"
 
 msgid "The label to display of the category on the public site"
 msgstr "Etiketten för kategorin som ska visas på den offentliga sidan"
@@ -1757,14 +1747,6 @@ msgstr "Senaste resultatet synkroniserades %(time)s sedan"
 
 msgid "Synced"
 msgstr "Synkroniserat "
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Synkronisering pågår... {sync_progress:.1f}%"
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Redigera undersökningen för flöde [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -2064,6 +2046,24 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "Importera %s"
+
+#~ msgid "Category {idx+1}"
+#~ msgstr "Kategori {idx+1}"
+
+#~ msgid "Display {idx+1}"
+#~ msgstr "Display {idx+1}"
+
+#, python-brace-format
+#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
+#~ msgstr "Synkronisering pågår... {sync_progress:.1f}%"
+
+#, python-brace-format
+#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#~ msgstr "Redigera undersökningen för flöde [{flow_name} ({flow_date_hint})]"
 
 #, fuzzy
 #~| msgid "Create"

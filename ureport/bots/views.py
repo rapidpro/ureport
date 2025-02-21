@@ -1,9 +1,10 @@
+from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
+
 from django import forms
 from django.db.models.functions import Lower
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
-from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 from ureport.bots.models import Bot
 
 

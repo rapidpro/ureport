@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from smartmin.models import SmartModel
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
-from smartmin.models import SmartModel
 
 BANNER = "B"
 PATTERN = "P"

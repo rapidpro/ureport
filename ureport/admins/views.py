@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from smartmin.views import SmartCRUDL, SmartUpdateView
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org
 from dash.orgs.views import OrgPermsMixin
-from smartmin.views import SmartCRUDL, SmartUpdateView
 from ureport.admins import OrgCache, refresh_caches
 
 

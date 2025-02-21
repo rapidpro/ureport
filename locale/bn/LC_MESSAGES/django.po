@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-21 12:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -705,10 +705,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "আপনার নতুন %s তৈরি সম্পূর্ণ হয়েছে "
-
-#, python-format
-msgid "Import %s"
-msgstr "আনুন %s"
 
 msgid "Back to Website"
 msgstr "ওয়েবসাইটে ফিরে যান"
@@ -1766,17 +1762,9 @@ msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
 #, fuzzy
-#| msgid "Categories"
-msgid "Category {idx+1}"
-msgstr "বিভাগগুলো "
-
-#, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "RapidPro এর নিয়মাবলীর লেবেল"
-
-msgid "Display {idx+1}"
-msgstr ""
 
 #, fuzzy
 #| msgid "If there are jobs to be shown on the public site."
@@ -1791,14 +1779,6 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
-msgstr ""
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr ""
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
 msgstr ""
 
 #, python-format
@@ -2109,6 +2089,15 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "আনুন %s"
+
+#, fuzzy
+#~| msgid "Categories"
+#~ msgid "Category {idx+1}"
+#~ msgstr "বিভাগগুলো "
 
 #, fuzzy
 #~| msgid "Create"

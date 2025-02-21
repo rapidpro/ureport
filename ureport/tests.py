@@ -6,6 +6,7 @@ import uuid
 import zoneinfo
 
 from mock import Mock, patch
+from smartmin.tests import SmartminTest
 from temba_client.v2 import TembaClient
 from temba_client.v2.types import (
     Contact as TembaContact,
@@ -28,7 +29,6 @@ from dash.orgs.middleware import SetOrgMiddleware
 from dash.orgs.models import Org
 from dash.test import DashTest
 from dash.utils import random_string
-from smartmin.tests import SmartminTest
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.jobs.models import JobSource
