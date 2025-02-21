@@ -284,7 +284,10 @@
                                        class="pull-left">{{ request.user.username }}</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'users.user_logout' %}?go=/" class="pull-right">{% trans "Logout" %}</a>
+                                    <form method="post" action="{% url 'users.user_logout' %}?go=/">
+                                        {% csrf_token %}
+                                        <button type="submit" class="pull-right">{% trans "Logout" %}</button>
+                                    </form>
                                 </li>
                             {% else %}
                                 <li>
