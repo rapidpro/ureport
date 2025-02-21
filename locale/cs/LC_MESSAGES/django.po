@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-21 15:16+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -702,10 +702,6 @@ msgstr "Uložit"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Váš nový %s byl vytvořen."
-
-#, python-format
-msgid "Import %s"
-msgstr "Import %s"
 
 msgid "Back to Website"
 msgstr "Zpět na webovou stranu"
@@ -1686,14 +1682,8 @@ msgstr "Volba skrytých grafů"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Vyberte členění grafů, které chcete skrýt pro tuto otázku pro veřejnost."
 
-msgid "Category {idx+1}"
-msgstr "Kategorie {idx+1}"
-
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Označení kategorie z backendu (například RapidPro)"
-
-msgid "Display {idx+1}"
-msgstr "Zobrazení {idx+1}"
 
 msgid "The label to display of the category on the public site"
 msgstr "Štítek, který se má zobrazit u kategorie na veřejném webu."
@@ -1707,14 +1697,6 @@ msgstr "Poslední výsledky synchronizované před %(time)s"
 
 msgid "Synced"
 msgstr "Synchronizováno"
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Synchronizace právě probíhá... {sync_progress:.1f}%"
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Upravit průzkum pro tok [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1992,3 +1974,21 @@ msgstr "Země národního výboru UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Západní a střední Afrika"
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "Import %s"
+
+#~ msgid "Category {idx+1}"
+#~ msgstr "Kategorie {idx+1}"
+
+#~ msgid "Display {idx+1}"
+#~ msgstr "Zobrazení {idx+1}"
+
+#, python-brace-format
+#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
+#~ msgstr "Synchronizace právě probíhá... {sync_progress:.1f}%"
+
+#, python-brace-format
+#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#~ msgstr "Upravit průzkum pro tok [{flow_name} ({flow_date_hint})]"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-21 15:16+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -705,10 +705,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Креиран е нов %s."
-
-#, python-format
-msgid "Import %s"
-msgstr "Вчитај %s"
 
 msgid "Back to Website"
 msgstr "Назад кон веб страната"
@@ -1751,14 +1747,8 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-msgid "Category {idx+1}"
-msgstr "Категорија {idx+1}"
-
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Наслов за категоријата од backend (на пр: RapidPro)"
-
-msgid "Display {idx+1}"
-msgstr "Приказ {idx+1}"
 
 msgid "The label to display of the category on the public site"
 msgstr "Наслов на категоријата  кој ќе биде прикажан на јавната страна "
@@ -1772,14 +1762,6 @@ msgstr "Последна синхронизација на податоците 
 
 msgid "Synced"
 msgstr "Синхронизирано"
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Се врши синхронизирање... {sync_progress:.1f}%"
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Уреди анкета за тек [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -2079,6 +2061,24 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "Вчитај %s"
+
+#~ msgid "Category {idx+1}"
+#~ msgstr "Категорија {idx+1}"
+
+#~ msgid "Display {idx+1}"
+#~ msgstr "Приказ {idx+1}"
+
+#, python-brace-format
+#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
+#~ msgstr "Се врши синхронизирање... {sync_progress:.1f}%"
+
+#, python-brace-format
+#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#~ msgstr "Уреди анкета за тек [{flow_name} ({flow_date_hint})]"
 
 #, fuzzy
 #~| msgid "Create"

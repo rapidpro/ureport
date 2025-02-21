@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-21 15:16+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -736,10 +736,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Vaš novi %s je kreiran"
-
-#, python-format
-msgid "Import %s"
-msgstr "Uvezi %s"
 
 msgid "Back to Website"
 msgstr ""
@@ -1876,17 +1872,9 @@ msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
 #, fuzzy
-#| msgid "Categories"
-msgid "Category {idx+1}"
-msgstr "Kategorije"
-
-#, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Oznaka niza pravila iz RapidPro-a"
-
-msgid "Display {idx+1}"
-msgstr ""
 
 #, fuzzy
 #| msgid "If there are jobs to be shown on the public site"
@@ -1901,14 +1889,6 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
-msgstr ""
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr ""
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
 msgstr ""
 
 #, fuzzy, python-format
@@ -2246,6 +2226,15 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "Uvezi %s"
+
+#, fuzzy
+#~| msgid "Categories"
+#~ msgid "Category {idx+1}"
+#~ msgstr "Kategorije"
 
 #, fuzzy
 #~| msgid "Create"

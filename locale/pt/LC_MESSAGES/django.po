@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-21 15:16+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Rodolfo Pedro, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/rapidpro/teams/226/pt/)\n"
@@ -699,10 +699,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "O teu novo %s foi criado."
-
-#, python-format
-msgid "Import %s"
-msgstr "Importar %s"
 
 msgid "Back to Website"
 msgstr "Voltar para o Website"
@@ -1686,14 +1682,8 @@ msgstr "Escolha de gráficos ocultos"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Selecionar a desagregação dos gráficos a ocultar para esta pergunta ao público"
 
-msgid "Category {idx+1}"
-msgstr "Categoria {idx+1}"
-
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "A etiqueta da categoria a partir do backend (como o RapidPro)"
-
-msgid "Display {idx+1}"
-msgstr "Mostrar {idx+1}"
 
 msgid "The label to display of the category on the public site"
 msgstr "A etiqueta a apresentar da categoria no sítio público"
@@ -1707,14 +1697,6 @@ msgstr "Últimos resultados atualizados a %(time)s minutos atrás"
 
 msgid "Synced"
 msgstr "Sincronizado"
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Syncronização atualmente em progresso currently ... {sync_progress:.1f}%"
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Editar inquérito para o fluxo [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -2000,6 +1982,24 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "Importar %s"
+
+#~ msgid "Category {idx+1}"
+#~ msgstr "Categoria {idx+1}"
+
+#~ msgid "Display {idx+1}"
+#~ msgstr "Mostrar {idx+1}"
+
+#, python-brace-format
+#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
+#~ msgstr "Syncronização atualmente em progresso currently ... {sync_progress:.1f}%"
+
+#, python-brace-format
+#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#~ msgstr "Editar inquérito para o fluxo [{flow_name} ({flow_date_hint})]"
 
 #, fuzzy
 #~| msgid "Create"
