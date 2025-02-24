@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 11:36+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -1754,8 +1754,17 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Slike kategorija"
+
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Oznaka kategorije iz pozadine (poput RapidPro)"
+
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 msgid "The label to display of the category on the public site"
 msgstr "Oznaka za prikaz kategorije na javnoj stranici"
@@ -1769,6 +1778,15 @@ msgstr "Posljednji rezultati sinkronizirani prije %(time)s "
 
 msgid "Synced"
 msgstr "Sinkronizirano"
+
+#, fuzzy, python-format
+#| msgid "Scheduled Sync currently in progress..."
+msgid "Sync currently in progress... %.1f"
+msgstr "Planirana sinkronizacija trenutno je u tijeku ..."
+
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -2069,69 +2087,7 @@ msgstr ""
 msgid "West and Central Africa"
 msgstr ""
 
-#, python-format
-#~ msgid "Import %s"
-#~ msgstr "Uvezi%s"
-
-#~ msgid "Category {idx+1}"
-#~ msgstr "Kategorija {idx+1}"
-
-#~ msgid "Display {idx+1}"
-#~ msgstr "Prikaži {idx+1}"
-
-#, python-brace-format
-#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
-#~ msgstr "Sinkronizacija u tijeku... {sync_progress:.1f}%"
-
-#, python-brace-format
-#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-#~ msgstr "Uređivanje ankete za flow[{flow_name} ({flow_date_hint})]"
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Kreiraj"
-
-#~ msgid "Save Changes"
-#~ msgstr "Sačuvaj promjene"
-
-#~ msgid "Photos"
-#~ msgstr "Slike"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "Opis stranice s odgovorima"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Treba li anketa biti prikazana na početnoj stranici"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Org"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "Opis stranice sa pričama"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Boja za pisanje teksta na polju za pridruživanje"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Primarna boja za ovu postavku"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Sekundarna boja za ovu postavku"
-
-#~ msgid "The background color for the site"
-#~ msgstr "Pozadinska boja ove stranice"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Treba li aktivirati novi dizajn"
+#, fuzzy, python-format
+#~| msgid "Scheduled Sync currently in progress..."
+#~ msgid "Sync currently in progress... %(sync_progress)d"
+#~ msgstr "Planirana sinkronizacija trenutno je u tijeku ..."

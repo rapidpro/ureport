@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 11:36+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1692,8 +1692,17 @@ msgstr "Вибір прихованих діаграм"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Виберіть розбивку діаграм, щоб приховати це запитання "
 
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Зображення до категорій"
+
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Мітка категорії з бекенду (наприклад, RapidPro)"
+
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 msgid "The label to display of the category on the public site"
 msgstr "Мітка для відображення категорії на загальнодоступному сайті"
@@ -1707,6 +1716,15 @@ msgstr "Востаннє результати сихронізовано %(time)
 
 msgid "Synced"
 msgstr "Синхронізовано"
+
+#, fuzzy, python-format
+#| msgid "Scheduled Sync currently in progress..."
+msgid "Sync currently in progress... %.1f"
+msgstr "Триває запловананий процес сихронізації"
+
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1995,28 +2013,7 @@ msgstr ""
 msgid "West and Central Africa"
 msgstr ""
 
-#, python-format
-#~ msgid "Import %s"
-#~ msgstr "Імпортувати %s"
-
-#~ msgid "Category {idx+1}"
-#~ msgstr "Категорія {idx+1}"
-
-#~ msgid "Display {idx+1}"
-#~ msgstr "Відображення {idx+1}"
-
-#, python-brace-format
-#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
-#~ msgstr "Триває процес синхронізації... {sync_progress:.1f}%"
-
-#, python-brace-format
-#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-#~ msgstr "Редагувати опитування для потоку [{flow_name} ({flow_date_hint})]"
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Створити"
-
-#~ msgid "Save Changes"
-#~ msgstr "Зберегти зміни"
+#, fuzzy, python-format
+#~| msgid "Scheduled Sync currently in progress..."
+#~ msgid "Sync currently in progress... %(sync_progress)d"
+#~ msgstr "Триває запловананий процес сихронізації"

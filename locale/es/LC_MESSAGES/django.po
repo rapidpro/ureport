@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 11:36+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1724,7 +1724,16 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Imágenes de categorías"
+
 msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+#, python-format
+msgid "Display %d"
 msgstr ""
 
 msgid "The label to display of the category on the public site"
@@ -1738,6 +1747,14 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
+msgstr ""
+
+#, python-format
+msgid "Sync currently in progress... %.1f"
+msgstr ""
+
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -2032,56 +2049,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#, python-format
-#~ msgid "Import %s"
-#~ msgstr "Importar %s"
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Crear"
-
-#~ msgid "Save Changes"
-#~ msgstr "Guardar cambios"
-
-#~ msgid "Photos"
-#~ msgstr "Fotos"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "La descripción de la página Opiniones"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Si esta encuesta se debería exhibir en la página principal"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Organización"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "La descripción de la página Historias"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "El color usado para el texto en la barra de participar"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "El color usado para el fondo en la barra de participar"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "El color primario para el diseño de esta organización"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "El color secundario para el diseño de esta organización"
-
-#~ msgid "The background color for the site"
-#~ msgstr "El color de fondo para el sitio"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Si se activa el nuevo diseño."

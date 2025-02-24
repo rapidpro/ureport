@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 11:36+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -1735,8 +1735,17 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Bildekategorier"
+
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Etikett for backend kategori (feks RapidPro)"
+
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 msgid "The label to display of the category on the public site"
 msgstr "Etiketten for kategorien som skal vises på den offentlige siden"
@@ -1750,6 +1759,15 @@ msgstr "Siste resultat ble synkronisert %(time)s siden"
 
 msgid "Synced"
 msgstr "Synkronisert"
+
+#, fuzzy, python-format
+#| msgid "Scheduled Sync currently in progress..."
+msgid "Sync currently in progress... %.1f"
+msgstr "Planlagt synkronisering under arbeid..."
+
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -2052,72 +2070,7 @@ msgstr ""
 msgid "West and Central Africa"
 msgstr ""
 
-#, python-format
-#~ msgid "Import %s"
-#~ msgstr "Importer %s"
-
-#~ msgid "Category {idx+1}"
-#~ msgstr "Kategori {idx+1}"
-
-#~ msgid "Display {idx+1}"
-#~ msgstr "Display {idx+1}"
-
-#, python-brace-format
-#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
-#~ msgstr "Synkronisering pågår... {sync_progress:.1f}%"
-
-#, python-brace-format
-#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-#~ msgstr "Rediger undersøkelsen for flowen [{flow_name} ({flow_date_hint})]"
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Opprett"
-
-#~ msgid "Save Changes"
-#~ msgstr "Lagre endringer"
-
-#~ msgid "Photos"
-#~ msgstr "Bilder"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "Beskrivelse av meningssiden"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Undersøkelsen skal vises på hovedsiden"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Org"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "Beskrivelse av historiesiden"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Tekstfarge på \"delta/bli med\"-baren"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Bakgrunnsfarge for \"delta/bli med\"-baren"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Primærfargen for styling tilknyttet denne organisasjonen"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen"
-
-#~ msgid "The background color for the site"
-#~ msgstr "Bakgrunnsfargen for siden"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Aktiver nytt design"
-
-#~ msgid "JOIN NOW"
-#~ msgstr "BLI MED NÅ"
+#, fuzzy, python-format
+#~| msgid "Scheduled Sync currently in progress..."
+#~ msgid "Sync currently in progress... %(sync_progress)d"
+#~ msgstr "Planlagt synkronisering under arbeid..."

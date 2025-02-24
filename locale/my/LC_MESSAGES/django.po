@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 11:36+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1663,7 +1663,16 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Categories"
+msgid "Category %d"
+msgstr "Categories"
+
 msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+#, python-format
+msgid "Display %d"
 msgstr ""
 
 msgid "The label to display of the category on the public site"
@@ -1677,6 +1686,14 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
+msgstr ""
+
+#, python-format
+msgid "Sync currently in progress... %.1f"
+msgstr ""
+
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -1955,18 +1972,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Categories"
-#~ msgid "Category {idx+1}"
-#~ msgstr "Categories"
-
-#, fuzzy
-#~| msgid "A short descriptive name for this image"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "A short descriptive name for this image"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Org"

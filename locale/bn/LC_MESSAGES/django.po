@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 11:36+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1761,10 +1761,19 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "বিভাগের ছবিগুলো "
+
 #, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "RapidPro এর নিয়মাবলীর লেবেল"
+
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 #, fuzzy
 #| msgid "If there are jobs to be shown on the public site."
@@ -1779,6 +1788,14 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
+msgstr ""
+
+#, python-format
+msgid "Sync currently in progress... %.1f"
+msgstr ""
+
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -2089,405 +2106,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#, python-format
-#~ msgid "Import %s"
-#~ msgstr "আনুন %s"
-
-#, fuzzy
-#~| msgid "Categories"
-#~ msgid "Category {idx+1}"
-#~ msgstr "বিভাগগুলো "
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "তৈরি করুন "
-
-#~ msgid "Save Changes"
-#~ msgstr "পরিবর্তনগুলো সংরক্ষণ করুন "
-
-#~ msgid "Photos"
-#~ msgstr "ছবিগুলো"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "মতামত জানানোর পেইজের বর্ণনা"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "এই পোলটি কি হোমপেজে দেখানো উচিত? "
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "অরগ "
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "ঘটনা পেইজের বর্ণনা"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "যোগদান করার বার এর লেখার জন্য যে রঙ টি ব্যবহার করা হয়েছে  "
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "যোগদান করার বার এর পটভূমি আকার  জন্য যে রঙ টি ব্যবহার করা হয়েছে "
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "এই প্রতিষ্ঠান এর স্টাইলিং জন্য প্রাথমিক ভাবে যে রঙ ব্যবহার করা হয়েছে "
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "এই প্রতিষ্ঠান এর স্টাইলিং এ ব্যবহার করার জন্য দ্বিতীয় রঙ "
-
-#~ msgid "The background color for the site"
-#~ msgstr "এই সাইট এর পটভূমির রঙ "
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "নতুন কোন ডিজাইন সক্রিয় করা হবে কি না"
-
-#~ msgid "JOIN NOW"
-#~ msgstr "এখুনি যোগদান করুন"
-
-#~ msgid ""
-#~ "\n"
-#~ "             %(counter)s result\n"
-#~ "           "
-#~ msgid_plural ""
-#~ "\n"
-#~ "              %(counter)s results\n"
-#~ "            "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "     %(counter)s ফলাফল\n"
-#~ "        "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "     %(counter)s ফলাফল\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "\tফলাফল %(start)s-%(end)s / %(count)s\n"
-#~ "\t"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                  %(questions)s question polled on this topic\n"
-#~| "                "
-#~| msgid_plural ""
-#~| "\n"
-#~| "                  %(questions)s questions polled on this topic\n"
-#~| "                "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "                এই বিষয়ের উপর %(questions)s  -টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "  \n"
-#~ "              "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "                 এই বিষয়ের উপর %(questions)s-টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "                "
-
-#, fuzzy
-#~| msgid "Poll Questions"
-#~ msgid "questions"
-#~ msgstr "পোল এর প্রশ্নগুলো "
-
-#~ msgid "Polls"
-#~ msgstr "পোল গুলো "
-
-#~ msgid "U-Reporters"
-#~ msgstr "u-reporters"
-
-#~ msgid "Join & Engage"
-#~ msgstr "যোগদান করুন এবং কাজ করুন "
-
-#~ msgid "FOLLOW US ON"
-#~ msgstr "আমাদের অনুসরণ করুন "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "মনে রাখুন twitter এ কাজের উৎস খোঁজার  জন্য আপনাকে twitter widget id গ্রহন করতে হবে"
-
-#~ msgid "ABOUT U-REPORT"
-#~ msgstr "U-REPORT এর ব্যাপারে "
-
-#~ msgid "Scroll to Learn more"
-#~ msgstr "আরও জানতে নিচে দেখুন "
-
-#~ msgid "The mission of U-Report"
-#~ msgstr "U-Report এর উদ্দেশ্য "
-
-#~ msgid "Why Join U-Report?"
-#~ msgstr "কেন u-report এ যোগদান করবেন ? "
-
-#~ msgid "Speak out on what's happening in your community"
-#~ msgstr "আপনার চারপাশে কি ঘটছে সেটি নিয়ে কথা বলুন"
-
-#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
-#~ msgstr "U-report এর ফলাফল এবং তথ্য গুলো নাগরিকদের জানান এবং সচেতন  করুন "
-
-#~ msgid "Participate in nationwide campaigns to help improve your country"
-#~ msgstr "সারা দেশব্যাপী প্রচারণায় অংশ নিয়ে আপনার দেশ এর উন্নয়নে সহায়তা করুন"
-
-#~ msgid "Share what's happening around %(country)s with other U-Reporters"
-#~ msgstr "আপনার চারপাশের অন্যান্য U-reporter দের সাথে কি হচ্ছে সেটি সবাইকে জানান '%(country)s'"
-
-#~ msgid "CLICK HERE TO JOIN"
-#~ msgstr "যোগদান করতে এখানে ক্লিক করুন "
-
-#~ msgid "U-REPORT VIDEOS"
-#~ msgstr "U-report এর  ভিডিও গুলো "
-
-#~ msgid "No videos yet."
-#~ msgstr "এখনো কোন ভিডিও নেই "
-
-#~ msgid "WATCH IT ON YOUTUBE"
-#~ msgstr "YOUTUBE এ দেখুন "
-
-#~ msgid "Follow"
-#~ msgstr "অনুসরণ করুন "
-
-#~ msgid ""
-#~ "\n"
-#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "U-report একটি সামাজিক যোগাযোগের মাধ্যম যা সকলের জন্য ফ্রি, যা আপনাকে সুযোগ দেবে পৃথিবীর যেকোন জায়গা থেকেই উন্নয়ন নিয়ে কথা বলার, শিশুদের অধিকারকে সমর্থন করা এবং নিজের দেশ ও সমাজের মানুষদের জীবনযাত্রার মান উন্নয়ন করার"
-
-#~ msgid "CURRENT POLL"
-#~ msgstr "চলতি পোল "
-
-#~ msgid "View Full Results"
-#~ msgstr "সম্পূর্ণ ফলাফল দেখুন "
-
-#~ msgid "All U-Report members"
-#~ msgstr "সকল U-report এর সদস্য গণ "
-
-#~ msgid "Responded out of"
-#~ msgstr "প্রতিক্রিয়া জানিয়েছেন এত জন "
-
-#~ msgid "RESPONDER'S RATE BY LOCATION"
-#~ msgstr "অবস্থান অনুযায়ী উত্তর প্রদানকারীর হার "
-
-#~ msgid "Most responded"
-#~ msgstr "বেশি উত্তর প্রদানকারী "
-
-#~ msgid ""
-#~ "\n"
-#~ "                                  %(responded)s of %(total)s\n"
-#~ "                                  "
-#~ msgstr ""
-#~ "\n"
-#~ "1%(responded)s of 2%(total)s"
-
-#~ msgid "TRENDING WORDS"
-#~ msgstr "জনপ্রিয় শব্দ গুলো "
-
-#~ msgid "FEATURED RESPONSES"
-#~ msgstr "বিশেষায়িত উত্তর গুলো "
-
-#~ msgid "TOTAL # OF U-REPORTERS"
-#~ msgstr "মোট U-REPORTERS "
-
-#~ msgid "4 MOST ACTIVE REGIONS"
-#~ msgstr "সবচেয়ে সক্রিয় চারটি অঞ্চল "
-
-#~ msgid "RATE BY GENDER"
-#~ msgstr "লিঙ্গ অনুযায়ী মান নির্ধারণ করুন "
-
-#~ msgid "RATE BY AGE"
-#~ msgstr "বয়স অনুযায়ী মান নির্ধারণ করুন "
-
-#~ msgid "WHAT U-REPORTERS ARE SAYING"
-#~ msgstr "U-REPORTERS রা কি বলছেন ? "
-
-#~ msgid "FEATURED VIDEO"
-#~ msgstr "বিশেষায়িত ভিডিও "
-
-#~ msgid "Watch more videos"
-#~ msgstr "আরও ভিডিও দেখুন "
-
-#~ msgid "FEATURED REGION"
-#~ msgstr "বিশেষায়িত অঞ্চল "
-
-#~ msgid "Check more stories in U-Report app"
-#~ msgstr "U-REPORT এপ এ আরও ঘটনা জানুন "
-
-#~ msgid "View more stories on Facebook"
-#~ msgstr "ফেসবুকে আরও ঘটনা দেখুন "
-
-#~ msgid "View more on Instagram"
-#~ msgstr "ইন্সটাগ্রাম এ আরও দেখুন "
-
-#~ msgid "Read more tweets on Twitter"
-#~ msgstr "টুঁইটার এ আরও টুইট পড়ুন "
-
-#~ msgid "NEWS FEED"
-#~ msgstr "ঘটনা প্রবাহ  "
-
-#~ msgid "Read full story"
-#~ msgstr "সম্পূর্ণ ঘটনা জানুন "
-
-#~ msgid "Read this story"
-#~ msgstr "ঘটনাটি পড়ুন "
-
-#~ msgid "JOBS"
-#~ msgstr "কাজগুলো "
-
-#~ msgid "Scroll to see job details"
-#~ msgstr "কাজের ব্যাপারে জানতে নিচে দেখুন "
-
-#~ msgid "Tweet to"
-#~ msgstr "টুইট করুন "
-
-#~ msgid "Read more"
-#~ msgstr "আরও পড়ুন "
-
-#~ msgid "JOIN U-REPORT"
-#~ msgstr "U-REPORT এ যোগদান করুন "
-
-#~ msgid "HOW TO JOIN"
-#~ msgstr "কিভাবে যোগদান করবেন "
-
-#~ msgid ""
-#~ "\n"
-#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-#~ "\n"
-#~ "              "
-#~ msgstr ""
-#~ "\n"
-#~ "* U-Report UNICEF এর অর্থায়নে তৈরি একটি ফ্রি প্লাটফর্ম যা%(country)s নেটওয়ার্ক প্রভাইডারদের সাহায্যে সকলের কাছে পৌঁছানো হয়। U-Report  কখনোই কোন ধরনের আর্থিক লেনদেন বা ব্যক্তিগত আর্থিক তথ্য জানতে চাইবে না। অনুগ্রহ করে এমন বার্তাগুলো এড়িয়ে যান যা আপনাকে এই নাম্বারে টাকা পাঠাতে বলবে অথবা ফেসবুক বা টুঁইটার পেজে আর্থিক লেনদেন করতে বলবে। U-Report-এর সকল সেবা (all msg on %(shortcode)s) বিনামূল্যে প্রদান করা হয়।"
-
-#~ msgid "U-REPORT ON SOCIAL MEDIA"
-#~ msgstr "U-report সামাজিক যোগাযোগের মাধ্যমে "
-
-#~ msgid "Compose new Tweet"
-#~ msgstr "নতুন টুইট লিখুন "
-
-#~ msgid "CURRENT POLL IN"
-#~ msgstr "চলতি পোলটি "
-
-#~ msgid "response rate"
-#~ msgstr "উত্তর দেওয়ার হার "
-
-#~ msgid "responded out of"
-#~ msgstr "উত্তর দিয়েছেন এত জন "
-
-#~ msgid "polled"
-#~ msgstr "পোল হয়েছে এত গুলো "
-
-#~ msgid "POLL RESULTS"
-#~ msgstr "পোল এর ফলাফল "
-
-#~ msgid ""
-#~ "\n"
-#~ "                    %(responded)s responded out of %(polled)s polled\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "1 %(responded)s উত্তর দিয়েছেন 2 %(polled)s পোল"
-
-#~ msgid "KEYWORDS"
-#~ msgstr "শব্দ গুলো "
-
-#~ msgid "STATISTICS"
-#~ msgstr "পরিসংখ্যান "
-
-#~ msgid "LOCATIONS"
-#~ msgstr "ঠিকানা "
-
-#~ msgid "FEATURED ANSWERS"
-#~ msgstr "বিশেষায়িত উত্তরগুলো "
-
-#~ msgid "No featured answers."
-#~ msgstr "কোন বিশেষায়িত উত্তর নেই "
-
-#~ msgid "U-Reporter in"
-#~ msgstr "U-Reporter আছেন "
-
-#~ msgid "RELATED STORIES"
-#~ msgstr "সম্পর্কিত ঘটনাবলী "
-
-#~ msgid "No related stories."
-#~ msgstr "কোন সম্পর্কিত ঘটনা নেই "
-
-#~ msgid "FEATURED IMAGES"
-#~ msgstr "বিশেষায়িত ছবি গুলো "
-
-#~ msgid "No featured images yet."
-#~ msgstr "কোন বিশেষায়িত ছবি নেই "
-
-#~ msgid "BY"
-#~ msgstr "এর দ্বারা "
-
-#~ msgid "LATEST STORIES"
-#~ msgstr "চলতি ঘটনাবলী "
-
-#~ msgid "FILTERED BY"
-#~ msgstr "আলাদা করা হয়েছে এর দ্বারা "
-
-#~ msgid "Scroll to read more"
-#~ msgstr "আরও পড়তে নিচে নামুন "
-
-#~ msgid "STORY CONTINUES"
-#~ msgstr "ঘটনা চলছে "
-
-#~ msgid "AUDIO"
-#~ msgstr "অডিও "
-
-#~ msgid "RELATED POLLS"
-#~ msgstr "সম্পর্কিত পোল "
-
-#~ msgid "No related polls."
-#~ msgstr "সম্পর্কিত পোল না "
-
-#~ msgid "No featured images."
-#~ msgstr "কোন বিশেষায়িত ছবি না "
-
-#~ msgid "WHO WE ARE"
-#~ msgstr "আমরা কারা "
-
-#~ msgid "U-REPORTER STATISTICS"
-#~ msgstr "U-Reporter দের পরিসংখ্যান "
-
-#~ msgid "WHERE ARE U-REPORTERS FROM?"
-#~ msgstr "U-reporter রা কোন জায়গা থেকে এসেছে ? "
-
-#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-#~ msgstr "নিবন্ধনের হার ঃ গত ৬ মাসে "
-
-#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-#~ msgstr "পেশা : উল্লেখিত শীর্ষ ৯টি"
-
-#~ msgid "Registered"
-#~ msgstr "নিবন্ধিত "
-
-#~ msgid "Week of"
-#~ msgstr "সপ্তাহের "
-
-#~ msgid "Poll Results Data"
-#~ msgstr "পোলের ফলাফলের ডাটা"

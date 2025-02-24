@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 11:36+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1751,10 +1751,19 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Категории изображения"
+
 #, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Етикетът на ruleset-а от RapidPro"
+
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 #, fuzzy
 #| msgid "If there are jobs to be shown on the public site."
@@ -1769,6 +1778,14 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
+msgstr ""
+
+#, python-format
+msgid "Sync currently in progress... %.1f"
+msgstr ""
+
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -2073,118 +2090,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#, python-format
-#~ msgid "Import %s"
-#~ msgstr "Вмъкни %s"
-
-#, fuzzy
-#~| msgid "Categories"
-#~ msgid "Category {idx+1}"
-#~ msgstr "Категории"
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Създай"
-
-#~ msgid "Save Changes"
-#~ msgstr "Запази промените"
-
-#~ msgid "Photos"
-#~ msgstr "Снимки"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "Описанието на страницата с допитвания"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Дали това допитване трябва да бъде показано на началната страница"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Оргазация"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "Описанието на страницата с мнения"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Цветът, използван за текста в полето за присъединяване"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Цвят на фона на полето за присъединяване"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Основният цвят за оформление на страницата на тази организация "
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Второстепенният цвят за оформление на страницата на тази отганизация"
-
-#~ msgid "The background color for the site"
-#~ msgstr "Цвят на фона на сайта"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Дали да бъде активиран новия дизайн"
-
-#~ msgid "JOIN NOW"
-#~ msgstr "ВКЛЮЧИ СЕ СЕГА"
-
-#~ msgid ""
-#~ "\n"
-#~ "             %(counter)s result\n"
-#~ "           "
-#~ msgid_plural ""
-#~ "\n"
-#~ "              %(counter)s results\n"
-#~ "            "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(counter)sрезултати"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(counter)s резултати"
-
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "Резултати %(start)s%(end)s на %(count)s"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "             %(counter)s result\n"
-#~| "           "
-#~| msgid_plural ""
-#~| "\n"
-#~| "              %(counter)s results\n"
-#~| "            "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(counter)sрезултати"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(counter)s резултати"
-
-#, fuzzy
-#~| msgid "Poll Questions"
-#~ msgid "questions"
-#~ msgstr "Въпроси в допитването"
