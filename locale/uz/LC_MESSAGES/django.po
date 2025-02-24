@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -697,10 +697,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Sizning yangi %s giz yaratildi."
-
-#, python-format
-msgid "Import %s"
-msgstr "%simporti"
 
 msgid "Back to Website"
 msgstr "Vebsaytga qaytish"
@@ -1754,17 +1750,18 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-#, fuzzy
-#| msgid "Categories"
-msgid "Category {idx+1}"
-msgstr "Toifalar"
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Toifa tasvirlari"
 
 #, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "RapidPro dan qoidalar majmuasining tamg'asi"
 
-msgid "Display {idx+1}"
+#, python-format
+msgid "Display %d"
 msgstr ""
 
 #, fuzzy
@@ -1782,12 +1779,12 @@ msgstr ""
 msgid "Synced"
 msgstr ""
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
+#, python-format
+msgid "Sync currently in progress... %.1f"
 msgstr ""
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -2092,106 +2089,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Yaratish"
-
-#~ msgid "Save Changes"
-#~ msgstr "O'zgarishlarni saqlash"
-
-#~ msgid "Photos"
-#~ msgstr "Fotosur'atlar"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "Fikrlar sahifasining bayoni"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Mazkur so'rov uy sahifasida alohida ajralib turishi kerakmi"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Tashk"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "Hikoyalar sahifasining bayoni"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
-
-#~ msgid "The background color for the site"
-#~ msgstr "Sahifa uchun orqa fon rangi"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Yangi disaynni faollashtirish lozimmi."
-
-#~ msgid "JOIN NOW"
-#~ msgstr "HOZIR QO'SHILING"
-
-#~ msgid ""
-#~ "\n"
-#~ "             %(counter)s result\n"
-#~ "           "
-#~ msgid_plural ""
-#~ "\n"
-#~ "              %(counter)s results\n"
-#~ "            "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "              %(counter)s natijalar\n"
-#~ "            "
-
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "             Natijalar%(start)s-%(end)s of %(count)s\n"
-#~ "           "
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "             %(counter)s result\n"
-#~| "           "
-#~| msgid_plural ""
-#~| "\n"
-#~| "              %(counter)s results\n"
-#~| "            "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "              %(counter)s natijalar\n"
-#~ "            "
-
-#, fuzzy
-#~| msgid "Poll Questions"
-#~ msgid "questions"
-#~ msgstr "So'rovnoma savollari"

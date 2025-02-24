@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -705,10 +705,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Креиран е нов %s."
-
-#, python-format
-msgid "Import %s"
-msgstr "Вчитај %s"
 
 msgid "Back to Website"
 msgstr "Назад кон веб страната"
@@ -1751,14 +1747,17 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-msgid "Category {idx+1}"
-msgstr "Категорија {idx+1}"
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Категорија слики"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Наслов за категоријата од backend (на пр: RapidPro)"
 
-msgid "Display {idx+1}"
-msgstr "Приказ {idx+1}"
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 msgid "The label to display of the category on the public site"
 msgstr "Наслов на категоријата  кој ќе биде прикажан на јавната страна "
@@ -1773,13 +1772,14 @@ msgstr "Последна синхронизација на податоците 
 msgid "Synced"
 msgstr "Синхронизирано"
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Се врши синхронизирање... {sync_progress:.1f}%"
+#, fuzzy, python-format
+#| msgid "Scheduled Sync currently in progress..."
+msgid "Sync currently in progress... %.1f"
+msgstr "Се врши закажано синхронизирање..."
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Уреди анкета за тек [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -2080,51 +2080,7 @@ msgstr ""
 msgid "West and Central Africa"
 msgstr ""
 
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Креирај"
-
-#~ msgid "Save Changes"
-#~ msgstr "Зачувај промени"
-
-#~ msgid "Photos"
-#~ msgstr "Фотографии"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "Опис на страната за мислења"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Дали анкетата ќе биде прикажана на насловната страна"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Орг"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "Опис на страната со статии"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Бојата на текстот во лентата со повик за вклучување"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Бојата на позадината во лентата со повик за вклучување"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Основната боја за уредување на страната на организацијата "
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Второстепената боја за уредување на страната на организацијата "
-
-#~ msgid "The background color for the site"
-#~ msgstr "Позадинска боја за оваа страна"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Дали да се активира новиот дизајн"
+#, fuzzy, python-format
+#~| msgid "Scheduled Sync currently in progress..."
+#~ msgid "Sync currently in progress... %(sync_progress)d"
+#~ msgstr "Се врши закажано синхронизирање..."

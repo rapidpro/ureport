@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -696,10 +696,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Το νέο σας %s δημιουργήθηκε"
-
-#, python-format
-msgid "Import %s"
-msgstr "Εισάγετε %s "
 
 msgid "Back to Website"
 msgstr "Επιστροφή στον Ιστότοπο"
@@ -1678,14 +1674,17 @@ msgstr "Επιλογή κρυφών γραφημάτων"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Επιλέξτε την ανάλυση των γραφημάτων για απόκρυψη για αυτήν την ερώτηση στο κοινό"
 
-msgid "Category {idx+1}"
-msgstr "Κατηγορία {idx+1}"
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Εικόνες κατηγορίας"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Η ετικέτα της κατηγορίας από το backend (όπως το RapidPro)"
 
-msgid "Display {idx+1}"
-msgstr "Απεικόνιση {idx+1}"
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 msgid "The label to display of the category on the public site"
 msgstr "Η ετικέτα για την εμφάνιση της κατηγορίας στον δημόσιο ιστότοπο"
@@ -1700,13 +1699,14 @@ msgstr "Τα τελευταία αποτελέσματα συγχρονίστη�
 msgid "Synced"
 msgstr "Συγχρονισμένος"
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Συγχρονισμός σε εξέλιξη...{sync_progress:.1f}%"
+#, fuzzy, python-format
+#| msgid "Scheduled Sync currently in progress..."
+msgid "Sync currently in progress... %.1f"
+msgstr "Προγραμματισμένος συγχρονισμός σε εξέλιξη."
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Επεξεργασία δημοσκόπησης για τη ροή [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1995,10 +1995,7 @@ msgstr ""
 msgid "West and Central Africa"
 msgstr ""
 
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Δημιουργώ"
-
-#~ msgid "Save Changes"
-#~ msgstr "Αποθήκευσε τις αλλαγές"
+#, fuzzy, python-format
+#~| msgid "Scheduled Sync currently in progress..."
+#~ msgid "Sync currently in progress... %(sync_progress)d"
+#~ msgstr "Προγραμματισμένος συγχρονισμός σε εξέλιξη."

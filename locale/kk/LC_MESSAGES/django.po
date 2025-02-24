@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Askhat Makitov, 2024\n"
 "Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
@@ -670,10 +670,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Жаңа %s жасалды."
-
-#, python-format
-msgid "Import %s"
-msgstr "%s импорттау"
 
 msgid "Back to Website"
 msgstr "Веб-сайтқа оралу"
@@ -1636,13 +1632,16 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-msgid "Category {idx+1}"
-msgstr ""
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "Суреттердің санаттары"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr ""
 
-msgid "Display {idx+1}"
+#, python-format
+msgid "Display %d"
 msgstr ""
 
 msgid "The label to display of the category on the public site"
@@ -1658,12 +1657,12 @@ msgstr ""
 msgid "Synced"
 msgstr ""
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
+#, python-format
+msgid "Sync currently in progress... %.1f"
 msgstr ""
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -1944,9 +1943,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#~ msgid "Co-Create"
-#~ msgstr "Бірлесіп жасау"
-
-#~ msgid "Save Changes"
-#~ msgstr "Өзгерістерді сақтау"

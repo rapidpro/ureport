@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 13:09+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -699,10 +699,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s ใหม่ของคุณได้ถูกสร้างแล้ว"
-
-#, python-format
-msgid "Import %s"
-msgstr "นำเข้า %s"
 
 msgid "Back to Website"
 msgstr "กลับไปที่เว็ปไซด์"
@@ -1682,14 +1678,17 @@ msgstr "ตัวเลือกซ่อนกราฟ"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "เลือกรายละเอียดกราฟของคำถามนี้ที่จะไม่โชว์ต่อสาธารณะ"
 
-msgid "Category {idx+1}"
-msgstr "หมวดหมู่ {idx+1}"
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %d"
+msgstr "ภาพหมวดหมู่"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "ป้ายกำกับหมวดหมู่ของระบบ Backend (เช่น RapidPro)"
 
-msgid "Display {idx+1}"
-msgstr "แสดง {idx+1}"
+#, python-format
+msgid "Display %d"
+msgstr ""
 
 msgid "The label to display of the category on the public site"
 msgstr "ป้ายที่จะแสดงหมวดหมู่บนหน้าเว็บไซต์สาธารณะ"
@@ -1704,13 +1703,14 @@ msgstr "ระบบกำลังซิงค์ผลลัพธ์ล่า
 msgid "Synced"
 msgstr "ซิงค์"
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "ระบบกำลังซิงค์ข้อมูล... {sync_progress:.1f}%"
+#, fuzzy, python-format
+#| msgid "Scheduled Sync currently in progress..."
+msgid "Sync currently in progress... %.1f"
+msgstr "ระบบกำลังซิงค์ข้อมูลตามเวลาที่กำหนดไว้..."
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "แก้ไขโพลสำหรับ Flow [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1999,10 +1999,7 @@ msgstr ""
 msgid "West and Central Africa"
 msgstr ""
 
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "สร้าง"
-
-#~ msgid "Save Changes"
-#~ msgstr "บันทึกการเปลี่ยนแปลง"
+#, fuzzy, python-format
+#~| msgid "Scheduled Sync currently in progress..."
+#~ msgid "Sync currently in progress... %(sync_progress)d"
+#~ msgstr "ระบบกำลังซิงค์ข้อมูลตามเวลาที่กำหนดไว้..."

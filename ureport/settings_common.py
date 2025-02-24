@@ -749,8 +749,6 @@ INSTALLED_APPS = (
     "sorl.thumbnail",
     # smartmin
     "smartmin",
-    # import tasks
-    "smartmin.csv_imports",
     # smartmin users
     "smartmin.users",
     # dash apps

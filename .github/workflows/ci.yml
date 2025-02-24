@@ -3,7 +3,7 @@ on: [push, pull_request]
 jobs:
   test:
     name: Test
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       python-version: "3.12.x"
     services:
