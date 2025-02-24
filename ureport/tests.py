@@ -16,7 +16,7 @@ from temba_client.v2.types import (
 )
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.http.request import HttpRequest
 from django.test import override_settings
@@ -140,7 +140,7 @@ class MockResponse(object):
 @override_settings(SITE_BACKEND="ureport.tests.TestBackend")
 class UreportTest(SmartminTest, DashTest):
     def setUp(self):
-        self.superuser = User.objects.create_superuser(username="super", email="super@user.com", password="super")
+        self.superuser = get_user_model().objects.create_superuser(username="super", email="super@user.com", password="super")
 
         self.admin = self.create_user("Administrator")
         self.anon = self.create_user("Anon")

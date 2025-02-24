@@ -11,7 +11,7 @@ from mock import patch
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from dash.categories.models import Category
@@ -27,7 +27,7 @@ from ureport.polls.models import Poll, PollQuestion
 
 class UreportAPITests(APITestCase):
     def setUp(self):
-        self.superuser = User.objects.create_superuser(username="super", email="super@user.com", password="super")
+        self.superuser = get_user_model().objects.create_superuser(username="super", email="super@user.com", password="super")
         self.uganda = self.create_org("uganda", self.superuser)
         self.nigeria = self.create_org("testserver", self.superuser)
 
