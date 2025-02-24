@@ -1,3 +1,11 @@
+v1.2.145 (2025-02-24)
+-------------------------
+ * Update locales
+ * Run test on latest ubuntu
+ * Run code checks
+ * Update deps
+ * Remove csv_imports
+
 v1.2.144 (2025-02-21)
 -------------------------
  * Fix logout button to use POST method
