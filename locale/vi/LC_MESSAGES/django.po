@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 11:36+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -724,10 +724,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s mới của bạn đã được tạo."
-
-#, python-format
-msgid "Import %s"
-msgstr "Nhập %s"
 
 msgid "Back to Website"
 msgstr ""
@@ -1851,17 +1847,9 @@ msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
 #, fuzzy
-#| msgid "Categories"
-msgid "Category {idx+1}"
-msgstr "Danh mục"
-
-#, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Nhãn của ruleset từ RapidPro"
-
-msgid "Display {idx+1}"
-msgstr ""
 
 #, fuzzy
 #| msgid "If there are jobs to be shown on the public site"
@@ -1876,14 +1864,6 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
-msgstr ""
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr ""
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
 msgstr ""
 
 #, fuzzy, python-format
@@ -2221,6 +2201,15 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "Nhập %s"
+
+#, fuzzy
+#~| msgid "Categories"
+#~ msgid "Category {idx+1}"
+#~ msgstr "Danh mục"
 
 #, fuzzy
 #~| msgid "Create"

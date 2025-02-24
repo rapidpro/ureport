@@ -47,7 +47,7 @@ jobs:
     - name: Run pre-test checks
       run: |
         sudo apt-get install gettext
-        : # poetry run ./code_check.py --debug
+        poetry run ./code_check.py --debug
 
     - name: Run tests
       run: |

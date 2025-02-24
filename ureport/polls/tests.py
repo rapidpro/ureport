@@ -9,8 +9,8 @@ import six
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
-from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Sum, TextField, Value
 from django.db.models.functions import Cast, ExtractYear

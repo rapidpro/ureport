@@ -27,7 +27,9 @@ from ureport.polls.models import Poll, PollQuestion
 
 class UreportAPITests(APITestCase):
     def setUp(self):
-        self.superuser = get_user_model().objects.create_superuser(username="super", email="super@user.com", password="super")
+        self.superuser = get_user_model().objects.create_superuser(
+            username="super", email="super@user.com", password="super"
+        )
         self.uganda = self.create_org("uganda", self.superuser)
         self.nigeria = self.create_org("testserver", self.superuser)
 

@@ -140,7 +140,9 @@ class MockResponse(object):
 @override_settings(SITE_BACKEND="ureport.tests.TestBackend")
 class UreportTest(SmartminTest, DashTest):
     def setUp(self):
-        self.superuser = get_user_model().objects.create_superuser(username="super", email="super@user.com", password="super")
+        self.superuser = get_user_model().objects.create_superuser(
+            username="super", email="super@user.com", password="super"
+        )
 
         self.admin = self.create_user("Administrator")
         self.anon = self.create_user("Anon")

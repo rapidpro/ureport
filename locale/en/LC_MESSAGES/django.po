@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 11:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -665,10 +665,6 @@ msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
-msgstr ""
-
-#, python-format
-msgid "Import %s"
 msgstr ""
 
 msgid "Back to Website"
@@ -1632,13 +1628,7 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-msgid "Category {idx+1}"
-msgstr ""
-
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr ""
-
-msgid "Display {idx+1}"
 msgstr ""
 
 msgid "The label to display of the category on the public site"
@@ -1652,14 +1642,6 @@ msgid "Last results synced %(time)s ago"
 msgstr ""
 
 msgid "Synced"
-msgstr ""
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr ""
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
 msgstr ""
 
 #, python-format

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-24 11:36+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -695,10 +695,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Vaš novi %s je kreiran"
-
-#, python-format
-msgid "Import %s"
-msgstr "Uvezi %s"
 
 msgid "Back to Website"
 msgstr "Nazad na sajt"
@@ -1685,14 +1681,8 @@ msgstr "Izbor sakrivenih grafikona"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Odaberite raspored grafikona da biste sakrili ovo pitanje za javnost"
 
-msgid "Category {idx+1}"
-msgstr "Kategorija {idx+1}"
-
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Oznaka kategorije backend-a (poput RapidPro)"
-
-msgid "Display {idx+1}"
-msgstr "Prikaz {idx+1}"
 
 msgid "The label to display of the category on the public site"
 msgstr "Oznaka za prikaz kategorije na sajtu"
@@ -1706,14 +1696,6 @@ msgstr "Poslednji rezultati sinhronizovani pre %(time)s"
 
 msgid "Synced"
 msgstr "Sinhronizovano"
-
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Trenutno je sinhronizacija u toku... {sync_progress:.1f}%"
-
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Izmenite anketu za flow [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1999,6 +1981,24 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "Uvezi %s"
+
+#~ msgid "Category {idx+1}"
+#~ msgstr "Kategorija {idx+1}"
+
+#~ msgid "Display {idx+1}"
+#~ msgstr "Prikaz {idx+1}"
+
+#, python-brace-format
+#~ msgid "Sync currently in progress... {sync_progress:.1f}%"
+#~ msgstr "Trenutno je sinhronizacija u toku... {sync_progress:.1f}%"
+
+#, python-brace-format
+#~ msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#~ msgstr "Izmenite anketu za flow [{flow_name} ({flow_date_hint})]"
 
 #, fuzzy
 #~| msgid "Create"
