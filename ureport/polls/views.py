@@ -532,7 +532,7 @@ class PollCRUDL(SmartCRUDL):
                     cat_label_field_name = f"ruleset_{result_uuid}_cat_label_{category.id}"
                     cat_label_field_initial = initial.get(cat_label_field_name, "")
                     cat_label_field = forms.CharField(
-                        label=_("Category %d" % idx + 1),
+                        label=_("Category %s" % str(idx + 1)),
                         widget=forms.TextInput(attrs={"readonly": "readonly"}),
                         required=False,
                         initial=cat_label_field_initial,
@@ -542,7 +542,7 @@ class PollCRUDL(SmartCRUDL):
                     cat_display_field_name = f"ruleset_{result_uuid}_cat_display_{category.id}"
                     cat_display_field_initial = initial.get(cat_display_field_name, "")
                     cat_display_field = forms.CharField(
-                        label=_("Display %d" % idx + 1),
+                        label=_("Display %s" % str(idx + 1)),
                         required=False,
                         initial=cat_display_field_initial,
                         help_text=_("The label to display of the category on the public site"),
