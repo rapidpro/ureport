@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 13:09+0000\n"
+"POT-Creation-Date: 2025-02-25 07:00+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1686,14 +1686,14 @@ msgstr "Choisissez la répartition des graphiques à masquer pour cette question
 
 #, fuzzy, python-format
 #| msgid "Category Images"
-msgid "Category %d"
+msgid "Category %s"
 msgstr "Images pour catégorie"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Le libellé de la catégorie du backend (comme RapidPro)"
 
 #, python-format
-msgid "Display %d"
+msgid "Display %s"
 msgstr ""
 
 msgid "The label to display of the category on the public site"

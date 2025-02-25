@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 13:09+0000\n"
+"POT-Creation-Date: 2025-02-25 07:00+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1726,14 +1726,14 @@ msgstr ""
 
 #, fuzzy, python-format
 #| msgid "Category Images"
-msgid "Category %d"
+msgid "Category %s"
 msgstr "Imágenes de categorías"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr ""
 
 #, python-format
-msgid "Display %d"
+msgid "Display %s"
 msgstr ""
 
 msgid "The label to display of the category on the public site"

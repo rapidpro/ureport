@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 13:09+0000\n"
+"POT-Creation-Date: 2025-02-25 07:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -1858,7 +1858,7 @@ msgstr ""
 
 #, fuzzy, python-format
 #| msgid "Category Images"
-msgid "Category %d"
+msgid "Category %s"
 msgstr "Slike kategorija"
 
 #, fuzzy
@@ -1867,7 +1867,7 @@ msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Oznaka niza pravila iz RapidPro-a"
 
 #, python-format
-msgid "Display %d"
+msgid "Display %s"
 msgstr ""
 
 #, fuzzy
