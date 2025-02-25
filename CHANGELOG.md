@@ -1,3 +1,7 @@
+v1.2.147 (2025-02-25)
+-------------------------
+ * Adjust categories labels and displays labels
+
 v1.2.145 (2025-02-24)
 -------------------------
  * Update locales
