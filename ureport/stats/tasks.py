@@ -9,7 +9,6 @@ from django.utils import timezone
 from dash.orgs.models import Org
 from dash.orgs.tasks import org_task
 from ureport.celery import app
-from ureport.utils import chunk_list
 
 logger = logging.getLogger(__name__)
 
@@ -45,26 +44,32 @@ def delete_old_contact_activities(org, since, until):
     start_time = time.time()
     last_used_time = now - timedelta(days=400)
 
-    # find objects older than 400 days that have used=True so we can update them to used = False
-    old_contact_activities_ids = (
-        ContactActivity.objects.filter(org=org, date__lte=last_used_time).order_by("id").values_list("id", flat=True)
-    )
+    active_orgs = Org.objects.filter(active=True).values_list("id", flat=True)
+    total_deleted = 0
 
-    org_count = 0
+    for org_id in active_orgs:
+        org_count = 0
 
-    for batch in chunk_list(old_contact_activities_ids, 1000):
-        batch_ids = list(batch)
-        deleted, old_objects_deleted = ContactActivity.objects.filter(id__in=batch_ids).delete()
+        while True:
+            batch_ids = list(
+                ContactActivity.objects.filter(org_id=org_id, date__lte=last_used_time)
+                .order_by("id")
+                .values_list("id", flat=True)[:100]
+            )
 
-        org_count += deleted
+            if not batch_ids:
+                break
 
-        elapsed = time.time() - start_time
+            deleted, _ = ContactActivity.objects.filter(id__in=batch_ids).delete()
+            org_count += deleted
+            total_deleted += deleted
+            elapsed = time.time() - start_time
 
-        logger.info(f"Task: Deleting {org_count} old contact activities on org #{org.id} in {elapsed:.1f} seconds")
+            logger.info(f"Task: Deleting {org_count} old contact activities on org #{org_id} in {elapsed:.1f} seconds")
 
     elapsed = time.time() - start_time
     logger.info(
-        f"Task: Finished deleting {org_count} old contact activities until {last_used_time} on org #{org.id} in {elapsed:.1f} seconds"
+        f"Task: Finished deleting {total_deleted} old contact activities until {last_used_time} for all active orgs in {elapsed:.1f} seconds"
     )
 
 
