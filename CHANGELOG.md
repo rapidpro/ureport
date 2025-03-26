@@ -1,3 +1,9 @@
+v1.2.148 (2025-03-26)
+-------------------------
+ * Merge pull request #1269 from rapidpro/translations_locale-en-lc-messages-django-po--main_es
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in es
+
 v1.2.147 (2025-02-25)
 -------------------------
  * Adjust categories labels and displays labels
