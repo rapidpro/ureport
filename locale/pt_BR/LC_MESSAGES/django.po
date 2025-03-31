@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-25 07:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -707,10 +707,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "O seu novo %s foi criado."
-
-#, python-format
-msgid "Import %s"
-msgstr "Importar %s"
 
 msgid "Back to Website"
 msgstr "Voltar para o Website"
@@ -1769,17 +1765,18 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-#, fuzzy
-#| msgid "Categories"
-msgid "Category {idx+1}"
-msgstr "Categorias"
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %s"
+msgstr "Categoria de Imagens"
 
 #, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Título da ruleset do RapidPro"
 
-msgid "Display {idx+1}"
+#, python-format
+msgid "Display %s"
 msgstr ""
 
 #, fuzzy
@@ -1797,12 +1794,12 @@ msgstr ""
 msgid "Synced"
 msgstr ""
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
+#, python-format
+msgid "Sync currently in progress... %.1f"
 msgstr ""
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -2109,395 +2106,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Criar"
-
-#~ msgid "Save Changes"
-#~ msgstr "Salvar Alterações."
-
-#~ msgid "Photos"
-#~ msgstr "Fotos"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "A descrição da página de opiniões"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Se essa enquete deve ser destaque na página inicial"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Organização"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "A descrição da página de histórias"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "A cor usada no texto da barra de registro"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "A cor usada no fundo na barra de registro"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "A cor primária para definir o estilo desta organização"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "A cor secundária para definir o estilo desta organização"
-
-#~ msgid "The background color for the site"
-#~ msgstr "A cor de fundo para o site"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Se deve ativar o novo design."
-
-#~ msgid "JOIN NOW"
-#~ msgstr "PARTICIPE JÁ!"
-
-#~ msgid ""
-#~ "\n"
-#~ "             %(counter)s result\n"
-#~ "           "
-#~ msgid_plural ""
-#~ "\n"
-#~ "              %(counter)s results\n"
-#~ "            "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "             %(counter)s resultado\n"
-#~ "           "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "              %(counter)s resultados\n"
-#~ "            "
-
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "             Resultados %(start)s-%(end)s de %(count)s\n"
-#~ "           "
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                  %(questions)s question polled on this topic\n"
-#~| "                "
-#~| msgid_plural ""
-#~| "\n"
-#~| "                  %(questions)s questions polled on this topic\n"
-#~| "                "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "                  %(questions)s erguntas realizadas nesse tópico\n"
-#~ "                "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "                  %(questions)s perguntas realizadas nesse tópico\n"
-#~ "                "
-
-#, fuzzy
-#~| msgid "Poll Questions"
-#~ msgid "questions"
-#~ msgstr "Questões da enquete"
-
-#~ msgid "Polls"
-#~ msgstr "Enquetes"
-
-#~ msgid "U-Reporters"
-#~ msgstr "U-Reporters"
-
-#~ msgid "Join & Engage"
-#~ msgstr "Entre & Participe"
-
-#~ msgid "FOLLOW US ON"
-#~ msgstr "Segue nas redes"
-
-#~ msgid ""
-#~ "\n"
-#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Lembre-se de que para adicionar uma proposta de trabalho do Twitter, você precisa criar um widget do twitter"
-
-#~ msgid "ABOUT U-REPORT"
-#~ msgstr "SOBRE O U-REPORT"
-
-#~ msgid "Scroll to Learn more"
-#~ msgstr "Desça a barra de rolagem para mais informações"
-
-#~ msgid "The mission of U-Report"
-#~ msgstr "A missão do U-Report"
-
-#~ msgid "Why Join U-Report?"
-#~ msgstr "Por que fazer parte do U-Report?"
-
-#~ msgid "Speak out on what's happening in your community"
-#~ msgstr "Fale sobre o que está acontecendo na sua comunidade"
-
-#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
-#~ msgstr "Utilize resultados e informações do U-Report para atualizar e melhorar a consciência cidadã"
-
-#~ msgid "Participate in nationwide campaigns to help improve your country"
-#~ msgstr "Participe das campanhas em nível nacional para ajudar a melhor o seu País."
-
-#~ msgid "Share what's happening around %(country)s with other U-Reporters"
-#~ msgstr "Compartilhe o que está acontecendo ao redor %(country)s com outros U-Reporters"
-
-#~ msgid "CLICK HERE TO JOIN"
-#~ msgstr "CLIQUE PARA ENTRAR"
-
-#~ msgid "U-REPORT VIDEOS"
-#~ msgstr "VÍDEOS DO U-REPORT "
-
-#~ msgid "No videos yet."
-#~ msgstr "Ainda não há vídeos."
-
-#~ msgid "WATCH IT ON YOUTUBE"
-#~ msgstr "ASSISTA NO YOUTUBE"
-
-#~ msgid "Follow"
-#~ msgstr "Seguir"
-
-#~ msgid ""
-#~ "\n"
-#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "O U-Report é uma ferramenta social de mensagens gratuita para todos, onde quer que se esteja no mundo, para falar sobre questões de desenvolvimento, apoiar os direitos da criança e melhorar as nossas comunidades"
-
-#~ msgid "CURRENT POLL"
-#~ msgstr "ÚLTIMA ENQUETE"
-
-#~ msgid "View Full Results"
-#~ msgstr "Veja Todos os Resultados"
-
-#~ msgid "All U-Report members"
-#~ msgstr "Todos usuários do U-Report"
-
-#~ msgid "Responded out of"
-#~ msgstr "Responderam de"
-
-#~ msgid "RESPONDER'S RATE BY LOCATION"
-#~ msgstr "RESPOSTAS POR ESTADO"
-
-#~ msgid "Most responded"
-#~ msgstr "A maioria respondeu"
-
-#~ msgid ""
-#~ "\n"
-#~ "                                  %(responded)s of %(total)s\n"
-#~ "                                  "
-#~ msgstr ""
-#~ "\n"
-#~ "                                  %(responded)s de %(total)s\n"
-#~ "                                  "
-
-#~ msgid "TRENDING WORDS"
-#~ msgstr "PALAVRAS MAIS USADAS"
-
-#~ msgid "FEATURED RESPONSES"
-#~ msgstr "RESPOSTAS EM DESTAQUE"
-
-#~ msgid "TOTAL # OF U-REPORTERS"
-#~ msgstr "TOTAL DE # U-REPORTERS"
-
-#~ msgid "4 MOST ACTIVE REGIONS"
-#~ msgstr "4 REGIÕES MAIS ATIVAS"
-
-#~ msgid "RATE BY GENDER"
-#~ msgstr "TAXA POR GÊNERO"
-
-#~ msgid "RATE BY AGE"
-#~ msgstr "TAXA POR IDADE"
-
-#~ msgid "WHAT U-REPORTERS ARE SAYING"
-#~ msgstr "O QUE U-REPORTERS ESTÃO DIZENDO"
-
-#~ msgid "FEATURED VIDEO"
-#~ msgstr "VÍDEO EM DESTAQUE"
-
-#~ msgid "Watch more videos"
-#~ msgstr "Assita a mais vídeos"
-
-#~ msgid "FEATURED REGION"
-#~ msgstr "REGIÃO EM DESTAQUE"
-
-#~ msgid "Check more stories in U-Report app"
-#~ msgstr "Acesse mais histórias no aplicativo U-Report"
-
-#~ msgid "View more stories on Facebook"
-#~ msgstr "Veja mais histórias no Facebook"
-
-#~ msgid "View more on Instagram"
-#~ msgstr "Veja mais no Instagram"
-
-#~ msgid "Read more tweets on Twitter"
-#~ msgstr "Leia mais tweets no Twitter"
-
-#~ msgid "NEWS FEED"
-#~ msgstr "NOTÍCIAS"
-
-#~ msgid "Read full story"
-#~ msgstr "Ler história completa"
-
-#~ msgid "Read this story"
-#~ msgstr "Leia essa história"
-
-#~ msgid "JOBS"
-#~ msgstr "VAGAS DE EMPREGO"
-
-#~ msgid "Scroll to see job details"
-#~ msgstr "Desça a barra de rolagem para ver os detalhes das vagas de emprego"
-
-#~ msgid "Tweet to"
-#~ msgstr "Tweet para"
-
-#~ msgid "Read more"
-#~ msgstr "Ler mais"
-
-#~ msgid "JOIN U-REPORT"
-#~ msgstr "FAÇA PARTE DO U-REPORT"
-
-#~ msgid "HOW TO JOIN"
-#~ msgstr "COMO PARTICIPAR"
-
-#~ msgid ""
-#~ "\n"
-#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-#~ "\n"
-#~ "              "
-#~ msgstr ""
-#~ "\n"
-#~ "                *O U-Report é um programa gratuito, patrocinado pelo UNICEF com a ajuda de provedores de rede em%(country)s. Por isso, não solicitará pagamentos, nem informações financeiras pessoais; POR FAVOR, desconsidere qualquer mensagem deste número, das páginas do Facebook e Twitter que solicitem pagamento. Todos os serviços do U-Report (todas as mensagens em %(shortcode)s) são gratuitos.\n"
-#~ "\n"
-#~ "              "
-
-#~ msgid "U-REPORT ON SOCIAL MEDIA"
-#~ msgstr "U-REPORT NAS MÍDIAS SOCIAIS"
-
-#~ msgid "Compose new Tweet"
-#~ msgstr "Compor novo Tweet"
-
-#~ msgid "CURRENT POLL IN"
-#~ msgstr "ENQUETE ATUAL NO"
-
-#~ msgid "response rate"
-#~ msgstr "taxa de respostas"
-
-#~ msgid "responded out of"
-#~ msgstr "responderam de"
-
-#~ msgid "polled"
-#~ msgstr "questionados"
-
-#~ msgid "POLL RESULTS"
-#~ msgstr "RESULTADOS DAS ENQUETES"
-
-#~ msgid ""
-#~ "\n"
-#~ "                    %(responded)s responded out of %(polled)s polled\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "%(responded)s responderam de %(polled)s questionadas"
-
-#~ msgid "KEYWORDS"
-#~ msgstr "PALAVRAS-CHAVES"
-
-#~ msgid "STATISTICS"
-#~ msgstr "ESTATÍSTICAS"
-
-#~ msgid "LOCATIONS"
-#~ msgstr "LOCALIZAÇÕES"
-
-#~ msgid "FEATURED ANSWERS"
-#~ msgstr "RESPOSTAS EM DESTAQUE"
-
-#~ msgid "No featured answers."
-#~ msgstr "Não há respostas em destaque."
-
-#~ msgid "U-Reporter in"
-#~ msgstr "U-Reporter em"
-
-#~ msgid "RELATED STORIES"
-#~ msgstr "HISTÓRIAS RELACIONADAS"
-
-#~ msgid "No related stories."
-#~ msgstr "Nenhuma história relacionada"
-
-#~ msgid "FEATURED IMAGES"
-#~ msgstr "IMAGENS EM DESTAQUE"
-
-#~ msgid "No featured images yet."
-#~ msgstr "Ainda não há imagens em destaque."
-
-#~ msgid "BY"
-#~ msgstr "POR"
-
-#~ msgid "LATEST STORIES"
-#~ msgstr "ÚLTIMAS HISTÓRIAS"
-
-#~ msgid "FILTERED BY"
-#~ msgstr "FILTRADO POR"
-
-#~ msgid "Scroll to read more"
-#~ msgstr "Saiba mais abaixo"
-
-#~ msgid "STORY CONTINUES"
-#~ msgstr "A HISTÓRIA CONTINUA"
-
-#~ msgid "AUDIO"
-#~ msgstr "ÁUDIO"
-
-#~ msgid "RELATED POLLS"
-#~ msgstr "ENQUETES RELACIONADAS"
-
-#~ msgid "No related polls."
-#~ msgstr "Não há enquetes relacionadas."
-
-#~ msgid "No featured images."
-#~ msgstr "Não há imagens em destaque."
-
-#~ msgid "WHO WE ARE"
-#~ msgstr "QUEM SOMOS"
-
-#~ msgid "U-REPORTER STATISTICS"
-#~ msgstr "ESTATÍSTICAS DOS PARTICIPANTES "
-
-#~ msgid "WHERE ARE U-REPORTERS FROM?"
-#~ msgstr "DE ONDE SÃO OS PARTICIPANTES DO U-REPORT?"
-
-#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-#~ msgstr "TAXA DE REGISTRO: NOS ÚLTIMOS 6 MESES"
-
-#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-#~ msgstr "OCUPAÇÃO: TOP 9 MAIS MENCIONADOS"
-
-#~ msgid "Registered"
-#~ msgstr "Registrado"
-
-#~ msgid "Week of"
-#~ msgstr "Semana de"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-25 07:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -704,10 +704,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Ваш новый %s был создан."
-
-#, python-format
-msgid "Import %s"
-msgstr "Импортировать %s"
 
 msgid "Back to Website"
 msgstr "Вернуться на сайт"
@@ -1742,14 +1738,17 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-msgid "Category {idx+1}"
-msgstr "Категория {idx+1}"
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %s"
+msgstr "Фотографии категорий"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Ярлык категории из бэкэнда (например, RapidPro)"
 
-msgid "Display {idx+1}"
-msgstr "Показать {idx+1}"
+#, python-format
+msgid "Display %s"
+msgstr ""
 
 msgid "The label to display of the category on the public site"
 msgstr "Ярлык для отображения категории на общедоступном сайте"
@@ -1764,13 +1763,14 @@ msgstr "Последние результаты синхронизированы
 msgid "Synced"
 msgstr "Синхронизировано"
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Выполняется синхронизация ... {sync_progress:.1f}%"
+#, fuzzy, python-format
+#| msgid "Scheduled Sync currently in progress..."
+msgid "Sync currently in progress... %.1f"
+msgstr "Выполняется запланированная синхронизация ..."
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Изменить опрос для потока [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -2071,31 +2071,7 @@ msgstr ""
 msgid "West and Central Africa"
 msgstr ""
 
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Создать"
-
-#~ msgid "Save Changes"
-#~ msgstr "Сохранить изменения"
-
-#~ msgid "Photos"
-#~ msgstr "Фотографии"
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Цвет, используемый для рисования текста на панели соединения"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Цвет, используемый для рисования фона на панели соединения"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Основной цвет для оформления этой организации"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Дополнительный цвет для стилизации для этой организации"
-
-#~ msgid "The background color for the site"
-#~ msgstr "Цвет фона для сайта"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Активировать ли новый дизайн"
+#, fuzzy, python-format
+#~| msgid "Scheduled Sync currently in progress..."
+#~ msgid "Sync currently in progress... %(sync_progress)d"
+#~ msgstr "Выполняется запланированная синхронизация ..."
