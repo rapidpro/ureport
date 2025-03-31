@@ -9,6 +9,7 @@ import six
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Sum, TextField, Value
@@ -1095,7 +1096,7 @@ class PollTest(UreportTest):
             mock_get_linked_orgs.assert_called_with(False)
 
         request = Mock(spec=HttpRequest)
-        request.user = User.objects.get(pk=1)
+        request.user = get_user_model().objects.get(pk=1)
 
         with patch("django.contrib.auth.models.User.is_authenticated") as mock_authenticated:
             mock_authenticated.return_value = True

@@ -532,7 +532,7 @@ class PollCRUDL(SmartCRUDL):
                     cat_label_field_name = f"ruleset_{result_uuid}_cat_label_{category.id}"
                     cat_label_field_initial = initial.get(cat_label_field_name, "")
                     cat_label_field = forms.CharField(
-                        label=_(f"Category {idx+1}"),
+                        label=_("Category %s" % str(idx + 1)),
                         widget=forms.TextInput(attrs={"readonly": "readonly"}),
                         required=False,
                         initial=cat_label_field_initial,
@@ -542,7 +542,7 @@ class PollCRUDL(SmartCRUDL):
                     cat_display_field_name = f"ruleset_{result_uuid}_cat_display_{category.id}"
                     cat_display_field_initial = initial.get(cat_display_field_name, "")
                     cat_display_field = forms.CharField(
-                        label=_(f"Display {idx+1}"),
+                        label=_("Display %s" % str(idx + 1)),
                         required=False,
                         initial=cat_display_field_initial,
                         help_text=_("The label to display of the category on the public site"),
@@ -690,7 +690,7 @@ class PollCRUDL(SmartCRUDL):
                 return _("Synced")
 
             sync_progress = obj.get_sync_progress()
-            return _(f"Sync currently in progress... {sync_progress:.1f}%")
+            return _("Sync currently in progress... %.1f" % sync_progress)
 
         def get_questions(self, obj):
             return obj.get_questions().count()
@@ -737,7 +737,10 @@ class PollCRUDL(SmartCRUDL):
             flow_name = flow.get("name", "")
             flow_date_hint = flow.get("date_hint", "")
 
-            return _(f"Edit Poll for flow [{flow_name} ({flow_date_hint})]")
+            return _(
+                "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
+                % dict(flow_name=flow_name, flow_date_hint=flow_date_hint)
+            )
 
         def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)

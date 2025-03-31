@@ -79,11 +79,12 @@
 
             {% if request.user.is_authenticated %}
                 <div class='btn authorize'>
-                    <a id="auth" class="header__btn" href="{{ LOGOUT_URL }}?next={{ request.path }}" data-sw-translate>
-                        {% block django_logout_message %}
+                    <form method="post" action="{{ LOGOUT_URL }}?next={{ request.path }}">
+                        {% csrf_token %}
+                        <button type="submit" id="auth" class="header__btn" data-sw-translate >{% block django_logout_message %}
                             Django Logout
-                        {% endblock %}
-                    </a>
+                        {% endblock %}</button>
+                    </form>
                 </div>
             {% else %}
                 <div class='btn authorize'>

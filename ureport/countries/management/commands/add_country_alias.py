@@ -8,7 +8,7 @@ import os
 import git
 from django_countries import countries
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.utils.translation import gettext_lazy as _
 
@@ -58,7 +58,7 @@ class Command(BaseCommand):
 
         logger.info("Found %d json files to parse")
 
-        user = User.objects.filter(username="root").first()
+        user = get_user_model().objects.filter(username="root").first()
 
         if not user:
             raise Exception(_("No root user found. Please create a root user"))

@@ -1,3 +1,27 @@
+v1.2.148 (2025-03-26)
+-------------------------
+ * Merge pull request #1269 from rapidpro/translations_locale-en-lc-messages-django-po--main_es
+ * Run code checks
+ * Translate locale/en/LC_MESSAGES/django.po in es
+
+v1.2.147 (2025-02-25)
+-------------------------
+ * Adjust categories labels and displays labels
+
+v1.2.145 (2025-02-24)
+-------------------------
+ * Update locales
+ * Run test on latest ubuntu
+ * Run code checks
+ * Update deps
+ * Remove csv_imports
+
+v1.2.144 (2025-02-21)
+-------------------------
+ * Fix logout button to use POST method
+ * Update GH action to use postgress image on CI
+ * Update pyproject.toml for poetry 2
+
 v1.2.143 (2025-01-06)
 -------------------------
  * Merge pull request #1260 from rapidpro/poll-results-big-int

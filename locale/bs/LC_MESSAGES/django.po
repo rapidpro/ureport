@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 14:37+0000\n"
+"POT-Creation-Date: 2025-02-25 07:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -789,10 +789,6 @@ msgstr ""
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Vaš novi%sje kreiran"
-
-#, python-format
-msgid "Import %s"
-msgstr "Importuj %s"
 
 msgid "Back to Website"
 msgstr "Povratak na stranicu"
@@ -1860,17 +1856,18 @@ msgstr ""
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr ""
 
-#, fuzzy
-#| msgid "Categories"
-msgid "Category {idx+1}"
-msgstr "Kategorije"
+#, fuzzy, python-format
+#| msgid "Category Images"
+msgid "Category %s"
+msgstr "Slike kategorija"
 
 #, fuzzy
 #| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Oznaka niza pravila iz RapidPro-a"
 
-msgid "Display {idx+1}"
+#, python-format
+msgid "Display %s"
 msgstr ""
 
 #, fuzzy
@@ -1888,12 +1885,12 @@ msgstr ""
 msgid "Synced"
 msgstr ""
 
-#, python-brace-format
-msgid "Sync currently in progress... {sync_progress:.1f}%"
+#, python-format
+msgid "Sync currently in progress... %.1f"
 msgstr ""
 
-#, python-brace-format
-msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+#, python-format
+msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
 msgstr ""
 
 #, python-format
@@ -2200,115 +2197,3 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "Co-Create"
-#~ msgstr "Kreiraj"
-
-#~ msgid "Save Changes"
-#~ msgstr "Sačuvaj promjene"
-
-#~ msgid "Photos"
-#~ msgstr "Slike"
-
-#, fuzzy
-#~| msgid "The description of the opinions page"
-#~ msgid "The description of this bot, optional"
-#~ msgstr "Opis stranice sa odgovorima "
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this bot is featured and displayed on the homepage"
-#~ msgstr "Treba li anketa biti prikazana na početnoj stranici"
-
-#, fuzzy
-#~| msgid "Org"
-#~ msgid "Or"
-#~ msgstr "Org"
-
-#, fuzzy
-#~| msgid "The description of the stories page"
-#~ msgid "The description text for this bot"
-#~ msgstr "Opis stranice sa pričama "
-
-#~ msgid "The color used to draw the text on the join bar"
-#~ msgstr "Boja za pisanje teksta na polju za pridruživanje"
-
-#~ msgid "The color used to draw the background on the join bar"
-#~ msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
-
-#~ msgid "The primary color for styling for this organization"
-#~ msgstr "Primarna boja za ovu postavku"
-
-#~ msgid "The secondary color for styling for this organization"
-#~ msgstr "Sekundarna boja za ovu postavku"
-
-#~ msgid "The background color for the site"
-#~ msgstr "Pozadinska boja ove stranice"
-
-#~ msgid "Whether to activate the new design."
-#~ msgstr "Treba li aktivirati novi dizajn"
-
-#~ msgid "JOIN NOW"
-#~ msgstr "PRIDRUŽI SE"
-
-#~ msgid ""
-#~ "\n"
-#~ "             %(counter)s result\n"
-#~ "           "
-#~ msgid_plural ""
-#~ "\n"
-#~ "              %(counter)s results\n"
-#~ "            "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(counter)srezultati"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(counter)srezultati"
-#~ msgstr[2] ""
-#~ "\n"
-#~ "%(counter)srezultati"
-
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "Rezultati%(start)s-%(end)sod%(count)s"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "             %(counter)s result\n"
-#~| "           "
-#~| msgid_plural ""
-#~| "\n"
-#~| "              %(counter)s results\n"
-#~| "            "
-#~ msgid ""
-#~ "\n"
-#~ "                    %(counter)s poll question\n"
-#~ "                    "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                      %(counter)s poll questions\n"
-#~ "\n"
-#~ "\n"
-#~ "                  "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(counter)srezultati"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(counter)srezultati"
-#~ msgstr[2] ""
-#~ "\n"
-#~ "%(counter)srezultati"
-
-#, fuzzy
-#~| msgid "Poll Questions"
-#~ msgid "questions"
-#~ msgstr "Anketna pitanja"

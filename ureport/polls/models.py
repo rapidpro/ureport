@@ -11,7 +11,7 @@ import six
 from django_redis import get_redis_connection
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.db import connection, models
 from django.db.models import Count, F, Prefetch, Q, Sum
@@ -646,7 +646,7 @@ class Poll(SmartModel):
 
     def update_or_create_questions(self, user=None):
         if not user:
-            user = User.objects.get(pk=-1)
+            user = get_user_model().objects.get(pk=-1)
 
         org = self.org
         backend = org.get_backend(backend_slug=self.backend.slug)
