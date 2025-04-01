@@ -1,3 +1,8 @@
+v1.2.149 (2025-04-01)
+-------------------------
+ * Merge pull request #1270 from rapidpro/add-aus
+ * Add AUS link to countries dropdown
+
 v1.2.148 (2025-03-26)
 -------------------------
  * Merge pull request #1269 from rapidpro/translations_locale-en-lc-messages-django-po--main_es
