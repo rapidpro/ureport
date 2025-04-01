@@ -1179,6 +1179,14 @@ COUNTRY_FLAGS_SITES = [
         region="LACRO",
     ),
     dict(
+        name="Australia",
+        host="//australia.ureport.in",
+        flag="",
+        countries_codes=["AUS"],
+        count_link="http://australia.ureport.in/count/",
+        region="NATCOM",
+    ),
+    dict(
         name="Bangladesh",
         host="//bangladesh.ureport.in/",
         flag="flag_bangladesh.png",
