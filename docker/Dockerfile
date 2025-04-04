@@ -5,7 +5,8 @@ WORKDIR /app
 COPY ./pyproject.toml .
 COPY ./poetry.lock .
 
-RUN python -m pip install -U poetry==1.8.4
+RUN python -m pip install -U poetry==2.0.0
+RUN poetry self add poetry-plugin-export
 RUN poetry export --without-hashes --output requirements.txt
 
 FROM python:3.12-slim AS base
