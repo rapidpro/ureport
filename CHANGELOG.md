@@ -1,3 +1,8 @@
+v1.2.150 (2025-04-04)
+-------------------------
+ * Merge pull request #1264 from rapidpro/custom-html
+ * Add custom_html config to the public pages
+
 v1.2.149 (2025-04-01)
 -------------------------
  * Merge pull request #1270 from rapidpro/add-aus
