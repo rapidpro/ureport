@@ -488,18 +488,18 @@ typing_extensions = ">=3.10.0.0"
 
 [[package]]
 name = "django"
-version = "5.1.6"
+version = "5.2.1"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "Django-5.1.6-py3-none-any.whl", hash = "sha256:8d203400bc2952fbfb287c2bbda630297d654920c72a73cc82a9ad7926feaad5"},
-    {file = "Django-5.1.6.tar.gz", hash = "sha256:1e39eafdd1b185e761d9fab7a9f0b9fa00af1b37b25ad980a8aa0dac13535690"},
+    {file = "django-5.2.1-py3-none-any.whl", hash = "sha256:a9b680e84f9a0e71da83e399f1e922e1ab37b2173ced046b541c72e1589a5961"},
+    {file = "django-5.2.1.tar.gz", hash = "sha256:57fe1f1b59462caed092c80b3dd324fd92161b620d59a9ba9181c34746c97284"},
 ]
 
 [package.dependencies]
-asgiref = ">=3.8.1,<4"
+asgiref = ">=3.8.1"
 sqlparse = ">=0.3.1"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
@@ -1278,19 +1278,19 @@ files = [
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.17.1"
+version = "1.18.0"
 description = "Support library for RapidPro dashboards"
 optional = false
-python-versions = "<4.0,>=3.10"
+python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "rapidpro_dash-1.17.1-py3-none-any.whl", hash = "sha256:110d2bb8a7d70e7803c8bd1f63eb8386e37bfdea3db1fea3c174fc226567a71c"},
-    {file = "rapidpro_dash-1.17.1.tar.gz", hash = "sha256:c22020fd0da380b59e4c99ab34fa1fba524ef9a5a39fb390192b76cf2f5794f5"},
+    {file = "rapidpro_dash-1.18.0-py3-none-any.whl", hash = "sha256:826da5f5a9d03f5719ba0785a14029bb706227f0949b92c1653ed8b900d74c89"},
+    {file = "rapidpro_dash-1.18.0.tar.gz", hash = "sha256:686705f40f8b9859890fcb32c4d96eeb0f0d9554ab42eb0ba9607a360e3c365f"},
 ]
 
 [package.dependencies]
 celery = ">=5.1,<6.0"
-Django = ">=5.0.8,<5.2"
+Django = ">=5.1.9,<5.3"
 django-compressor = ">=4.0"
 django-redis = ">=5.2.0"
 django-timezone-field = ">=6.1.0"
@@ -1300,7 +1300,7 @@ Pillow = ">=9.4"
 psycopg = ">=3.1.9"
 python-dateutil = ">=2.8.2"
 rapidpro-python = ">=2.15.0"
-smartmin = ">=5.0.8"
+smartmin = ">=5.2.0,<6.0.0"
 sorl-thumbnail = ">=12.9.0"
 
 [[package]]
@@ -1700,19 +1700,19 @@ files = [
 
 [[package]]
 name = "smartmin"
-version = "5.1.2"
+version = "5.2.0"
 description = "Scaffolding system for Django object management."
 optional = false
-python-versions = "<3.13,>=3.10"
+python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "smartmin-5.1.2-py3-none-any.whl", hash = "sha256:e5348ff8ca6ceefec37879caa59c88a6016ffe12dd9e45b6a2d920078ecfffd9"},
-    {file = "smartmin-5.1.2.tar.gz", hash = "sha256:8ad442f4bbbe627d07338cbbbcb8614fe0d69573a7ed704548f2be265c068838"},
+    {file = "smartmin-5.2.0-py3-none-any.whl", hash = "sha256:50e76b24728f38a26c2b82caba2f5b10d69b6e253307eadc2063625fe51dc5e2"},
+    {file = "smartmin-5.2.0.tar.gz", hash = "sha256:9e64d19045ef682954e2e0677683838ce1b15497763b615997d926407182b90d"},
 ]
 
 [package.dependencies]
 celery = ">=5.1"
-Django = ">=5.0,<5.2"
+Django = ">=5.1,<5.3"
 redis = ">=3.5.3"
 sqlparse = ">=0.4.1,<0.6.0"
 xlrd = ">=1.2.0"
@@ -1914,4 +1914,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "765af4908c1bda75fb807400b61e34724bdc108e4c868994dae92e42e0a68e83"
+content-hash = "02ea9ccd89fa8ed48986840416293a2615272786459d20e5fbebf34b3fac0b61"
