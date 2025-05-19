@@ -1,3 +1,8 @@
+v1.2.151 (2025-05-19)
+-------------------------
+ * Merge pull request #1271 from rapidpro/update-django
+ * Update to support django 5.2
+
 v1.2.150 (2025-04-04)
 -------------------------
  * Merge pull request #1264 from rapidpro/custom-html
