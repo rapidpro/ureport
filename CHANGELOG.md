@@ -1,3 +1,8 @@
+v1.2.152 (2025-05-21)
+-------------------------
+ * Merge pull request #1272 from rapidpro/add-eth
+ * Add ETH to dropdown
+
 v1.2.151 (2025-05-19)
 -------------------------
  * Merge pull request #1271 from rapidpro/update-django
