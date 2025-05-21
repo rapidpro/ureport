@@ -1387,6 +1387,14 @@ COUNTRY_FLAGS_SITES = [
         region="ESARO",
     ),
     dict(
+        name="Ethiopia",
+        host="//ethiopia.ureport.in/",
+        flag="",
+        countries_codes=["ETH"],
+        count_link="http://ethiopia.ureport.in/count/",
+        region="ESARO",
+    ),
+    dict(
         name="Europe",
         host="//europe-uk.ureport.in/",
         flag="flag_europe-uk.png",
