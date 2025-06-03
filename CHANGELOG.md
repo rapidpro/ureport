@@ -1,3 +1,7 @@
+v1.2.154 (2025-06-03)
+-------------------------
+ * Merge pull request #1273 from rapidpro/gtm-check
+
 v1.2.152 (2025-05-21)
 -------------------------
  * Merge pull request #1272 from rapidpro/add-eth
