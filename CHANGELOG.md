@@ -1,3 +1,13 @@
+v1.2.155 (2025-06-12)
+-------------------------
+ * Merge pull request #1276 from rapidpro/updates
+ * Update archive type param
+ * Update deps
+ * Merge pull request #1275 from rapidpro/dependabot/pip/django-5.2.2
+ * Merge pull request #1274 from rapidpro/dependabot/pip/requests-2.32.4
+ * Bump django from 5.2.1 to 5.2.2
+ * Bump requests from 2.32.3 to 2.32.4
+
 v1.2.154 (2025-06-03)
 -------------------------
  * Merge pull request #1273 from rapidpro/gtm-check
