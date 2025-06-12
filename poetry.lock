@@ -1278,14 +1278,14 @@ files = [
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.18.0"
+version = "1.18.1"
 description = "Support library for RapidPro dashboards"
 optional = false
 python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "rapidpro_dash-1.18.0-py3-none-any.whl", hash = "sha256:826da5f5a9d03f5719ba0785a14029bb706227f0949b92c1653ed8b900d74c89"},
-    {file = "rapidpro_dash-1.18.0.tar.gz", hash = "sha256:686705f40f8b9859890fcb32c4d96eeb0f0d9554ab42eb0ba9607a360e3c365f"},
+    {file = "rapidpro_dash-1.18.1-py3-none-any.whl", hash = "sha256:74260f00037235537411e618eed92dbcaa98a3dcfaa9f9695ed96bfc6a771fb4"},
+    {file = "rapidpro_dash-1.18.1.tar.gz", hash = "sha256:37288200f5ca12c1acc0fd47cad108fdc5d999e9fcf64e4900209f73eecabfb3"},
 ]
 
 [package.dependencies]
@@ -1299,20 +1299,20 @@ phonenumbers = ">=8.12.16"
 Pillow = ">=9.4"
 psycopg = ">=3.1.9"
 python-dateutil = ">=2.8.2"
-rapidpro-python = ">=2.15.0"
-smartmin = ">=5.2.0,<6.0.0"
+rapidpro-python = ">=2.18.0"
+smartmin = ">=5.2.1,<6.0.0"
 sorl-thumbnail = ">=12.9.0"
 
 [[package]]
 name = "rapidpro-python"
-version = "2.17.0"
+version = "2.18.2"
 description = "Python client library for the RapidPro API"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "rapidpro_python-2.17.0-py3-none-any.whl", hash = "sha256:4f7c09068c708243a7822466d8440839d2b148bd33ce104fe667aece9933f843"},
-    {file = "rapidpro_python-2.17.0.tar.gz", hash = "sha256:56f2a931e4483b3ad75646684fee07ce7f58b8ac162754e17b39e02846f49162"},
+    {file = "rapidpro_python-2.18.2-py3-none-any.whl", hash = "sha256:613b705ce5ff9f8650b2040fc1afb65176a4ae24a7bd6a875ce1b7f724843bc4"},
+    {file = "rapidpro_python-2.18.2.tar.gz", hash = "sha256:122d6b38c6b3609693a664cc2e1e4ec31b4327eb4ae7239183fddc3d8ba65d82"},
 ]
 
 [package.dependencies]
@@ -1700,14 +1700,14 @@ files = [
 
 [[package]]
 name = "smartmin"
-version = "5.2.0"
+version = "5.2.1"
 description = "Scaffolding system for Django object management."
 optional = false
 python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "smartmin-5.2.0-py3-none-any.whl", hash = "sha256:50e76b24728f38a26c2b82caba2f5b10d69b6e253307eadc2063625fe51dc5e2"},
-    {file = "smartmin-5.2.0.tar.gz", hash = "sha256:9e64d19045ef682954e2e0677683838ce1b15497763b615997d926407182b90d"},
+    {file = "smartmin-5.2.1-py3-none-any.whl", hash = "sha256:2edcd0b54e149fe609a10a22704d15ceeee114ac41f30cabb8d5c439eed573a6"},
+    {file = "smartmin-5.2.1.tar.gz", hash = "sha256:0a837b58454af0b7b4ff6c39ed7595f765497a06e1da5d4b42c639791100cf84"},
 ]
 
 [package.dependencies]
@@ -1914,4 +1914,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "02ea9ccd89fa8ed48986840416293a2615272786459d20e5fbebf34b3fac0b61"
+content-hash = "37150b5cbc63c9ab48264b056cb283d2c683625e28e97ab37daaaa02006e60bb"
