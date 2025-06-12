@@ -6,7 +6,7 @@ import zoneinfo
 from datetime import datetime, timezone as tzone
 
 import mock
-import redis
+import valkey
 from mock import patch
 from temba_client.v2 import Flow
 
@@ -54,7 +54,7 @@ class UtilsTest(UreportTest):
 
     def clear_cache(self):
         # hardcoded to localhost
-        r = redis.StrictRedis(host="localhost", db=1)
+        r = valkey.StrictValkey(host="localhost", db=1)
         r.flushdb()
 
     def test_datetime_to_json_date(self):
@@ -547,9 +547,8 @@ class UtilsTest(UreportTest):
         with self.settings(
             CACHES={
                 "default": {
-                    "BACKEND": "django_redis.cache.RedisCache",
+                    "BACKEND": "django_valkey.cache.ValkeyCache",
                     "LOCATION": "redis://127.0.0.1:6379/1",
-                    "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
                 }
             }
         ):

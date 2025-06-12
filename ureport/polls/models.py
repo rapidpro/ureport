@@ -8,7 +8,7 @@ from collections import defaultdict
 from datetime import timedelta, timezone as tzone
 
 import six
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -368,7 +368,7 @@ class Poll(SmartModel):
             logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
             return
 
-        r = get_redis_connection()
+        r = get_valkey_connection()
 
         key = Poll.POLL_REBUILD_COUNTS_LOCK % (org_id, flow)
 

@@ -144,21 +144,16 @@ COMPRESS_OFFLINE_CONTEXT = [
     dict(STATIC_URL=STATIC_URL, base_template='public_base.html', org=None, debug=False, testing=False)
 ]
 
-REDIS_HOST = 'localhost'
+VALKEY_HOST = 'localhost'
+VALKEY_PORT = 6379
+VALKEY_DB = '1'
 
-REDIS_HOST = REDIS_HOST
-REDIS_PORT = 6379
-REDIS_DB = '1'
-
-CELERY_BROKER_URL = 'redis://%s:%s/%s' % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+CELERY_BROKER_URL = 'redis://%s:%s/%s' % (VALKEY_HOST, VALKEY_PORT, VALKEY_DB)
 
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
+        'BACKEND': 'django_valkey.cache.ValkeyCache',
         'LOCATION': CELERY_BROKER_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
     }
 }
 

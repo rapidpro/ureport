@@ -23,7 +23,6 @@ dependencies = [
     "Pillow ~= 10.4.0",
     "gunicorn ~= 23.0.0",
     "sentry-sdk ~= 2.19.2",
-    "django-redis ~= 5.4.0",
     "psycopg ~= 3.2.3",
     "xlutils ~= 2.0.0",
     "mock ~= 5.1.0",
@@ -38,6 +37,7 @@ dependencies = [
     "stop_words ~= 2018.7.23",
     "boto3 >= 1.27.1",
     "drf-yasg ~= 1.21.8",
+    "django-valkey (>=0.2.1,<0.3.0)",
 ]
 
 

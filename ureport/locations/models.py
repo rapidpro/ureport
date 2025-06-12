@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import json
 
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -61,7 +61,7 @@ class Boundary(models.Model):
 
     @classmethod
     def lock(cls, org, osm_id):
-        return get_redis_connection().lock(BOUNDARY_LOCK_KEY % (org.pk, osm_id), timeout=60)
+        return get_valkey_connection().lock(BOUNDARY_LOCK_KEY % (org.pk, osm_id), timeout=60)
 
     @classmethod
     def build_global_boundaries(cls):
