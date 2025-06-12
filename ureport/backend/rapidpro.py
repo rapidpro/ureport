@@ -505,7 +505,7 @@ class RapidProBackend(BaseBackend):
             client = self._get_client(org, 2)
 
             questions_uuids = poll.get_question_uuids()
-            archives_query = client.get_archives(archive_type="run", after=first)
+            archives_query = client.get_archives(type="run", after=first)
             archives_fetches = archives_query.iterfetches(retry_on_rate_exceed=True)
 
             i = 0
