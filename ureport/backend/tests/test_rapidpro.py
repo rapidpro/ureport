@@ -1844,7 +1844,7 @@ class RapidProBackendTest(UreportTest):
                 *[
                     [
                         TembaArchive.create(
-                            archive_type="run",
+                            type="run",
                             start_date=poll.created_on,
                             period="daily",
                             record_count=12,
@@ -1872,7 +1872,7 @@ class RapidProBackendTest(UreportTest):
             (1, 0, 0, 0, 0, 1),
         )
 
-        mock_get_archives.assert_called_with(archive_type="run", after=None)
+        mock_get_archives.assert_called_with(type="run", after=None)
         mock_redis_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid))
 
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
@@ -1923,7 +1923,7 @@ class RapidProBackendTest(UreportTest):
                 *[
                     [
                         TembaArchive.create(
-                            archive_type="run",
+                            type="run",
                             start_date=poll.created_on,
                             period="daily",
                             record_count=12,
