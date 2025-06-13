@@ -6,7 +6,7 @@ import time
 from collections import defaultdict
 
 import requests
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 from temba_client.v2 import TembaClient
 
 from django.conf import settings
@@ -296,7 +296,7 @@ class FLOIPBackend(BaseBackend):
 
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
-        r = get_redis_connection()
+        r = get_valkey_connection()
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
 
         stats_dict = dict(
@@ -327,7 +327,7 @@ class FLOIPBackend(BaseBackend):
 
                 questions_uuids = poll.get_question_uuids()
 
-                # ignore the TaskState time and use the time we stored in redis
+                # ignore the TaskState time and use the time we stored in valkey
                 (
                     latest_synced_obj_time,
                     pull_after_delete,
@@ -634,7 +634,7 @@ class FLOIPBackend(BaseBackend):
             None,
         )
 
-        # Use redis cache with expiring(in 48 hrs) key to allow other polls task
+        # Use Valkey cache with expiring(in 48 hrs) key to allow other polls task
         # to sync all polls without hitting the API rate limit
         cache.set(
             Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid),

@@ -5,7 +5,7 @@ import logging
 import time
 from datetime import timedelta
 
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 from temba_client.exceptions import TembaRateExceededError
 
 from django.core.cache import cache
@@ -158,7 +158,7 @@ def clear_old_poll_results(org, since, until):
     from .models import Poll
 
     now = timezone.now()
-    r = get_redis_connection()
+    r = get_valkey_connection()
     syncing_window = now - timedelta(days=365)
     new_window = now - timedelta(days=14)
 
@@ -241,7 +241,7 @@ def pull_refresh_from_archives(poll_id):
 def rebuild_counts():
     from .models import Poll
 
-    r = get_redis_connection()
+    r = get_valkey_connection()
 
     key = "polls_rebuild_counts_task_running"
     lock_timeout = 60 * 60 * 24 * 4  # 4 days
@@ -283,7 +283,7 @@ def update_results_age_gender(org_id=None):
 @app.task(name="polls.refresh_org_flows")
 def refresh_org_flows(org_id=None):
     start = time.time()
-    r = get_redis_connection()
+    r = get_valkey_connection()
 
     key = "refresh_flows"
     lock_timeout = 900
@@ -307,7 +307,7 @@ def refresh_org_flows(org_id=None):
 @app.task(name="polls.fetch_old_sites_count")
 def fetch_old_sites_count():
     start = time.time()
-    r = get_redis_connection()
+    r = get_valkey_connection()
 
     key = "fetch_old_sites_count_lock"
     lock_timeout = 60 * 5
@@ -335,7 +335,7 @@ def recheck_poll_flow_data(org_id=None):
 def polls_stats_squash():
     from ureport.stats.models import PollStats
 
-    r = get_redis_connection()
+    r = get_valkey_connection()
     key = "squash_stats_lock"
 
     lock_timeout = 60 * 60 * 2

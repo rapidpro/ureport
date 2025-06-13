@@ -4,7 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import time
 
 from celery.utils.log import get_task_logger
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -22,7 +22,7 @@ logger = get_task_logger(__name__)
 
 @app.task(name="contacts.rebuild_contacts_counts")
 def rebuild_contacts_counts():
-    r = get_redis_connection()
+    r = get_valkey_connection()
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
         key = TaskState.get_lock_key(org, "contact-pull")
@@ -32,7 +32,7 @@ def rebuild_contacts_counts():
 
 @app.task(name="contacts.check_contacts_count_mismatch")
 def check_contacts_count_mismatch():
-    r = get_redis_connection()
+    r = get_valkey_connection()
     orgs = Org.objects.filter(is_active=True).order_by("pk")
 
     error_counts = dict()
@@ -166,7 +166,7 @@ def pull_contacts(org, ignored_since, ignored_until):
 
 @org_task("contact-pull", 60 * 60 * 24)
 def populate_contact_schemes(org, since, until):
-    r = get_redis_connection()
+    r = get_valkey_connection()
     start_time = time.time()
 
     schemes_populated_key = f"schemes_populated:{org.id}"

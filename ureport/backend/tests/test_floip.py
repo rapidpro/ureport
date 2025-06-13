@@ -883,9 +883,9 @@ class FLOIPBackendTest(UreportTest):
         self.assertFalse(Contact.objects.filter(uuid="C-002", is_active=True))
 
     @patch("requests.request")
-    @patch("redis.client.StrictRedis.lock")
+    @patch("valkey.client.StrictValkey.lock")
     @patch("django.core.cache.cache.get")
-    def test_pull_results(self, mock_cache_get, mock_redis_lock, mock_request):
+    def test_pull_results(self, mock_cache_get, mock_valkey_lock, mock_request):
         response_contents = """
         {
             "data": {
@@ -1166,7 +1166,7 @@ class FLOIPBackendTest(UreportTest):
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
             (15, 0, 8, 0, 0, 0),
         )
-        mock_redis_lock.assert_called_once_with(
+        mock_valkey_lock.assert_called_once_with(
             Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid), timeout=7200
         )
 

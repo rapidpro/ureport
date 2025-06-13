@@ -296,9 +296,9 @@ class ContactTest(UreportTest):
             {"total-reporters": 2, "gender:m": 2},
         )
 
-    @patch("redis.client.StrictRedis.get")
-    def test_squash_reporters(self, mock_redis_get):
-        mock_redis_get.return_value = None
+    @patch("valkey.client.StrictValkey.get")
+    def test_squash_reporters(self, mock_valkey_get):
+        mock_valkey_get.return_value = None
 
         self.assertFalse(ReportersCounter.objects.all())
 
@@ -327,11 +327,11 @@ class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
 
-    @patch("redis.client.StrictRedis.get")
+    @patch("valkey.client.StrictValkey.get")
     @patch("django.core.cache.cache.set")
     @patch("ureport.contacts.models.ReportersCounter.get_counts")
-    def test_check_contacts_count_mismatch(self, mock_counter_counts, mock_cache_set, mock_redis_get):
-        mock_redis_get.return_value = None
+    def test_check_contacts_count_mismatch(self, mock_counter_counts, mock_cache_set, mock_valkey_get):
+        mock_valkey_get.return_value = None
         mock_counter_counts.return_value = {"total-reporters": 1000}
 
         for i in range(1250):
@@ -365,7 +365,7 @@ class ContactsTasksTest(UreportTest):
             "contact_counts_status", {"mismatch_counts": {}, "error_counts": {}}, None
         )
 
-        mock_redis_get.side_effect = ["foo_locked_task_running", None]
+        mock_valkey_get.side_effect = ["foo_locked_task_running", None]
         mock_cache_set.reset_mock()
         mock_counter_counts.side_effect = [{"total-reporters": 1000}, {"total-reporters": 1000}]
 

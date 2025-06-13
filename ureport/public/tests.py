@@ -1034,7 +1034,7 @@ class PublicTest(UreportTest):
             set(response.json()),
             set(
                 {
-                    "redis_up",
+                    "valkey_up",
                     "db_up",
                 }
             ),

@@ -665,6 +665,29 @@ files = [
 Django = ">=3.2,<6.0"
 
 [[package]]
+name = "django-valkey"
+version = "0.2.1"
+description = "a valkey backend for django"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "django_valkey-0.2.1-py3-none-any.whl", hash = "sha256:24c3296eba78eae0543f21517dab297995e4b2f65dafd75cd2ded42b25f7d6e7"},
+    {file = "django_valkey-0.2.1.tar.gz", hash = "sha256:747e35609f7d0af906d3d1af8a0f8edfd9a872998e4750c299d1d5a17d0496a9"},
+]
+
+[package.dependencies]
+django = ">=4.2.20"
+valkey = ">=6.0.2"
+
+[package.extras]
+brotli = ["brotli (>=1.1.0,<2.0.0)"]
+libvalkey = ["libvalkey (>=4.0.1,<5.0.0)"]
+lz4 = ["lz4 (>=4.3.3,<5.0.0)"]
+msgpack = ["msgpack (>=1.1.0,<2.0.0)"]
+pyzstd = ["pyzstd (>=0.16.2,<0.17.0)"]
+
+[[package]]
 name = "djangorestframework"
 version = "3.15.2"
 description = "Web APIs for Django, made easy."
@@ -1839,6 +1862,22 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
+name = "valkey"
+version = "6.1.0"
+description = "Python client for Valkey forked from redis-py"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "valkey-6.1.0-py3-none-any.whl", hash = "sha256:cfe769edae894f74ac946eff1e93f7d7f466032c3030ba7e9d089a742459ac9c"},
+    {file = "valkey-6.1.0.tar.gz", hash = "sha256:a652df15ed89c41935ffae6dfd09c56f4a9ab80b592e5ed9204d538e2ddad6d3"},
+]
+
+[package.extras]
+libvalkey = ["libvalkey (>=4.0.1)"]
+ocsp = ["cryptography (>=36.0.1)", "pyopenssl (==23.2.1)", "requests (>=2.31.0)"]
+
+[[package]]
 name = "vine"
 version = "5.1.0"
 description = "Python promises."
@@ -1914,4 +1953,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "37150b5cbc63c9ab48264b056cb283d2c683625e28e97ab37daaaa02006e60bb"
+content-hash = "c73ed6c3e5bbecca9bf8b4b7249637cbc5e9c104f46b3dfd3106ffbd108b3a52"
