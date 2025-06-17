@@ -590,25 +590,6 @@ files = [
 ]
 
 [[package]]
-name = "django-redis"
-version = "5.4.0"
-description = "Full featured redis cache backend for Django."
-optional = false
-python-versions = ">=3.6"
-groups = ["main"]
-files = [
-    {file = "django-redis-5.4.0.tar.gz", hash = "sha256:6a02abaa34b0fea8bf9b707d2c363ab6adc7409950b2db93602e6cb292818c42"},
-    {file = "django_redis-5.4.0-py3-none-any.whl", hash = "sha256:ebc88df7da810732e2af9987f7f426c96204bf89319df4c6da6ca9a2942edd5b"},
-]
-
-[package.dependencies]
-Django = ">=3.2"
-redis = ">=3,<4.0.0 || >4.0.0,<4.0.1 || >4.0.1"
-
-[package.extras]
-hiredis = ["redis[hiredis] (>=3,!=4.0.0,!=4.0.1)"]
-
-[[package]]
 name = "django-rosetta"
 version = "0.10.1"
 description = "A Django application that eases the translation of Django projects"
@@ -1301,29 +1282,29 @@ files = [
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.18.1"
+version = "1.19.0"
 description = "Support library for RapidPro dashboards"
 optional = false
 python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "rapidpro_dash-1.18.1-py3-none-any.whl", hash = "sha256:74260f00037235537411e618eed92dbcaa98a3dcfaa9f9695ed96bfc6a771fb4"},
-    {file = "rapidpro_dash-1.18.1.tar.gz", hash = "sha256:37288200f5ca12c1acc0fd47cad108fdc5d999e9fcf64e4900209f73eecabfb3"},
+    {file = "rapidpro_dash-1.19.0-py3-none-any.whl", hash = "sha256:52dd570426caa26a1de855a754d68055011a824274b64e59c4eba3c9057919a7"},
+    {file = "rapidpro_dash-1.19.0.tar.gz", hash = "sha256:59745025407c4724be4904cc116e4ce7baa5d3efc924d9fa203e2bed90325367"},
 ]
 
 [package.dependencies]
 celery = ">=5.1,<6.0"
 Django = ">=5.1.9,<5.3"
 django-compressor = ">=4.0"
-django-redis = ">=5.2.0"
 django-timezone-field = ">=6.1.0"
+django-valkey = ">=0.2.1,<0.3.0"
 isort = {version = ">=5.13.2", extras = ["pyproject"]}
 phonenumbers = ">=8.12.16"
 Pillow = ">=9.4"
 psycopg = ">=3.1.9"
 python-dateutil = ">=2.8.2"
 rapidpro-python = ">=2.18.0"
-smartmin = ">=5.2.1,<6.0.0"
+smartmin = ">=5.2.2,<6.0.0"
 sorl-thumbnail = ">=12.9.0"
 
 [[package]]
@@ -1398,22 +1379,6 @@ files = [
     {file = "rcssmin-1.1.2-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:f363c9d242e1afce4fafbbf6bed52452464b19199e66075bed606764f31ca329"},
     {file = "rcssmin-1.1.2.tar.gz", hash = "sha256:bc75eb75bd6d345c0c51fd80fc487ddd6f9fd409dd7861b3fe98dee85018e1e9"},
 ]
-
-[[package]]
-name = "redis"
-version = "5.2.1"
-description = "Python client for Redis database and key-value store"
-optional = false
-python-versions = ">=3.8"
-groups = ["main"]
-files = [
-    {file = "redis-5.2.1-py3-none-any.whl", hash = "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4"},
-    {file = "redis-5.2.1.tar.gz", hash = "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f"},
-]
-
-[package.extras]
-hiredis = ["hiredis (>=3.0.0)"]
-ocsp = ["cryptography (>=36.0.1)", "pyopenssl (==23.2.1)", "requests (>=2.31.0)"]
 
 [[package]]
 name = "regex"
@@ -1723,20 +1688,18 @@ files = [
 
 [[package]]
 name = "smartmin"
-version = "5.2.1"
+version = "5.2.2"
 description = "Scaffolding system for Django object management."
 optional = false
 python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "smartmin-5.2.1-py3-none-any.whl", hash = "sha256:2edcd0b54e149fe609a10a22704d15ceeee114ac41f30cabb8d5c439eed573a6"},
-    {file = "smartmin-5.2.1.tar.gz", hash = "sha256:0a837b58454af0b7b4ff6c39ed7595f765497a06e1da5d4b42c639791100cf84"},
+    {file = "smartmin-5.2.2-py3-none-any.whl", hash = "sha256:d1248ac7dc0108918883d7b354f167b54dacf6c744b07051f0f433a0c932cab4"},
+    {file = "smartmin-5.2.2.tar.gz", hash = "sha256:c06078386e0819f5fa198e89cc0a4333ad6b1f5a0781df1906e2e42976188599"},
 ]
 
 [package.dependencies]
-celery = ">=5.1"
 Django = ">=5.1,<5.3"
-redis = ">=3.5.3"
 sqlparse = ">=0.4.1,<0.6.0"
 xlrd = ">=1.2.0"
 xlwt = ">=1.3.0"
@@ -1953,4 +1916,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "c73ed6c3e5bbecca9bf8b4b7249637cbc5e9c104f46b3dfd3106ffbd108b3a52"
+content-hash = "a7d6c30429f22a55123ce658042482bdbc6138e375086b130cfa2505e006f8d9"
