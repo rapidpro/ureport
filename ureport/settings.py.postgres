@@ -37,7 +37,7 @@ LOGGING['loggers']['celery.worker'] = {
 # AWS_QUERYSTRING_AUTH = False
 # AWS_S3_OBJECT_PARAMETERS = {
 #     'CacheControl': 'max-age=86400',
-# 
+#
 # }
 # List of finder classes that know how to find static files in
 # various locations.
@@ -61,7 +61,7 @@ DATABASES = {
     }
 }
 
-VALKEY_HOST = 'localhost'
+VALKEY_HOST = "localhost"
 VALKEY_PORT = 6379
 VALKEY_DB = '1'
 
