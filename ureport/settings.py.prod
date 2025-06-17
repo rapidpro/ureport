@@ -158,7 +158,7 @@ COMPRESS_OFFLINE_CONTEXT = [
     dict(STATIC_URL=STATIC_URL, base_template='public_base.html', org=None, debug=False, testing=False)
 ]
 
-VALKEY_HOST = 'redis-internal.ureport.in'
+VALKEY_HOST = os.environ.get("VALKEY_HOST")
 VALKEY_PORT = 6379
 VALKEY_DB = '1'
 
