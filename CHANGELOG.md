@@ -1,3 +1,7 @@
+v1.2.157 (2025-06-17)
+-------------------------
+ * Merge pull request #1277 from rapidpro/django_valkey
+
 v1.2.155 (2025-06-12)
 -------------------------
  * Merge pull request #1276 from rapidpro/updates
