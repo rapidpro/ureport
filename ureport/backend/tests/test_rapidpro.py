@@ -1280,11 +1280,11 @@ class RapidProBackendTest(UreportTest):
             {SyncOutcome.created: 2, SyncOutcome.updated: 0, SyncOutcome.deleted: 2, SyncOutcome.ignored: 0},
         )
 
-    @patch("redis.client.StrictRedis.lock")
+    @patch("valkey.client.StrictValkey.lock")
     @patch("dash.orgs.models.TembaClient.get_runs")
     @patch("django.utils.timezone.now")
     @patch("django.core.cache.cache.get")
-    def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs, mock_redis_lock):
+    def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs, mock_valkey_lock):
         mock_cache_get.return_value = None
 
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
@@ -1332,7 +1332,7 @@ class RapidProBackendTest(UreportTest):
             (1, 0, 0, 0, 0, 1),
         )
         mock_get_runs.assert_called_with(flow="flow-uuid", after=None, reverse=True, paths=True)
-        mock_redis_lock.assert_called_once_with(
+        mock_valkey_lock.assert_called_once_with(
             Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid), timeout=7200
         )
 
@@ -1786,13 +1786,13 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.category, "Win")
         self.assertEqual(poll_result.text, "We'll win today")
 
-    @patch("redis.client.StrictRedis.lock")
+    @patch("valkey.client.StrictValkey.lock")
     @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.TembaClient.get_archives")
     @patch("django.utils.timezone.now")
     @patch("requests.get")
     def test_pull_results_from_archives(
-        self, mock_request_get, mock_timezone_now, mock_get_archives, mock_poll_flow_date, mock_redis_lock
+        self, mock_request_get, mock_timezone_now, mock_get_archives, mock_poll_flow_date, mock_valkey_lock
     ):
         def gzipped_records(records):
             stream = io.BytesIO()
@@ -1873,7 +1873,7 @@ class RapidProBackendTest(UreportTest):
         )
 
         mock_get_archives.assert_called_with(type="run", after=None)
-        mock_redis_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid))
+        mock_valkey_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid))
 
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
         self.assertEqual(poll_result.state, "R-LAGOS")
@@ -2151,9 +2151,9 @@ class PerfTest(UreportTest):
     def test_pull_results(self, mock_get_pull_cached_params, mock_timezone_now, mock_get_runs):
         mock_get_pull_cached_params.return_value = (None, None)
 
-        from django_redis import get_redis_connection
+        from django_valkey import get_valkey_connection
 
-        redis_client = get_redis_connection()
+        valkey_client = get_valkey_connection()
 
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
@@ -2163,7 +2163,7 @@ class PerfTest(UreportTest):
         poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
 
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid)
-        redis_client.delete(key)
+        valkey_client.delete(key)
 
         now = timezone.now()
 
@@ -2237,7 +2237,7 @@ class PerfTest(UreportTest):
         # simulate a subsequent sync with no changes
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
         (
             num_val_created,
             num_val_updated,
@@ -2266,7 +2266,7 @@ class PerfTest(UreportTest):
                 )
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
         (
             num_val_created,
             num_val_updated,
@@ -2298,7 +2298,7 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
         (
             num_val_created,
             num_val_updated,
@@ -2335,7 +2335,7 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
         (
             num_val_created,
             num_val_updated,
@@ -2371,7 +2371,7 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
         (
             num_val_created,
             num_val_updated,
@@ -2401,7 +2401,7 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
         (
             num_val_created,
             num_val_updated,
@@ -2447,7 +2447,7 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
         (
             num_val_created,
             num_val_updated,
@@ -2472,7 +2472,7 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        redis_client.set(key, "lock-taken")
+        valkey_client.set(key, "lock-taken")
 
         (
             num_val_created,
@@ -2488,7 +2488,7 @@ class PerfTest(UreportTest):
             (0, 0, 0, 0, 0, 0),
         )
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
 
         PollResult.objects.all().delete()
 
@@ -2545,7 +2545,7 @@ class PerfTest(UreportTest):
             (1, 0, num_fetches * fetch_size * num_steps - 1, 0, 0, 0),
         )
 
-        redis_client.delete(key)
+        valkey_client.delete(key)
 
         PollResult.objects.all().delete()
 
@@ -2583,7 +2583,7 @@ class PerfTest(UreportTest):
                 mock_rebuild_counts.assert_called_with()
 
                 mock_max_runs.return_value = 200
-                redis_client.delete(key)
+                valkey_client.delete(key)
 
                 PollResult.objects.all().delete()
 
@@ -2633,7 +2633,7 @@ class PerfTest(UreportTest):
 
             self.assertFalse(mock_delete_poll_results.called)
 
-            redis_client.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk), now_date, None)
+            valkey_client.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk), now_date, None)
 
             mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 

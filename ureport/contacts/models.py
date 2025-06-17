@@ -5,7 +5,7 @@ import logging
 import time
 from collections import defaultdict
 
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 
 from django.db import connection, models
 from django.db.models import Count, Sum
@@ -59,7 +59,7 @@ class ContactField(models.Model):
 
     @classmethod
     def lock(cls, org, key):
-        return get_redis_connection().lock(CONTACT_FIELD_LOCK_KEY % (org.pk, key), timeout=60)
+        return get_valkey_connection().lock(CONTACT_FIELD_LOCK_KEY % (org.pk, key), timeout=60)
 
     def release(self):
         self.delete()
@@ -119,7 +119,7 @@ class Contact(models.Model):
 
     @classmethod
     def lock(cls, org, uuid):
-        return get_redis_connection().lock(CONTACT_LOCK_KEY % (org.pk, uuid), timeout=60)
+        return get_valkey_connection().lock(CONTACT_LOCK_KEY % (org.pk, uuid), timeout=60)
 
     @classmethod
     def recalculate_reporters_stats(cls, org):
@@ -249,7 +249,7 @@ class ReportersCounter(models.Model):
     @classmethod
     def squash_counts(cls):
         # get the id of the last count we squashed
-        r = get_redis_connection()
+        r = get_valkey_connection()
         key = ReportersCounter.COUNTS_SQUASH_LOCK
         if r.get(key):
             logger.info("Squash reporters counts already running.")
