@@ -96,5 +96,9 @@ country-list/
 celerybeat.pid
 celerybeat-schedule
 
-# VS code 
-.vscode
+# VS Code - ignore user-specific settings but allow project configuration
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json

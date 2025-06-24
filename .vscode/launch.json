@@ -1,0 +1,52 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Django: Run Server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "runserver",
+                "127.0.0.1:8000"
+            ],
+            "django": true,
+            "autoReload": {
+                "enable": true
+            },
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "ureport.settings"
+            },
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Django: Run Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "test",
+                "--verbosity=2"
+            ],
+            "django": true,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "ureport.settings"
+            },
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Django: Migrate",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "migrate"
+            ],
+            "django": true,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "ureport.settings"
+            },
+            "console": "integratedTerminal"
+        }
+    ]
+}
