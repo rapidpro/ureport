@@ -101,7 +101,7 @@ poetry shell
 ### Database Setup
 ```bash
 # Link settings file (adjust for your setup)
-ln -s ureport/settings.py.postgres ureport/settings.py
+ln -s settings.py.postgres ureport/settings.py
 
 # Run migrations
 python manage.py migrate
@@ -261,5 +261,15 @@ Run code checks with:
 - Project documentation: Check the main README.md for development setup
 - Django documentation: https://docs.djangoproject.com/
 - Django REST Framework: https://www.django-rest-framework.org/
+
+## Validation
+
+You can test your setup by running our validation script:
+
+```bash
+python test_copilot_setup.py
+```
+
+This will check that all required tools are installed and configured correctly.
 
 Happy coding with Copilot! 🚀
