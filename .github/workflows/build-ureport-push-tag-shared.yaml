@@ -1,0 +1,133 @@
+name: Build Rapidpro mailroom India and Ireland in Shared (Push Tag)
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+      - '*.*.*-staging'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Set variables
+        run: |
+            TAG="$( echo "${GITHUB_REF}" | cut -d'/' -f3 )"
+            if grep -qs -e '^.*.*-develop' <<< "${TAG}" ; then
+              echo "Found environment: DEVELOP - ${TAG}"
+              echo "MANIFESTS_ENVIRONMENT=develop" | tee -a "${GITHUB_ENV}"
+            elif grep -qs -e '^.*.*-staging' <<< "${TAG}" ; then
+              echo "Found environment: STAGING - ${TAG}"
+              echo "MANIFESTS_ENVIRONMENT=staging" | tee -a "${GITHUB_ENV}"
+            elif grep -qs -e '^.*.*' <<< "${TAG}" ; then
+              echo "Found environment: PROD - ${TAG}"
+              echo "MANIFESTS_ENVIRONMENT=production" | tee -a "${GITHUB_ENV}"
+            else
+              echo 'Not a valid tag. Skipping...'
+              exit 1
+            fi
+
+            echo "TAG=$TAG" | tee -a "${GITHUB_ENV}"
+            VERSION="${TAG}"
+            echo "VERSION=${VERSION}" | tee -a "${GITHUB_ENV}"
+            echo "COMMIT_SHA=$GITHUB_SHA" | tee -a "${GITHUB_ENV}"
+            echo "IMAGE_TAG=${{ secrets.ECR }}/ureport:${TAG}" | tee -a "${GITHUB_ENV}"
+            echo "IMAGE_SOURCE_URL=https://github.com/Ilhasoft/ureport" | tee -a "${GITHUB_ENV}"
+            echo "MANIFESTS_REPOSITORY=weni-ai/kubernetes-manifests-platform" | tee -a "${GITHUB_ENV}"
+            echo "MANIFESTS_APPLICATION=ureport" | tee -a "${GITHUB_ENV}"
+            echo "MANIFESTS_PATCH_TARGET=deployment.json" | tee -a "${GITHUB_ENV}"
+            
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          ref: "${{env.GITHUB_SHA}}"         
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to ECR
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.ECR }}
+          username: ${{ secrets.AWS_ACCESS_KEY_ID_SHARED }}      
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY_SHARED }}
+
+      - name: Build and push - Ureport in Shared Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          labels: |
+            tag=${{env.TAG}}
+            commit=${{env.COMMIT_SHA}}
+            repository=${{env.IMAGE_SOURCE_URL}}
+          file: docker/Dockerfile
+          push: true
+          tags: "${{env.IMAGE_TAG}}"
+          no-cache: true
+
+      - name: Check out Kubernetes Manifests
+        uses: actions/checkout@master
+        with:
+          ref: main
+          repository: "${{ env.MANIFESTS_REPOSITORY }}"
+          token: "${{ secrets.DEVOPS_GITHUB_PERMANENT_TOKEN }}"
+          path: ./kubernetes-manifests/
+          
+      - name: Update image on deployment
+        run: |
+            which jq > /dev/null 2>&1 || ( sudo apt update ; sudo apt install -y jq )
+            # Dep: coreutils
+            verlte() {
+              [ "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
+            }
+            verlt(){
+              [ "$1" = "$2" ] && return 1 || verlte $1 $2
+            }
+            export PROJECT_DIR="${{ env.MANIFESTS_APPLICATION }}"
+            ENV_DIR="kubernetes-manifests/${{ env.MANIFESTS_APPLICATION }}/${MANIFESTS_ENVIRONMENT}"
+            for e in ${ENV_DIR}; do
+              echo "Update ${e}:"
+              if [ ! -d "${e}" ] ; then
+                echo "${e}: Does not exist, skipping"
+              elif [ ! -r "${e}/kustomization.yaml" ] ; then
+                echo "${e}/kustomization.yaml: Does not readable, skipping"
+              elif [ ! -r "${e}/${{ env.MANIFESTS_PATCH_TARGET }}" ] ; then
+                echo "${e}/${{ env.MANIFESTS_PATCH_TARGET }}: Does not readable, skipping"
+              else
+                OLD_IMAGE=$(
+                  cat "${e}/${{ env.MANIFESTS_PATCH_TARGET }}" \
+                    | jq '.[] | select(.path == "/spec/template/spec/containers/0/image") | .value'
+                )
+                echo "Old image to replace: ${OLD_IMAGE}"
+                OLD_VERSION=$(
+                  echo "${OLD_IMAGE}" \
+                    | sed s'/^.*[v:]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/'g \
+                    | head -n1
+                )
+                echo "Old image version to compare: ${OLD_VERSION}<=${{env.VERSION}}"
+                if verlte "${OLD_VERSION}" "${VERSION}" || [[ ! "${OLD_VERSION}" =~ [0-9]+\.[0-9]+\.[0-9]+ ]] ; then
+                  echo 'New configurations:'
+                  new_configuration=$(
+                    cat "${e}/${{ env.MANIFESTS_PATCH_TARGET }}" \
+                      | jq '(..|select(.path == "/spec/template/spec/containers/0/image")?) += {value: "'"${{env.IMAGE_TAG}}"'"}'
+                  )
+                  echo "${new_configuration}"
+                  echo "${new_configuration}" > "${e}/${{ env.MANIFESTS_PATCH_TARGET }}"
+                else
+                  echo "Version in file is greater than build, skipping update yaml"
+                fi
+              fi
+            done
+
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: "${{ secrets.DEVOPS_GITHUB_PERMANENT_TOKEN }}"
+          repository: "${{ env.MANIFESTS_REPOSITORY }}"
+          directory: ./kubernetes-manifests/
+          branch: main
+          message: "From Ureport in Shared (Push Tag ${{ env.MANIFESTS_ENVIRONMENT }})"
+          
