@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "charliermarsh.ruff",
+        "batisteo.vscode-django",
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag",
+        "monosans.djlint",
+        "ms-vscode.vscode-json"
+    ]
+}
