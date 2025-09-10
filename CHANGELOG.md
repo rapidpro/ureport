@@ -1,3 +1,10 @@
+v1.2.160 (2025-09-10)
+-------------------------
+ * Merge pull request #1284 from rapidpro/updates
+ * Update django
+ * Merge pull request #1282 from rapidpro/dependabot/pip/urllib3-2.5.0
+ * Bump urllib3 from 2.3.0 to 2.5.0
+
 v1.2.159 (2025-06-17)
 -------------------------
  * Merge pull request #1279 from rapidpro/more-valkey
