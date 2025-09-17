@@ -37,3 +37,7 @@ At this point everything should be good to go, you can start with:
 ```
 
 Note that the endpoint called for API calls is by default 'localhost:8001', you can uncomment the RAPIDPRO_API line in settings.py.postgres to go against production servers.
+
+## GitHub Copilot Setup
+
+For an enhanced development experience with GitHub Copilot, see our [Copilot Setup Guide](COPILOT_SETUP.md).
