@@ -1,3 +1,10 @@
+v1.2.161 (2025-10-07)
+-------------------------
+ * Merge pull request #1285 from rapidpro/validate-slug-landing-page
+ * Allow hyphens in landing pages slug
+ * Update django
+ * Validate landing pages slug
+
 v1.2.160 (2025-09-10)
 -------------------------
  * Merge pull request #1284 from rapidpro/updates
