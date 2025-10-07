@@ -24,8 +24,8 @@ class LandingPageForm(forms.ModelForm):
 
     def clean_slug(self):
         slug = self.cleaned_data["slug"]
-        if re.findall(r"\W", slug):
-            raise forms.ValidationError(_("The slug can only contain letters, numbers, and underscores"))
+        if re.findall(r"[^\w-]", slug):
+            raise forms.ValidationError(_("The slug can only contain letters, numbers, underscores and hyphens"))
         return slug
 
     class Meta:
