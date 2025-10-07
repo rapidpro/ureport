@@ -1,3 +1,5 @@
+import re
+
 from django import forms
 from django.db.models.functions import Lower
 from django.urls import reverse
@@ -19,6 +21,12 @@ class LandingPageForm(forms.ModelForm):
 
         super(LandingPageForm, self).__init__(*args, **kwargs)
         self.fields["bots"].queryset = Bot.objects.filter(org=self.org)
+
+    def clean_slug(self):
+        slug = self.cleaned_data["slug"]
+        if re.findall(r"\W", slug):
+            raise forms.ValidationError(_("The slug can only contain letters, numbers, and underscores"))
+        return slug
 
     class Meta:
         model = LandingPage
