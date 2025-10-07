@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-25 07:00+0000\n"
+"POT-Creation-Date: 2025-10-07 10:36+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -1429,6 +1429,9 @@ msgstr "Soubor obrázku, který se použije pro stránku"
 
 msgid "Whether this page should be active to the public"
 msgstr "Zda má být tato stránka aktivní pro veřejnost"
+
+msgid "The slug can only contain letters, numbers, and underscores"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Toto je ID OSM pro tuto správní hranici."
