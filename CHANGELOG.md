@@ -1,3 +1,8 @@
+v1.2.162 (2025-10-10)
+-------------------------
+ * Merge pull request #1286 from rapidpro/update-rp-client
+ * Update rapidpro-client
+
 v1.2.161 (2025-10-07)
 -------------------------
  * Merge pull request #1285 from rapidpro/validate-slug-landing-page
