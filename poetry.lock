@@ -1315,14 +1315,14 @@ sorl-thumbnail = ">=12.9.0"
 
 [[package]]
 name = "rapidpro-python"
-version = "2.18.2"
+version = "2.21.0"
 description = "Python client library for the RapidPro API"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "rapidpro_python-2.18.2-py3-none-any.whl", hash = "sha256:613b705ce5ff9f8650b2040fc1afb65176a4ae24a7bd6a875ce1b7f724843bc4"},
-    {file = "rapidpro_python-2.18.2.tar.gz", hash = "sha256:122d6b38c6b3609693a664cc2e1e4ec31b4327eb4ae7239183fddc3d8ba65d82"},
+    {file = "rapidpro_python-2.21.0-py3-none-any.whl", hash = "sha256:a33c9b1f58e8ea2801007bcdbec88917decd3dcca5f7d1d4f4ed1d9da1330e7f"},
+    {file = "rapidpro_python-2.21.0.tar.gz", hash = "sha256:310a3b4680ed167a0c205ba8de6a8cd0fde8c3b376be94f13413a212f8733b99"},
 ]
 
 [package.dependencies]
@@ -1939,4 +1939,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "8d6276279abb785e8940dd5fc208b8beec6188a06cb5cb68b95c1b4f9d89bcad"
+content-hash = "c0cc178d9e2ebcc39628d81153a41b8ab50bba8ba336cc67aa437358de54d6f6"
