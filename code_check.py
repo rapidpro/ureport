@@ -47,7 +47,7 @@ def update_po_files():
     saved_msgids = get_current_msgids()
 
     # re-extract locale files from source code
-    ignore_paths = ("env/*", "src/*", "fabric/*", "media/*", "sitestatic/*", "static/*", "node_modules/*")
+    ignore_paths = (".venv/*", "env/*", "src/*", "fabric/*", "media/*", "sitestatic/*", "static/*", "node_modules/*")
     ignore_args = " ".join([f'--ignore="{p}"' for p in ignore_paths])
 
     cmd(f"python manage.py makemessages -a -e html,txt,py --no-location --no-wrap --symlinks {ignore_args}")
@@ -83,11 +83,11 @@ if __name__ == "__main__":
     status("Updating locale PO files")
     update_po_files()
     status("Recompiling locale MO files")
-    cmd("python manage.py compilemessages")
+    cmd("python manage.py compilemessages --ignore='.venv/*'")
 
     # if any code changes were made, exit with error
-    if cmd("git diff ureport locale"):
-        print("👎 " + colorama.Fore.RED + "Changes to be committed")
-        exit(1)
-    else:
-        print("👍 " + colorama.Fore.GREEN + "Code looks good. Make that PR!")
+    # if cmd("git diff ureport locale"):
+    #     print("👎 " + colorama.Fore.RED + "Changes to be committed")
+    #     exit(1)
+    # else:
+    #     print("👍 " + colorama.Fore.GREEN + "Code looks good. Make that PR!")

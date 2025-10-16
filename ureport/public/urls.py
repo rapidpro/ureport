@@ -68,8 +68,8 @@ urlpatterns = [
     re_path(r"^story/(?P<pk>\d+)/$", StoryReadView.as_view(), {}, "public.story_read"),
     re_path(r"^join/$", JoinEngageView.as_view(), {}, "public.join"),
     re_path(r"^jobs/$", JobsView.as_view(), {}, "public.jobs"),
-    re_path(r"^page/(?P<link>\w+)/$", CustomPage.as_view(), {}, "public.custom_page"),
-    re_path(r"^lp/(?P<slug>\w+)/$", LandingPageView.as_view(), {}, "public.landing_page"),
+    re_path(r"^page/(?P<link>[\w-]+)/$", CustomPage.as_view(), {}, "public.custom_page"),
+    re_path(r"^lp/(?P<slug>[\w-]+)/$", LandingPageView.as_view(), {}, "public.landing_page"),
     re_path(r"^count/$", Count.as_view(), {}, "public.count"),
     re_path(
         r"^shared_sites_count/$", cache_page(60 * 10)(SharedSitesCount.as_view()), {}, "public.shared_sites_count"

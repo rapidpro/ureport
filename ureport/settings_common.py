@@ -975,26 +975,25 @@ AUTH_PASSWORD_VALIDATORS = [
 ANONYMOUS_USER_NAME = "AnonymousUser"
 
 # -----------------------------------------------------------------------------------
-# Redis Configuration
+# Valkey Configuration
 # -----------------------------------------------------------------------------------
 
-# by default, celery doesn't have any timeout on our redis connections, this fixes that
+# by default, celery doesn't have any timeout on our valkey connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
 
 CELERY_BROKER_URL = "redis://localhost:6379/1"
 
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
-# by default, celery doesn't have any timeout on our redis connections, this fixes that
+# by default, celery doesn't have any timeout on our valkey connections, this fixes that
 CELERY_BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
 
 CELERY_TIMEZONE = "UTC"
 
 CACHES = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
+        "BACKEND": "django_valkey.cache.ValkeyCache",
         "LOCATION": CELERY_BROKER_URL,
-        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     }
 }
 
@@ -1179,6 +1178,14 @@ COUNTRY_FLAGS_SITES = [
         countries_codes=["ARG"],
         count_link="http://argentina.ureport.in/count/",
         region="LACRO",
+    ),
+    dict(
+        name="Australia",
+        host="//australia.ureport.in",
+        flag="",
+        countries_codes=["AUS"],
+        count_link="http://australia.ureport.in/count/",
+        region="NATCOM",
     ),
     dict(
         name="Bangladesh",
@@ -1378,6 +1385,14 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_eswatini.png",
         countries_codes=["SWZ"],
         count_link="http://eswatini.ureport.in/count/",
+        region="ESARO",
+    ),
+    dict(
+        name="Ethiopia",
+        host="//ethiopia.ureport.in/",
+        flag="",
+        countries_codes=["ETH"],
+        count_link="http://ethiopia.ureport.in/count/",
         region="ESARO",
     ),
     dict(

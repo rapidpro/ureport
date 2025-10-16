@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-25 07:00+0000\n"
+"POT-Creation-Date: 2025-10-07 10:36+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1437,6 +1437,9 @@ msgstr "Файл зображення для використання на ці�
 
 msgid "Whether this page should be active to the public"
 msgstr "Чи повинна ця сторінка бути загальнодоступною?"
+
+msgid "The slug can only contain letters, numbers, and underscores"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Це OSM id для цього адміністративного кордону"

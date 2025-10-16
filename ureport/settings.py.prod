@@ -198,13 +198,17 @@ REDIS_DATABASE = config('REDIS_DATABASE', default='1')
 
 CELERY_BROKER_URL = 'redis://{}:6379/{}'.format(REDIS_HOST, REDIS_DATABASE)
 
+-- VALKEY
+# VALKEY_HOST = os.environ.get("VALKEY_HOST")
+# VALKEY_PORT = 6379
+# VALKEY_DB = '1'
+
+# CELERY_BROKER_URL = 'redis://%s:%s/%s' % (VALKEY_HOST, VALKEY_PORT, VALKEY_DB)
+
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
+        'BACKEND': "django_valkey.cache.ValkeyCache",
         'LOCATION': CELERY_BROKER_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
     }
 }
 

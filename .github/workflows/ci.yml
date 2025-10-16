@@ -7,8 +7,8 @@ jobs:
     env:
       python-version: "3.12.x"
     services:
-      redis:
-        image: redis:6.2-alpine
+      valkey:
+        image: valkey/valkey:8.0-alpine
         ports:
           - 6379:6379
       postgres:
