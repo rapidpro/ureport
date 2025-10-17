@@ -1,6 +1,6 @@
 [project]
 name = "ureport"
-version = "1.2.148"
+version = "1.2.162"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = [
     {"name" = "Nyaruka", "email" = "code@nyaruka.com"}
@@ -8,11 +8,11 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "Django ~= 5.1.4",
-    "smartmin ~= 5.1.2",
-    "rapidpro-dash ~= 1.17.1",
+    "django (>=5.2.7,<6.0.0)",
+    "smartmin (>=5.2.2,<6.0.0)",
+    "rapidpro-dash (>=1.19.0,<2.0.0)",
     "colorama ~= 0.4.3",
-    "celery ~= 5.1",
+    "celery[redis] (>=5.5.3,<6.0.0)",
     "django-compressor ~= 4.0",
     "django-debug-toolbar ~= 4.4.6",
     "django-digest ~= 1.13",
@@ -23,14 +23,13 @@ dependencies = [
     "Pillow ~= 10.4.0",
     "gunicorn ~= 23.0.0",
     "sentry-sdk ~= 2.19.2",
-    "django-redis ~= 5.4.0",
     "psycopg ~= 3.2.3",
     "xlutils ~= 2.0.0",
     "mock ~= 5.1.0",
     "pycountry >= 24.5.1",
     "django-countries ~= 7.6.1",
     "regex ~= 2024.11.6",
-    "rapidpro-python ~= 2.17.0",
+    "rapidpro-python (>=2.21.0,<3.0.0)",
     "feedparser ~= 6.0.2",
     "Markdown ~= 3.7",
     "iso8601 ~= 0.1.12",
@@ -38,6 +37,7 @@ dependencies = [
     "stop_words ~= 2018.7.23",
     "boto3 >= 1.27.1",
     "drf-yasg ~= 1.21.8",
+    "django-valkey (>=0.2.1,<0.3.0)",
 ]
 
 

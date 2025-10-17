@@ -10,7 +10,7 @@ from functools import reduce
 
 import pycountry
 import six
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 
 from django.conf import settings
 from django.core.cache import cache
@@ -717,21 +717,21 @@ class CountriesView(SmartTemplateView):
 def status(request):
     """
     Meant to be a very lightweight view that checks our connectivity to both our database
-    and redis. This is hit by ELB to determine whether an instance is healthy.
+    and valkey. This is hit by ELB to determine whether an instance is healthy.
     """
     # check our db
     org = Org.objects.all().first()
     db_up = org is not None
 
-    # check redis
-    r = get_redis_connection()
+    # check valkey
+    r = get_valkey_connection()
     r.set("ping", "pong")
     pong = r.get("ping")
-    redis_up = pong == b"pong"
+    valkey_up = pong == b"pong"
 
-    body = json.dumps(dict(db_up=db_up, redis_up=redis_up))
+    body = json.dumps(dict(db_up=db_up, valkey_up=valkey_up))
 
-    if not db_up or not redis_up:
+    if not db_up or not valkey_up:
         return HttpResponse(body, status=500, content_type="application/json")
     else:
         return HttpResponse(body, status=200, content_type="application/json")

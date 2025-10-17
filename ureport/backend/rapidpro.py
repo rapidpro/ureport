@@ -10,7 +10,7 @@ from collections import defaultdict
 from datetime import timedelta, timezone as tzone
 
 import requests
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import Run
 
@@ -471,7 +471,7 @@ class RapidProBackend(BaseBackend):
 
     def pull_results_from_archives(self, poll):
         org = poll.org
-        r = get_redis_connection()
+        r = get_valkey_connection()
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
 
         stats_dict = dict(
@@ -505,7 +505,7 @@ class RapidProBackend(BaseBackend):
             client = self._get_client(org, 2)
 
             questions_uuids = poll.get_question_uuids()
-            archives_query = client.get_archives(archive_type="run", after=first)
+            archives_query = client.get_archives(type="run", after=first)
             archives_fetches = archives_query.iterfetches(retry_on_rate_exceed=True)
 
             i = 0
@@ -569,7 +569,7 @@ class RapidProBackend(BaseBackend):
 
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
-        r = get_redis_connection()
+        r = get_valkey_connection()
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
 
         stats_dict = dict(
@@ -601,7 +601,7 @@ class RapidProBackend(BaseBackend):
 
                 questions_uuids = poll.get_question_uuids()
 
-                # ignore the TaskState time and use the time we stored in redis
+                # ignore the TaskState time and use the time we stored in valkey
                 (
                     latest_synced_obj_time,
                     pull_after_delete,
@@ -1096,7 +1096,7 @@ class RapidProBackend(BaseBackend):
     @staticmethod
     def _mark_poll_results_sync_paused(org, poll, latest_synced_obj_time):
         """
-        Use redis to set the time when we paused, where we will resume from.
+        Use valkey to set the time when we paused, where we will resume from.
         This is a way to allow sharing the API throttle rate to multiple polls, to allow each to progress
         """
         # update the time for this poll from which we fetch next time
@@ -1109,8 +1109,8 @@ class RapidProBackend(BaseBackend):
     @staticmethod
     def _mark_poll_results_sync_completed(poll, org, latest_synced_obj_time):
         """
-        Use Redis key to mark we finished to sync existing results.
-        And future sync will only look for newer results that the time in redis.
+        Use Valkey key to mark we finished to sync existing results.
+        And future sync will only look for newer results that the time in Valkey.
         """
 
         # update the time for this poll from which we fetch next time
@@ -1124,7 +1124,7 @@ class RapidProBackend(BaseBackend):
             None,
         )
 
-        # Use redis cache with expiring(in 48 hrs) key to allow other polls task
+        # Use valkey cache with expiring(in 48 hrs) key to allow other polls task
         # to sync all polls without hitting the API rate limit
         cache.set(
             Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid),

@@ -191,20 +191,16 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
+VALKEY_HOST = config('VALKEY_HOST', default='localhost')
+VALKEY_PORT = config('VALKEY_PORT', default='6379')
+VALKEY_DB = config('VALKEY_DATABASE', default='1')
 
-# redis configuration
-REDIS_HOST = config('REDIS_HOST')
-REDIS_DATABASE = config('REDIS_DATABASE', default='1')
-
-CELERY_BROKER_URL = 'redis://{}:6379/{}'.format(REDIS_HOST, REDIS_DATABASE)
+CELERY_BROKER_URL = 'redis://%s:%s/%s' % (VALKEY_HOST, VALKEY_PORT, VALKEY_DB)
 
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
+        'BACKEND': "django_valkey.cache.ValkeyCache",
         'LOCATION': CELERY_BROKER_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
     }
 }
 

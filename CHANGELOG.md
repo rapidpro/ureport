@@ -1,3 +1,64 @@
+v1.2.162 (2025-10-10)
+-------------------------
+ * Merge pull request #1286 from rapidpro/update-rp-client
+ * Update rapidpro-client
+
+v1.2.161 (2025-10-07)
+-------------------------
+ * Merge pull request #1285 from rapidpro/validate-slug-landing-page
+ * Allow hyphens in landing pages slug
+ * Update django
+ * Validate landing pages slug
+
+v1.2.160 (2025-09-10)
+-------------------------
+ * Merge pull request #1284 from rapidpro/updates
+ * Update django
+ * Merge pull request #1282 from rapidpro/dependabot/pip/urllib3-2.5.0
+ * Bump urllib3 from 2.3.0 to 2.5.0
+
+v1.2.159 (2025-06-17)
+-------------------------
+ * Merge pull request #1279 from rapidpro/more-valkey
+
+v1.2.157 (2025-06-17)
+-------------------------
+ * Merge pull request #1277 from rapidpro/django_valkey
+
+v1.2.155 (2025-06-12)
+-------------------------
+ * Merge pull request #1276 from rapidpro/updates
+ * Update archive type param
+ * Update deps
+ * Merge pull request #1275 from rapidpro/dependabot/pip/django-5.2.2
+ * Merge pull request #1274 from rapidpro/dependabot/pip/requests-2.32.4
+ * Bump django from 5.2.1 to 5.2.2
+ * Bump requests from 2.32.3 to 2.32.4
+
+v1.2.154 (2025-06-03)
+-------------------------
+ * Merge pull request #1273 from rapidpro/gtm-check
+
+v1.2.152 (2025-05-21)
+-------------------------
+ * Merge pull request #1272 from rapidpro/add-eth
+ * Add ETH to dropdown
+
+v1.2.151 (2025-05-19)
+-------------------------
+ * Merge pull request #1271 from rapidpro/update-django
+ * Update to support django 5.2
+
+v1.2.150 (2025-04-04)
+-------------------------
+ * Merge pull request #1264 from rapidpro/custom-html
+ * Add custom_html config to the public pages
+
+v1.2.149 (2025-04-01)
+-------------------------
+ * Merge pull request #1270 from rapidpro/add-aus
+ * Add AUS link to countries dropdown
+
 v1.2.148 (2025-03-26)
 -------------------------
  * Merge pull request #1269 from rapidpro/translations_locale-en-lc-messages-django-po--main_es

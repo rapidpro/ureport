@@ -26,6 +26,19 @@ class LandingPageTest(UreportTest):
         post_data = dict(
             title="Welcome",
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            slug="lorem=2025",
+        )
+
+        response = self.client.post(create_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
+        self.assertTrue(response.context["form"].errors)
+        self.assertIn("slug", response.context["form"].errors)
+        self.assertEqual(
+            "The slug can only contain letters, numbers, underscores and hyphens", response.context["form"].errors["slug"][0]
+        )
+
+        post_data = dict(
+            title="Welcome",
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             slug="lorem",
         )
 

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-25 07:00+0000\n"
+"POT-Creation-Date: 2025-10-07 10:36+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1409,6 +1409,9 @@ msgid "The image file to use for the page"
 msgstr "The image file to use"
 
 msgid "Whether this page should be active to the public"
+msgstr ""
+
+msgid "The slug can only contain letters, numbers, and underscores"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"

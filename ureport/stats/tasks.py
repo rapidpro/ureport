@@ -2,7 +2,7 @@ import logging
 import time
 from datetime import timedelta
 
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 
 from django.utils import timezone
 
@@ -77,7 +77,7 @@ def delete_old_contact_activities(org, since, until):
 def squash_contact_activities_counts():
     from .models import ContactActivityCounter
 
-    r = get_redis_connection()
+    r = get_valkey_connection()
     key = "squash_contact_activity_counts_lock"
 
     lock_timeout = 60 * 60

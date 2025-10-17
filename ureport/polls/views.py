@@ -5,7 +5,7 @@ import ast
 import re
 from datetime import timedelta
 
-from django_redis import get_redis_connection
+from django_valkey import get_valkey_connection
 
 from django import forms
 from django.core.cache import cache
@@ -675,7 +675,7 @@ class PollCRUDL(SmartCRUDL):
 
         def get_sync_status(self, obj):
             if obj.has_synced:
-                r = get_redis_connection()
+                r = get_valkey_connection()
                 key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (obj.org.pk, obj.flow_uuid)
                 if r.get(key):
                     return _("Scheduled Sync currently in progress...")
