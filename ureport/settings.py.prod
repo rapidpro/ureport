@@ -191,9 +191,9 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
-VALKEY_HOST = os.environ.get("VALKEY_HOST")
-VALKEY_PORT = 6379
-VALKEY_DB = '1'
+VALKEY_HOST = config('VALKEY_HOST', default='localhost')
+VALKEY_PORT = config('VALKEY_PORT', default='6379')
+VALKEY_DB = config('VALKEY_DATABASE', default='1')
 
 CELERY_BROKER_URL = 'redis://%s:%s/%s' % (VALKEY_HOST, VALKEY_PORT, VALKEY_DB)
 
