@@ -15,53 +15,66 @@ CREATE OR REPLACE FUNCTION ureport_increment_counter_for_contact(_contact contac
 RETURNS VOID AS $$
 DECLARE
   _count INT;
+  _counters TEXT[];
+  _counter TEXT;
 BEGIN
   IF _add THEN
     _count = 1;
   ELSE
     _count = -1;
   END IF;
-  -- If we have a org, increment all reporters counters for its values
+  
+  -- If we have a org, batch all counter increments into fewer operations
   IF _contact.org_id IS NOT NULL THEN
-    PERFORM ureport_insert_reporters_counter(_contact.org_id, 'total-reporters', _count);
+    -- Collect all counter types to insert in a single batch
+    _counters := ARRAY['total-reporters'];
+    
     IF _contact.gender IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('gender:', LOWER(_contact.gender)), _count);
+      _counters := _counters || ARRAY[CONCAT('gender:', LOWER(_contact.gender))];
     END IF;
     IF _contact.born IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('born:', LOWER(CAST(_contact.born AS VARCHAR ))), _count);
+      _counters := _counters || ARRAY[CONCAT('born:', LOWER(CAST(_contact.born AS VARCHAR)))];
     END IF;
     IF _contact.occupation IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('occupation:', LOWER(_contact.occupation)), _count);
-    END IF;
-    IF _contact.registered_on IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('registered_on:', DATE(_contact.registered_on)), _count);
-      IF _contact.gender IS NOT NULL THEN
-        PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('registered_gender:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', LOWER(_contact.gender)), _count);
-      END IF;
-      IF _contact.born IS NOT NULL THEN
-        PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('registered_born:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', LOWER(CAST(_contact.born AS VARCHAR ))), _count);
-      END IF;
-      IF _contact.state IS NOT NULL THEN
-        PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('registered_state:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', UPPER(_contact.state)), _count);
-      END IF;
-
-      IF _contact.scheme IS NOT NULL THEN
-        PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('registered_scheme:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', LOWER(_contact.scheme)), _count);
-      END IF;
-
-
+      _counters := _counters || ARRAY[CONCAT('occupation:', LOWER(_contact.occupation))];
     END IF;
     IF _contact.state IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('state:', UPPER(_contact.state)), _count);
+      _counters := _counters || ARRAY[CONCAT('state:', UPPER(_contact.state))];
     END IF;
     IF _contact.district IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('district:', UPPER(_contact.district)), _count);
+      _counters := _counters || ARRAY[CONCAT('district:', UPPER(_contact.district))];
     END IF;
     IF _contact.ward IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('ward:', UPPER(_contact.ward)), _count);
+      _counters := _counters || ARRAY[CONCAT('ward:', UPPER(_contact.ward))];
     END IF;
     IF _contact.scheme IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('scheme:', LOWER(_contact.scheme)), _count);
+      _counters := _counters || ARRAY[CONCAT('scheme:', LOWER(_contact.scheme))];
+    END IF;
+    
+    -- Batch insert all basic counters
+    INSERT INTO contacts_reporterscounter("org_id", "type", "count")
+    SELECT _contact.org_id, unnest(_counters), _count;
+    
+    -- Handle registration-related counters only if registered_on exists
+    IF _contact.registered_on IS NOT NULL THEN
+      _counters := ARRAY[CONCAT('registered_on:', DATE(_contact.registered_on))];
+      
+      IF _contact.gender IS NOT NULL THEN
+        _counters := _counters || ARRAY[CONCAT('registered_gender:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', LOWER(_contact.gender))];
+      END IF;
+      IF _contact.born IS NOT NULL THEN
+        _counters := _counters || ARRAY[CONCAT('registered_born:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', LOWER(CAST(_contact.born AS VARCHAR)))];
+      END IF;
+      IF _contact.state IS NOT NULL THEN
+        _counters := _counters || ARRAY[CONCAT('registered_state:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', UPPER(_contact.state))];
+      END IF;
+      IF _contact.scheme IS NOT NULL THEN
+        _counters := _counters || ARRAY[CONCAT('registered_scheme:', DATE(date_trunc('day', _contact.registered_on)::timestamp), ':', LOWER(_contact.scheme))];
+      END IF;
+      
+      -- Batch insert all registration counters
+      INSERT INTO contacts_reporterscounter("org_id", "type", "count")
+      SELECT _contact.org_id, unnest(_counters), _count;
     END IF;
   END IF;
 END;

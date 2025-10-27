@@ -1046,7 +1046,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
+        "schedule": crontab(minute=[0, 20, 40]),  # Reduced from every 10 minutes to every 20 minutes
         "args": ("ureport.contacts.tasks.pull_contacts",),
     },
     "update-org-contact-counts": {
@@ -1101,17 +1101,23 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(hour=6, minute=0),
         "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
     },
-    "polls_stats_squash": {
-        "task": "polls.polls_stats_squash",
-        "schedule": timedelta(minutes=30),
+    "stats_activities_squash": {
+        "task": "stats.squash_contact_activities_counts",
+        "schedule": timedelta(minutes=30),  # Reduced from 15 to 30 minutes
         "relative": True,
         "options": {"queue": "slow"},
     },
-    "stats_activities_squash": {
-        "task": "stats.squash_contact_activities_counts",
-        "schedule": timedelta(minutes=15),
+    "polls_stats_squash": {
+        "task": "polls.polls_stats_squash",
+        "schedule": timedelta(hours=1),  # Reduced from 30 minutes to 1 hour
         "relative": True,
         "options": {"queue": "slow"},
+    },
+    "flush-redis-counters": {
+        "task": "ureport.utils.redis_optimizations.flush_redis_counters",
+        "schedule": timedelta(minutes=5),  # Flush Redis counters every 5 minutes
+        "relative": True,
+        "options": {"queue": "fast"},
     },
 }
 
