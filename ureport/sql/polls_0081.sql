@@ -6,10 +6,20 @@ CREATE OR REPLACE FUNCTION
 RETURNS VOID AS $$
 BEGIN
     INSERT INTO stats_contactactivity(contact, date, org_id, born, gender, state, district, ward, scheme, used) 
-    WITH month_days(missing_month) AS (SELECT generate_series(date_trunc('month', _poll_result.date)::timestamp,(date_trunc('month', _poll_result.date)::timestamp+ interval '11 months')::date,interval '1 month')::date), 
-    curr_activity AS (SELECT * FROM stats_contactactivity WHERE org_id = _poll_result.org_id and contact = _poll_result.contact) 
-    
-    SELECT _poll_result.contact, missing_month::date, _poll_result.org_id, _poll_result.born, _poll_result.gender,_poll_result.state, _poll_result.district, _poll_result.ward, _poll_result.scheme, True  FROM month_days LEFT JOIN stats_contactactivity ON stats_contactactivity.date = month_days.missing_month AND stats_contactactivity.contact = _poll_result.contact AND org_id = _poll_result.org_id WHERE stats_contactactivity.date IS NULL;
+    WITH month_days(missing_month) AS (
+        SELECT generate_series(
+            date_trunc('month', _poll_result.date)::timestamp,
+            (date_trunc('month', _poll_result.date)::timestamp + interval '11 months')::date,
+            interval '1 month'
+        )::date
+    )
+    SELECT _poll_result.contact, missing_month::date, _poll_result.org_id, _poll_result.born, _poll_result.gender, _poll_result.state, _poll_result.district, _poll_result.ward, _poll_result.scheme, True
+    FROM month_days
+    LEFT JOIN stats_contactactivity
+        ON stats_contactactivity.date = month_days.missing_month
+        AND stats_contactactivity.contact = _poll_result.contact
+        AND org_id = _poll_result.org_id
+    WHERE stats_contactactivity.date IS NULL;
 END;
 $$ LANGUAGE plpgsql;
 
