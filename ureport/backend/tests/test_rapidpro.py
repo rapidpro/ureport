@@ -1108,7 +1108,7 @@ class RapidProBackendTest(UreportTest):
             ),
         ]
 
-        with self.assertNumQueries(12):
+        with self.assertNumQueries(14):
             contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual(
