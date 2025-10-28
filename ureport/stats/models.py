@@ -36,7 +36,7 @@ class AgeSegment(models.Model):
 
 
 class SchemeSegment(models.Model):
-    SCHEME_DISPLAY = {"tel": "SMS", "twitterid": "TWITTER", "ext": None}
+    SCHEME_DISPLAY = {"tel": "SMS", "twitterid": "TWITTER", "ext": None, "fcm": "U-REPORT APP"}
 
     scheme = models.CharField(max_length=16, unique=True)
 

@@ -334,6 +334,14 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="has_ureport_app",
+        field=dict(
+            help_text=_("If there is a U-Report app available."),
+            label="Display U-Report App",
+            required=False,
+        ),
+    ),
+    dict(
         name="join_button_text",
         field=dict(
             help_text=_("The join button text"),
