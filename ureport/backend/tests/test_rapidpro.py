@@ -679,18 +679,19 @@ class ContactSyncerTest(UreportTest):
         self.assertEqual(contact.registered_on, json_date_to_datetime("2014-01-02T03:04:05.000000Z"))
         self.assertEqual(contact.state, "R-LAGOS")
 
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").count(), 12)
-        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).exists())
-        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).exists())
-        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(born=None).exists())
-        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).exists())
-        self.assertTrue(ContactActivity.objects.filter(contact="C-008", state="R-LAGOS").exists())
+        base_qs = ContactActivity.objects.filter(contact="C-008")
+        self.assertEqual(base_qs.count(), 12)
+        self.assertTrue(base_qs.exclude(state="").exclude(state=None).exists())
+        self.assertTrue(base_qs.exclude(gender="").exclude(gender=None).exists())
+        self.assertTrue(base_qs.exclude(born=None).exists())
+        self.assertTrue(base_qs.exclude(district="").exclude(district=None).exists())
+        self.assertTrue(base_qs.filter(state="R-LAGOS").exists())
 
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).count(), 6)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).count(), 6)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(born=None).count(), 6)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).count(), 6)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008", state="R-LAGOS").count(), 6)
+        self.assertEqual(base_qs.exclude(state="").exclude(state=None).count(), 6)
+        self.assertEqual(base_qs.exclude(gender="").exclude(gender=None).count(), 6)
+        self.assertEqual(base_qs.exclude(born=None).count(), 6)
+        self.assertEqual(base_qs.exclude(district="").exclude(district=None).count(), 6)
+        self.assertEqual(base_qs.filter(state="R-LAGOS").count(), 6)
 
 class RapidProBackendTest(UreportTest):
     def setUp(self):
