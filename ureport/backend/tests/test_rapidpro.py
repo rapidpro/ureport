@@ -616,7 +616,7 @@ class ContactSyncerTest(UreportTest):
         self.assertEqual(result.state, "R-LAGOS")
 
     @patch("django.utils.timezone.now")
-    def test_update_local(self,  mock_timezone_now):
+    def test_update_local(self, mock_timezone_now):
         now_date = json_date_to_datetime("2020-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
