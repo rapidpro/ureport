@@ -1,3 +1,8 @@
+v1.2.164 (2025-10-28)
+-------------------------
+ * Merge pull request #1290 from rapidpro/reduce-db-load-1
+ * Fix date
+
 v1.2.162 (2025-10-10)
 -------------------------
  * Merge pull request #1286 from rapidpro/update-rp-client
