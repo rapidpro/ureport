@@ -30,6 +30,7 @@ from ureport.contacts.models import Contact, ContactField
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
+from ureport.stats.models import ContactActivity
 from ureport.tests import MockResponse, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -614,6 +615,82 @@ class ContactSyncerTest(UreportTest):
         result.refresh_from_db()
         self.assertEqual(result.state, "R-LAGOS")
 
+    @patch("django.utils.timezone.now")
+    def test_update_local(self,  mock_timezone_now):
+        now_date = json_date_to_datetime("2020-04-08T12:48:44.320Z")
+        mock_timezone_now.return_value = now_date
+
+        remote = TembaContact.create(
+            uuid="C-008",
+            name="Jan",
+            urns=["tel:123"],
+            groups=[ObjectRef.create(uuid="G-001", name="ureporters"), ObjectRef.create(uuid="G-007", name="Actors")],
+            fields={"registration_date": "2014-01-02T03:04:05.000000Z",},
+            language="eng",
+        )
+
+        result = PollResult.objects.create(
+            org=self.nigeria,
+            flow="flow-uuid",
+            ruleset="ruleset-uuid",
+            contact="C-008",
+            completed=False,
+            category="Yes",
+            date=timezone.now() - timedelta(days=180),
+        )
+
+        result.refresh_from_db()
+        self.assertFalse(result.state)
+
+        contact = self.syncer.create_local(self.syncer.local_kwargs(self.nigeria, remote))
+
+        self.assertEqual(contact.org, self.nigeria)
+        self.assertEqual(contact.uuid, "C-008")
+        self.assertEqual(contact.registered_on, json_date_to_datetime("2014-01-02T03:04:05.000000Z"))
+        self.assertNotEqual(contact.state, "R-LAGOS")
+
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").count(), 12)
+        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).exists())
+        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).exists())
+        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(born=None).exists())
+        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).exists())
+
+        remote = TembaContact.create(
+            uuid="C-008",
+            name="Jan",
+            urns=["tel:123"],
+            groups=[ObjectRef.create(uuid="G-001", name="ureporters"), ObjectRef.create(uuid="G-007", name="Actors")],
+            fields={
+                "registration_date": "2014-01-02T03:04:05.000000Z",
+                "state": "Lagos",
+                "lga": "Oyo",
+                "ward": "Ikeja",
+                "occupation": "Student",
+                "born": "1990",
+                "gender": "Male",
+            },
+            language="eng",
+        )
+
+        contact = self.syncer.update_local(contact, self.syncer.local_kwargs(self.nigeria, remote))
+
+        self.assertEqual(contact.org, self.nigeria)
+        self.assertEqual(contact.uuid, "C-008")
+        self.assertEqual(contact.registered_on, json_date_to_datetime("2014-01-02T03:04:05.000000Z"))
+        self.assertEqual(contact.state, "R-LAGOS")
+
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").count(), 12)
+        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).exists())
+        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).exists())
+        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(born=None).exists())
+        self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).exists())
+        self.assertTrue(ContactActivity.objects.filter(contact="C-008", state="R-LAGOS").exists())
+
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).count(), 5)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).count(), 5)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(born=None).count(), 5)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).count(), 5)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008", state="R-LAGOS").count(), 5)
 
 class RapidProBackendTest(UreportTest):
     def setUp(self):

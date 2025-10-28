@@ -24,6 +24,7 @@ from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
+from ureport.stats.models import ContactActivity
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
 from . import BaseBackend
@@ -311,6 +312,22 @@ class ContactSyncer(BaseSyncer):
                 local.scheme != local_kwargs["scheme"],
             ]
         )
+
+    def update_local(self, local, remote_as_kwargs):
+        local = super().update_local(local, remote_as_kwargs)
+
+        now = timezone.now()
+        ContactActivity.objects.filter(contact=local.uuid, date__gte=now).update(
+            gender=local.gender,
+            born=local.born,
+            state=local.state,
+            district=local.district,
+            ward=local.ward,
+            scheme=local.scheme,
+            used=True,
+        )
+
+        return local
 
     def create_local(self, remote_as_kwargs):
         obj = super().create_local(remote_as_kwargs)
