@@ -686,11 +686,11 @@ class ContactSyncerTest(UreportTest):
         self.assertTrue(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).exists())
         self.assertTrue(ContactActivity.objects.filter(contact="C-008", state="R-LAGOS").exists())
 
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).count(), 5)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).count(), 5)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(born=None).count(), 5)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).count(), 5)
-        self.assertEqual(ContactActivity.objects.filter(contact="C-008", state="R-LAGOS").count(), 5)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).count(), 6)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).count(), 6)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(born=None).count(), 6)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).count(), 6)
+        self.assertEqual(ContactActivity.objects.filter(contact="C-008", state="R-LAGOS").count(), 6)
 
 class RapidProBackendTest(UreportTest):
     def setUp(self):
