@@ -330,34 +330,6 @@ class ContactSyncer(BaseSyncer):
 
         return local
 
-    def create_local(self, remote_as_kwargs):
-        obj = super().create_local(remote_as_kwargs)
-
-        # Contacts sync only on the reporters group and those are the only with demographic data saved.
-        # Poll results sync all poll response including those not in the reporter group,
-        # Here we update the recent(last 30 days) results to have the demographic data for the contact
-        # that is registered (part of reporters group) and syncs now
-        one_month_ago = timezone.now() - timedelta(days=30)
-        if obj.registered_on is not None and obj.registered_on > one_month_ago:
-            recent_results = PollResult.objects.filter(
-                org=obj.org,
-                contact=obj.uuid,
-                date__gte=one_month_ago,
-            ).exists()
-
-            if recent_results:
-                PollResult.objects.filter(org=obj.org, contact=obj.uuid, date__gte=one_month_ago).update(
-                    state=obj.state,
-                    district=obj.district,
-                    ward=obj.ward,
-                    gender=obj.gender,
-                    born=obj.born,
-                    scheme=obj.scheme,
-                )
-
-        return obj
-
-
 class RapidProBackend(BaseBackend):
     """
     RapidPro instance as a backend
