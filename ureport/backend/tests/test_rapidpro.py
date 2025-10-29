@@ -613,7 +613,7 @@ class ContactSyncerTest(UreportTest):
         self.assertEqual(contact.state, "R-LAGOS")
 
         result.refresh_from_db()
-        self.assertEqual(result.state, "R-LAGOS")
+        self.assertFalse(result.state) # removed updating existing results
 
     @patch("django.utils.timezone.now")
     def test_update_local(self, mock_timezone_now):
