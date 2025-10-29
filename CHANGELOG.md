@@ -1,3 +1,10 @@
+v1.2.165 (2025-10-29)
+-------------------------
+ * Merge pull request #1291 from rapidpro/reduce-db-load
+ * Merge pull request #1289 from rapidpro/fcm-display
+ * Stop updting past results on contact sync
+ * Add ureport app links to join page
+
 v1.2.164 (2025-10-28)
 -------------------------
  * Merge pull request #1290 from rapidpro/reduce-db-load-1
