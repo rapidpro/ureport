@@ -488,7 +488,7 @@ class Poll(SmartModel):
                 # Delete existing counters and then create new counters
                 self.delete_poll_stats()
 
-                PollStats.objects.bulk_create(poll_stats_obj_to_insert)
+                PollStats.objects.bulk_create(poll_stats_obj_to_insert, batch_size=1000)
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
