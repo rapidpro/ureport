@@ -1,3 +1,8 @@
+v1.2.166 (2025-10-29)
+-------------------------
+ * Merge pull request #1292 from rapidpro/insert_batches
+ * Insert poll stats using batch size with bulk create
+
 v1.2.165 (2025-10-29)
 -------------------------
  * Merge pull request #1291 from rapidpro/reduce-db-load
