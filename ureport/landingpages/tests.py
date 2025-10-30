@@ -33,7 +33,8 @@ class LandingPageTest(UreportTest):
         self.assertTrue(response.context["form"].errors)
         self.assertIn("slug", response.context["form"].errors)
         self.assertEqual(
-            "The slug can only contain letters, numbers, underscores and hyphens", response.context["form"].errors["slug"][0]
+            "The slug can only contain letters, numbers, underscores and hyphens",
+            response.context["form"].errors["slug"][0],
         )
 
         post_data = dict(

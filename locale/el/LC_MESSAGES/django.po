@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -991,6 +991,11 @@ msgstr "Πώς θα ήθελες να εγγραφείς;"
 msgid "Text"
 msgstr "Κείμενο"
 
+#, fuzzy
+#| msgid "Download Report"
+msgid "Or download the U-Report App:"
+msgstr "Λήψη αναφοράς"
+
 msgid "PAGE"
 msgstr "Σελίδα"
 
@@ -1420,7 +1425,7 @@ msgstr "Το αρχείο εικόνας που θα χρησιμοποιηθε�
 msgid "Whether this page should be active to the public"
 msgstr "Εάν αυτή η σελίδα πρέπει να είναι ενεργή για το κοινό"
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1771,6 +1776,9 @@ msgstr "Το όνομα χρήστη viber που θα χρησιμοποιήσ�
 #| msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Το Telegram bot που θα χρησιμοποιήσουν οι χρήστες για να επικοινωνήσουν με το U-Report εάν έχετε"
+
+msgid "If there is a U-Report app available."
+msgstr ""
 
 msgid "The join button text"
 msgstr "Το κείμενο του κουμπιού Εγγραφή"
