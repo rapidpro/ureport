@@ -1,3 +1,10 @@
+v1.2.167 (2025-10-30)
+-------------------------
+ * Remove no longer needed periodic task schedule
+ * Remove use of list for all contacts
+ * Run code_checks
+ * Use iterator for large querysets
+
 v1.2.166 (2025-10-29)
 -------------------------
  * Merge pull request #1292 from rapidpro/insert_batches
