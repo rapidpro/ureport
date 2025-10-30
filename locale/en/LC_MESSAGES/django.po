@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -955,6 +955,9 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "Or download the U-Report App:"
+msgstr ""
+
 msgid "PAGE"
 msgstr ""
 
@@ -1376,7 +1379,7 @@ msgstr ""
 msgid "Whether this page should be active to the public"
 msgstr ""
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1720,6 +1723,9 @@ msgid "The viber username that users will use to contact U-Report if you have on
 msgstr ""
 
 msgid "The Line bot link that users will use to contact U-Report if you have one"
+msgstr ""
+
+msgid "If there is a U-Report app available."
 msgstr ""
 
 msgid "The join button text"

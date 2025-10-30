@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -1005,6 +1005,9 @@ msgstr "Como você gostaria de fazer parte?"
 msgid "Text"
 msgstr "Texto"
 
+msgid "Or download the U-Report App:"
+msgstr ""
+
 msgid "PAGE"
 msgstr ""
 
@@ -1505,7 +1508,7 @@ msgstr "O arquivo da imagem a ser usada"
 msgid "Whether this page should be active to the public"
 msgstr "Se esta organização deve aparecer na página de destino"
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1871,6 +1874,9 @@ msgstr "O número do Whatsapp que os usuários usarão para entrar em contato co
 #| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "O número do Whatsapp que os usuários usarão para entrar em contato com o U-Report se você tiver um"
+
+msgid "If there is a U-Report app available."
+msgstr ""
 
 #, fuzzy
 #| msgid "The font used for normal text"

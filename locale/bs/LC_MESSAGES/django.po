@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -1089,6 +1089,9 @@ msgstr "Na koji način se želiš pridružiti? "
 msgid "Text"
 msgstr "Tekst"
 
+msgid "Or download the U-Report App:"
+msgstr ""
+
 msgid "PAGE"
 msgstr ""
 
@@ -1596,7 +1599,7 @@ msgstr "Fajl za sliku koja će se koristiti"
 msgid "Whether this page should be active to the public"
 msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1964,6 +1967,9 @@ msgstr "Whatsapp broj koji će korisnici koristiti da kontaktiraju U-Report ako 
 #| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Whatsapp broj koji će korisnici koristiti da kontaktiraju U-Report ako ga imamo"
+
+msgid "If there is a U-Report app available."
+msgstr ""
 
 #, fuzzy
 #| msgid "The font used for normal text"

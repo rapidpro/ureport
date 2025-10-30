@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -992,6 +992,11 @@ msgstr "คุณต้องการเข้าร่วมอย่างไ
 msgid "Text"
 msgstr "ข้อความ"
 
+#, fuzzy
+#| msgid "Download Report"
+msgid "Or download the U-Report App:"
+msgstr "ดาวน์โหลดรายงาน"
+
 msgid "PAGE"
 msgstr "หน้า"
 
@@ -1424,7 +1429,7 @@ msgstr "ไฟล์รูปภาพที่จะใช้บนหน้า
 msgid "Whether this page should be active to the public"
 msgstr "เพจนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1775,6 +1780,9 @@ msgstr "Username ของ Viber ที่ผู้ใช้งานสาม�
 #| msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Telegram บอทที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
+
+msgid "If there is a U-Report app available."
+msgstr ""
 
 msgid "The join button text"
 msgstr "ข้อความของปุ่มเข้าร่วม"
