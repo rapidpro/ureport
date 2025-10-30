@@ -1099,11 +1099,6 @@ CELERY_BEAT_SCHEDULE = {
         "task": "polls.rebuild_counts",
         "schedule": crontab(hour=4, minute=0),
     },
-    "populate-schemes": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(hour=6, minute=0),
-        "args": ("ureport.contacts.tasks.populate_contact_schemes", "slow"),
-    },
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=6, minute=0),
