@@ -2198,7 +2198,9 @@ class PollResultsTest(UreportTest):
         next_year = current_year + 1
         eight_years_ago = current_year - 8
 
-        result_date = timezone.now().replace(year=next_year, month=9, day=15, hour=0, minute=0, second=0, microsecond=0)
+        result_date = timezone.now().replace(
+            year=next_year, month=9, day=15, hour=0, minute=0, second=0, microsecond=0
+        )
 
         PollResult.objects.create(
             org=self.nigeria,
@@ -2514,7 +2516,6 @@ class PollResultsTest(UreportTest):
             .annotate(Sum("count"))
             .count(),
         )
-
 
     def test_poll_result_generate_stats(self):
         poll_result1 = PollResult.objects.create(

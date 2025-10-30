@@ -613,7 +613,7 @@ class ContactSyncerTest(UreportTest):
         self.assertEqual(contact.state, "R-LAGOS")
 
         result.refresh_from_db()
-        self.assertFalse(result.state) # removed updating existing results
+        self.assertFalse(result.state)  # removed updating existing results
 
     @patch("django.utils.timezone.now")
     def test_update_local(self, mock_timezone_now):
@@ -625,7 +625,9 @@ class ContactSyncerTest(UreportTest):
             name="Jan",
             urns=["tel:123"],
             groups=[ObjectRef.create(uuid="G-001", name="ureporters"), ObjectRef.create(uuid="G-007", name="Actors")],
-            fields={"registration_date": "2014-01-02T03:04:05.000000Z",},
+            fields={
+                "registration_date": "2014-01-02T03:04:05.000000Z",
+            },
             language="eng",
         )
 
@@ -650,10 +652,16 @@ class ContactSyncerTest(UreportTest):
         self.assertNotEqual(contact.state, "R-LAGOS")
 
         self.assertEqual(ContactActivity.objects.filter(contact="C-008").count(), 12)
-        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).exists())
-        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).exists())
+        self.assertFalse(
+            ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).exists()
+        )
+        self.assertFalse(
+            ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).exists()
+        )
         self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(born=None).exists())
-        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).exists())
+        self.assertFalse(
+            ContactActivity.objects.filter(contact="C-008").exclude(district="").exclude(district=None).exists()
+        )
 
         remote = TembaContact.create(
             uuid="C-008",
@@ -692,6 +700,7 @@ class ContactSyncerTest(UreportTest):
         self.assertEqual(base_qs.exclude(born=None).count(), 6)
         self.assertEqual(base_qs.exclude(district="").exclude(district=None).count(), 6)
         self.assertEqual(base_qs.filter(state="R-LAGOS").count(), 6)
+
 
 class RapidProBackendTest(UreportTest):
     def setUp(self):

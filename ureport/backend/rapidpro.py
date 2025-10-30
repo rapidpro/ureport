@@ -330,6 +330,7 @@ class ContactSyncer(BaseSyncer):
 
         return local
 
+
 class RapidProBackend(BaseBackend):
     """
     RapidPro instance as a backend
@@ -668,7 +669,10 @@ class RapidProBackend(BaseBackend):
                         logger.info("=" * 40)
 
                         # Pause the sync for this poll when we have synced Poll.POLL_RESULTS_MAX_SYNC_RUNS runs this time
-                        if stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
+                        if (
+                            stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS
+                            or time.time() > lock_expiration
+                        ):
                             # rebuild the aggregated counts
                             poll.rebuild_poll_results_counts()
 

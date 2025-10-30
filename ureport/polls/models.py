@@ -345,7 +345,6 @@ class Poll(SmartModel):
 
         from ureport.locations.models import Boundary
         from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
-        from ureport.utils import chunk_list
 
         start = time.time()
 
@@ -365,7 +364,7 @@ class Poll(SmartModel):
                         % (flow_poll.pk, flow_poll.org_id)
                     )
 
-            logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
+            logger.info("Poll stopped regenerating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
             return
 
         r = get_valkey_connection()
@@ -377,7 +376,7 @@ class Poll(SmartModel):
 
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list("pk", flat=True)
+                poll_results = PollResult.objects.filter(org_id=org_id, flow=flow).iterator(chunk_size=1000)
 
                 questions = self.questions.all().select_related("flow_result").prefetch_related("response_categories")
                 questions_dict = dict()
@@ -388,14 +387,14 @@ class Poll(SmartModel):
 
                 for qsn in questions:
                     categories = qsn.response_categories.all().select_related("flow_result_category")
-                    categoryies_dict = {elt.flow_result_category.category.lower(): elt.id for elt in categories}
+                    categories_dict = {elt.flow_result_category.category.lower(): elt.id for elt in categories}
                     flow_categories_dict = {
                         elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories
                     }
                     questions_dict[qsn.flow_result.result_uuid] = dict(
                         id=qsn.id,
                         flow_result_id=qsn.flow_result_id,
-                        categories=categoryies_dict,
+                        categories=categories_dict,
                         flow_categories=flow_categories_dict,
                     )
 
@@ -411,20 +410,18 @@ class Poll(SmartModel):
                 processed_results = 0
                 stats_dict = defaultdict(int)
 
-                for batch in chunk_list(poll_results_ids, 1000):
-                    poll_results = list(PollResult.objects.filter(pk__in=batch))
+                for result in poll_results:
+                    gen_stats = result.generate_poll_stats()
+                    for dict_key in gen_stats.keys():
+                        stats_dict[dict_key] += gen_stats[dict_key]
 
-                    for result in poll_results:
-                        gen_stats = result.generate_poll_stats()
-                        for dict_key in gen_stats.keys():
-                            stats_dict[dict_key] += gen_stats[dict_key]
+                    processed_results += 1
 
-                        processed_results += 1
-
-                    logger.info(
-                        "Rebuild counts progress... build counters dict for pair %s, %s, processed %d in %ds"
-                        % (org_id, flow, processed_results, time.time() - start)
-                    )
+                    if processed_results % 1000 == 0:
+                        logger.info(
+                            "Rebuild counts progress... build counters dict for pair %s, %s, processed %d in %ds"
+                            % (org_id, flow, processed_results, time.time() - start)
+                        )
 
                 poll_stats_obj_to_insert = []
                 for stat_tuple in stats_dict.keys():
@@ -504,7 +501,7 @@ class Poll(SmartModel):
                     )
 
                     logger.info(
-                        "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled"
+                        "Poll responses counts for poll #%d on org #%d: %s responses received out of %s participants polled"
                         % (poll_id, org_id, flow_poll.responded_runs(), flow_poll.runs())
                     )
 
