@@ -127,7 +127,6 @@ class Contact(models.Model):
         all_contacts = Contact.objects.filter(org=org).order_by("id").iterator(chunk_size=1000)
         start = time.time()
 
-        all_contacts = list(all_contacts)
         all_contacts_count = 0
 
         counters_dict = defaultdict(int)
@@ -310,7 +309,7 @@ class ReportersCounter(models.Model):
         counters = cls.objects.filter(org=org)
         if types:
             counters = counters.filter(type__in=types)
-        counter_counts = counters.values("type").annotate(count_sum=Sum("count")).iterator(chunk_size=1000)
+        counter_counts = counters.values("type").annotate(count_sum=Sum("count"))
 
         return {c["type"]: c["count_sum"] for c in counter_counts}
 
