@@ -12,7 +12,6 @@ from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org, OrgBackend
-from ureport.utils import chunk_list
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
 CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"
@@ -144,8 +143,7 @@ class Contact(models.Model):
             count = counters_dict[counter_tuple]
             counters_to_insert.append(ReportersCounter(org_id=org_id, type=counter_type, count=count))
 
-        for batch in chunk_list(counters_to_insert, 1000):
-            ReportersCounter.objects.bulk_create(batch)
+        ReportersCounter.objects.bulk_create(counters_to_insert, batch_size=1000)
 
         logger.info(
             "Finished rebuilding contacts reporters counters (aggregated statistics for contacts) for org #%d in %ds, inserted %d counter objects for %s contacts"
