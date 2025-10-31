@@ -8,7 +8,7 @@ from collections import defaultdict
 from django_valkey import get_valkey_connection
 
 from django.db import connection, models
-from django.db.models import Count, Sum
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org, OrgBackend
@@ -309,9 +309,14 @@ class ReportersCounter(models.Model):
         counters = cls.objects.filter(org=org)
         if types:
             counters = counters.filter(type__in=types)
-        counter_counts = counters.values("type").annotate(count_sum=Sum("count"))
 
-        return {c["type"]: c["count_sum"] for c in counter_counts}
+        counter_counts = counters.iterator(chunk_size=1000)
+
+        counts = defaultdict(int)
+        for c in counter_counts:
+            counts[c.type] += c.count
+
+        return counts
 
     class Meta:
         indexes = [
