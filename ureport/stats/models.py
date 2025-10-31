@@ -116,7 +116,7 @@ class PollStats(models.Model):
                 "scheme_segment_id",
                 "location_id",
                 "date",
-            )[:50000]
+            )[:30000]
         )
 
         for distinct_set in stats_objs:
@@ -803,7 +803,7 @@ class ContactActivity(models.Model):
                     count=count,
                 )
             )
-        ContactActivityCounter.objects.bulk_create(counters_to_insert)
+        ContactActivityCounter.objects.bulk_create(counters_to_insert, batch_size=1000)
 
         logger.info(
             "Finished Rebuilding the contacts activitiies counters for org #%d in %ds, inserted %d counters objects for %s activities"

@@ -1080,7 +1080,7 @@ class RapidProBackend(BaseBackend):
                 obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
                 if obj_to_create is not None:
                     new_poll_results.append(obj_to_create)
-        PollResult.objects.bulk_create(new_poll_results)
+        PollResult.objects.bulk_create(new_poll_results, batch_size=1000)
 
     @staticmethod
     def _mark_poll_results_sync_paused(org, poll, latest_synced_obj_time):
