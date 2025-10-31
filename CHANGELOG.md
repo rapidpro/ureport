@@ -1,3 +1,8 @@
+v1.2.169 (2025-10-31)
+-------------------------
+ * Reduce squash items query rows
+ * Use batch size for bulk create
+
 v1.2.168 (2025-10-31)
 -------------------------
  * Loop on all objects to insert
