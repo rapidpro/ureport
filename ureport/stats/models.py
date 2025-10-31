@@ -116,7 +116,7 @@ class PollStats(models.Model):
                 "scheme_segment_id",
                 "location_id",
                 "date",
-            )[:50000]
+            )[:30000]
         )
 
         for distinct_set in stats_objs:
