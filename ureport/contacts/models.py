@@ -8,10 +8,11 @@ from collections import defaultdict
 from django_valkey import get_valkey_connection
 
 from django.db import connection, models
-from django.db.models import Count, Sum
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org, OrgBackend
+from ureport.utils import chunk_list
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
 CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"
@@ -142,7 +143,9 @@ class Contact(models.Model):
             org_id, counter_type = counter_tuple
             count = counters_dict[counter_tuple]
             counters_to_insert.append(ReportersCounter(org_id=org_id, type=counter_type, count=count))
-        ReportersCounter.objects.bulk_create(counters_to_insert, batch_size=1000)
+
+        for batch in chunk_list(counters_to_insert, 1000):
+            ReportersCounter.objects.bulk_create(batch)
 
         logger.info(
             "Finished rebuilding contacts reporters counters (aggregated statistics for contacts) for org #%d in %ds, inserted %d counter objects for %s contacts"
@@ -309,9 +312,14 @@ class ReportersCounter(models.Model):
         counters = cls.objects.filter(org=org)
         if types:
             counters = counters.filter(type__in=types)
-        counter_counts = counters.values("type").annotate(count_sum=Sum("count"))
 
-        return {c["type"]: c["count_sum"] for c in counter_counts}
+        counter_counts = counters.iterator(chunk_size=1000)
+
+        counts = defaultdict(int)
+        for c in counter_counts:
+            counts[c.type] += c.count
+
+        return counts
 
     class Meta:
         indexes = [

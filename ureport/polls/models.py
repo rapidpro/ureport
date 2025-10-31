@@ -27,6 +27,7 @@ from dash.tags.models import Tag
 from smartmin.models import SmartModel
 from ureport.flows.models import FlowResult, FlowResultCategory
 
+
 logger = logging.getLogger(__name__)
 
 # cache whether a question is open ended for a month
@@ -345,6 +346,7 @@ class Poll(SmartModel):
 
         from ureport.locations.models import Boundary
         from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
+        from ureport.utils import chunk_list
 
         start = time.time()
 
@@ -417,11 +419,16 @@ class Poll(SmartModel):
 
                     processed_results += 1
 
-                    if processed_results % 1000 == 0:
+                    if processed_results % 50000 == 0:
                         logger.info(
                             "Rebuild counts progress... build counters dict for pair %s, %s, processed %d in %ds"
                             % (org_id, flow, processed_results, time.time() - start)
                         )
+
+                logger.info(
+                    "Rebuild counts progress... build counters dict for pair %s, %s, processed %d in %ds"
+                    % (org_id, flow, processed_results, time.time() - start)
+                )
 
                 poll_stats_obj_to_insert = []
                 for stat_tuple in stats_dict.keys():
@@ -485,7 +492,8 @@ class Poll(SmartModel):
                 # Delete existing counters and then create new counters
                 self.delete_poll_stats()
 
-                PollStats.objects.bulk_create(poll_stats_obj_to_insert, batch_size=1000)
+                for batch in chunk_list(poll_stats_obj_to_insert, 1000):
+                    PollStats.objects.bulk_create(batch)
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
@@ -518,7 +526,6 @@ class Poll(SmartModel):
 
     @classmethod
     def get_valid_polls(cls, org):
-
         return (
             Poll.objects.filter(org=org, is_active=True, has_synced=True)
             .exclude(flow_uuid="")
@@ -581,9 +588,7 @@ class Poll(SmartModel):
     @classmethod
     def find_main_poll(cls, org):
         poll_with_questions = (
-            PollQuestion.objects.filter(is_active=True, poll__org=org)
-            .only("poll_id")
-            .values_list("poll_id", flat=True)
+            PollQuestion.objects.filter(is_active=True, poll__org=org).only("poll_id").values_list("poll_id", flat=True)
         )
 
         polls = (
