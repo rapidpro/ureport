@@ -1,3 +1,8 @@
+v1.2.168 (2025-10-31)
+-------------------------
+ * Loop on all objects to insert
+ * Use queryset iterator for getting reporters counts
+
 v1.2.167 (2025-10-30)
 -------------------------
  * Remove no longer needed periodic task schedule
