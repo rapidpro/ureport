@@ -8,11 +8,10 @@ from collections import defaultdict
 from django_valkey import get_valkey_connection
 
 from django.db import connection, models
-from django.db.models import Count, Sum
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org, OrgBackend
-from ureport.utils import chunk_list
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
 CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"
@@ -125,33 +124,29 @@ class Contact(models.Model):
     def recalculate_reporters_stats(cls, org):
         ReportersCounter.objects.filter(org_id=org.id).delete()
 
-        all_contacts = Contact.objects.filter(org=org).values_list("id", flat=True).order_by("id")
+        all_contacts = Contact.objects.filter(org=org).order_by("id").iterator(chunk_size=1000)
         start = time.time()
-        i = 0
 
-        all_contacts = list(all_contacts)
-        all_contacts_count = len(all_contacts)
+        all_contacts_count = 0
 
         counters_dict = defaultdict(int)
 
-        for contact_id_batch in chunk_list(all_contacts, 1000):
-            contact_batch = list(contact_id_batch)
-            contacts = Contact.objects.filter(id__in=contact_batch)
-            for contact in contacts:
-                i += 1
-                gen_counters = contact.generate_counters()
-                for dict_key in gen_counters.keys():
-                    counters_dict[(org.id, dict_key)] += gen_counters[dict_key]
+        for contact in all_contacts:
+            all_contacts_count += 1
+            gen_counters = contact.generate_counters()
+            for dict_key in gen_counters.keys():
+                counters_dict[(org.id, dict_key)] += gen_counters[dict_key]
 
         counters_to_insert = []
         for counter_tuple in counters_dict.keys():
             org_id, counter_type = counter_tuple
             count = counters_dict[counter_tuple]
             counters_to_insert.append(ReportersCounter(org_id=org_id, type=counter_type, count=count))
-        ReportersCounter.objects.bulk_create(counters_to_insert)
+
+        ReportersCounter.objects.bulk_create(counters_to_insert, batch_size=1000)
 
         logger.info(
-            "Finished Rebuilding the contacts reporters counters for org #%d in %ds, inserted %d counters objects for %s contacts"
+            "Finished rebuilding contacts reporters counters (aggregated statistics for contacts) for org #%d in %ds, inserted %d counter objects for %s contacts"
             % (org.id, time.time() - start, len(counters_to_insert), all_contacts_count)
         )
 
@@ -315,9 +310,14 @@ class ReportersCounter(models.Model):
         counters = cls.objects.filter(org=org)
         if types:
             counters = counters.filter(type__in=types)
-        counter_counts = counters.values("type").annotate(count_sum=Sum("count"))
 
-        return {c["type"]: c["count_sum"] for c in counter_counts}
+        counter_counts = counters.iterator(chunk_size=1000)
+
+        counts = defaultdict(int)
+        for c in counter_counts:
+            counts[c.type] += c.count
+
+        return counts
 
     class Meta:
         indexes = [

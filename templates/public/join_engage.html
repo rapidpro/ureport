@@ -110,6 +110,30 @@
                         </div>
                     {% endif %}
                 </div>
+                {% if org|config:"has_ureport_app" %}
+                <div class="md:pl-24 md:pr-12 mt-8 grid grid-cols-1 flex justify-around">
+                    {% trans "Or download the U-Report App:" %}
+                </div>
+                <div class="md:pl-24 md:pr-12 grid grid-cols-2 text-xl font-bold flex justify-around">
+
+                        <div class="md:mx-4 mb-4 mt-4 text-center">
+                            <a href="https://apps.apple.com/tt/app/u-report/id1598072043">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-app-store"></i>
+                                </div>
+                            </a>
+                            <div class="block">App Store (iOS)</div>
+                        </div>
+                        <div class="md:mx-4 mb-4 mt-4 text-center">
+                            <a href="https://play.google.com/store/apps/details?id=org.unicef.ureport">
+                                <div class="bg-circle-lg bg-white text-black border border-black">
+                                    <i class="fab fa-google-play"></i>
+                                </div>
+                            </a>
+                            <div class="block">Google Play (Android)</div>
+                        </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

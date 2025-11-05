@@ -24,7 +24,6 @@ from dash.utils import datetime_to_ms
 from ureport.assets.models import LOGO, Image
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
-from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -358,6 +357,8 @@ def update_cache_org_contact_counts(org):
 
 
 def get_gender_labels(org):
+    from ureport.stats.models import GenderSegment
+
     translation.activate(org.language)
     return {k: str(v) for k, v in GenderSegment.GENDERS.items()}
 
@@ -450,6 +451,8 @@ def get_age_stats(org):
 
 
 def get_schemes_stats(org):
+    from ureport.stats.models import SchemeSegment
+
     org_contacts_counts = get_org_contacts_counts(org)
     schemes_counts = {
         k[7:]: v for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:] and k[7:] != "ext"
@@ -562,6 +565,8 @@ def get_sign_up_rate_location(org, time_filter):
 
 
 def get_sign_up_rate_gender(org, time_filter):
+    from ureport.stats.models import GenderSegment
+
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
@@ -607,6 +612,8 @@ def get_sign_up_rate_gender(org, time_filter):
 
 
 def get_sign_up_rate_age(org, time_filter):
+    from ureport.stats.models import AgeSegment
+
     now = timezone.now()
     current_year = now.year
     year_ago = now - timedelta(days=365)
@@ -679,6 +686,8 @@ def get_sign_up_rate_age(org, time_filter):
 
 
 def get_sign_up_rate_scheme(org, time_filter):
+    from ureport.stats.models import SchemeSegment
+
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
@@ -860,6 +869,8 @@ def get_ureporters_locations_stats(org, segment):
 
 
 def get_ureporters_locations_response_rates(org, segment):
+    from ureport.stats.models import PollStats
+
     parent = segment.get("parent", None)
     field_type = segment.get("location", None)
 

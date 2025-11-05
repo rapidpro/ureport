@@ -1,6 +1,6 @@
 [project]
 name = "ureport"
-version = "1.2.162"
+version = "1.2.169"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = [
     {"name" = "Nyaruka", "email" = "code@nyaruka.com"}

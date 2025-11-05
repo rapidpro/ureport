@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1000,6 +1000,11 @@ msgstr "Comment tu peux joindre?"
 msgid "Text"
 msgstr "Texte"
 
+#, fuzzy
+#| msgid "Download Report"
+msgid "Or download the U-Report App:"
+msgstr "Télécharger le rapport"
+
 msgid "PAGE"
 msgstr "Page"
 
@@ -1430,7 +1435,7 @@ msgstr "Le fichier image à utiliser pour la page"
 msgid "Whether this page should be active to the public"
 msgstr "Si cette page doit être active pour le public"
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1781,6 +1786,9 @@ msgstr "Le nom d'utilisateur Viber que les utilisateurs utiliseront pour contact
 #| msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Le bot Telegram que les utilisateurs utiliseront pour contacter U-Report si vous en avez un"
+
+msgid "If there is a U-Report app available."
+msgstr ""
 
 msgid "The join button text"
 msgstr "Le texte du bouton d'adhésion"

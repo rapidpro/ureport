@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -997,6 +997,9 @@ msgstr "Hur vill du delta?"
 msgid "Text"
 msgstr "Text"
 
+msgid "Or download the U-Report App:"
+msgstr ""
+
 msgid "PAGE"
 msgstr ""
 
@@ -1472,7 +1475,7 @@ msgstr "Bildfilen som ska användas"
 msgid "Whether this page should be active to the public"
 msgstr "Organisationen ska visas på landningssidan"
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1833,6 +1836,9 @@ msgstr "Viber-användarnamnet som användarna måste använda för att kontakta 
 #| msgid "The viber username that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Viber-användarnamnet som användarna måste använda för att kontakta U-Report Sverige"
+
+msgid "If there is a U-Report app available."
+msgstr ""
 
 msgid "The join button text"
 msgstr "Så deltar du"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:36+0000\n"
+"POT-Creation-Date: 2025-10-30 08:50+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1005,6 +1005,11 @@ msgstr "Яким чином Вам хотілося б приєднатися?"
 msgid "Text"
 msgstr "Текст"
 
+#, fuzzy
+#| msgid "Download Report"
+msgid "Or download the U-Report App:"
+msgstr "Завантажити звіт"
+
 msgid "PAGE"
 msgstr "СТОРІНКА"
 
@@ -1438,7 +1443,7 @@ msgstr "Файл зображення для використання на ці�
 msgid "Whether this page should be active to the public"
 msgstr "Чи повинна ця сторінка бути загальнодоступною?"
 
-msgid "The slug can only contain letters, numbers, and underscores"
+msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
@@ -1789,6 +1794,9 @@ msgstr "Viber номер, який користувачі використову
 #| msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
 msgstr "Telegram номер, який користувачі використовуватимуть для контакту з U-Report, якщо такий є"
+
+msgid "If there is a U-Report app available."
+msgstr ""
 
 msgid "The join button text"
 msgstr "Приєднатись"

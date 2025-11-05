@@ -336,6 +336,14 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="has_ureport_app",
+        field=dict(
+            help_text=_("If there is a U-Report app available."),
+            label="Display U-Report App",
+            required=False,
+        ),
+    ),
+    dict(
         name="join_button_text",
         field=dict(
             help_text=_("The join button text"),
@@ -1092,11 +1100,6 @@ CELERY_BEAT_SCHEDULE = {
     "rebuild-poll-results-count": {
         "task": "polls.rebuild_counts",
         "schedule": crontab(hour=4, minute=0),
-    },
-    "populate-schemes": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(hour=6, minute=0),
-        "args": ("ureport.contacts.tasks.populate_contact_schemes", "slow"),
     },
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",

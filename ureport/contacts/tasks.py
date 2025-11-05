@@ -180,7 +180,7 @@ def populate_contact_schemes(org, since, until):
 
     contact_pull_key = TaskState.get_lock_key(org, "contact-pull")
 
-    if Contact.objects.filter(org_id=org.id, scheme=None).exists():
+    if Contact.objects.filter(org_id=org.id, scheme=None, is_active=True).exists():
         # for ourself to make sure our task below will be run
         r.delete(contact_pull_key)
 

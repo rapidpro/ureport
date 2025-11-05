@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import uuid
 import zoneinfo
-from datetime import date, datetime, timedelta, timezone as tzone
+from datetime import datetime, timedelta, timezone as tzone
 
 import six
 from mock import Mock, patch
@@ -2198,7 +2198,9 @@ class PollResultsTest(UreportTest):
         next_year = current_year + 1
         eight_years_ago = current_year - 8
 
-        result_date = date(next_year, 9, 15)
+        result_date = timezone.now().replace(
+            year=next_year, month=9, day=15, hour=0, minute=0, second=0, microsecond=0
+        )
 
         PollResult.objects.create(
             org=self.nigeria,
@@ -2377,7 +2379,7 @@ class PollResultsTest(UreportTest):
             for idx, elt in enumerate(location_activity_counts):
                 self.assertEqual(elt, location_activities[idx])
                 if elt["value"] == "R-LAGOS":
-                    self.assertEqual(3, elt["count__sum"])
+                    self.assertEqual(2, elt["count__sum"])
                 if elt["value"] == "R-ABUJA":
                     self.assertEqual(1, elt["count__sum"])
 
@@ -2408,7 +2410,7 @@ class PollResultsTest(UreportTest):
 
         verify_counts()
 
-        self.assertEqual(324, ContactActivityCounter.objects.all().count())
+        self.assertEqual(192, ContactActivityCounter.objects.all().count())
         ContactActivityCounter.squash()
         self.assertEqual(96, ContactActivityCounter.objects.all().count())
 
@@ -2514,181 +2516,6 @@ class PollResultsTest(UreportTest):
             .annotate(Sum("count"))
             .count(),
         )
-
-        PollResult.objects.create(
-            org=self.nigeria,
-            flow=self.poll.flow_uuid,
-            ruleset="other-uuid",
-            contact="contact-uuid",
-            category="No",
-            text="Nah",
-            completed=False,
-            date=self.now,
-            state="R-LAGOS",
-            district="R-oyo",
-            ward="R-IKEJA",
-        )
-
-        self.assertTrue(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid"))
-        self.assertEqual(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid").count(), 12)
-        self.assertFalse(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid").exclude(born=None))
-        self.assertFalse(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
-            .exclude(gender="")
-            .exclude(gender=None)
-        )
-        self.assertTrue(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
-            .exclude(state="")
-            .exclude(state=None)
-        )
-        self.assertTrue(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
-            .exclude(district="")
-            .exclude(district=None)
-        )
-        self.assertTrue(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
-            .exclude(ward="")
-            .exclude(ward=None)
-        )
-
-        activity_counts = (
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_ALL)
-            .values("date")
-            .annotate(Sum("count"))
-        )
-        self.assertEqual(12, activity_counts.count())
-        # the count shoul be 1 for each date
-        for elt in activity_counts:
-            self.assertEqual(1, elt["count__sum"])
-
-        # no gender/age/scheme type counts
-        self.assertEqual(
-            0,
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_AGE)
-            .values("date")
-            .annotate(Sum("count"))
-            .count(),
-        )
-        self.assertEqual(
-            0,
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_GENDER)
-            .values("date")
-            .annotate(Sum("count"))
-            .count(),
-        )
-        self.assertEqual(
-            0,
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_SCHEME)
-            .values("date")
-            .annotate(Sum("count"))
-            .count(),
-        )
-
-        state_activity_counts = (
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_LOCATION)
-            .values("date", "value")
-            .annotate(Sum("count"))
-        )
-
-        self.assertEqual(12, state_activity_counts.count())
-        for elt in state_activity_counts:
-            self.assertEqual("R-LAGOS", elt["value"])
-            self.assertEqual(1, elt["count__sum"])
-
-        PollResult.objects.create(
-            org=self.nigeria,
-            flow=self.poll.flow_uuid,
-            ruleset="other-uuid",
-            contact="contact-uuid2",
-            category="Yes",
-            text="Yeah",
-            completed=False,
-            born=2015,
-            gender="M",
-            date=self.now,
-            state="R-LAGOS",
-            district="R-oyo",
-            ward="R-IKEJA",
-        )
-
-        self.assertTrue(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2"))
-        self.assertEqual(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2").count(), 12)
-        self.assertTrue(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2").exclude(born=None))
-        self.assertTrue(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
-            .exclude(gender="")
-            .exclude(gender=None)
-        )
-        self.assertTrue(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
-            .exclude(state="")
-            .exclude(state=None)
-        )
-        self.assertTrue(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
-            .exclude(district="")
-            .exclude(district=None)
-        )
-        self.assertTrue(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
-            .exclude(ward="")
-            .exclude(ward=None)
-        )
-
-        activity_counts = (
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_ALL)
-            .values("date")
-            .annotate(Sum("count"))
-        )
-        self.assertEqual(12, activity_counts.count())
-        # the count shoul be 1 for each date
-        for elt in activity_counts:
-            self.assertEqual(2, elt["count__sum"])
-
-        # no gender/age/scheme type counts
-        self.assertEqual(
-            12,
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_AGE)
-            .values("date")
-            .annotate(Sum("count"))
-            .count(),
-        )
-        self.assertEqual(
-            12,
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_GENDER)
-            .values("date")
-            .annotate(Sum("count"))
-            .count(),
-        )
-
-        self.assertEqual(
-            0,
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_SCHEME)
-            .values("date")
-            .annotate(Sum("count"))
-            .count(),
-        )
-
-        self.assertEqual(
-            12,
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_LOCATION)
-            .values("date")
-            .annotate(Sum("count"))
-            .count(),
-        )
-
-        gender_activity_counts = (
-            ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_GENDER)
-            .values("date", "value")
-            .annotate(Sum("count"))
-        )
-
-        self.assertEqual(12, gender_activity_counts.count())
-        for elt in gender_activity_counts:
-            self.assertEqual("M", elt["value"])
-            self.assertEqual(1, elt["count__sum"])
 
     def test_poll_result_generate_stats(self):
         poll_result1 = PollResult.objects.create(

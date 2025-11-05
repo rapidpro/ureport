@@ -24,6 +24,7 @@ from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
+from ureport.stats.models import ContactActivity
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
 from . import BaseBackend
@@ -312,32 +313,22 @@ class ContactSyncer(BaseSyncer):
             ]
         )
 
-    def create_local(self, remote_as_kwargs):
-        obj = super().create_local(remote_as_kwargs)
+    def update_local(self, local, remote_as_kwargs):
+        local = super().update_local(local, remote_as_kwargs)
 
-        # Contacts sync only on the reporters group and those are the only with demographic data saved.
-        # Poll results sync all poll response including those not in the reporter group,
-        # Here we update the recent(last 30 days) results to have the demographic data for the contact
-        # that is registered (part of reporters group) and syncs now
-        one_month_ago = timezone.now() - timedelta(days=30)
-        if obj.registered_on is not None and obj.registered_on > one_month_ago:
-            recent_results = PollResult.objects.filter(
-                org=obj.org,
-                contact=obj.uuid,
-                date__gte=one_month_ago,
-            ).exists()
+        now = timezone.now()
+        start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        ContactActivity.objects.filter(org_id=local.org_id, contact=local.uuid, date__gte=start_of_month).update(
+            gender=local.gender,
+            born=local.born,
+            state=local.state,
+            district=local.district,
+            ward=local.ward,
+            scheme=local.scheme,
+            used=True,
+        )
 
-            if recent_results:
-                PollResult.objects.filter(org=obj.org, contact=obj.uuid, date__gte=one_month_ago).update(
-                    state=obj.state,
-                    district=obj.district,
-                    ward=obj.ward,
-                    gender=obj.gender,
-                    born=obj.born,
-                    scheme=obj.scheme,
-                )
-
-        return obj
+        return local
 
 
 class RapidProBackend(BaseBackend):
@@ -712,7 +703,6 @@ class RapidProBackend(BaseBackend):
                                 stats_dict["num_path_ignored"],
                             )
                 except TembaRateExceededError:
-
                     # rebuild the aggregated counts
                     poll.rebuild_poll_results_counts()
 
@@ -968,7 +958,6 @@ class RapidProBackend(BaseBackend):
                 poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
                 if existing_poll_result is not None:
-
                     # exiting obj in the DB, check whether that need to be updated when the non response happened after 5 seconds
                     # sometimes the path is the same or close time as the value(result) time
                     if existing_poll_result.date is None or value_date > (
@@ -1091,7 +1080,7 @@ class RapidProBackend(BaseBackend):
                 obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
                 if obj_to_create is not None:
                     new_poll_results.append(obj_to_create)
-        PollResult.objects.bulk_create(new_poll_results)
+        PollResult.objects.bulk_create(new_poll_results, batch_size=1000)
 
     @staticmethod
     def _mark_poll_results_sync_paused(org, poll, latest_synced_obj_time):

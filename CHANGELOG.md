@@ -1,3 +1,37 @@
+v1.2.169 (2025-10-31)
+-------------------------
+ * Reduce squash items query rows
+ * Use batch size for bulk create
+
+v1.2.168 (2025-10-31)
+-------------------------
+ * Loop on all objects to insert
+ * Use queryset iterator for getting reporters counts
+
+v1.2.167 (2025-10-30)
+-------------------------
+ * Remove no longer needed periodic task schedule
+ * Remove use of list for all contacts
+ * Run code_checks
+ * Use iterator for large querysets
+
+v1.2.166 (2025-10-29)
+-------------------------
+ * Merge pull request #1292 from rapidpro/insert_batches
+ * Insert poll stats using batch size with bulk create
+
+v1.2.165 (2025-10-29)
+-------------------------
+ * Merge pull request #1291 from rapidpro/reduce-db-load
+ * Merge pull request #1289 from rapidpro/fcm-display
+ * Stop updting past results on contact sync
+ * Add ureport app links to join page
+
+v1.2.164 (2025-10-28)
+-------------------------
+ * Merge pull request #1290 from rapidpro/reduce-db-load-1
+ * Fix date
+
 v1.2.162 (2025-10-10)
 -------------------------
  * Merge pull request #1286 from rapidpro/update-rp-client
