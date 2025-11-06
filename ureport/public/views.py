@@ -128,7 +128,7 @@ class SharedSitesCount(SmartTemplateView):
 
         unique_countries = set()
         for elt in linked_sites:
-            unique_countries.update(elt.get("countries_codes", []))
+            unique_countries.update(elt.get("country_codes", []))
         countries_count = len(unique_countries)
 
         json_dict = dict(global_count=global_count, linked_sites=linked_sites, countries_count=countries_count)

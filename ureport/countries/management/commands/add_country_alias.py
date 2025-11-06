@@ -22,12 +22,12 @@ class Command(BaseCommand):
 
     def import_file(self, json_file, user):
         countries_json = json.loads(json_file.read())
-        all_countries_codes = countries.countries
+        all_country_codes = countries.countries
 
         for country in countries_json:
             name = countries_json.get(country, None)
             country = country.upper()
-            if name and country in all_countries_codes:
+            if name and country in all_country_codes:
                 CountryAlias.get_or_create(country, name, user)
 
     def handle(self, *args, **options):
