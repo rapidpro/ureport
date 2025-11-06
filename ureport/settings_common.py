@@ -1461,6 +1461,14 @@ COUNTRY_FLAGS_SITES = [
         region="WCARO",
     ),
     dict(
+        name="Guinea-Bissau",
+        host="//guineabissau.ureport.in/",
+        flag="",
+        countries_codes=["GNB"],
+        count_link="https://guineabissau.ureport.in/count/",
+        region="WCARO",
+    ),
+    dict(
         name="Guinea Ecuatorial",
         host="//guineaecuatorial.ureport.in/",
         flag="flag_guineaecuatorial.png",
