@@ -1,3 +1,11 @@
+v1.2.170 (2025-11-06)
+-------------------------
+ * Merge pull request #1300 from rapidpro/update-django
+ * Update django
+ * Merge pull request #1298 from rapidpro/add-bissau
+ * Rename countries_codes key to country_codes
+ * Add Guinea Bissau to countries list
+
 v1.2.169 (2025-10-31)
 -------------------------
  * Reduce squash items query rows
