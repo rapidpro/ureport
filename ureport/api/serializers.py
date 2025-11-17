@@ -83,7 +83,8 @@ class OrgReadSerializer(serializers.ModelSerializer):
         return json.loads(obj.get_registration_stats())
 
     def get_occupation_stats(self, obj):
-        return json.loads("[]") # Occupation stats have been removed
+        # Occupation stats have been removed
+        return []
 
     def get_schemes_stats(self, obj):
         return obj.get_schemes_stats()
