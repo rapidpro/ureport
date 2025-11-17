@@ -20,7 +20,6 @@ class ContactTest(UreportTest):
         self.nigeria.set_config("rapidpro.state_label", "State")
         self.nigeria.set_config("rapidpro.district_label", "LGA")
         self.nigeria.set_config("rapidpro.ward_label", "Ward")
-        self.nigeria.set_config("rapidpro.occupation_label", "Activité")
         self.nigeria.set_config("rapidpro.born_label", "Born")
         self.nigeria.set_config("rapidpro.gender_label", "Gender")
         self.nigeria.set_config("rapidpro.female_label", "Female")
@@ -67,9 +66,6 @@ class ContactTest(UreportTest):
         self.state_field = ContactField.objects.create(org=self.nigeria, key="state", label="State", value_type="S")
         self.district_field = ContactField.objects.create(org=self.nigeria, key="lga", label="LGA", value_type="D")
         self.ward_field = ContactField.objects.create(org=self.nigeria, key="ward", label="Ward", value_type="W")
-        self.occupation_field = ContactField.objects.create(
-            org=self.nigeria, key="occupation", label="Activité", value_type="T"
-        )
 
         self.born_field = ContactField.objects.create(org=self.nigeria, key="born", label="Born", value_type="T")
         self.gender_field = ContactField.objects.create(org=self.nigeria, key="gender", label="Gender", value_type="T")
@@ -114,7 +110,6 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1990,
-            occupation="Student",
             registered_on=json_date_to_datetime("2014-01-02T03:04:05.000"),
             state="R-LAGOS",
             district="R-OYO",
@@ -129,7 +124,6 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1980,
-            occupation="Teacher",
             registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
             state="R-LAGOS",
             district="R-OYO",
@@ -147,7 +141,6 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1990,
-            occupation="Student",
             registered_on=json_date_to_datetime("2014-01-02T03:04:05.000"),
             state="R-LAGOS",
             district="R-OYO",
@@ -157,7 +150,6 @@ class ContactTest(UreportTest):
         expected = dict()
         expected["total-reporters"] = 1
         expected["gender:m"] = 1
-        expected["occupation:student"] = 1
         expected["born:1990"] = 1
         expected["registered_on:2014-01-02"] = 1
         expected["registered_gender:2014-01-02:m"] = 1
@@ -178,7 +170,6 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1980,
-            occupation="Teacher",
             registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
             state="R-LAGOS",
             district="R-OYO",
@@ -188,8 +179,6 @@ class ContactTest(UreportTest):
         expected = dict()
         expected["total-reporters"] = 2
         expected["gender:m"] = 2
-        expected["occupation:student"] = 1
-        expected["occupation:teacher"] = 1
         expected["born:1990"] = 1
         expected["born:1980"] = 1
         expected["registered_on:2014-01-02"] = 2
@@ -215,7 +204,6 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1980,
-            occupation="Teacher",
             registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
             state="R-LAGOS",
             district="R-OYO",
@@ -235,7 +223,6 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1990,
-            occupation="Student",
             registered_on=json_date_to_datetime("2014-01-02T03:04:05.000"),
             state="R-LAGOS",
             district="R-OYO",
@@ -245,7 +232,6 @@ class ContactTest(UreportTest):
         expected = dict()
         expected["total-reporters"] = 1
         expected["gender:m"] = 1
-        expected["occupation:student"] = 1
         expected["born:1990"] = 1
         expected["registered_on:2014-01-02"] = 1
         expected["registered_gender:2014-01-02:m"] = 1
@@ -263,7 +249,6 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1980,
-            occupation="Teacher",
             registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
             state="R-LAGOS",
             district="R-OYO",
@@ -273,8 +258,6 @@ class ContactTest(UreportTest):
         expected = dict()
         expected["total-reporters"] = 2
         expected["gender:m"] = 2
-        expected["occupation:student"] = 1
-        expected["occupation:teacher"] = 1
         expected["born:1990"] = 1
         expected["born:1980"] = 1
         expected["registered_on:2014-01-02"] = 2

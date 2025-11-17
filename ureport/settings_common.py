@@ -221,15 +221,6 @@ BACKENDS_ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
-        name="occupation_label",
-        field=dict(
-            help_text=_("The label of the Contact Field that contains the occupation of reporters"),
-            required=False,
-        ),
-        superuser_only=True,
-        read_only=True,
-    ),
-    dict(
         name="registration_label",
         field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")),
         superuser_only=True,

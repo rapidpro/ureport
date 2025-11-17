@@ -30,7 +30,6 @@ from ureport.utils import (
     get_gender_stats,
     get_global_count,
     get_linked_orgs,
-    get_occupation_stats,
     get_org_contacts_counts,
     get_regions_stats,
     get_registration_stats,
@@ -572,48 +571,3 @@ class UtilsTest(UreportTest):
 
                 self.assertEqual(get_global_count(), 20)
                 cache_get_mock.assert_called_once_with("global_count", None)
-
-    @patch("django.core.cache.cache.get")
-    def test_get_occupation_stats(self, mock_cache_get):
-        mock_cache_get.return_value = None
-
-        self.assertEqual(get_occupation_stats(self.org), "[]")
-
-        ReportersCounter.objects.create(org=self.org, type="occupation:student", count=5)
-        ReportersCounter.objects.create(org=self.org, type="occupation:writer", count=2)
-        ReportersCounter.objects.create(org=self.org, type="occupation:all responses", count=13)
-
-        self.assertEqual(
-            get_occupation_stats(self.org), json.dumps([dict(label="student", count=5), dict(label="writer", count=2)])
-        )
-
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooAAA", count=1)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooBBB", count=1)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooCCC", count=10)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooDDD", count=11)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooEEE", count=12)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooFFF", count=13)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooGGG", count=8)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooGGG", count=6)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooHHH", count=15)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooIII", count=16)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooJJJ", count=2)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooJJJ", count=15)
-        ReportersCounter.objects.create(org=self.org, type="occupation:fooKKK", count=18)
-
-        self.assertEqual(
-            get_occupation_stats(self.org),
-            json.dumps(
-                [
-                    dict(label="fooKKK", count=18),
-                    dict(label="fooJJJ", count=17),
-                    dict(label="fooIII", count=16),
-                    dict(label="fooHHH", count=15),
-                    dict(label="fooGGG", count=14),
-                    dict(label="fooFFF", count=13),
-                    dict(label="fooEEE", count=12),
-                    dict(label="fooDDD", count=11),
-                    dict(label="fooCCC", count=10),
-                ]
-            ),
-        )

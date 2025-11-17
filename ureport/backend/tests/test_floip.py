@@ -25,7 +25,6 @@ class ContactSyncerTest(UreportTest):
         self.nigeria.set_config("floip.state_label", "state")
         self.nigeria.set_config("floip.district_label", "lga")
         self.nigeria.set_config("floip.ward_label", "ward")
-        self.nigeria.set_config("floip.occupation_label", "occupation")
         self.nigeria.set_config("floip.born_label", "born")
         self.nigeria.set_config("floip.gender_label", "gender")
         self.nigeria.set_config("floip.female_label", "female")
@@ -79,7 +78,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": None,
                 "state": None,
                 "lga": None,
-                "occupation": None,
                 "born": None,
                 "gender": None,
             },
@@ -94,7 +92,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-006",
                 "gender": "",
                 "born": 0,
-                "occupation": "",
                 "registered_on": None,
                 "state": "",
                 "district": "",
@@ -111,7 +108,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": "2014-01-02T03:04:05.000000Z",
                 "state": "Kigali",
                 "lga": "Oyo",
-                "occupation": "Student",
                 "born": "1990",
                 "gender": "Male",
             },
@@ -126,7 +122,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-007",
                 "gender": "M",
                 "born": 1990,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "state": "",
                 "district": "",
@@ -144,7 +139,6 @@ class ContactSyncerTest(UreportTest):
                 "state": "Lagos",
                 "lga": "Oyo",
                 "ward": "Ikeja",
-                "occupation": "Student",
                 "born": "1990",
                 "gender": "Male",
             },
@@ -159,7 +153,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-008",
                 "gender": "M",
                 "born": 1990,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "state": "R-LAGOS",
                 "district": "R-OYO",
@@ -176,7 +169,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": "2014-01-02T03:04:05.000000Z",
                 "state": "Lagos",
                 "lga": "Oyo",
-                "occupation": "Student",
                 "born": "-1",
                 "gender": "Male",
             },
@@ -191,7 +183,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-008",
                 "gender": "M",
                 "born": 0,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "state": "R-LAGOS",
                 "district": "R-OYO",
@@ -208,7 +199,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": "2014-01-02T03:04:05.000000Z",
                 "state": "Lagos",
                 "lga": "Oyo",
-                "occupation": "Student",
                 "born": "2147483648",
                 "gender": "Male",
             },
@@ -223,7 +213,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-008",
                 "gender": "M",
                 "born": 0,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "state": "R-LAGOS",
                 "district": "R-OYO",
@@ -244,7 +233,6 @@ class FLOIPBackendTest(UreportTest):
         self.nigeria.set_config("floip.state_label", "state")
         self.nigeria.set_config("floip.district_label", "lga")
         self.nigeria.set_config("floip.ward_label", "ward")
-        self.nigeria.set_config("floip.occupation_label", "occupation")
         self.nigeria.set_config("floip.born_label", "born")
         self.nigeria.set_config("floip.gender_label", "gender")
         self.nigeria.set_config("floip.female_label", "Female")
@@ -802,7 +790,6 @@ class FLOIPBackendTest(UreportTest):
                             "registration_date": "2014-01-02T03:04:05.000000Z",
                             "state": "Nigeria > Lagos",
                             "lga": "Nigeria > Lagos > Oyo",
-                            "occupation": "Student",
                             "born": "1990",
                             "gender": "Male",
                         },
