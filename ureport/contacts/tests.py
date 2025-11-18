@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from datetime import timedelta
+
 from mock import patch
+
+from django.utils import timezone
 
 from dash.orgs.models import TaskState
 from dash.utils.sync import SyncOutcome
@@ -151,11 +155,6 @@ class ContactTest(UreportTest):
         expected["total-reporters"] = 1
         expected["gender:m"] = 1
         expected["born:1990"] = 1
-        expected["registered_on:2014-01-02"] = 1
-        expected["registered_gender:2014-01-02:m"] = 1
-        expected["registered_born:2014-01-02:1990"] = 1
-        expected["registered_state:2014-01-02:R-LAGOS"] = 1
-        expected["registered_scheme:2014-01-02:tel"] = 1
         expected["state:R-LAGOS"] = 1
         expected["district:R-OYO"] = 1
         expected["scheme:tel"] = 1
@@ -165,12 +164,14 @@ class ContactTest(UreportTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
+        signup_date = timezone.now() - timedelta(days=300)
+
         Contact.objects.create(
             uuid="C-008",
             org=self.nigeria,
             gender="M",
             born=1980,
-            registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
+            registered_on=signup_date,
             state="R-LAGOS",
             district="R-OYO",
             scheme="facebook",
@@ -181,13 +182,11 @@ class ContactTest(UreportTest):
         expected["gender:m"] = 2
         expected["born:1990"] = 1
         expected["born:1980"] = 1
-        expected["registered_on:2014-01-02"] = 2
-        expected["registered_gender:2014-01-02:m"] = 2
-        expected["registered_born:2014-01-02:1990"] = 1
-        expected["registered_born:2014-01-02:1980"] = 1
-        expected["registered_state:2014-01-02:R-LAGOS"] = 2
-        expected["registered_scheme:2014-01-02:tel"] = 1
-        expected["registered_scheme:2014-01-02:facebook"] = 1
+        expected[f"registered_on:{signup_date.date()}"] = 1
+        expected[f"registered_gender:{signup_date.date()}:m"] = 1
+        expected[f"registered_born:{signup_date.date()}:1980"] = 1
+        expected[f"registered_state:{signup_date.date()}:R-LAGOS"] = 1
+        expected[f"registered_scheme:{signup_date.date()}:facebook"] = 1
         expected["state:R-LAGOS"] = 2
         expected["district:R-OYO"] = 2
         expected["scheme:tel"] = 1
@@ -217,13 +216,15 @@ class ContactTest(UreportTest):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
     def test_reporters_counter(self):
+
+        signup_date = timezone.now() - timedelta(days=300)
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
         Contact.objects.create(
             uuid="C-007",
             org=self.nigeria,
             gender="M",
             born=1990,
-            registered_on=json_date_to_datetime("2014-01-02T03:04:05.000"),
+            registered_on=signup_date,
             state="R-LAGOS",
             district="R-OYO",
             scheme="tel",
@@ -233,11 +234,11 @@ class ContactTest(UreportTest):
         expected["total-reporters"] = 1
         expected["gender:m"] = 1
         expected["born:1990"] = 1
-        expected["registered_on:2014-01-02"] = 1
-        expected["registered_gender:2014-01-02:m"] = 1
-        expected["registered_born:2014-01-02:1990"] = 1
-        expected["registered_state:2014-01-02:R-LAGOS"] = 1
-        expected["registered_scheme:2014-01-02:tel"] = 1
+        expected[f"registered_on:{signup_date.date()}"] = 1
+        expected[f"registered_gender:{signup_date.date()}:m"] = 1
+        expected[f"registered_born:{signup_date.date()}:1990"] = 1
+        expected[f"registered_state:{signup_date.date()}:R-LAGOS"] = 1
+        expected[f"registered_scheme:{signup_date.date()}:tel"] = 1
         expected["state:R-LAGOS"] = 1
         expected["district:R-OYO"] = 1
         expected["scheme:tel"] = 1
@@ -249,7 +250,7 @@ class ContactTest(UreportTest):
             org=self.nigeria,
             gender="M",
             born=1980,
-            registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
+            registered_on=signup_date,
             state="R-LAGOS",
             district="R-OYO",
             scheme="facebook",
@@ -260,13 +261,13 @@ class ContactTest(UreportTest):
         expected["gender:m"] = 2
         expected["born:1990"] = 1
         expected["born:1980"] = 1
-        expected["registered_on:2014-01-02"] = 2
-        expected["registered_gender:2014-01-02:m"] = 2
-        expected["registered_born:2014-01-02:1990"] = 1
-        expected["registered_born:2014-01-02:1980"] = 1
-        expected["registered_state:2014-01-02:R-LAGOS"] = 2
-        expected["registered_scheme:2014-01-02:tel"] = 1
-        expected["registered_scheme:2014-01-02:facebook"] = 1
+        expected[f"registered_on:{signup_date.date()}"] = 2
+        expected[f"registered_gender:{signup_date.date()}:m"] = 2
+        expected[f"registered_born:{signup_date.date()}:1990"] = 1
+        expected[f"registered_born:{signup_date.date()}:1980"] = 1
+        expected[f"registered_state:{signup_date.date()}:R-LAGOS"] = 2
+        expected[f"registered_scheme:{signup_date.date()}:tel"] = 1
+        expected[f"registered_scheme:{signup_date.date()}:facebook"] = 1
         expected["state:R-LAGOS"] = 2
         expected["district:R-OYO"] = 2
         expected["scheme:tel"] = 1
