@@ -1179,6 +1179,7 @@ class PollQuestion(SmartModel):
             else:
                 categories_results = (
                     PollStats.get_question_stats(org.id, self)
+                    .filter(age_segment=None, gender_segment=None, scheme_segment=None, location=None)
                     .exclude(flow_result_category=None)
                     .values("flow_result_category__category")
                     .annotate(label=F("flow_result_category__category"), count=Sum("count"))
@@ -1239,6 +1240,7 @@ class PollQuestion(SmartModel):
         key = PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         responded_stats = (
             PollStats.get_question_stats(self.poll.org_id, question=self)
+            .filter(age_segment=None, gender_segment=None, scheme_segment=None, location=None)
             .exclude(flow_result_category=None)
             .aggregate(Sum("count"))
         )
@@ -1261,7 +1263,11 @@ class PollQuestion(SmartModel):
 
         key = PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
 
-        polled_stats = PollStats.get_question_stats(self.poll.org_id, question=self).aggregate(Sum("count"))
+        polled_stats = (
+            PollStats.get_question_stats(self.poll.org_id, question=self)
+            .filter(age_segment=None, gender_segment=None, scheme_segment=None, location=None)
+            .aggregate(Sum("count"))
+        )
         results = polled_stats.get("count__sum", 0) or 0
 
         cache.set(key, {"results": results}, None)
@@ -1392,7 +1398,7 @@ class PollResult(models.Model):
 
     scheme = models.CharField(max_length=16, null=True)
 
-    def get_result_tuple(self):
+    def get_result_tuples(self):
         if not self.org_id or not self.flow or not self.ruleset:
             return ()
 
@@ -1426,6 +1432,8 @@ class PollResult(models.Model):
         ):
             category = self.category.lower()
 
+        output_tuples = [(self.org_id, ruleset, category, "", "", "", "", "", "", date)]
+
         if self.state:
             state = self.state.upper()
 
@@ -1435,22 +1443,44 @@ class PollResult(models.Model):
         if self.ward:
             ward = self.ward.upper()
 
+        if ward:
+            output_tuples.append(
+                (self.org_id, ruleset, category, "", "", "", "", ward, "", date),
+            )
+        elif district:
+            output_tuples.append(
+                (self.org_id, ruleset, category, "", "", "", district, "", "", date),
+            )
+        elif state:
+            output_tuples.append(
+                (self.org_id, ruleset, category, "", "", state, "", "", "", date),
+            )
+
         if self.born:
             born = self.born
+            output_tuples.append(
+                (self.org_id, ruleset, category, born, "", "", "", "", "", date),
+            )
 
         if self.gender:
             gender = self.gender.lower()
+            output_tuples.append(
+                (self.org_id, ruleset, category, "", gender, "", "", "", "", date),
+            )
 
         if self.scheme:
             scheme = self.scheme.lower()
+            output_tuples.append(
+                (self.org_id, ruleset, category, "", "", "", "", "", scheme, date),
+            )
 
-        return (self.org_id, ruleset, category, born, gender, state, district, ward, scheme, date)
+        return output_tuples
 
     def generate_poll_stats(self):
         generated_stats = dict()
 
-        result_tuple = self.get_result_tuple()
-        if result_tuple:
+        result_tuples = self.get_result_tuples()
+        for result_tuple in result_tuples:
             generated_stats[result_tuple] = 1
 
         return generated_stats
