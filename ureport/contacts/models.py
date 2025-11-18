@@ -4,11 +4,13 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import logging
 import time
 from collections import defaultdict
+from datetime import timedelta
 
 from django_valkey import get_valkey_connection
 
 from django.db import connection, models
 from django.db.models import Count
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org, OrgBackend
@@ -185,7 +187,7 @@ class Contact(models.Model):
         if self.born:
             born = self.born
 
-        if self.registered_on:
+        if self.registered_on and (self.registered_on >= (timezone.now() - timedelta(days=400))):
             registered_on = self.registered_on.date()
 
         generated_counters["total-reporters"] = 1

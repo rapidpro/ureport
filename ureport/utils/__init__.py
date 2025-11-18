@@ -940,7 +940,6 @@ def get_reporters_count(org):
     return org_contacts_counts.get("total-reporters", 0)
 
 
-
 def get_regions_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
     boundaries_name = Boundary.get_org_top_level_boundaries_name(org)

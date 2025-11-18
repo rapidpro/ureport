@@ -27,7 +27,6 @@ from dash.tags.models import Tag
 from smartmin.models import SmartModel
 from ureport.flows.models import FlowResult, FlowResultCategory
 
-
 logger = logging.getLogger(__name__)
 
 # cache whether a question is open ended for a month
@@ -584,7 +583,9 @@ class Poll(SmartModel):
     @classmethod
     def find_main_poll(cls, org):
         poll_with_questions = (
-            PollQuestion.objects.filter(is_active=True, poll__org=org).only("poll_id").values_list("poll_id", flat=True)
+            PollQuestion.objects.filter(is_active=True, poll__org=org)
+            .only("poll_id")
+            .values_list("poll_id", flat=True)
         )
 
         polls = (
