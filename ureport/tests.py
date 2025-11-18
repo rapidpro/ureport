@@ -38,7 +38,7 @@ from ureport.public.views import IndexView
 
 class MockTembaClient(TembaClient):
     def get_fields(self, pager=None):
-        return [TembaContactField.create(key="occupation", label="Activité", value_type="T")]
+        return [TembaContactField.create(key="gender", label="Genre", value_type="T")]
 
     def get_contacts(self, uuids=None, urns=None, groups=None, after=None, before=None, pager=None):
         return [

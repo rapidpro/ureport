@@ -159,7 +159,6 @@ class Contact(models.Model):
 
         gender = ""
         born = ""
-        occupation = ""
         registered_on = ""
 
         state = ""
@@ -186,9 +185,6 @@ class Contact(models.Model):
         if self.born:
             born = self.born
 
-        if self.occupation:
-            occupation = self.occupation.lower()
-
         if self.registered_on:
             registered_on = self.registered_on.date()
 
@@ -198,9 +194,6 @@ class Contact(models.Model):
 
         if born:
             generated_counters[f"born:{born}"] = 1
-
-        if occupation:
-            generated_counters[f"occupation:{occupation}"] = 1
 
         if registered_on:
             generated_counters[f"registered_on:{str(registered_on)}"] = 1

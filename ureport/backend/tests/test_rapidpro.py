@@ -254,7 +254,6 @@ class ContactSyncerTest(UreportTest):
         self.nigeria.set_config("rapidpro.state_label", "State")
         self.nigeria.set_config("rapidpro.district_label", "LGA")
         self.nigeria.set_config("rapidpro.ward_label", "Ward")
-        self.nigeria.set_config("rapidpro.occupation_label", "Activité")
         self.nigeria.set_config("rapidpro.born_label", "Born")
         self.nigeria.set_config("rapidpro.gender_label", "Gender")
         self.nigeria.set_config("rapidpro.female_label", "Female")
@@ -315,9 +314,6 @@ class ContactSyncerTest(UreportTest):
         self.ward_field = ContactField.objects.create(
             org=self.nigeria, key="ward", label="Ward", value_type="T", backend=self.rapidpro_backend
         )
-        self.occupation_field = ContactField.objects.create(
-            org=self.nigeria, key="occupation", label="Activité", value_type="T", backend=self.rapidpro_backend
-        )
 
         self.born_field = ContactField.objects.create(
             org=self.nigeria, key="born", label="Born", value_type="T", backend=self.rapidpro_backend
@@ -336,7 +332,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": None,
                 "state": None,
                 "lga": None,
-                "occupation": None,
                 "born": None,
                 "gender": None,
             },
@@ -354,7 +349,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": None,
                 "state": None,
                 "lga": None,
-                "occupation": None,
                 "born": None,
                 "gender": None,
             },
@@ -373,7 +367,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": None,
                 "state": None,
                 "lga": None,
-                "occupation": None,
                 "born": None,
                 "gender": None,
             },
@@ -389,7 +382,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-006",
                 "gender": "",
                 "born": 0,
-                "occupation": "",
                 "registered_on": json_date_to_datetime("2013-01-02T03:04:05.000"),
                 "scheme": "tel",
                 "state": "",
@@ -407,7 +399,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": "2014-01-02T03:04:05.000000Z",
                 "state": "Kigali",
                 "lga": "Oyo",
-                "occupation": "Student",
                 "born": "1990",
                 "gender": "Male",
             },
@@ -422,7 +413,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-007",
                 "gender": "M",
                 "born": 1990,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "scheme": "tel",
                 "state": "",
@@ -441,7 +431,6 @@ class ContactSyncerTest(UreportTest):
                 "state": "Lagos",
                 "lga": "Oyo",
                 "ward": "Ikeja",
-                "occupation": "Student",
                 "born": "1990",
                 "gender": "Male",
             },
@@ -456,7 +445,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-008",
                 "gender": "M",
                 "born": 1990,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "scheme": "tel",
                 "state": "R-LAGOS",
@@ -474,7 +462,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": "2014-01-02T03:04:05.000000Z",
                 "state": "Lagos",
                 "lga": "Oyo",
-                "occupation": "Student",
                 "born": "-1",
                 "gender": "Male",
             },
@@ -489,7 +476,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-008",
                 "gender": "M",
                 "born": 0,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "scheme": "tel",
                 "state": "R-LAGOS",
@@ -507,7 +493,6 @@ class ContactSyncerTest(UreportTest):
                 "registration_date": "2014-01-02T03:04:05.000000Z",
                 "state": "Lagos",
                 "lga": "Oyo",
-                "occupation": "Student",
                 "born": "2147483648",
                 "gender": "Male",
             },
@@ -522,7 +507,6 @@ class ContactSyncerTest(UreportTest):
                 "uuid": "C-008",
                 "gender": "M",
                 "born": 0,
-                "occupation": "Student",
                 "registered_on": json_date_to_datetime("2014-01-02T03:04:05.000"),
                 "scheme": "tel",
                 "state": "R-LAGOS",
@@ -546,7 +530,6 @@ class ContactSyncerTest(UreportTest):
                 "state": "Lagos",
                 "lga": "Oyo",
                 "ward": "Ikeja",
-                "occupation": "Student",
                 "born": "1990",
                 "gender": "Male",
             },
@@ -588,7 +571,6 @@ class ContactSyncerTest(UreportTest):
                 "state": "Lagos",
                 "lga": "Oyo",
                 "ward": "Ikeja",
-                "occupation": "Student",
                 "born": "1990",
                 "gender": "Male",
             },
@@ -673,7 +655,6 @@ class ContactSyncerTest(UreportTest):
                 "state": "Lagos",
                 "lga": "Oyo",
                 "ward": "Ikeja",
-                "occupation": "Student",
                 "born": "1990",
                 "gender": "Male",
             },
@@ -715,7 +696,6 @@ class RapidProBackendTest(UreportTest):
         self.nigeria.set_config("rapidpro.state_label", "State")
         self.nigeria.set_config("rapidpro.district_label", "LGA")
         self.nigeria.set_config("rapidpro.ward_label", "Ward")
-        self.nigeria.set_config("rapidpro.occupation_label", "Activité")
         self.nigeria.set_config("rapidpro.born_label", "Born")
         self.nigeria.set_config("rapidpro.gender_label", "Gender")
         self.nigeria.set_config("rapidpro.female_label", "Female")
@@ -775,9 +755,6 @@ class RapidProBackendTest(UreportTest):
         )
         self.ward_field = ContactField.objects.create(
             org=self.nigeria, key="ward", label="Ward", value_type="W", backend=self.rapidpro_backend
-        )
-        self.occupation_field = ContactField.objects.create(
-            org=self.nigeria, key="occupation", label="Activité", value_type="T", backend=self.rapidpro_backend
         )
 
         self.born_field = ContactField.objects.create(
@@ -1081,7 +1058,6 @@ class RapidProBackendTest(UreportTest):
                             "registration_date": "2014-01-02T03:04:05.000000Z",
                             "state": "Nigeria > Lagos",
                             "lga": "Nigeria > Lagos > Oyo",
-                            "occupation": "Student",
                             "born": "1990",
                             "gender": "Male",
                         },
@@ -2178,7 +2154,6 @@ class PerfTest(UreportTest):
         self.nigeria.set_config("rapidpro.state_label", "State")
         self.nigeria.set_config("rapidpro.district_label", "LGA")
         self.nigeria.set_config("rapidpro.ward_label", "Ward")
-        self.nigeria.set_config("rapidpro.occupation_label", "Activité")
         self.nigeria.set_config("rapidpro.born_label", "Born")
         self.nigeria.set_config("rapidpro.gender_label", "Gender")
         self.nigeria.set_config("rapidpro.female_label", "Female")
@@ -2224,9 +2199,6 @@ class PerfTest(UreportTest):
 
         self.state_field = ContactField.objects.create(org=self.nigeria, key="state", label="State", value_type="S")
         self.district_field = ContactField.objects.create(org=self.nigeria, key="lga", label="LGA", value_type="D")
-        self.occupation_field = ContactField.objects.create(
-            org=self.nigeria, key="occupation", label="Activité", value_type="T"
-        )
 
         self.born_field = ContactField.objects.create(org=self.nigeria, key="born", label="Born", value_type="T")
         self.gender_field = ContactField.objects.create(org=self.nigeria, key="gender", label="Gender", value_type="T")

@@ -234,14 +234,6 @@ class ContactSyncer(BaseSyncer):
             # default to created_on to avoid null in the PG triggers
             registered_on = remote.created_on
 
-        occupation = ""
-        occupation_field = org.get_config("%s.occupation_label" % self.backend.slug, default="")
-        if occupation_field:
-            occupation_field = occupation_field.lower()
-            occupation = remote.fields.get(contact_fields.get(occupation_field), "")
-            if not occupation:
-                occupation = ""
-
         born = 0
         born_field = org.get_config("%s.born_label" % self.backend.slug, default="")
         if born_field:
@@ -285,7 +277,6 @@ class ContactSyncer(BaseSyncer):
             "uuid": remote.uuid,
             "gender": gender,
             "born": born,
-            "occupation": occupation,
             "registered_on": registered_on,
             "state": state,
             "district": district,
@@ -304,7 +295,6 @@ class ContactSyncer(BaseSyncer):
             [
                 local.gender != local_kwargs["gender"],
                 local.born != local_kwargs["born"],
-                local.occupation != local_kwargs["occupation"],
                 local.registered_on != local_kwargs["registered_on"],
                 local.state != local_kwargs["state"],
                 local.district != local_kwargs["district"],

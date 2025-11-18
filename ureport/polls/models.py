@@ -59,8 +59,6 @@ CACHE_ORG_AGE_DATA_KEY = "org:%d:age:%s"
 
 CACHE_ORG_REGISTRATION_DATA_KEY = "org:%d:registration:%s"
 
-CACHE_ORG_OCCUPATION_DATA_KEY = "org:%d:occupation:%s"
-
 
 @six.python_2_unicode_compatible
 class PollCategory(SmartModel):

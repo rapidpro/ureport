@@ -341,7 +341,7 @@ class UreportAPITests(APITestCase):
         self.assertEqual(reporters_count, 5)
 
         occupation_stats = response.data.pop("occupation_stats")
-        self.assertEqual(occupation_stats, [dict(label="student", count=5), dict(label="writer", count=2)])
+        self.assertEqual(occupation_stats, [])
 
         tz = zoneinfo.ZoneInfo("UTC")
 
