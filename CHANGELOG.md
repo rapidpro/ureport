@@ -1,3 +1,12 @@
+v1.2.171 (2025-11-18)
+-------------------------
+ * Merge pull request #1302 from rapidpro/trim-reporters-counts
+ * use postgres is distinct to
+ * Only add counters for signup in the recent 400 days
+ * Merge pull request #1301 from rapidpro/cleanup-occupation
+ * Apply copilot code review
+ * Cleanup references of occupation no longer used
+
 v1.2.170 (2025-11-06)
 -------------------------
  * Merge pull request #1300 from rapidpro/update-django
