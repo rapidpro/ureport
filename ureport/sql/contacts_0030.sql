@@ -74,52 +74,52 @@ BEGIN
   ELSIF _new_contact.is_active != _old_contact.is_active THEN
     PERFORM ureport_increment_counter_for_contact(_old_contact, _new_contact.is_active);
   ELSIF _new_contact.org_id = _old_contact.org_id THEN
-    IF _new_contact.gender != _old_contact.gender THEN
+    IF _new_contact.gender IS DISTINCT FROM _old_contact.gender THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('gender:', LOWER(_old_contact.gender)), -1);
       PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('gender:', LOWER(_new_contact.gender)), 1);
     END IF;
-    IF _new_contact.born != _old_contact.born THEN
+    IF _new_contact.born IS DISTINCT FROM _old_contact.born THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('born:', LOWER(CAST(_old_contact.born AS VARCHAR ))), -1);
       PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('born:', LOWER(CAST(_new_contact.born AS VARCHAR ))), 1);
     END IF;
-    IF _new_contact.registered_on != _old_contact.registered_on AND _new_contact.registered_on >= (NOW() - INTERVAL '400 days') THEN
+    IF _new_contact.registered_on IS DISTINCT FROM _old_contact.registered_on AND _new_contact.registered_on >= (NOW() - INTERVAL '400 days') THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('registered_on:', DATE(_old_contact.registered_on)), -1);
       PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('registered_on:', DATE(_new_contact.registered_on)), 1);
-      IF _new_contact.gender != _old_contact.gender THEN
+      IF _new_contact.gender IS DISTINCT FROM _old_contact.gender THEN
         PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('registered_gender:', DATE(date_trunc('day', _old_contact.registered_on)::timestamp), ':', LOWER(_old_contact.gender)), -1);
         PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('registered_gender:', DATE(date_trunc('day', _new_contact.registered_on)::timestamp), ':', LOWER(_new_contact.gender)), 1);
       END IF;
 
-      IF _new_contact.born != _old_contact.born THEN
+      IF _new_contact.born IS DISTINCT FROM _old_contact.born THEN
         PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('registered_born:', DATE(date_trunc('day', _old_contact.registered_on)::timestamp), ':', LOWER(CAST(_old_contact.born AS VARCHAR ))), -1);
         PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('registered_born:', DATE(date_trunc('day', _new_contact.registered_on)::timestamp), ':', LOWER(CAST(_new_contact.born AS VARCHAR ))), 1);
       END IF;
 
-      IF _new_contact.state != _old_contact.state THEN
+      IF _new_contact.state IS DISTINCT FROM _old_contact.state THEN
         PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('registered_state:', DATE(date_trunc('day', _old_contact.registered_on)::timestamp), ':', UPPER(_old_contact.state)), -1);
         PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('registered_state:', DATE(date_trunc('day', _new_contact.registered_on)::timestamp), ':', UPPER(_new_contact.state)), 1);
       END IF;
 
-      IF _new_contact.scheme != _old_contact.scheme THEN
+      IF _new_contact.scheme IS DISTINCT FROM _old_contact.scheme THEN
         PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('registered_scheme:', DATE(date_trunc('day', _old_contact.registered_on)::timestamp), ':', LOWER(_old_contact.scheme)), -1);
         PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('registered_scheme:', DATE(date_trunc('day', _new_contact.registered_on)::timestamp), ':', LOWER(_new_contact.scheme)), 1);
       END IF;
 
     END IF;
-    IF _new_contact.state != _old_contact.state THEN
+    IF _new_contact.state IS DISTINCT FROM _old_contact.state THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('state:', UPPER(_old_contact.state)), -1);
       PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('state:', UPPER(_new_contact.state)), 1);
     END IF;
-    IF _new_contact.district != _old_contact.district THEN
+    IF _new_contact.district IS DISTINCT FROM _old_contact.district THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('district:', UPPER(_old_contact.district)), -1);
       PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('district:', UPPER(_new_contact.district)), 1);
     END IF;
-    IF _new_contact.ward != _old_contact.ward THEN
+    IF _new_contact.ward IS DISTINCT FROM _old_contact.ward THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('ward:', UPPER(_old_contact.ward)), -1);
       PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('ward:', UPPER(_new_contact.ward)), 1);
     END IF;
 
-    IF _new_contact.scheme != _old_contact.scheme THEN
+    IF _new_contact.scheme IS DISTINCT FROM _old_contact.scheme THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('scheme:', LOWER(_old_contact.scheme)), -1);
       PERFORM ureport_insert_reporters_counter(_new_contact.org_id, CONCAT('scheme:', LOWER(_new_contact.scheme)), 1);
     END IF;
