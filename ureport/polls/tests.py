@@ -2566,11 +2566,9 @@ class PollResultsTest(UreportTest):
 
         ruleset = poll_result2.ruleset.lower()
         category = poll_result2.category.lower()
-        state = poll_result2.state.upper()
-        district = poll_result2.district.upper()
         ward = poll_result2.ward.upper()
 
-        self.assertEqual(len(gen_stats.keys()), 1)
+        self.assertEqual(len(gen_stats.keys()), 3)
         self.assertEqual(
             list(gen_stats.keys()),
             [
@@ -2580,12 +2578,36 @@ class PollResultsTest(UreportTest):
                     category,
                     "",
                     "",
-                    state,
-                    district,
+                    "",
+                    "",
+                    "",
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    category,
+                    "",
+                    "",
+                    "",
+                    "",
                     ward,
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    category,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
                     "tel",
                     self.now.replace(hour=0, minute=0, second=0, microsecond=0),
-                )
+                ),
             ],
         )
 
@@ -2607,11 +2629,9 @@ class PollResultsTest(UreportTest):
         gen_stats = poll_result3.generate_poll_stats()
 
         ruleset = poll_result3.ruleset.lower()
-        state = poll_result3.state.upper()
-        district = poll_result3.district.upper()
         ward = poll_result3.ward.upper()
 
-        self.assertEqual(len(gen_stats.keys()), 1)
+        self.assertEqual(len(gen_stats.keys()), 3)
         self.assertEqual(
             list(gen_stats.keys()),
             [
@@ -2621,12 +2641,36 @@ class PollResultsTest(UreportTest):
                     "",
                     "",
                     "",
-                    state,
-                    district,
+                    "",
+                    "",
+                    "",
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
                     ward,
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
                     "facebook",
                     self.now.replace(hour=0, minute=0, second=0, microsecond=0),
-                )
+                ),
             ],
         )
 
@@ -2650,11 +2694,9 @@ class PollResultsTest(UreportTest):
         gen_stats = poll_result4.generate_poll_stats()
 
         ruleset = poll_result4.ruleset.lower()
-        state = poll_result4.state.upper()
-        district = poll_result4.district.upper()
         ward = poll_result4.ward.upper()
 
-        self.assertEqual(len(gen_stats.keys()), 1)
+        self.assertEqual(len(gen_stats.keys()), 5)
         self.assertEqual(
             list(gen_stats.keys()),
             [
@@ -2662,14 +2704,62 @@ class PollResultsTest(UreportTest):
                     self.nigeria.id,
                     ruleset,
                     "yes",
-                    2015,
-                    "m",
-                    state,
-                    district,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    "yes",
+                    "",
+                    "",
+                    "",
+                    "",
                     ward,
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    "yes",
+                    2015,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    "yes",
+                    "",
+                    "m",
+                    "",
+                    "",
+                    "",
+                    "",
+                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
+                ),
+                (
+                    self.nigeria.id,
+                    ruleset,
+                    "yes",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
                     "tel",
                     self.now.replace(hour=0, minute=0, second=0, microsecond=0),
-                )
+                ),
             ],
         )
 
@@ -2748,16 +2838,29 @@ class PollResultsTest(UreportTest):
             ward="R-IKEJA",
         )
         self.poll.rebuild_poll_results_counts()
-        self.assertEqual(PollStats.objects.all().count(), 1)
-        poll_stat = PollStats.objects.get()
+        self.assertEqual(PollStats.objects.all().count(), 4)
 
-        self.assertEqual(poll_stat.org, self.nigeria)
-        self.assertEqual(poll_stat.flow_result, self.poll_question.flow_result)
-        self.assertEqual(poll_stat.flow_result_category, yes_category.flow_result_category)
-        self.assertEqual(poll_stat.location, ikeja_boundary)
-        self.assertEqual(poll_stat.gender_segment, GenderSegment.objects.get(gender="M"))
-        self.assertEqual(poll_stat.age_segment, AgeSegment.objects.get(min_age=0))
-        self.assertEqual(poll_stat.date, self.now.replace(hour=0, minute=0, second=0, microsecond=0))
+        self.assertEqual(PollStats.objects.filter(org=self.nigeria).count(), 4)
+        self.assertEqual(
+            PollStats.objects.filter(org=self.nigeria, flow_result=self.poll_question.flow_result).count(), 4
+        )
+        self.assertEqual(
+            PollStats.objects.filter(org=self.nigeria, flow_result_category=yes_category.flow_result_category).count(),
+            4,
+        )
+        self.assertEqual(PollStats.objects.filter(org=self.nigeria, location=ikeja_boundary).count(), 1)
+        self.assertEqual(
+            PollStats.objects.filter(org=self.nigeria, gender_segment=GenderSegment.objects.get(gender="M")).count(), 1
+        )
+        self.assertEqual(
+            PollStats.objects.filter(org=self.nigeria, age_segment=AgeSegment.objects.get(min_age=0)).count(), 1
+        )
+        self.assertEqual(
+            PollStats.objects.filter(
+                org=self.nigeria, date=self.now.replace(hour=0, minute=0, second=0, microsecond=0)
+            ).count(),
+            4,
+        )
 
         PollResult.objects.create(
             org=self.nigeria,
@@ -2771,15 +2874,25 @@ class PollResultsTest(UreportTest):
         )
 
         self.poll.rebuild_poll_results_counts()
-        self.assertEqual(PollStats.objects.all().count(), 2)
+        self.assertEqual(PollStats.objects.all().count(), 4)
         self.assertEqual(
-            PollStats.objects.filter(flow_result=self.poll_question.flow_result).aggregate(Sum("count"))["count__sum"],
+            PollStats.objects.filter(
+                flow_result=self.poll_question.flow_result,
+                age_segment=None,
+                gender_segment=None,
+                scheme_segment=None,
+                location=None,
+            ).aggregate(Sum("count"))["count__sum"],
             2,
         )
         self.assertEqual(
-            PollStats.objects.filter(flow_result_category=yes_category.flow_result_category).aggregate(Sum("count"))[
-                "count__sum"
-            ],
+            PollStats.objects.filter(
+                flow_result_category=yes_category.flow_result_category,
+                age_segment=None,
+                gender_segment=None,
+                scheme_segment=None,
+                location=None,
+            ).aggregate(Sum("count"))["count__sum"],
             2,
         )
         self.assertEqual(PollStats.objects.filter(location=ikeja_boundary).aggregate(Sum("count"))["count__sum"], 1)
