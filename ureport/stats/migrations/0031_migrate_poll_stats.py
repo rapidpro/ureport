@@ -39,7 +39,7 @@ def migrate_poll_stats(apps, schema_editor):  # pragma: no cover
             for stat in stats:
                 for field_name in segment_fields:
                     field_value = getattr(stat, field_name)
-                    if field_value is not None or field_value != 0 or field_value != "":
+                    if field_value is not None:
                         kwargs = {
                             "org": stat.org,
                             "question_id": stat.question_id,
