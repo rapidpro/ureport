@@ -2,7 +2,7 @@
 
 import time
 
-from django.db import migrations
+from django.db import migrations, transaction
 
 from ureport.utils import chunk_list
 
@@ -17,7 +17,7 @@ def migrate_poll_stats(apps, schema_editor):  # pragma: no cover
     Records with multiple segments are split into separate records, one per segment type.
     """
     PollStats = apps.get_model("stats", "PollStats")
-    all_stats_ids = PollStats.objects.all().order_by("id").values_list("id", flat=True)
+    all_stats_ids = PollStats.objects.all().exclude(age_segment_id=None, gender_segment_id=None, scheme_segment_id=None, location_id=None, is_squashed=False).order_by("id").values_list("id", flat=True)
     total = all_stats_ids.count()
     print(f"Total PollStats to migrate: {total}")
     start_time = time.time()
@@ -25,85 +25,42 @@ def migrate_poll_stats(apps, schema_editor):  # pragma: no cover
     processed = 0
     for batch in chunk_list(all_stats_ids, 1000):
         batch_ids = list(batch)
-
         stats = PollStats.objects.filter(id__in=batch_ids)
+        segment_fields = [
+            "age_segment_id",
+            "gender_segment_id",
+            "scheme_segment_id",
+            "location_id",
+        ]
 
-        update_fields = ["age_segment_id", "gender_segment_id", "scheme_segment_id", "location_id", "is_squashed"]
-        stats_to_update = []
-        new_records = []
+        with transaction.atomic():
+            stats_to_update = []
+            new_records = []
+            for stat in stats:
+                for field_name in segment_fields:
+                    field_value = getattr(stat, field_name)
+                    if field_value is not None or field_value != 0 or field_value != "":
+                        kwargs = {
+                            "org": stat.org,
+                            "question_id": stat.question_id,
+                            "flow_result_id": stat.flow_result_id,
+                            "category_id": stat.category_id,
+                            "flow_result_category_id": stat.flow_result_category_id,
+                            "date": stat.date,
+                            "count": stat.count,
+                            "is_squashed": False,
+                            field_name: field_value,
+                        }
+                        new_records.append(PollStats(**kwargs))
+                        setattr(stat, field_name, None)
 
-        for stat in stats:
-            if stat.age_segment_id is not None:
-                new_records.append(
-                    PollStats(
-                        org=stat.org,
-                        question_id=stat.question_id,
-                        flow_result_id=stat.flow_result_id,
-                        category_id=stat.category_id,
-                        flow_result_category_id=stat.flow_result_category_id,
-                        age_segment_id=stat.age_segment_id,
-                        date=stat.date,
-                        count=stat.count,
-                        is_squashed=False,
-                    )
-                )
-                stat.age_segment_id = None
+                stat.is_squashed = False
+                stats_to_update.append(stat)
 
-            if stat.gender_segment_id is not None:
-                new_records.append(
-                    PollStats(
-                        org=stat.org,
-                        question_id=stat.question_id,
-                        flow_result_id=stat.flow_result_id,
-                        category_id=stat.category_id,
-                        flow_result_category_id=stat.flow_result_category_id,
-                        gender_segment_id=stat.gender_segment_id,
-                        date=stat.date,
-                        count=stat.count,
-                        is_squashed=False,
-                    )
-                )
-                stat.gender_segment_id = None
-
-            if stat.scheme_segment_id is not None:
-                new_records.append(
-                    PollStats(
-                        org=stat.org,
-                        question_id=stat.question_id,
-                        flow_result_id=stat.flow_result_id,
-                        category_id=stat.category_id,
-                        flow_result_category_id=stat.flow_result_category_id,
-                        scheme_segment_id=stat.scheme_segment_id,
-                        date=stat.date,
-                        count=stat.count,
-                        is_squashed=False,
-                    )
-                )
-                stat.scheme_segment_id = None
-
-            if stat.location_id is not None:
-                new_records.append(
-                    PollStats(
-                        org=stat.org,
-                        question_id=stat.question_id,
-                        flow_result_id=stat.flow_result_id,
-                        category_id=stat.category_id,
-                        flow_result_category_id=stat.flow_result_category_id,
-                        location_id=stat.location_id,
-                        date=stat.date,
-                        count=stat.count,
-                        is_squashed=False,
-                    )
-                )
-                stat.location_id = None
-
-            stat.is_squashed = False
-            stats_to_update.append(stat)
-
-        if new_records:
-            PollStats.objects.bulk_create(new_records, batch_size=1000)
-        if stats_to_update:
-            PollStats.objects.bulk_update(stats_to_update, update_fields, batch_size=1000)
+            if new_records:
+                PollStats.objects.bulk_create(new_records, batch_size=1000)
+            if stats_to_update:
+                PollStats.objects.bulk_update(stats_to_update, ["age_segment_id", "gender_segment_id", "scheme_segment_id", "location_id", "is_squashed"], batch_size=1000)
 
         processed += len(batch_ids)
         elapsed = time.time() - start_time
