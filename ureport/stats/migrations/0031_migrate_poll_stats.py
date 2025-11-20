@@ -4,6 +4,8 @@ import time
 
 from django.db import migrations, transaction
 
+from django.core.cache import cache
+
 from ureport.utils import chunk_list
 
 
@@ -17,7 +19,10 @@ def migrate_poll_stats(apps, schema_editor):  # pragma: no cover
     Records with multiple segments are split into separate records, one per segment type.
     """
     PollStats = apps.get_model("stats", "PollStats")
-    all_stats_ids = PollStats.objects.all().exclude(age_segment_id=None, gender_segment_id=None, scheme_segment_id=None, location_id=None, is_squashed=False).order_by("id").values_list("id", flat=True)
+    last_migrated_poll_stats_id_key = "migrated_poll_stats_last_id"
+    last_id = cache.get(last_migrated_poll_stats_id_key, 0)
+
+    all_stats_ids = PollStats.objects.all().filter(id__gte=last_id).exclude(age_segment_id=None, gender_segment_id=None, scheme_segment_id=None, location_id=None, is_squashed=False).order_by("id").values_list("id", flat=True)
     total = all_stats_ids.count()
     print(f"Total PollStats to migrate: {total}")
     start_time = time.time()
@@ -61,6 +66,8 @@ def migrate_poll_stats(apps, schema_editor):  # pragma: no cover
                 PollStats.objects.bulk_create(new_records, batch_size=1000)
             if stats_to_update:
                 PollStats.objects.bulk_update(stats_to_update, ["age_segment_id", "gender_segment_id", "scheme_segment_id", "location_id", "is_squashed"], batch_size=1000)
+
+        cache.set(last_migrated_poll_stats_id_key, batch_ids[-1], None)
 
         processed += len(batch_ids)
         elapsed = time.time() - start_time
