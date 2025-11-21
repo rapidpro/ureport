@@ -714,6 +714,64 @@ class PollStats(models.Model):
         return percentage
 
 
+
+class PollStatsSegment(models.Model):
+    """
+    Represents a segment used in Poll Stats calculations.
+    """
+
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats_segments")
+
+    flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
+
+    flow_result_category = models.ForeignKey(FlowResultCategory, null=True, on_delete=models.SET_NULL)
+
+    scope = models.CharField(max_length=64, help_text=_("The scope of this segment"))
+
+    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    is_squashed = models.BooleanField(null=True, help_text=_("Whether this row was created by squashing"))
+
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["org", "flow_result"], name="ps_sgmnts_org_flowresult_idx"),
+            # for squashing task
+            models.Index(
+                name="pollstatssegment_unsquashed", fields=("org", "flow_result", "flow_result_category", "scope"), condition=Q(is_squashed=False)
+            ),
+        ]
+
+class PollEngagementStats(models.Model):
+    """
+    Represents engagement stats for polls.
+    """
+
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_engagement_stats")
+
+    flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
+
+    is_responded = models.BooleanField(null=True, help_text=_("Whether the poll got responded to or just sent"))
+
+    scope = models.CharField(max_length=64, help_text=_("The scope of this engagement stat"))
+
+    date = models.DateField(help_text=_("The date for the engagement stats"))
+
+    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    is_squashed = models.BooleanField(null=True, help_text=_("Whether this row was created by squashing"))
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["org", "flow_result"], name="pestats_org_flowresult_idx"),
+            models.Index(fields=["org", "date"], name="pestats_org_date_idx"),
+            # for squashing task
+            models.Index(
+                name="pollengagementstats_unsquashed", fields=("org", "flow_result", "is_responded", "date", "scope"), condition=Q(is_squashed=False)
+            ),
+        ]
+
+
 class ContactActivity(models.Model):
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_activities")
 
