@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -1792,9 +1792,6 @@ msgstr "Etikett på Contact Field som inneholder fødselsdatoene til U-reportern
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Etikett på Contact Field som inneholder kjønnet til U-reporterne"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Etikett på Contact Field som inneholder yrket til U-reporterne"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Etikett på Contact Field som inneholder registreringsdato til U-reporterne"
 
@@ -2078,6 +2075,9 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Etikett på Contact Field som inneholder yrket til U-reporterne"
 
 #, fuzzy, python-format
 #~| msgid "Scheduled Sync currently in progress..."

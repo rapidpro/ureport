@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1827,9 +1827,6 @@ msgstr "L'etichetta del Campo Contatto che contiene la data di nascita dei repor
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "L'etichetta del Campo Contatto che contiene il genere dei reporter "
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "L'etichetta del Campo Contatto che contiene l'occupazione dei reporter "
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "L'etichetta del Campo Contatto che contiene la data di registrazione dei reporter "
 
@@ -2123,3 +2120,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "L'etichetta del Campo Contatto che contiene l'occupazione dei reporter "

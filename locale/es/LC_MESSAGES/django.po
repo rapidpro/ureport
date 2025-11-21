@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: WILDNEY RAPHAEL SILVA CAVALCANTE, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1731,9 +1731,6 @@ msgstr "El nivel de Campo de Contactos que contiene la fecha de nacimiento de lo
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "La etiqueta del Campo de Contactos que contiene el género de los periodistas"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "La etiqueta del Campo de Contactos que contiene la ocupación de los periodistas"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "La etiqueta del Campo de Contactos que contiene la fecha de registro de los periodistas"
 
@@ -1991,3 +1988,6 @@ msgstr "Países del Comité Nacional de UNICEF"
 
 msgid "West and Central Africa"
 msgstr "África Occidental y Central"
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "La etiqueta del Campo de Contactos que contiene la ocupación de los periodistas"

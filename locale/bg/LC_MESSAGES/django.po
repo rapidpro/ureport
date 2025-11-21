@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1811,9 +1811,6 @@ msgstr "Етикетът на полето с датата на раждане �
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Етикетът на полето с пола на репортерите"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Етикетът на полето с професията на репортерите"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Етикетът на полето с датата на регистриране на репортерите"
 
@@ -2099,3 +2096,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Етикетът на полето с професията на репортерите"

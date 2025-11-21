@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1827,9 +1827,6 @@ msgstr "Eticheta câmpului „Contacte” care include data nașterii a reporter
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Eticheta câmpului „Contacte” care include sexul reporterilor"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Eticheta câmpului „Contacte” care include ocupaţia reporterilor"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Eticheta câmpului „Contacte” care include data la care s-au înregistrat reporterii"
 
@@ -2117,3 +2114,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Eticheta câmpului „Contacte” care include ocupaţia reporterilor"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1733,9 +1733,6 @@ msgstr "Η ετικέτα του Πεδίου Επικοινωνίας που π
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει το φύλο των U-Reporters"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει το επάγγελμα των U-Reporters"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει την ημερομηνία εγγραφής των U-Reporters"
 
@@ -2005,6 +2002,9 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Η ετικέτα του Πεδίου Επικοινωνίας που περιέχει το επάγγελμα των U-Reporters"
 
 #, fuzzy, python-format
 #~| msgid "Scheduled Sync currently in progress..."

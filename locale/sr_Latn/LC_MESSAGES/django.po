@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1934,9 +1934,6 @@ msgstr "Naziv polja kontakta koji sadrži datum rođenja reportera"
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Naziv polja kontakta koji sadrži pol reportera"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Naziv polja kontakta koji sadrži zanimanje reportera"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Naziv polja kontakta koji sadrži datum registracije reportera"
 
@@ -2252,3 +2249,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Naziv polja kontakta koji sadrži zanimanje reportera"
