@@ -14,6 +14,7 @@ from dash.orgs.models import Org
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
+from ureport.utils.counts import BaseDailyCount, BaseScopedCount
 from ureport.utils.models import SquashableModel
 
 logger = logging.getLogger(__name__)
@@ -712,6 +713,49 @@ class PollStats(models.Model):
         cache.set(key, {"results": percentage}, None)
 
         return percentage
+
+
+class PollStatsCounter(BaseScopedCount):
+    squash_over = ("org_id", "flow_result_id", "flow_result_category_id", "scope")
+
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats_segments")
+
+    flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
+
+    flow_result_category = models.ForeignKey(FlowResultCategory, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["org", "flow_result"], name="stats_psc_org_flowresult_idx"),
+            # for squashing task
+            models.Index(
+                name="stats_psc_unsquashed",
+                fields=("org", "flow_result", "flow_result_category", "scope"),
+                condition=Q(is_squashed=False),
+            ),
+        ]
+
+
+class PollEngagementDailyCount(BaseDailyCount):
+    squash_over = ("org_id", "flow_result_id", "is_responded", "scope", "day")
+
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_engagement_stats")
+
+    flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
+
+    is_responded = models.BooleanField(null=True, help_text=_("Whether the poll got responded to or just sent"))
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["org", "flow_result"], name="stats_pedc_org_flowresult_idx"),
+            models.Index(fields=["org", "day"], name="stats_pedc_org_date_idx"),
+            # for squashing task
+            models.Index(
+                name="stats_pedc_unsquashed",
+                fields=("org", "flow_result", "is_responded", "scope", "day"),
+                condition=Q(is_squashed=False),
+            ),
+        ]
 
 
 class ContactActivity(models.Model):

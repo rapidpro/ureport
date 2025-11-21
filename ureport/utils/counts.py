@@ -79,7 +79,7 @@ class BaseSquashableCount(models.Model):
     @classmethod
     def get_squash_query(cls, distinct_set: dict) -> tuple:
         squash_over = cls.get_squash_over()
-        
+
         # Build WHERE clause conditions, handling NULL values correctly
         delete_conditions = []
         delete_params = []
@@ -90,7 +90,7 @@ class BaseSquashableCount(models.Model):
             else:
                 delete_conditions.append(f'"{col}" = %s')
                 delete_params.append(value)
-        
+
         delete_cond = " AND ".join(delete_conditions)
         insert_cols = ", ".join([f'"{col}"' for col in squash_over])
         insert_vals = ", ".join(["%s"] * len(squash_over))
