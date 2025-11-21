@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1909,9 +1909,6 @@ msgstr "Nhãn của Trường Liên lạc chứa ngày sinh của các phóng vi
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Nhãn của Trường Liên lạc chứa giới tính của các phóng viên"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Nhãn của Trường Liên lạc chứa nghề nghiệp của các phóng viên"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Nhãn của Trường Liên lạc chứa ngày đăng ký của các phóng viên"
 
@@ -2227,3 +2224,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Nhãn của Trường Liên lạc chứa nghề nghiệp của các phóng viên"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Tjaša Jazbinšek, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -1745,9 +1745,6 @@ msgstr "Oznaka za Contact Field, ki vsebuje datum rojstva uporabnikov"
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Oznaka za Contact Field, ki vsebuje spol uporabnikov"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Oznaka za Contact Field, ki vsebuje poklic uporabnikov"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Oznaka za Contact Field, ki vsebuje datum registracije uporabnikov"
 
@@ -2015,6 +2012,9 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Oznaka za Contact Field, ki vsebuje poklic uporabnikov"
 
 #, fuzzy, python-format
 #~| msgid "Scheduled Sync currently in progress..."

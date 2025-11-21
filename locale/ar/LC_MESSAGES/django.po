@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -1795,9 +1795,6 @@ msgstr "اسم الحقل الخاص في إدخال تاريخ ميلاد ال�
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "اسم الحقل الخاص في إدخال جنس الماسح "
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "اسم الحقل الخاص في إدخال مهنة الماسح "
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "اسم الحقل الخاص في إدخال تاريخ تسجيل الماسح في البرنامج "
 
@@ -2079,3 +2076,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "اسم الحقل الخاص في إدخال مهنة الماسح "

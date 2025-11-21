@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-30 08:50+0000\n"
+"POT-Creation-Date: 2025-11-21 12:58+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1919,9 +1919,6 @@ msgstr "Label Kolom kontak yang berisi Tanggal Lahir dari U-Reporters"
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Label Kolom kontak yang berisi Jenis Kelamin dari U-Reporters"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Label kolom kontak yang berisi pekerjaan dari U-Reporters"
-
 msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Label kolom kontak yang berisi tanggal pendaftaran dari U-Reporters"
 
@@ -2239,3 +2236,6 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#~ msgid "The label of the Contact Field that contains the occupation of reporters"
+#~ msgstr "Label kolom kontak yang berisi pekerjaan dari U-Reporters"
