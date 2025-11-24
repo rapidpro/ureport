@@ -743,9 +743,7 @@ class PollEngagementDailyCount(BaseDailyCount):
 
     flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
 
-    is_responded = models.BooleanField(
-        null=True, help_text=_("Whether the contact responded to the poll or only received it")
-    )
+    is_responded = models.BooleanField(null=True)
 
     class Meta:
         indexes = [

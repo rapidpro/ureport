@@ -44,9 +44,10 @@ from ureport.stats.models import (
     ContactActivity,
     ContactActivityCounter,
     GenderSegment,
+    PollEngagementDailyCount,
     PollStats,
-    PollStatsCounter, PollEngagementDailyCount,
-            PollWordCloud,
+    PollStatsCounter,
+    PollWordCloud,
 )
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime

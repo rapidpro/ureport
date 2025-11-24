@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 14:16+0000\n"
+"POT-Creation-Date: 2025-11-24 14:33+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1945,9 +1945,6 @@ msgid "Active Users"
 msgstr ""
 
 msgid "Whether this row was created by squashing"
-msgstr ""
-
-msgid "Whether the contact responded to the poll or only received it"
 msgstr ""
 
 msgid "Something to trigger localizations"
