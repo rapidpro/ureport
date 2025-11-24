@@ -106,8 +106,9 @@ class BaseSquashableCount(models.Model):
         """
 
         # Combine params for DELETE (only non-NULL) and INSERT (all values)
+        delete_param_tuple = tuple(delete_params)
         insert_params = tuple(distinct_set[col] for col in squash_over)
-        return sql, tuple(delete_params) + insert_params
+        return sql, delete_param_tuple + insert_params
 
     class Meta:
         abstract = True
