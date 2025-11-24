@@ -1,6 +1,6 @@
 import logging
 import time
-from datetime import date
+from datetime import date, datetime
 from typing import Self
 
 from django.db import connection, models
@@ -144,7 +144,7 @@ class DailyCountQuerySet(ScopedCountQuerySet):
             counts = self.values_list("day").annotate(count_sum=Sum("count"))
             return {c[0]: c[1] for c in counts}
 
-    def month_totals(self, *, scoped: bool) -> dict[date | tuple[date, str], int]:
+    def month_totals(self, *, scoped: bool) -> dict[datetime | tuple[datetime, str], int]:
         """
         Sums counts grouped by month or month + scope.
         """
