@@ -79,7 +79,19 @@ class BaseSquashableCount(models.Model):
     @classmethod
     def get_squash_query(cls, distinct_set: dict) -> tuple:
         squash_over = cls.get_squash_over()
-        delete_cond = " AND ".join([f'"{col}" = %s' for col in squash_over])
+        
+        # Build WHERE clause conditions, handling NULL values correctly
+        delete_conditions = []
+        delete_params = []
+        for col in squash_over:
+            value = distinct_set[col]
+            if value is None:
+                delete_conditions.append(f'"{col}" IS NULL')
+            else:
+                delete_conditions.append(f'"{col}" = %s')
+                delete_params.append(value)
+        
+        delete_cond = " AND ".join(delete_conditions)
         insert_cols = ", ".join([f'"{col}"' for col in squash_over])
         insert_vals = ", ".join(["%s"] * len(squash_over))
 
@@ -93,7 +105,10 @@ class BaseSquashableCount(models.Model):
         ) s WHERE s.total != 0;
         """
 
-        return sql, tuple(distinct_set[col] for col in squash_over) * 2
+        # Combine params for DELETE (only non-NULL) and INSERT (all values)
+        delete_param_tuple = tuple(delete_params)
+        insert_params = tuple(distinct_set[col] for col in squash_over)
+        return sql, delete_param_tuple + insert_params
 
     class Meta:
         abstract = True
