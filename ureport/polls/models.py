@@ -238,7 +238,7 @@ class Poll(SmartModel):
         return latest_synced_obj_time, pull_after_delete
 
     def delete_poll_stats(self):
-        from ureport.stats.models import PollStats
+        from ureport.stats.models import PollEngagementDailyCount, PollStats, PollStatsCounter
         from ureport.utils import chunk_list
 
         if self.stopped_syncing:
@@ -256,6 +256,36 @@ class Poll(SmartModel):
             PollStats.objects.filter(pk__in=batch).delete()
 
         logger.info("Deleted %d poll stats for poll #%d on org #%d" % (poll_stats_ids_count, self.pk, self.org_id))
+
+        poll_stats_counters_ids = PollStatsCounter.objects.filter(
+            org_id=self.org_id, flow_result_id__in=flow_result_ids
+        )
+        poll_stats_counters_ids = poll_stats_counters_ids.values_list("pk", flat=True)
+
+        poll_stats_counters_ids_count = len(poll_stats_counters_ids)
+
+        for batch in chunk_list(poll_stats_counters_ids, 1000):
+            PollStatsCounter.objects.filter(pk__in=batch).delete()
+
+        logger.info(
+            "Deleted %d poll stats counters for poll #%d on org #%d"
+            % (poll_stats_counters_ids_count, self.pk, self.org_id)
+        )
+
+        poll_engagement_daily_count_ids = PollEngagementDailyCount.objects.filter(
+            org_id=self.org_id, flow_result_id__in=flow_result_ids
+        )
+        poll_engagement_daily_count_ids = poll_engagement_daily_count_ids.values_list("pk", flat=True)
+
+        poll_engagement_daily_count_ids_count = len(poll_engagement_daily_count_ids)
+
+        for batch in chunk_list(poll_engagement_daily_count_ids, 1000):
+            PollEngagementDailyCount.objects.filter(pk__in=batch).delete()
+
+        logger.info(
+            "Deleted %d poll engagement daily counts for poll #%d on org #%d"
+            % (poll_engagement_daily_count_ids_count, self.pk, self.org_id)
+        )
 
     def delete_poll_results(self):
         from ureport.utils import chunk_list
