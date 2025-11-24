@@ -1,7 +1,14 @@
+import logging
+import time
 from datetime import date
+from typing import Self
 
 from django.db import connection, models
 from django.db.models import Sum
+from django.db.models.functions import TruncMonth
+
+logger = logging.getLogger(__name__)
+
 
 class CountQuerySet(models.QuerySet):
     """
@@ -18,13 +25,14 @@ class CountQuerySet(models.QuerySet):
 class BaseSquashableCount(models.Model):
     """
     Base class for models which track counts by delta insertions which are then periodically squashed.
+    Subclass should define appropriate database indexes on the fields specified in squash_over for optimal query performance
     """
 
     squash_over = ()
     squash_max_distinct = 5000
 
     id = models.BigAutoField(auto_created=True, primary_key=True)
-    count = models.BigIntegerField()
+    count = models.BigIntegerField(default=0)
     is_squashed = models.BooleanField(default=False)
 
     objects = CountQuerySet.as_manager()
@@ -43,9 +51,12 @@ class BaseSquashableCount(models.Model):
         Squashes all distinct sets of counts with unsquashed rows into a single row if they sum to non-zero or just
         deletes them if they sum to zero. Returns the number of sets squashed.
         """
-
+        start = time.time()
         num_sets = 0
         squash_over = cls.get_squash_over()
+        if not squash_over:
+            raise ValueError(f"{cls.__name__} must define squash_over tuple with at least one field")
+
         distinct_sets = (
             cls.get_unsquashed()
             .values(*squash_over)
@@ -61,6 +72,8 @@ class BaseSquashableCount(models.Model):
 
             num_sets += 1
 
+        time_taken = time.time() - start
+        logger.info("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
         return num_sets
 
     @classmethod
@@ -117,10 +130,10 @@ class DailyCountQuerySet(ScopedCountQuerySet):
     Specialized queryset for scope + day + count models.
     """
 
-    def period(self, since, until):
+    def period(self, since, until) -> Self:
         return self.filter(day__gte=since, day__lt=until)
 
-    def day_totals(self, *, scoped: bool) -> dict[date | tuple, int]:
+    def day_totals(self, *, scoped: bool) -> dict[date | tuple[date, str], int]:
         """
         Sums counts grouped by day or day + scope.
         """
@@ -131,12 +144,12 @@ class DailyCountQuerySet(ScopedCountQuerySet):
             counts = self.values_list("day").annotate(count_sum=Sum("count"))
             return {c[0]: c[1] for c in counts}
 
-    def month_totals(self, *, scoped: bool) -> dict[date | tuple, int]:
+    def month_totals(self, *, scoped: bool) -> dict[date | tuple[date, str], int]:
         """
         Sums counts grouped by month or month + scope.
         """
 
-        with_month = self.extra({"month": "date_trunc('month', day)::date"})
+        with_month = self.annotate(month=TruncMonth("day"))
 
         if scoped:
             counts = with_month.values_list("month", "scope").annotate(count_sum=Sum("count"))
