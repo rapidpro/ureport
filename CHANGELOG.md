@@ -1,3 +1,12 @@
+v1.2.172 (2025-11-24)
+-------------------------
+ * Generate new stats as poll results are synced for now
+ * Remove help text
+ * Make sure the new stats models are removed the same way as the old one if needed to be cleared
+ * Apply suggestions from code review
+ * Add new poll stats and engagement models
+ * Add counts abstract models, that are squashable
+
 v1.2.171 (2025-11-18)
 -------------------------
  * Merge pull request #1302 from rapidpro/trim-reporters-counts
