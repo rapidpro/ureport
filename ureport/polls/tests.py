@@ -1183,6 +1183,8 @@ class PollTest(UreportTest):
             poll.rebuild_poll_results_counts()
 
             self.assertTrue(PollStats.objects.all())
+            self.assertTrue(PollStatsCounter.objects.all())
+            self.assertTrue(PollEngagementDailyCount.objects.all())
 
             poll.stopped_syncing = True
             poll.save()
@@ -1190,8 +1192,8 @@ class PollTest(UreportTest):
             poll.delete_poll_stats()
 
             self.assertTrue(PollStats.objects.all())
-            self.assertFalse(PollStatsCounter.objects.all())
-            self.assertFalse(PollEngagementDailyCount.objects.all())
+            self.assertTrue(PollStatsCounter.objects.all())
+            self.assertTrue(PollEngagementDailyCount.objects.all())
 
             poll.stopped_syncing = False
             poll.save()
@@ -1214,8 +1216,14 @@ class PollTest(UreportTest):
             poll.rebuild_poll_results_counts()
 
             self.assertTrue(PollStats.objects.all())
+            self.assertTrue(PollStatsCounter.objects.all())
+            self.assertTrue(PollEngagementDailyCount.objects.all())
             self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
+            self.assertTrue(PollStatsCounter.objects.filter(flow_result_id=poll_question.flow_result_id))
+            self.assertTrue(PollEngagementDailyCount.objects.filter(flow_result_id=poll_question.flow_result_id))
             self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
+            self.assertTrue(PollStatsCounter.objects.filter(flow_result_id=poll_question2.flow_result_id))
+            self.assertTrue(PollEngagementDailyCount.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
     def test_delete_poll_results(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
@@ -2768,6 +2776,39 @@ class PollResultsTest(UreportTest):
         self.assertEqual(poll_stat.gender_segment, GenderSegment.objects.get(gender="M"))
         self.assertEqual(poll_stat.age_segment, AgeSegment.objects.get(min_age=0))
         self.assertEqual(poll_stat.date, self.now.replace(hour=0, minute=0, second=0, microsecond=0))
+
+        self.assertEqual(PollStatsCounter.objects.all().count(), 4)
+        self.assertEqual(PollStatsCounter.objects.filter(org=self.nigeria).count(), 4)
+        self.assertEqual(
+            PollStatsCounter.objects.filter(org=self.nigeria, flow_result=self.poll_question.flow_result).count(), 4
+        )
+        self.assertEqual(
+            PollStatsCounter.objects.filter(
+                org=self.nigeria, flow_result_category=yes_category.flow_result_category
+            ).count(),
+            4,
+        )
+        self.assertEqual(PollStatsCounter.objects.filter(scope=f"location:{ikeja_boundary.id}").count(), 1)
+        self.assertEqual(PollStatsCounter.objects.filter(scope="gender:m").count(), 1)
+        self.assertEqual(PollStatsCounter.objects.filter(scope="age:0").count(), 1)
+        self.assertEqual(PollStatsCounter.objects.filter(scope="all").count(), 1)
+
+        self.assertEqual(PollEngagementDailyCount.objects.all().count(), 4)
+        self.assertEqual(PollEngagementDailyCount.objects.filter(org=self.nigeria).count(), 4)
+        self.assertEqual(
+            PollEngagementDailyCount.objects.filter(
+                org=self.nigeria, flow_result=self.poll_question.flow_result
+            ).count(),
+            4,
+        )
+        self.assertEqual(
+            PollEngagementDailyCount.objects.filter(org=self.nigeria, is_responded=True).count(),
+            4,
+        )
+        self.assertEqual(PollEngagementDailyCount.objects.filter(scope=f"location:{ikeja_boundary.id}").count(), 1)
+        self.assertEqual(PollEngagementDailyCount.objects.filter(scope="gender:m").count(), 1)
+        self.assertEqual(PollEngagementDailyCount.objects.filter(scope="age:0").count(), 1)
+        self.assertEqual(PollEngagementDailyCount.objects.filter(scope="all").count(), 1)
 
         PollResult.objects.create(
             org=self.nigeria,

@@ -372,7 +372,14 @@ class Poll(SmartModel):
         import time
 
         from ureport.locations.models import Boundary
-        from ureport.stats.models import AgeSegment, GenderSegment, PollStats, SchemeSegment
+        from ureport.stats.models import (
+            AgeSegment,
+            GenderSegment,
+            PollEngagementDailyCount,
+            PollStats,
+            PollStatsCounter,
+            SchemeSegment,
+        )
 
         start = time.time()
 
@@ -407,7 +414,7 @@ class Poll(SmartModel):
                 poll_results = PollResult.objects.filter(org_id=org_id, flow=flow).iterator(chunk_size=1000)
 
                 questions = self.questions.all().select_related("flow_result").prefetch_related("response_categories")
-                questions_dict = dict()
+                results_dict = dict()
 
                 if not questions.exists():
                     logger.info("Poll cannot sync without questions for poll #%d on org #%d" % (poll_id, org_id))
@@ -419,7 +426,7 @@ class Poll(SmartModel):
                     flow_categories_dict = {
                         elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories
                     }
-                    questions_dict[qsn.flow_result.result_uuid] = dict(
+                    results_dict[qsn.flow_result.result_uuid] = dict(
                         id=qsn.id,
                         flow_result_id=qsn.flow_result_id,
                         categories=categories_dict,
@@ -457,23 +464,21 @@ class Poll(SmartModel):
                 )
 
                 poll_stats_obj_to_insert = []
+                poll_stats_counter_obj_to_insert = []
+                poll_engagement_daily_count_obj_to_insert = []
                 for stat_tuple in stats_dict.keys():
                     org_id, ruleset, category, born, gender, state, district, ward, scheme, date = stat_tuple
                     count = stats_dict.get(stat_tuple)
                     stat_kwargs = dict(org_id=org_id, count=count, date=date)
 
-                    if ruleset not in questions_dict:
+                    if ruleset not in results_dict:
                         continue
 
-                    question_id = questions_dict[ruleset].get("id")
-                    if not question_id:
-                        continue
-
-                    flow_result_id = questions_dict[ruleset].get("flow_result_id")
+                    flow_result_id = results_dict[ruleset].get("flow_result_id")
                     if not flow_result_id:
                         continue
 
-                    flow_category_id = questions_dict[ruleset].get("flow_categories", dict()).get(category)
+                    flow_category_id = results_dict[ruleset].get("flow_categories", dict()).get(category)
 
                     gender_id = None
                     if gender:
@@ -515,10 +520,51 @@ class Poll(SmartModel):
 
                     poll_stats_obj_to_insert.append(PollStats(**stat_kwargs))
 
+                    stat_counter_kwargs = dict(
+                        org_id=org_id,
+                        flow_result_id=flow_result_id,
+                        flow_result_category_id=flow_category_id,
+                        count=count,
+                    )
+                    engagement_counter_kwargs = dict()
+                    if date is not None:
+                        engagement_counter_kwargs = dict(
+                            org_id=org_id,
+                            flow_result_id=flow_result_id,
+                            is_responded=bool(flow_category_id),
+                            day=date.date(),
+                            count=count,
+                        )
+
+                    scopes = ["all"]
+                    if born:
+                        scopes.append("age:%s" % AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
+                    if gender:
+                        scopes.append("gender:%s" % gender)
+                    if scheme:
+                        scopes.append("scheme:%s" % scheme)
+
+                    if location_id:
+                        scopes.append("location:%s" % location_id)
+
+                    for scope in scopes:
+                        stat_counter_kwargs["scope"] = scope
+                        poll_stats_counter_obj_to_insert.append(PollStatsCounter(**stat_counter_kwargs))
+
+                        if engagement_counter_kwargs and date and date >= (timezone.now() - timedelta(days=400)):
+                            engagement_counter_kwargs["scope"] = scope
+                            poll_engagement_daily_count_obj_to_insert.append(
+                                PollEngagementDailyCount(**engagement_counter_kwargs)
+                            )
+
                 # Delete existing counters and then create new counters
                 self.delete_poll_stats()
 
                 PollStats.objects.bulk_create(poll_stats_obj_to_insert, batch_size=1000)
+                PollStatsCounter.objects.bulk_create(poll_stats_counter_obj_to_insert, batch_size=1000)
+                PollEngagementDailyCount.objects.bulk_create(
+                    poll_engagement_daily_count_obj_to_insert, batch_size=1000
+                )
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
