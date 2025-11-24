@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 12:58+0000\n"
+"POT-Creation-Date: 2025-11-24 14:16+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -2060,6 +2060,9 @@ msgstr "Aktivni korisnici"
 
 msgid "Whether this row was created by squashing"
 msgstr "Je li priča objavljena"
+
+msgid "Whether the contact responded to the poll or only received it"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"

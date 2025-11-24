@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 12:58+0000\n"
+"POT-Creation-Date: 2025-11-24 14:16+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1975,6 +1975,9 @@ msgstr "Aktivni Korisnici"
 
 msgid "Whether this row was created by squashing"
 msgstr "Da li je ovaj red stvoren zbijanjem"
+
+msgid "Whether the contact responded to the poll or only received it"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"

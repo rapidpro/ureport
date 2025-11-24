@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 12:58+0000\n"
+"POT-Creation-Date: 2025-11-24 14:16+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -2038,6 +2038,9 @@ msgstr "Aktiva användare"
 
 msgid "Whether this row was created by squashing"
 msgstr "Raden skapades genom squashing"
+
+msgid "Whether the contact responded to the poll or only received it"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"

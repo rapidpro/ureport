@@ -333,7 +333,7 @@ def recheck_poll_flow_data(org_id=None):
 
 @app.task(name="polls.polls_stats_squash")
 def polls_stats_squash():
-    from ureport.stats.models import PollStats
+    from ureport.stats.models import PollEngagementDailyCount, PollStats, PollStatsCounter
 
     r = get_valkey_connection()
     key = "squash_stats_lock"
@@ -345,3 +345,5 @@ def polls_stats_squash():
     else:
         with r.lock(key, timeout=lock_timeout):
             PollStats.squash()
+            PollStatsCounter.squash()
+            PollEngagementDailyCount.squash()

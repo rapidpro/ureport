@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 12:58+0000\n"
+"POT-Creation-Date: 2025-11-24 14:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1909,6 +1909,9 @@ msgid "Active Users"
 msgstr ""
 
 msgid "Whether this row was created by squashing"
+msgstr ""
+
+msgid "Whether the contact responded to the poll or only received it"
 msgstr ""
 
 msgid "Something to trigger localizations"

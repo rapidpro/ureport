@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 12:58+0000\n"
+"POT-Creation-Date: 2025-11-24 14:16+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -2044,6 +2044,9 @@ msgstr "Активные пользователи"
 
 msgid "Whether this row was created by squashing"
 msgstr "Была ли эта строка создана сжатием"
+
+msgid "Whether the contact responded to the poll or only received it"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Что-то для запуска локализаций"

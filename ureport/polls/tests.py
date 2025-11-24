@@ -45,7 +45,8 @@ from ureport.stats.models import (
     ContactActivityCounter,
     GenderSegment,
     PollStats,
-    PollWordCloud,
+    PollStatsCounter, PollEngagementDailyCount,
+            PollWordCloud,
 )
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
@@ -1158,6 +1159,8 @@ class PollTest(UreportTest):
         poll_question = self.create_poll_question(self.admin, poll, "question 1", "step-uuid")
 
         self.assertFalse(PollStats.objects.all())
+        self.assertFalse(PollStatsCounter.objects.all())
+        self.assertFalse(PollEngagementDailyCount.objects.all())
 
         PollResult.objects.create(
             org=self.nigeria,
@@ -1186,17 +1189,23 @@ class PollTest(UreportTest):
             poll.delete_poll_stats()
 
             self.assertTrue(PollStats.objects.all())
+            self.assertFalse(PollStatsCounter.objects.all())
+            self.assertFalse(PollEngagementDailyCount.objects.all())
 
             poll.stopped_syncing = False
             poll.save()
 
             poll.delete_poll_stats()
             self.assertFalse(PollStats.objects.all())
+            self.assertFalse(PollStatsCounter.objects.all())
+            self.assertFalse(PollEngagementDailyCount.objects.all())
 
             poll2 = self.create_poll(self.nigeria, "Poll 2", "flow-uuid", self.education_nigeria, self.admin)
             poll_question2 = self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
 
             self.assertFalse(PollStats.objects.all())
+            self.assertFalse(PollStatsCounter.objects.all())
+            self.assertFalse(PollEngagementDailyCount.objects.all())
             self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
             self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
