@@ -25,7 +25,7 @@ class CountQuerySet(models.QuerySet):
 class BaseSquashableCount(models.Model):
     """
     Base class for models which track counts by delta insertions which are then periodically squashed.
-    Subclass should define appropriate database indexes on the fields specified in squash_over for optimal query performance
+    Subclass should define appropriate database indexes on the fields specified in squash_over for optimal query performance.
     """
 
     squash_over = ()
@@ -145,7 +145,7 @@ class DailyCountQuerySet(ScopedCountQuerySet):
     Specialized queryset for scope + day + count models.
     """
 
-    def period(self, since, until) -> Self:
+    def period(self, since: date, until: date) -> Self:
         return self.filter(day__gte=since, day__lt=until)
 
     def day_totals(self, *, scoped: bool) -> dict[date | tuple[date, str], int]:
