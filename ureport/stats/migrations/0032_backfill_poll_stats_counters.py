@@ -31,8 +31,10 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
     DISTRICT_LEVEL = 2
     WARD_LEVEL = 3
 
-    stopped_polls = Poll.objects.filter(stopped_syncing=True).values_list("id", flat=True)
-    flow_result_ids = PollQuestion.objects.filter(poll_id__in=stopped_polls).values_list("flow_result_id", flat=True)
+    stopped_polls = list(Poll.objects.filter(stopped_syncing=True).values_list("id", flat=True))
+    flow_result_ids = list(
+        PollQuestion.objects.filter(poll_id__in=stopped_polls).values_list("flow_result_id", flat=True)
+    )
 
     last_backfilled_poll_stats_id_key = "migrations_backfilled_poll_stats_last_id"
     last_id = cache.get(last_backfilled_poll_stats_id_key, 0)
@@ -50,8 +52,8 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
     age_dict = {elt.id: elt.min_age for elt in AgeSegment.objects.all()}
     scheme_dict = {elt.id: elt.scheme.lower() for elt in SchemeSegment.objects.all()}
 
-    boundaries = Boundary.objects.all().select_related('parent__parent')
-    location_dict = {elt.id: elt for elt in boundaries.iterator()}
+    boundaries = Boundary.objects.all().select_related("parent__parent")
+    location_dict = {elt.id: elt for elt in boundaries}
 
     processed = 0
     for batch in chunk_list(poll_stat_ids, 1000):
