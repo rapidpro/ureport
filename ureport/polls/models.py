@@ -1397,7 +1397,7 @@ class PollQuestion(SmartModel):
                                 logger.info(
                                     "PollStatsCounter CHECK: Mismatch in question results stats for question #%d for gender segment %s on org #%d, old stats: %s, new stats: %s",
                                     self.id,
-                                    gender,
+                                    gender["gender"],
                                     org.id,
                                     categories_results_dict,
                                     new_categories_results_dict,
@@ -1406,14 +1406,14 @@ class PollQuestion(SmartModel):
                                 logger.info(
                                     "PollStatsCounter CHECK: Match in question results stats for question #%d for gender segment %s on org #%d",
                                     self.id,
-                                    gender,
+                                    gender["gender"],
                                     org.id,
                                 )
                             if new_unset_count != unset_count:
                                 logger.info(
                                     "PollStatsCounter CHECK: Mismatch in question unset stats for question #%d for gender segment %s on org #%d, old unset: %d, new unset: %d",
                                     self.id,
-                                    gender,
+                                    gender["gender"],
                                     org.id,
                                     unset_count,
                                     new_unset_count,
@@ -1422,7 +1422,7 @@ class PollQuestion(SmartModel):
                                 logger.info(
                                     "PollStatsCounter CHECK: Match in question unset stats for question #%d for gender segment %s on org #%d",
                                     self.id,
-                                    gender,
+                                    gender["gender"],
                                     org.id,
                                 )
 
@@ -1583,7 +1583,12 @@ class PollQuestion(SmartModel):
             if new_polled_stats == polled_stats:
                 logger.info("PollStatsCounter CHECK: New polled stats are same as old for question id %d", self.pk)
             else:
-                logger.info("PollStatsCounter CHECK: Mismatch polled stats for question id %d", self.pk)
+                logger.info(
+                    "PollStatsCounter CHECK: Mismatch polled stats for question id %d, old=%s vs new=%s",
+                    self.pk,
+                    polled_stats,
+                    new_polled_stats,
+                )
 
         cache.set(key, {"results": results}, None)
         return results
