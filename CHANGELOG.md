@@ -1,3 +1,10 @@
+v1.2.173 (2025-11-25)
+-------------------------
+ * Reuse log stats comparison
+ * Extract duplicated stats comparison logic into _log_stats_comparison helper method
+ * Start comparing stats from new table to existing table
+ * Adjust location scopes for poll stats counters and engagement counts
+
 v1.2.172 (2025-11-24)
 -------------------------
  * Generate new stats as poll results are synced for now
