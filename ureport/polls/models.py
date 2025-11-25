@@ -543,9 +543,12 @@ class Poll(SmartModel):
                         scopes.append("gender:%s" % gender)
                     if scheme:
                         scopes.append("scheme:%s" % scheme)
-
-                    if location_id:
-                        scopes.append("location:%s" % location_id)
+                    if ward:
+                        scopes.append("ward:%s" % ward)
+                    if district:
+                        scopes.append("district:%s" % district)
+                    if state:
+                        scopes.append("state:%s" % state)
 
                     for scope in scopes:
                         stat_counter_kwargs["scope"] = scope
