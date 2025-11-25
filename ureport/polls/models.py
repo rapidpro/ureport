@@ -1429,18 +1429,9 @@ class PollQuestion(SmartModel):
                     )
                     new_categories_results_dict = {elt["label"].lower(): elt["count"] for elt in new_stats_count}
 
-                    if new_categories_results_dict != categories_results_dict:
-                        logger.info(
-                            "PollStatsCounter CHECK: Mismatch in total categories stats for question id %d: old=%s vs new=%s",
-                            self.pk,
-                            categories_results_dict,
-                            new_categories_results_dict,
-                        )
-                    else:
-                        logger.info(
-                            "PollStatsCounter CHECK: New stats total categories stats match for question id %d",
-                            self.pk,
-                        )
+                    self._log_stats_comparison(
+                        categories_results_dict, new_categories_results_dict, None, None, "total", "all", org.id
+                    )
 
                 categories = []
 
@@ -1507,15 +1498,9 @@ class PollQuestion(SmartModel):
                 .aggregate(Sum("count"))
             )
 
-            if new_responded_stats == responded_stats:
-                logger.info("PollStatsCounter CHECK: New responded stats are same as old for question id %d", self.pk)
-            else:
-                logger.info(
-                    "PollStatsCounter CHECK: Mismatch responded stats for question id %d, old=%s vs new=%s",
-                    self.pk,
-                    responded_stats,
-                    new_responded_stats,
-                )
+            self._log_stats_comparison(
+                responded_stats, new_responded_stats, None, None, "total", "all", self.poll.org_id
+            )
 
         results = responded_stats.get("count__sum", 0) or 0
         cache.set(key, {"results": results}, None)
@@ -1544,15 +1529,7 @@ class PollQuestion(SmartModel):
                 org_id=self.poll.org_id, flow_result=self.flow_result, scope="all"
             ).aggregate(Sum("count"))
 
-            if new_polled_stats == polled_stats:
-                logger.info("PollStatsCounter CHECK: New polled stats are same as old for question id %d", self.pk)
-            else:
-                logger.info(
-                    "PollStatsCounter CHECK: Mismatch polled stats for question id %d, old=%s vs new=%s",
-                    self.pk,
-                    polled_stats,
-                    new_polled_stats,
-                )
+            self._log_stats_comparison(polled_stats, new_polled_stats, None, None, "total", "all", self.poll.org_id)
 
         cache.set(key, {"results": results}, None)
         return results
