@@ -27,6 +27,9 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
     Poll = apps.get_model("polls", "Poll")
     PollQuestion = apps.get_model("polls", "PollQuestion")
     Boundary = apps.get_model("locations", "Boundary")
+    STATE_LEVEL = 1
+    DISTRICT_LEVEL = 2
+    WARD_LEVEL = 3
 
     stopped_polls = Poll.objects.filter(stopped_syncing=True).values_list("id", flat=True)
     flow_result_ids = PollQuestion.objects.filter(poll_id__in=stopped_polls).values_list("flow_result_id", flat=True)
@@ -47,7 +50,7 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
     age_dict = {elt.id: elt.min_age for elt in AgeSegment.objects.all()}
     scheme_dict = {elt.id: elt.scheme.lower() for elt in SchemeSegment.objects.all()}
 
-    boundaries = Boundary.objects.all()
+    boundaries = Boundary.objects.all().select_related('parent__parent')
     location_dict = {elt.id: elt for elt in boundaries}
 
     processed = 0
@@ -76,31 +79,31 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
                 )
 
             scopes = ["all"]
-            if stat.age_segment_id:
+            if stat.age_segment_id and age_dict.get(stat.age_segment_id) is not None:
                 scopes.append(f"age:{age_dict.get(stat.age_segment_id)}")
-            if stat.gender_segment_id:
+            if stat.gender_segment_id and gender_dict.get(stat.gender_segment_id) is not None:
                 scopes.append(f"gender:{gender_dict.get(stat.gender_segment_id)}")
-            if stat.scheme_segment_id:
+            if stat.scheme_segment_id and scheme_dict.get(stat.scheme_segment_id) is not None:
                 scopes.append(f"scheme:{scheme_dict.get(stat.scheme_segment_id)}")
             if stat.location_id:
                 location = location_dict.get(stat.location_id)
                 if location:
-                    if location.level == Boundary.WARD_LEVEL:
+                    if location.level == WARD_LEVEL:
                         scopes.append(f"ward:{location.osm_id.upper()}")
                         if location.parent:
                             scopes.append(f"district:{location.parent.osm_id.upper()}")
                         if location.parent and location.parent.parent:
                             scopes.append(f"state:{location.parent.parent.osm_id.upper()}")
-                    if location.level == Boundary.DISTRICT_LEVEL:
+                    if location.level == DISTRICT_LEVEL:
                         scopes.append(f"district:{location.osm_id.upper()}")
                         if location.parent:
                             scopes.append(f"state:{location.parent.osm_id.upper()}")
-                    if location.level == Boundary.STATE_LEVEL:
+                    if location.level == STATE_LEVEL:
                         scopes.append(f"state:{location.osm_id.upper()}")
 
             for scope in scopes:
                 poll_stats_counter_obj_to_insert.append(PollStatsCounter(**stat_counter_kwargs, scope=scope))
-                if  engagement_counter_kwargs:
+                if engagement_counter_kwargs:
                     poll_engagement_daily_count_obj_to_insert.append(
                         PollEngagementDailyCount(**engagement_counter_kwargs, scope=scope)
                     )
