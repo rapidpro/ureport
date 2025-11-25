@@ -37,12 +37,12 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
     last_backfilled_poll_stats_id_key = "migrations_backfilled_poll_stats_last_id"
     last_id = cache.get(last_backfilled_poll_stats_id_key, 0)
 
-    poll_stat_ids = (
+    poll_stat_ids = list(
         PollStats.objects.filter(flow_result_id__in=flow_result_ids, id__gt=last_id)
         .order_by("id")
         .values_list("id", flat=True)
     )
-    total = poll_stat_ids.count()
+    total = len(poll_stat_ids)
     print(f"Total PollStats to migrate: {total}")
     start_time = time.time()
 
@@ -51,7 +51,7 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
     scheme_dict = {elt.id: elt.scheme.lower() for elt in SchemeSegment.objects.all()}
 
     boundaries = Boundary.objects.all().select_related('parent__parent')
-    location_dict = {elt.id: elt for elt in boundaries}
+    location_dict = {elt.id: elt for elt in boundaries.iterator()}
 
     processed = 0
     for batch in chunk_list(poll_stat_ids, 1000):
