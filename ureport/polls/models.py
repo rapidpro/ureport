@@ -999,6 +999,47 @@ class PollQuestion(SmartModel):
             .order_by("pk")
         )
 
+    def _log_stats_comparison(
+        self, old_stats_dict, new_stats_dict, old_unset, new_unset, segment_type, segment_id, org_id
+    ):
+        """Log comparison results between old PollStats and new PollStatsCounter."""
+        if new_stats_dict != old_stats_dict:
+            logger.info(
+                "PollStatsCounter CHECK: Mismatch in question results stats for question #%d for %s segment %s on org #%d, old stats: %s, new stats: %s",
+                self.id,
+                segment_type,
+                segment_id,
+                org_id,
+                old_stats_dict,
+                new_stats_dict,
+            )
+        else:
+            logger.info(
+                "PollStatsCounter CHECK: Match in question results stats for question #%d for %s segment %s on org #%d",
+                self.id,
+                segment_type,
+                segment_id,
+                org_id,
+            )
+        if new_unset != old_unset:
+            logger.info(
+                "PollStatsCounter CHECK: Mismatch in question unset stats for question #%d for %s segment %s on org #%d, old unset: %d, new unset: %d",
+                self.id,
+                segment_type,
+                segment_id,
+                org_id,
+                old_unset,
+                new_unset,
+            )
+        else:
+            logger.info(
+                "PollStatsCounter CHECK: Match in question unset stats for question #%d for %s segment %s on org #%d",
+                self.id,
+                segment_type,
+                segment_id,
+                org_id,
+            )
+
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
@@ -1167,42 +1208,15 @@ class PollQuestion(SmartModel):
                             )
                             new_unset_count = new_unset_count_stats.get("count__sum", 0) or 0
 
-                            if new_categories_results_dict != categories_results_dict:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Mismatch in question results stats for question #%d for location segment %s:%s on org #%d, old stats: %s, new stats: %s",
-                                    self.id,
-                                    location_part,
-                                    osm_id,
-                                    org.id,
-                                    categories_results_dict,
-                                    new_categories_results_dict,
-                                )
-                            else:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Match in question results stats for question #%d for location segment %s:%s on org #%d",
-                                    self.id,
-                                    location_part,
-                                    osm_id,
-                                    org.id,
-                                )
-                            if new_unset_count != unset_count:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Mismatch in question unset stats for question #%d for location segment %s:%s on org #%d, old unset: %d, new unset: %d",
-                                    self.id,
-                                    location_part,
-                                    osm_id,
-                                    org.id,
-                                    unset_count,
-                                    new_unset_count,
-                                )
-                            else:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Match in question unset stats for question #%d for location segment %s:%s on org #%d",
-                                    self.id,
-                                    location_part,
-                                    osm_id,
-                                    org.id,
-                                )
+                            self._log_stats_comparison(
+                                categories_results_dict,
+                                new_categories_results_dict,
+                                unset_count,
+                                new_unset_count,
+                                "location",
+                                f"{location_part}:{osm_id}",
+                                org.id,
+                            )
 
                         for category_obj in categories_qs:
                             key = category_obj.flow_result_category.category.lower()
@@ -1286,42 +1300,15 @@ class PollQuestion(SmartModel):
                             )
                             new_unset_count = new_unset_count_stats.get("count__sum", 0) or 0
 
-                            if new_categories_results_dict != categories_results_dict:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Mismatch in question results stats for question #%d for age segment %s:%s on org #%d, old stats: %s, new stats: %s",
-                                    self.id,
-                                    age["min_age"],
-                                    age["max_age"],
-                                    org.id,
-                                    categories_results_dict,
-                                    new_categories_results_dict,
-                                )
-                            else:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Match in question results stats for question #%d for age segment %s:%s on org #%d",
-                                    self.id,
-                                    age["min_age"],
-                                    age["max_age"],
-                                    org.id,
-                                )
-                            if new_unset_count != unset_count:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Mismatch in question unset stats for question #%d for age segment %s:%s on org #%d, old unset: %d, new unset: %d",
-                                    self.id,
-                                    age["min_age"],
-                                    age["max_age"],
-                                    org.id,
-                                    unset_count,
-                                    new_unset_count,
-                                )
-                            else:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Match in question unset stats for question #%d for age segment %s:%s on org #%d",
-                                    self.id,
-                                    age["min_age"],
-                                    age["max_age"],
-                                    org.id,
-                                )
+                            self._log_stats_comparison(
+                                categories_results_dict,
+                                new_categories_results_dict,
+                                unset_count,
+                                new_unset_count,
+                                "age",
+                                f"{age['min_age']}:{age['max_age']}",
+                                org.id,
+                            )
 
                         categories = []
                         for category_obj in categories_qs:
@@ -1393,38 +1380,15 @@ class PollQuestion(SmartModel):
                             )
                             new_unset_count = new_unset_count_stats.get("count__sum", 0) or 0
 
-                            if new_categories_results_dict != categories_results_dict:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Mismatch in question results stats for question #%d for gender segment %s on org #%d, old stats: %s, new stats: %s",
-                                    self.id,
-                                    gender["gender"],
-                                    org.id,
-                                    categories_results_dict,
-                                    new_categories_results_dict,
-                                )
-                            else:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Match in question results stats for question #%d for gender segment %s on org #%d",
-                                    self.id,
-                                    gender["gender"],
-                                    org.id,
-                                )
-                            if new_unset_count != unset_count:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Mismatch in question unset stats for question #%d for gender segment %s on org #%d, old unset: %d, new unset: %d",
-                                    self.id,
-                                    gender["gender"],
-                                    org.id,
-                                    unset_count,
-                                    new_unset_count,
-                                )
-                            else:
-                                logger.info(
-                                    "PollStatsCounter CHECK: Match in question unset stats for question #%d for gender segment %s on org #%d",
-                                    self.id,
-                                    gender["gender"],
-                                    org.id,
-                                )
+                            self._log_stats_comparison(
+                                categories_results_dict,
+                                new_categories_results_dict,
+                                unset_count,
+                                new_unset_count,
+                                "gender",
+                                gender["gender"],
+                                org.id,
+                            )
 
                         for category_obj in categories_qs:
                             key = category_obj.flow_result_category.category.lower()
