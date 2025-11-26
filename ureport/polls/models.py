@@ -1111,8 +1111,6 @@ class PollQuestion(SmartModel):
         polled = self.calculate_polled()
         org_gender_labels = org.get_gender_labels()
 
-        check_new_stats = not self.poll.stopped_syncing
-
         results = []
 
         if open_ended and not segment:
@@ -1186,7 +1184,6 @@ class PollQuestion(SmartModel):
                             .aggregate(Sum("count"))
                         )
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
-
 
                         new_categories_results = (
                             PollStatsCounter.objects.filter(
@@ -1495,14 +1492,12 @@ class PollQuestion(SmartModel):
         )
 
         new_responded_stats = (
-                PollStatsCounter.objects.filter(org_id=self.poll.org_id, flow_result=self.flow_result, scope="all")
-                .exclude(flow_result_category=None)
-                .aggregate(Sum("count"))
+            PollStatsCounter.objects.filter(org_id=self.poll.org_id, flow_result=self.flow_result, scope="all")
+            .exclude(flow_result_category=None)
+            .aggregate(Sum("count"))
         )
 
-        self._log_stats_comparison(
-            responded_stats, new_responded_stats, None, None, "total", "all", self.poll.org_id
-        )
+        self._log_stats_comparison(responded_stats, new_responded_stats, None, None, "total", "all", self.poll.org_id)
 
         results = responded_stats.get("count__sum", 0) or 0
         cache.set(key, {"results": results}, None)

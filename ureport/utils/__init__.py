@@ -869,7 +869,7 @@ def get_ureporters_locations_stats(org, segment):
 
 
 def get_ureporters_locations_response_rates(org, segment):
-    from ureport.stats.models import PollStats, PollEngagementDailyCount
+    from ureport.stats.models import PollEngagementDailyCount, PollStats
 
     parent = segment.get("parent", None)
     field_type = segment.get("location", None)
@@ -939,7 +939,9 @@ def get_ureporters_locations_response_rates(org, segment):
     responded_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in responded_stats}
 
     new_responded_stats = (
-        PollEngagementDailyCount.objects.filter(org=org, day__gte=year_ago, scope__in=location_scopes, is_responded=True)
+        PollEngagementDailyCount.objects.filter(
+            org=org, day__gte=year_ago, scope__in=location_scopes, is_responded=True
+        )
         .values("scope")
         .annotate(Sum("count"))
     )
