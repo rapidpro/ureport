@@ -1044,7 +1044,7 @@ class PollStats(models.Model):
             )
         else:
             logger.info(
-                "%s CHECK: Match in question results stats for question #%d for %s segment %s on org #%d",
+                "%s CHECK: Match in question results stats for %s segment %s on org #%d",
                 model_name,
                 segment_type,
                 segment_id,
