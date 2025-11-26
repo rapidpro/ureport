@@ -311,8 +311,8 @@ class PollStats(models.Model):
         )
         PollStats._log_stats_comparison(
             "PollEngagementDailyCount",
-            responses,
-            new_responses,
+            list(responses),
+            list(new_responses),
             "all",
             "ALL",
             org.id,
@@ -360,8 +360,8 @@ class PollStats(models.Model):
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responses,
-                new_responses,
+                list(responses),
+                list(new_responses),
                 "gender",
                 gender["gender"].lower(),
                 org.id,
@@ -413,8 +413,8 @@ class PollStats(models.Model):
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responses,
-                new_responses,
+                list(responses),
+                list(new_responses),
                 "scheme",
                 scheme["scheme"].lower(),
                 org.id,
@@ -468,8 +468,8 @@ class PollStats(models.Model):
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responses,
-                new_responses,
+                list(responses),
+                list(new_responses),
                 "state",
                 osm_id.upper(),
                 org.id,
@@ -526,8 +526,8 @@ class PollStats(models.Model):
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responses,
-                new_responses,
+                list(responses),
+                list(new_responses),
                 "age",
                 age["min_age"],
                 org.id,
@@ -596,16 +596,16 @@ class PollStats(models.Model):
 
         PollStats._log_stats_comparison(
             "PollEngagementDailyCount",
-            polled_stats,
-            new_polled_stats,
+            list(polled_stats),
+            list(new_polled_stats),
             "all",
             "ALL",
             org.id,
         )
         PollStats._log_stats_comparison(
             "PollEngagementDailyCount",
-            responded_stats,
-            new_responded_stats,
+            list(responded_stats),
+            list(new_responded_stats),
             "all",
             "ALL",
             org.id,
@@ -672,16 +672,16 @@ class PollStats(models.Model):
 
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                polled_stats,
-                new_polled_stats,
+                list(polled_stats),
+                list(new_polled_stats),
                 "state",
                 osm_id.upper(),
                 org.id,
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responded_stats,
-                new_responded_stats,
+                list(responded_stats),
+                list(new_responded_stats),
                 "state",
                 osm_id.upper(),
                 org.id,
@@ -749,16 +749,16 @@ class PollStats(models.Model):
 
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                polled_stats,
-                new_polled_stats,
+                list(polled_stats),
+                list(new_polled_stats),
                 "scheme",
                 scheme["scheme"].lower(),
                 org.id,
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responded_stats,
-                new_responded_stats,
+                list(responded_stats),
+                list(new_responded_stats),
                 "scheme",
                 scheme["scheme"].lower(),
                 org.id,
@@ -832,16 +832,16 @@ class PollStats(models.Model):
 
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                polled_stats,
-                new_polled_stats,
+                list(polled_stats),
+                list(new_polled_stats),
                 "gender",
                 gender["gender"].lower(),
                 org.id,
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responded_stats,
-                new_responded_stats,
+                list(responded_stats),
+                list(new_responded_stats),
                 "gender",
                 gender["gender"].lower(),
                 org.id,
@@ -915,16 +915,16 @@ class PollStats(models.Model):
 
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                polled_stats,
-                new_polled_stats,
+                list(polled_stats),
+                list(new_polled_stats),
                 "age",
                 age["min_age"],
                 org.id,
             )
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
-                responded_stats,
-                new_responded_stats,
+                list(responded_stats),
+                list(new_responded_stats),
                 "age",
                 age["min_age"],
                 org.id,
@@ -1002,16 +1002,16 @@ class PollStats(models.Model):
 
         PollStats._log_stats_comparison(
             "PollStatsCounter",
-            polled_stats,
-            new_polled_stats,
+            list(polled_stats),
+            list(new_polled_stats),
             "all",
             "N/A",
             org.id,
         )
         PollStats._log_stats_comparison(
             "PollStatsCounter",
-            responded_stats,
-            new_responded_stats,
+            list(responded_stats),
+            list(new_responded_stats),
             "all",
             "N/A",
             org.id,
