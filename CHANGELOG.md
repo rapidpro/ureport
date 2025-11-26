@@ -1,3 +1,12 @@
+v1.2.174 (2025-11-26)
+-------------------------
+ * First backfill should clear any existing rows for stats and engagement counters
+ * Only record state level for engagement counters
+ * Apply copilot code review suggestions
+ * Apply suggestions from code review
+ * Apply copilot code review suggestions
+ * Add data migration to backfill the poll stats counters and engagement counts
+
 v1.2.173 (2025-11-25)
 -------------------------
  * Reuse log stats comparison
