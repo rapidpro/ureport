@@ -869,7 +869,7 @@ def get_ureporters_locations_stats(org, segment):
 
 
 def get_ureporters_locations_response_rates(org, segment):
-    from ureport.stats.models import PollStats
+    from ureport.stats.models import PollStats, PollEngagementDailyCount
 
     parent = segment.get("parent", None)
     field_type = segment.get("location", None)
@@ -906,6 +906,15 @@ def get_ureporters_locations_response_rates(org, segment):
             .order_by("osm_id")
         )
 
+    location_scopes = []
+    for elt in boundaries:
+        if field_type == "state":
+            location_scopes.append(f"state:{elt['osm_id'].upper()}")
+        elif field_type == "district":
+            location_scopes.append(f"district:{elt['osm_id'].upper()}")
+        else:
+            location_scopes.append(f"ward:{elt['osm_id'].upper()}")
+
     boundaries_ids = [elt["id"] for elt in boundaries]
     polled_stats = (
         PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
@@ -913,6 +922,14 @@ def get_ureporters_locations_response_rates(org, segment):
         .annotate(Sum("count"))
     )
     polled_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in polled_stats}
+
+    new_polled_stats = (
+        PollEngagementDailyCount.objects.filter(org=org, day__gte=year_ago, scope__in=location_scopes)
+        .values("scope")
+        .annotate(Sum("count"))
+    )
+    new_polled_stats_dict = {elt["scope"].split(":")[1].upper(): elt["count__sum"] for elt in new_polled_stats}
+
     responded_stats = (
         PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
         .exclude(flow_result_category=None)
@@ -920,6 +937,39 @@ def get_ureporters_locations_response_rates(org, segment):
         .annotate(Sum("count"))
     )
     responded_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in responded_stats}
+
+    new_responded_stats = (
+        PollEngagementDailyCount.objects.filter(org=org, day__gte=year_ago, scope__in=location_scopes, is_responded=True)
+        .values("scope")
+        .annotate(Sum("count"))
+    )
+    new_responded_stats_dict = {elt["scope"].split(":")[1].upper(): elt["count__sum"] for elt in new_responded_stats}
+
+    if polled_stats_dict != new_polled_stats_dict:
+        logger.info(
+            "PollEngagementDailyCount CHECK: Mismatch in reporters locations polled responses stats on org #%d, old stats: %s, new stats: %s",
+            org.id,
+            polled_stats_dict,
+            new_polled_stats_dict,
+        )
+    else:
+        logger.info(
+            "PollEngagementDailyCount CHECK: Match in reporters locations polled responses stats on org #%d",
+            org.id,
+        )
+
+    if responded_stats_dict != new_responded_stats_dict:
+        logger.info(
+            "PollEngagementDailyCount CHECK: Mismatch in reporters locations responded responses stats on org #%d, old stats: %s, new stats: %s",
+            org.id,
+            responded_stats_dict,
+            new_responded_stats_dict,
+        )
+    else:
+        logger.info(
+            "PollEngagementDailyCount CHECK: Match in reporters locations responded responses stats on org #%d",
+            org.id,
+        )
 
     response_rates = {
         key: round(responded_stats_dict.get(key, 0) * 100 / val, 1) for key, val in polled_stats_dict.items()
