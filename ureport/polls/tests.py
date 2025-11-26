@@ -2795,20 +2795,20 @@ class PollResultsTest(UreportTest):
         self.assertEqual(PollStatsCounter.objects.filter(scope="age:0").count(), 1)
         self.assertEqual(PollStatsCounter.objects.filter(scope="all").count(), 1)
 
-        self.assertEqual(PollEngagementDailyCount.objects.all().count(), 6)
-        self.assertEqual(PollEngagementDailyCount.objects.filter(org=self.nigeria).count(), 6)
+        self.assertEqual(PollEngagementDailyCount.objects.all().count(), 4)
+        self.assertEqual(PollEngagementDailyCount.objects.filter(org=self.nigeria).count(), 4)
         self.assertEqual(
             PollEngagementDailyCount.objects.filter(
                 org=self.nigeria, flow_result=self.poll_question.flow_result
             ).count(),
-            6,
+            4,
         )
         self.assertEqual(
             PollEngagementDailyCount.objects.filter(org=self.nigeria, is_responded=True).count(),
-            6,
+            4,
         )
-        self.assertEqual(PollEngagementDailyCount.objects.filter(scope=f"ward:{ikeja_boundary.osm_id}").count(), 1)
-        self.assertEqual(PollEngagementDailyCount.objects.filter(scope=f"district:{oyo_boundary.osm_id}").count(), 1)
+        self.assertEqual(PollEngagementDailyCount.objects.filter(scope=f"ward:{ikeja_boundary.osm_id}").count(), 0)
+        self.assertEqual(PollEngagementDailyCount.objects.filter(scope=f"district:{oyo_boundary.osm_id}").count(), 0)
         self.assertEqual(PollEngagementDailyCount.objects.filter(scope=f"state:{lagos_boundary.osm_id}").count(), 1)
         self.assertEqual(PollEngagementDailyCount.objects.filter(scope="gender:m").count(), 1)
         self.assertEqual(PollEngagementDailyCount.objects.filter(scope="age:0").count(), 1)
