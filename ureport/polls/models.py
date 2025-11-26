@@ -554,7 +554,13 @@ class Poll(SmartModel):
                         stat_counter_kwargs["scope"] = scope
                         poll_stats_counter_obj_to_insert.append(PollStatsCounter(**stat_counter_kwargs))
 
-                        if engagement_counter_kwargs and date and date >= (timezone.now() - timedelta(days=400)):
+                        if (
+                            engagement_counter_kwargs
+                            and "district:" not in scope
+                            and "ward:" not in scope
+                            and date
+                            and date >= (timezone.now() - timedelta(days=400))
+                        ):
                             engagement_counter_kwargs["scope"] = scope
                             poll_engagement_daily_count_obj_to_insert.append(
                                 PollEngagementDailyCount(**engagement_counter_kwargs)
