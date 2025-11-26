@@ -302,7 +302,7 @@ class PollStats(models.Model):
             .annotate(Sum("count"))
         )
 
-        new_reponses = (
+        new_responses = (
             PollEngagementDailyCount.objects.filter(
                 org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids, is_responded=True
             )
@@ -312,7 +312,7 @@ class PollStats(models.Model):
         PollStats._log_stats_comparison(
             "PollEngagementDailyCount",
             responses,
-            new_reponses,
+            new_responses,
             "all",
             "ALL",
             org.id,
@@ -347,7 +347,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
 
-            new_reponses = (
+            new_responses = (
                 PollEngagementDailyCount.objects.filter(
                     org=org,
                     day__gte=start,
@@ -361,7 +361,7 @@ class PollStats(models.Model):
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
                 responses,
-                new_reponses,
+                new_responses,
                 "gender",
                 gender["gender"].lower(),
                 org.id,
@@ -400,7 +400,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
 
-            new_reponses = (
+            new_responses = (
                 PollEngagementDailyCount.objects.filter(
                     org=org,
                     day__gte=start,
@@ -414,7 +414,7 @@ class PollStats(models.Model):
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
                 responses,
-                new_reponses,
+                new_responses,
                 "scheme",
                 scheme["scheme"].lower(),
                 org.id,
@@ -455,7 +455,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
 
-            new_reponses = (
+            new_responses = (
                 PollEngagementDailyCount.objects.filter(
                     org=org,
                     day__gte=start,
@@ -469,7 +469,7 @@ class PollStats(models.Model):
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
                 responses,
-                new_reponses,
+                new_responses,
                 "state",
                 osm_id.upper(),
                 org.id,
@@ -513,7 +513,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
 
-            new_reponses = (
+            new_responses = (
                 PollEngagementDailyCount.objects.filter(
                     org=org,
                     day__gte=start,
@@ -527,7 +527,7 @@ class PollStats(models.Model):
             PollStats._log_stats_comparison(
                 "PollEngagementDailyCount",
                 responses,
-                new_reponses,
+                new_responses,
                 "age",
                 age["min_age"],
                 org.id,
