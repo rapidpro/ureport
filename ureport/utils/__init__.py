@@ -962,14 +962,14 @@ def get_ureporters_locations_response_rates(org, segment):
 
     if responded_stats_dict != new_responded_stats_dict:
         logger.info(
-            "PollEngagementDailyCount CHECK: Mismatch in reporters locations responded responses stats on org #%d, old stats: %s, new stats: %s",
+            "PollEngagementDailyCount CHECK: Mismatch in reporters locations responded stats on org #%d, old stats: %s, new stats: %s",
             org.id,
             responded_stats_dict,
             new_responded_stats_dict,
         )
     else:
         logger.info(
-            "PollEngagementDailyCount CHECK: Match in reporters locations responded responses stats on org #%d",
+            "PollEngagementDailyCount CHECK: Match in reporters locations responded stats on org #%d",
             org.id,
         )
 
