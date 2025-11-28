@@ -301,6 +301,22 @@ class PollStats(models.Model):
             .values("date")
             .annotate(Sum("count"))
         )
+
+        new_responses = (
+            PollEngagementDailyCount.objects.filter(
+                org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids, is_responded=True
+            )
+            .values(day=Cast("day", output_field=models.DateField()))
+            .annotate(Sum("count"))
+        )
+        PollStats._log_stats_comparison(
+            "PollEngagementDailyCount",
+            list(responses),
+            list(new_responses),
+            "all",
+            "ALL",
+            org.id,
+        )
         return [dict(name=str(_("Opinion Responses")), data=PollStats.get_counts_data(responses, time_filter))]
 
     @classmethod
@@ -330,6 +346,27 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+
+            new_responses = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"gender:{gender['gender'].lower()}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responses),
+                list(new_responses),
+                "gender",
+                gender["gender"].lower(),
+                org.id,
+            )
+
             series = PollStats.get_counts_data(responses, time_filter)
             output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=series))
         return output_data
@@ -362,6 +399,27 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+
+            new_responses = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"scheme:{scheme['scheme'].lower()}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responses),
+                list(new_responses),
+                "scheme",
+                scheme["scheme"].lower(),
+                org.id,
+            )
+
             series = PollStats.get_counts_data(responses, time_filter)
 
             name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
@@ -396,6 +454,27 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+
+            new_responses = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"state:{osm_id.upper()}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responses),
+                list(new_responses),
+                "state",
+                osm_id.upper(),
+                org.id,
+            )
+
             series = PollStats.get_counts_data(responses, time_filter)
             output_data.append(dict(name=name, osm_id=osm_id, data=series))
         return output_data
@@ -433,6 +512,27 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+
+            new_responses = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"age:{age['min_age']}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responses),
+                list(new_responses),
+                "age",
+                age["min_age"],
+                org.id,
+            )
+
             series = PollStats.get_counts_data(responses, time_filter)
             output_data.append(dict(name=data_key, data=series))
         return output_data
@@ -478,6 +578,39 @@ class PollStats(models.Model):
             .annotate(Sum("count"))
         )
 
+        new_polled_stats = (
+            PollEngagementDailyCount.objects.filter(
+                org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids
+            )
+            .values(day=Cast("day", output_field=models.DateField()))
+            .annotate(Sum("count"))
+        )
+
+        new_responded_stats = (
+            PollEngagementDailyCount.objects.filter(
+                org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids, is_responded=True
+            )
+            .values(day=Cast("day", output_field=models.DateField()))
+            .annotate(Sum("count"))
+        )
+
+        PollStats._log_stats_comparison(
+            "PollEngagementDailyCount",
+            list(polled_stats),
+            list(new_polled_stats),
+            "all",
+            "ALL",
+            org.id,
+        )
+        PollStats._log_stats_comparison(
+            "PollEngagementDailyCount",
+            list(responded_stats),
+            list(new_responded_stats),
+            "all",
+            "ALL",
+            org.id,
+        )
+
         return [
             dict(
                 name=str(_("Response Rate")),
@@ -517,6 +650,43 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+            new_polled_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org, day__gte=start, scope=f"state:{osm_id.upper()}", flow_result_id__in=flow_result_ids
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            new_responded_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"state:{osm_id.upper()}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(polled_stats),
+                list(new_polled_stats),
+                "state",
+                osm_id.upper(),
+                org.id,
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responded_stats),
+                list(new_responded_stats),
+                "state",
+                osm_id.upper(),
+                org.id,
+            )
+
             series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
             output_data.append(dict(name=name, osm_id=osm_id, data=series))
         return output_data
@@ -554,6 +724,46 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+            new_polled_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"scheme:{scheme['scheme'].lower()}",
+                    flow_result_id__in=flow_result_ids,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            new_responded_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"scheme:{scheme['scheme'].lower()}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(polled_stats),
+                list(new_polled_stats),
+                "scheme",
+                scheme["scheme"].lower(),
+                org.id,
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responded_stats),
+                list(new_responded_stats),
+                "scheme",
+                scheme["scheme"].lower(),
+                org.id,
+            )
+
             gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
 
             name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
@@ -596,6 +806,47 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+
+            new_polled_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"gender:{gender['gender'].lower()}",
+                    flow_result_id__in=flow_result_ids,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            new_responded_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"gender:{gender['gender'].lower()}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(polled_stats),
+                list(new_polled_stats),
+                "gender",
+                gender["gender"].lower(),
+                org.id,
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responded_stats),
+                list(new_responded_stats),
+                "gender",
+                gender["gender"].lower(),
+                org.id,
+            )
+
             gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
             output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=gender_rate_series))
 
@@ -641,6 +892,44 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
+
+            new_polled_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org, day__gte=start, scope=f"age:{age['min_age']}", flow_result_id__in=flow_result_ids
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            new_responded_stats = (
+                PollEngagementDailyCount.objects.filter(
+                    org=org,
+                    day__gte=start,
+                    scope=f"age:{age['min_age']}",
+                    flow_result_id__in=flow_result_ids,
+                    is_responded=True,
+                )
+                .values(day=Cast("day", output_field=models.DateField()))
+                .annotate(Sum("count"))
+            )
+
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(polled_stats),
+                list(new_polled_stats),
+                "age",
+                age["min_age"],
+                org.id,
+            )
+            PollStats._log_stats_comparison(
+                "PollEngagementDailyCount",
+                list(responded_stats),
+                list(new_responded_stats),
+                "age",
+                age["min_age"],
+                org.id,
+            )
+
             age_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
             output_data.append(dict(name=data_key, data=age_rate_series))
         return output_data
@@ -702,6 +991,32 @@ class PollStats(models.Model):
             .aggregate(Sum("count"))
         )
 
+        new_polled_stats = PollStatsCounter.objects.filter(
+            org=org, flow_result_id__in=flow_result_ids, scope="all"
+        ).aggregate(Sum("count"))
+        new_responded_stats = (
+            PollStatsCounter.objects.filter(org=org, flow_result_id__in=flow_result_ids, scope="all")
+            .exclude(flow_result_category=None)
+            .aggregate(Sum("count"))
+        )
+
+        PollStats._log_stats_comparison(
+            "PollStatsCounter",
+            list(polled_stats),
+            list(new_polled_stats),
+            "all",
+            "N/A",
+            org.id,
+        )
+        PollStats._log_stats_comparison(
+            "PollStatsCounter",
+            list(responded_stats),
+            list(new_responded_stats),
+            "all",
+            "N/A",
+            org.id,
+        )
+
         responded = responded_stats.get("count__sum", 0)
         if responded is None:
             responded = 0
@@ -714,8 +1029,31 @@ class PollStats(models.Model):
 
         return percentage
 
+    @classmethod
+    def _log_stats_comparison(cls, model_name, old_stats_dict, new_stats_dict, segment_type, segment_id, org_id):
+        """Log comparison results between old PollStats and new PollStatsCounter."""
+        if new_stats_dict != old_stats_dict:
+            logger.info(
+                "%s CHECK: Mismatch in results stats for %s segment %s on org #%d, old stats: %s, new stats: %s",
+                model_name,
+                segment_type,
+                segment_id,
+                org_id,
+                old_stats_dict,
+                new_stats_dict,
+            )
+        else:
+            logger.info(
+                "%s CHECK: Match in results stats for %s segment %s on org #%d",
+                model_name,
+                segment_type,
+                segment_id,
+                org_id,
+            )
+
 
 class PollStatsCounter(BaseScopedCount):
+    squash_max_distinct = 20000
     squash_over = ("org_id", "flow_result_id", "flow_result_category_id", "scope")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats_segments")
@@ -737,6 +1075,7 @@ class PollStatsCounter(BaseScopedCount):
 
 
 class PollEngagementDailyCount(BaseDailyCount):
+    squash_max_distinct = 10000
     squash_over = ("org_id", "flow_result_id", "is_responded", "scope", "day")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_engagement_stats")
