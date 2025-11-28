@@ -306,7 +306,7 @@ class PollStats(models.Model):
             PollEngagementDailyCount.objects.filter(
                 org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids, is_responded=True
             )
-            .values(day=Cast("day", output_field=models.DateField()))
+            .values(date=Cast("day", output_field=models.DateField()))
             .annotate(Sum("count"))
         )
         PollStats._log_stats_comparison(
@@ -355,7 +355,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
             PollStats._log_stats_comparison(
@@ -408,7 +408,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
             PollStats._log_stats_comparison(
@@ -463,7 +463,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
             PollStats._log_stats_comparison(
@@ -521,7 +521,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
             PollStats._log_stats_comparison(
@@ -582,7 +582,7 @@ class PollStats(models.Model):
             PollEngagementDailyCount.objects.filter(
                 org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids
             )
-            .values(day=Cast("day", output_field=models.DateField()))
+            .values(date=Cast("day", output_field=models.DateField()))
             .annotate(Sum("count"))
         )
 
@@ -590,7 +590,7 @@ class PollStats(models.Model):
             PollEngagementDailyCount.objects.filter(
                 org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids, is_responded=True
             )
-            .values(day=Cast("day", output_field=models.DateField()))
+            .values(date=Cast("day", output_field=models.DateField()))
             .annotate(Sum("count"))
         )
 
@@ -654,7 +654,7 @@ class PollStats(models.Model):
                 PollEngagementDailyCount.objects.filter(
                     org=org, day__gte=start, scope=f"state:{osm_id.upper()}", flow_result_id__in=flow_result_ids
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
@@ -666,7 +666,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
@@ -731,7 +731,7 @@ class PollStats(models.Model):
                     scope=f"scheme:{scheme['scheme'].lower()}",
                     flow_result_id__in=flow_result_ids,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
@@ -743,7 +743,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
@@ -814,7 +814,7 @@ class PollStats(models.Model):
                     scope=f"gender:{gender['gender'].lower()}",
                     flow_result_id__in=flow_result_ids,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
@@ -826,7 +826,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
@@ -897,7 +897,7 @@ class PollStats(models.Model):
                 PollEngagementDailyCount.objects.filter(
                     org=org, day__gte=start, scope=f"age:{age['min_age']}", flow_result_id__in=flow_result_ids
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
@@ -909,7 +909,7 @@ class PollStats(models.Model):
                     flow_result_id__in=flow_result_ids,
                     is_responded=True,
                 )
-                .values(day=Cast("day", output_field=models.DateField()))
+                .values(date=Cast("day", output_field=models.DateField()))
                 .annotate(Sum("count"))
             )
 
