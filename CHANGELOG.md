@@ -1,3 +1,15 @@
+v1.2.175 (2025-11-28)
+-------------------------
+ * Increase squash max distinct
+ * Compare lists of data
+ * Fix log
+ * Adjust logs and check colon is present in scope
+ * rename variable
+ * Fix log format
+ * Compare engagement stats data
+ * Compare response rates stats for repoters locations
+ * Compare stats for old table and new tables for all polls
+
 v1.2.174 (2025-11-26)
 -------------------------
  * First backfill should clear any existing rows for stats and engagement counters
