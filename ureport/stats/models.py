@@ -1053,6 +1053,7 @@ class PollStats(models.Model):
 
 
 class PollStatsCounter(BaseScopedCount):
+    squash_max_distinct = 20000
     squash_over = ("org_id", "flow_result_id", "flow_result_category_id", "scope")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats_segments")
@@ -1074,6 +1075,7 @@ class PollStatsCounter(BaseScopedCount):
 
 
 class PollEngagementDailyCount(BaseDailyCount):
+    squash_max_distinct = 10000
     squash_over = ("org_id", "flow_result_id", "is_responded", "scope", "day")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_engagement_stats")
