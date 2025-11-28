@@ -928,7 +928,9 @@ def get_ureporters_locations_response_rates(org, segment):
         .values("scope")
         .annotate(Sum("count"))
     )
-    new_polled_stats_dict = {elt["scope"].split(":")[1].upper(): elt["count__sum"] for elt in new_polled_stats if ":" in elt["scope"]}
+    new_polled_stats_dict = {
+        elt["scope"].split(":")[1].upper(): elt["count__sum"] for elt in new_polled_stats if ":" in elt["scope"]
+    }
 
     responded_stats = (
         PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
@@ -945,7 +947,9 @@ def get_ureporters_locations_response_rates(org, segment):
         .values("scope")
         .annotate(Sum("count"))
     )
-    new_responded_stats_dict = {elt["scope"].split(":")[1].upper(): elt["count__sum"] for elt in new_responded_stats if ":" in elt["scope"]}
+    new_responded_stats_dict = {
+        elt["scope"].split(":")[1].upper(): elt["count__sum"] for elt in new_responded_stats if ":" in elt["scope"]
+    }
 
     if polled_stats_dict != new_polled_stats_dict:
         logger.info(
