@@ -296,7 +296,15 @@ class PollStats(models.Model):
         )
 
         responses = (
-            PollStats.objects.filter(org=org, date__gte=start, flow_result_id__in=flow_result_ids)
+            PollStats.objects.filter(
+                org=org,
+                date__gte=start,
+                flow_result_id__in=flow_result_ids,
+                age_segment=None,
+                gender_segment=None,
+                scheme_segment=None,
+                location=None,
+            )
             .exclude(flow_result_category=None)
             .values("date")
             .annotate(Sum("count"))
@@ -567,12 +575,28 @@ class PollStats(models.Model):
         )
 
         polled_stats = (
-            PollStats.objects.filter(org=org, date__gte=start, flow_result_id__in=flow_result_ids)
+            PollStats.objects.filter(
+                org=org,
+                date__gte=start,
+                flow_result_id__in=flow_result_ids,
+                age_segment=None,
+                gender_segment=None,
+                scheme_segment=None,
+                location=None,
+            )
             .values("date")
             .annotate(Sum("count"))
         )
         responded_stats = (
-            PollStats.objects.filter(org=org, date__gte=start, flow_result_id__in=flow_result_ids)
+            PollStats.objects.filter(
+                org=org,
+                date__gte=start,
+                flow_result_id__in=flow_result_ids,
+                age_segment=None,
+                gender_segment=None,
+                scheme_segment=None,
+                location=None,
+            )
             .exclude(flow_result_category=None)
             .values("date")
             .annotate(Sum("count"))
@@ -984,9 +1008,23 @@ class PollStats(models.Model):
             PollQuestion.objects.filter(is_active=True, poll_id__in=poll_ids).values_list("flow_result_id", flat=True)
         )
 
-        polled_stats = PollStats.objects.filter(org=org, flow_result_id__in=flow_result_ids).aggregate(Sum("count"))
+        polled_stats = PollStats.objects.filter(
+            org=org,
+            flow_result_id__in=flow_result_ids,
+            age_segment=None,
+            gender_segment=None,
+            scheme_segment=None,
+            location=None,
+        ).aggregate(Sum("count"))
         responded_stats = (
-            PollStats.objects.filter(org=org, flow_result_id__in=flow_result_ids)
+            PollStats.objects.filter(
+                org=org,
+                flow_result_id__in=flow_result_ids,
+                age_segment=None,
+                gender_segment=None,
+                scheme_segment=None,
+                location=None,
+            )
             .exclude(flow_result_category=None)
             .aggregate(Sum("count"))
         )
