@@ -25,24 +25,21 @@ def dedupe_poll_stats_by_questions(apps, schema_editor):  # pragma: no cover
     for flow_result in results_with_duplicate_questions:
         questions = flow_result.pollquestion_set.all()
         first_question = questions[0]
-        for question in questions[1:]:
-            stats = (
-                PollStats.objects.exclude(question=None)
-                .filter(flow_result=flow_result)
-                .exclude(question=first_question)
-            )
-            if stats.exists():
-                print(f"Found {stats.count()} PollStats for question {question.id}, FlowResult ID {flow_result.id}")
-                stats.delete()
-            else:
-                print(
-                    f"No duplicate PollStats for question {question.id} for FlowResult ID {flow_result.id}"
-                )
-        PollStats.objects.exclude(question=None) \
-            .filter(flow_result=flow_result) \
-            .filter(question=first_question) \
+        stats = (
+            PollStats.objects.exclude(question=None).filter(flow_result=flow_result).exclude(question=first_question)
+        )
+        if stats.exists():
+            print(f"Found {stats.count()} PollStats duplicates for FlowResult ID {flow_result.id}")
+            stats.delete()
+        else:
+            print(f"No duplicate PollStats for FlowResult ID {flow_result.id}")
+        updated = (
+            PollStats.objects.exclude(question=None)
+            .filter(flow_result=flow_result)
+            .filter(question=first_question)
             .update(question=None)
-        print(f"Deduped PollStats for FlowResult ID {flow_result.id}")
+        )
+        print(f"Deduped PollStats for FlowResult ID {flow_result.id}, updated {updated} entries")
         print("======================")
 
 
