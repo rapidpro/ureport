@@ -65,7 +65,7 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
         PollQuestion.objects.filter(poll_id__in=stopped_polls).values_list("flow_result_id", flat=True)
     )
 
-    last_backfilled_poll_stats_id_key = "deduped_migrations_backfilled_poll_stats_last_id"
+    last_backfilled_poll_stats_id_key = "deduplicated_migrations_backfilled_poll_stats_last_id"
     last_id = cache.get(last_backfilled_poll_stats_id_key, 0)
 
     if last_id == 0:
@@ -75,7 +75,7 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
         poll_stats_counters_ids_count = len(poll_stats_counters_ids)
 
         for batch in chunk_list(poll_stats_counters_ids, 1000):
-            PollStatsCounter.objects.filter(pk__in=batch).delete()
+            PollStatsCounter.objects.filter(pk__in=list(batch)).delete()
 
         poll_engagement_daily_count_ids = PollEngagementDailyCount.objects.filter(flow_result_id__in=flow_result_ids)
         poll_engagement_daily_count_ids = list(poll_engagement_daily_count_ids.values_list("pk", flat=True))
@@ -83,7 +83,7 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
         poll_engagement_daily_count_ids_count = len(poll_engagement_daily_count_ids)
 
         for batch in chunk_list(poll_engagement_daily_count_ids, 1000):
-            PollEngagementDailyCount.objects.filter(pk__in=batch).delete()
+            PollEngagementDailyCount.objects.filter(pk__in=list(batch)).delete()
         print(
             "Backfill for the first time, Deleted %d PollStatsCounter and %d PollEngagementDailyCount entries"
             % (poll_stats_counters_ids_count, poll_engagement_daily_count_ids_count)
