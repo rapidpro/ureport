@@ -32,18 +32,16 @@ def dedupe_poll_stats_by_questions(apps, schema_editor):  # pragma: no cover
                 .exclude(question=first_question)
             )
             if stats.exists():
-                print(f"Found {stats.count()} for question {question.id} PollStats for FlowResult ID {flow_result.id}")
+                print(f"Found {stats.count()} PollStats for question {question.id}, FlowResult ID {flow_result.id}")
                 stats.delete()
             else:
                 print(
-                    f"No duplicate PollStats for question {question.id} PollStats for FlowResult ID {flow_result.id}"
+                    f"No duplicate PollStats for question {question.id} for FlowResult ID {flow_result.id}"
                 )
-        stats = (
-            PollStats.objects.exclude(question=None)
-            .filter(flow_result=flow_result)
-            .filter(question=first_question)
+        PollStats.objects.exclude(question=None) \
+            .filter(flow_result=flow_result) \
+            .filter(question=first_question) \
             .update(question=None)
-        )
         print(f"Deduped PollStats for FlowResult ID {flow_result.id}")
         print("======================")
 
