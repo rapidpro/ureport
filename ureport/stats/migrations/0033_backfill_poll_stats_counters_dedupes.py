@@ -77,7 +77,8 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
         poll_stats_counters_ids_count = len(poll_stats_counters_ids)
 
         for batch in chunk_list(poll_stats_counters_ids, 1000):
-            PollStatsCounter.objects.filter(pk__in=list(batch)).delete()
+            batch_ids = list(batch)
+            PollStatsCounter.objects.filter(pk__in=batch_ids).delete()
 
         poll_engagement_daily_count_ids = PollEngagementDailyCount.objects.filter(flow_result_id__in=flow_result_ids)
         poll_engagement_daily_count_ids = list(poll_engagement_daily_count_ids.values_list("pk", flat=True))
@@ -85,7 +86,8 @@ def backfill_poll_stats_counters(apps, schema_editor):  # pragma: no cover
         poll_engagement_daily_count_ids_count = len(poll_engagement_daily_count_ids)
 
         for batch in chunk_list(poll_engagement_daily_count_ids, 1000):
-            PollEngagementDailyCount.objects.filter(pk__in=list(batch)).delete()
+            batch_ids = list(batch)
+            PollEngagementDailyCount.objects.filter(pk__in=batch_ids).delete()
         print(
             "Backfill for the first time, Deleted %d PollStatsCounter and %d PollEngagementDailyCount entries"
             % (poll_stats_counters_ids_count, poll_engagement_daily_count_ids_count)
