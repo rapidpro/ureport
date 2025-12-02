@@ -24,6 +24,8 @@ def dedupe_poll_stats_by_questions(apps, schema_editor):  # pragma: no cover
 
     for flow_result in results_with_duplicate_questions:
         questions = flow_result.pollquestion_set.all()
+        if not questions:
+            continue
         first_question = questions[0]
         stats = (
             PollStats.objects.exclude(question=None).filter(flow_result=flow_result).exclude(question=first_question)
