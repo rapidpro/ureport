@@ -1,3 +1,12 @@
+v1.2.178 (2025-12-02)
+-------------------------
+ * Apply copilot code review suggestions
+ * Apply suggestions from code review
+ * Apply suggestions from code review
+ * Remove unnecessary loop on questions
+ * Apply suggestions from code review
+ * Rebackfill the poll stats counter and engagement counter after deduplicating the poll stats
+
 v1.2.177 (2025-11-28)
 -------------------------
  * Fix date values field
