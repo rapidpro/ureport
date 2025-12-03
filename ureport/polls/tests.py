@@ -2315,7 +2315,7 @@ class PollResultsTest(UreportTest):
             )
 
             activities = (
-                ContactActivity.objects.filter(org=self.nigeria).values("date").annotate(count__sum=Count("id"))
+                ContactActivity.objects.filter(org=self.nigeria).values("date").annotate(count__sum=Count("id")).order_by("date")
             )
             self.assertEqual(12, activity_counts.count())
             self.assertEqual(12, activities.count())
@@ -2330,6 +2330,7 @@ class PollResultsTest(UreportTest):
                 .annotate(age=Cast("value", output_field=IntegerField()))
                 .values("date", "type", "age")
                 .annotate(Sum("count"))
+                .order_by("date", "type", "age")
             )
             age_activities = (
                 ContactActivity.objects.filter(org=self.nigeria)
@@ -2340,6 +2341,7 @@ class PollResultsTest(UreportTest):
                 .annotate(type=Value("B"))
                 .values("date", "type", "age")
                 .annotate(count__sum=Count("id"))
+                .order_by("date", "type", "age")
             )
 
             self.assertEqual(12, age_activity_counts.count())
@@ -2353,6 +2355,7 @@ class PollResultsTest(UreportTest):
                 ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_GENDER)
                 .values("date", "type", "value")
                 .annotate(Sum("count"))
+                .order_by("date", "type", "value")
             )
 
             gender_activities = (
@@ -2363,6 +2366,7 @@ class PollResultsTest(UreportTest):
                 .annotate(type=Value("G"))
                 .values("date", "type", "value")
                 .annotate(count__sum=Count("id"))
+                .order_by("date", "type", "value")
             )
 
             self.assertEqual(24, gender_activity_counts.count())
@@ -2379,6 +2383,7 @@ class PollResultsTest(UreportTest):
                 ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_LOCATION)
                 .values("date", "type", "value")
                 .annotate(Sum("count"))
+                .order_by("date", "type", "value")
             )
 
             location_activities = (
@@ -2389,6 +2394,7 @@ class PollResultsTest(UreportTest):
                 .annotate(type=Value("L"))
                 .values("date", "type", "value")
                 .annotate(count__sum=Count("id"))
+                .order_by("date", "type", "value")
             )
 
             self.assertEqual(24, location_activity_counts.count())
@@ -2405,6 +2411,7 @@ class PollResultsTest(UreportTest):
                 ContactActivityCounter.objects.filter(org=self.nigeria, type=ContactActivityCounter.TYPE_SCHEME)
                 .values("date", "type", "value")
                 .annotate(Sum("count"))
+                .order_by("date", "type", "value")
             )
             scheme_activities = (
                 ContactActivity.objects.filter(org=self.nigeria)
@@ -2414,6 +2421,7 @@ class PollResultsTest(UreportTest):
                 .annotate(type=Value("S"))
                 .values("date", "type", "value")
                 .annotate(count__sum=Count("id"))
+                .order_by("date", "type", "value")
             )
 
             self.assertEqual(24, scheme_activity_counts.count())
