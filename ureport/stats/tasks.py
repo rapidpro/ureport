@@ -16,23 +16,23 @@ logger = logging.getLogger(__name__)
 
 @org_task("refresh-engagement-data", 60 * 60 * 4)
 def refresh_engagement_data(org, since, until):
-    from .models import PollStats
+    from .models import PollEngagementDailyCount, PollStatsCounter
 
     start = time.time()
 
-    time_filters = list(PollStats.DATA_TIME_FILTERS.keys())
-    segments = list(PollStats.DATA_SEGMENTS.keys())
-    metrics = list(PollStats.DATA_METRICS.keys())
+    time_filters = list(PollEngagementDailyCount.DATA_TIME_FILTERS.keys())
+    segments = list(PollEngagementDailyCount.DATA_SEGMENTS.keys())
+    metrics = list(PollEngagementDailyCount.DATA_METRICS.keys())
 
     for time_filter in time_filters:
         for segment in segments:
             for metric in metrics:
-                PollStats.refresh_engagement_data(org, metric, segment, time_filter)
+                PollEngagementDailyCount.refresh_engagement_data(org, metric, segment, time_filter)
                 logger.info(
                     f"Task: refresh_engagement_data org {org.id} in progress for {time.time() - start}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
                 )
 
-    PollStats.calculate_average_response_rate(org)
+    PollStatsCounter.calculate_average_response_rate(org)
 
     logger.info(f"Task: refresh_engagement_data org {org.id} finished in {time.time() - start}s")
 
@@ -86,10 +86,10 @@ def squash_contact_activities_counts():
 
 @app.task(name="stats.rebuild_contacts_activities_counts")
 def rebuild_contacts_activities_counts():
-    from .models import ContactActivity, PollStats
+    from .models import ContactActivity, PollEngagementDailyCount
 
-    time_filters = list(PollStats.DATA_TIME_FILTERS.keys())
-    segments = list(PollStats.DATA_SEGMENTS.keys())
+    time_filters = list(PollEngagementDailyCount.DATA_TIME_FILTERS.keys())
+    segments = list(PollEngagementDailyCount.DATA_SEGMENTS.keys())
     metric = "active-users"
 
     orgs = Org.objects.filter(is_active=True)
@@ -105,7 +105,7 @@ def rebuild_contacts_activities_counts():
 
         for time_filter in time_filters:
             for segment in segments:
-                PollStats.refresh_engagement_data(org, metric, segment, time_filter)
+                PollEngagementDailyCount.refresh_engagement_data(org, metric, segment, time_filter)
                 logger.info(
                     f"Task: rebuild_contacts_activities_counts refreshing contacts activities engagement stats for org {org.id} in progress for {time.time() - start_refresh}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
                 )
