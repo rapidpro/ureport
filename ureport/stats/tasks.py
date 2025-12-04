@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @org_task("refresh-engagement-data", 60 * 60 * 4)
 def refresh_engagement_data(org, since, until):
-    from .models import PollStats
+    from .models import PollStatsCounter, PollStats
 
     start = time.time()
 
@@ -32,7 +32,7 @@ def refresh_engagement_data(org, since, until):
                     f"Task: refresh_engagement_data org {org.id} in progress for {time.time() - start}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
                 )
 
-    PollStats.calculate_average_response_rate(org)
+    PollStatsCounter.calculate_average_response_rate(org)
 
     logger.info(f"Task: refresh_engagement_data org {org.id} finished in {time.time() - start}s")
 
