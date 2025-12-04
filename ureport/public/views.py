@@ -38,7 +38,7 @@ from ureport.landingpages.models import LandingPage
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem
 from ureport.polls.models import Poll, PollQuestion
-from ureport.stats.models import GenderSegment, PollStats
+from ureport.stats.models import GenderSegment, PollStats, PollStatsCounter
 from ureport.utils import (
     get_global_count,
     get_shared_countries_number,
@@ -548,7 +548,7 @@ class UreportersView(RedirectConfigMixin, SmartTemplateView):
 
         # global counter
         context["global_counter"] = get_global_count()
-        context["average_response_rate"] = PollStats.get_average_response_rate(org)
+        context["average_response_rate"] = PollStatsCounter.get_average_response_rate(org)
 
         context["data_time_filters"] = [
             dict(time_filter_number=key, label=str(val)) for key, val in PollStats.DATA_TIME_FILTERS.items()

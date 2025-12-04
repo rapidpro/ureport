@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, F, Prefetch, Q, Sum
+from django.db.models import Count, F, Prefetch, Sum
 from django.db.models.functions import Lower
 from django.utils import timezone
 from django.utils.html import strip_tags
@@ -1103,7 +1103,7 @@ class PollQuestion(SmartModel):
     def calculate_results(self, segment=None):
         from stop_words import safe_get_stop_words
 
-        from ureport.stats.models import AgeSegment, GenderSegment, PollStats, PollStatsCounter, PollWordCloud
+        from ureport.stats.models import AgeSegment, GenderSegment, PollStatsCounter, PollWordCloud
 
         org = self.poll.org
         open_ended = self.is_open_ended()
@@ -1160,66 +1160,30 @@ class PollQuestion(SmartModel):
                         osm_id = boundary.get("osm_id").upper()
 
                         categories_results = (
-                            PollStats.get_question_stats(org.id, self)
-                            .filter(
-                                Q(location__id=boundary["id"])
-                                | Q(location__parent__id=boundary["id"])
-                                | Q(location__parent__parent__id=boundary["id"])
+                            PollStatsCounter.objects.filter(
+                                org_id=org.id,
+                                flow_result=self.flow_result,
+                                scope="%s:%s" % (location_part, osm_id),
                             )
                             .exclude(flow_result_category=None)
                             .values("flow_result_category__category")
                             .annotate(label=F("flow_result_category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
+                        categories_results_dict = {
+                            elt["label"].lower(): elt["count"] for elt in categories_results
+                        }
 
                         unset_count_stats = (
-                            PollStats.get_question_stats(org.id, self)
-                            .filter(flow_result_category=None)
-                            .filter(
-                                Q(location__id=boundary["id"])
-                                | Q(location__parent__id=boundary["id"])
-                                | Q(location__parent__parent__id=boundary["id"])
+                            PollStatsCounter.objects.filter(
+                                org_id=org.id,
+                                flow_result=self.flow_result,
+                                scope="%s:%s" % (location_part, osm_id),
                             )
+                            .filter(flow_result_category=None)
                             .aggregate(Sum("count"))
                         )
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
-
-                        new_categories_results = (
-                            PollStatsCounter.objects.filter(
-                                org_id=org.id,
-                                flow_result=self.flow_result,
-                                scope="%s:%s" % (location_part, osm_id),
-                            )
-                            .exclude(flow_result_category=None)
-                            .values("flow_result_category__category")
-                            .annotate(label=F("flow_result_category__category"), count=Sum("count"))
-                            .values("label", "count")
-                        )
-                        new_categories_results_dict = {
-                            elt["label"].lower(): elt["count"] for elt in new_categories_results
-                        }
-
-                        new_unset_count_stats = (
-                            PollStatsCounter.objects.filter(
-                                org_id=org.id,
-                                flow_result=self.flow_result,
-                                scope="%s:%s" % (location_part, osm_id),
-                            )
-                            .filter(flow_result_category=None)
-                            .aggregate(Sum("count"))
-                        )
-                        new_unset_count = new_unset_count_stats.get("count__sum", 0) or 0
-
-                        self._log_stats_comparison(
-                            categories_results_dict,
-                            new_categories_results_dict,
-                            unset_count,
-                            new_unset_count,
-                            "location",
-                            f"{location_part}:{osm_id}",
-                            org.id,
-                        )
 
                         for category_obj in categories_qs:
                             key = category_obj.flow_result_category.category.lower()
@@ -1260,23 +1224,6 @@ class PollQuestion(SmartModel):
                             data_key = "35+"
 
                         categories_results = (
-                            PollStats.get_question_stats(org.id, self)
-                            .filter(age_segment_id=age["id"])
-                            .exclude(flow_result_category=None)
-                            .values("flow_result_category__category")
-                            .annotate(label=F("flow_result_category__category"), count=Sum("count"))
-                            .values("label", "count")
-                        )
-                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
-
-                        unset_count_stats = (
-                            PollStats.get_question_stats(org.id, self)
-                            .filter(flow_result_category=None, age_segment_id=age["id"])
-                            .aggregate(Sum("count"))
-                        )
-                        unset_count = unset_count_stats.get("count__sum", 0) or 0
-
-                        new_categories_results = (
                             PollStatsCounter.objects.filter(
                                 org_id=org.id,
                                 flow_result=self.flow_result,
@@ -1287,11 +1234,11 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("flow_result_category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        new_categories_results_dict = {
-                            elt["label"].lower(): elt["count"] for elt in new_categories_results
+                        categories_results_dict = {
+                            elt["label"].lower(): elt["count"] for elt in categories_results
                         }
 
-                        new_unset_count_stats = (
+                        unset_count_stats = (
                             PollStatsCounter.objects.filter(
                                 org_id=org.id,
                                 flow_result=self.flow_result,
@@ -1300,17 +1247,7 @@ class PollQuestion(SmartModel):
                             .filter(flow_result_category=None)
                             .aggregate(Sum("count"))
                         )
-                        new_unset_count = new_unset_count_stats.get("count__sum", 0) or 0
-
-                        self._log_stats_comparison(
-                            categories_results_dict,
-                            new_categories_results_dict,
-                            unset_count,
-                            new_unset_count,
-                            "age",
-                            f"{age['min_age']}:{age['max_age']}",
-                            org.id,
-                        )
+                        unset_count = unset_count_stats.get("count__sum", 0) or 0
 
                         categories = []
                         for category_obj in categories_qs:
@@ -1338,24 +1275,6 @@ class PollQuestion(SmartModel):
                     results = []
                     for gender in genders:
                         categories_results = (
-                            PollStats.get_question_stats(org.id, self)
-                            .filter(gender_segment_id=gender["id"])
-                            .exclude(flow_result_category=None)
-                            .values("flow_result_category__category")
-                            .annotate(label=F("flow_result_category__category"), count=Sum("count"))
-                            .values("label", "count")
-                        )
-                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
-                        categories = []
-
-                        unset_count_stats = (
-                            PollStats.get_question_stats(org.id, self)
-                            .filter(flow_result_category=None, gender_segment_id=gender["id"])
-                            .aggregate(Sum("count"))
-                        )
-                        unset_count = unset_count_stats.get("count__sum", 0) or 0
-
-                        new_categories_results = (
                             PollStatsCounter.objects.filter(
                                 org_id=org.id,
                                 flow_result=self.flow_result,
@@ -1366,11 +1285,12 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("flow_result_category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        new_categories_results_dict = {
-                            elt["label"].lower(): elt["count"] for elt in new_categories_results
+                        categories_results_dict = {
+                            elt["label"].lower(): elt["count"] for elt in categories_results
                         }
+                        categories = []
 
-                        new_unset_count_stats = (
+                        unset_count_stats = (
                             PollStatsCounter.objects.filter(
                                 org_id=org.id,
                                 flow_result=self.flow_result,
@@ -1379,17 +1299,7 @@ class PollQuestion(SmartModel):
                             .filter(flow_result_category=None)
                             .aggregate(Sum("count"))
                         )
-                        new_unset_count = new_unset_count_stats.get("count__sum", 0) or 0
-
-                        self._log_stats_comparison(
-                            categories_results_dict,
-                            new_categories_results_dict,
-                            unset_count,
-                            new_unset_count,
-                            "gender",
-                            gender["gender"],
-                            org.id,
-                        )
+                        unset_count = unset_count_stats.get("count__sum", 0) or 0
 
                         for category_obj in categories_qs:
                             key = category_obj.flow_result_category.category.lower()
@@ -1411,27 +1321,14 @@ class PollQuestion(SmartModel):
                         )
 
             else:
-                categories_results = (
-                    PollStats.get_question_stats(org.id, self)
-                    .exclude(flow_result_category=None)
-                    .values("flow_result_category__category")
-                    .annotate(label=F("flow_result_category__category"), count=Sum("count"))
-                    .values("label", "count")
-                )
-                categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
-
-                new_stats_count = (
+                stats_count = (
                     PollStatsCounter.objects.filter(org_id=org.id, flow_result=self.flow_result, scope="all")
                     .exclude(flow_result_category=None)
                     .values("flow_result_category__category")
                     .annotate(label=F("flow_result_category__category"), count=Sum("count"))
                     .values("label", "count")
                 )
-                new_categories_results_dict = {elt["label"].lower(): elt["count"] for elt in new_stats_count}
-
-                self._log_stats_comparison(
-                    categories_results_dict, new_categories_results_dict, None, None, "total", "all", org.id
-                )
+                categories_results_dict = {elt["label"].lower(): elt["count"] for elt in stats_count}
 
                 categories = []
 
@@ -1482,22 +1379,15 @@ class PollQuestion(SmartModel):
         return self.calculate_responded()
 
     def calculate_responded(self):
-        from ureport.stats.models import PollStats, PollStatsCounter
+        from ureport.stats.models import PollStatsCounter
 
         key = PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
-        responded_stats = (
-            PollStats.get_question_stats(self.poll.org_id, question=self)
-            .exclude(flow_result_category=None)
-            .aggregate(Sum("count"))
-        )
 
-        new_responded_stats = (
+        responded_stats = (
             PollStatsCounter.objects.filter(org_id=self.poll.org_id, flow_result=self.flow_result, scope="all")
             .exclude(flow_result_category=None)
             .aggregate(Sum("count"))
         )
-
-        self._log_stats_comparison(responded_stats, new_responded_stats, None, None, "total", "all", self.poll.org_id)
 
         results = responded_stats.get("count__sum", 0) or 0
         cache.set(key, {"results": results}, None)
@@ -1514,18 +1404,14 @@ class PollQuestion(SmartModel):
         return self.calculate_polled()
 
     def calculate_polled(self):
-        from ureport.stats.models import PollStats, PollStatsCounter
+        from ureport.stats.models import PollStatsCounter
 
         key = PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
 
-        polled_stats = PollStats.get_question_stats(self.poll.org_id, question=self).aggregate(Sum("count"))
-        results = polled_stats.get("count__sum", 0) or 0
-
-        new_polled_stats = PollStatsCounter.objects.filter(
+        polled_stats = PollStatsCounter.objects.filter(
             org_id=self.poll.org_id, flow_result=self.flow_result, scope="all"
         ).aggregate(Sum("count"))
-
-        self._log_stats_comparison(polled_stats, new_polled_stats, None, None, "total", "all", self.poll.org_id)
+        results = polled_stats.get("count__sum", 0) or 0
 
         cache.set(key, {"results": results}, None)
         return results

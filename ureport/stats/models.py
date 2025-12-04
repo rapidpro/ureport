@@ -963,71 +963,7 @@ class PollStats(models.Model):
 
         return data
 
-    @classmethod
-    def get_average_response_rate(cls, org):
-        key = f"org:{org.id}:average_response_rate"
-        output_data = cache.get(key, None)
-        if output_data:
-            return output_data["results"]
 
-        return PollStats.calculate_average_response_rate(org)
-
-    @classmethod
-    def calculate_average_response_rate(cls, org):
-        key = f"org:{org.id}:average_response_rate"
-
-        poll_ids = list(
-            Poll.objects.filter(org_id=org.id, published=True, is_active=True).only("id").values_list("id", flat=True)
-        )
-
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll_id__in=poll_ids).values_list("flow_result_id", flat=True)
-        )
-
-        polled_stats = PollStats.objects.filter(org=org, flow_result_id__in=flow_result_ids).aggregate(Sum("count"))
-        responded_stats = (
-            PollStats.objects.filter(org=org, flow_result_id__in=flow_result_ids)
-            .exclude(flow_result_category=None)
-            .aggregate(Sum("count"))
-        )
-
-        new_polled_stats = PollStatsCounter.objects.filter(
-            org=org, flow_result_id__in=flow_result_ids, scope="all"
-        ).aggregate(Sum("count"))
-        new_responded_stats = (
-            PollStatsCounter.objects.filter(org=org, flow_result_id__in=flow_result_ids, scope="all")
-            .exclude(flow_result_category=None)
-            .aggregate(Sum("count"))
-        )
-
-        PollStats._log_stats_comparison(
-            "PollStatsCounter",
-            list(polled_stats),
-            list(new_polled_stats),
-            "all",
-            "N/A",
-            org.id,
-        )
-        PollStats._log_stats_comparison(
-            "PollStatsCounter",
-            list(responded_stats),
-            list(new_responded_stats),
-            "all",
-            "N/A",
-            org.id,
-        )
-
-        responded = responded_stats.get("count__sum", 0)
-        if responded is None:
-            responded = 0
-        polled = polled_stats.get("count__sum")
-        if polled is None or polled == 0:
-            return 0
-
-        percentage = responded * 100 / polled
-        cache.set(key, {"results": percentage}, None)
-
-        return percentage
 
     @classmethod
     def _log_stats_comparison(cls, model_name, old_stats_dict, new_stats_dict, segment_type, segment_id, org_id):
@@ -1061,6 +997,49 @@ class PollStatsCounter(BaseScopedCount):
     flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT)
 
     flow_result_category = models.ForeignKey(FlowResultCategory, null=True, on_delete=models.SET_NULL)
+
+    @classmethod
+    def get_average_response_rate(cls, org):
+        key = f"org:{org.id}:average_response_rate"
+        output_data = cache.get(key, None)
+        if output_data:
+            return output_data["results"]
+
+        return PollStatsCounter.calculate_average_response_rate(org)
+
+    @classmethod
+    def calculate_average_response_rate(cls, org):
+        key = f"org:{org.id}:average_response_rate"
+
+        poll_ids = list(
+            Poll.objects.filter(org_id=org.id, published=True, is_active=True).only("id").values_list("id", flat=True)
+        )
+
+        flow_result_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll_id__in=poll_ids).values_list("flow_result_id", flat=True)
+        )
+
+        polled_stats = PollStatsCounter.objects.filter(
+            org=org, flow_result_id__in=flow_result_ids, scope="all"
+        ).aggregate(Sum("count"))
+
+        responded_stats = (
+            PollStatsCounter.objects.filter(org=org, flow_result_id__in=flow_result_ids, scope="all")
+            .exclude(flow_result_category=None)
+            .aggregate(Sum("count"))
+        )
+
+        responded = responded_stats.get("count__sum", 0)
+        if responded is None:
+            responded = 0
+        polled = polled_stats.get("count__sum")
+        if polled is None or polled == 0:
+            return 0
+
+        percentage = responded * 100 / polled
+        cache.set(key, {"results": percentage}, None)
+
+        return percentage
 
     class Meta:
         indexes = [
