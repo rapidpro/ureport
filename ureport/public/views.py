@@ -38,7 +38,7 @@ from ureport.landingpages.models import LandingPage
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem
 from ureport.polls.models import Poll, PollQuestion
-from ureport.stats.models import GenderSegment, PollStats, PollStatsCounter
+from ureport.stats.models import GenderSegment, PollStatsCounter, PollEngagementDailyCount
 from ureport.utils import (
     get_global_count,
     get_shared_countries_number,
@@ -505,7 +505,7 @@ class EngagementDataView(RedirectConfigMixin, SmartReadView):
                 segment_slug = results_params.get("segment")
                 time_filter = int(results_params.get("filter", "12"))
 
-                output_data = PollStats.get_engagement_data(self.get_object(), metric, segment_slug, time_filter)
+                output_data = PollEngagementDailyCount.get_engagement_data(self.get_object(), metric, segment_slug, time_filter)
         except json.JSONDecodeError:
             output_data = []
             pass
@@ -551,7 +551,7 @@ class UreportersView(RedirectConfigMixin, SmartTemplateView):
         context["average_response_rate"] = PollStatsCounter.get_average_response_rate(org)
 
         context["data_time_filters"] = [
-            dict(time_filter_number=key, label=str(val)) for key, val in PollStats.DATA_TIME_FILTERS.items()
+            dict(time_filter_number=key, label=str(val)) for key, val in PollEngagementDailyCount.DATA_TIME_FILTERS.items()
         ]
 
         backend_options = org.backends.filter(is_active=True).values_list("slug", flat=True)
@@ -561,11 +561,11 @@ class UreportersView(RedirectConfigMixin, SmartTemplateView):
 
         context["data_segments"] = [
             dict(segment_type=key, label=str(val))
-            for key, val in PollStats.DATA_SEGMENTS.items()
+            for key, val in PollEngagementDailyCount.DATA_SEGMENTS.items()
             if (key != "location" or show_maps)
         ]
 
-        context["data_metrics"] = [dict(slug=key, title=str(val)) for key, val in PollStats.DATA_METRICS.items()]
+        context["data_metrics"] = [dict(slug=key, title=str(val)) for key, val in PollEngagementDailyCount.DATA_METRICS.items()]
 
         context["hide_charts_breakdown"] = org.get_config("common.has_charts_hidden", False) and not (
             (user.is_authenticated and org in user.get_user_orgs()) or user.is_superuser
