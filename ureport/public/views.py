@@ -47,8 +47,25 @@ from ureport.utils import (
 )
 
 
+class RedirectConfigMixin(object):
+    def has_permission(self, request, *args, **kwargs):
+        org = request.org
+        redirect_site_url = org.get_config("redirect_site_url", "").strip()
+        if redirect_site_url:
+            return request.user.is_authenticated and (org in request.user.get_user_orgs() or request.user.is_superuser)
+        return super(RedirectConfigMixin, self).has_permission(request, *args, **kwargs)
+
+
 class IndexView(SmartTemplateView):
     template_name = "public/index.html"
+
+    def pre_process(self, request, *args, **kwargs):
+        org = request.org
+        redirect_site_url = org.get_config("redirect_site_url", "").strip()
+        if redirect_site_url and not request.user.is_authenticated:
+            return HttpResponse(status=302, headers={"Location": redirect_site_url})
+
+        return super().pre_process(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -136,7 +153,7 @@ class SharedSitesCount(SmartTemplateView):
         return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")
 
 
-class NewsView(SmartTemplateView):
+class NewsView(RedirectConfigMixin, SmartTemplateView):
     def render_to_response(self, context, **kwargs):
         org = self.request.org
 
@@ -162,7 +179,7 @@ class NewsView(SmartTemplateView):
         return HttpResponse(json.dumps(output_json))
 
 
-class CustomPage(SmartReadView):
+class CustomPage(RedirectConfigMixin, SmartReadView):
     template_name = "public/custom_page.html"
     model = DashBlock
     slug_url_kwarg = "link"
@@ -180,7 +197,7 @@ class CustomPage(SmartReadView):
         return queryset
 
 
-class LandingPageView(SmartReadView):
+class LandingPageView(RedirectConfigMixin, SmartReadView):
     template_name = "public/landing_page.html"
     model = LandingPage
     slug_url_kwarg = "slug"
@@ -195,7 +212,7 @@ class LandingPageView(SmartReadView):
         return queryset
 
 
-class AboutView(SmartTemplateView):
+class AboutView(RedirectConfigMixin, SmartTemplateView):
     template_name = "public/about.html"
 
     def get_context_data(self, **kwargs):
@@ -290,7 +307,7 @@ class PollContextMixin(object):
         return context
 
 
-class PollsView(PollContextMixin, SmartTemplateView):
+class PollsView(RedirectConfigMixin, PollContextMixin, SmartTemplateView):
     template_name = "public/polls.html"
 
     def get_context_data(self, **kwargs):
@@ -299,7 +316,7 @@ class PollsView(PollContextMixin, SmartTemplateView):
         return context
 
 
-class PollReadView(PollContextMixin, SmartReadView):
+class PollReadView(RedirectConfigMixin, PollContextMixin, SmartReadView):
     template_name = "public/polls.html"
     model = Poll
 
@@ -312,7 +329,7 @@ class PollReadView(PollContextMixin, SmartReadView):
         return self.get_object()
 
 
-class PollPreview(OrgObjPermsMixin, PollContextMixin, SmartReadView):
+class PollPreview(RedirectConfigMixin, OrgObjPermsMixin, PollContextMixin, SmartReadView):
     template_name = "public/polls.html"
     model = Poll
     permission = "polls.poll_read"
@@ -336,7 +353,7 @@ class PollRedirectView(RedirectView):
         return reverse("public.opinion_read", args=[kwargs["pk"]])
 
 
-class StoriesView(SmartTemplateView):
+class StoriesView(RedirectConfigMixin, SmartTemplateView):
     template_name = "public/stories.html"
 
     def get_context_data(self, **kwargs):
@@ -378,7 +395,7 @@ class StoriesView(SmartTemplateView):
         return context
 
 
-class ReportsView(SmartTemplateView):
+class ReportsView(RedirectConfigMixin, SmartTemplateView):
     template_name = "public/reports.html"
 
     def get_context_data(self, **kwargs):
@@ -417,7 +434,7 @@ class ReportsView(SmartTemplateView):
         return context
 
 
-class StoryReadView(SmartReadView):
+class StoryReadView(RedirectConfigMixin, SmartReadView):
     template_name = "public/story_read.html"
     model = Story
 
@@ -446,7 +463,7 @@ class StoryReadView(SmartReadView):
         return context
 
 
-class ReportersResultsView(SmartReadView):
+class ReportersResultsView(RedirectConfigMixin, SmartReadView):
     model = Org
     http_method_names = ["get"]
 
@@ -470,7 +487,7 @@ class ReportersResultsView(SmartReadView):
         return HttpResponse(json.dumps(output_data))
 
 
-class EngagementDataView(SmartReadView):
+class EngagementDataView(RedirectConfigMixin, SmartReadView):
     model = Org
     http_method_names = ["get"]
 
@@ -499,7 +516,7 @@ class EngagementDataView(SmartReadView):
         return HttpResponse(json.dumps(output_data))
 
 
-class UreportersView(SmartTemplateView):
+class UreportersView(RedirectConfigMixin, SmartTemplateView):
     template_name = "public/ureporters.html"
     http_method_names = ["get"]
 
@@ -557,7 +574,7 @@ class UreportersView(SmartTemplateView):
         return context
 
 
-class JoinEngageView(SmartTemplateView):
+class JoinEngageView(RedirectConfigMixin, SmartTemplateView):
     template_name = "public/join_engage.html"
 
     def get_context_data(self, **kwargs):
@@ -568,7 +585,7 @@ class JoinEngageView(SmartTemplateView):
         return context
 
 
-class Bots(SmartTemplateView):
+class Bots(RedirectConfigMixin, SmartTemplateView):
     template_name = "public/bots.html"
 
     def get_context_data(self, **kwargs):
@@ -579,7 +596,7 @@ class Bots(SmartTemplateView):
         return context
 
 
-class JobsView(SmartTemplateView):
+class JobsView(RedirectConfigMixin, SmartTemplateView):
     template_name = "public/jobs.html"
 
     def pre_process(self, *args, **kwargs):
@@ -600,7 +617,7 @@ class JobsView(SmartTemplateView):
         return context
 
 
-class BoundaryView(SmartTemplateView):
+class BoundaryView(RedirectConfigMixin, SmartTemplateView):
     def render_to_response(self, context, **kwargs):
         org = self.request.org
 
@@ -638,7 +655,7 @@ class BoundaryView(SmartTemplateView):
         return HttpResponse(json.dumps(boundaries))
 
 
-class PollQuestionResultsView(SmartReadView):
+class PollQuestionResultsView(RedirectConfigMixin, SmartReadView):
     model = PollQuestion
 
     def derive_queryset(self):

@@ -660,6 +660,14 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="redirect_site_url",
+        field=dict(
+            help_text=_("If set, public users visiting the site will be redirected to this URL."),
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="has_charts_hidden",
         field=dict(
             help_text=_("Whether to hide the engagement breakdown charts."),

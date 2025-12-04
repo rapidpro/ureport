@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 14:33+0000\n"
+"POT-Creation-Date: 2025-12-04 08:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -1907,6 +1907,9 @@ msgstr "Zda se má aktivovat další pohlaví."
 
 msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
 msgstr "Zda používat novou značku 2024 s UNICEF v logu a společným tématem."
+
+msgid "If set, public users visiting the site will be redirected to this URL."
+msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Zda skrýt grafy rozdělení závazků."
