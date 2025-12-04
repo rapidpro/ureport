@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @org_task("refresh-engagement-data", 60 * 60 * 4)
 def refresh_engagement_data(org, since, until):
-    from .models import PollStatsCounter, PollEngagementDailyCount
+    from .models import PollEngagementDailyCount, PollStatsCounter
 
     start = time.time()
 

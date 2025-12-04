@@ -401,7 +401,11 @@ class PollEngagementDailyCount(BaseDailyCount):
             .values(date=Cast("day", output_field=models.DateTimeField()))
             .annotate(Sum("count"))
         )
-        return [dict(name=str(_("Opinion Responses")), data=PollEngagementDailyCount.get_counts_data(responses, time_filter))]
+        return [
+            dict(
+                name=str(_("Opinion Responses")), data=PollEngagementDailyCount.get_counts_data(responses, time_filter)
+            )
+        ]
 
     @classmethod
     def get_gender_opinion_responses(cls, org, time_filter):
@@ -678,7 +682,9 @@ class PollEngagementDailyCount(BaseDailyCount):
                 .annotate(Sum("count"))
             )
 
-            gender_rate_series = PollEngagementDailyCount.get_response_rate_data(polled_stats, responded_stats, time_filter)
+            gender_rate_series = PollEngagementDailyCount.get_response_rate_data(
+                polled_stats, responded_stats, time_filter
+            )
 
             name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
             if not name:
@@ -728,7 +734,9 @@ class PollEngagementDailyCount(BaseDailyCount):
                 .annotate(Sum("count"))
             )
 
-            gender_rate_series = PollEngagementDailyCount.get_response_rate_data(polled_stats, responded_stats, time_filter)
+            gender_rate_series = PollEngagementDailyCount.get_response_rate_data(
+                polled_stats, responded_stats, time_filter
+            )
             output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=gender_rate_series))
 
         return output_data
@@ -778,7 +786,9 @@ class PollEngagementDailyCount(BaseDailyCount):
                 .annotate(Sum("count"))
             )
 
-            age_rate_series = PollEngagementDailyCount.get_response_rate_data(polled_stats, responded_stats, time_filter)
+            age_rate_series = PollEngagementDailyCount.get_response_rate_data(
+                polled_stats, responded_stats, time_filter
+            )
             output_data.append(dict(name=data_key, data=age_rate_series))
         return output_data
 
@@ -810,8 +820,6 @@ class PollEngagementDailyCount(BaseDailyCount):
             data[key] = rate
 
         return data
-
-
 
     class Meta:
         indexes = [

@@ -2204,8 +2204,6 @@ class PollQuestionTest(UreportTest):
         age_segment_20 = AgeSegment.objects.filter(min_age=20).first()
         age_segment_25 = AgeSegment.objects.filter(min_age=25).first()
 
-        now = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
-
         PollStatsCounter.objects.all().delete()
         self.assertEqual(0, PollStatsCounter.objects.all().count())
 
@@ -2444,7 +2442,6 @@ class PollQuestionTest(UreportTest):
         self.assertEqual(11, PollStatsCounter.objects.all().count())
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
-
     def test_tasks(self):
         self.org = self.create_org("burundi", zoneinfo.ZoneInfo("Africa/Bujumbura"), self.admin)
 
@@ -2630,7 +2627,10 @@ class PollResultsTest(UreportTest):
             )
 
             activities = (
-                ContactActivity.objects.filter(org=self.nigeria).values("date").annotate(count__sum=Count("id")).order_by("date")
+                ContactActivity.objects.filter(org=self.nigeria)
+                .values("date")
+                .annotate(count__sum=Count("id"))
+                .order_by("date")
             )
             self.assertEqual(12, activity_counts.count())
             self.assertEqual(12, activities.count())
