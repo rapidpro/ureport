@@ -1170,9 +1170,7 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("flow_result_category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {
-                            elt["label"].lower(): elt["count"] for elt in categories_results
-                        }
+                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
 
                         unset_count_stats = (
                             PollStatsCounter.objects.filter(
@@ -1234,9 +1232,7 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("flow_result_category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {
-                            elt["label"].lower(): elt["count"] for elt in categories_results
-                        }
+                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
 
                         unset_count_stats = (
                             PollStatsCounter.objects.filter(
@@ -1285,9 +1281,7 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("flow_result_category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {
-                            elt["label"].lower(): elt["count"] for elt in categories_results
-                        }
+                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
                         categories = []
 
                         unset_count_stats = (

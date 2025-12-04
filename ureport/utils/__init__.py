@@ -915,7 +915,6 @@ def get_ureporters_locations_response_rates(org, segment):
         else:
             location_scopes.append(f"ward:{elt['osm_id'].upper()}")
 
-    boundaries_ids = [elt["id"] for elt in boundaries]
     polled_stats = (
         PollEngagementDailyCount.objects.filter(org=org, day__gte=year_ago, scope__in=location_scopes)
         .values("scope")
