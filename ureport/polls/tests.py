@@ -2315,7 +2315,10 @@ class PollResultsTest(UreportTest):
             )
 
             activities = (
-                ContactActivity.objects.filter(org=self.nigeria).values("date").annotate(count__sum=Count("id")).order_by("date")
+                ContactActivity.objects.filter(org=self.nigeria)
+                .values("date")
+                .annotate(count__sum=Count("id"))
+                .order_by("date")
             )
             self.assertEqual(12, activity_counts.count())
             self.assertEqual(12, activities.count())

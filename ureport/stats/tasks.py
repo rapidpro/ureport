@@ -112,3 +112,20 @@ def rebuild_contacts_activities_counts():
         logger.info(
             f"Task: rebuild_contacts_activities_counts finished recalculating contact activity and refreshing contacts activities engagement stats for org {org.id} in {time.time() - start_rebuild}s"
         )
+
+
+@app.task(name="stats.stats_counts_squash")
+def stats_counts_squash():
+    from ureport.stats.models import PollEngagementDailyCount, PollStatsCounter
+
+    r = get_valkey_connection()
+    key = "squash_stats_counts_lock"
+
+    lock_timeout = 60 * 60 * 2
+
+    if r.get(key):
+        logger.info("Skipping stats app squashing stats as it is still running")
+    else:
+        with r.lock(key, timeout=lock_timeout):
+            PollStatsCounter.squash()
+            PollEngagementDailyCount.squash()
