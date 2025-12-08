@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 14:33+0000\n"
+"POT-Creation-Date: 2025-12-04 08:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: WILDNEY RAPHAEL SILVA CAVALCANTE, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1895,6 +1895,9 @@ msgstr "Si hay que activar otro género."
 
 msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
 msgstr "Indica si se debe usar la nueva marca de 2024 con UNICEF en el logo y un tema común."
+
+msgid "If set, public users visiting the site will be redirected to this URL."
+msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Indica si se deben ocultar los gráficos de desglose de participación."

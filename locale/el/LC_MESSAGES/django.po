@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 14:33+0000\n"
+"POT-Creation-Date: 2025-12-04 08:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1907,6 +1907,9 @@ msgstr "Εάν θα ενεργοποιήσετε ένα επιπλέον φύλ�
 #| msgid "Whether to show the UNICEF logo in the footer."
 msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
 msgstr "Εάν θα εμφανίζεται το λογότυπο της UNICEF στο υποσέλιδο."
+
+msgid "If set, public users visiting the site will be redirected to this URL."
+msgstr ""
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Εάν θα πρέπει να κρύψετε τα γραφήματα ανάλυσης της σύνδεσης."
