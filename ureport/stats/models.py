@@ -682,14 +682,14 @@ class PollEngagementDailyCount(BaseDailyCount):
                 .annotate(Sum("count"))
             )
 
-            gender_rate_series = PollEngagementDailyCount.get_response_rate_data(
+            scheme_rate_series = PollEngagementDailyCount.get_response_rate_data(
                 polled_stats, responded_stats, time_filter
             )
 
             name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
             if not name:
                 continue
-            output_data.append(dict(name=name, data=gender_rate_series))
+            output_data.append(dict(name=name, data=scheme_rate_series))
 
         return output_data
 
