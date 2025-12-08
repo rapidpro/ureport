@@ -285,7 +285,6 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["view"].template_name, "public/index.html")
 
-
     def test_additional_menu(self):
         additional_menu_url = reverse("public.custom_page", args=["faq"])
         custom_page_dashblock_type = DashBlockType.objects.get_or_create(

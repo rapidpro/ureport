@@ -238,7 +238,7 @@ class Poll(SmartModel):
         return latest_synced_obj_time, pull_after_delete
 
     def delete_poll_stats(self):
-        from ureport.stats.models import PollEngagementDailyCount, PollStats, PollStatsCounter
+        from ureport.stats.models import PollEngagementDailyCount, PollStatsCounter
         from ureport.utils import chunk_list
 
         if self.stopped_syncing:
@@ -246,16 +246,6 @@ class Poll(SmartModel):
             return
 
         flow_result_ids = self.questions.all().values_list("flow_result_id", flat=True)
-
-        poll_stats_ids = PollStats.objects.filter(org_id=self.org_id, flow_result_id__in=flow_result_ids)
-        poll_stats_ids = poll_stats_ids.values_list("pk", flat=True)
-
-        poll_stats_ids_count = len(poll_stats_ids)
-
-        for batch in chunk_list(poll_stats_ids, 1000):
-            PollStats.objects.filter(pk__in=batch).delete()
-
-        logger.info("Deleted %d poll stats for poll #%d on org #%d" % (poll_stats_ids_count, self.pk, self.org_id))
 
         poll_stats_counters_ids = PollStatsCounter.objects.filter(
             org_id=self.org_id, flow_result_id__in=flow_result_ids
@@ -376,7 +366,6 @@ class Poll(SmartModel):
             AgeSegment,
             GenderSegment,
             PollEngagementDailyCount,
-            PollStats,
             PollStatsCounter,
             SchemeSegment,
         )
@@ -463,7 +452,6 @@ class Poll(SmartModel):
                     % (org_id, flow, processed_results, time.time() - start)
                 )
 
-                poll_stats_obj_to_insert = []
                 poll_stats_counter_obj_to_insert = []
                 poll_engagement_daily_count_obj_to_insert = []
                 for stat_tuple in stats_dict.keys():
@@ -518,8 +506,6 @@ class Poll(SmartModel):
                     if location_id:
                         stat_kwargs["location_id"] = location_id
 
-                    poll_stats_obj_to_insert.append(PollStats(**stat_kwargs))
-
                     stat_counter_kwargs = dict(
                         org_id=org_id,
                         flow_result_id=flow_result_id,
@@ -569,7 +555,6 @@ class Poll(SmartModel):
                 # Delete existing counters and then create new counters
                 self.delete_poll_stats()
 
-                PollStats.objects.bulk_create(poll_stats_obj_to_insert, batch_size=1000)
                 PollStatsCounter.objects.bulk_create(poll_stats_counter_obj_to_insert, batch_size=1000)
                 PollEngagementDailyCount.objects.bulk_create(
                     poll_engagement_daily_count_obj_to_insert, batch_size=1000

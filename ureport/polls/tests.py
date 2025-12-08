@@ -1159,7 +1159,6 @@ class PollTest(UreportTest):
 
         poll_question = self.create_poll_question(self.admin, poll, "question 1", "step-uuid")
 
-        self.assertFalse(PollStats.objects.all())
         self.assertFalse(PollStatsCounter.objects.all())
         self.assertFalse(PollEngagementDailyCount.objects.all())
 
@@ -1182,7 +1181,6 @@ class PollTest(UreportTest):
         ):
             poll.rebuild_poll_results_counts()
 
-            self.assertTrue(PollStats.objects.all())
             self.assertTrue(PollStatsCounter.objects.all())
             self.assertTrue(PollEngagementDailyCount.objects.all())
 
@@ -1191,7 +1189,6 @@ class PollTest(UreportTest):
 
             poll.delete_poll_stats()
 
-            self.assertTrue(PollStats.objects.all())
             self.assertTrue(PollStatsCounter.objects.all())
             self.assertTrue(PollEngagementDailyCount.objects.all())
 
@@ -1199,29 +1196,22 @@ class PollTest(UreportTest):
             poll.save()
 
             poll.delete_poll_stats()
-            self.assertFalse(PollStats.objects.all())
             self.assertFalse(PollStatsCounter.objects.all())
             self.assertFalse(PollEngagementDailyCount.objects.all())
 
             poll2 = self.create_poll(self.nigeria, "Poll 2", "flow-uuid", self.education_nigeria, self.admin)
             poll_question2 = self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
 
-            self.assertFalse(PollStats.objects.all())
             self.assertFalse(PollStatsCounter.objects.all())
             self.assertFalse(PollEngagementDailyCount.objects.all())
-            self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
-            self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
             # rebuild for first poll will rebuild for poll2 as well
             poll.rebuild_poll_results_counts()
 
-            self.assertTrue(PollStats.objects.all())
             self.assertTrue(PollStatsCounter.objects.all())
             self.assertTrue(PollEngagementDailyCount.objects.all())
-            self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
             self.assertTrue(PollStatsCounter.objects.filter(flow_result_id=poll_question.flow_result_id))
             self.assertTrue(PollEngagementDailyCount.objects.filter(flow_result_id=poll_question.flow_result_id))
-            self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
             self.assertTrue(PollStatsCounter.objects.filter(flow_result_id=poll_question2.flow_result_id))
             self.assertTrue(PollEngagementDailyCount.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
@@ -3089,16 +3079,6 @@ class PollResultsTest(UreportTest):
             ward="R-IKEJA",
         )
         self.poll.rebuild_poll_results_counts()
-        self.assertEqual(PollStats.objects.all().count(), 1)
-        poll_stat = PollStats.objects.get()
-
-        self.assertEqual(poll_stat.org, self.nigeria)
-        self.assertEqual(poll_stat.flow_result, self.poll_question.flow_result)
-        self.assertEqual(poll_stat.flow_result_category, yes_category.flow_result_category)
-        self.assertEqual(poll_stat.location, ikeja_boundary)
-        self.assertEqual(poll_stat.gender_segment, GenderSegment.objects.get(gender="M"))
-        self.assertEqual(poll_stat.age_segment, AgeSegment.objects.get(min_age=0))
-        self.assertEqual(poll_stat.date, self.now.replace(hour=0, minute=0, second=0, microsecond=0))
 
         self.assertEqual(PollStatsCounter.objects.all().count(), 6)
         self.assertEqual(PollStatsCounter.objects.filter(org=self.nigeria).count(), 6)
@@ -3149,18 +3129,6 @@ class PollResultsTest(UreportTest):
         )
 
         self.poll.rebuild_poll_results_counts()
-        self.assertEqual(PollStats.objects.all().count(), 2)
-        self.assertEqual(
-            PollStats.objects.filter(flow_result=self.poll_question.flow_result).aggregate(Sum("count"))["count__sum"],
-            2,
-        )
-        self.assertEqual(
-            PollStats.objects.filter(flow_result_category=yes_category.flow_result_category).aggregate(Sum("count"))[
-                "count__sum"
-            ],
-            2,
-        )
-        self.assertEqual(PollStats.objects.filter(location=ikeja_boundary).aggregate(Sum("count"))["count__sum"], 1)
 
         self.assertEqual(
             self.poll_question.calculate_results()[0]["categories"],
