@@ -1599,6 +1599,13 @@ class PollQuestionTest(UreportTest):
             date=now,
             count=1,
         )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="all",
+            count=1,
+        )
 
         PollStats.objects.create(
             org=self.uganda,
@@ -1612,6 +1619,13 @@ class PollQuestionTest(UreportTest):
             date=now,
             count=2,
         )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="all",
+            count=2,
+        )
 
         PollStats.objects.create(
             org=self.uganda,
@@ -1623,6 +1637,13 @@ class PollQuestionTest(UreportTest):
             gender_segment=None,
             location=None,
             date=now,
+            count=1,
+        )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="all",
             count=1,
         )
 
@@ -1645,6 +1666,13 @@ class PollQuestionTest(UreportTest):
             date=None,
             count=2,
         )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="gender:m",
+            count=2,
+        )
 
         PollStats.objects.create(
             org=self.uganda,
@@ -1656,6 +1684,13 @@ class PollQuestionTest(UreportTest):
             gender_segment=female_gender,
             location=None,
             date=None,
+            count=1,
+        )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="gender:f",
             count=1,
         )
 
@@ -1671,6 +1706,13 @@ class PollQuestionTest(UreportTest):
             date=None,
             count=3,
         )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="gender:f",
+            count=3,
+        )
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
@@ -1681,6 +1723,13 @@ class PollQuestionTest(UreportTest):
             gender_segment=female_gender,
             location=None,
             date=None,
+            count=5,
+        )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="gender:f",
             count=5,
         )
 
@@ -1702,6 +1751,13 @@ class PollQuestionTest(UreportTest):
             date=None,
             count=2,
         )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="age:%s" % age_segment_20.min_age,
+            count=2,
+        )
 
         PollStats.objects.create(
             org=self.uganda,
@@ -1713,6 +1769,13 @@ class PollQuestionTest(UreportTest):
             gender_segment=None,
             location=None,
             date=None,
+            count=1,
+        )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="age:%s" % age_segment_25.min_age,
             count=1,
         )
 
@@ -1728,6 +1791,13 @@ class PollQuestionTest(UreportTest):
             date=None,
             count=3,
         )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="age:%s" % age_segment_25.min_age,
+            count=3,
+        )
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
@@ -1738,6 +1808,13 @@ class PollQuestionTest(UreportTest):
             gender_segment=None,
             location=None,
             date=None,
+            count=5,
+        )
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="age:%s" % age_segment_25.min_age,
             count=5,
         )
 
@@ -1843,18 +1920,10 @@ class PollQuestionTest(UreportTest):
         )
 
         self.assertEqual(4, PollStats.objects.all().count())
-        calculated_results = [
-            dict(open_ended=False, set=6, unset=1, categories=[dict(count=2, label="Yes"), dict(count=4, label="No")])
-        ]
-        self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
         PollStats.squash()
 
         self.assertEqual(3, PollStats.objects.all().count())
-        calculated_results = [
-            dict(open_ended=False, set=6, unset=1, categories=[dict(count=2, label="Yes"), dict(count=4, label="No")])
-        ]
-        self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
         PollStats.objects.create(
             org=self.uganda,
@@ -1883,22 +1952,10 @@ class PollQuestionTest(UreportTest):
         )
 
         self.assertEqual(5, PollStats.objects.all().count())
-        calculated_results = [
-            dict(
-                open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")]
-            )
-        ]
-        self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
         PollStats.squash()
 
         self.assertEqual(3, PollStats.objects.all().count())
-        calculated_results = [
-            dict(
-                open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")]
-            )
-        ]
-        self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
         PollStats.objects.create(
             org=self.uganda,
@@ -2001,17 +2058,11 @@ class PollQuestionTest(UreportTest):
             date=None,
             count=3,
         )
-        calculated_results = [
-            dict(set=2, unset=0, label="Male", categories=[dict(count=0, label="Yes"), dict(count=2, label="No")]),
-            dict(set=4, unset=16, label="Female", categories=[dict(count=3, label="Yes"), dict(count=1, label="No")]),
-        ]
-        self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
 
         self.assertEqual(11, PollStats.objects.all().count())
         PollStats.squash()
 
         self.assertEqual(8, PollStats.objects.all().count())
-        self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
 
         PollStats.objects.create(
             org=self.uganda,
@@ -2114,6 +2165,267 @@ class PollQuestionTest(UreportTest):
             count=6,
         )
 
+        self.assertEqual(16, PollStats.objects.all().count())
+        PollStats.squash()
+
+        self.assertEqual(12, PollStats.objects.all().count())
+
+    def test_squash_poll_stats_counters(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+
+        poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
+
+        self.assertEqual(six.text_type(poll_question1), "question 1")
+
+        # no response category are ignored
+        self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")
+
+        self.assertFalse(poll_question1.is_open_ended())
+
+        yes_category = self.create_poll_response_category(poll_question1, "rule-uuid-1", "Yes")
+
+        self.assertTrue(poll_question1.is_open_ended())
+
+        no_category = self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
+        PollResponseCategory.objects.filter(category="No").update(is_active=False)
+
+        self.assertTrue(poll_question1.is_open_ended())
+
+        PollResponseCategory.objects.filter(category="No").update(is_active=True)
+
+        self.assertFalse(poll_question1.is_open_ended())
+
+        # should be ignored in calculated results
+        self.create_poll_response_category(poll_question1, "rule-uuid-3", "Other")
+
+        male_gender = GenderSegment.objects.filter(gender="M").first()
+        female_gender = GenderSegment.objects.filter(gender="F").first()
+
+        age_segment_20 = AgeSegment.objects.filter(min_age=20).first()
+        age_segment_25 = AgeSegment.objects.filter(min_age=25).first()
+
+        PollStatsCounter.objects.all().delete()
+        self.assertEqual(0, PollStatsCounter.objects.all().count())
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="all",
+            count=1,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="all",
+            count=2,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="all",
+            count=1,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="all",
+            count=3,
+        )
+
+        self.assertEqual(4, PollStatsCounter.objects.all().count())
+        calculated_results = [
+            dict(open_ended=False, set=6, unset=1, categories=[dict(count=2, label="Yes"), dict(count=4, label="No")])
+        ]
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
+
+        PollStatsCounter.squash()
+
+        self.assertEqual(3, PollStatsCounter.objects.all().count())
+        calculated_results = [
+            dict(open_ended=False, set=6, unset=1, categories=[dict(count=2, label="Yes"), dict(count=4, label="No")])
+        ]
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="all",
+            count=4,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="all",
+            count=2,
+        )
+
+        self.assertEqual(5, PollStatsCounter.objects.all().count())
+        calculated_results = [
+            dict(
+                open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")]
+            )
+        ]
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
+
+        PollStatsCounter.squash()
+
+        self.assertEqual(3, PollStatsCounter.objects.all().count())
+        calculated_results = [
+            dict(
+                open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")]
+            )
+        ]
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="gender:%s" % male_gender.gender.lower(),
+            count=2,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="gender:%s" % female_gender.gender.lower(),
+            count=1,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="gender:%s" % female_gender.gender.lower(),
+            count=3,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="gender:%s" % female_gender.gender.lower(),
+            count=5,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="gender:%s" % female_gender.gender.lower(),
+            count=4,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="gender:%s" % female_gender.gender.lower(),
+            count=1,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="gender:%s" % female_gender.gender.lower(),
+            count=3,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="gender:%s" % female_gender.gender.lower(),
+            count=3,
+        )
+        calculated_results = [
+            dict(set=2, unset=0, label="Male", categories=[dict(count=0, label="Yes"), dict(count=2, label="No")]),
+            dict(set=4, unset=16, label="Female", categories=[dict(count=3, label="Yes"), dict(count=1, label="No")]),
+        ]
+        self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
+
+        self.assertEqual(11, PollStatsCounter.objects.all().count())
+        PollStatsCounter.squash()
+
+        self.assertEqual(7, PollStatsCounter.objects.all().count())
+        self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="age:%s" % age_segment_20.min_age,
+            count=2,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=no_category.flow_result_category,
+            scope="age:%s" % age_segment_25.min_age,
+            count=1,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="age:%s" % age_segment_25.min_age,
+            count=3,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="age:%s" % age_segment_25.min_age,
+            count=5,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="age:%s" % age_segment_25.min_age,
+            count=4,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="age:%s" % age_segment_25.min_age,
+            count=2,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=yes_category.flow_result_category,
+            scope="age:%s" % age_segment_25.min_age,
+            count=1,
+        )
+
+        PollStatsCounter.objects.create(
+            org=self.uganda,
+            flow_result=poll_question1.flow_result,
+            flow_result_category=None,
+            scope="age:%s" % age_segment_25.min_age,
+            count=6,
+        )
+
         calculated_results = [
             dict(set=0, unset=0, label="0-14", categories=[dict(count=0, label="Yes"), dict(count=0, label="No")]),
             dict(set=0, unset=0, label="15-19", categories=[dict(count=0, label="Yes"), dict(count=0, label="No")]),
@@ -2124,10 +2436,10 @@ class PollQuestionTest(UreportTest):
         ]
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
-        self.assertEqual(16, PollStats.objects.all().count())
-        PollStats.squash()
+        self.assertEqual(15, PollStatsCounter.objects.all().count())
+        PollStatsCounter.squash()
 
-        self.assertEqual(12, PollStats.objects.all().count())
+        self.assertEqual(11, PollStatsCounter.objects.all().count())
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
     def test_tasks(self):
