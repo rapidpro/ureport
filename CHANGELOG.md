@@ -1,3 +1,14 @@
+v1.2.180 (2025-12-08)
+-------------------------
+ * Merge pull request #1322 from rapidpro/new-stats-6
+ * Fix variable name
+ * Run code_checks
+ * Switch to use PollEngagementDailyCount model engagement stats
+ * Switch to use PollStatsCounter model stats
+ * Merge pull request #1321 from rapidpro/redirect-config
+ * Merge pull request #1323 from rapidpro/squash-more-often
+ * Squash the new stats tables more often
+
 v1.2.178 (2025-12-02)
 -------------------------
  * Apply copilot code review suggestions
