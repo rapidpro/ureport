@@ -194,15 +194,6 @@ class PollStats(models.Model):
         logger.info("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
 
     @classmethod
-    def get_question_stats(cls, org_id, question):
-        matching_question = PollStats.objects.filter(
-            org_id=org_id, flow_result=question.flow_result, question=question
-        ).exists()
-        if matching_question:
-            return PollStats.objects.filter(org_id=org_id, flow_result=question.flow_result, question=question)
-        return PollStats.objects.filter(org_id=org_id, flow_result=question.flow_result)
-
-    @classmethod
     def _log_stats_comparison(cls, model_name, old_stats_dict, new_stats_dict, segment_type, segment_id, org_id):
         """Log comparison results between old PollStats and new PollStatsCounter."""
         if new_stats_dict != old_stats_dict:
