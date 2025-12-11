@@ -1,3 +1,8 @@
+v1.2.181 (2025-12-11)
+-------------------------
+ * Merge pull request #1324 from rapidpro/new-stats-7
+ * Stop writting PollStats rows
+
 v1.2.180 (2025-12-08)
 -------------------------
  * Merge pull request #1322 from rapidpro/new-stats-6
