@@ -1103,15 +1103,9 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(hour=6, minute=0),
         "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
     },
-    "polls_stats_squash": {
-        "task": "polls.polls_stats_squash",
-        "schedule": timedelta(minutes=30),
-        "relative": True,
-        "options": {"queue": "slow"},
-    },
     "stats_counts_squash": {
         "task": "stats.stats_counts_squash",
-        "schedule": timedelta(minutes=5),
+        "schedule": timedelta(minutes=15),
         "relative": True,
         "options": {"queue": "slow"},
     },
