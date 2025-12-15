@@ -1,3 +1,8 @@
+v1.2.182 (2025-12-15)
+-------------------------
+ * Merge pull request #1325 from rapidpro/new-stats-8
+ * Adjust tasks schedules
+
 v1.2.181 (2025-12-11)
 -------------------------
  * Merge pull request #1324 from rapidpro/new-stats-7
