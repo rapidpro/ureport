@@ -1,3 +1,10 @@
+v1.2.183 (2025-12-18)
+-------------------------
+ * Merge pull request #1329 from rapidpro/task-schedule
+ * Adjust stats squash schedule to 10 min
+ * Merge pull request #1328 from rapidpro/update-django
+ * Regenerate poetry lock file
+
 v1.2.182 (2025-12-15)
 -------------------------
  * Merge pull request #1325 from rapidpro/new-stats-8
