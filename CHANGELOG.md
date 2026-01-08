@@ -1,3 +1,8 @@
+v1.2.185 (2026-01-08)
+-------------------------
+ * Merge pull request #1331 from rapidpro/dependabot/pip/urllib3-2.6.3
+ * Bump urllib3 from 2.6.2 to 2.6.3
+
 v1.2.184 (2026-01-08)
 -------------------------
  * Merge pull request #1330 from rapidpro/update-rapidpro-python
