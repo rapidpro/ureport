@@ -1,3 +1,8 @@
+v1.2.184 (2026-01-08)
+-------------------------
+ * Merge pull request #1330 from rapidpro/update-rapidpro-python
+ * Update rapidpro-python to 2.22.0
+
 v1.2.183 (2025-12-18)
 -------------------------
  * Merge pull request #1329 from rapidpro/task-schedule
