@@ -867,27 +867,6 @@ class PollQuestion(SmartModel):
         ("D3", _("Dark 3 background and Black text")),
     )
 
-    QUESTION_COLOR_CHOICE_BLOCK_CSS_CLASSES = {
-        "D1": "bg-dark1 text-white",
-        "L1": "bg-light1 text-black",
-        "D2": "bg-dark2 text-white",
-        "D3": "bg-dark3 text-black",
-    }
-
-    QUESTION_COLOR_CHOICE_BG_COLORS = {
-        "D1": ("dark1_color", "#439932"),
-        "L1": ("light1_color", "#FFD100"),
-        "D2": ("dark2_color", "#1751af"),
-        "D3": ("dark3_color", "#5eb3e0"),
-    }
-
-    QUESTION_COLOR_CHOICE_BORDER_COLORS = {
-        "D1": "white",
-        "L1": "black",
-        "D2": "white",
-        "D3": "white",
-    }
-
     QUESTION_HIDDEN_CHARTS_CHOICES = (
         (None, _("Show Age, Gender and Location charts")),
         ("A", _("Hide Age chart ONLY")),
@@ -945,17 +924,6 @@ class PollQuestion(SmartModel):
         if self.hidden_charts is None or "A" not in self.hidden_charts:
             return "age"
         return "all"
-
-    def get_color_choice_css(self):
-        return self.QUESTION_COLOR_CHOICE_BLOCK_CSS_CLASSES.get(self.color_choice, "")
-
-    def get_border_color_choice(self):
-        return self.QUESTION_COLOR_CHOICE_BORDER_COLORS.get(self.color_choice, "")
-
-    def get_bg_color_choice(self):
-        org = self.poll.org
-        color_tuple = self.QUESTION_COLOR_CHOICE_BG_COLORS.get(self.color_choice, ("", ""))
-        return org.get_config(color_tuple[0]) or color_tuple[1]
 
     @classmethod
     def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):

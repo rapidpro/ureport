@@ -18,13 +18,7 @@
         <meta name="keywords" content="">
         <meta name="author" content="">
         {% if has_better_domain %}<meta name="robots" content="noindex">{% endif %}
-        {% if org|config:"has_new_brand" %}
-            <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon-v2024.png">
-        {% elif org.subdomain %}
-            <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicos/flag_{{ org.subdomain }}.png">
-        {% else %}
-            <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png">
-        {% endif %}
+        <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon-v2024.png">
         {% block meta-extra %}
             <meta property="og:url" content="{% org_host_link %}">
             {% thumbnail org.get_logo "x180" format="PNG" as im %}
@@ -47,57 +41,57 @@
         <style type="text/css">
           .bg-dark1,
           .bg-dark1-v2024 {
-            background: {{ org|config:'dark1_color'|default:'#439932' }};
+            background: #98DFF9;
           }
 
           .border-dark1,
           .border-dark1-v2024 {
-            border-color: {{ org|config:'dark1_color'|default:'#439932' }};
+            border-color: #98DFF9;
           }
 
           .hover\:border-dark1:hover,
           .hover\:border-dark1-v2024:hover {
-            border-color: {{ org|config:'dark1_color'|default:'#439932' }};
+            border-color: #98DFF9;
           }
 
           .bg-dark2,
           .bg-dark2-v2024 {
-            background: {{ org|config:'dark2_color' |default:'#1751af' }};
+            background: #FFC20E;
           }
 
           .border-dark2,
           .border-dark2-v2024 {
-            border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
+            border-color: #FFC20E;
           }
 
           .hover\:border-dark2:hover,
           .hover\:border-dark2-v2024:hover {
-            border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
+            border-color: #FFC20E;
           }
 
           .bg-dark3,
           .bg-dark3-v2024 {
-            background: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
+            background: #FF7100;
           }
 
           .border-dark3,
           .border-dark3-v2024 {
-            border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
+            border-color: #FF7100;
           }
 
           .hover\:border-dark3:hover,
           .hover\:border-dark3-v2024:hover {
-            border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
+            border-color: #FF7100;
           }
 
           .border-light1,
           .border-light1-v2024 {
-            border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
+            border-color: #143E49;
           }
 
           .bg-light1,
           .bg-light1-v2024 {
-            background: {{ org|config:'light1_color'|default:'#FFD100' }};
+            background: #143E49;
           }
 
           .bg-light1.hover-dark:hover,
@@ -107,12 +101,12 @@
 
           .text-light1,
           .text-light1-v2024 {
-            color: {{ org|config:'light1_color'|default:'#FFD100' }};
+            color: #143E49;
           }
 
           .bg-light2,
           .bg-light2-v2024 {
-            background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
+            background: #2653B9;
           }
 
           .bg-light2.hover-dark:hover,
@@ -164,8 +158,6 @@
             display: block;
           }
 
-        {% if org|config:"has_new_brand" %}
-
           .bg-dark1-v2024,
           .bg-dark2-v2024,
           .bg-dark3-v2024,
@@ -203,18 +195,10 @@
             color: #00aeef;
           }
 
-        {% endif %}
         </style>
         <script type="text/javascript">
-          var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
-          var orgColors = '{{org|config:"colors"|default:""}}'.toUpperCase().split(',');
+          var orgColors = ["#98DFF9", "#FFC20E", "#FF7100", "#143E49", "#2653B9", "#e4002b"]
 
-          for (var i = 0; i < defaultColors.length; i++) {
-            var elt = defaultColors[i].trim().toUpperCase();
-            if ((orgColors.length <= 6) && (!orgColors.includes(elt))) {
-              orgColors.push(elt);
-            }
-          }
         </script>
         {% if org and org|config:"google_tag_manager_id" %}
             <!-- Google Tag Manager -->
@@ -327,7 +311,7 @@
             <div class="bg-black text-white py-home pl-home pr-16 h-auto">
                 <a href="{% url 'public.opinions' %}" class="hover:text-gray-600 block font-bold">{% trans "Opinions" %}</a>
                 <a href="{{ stories_link }}" class="hover:text-gray-600 block mt-4 font-bold">{% trans "Stories" %}</a>
-                {% if org|config:"has_new_brand" and org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
+                {% if org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
                     <a href='{{ org|config:"extra_menu_link" }}' class="hover:text-gray-600 block mt-4 font-bold">{{ org|config:"extra_menu_text" }}</a>
                 {% endif %}
                 <a href="{% if org|config:"is_global" and org.subdomain == "" %}https://www.voicesofyouth.org/aboutureport{% else %}{% url 'public.about' %}{% endif %}"
@@ -413,21 +397,17 @@
                     <i class="fas fa-times text-3xl"></i>
                 </a>
                 <div class="flex p-home">
-                    <div class="md:w-1/6 {% if not org|config:"has_new_brand" %}flex-center-y{% endif %}">
+                    <div class="md:w-1/6">
                         <div class="p-4 ">
                             <a href="https://ureport.in/" class="hover:bg-gray-900 inline-block border-white p-2">
-                                {% if org|config:"has_new_brand" %}
-                                    {% if org.language != "ar" and org.language != "ru" %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert_EN.png"
-                                             alt="{{ org.name }}"
-                                             class="logo">
-                                    {% else %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert_{{ org.language|upper }}.png"
-                                             alt="{{ org.name }}"
-                                             class="logo">
-                                    {% endif %}
+                                {% if org.language != "ar" and org.language != "ru" %}
+                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert_EN.png"
+                                        alt="{{ org.name }}"
+                                        class="logo">
                                 {% else %}
-                                    <img src="{{ STATIC_URL }}img/u-report-global-logo-white.png" alt="">
+                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_invert_{{ org.language|upper }}.png"
+                                        alt="{{ org.name }}"
+                                        class="logo">
                                 {% endif %}
                             </a>
                         </div>
@@ -643,8 +623,7 @@
                     </div>
                 </ul>
                 <!-- header menu -->
-                {% if org|config:"has_new_brand" %}
-                    <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
+                <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 hidden border-b pb-6">
                         <a href="{% url 'public.index' %}" class="flex-initial text-center">
                             <div style="width:500px">
                                 {% if org.subdomain == "drc" %}
@@ -676,7 +655,7 @@
                                        class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
                                 </div>
                             </div>
-                            {% if org|config:"has_new_brand" and org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
+                            {% if org|config:"extra_menu_link" and org|config:"extra_menu_text" %}
                                 <div class="flex-1 text-center font-bold text-xl flex-center-y">
                                     <div>
                                         <a href="{{ org|config:"extra_menu_link" }}"
@@ -685,30 +664,7 @@
                                 </div>
                             {% endif %}
                         </div>
-                    </div>
-                {% else %}
-                    <div class="md:flex max-w-page mx-auto justify-around mt-5 mb-12 px-home hidden border-b pb-6">
-                        <div class="flex-1 text-center font-bold text-2xl flex-center-y">
-                            <div>
-                                <a href="{% url 'public.opinions' %}"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Opinions" %}</a>
-                            </div>
-                        </div>
-                        <a href="{% url 'public.index' %}" class="flex-initial text-center">
-                            <div style="width:360px">
-                                {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                    <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                                {% endthumbnail %}
-                            </div>
-                        </a>
-                        <div class="flex-1 text-center font-bold text-2xl flex-center-y">
-                            <div>
-                                <a href="{{ stories_link }}"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
+                </div>
             </div>
             <!-- mobile header -->
             <div class="md:hidden block">
@@ -716,20 +672,14 @@
                     <div class="p-home">
                         <a href="{% url 'public.index' %}" class="flex-initial text-center">
                             <div style="width:180px">
-                                {% if org|config:"has_new_brand" %}
-                                    {% if org.subdomain == "drc" %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
-                                    {% elif org.language != "ar" and org.language != "ru" %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
-                                    {% else %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png"
-                                             alt="{{ org.name }}"
-                                             class="logo">
-                                    {% endif %}
+                                {% if org.subdomain == "drc" %}
+                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                                {% elif org.language != "ar" and org.language != "ru" %}
+                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
                                 {% else %}
-                                    {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                        <img src="{{ im.url }}" alt="{{ org.name }}" class="logo" alt="">
-                                    {% endthumbnail %}
+                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png"
+                                        alt="{{ org.name }}"
+                                        class="logo">
                                 {% endif %}
                             </div>
                         </a>
@@ -752,16 +702,16 @@
                     <div class="flex-1">
                         <div class="p-8 hover-parent">
                             {% edit_content 'orgs.org_edit' "" "#id_common.join_text_top" "-m-8" "dark" %}
-                            <div class="text-3xl font-bold leading-tight {% if not org|config:"has_new_brand" %}text-center{% endif %}">
+                            <div class="text-3xl font-bold leading-tight">
                                 {% if org|config:"join_text_top" %}
                                     {{ org|config:"join_text_top" }}
                                 {% else %}
                                     {% trans "Join U-Report, Your voice matters." %}
                                 {% endif %}
                             </div>
-                            <div class="mt-8 {% if not org|config:"has_new_brand" %}text-center{% endif %}">
+                            <div class="mt-8">
                                 <a href="{% url 'public.join' %}"
-                                   class="btn bg-light1-v2024 hover-dark {% if org|config:"has_new_brand" %}text-white{% else %}text-black{% endif %}">
+                                   class="btn bg-light1-v2024 hover-dark text-white">
                                     {% if org|config:"join_button_text" %}
                                         {{ org|config:"join_button_text" }}
                                     {% else %}
@@ -789,7 +739,7 @@
                                 </div>
                                 <div class="{% if story.title|length < 50 %}text-lg{% else %}text-base{% endif %} font-bold mt-4 h-20">{{ story.title }}</div>
                                 <div class="md:block mt-4 hidden">
-                                    <button class="btn {% if org|config:"has_new_brand" %} bg-light1-v2024 hover-dark{% else %}bg-black hover:bg-gray-700{% endif %} text-white">{% trans "READ MORE" %}</button>
+                                    <button class="btn bg-light1-v2024 hover-dark text-white">{% trans "READ MORE" %}</button>
                                 </div>
                             </a>
                             {% edit_content 'stories.story_update' story.pk "" "bg-black p-2 md:mt-4" "white" %}
@@ -802,7 +752,6 @@
                 <div class="md:flex max-w-page mx-auto text-white p-home">
                     <div class="md:w-1/3 md:block hidden">
                         <div class="w-40">
-                            {% if not org|config:"has_new_brand" %}<img src="{{ STATIC_URL }}img/blue_u.png" alt="">{% endif %}
                         </div>
                     </div>
                     <div class="md:w-2/3 {% if is_rtl_org %}md:text-left{% else %}md:text-right{% endif %} text-center">
@@ -823,17 +772,9 @@
             <!-- footer navbar -->
             <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 px-home mt-12 mb-3">
                 <a href="{% url 'public.index' %}" class="md:block flex-1 text-center mb-2 hidden">
-                    {% if org|config:"has_new_brand" %}
-                        <div style="max-width:220px">
-                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
-                        </div>
-                    {% else %}
-                        <div style="max-width:360px">
-                            {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                            {% endthumbnail %}
-                        </div>
-                    {% endif %}
+                    <div style="max-width:220px">
+                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
+                    </div>
                 </a>
                 <div class="md:flex justify-center hidden">
                     <div style="max-width:150px" class="md:block block">
@@ -848,13 +789,7 @@
                 </div>
                 <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
                     <div style="width:180px">
-                        {% if org|config:"has_new_brand" %}
-                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
-                        {% else %}
-                            {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                            {% endthumbnail %}
-                        {% endif %}
+                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
                     </div>
                     <div class="md:hidden flex flex-1 justify-end float-right">
                         <div style="width:120px" class="md:block block">
@@ -1018,7 +953,7 @@
     {% block script %}
         <script type="text/javascript">
           // global primary color
-          var primaryColor = '{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:"dark1_color" }}{% endif %}';
+          var primaryColor = '#00aeef';
           window.string_Responders = "{% trans "Responders" %}";
           window.string_Polled = "{% trans "Polled" %}";
           window.string_Reporters = "{% trans "Reporters" %}";

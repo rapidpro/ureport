@@ -60,7 +60,7 @@
                             {{ age_stats|json_script:"age_stats" }}
                             <div data-aos="fade"
                                  data-graph-type="age-chart"
-                                 data-bar-color="{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:'light1_color'|default:'#FFD100' }}{% endif %}"
+                                 data-bar-color="#00aeef"
                                  data-label-color="white"
                                  data-stats="age_stats"
                                  class="w-full h-full absolute age-chart"
@@ -75,7 +75,7 @@
                             <div data-aos="fade"
                                  data-graph-type="scheme-chart"
                                  data-stats="schemes_stats"
-                                 data-bar-color="{% if org|config:"has_new_brand" %}#00aeef{% else %}{{ org|config:'light1_color'|default:'#FFD100' }}{% endif %}"
+                                 data-bar-color="#00aeef"
                                  data-label-color="white"
                                  class="h-full absolute scheme-chart"
                                  id="schemes-pie"></div>

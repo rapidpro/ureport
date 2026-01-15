@@ -869,15 +869,13 @@ class PollTest(UreportTest):
         response = self.client.get(uganda_questions_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 6)
+        self.assertEqual(len(response.context["form"].fields), 5)
         self.assertTrue("ruleset_uuid-101_include" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_priority" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_label" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_title" in response.context["form"].fields)
-        self.assertTrue("ruleset_uuid-101_color" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_hidden_charts" in response.context["form"].fields)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_priority"].initial, 0)
-        self.assertIsNone(response.context["form"].fields["ruleset_uuid-101_color"].initial)
         self.assertIsNone(response.context["form"].fields["ruleset_uuid-101_hidden_charts"].initial)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_label"].initial, "question poll 1")
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_title"].initial, "question poll 1")
@@ -923,7 +921,6 @@ class PollTest(UreportTest):
         post_data["ruleset_uuid-101_include"] = True
         post_data["ruleset_uuid-101_title"] = "electricity network coverage"
         post_data["ruleset_uuid-101_priority"] = 5
-        post_data["ruleset_uuid-101_color"] = "D1"
         post_data["ruleset_uuid-101_hidden_charts"] = "GL"
         response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
 
@@ -933,7 +930,6 @@ class PollTest(UreportTest):
         self.assertEqual(poll_question.title, "electricity network coverage")
         self.assertEqual(poll_question.ruleset_label, "question poll 1")
         self.assertEqual(poll_question.priority, 5)
-        self.assertEqual(poll_question.color_choice, "D1")
         self.assertTrue(poll_question.show_age())
         self.assertFalse(poll_question.show_gender())
         self.assertFalse(poll_question.show_locations())
@@ -1043,7 +1039,6 @@ class PollTest(UreportTest):
         from ureport.polls.templatetags.ureport import (
             config,
             org_arrow_link,
-            org_color,
             org_host_link,
             question_results,
             show_org_flags,
@@ -1057,27 +1052,6 @@ class PollTest(UreportTest):
             self.assertEqual(config(self.uganda, "field_name"), "Done")
             mock.assert_called_with("field_name")
 
-        self.assertIsNone(org_color(None, 1))
-        self.assertEqual(org_color(self.uganda, 0), "#E4002B")
-        self.assertEqual(org_color(self.uganda, 1), "#FF8200")
-        self.assertEqual(org_color(self.uganda, 2), "#FFD100")
-        self.assertEqual(org_color(self.uganda, 3), "#009A17")
-
-        self.uganda.set_config("common.colors", "#cccccc, #dddddd, #eeeeee, #111111, #222222, #333333, #444444")
-
-        self.assertEqual(org_color(self.uganda, 0), "#CCCCCC")
-        self.assertEqual(org_color(self.uganda, 1), "#DDDDDD")
-        self.assertEqual(org_color(self.uganda, 2), "#EEEEEE")
-        self.assertEqual(org_color(self.uganda, 3), "#111111")
-        self.assertEqual(org_color(self.uganda, 4), "#222222")
-        self.assertEqual(org_color(self.uganda, 5), "#333333")
-        self.assertEqual(org_color(self.uganda, 6), "#444444")
-        self.assertEqual(org_color(self.uganda, 7), "#CCCCCC")
-        self.assertEqual(org_color(self.uganda, 8), "#DDDDDD")
-        self.assertEqual(org_color(self.uganda, 9), "#EEEEEE")
-        self.assertEqual(org_color(self.uganda, 10), "#111111")
-        self.assertEqual(org_color(self.uganda, 11), "#222222")
-
         self.assertIsNone(transparency(None, 0.8))
         self.assertEqual(transparency("#808080", 0.7), "rgba(128, 128, 128, 0.7)")
 
@@ -1090,11 +1064,11 @@ class PollTest(UreportTest):
             request = Mock(spec=HttpRequest)
             request.user = Mock(spec=User, is_authenticated=True)
 
-            show_org_flags(dict(is_iorg=True, request=request, is_new_brand=True))
+            show_org_flags(dict(is_iorg=True, request=request))
             mock_get_linked_orgs.assert_called_with(True)
 
             request.user = Mock(spec=User, is_authenticated=False)
-            show_org_flags(dict(is_iorg=True, request=request, is_new_brand=True))
+            show_org_flags(dict(is_iorg=True, request=request))
             mock_get_linked_orgs.assert_called_with(False)
 
         request = Mock(spec=HttpRequest)

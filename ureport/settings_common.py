@@ -440,62 +440,6 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
-        name="dark1_color",
-        field=dict(
-            help_text=_("The primary color for styling for this organization, should be dark"),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
-        name="dark2_color",
-        field=dict(
-            help_text=_("The secondary color for styling for this organization, should be dark"),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
-        name="dark3_color",
-        field=dict(
-            help_text=_("The tertiary color for styling for this organization, should be dark"),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
-        name="light1_color",
-        field=dict(
-            help_text=_("The primary highlight color for styling for this organization, should be light"),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
-        name="light2_color",
-        field=dict(
-            help_text=_("The secondary highlight color for styling for this organization, should be light"),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
-        name="colors",
-        field=dict(
-            help_text=_("Up to 6 colors for styling charts, use comma between colors"),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
-        name="colors_map",
-        field=dict(
-            help_text=_("11 colors for styling maps, use comma between colors, not used if not 11 colors"),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
         name="limit_states",
         field=dict(help_text=_("The states to show on maps only"), required=False),
         superuser_only=True,
@@ -650,14 +594,6 @@ ORG_CONFIG_FIELDS = [
         field=dict(help_text=_("Whether to activate an extra gender."), required=False),
         superuser_only=True,
         read_only=True,
-    ),
-    dict(
-        name="has_new_brand",
-        field=dict(
-            help_text=_("Whether to use the new 2024 brand with UNICEF in the logo and a common theme."),
-            required=False,
-        ),
-        superuser_only=True,
     ),
     dict(
         name="redirect_site_url",

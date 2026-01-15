@@ -28,16 +28,16 @@
         display: block;
         padding-left: 5px;
 
-        color: {{ org|config:'dark1_color'|default:'#439932' }};
+        color: #98DFF9;
 
-        border-left: 5px solid {{ org|config:'dark1_color'|default:'#439932' }};
+        border-left: 5px solid #98DFF9;
       }
 
       .row1 a:hover,
       .row2 a:hover {
         background-color: #E6E7E8;
 
-        color: {{ org|config:'dark1_color'|default:'#439932' }};
+        color: #98DFF9;
       }
 
       .row1.inactive a,
@@ -88,24 +88,16 @@
                         <div class="level-left">
                             <div style="justify-content: start;" class="level-item square-logo">
                                 <div style="width:360px">
-                                    {% if org|config:"has_new_brand" %}
-                                        {% if org.subdomain == "drc" %}
-                                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
-                                        {% elif org.language != "ar" and org.language != "ru" %}
+                                    {% if org.subdomain == "drc" %}
+                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                                    {% elif org.language != "ar" and org.language != "ru" %}
                                         <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
-                                        {% else %}
-                                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
-                                        {% endif %}
                                     {% else %}
-                                        {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                            <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                                        {% endthumbnail %}
+                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
                                     {% endif %}
                                 </div>
-                                {% if org|config:"has_new_brand" %}
-                                    <div class="flex-1 text-center font-bold flex-center-y mx-4 mt-4"
-                                         style="font-family:'Noto Sans', sans-serif">{{ org.name }}</div>
-                                {% endif %}
+                                <div class="flex-1 text-center font-bold flex-center-y mx-4 mt-4"
+                                    style="font-family:'Noto Sans', sans-serif">{{ org.name }}</div>
                             </div>
                         </div>
                     {% endif %}
@@ -131,18 +123,12 @@
                         <div class="level-right">
                             <div style="justify-content: start; margin-right: 0rem" class="level-item square-logo">
                                 <div style="width:360px">
-                                    {% if org|config:"has_new_brand" %}
-                                        {% if org.subdomain == "drc" %}
-                                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
-                                        {% elif org.language != "ar" and org.language != "ru" %}
+                                    {% if org.subdomain == "drc" %}
+                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                                    {% elif org.language != "ar" and org.language != "ru" %}
                                         <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
-                                        {% else %}
-                                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
-                                        {% endif %}
                                     {% else %}
-                                        {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                            <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                                        {% endthumbnail %}
+                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
                                     {% endif %}
                                 </div>
                             </div>
@@ -333,17 +319,9 @@
                 <!-- footer navbar -->
                 <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 px-home mt-12 mb-3">
                     <a href="{% url 'public.index' %}" class="md:block flex-1 text-center mb-2 hidden">
-                        {% if org|config:"has_new_brand" %}
-                            <div style="max-width:220px">
-                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
-                            </div>
-                        {% else %}
-                            <div style="max-width:360px">
-                                {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                    <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                                {% endthumbnail %}
-                            </div>
-                        {% endif %}
+                        <div style="max-width:220px">
+                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
+                        </div>
                     </a>
                     <div class="md:flex justify-center hidden">
                         <div style="max-width:150px" class="md:block block">
@@ -358,18 +336,12 @@
                     </div>
                     <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
                         <div style="width:180px">
-                            {% if org|config:"has_new_brand" %}
-                                {% if org.subdomain == "drc" %}
-                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
-                                {% elif org.language != "ar" and org.language != "ru" %}
-                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
-                                {% else %}
-                                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
-                                {% endif %}
+                            {% if org.subdomain == "drc" %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                            {% elif org.language != "ar" and org.language != "ru" %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
                             {% else %}
-                                {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                                    <img src="{{ im.url }}" alt="{{ org.name }}" class="logo">
-                                {% endthumbnail %}
+                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
                             {% endif %}
                         </div>
                         <div class="md:hidden flex flex-1 justify-end float-right">
@@ -440,7 +412,7 @@
                             {% if request.user and request.user.is_authenticated %}
                             <form method="post" action="{% url 'users.user_logout' %}?go=/">
                                 {% csrf_token %}
-                                <button type="submit" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu font-bold">{% trans "Logout" %}</i></button>
+                                <button type="submit" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu font-bold">{% trans "Logout" %}</button>
                             </form>
                             {% else %}
                                 <a href="{% org_host_link %}{% url 'users.user_login' %}"
