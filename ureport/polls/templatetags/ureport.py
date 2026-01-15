@@ -160,7 +160,6 @@ def show_org_flags(context):
         break_pos=min(len(linked_orgs) / 2, 9),
         STATIC_URL=settings.STATIC_URL,
         is_iorg=context["is_iorg"],
-        is_new_brand=context["is_new_brand"],
     )
 
 

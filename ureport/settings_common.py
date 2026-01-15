@@ -652,14 +652,6 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
-        name="has_new_brand",
-        field=dict(
-            help_text=_("Whether to use the new 2024 brand with UNICEF in the logo and a common theme."),
-            required=False,
-        ),
-        superuser_only=True,
-    ),
-    dict(
         name="redirect_site_url",
         field=dict(
             help_text=_("If set, public users visiting the site will be redirected to this URL."),

@@ -26,7 +26,6 @@ def set_has_better_domain(request):
     # our defaults, prevent indexing and hide login link
     has_better_domain = True
     show_login = False
-    is_new_brand = False
 
     hostname = getattr(settings, "HOSTNAME", "localhost")
 
@@ -42,9 +41,7 @@ def set_has_better_domain(request):
         if not org.domain or not using_subdomain:
             has_better_domain = False
 
-        is_new_brand = org.get_config("has_new_brand")
-
-    return dict(has_better_domain=has_better_domain, show_login=show_login, is_new_brand=is_new_brand)
+    return dict(has_better_domain=has_better_domain, show_login=show_login)
 
 
 def set_linked_sites(request):

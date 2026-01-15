@@ -1090,11 +1090,11 @@ class PollTest(UreportTest):
             request = Mock(spec=HttpRequest)
             request.user = Mock(spec=User, is_authenticated=True)
 
-            show_org_flags(dict(is_iorg=True, request=request, is_new_brand=True))
+            show_org_flags(dict(is_iorg=True, request=request))
             mock_get_linked_orgs.assert_called_with(True)
 
             request.user = Mock(spec=User, is_authenticated=False)
-            show_org_flags(dict(is_iorg=True, request=request, is_new_brand=True))
+            show_org_flags(dict(is_iorg=True, request=request))
             mock_get_linked_orgs.assert_called_with(False)
 
         request = Mock(spec=HttpRequest)
