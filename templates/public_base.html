@@ -41,57 +41,57 @@
         <style type="text/css">
           .bg-dark1,
           .bg-dark1-v2024 {
-            background: {{ org|config:'dark1_color'|default:'#439932' }};
+            background: #98DFF9;
           }
 
           .border-dark1,
           .border-dark1-v2024 {
-            border-color: {{ org|config:'dark1_color'|default:'#439932' }};
+            border-color: #98DFF9;
           }
 
           .hover\:border-dark1:hover,
           .hover\:border-dark1-v2024:hover {
-            border-color: {{ org|config:'dark1_color'|default:'#439932' }};
+            border-color: #98DFF9;
           }
 
           .bg-dark2,
           .bg-dark2-v2024 {
-            background: {{ org|config:'dark2_color' |default:'#1751af' }};
+            background: #FFC20E;
           }
 
           .border-dark2,
           .border-dark2-v2024 {
-            border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
+            border-color: #FFC20E;
           }
 
           .hover\:border-dark2:hover,
           .hover\:border-dark2-v2024:hover {
-            border-color: {{ org|config:'dark2_color'|default:'#1751af' }};
+            border-color: #FFC20E;
           }
 
           .bg-dark3,
           .bg-dark3-v2024 {
-            background: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
+            background: #FF7100;
           }
 
           .border-dark3,
           .border-dark3-v2024 {
-            border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
+            border-color: #FF7100;
           }
 
           .hover\:border-dark3:hover,
           .hover\:border-dark3-v2024:hover {
-            border-color: {{ org|config:'dark3_color'|default:'#5eb3e0' }};
+            border-color: #FF7100;
           }
 
           .border-light1,
           .border-light1-v2024 {
-            border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
+            border-color: #143E49;
           }
 
           .bg-light1,
           .bg-light1-v2024 {
-            background: {{ org|config:'light1_color'|default:'#FFD100' }};
+            background: #143E49;
           }
 
           .bg-light1.hover-dark:hover,
@@ -101,12 +101,12 @@
 
           .text-light1,
           .text-light1-v2024 {
-            color: {{ org|config:'light1_color'|default:'#FFD100' }};
+            color: #143E49;
           }
 
           .bg-light2,
           .bg-light2-v2024 {
-            background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
+            background: #2653B9;
           }
 
           .bg-light2.hover-dark:hover,
@@ -197,15 +197,8 @@
 
         </style>
         <script type="text/javascript">
-          var defaultColors = ["#e4002b", "#ff8200", "#ffd100", "#009a17", "#41b6e6", "#0050b5", "#d9d9d6"];
-          var orgColors = '{{org|config:"colors"|default:""}}'.toUpperCase().split(',');
+          var orgColors = ["#98DFF9", "#FFC20E", "#FF7100", "#143E49", "#2653B9", "#e4002b"]
 
-          for (var i = 0; i < defaultColors.length; i++) {
-            var elt = defaultColors[i].trim().toUpperCase();
-            if ((orgColors.length <= 6) && (!orgColors.includes(elt))) {
-              orgColors.push(elt);
-            }
-          }
         </script>
         {% if org and org|config:"google_tag_manager_id" %}
             <!-- Google Tag Manager -->

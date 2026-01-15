@@ -1043,7 +1043,6 @@ class PollTest(UreportTest):
         from ureport.polls.templatetags.ureport import (
             config,
             org_arrow_link,
-            org_color,
             org_host_link,
             question_results,
             show_org_flags,
@@ -1056,27 +1055,6 @@ class PollTest(UreportTest):
             self.assertIsNone(config(None, "field_name"))
             self.assertEqual(config(self.uganda, "field_name"), "Done")
             mock.assert_called_with("field_name")
-
-        self.assertIsNone(org_color(None, 1))
-        self.assertEqual(org_color(self.uganda, 0), "#E4002B")
-        self.assertEqual(org_color(self.uganda, 1), "#FF8200")
-        self.assertEqual(org_color(self.uganda, 2), "#FFD100")
-        self.assertEqual(org_color(self.uganda, 3), "#009A17")
-
-        self.uganda.set_config("common.colors", "#cccccc, #dddddd, #eeeeee, #111111, #222222, #333333, #444444")
-
-        self.assertEqual(org_color(self.uganda, 0), "#CCCCCC")
-        self.assertEqual(org_color(self.uganda, 1), "#DDDDDD")
-        self.assertEqual(org_color(self.uganda, 2), "#EEEEEE")
-        self.assertEqual(org_color(self.uganda, 3), "#111111")
-        self.assertEqual(org_color(self.uganda, 4), "#222222")
-        self.assertEqual(org_color(self.uganda, 5), "#333333")
-        self.assertEqual(org_color(self.uganda, 6), "#444444")
-        self.assertEqual(org_color(self.uganda, 7), "#CCCCCC")
-        self.assertEqual(org_color(self.uganda, 8), "#DDDDDD")
-        self.assertEqual(org_color(self.uganda, 9), "#EEEEEE")
-        self.assertEqual(org_color(self.uganda, 10), "#111111")
-        self.assertEqual(org_color(self.uganda, 11), "#222222")
 
         self.assertIsNone(transparency(None, 0.8))
         self.assertEqual(transparency("#808080", 0.7), "rgba(128, 128, 128, 0.7)")

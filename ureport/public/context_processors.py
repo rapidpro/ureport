@@ -85,8 +85,6 @@ def set_config_display_flags(request):
 
         context["show_bots_link"] = Bot.objects.filter(is_active=True, org=org).exists()
 
-        context["colors_map"] = [str(color.strip()) for color in org.get_config("colors_map", "").split(",")]
-
         other_languages_sites = {}
         try:
             other_languages_sites = json.loads(org.get_config("other_languages_sites"))

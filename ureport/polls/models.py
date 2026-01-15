@@ -875,10 +875,10 @@ class PollQuestion(SmartModel):
     }
 
     QUESTION_COLOR_CHOICE_BG_COLORS = {
-        "D1": ("dark1_color", "#439932"),
-        "L1": ("light1_color", "#FFD100"),
-        "D2": ("dark2_color", "#1751af"),
-        "D3": ("dark3_color", "#5eb3e0"),
+        "D1": ("dark1_color", "#98DFF9"),
+        "L1": ("light1_color", "#143E49"),
+        "D2": ("dark2_color", "#FFC20E"),
+        "D3": ("dark3_color", "#FF7100"),
     }
 
     QUESTION_COLOR_CHOICE_BORDER_COLORS = {
