@@ -12,7 +12,7 @@
                         {% edit_content 'polls.poll_update' latest_poll.pk "#id_title" "-m-8" "dark" %}
                         {{ latest_poll.title }}
                     </div>
-                    <div class="{% if latest_poll.get_first_question.get_border_color_choice %} border-{{ latest_poll.get_first_question.get_border_color_choice }} {% else %}border-{{ border_color }}{% endif %} font-alt font-bold italic left-border mt-8 hover-parent">
+                    <div class="border-{{ border_color }} font-alt font-bold italic left-border mt-8 hover-parent">
                         {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.flow_result.result_uuid|add:"_title"  "-m-8" "dark" %}
                         {{ latest_poll.get_first_question.title }}
                     </div>

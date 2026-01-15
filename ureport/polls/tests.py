@@ -869,15 +869,13 @@ class PollTest(UreportTest):
         response = self.client.get(uganda_questions_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 6)
+        self.assertEqual(len(response.context["form"].fields), 5)
         self.assertTrue("ruleset_uuid-101_include" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_priority" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_label" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_title" in response.context["form"].fields)
-        self.assertTrue("ruleset_uuid-101_color" in response.context["form"].fields)
         self.assertTrue("ruleset_uuid-101_hidden_charts" in response.context["form"].fields)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_priority"].initial, 0)
-        self.assertIsNone(response.context["form"].fields["ruleset_uuid-101_color"].initial)
         self.assertIsNone(response.context["form"].fields["ruleset_uuid-101_hidden_charts"].initial)
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_label"].initial, "question poll 1")
         self.assertEqual(response.context["form"].fields["ruleset_uuid-101_title"].initial, "question poll 1")
@@ -923,7 +921,6 @@ class PollTest(UreportTest):
         post_data["ruleset_uuid-101_include"] = True
         post_data["ruleset_uuid-101_title"] = "electricity network coverage"
         post_data["ruleset_uuid-101_priority"] = 5
-        post_data["ruleset_uuid-101_color"] = "D1"
         post_data["ruleset_uuid-101_hidden_charts"] = "GL"
         response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
 
@@ -933,7 +930,6 @@ class PollTest(UreportTest):
         self.assertEqual(poll_question.title, "electricity network coverage")
         self.assertEqual(poll_question.ruleset_label, "question poll 1")
         self.assertEqual(poll_question.priority, 5)
-        self.assertEqual(poll_question.color_choice, "D1")
         self.assertTrue(poll_question.show_age())
         self.assertFalse(poll_question.show_gender())
         self.assertFalse(poll_question.show_locations())

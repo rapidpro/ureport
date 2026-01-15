@@ -248,7 +248,7 @@
                             <div data-html2canvas-ignore
                                  class="flex-none bg-circle bg-black text-white font-bold">{{ forloop.counter }}</div>
                             <div class="flex-1 flex-center-y">
-                                <div class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'white' 'black' 'white' 'white' as border_color silent %}{% if question.get_border_color_choice %} border-{{ question.get_border_color_choice }} {% else %}border-{{ border_color }}{% endif %} h-1 border-t">
+                                <div class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'white' 'black' 'white' 'white' as border_color silent %} border-{{ border_color }} h-1 border-t">
                                 </div>
                             </div>
                         </div>
