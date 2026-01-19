@@ -1,3 +1,7 @@
+v1.3.0 (2026-01-19)
+-------------------------
+ * Merge pull request #1332 from rapidpro/remove-old-branding
+
 v1.2.185 (2026-01-08)
 -------------------------
  * Merge pull request #1331 from rapidpro/dependabot/pip/urllib3-2.6.3
