@@ -428,8 +428,6 @@ class PollCRUDL(SmartCRUDL):
                 fields.append("ruleset_%s_include" % result_uuid)
                 fields.append("ruleset_%s_label" % result_uuid)
 
-                fields.append("ruleset_%s_color" % result_uuid)
-
                 fields.append("ruleset_%s_hidden_charts" % result_uuid)
 
                 fields.append("ruleset_%s_title" % result_uuid)
@@ -500,16 +498,6 @@ class PollCRUDL(SmartCRUDL):
                     help_text=_("The question posed to your audience, will be displayed publicly"),
                 )
 
-                color_field_name = f"ruleset_{result_uuid}_color"
-                color_field_initial = initial.get(color_field_name, "")
-                color_field = forms.ChoiceField(
-                    label=_("Color Choice"),
-                    choices=PollQuestion.QUESTION_COLOR_CHOICES,
-                    required=False,
-                    initial=color_field_initial,
-                    help_text=_("The color to use for the question block will be displayed publicly"),
-                )
-
                 hidden_charts_field_name = f"ruleset_{result_uuid}_hidden_charts"
                 hidden_charts_field_initial = initial.get(hidden_charts_field_name, "")
                 hidden_charts_field = forms.ChoiceField(
@@ -524,7 +512,6 @@ class PollCRUDL(SmartCRUDL):
                 self.form.fields[priority_field_name] = priority_field
                 self.form.fields[label_field_name] = label_field
                 self.form.fields[title_field_name] = title_field
-                self.form.fields[color_field_name] = color_field
                 self.form.fields[hidden_charts_field_name] = hidden_charts_field
 
                 categories = question.get_public_categories()
@@ -569,15 +556,12 @@ class PollCRUDL(SmartCRUDL):
 
                 title = data[f"ruleset_{result_uuid}_title"]
 
-                color_choice = data[f"ruleset_{result_uuid}_color"]
-
                 hidden_charts_choice = data[f"ruleset_{result_uuid}_hidden_charts"]
 
                 PollQuestion.objects.filter(poll=poll, flow_result__result_uuid=result_uuid).update(
                     is_active=included,
                     title=title,
                     priority=priority,
-                    color_choice=color_choice,
                     hidden_charts=hidden_charts_choice,
                 )
 
@@ -620,7 +604,6 @@ class PollCRUDL(SmartCRUDL):
                 initial["ruleset_%s_priority" % result_uuid] = question.priority
                 initial["ruleset_%s_label" % result_uuid] = result_name
                 initial["ruleset_%s_title" % result_uuid] = question.title
-                initial["ruleset_%s_color" % result_uuid] = question.color_choice
                 initial["ruleset_%s_hidden_charts" % result_uuid] = question.hidden_charts
 
                 categories = question.get_public_categories()
