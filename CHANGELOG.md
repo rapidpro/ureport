@@ -1,3 +1,9 @@
+v1.3.1 (2026-02-18)
+-------------------------
+ * Merge pull request #1333 from rapidpro/fix-get-redirect
+ * Run code checks
+ * Show 404 status code for missing sites
+
 v1.3.0 (2026-01-19)
 -------------------------
  * Merge pull request #1332 from rapidpro/remove-old-branding
