@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-04 08:59+0000\n"
+"POT-Creation-Date: 2026-02-18 09:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1622,12 +1622,6 @@ msgstr ""
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr ""
 
-msgid "Color Choice"
-msgstr ""
-
-msgid "The color to use for the question block will be displayed publicly"
-msgstr ""
-
 msgid "Hidden Charts Choice"
 msgstr ""
 
@@ -1764,27 +1758,6 @@ msgstr ""
 msgid "The callout message on the footer engagement section"
 msgstr ""
 
-msgid "The primary color for styling for this organization, should be dark"
-msgstr ""
-
-msgid "The secondary color for styling for this organization, should be dark"
-msgstr ""
-
-msgid "The tertiary color for styling for this organization, should be dark"
-msgstr ""
-
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr ""
-
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr ""
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
-
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr ""
-
 msgid "The states to show on maps only"
 msgstr ""
 
@@ -1845,9 +1818,6 @@ msgstr ""
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
-msgstr ""
-
 msgid "If set, public users visiting the site will be redirected to this URL."
 msgstr ""
 
@@ -1881,6 +1851,9 @@ msgstr ""
 msgid "Other language sites links"
 msgstr ""
 
+msgid "Whether this row was created by squashing"
+msgstr ""
+
 msgid "90 Days"
 msgstr ""
 
@@ -1909,9 +1882,6 @@ msgid "Response Rate"
 msgstr ""
 
 msgid "Active Users"
-msgstr ""
-
-msgid "Whether this row was created by squashing"
 msgstr ""
 
 msgid "Something to trigger localizations"

@@ -89,7 +89,6 @@ def org_arrow_link(org):
     return mark_safe("&#8594;")
 
 
-
 @register.filter
 def transparency(color, alpha):
     if not color:

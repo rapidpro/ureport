@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-04 08:59+0000\n"
+"POT-Creation-Date: 2026-02-18 09:26+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1863,14 +1863,6 @@ msgstr "Naslov"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Pitanje upućeno publici biće javno objavljeno"
 
-msgid "Color Choice"
-msgstr ""
-
-#, fuzzy
-#| msgid "The question posed to your audience, will be displayed publicly"
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "Pitanje upućeno publici biće javno objavljeno"
-
 msgid "Hidden Charts Choice"
 msgstr ""
 
@@ -2035,39 +2027,6 @@ msgstr ""
 msgid "The callout message on the footer engagement section"
 msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
-msgid "The primary color for styling for this organization, should be dark"
-msgstr "Primarna boja za ovu postavku"
-
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
-msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Sekundarna boja za ovu postavku"
-
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
-msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Primarna boja za ovu postavku"
-
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "Primarna boja za ovu postavku"
-
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "Sekundarna boja za ovu postavku"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Do 6 boja za stilizovanje grafika, koristite zarez izmedju boja"
-
-#, fuzzy
-#| msgid "Up to 6 colors for styling charts, use comma between colors"
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "Do 6 boja za stilizovanje grafika, koristite zarez izmedju boja"
-
 msgid "The states to show on maps only"
 msgstr ""
 
@@ -2136,11 +2095,6 @@ msgstr "Da li ova postavka uključuje globalne podatke, npr. mapu sveta umesto m
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
-msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
-msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
-
 msgid "If set, public users visiting the site will be redirected to this URL."
 msgstr ""
 
@@ -2180,6 +2134,11 @@ msgstr "Ako treba uključiti prilagođeni HTML kod u vaše org stranice, poput p
 msgid "Other language sites links"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Da li je priča objavljena"
+
 msgid "90 Days"
 msgstr ""
 
@@ -2216,11 +2175,6 @@ msgstr "Stopa odgovora"
 msgid "Active Users"
 msgstr ""
 
-#, fuzzy
-#| msgid "Whether this story is featured"
-msgid "Whether this row was created by squashing"
-msgstr "Da li je priča objavljena"
-
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
@@ -2252,6 +2206,49 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The question posed to your audience, will be displayed publicly"
+#~ msgid "The color to use for the question block will be displayed publicly"
+#~ msgstr "Pitanje upućeno publici biće javno objavljeno"
+
+#, fuzzy
+#~| msgid "The primary color for styling for this organization"
+#~ msgid "The primary color for styling for this organization, should be dark"
+#~ msgstr "Primarna boja za ovu postavku"
+
+#, fuzzy
+#~| msgid "The secondary color for styling for this organization"
+#~ msgid "The secondary color for styling for this organization, should be dark"
+#~ msgstr "Sekundarna boja za ovu postavku"
+
+#, fuzzy
+#~| msgid "The primary color for styling for this organization"
+#~ msgid "The tertiary color for styling for this organization, should be dark"
+#~ msgstr "Primarna boja za ovu postavku"
+
+#, fuzzy
+#~| msgid "The primary color for styling for this organization"
+#~ msgid "The primary highlight color for styling for this organization, should be light"
+#~ msgstr "Primarna boja za ovu postavku"
+
+#, fuzzy
+#~| msgid "The secondary color for styling for this organization"
+#~ msgid "The secondary highlight color for styling for this organization, should be light"
+#~ msgstr "Sekundarna boja za ovu postavku"
+
+#~ msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgstr "Do 6 boja za stilizovanje grafika, koristite zarez izmedju boja"
+
+#, fuzzy
+#~| msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+#~ msgstr "Do 6 boja za stilizovanje grafika, koristite zarez izmedju boja"
+
+#, fuzzy
+#~| msgid "Whether this user is allowed to log into the site"
+#~ msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+#~ msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
 
 #~ msgid "The label of the Contact Field that contains the occupation of reporters"
 #~ msgstr "Naziv polja kontakta koji sadrži zanimanje reportera"

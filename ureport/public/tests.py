@@ -146,6 +146,10 @@ class PublicTest(UreportTest):
         mock_cache_get.return_value = None
         home_url = reverse("public.index")
 
+        response = self.client.get(home_url, SERVER_NAME="random.ureport.io")
+        self.assertEqual(response.request["PATH_INFO"], "/")
+        self.assertEqual(response.status_code, 404)
+
         response = self.client.get(home_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertEqual(response.context["org"], self.nigeria)
@@ -319,6 +323,12 @@ class PublicTest(UreportTest):
 
     def test_about(self):
         about_url = reverse("public.about")
+
+        response = self.client.get(about_url, SERVER_NAME="random.ureport.io")
+        self.assertEqual(response.request["PATH_INFO"], "/about/")
+        self.assertEqual(response.status_code, 302)
+        response = self.client.get(about_url, SERVER_NAME="random.ureport.io", follow=True)
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get(about_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/about/")

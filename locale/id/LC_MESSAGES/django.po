@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-04 08:59+0000\n"
+"POT-Creation-Date: 2026-02-18 09:26+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1848,14 +1848,6 @@ msgstr "Judul"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
 
-msgid "Color Choice"
-msgstr ""
-
-#, fuzzy
-#| msgid "The question posed to your audience, will be displayed publicly"
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
-
 msgid "Hidden Charts Choice"
 msgstr ""
 
@@ -2020,39 +2012,6 @@ msgstr ""
 msgid "The callout message on the footer engagement section"
 msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
-msgid "The primary color for styling for this organization, should be dark"
-msgstr "Warna utama untuk desain organisasi ini"
-
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
-msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Warna sekunder untuk desain organisasi ini"
-
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
-msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Warna utama untuk desain organisasi ini"
-
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "Warna utama untuk desain organisasi ini"
-
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "Warna sekunder untuk desain organisasi ini"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Sampai dengan 6 warna untuk styling grafik, Gunakan koma di antara warna pilihan"
-
-#, fuzzy
-#| msgid "Up to 6 colors for styling charts, use comma between colors"
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "Sampai dengan 6 warna untuk styling grafik, Gunakan koma di antara warna pilihan"
-
 msgid "The states to show on maps only"
 msgstr ""
 
@@ -2123,11 +2082,6 @@ msgstr "Jika org ini jika untuk data global. mis: Ini menunjukkan peta dunia buk
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
-msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
-msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
-
 msgid "If set, public users visiting the site will be redirected to this URL."
 msgstr ""
 
@@ -2167,6 +2121,11 @@ msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, sep
 msgid "Other language sites links"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Cerita ini di tampilkan di halaman depan"
+
 msgid "90 Days"
 msgstr ""
 
@@ -2203,11 +2162,6 @@ msgstr "Rating Tanggapan"
 msgid "Active Users"
 msgstr ""
 
-#, fuzzy
-#| msgid "Whether this story is featured"
-msgid "Whether this row was created by squashing"
-msgstr "Cerita ini di tampilkan di halaman depan"
-
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
 
@@ -2239,6 +2193,49 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The question posed to your audience, will be displayed publicly"
+#~ msgid "The color to use for the question block will be displayed publicly"
+#~ msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
+
+#, fuzzy
+#~| msgid "The primary color for styling for this organization"
+#~ msgid "The primary color for styling for this organization, should be dark"
+#~ msgstr "Warna utama untuk desain organisasi ini"
+
+#, fuzzy
+#~| msgid "The secondary color for styling for this organization"
+#~ msgid "The secondary color for styling for this organization, should be dark"
+#~ msgstr "Warna sekunder untuk desain organisasi ini"
+
+#, fuzzy
+#~| msgid "The primary color for styling for this organization"
+#~ msgid "The tertiary color for styling for this organization, should be dark"
+#~ msgstr "Warna utama untuk desain organisasi ini"
+
+#, fuzzy
+#~| msgid "The primary color for styling for this organization"
+#~ msgid "The primary highlight color for styling for this organization, should be light"
+#~ msgstr "Warna utama untuk desain organisasi ini"
+
+#, fuzzy
+#~| msgid "The secondary color for styling for this organization"
+#~ msgid "The secondary highlight color for styling for this organization, should be light"
+#~ msgstr "Warna sekunder untuk desain organisasi ini"
+
+#~ msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgstr "Sampai dengan 6 warna untuk styling grafik, Gunakan koma di antara warna pilihan"
+
+#, fuzzy
+#~| msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+#~ msgstr "Sampai dengan 6 warna untuk styling grafik, Gunakan koma di antara warna pilihan"
+
+#, fuzzy
+#~| msgid "Whether this user is allowed to log into the site"
+#~ msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+#~ msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
 
 #~ msgid "The label of the Contact Field that contains the occupation of reporters"
 #~ msgstr "Label kolom kontak yang berisi pekerjaan dari U-Reporters"

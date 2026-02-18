@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-04 08:59+0000\n"
+"POT-Creation-Date: 2026-02-18 09:26+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -1678,12 +1678,6 @@ msgstr "Název"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Otázka položená vašemu publiku se zobrazí veřejně."
 
-msgid "Color Choice"
-msgstr "Výběr barvy"
-
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "Barva, která se použije pro blok otázek, se zobrazí veřejně."
-
 msgid "Hidden Charts Choice"
 msgstr "Volba skrytých grafů"
 
@@ -1824,27 +1818,6 @@ msgstr "Popis stránky zapojení"
 msgid "The callout message on the footer engagement section"
 msgstr "Zpráva s výzvou v zápatí sekce angažovanost"
 
-msgid "The primary color for styling for this organization, should be dark"
-msgstr "Primární barva pro stylování této organizace by měla být tmavá."
-
-msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Sekundární barva pro stylování této organizace by měla být tmavá."
-
-msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Třetí barva pro stylování této organizace by měla být tmavá."
-
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "Hlavní barva zvýraznění pro stylování této organizace by měla být světlá."
-
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "Sekundární barva zvýraznění pro stylování této organizace by měla být světlá."
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Až 6 barev pro stylování grafů, mezi barvami použijte čárku"
-
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "11 barev pro stylování map, mezi barvami použijte čárku, nepoužívá se, pokud není 11 barev"
-
 msgid "The states to show on maps only"
 msgstr "Stavy k zobrazení pouze na mapách"
 
@@ -1905,9 +1878,6 @@ msgstr "Pokud je tento orgán určen pro globální data, např.: zobrazuje mapu
 msgid "Whether to activate an extra gender."
 msgstr "Zda se má aktivovat další pohlaví."
 
-msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
-msgstr "Zda používat novou značku 2024 s UNICEF v logu a společným tématem."
-
 msgid "If set, public users visiting the site will be redirected to this URL."
 msgstr ""
 
@@ -1941,6 +1911,9 @@ msgstr "Pokud potřebujete do svých stránek organizace zahrnout některé vlas
 msgid "Other language sites links"
 msgstr "Odkazy na další jazykové stránky"
 
+msgid "Whether this row was created by squashing"
+msgstr "Zda byl tento řádek vytvořen stlačením"
+
 msgid "90 Days"
 msgstr "90 dní"
 
@@ -1971,9 +1944,6 @@ msgstr "Míra odezvy"
 msgid "Active Users"
 msgstr "Aktivní uživatelé"
 
-msgid "Whether this row was created by squashing"
-msgstr "Zda byl tento řádek vytvořen stlačením"
-
 msgid "Something to trigger localizations"
 msgstr "Něco pro spouštění lokalizací"
 
@@ -2003,6 +1973,36 @@ msgstr "Země národního výboru UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Západní a střední Afrika"
+
+#~ msgid "Color Choice"
+#~ msgstr "Výběr barvy"
+
+#~ msgid "The color to use for the question block will be displayed publicly"
+#~ msgstr "Barva, která se použije pro blok otázek, se zobrazí veřejně."
+
+#~ msgid "The primary color for styling for this organization, should be dark"
+#~ msgstr "Primární barva pro stylování této organizace by měla být tmavá."
+
+#~ msgid "The secondary color for styling for this organization, should be dark"
+#~ msgstr "Sekundární barva pro stylování této organizace by měla být tmavá."
+
+#~ msgid "The tertiary color for styling for this organization, should be dark"
+#~ msgstr "Třetí barva pro stylování této organizace by měla být tmavá."
+
+#~ msgid "The primary highlight color for styling for this organization, should be light"
+#~ msgstr "Hlavní barva zvýraznění pro stylování této organizace by měla být světlá."
+
+#~ msgid "The secondary highlight color for styling for this organization, should be light"
+#~ msgstr "Sekundární barva zvýraznění pro stylování této organizace by měla být světlá."
+
+#~ msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgstr "Až 6 barev pro stylování grafů, mezi barvami použijte čárku"
+
+#~ msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+#~ msgstr "11 barev pro stylování map, mezi barvami použijte čárku, nepoužívá se, pokud není 11 barev"
+
+#~ msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+#~ msgstr "Zda používat novou značku 2024 s UNICEF v logu a společným tématem."
 
 #~ msgid "The label of the Contact Field that contains the occupation of reporters"
 #~ msgstr "Označení pole kontaktu, které obsahuje povolání reportérů."

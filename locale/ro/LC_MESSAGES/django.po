@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-04 08:59+0000\n"
+"POT-Creation-Date: 2026-02-18 09:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1759,14 +1759,6 @@ msgstr "Titlu"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Întrebarea pusă persoanelor pe care le-ai intervievat va fi afișată pentru toți"
 
-msgid "Color Choice"
-msgstr ""
-
-#, fuzzy
-#| msgid "The question posed to your audience, will be displayed publicly"
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "Întrebarea pusă persoanelor pe care le-ai intervievat va fi afișată pentru toți"
-
 msgid "Hidden Charts Choice"
 msgstr ""
 
@@ -1924,27 +1916,6 @@ msgstr "Descrierea paginii de angajament"
 msgid "The callout message on the footer engagement section"
 msgstr "Mesajul de apelare în secțiunea de implicare la subsol"
 
-msgid "The primary color for styling for this organization, should be dark"
-msgstr "Culoarea principală pentru styling pentru această organizație, ar trebui să fie întunecată"
-
-msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Culoarea secundară pentru styling pentru această organizație, ar trebui să fie întunecată"
-
-msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Culoarea terțiară pentru styling pentru această organizație, ar trebui să fie întunecată"
-
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "Culoarea primordială pentru stilul acestei organizații ar trebui să fie deschisă"
-
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "Culoarea secundară evidențiată pentru stilul acestei organizații, ar trebui să fie deschisă"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
-
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "11 culori pentru hărți de styling, utilizați virgula între culori, nu sunt folosite dacă nu sunt cel puțin 11 culori"
-
 msgid "The states to show on maps only"
 msgstr "Statele trebuie afișate doar pe hărți"
 
@@ -2009,11 +1980,6 @@ msgstr "Dacă această organizație este destinată pentru date globale, de ex.:
 msgid "Whether to activate an extra gender."
 msgstr "În caz dacă activați un gen suplimentar."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
-msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
-msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
-
 msgid "If set, public users visiting the site will be redirected to this URL."
 msgstr ""
 
@@ -2049,6 +2015,11 @@ msgstr "Dacă ai nevoie să incluzi unele coduri HTML personalizate în paginile
 msgid "Other language sites links"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Dacă acest articol este recomandat"
+
 msgid "90 Days"
 msgstr "90 zile"
 
@@ -2081,11 +2052,6 @@ msgstr "Rata de răspuns"
 msgid "Active Users"
 msgstr "Utilizatori Activi"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
-msgid "Whether this row was created by squashing"
-msgstr "Dacă acest articol este recomandat"
-
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
 
@@ -2117,6 +2083,37 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The question posed to your audience, will be displayed publicly"
+#~ msgid "The color to use for the question block will be displayed publicly"
+#~ msgstr "Întrebarea pusă persoanelor pe care le-ai intervievat va fi afișată pentru toți"
+
+#~ msgid "The primary color for styling for this organization, should be dark"
+#~ msgstr "Culoarea principală pentru styling pentru această organizație, ar trebui să fie întunecată"
+
+#~ msgid "The secondary color for styling for this organization, should be dark"
+#~ msgstr "Culoarea secundară pentru styling pentru această organizație, ar trebui să fie întunecată"
+
+#~ msgid "The tertiary color for styling for this organization, should be dark"
+#~ msgstr "Culoarea terțiară pentru styling pentru această organizație, ar trebui să fie întunecată"
+
+#~ msgid "The primary highlight color for styling for this organization, should be light"
+#~ msgstr "Culoarea primordială pentru stilul acestei organizații ar trebui să fie deschisă"
+
+#~ msgid "The secondary highlight color for styling for this organization, should be light"
+#~ msgstr "Culoarea secundară evidențiată pentru stilul acestei organizații, ar trebui să fie deschisă"
+
+#~ msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
+
+#~ msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+#~ msgstr "11 culori pentru hărți de styling, utilizați virgula între culori, nu sunt folosite dacă nu sunt cel puțin 11 culori"
+
+#, fuzzy
+#~| msgid "Whether this user is allowed to log into the site"
+#~ msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+#~ msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
 
 #~ msgid "The label of the Contact Field that contains the occupation of reporters"
 #~ msgstr "Eticheta câmpului „Contacte” care include ocupaţia reporterilor"
