@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-04 08:59+0000\n"
+"POT-Creation-Date: 2026-02-18 09:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -1724,14 +1724,6 @@ msgstr "Titel"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Frågan som ställs till din publik kommer att visas offentligt"
 
-msgid "Color Choice"
-msgstr ""
-
-#, fuzzy
-#| msgid "The question posed to your audience, will be displayed publicly"
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "Frågan som ställs till din publik kommer att visas offentligt"
-
 msgid "Hidden Charts Choice"
 msgstr ""
 
@@ -1882,27 +1874,6 @@ msgstr "Beskrivning av sidan \"Engagemang\""
 msgid "The callout message on the footer engagement section"
 msgstr "Nedre meddelandet på den nedre raden på sidan \"Engagemang\""
 
-msgid "The primary color for styling for this organization, should be dark"
-msgstr "Huvudfärgen för den här organisationen, bör vara mörk"
-
-msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Sekundär färg för den här organisationen, bör vara mörk"
-
-msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Tredje färgen för den här organisationen, bör vara mörk"
-
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "Primära markeringsfärgen för den här organisationen, ska vara ljus"
-
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "Sekundära markeringsfärgen för den här organisationen, ska vara ljus"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Du kan ha upp till 6 färger för färgdiagrammen, använd kommatecken mellan färgerna"
-
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "11 färger för färgdiagram, använd kommatecken mellan färgerna, fungerar bara med 11 färger"
-
 msgid "The states to show on maps only"
 msgstr "Landskapen som ska kunna visas på kartan"
 
@@ -1967,11 +1938,6 @@ msgstr "Bör denna organisation ha global data? Ska det vara en världskarta ist
 msgid "Whether to activate an extra gender."
 msgstr "Aktivera fler könsidentiteter"
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
-msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
-msgstr "Användaren kan logga in på webbplatsen"
-
 msgid "If set, public users visiting the site will be redirected to this URL."
 msgstr ""
 
@@ -2007,6 +1973,9 @@ msgstr "Om du behöver en anpassad HTML-kod för organisationens sidor, till exe
 msgid "Other language sites links"
 msgstr "Länkar till sidan på andra språk"
 
+msgid "Whether this row was created by squashing"
+msgstr "Raden skapades genom squashing"
+
 msgid "90 Days"
 msgstr "90 dagar"
 
@@ -2039,9 +2008,6 @@ msgstr "Svarsfrekvens"
 msgid "Active Users"
 msgstr "Aktiva användare"
 
-msgid "Whether this row was created by squashing"
-msgstr "Raden skapades genom squashing"
-
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
 
@@ -2073,6 +2039,37 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The question posed to your audience, will be displayed publicly"
+#~ msgid "The color to use for the question block will be displayed publicly"
+#~ msgstr "Frågan som ställs till din publik kommer att visas offentligt"
+
+#~ msgid "The primary color for styling for this organization, should be dark"
+#~ msgstr "Huvudfärgen för den här organisationen, bör vara mörk"
+
+#~ msgid "The secondary color for styling for this organization, should be dark"
+#~ msgstr "Sekundär färg för den här organisationen, bör vara mörk"
+
+#~ msgid "The tertiary color for styling for this organization, should be dark"
+#~ msgstr "Tredje färgen för den här organisationen, bör vara mörk"
+
+#~ msgid "The primary highlight color for styling for this organization, should be light"
+#~ msgstr "Primära markeringsfärgen för den här organisationen, ska vara ljus"
+
+#~ msgid "The secondary highlight color for styling for this organization, should be light"
+#~ msgstr "Sekundära markeringsfärgen för den här organisationen, ska vara ljus"
+
+#~ msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgstr "Du kan ha upp till 6 färger för färgdiagrammen, använd kommatecken mellan färgerna"
+
+#~ msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+#~ msgstr "11 färger för färgdiagram, använd kommatecken mellan färgerna, fungerar bara med 11 färger"
+
+#, fuzzy
+#~| msgid "Whether this user is allowed to log into the site"
+#~ msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+#~ msgstr "Användaren kan logga in på webbplatsen"
 
 #~ msgid "The label of the Contact Field that contains the occupation of reporters"
 #~ msgstr "Etikett på kontaktfältet som innehåller yrket för U-Reporters"

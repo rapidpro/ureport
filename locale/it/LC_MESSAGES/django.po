@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-04 08:59+0000\n"
+"POT-Creation-Date: 2026-02-18 09:26+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1757,14 +1757,6 @@ msgstr "Titolo"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "La questione posta alla tua audience, sarà visualizzata pubblicamente"
 
-msgid "Color Choice"
-msgstr ""
-
-#, fuzzy
-#| msgid "The question posed to your audience, will be displayed publicly"
-msgid "The color to use for the question block will be displayed publicly"
-msgstr "La questione posta alla tua audience, sarà visualizzata pubblicamente"
-
 msgid "Hidden Charts Choice"
 msgstr ""
 
@@ -1926,27 +1918,6 @@ msgstr "La descrizione della pagina partecipazione"
 msgid "The callout message on the footer engagement section"
 msgstr "Il messaggio nel footer della sezione partecipazione"
 
-msgid "The primary color for styling for this organization, should be dark"
-msgstr "Il colore primario per la progettazione per questa organizzazione, scuro"
-
-msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Il colore secondario per la progettazione per questa organizzazione, scuro"
-
-msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Il terzo colore per la progettazione per questa organizzazione, scuro"
-
-msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "Il colore primario per la progettazione per questa organizzazione, chiaro"
-
-msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "Il colore secondario per la progettazione per questa organizzazione, chiaro"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Fino a 6 colori per il design dei grafici, usa la virgola tra i colori"
-
-msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "Fino a 11 colori per il design dei grafici, usa la virgola tra i colori, non usato se non 11 colori"
-
 msgid "The states to show on maps only"
 msgstr "Gli stati da mostrare solo nelle mappe"
 
@@ -2015,11 +1986,6 @@ msgstr "Se questo org è per dati globali. es. Mostra una mappa mondiale invece 
 msgid "Whether to activate an extra gender."
 msgstr "Se attivare un genere extra "
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
-msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
-msgstr "Se questo utente ha il permesso di accedere al sito "
-
 msgid "If set, public users visiting the site will be redirected to this URL."
 msgstr ""
 
@@ -2055,6 +2021,11 @@ msgstr "Se hai bisogno di inserire alcuni codici personalizzati HTML nelle tue p
 msgid "Other language sites links"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Se questa storia è apparsa"
+
 msgid "90 Days"
 msgstr "90 giorni"
 
@@ -2087,11 +2058,6 @@ msgstr "Tasso di risposta"
 msgid "Active Users"
 msgstr "Utenti attivi"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
-msgid "Whether this row was created by squashing"
-msgstr "Se questa storia è apparsa"
-
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
 
@@ -2123,6 +2089,37 @@ msgstr ""
 
 msgid "West and Central Africa"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The question posed to your audience, will be displayed publicly"
+#~ msgid "The color to use for the question block will be displayed publicly"
+#~ msgstr "La questione posta alla tua audience, sarà visualizzata pubblicamente"
+
+#~ msgid "The primary color for styling for this organization, should be dark"
+#~ msgstr "Il colore primario per la progettazione per questa organizzazione, scuro"
+
+#~ msgid "The secondary color for styling for this organization, should be dark"
+#~ msgstr "Il colore secondario per la progettazione per questa organizzazione, scuro"
+
+#~ msgid "The tertiary color for styling for this organization, should be dark"
+#~ msgstr "Il terzo colore per la progettazione per questa organizzazione, scuro"
+
+#~ msgid "The primary highlight color for styling for this organization, should be light"
+#~ msgstr "Il colore primario per la progettazione per questa organizzazione, chiaro"
+
+#~ msgid "The secondary highlight color for styling for this organization, should be light"
+#~ msgstr "Il colore secondario per la progettazione per questa organizzazione, chiaro"
+
+#~ msgid "Up to 6 colors for styling charts, use comma between colors"
+#~ msgstr "Fino a 6 colori per il design dei grafici, usa la virgola tra i colori"
+
+#~ msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+#~ msgstr "Fino a 11 colori per il design dei grafici, usa la virgola tra i colori, non usato se non 11 colori"
+
+#, fuzzy
+#~| msgid "Whether this user is allowed to log into the site"
+#~ msgid "Whether to use the new 2024 brand with UNICEF in the logo and a common theme."
+#~ msgstr "Se questo utente ha il permesso di accedere al sito "
 
 #~ msgid "The label of the Contact Field that contains the occupation of reporters"
 #~ msgstr "L'etichetta del Campo Contatto che contiene l'occupazione dei reporter "
