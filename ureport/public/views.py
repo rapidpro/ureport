@@ -50,6 +50,8 @@ from ureport.utils import (
 class RedirectConfigMixin(object):
     def has_permission(self, request, *args, **kwargs):
         org = request.org
+        if org is None:
+            return False
         redirect_site_url = org.get_config("redirect_site_url", "").strip()
         if redirect_site_url:
             return request.user.is_authenticated and (org in request.user.get_user_orgs() or request.user.is_superuser)
@@ -61,6 +63,8 @@ class IndexView(SmartTemplateView):
 
     def pre_process(self, request, *args, **kwargs):
         org = request.org
+        if org is None:
+            raise Http404("Page not found")
         redirect_site_url = org.get_config("redirect_site_url", "").strip()
         if redirect_site_url and not request.user.is_authenticated:
             return HttpResponse(status=302, headers={"Location": redirect_site_url})
