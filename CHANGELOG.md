@@ -1,3 +1,10 @@
+v1.3.2 (2026-03-25)
+-------------------------
+ * Update deps
+ * Update actions/checkout and codecov-action to v5
+ * Bump lodash from 4.17.21 to 4.17.23
+ * Bump django from 5.2.9 to 5.2.12
+
 v1.3.1 (2026-02-18)
 -------------------------
  * Merge pull request #1333 from rapidpro/fix-get-redirect
