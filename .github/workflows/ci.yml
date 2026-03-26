@@ -36,7 +36,7 @@ jobs:
     - name: Initialize environment
       run: |
         uv sync
-        sudo npm install -g coffee-script less
+        sudo npm install -g coffeescript less
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
 
         uv run pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
