@@ -35,6 +35,7 @@ jobs:
 
     - name: Initialize environment
       run: |
+        uv venv
         uv sync --all-groups
         sudo npm install -g coffeescript less
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
