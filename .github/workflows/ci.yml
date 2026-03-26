@@ -25,34 +25,32 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v6
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+
     - name: Install Python
       uses: actions/setup-python@v6
       with:
         python-version: ${{ env.python-version }}
 
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with:
-        virtualenvs-in-project: true
-
     - name: Initialize environment
       run: |
-        poetry install --no-root
+        uv sync
         sudo npm install -g coffee-script less
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
 
-        poetry run pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
-        poetry run pip show rapidpro-dash | awk '/Location:/ { print $2 "/dash ${{ github.workspace }}/dash" }' | xargs ln -s
+        uv run pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
+        uv run pip show rapidpro-dash | awk '/Location:/ { print $2 "/dash ${{ github.workspace }}/dash" }' | xargs ln -s
 
     - name: Run pre-test checks
       run: |
         sudo apt-get install gettext
-        poetry run ./code_check.py --debug
+        uv run ./code_check.py --debug
 
     - name: Run tests
       run: |
-        poetry run coverage run manage.py test --verbosity=2 --noinput
-        poetry run coverage xml
+        uv run coverage run manage.py test --verbosity=2 --noinput
+        uv run coverage xml
 
     - name: Upload coverage
       if: success()
