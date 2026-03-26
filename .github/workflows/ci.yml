@@ -35,12 +35,12 @@ jobs:
 
     - name: Initialize environment
       run: |
-        uv sync
+        uv sync --all-groups
         sudo npm install -g coffeescript less
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
 
-        uv run pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
-        uv run pip show rapidpro-dash | awk '/Location:/ { print $2 "/dash ${{ github.workspace }}/dash" }' | xargs ln -s
+        uv pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
+        uv pip show rapidpro-dash | awk '/Location:/ { print $2 "/dash ${{ github.workspace }}/dash" }' | xargs ln -s
 
     - name: Run pre-test checks
       run: |
