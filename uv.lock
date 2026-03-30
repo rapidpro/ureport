@@ -63,6 +63,7 @@ dependencies = [
     { name = "jmespath" },
     { name = "s3transfer" },
 ]
+sdist = { url = "https://files.pythonhosted.org/packages/f1/13/33c8b8704d677fcaf5555ba8c6cc39468fc7b9a0c6b6c496e008cd5557fc/boto3-1.42.76.tar.gz", hash = "sha256:aa2b1973eee8973a9475d24bb579b1dee7176595338d4e4f7880b5c6189b8814", size = 112789, upload-time = "2026-03-25T19:33:25.985Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f0/dc/21b3dfb135125eb7e3a46b9aab0aede847726f239fc8f39474742a87ebb0/boto3-1.42.76-py3-none-any.whl", hash = "sha256:63c6779c814847016b89ae1b72ed968f8a63d80e589ba337511aa6fc1b59585e", size = 140557, upload-time = "2026-03-25T19:33:23.289Z" },
 ]
@@ -726,7 +727,7 @@ wheels = [
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.19.1"
+version = "1.19.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery", extra = ["redis"] },
@@ -742,22 +743,22 @@ dependencies = [
     { name = "smartmin" },
     { name = "sorl-thumbnail" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c6/22/471ba4b064f34dad4dd5b4cbc35b011e65caff0e2f59ed7bcb99846cf481/rapidpro_dash-1.19.1.tar.gz", hash = "sha256:41bb78239fe9c943b41d42b13200743d73f97a60322495414b7751102d1d59f0", size = 726447, upload-time = "2026-03-25T08:38:42.801Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9d/f7/e9c9a43d55d134d902fe9115b91e3830de2a35998da4b382c74472961705/rapidpro_dash-1.19.2.tar.gz", hash = "sha256:d23852f7601a80c37446aded62530f6db265363c7ac11e0c3979028273617261", size = 726479, upload-time = "2026-03-30T17:24:16.071Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2a/39/4013b2d11073ac728207590ac1b51de449403391c578a2c3762d5f8714da/rapidpro_dash-1.19.1-py3-none-any.whl", hash = "sha256:7b237e3e6d9e3cfb4fd62eff46af4ba7ffd2c1624b1a855776a555e98118877e", size = 168193, upload-time = "2026-03-25T08:38:41.394Z" },
+    { url = "https://files.pythonhosted.org/packages/cc/ed/7a4ea12f23fbc855d0f86087fc71e413ec94e738d1629cfeb1f287d9e2fc/rapidpro_dash-1.19.2-py3-none-any.whl", hash = "sha256:42ea8bc0a1547da0a2ed2b4529d9ee6c02f65197c6d63dbb061162d55bdff576", size = 168191, upload-time = "2026-03-30T17:24:14.696Z" },
 ]
 
 [[package]]
 name = "rapidpro-python"
-version = "2.22.1"
+version = "2.22.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/29/31/d7e1420abbde8d38eb841d6bfca16ee38c68769c93dcab41dfa20504d5a2/rapidpro_python-2.22.1.tar.gz", hash = "sha256:cae47203c598f05c5698308f3d685fefb878af28c00711a76d07ca1d224037ee", size = 21627, upload-time = "2026-03-24T11:15:54.255Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e5/2c/a4687cde52d0a4974def780bc98e3203ce8b77182ba4fc29f191ca9a4690/rapidpro_python-2.22.2.tar.gz", hash = "sha256:3cbd6ff6fbd609f1084019b916769044b7b71d43537c191ce5420f22aa09fc9f", size = 21624, upload-time = "2026-03-26T15:50:35.597Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/98/d5/09f8d180715380218e0194b96a1b36b0044b3513ede7df12fc9d0d1645ea/rapidpro_python-2.22.1-py3-none-any.whl", hash = "sha256:bd1d11be5081bb9d1115ae09f4c4f3aab152747879b4a7b4865b93e8484c5cd6", size = 24306, upload-time = "2026-03-24T11:15:53.404Z" },
+    { url = "https://files.pythonhosted.org/packages/37/29/8cbf47178dfa0e89f3edde6cfdae0f983862ed932b300645d0861f046c4a/rapidpro_python-2.22.2-py3-none-any.whl", hash = "sha256:b41da5e5151b189a2c2ee193317c12f91fd7c87d45d5cad1dfc452a2fafb8232", size = 24303, upload-time = "2026-03-26T15:50:34.505Z" },
 ]
 
 [[package]]
@@ -1038,7 +1039,7 @@ requires-dist = [
     { name = "pillow", specifier = "~=12.1.1" },
     { name = "psycopg", specifier = "~=3.2.3" },
     { name = "pycountry", specifier = ">=24.5.1" },
-    { name = "rapidpro-dash", specifier = ">=1.19.1,<2.0.0" },
+    { name = "rapidpro-dash", specifier = ">=1.19.2,<2.0.0" },
     { name = "rapidpro-python", specifier = ">=2.22.1,<3.0.0" },
     { name = "regex", specifier = "~=2024.11.6" },
     { name = "sentry-sdk", specifier = "~=2.19.2" },
