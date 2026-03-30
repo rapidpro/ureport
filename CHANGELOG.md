@@ -1,3 +1,9 @@
+v1.4.0 (2026-03-30)
+-------------------------
+ * Update README
+ * Update deps
+ * Switch to use UV package and project manager
+
 v1.3.2 (2026-03-25)
 -------------------------
  * Update deps
