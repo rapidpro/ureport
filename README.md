@@ -12,9 +12,9 @@ Getting Started
 
 Install dependencies
 ```
-% pip install --upgrade pip poetry
-% poetry install --no-root
-% poetry shell
+% pip install --upgrade pip uv
+% uv venv
+% uv sync --all-groups
 ```
 
 Link up a settings file (you'll need to create the postgres db first, username: 'ureport' password: 'nyaruka')
