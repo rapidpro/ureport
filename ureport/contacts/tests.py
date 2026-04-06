@@ -216,7 +216,6 @@ class ContactTest(UreportTest):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
     def test_reporters_counter(self):
-
         signup_date = timezone.now() - timedelta(days=300)
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
         Contact.objects.create(
