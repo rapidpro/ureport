@@ -142,9 +142,7 @@ class UreportAPITests(APITestCase):
         )
 
     def create_poll_question(self, user, poll, result_name, result_uuid):
-        flow_result = FlowResult.objects.filter(
-            org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid
-        ).first()
+        flow_result = FlowResult.objects.filter(org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid).first()
         if flow_result:
             flow_result.result_name = result_name
             flow_result.save(update_fields=("result_name",))
@@ -488,9 +486,7 @@ class UreportAPITests(APITestCase):
 
         self.assertDictEqual(
             dict(category),
-            dict(
-                OrderedDict(name=poll.category.name, image_url=CategoryReadSerializer().get_image_url(poll.category))
-            ),
+            dict(OrderedDict(name=poll.category.name, image_url=CategoryReadSerializer().get_image_url(poll.category))),
         )
 
         with patch("ureport.polls.models.PollQuestion.get_results") as mock_get_results:

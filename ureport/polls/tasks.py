@@ -183,7 +183,6 @@ def clear_old_poll_results(org, since, until):
                 % (poll.pk, org.pk)
             )
         else:
-
             dupes_flow_uuid.add(poll.flow_uuid)
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 # refresh the object from the DB

@@ -293,9 +293,7 @@ class ReportersCounter(models.Model):
                 if max_id:
                     r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id.id)
 
-                logger.info(
-                    "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
-                )
+                logger.info("Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start))
 
     @classmethod
     def get_counts(cls, org, types=None):

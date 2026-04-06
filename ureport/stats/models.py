@@ -43,7 +43,6 @@ class SchemeSegment(models.Model):
 
 
 class PollStats(models.Model):
-
     id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats")
@@ -154,9 +153,7 @@ class PollStats(models.Model):
 
                 where_sql += """
                 "date" = date_trunc('day', TIMESTAMP '%s')::TIMESTAMP
-                """ % str(
-                    distinct_set.date
-                )
+                """ % str(distinct_set.date)
 
                 sql = """
                 WITH deleted as (
@@ -168,9 +165,7 @@ class PollStats(models.Model):
                 )
                 INSERT INTO stats_pollstats("org_id", "question_id", "flow_result_id", "category_id", "flow_result_category_id", "age_segment_id", "gender_segment_id", "scheme_segment_id", "location_id", "date", "count", "is_squashed")
                 VALUES (%%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
-                """ % {
-                    "where_sql": where_sql
-                }
+                """ % {"where_sql": where_sql}
 
                 params = (
                     distinct_set.org_id,
@@ -486,7 +481,6 @@ class PollEngagementDailyCount(BaseDailyCount):
         top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
         output_data = []
         for osm_id, name in top_boundaries.items():
-
             responses = (
                 PollEngagementDailyCount.objects.filter(
                     org=org,
@@ -1125,9 +1119,7 @@ class ContactActivityCounter(SquashableModel):
         )
         INSERT INTO %(table)s("org_id", "date", "type", "value", "count", "is_squashed")
         VALUES (%%s, %%s, %%s, %%s, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
-        """ % {
-            "table": cls._meta.db_table
-        }
+        """ % {"table": cls._meta.db_table}
 
         return sql, (distinct_set.org_id, distinct_set.date, distinct_set.type, distinct_set.value) * 2
 

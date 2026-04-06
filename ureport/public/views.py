@@ -145,7 +145,7 @@ class SharedSitesCount(SmartTemplateView):
                 and elt.get("flag", "")
                 and not elt["flag"].startswith("https://ureport.in/sitestatic/img/site_flags/")
             ):
-                elt["flag"] = f'https://ureport.in/sitestatic/img/site_flags/{elt["flag"]}'
+                elt["flag"] = f"https://ureport.in/sitestatic/img/site_flags/{elt['flag']}"
 
         unique_countries = set()
         for elt in linked_sites:

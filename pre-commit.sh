@@ -4,15 +4,13 @@
 FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -e '\.py$')
 
 if [ -n "$FILES" ]; then
-    isort -q $FILES
+    ruff check --select I --fix -q $FILES
 fi
 
 if [ -n "$FILES" ]; then
-    if black --line-length=119 $FILES; then
-	touch .commit
-    fi
+    ruff format -q $FILES
 fi
 
 if [ -n "$FILES" ]; then
-    flake8 $FILES 
+    ruff check -q $FILES
 fi
