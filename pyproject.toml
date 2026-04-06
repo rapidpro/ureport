@@ -43,7 +43,6 @@ dependencies = [
 [dependency-groups]
 dev = [
     "black>=26.3.1,<27.0.0",
-    "isort>=5.13.2,<6.0.0",
     "coverage[toml]>=7.2.2,<8.0.0",
     "ruff>=0.3.3,<0.4.0",
     "djlint>=1.34.1,<2.0.0",
@@ -54,19 +53,18 @@ line-length = 119
 
 [tool.ruff]
 line-length = 120
-lint.select = ["E", "F", "W"]
+lint.select = ["E", "F", "W", "I"]
 lint.ignore = ["E501", "F405"]
 fix = true
 exclude = ["./.tox/*", "./.venv/*", "./env/*", "*/migrations/*", "./build/*"]
 
-[tool.isort]
-multi_line_output = 3
-force_grid_wrap = 0
-line_length = 119
-include_trailing_comma = true
-combine_as_imports = true
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
-known_django = ["django"]
+[tool.ruff.lint.isort]
+combine-as-imports = true
+section-order = ["future", "standard-library", "third-party", "django", "first-party", "local-folder"]
+known-first-party = ["dash", "smartmin"]
+
+[tool.ruff.lint.isort.sections]
+django = ["django"]
 
 [tool.djlint]
 blank_line_after_tag = "load"

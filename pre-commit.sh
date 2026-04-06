@@ -4,7 +4,7 @@
 FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -e '\.py$')
 
 if [ -n "$FILES" ]; then
-    isort -q $FILES
+    ruff check --select I --fix -q $FILES
 fi
 
 if [ -n "$FILES" ]; then

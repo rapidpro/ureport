@@ -78,8 +78,6 @@ if __name__ == "__main__":
     cmd("black ureport")
     status("Running ruff")
     cmd("ruff check ureport")
-    status("Running isort")
-    cmd("isort ureport")
     status("Updating locale PO files")
     update_po_files()
     status("Recompiling locale MO files")
