@@ -112,7 +112,7 @@ class Poll(SmartModel):
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(
-        help_text=_("The date to display for this poll. " "Leave empty to use flow creation date.")
+        help_text=_("The date to display for this poll. Leave empty to use flow creation date.")
     )
 
     flow_archived = models.BooleanField(
@@ -556,9 +556,7 @@ class Poll(SmartModel):
                 self.delete_poll_stats()
 
                 PollStatsCounter.objects.bulk_create(poll_stats_counter_obj_to_insert, batch_size=1000)
-                PollEngagementDailyCount.objects.bulk_create(
-                    poll_engagement_daily_count_obj_to_insert, batch_size=1000
-                )
+                PollEngagementDailyCount.objects.bulk_create(poll_engagement_daily_count_obj_to_insert, batch_size=1000)
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
@@ -653,9 +651,7 @@ class Poll(SmartModel):
     @classmethod
     def find_main_poll(cls, org):
         poll_with_questions = (
-            PollQuestion.objects.filter(is_active=True, poll__org=org)
-            .only("poll_id")
-            .values_list("poll_id", flat=True)
+            PollQuestion.objects.filter(is_active=True, poll__org=org).only("poll_id").values_list("poll_id", flat=True)
         )
 
         polls = (

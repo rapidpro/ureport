@@ -863,8 +863,7 @@ def get_ureporters_locations_stats(org, segment):
         location_counts = {k[9:]: v for k, v in org_contacts_counts.items() if k.startswith("district")}
 
     return [
-        dict(boundary=elt["osm_id"], label=elt["name"], set=location_counts.get(elt["osm_id"], 0))
-        for elt in boundaries
+        dict(boundary=elt["osm_id"], label=elt["name"], set=location_counts.get(elt["osm_id"], 0)) for elt in boundaries
     ]
 
 

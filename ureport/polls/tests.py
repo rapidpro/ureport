@@ -115,9 +115,7 @@ class PollTest(UreportTest):
 
             self.assertEqual(response.context["org"], self.uganda)
             self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_list"))
-            self.assertContains(
-                response, "Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id)
-            )
+            self.assertContains(response, "Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id))
 
             mock_pull_refresh.assert_called_once_with()
 
@@ -2235,9 +2233,7 @@ class PollQuestionTest(UreportTest):
 
         self.assertEqual(5, PollStatsCounter.objects.all().count())
         calculated_results = [
-            dict(
-                open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")]
-            )
+            dict(open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")])
         ]
         self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
@@ -2245,9 +2241,7 @@ class PollQuestionTest(UreportTest):
 
         self.assertEqual(3, PollStatsCounter.objects.all().count())
         calculated_results = [
-            dict(
-                open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")]
-            )
+            dict(open_ended=False, set=12, unset=1, categories=[dict(count=2, label="Yes"), dict(count=10, label="No")])
         ]
         self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
@@ -2492,9 +2486,7 @@ class PollResultsTest(UreportTest):
         next_year = current_year + 1
         eight_years_ago = current_year - 8
 
-        result_date = timezone.now().replace(
-            year=next_year, month=9, day=15, hour=0, minute=0, second=0, microsecond=0
-        )
+        result_date = timezone.now().replace(year=next_year, month=9, day=15, hour=0, minute=0, second=0, microsecond=0)
 
         PollResult.objects.create(
             org=self.nigeria,
@@ -2776,9 +2768,7 @@ class PollResultsTest(UreportTest):
             .exclude(district=None)
         )
         self.assertFalse(
-            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
-            .exclude(ward="")
-            .exclude(ward=None)
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid").exclude(ward="").exclude(ward=None)
         )
 
         # have all type counts

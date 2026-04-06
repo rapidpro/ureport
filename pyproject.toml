@@ -43,7 +43,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "coverage[toml]>=7.2.2,<8.0.0",
-    "ruff>=0.3.3,<0.4.0",
+    "ruff>=0.15.9,<0.16.0",
     "djlint>=1.34.1,<2.0.0",
 ]
 

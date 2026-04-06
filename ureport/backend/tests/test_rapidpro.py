@@ -634,9 +634,7 @@ class ContactSyncerTest(UreportTest):
         self.assertNotEqual(contact.state, "R-LAGOS")
 
         self.assertEqual(ContactActivity.objects.filter(contact="C-008").count(), 12)
-        self.assertFalse(
-            ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).exists()
-        )
+        self.assertFalse(ContactActivity.objects.filter(contact="C-008").exclude(state="").exclude(state=None).exists())
         self.assertFalse(
             ContactActivity.objects.filter(contact="C-008").exclude(gender="").exclude(gender=None).exists()
         )
@@ -1874,9 +1872,7 @@ class RapidProBackendTest(UreportTest):
         mock_poll_flow_date.return_value = None
 
         PollResult.objects.all().delete()
-        Contact.objects.create(
-            org=self.nigeria, uuid="C-001", gender="M", born=1990, state="R-LAGOS", district="R-OYO"
-        )
+        Contact.objects.create(org=self.nigeria, uuid="C-001", gender="M", born=1990, state="R-LAGOS", district="R-OYO")
         poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
         poll.poll_date = now_date
         poll.save()
