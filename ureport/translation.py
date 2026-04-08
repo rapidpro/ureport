@@ -5,7 +5,7 @@ from modeltranslation import utils
 from modeltranslation.translator import TranslationOptions, translator
 from nsms.text.models import Text
 
-from django.utils.translation import get_language as _get_language, ugettext as _
+from django.utils.translation import get_language as _get_language, gettext as _
 
 
 class TextTranslationOptions(TranslationOptions):

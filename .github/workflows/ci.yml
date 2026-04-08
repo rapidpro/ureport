@@ -2,10 +2,12 @@ name: CI
 on: [push, pull_request]
 jobs:
   test:
-    name: Test
+    name: Test (${{ matrix.python-version }})
     runs-on: ubuntu-latest
-    env:
-      python-version: "3.12.x"
+    strategy:
+      matrix:
+        python-version: ["3.12.x", "3.13.x", "3.14.x"]
+      fail-fast: false
     services:
       valkey:
         image: valkey/valkey:8.1-alpine
@@ -31,7 +33,7 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v6
       with:
-        python-version: ${{ env.python-version }}
+        python-version: ${{ matrix.python-version }}
 
     - name: Initialize environment
       run: |
