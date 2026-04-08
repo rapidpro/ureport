@@ -1,3 +1,15 @@
+v1.4.1 (2026-04-08)
+-------------------------
+ * Merge pull request #1344 from rapidpro/django-6.0
+ * Add CI test matrix for Python 3.12, 3.13 and 3.14
+ * Update to Django 6.0
+ * Merge pull request #1343 from rapidpro/replace-isort-with-ruff
+ * Update ruff from 0.3 to 0.15
+ * Replace black with ruff format
+ * Replace isort with ruff import sorting
+ * Merge pull request #1342 from rapidpro/valkey-8.1
+ * Bump valkey from 8.0 to 8.1 in CI
+
 v1.4.0 (2026-03-30)
 -------------------------
  * Update README
