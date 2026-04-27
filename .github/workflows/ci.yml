@@ -53,10 +53,6 @@ jobs:
     - name: Run tests
       run: |
         uv run coverage run manage.py test --verbosity=2 --noinput
-        uv run coverage xml
 
-    - name: Upload coverage
-      if: success()
-      uses: codecov/codecov-action@v6
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+    - name: Coverage report
+      run: uv run coverage report -m
