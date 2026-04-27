@@ -1,7 +1,6 @@
 # U-Report 
 
 [![Build Status](https://github.com/rapidpro/ureport/workflows/CI/badge.svg)](https://github.com/rapidpro/ureport/actions?query=workflow%3ACI) 
-[![codecov](https://codecov.io/gh/rapidpro/ureport/branch/main/graph/badge.svg)](https://codecov.io/gh/rapidpro/ureport)
 
 This is the U-Report dashboard built on data collected by RapidPro.
 
