@@ -1,3 +1,14 @@
+v1.5.0 (2026-04-30)
+-------------------------
+ * Merge pull request #1347 from rapidpro/use-python3.14
+ * Test on python 3.14 only
+ * Update GH action
+ * Use python 3.14 and update dependencies
+ * Merge pull request #1346 from rapidpro/remove-codecov
+ * Remove codecov
+ * Merge pull request #1345 from rapidpro/update-pillow
+ * Update pillow to 12.2.0
+
 v1.4.1 (2026-04-08)
 -------------------------
  * Merge pull request #1344 from rapidpro/django-6.0
