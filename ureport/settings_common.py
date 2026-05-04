@@ -148,10 +148,7 @@ STATICFILES_FINDERS = (
     "compressor.finders.CompressorFinder",
 )
 
-COMPRESS_PRECOMPILERS = (
-    ("text/coffeescript", "coffee --compile --stdio"),
-    ("text/less", "lessc {infile} {outfile}"),
-)
+COMPRESS_PRECOMPILERS = (("text/less", "lessc {infile} {outfile}"),)
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r)bxo"
