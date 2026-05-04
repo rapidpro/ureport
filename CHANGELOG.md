@@ -1,3 +1,9 @@
+v1.5.3 (2026-05-04)
+-------------------------
+ * Merge pull request #1349 from rapidpro/cleanup-unused-code
+ * Merge pull request #1348 from rapidpro/remove-coffee
+ * Address PR review comments
+
 v1.5.0 (2026-04-30)
 -------------------------
  * Merge pull request #1347 from rapidpro/use-python3.14
