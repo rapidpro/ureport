@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import zoneinfo
 from collections import OrderedDict
 from datetime import datetime
 from random import randint
 
-import six
 from mock import patch
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -129,7 +127,7 @@ class UreportAPITests(APITestCase):
     def create_poll(self, title, is_featured=False, has_synced=True, published=True):
         now = timezone.now()
         return Poll.objects.create(
-            flow_uuid=six.text_type(randint(1000, 9999)),
+            flow_uuid=str(randint(1000, 9999)),
             title=title,
             category=self.health_uganda,
             poll_date=now,
@@ -265,7 +263,7 @@ class UreportAPITests(APITestCase):
                 language=org.language,
                 subdomain=org.subdomain,
                 domain=org.domain,
-                timezone=six.text_type(org.timezone),
+                timezone=str(org.timezone),
             ),
         )
 

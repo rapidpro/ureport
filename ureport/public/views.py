@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import calendar
 import json
@@ -9,7 +8,6 @@ from datetime import timedelta
 from functools import reduce
 
 import pycountry
-import six
 from django_valkey import get_valkey_connection
 
 from django.conf import settings
@@ -535,7 +533,7 @@ class UreportersView(RedirectConfigMixin, SmartTemplateView):
         translation.activate(org.language)
 
         # remove the first option '' from calender.month_abbr
-        context["months"] = [six.text_type(_("%s")) % m for m in calendar.month_abbr][1:]
+        context["months"] = [str(_("%s")) % m for m in calendar.month_abbr][1:]
 
         context["states"] = sorted(
             [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()],

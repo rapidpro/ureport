@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import regex
-import six
 from django_countries.fields import CountryField
 
 from django.db import models
@@ -17,7 +15,7 @@ class CountryAlias(SmartModel):
 
     @classmethod
     def normalize_name(cls, name):
-        words = regex.split(r"\W+", six.text_type(name).lower(), flags=regex.UNICODE | regex.V0)
+        words = regex.split(r"\W+", str(name).lower(), flags=regex.UNICODE | regex.V0)
         return " ".join([word.lower() for word in words if word])
 
     @classmethod
