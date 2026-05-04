@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
 import logging
@@ -10,7 +9,6 @@ from datetime import datetime, timedelta, timezone as tzone
 from itertools import chain, islice
 
 import iso8601
-import six
 from sentry_sdk import capture_exception
 
 from django.conf import settings
@@ -394,13 +392,13 @@ def get_gender_stats(org):
 
     output = dict(
         female_count=female_count,
-        female_percentage=six.text_type(female_percentage) + "%",
+        female_percentage=str(female_percentage) + "%",
         male_count=male_count,
-        male_percentage=six.text_type(male_percentage) + "%",
+        male_percentage=str(male_percentage) + "%",
     )
     if has_extra_gender:
         output["other_count"] = other_count
-        output["other_percentage"] = six.text_type(other_percentage) + "%"
+        output["other_percentage"] = str(other_percentage) + "%"
 
     return output
 

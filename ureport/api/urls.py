@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view

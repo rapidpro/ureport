@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 from django.conf import settings
-from django.urls import include
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from django.urls import re_path
+from django.urls import include, re_path
 from django.views import static
 from django.views.generic import RedirectView
 from django.views.i18n import JavaScriptCatalog

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
 
-import six
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from sorl.thumbnail import get_thumbnail
@@ -93,7 +91,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
         return obj.get_reporters_count()
 
     def get_timezone(self, obj):
-        return six.text_type(obj.timezone)
+        return str(obj.timezone)
 
 
 class StoryReadSerializer(serializers.ModelSerializer):

@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import uuid
 import zoneinfo
 from datetime import datetime, timedelta, timezone as tzone
 
-import six
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
@@ -204,7 +202,7 @@ class PollTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
-        self.assertEqual(six.text_type(poll1), "Poll 1")
+        self.assertEqual(str(poll1), "Poll 1")
 
         self.assertIsNone(Poll.find_main_poll(self.uganda))
         self.assertIsNone(Poll.find_main_poll(self.nigeria))
@@ -357,7 +355,7 @@ class PollTest(UreportTest):
             name="image 1", poll=poll1, created_by=self.admin, modified_by=self.admin
         )
 
-        self.assertEqual(six.text_type(poll_image1), "Poll 1 - image 1")
+        self.assertEqual(str(poll_image1), "Poll 1 - image 1")
 
         self.assertFalse(poll1.get_featured_images())
 
@@ -1312,7 +1310,7 @@ class PollQuestionTest(UreportTest):
 
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
-        self.assertEqual(six.text_type(poll_question1), "question 1")
+        self.assertEqual(str(poll_question1), "question 1")
 
         # no response category are ignored
         self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")
@@ -1518,7 +1516,7 @@ class PollQuestionTest(UreportTest):
 
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
-        self.assertEqual(six.text_type(poll_question1), "question 1")
+        self.assertEqual(str(poll_question1), "question 1")
 
         # no response category are ignored
         self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")
@@ -1795,7 +1793,7 @@ class PollQuestionTest(UreportTest):
 
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
-        self.assertEqual(six.text_type(poll_question1), "question 1")
+        self.assertEqual(str(poll_question1), "question 1")
 
         # no response category are ignored
         self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")
@@ -2137,7 +2135,7 @@ class PollQuestionTest(UreportTest):
 
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
-        self.assertEqual(six.text_type(poll_question1), "question 1")
+        self.assertEqual(str(poll_question1), "question 1")
 
         # no response category are ignored
         self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
 import logging
@@ -7,7 +6,6 @@ import uuid
 from collections import defaultdict
 from datetime import timedelta, timezone as tzone
 
-import six
 from django_valkey import get_valkey_connection
 
 from django.conf import settings
@@ -59,7 +57,6 @@ CACHE_ORG_AGE_DATA_KEY = "org:%d:age:%s"
 CACHE_ORG_REGISTRATION_DATA_KEY = "org:%d:registration:%s"
 
 
-@six.python_2_unicode_compatible
 class PollCategory(SmartModel):
     """
     This is a dead class but here so we can perform our migration.
@@ -78,7 +75,6 @@ class PollCategory(SmartModel):
         verbose_name_plural = _("Poll Categories")
 
 
-@six.python_2_unicode_compatible
 class Poll(SmartModel):
     """
     A poll represents a single Flow that has been brought in for
@@ -807,7 +803,6 @@ class Poll(SmartModel):
         ]
 
 
-@six.python_2_unicode_compatible
 class PollImage(SmartModel):
     name = models.CharField(max_length=64, help_text=_("The name to describe this image"))
 
@@ -821,7 +816,6 @@ class PollImage(SmartModel):
         return "%s - %s" % (self.poll, self.name)
 
 
-@six.python_2_unicode_compatible
 class FeaturedResponse(SmartModel):
     """
     A highlighted response for a poll and location.
@@ -843,7 +837,6 @@ class FeaturedResponse(SmartModel):
         return "%s - %s - %s" % (self.poll, self.location, self.message)
 
 
-@six.python_2_unicode_compatible
 class PollQuestion(SmartModel):
     """
     Represents a single question that was asked in a poll, these questions tie 1-1 to
@@ -998,7 +991,7 @@ class PollQuestion(SmartModel):
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            key += ":" + slugify(six.text_type(json.dumps(segment)))
+            key += ":" + slugify(str(json.dumps(segment)))
 
         cached_value = cache.get(key, None)
         if cached_value:
@@ -1288,7 +1281,7 @@ class PollQuestion(SmartModel):
 
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            key += ":" + slugify(six.text_type(json.dumps(segment)))
+            key += ":" + slugify(str(json.dumps(segment)))
 
         cache.set(key, {"results": results}, None)
 
@@ -1364,7 +1357,7 @@ class PollQuestion(SmartModel):
         responded = self.get_responded()
         if polled and responded:
             percentage = int(round((float(responded) * 100.0) / float(polled)))
-            return "%s" % six.text_type(percentage) + "%"
+            return "%s" % str(percentage) + "%"
         return "___"
 
     def get_gender_stats(self):
