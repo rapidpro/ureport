@@ -39,7 +39,7 @@ jobs:
       run: |
         uv venv
         uv sync --all-groups
-        sudo npm install -g coffeescript less
+        sudo npm install -g less
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
 
         uv pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
