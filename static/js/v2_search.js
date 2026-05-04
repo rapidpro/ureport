@@ -5,13 +5,13 @@ $(function () {
     var results = "#" + $(this).data("results-id");
     if (!$(results).hasClass("shown")) {
       $(results).addClass("shown");
-      $(document).click(function () {
+      $(document).on("click.searchBox", function () {
         $(searchBox).val("");
         $(results).find(".no-results").addClass("hidden");
         $(results).find(".searchable").removeClass("hide");
         $(results).find(".search-category").removeClass("hidden").removeClass("open");
         $(results).removeClass("shown");
-        $(document).unbind("click");
+        $(document).off("click.searchBox");
       });
     }
   });
@@ -42,13 +42,11 @@ $(function () {
     // no search, make everything visible again
     if (filter === "") {
       $("#" + results).find(".search-category").each(function () {
-        console.log(this);
         if ($(this).hasClass("date-category")) {
           $(this).addClass("hidden");
         } else {
           $(this).removeClass("hidden");
         }
-        console.log("state: " + $(this).data("state"));
         if ($(this).data("state") === "open") {
           $(this).addClass("open");
         } else {

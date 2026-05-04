@@ -29,13 +29,13 @@ $(".state-pill").click(function () {
 
   if (!$(states).hasClass("shown")) {
     $(states).addClass("shown");
-    $(document).click(function () {
+    $(document).on("click.statePill", function () {
       $(states).removeClass("shown");
-      $(document).unbind("click");
+      $(document).off("click.statePill");
     });
   } else {
     $(states).removeClass("shown");
-    $(document).unbind("click");
+    $(document).off("click.statePill");
   }
   return false;
 });
