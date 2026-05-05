@@ -1711,14 +1711,6 @@ COUNTRY_FLAGS_SITES = [
         region="ROSA",
     ),
     dict(
-        name="Panama",
-        host="//panama.ureport.in",
-        flag="flag_panama.png",
-        country_codes=["PAN"],
-        count_link="http://panama.ureport.in/count/",
-        region="LACRO",
-    ),
-    dict(
         name="Paraguay",
         host="//paraguay.ureport.in",
         flag="flag_paraguay.png",
