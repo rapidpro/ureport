@@ -1,3 +1,8 @@
+v1.5.4 (2026-05-05)
+-------------------------
+ * Merge pull request #1350 from rapidpro/remove-panama
+ * Remove Panama
+
 v1.5.3 (2026-05-04)
 -------------------------
  * Merge pull request #1349 from rapidpro/cleanup-unused-code
