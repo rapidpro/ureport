@@ -1,3 +1,10 @@
+v1.5.5 (2026-05-19)
+-------------------------
+ * Merge pull request #1352 from rapidpro/dependabot/uv/django-6.0.5
+ * Merge pull request #1351 from rapidpro/dependabot/uv/urllib3-2.7.0
+ * Bump django from 6.0.4 to 6.0.5
+ * Bump urllib3 from 2.6.3 to 2.7.0
+
 v1.5.4 (2026-05-05)
 -------------------------
  * Merge pull request #1350 from rapidpro/remove-panama
