@@ -1,3 +1,8 @@
+v1.5.6 (2026-05-22)
+-------------------------
+ * Force gc.collect after each sync fetch page to release per-page lookup maps
+ * Bump idna from 3.13 to 3.15
+
 v1.5.5 (2026-05-19)
 -------------------------
  * Merge pull request #1352 from rapidpro/dependabot/uv/django-6.0.5
