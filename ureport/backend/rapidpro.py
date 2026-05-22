@@ -532,6 +532,10 @@ class RapidProBackend(BaseBackend):
                                 % (i, time.time() - fetch_start, len(fetch))
                             )
 
+                            # release per-page lookup maps holding cyclic references before next allocation
+                            del contacts_map, poll_results_map, poll_results_to_save_map
+                            gc.collect()
+
                         logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
                     except Exception as e:
                         logger.info(e)
