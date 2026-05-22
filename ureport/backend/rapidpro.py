@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import gc
 import gzip
 import io
 import json
@@ -531,12 +532,18 @@ class RapidProBackend(BaseBackend):
                                 % (i, time.time() - fetch_start, len(fetch))
                             )
 
+                            # release per-page lookup maps holding cyclic references before next allocation
+                            del contacts_map, poll_results_map, poll_results_to_save_map
+                            gc.collect()
+
                         logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
                     except Exception as e:
                         logger.info(e)
                         import traceback
 
                         traceback.print_exc()
+
+                    gc.collect()
 
         return (
             stats_dict["num_val_created"],
@@ -654,6 +661,11 @@ class RapidProBackend(BaseBackend):
                             "runs for poll #%d on org #%d"
                             % (stats_dict["num_synced"] - len(fetch), stats_dict["num_synced"], poll.pk, org.pk)
                         )
+
+                        # release per-page lookup maps holding cyclic references before next allocation
+                        del contacts_map, poll_results_map, poll_results_to_save_map
+                        gc.collect()
+
                         fetch_start = time.time()
                         logger.info("=" * 40)
 
