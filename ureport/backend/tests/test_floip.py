@@ -1138,6 +1138,8 @@ class FLOIPBackendTest(UreportTest):
         self.create_poll_question(self.admin, poll, "question 2", "q_1522956746998_26")
         self.create_poll_question(self.admin, poll, "question 3", "q_1522957067432_34")
 
+        progress_calls = []
+
         with self.assertNumQueries(4):
             (
                 num_val_created,
@@ -1146,12 +1148,17 @@ class FLOIPBackendTest(UreportTest):
                 num_path_created,
                 num_path_updated,
                 num_path_ignored,
-            ) = self.backend.pull_results(poll, None, None)
+            ) = self.backend.pull_results(poll, None, None, progress_callback=progress_calls.append)
 
         self.assertEqual(
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
             (15, 0, 8, 0, 0, 0),
         )
+
+        # progress_callback should be called once per page with the cumulative number of synced runs.
+        # The mocked response has 23 entries on a single page, so num_synced must be 23 — not 23*23 (the
+        # value seen when the per-page increment was incorrectly nested inside the per-result loop).
+        self.assertEqual(progress_calls, [23])
         mock_valkey_lock.assert_called_once_with(
             Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid), timeout=7200
         )
