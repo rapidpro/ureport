@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import gc
 import logging
 import time
 from collections import defaultdict
@@ -373,6 +374,11 @@ class FLOIPBackend(BaseBackend):
                         "runs for poll #%d on org #%d"
                         % (stats_dict["num_synced"] - len(results), stats_dict["num_synced"], poll.pk, org.pk)
                     )
+
+                    # release per-page lookup maps holding cyclic references before next allocation
+                    del contacts_map, poll_results_map, poll_results_to_save_map
+                    gc.collect()
+
                     # fetch_start = time.time()
                     logger.info("=" * 40)
 
