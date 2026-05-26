@@ -363,9 +363,9 @@ class FLOIPBackend(BaseBackend):
                             stats_dict,
                         )
 
-                        stats_dict["num_synced"] += len(results)
-                        if progress_callback:
-                            progress_callback(stats_dict["num_synced"])
+                    stats_dict["num_synced"] += len(results)
+                    if progress_callback:
+                        progress_callback(stats_dict["num_synced"])
 
                     self._save_new_poll_results_to_database(poll_results_to_save_map)
 
