@@ -1,3 +1,8 @@
+v1.5.7 (2026-05-26)
+-------------------------
+ * Require Python 3.14.5+
+ * Fix FLOIP sync quadratic num_synced growth
+
 v1.5.6 (2026-05-22)
 -------------------------
  * Force gc.collect after each sync fetch page to release per-page lookup maps
