@@ -98,3 +98,11 @@ celerybeat-schedule
 
 # VS code 
 .vscode
+
+.devcontainer
+
+# AI
+.claude/
+CLAUDE.md
+CODEX.md
+AGENTS.md
