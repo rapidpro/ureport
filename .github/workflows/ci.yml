@@ -35,11 +35,15 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Install Bun
+      uses: oven-sh/setup-bun@v2
+
     - name: Initialize environment
       run: |
         uv venv
         uv sync --all-groups
-        sudo npm install -g less
+        bun install
+        echo "${{ github.workspace }}/node_modules/.bin" >> $GITHUB_PATH
         ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
 
         uv pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
