@@ -1,3 +1,10 @@
+v1.6.0 (2026-07-22)
+-------------------------
+ * Update pillow to 12.3.0
+ * Pin bun version and use frozen lockfile in CI
+ * Use bun instead of npm for JS tooling
+ * Update .gitignore to cover .devcontainer and AI agent files
+
 v1.5.7 (2026-05-26)
 -------------------------
  * Require Python 3.14.5+
