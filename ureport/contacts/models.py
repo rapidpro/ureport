@@ -243,7 +243,7 @@ class ReportersCounter(models.Model):
         if r.get(key):
             logger.info("Squash reporters counts already running.")
         else:
-            with r.lock(key):
+            with r.lock(key, timeout=60 * 60):
                 last_squash = r.get(ReportersCounter.LAST_SQUASHED_ID_KEY)
                 if not last_squash:
                     last_squash = 0

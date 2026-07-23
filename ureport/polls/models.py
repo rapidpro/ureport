@@ -101,6 +101,9 @@ class Poll(SmartModel):
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
+    # archive pulls have no pause/resume checkpoint so their lock lease must cover a full worst-case run
+    POLL_PULL_ARCHIVES_LOCK_TIMEOUT = 60 * 60 * 12
+
     published = models.BooleanField(
         default=True, help_text=_("Whether this poll should be visible/hidden on the public site")
     )

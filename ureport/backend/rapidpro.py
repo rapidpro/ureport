@@ -475,7 +475,7 @@ class RapidProBackend(BaseBackend):
                 stats_dict["num_path_ignored"],
             )
 
-        with r.lock(key):
+        with r.lock(key, timeout=Poll.POLL_PULL_ARCHIVES_LOCK_TIMEOUT):
             flow_date_json = poll.get_flow_date()
             first = (
                 json_date_to_datetime(flow_date_json).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
