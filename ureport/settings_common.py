@@ -653,6 +653,7 @@ ORG_CONFIG_FIELDS = [
             required=False,
             widget=Textarea,
         ),
+        superuser_only=True,
     ),
     dict(
         name="other_languages_sites",
