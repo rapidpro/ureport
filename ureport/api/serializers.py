@@ -120,12 +120,12 @@ class StoryReadSerializer(serializers.ModelSerializer):
             # Drop any fields that are specified in the `exclude` argument.
             exclude_allowed = set(exclude_fields)
             for field_name in exclude_allowed:
-                self.fields.pop(field_name)
+                self.fields.pop(field_name, None)
         elif fields is not None:
             allowed_fields = set(fields)
             existing_data = set(self.fields)
             for field_names in existing_data - allowed_fields:
-                self.fields.pop(field_names)
+                self.fields.pop(field_names, None)
 
     class Meta:
         model = Story
@@ -165,12 +165,12 @@ class PollReadSerializer(serializers.ModelSerializer):
             # Drop any fields that are specified in the `exclude` argument.
             exclude_allowed = set(exclude_fields)
             for field_name in exclude_allowed:
-                self.fields.pop(field_name)
+                self.fields.pop(field_name, None)
         elif fields is not None:
             allowed_fields = set(fields)
             existing_data = set(self.fields)
             for field_names in existing_data - allowed_fields:
-                self.fields.pop(field_names)
+                self.fields.pop(field_names, None)
 
     def get_questions(self, obj):
         questions = []
