@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -47,10 +47,14 @@ msgstr "Fișierul imagine pentru utilizare"
 msgid "The human readable name for this content type"
 msgstr "Denumirea lizibilă de către om pentru acest tip de conținut"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Câmpul pentru identificarea acestui tip de conținut, utilizat cu tag-uri șablon"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "O descriere a locului unde acest tip de conținut este folosit pe site și modul în care va fi afișat"
 
 msgid "Whether this content should include a title"
@@ -340,7 +344,9 @@ msgstr "Trebuie să aveți cel puțin un administrator"
 msgid "Select your Organization"
 msgstr "Selectați organizația voastră"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Contul dat nu este asociat unei organizații. Vă rugăm să contactați administratorul."
 
 msgid "Your Organization"

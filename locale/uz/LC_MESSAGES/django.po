@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,10 +43,14 @@ msgstr "Ishlatiladigan surat-fayli"
 msgid "The human readable name for this content type"
 msgstr "Mazkur kontent turi uchun inson o'qiy oladigan nom"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Mazkur kontent turini aniqlash uchun andozaviy teglar bilan birga ishlatiladigan slag."
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Sahifaning qayerida mazkur kontent turi qo'llanilishi va u qay tarzda namoyish etilishining ta'rifi"
 
 msgid "Whether this content should include a title"
@@ -337,7 +341,9 @@ msgstr "Sizda eng kamida bitta administrator bo'lishi lozim"
 msgid "Select your Organization"
 msgstr "O'z tashkilotingizni tanlang"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Sizning akkauntingizngig tashkilot bilan aloqasi yo'q. Iltimos administrator bilan bog'laning"
 
 msgid "Your Organization"

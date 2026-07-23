@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -47,10 +47,14 @@ msgstr "Визуальный файл для использования"
 msgid "The human readable name for this content type"
 msgstr "Название для такого типа категории"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Определение этого типа контента, который используется с примерными тегами"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Описание того, где этот тип контента используется на сайте и как он будет отображаться"
 
 msgid "Whether this content should include a title"
@@ -340,7 +344,9 @@ msgstr "У вас должен быть хотя бы один админист�
 msgid "Select your Organization"
 msgstr "Выберите вашу организацию"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Ваша учетная запись не связана с организацией. Обратитесь к администратору."
 
 msgid "Your Organization"

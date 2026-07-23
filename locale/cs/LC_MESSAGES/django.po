@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -45,10 +45,14 @@ msgstr "Soubor obrázku, který se má použít"
 msgid "The human readable name for this content type"
 msgstr "Lidsky čitelný název tohoto typu obsahu"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Slug pro identifikaci tohoto typu obsahu, který se používá se značkami šablony."
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Popis, kde se tento typ obsahu na webu používá a jak se bude zobrazovat."
 
 msgid "Whether this content should include a title"
@@ -332,7 +336,9 @@ msgstr "Musíte mít alespoň jednoho správce"
 msgid "Select your Organization"
 msgstr "Vyberte svou organizaci"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Váš účet není přidružen k žádné organizaci. Kontaktujte prosím administrátora."
 
 msgid "Your Organization"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -47,10 +47,14 @@ msgstr "Αρχείο εικόνας"
 msgid "The human readable name for this content type"
 msgstr "Τίτλος περιεχομένου"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Το όνομα για την αναγνώριση αυτού του τύπου περιεχομένου, που χρησιμοποιείται με τις ετικέτες του προτύπου"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Μία περιγραφή για το πού χρησιμοποιείται αυτός ο τύπος περιεχομένου στον ιστότοπο και  πώς θα εμφανίζεται"
 
 msgid "Whether this content should include a title"
@@ -340,7 +344,9 @@ msgstr "Πρέπει να έχετε τουλάχιστον έναν διαχε�
 msgid "Select your Organization"
 msgstr "Επιλέξτε τον οργανισμό σας"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Ο λογαριασμός σας δεν σχετίζεται με κάποιον οργανισμό. Επικοινωνήστε με τον διαχειριστή."
 
 msgid "Your Organization"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -46,10 +46,14 @@ msgstr "Слика која ќе се користи"
 msgid "The human readable name for this content type"
 msgstr "Човечки читливо име за оваа категорија"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Кратенка-slug за идентификација на видот на содржината која што се користи за шаблонските ознаки-тагови"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Опис за тоа каде се користи овој тип на содржина на страницата и како ќе биде прикажан на слики"
 
 msgid "Whether this content should include a title"
@@ -340,7 +344,9 @@ msgstr "Мора да има барем еден администратор"
 msgid "Select your Organization"
 msgstr "Изберете ја вашата организација"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Вашата корисничка сметка не е поврзана со ниедна организација. Ве молиме контактирајте го администраторот."
 
 msgid "Your Organization"

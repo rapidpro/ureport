@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -46,10 +46,14 @@ msgstr "ไฟล์รูปภาพที่จะใช้"
 msgid "The human readable name for this content type"
 msgstr "ชื่อสำหรับประเภทเนื้อหานี้"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Slug เพื่อระบุประเภทเนื้อหานี้ เพื่อใช้กับแท็กของเทมเพลต"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "คำอธิบายว่าประเภทเนื้อหานี้จะใช้ที่ใดบนหน้าเว็บไซต์ และจะแสดงผลให้เห็นอย่างไร"
 
 msgid "Whether this content should include a title"
@@ -340,7 +344,9 @@ msgstr "คุณต้องมีผู้ดูแลระบบอย่า
 msgid "Select your Organization"
 msgstr "เลือกองค์กรของคุณ"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "บัญชีของคุณยังไม่ได้เชื่อมโยงกับองค์กร กรุณาติดต่อผู้ดูแลระบบ"
 
 msgid "Your Organization"
