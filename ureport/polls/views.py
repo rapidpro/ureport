@@ -771,7 +771,7 @@ class PollCRUDL(SmartCRUDL):
             Poll.find_main_poll(org)
             return obj
 
-    class PullRefresh(SmartUpdateView):
+    class PullRefresh(ActivePollMixin, SmartUpdateView):
         fields = ()
         success_url = "@polls.poll_list"
         success_message = None
