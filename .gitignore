@@ -48,6 +48,11 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
+# AI
+.claude/
+CLAUDE.md
+CODEX.md
+AGENTS.md
 
 # Mr Developer
 .mr.developer.cfg
