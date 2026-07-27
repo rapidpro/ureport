@@ -151,9 +151,7 @@ COMPRESS_PRECOMPILERS = (("text/less", "lessc {infile} {outfile}"),)
 
 # Make this unique, and don't share it with anybody. Deployments must set this
 # via the DJANGO_SECRET_KEY environment variable; the default is for development only.
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY", "bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r)bxo"
-)
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-secret-key-not-used-anywhere-else")
 
 MIDDLEWARE = (
     "django.middleware.common.CommonMiddleware",
