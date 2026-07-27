@@ -4,6 +4,8 @@ jobs:
   test:
     name: Test (${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    env:
+      DJANGO_SECRET_KEY: ci-only-secret-key-not-used-anywhere-else
     strategy:
       matrix:
         python-version: ["3.14.x"]

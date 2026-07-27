@@ -15,10 +15,6 @@ COMPRESS_ENABLED = True
 # fail on boot rather than fall back to the publicly-known development key
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
-# the previous signing key remains valid for verification only, so existing sessions
-# and tokens survive the rotation; remove it once they have all expired
-SECRET_KEY_FALLBACKS = ["bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r)bxo"]
-
 
 EMPTY_SUBDOMAIN_HOST = 'http://ureport.in'
 HOSTNAME = 'ureport.in'
