@@ -771,10 +771,18 @@ class PollCRUDL(SmartCRUDL):
             Poll.find_main_poll(org)
             return obj
 
-    class PullRefresh(SmartUpdateView):
+    class PullRefresh(ActivePollMixin, SmartUpdateView):
         fields = ()
         success_url = "@polls.poll_list"
         success_message = None
+
+        def has_permission(self, request, *args, **kwargs):
+            self.kwargs = kwargs
+            self.args = args
+            self.request = request
+            self.org = self.derive_org()
+
+            return request.user.is_superuser or request.user.is_staff
 
         def post_save(self, obj):
             poll = self.get_object()

@@ -94,13 +94,32 @@ class PollTest(UreportTest):
             response = self.client.post(pull_refresh_url, post_data, SERVER_NAME="uganda.ureport.io")
             self.assertLoginRedirect(response)
 
+            # org admins cannot pull refresh polls, not even for their own org
             self.login(self.admin)
-
-            response = self.client.get(pull_refresh_url, SERVER_NAME="uganda.ureport.io")
-            self.assertLoginRedirect(response)
 
             response = self.client.post(pull_refresh_url, post_data, SERVER_NAME="uganda.ureport.io")
             self.assertLoginRedirect(response)
+            mock_pull_refresh.assert_not_called()
+
+            # neither can org editors
+            org_editor = self.create_user("OrgEditor")
+            self.uganda.editors.add(org_editor)
+            self.login(org_editor)
+
+            response = self.client.post(pull_refresh_url, post_data, SERVER_NAME="uganda.ureport.io")
+            self.assertLoginRedirect(response)
+            mock_pull_refresh.assert_not_called()
+
+            # staff users can pull refresh
+            staff_user = self.create_user("Staffuser")
+            staff_user.is_staff = True
+            staff_user.save()
+            self.login(staff_user)
+
+            response = self.client.post(pull_refresh_url, post_data, SERVER_NAME="uganda.ureport.io")
+            self.assertEqual(response.status_code, 302)
+            mock_pull_refresh.assert_called_once_with()
+            mock_pull_refresh.reset_mock()
 
             self.login(self.superuser)
 
