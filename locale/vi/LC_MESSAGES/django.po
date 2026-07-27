@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,10 +40,14 @@ msgstr "Tệp hình ảnh để sử dụng"
 msgid "The human readable name for this content type"
 msgstr "Tên dễ gọi cho nội dung này"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Slug để nhận dạng loại nội dung này, được sử dụng với các thẻ khuôn mẫu"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Mô tả vị trí nội dung này và cách thức nó được bố trí trên trang web"
 
 msgid "Whether this content should include a title"
@@ -337,7 +341,9 @@ msgstr "Bạn phải có ít nhất một quản trị viên"
 msgid "Select your Organization"
 msgstr "Lựa chọn tổ chức của bạn"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Tài khoản của bạn không được liên kết với một tổ chức. Vui lòng liên hệ với quản trị viên."
 
 msgid "Your Organization"

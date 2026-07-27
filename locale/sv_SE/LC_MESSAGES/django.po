@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -45,10 +45,14 @@ msgstr "Bildfilen som ska användas"
 msgid "The human readable name for this content type"
 msgstr "Det mänskliga läsbara namnet för den här innehållstypen"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "URL-koden för att identifiera den här innehållstypen, används tillsammans med template tags"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "En beskrivning av var den här innehållstypen används på sidan och hur den kommer att se ut"
 
 msgid "Whether this content should include a title"
@@ -338,7 +342,9 @@ msgstr "Du måste ha minst en administratör"
 msgid "Select your Organization"
 msgstr "Välj din organisation"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Ditt konto är inte anslutet till en organisation. Kontakta administratören."
 
 msgid "Your Organization"

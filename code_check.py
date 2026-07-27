@@ -83,9 +83,9 @@ if __name__ == "__main__":
     status("Recompiling locale MO files")
     cmd("python manage.py compilemessages --ignore='.venv/*'")
 
-    # if any code changes were made, exit with error
-    # if cmd("git diff ureport locale"):
-    #     print("👎 " + colorama.Fore.RED + "Changes to be committed")
-    #     exit(1)
-    # else:
-    #     print("👍 " + colorama.Fore.GREEN + "Code looks good. Make that PR!")
+    # if any code changes were made, including new untracked files such as generated migrations, exit with error
+    if cmd("git status --porcelain ureport locale"):
+        print("👎 " + colorama.Fore.RED + "Changes to be committed")
+        exit(1)
+    else:
+        print("👍 " + colorama.Fore.GREEN + "Code looks good. Make that PR!")

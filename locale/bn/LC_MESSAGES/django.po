@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -46,10 +46,14 @@ msgstr "যে ছবিটি ব্যবহার করা হবে"
 msgid "The human readable name for this content type"
 msgstr "এই বিষয়কে বর্ননা করতে পারে এমন নাম"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "এই একই ধরনের বিষয় কে শনাক্ত করে নমুনা হিসেবে ব্যবহার করা"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "এই বিষয়গুলো সাইটে কোথায় কিভাবে ব্যবহার এবং দেখানো হবে তার বর্ণনা "
 
 msgid "Whether this content should include a title"
@@ -341,7 +345,9 @@ msgstr "আপনার কমপক্ষে একজন অ্যাডমি
 msgid "Select your Organization"
 msgstr "আপনার প্রতিষ্ঠান নিশ্চিত করুন "
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "আপনার একাউন্ট এই প্রতিষ্ঠান এর সাথে সংযুক্ত নয়। অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন "
 
 msgid "Your Organization"

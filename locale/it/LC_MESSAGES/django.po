@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 09:26+0000\n"
+"POT-Creation-Date: 2026-07-23 15:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -46,10 +46,14 @@ msgstr "Il file immagine da usare"
 msgid "The human readable name for this content type"
 msgstr "Il nome per questo contenuto"
 
-msgid "The slug to idenfity this content type, used with the template tags"
+#, fuzzy
+#| msgid "The slug to idenfity this content type, used with the template tags"
+msgid "The slug to identify this content type, used with the template tags"
 msgstr "Lo slug per identificare questo tipo di contenuto"
 
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#, fuzzy
+#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Una descrizione di dove questo tipo di contenuto è usato sul sito e come è visualizzato"
 
 msgid "Whether this content should include a title"
@@ -339,7 +343,9 @@ msgstr "Devi avere almeno un amministratore"
 msgid "Select your Organization"
 msgstr "Seleziona la tua organizzazione"
 
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#, fuzzy
+#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Il tuo account non è associato ad un'organizzazione.  Per favore contatta l'amministratore "
 
 msgid "Your Organization"
