@@ -1931,7 +1931,10 @@ class RapidProBackendTest(UreportTest):
         )
 
         mock_get_archives.assert_called_with(type="run", after=None)
-        mock_valkey_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid))
+        mock_valkey_lock.assert_called_once_with(
+            Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid),
+            timeout=Poll.POLL_PULL_ARCHIVES_LOCK_TIMEOUT,
+        )
 
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
         self.assertEqual(poll_result.state, "R-LAGOS")

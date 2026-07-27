@@ -25,7 +25,7 @@ def rebuild_contacts_counts():
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
         key = TaskState.get_lock_key(org, "contact-pull")
-        with r.lock(key):
+        with r.lock(key, timeout=60 * 60 * 12):
             Contact.recalculate_reporters_stats(org)
 
 
@@ -183,7 +183,7 @@ def populate_contact_schemes(org, since, until):
         # for ourself to make sure our task below will be run
         r.delete(contact_pull_key)
 
-    with r.lock(contact_pull_key):
+    with r.lock(contact_pull_key, timeout=60 * 60 * 24):
         last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.id, "rapidpro")
         cache.delete(last_fetch_date_key)
 
@@ -256,7 +256,7 @@ def populate_contact_schemes(org, since, until):
     logger.info(f"Finished populating schemes on contacts for org #{org.id} in {elapsed:.1f} seconds")
 
     contact_count_cache_updates_key = TaskState.get_lock_key(org, "update-org-contact-counts")
-    with r.lock(contact_count_cache_updates_key):
+    with r.lock(contact_count_cache_updates_key, timeout=60 * 20):
         update_cache_org_contact_counts(org)
 
     elapsed = time.time() - start_time
