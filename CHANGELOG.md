@@ -1,3 +1,13 @@
+v1.6.2 (2026-07-27)
+-------------------------
+ * Run code checkes
+ * Read SECRET_KEY from the DJANGO_SECRET_KEY environment variable
+ * Restrict poll pull refresh to superusers and staff
+ * Add org object permission check to poll pull refresh view
+ * Ignore unknown names in API ?fields and ?exclude params
+ * Re-enable code check failure on drift and regenerate locale files
+ * Add timeouts to task locks so a killed worker cannot wedge syncing
+
 v1.6.1 (2026-07-23)
 -------------------------
  * Bump django from 6.0.5 to 6.0.6
