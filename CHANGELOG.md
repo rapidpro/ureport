@@ -1,3 +1,10 @@
+v1.6.3 (2026-07-27)
+-------------------------
+ * Update .gitignore to cover AI agent files
+ * Update smartmin to 6.1.0 and rapidpro-dash to 1.21.0
+ * Update smartmin to 6.0.1
+ * Remove SECRET_KEY_FALLBACKS and the old development fallback key
+
 v1.6.2 (2026-07-27)
 -------------------------
  * Run code checkes
