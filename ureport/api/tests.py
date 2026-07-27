@@ -647,6 +647,30 @@ class UreportAPITests(APITestCase):
                 ),
             )
 
+    def test_polls_and_stories_with_unknown_field_parameters(self):
+        response = self.client.get("/api/v1/polls/%d/?exclude=bogus" % self.reg_poll.pk)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.client.get("/api/v1/polls/%d/?fields=title,bogus" % self.reg_poll.pk)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertDictEqual(response.data, dict(title=self.reg_poll.title))
+
+        response = self.client.get("/api/v1/stories/%d/?exclude=bogus,title" % self.uganda_story.pk)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertNotIn("title", response.data)
+
+        response = self.client.get("/api/v1/stories/%d/?fields=title,bogus" % self.uganda_story.pk)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertDictEqual(response.data, dict(title=self.uganda_story.title))
+
+        # excluding every field is safe and returns an empty object
+        all_fields = ",".join(
+            ("id", "flow_uuid", "title", "org", "category", "poll_date", "modified_on", "created_on", "questions")
+        )
+        response = self.client.get("/api/v1/polls/%d/?exclude=%s" % (self.reg_poll.pk, all_fields))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertDictEqual(dict(response.data), dict())
+
     def test_news_item_by_org_list(self):
         url = "/api/v1/news/org/%d/" % self.uganda.pk
         url1 = "/api/v1/news/org/%d/" % self.nigeria.pk
