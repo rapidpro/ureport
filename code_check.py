@@ -38,10 +38,10 @@ def update_po_files():
         return {e.msgid for e in pot if not e.fuzzy and not e.obsolete}
 
     if not path.exists("smartmin"):
-        cmd("""pip show smartmin | awk '/Location:/ { print $2 "/smartmin" }' | xargs ln -s""")
+        cmd("""uv pip show smartmin | awk '/Location:/ { print $2 "/smartmin" }' | xargs ln -sf""")
 
     if not path.exists("dash"):
-        cmd("""pip show rapidpro-dash | awk '/Location:/ { print $2 \"/dash\" }' | xargs ln -s""")
+        cmd("""uv pip show rapidpro-dash | awk '/Location:/ { print $2 \"/dash\" }' | xargs ln -sf""")
 
     # get the current set of msgids
     saved_msgids = get_current_msgids()
