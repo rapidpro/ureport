@@ -1,3 +1,8 @@
+v1.6.4 (2026-07-28)
+-------------------------
+ * Update rapidpro-dash to 1.21.1
+ * Fix code check recreation of package symlinks under uv
+
 v1.6.3 (2026-07-27)
 -------------------------
  * Update .gitignore to cover AI agent files
