@@ -28,6 +28,7 @@ from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.stats.models import ContactActivity
+from ureport.sync_state import is_sync_shutting_down
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
 from . import BaseBackend
@@ -734,6 +735,7 @@ class RapidProBackend(BaseBackend):
                             stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS
                             or time.time() > lock_expiration
                             or (budget_expiration is not None and time.time() > budget_expiration)
+                            or is_sync_shutting_down()
                         ):
                             # rebuild the aggregated counts
                             poll.rebuild_poll_results_counts()

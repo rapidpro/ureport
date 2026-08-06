@@ -3252,6 +3252,25 @@ class PollsTasksTest(UreportTest):
         pull_results_recent_polls(self.nigeria.pk)
         self.assertFalse(mock_pull_results.called)
 
+    @patch("ureport.polls.tasks.is_sync_shutting_down")
+    @patch("ureport.polls.models.Poll.get_flow_date")
+    @patch("dash.orgs.models.Org.get_backend")
+    @patch("ureport.tests.TestBackend.pull_results")
+    def test_backfill_poll_results_worker_shutdown(
+        self, mock_pull_results, mock_get_backend, mock_get_flow_date, mock_shutting_down
+    ):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_get_flow_date.return_value = None
+        mock_shutting_down.return_value = True
+
+        self.poll.has_synced = False
+        self.poll.save()
+
+        # a shutting down worker starts no new poll syncs, leaving them for the next cycle
+        backfill_poll_results(self.nigeria.pk)
+        self.assertFalse(mock_pull_results.called)
+
     @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")
     @patch("ureport.tests.TestBackend.pull_results")
