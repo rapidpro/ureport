@@ -1846,6 +1846,135 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.category, "Win")
         self.assertEqual(poll_result.text, "We'll win today")
 
+    def _create_test_run(self, contact_uuid, modified_on):
+        return TembaRun.create(
+            uuid=contact_uuid,
+            flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
+            contact=ObjectRef.create(uuid=contact_uuid, name="Test"),
+            responded=True,
+            values={
+                "win": TembaRun.Value.create(
+                    value="We'll win today", category="Win", node="ruleset-uuid", time=modified_on
+                )
+            },
+            path=[TembaRun.Step.create(node="ruleset-uuid", time=modified_on)],
+            created_on=modified_on,
+            modified_on=modified_on,
+            exited_on=modified_on,
+            exit_type="completed",
+        )
+
+    @patch("valkey.client.StrictValkey.lock")
+    @patch("dash.orgs.models.TembaClient.get_runs")
+    @patch("django.core.cache.cache.set")
+    @patch("django.core.cache.cache.get")
+    def test_pull_results_checkpoints_watermark_after_each_page(
+        self, mock_cache_get, mock_cache_set, mock_get_runs, mock_valkey_lock
+    ):
+        mock_cache_get.return_value = None
+
+        PollResult.objects.all().delete()
+        poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
+
+        now = timezone.now()
+        later = now + timedelta(minutes=5)
+
+        mock_get_runs.side_effect = [
+            MockClientQuery([self._create_test_run("C-001", now)], [self._create_test_run("C-002", later)])
+        ]
+
+        self.backend.pull_results(poll, None, None)
+
+        watermark_key = Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid)
+        watermark_writes = [call[0][1] for call in mock_cache_set.call_args_list if call[0][0] == watermark_key]
+
+        # one write per page saved plus the completion write
+        self.assertEqual(3, len(watermark_writes))
+        self.assertEqual(datetime_to_json_date(now), watermark_writes[0])
+        self.assertEqual(datetime_to_json_date(later), watermark_writes[1])
+        self.assertEqual(datetime_to_json_date(later), watermark_writes[2])
+
+    @override_settings(SYNC_TASK_TIME_BUDGET=0)
+    @patch("ureport.polls.tasks.pull_refresh.apply_async")
+    @patch("valkey.client.StrictValkey.lock")
+    @patch("dash.orgs.models.TembaClient.get_runs")
+    @patch("django.core.cache.cache.set")
+    @patch("django.core.cache.cache.get")
+    def test_pull_results_time_budget_pauses_after_page(
+        self, mock_cache_get, mock_cache_set, mock_get_runs, mock_valkey_lock, mock_pull_refresh
+    ):
+        mock_cache_get.return_value = None
+
+        PollResult.objects.all().delete()
+        poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
+
+        now = timezone.now()
+        later = now + timedelta(minutes=5)
+
+        mock_get_runs.side_effect = [
+            MockClientQuery([self._create_test_run("C-001", now)], [self._create_test_run("C-002", later)])
+        ]
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results(poll, None, None)
+
+        # only the first page was processed before the budget expired
+        self.assertEqual(1, num_val_created)
+        self.assertEqual(1, PollResult.objects.all().count())
+
+        # the pause path checkpointed the first page and queued a resume
+        watermark_key = Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid)
+        watermark_writes = [call[0][1] for call in mock_cache_set.call_args_list if call[0][0] == watermark_key]
+        self.assertEqual([datetime_to_json_date(now), datetime_to_json_date(now)], watermark_writes)
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue="sync")
+
+    @patch("dash.orgs.models.TembaClient.get_contacts")
+    def test_pull_contacts_time_limit_returns_resume_cursor(self, mock_get_contacts):
+        Contact.objects.all().delete()
+
+        mock_get_contacts.side_effect = [
+            # two pages of active contacts
+            MockClientQuery(
+                [
+                    TembaContact.create(
+                        uuid="C-001",
+                        name="Bob McFlow",
+                        language="eng",
+                        urns=["twitter:bobflow"],
+                        groups=[ObjectRef.create(uuid="G-001", name="Customers")],
+                        fields={"age": "34"},
+                        status="active",
+                    )
+                ],
+                [
+                    TembaContact.create(
+                        uuid="C-002",
+                        name="Jim McMsg",
+                        language="fre",
+                        urns=["tel:+250783835665"],
+                        groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
+                        fields={"age": "67"},
+                        status="active",
+                    )
+                ],
+            ),
+            # deleted contacts
+            MockClientQuery([]),
+        ]
+
+        contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None, time_limit=0.000001)
+
+        # the pull paused after the first page and returned a cursor to resume from
+        self.assertEqual("cursor-string", resume_cursor)
+
     @patch("valkey.client.StrictValkey.lock")
     @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.TembaClient.get_archives")

@@ -14,6 +14,7 @@ from django.db.models import Count, ExpressionWrapper, F, IntegerField, Sum, Tex
 from django.db.models.functions import Cast, ExtractYear
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
+from django.test import override_settings
 from django.urls import reverse
 from django.utils import timezone
 
@@ -30,6 +31,7 @@ from ureport.polls.tasks import (
     pull_refresh,
     pull_results_main_poll,
     pull_results_other_polls,
+    pull_results_recent_polls,
     rebuild_counts,
     recheck_poll_flow_data,
     refresh_org_flows,
@@ -3214,6 +3216,41 @@ class PollsTasksTest(UreportTest):
         task_state = TaskState.objects.get(org=self.nigeria, task_key="results-pull-other-polls")
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
+
+    @override_settings(SYNC_TASK_TIME_BUDGET=0)
+    @patch("ureport.polls.models.Poll.get_flow_date")
+    @patch("dash.orgs.models.Org.get_backend")
+    @patch("ureport.tests.TestBackend.pull_results")
+    def test_backfill_poll_results_time_budget(self, mock_pull_results, mock_get_backend, mock_get_flow_date):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_get_flow_date.return_value = None
+
+        self.poll.has_synced = False
+        self.poll.save()
+
+        # with an exhausted time budget no poll sync is started, leaving the rest for the next cycle
+        backfill_poll_results(self.nigeria.pk)
+        self.assertFalse(mock_pull_results.called)
+
+        task_state = TaskState.objects.get(org=self.nigeria, task_key="backfill-poll-results")
+        self.assertEqual(task_state.get_last_results(), {})
+
+    @override_settings(SYNC_TASK_TIME_BUDGET=0)
+    @patch("ureport.polls.models.Poll.get_flow_date")
+    @patch("dash.orgs.models.Org.get_backend")
+    @patch("ureport.tests.TestBackend.pull_results")
+    @patch("ureport.polls.models.Poll.get_recent_polls")
+    def test_pull_results_recent_polls_time_budget(
+        self, mock_get_recent_polls, mock_pull_results, mock_get_backend, mock_get_flow_date
+    ):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+        mock_get_recent_polls.return_value = self.polls_query
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_get_flow_date.return_value = None
+
+        pull_results_recent_polls(self.nigeria.pk)
+        self.assertFalse(mock_pull_results.called)
 
     @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")

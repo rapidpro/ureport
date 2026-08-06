@@ -7,6 +7,7 @@ from datetime import timedelta
 from django_valkey import get_valkey_connection
 from temba_client.exceptions import TembaRateExceededError
 
+from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
 
@@ -24,11 +25,22 @@ from ureport.utils import (
 logger = logging.getLogger(__name__)
 
 
+def _sync_deadline():
+    """
+    Returns the time after which a sync task should stop starting new polls, or None if
+    no time budget is configured. Scheduled tasks are re-triggered by beat, so remaining
+    polls are picked up on the next cycle.
+    """
+    time_budget = getattr(settings, "SYNC_TASK_TIME_BUDGET", None)
+    return time.time() + time_budget if time_budget is not None else None
+
+
 @org_task("backfill-poll-results", 60 * 60 * 3)
 def backfill_poll_results(org, since, until):
     from .models import Poll
 
     results_log = dict()
+    deadline = _sync_deadline()
 
     for poll in (
         Poll.objects.filter(org=org, has_synced=False)
@@ -36,6 +48,9 @@ def backfill_poll_results(org, since, until):
         .exclude(flow_uuid="")
         .distinct("flow_uuid")
     ):
+        if deadline is not None and time.time() > deadline:
+            logger.info("Time budget exhausted backfilling results for org #%d, will resume next cycle" % org.id)
+            break
         (
             num_val_created,
             num_val_updated,
@@ -94,7 +109,11 @@ def pull_results_other_polls(org, since, until):
     other_polls_ids = Poll.get_other_polls(org).exclude(created_on__gt=recent_window)
     other_polls_ids = other_polls_ids.order_by("flow_uuid").distinct("flow_uuid").values_list("id", flat=True)
     other_polls = Poll.objects.filter(id__in=other_polls_ids).order_by("-created_on")
+    deadline = _sync_deadline()
     for poll in other_polls:
+        if deadline is not None and time.time() > deadline:
+            logger.info("Time budget exhausted pulling other polls for org #%d, will resume next cycle" % org.id)
+            break
         key = Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid)
         if not cache.get(key):
             try:
@@ -131,7 +150,11 @@ def pull_results_recent_polls(org, since, until):
     recent_polls_ids = recent_polls_ids.distinct("flow_uuid").values_list("id", flat=True)
 
     recent_polls = Poll.objects.filter(id__in=recent_polls_ids).order_by("-created_on")
+    deadline = _sync_deadline()
     for poll in recent_polls:
+        if deadline is not None and time.time() > deadline:
+            logger.info("Time budget exhausted pulling recent polls for org #%d, will resume next cycle" % org.id)
+            break
         (
             num_val_created,
             num_val_updated,

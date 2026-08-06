@@ -949,6 +949,19 @@ DEFAULT_COUNTRY_CODE = "250"
 INTERNAL_IPS = ("127.0.0.1",)
 
 # -----------------------------------------------------------------------------------
+# Sync Settings
+# -----------------------------------------------------------------------------------
+
+# maximum seconds a single sync task invocation may spend fetching before it pauses,
+# checkpoints its progress and lets a future run resume - None disables the budget.
+# Set this comfortably below the worker's shutdown grace period when workers are
+# short-lived (e.g. 90 for containers stopped after 120s)
+SYNC_TASK_TIME_BUDGET = None
+
+# countdown in seconds before a paused poll results sync is re-queued
+POLL_PULL_RESULTS_RESUME_COUNTDOWN = 300
+
+# -----------------------------------------------------------------------------------
 # Crontab Settings
 # -----------------------------------------------------------------------------------
 

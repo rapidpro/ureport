@@ -186,7 +186,9 @@ class FLOIPBackend(BaseBackend):
         # Not needed
         return {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0}
 
-    def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
+    def pull_contacts(
+        self, org, modified_after, modified_before, progress_callback=None, resume_cursor=None, time_limit=None
+    ):
         client = self._get_client(org)
 
         # all contacts created or modified in the time window
