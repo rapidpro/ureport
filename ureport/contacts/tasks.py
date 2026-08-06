@@ -15,7 +15,7 @@ from dash.utils.sync import SyncOutcome
 from ureport.celery import app
 from ureport.contacts.models import Contact, ReportersCounter
 from ureport.stats.models import ContactActivity
-from ureport.utils import chunk_list, datetime_to_json_date, update_cache_org_contact_counts
+from ureport.utils import chunk_list, datetime_to_json_date, org_sync_lock_timeout, update_cache_org_contact_counts
 
 logger = get_task_logger(__name__)
 
@@ -76,7 +76,7 @@ def update_org_contact_count(org, ignored_since, ignored_until):
     update_cache_org_contact_counts(org)
 
 
-@org_task("contact-pull", 60 * 60 * 12)
+@org_task("contact-pull", org_sync_lock_timeout(60 * 60 * 12))
 def pull_contacts(org, ignored_since, ignored_until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly

@@ -101,6 +101,10 @@ class Poll(SmartModel):
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
+    # lease of the results pull lock - renewed after every fetched page, so it only needs to
+    # outlive a single page; a killed worker frees the poll within this time instead of hours
+    POLL_PULL_RESULTS_LOCK_TIMEOUT = 60 * 10
+
     # archive pulls have no pause/resume checkpoint so their lock lease must cover a full worst-case run
     POLL_PULL_ARCHIVES_LOCK_TIMEOUT = 60 * 60 * 12
 
