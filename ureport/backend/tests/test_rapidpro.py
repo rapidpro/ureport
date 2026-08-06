@@ -6,6 +6,7 @@ import json
 import logging
 from datetime import timedelta
 
+from django_valkey import get_valkey_connection
 from mock import PropertyMock, patch
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import (
@@ -17,6 +18,7 @@ from temba_client.v2.types import (
     Run as TembaRun,
 )
 
+from django.core.cache import cache
 from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
@@ -2004,6 +2006,94 @@ class RapidProBackendTest(UreportTest):
         watermark_writes = [call[0][1] for call in mock_cache_set.call_args_list if call[0][0] == watermark_key]
         self.assertEqual([datetime_to_json_date(now), datetime_to_json_date(now)], watermark_writes)
         mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue="sync")
+
+    @patch("dash.orgs.models.TembaClient.get_runs")
+    def test_pull_results_resumes_from_watermark_after_worker_kill(self, mock_get_runs):
+        """
+        Simulates a worker hard-killed mid-sync: the first invocation dies after saving one
+        page, then a later invocation must resume from that page's watermark instead of
+        re-fetching the whole window
+        """
+
+        class SimulatedWorkerKill(Exception):
+            pass
+
+        class InterruptedQuery:
+            """
+            Yields the given fetches, then dies like a killed worker instead of finishing
+            """
+
+            def __init__(self, *fetches):
+                self.fetches = fetches
+
+            def iterfetches(self, *args, **kwargs):
+                def gen():
+                    yield from self.fetches
+                    raise SimulatedWorkerKill()
+
+                return gen()
+
+        PollResult.objects.all().delete()
+        poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
+
+        watermark_key = Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid)
+        cache.delete(watermark_key)
+        cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, poll.pk))
+        get_valkey_connection().delete(Poll.POLL_PULL_RESULTS_TASK_LOCK % (self.nigeria.pk, poll.flow_uuid))
+
+        now = timezone.now()
+        later = now + timedelta(minutes=5)
+
+        # first invocation saves one page, then the worker dies
+        mock_get_runs.side_effect = [InterruptedQuery([self._create_test_run("C-001", now)])]
+
+        with self.assertRaises(SimulatedWorkerKill):
+            self.backend.pull_results(poll, None, None)
+
+        # the saved page and its watermark survived the kill
+        self.assertEqual(1, PollResult.objects.all().count())
+        self.assertEqual(datetime_to_json_date(now), cache.get(watermark_key))
+
+        # the next invocation resumes from the watermark, not from the start of the window
+        mock_get_runs.side_effect = [MockClientQuery([self._create_test_run("C-002", later)])]
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results(poll, None, None)
+
+        mock_get_runs.assert_called_with(flow="flow-uuid", after=datetime_to_json_date(now), reverse=True, paths=True)
+
+        # no duplicates - the resumed pull only added the new run
+        self.assertEqual(1, num_val_created)
+        self.assertEqual(2, PollResult.objects.all().count())
+        self.assertEqual(datetime_to_json_date(later), cache.get(watermark_key))
+
+    @patch("dash.orgs.models.TembaClient.get_runs")
+    def test_pull_results_skipped_while_lock_held(self, mock_get_runs):
+        """
+        A poll whose lock is still held (e.g. another worker is mid-sync) is skipped entirely
+        """
+        PollResult.objects.all().delete()
+        poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
+
+        r = get_valkey_connection()
+        lock_key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (self.nigeria.pk, poll.flow_uuid)
+        r.set(lock_key, "other-worker", ex=60)
+
+        try:
+            results = self.backend.pull_results(poll, None, None)
+
+            self.assertEqual((0, 0, 0, 0, 0, 0), results)
+            self.assertFalse(mock_get_runs.called)
+        finally:
+            r.delete(lock_key)
 
     @patch("ureport.backend.rapidpro.is_sync_shutting_down")
     @patch("ureport.polls.tasks.pull_refresh.apply_async")
