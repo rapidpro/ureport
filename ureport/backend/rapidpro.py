@@ -7,12 +7,14 @@ import json
 import logging
 import time
 from collections import defaultdict
+from contextlib import contextmanager
 from datetime import timedelta, timezone as tzone
 
 import requests
 from django_valkey import get_valkey_connection
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import Run
+from valkey.exceptions import LockError
 
 from django.conf import settings
 from django.core.cache import cache
@@ -557,6 +559,25 @@ class RapidProBackend(BaseBackend):
             stats_dict["num_path_ignored"],
         )
 
+    @staticmethod
+    @contextmanager
+    def _owned_lock(lock, poll, org):
+        """
+        Acquires the given lock for the duration of the block, tolerating a lease that expired
+        before release - the work is already done at that point and must not be failed for it
+        """
+        lock.acquire()
+        try:
+            yield lock
+        finally:
+            try:
+                lock.release()
+            except LockError:
+                logger.warning(
+                    "Unable to release pull results lock for poll #%d on org #%d as it is no longer owned"
+                    % (poll.pk, org.pk)
+                )
+
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
         r = get_valkey_connection()
@@ -585,7 +606,10 @@ class RapidProBackend(BaseBackend):
         if r.get(key):
             logger.info("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))
         else:
-            with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
+            # the lock lease is short and renewed after every page, so a killed worker frees the
+            # poll within minutes; the sync itself may still run much longer than the lease
+            lock = r.lock(key, timeout=Poll.POLL_PULL_RESULTS_LOCK_TIMEOUT)
+            with self._owned_lock(lock, poll, org):
                 lock_expiration = time.time() + 0.8 * Poll.POLL_SYNC_LOCK_TIMEOUT
                 client = self._get_client(org, 2)
 
@@ -618,6 +642,27 @@ class RapidProBackend(BaseBackend):
                     fetch_start = time.time()
 
                     for fetch in fetches:
+                        try:
+                            lock.extend(Poll.POLL_PULL_RESULTS_LOCK_TIMEOUT, replace_ttl=True)
+                        except LockError:
+                            # our lease expired and another worker may now own this poll - pause
+                            # at the last saved page rather than risk two concurrent syncs
+                            poll.rebuild_poll_results_counts()
+                            self._mark_poll_results_sync_paused(org, poll, latest_synced_obj_time)
+
+                            logger.warning(
+                                "Lost pull results lock for poll #%d on org #%d, pausing sync" % (poll.pk, org.pk)
+                            )
+
+                            return (
+                                stats_dict["num_val_created"],
+                                stats_dict["num_val_updated"],
+                                stats_dict["num_val_ignored"],
+                                stats_dict["num_path_created"],
+                                stats_dict["num_path_updated"],
+                                stats_dict["num_path_ignored"],
+                            )
+
                         logger.info(
                             "RapidPro API fetch for poll #%d "
                             "on org #%d %d - %d took %ds"

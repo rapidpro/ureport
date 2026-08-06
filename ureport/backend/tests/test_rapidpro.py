@@ -1393,7 +1393,8 @@ class RapidProBackendTest(UreportTest):
         )
         mock_get_runs.assert_called_with(flow="flow-uuid", after=None, reverse=True, paths=True)
         mock_valkey_lock.assert_called_once_with(
-            Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid), timeout=7200
+            Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid),
+            timeout=Poll.POLL_PULL_RESULTS_LOCK_TIMEOUT,
         )
 
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
@@ -1931,6 +1932,74 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(1, PollResult.objects.all().count())
 
         # the pause path checkpointed the first page and queued a resume
+        watermark_key = Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid)
+        watermark_writes = [call[0][1] for call in mock_cache_set.call_args_list if call[0][0] == watermark_key]
+        self.assertEqual([datetime_to_json_date(now), datetime_to_json_date(now)], watermark_writes)
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue="sync")
+
+    @patch("valkey.client.StrictValkey.lock")
+    @patch("dash.orgs.models.TembaClient.get_runs")
+    @patch("django.core.cache.cache.set")
+    @patch("django.core.cache.cache.get")
+    def test_pull_results_renews_lock_each_page(self, mock_cache_get, mock_cache_set, mock_get_runs, mock_valkey_lock):
+        mock_cache_get.return_value = None
+
+        PollResult.objects.all().delete()
+        poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
+
+        now = timezone.now()
+        later = now + timedelta(minutes=5)
+
+        mock_get_runs.side_effect = [
+            MockClientQuery([self._create_test_run("C-001", now)], [self._create_test_run("C-002", later)])
+        ]
+
+        self.backend.pull_results(poll, None, None)
+
+        mock_lock = mock_valkey_lock.return_value
+        self.assertEqual(2, mock_lock.extend.call_count)
+        mock_lock.extend.assert_called_with(Poll.POLL_PULL_RESULTS_LOCK_TIMEOUT, replace_ttl=True)
+
+    @patch("ureport.polls.tasks.pull_refresh.apply_async")
+    @patch("valkey.client.StrictValkey.lock")
+    @patch("dash.orgs.models.TembaClient.get_runs")
+    @patch("django.core.cache.cache.set")
+    @patch("django.core.cache.cache.get")
+    def test_pull_results_pauses_when_lock_lost(
+        self, mock_cache_get, mock_cache_set, mock_get_runs, mock_valkey_lock, mock_pull_refresh
+    ):
+        from valkey.exceptions import LockNotOwnedError
+
+        mock_cache_get.return_value = None
+
+        PollResult.objects.all().delete()
+        poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
+
+        now = timezone.now()
+        later = now + timedelta(minutes=5)
+
+        mock_get_runs.side_effect = [
+            MockClientQuery([self._create_test_run("C-001", now)], [self._create_test_run("C-002", later)])
+        ]
+
+        # first renewal succeeds, second finds the lease expired
+        mock_valkey_lock.return_value.extend.side_effect = [True, LockNotOwnedError("expired")]
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results(poll, None, None)
+
+        # only the first page was processed, then the sync paused at the saved watermark
+        self.assertEqual(1, num_val_created)
+        self.assertEqual(1, PollResult.objects.all().count())
+
         watermark_key = Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid)
         watermark_writes = [call[0][1] for call in mock_cache_set.call_args_list if call[0][0] == watermark_key]
         self.assertEqual([datetime_to_json_date(now), datetime_to_json_date(now)], watermark_writes)

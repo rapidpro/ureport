@@ -134,6 +134,19 @@ def chunk_list(iterable, size):
             return
 
 
+def org_sync_lock_timeout(default_timeout):
+    """
+    Lock timeout for an org sync task. When a sync time budget is configured, invocations pause
+    within the budget so a much shorter lock is enough, and a killed worker then frees the org in
+    minutes rather than hours. Without a budget, runs can legitimately be long-lived and need the
+    full default. Evaluated at import time, so changing the budget requires a restart.
+    """
+    time_budget = getattr(settings, "SYNC_TASK_TIME_BUDGET", None)
+    if time_budget is not None:
+        return max(int(time_budget) * 4, 60 * 10)
+    return default_timeout
+
+
 def get_logo(org):
     if hasattr(org, "_logo_field"):
         return org._logo_field

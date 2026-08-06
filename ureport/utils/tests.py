@@ -10,6 +10,7 @@ from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
+from django.test import override_settings
 from django.utils import timezone
 
 from dash.categories.models import Category
@@ -35,6 +36,7 @@ from ureport.utils import (
     get_reporters_count,
     get_ureporters_locations_stats,
     json_date_to_datetime,
+    org_sync_lock_timeout,
     update_poll_flow_data,
 )
 
@@ -68,6 +70,18 @@ class UtilsTest(UreportTest):
         self.assertEqual(json_date_to_datetime("2014-01-02T03:04:05+02:00"), d2)
         self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000Z"), d2)
         self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000"), d2)
+
+    def test_org_sync_lock_timeout(self):
+        # without a time budget, tasks keep their long lock timeouts
+        with override_settings(SYNC_TASK_TIME_BUDGET=None):
+            self.assertEqual(60 * 60 * 12, org_sync_lock_timeout(60 * 60 * 12))
+
+        # with a budget, the lock only needs to outlive a short run
+        with override_settings(SYNC_TASK_TIME_BUDGET=90):
+            self.assertEqual(60 * 10, org_sync_lock_timeout(60 * 60 * 12))
+
+        with override_settings(SYNC_TASK_TIME_BUDGET=300):
+            self.assertEqual(1200, org_sync_lock_timeout(60 * 60 * 12))
 
     @mock.patch("ureport.utils.get_shared_sites_count")
     def test_get_linked_orgs(self, mock_get_shared_sites_count):
