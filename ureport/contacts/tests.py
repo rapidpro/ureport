@@ -4,6 +4,7 @@ from datetime import timedelta
 
 from mock import patch
 
+from django.core.cache import cache
 from django.utils import timezone
 
 from dash.orgs.models import TaskState
@@ -426,3 +427,54 @@ class ContactsTasksTest(UreportTest):
         )
 
         # mock_squash_counts.assert_called_once_with()
+
+    @patch("dash.orgs.models.Org.get_backend")
+    @patch("ureport.tests.TestBackend.pull_fields")
+    @patch("ureport.tests.TestBackend.pull_boundaries")
+    @patch("ureport.tests.TestBackend.pull_contacts")
+    def test_pull_contacts_resume_state(
+        self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_get_backend
+    ):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+        empty_counts = {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0}
+        mock_pull_fields.return_value = empty_counts
+        mock_pull_boundaries.return_value = empty_counts
+
+        # keep only one backend config
+        self.nigeria.backends.exclude(slug="rapidpro").delete()
+
+        last_fetch_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (self.nigeria.pk, "rapidpro")
+        resume_key = Contact.CONTACT_SYNC_RESUME_CACHE_KEY % (self.nigeria.pk, "rapidpro")
+        cache.delete(last_fetch_key)
+        cache.delete(resume_key)
+
+        # an interrupted pull stores its cursor and window, and does not advance the fetch watermark
+        mock_pull_contacts.return_value = (empty_counts, "cursor-1")
+        pull_contacts(self.nigeria.pk)
+
+        resume_state = cache.get(resume_key)
+        self.assertEqual("cursor-1", resume_state["cursor"])
+        self.assertIsNone(resume_state["since"])
+        self.assertIsNone(cache.get(last_fetch_key))
+
+        # the next run resumes the same window from the stored cursor
+        mock_pull_contacts.return_value = (empty_counts, None)
+        pull_contacts(self.nigeria.pk)
+
+        args, kwargs = mock_pull_contacts.call_args
+        self.assertEqual(resume_state["until"], args[2])
+        self.assertEqual("cursor-1", kwargs["resume_cursor"])
+
+        # completion clears the resume state and advances the fetch watermark to the window end
+        self.assertIsNone(cache.get(resume_key))
+        self.assertEqual(resume_state["until"], cache.get(last_fetch_key))
+
+        # a failing pull clears stored resume state so a stale cursor cannot wedge future syncs
+        mock_pull_contacts.return_value = (empty_counts, "cursor-2")
+        pull_contacts(self.nigeria.pk)
+        self.assertIsNotNone(cache.get(resume_key))
+
+        mock_pull_contacts.side_effect = ValueError("boom")
+        with self.assertRaises(ValueError):
+            pull_contacts(self.nigeria.pk)
+        self.assertIsNone(cache.get(resume_key))

@@ -14,6 +14,7 @@ from django_valkey import get_valkey_connection
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import Run
 
+from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
 
@@ -414,19 +415,21 @@ class RapidProBackend(BaseBackend):
 
         return sync_local_to_set(org, BoundarySyncer(backend=self.backend), incoming_objects)
 
-    def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
+    def pull_contacts(
+        self, org, modified_after, modified_before, progress_callback=None, resume_cursor=None, time_limit=None
+    ):
         client = self._get_client(org, 2)
 
         # all contacts created or modified in RapidPro in the time window
         active_query = client.get_contacts(after=modified_after, before=modified_before)
-        fetches = active_query.iterfetches(retry_on_rate_exceed=True)
+        fetches = active_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
 
         # all contacts deleted in RapidPro in the same time window
         deleted_query = client.get_contacts(deleted=True, after=modified_after, before=modified_before)
         deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True)
 
         return sync_local_to_changes(
-            org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback
+            org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback, time_limit
         )
 
     def _iter_archive_records(self, archive, flow_uuid):
@@ -600,6 +603,9 @@ class RapidProBackend(BaseBackend):
                     pull_refresh_from_archives.apply_async((poll.pk,), queue="sync")
 
                 start = time.time()
+                time_budget = getattr(settings, "SYNC_TASK_TIME_BUDGET", None)
+                budget_expiration = start + time_budget if time_budget is not None else None
+
                 logger.info("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
 
                 # fetch runs from API, respecting rate limits
@@ -656,6 +662,15 @@ class RapidProBackend(BaseBackend):
                         # Save the objects to the DB for new objects in the respective map
                         self._save_new_poll_results_to_database(poll_results_to_save_map)
 
+                        # runs are fetched oldest first, so once a page is saved the latest modified_on
+                        # seen is a valid resume point - persist it so an interrupted sync loses at most
+                        # one page of progress
+                        cache.set(
+                            Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
+                            latest_synced_obj_time,
+                            None,
+                        )
+
                         logger.info(
                             "Processed fetch of %d - %d "
                             "runs for poll #%d on org #%d"
@@ -670,7 +685,11 @@ class RapidProBackend(BaseBackend):
                         logger.info("=" * 40)
 
                         # Pause the sync for this poll when we have synced Poll.POLL_RESULTS_MAX_SYNC_RUNS runs this time
-                        if stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
+                        if (
+                            stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS
+                            or time.time() > lock_expiration
+                            or (budget_expiration is not None and time.time() > budget_expiration)
+                        ):
                             # rebuild the aggregated counts
                             poll.rebuild_poll_results_counts()
 
@@ -1091,7 +1110,8 @@ class RapidProBackend(BaseBackend):
 
         from ureport.polls.tasks import pull_refresh
 
-        pull_refresh.apply_async((poll.pk,), countdown=300, queue="sync")
+        countdown = getattr(settings, "POLL_PULL_RESULTS_RESUME_COUNTDOWN", 300)
+        pull_refresh.apply_async((poll.pk,), countdown=countdown, queue="sync")
 
     @staticmethod
     def _mark_poll_results_sync_completed(poll, org, latest_synced_obj_time):

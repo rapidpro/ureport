@@ -73,6 +73,10 @@ class Contact(models.Model):
     CONTACT_LAST_FETCHED_CACHE_KEY = "last:fetch_contacts:%d:backend:%s"
     CONTACT_LAST_FETCHED_CACHE_TIMEOUT = 60 * 60 * 24 * 30
 
+    # holds the API cursor and time window of an interrupted contacts pull so the next run
+    # can resume where it stopped instead of re-fetching the whole window
+    CONTACT_SYNC_RESUME_CACHE_KEY = "sync_resume:contacts:%d:backend:%s"
+
     MALE = "M"
     FEMALE = "F"
     OTHER = "O"

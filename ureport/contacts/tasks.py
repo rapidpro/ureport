@@ -5,6 +5,7 @@ import time
 from celery.utils.log import get_task_logger
 from django_valkey import get_valkey_connection
 
+from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
 
@@ -89,9 +90,20 @@ def pull_contacts(org, ignored_since, ignored_until):
         backend = org.get_backend(backend_slug=backend_obj.slug)
 
         last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, backend_obj.slug)
+        sync_resume_key = Contact.CONTACT_SYNC_RESUME_CACHE_KEY % (org.pk, backend_obj.slug)
 
         until = datetime_to_json_date(timezone.now())
         since = cache.get(last_fetch_date_key, None)
+
+        resume_cursor = None
+        resume_state = cache.get(sync_resume_key, None)
+        if resume_state:
+            # the cursor is only valid for the query window it was created with, so resume
+            # the interrupted pull with its original bounds
+            since = resume_state.get("since")
+            until = resume_state.get("until")
+            resume_cursor = resume_state.get("cursor")
+            logger.info("Resuming interrupted contact pull for org #%d" % org.pk)
 
         if not since:
             logger.info("First time run for org #%d. Will sync all contacts" % org.pk)
@@ -130,14 +142,31 @@ def pull_contacts(org, ignored_since, ignored_until):
         logger.info("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
         start_contacts = time.time()
 
-        backend_contact_results, resume_cursor = backend.pull_contacts(org, since, until)
+        try:
+            backend_contact_results, next_resume_cursor = backend.pull_contacts(
+                org,
+                since,
+                until,
+                resume_cursor=resume_cursor,
+                time_limit=getattr(settings, "SYNC_TASK_TIME_BUDGET", None),
+            )
+        except Exception:
+            # a stored cursor may have expired on the API side - clear it so the next run
+            # falls back to a fresh pull of the same window instead of failing forever
+            cache.delete(sync_resume_key)
+            raise
 
         contacts_created = backend_contact_results[SyncOutcome.created]
         contacts_updated = backend_contact_results[SyncOutcome.updated]
         contacts_deleted = backend_contact_results[SyncOutcome.deleted]
         ignored = backend_contact_results[SyncOutcome.ignored]
 
-        cache.set(last_fetch_date_key, until, None)
+        if next_resume_cursor:
+            cache.set(sync_resume_key, {"cursor": next_resume_cursor, "since": since, "until": until}, None)
+            logger.info("Paused contact pull for org #%d, will resume next run" % org.pk)
+        else:
+            cache.delete(sync_resume_key)
+            cache.set(last_fetch_date_key, until, None)
 
         logger.info(
             "Fetched contacts for org #%d. "

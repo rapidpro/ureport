@@ -28,13 +28,18 @@ class BaseBackend(object):
         pass
 
     @abstractmethod
-    def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
+    def pull_contacts(
+        self, org, modified_after, modified_before, progress_callback=None, resume_cursor=None, time_limit=None
+    ):
         """
         Pulls contacts modified in the given time window
         :param org: the org
         :param datetime modified_after: pull contacts modified after this
         :param datetime modified_before: pull contacts modified before this
         :param progress_callback: callable that will be called from time to time with number of contacts pulled
-        :return: tuple of the number of contacts created, updated, deleted and ignored
+        :param resume_cursor: optional API cursor from a previous incomplete pull of the same time window
+        :param time_limit: optional number of seconds after which the pull pauses and returns a resume cursor
+        :return: tuple of a dict of counts of created, updated, deleted and ignored contacts, and a resume cursor
+                 if the pull didn't complete
         """
         pass
