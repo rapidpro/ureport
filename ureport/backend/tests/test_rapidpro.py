@@ -2005,6 +2005,43 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual([datetime_to_json_date(now), datetime_to_json_date(now)], watermark_writes)
         mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue="sync")
 
+    @patch("ureport.backend.rapidpro.is_sync_shutting_down")
+    @patch("ureport.polls.tasks.pull_refresh.apply_async")
+    @patch("valkey.client.StrictValkey.lock")
+    @patch("dash.orgs.models.TembaClient.get_runs")
+    @patch("django.core.cache.cache.set")
+    @patch("django.core.cache.cache.get")
+    def test_pull_results_pauses_on_worker_shutdown(
+        self, mock_cache_get, mock_cache_set, mock_get_runs, mock_valkey_lock, mock_pull_refresh, mock_shutting_down
+    ):
+        mock_cache_get.return_value = None
+        mock_shutting_down.return_value = True
+
+        PollResult.objects.all().delete()
+        poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
+
+        now = timezone.now()
+        later = now + timedelta(minutes=5)
+
+        mock_get_runs.side_effect = [
+            MockClientQuery([self._create_test_run("C-001", now)], [self._create_test_run("C-002", later)])
+        ]
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results(poll, None, None)
+
+        # the sync paused at the first saved page instead of continuing into the shutdown
+        self.assertEqual(1, num_val_created)
+        self.assertEqual(1, PollResult.objects.all().count())
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue="sync")
+
     @patch("dash.orgs.models.TembaClient.get_contacts")
     def test_pull_contacts_time_limit_returns_resume_cursor(self, mock_get_contacts):
         Contact.objects.all().delete()

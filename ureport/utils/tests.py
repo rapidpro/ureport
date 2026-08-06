@@ -71,6 +71,18 @@ class UtilsTest(UreportTest):
         self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000Z"), d2)
         self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000"), d2)
 
+    def test_sync_shutdown_flag(self):
+        from ureport.sync_state import clear_sync_shutdown, is_sync_shutting_down, signal_sync_shutdown
+
+        clear_sync_shutdown()
+        self.assertFalse(is_sync_shutting_down())
+
+        signal_sync_shutdown()
+        self.assertTrue(is_sync_shutting_down())
+
+        clear_sync_shutdown()
+        self.assertFalse(is_sync_shutting_down())
+
     def test_org_sync_lock_timeout(self):
         # without a time budget, tasks keep their long lock timeouts
         with override_settings(SYNC_TASK_TIME_BUDGET=None):
