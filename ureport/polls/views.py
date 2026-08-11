@@ -25,6 +25,8 @@ from dash.orgs.models import OrgBackend
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
 from dash.tags.models import Tag
 from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
+from ureport.polls.sync import RESULTS_JOB_TYPE
+from ureport.syncjobs.models import SyncJob
 from ureport.utils import json_date_to_datetime
 
 from .models import Poll, PollImage, PollQuestion, PollResponseCategory
@@ -657,6 +659,18 @@ class PollCRUDL(SmartCRUDL):
 
         def get_sync_status(self, obj):
             if obj.has_synced:
+                job = SyncJob.objects.filter(org_id=obj.org_id, job_type=RESULTS_JOB_TYPE, scope=obj.flow_uuid).first()
+                if job:
+                    if job.lease_expires_on and job.lease_expires_on > timezone.now():
+                        return _("Scheduled Sync currently in progress...")
+
+                    if job.ended_on:
+                        return _("Last results synced %(time)s ago" % dict(time=timesince(job.ended_on)))
+
+                    # we know we synced do not check the the progress since that is slow
+                    return _("Synced")
+
+                # no job yet, i.e. nothing has synced this flow since the sync jobs landed
                 r = get_valkey_connection()
                 key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (obj.org.pk, obj.flow_uuid)
                 if r.get(key):
