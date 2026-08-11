@@ -907,15 +907,26 @@ ANONYMOUS_USER_NAME = "AnonymousUser"
 # Valkey Configuration
 # -----------------------------------------------------------------------------------
 
-# by default, celery doesn't have any timeout on our valkey connections, this fixes that
-BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
-
 CELERY_BROKER_URL = "redis://localhost:6379/1"
 
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
-# by default, celery doesn't have any timeout on our valkey connections, this fixes that
-CELERY_BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5}
+# by default, celery doesn't have any timeout on our valkey connections, this fixes that.
+# visibility_timeout controls how long any unacknowledged message is hidden before the
+# broker redelivers it - that includes messages prefetched by a busy worker and
+# countdown/eta messages, not just acks_late tasks - so it must exceed the worst-case
+# task runtime and the longest countdown or the message is redelivered while still in
+# flight (the transport default is only an hour)
+CELERY_BROKER_TRANSPORT_OPTIONS = {"socket_timeout": 5, "visibility_timeout": 60 * 60 * 25}
+
+# fetch one task per worker process at a time so a stopping worker holds at most one
+# unstarted task, and long tasks don't strand queued work behind them
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+
+# backstop limits for runaway tasks - generous enough for the longest legitimate syncs.
+# TODO: tighten per task as tasks are converted to bounded chunks
+CELERY_TASK_SOFT_TIME_LIMIT = 60 * 60 * 23
+CELERY_TASK_TIME_LIMIT = 60 * 60 * 24
 
 CELERY_TIMEZONE = "UTC"
 
