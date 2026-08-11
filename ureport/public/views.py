@@ -37,6 +37,7 @@ from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem
 from ureport.polls.models import Poll, PollQuestion
 from ureport.stats.models import GenderSegment, PollEngagementDailyCount, PollStatsCounter
+from ureport.syncjobs.models import SyncJob
 from ureport.utils import (
     get_global_count,
     get_shared_countries_number,
@@ -784,7 +785,13 @@ def task_status(request):
             failing_tasks[f"{obj.org.name} - {obj.task_key}"] = f"{obj.last_successfully_started_on}"
 
     body = json.dumps(
-        dict(contact_sync_up=contact_sync_up, tasks=all_tasks, failing_tasks=failing_tasks), sort_keys=True
+        dict(
+            contact_sync_up=contact_sync_up,
+            tasks=all_tasks,
+            failing_tasks=failing_tasks,
+            sync_jobs=SyncJob.get_status_counts(),
+        ),
+        sort_keys=True,
     )
 
     if not contact_sync_up:

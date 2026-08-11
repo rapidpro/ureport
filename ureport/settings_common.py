@@ -830,6 +830,12 @@ PERMISSIONS = {
         "poll_flow",
     ),
     "stories.story": ("html", "images"),
+    # deliberately granted to no group - sync job controls are for superusers only
+    "syncjobs.syncjob": (
+        "pause",
+        "resume",
+        "force_resync",
+    ),
 }
 
 # assigns the permissions that each group should have
@@ -976,6 +982,11 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": timedelta(minutes=30),
         "relative": True,
     },
+    "check_sync_jobs": {
+        "task": "syncjobs.check_jobs",
+        "schedule": timedelta(minutes=30),
+        "relative": True,
+    },
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
@@ -1053,6 +1064,11 @@ UREPORT_DEFAULT_SECONDARY_COLOR = "#1F49BF"
 # non org urls
 # -----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = (
+    # sync jobs are listed and controlled across all orgs, so they need no org context
+    "syncjobs.syncjob_list",
+    "syncjobs.syncjob_pause",
+    "syncjobs.syncjob_resume",
+    "syncjobs.syncjob_force_resync",
     "public.countries",
     "public.status",
     "public.task_status",
