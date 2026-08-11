@@ -977,9 +977,8 @@ CELERY_BEAT_SCHEDULE = {
         "relative": True,
     },
     "contact-pull": {
-        "task": "dash.orgs.tasks.trigger_org_task",
+        "task": "contacts.sync_contacts_dispatch",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
-        "args": ("ureport.contacts.tasks.pull_contacts",),
     },
     "update-org-contact-counts": {
         "task": "dash.orgs.tasks.trigger_org_task",
