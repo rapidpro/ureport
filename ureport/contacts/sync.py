@@ -2,6 +2,7 @@
 
 import json
 import logging
+from contextlib import contextmanager
 from datetime import timedelta
 
 from django_valkey import get_valkey_connection
@@ -51,8 +52,36 @@ def _counts(prefix, counts):
     return {f"{prefix}_{key}": value for key, value in counts.items()}
 
 
-def _is_disabled(org):
+def is_pull_disabled(org):
     return TaskState.objects.filter(org=org, task_key=JOB_TYPE, is_disabled=True).exists()
+
+
+@contextmanager
+def contact_pull_lock(org, timeout=LEASE_SECONDS):
+    """
+    Takes this org's contact-pull lock for the duration of one chunk, yielding whether it was
+    taken. It is the lock all of the contact tasks coordinate through: the ones that rebuild
+    counters need exclusive access while they do, and the mismatch check reads it to tell a
+    sync in progress from real drift. Never blocks - a chunk that can't have it should back
+    off and try again rather than tie up a worker.
+
+    The timeout must outlive the caller's lease, or a chunk that overruns its lease loses the
+    lock at the same moment another worker becomes free to claim the job, and the two run
+    concurrently - which is exactly what the lock is there to prevent.
+    """
+    lock = get_valkey_connection().lock(TaskState.get_lock_key(org, JOB_TYPE), timeout=timeout)
+    acquired = lock.acquire(blocking=False)
+
+    try:
+        yield acquired
+    finally:
+        if acquired:
+            try:
+                lock.release()
+            except LockError:
+                # the chunk outlived the lock's timeout - don't let that fail an otherwise
+                # successful chunk or mask an in-flight exception
+                logger.warning("Unable to release contact pull lock for org #%d as it is no longer owned", org.pk)
 
 
 def _mark_state_failing(org):
@@ -104,6 +133,12 @@ def finalize_contacts_sync(job):
     state.is_failing = False
     state.save(update_fields=("started_on", "ended_on", "last_successfully_started_on", "last_results", "is_failing"))
 
+    # the one-off schemes backfill waits here because it reads what a pull writes - imported
+    # locally as the maintenance tasks build on this module
+    from ureport.contacts.maintenance import resume_schemes_backfill
+
+    resume_schemes_backfill(org)
+
 
 @chunked_task(
     JOB_TYPE, queue=QUEUE, lease_seconds=LEASE_SECONDS, finalize=finalize_contacts_sync, name="contacts.sync_contacts"
@@ -123,34 +158,23 @@ def sync_contacts(job):
         logger.info("Backend %s no longer active for org #%s, nothing to sync", job.scope, org.pk if org else None)
         return _abort_run(job, cursor)
 
-    if _is_disabled(org):
+    if is_pull_disabled(org):
         logger.info("Contact pull disabled for org #%d, stopping", org.pk)
         return _abort_run(job, cursor)
 
-    # the ad-hoc contact tasks still coordinate through this lock: two of them rebuild
-    # counters and need exclusive access, and the mismatch check reads it to tell a sync in
-    # progress from real drift
-    r = get_valkey_connection()
-    lock = r.lock(TaskState.get_lock_key(org, JOB_TYPE), timeout=LEASE_SECONDS)
-    if not lock.acquire(blocking=False):
-        logger.info("Contact pull lock held for org #%d, backing off", org.pk)
-        return LOCK_BACKOFF
+    with contact_pull_lock(org) as acquired:
+        if not acquired:
+            logger.info("Contact pull lock held for org #%d, backing off", org.pk)
+            return LOCK_BACKOFF
 
-    try:
-        return _run_chunk(job, org, backend_obj, cursor)
-    except LeaseLost:
-        # not our run to report on anymore - the worker that took it over owns its outcome
-        raise
-    except Exception:
-        _mark_state_failing(org)
-        raise
-    finally:
         try:
-            lock.release()
-        except LockError:
-            # the chunk outlived the lock's timeout - don't let that fail an otherwise
-            # successful chunk or mask an in-flight exception
-            logger.warning("Unable to release contact pull lock for org #%d as it is no longer owned", org.pk)
+            return _run_chunk(job, org, backend_obj, cursor)
+        except LeaseLost:
+            # not our run to report on anymore - the worker that took it over owns its outcome
+            raise
+        except Exception:
+            _mark_state_failing(org)
+            raise
 
 
 def _run_chunk(job, org, backend_obj, cursor):
@@ -225,7 +249,7 @@ def enqueue_org_syncs(org):
     for backend_obj in org.backends.filter(is_active=True):
         job = SyncJob.get_or_create_job(org, JOB_TYPE, scope=backend_obj.slug)
 
-        if job.status == SyncJob.STATUS_PAUSED or _is_in_flight(job, now):
+        if job.status == SyncJob.STATUS_PAUSED or is_in_flight(job, now):
             logger.info("Job #%d (%s:%s) not nudged, %s", job.id, JOB_TYPE, job.scope, job.get_status_display())
             skipped[backend_obj.slug] = job.id
             continue
@@ -236,7 +260,7 @@ def enqueue_org_syncs(org):
     return {"enqueued": enqueued, "skipped": skipped}
 
 
-def _is_in_flight(job, now):
+def is_in_flight(job, now):
     """
     Whether a run is already being driven, so that nudging it would only start a duplicate
     chain of chunks. The lease is released between chunks, so a running job counts as in
@@ -246,6 +270,38 @@ def _is_in_flight(job, now):
         return True
 
     return job.status == SyncJob.STATUS_RUNNING and job.modified_on > now - STALE_RUN_AFTER
+
+
+def force_full_repull(org):
+    """
+    Makes this org's next contact sync run pull its whole history again, by dropping both
+    resume positions a run can start from - the job cursor and the pre-chunking cache key it
+    seeds from. A job with a run being driven is left alone rather than having the window
+    pulled out from under it. Idempotent, so a caller that needs every backend reset can keep
+    trying until none are left alone. Returns the backend slugs reset and those left alone.
+
+    Only used by the one-off schemes backfill trigger - remove it with the shims.
+    """
+    now = timezone.now()
+    reset = []
+    skipped = []
+
+    for backend_obj in org.backends.filter(is_active=True):
+        job = SyncJob.get_or_create_job(org, JOB_TYPE, scope=backend_obj.slug)
+
+        # gated on the lease as well as on being in flight, so that a claim landing between
+        # the two wins rather than having the cursor pulled out from under it
+        if not is_in_flight(job, now) and SyncJob.objects.filter(id=job.id, lease_owner=None).update(cursor={}):
+            # only once the cursor is actually gone, or a refused reset would still drop the
+            # seed the next run would have resumed from
+            cache.delete(_last_fetched_key(org, backend_obj.slug))
+            reset.append(backend_obj.slug)
+            continue
+
+        logger.warning("Job #%d (%s:%s) is in flight, resume position left alone", job.id, JOB_TYPE, job.scope)
+        skipped.append(backend_obj.slug)
+
+    return reset, skipped
 
 
 @app.task(name="contacts.sync_contacts_dispatch")
