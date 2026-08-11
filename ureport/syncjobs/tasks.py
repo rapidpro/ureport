@@ -21,7 +21,9 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
     Creates a Celery task that runs a SyncJob one bounded chunk at a time. The decorated
     function performs a single chunk of work: it reads its resume position from job.cursor,
     calls job.checkpoint(...) alongside its data writes, and returns True when the job has
-    no work left or False to have a continuation task enqueued.
+    no work left, False (or None) to have a continuation task enqueued immediately, or a
+    number of seconds to have the continuation delayed - e.g. to back off after hitting an
+    API rate limit without losing the chunk's progress.
 
     Every caller - beat nudges, continuations, redeliveries, manual triggers - invokes the
     task the same way, with the job id. The atomic claim serializes execution: an
@@ -74,7 +76,7 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
                 job.record_failure(traceback.format_exc())
                 raise
 
-            if done:
+            if done is True:
                 if not job.mark_complete(needs_finalize=bool(finalize)):
                     return  # job was taken over - the new holder owns finalization
                 if finalize:
@@ -82,9 +84,13 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
                     job.clear_finalize()
                 job.release_lease()
             else:
+                # a numeric return is a requested delay before the continuation (bool is
+                # an int subclass, so False must be checked first)
+                countdown = done if not isinstance(done, bool) and isinstance(done, (int, float)) else None
+
                 # enqueue before releasing so a continuation that lands early retries
                 # against our still-held lease instead of racing the release
-                _task.apply_async((job_id,), queue=queue)
+                _task.apply_async((job_id,), queue=queue, countdown=countdown)
                 job.release_lease()
 
         def _retry_if_leased(task_self, job_id):

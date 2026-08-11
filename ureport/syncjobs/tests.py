@@ -253,7 +253,7 @@ class ChunkedTaskTest(TestCase):
         with patch.object(task, "apply_async") as mock_continue:
             # each continuation is enqueued, not executed - drive them by hand as a worker would
             task(self.job.id)
-            mock_continue.assert_called_once_with((self.job.id,), queue="testq")
+            mock_continue.assert_called_once_with((self.job.id,), queue="testq", countdown=None)
             task(self.job.id)
             task(self.job.id)
             self.assertEqual(mock_continue.call_count, 2)
@@ -347,6 +347,26 @@ class ChunkedTaskTest(TestCase):
             task2(self.job.id)
 
         self.assertEqual(ran2, [1, 2])
+        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_COMPLETE)
+
+    def test_chunk_can_delay_continuation(self):
+        delayed = []
+
+        @chunked_task("test-sync", queue="testq", name=f"test.sync.{uuid.uuid4().hex}")
+        def sync_backoff(job):
+            done = job.cursor.get("chunk", 0) >= 1
+            job.checkpoint(cursor={"chunk": job.cursor.get("chunk", 0) + 1})
+            if done:
+                return True
+            delayed.append(True)
+            return 300  # e.g. rate limited - continue in five minutes
+
+        with patch.object(sync_backoff, "apply_async") as mock_continue:
+            sync_backoff(self.job.id)
+            mock_continue.assert_called_once_with((self.job.id,), queue="testq", countdown=300)
+            sync_backoff(self.job.id)
+
+        self.assertEqual(delayed, [True])
         self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_COMPLETE)
 
     def test_missing_job_is_skipped(self):
