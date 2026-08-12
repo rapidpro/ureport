@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 15:54+0000\n"
+"POT-Creation-Date: 2026-08-12 10:05+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1394,6 +1394,42 @@ msgid "+ New Story"
 msgstr ""
 
 #, python-format
+msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
+msgstr ""
+
+#, python-format
+msgid "last checked %(checked_on)s"
+msgstr ""
+
+msgid "not checked yet"
+msgstr ""
+
+msgid "All job types"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Actions"
+msgstr "Populasi"
+
+msgid "Pause"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Resume"
+msgstr "Hasil"
+
+msgid "Force resync"
+msgstr ""
+
+#, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Refreshed %s cache untuk organisasi ini"
 
@@ -2166,6 +2202,26 @@ msgid "Response Rate"
 msgstr "Rating Tanggapan"
 
 msgid "Active Users"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d is being worked on, try again in a moment"
+msgstr ""
+
+#, python-format
+msgid "Paused job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Resumed job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d isn't paused"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d will resync from scratch on its next run"
 msgstr ""
 
 msgid "Something to trigger localizations"

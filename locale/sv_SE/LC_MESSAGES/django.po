@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 15:54+0000\n"
+"POT-Creation-Date: 2026-08-12 10:05+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -1290,6 +1290,42 @@ msgid "+ New Story"
 msgstr "+ Ny berättelse"
 
 #, python-format
+msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
+msgstr ""
+
+#, python-format
+msgid "last checked %(checked_on)s"
+msgstr ""
+
+msgid "not checked yet"
+msgstr ""
+
+msgid "All job types"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Location"
+msgid "Actions"
+msgstr "Plats"
+
+msgid "Pause"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Resume"
+msgstr "Resultat"
+
+msgid "Force resync"
+msgstr ""
+
+#, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Uppdaterade %s cache för den här organisationen"
 
@@ -2013,6 +2049,26 @@ msgstr "Svarsfrekvens"
 
 msgid "Active Users"
 msgstr "Aktiva användare"
+
+#, python-format
+msgid "Job #%(job_id)d is being worked on, try again in a moment"
+msgstr ""
+
+#, python-format
+msgid "Paused job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Resumed job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d isn't paused"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d will resync from scratch on its next run"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
