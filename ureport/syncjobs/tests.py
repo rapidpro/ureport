@@ -349,6 +349,40 @@ class ChunkedTaskTest(TestCase):
         self.assertEqual(ran2, [1, 2])
         self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_COMPLETE)
 
+    def test_failing_finalize_records_failure_and_is_retried(self):
+        attempts = []
+
+        def finalize(job):
+            attempts.append(job.id)
+            if len(attempts) == 1:
+                raise ValueError("finalize blew up")
+
+        task, ran = _make_task(chunks_to_run=1, finalize=finalize)
+
+        with patch.object(task, "apply_async"):
+            with self.assertRaises(ValueError):
+                task(self.job.id)
+
+        # the work completed but the failed finalization is recorded and retryable:
+        # failure counted, lease released so the retry needn't wait out its expiry,
+        # and needs_finalize still set so the retry finalizes before anything else
+        job = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(job.status, SyncJob.STATUS_FAILED)
+        self.assertEqual(job.consecutive_failures, 1)
+        self.assertTrue(job.needs_finalize)
+        self.assertIsNone(job.lease_owner)
+
+        with patch.object(task, "apply_async"):
+            task(self.job.id)
+
+        # the retry runs the leftover finalization first, then its own completion's -
+        # at-least-once semantics, which is why finalize hooks must be idempotent
+        self.assertEqual(len(attempts), 3)
+        job = SyncJob.objects.get(id=self.job.id)
+        self.assertFalse(job.needs_finalize)
+        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
+        self.assertEqual(job.consecutive_failures, 0)
+
     def test_chunk_can_delay_continuation(self):
         delayed = []
 

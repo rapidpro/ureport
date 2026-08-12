@@ -80,7 +80,14 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
                 if not job.mark_complete(needs_finalize=bool(finalize)):
                     return  # job was taken over - the new holder owns finalization
                 if finalize:
-                    finalize(job)
+                    try:
+                        finalize(job)
+                    except Exception:
+                        # record the failure so backoff engages and release the lease so
+                        # the retry needn't wait out its expiry; needs_finalize stays set
+                        # so the retry runs the leftover finalization before anything else
+                        job.record_failure(traceback.format_exc())
+                        raise
                     job.clear_finalize()
                 job.release_lease()
             else:
