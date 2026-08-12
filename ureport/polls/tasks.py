@@ -2,24 +2,29 @@
 
 import logging
 import time
-from datetime import timedelta
 
 from django_valkey import get_valkey_connection
 
 from django.utils import timezone
 
 from dash.orgs.models import Org
-from dash.orgs.tasks import org_task
 from ureport.celery import app
 from ureport.polls.sync import (  # noqa: F401 - imported here so the worker registers the chunked tasks
     MAIN_POLL_INTERVAL,
     OTHER_POLLS_INTERVAL,
     OTHER_POLLS_NEW_WINDOW,
     RECENT_POLLS_INTERVAL,
+    backfill_age_gender,
     dispatch_flows,
-    is_flow_syncing,
+    prune_poll_results,
+    prune_results_dispatch,
+    queue_age_gender_backfill,
     queue_archives_sync,
+    queue_counts_rebuild,
+    queue_results_prune,
     queue_results_sync,
+    rebuild_counts_dispatch,
+    rebuild_poll_counts,
     sync_poll_archives,
     sync_poll_results,
     sync_polls_dispatch,
@@ -28,7 +33,6 @@ from ureport.utils import (
     fetch_flows,
     fetch_old_sites_count as do_fetch_old_sites_count,
     fetch_shared_sites_count,
-    populate_age_and_gender_poll_results,
     update_poll_flow_data,
 )
 
@@ -87,58 +91,11 @@ def pull_results_recent_polls(org_id):
     _queue_polls(org, Poll.get_recent_polls(org), interval=RECENT_POLLS_INTERVAL)
 
 
-@org_task("clear-old-poll-results", 60 * 60 * 5)
-def clear_old_poll_results(org, since, until):
-    from .models import Poll
+@app.task(name="ureport.polls.tasks.clear_old_poll_results")
+def clear_old_poll_results(org_id):
+    org = Org.objects.get(pk=org_id)
 
-    now = timezone.now()
-    r = get_valkey_connection()
-    syncing_window = now - timedelta(days=365)
-    new_window = now - timedelta(days=14)
-
-    dupes_flow_uuid = set()
-
-    old_polls = (
-        Poll.objects.filter(org=org)
-        .exclude(poll_date__gte=syncing_window)
-        .exclude(created_on__gte=new_window)
-        .exclude(stopped_syncing=True)
-        .order_by("pk")
-    )
-    for poll in old_polls:
-        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
-        # the valkey lock is only taken by the unchunked pulls, kept here for the release
-        # they still exist in - a chunked sync announces itself with its job lease instead
-        if r.get(key) or is_flow_syncing(org.pk, poll.flow_uuid):
-            logger.info(
-                "Skipping clearing old results for poll #%d on org #%d as it is still syncing" % (poll.pk, org.pk)
-            )
-        elif poll.flow_uuid in dupes_flow_uuid:
-            logger.info(
-                "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated"
-                % (poll.pk, org.pk)
-            )
-        else:
-            dupes_flow_uuid.add(poll.flow_uuid)
-            with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                # refresh the object from the DB
-                poll.refresh_from_db()
-                try:
-                    # one last stats rebuild for the poll
-                    poll.rebuild_poll_results_counts()
-
-                    if not poll.stopped_syncing:
-                        poll.delete_poll_results()
-                        Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
-                        logger.info(
-                            "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
-                        )
-                except Exception:
-                    logger.error(
-                        "Error clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
-                        exc_info=True,
-                        extra={"stack": True},
-                    )
+    queue_results_prune(org)
 
 
 @app.task()
@@ -180,45 +137,15 @@ def pull_refresh_from_archives(poll_id):
 
 @app.task(name="polls.rebuild_counts")
 def rebuild_counts():
-    from .models import Poll
-
-    r = get_valkey_connection()
-
-    key = "polls_rebuild_counts_task_running"
-    lock_timeout = 60 * 60 * 24 * 4  # 4 days
-
-    if r.get(key):
-        logger.info("Task: polls.rebuild_counts skipped")
-    else:
-        with r.lock(key, timeout=lock_timeout):
-            start_time = time.time()
-
-            logger.info("Task: polls.rebuild_counts started")
-            polls = Poll.objects.filter(is_active=True)
-
-            for poll in polls:
-                poll.rebuild_poll_results_counts()
-
-            elapsed = time.time() - start_time
-
-            logger.info(f"Task: polls.rebuild_counts finished in {elapsed:.1f} seconds")
+    queue_counts_rebuild()
 
 
 @app.task(name="update_results_age_gender")
 def update_results_age_gender(org_id=None):
-    from .models import Poll
+    orgs = Org.objects.filter(pk=org_id) if org_id else Org.objects.filter(is_active=True)
 
-    org = None
-    if org_id:
-        org = Org.objects.filter(pk=org_id).first()
-
-    populate_age_and_gender_poll_results(org)
-
-    polls = Poll.objects.all()
-    if org:
-        polls = polls.filter(org=org)
-    for poll in polls:
-        poll.rebuild_poll_results_counts()
+    for org in orgs:
+        queue_age_gender_backfill(org)
 
 
 @app.task(name="polls.refresh_org_flows")
