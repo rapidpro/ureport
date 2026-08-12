@@ -1027,13 +1027,14 @@ CELERY_BEAT_SCHEDULE = {
         "args": ("ureport.stats.tasks.delete_old_contact_activities", "slow"),
     },
     "rebuild-poll-results-count": {
-        "task": "polls.rebuild_counts",
+        "task": "polls.rebuild_counts_dispatch",
         "schedule": crontab(hour=4, minute=0),
+        "options": {"queue": "slow"},
     },
     "clear-old-results": {
-        "task": "dash.orgs.tasks.trigger_org_task",
+        "task": "polls.prune_results_dispatch",
         "schedule": crontab(hour=6, minute=0),
-        "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
+        "options": {"queue": "slow"},
     },
     "stats_counts_squash": {
         "task": "stats.stats_counts_squash",

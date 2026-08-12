@@ -5,18 +5,28 @@ from datetime import timedelta, timezone as tzone
 from mock import patch
 
 from django.core.cache import cache
+from django.db import IntegrityError, transaction
 from django.utils import timezone
 
 from dash.categories.models import Category
-from dash.orgs.models import TaskState
+from dash.orgs.models import Org, TaskState
 from ureport.backend import ChunkResult
 from ureport.backend.rapidpro import RapidProBackend
+from ureport.contacts.models import Contact
 from ureport.polls.models import Poll, PollResult
 from ureport.polls.sync import (
+    AGE_GENDER_JOB_TYPE,
     ARCHIVES_JOB_TYPE,
+    COUNTS_JOB_TYPE,
+    PRUNE_JOB_TYPE,
     RATE_LIMITED_BACKOFF,
     RESULTS_JOB_TYPE,
+    backfill_age_gender,
     dispatch_org_polls,
+    prune_poll_results,
+    prune_results_dispatch,
+    rebuild_counts_dispatch,
+    rebuild_poll_counts,
     sync_poll_archives,
     sync_poll_results,
     sync_polls_dispatch,
@@ -29,12 +39,23 @@ from ureport.polls.tasks import (
     pull_results_main_poll,
     pull_results_other_polls,
     pull_results_recent_polls,
+    rebuild_counts,
+    update_results_age_gender,
 )
 from ureport.polls.views import PollCRUDL
 from ureport.syncjobs.models import SyncJob
-from ureport.syncjobs.testing import SyncJobTestMixin, drop_lease, end_run, hold_lease, make_stale, run_task
+from ureport.syncjobs.testing import (
+    SyncJobTestMixin,
+    drop_lease,
+    end_run,
+    held_lock,
+    hold_lease,
+    make_stale,
+    reload,
+    run_task,
+)
 from ureport.tests import UreportTest
-from ureport.utils import datetime_to_json_date
+from ureport.utils import LAST_POPULATED_CONTACT_KEY, datetime_to_json_date
 
 
 def results_counts(**overrides):
@@ -688,36 +709,591 @@ class TaskShimTest(PollSyncTestBase):
         self.assertFalse(TaskState.objects.filter(org=self.nigeria).exists())
 
 
-class ClearOldResultsTest(PollSyncTestBase):
+class RebuildPollCountsTest(PollSyncTestBase):
     def setUp(self):
-        super(ClearOldResultsTest, self).setUp()
+        super(RebuildPollCountsTest, self).setUp()
 
-        Poll.objects.filter(id=self.poll.id).update(
-            poll_date=timezone.now() - timedelta(days=500), created_on=timezone.now() - timedelta(days=500)
+        self.health_uganda = Category.objects.create(
+            org=self.uganda, name="Health", created_by=self.admin, modified_by=self.admin
         )
 
-    def clear(self):
+        self.polls = [self.poll]
+        for index in range(2, 7):
+            self.polls.append(
+                self.create_poll(self.nigeria, "Poll %d" % index, "uuid-%d" % index, self.education_nigeria, self.admin)
+            )
+
+        # the counts rebuild is one install wide job, so another org's polls are in its walk
+        self.polls.append(self.create_poll(self.uganda, "Poll UG", "uuid-ug", self.health_uganda, self.admin))
+
+        self.job = SyncJob.get_or_create_job(None, COUNTS_JOB_TYPE)
+
+    def rebuild(self):
+        with patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild:
+            mock_continue = run_task(rebuild_poll_counts, self.job.id)
+
+        return [call[0][0].pk for call in mock_rebuild.call_args_list], mock_continue
+
+    def test_walks_every_poll_a_chunk_at_a_time(self):
+        self.assertIsNone(self.job.org_id)
+
+        rebuilt, mock_continue = self.rebuild()
+
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[:5]])
+        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+
+        self.assertJobState(
+            self.job,
+            status=SyncJob.STATUS_RUNNING,
+            cursor={"after_pk": self.polls[4].pk},
+            progress={"rebuilt": 5},
+        )
+
+        # the continuation picks up from the checkpointed position
+        rebuilt, mock_continue = self.rebuild()
+
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[5:]])
+        mock_continue.assert_called_once()
+
+        # and the run ends once the polls are exhausted
+        rebuilt, mock_continue = self.rebuild()
+
+        self.assertEqual(rebuilt, [])
+        mock_continue.assert_not_called()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, progress={"rebuilt": 7})
+
+    def test_skips_polls_with_nothing_to_count(self):
+        Poll.objects.filter(id=self.polls[1].id).update(stopped_syncing=True)
+        Poll.objects.filter(id=self.polls[2].id).update(is_active=False)
+
+        rebuilt, _ = self.rebuild()
+
+        self.assertEqual(rebuilt, [self.polls[index].pk for index in (0, 3, 4, 5, 6)])
+
+    def test_resumes_where_a_killed_chunk_stopped(self):
+        with (
+            patch.object(rebuild_poll_counts, "apply_async"),
+            patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild,
+        ):
+            mock_rebuild.side_effect = [None, None, ValueError("worker died")]
+
+            with self.assertRaises(ValueError):
+                rebuild_poll_counts(self.job.id)
+
+        self.assertJobState(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            cursor={"after_pk": self.polls[1].pk},
+            progress={"rebuilt": 2},
+        )
+
+        # the retry resumes the interrupted run rather than rebuilding those two again
+        rebuilt, _ = self.rebuild()
+
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[2:]])
+        self.assertJobState(self.job, progress={"rebuilt": 7})
+
+    def completed_run(self):
+        """
+        Leaves the job as a run that covered every poll a day ago, i.e. the state a new run
+        of it has to recognise as one it must not resume below.
+        """
+        return end_run(
+            self.job,
+            cursor={"after_pk": self.polls[-1].pk},
+            progress={"rebuilt": 7},
+            ended_on=timezone.now() - timedelta(days=1),
+        )
+
+    def test_a_new_run_starts_from_the_first_poll(self):
+        # a completed run leaves its position behind, and resuming below it would walk nothing
+        self.completed_run()
+
+        rebuilt, _ = self.rebuild()
+
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[:5]])
+        self.assertJobState(self.job, progress={"rebuilt": 5})
+
+    def test_a_new_run_that_fails_before_its_first_checkpoint_still_starts_over(self):
+        self.completed_run()
+
+        with (
+            patch.object(rebuild_poll_counts, "apply_async"),
+            patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild,
+        ):
+            mock_rebuild.side_effect = ValueError("worker died")
+
+            with self.assertRaises(ValueError):
+                rebuild_poll_counts(self.job.id)
+
+        # the run dropped the completed one's position before touching a poll, so the stale
+        # position can't survive a chunk that fails before checkpointing anything itself
+        self.assertJobState(self.job, status=SyncJob.STATUS_FAILED, cursor={})
+
+        # and the retry, which resumes that run rather than starting one, still walks it all
+        rebuilt, _ = self.rebuild()
+
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[:5]])
+
+    def test_a_lost_lease_leaves_the_polls_already_done_checkpointed(self):
+        def steal(poll):
+            if poll.pk == self.polls[1].pk:
+                SyncJob.objects.filter(id=self.job.id).update(lease_owner="worker-2")
+
+        with patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild:
+            mock_rebuild.side_effect = steal
+
+            mock_continue = run_task(rebuild_poll_counts, self.job.id)
+
+        # the chunk is dropped where it lost the lease, but the poll it had already
+        # checkpointed is not walked again by whoever took over
+        self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, cursor={"after_pk": self.polls[0].pk})
+        mock_continue.assert_not_called()
+
+    def test_only_one_global_job_can_exist(self):
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            SyncJob.objects.create(org=None, job_type=COUNTS_JOB_TYPE, scope="")
+
+
+class PrunePollResultsTest(PollSyncTestBase):
+    def setUp(self):
+        super(PrunePollResultsTest, self).setUp()
+
+        # a duplicate poll on the same flow, and two polls of their own
+        self.dupe = self.create_poll(self.nigeria, "Poll 1 again", "uuid-1", self.education_nigeria, self.admin)
+        self.second = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
+        self.third = self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin)
+
+        self.old_polls = [self.poll, self.dupe, self.second, self.third]
+
+        long_ago = timezone.now() - timedelta(days=500)
+        Poll.objects.filter(id__in=[poll.id for poll in self.old_polls]).update(poll_date=long_ago, created_on=long_ago)
+
+        self.job = SyncJob.get_or_create_job(self.nigeria, PRUNE_JOB_TYPE)
+
+    def prune(self):
         with (
             patch.object(Poll, "rebuild_poll_results_counts"),
-            patch.object(Poll, "delete_poll_results") as mock_delete,
+            patch.object(Poll, "delete_poll_results", autospec=True) as mock_delete,
         ):
-            clear_old_poll_results(self.nigeria.pk)
+            mock_continue = run_task(prune_poll_results, self.job.id)
 
-        return mock_delete
+        return [call[0][0].pk for call in mock_delete.call_args_list], mock_continue
 
-    def test_leaves_a_flow_alone_while_its_sync_holds_the_lease(self):
+    def stopped(self):
+        return set(Poll.objects.filter(stopped_syncing=True).values_list("pk", flat=True))
+
+    def test_retires_each_flow_once_a_chunk_at_a_time(self):
+        pruned, mock_continue = self.prune()
+
+        # the duplicate poll of the first flow is recognised by the flow already being stopped
+        self.assertEqual(pruned, [self.poll.pk, self.second.pk])
+        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+
+        self.assertJobState(
+            self.job, cursor={"after_pk": self.second.pk}, progress={"cleared": 2, "skipped_retired": 1}
+        )
+        self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk, self.second.pk})
+
+        # the continuation takes the poll the chunk stopped at
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [self.third.pk])
+        self.assertEqual(self.stopped(), {poll.pk for poll in self.old_polls})
+
+        pruned, mock_continue = self.prune()
+
+        self.assertEqual(pruned, [])
+        mock_continue.assert_not_called()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
+
+    def test_leaves_recent_polls_alone(self):
+        Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=10))
+        # an old poll only just created is someone still setting it up
+        Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=2))
+
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [self.poll.pk])
+        self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
+
+    def test_steps_over_a_flow_that_is_still_syncing(self):
         job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
         SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_RUNNING)
         hold_lease(job)
 
-        self.clear().assert_not_called()
-        self.assertFalse(Poll.objects.get(id=self.poll.id).stopped_syncing)
+        # the syncing flow is skipped, but the polls behind it in the walk are not held up
+        pruned, _ = self.prune()
 
-        # once the lease is gone the results can be cleared
+        self.assertEqual(pruned, [self.second.pk])
+        self.assertEqual(self.stopped(), {self.second.pk})
+        self.assertJobState(self.job, progress={"cleared": 1, "skipped_syncing": 2})
+
+        pruned, _ = self.prune()
+        self.assertEqual(pruned, [self.third.pk])
+
+        self.prune()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
+
+        # once its lease is gone, the next run picks the flow back up
         drop_lease(job)
 
-        self.clear().assert_called_once()
-        self.assertTrue(Poll.objects.get(id=self.poll.id).stopped_syncing)
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [self.poll.pk])
+        self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk, self.second.pk, self.third.pk})
+
+    def test_steps_over_a_flow_held_by_an_unchunked_pull(self):
+        with held_lock(Poll.POLL_PULL_RESULTS_TASK_LOCK % (self.nigeria.pk, "uuid-1")) as lock:
+            # the lock is never waited on, a chunk holding a job lease can't sit on it for hours
+            pruned, _ = self.prune()
+
+            self.assertEqual(pruned, [self.second.pk])
+            self.assertFalse(Poll.objects.get(id=self.poll.id).stopped_syncing)
+            self.assertJobState(self.job, progress={"cleared": 1, "skipped_syncing": 2})
+
+            # and it is left for whoever holds it, not released from under them
+            self.assertTrue(lock.owned())
+
+    def test_retires_a_flow_before_deleting_its_results(self):
+        stopped_when_deleting = []
+
+        def delete(poll):
+            stopped_when_deleting.append(Poll.objects.get(id=poll.id).stopped_syncing)
+
+        with (
+            patch.object(Poll, "rebuild_poll_results_counts"),
+            patch.object(Poll, "delete_poll_results", autospec=True) as mock_delete,
+        ):
+            mock_delete.side_effect = delete
+
+            run_task(prune_poll_results, self.job.id)
+
+        # a delete interrupted part way must leave a flow that is durably retired, not one
+        # still syncing on results that are half gone
+        self.assertEqual(stopped_when_deleting, [True, True])
+
+    def test_moves_past_a_poll_that_errors(self):
+        def rebuild(poll):
+            if poll.flow_uuid == "uuid-1":
+                raise ValueError("boom")
+
+        with (
+            patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild,
+            patch.object(Poll, "delete_poll_results", autospec=True) as mock_delete,
+        ):
+            mock_rebuild.side_effect = rebuild
+
+            run_task(prune_poll_results, self.job.id)
+
+        # one broken poll can't stall the polls behind it, and its flow keeps syncing
+        self.assertEqual([call[0][0].pk for call in mock_delete.call_args_list], [self.second.pk])
+        self.assertEqual(self.stopped(), {self.second.pk})
+
+        # a poll failing every run is told apart from one that was merely busy
+        self.assertJobState(self.job, cursor={"after_pk": self.second.pk}, progress={"cleared": 1, "errors": 2})
+
+
+@patch("ureport.polls.sync.POPULATE_BATCH_SIZE", 2)
+@patch("ureport.polls.sync.POPULATE_BATCHES_PER_CHUNK", 2)
+class BackfillAgeGenderTest(PollSyncTestBase):
+    def setUp(self):
+        super(BackfillAgeGenderTest, self).setUp()
+
+        self.polls = [self.poll]
+        for index in range(2, 8):
+            self.polls.append(
+                self.create_poll(self.nigeria, "Poll %d" % index, "uuid-%d" % index, self.education_nigeria, self.admin)
+            )
+
+        self.contacts = [
+            Contact.objects.create(uuid="contact-%d" % index, org=self.nigeria, gender="M", born=1990)
+            for index in range(1, 6)
+        ]
+
+        # another org's contacts belong to that org's job, ids are global but the walk isn't
+        Contact.objects.create(uuid="contact-ug", org=self.uganda, gender="F", born=1985)
+
+        self.job = SyncJob.get_or_create_job(self.nigeria, AGE_GENDER_JOB_TYPE)
+
+        cache.delete(LAST_POPULATED_CONTACT_KEY)
+        self.addCleanup(cache.delete, LAST_POPULATED_CONTACT_KEY)
+
+    def backfill(self, populate=None):
+        with (
+            patch("ureport.utils.populate_age_and_gender_for_contacts") as mock_populate,
+            patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild,
+        ):
+            if populate:
+                mock_populate.side_effect = populate
+
+            mock_continue = run_task(backfill_age_gender, self.job.id)
+
+        populated = [list(call[0][0]) for call in mock_populate.call_args_list]
+
+        return populated, [call[0][0].pk for call in mock_rebuild.call_args_list], mock_continue
+
+    def contact_ids(self, *indexes):
+        return [self.contacts[index].pk for index in indexes]
+
+    def test_populates_in_batches_then_rebuilds(self):
+        populated, rebuilt, mock_continue = self.backfill()
+
+        # two batches of two contacts, the org's own, and nothing rebuilt yet
+        self.assertEqual(populated, [self.contact_ids(0, 1), self.contact_ids(2, 3)])
+        self.assertEqual(rebuilt, [])
+        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+
+        self.assertJobState(
+            self.job,
+            cursor={"stage": "populate", "after_contact_id": self.contacts[3].pk},
+            progress={"populated": 4},
+        )
+
+        # the fifth contact is the org's last, so the pass moves on to the rebuild
+        populated, rebuilt, _ = self.backfill()
+
+        self.assertEqual(populated, [self.contact_ids(4)])
+        self.assertEqual(rebuilt, [])
+        self.assertJobState(self.job, cursor={"stage": "rebuild", "populate_watermark": self.contacts[4].pk})
+
+        populated, rebuilt, _ = self.backfill()
+
+        self.assertEqual(populated, [])
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[:5]])
+
+        populated, rebuilt, _ = self.backfill()
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[5:]])
+
+        populated, rebuilt, mock_continue = self.backfill()
+
+        self.assertEqual(rebuilt, [])
+        mock_continue.assert_not_called()
+
+        job = self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, progress={"populated": 5, "rebuilt": 7})
+        self.assertEqual(job.cursor["populate_watermark"], self.contacts[4].pk)
+
+    def test_resumes_the_populate_pass_after_a_takeover(self):
+        positions = []
+
+        def populate(contact_ids):
+            job = reload(self.job)
+            positions.append((job.cursor.get("after_contact_id"), job.lease_expires_on))
+
+        self.backfill(populate=populate)
+
+        # each batch checkpoints its position and renews the lease before the next one
+        self.assertEqual([position[0] for position in positions], [0, self.contacts[1].pk])
+        self.assertGreater(positions[1][1], positions[0][1])
+
+        # a worker that dies part way through leaves the position of the batches it finished
+        self.job.force_resync()
+
+        def die(contact_ids):
+            if contact_ids[0] == self.contacts[2].pk:
+                raise ValueError("worker died")
+
+        with self.assertRaises(ValueError):
+            self.backfill(populate=die)
+
+        self.assertJobState(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            cursor={"stage": "populate", "after_contact_id": self.contacts[1].pk},
+        )
+
+        # and the walk carries on from there rather than from the org's first contact
+        populated, _, _ = self.backfill()
+        self.assertEqual(populated, [self.contact_ids(2, 3), self.contact_ids(4)])
+
+    def test_resumes_the_rebuild_stage_after_a_kill(self):
+        end_run(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            cursor={"stage": "rebuild", "after_pk": self.polls[2].pk},
+            progress={"populated": 5, "rebuilt": 3},
+        )
+
+        populated, rebuilt, _ = self.backfill()
+
+        self.assertEqual(populated, [])
+        self.assertEqual(rebuilt, [poll.pk for poll in self.polls[3:]])
+
+    def test_a_new_run_carries_on_from_the_last_watermark(self):
+        end_run(
+            self.job,
+            cursor={"stage": "rebuild", "after_pk": self.polls[-1].pk, "populate_watermark": self.contacts[2].pk},
+            progress={"populated": 5, "rebuilt": 7},
+            ended_on=timezone.now() - timedelta(days=1),
+        )
+
+        populated, rebuilt, _ = self.backfill()
+
+        # only the contacts added since the last run, and the polls are walked from the start
+        self.assertEqual(populated, [self.contact_ids(3, 4)])
+        self.assertEqual(rebuilt, [])
+
+        populated, _, _ = self.backfill()
+        self.assertEqual(populated, [])
+        self.assertEqual(reload(self.job).cursor["populate_watermark"], self.contacts[4].pk)
+
+    def test_seeds_a_first_run_from_the_unchunked_position(self):
+        cache.set(LAST_POPULATED_CONTACT_KEY, self.contacts[2].pk, None)
+
+        populated, _, _ = self.backfill()
+
+        self.assertEqual(populated, [self.contact_ids(3, 4)])
+
+        # the retired key is only ever read, the job keeps its own position from here
+        self.assertEqual(cache.get(LAST_POPULATED_CONTACT_KEY), self.contacts[2].pk)
+
+
+class MaintenanceDispatchTest(PollSyncTestBase):
+    def counts_nudge(self):
+        with patch.object(rebuild_poll_counts, "apply_async") as mock_queue:
+            rebuild_counts_dispatch()
+
+        return mock_queue
+
+    def prune_nudge(self):
+        with patch.object(prune_poll_results, "apply_async") as mock_queue:
+            queued = prune_results_dispatch()
+
+        return queued, mock_queue
+
+    def test_nudges_the_global_counts_job(self):
+        now = timezone.now()
+
+        self.counts_nudge()
+
+        job = SyncJob.objects.get(job_type=COUNTS_JOB_TYPE)
+        self.assertIsNone(job.org_id)
+        self.assertEqual(job.scope, "")
+
+        # a pass that finished a moment ago isn't started again
+        end_run(job, ended_on=now - timedelta(hours=2))
+        self.counts_nudge().assert_not_called()
+
+        end_run(job, ended_on=now - timedelta(hours=21))
+        self.counts_nudge().assert_called_once_with((job.id,), queue="slow")
+
+        # nor is one still working through its polls, or a paused one
+        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_RUNNING)
+        hold_lease(job)
+        self.counts_nudge().assert_not_called()
+
+        drop_lease(job)
+        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_PAUSED)
+        self.counts_nudge().assert_not_called()
+
+        # and a failing streak stretches the wait beyond the daily cadence
+        end_run(job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=21), failures=10)
+        self.counts_nudge().assert_not_called()
+
+        end_run(job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(days=2), failures=10)
+        self.counts_nudge().assert_called_once()
+
+    def test_measures_the_cadence_from_when_a_run_started(self):
+        now = timezone.now()
+
+        self.counts_nudge()
+        job = SyncJob.objects.get(job_type=COUNTS_JOB_TYPE)
+
+        # a pass that started 19 hours ago is not due again yet, however long it ran for
+        end_run(job, started_on=now - timedelta(hours=19), ended_on=now - timedelta(hours=1))
+        self.counts_nudge().assert_not_called()
+
+        # but a pass that started 21 hours ago is, even though it only ended five hours ago
+        # - measured from the end, a daily job taking hours would drift into two day gaps
+        end_run(job, started_on=now - timedelta(hours=21), ended_on=now - timedelta(hours=5))
+        self.counts_nudge().assert_called_once()
+
+    def complete_prunes(self, ended_on):
+        SyncJob.objects.filter(job_type=PRUNE_JOB_TYPE).update(
+            status=SyncJob.STATUS_COMPLETE, started_on=ended_on, ended_on=ended_on
+        )
+
+    def test_nudges_a_prune_job_per_org(self):
+        now = timezone.now()
+        active_orgs = set(Org.objects.filter(is_active=True).values_list("pk", flat=True))
+
+        queued, mock_queue = self.prune_nudge()
+
+        self.assertEqual(set(queued), active_orgs)
+        self.assertEqual(mock_queue.call_count, len(active_orgs))
+        self.assertEqual(
+            set(SyncJob.objects.filter(job_type=PRUNE_JOB_TYPE).values_list("org_id", flat=True)), active_orgs
+        )
+
+        self.complete_prunes(now - timedelta(hours=2))
+        self.assertEqual(self.prune_nudge()[0], [])
+
+        self.complete_prunes(now - timedelta(hours=21))
+        self.assertEqual(set(self.prune_nudge()[0]), active_orgs)
+
+        # a paused org's prune is left alone, the rest still run
+        SyncJob.objects.filter(job_type=PRUNE_JOB_TYPE, org=self.nigeria).update(status=SyncJob.STATUS_PAUSED)
+        self.assertNotIn(self.nigeria.pk, self.prune_nudge()[0])
+
+    def test_nudges_a_single_org(self):
+        self.assertIn(self.uganda.pk, self.prune_nudge()[0])
+
+        self.complete_prunes(timezone.now() - timedelta(days=1))
+
+        with patch.object(prune_poll_results, "apply_async") as mock_queue:
+            self.assertEqual(prune_results_dispatch(self.nigeria.pk), [self.nigeria.pk])
+
+        job = SyncJob.objects.get(org=self.nigeria, job_type=PRUNE_JOB_TYPE)
+        mock_queue.assert_called_once_with((job.id,), queue="slow")
+
+
+class MaintenanceShimTest(PollSyncTestBase):
+    def test_rebuild_counts_queues_the_global_job(self):
+        with patch.object(rebuild_poll_counts, "apply_async") as mock_queue:
+            rebuild_counts()
+
+        job = SyncJob.objects.get(job_type=COUNTS_JOB_TYPE)
+        self.assertIsNone(job.org_id)
+        mock_queue.assert_called_once_with((job.id,), queue="slow")
+
+    def test_clear_old_poll_results_queues_the_orgs_prune(self):
+        with patch.object(prune_poll_results, "apply_async") as mock_queue:
+            clear_old_poll_results(self.nigeria.pk)
+
+        job = SyncJob.objects.get(org=self.nigeria, job_type=PRUNE_JOB_TYPE)
+        mock_queue.assert_called_once_with((job.id,), queue="slow")
+
+    def test_update_results_age_gender_queues_backfills(self):
+        with patch.object(backfill_age_gender, "apply_async") as mock_queue:
+            update_results_age_gender(self.nigeria.pk)
+
+        job = SyncJob.objects.get(org=self.nigeria, job_type=AGE_GENDER_JOB_TYPE)
+        mock_queue.assert_called_once_with((job.id,), queue="slow")
+
+        # without an org it covers every active one
+        with patch.object(backfill_age_gender, "apply_async") as mock_queue:
+            update_results_age_gender()
+
+        self.assertEqual(mock_queue.call_count, Org.objects.filter(is_active=True).count())
+
+        # an org id that resolves to nothing does nothing, rather than falling back to all
+        with patch.object(backfill_age_gender, "apply_async") as mock_queue:
+            update_results_age_gender(-1)
+
+        mock_queue.assert_not_called()
+
+    def test_shims_record_no_task_state(self):
+        with (
+            patch.object(rebuild_poll_counts, "apply_async"),
+            patch.object(prune_poll_results, "apply_async"),
+            patch.object(backfill_age_gender, "apply_async"),
+        ):
+            rebuild_counts()
+            clear_old_poll_results(self.nigeria.pk)
+            update_results_age_gender()
+
+        # they only enqueue now, so they must not pass themselves off as having run
+        self.assertFalse(TaskState.objects.exists())
 
 
 class SyncStatusTest(PollSyncTestBase):
