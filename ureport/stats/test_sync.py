@@ -3,6 +3,9 @@
 from datetime import timedelta
 from unittest.mock import call, patch
 
+from django_valkey import get_valkey_connection
+
+from django.conf import settings
 from django.utils import timezone
 
 from dash.orgs.models import TaskState
@@ -11,9 +14,11 @@ from ureport.stats.sync import (
     DAILY_INTERVAL,
     ENGAGEMENT_BATCH_SIZE,
     ENGAGEMENT_JOB_TYPE,
+    LOCK_BACKOFF,
     PRUNE_JOB_TYPE,
     REBUILD_BATCH_SIZE,
     REBUILD_JOB_TYPE,
+    REBUILD_LOCK_KEY,
     REBUILD_METRIC,
     engagement_combos,
     finalize_engagement_refresh,
@@ -67,7 +72,7 @@ class RefreshEngagementTest(ChunkTestMixin, UreportTest):
 
         job = self._job(self.job)
         self.assertEqual(job.status, SyncJob.STATUS_RUNNING)
-        self.assertEqual(job.cursor, {"combo_index": ENGAGEMENT_BATCH_SIZE})
+        self.assertEqual(job.cursor, {"combo_index": ENGAGEMENT_BATCH_SIZE, "combo_count": len(combos)})
         self.assertEqual(job.progress, {"chunks": 1, "combos": ENGAGEMENT_BATCH_SIZE})
         mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
 
@@ -95,14 +100,16 @@ class RefreshEngagementTest(ChunkTestMixin, UreportTest):
 
         self._run(refresh_engagement, self.job)
 
-        self.assertEqual(self._job(self.job).cursor, {"combo_index": ENGAGEMENT_BATCH_SIZE})
+        self.assertEqual(self._job(self.job).cursor, {"combo_index": ENGAGEMENT_BATCH_SIZE, "combo_count": len(combos)})
         self.assertEqual(mock_refresh.call_args_list[-3:], mock_refresh.call_args_list[:3])
 
     @patch(CALCULATE_RESPONSE_RATE)
     @patch(REFRESH_ENGAGEMENT_DATA)
     def test_resumes_mid_list(self, mock_refresh, mock_response_rate):
         combos = engagement_combos()
-        SyncJob.objects.filter(id=self.job.id).update(cursor={"combo_index": len(combos) - 2})
+        SyncJob.objects.filter(id=self.job.id).update(
+            cursor={"combo_index": len(combos) - 2, "combo_count": len(combos)}
+        )
 
         self._run(refresh_engagement, self.job)
 
@@ -118,8 +125,8 @@ class RefreshEngagementTest(ChunkTestMixin, UreportTest):
     @patch(CALCULATE_RESPONSE_RATE)
     @patch(REFRESH_ENGAGEMENT_DATA)
     def test_cursor_past_the_end_completes(self, mock_refresh, mock_response_rate):
-        # e.g. a release that dropped a metric, leaving the previous run's position stranded
-        SyncJob.objects.filter(id=self.job.id).update(cursor={"combo_index": 500})
+        combos = engagement_combos()
+        SyncJob.objects.filter(id=self.job.id).update(cursor={"combo_index": 500, "combo_count": len(combos)})
 
         self._run(refresh_engagement, self.job)
 
@@ -130,7 +137,25 @@ class RefreshEngagementTest(ChunkTestMixin, UreportTest):
 
     @patch(CALCULATE_RESPONSE_RATE)
     @patch(REFRESH_ENGAGEMENT_DATA)
+    def test_changed_combo_list_restarts_the_pass(self, mock_refresh, mock_response_rate):
+        # a release that adds or drops a metric or segment leaves the position pointing at
+        # different combinations than it was taken against
+        self._run(refresh_engagement, self.job, times=2)
+        shorter = engagement_combos()[:30]
+
+        with patch("ureport.stats.sync.engagement_combos", return_value=shorter):
+            self._run(refresh_engagement, self.job)
+
+        job = self._job(self.job)
+        self.assertEqual(job.cursor, {"combo_index": ENGAGEMENT_BATCH_SIZE, "combo_count": len(shorter)})
+
+        # the pass starts over rather than skipping the tail the stale position would miss
+        self.assertEqual(mock_refresh.call_args_list[6:], mock_refresh.call_args_list[:3])
+
+    @patch(CALCULATE_RESPONSE_RATE)
+    @patch(REFRESH_ENGAGEMENT_DATA)
     def test_failed_chunk_resumes_from_its_last_position(self, mock_refresh, mock_response_rate):
+        combos = engagement_combos()
         self._run(refresh_engagement, self.job, times=2)
         mock_refresh.side_effect = ValueError("boom")
 
@@ -140,12 +165,14 @@ class RefreshEngagementTest(ChunkTestMixin, UreportTest):
         job = self._job(self.job)
         self.assertEqual(job.status, SyncJob.STATUS_FAILED)
         self.assertEqual(job.consecutive_failures, 1)
-        self.assertEqual(job.cursor, {"combo_index": 2 * ENGAGEMENT_BATCH_SIZE})
+        self.assertEqual(job.cursor, {"combo_index": 2 * ENGAGEMENT_BATCH_SIZE, "combo_count": len(combos)})
 
         mock_refresh.side_effect = None
         self._run(refresh_engagement, self.job)
 
-        self.assertEqual(self._job(self.job).cursor, {"combo_index": 3 * ENGAGEMENT_BATCH_SIZE})
+        self.assertEqual(
+            self._job(self.job).cursor, {"combo_index": 3 * ENGAGEMENT_BATCH_SIZE, "combo_count": len(combos)}
+        )
 
     @patch(CALCULATE_RESPONSE_RATE)
     @patch(REFRESH_ENGAGEMENT_DATA)
@@ -164,6 +191,23 @@ class RefreshEngagementTest(ChunkTestMixin, UreportTest):
         self.assertEqual(mock_refresh.call_count, ENGAGEMENT_BATCH_SIZE)
 
         # a run that refreshed only part of the data doesn't get to publish a response rate
+        mock_response_rate.assert_not_called()
+
+    @patch(CALCULATE_RESPONSE_RATE)
+    @patch(REFRESH_ENGAGEMENT_DATA)
+    def test_disabling_the_refresh_mid_run_aborts_it(self, mock_refresh, mock_response_rate):
+        self._run(refresh_engagement, self.job)
+
+        TaskState.objects.create(org=self.nigeria, task_key="refresh-engagement-data", is_disabled=True)
+
+        # the kill switch lands on the run in flight, not just on the next enqueue
+        self._run(refresh_engagement, self.job)
+
+        job = self._job(self.job)
+        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
+        self.assertEqual(job.cursor, {})
+        self.assertEqual(job.progress["aborted"], 1)
+        self.assertEqual(mock_refresh.call_count, ENGAGEMENT_BATCH_SIZE)
         mock_response_rate.assert_not_called()
 
     @patch(CALCULATE_RESPONSE_RATE)
@@ -249,6 +293,21 @@ class PruneContactActivitiesTest(ChunkTestMixin, UreportTest):
         self.assertEqual(job.progress["aborted"], 1)
         self.assertEqual(ContactActivity.objects.filter(org=self.nigeria).count(), 2)
 
+    def test_disabling_the_prune_mid_run_aborts_it(self):
+        self._create_activities(self.nigeria, 4, days_old=401)
+
+        with patch("ureport.stats.sync.PRUNE_BATCH_SIZE", 1), patch("ureport.stats.sync.PRUNE_BATCHES_PER_CHUNK", 1):
+            self._run(prune_contact_activities, self.job)
+
+            TaskState.objects.create(org=self.nigeria, task_key="delete-old-contact-activities", is_disabled=True)
+
+            self._run(prune_contact_activities, self.job)
+
+        job = self._job(self.job)
+        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
+        self.assertEqual(job.progress["aborted"], 1)
+        self.assertEqual(ContactActivity.objects.filter(org=self.nigeria).count(), 3)
+
 
 class RebuildContactActivityCountsTest(ChunkTestMixin, UreportTest):
     def setUp(self):
@@ -267,7 +326,7 @@ class RebuildContactActivityCountsTest(ChunkTestMixin, UreportTest):
         mock_continue = self._run(rebuild_contact_activity_counts, self.job)
 
         job = self._job(self.job)
-        self.assertEqual(job.cursor, {"stage": "engagement", "combo_index": 0})
+        self.assertEqual(job.cursor, {"stage": "engagement", "combo_index": 0, "combo_count": len(combos)})
         self.assertEqual(job.progress, {"chunks": 1, "counters": 2})
         mock_recalculate.assert_called_once_with(self.nigeria)
         mock_refresh.assert_not_called()
@@ -277,7 +336,9 @@ class RebuildContactActivityCountsTest(ChunkTestMixin, UreportTest):
         self._run(rebuild_contact_activity_counts, self.job)
 
         job = self._job(self.job)
-        self.assertEqual(job.cursor, {"stage": "engagement", "combo_index": REBUILD_BATCH_SIZE})
+        self.assertEqual(
+            job.cursor, {"stage": "engagement", "combo_index": REBUILD_BATCH_SIZE, "combo_count": len(combos)}
+        )
         self.assertEqual(job.progress, {"chunks": 2, "counters": 2, "combos": REBUILD_BATCH_SIZE})
         self.assertEqual(
             mock_refresh.call_args_list,
@@ -298,7 +359,36 @@ class RebuildContactActivityCountsTest(ChunkTestMixin, UreportTest):
         self._run(rebuild_contact_activity_counts, self.job)
 
         self.assertEqual(mock_recalculate.call_count, 2)
-        self.assertEqual(self._job(self.job).cursor, {"stage": "engagement", "combo_index": 0})
+        self.assertEqual(
+            self._job(self.job).cursor, {"stage": "engagement", "combo_index": 0, "combo_count": len(combos)}
+        )
+
+    @patch(REFRESH_ENGAGEMENT_DATA)
+    @patch(RECALCULATE_COUNTS)
+    def test_backs_off_while_another_worker_rebuilds(self, mock_recalculate, mock_refresh):
+        # two recalculations at once would double the org's counters rather than replace
+        # them, so a chunk that can't have the lock waits instead of running anyway
+        lock = get_valkey_connection().lock(TaskState.get_lock_key(self.nigeria, REBUILD_LOCK_KEY), timeout=60)
+        self.assertTrue(lock.acquire(blocking=False))
+
+        try:
+            mock_continue = self._run(rebuild_contact_activity_counts, self.job)
+        finally:
+            lock.release()
+
+        mock_recalculate.assert_not_called()
+        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=LOCK_BACKOFF)
+
+        job = self._job(self.job)
+        self.assertEqual(job.status, SyncJob.STATUS_RUNNING)
+        self.assertEqual(job.cursor, {})
+        self.assertEqual(job.progress, {"lock_backoffs": 1})
+
+        # and picks the rebuild up once the lock is free again
+        self._run(rebuild_contact_activity_counts, self.job)
+
+        mock_recalculate.assert_called_once_with(self.nigeria)
+        self.assertEqual(self._job(self.job).cursor["stage"], "engagement")
 
     @patch(REFRESH_ENGAGEMENT_DATA)
     def test_rebuild_recalculates_the_orgs_counters(self, mock_refresh):
@@ -378,6 +468,64 @@ class DispatchTest(UreportTest):
 
         self.assertEqual(SyncJob.objects.filter(job_type__in=(ENGAGEMENT_JOB_TYPE, PRUNE_JOB_TYPE)).count(), 4)
 
+    def test_pending_jobs_are_only_enqueued_once(self):
+        mock_engagement, mock_prune = self._dispatch()
+
+        self.assertEqual(mock_engagement.call_count, 1)
+        self.assertEqual(mock_prune.call_count, 1)
+
+        # the messages are queued but nothing has claimed them yet, so the jobs are still
+        # pending - nudging them again would only duplicate the messages, and a surplus one
+        # landing after the run completes starts a whole fresh pass
+        engagement = self._job(ENGAGEMENT_JOB_TYPE)
+        self.assertEqual(engagement.status, SyncJob.STATUS_PENDING)
+
+        mock_engagement, mock_prune = self._dispatch()
+
+        mock_engagement.assert_not_called()
+        mock_prune.assert_not_called()
+
+        # a message the broker genuinely lost is picked back up once nothing has moved for
+        # long enough
+        SyncJob.objects.filter(id=engagement.id).update(modified_on=timezone.now() - timedelta(hours=2))
+
+        mock_engagement, _ = self._dispatch()
+
+        mock_engagement.assert_called_once_with((engagement.id,), queue="slow")
+
+    def test_a_due_job_is_only_enqueued_once(self):
+        self._dispatch()
+        engagement = self._job(ENGAGEMENT_JOB_TYPE)
+
+        self._end_run(engagement, ago=DAILY_INTERVAL + timedelta(hours=1))
+
+        mock_engagement, _ = self._dispatch()
+        mock_engagement.assert_called_once_with((engagement.id,), queue="slow")
+
+        # the run it queued hasn't been picked up yet, so the job still looks finished and
+        # stale - the nudge is what stops the next pass queueing a second one
+        mock_engagement, _ = self._dispatch()
+        mock_engagement.assert_not_called()
+
+        # unless nothing came of it, in which case it is queued afresh
+        SyncJob.objects.filter(id=engagement.id).update(modified_on=timezone.now() - timedelta(hours=2))
+
+        mock_engagement, _ = self._dispatch()
+        mock_engagement.assert_called_once_with((engagement.id,), queue="slow")
+
+    def test_an_explicit_trigger_defers_only_to_a_run_in_flight(self):
+        self._dispatch()
+        engagement = self._job(ENGAGEMENT_JOB_TYPE)
+        self._end_run(engagement, ago=timedelta(minutes=5))
+
+        # the cadence and the nudge are the dispatcher's business - asking for a refresh
+        # directly gets one, as long as no run is actually being worked on
+        with patch.object(refresh_engagement, "apply_async") as mock_enqueue:
+            refresh_engagement_data(self.nigeria.id)
+            refresh_engagement_data(self.nigeria.id)
+
+        self.assertEqual(mock_enqueue.call_count, 2)
+
     def test_only_due_once_a_day(self):
         self._dispatch()
 
@@ -408,16 +556,20 @@ class DispatchTest(UreportTest):
         mock_engagement, _ = self._dispatch()
         mock_engagement.assert_called_once_with((engagement.id,), queue="slow")
 
-        # a streak of them earns a wait longer than a day
-        self._end_run(engagement, ago=timedelta(hours=25), failures=6)
+        # a streak of them earns a wait longer than a night: 20h, 40h, 80h, 160h
+        self._end_run(engagement, ago=timedelta(hours=25), failures=3)
         mock_engagement, _ = self._dispatch()
         mock_engagement.assert_not_called()
 
-        self._end_run(engagement, ago=timedelta(hours=33), failures=6)
+        self._end_run(engagement, ago=timedelta(hours=81), failures=3)
         mock_engagement, _ = self._dispatch()
         mock_engagement.assert_called_once_with((engagement.id,), queue="slow")
 
         # but never longer than the cap
+        self._end_run(engagement, ago=timedelta(days=6), failures=50)
+        mock_engagement, _ = self._dispatch()
+        mock_engagement.assert_not_called()
+
         self._end_run(engagement, ago=timedelta(days=8), failures=50)
         mock_engagement, _ = self._dispatch()
         mock_engagement.assert_called_once_with((engagement.id,), queue="slow")
@@ -488,8 +640,22 @@ class DispatchTest(UreportTest):
             {"nigeria"},
         )
 
+    def test_beat_runs_the_dispatcher(self):
+        # nothing else nudges these jobs, so a beat entry pointing at a name that no longer
+        # exists would simply stop the stats refreshing
+        entry = settings.CELERY_BEAT_SCHEDULE["stats-dispatch"]
+        self.assertEqual(entry["task"], stats_dispatch.name)
+        self.assertEqual(entry["options"], {"queue": "slow"})
+
 
 class ShimsTest(UreportTest):
+    def test_registered_task_names(self):
+        # the names messages already on the queue and existing triggers resolve by - renaming
+        # any of these silently drops that work on the floor
+        self.assertEqual(refresh_engagement_data.name, "ureport.stats.tasks.refresh_engagement_data")
+        self.assertEqual(delete_old_contact_activities.name, "ureport.stats.tasks.delete_old_contact_activities")
+        self.assertEqual(rebuild_contacts_activities_counts.name, "stats.rebuild_contacts_activities_counts")
+
     def test_refresh_engagement_data_enqueues_a_job(self):
         with patch.object(refresh_engagement, "apply_async") as mock_enqueue:
             result = refresh_engagement_data(self.nigeria.id)

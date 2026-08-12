@@ -1009,9 +1009,15 @@ CELERY_BEAT_SCHEDULE = {
         "relative": True,
         "args": ("ureport.polls.tasks.pull_results_other_polls", "sync"),
     },
+    # the stats jobs are due once a day, measured from when each org's last run ended rather
+    # than from the clock, so that a run which started late doesn't push the next one out to
+    # the following night. The dispatcher runs through the small hours: the first slot is the
+    # off peak anchor the fixed daily tasks used to have, and the ones after it are same
+    # night retry slots for orgs whose run failed or was interrupted. Running it around the
+    # clock instead would let each org's start time walk backwards into peak hours.
     "stats-dispatch": {
         "task": "stats.stats_dispatch",
-        "schedule": crontab(minute=0),
+        "schedule": crontab(hour=[0, 1, 2, 3, 4], minute=0),
         "options": {"queue": "slow"},
     },
     "rebuild-poll-results-count": {
