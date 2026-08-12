@@ -703,6 +703,7 @@ INSTALLED_APPS = (
     "ureport.news",
     "ureport.polls",
     "ureport.stats",
+    "ureport.syncjobs",
     "django_countries",
     "rest_framework",
     "drf_yasg",
@@ -976,9 +977,8 @@ CELERY_BEAT_SCHEDULE = {
         "relative": True,
     },
     "contact-pull": {
-        "task": "dash.orgs.tasks.trigger_org_task",
+        "task": "contacts.sync_contacts_dispatch",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
-        "args": ("ureport.contacts.tasks.pull_contacts",),
     },
     "update-org-contact-counts": {
         "task": "dash.orgs.tasks.trigger_org_task",

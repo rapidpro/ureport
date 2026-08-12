@@ -7,11 +7,11 @@ from mock import patch
 from django.utils import timezone
 
 from dash.orgs.models import TaskState
-from dash.utils.sync import SyncOutcome
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
 from ureport.contacts.tasks import check_contacts_count_mismatch, pull_contacts, update_org_contact_count
 from ureport.locations.models import Boundary
-from ureport.tests import TestBackend, UreportTest
+from ureport.syncjobs.models import SyncJob
+from ureport.tests import UreportTest
 from ureport.utils import json_date_to_datetime
 
 
@@ -381,48 +381,16 @@ class ContactsTasksTest(UreportTest):
 
         mock_update_cache_org_contact_counts.assert_called_once_with(self.nigeria)
 
-    @patch("dash.orgs.models.Org.get_backend")
-    @patch("ureport.contacts.models.ReportersCounter.squash_counts")
-    @patch("ureport.tests.TestBackend.pull_fields")
-    @patch("ureport.tests.TestBackend.pull_boundaries")
-    @patch("ureport.tests.TestBackend.pull_contacts")
-    def test_pull_contacts(
-        self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts, mock_get_backend
-    ):
-        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
-        mock_pull_fields.return_value = {
-            SyncOutcome.created: 1,
-            SyncOutcome.updated: 2,
-            SyncOutcome.deleted: 3,
-            SyncOutcome.ignored: 4,
-        }
-        mock_pull_boundaries.return_value = {
-            SyncOutcome.created: 5,
-            SyncOutcome.updated: 6,
-            SyncOutcome.deleted: 7,
-            SyncOutcome.ignored: 8,
-        }
-        mock_pull_contacts.return_value = (
-            {SyncOutcome.created: 9, SyncOutcome.updated: 10, SyncOutcome.deleted: 11, SyncOutcome.ignored: 12},
-            None,
-        )
-        mock_squash_counts.return_value = "Called"
-
+    @patch("ureport.contacts.sync.sync_contacts.apply_async")
+    def test_pull_contacts_enqueues_sync_jobs(self, mock_enqueue):
         # keep only on backend config
         self.nigeria.backends.exclude(slug="rapidpro").delete()
 
-        pull_contacts(self.nigeria.pk)
+        results = pull_contacts(self.nigeria.pk)
 
-        task_state = TaskState.objects.get(org=self.nigeria, task_key="contact-pull")
-        self.assertEqual(
-            task_state.get_last_results(),
-            {
-                "rapidpro": {
-                    "fields": {"created": 1, "updated": 2, "deleted": 3},
-                    "boundaries": {"created": 5, "updated": 6, "deleted": 7},
-                    "contacts": {"created": 9, "updated": 10, "deleted": 11},
-                }
-            },
-        )
+        job = SyncJob.objects.get(org=self.nigeria, job_type="contact-pull", scope="rapidpro")
+        mock_enqueue.assert_called_once_with((job.id,), queue="celery")
+        self.assertEqual(results, {"enqueued": {"rapidpro": job.id}, "skipped": {}})
 
-        # mock_squash_counts.assert_called_once_with()
+        # enqueuing isn't pulling, so it must not report a pull the org's task state
+        self.assertFalse(TaskState.objects.filter(org=self.nigeria, task_key="contact-pull").exists())
