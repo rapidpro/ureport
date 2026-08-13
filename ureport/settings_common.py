@@ -703,6 +703,7 @@ INSTALLED_APPS = (
     "ureport.news",
     "ureport.polls",
     "ureport.stats",
+    "ureport.syncjobs",
     "django_countries",
     "rest_framework",
     "drf_yasg",
@@ -985,28 +986,11 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(minute=[10, 30, 50]),
         "args": ("ureport.contacts.tasks.update_org_contact_count",),
     },
-    "backfill-poll-results": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": timedelta(minutes=10),
+    "sync-polls-dispatch": {
+        "task": "polls.sync_polls_dispatch",
+        "schedule": timedelta(minutes=20),
         "relative": True,
-        "args": ("ureport.polls.tasks.backfill_poll_results",),
-    },
-    "results-pull-main-poll": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(minute=[5, 25, 45]),
-        "args": ("ureport.polls.tasks.pull_results_main_poll", "sync"),
-    },
-    "results-pull-recent-polls": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": timedelta(hours=1),
-        "relative": True,
-        "args": ("ureport.polls.tasks.pull_results_recent_polls", "sync"),
-    },
-    "results-pull-other-polls": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": timedelta(hours=1),
-        "relative": True,
-        "args": ("ureport.polls.tasks.pull_results_other_polls", "sync"),
+        "options": {"queue": "sync"},
     },
     "refresh-engagement-data": {
         "task": "dash.orgs.tasks.trigger_org_task",
@@ -1019,13 +1003,14 @@ CELERY_BEAT_SCHEDULE = {
         "args": ("ureport.stats.tasks.delete_old_contact_activities", "slow"),
     },
     "rebuild-poll-results-count": {
-        "task": "polls.rebuild_counts",
+        "task": "polls.rebuild_counts_dispatch",
         "schedule": crontab(hour=4, minute=0),
+        "options": {"queue": "slow"},
     },
     "clear-old-results": {
-        "task": "dash.orgs.tasks.trigger_org_task",
+        "task": "polls.prune_results_dispatch",
         "schedule": crontab(hour=6, minute=0),
-        "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
+        "options": {"queue": "slow"},
     },
     "stats_counts_squash": {
         "task": "stats.stats_counts_squash",

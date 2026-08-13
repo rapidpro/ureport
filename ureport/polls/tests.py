@@ -5,7 +5,6 @@ import zoneinfo
 from datetime import datetime, timedelta, timezone as tzone
 
 from mock import Mock, patch
-from temba_client.exceptions import TembaRateExceededError
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -19,7 +18,6 @@ from django.utils import timezone
 
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
-from dash.orgs.models import TaskState
 from dash.tags.models import Tag
 from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
@@ -30,11 +28,9 @@ from ureport.polls.tasks import (
     pull_refresh,
     pull_results_main_poll,
     pull_results_other_polls,
-    rebuild_counts,
     recheck_poll_flow_data,
     refresh_org_flows,
     update_or_create_questions,
-    update_results_age_gender,
 )
 from ureport.polls.templatetags.ureport import question_segmented_results
 from ureport.stats.models import (
@@ -47,6 +43,7 @@ from ureport.stats.models import (
     PollStatsCounter,
     PollWordCloud,
 )
+from ureport.syncjobs.models import SyncJob
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -2444,17 +2441,11 @@ class PollQuestionTest(UreportTest):
             recheck_poll_flow_data(self.org.pk)
             mock_update_poll_flow_data.assert_called_once_with(self.org)
 
-        with patch("ureport.polls.models.Poll.pull_results") as mock_pull_results:
-            mock_pull_results.return_value = "Pulled"
-
+        with patch("ureport.polls.sync.sync_poll_results.apply_async") as mock_queue_sync:
             pull_refresh(self.poll.pk)
-            mock_pull_results.assert_called_once_with(self.poll.pk)
 
-        with patch("ureport.polls.models.Poll.rebuild_poll_results_counts") as mock_rebuild_counts:
-            mock_rebuild_counts.return_value = "Rebuilt"
-
-            rebuild_counts()
-            self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.all().count())
+            job = SyncJob.objects.get(org=self.poll.org, job_type="poll-results", scope=self.poll.flow_uuid)
+            mock_queue_sync.assert_called_once_with((job.id,), queue="sync")
 
         with patch("ureport.polls.models.Poll.update_or_create_questions") as mock_update_or_create_questions:
             mock_update_or_create_questions.side_effect = None
@@ -2466,17 +2457,6 @@ class PollQuestionTest(UreportTest):
             poll2 = self.create_poll(self.uganda, "Poll 2", "flow-uuid-2", self.health_uganda, self.admin)
             update_or_create_questions([self.poll.pk, poll2.pk])
             self.assertEqual(mock_update_or_create_questions.call_count, 2)
-
-        with patch("ureport.polls.models.Poll.rebuild_poll_results_counts") as mock_rebuild_counts:
-            mock_rebuild_counts.return_value = "Rebuilt"
-
-            with patch("ureport.polls.tasks.populate_age_and_gender_poll_results") as mock_populate_age_gender_results:
-                mock_populate_age_gender_results.return_value = "Populated"
-
-                update_results_age_gender(self.nigeria.pk)
-
-                mock_populate_age_gender_results.assert_called_once_with(self.nigeria)
-                self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.filter(org=self.nigeria).count())
 
 
 class PollResultsTest(UreportTest):
@@ -3147,104 +3127,41 @@ class PollsTasksTest(UreportTest):
         self.create_poll(self.nigeria, "Poll 4", "", self.education_nigeria, self.admin, has_synced=False)
         self.create_poll(self.nigeria, "Poll 5", "", self.education_nigeria, self.admin, has_synced=True)
 
-    @patch("ureport.polls.models.Poll.get_flow_date")
-    @patch("dash.orgs.models.Org.get_backend")
-    @patch("ureport.tests.TestBackend.pull_results")
+    @patch("ureport.polls.sync.sync_poll_results.apply_async")
     @patch("ureport.polls.models.Poll.get_main_poll")
-    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results, mock_get_backend, mock_get_flow_date):
-        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+    def test_pull_results_main_poll(self, mock_get_main_poll, mock_queue_sync):
         mock_get_main_poll.return_value = self.poll
-        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
-        mock_get_flow_date.return_value = None
 
         pull_results_main_poll(self.nigeria.pk)
 
-        task_state = TaskState.objects.get(org=self.nigeria, task_key="results-pull-main-poll")
-        self.assertEqual(
-            task_state.get_last_results()["flow-%s" % self.poll.flow_uuid],
-            {
-                "num_val_created": 1,
-                "num_val_updated": 2,
-                "num_val_ignored": 3,
-                "num_path_created": 4,
-                "num_path_updated": 5,
-                "num_path_ignored": 6,
-            },
-        )
+        job = SyncJob.objects.get(org=self.nigeria, job_type="poll-results", scope=self.poll.flow_uuid)
+        mock_queue_sync.assert_called_once_with((job.id,), queue="sync")
 
-    @patch("ureport.polls.models.Poll.get_flow_date")
-    @patch("dash.orgs.models.Org.get_backend")
-    @patch("django.core.cache.cache.get")
-    @patch("ureport.tests.TestBackend.pull_results")
+    @patch("ureport.polls.sync.sync_poll_results.apply_async")
     @patch("ureport.polls.models.Poll.get_other_polls")
-    def test_pull_results_other_polls(
-        self, mock_get_other_polls, mock_pull_results, mock_cache_get, mock_get_backend, mock_get_flow_date
-    ):
-        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+    def test_pull_results_other_polls(self, mock_get_other_polls, mock_queue_sync):
         mock_get_other_polls.return_value = self.polls_query
-        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
-        mock_cache_get.return_value = None
-        mock_get_flow_date.return_value = None
 
         self.poll.created_on = timezone.now() - timedelta(days=8)
         self.poll.save()
 
         pull_results_other_polls(self.nigeria.pk)
 
-        task_state = TaskState.objects.get(org=self.nigeria, task_key="results-pull-other-polls")
-        self.assertEqual(
-            task_state.get_last_results()["flow-%s" % self.poll.flow_uuid],
-            {
-                "num_val_created": 1,
-                "num_val_updated": 2,
-                "num_val_ignored": 3,
-                "num_path_created": 4,
-                "num_path_updated": 5,
-                "num_path_ignored": 6,
-            },
-        )
+        # the two polls share a flow so they share the one job
+        job = SyncJob.objects.get(org=self.nigeria, job_type="poll-results", scope=self.poll.flow_uuid)
+        mock_queue_sync.assert_called_once_with((job.id,), queue="sync")
 
-        mock_pull_results.assert_called_once()
-
-        mock_pull_results.reset_mock()
-        mock_pull_results.side_effect = [TembaRateExceededError(3)]
-
-        pull_results_other_polls(self.nigeria.pk)
-
-        task_state = TaskState.objects.get(org=self.nigeria, task_key="results-pull-other-polls")
-        self.assertEqual(task_state.get_last_results(), {})
-        mock_pull_results.assert_called_once()
-
-    @patch("ureport.polls.models.Poll.get_flow_date")
-    @patch("dash.orgs.models.Org.get_backend")
-    @patch("ureport.tests.TestBackend.pull_results")
-    def test_backfill_poll_results(self, mock_pull_results, mock_get_backend, mock_get_flow_date):
-        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
-        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
-        mock_get_flow_date.return_value = None
-
-        self.poll.has_synced = True
-        self.poll.save()
+    @patch("ureport.polls.sync.sync_poll_results.apply_async")
+    def test_backfill_poll_results(self, mock_queue_sync):
+        Poll.objects.filter(org=self.nigeria).update(has_synced=True)
 
         backfill_poll_results(self.nigeria.pk)
-        self.assertFalse(mock_pull_results.called)
+        self.assertFalse(mock_queue_sync.called)
 
         self.poll.has_synced = False
         self.poll.save()
 
         backfill_poll_results(self.nigeria.pk)
 
-        task_state = TaskState.objects.get(org=self.nigeria, task_key="backfill-poll-results")
-        self.assertEqual(
-            task_state.get_last_results()["flow-%s" % self.poll.flow_uuid],
-            {
-                "num_val_created": 1,
-                "num_val_updated": 2,
-                "num_val_ignored": 3,
-                "num_path_created": 4,
-                "num_path_updated": 5,
-                "num_path_ignored": 6,
-            },
-        )
-
-        mock_pull_results.assert_called_once()
+        job = SyncJob.objects.get(org=self.nigeria, job_type="poll-results", scope=self.poll.flow_uuid)
+        mock_queue_sync.assert_called_once_with((job.id,), queue="sync")

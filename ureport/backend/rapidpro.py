@@ -27,7 +27,7 @@ from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.stats.models import ContactActivity
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
-from . import BaseBackend
+from . import BaseBackend, ChunkResult
 
 logger = logging.getLogger(__name__)
 
@@ -764,6 +764,311 @@ class RapidProBackend(BaseBackend):
             stats_dict["num_path_updated"],
             stats_dict["num_path_ignored"],
         )
+
+    # ------------------------------------------------------------------------------
+    # Chunked pulls - bounded, resumable units of the pulls above. Unlike the methods
+    # they mirror, these hold no locks and write no cache bookkeeping: the caller owns
+    # cursor persistence, scheduling of the next chunk, and count rebuilds.
+    # ------------------------------------------------------------------------------
+
+    RESULTS_PAGE_BUDGET = 20  # API pages of runs per chunk
+    CONTACTS_TIME_BUDGET = 60 * 2  # seconds of active contact syncing per chunk
+    CONTACTS_DELETED_PAGE_BUDGET = 25  # API pages of deleted contacts per chunk
+    ARCHIVES_BUDGET = 1  # archive files with records per chunk
+
+    def pull_results_chunk(self, poll, cursor, page_budget=None):
+        """
+        Pulls up to page_budget API pages of runs for the poll. The cursor's "after" key is
+        the durable incremental position (newest modified_on synced) and its "resume" key
+        is the API page cursor within the current traversal.
+        """
+        if page_budget is None:
+            page_budget = self.RESULTS_PAGE_BUDGET
+        org = poll.org
+
+        stats_dict = dict(
+            num_val_created=0,
+            num_val_updated=0,
+            num_val_ignored=0,
+            num_path_created=0,
+            num_path_updated=0,
+            num_path_ignored=0,
+            num_synced=0,
+        )
+
+        if poll.stopped_syncing:
+            return ChunkResult(counts=stats_dict, cursor=dict(cursor), done=True)
+
+        client = self._get_client(org, 2)
+        questions_uuids = poll.get_question_uuids()
+
+        latest_synced_obj_time = cursor.get("after")
+
+        poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=latest_synced_obj_time, reverse=True, paths=True)
+        fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=cursor.get("resume"))
+
+        pages = 0
+        done = False
+        rate_limited = False
+
+        try:
+            for fetch in fetches:
+                (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(
+                    fetch, org, poll
+                )
+
+                for temba_run in fetch:
+                    if latest_synced_obj_time is None or temba_run.modified_on > json_date_to_datetime(
+                        latest_synced_obj_time
+                    ):
+                        latest_synced_obj_time = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=tzone.utc))
+
+                    contact_obj = contacts_map.get(temba_run.contact.uuid, None)
+                    self._process_run_poll_results(
+                        org,
+                        questions_uuids,
+                        temba_run,
+                        contact_obj,
+                        poll_results_map,
+                        poll_results_to_save_map,
+                        stats_dict,
+                    )
+
+                stats_dict["num_synced"] += len(fetch)
+                self._save_new_poll_results_to_database(poll_results_to_save_map)
+
+                # release per-page lookup maps holding cyclic references before next allocation
+                del contacts_map, poll_results_map, poll_results_to_save_map
+                gc.collect()
+
+                pages += 1
+                if pages >= page_budget:
+                    break
+            else:
+                done = True
+        except TembaRateExceededError:
+            rate_limited = True
+
+        next_cursor = {"after": latest_synced_obj_time}
+        if not done:
+            page_cursor = fetches.get_cursor()
+            if rate_limited:
+                # the iterator has no cursor until a fetch succeeds, so a rate limit on the
+                # first page of a resumed chunk must fall back to the incoming position
+                page_cursor = page_cursor or cursor.get("resume")
+            if page_cursor:
+                next_cursor["resume"] = page_cursor
+            elif not rate_limited:
+                # budget was hit on the traversal's last page - there is nothing left
+                done = True
+
+        return ChunkResult(counts=stats_dict, cursor=next_cursor, done=done, rate_limited=rate_limited)
+
+    def pull_contacts_chunk(self, org, modified_after, modified_before, cursor, time_budget=None):
+        """
+        Pulls one bounded chunk of contacts modified in the given time window. The pull
+        moves through two stages recorded in the cursor: "active" (changed contacts, time
+        boxed) then "deleted" (removed contacts, page bounded), each resumable from a page
+        cursor. The window must stay fixed for the life of the cursor: a resumed page
+        cursor is only valid against the exact query it came from, so callers freeze
+        (modified_after, modified_before) when a traversal starts and roll the window only
+        after done.
+        """
+        if time_budget is None:
+            time_budget = self.CONTACTS_TIME_BUDGET
+        client = self._get_client(org, 2)
+        syncer = ContactSyncer(backend=self.backend)
+
+        stage = cursor.get("stage", "active")
+
+        if stage == "active":
+            active_query = client.get_contacts(after=modified_after, before=modified_before)
+            fetches = active_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=cursor.get("resume"))
+
+            try:
+                outcome_counts, resume_cursor = sync_local_to_changes(org, syncer, fetches, [], time_limit=time_budget)
+            except TembaRateExceededError:
+                # objects synced before the limit hit are already saved, only their counts
+                # are lost; the iterator has no cursor until a fetch succeeds so fall back
+                # to the incoming position
+                next_cursor = {"stage": "active"}
+                page_cursor = fetches.get_cursor() or cursor.get("resume")
+                if page_cursor:
+                    next_cursor["resume"] = page_cursor
+                return ChunkResult(counts=self._outcome_counts_dict({}), cursor=next_cursor, rate_limited=True)
+
+            counts = self._outcome_counts_dict(outcome_counts)
+            if resume_cursor:
+                return ChunkResult(counts=counts, cursor={"stage": "active", "resume": resume_cursor}, done=False)
+            return ChunkResult(counts=counts, cursor={"stage": "deleted"}, done=False)
+
+        # deleted stage - page bounded so a bulk contact purge can't run unbounded
+        deleted_query = client.get_contacts(deleted=True, after=modified_after, before=modified_before)
+        deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=cursor.get("resume"))
+
+        counts = self._outcome_counts_dict({})
+        pages = 0
+        done = False
+
+        try:
+            for fetch in deleted_fetches:
+                for deleted_remote in fetch:
+                    identity = syncer.identify_remote(deleted_remote)
+                    with syncer.lock(org, identity):
+                        existing = syncer.fetch_local(org, identity)
+                        if existing:
+                            syncer.delete_local(existing)
+                            counts["deleted"] += 1
+
+                pages += 1
+                if pages >= self.CONTACTS_DELETED_PAGE_BUDGET:
+                    break
+            else:
+                done = True
+        except TembaRateExceededError:
+            next_cursor = {"stage": "deleted"}
+            page_cursor = deleted_fetches.get_cursor() or cursor.get("resume")
+            if page_cursor:
+                next_cursor["resume"] = page_cursor
+            return ChunkResult(counts=counts, cursor=next_cursor, rate_limited=True)
+
+        if done:
+            return ChunkResult(counts=counts, cursor={}, done=True)
+
+        next_cursor = {"stage": "deleted"}
+        page_cursor = deleted_fetches.get_cursor()
+        if page_cursor:
+            next_cursor["resume"] = page_cursor
+        else:
+            # budget was hit on the traversal's last page - there is nothing left
+            return ChunkResult(counts=counts, cursor={}, done=True)
+        return ChunkResult(counts=counts, cursor=next_cursor, done=False)
+
+    def pull_results_from_archives_chunk(self, poll, cursor, archive_budget=None):
+        """
+        Pulls archived results for the poll, processing up to archive_budget archive files
+        with records per chunk. Archives are listed newest first (by start_date, with
+        rolled-up dailies excluded), and the cursor is content addressed so the traversal
+        survives the listing changing between chunks (new archives appearing, dailies
+        rolling up into monthlies): "before" is the start_date of the last archive visited
+        and "seen" the period keys already processed at that exact date - together they
+        say "resume strictly below this position". Archives newer than "before" are
+        outside this traversal; their runs were still in the live API when the traversal
+        started. Archives that fail to process are recorded under "failed" and skipped.
+        """
+        if archive_budget is None:
+            archive_budget = self.ARCHIVES_BUDGET
+        org = poll.org
+
+        stats_dict = dict(
+            num_val_created=0,
+            num_val_updated=0,
+            num_val_ignored=0,
+            num_path_created=0,
+            num_path_updated=0,
+            num_path_ignored=0,
+            num_synced=0,
+        )
+
+        if poll.stopped_syncing:
+            return ChunkResult(counts=stats_dict, cursor=dict(cursor), done=True)
+
+        flow_date_json = poll.get_flow_date()
+        first = (
+            json_date_to_datetime(flow_date_json).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            if flow_date_json
+            else None
+        )
+
+        client = self._get_client(org, 2)
+        questions_uuids = poll.get_question_uuids()
+
+        before = cursor.get("before")
+        seen = set(cursor.get("seen") or [])
+        failed = list(cursor.get("failed") or [])
+
+        # before filters start_date inclusively server-side, so archives at the boundary
+        # date reappear and are dropped by the seen set below
+        archives_query = client.get_archives(type="run", after=first, before=before)
+        archives_fetches = archives_query.iterfetches(retry_on_rate_exceed=True)
+
+        processed = 0
+        more = False
+        rate_limited = False
+
+        try:
+            for archives in archives_fetches:
+                for archive in archives:
+                    # YYYY-MM-DD, so lexicographic comparison is chronological
+                    start_iso = str(archive.start_date)[:10]
+                    key = f"{start_iso}|{archive.period}"
+
+                    if before is not None:
+                        if start_iso > before:
+                            # appeared after this traversal started - its runs were still
+                            # in the live API then, so the API pull covers them
+                            continue
+                        if start_iso == before and key in seen:
+                            continue
+
+                    if processed >= archive_budget:
+                        more = True
+                        break
+
+                    logger.info("Archive %s with %d records, size %d" % (key, archive.record_count, archive.size))
+
+                    try:
+                        if archive.record_count > 0:
+                            start_archive = time.time()
+
+                            for fetch in self._iter_poll_record_runs(archive, poll.flow_uuid):
+                                (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(
+                                    fetch, org, poll
+                                )
+
+                                for temba_run in fetch:
+                                    contact_obj = contacts_map.get(temba_run.contact.uuid, None)
+                                    self._process_run_poll_results(
+                                        org,
+                                        questions_uuids,
+                                        temba_run,
+                                        contact_obj,
+                                        poll_results_map,
+                                        poll_results_to_save_map,
+                                        stats_dict,
+                                    )
+
+                                stats_dict["num_synced"] += len(fetch)
+                                self._save_new_poll_results_to_database(poll_results_to_save_map)
+
+                                # release per-page lookup maps holding cyclic references before next allocation
+                                del contacts_map, poll_results_map, poll_results_to_save_map
+                                gc.collect()
+
+                            logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
+                            processed += 1
+                    except Exception as e:
+                        # advance past the broken archive but keep its key so the caller can
+                        # see the traversal was not clean
+                        failed.append(key)
+                        processed += 1
+                        logger.error("Error processing archive %s for poll #%d" % (key, poll.pk), exc_info=e)
+
+                    if start_iso == before:
+                        seen.add(key)
+                    else:
+                        before = start_iso
+                        seen = {key}
+                if more:
+                    break
+        except TembaRateExceededError:
+            rate_limited = True
+
+        done = not more and not rate_limited
+        next_cursor = {"before": before, "seen": sorted(seen)}
+        if failed:
+            next_cursor["failed"] = failed
+        return ChunkResult(counts=stats_dict, cursor=next_cursor, done=done, rate_limited=rate_limited)
 
     def _initiate_lookup_maps(self, fetch, org, poll):
         """
