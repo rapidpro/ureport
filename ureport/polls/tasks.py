@@ -204,7 +204,9 @@ def clear_old_poll_results(org, since, until):
                     )
 
 
-@app.task()
+# acks late so an admin-triggered action interrupted by a worker stop is redelivered
+# rather than silently lost - there is no periodic trigger to retry it
+@app.task(acks_late=True, reject_on_worker_lost=True)
 def update_or_create_questions(poll_ids):
     from .models import Poll
 
@@ -219,7 +221,9 @@ def pull_refresh(poll_id):
     Poll.pull_results(poll_id)
 
 
-@app.task(name="polls.update_questions_results_cache")
+# acks late so an admin-triggered action interrupted by a worker stop is redelivered
+# rather than silently lost - there is no periodic trigger to retry it
+@app.task(name="polls.update_questions_results_cache", acks_late=True, reject_on_worker_lost=True)
 def update_questions_results_cache(poll_id):
     from .models import Poll
 
