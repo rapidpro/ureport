@@ -703,6 +703,7 @@ INSTALLED_APPS = (
     "ureport.news",
     "ureport.polls",
     "ureport.stats",
+    "ureport.syncjobs",
     "django_countries",
     "rest_framework",
     "drf_yasg",
@@ -1011,15 +1012,16 @@ CELERY_BEAT_SCHEDULE = {
         "relative": True,
         "args": ("ureport.polls.tasks.pull_results_other_polls", "sync"),
     },
-    "refresh-engagement-data": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(hour=2, minute=0),
-        "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
-    },
-    "delete-old-contact-activity": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(hour=22, minute=0),
-        "args": ("ureport.stats.tasks.delete_old_contact_activities", "slow"),
+    # the stats jobs are due once a day, measured from when each org's last run ended rather
+    # than from the clock, so that a run which started late doesn't push the next one out to
+    # the following night. The dispatcher runs through the small hours: the first slot is the
+    # off peak anchor the fixed daily tasks used to have, and the ones after it are same
+    # night retry slots for orgs whose run failed or was interrupted. Running it around the
+    # clock instead would let each org's start time walk backwards into peak hours.
+    "stats-dispatch": {
+        "task": "stats.stats_dispatch",
+        "schedule": crontab(hour=[0, 1, 2, 3, 4], minute=0),
+        "options": {"queue": "slow"},
     },
     "rebuild-poll-results-count": {
         "task": "polls.rebuild_counts",

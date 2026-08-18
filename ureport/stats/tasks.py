@@ -1,71 +1,46 @@
 import logging
-import time
-from datetime import timedelta
 
 from django_valkey import get_valkey_connection
 
-from django.utils import timezone
-
 from dash.orgs.models import Org
-from dash.orgs.tasks import org_task
 from ureport.celery import app
-from ureport.utils import chunk_list
+
+# the chunked stats tasks live in sync.py - imported here so celery, which only
+# autodiscovers tasks modules, registers them
+from ureport.stats.sync import (  # noqa: F401
+    ENGAGEMENT_JOB_TYPE,
+    PRUNE_JOB_TYPE,
+    REBUILD_JOB_TYPE,
+    enqueue_org_job,
+    prune_contact_activities,
+    rebuild_contact_activity_counts,
+    refresh_engagement,
+    stats_dispatch,
+)
 
 logger = logging.getLogger(__name__)
 
 
-@org_task("refresh-engagement-data", 60 * 60 * 4)
-def refresh_engagement_data(org, since, until):
-    from .models import PollEngagementDailyCount, PollStatsCounter
-
-    start = time.time()
-
-    time_filters = list(PollEngagementDailyCount.DATA_TIME_FILTERS.keys())
-    segments = list(PollEngagementDailyCount.DATA_SEGMENTS.keys())
-    metrics = list(PollEngagementDailyCount.DATA_METRICS.keys())
-
-    for time_filter in time_filters:
-        for segment in segments:
-            for metric in metrics:
-                PollEngagementDailyCount.refresh_engagement_data(org, metric, segment, time_filter)
-                logger.info(
-                    f"Task: refresh_engagement_data org {org.id} in progress for {time.time() - start}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
-                )
-
-    PollStatsCounter.calculate_average_response_rate(org)
-
-    logger.info(f"Task: refresh_engagement_data org {org.id} finished in {time.time() - start}s")
+# ------------------------------------------------------------------------------
+# Shims for the tasks the stats refreshes used to run under. They keep their
+# registered names for one release so queued messages and existing triggers
+# resolve, but only hand the work to the sync jobs - they hold no lock and record
+# no task state.
+# ------------------------------------------------------------------------------
 
 
-@org_task("delete-old-contact-activities", 60 * 60 * 1)
-def delete_old_contact_activities(org, since, until):
-    from .models import ContactActivity
+@app.task(name="ureport.stats.tasks.refresh_engagement_data")
+def refresh_engagement_data(org_id):
+    org = Org.objects.get(pk=org_id)
 
-    now = timezone.now()
-    start_time = time.time()
-    last_used_time = now - timedelta(days=400)
+    return enqueue_org_job(org, ENGAGEMENT_JOB_TYPE)
 
-    # find objects older than 400 days that have used=True so we can update them to used = False
-    old_contact_activities_ids = (
-        ContactActivity.objects.filter(org=org, date__lte=last_used_time).order_by("id").values_list("id", flat=True)
-    )
 
-    org_count = 0
+@app.task(name="ureport.stats.tasks.delete_old_contact_activities")
+def delete_old_contact_activities(org_id):
+    org = Org.objects.get(pk=org_id)
 
-    for batch in chunk_list(old_contact_activities_ids, 1000):
-        batch_ids = list(batch)
-        deleted, old_objects_deleted = ContactActivity.objects.filter(id__in=batch_ids).delete()
-
-        org_count += deleted
-
-        elapsed = time.time() - start_time
-
-        logger.info(f"Task: Deleting {org_count} old contact activities on org #{org.id} in {elapsed:.1f} seconds")
-
-    elapsed = time.time() - start_time
-    logger.info(
-        f"Task: Finished deleting {org_count} old contact activities until {last_used_time} on org #{org.id} in {elapsed:.1f} seconds"
-    )
+    return enqueue_org_job(org, PRUNE_JOB_TYPE)
 
 
 @app.task(name="stats.squash_contact_activities_counts")
@@ -85,33 +60,17 @@ def squash_contact_activities_counts():
 
 
 @app.task(name="stats.rebuild_contacts_activities_counts")
-def rebuild_contacts_activities_counts():
-    from .models import ContactActivity, PollEngagementDailyCount
-
-    time_filters = list(PollEngagementDailyCount.DATA_TIME_FILTERS.keys())
-    segments = list(PollEngagementDailyCount.DATA_SEGMENTS.keys())
-    metric = "active-users"
-
+def rebuild_contacts_activities_counts(org_id=None):
+    """
+    Queues a counter rebuild for every active org, or just the given one. The rebuild itself
+    is now done in resumable chunks by stats.rebuild_contact_activity_counts.
+    """
     orgs = Org.objects.filter(is_active=True)
+    if org_id:
+        orgs = orgs.filter(id=org_id)
+
     for org in orgs:
-        start_rebuild = time.time()
-
-        ContactActivity.recalculate_contact_activity_counts(org)
-        logger.info(
-            f"Task: rebuild_contacts_activities_counts finished recalculating contact activity counts for org {org.id} in {time.time() - start_rebuild}s"
-        )
-
-        start_refresh = time.time()
-
-        for time_filter in time_filters:
-            for segment in segments:
-                PollEngagementDailyCount.refresh_engagement_data(org, metric, segment, time_filter)
-                logger.info(
-                    f"Task: rebuild_contacts_activities_counts refreshing contacts activities engagement stats for org {org.id} in progress for {time.time() - start_refresh}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
-                )
-        logger.info(
-            f"Task: rebuild_contacts_activities_counts finished recalculating contact activity and refreshing contacts activities engagement stats for org {org.id} in {time.time() - start_rebuild}s"
-        )
+        enqueue_org_job(org, REBUILD_JOB_TYPE)
 
 
 @app.task(name="stats.stats_counts_squash")
