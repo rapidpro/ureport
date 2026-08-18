@@ -954,6 +954,9 @@ INTERNAL_IPS = ("127.0.0.1",)
 
 CELERY_TIMEZONE = "UTC"
 
+# use RedBeat so beat can be safely embedded in workers (it uses a redis lock to ensure only one runs)
+CELERY_BEAT_SCHEDULER = "redbeat.RedBeatScheduler"
+
 CELERY_BEAT_SCHEDULE = {
     "refresh_flows": {
         "task": "polls.refresh_org_flows",

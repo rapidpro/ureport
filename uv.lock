@@ -85,6 +85,21 @@ redis = [
 ]
 
 [[package]]
+name = "celery-redbeat"
+version = "2.4.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "celery" },
+    { name = "python-dateutil" },
+    { name = "redis" },
+    { name = "tenacity" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/03/13/9aefb6cb39266b28ab2b2a8f24382fd7d82399e20578c5ba2238e63c4445/celery_redbeat-2.4.2.tar.gz", hash = "sha256:a590fef7ef39d7e4511174ce8bafe310e07ef6cdf84a240cd311946815bd90bb", size = 36671, upload-time = "2026-07-27T01:28:09.389Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/11/3d/bb4adef34e7691ebd2e80c1e8df1fb3f3bf43b388de714219ac6a580a4d2/celery_redbeat-2.4.2-py2.py3-none-any.whl", hash = "sha256:4124d221a798ad983df0874bfa0d2e9beca41ca9ef91e92d073770bb193da000", size = 16526, upload-time = "2026-07-27T01:28:08.164Z" },
+]
+
+[[package]]
 name = "certifi"
 version = "2026.4.22"
 source = { registry = "https://pypi.org/simple" }
@@ -951,6 +966,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1c/cb/d58290804b7a4c5daa42abbbe2a93c477ae53e45541b1825e86f0dfaaf63/stop-words-2018.7.23.tar.gz", hash = "sha256:6df3ad5f5de697daa437e4445c86c73604e6bc138dd0dc0fac55664aa4e6b03e", size = 31494, upload-time = "2018-07-23T20:55:55.275Z" }
 
 [[package]]
+name = "tenacity"
+version = "9.1.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/47/c6/ee486fd809e357697ee8a44d3d69222b344920433d3b6666ccd9b374630c/tenacity-9.1.4.tar.gz", hash = "sha256:adb31d4c263f2bd041081ab33b498309a57c77f9acf2db65aadf0898179cf93a", size = 49413, upload-time = "2026-02-07T10:45:33.841Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d7/c1/eb8f9debc45d3b7918a32ab756658a0904732f75e555402972246b0b8e71/tenacity-9.1.4-py3-none-any.whl", hash = "sha256:6095a360c919085f28c6527de529e76a06ad89b23659fa881ae0649b867a9d55", size = 28926, upload-time = "2026-02-07T10:45:32.24Z" },
+]
+
+[[package]]
 name = "tqdm"
 version = "4.67.3"
 source = { registry = "https://pypi.org/simple" }
@@ -987,6 +1011,7 @@ source = { editable = "." }
 dependencies = [
     { name = "boto3" },
     { name = "celery", extra = ["redis"] },
+    { name = "celery-redbeat" },
     { name = "colorama" },
     { name = "dj-database-url" },
     { name = "django" },
@@ -1028,6 +1053,7 @@ dev = [
 requires-dist = [
     { name = "boto3", specifier = ">=1.27.1" },
     { name = "celery", extras = ["redis"], specifier = ">=5.5.3,<6.0.0" },
+    { name = "celery-redbeat", specifier = ">=2.4.2,<3.0.0" },
     { name = "colorama", specifier = "~=0.4.3" },
     { name = "dj-database-url", specifier = "~=2.3.0" },
     { name = "django", specifier = ">=6.0.7,<6.1" },
