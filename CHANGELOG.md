@@ -1,3 +1,10 @@
+v1.6.5 (2026-08-18)
+-------------------------
+ * Use RedBeat as celery beat scheduler so beat can be embedded in workers
+ * Add fake pip-requires.txt to solve Dependabot alerts
+ * Bump django from 6.0.6 to 6.0.7
+ * Add aggregate Test job so required status check name is stable across CI matrix changes
+
 v1.6.4 (2026-07-28)
 -------------------------
  * Update rapidpro-dash to 1.21.1
