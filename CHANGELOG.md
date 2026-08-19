@@ -1,3 +1,11 @@
+v1.6.6 (2026-08-19)
+-------------------------
+ * Ack admin-triggered poll tasks late so worker stops can't drop them
+ * Harden Celery config for containerized workers
+ * Record and retry failures in completion finalization
+ * Support delayed continuations in chunked tasks
+ * Add syncjobs app with resumable chunked task framework
+
 v1.6.5 (2026-08-18)
 -------------------------
  * Use RedBeat as celery beat scheduler so beat can be embedded in workers
