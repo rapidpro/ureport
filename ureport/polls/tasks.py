@@ -5,14 +5,25 @@ import time
 from datetime import timedelta
 
 from django_valkey import get_valkey_connection
-from temba_client.exceptions import TembaRateExceededError
 
-from django.core.cache import cache
 from django.utils import timezone
 
 from dash.orgs.models import Org
 from dash.orgs.tasks import org_task
 from ureport.celery import app
+from ureport.polls.sync import (  # noqa: F401 - imported here so the worker registers the chunked tasks
+    MAIN_POLL_INTERVAL,
+    OTHER_POLLS_INTERVAL,
+    OTHER_POLLS_NEW_WINDOW,
+    RECENT_POLLS_INTERVAL,
+    dispatch_flows,
+    is_flow_syncing,
+    queue_archives_sync,
+    queue_results_sync,
+    sync_poll_archives,
+    sync_poll_results,
+    sync_polls_dispatch,
+)
 from ureport.utils import (
     fetch_flows,
     fetch_old_sites_count as do_fetch_old_sites_count,
@@ -24,132 +35,56 @@ from ureport.utils import (
 logger = logging.getLogger(__name__)
 
 
-@org_task("backfill-poll-results", 60 * 60 * 3)
-def backfill_poll_results(org, since, until):
+# ------------------------------------------------------------------------------
+# Shims for the tasks the poll syncs used to run under. They keep their registered
+# names for one release so queued messages and existing triggers resolve, but only
+# hand the work to the sync jobs - they hold no lock and record no task state.
+# ------------------------------------------------------------------------------
+
+
+def _queue_polls(org, polls, interval=None):
+    queued = dispatch_flows(org, [poll.flow_uuid for poll in polls], interval=interval)
+
+    logger.info("Queued poll results syncs for org #%d: %s" % (org.pk, ", ".join(queued) or "none"))
+
+
+@app.task(name="ureport.polls.tasks.backfill_poll_results")
+def backfill_poll_results(org_id):
     from .models import Poll
 
-    results_log = dict()
+    org = Org.objects.get(pk=org_id)
+    polls = Poll.objects.filter(org=org, has_synced=False).exclude(is_active=False).exclude(flow_uuid="")
 
-    for poll in (
-        Poll.objects.filter(org=org, has_synced=False)
-        .exclude(is_active=False)
-        .exclude(flow_uuid="")
-        .distinct("flow_uuid")
-    ):
-        (
-            num_val_created,
-            num_val_updated,
-            num_val_ignored,
-            num_path_created,
-            num_path_updated,
-            num_path_ignored,
-        ) = Poll.pull_results(poll.id)
-        results_log["flow-%s" % poll.flow_uuid] = {
-            "num_val_created": num_val_created,
-            "num_val_updated": num_val_updated,
-            "num_val_ignored": num_val_ignored,
-            "num_path_created": num_path_created,
-            "num_path_updated": num_path_updated,
-            "num_path_ignored": num_path_ignored,
-        }
-
-    return results_log
+    _queue_polls(org, polls)
 
 
-@org_task("results-pull-main-poll", 60 * 60 * 2)
-def pull_results_main_poll(org, since, until):
+@app.task(name="ureport.polls.tasks.pull_results_main_poll")
+def pull_results_main_poll(org_id):
     from .models import Poll
 
-    results_log = dict()
+    org = Org.objects.get(pk=org_id)
     main_poll = Poll.get_main_poll(org)
-    if main_poll:
-        (
-            num_val_created,
-            num_val_updated,
-            num_val_ignored,
-            num_path_created,
-            num_path_updated,
-            num_path_ignored,
-        ) = Poll.pull_results(main_poll.id)
-        results_log["flow-%s" % main_poll.flow_uuid] = {
-            "num_val_created": num_val_created,
-            "num_val_updated": num_val_updated,
-            "num_val_ignored": num_val_ignored,
-            "num_path_created": num_path_created,
-            "num_path_updated": num_path_updated,
-            "num_path_ignored": num_path_ignored,
-        }
 
-    return results_log
+    _queue_polls(org, [main_poll] if main_poll else [], interval=MAIN_POLL_INTERVAL)
 
 
-@org_task("results-pull-other-polls", 60 * 60 * 24)
-def pull_results_other_polls(org, since, until):
+@app.task(name="ureport.polls.tasks.pull_results_other_polls")
+def pull_results_other_polls(org_id):
     from .models import Poll
 
-    now = timezone.now()
-    recent_window = now - timedelta(days=7)
+    org = Org.objects.get(pk=org_id)
+    other_polls = Poll.get_other_polls(org).exclude(created_on__gt=timezone.now() - OTHER_POLLS_NEW_WINDOW)
 
-    results_log = dict()
-    other_polls_ids = Poll.get_other_polls(org).exclude(created_on__gt=recent_window)
-    other_polls_ids = other_polls_ids.order_by("flow_uuid").distinct("flow_uuid").values_list("id", flat=True)
-    other_polls = Poll.objects.filter(id__in=other_polls_ids).order_by("-created_on")
-    for poll in other_polls:
-        key = Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid)
-        if not cache.get(key):
-            try:
-                (
-                    num_val_created,
-                    num_val_updated,
-                    num_val_ignored,
-                    num_path_created,
-                    num_path_updated,
-                    num_path_ignored,
-                ) = Poll.pull_results(poll.id)
-
-                results_log["flow-%s" % poll.flow_uuid] = {
-                    "num_val_created": num_val_created,
-                    "num_val_updated": num_val_updated,
-                    "num_val_ignored": num_val_ignored,
-                    "num_path_created": num_path_created,
-                    "num_path_updated": num_path_updated,
-                    "num_path_ignored": num_path_ignored,
-                }
-
-            except TembaRateExceededError:
-                pass
-
-    return results_log
+    _queue_polls(org, other_polls, interval=OTHER_POLLS_INTERVAL)
 
 
-@org_task("results-pull-recent-polls", 60 * 60 * 6)
-def pull_results_recent_polls(org, since, until):
+@app.task(name="ureport.polls.tasks.pull_results_recent_polls")
+def pull_results_recent_polls(org_id):
     from .models import Poll
 
-    results_log = dict()
-    recent_polls_ids = Poll.get_recent_polls(org).order_by("flow_uuid")
-    recent_polls_ids = recent_polls_ids.distinct("flow_uuid").values_list("id", flat=True)
+    org = Org.objects.get(pk=org_id)
 
-    recent_polls = Poll.objects.filter(id__in=recent_polls_ids).order_by("-created_on")
-    for poll in recent_polls:
-        (
-            num_val_created,
-            num_val_updated,
-            num_val_ignored,
-            num_path_created,
-            num_path_updated,
-            num_path_ignored,
-        ) = Poll.pull_results(poll.id)
-        results_log["flow-%s" % poll.flow_uuid] = {
-            "num_val_created": num_val_created,
-            "num_val_updated": num_val_updated,
-            "num_val_ignored": num_val_ignored,
-            "num_path_created": num_path_created,
-            "num_path_updated": num_path_updated,
-            "num_path_ignored": num_path_ignored,
-        }
-
-    return results_log
+    _queue_polls(org, Poll.get_recent_polls(org), interval=RECENT_POLLS_INTERVAL)
 
 
 @org_task("clear-old-poll-results", 60 * 60 * 5)
@@ -172,7 +107,9 @@ def clear_old_poll_results(org, since, until):
     )
     for poll in old_polls:
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
-        if r.get(key):
+        # the valkey lock is only taken by the unchunked pulls, kept here for the release
+        # they still exist in - a chunked sync announces itself with its job lease instead
+        if r.get(key) or is_flow_syncing(org.pk, poll.flow_uuid):
             logger.info(
                 "Skipping clearing old results for poll #%d on org #%d as it is still syncing" % (poll.pk, org.pk)
             )
@@ -218,7 +155,9 @@ def update_or_create_questions(poll_ids):
 def pull_refresh(poll_id):
     from .models import Poll
 
-    Poll.pull_results(poll_id)
+    poll = Poll.objects.filter(id=poll_id).first()
+    if poll:
+        queue_results_sync(poll.org, poll.flow_uuid)
 
 
 # acks late so an admin-triggered action interrupted by a worker stop is redelivered
@@ -236,7 +175,11 @@ def update_questions_results_cache(poll_id):
 def pull_refresh_from_archives(poll_id):
     from .models import Poll
 
-    Poll.pull_results_from_archives(poll_id)
+    poll = Poll.objects.filter(id=poll_id).first()
+    if poll:
+        # the only caller left is the unchunked pull's re-pull after a results delete, so
+        # the traversal has to start over rather than resume below its last position
+        queue_archives_sync(poll.org, poll.flow_uuid, reset_cursor=True)
 
 
 @app.task(name="polls.rebuild_counts")
