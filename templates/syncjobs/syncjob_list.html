@@ -1,0 +1,86 @@
+{% extends "smartmin/list.html" %}
+{% load i18n smartmin %}
+
+{% block pre-content %}
+    <div class="notification">
+        {% blocktrans trimmed with running=report.totals.running stale=report.totals.stale failing=report.totals.failing %}
+            {{ running }} running, {{ stale }} stale, {{ failing }} failing
+        {% endblocktrans %}
+        {% if report.checked_on %}
+            &mdash; {% blocktrans trimmed with checked_on=report.checked_on %}last checked {{ checked_on }}{% endblocktrans %}
+        {% else %}
+            &mdash; {% trans "not checked yet" %}
+        {% endif %}
+        {% for job_type, counts in report.by_type.items %}
+            <div class="is-size-7">
+                {{ job_type }}:
+                {% for status, count in counts.items %}{{ status }} {{ count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <form role="form" method="get">
+        <div class="field is-grouped">
+            <div class="control">
+                <div class="select">
+                    <select name="job_type">
+                        <option value="">{% trans "All job types" %}</option>
+                        {% for job_type in job_types %}
+                            <option value="{{ job_type }}" {% if job_type == filter_job_type %}selected{% endif %}>{{ job_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="control">
+                <div class="select">
+                    <select name="status">
+                        <option value="">{% trans "All statuses" %}</option>
+                        {% for value, label in statuses %}
+                            <option value="{{ value }}" {% if value == filter_status %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="control">
+                <button type="submit" class="button">{% trans "Filter" %}</button>
+            </div>
+        </div>
+    </form>
+{% endblock pre-content %}
+{% block table %}
+    <table class="{% get_list_class object_list %} table is-striped is-fullwidth is-hoverable list-table">
+        <thead>
+            <tr>
+                {% for field in fields %}<th class="header-{{ field }}">{% get_label field %}</th>{% endfor %}
+                <th>{% trans "Actions" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+                <tr class="{% cycle 'row2' 'row1' %}">
+                    {% for field in fields %}<td class="value-{{ field }}">{% get_value obj field %}</td>{% endfor %}
+                    <td>
+                        <div class="field is-grouped">
+                            <form method="post" action="{% url 'syncjobs.syncjob_pause' obj.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="button is-small">{% trans "Pause" %}</button>
+                            </form>
+                            <form method="post" action="{% url 'syncjobs.syncjob_resume' obj.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="button is-small">{% trans "Resume" %}</button>
+                            </form>
+                            <form method="post" action="{% url 'syncjobs.syncjob_force_resync' obj.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="button is-small is-warning">{% trans "Force resync" %}</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr class="empty_list">
+                    {% for field in fields %}<td></td>{% endfor %}
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock table %}

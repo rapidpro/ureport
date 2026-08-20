@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 15:54+0000\n"
+"POT-Creation-Date: 2026-08-12 10:05+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -1288,6 +1288,42 @@ msgid "+ New Story"
 msgstr "+ Nový příběh"
 
 #, python-format
+msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
+msgstr ""
+
+#, python-format
+msgid "last checked %(checked_on)s"
+msgstr ""
+
+msgid "not checked yet"
+msgstr ""
+
+msgid "All job types"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+#, fuzzy
+#| msgid "All locations"
+msgid "Actions"
+msgstr "Všechny lokality"
+
+msgid "Pause"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Resume"
+msgstr "Výsledky"
+
+msgid "Force resync"
+msgstr ""
+
+#, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Obnovená %s mezipaměť této organizace"
 
@@ -1949,6 +1985,26 @@ msgstr "Míra odezvy"
 
 msgid "Active Users"
 msgstr "Aktivní uživatelé"
+
+#, python-format
+msgid "Job #%(job_id)d is being worked on, try again in a moment"
+msgstr ""
+
+#, python-format
+msgid "Paused job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Resumed job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d isn't paused"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d will resync from scratch on its next run"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Něco pro spouštění lokalizací"

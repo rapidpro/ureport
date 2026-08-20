@@ -1,8 +1,10 @@
 import logging
+from collections import defaultdict
 from datetime import timedelta
 
+from django.core.cache import cache
 from django.db import models
-from django.db.models import Case, F, Q, Value, When
+from django.db.models import Case, Count, F, Q, Value, When
 from django.utils import timezone
 
 from dash.orgs.models import Org
@@ -13,12 +15,46 @@ DEFAULT_LEASE_SECONDS = 60 * 10
 
 MAX_ERROR_LENGTH = 10_000
 
+MAX_ERROR_SUMMARY_LENGTH = 200
+
+# how long after a lease expires a still running job is considered abandoned rather than
+# in the middle of a takeover by the redelivery of its own chunk
+DEFAULT_STALE_GRACE_SECONDS = 60 * 10
+
+DEFAULT_FAILING_THRESHOLD = 3
+
+# where the monitor task leaves its findings for the status page
+STATUS_CACHE_KEY = "syncjobs_status"
+
 
 class LeaseLost(Exception):
     """
     Raised when a checkpoint is attempted after this worker's lease on the job has been
     taken over or released - the chunk must abort without writing further progress.
     """
+
+
+class SyncJobQuerySet(models.QuerySet):
+    def stale(self, grace_seconds=DEFAULT_STALE_GRACE_SECONDS):
+        """
+        Runs that nothing is moving forward anymore: a worker died holding the lease and
+        no redelivery took it over, or the continuation of a released chunk was never
+        delivered. Either way the job sits mid run until an operator or a trigger revives
+        it, so it only counts as stale once past the grace an ordinary handover needs.
+        """
+        cutoff = timezone.now() - timedelta(seconds=grace_seconds)
+
+        return self.filter(status=SyncJob.STATUS_RUNNING).filter(
+            Q(lease_expires_on__lt=cutoff) | Q(lease_expires_on__isnull=True, modified_on__lt=cutoff)
+        )
+
+    def failing(self, threshold=DEFAULT_FAILING_THRESHOLD):
+        """
+        Jobs whose retries keep failing, i.e. the failure isn't the transient kind that
+        resuming from the last checkpoint fixes. Paused jobs are deliberately stopped, so
+        they don't keep reporting the failure that led to the pause.
+        """
+        return self.filter(consecutive_failures__gte=threshold).exclude(status=SyncJob.STATUS_PAUSED)
 
 
 class SyncJob(models.Model):
@@ -74,6 +110,8 @@ class SyncJob(models.Model):
 
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
+
+    objects = SyncJobQuerySet.as_manager()
 
     class Meta:
         constraints = [
@@ -199,6 +237,146 @@ class SyncJob(models.Model):
             lease_expires_on=None,
             modified_on=now,
         )
+
+    @property
+    def error_summary(self):
+        # a traceback's last line is the exception itself, which is the part worth showing
+        lines = [line for line in self.last_error.splitlines() if line.strip()]
+        return lines[-1].strip()[:MAX_ERROR_SUMMARY_LENGTH] if lines else ""
+
+    @property
+    def progress_summary(self):
+        return ", ".join(f"{key}={value}" for key, value in sorted(self.progress.items()))
+
+    def as_status(self, now=None):
+        """
+        The compact form of this job used by the monitor task. Only ever rendered to
+        authenticated staff - it carries error text and scopes.
+        """
+        now = now or timezone.now()
+        expired_for = (now - self.lease_expires_on).total_seconds() if self.lease_expires_on else None
+
+        return dict(
+            id=self.id,
+            org=self.org_id,
+            job_type=self.job_type,
+            scope=self.scope,
+            status=self.get_status_display(),
+            consecutive_failures=self.consecutive_failures,
+            last_error=self.error_summary,
+            lease_expires_on=self.lease_expires_on.isoformat() if self.lease_expires_on else None,
+            stale_for=int(expired_for) if expired_for and expired_for > 0 else None,
+            progress=self.progress,
+        )
+
+    @classmethod
+    def count_by_type(cls):
+        status_names = dict(cls.STATUS_CHOICES)
+        by_type = defaultdict(dict)
+
+        for row in cls.objects.values("job_type", "status").annotate(count=Count("id")):
+            by_type[row["job_type"]][status_names[row["status"]]] = row["count"]
+
+        return dict(by_type)
+
+    @classmethod
+    def get_status_report(cls):
+        """
+        Everything the monitor task last recorded, with the detail entries in it. Read only
+        from the cache - the status endpoints are polled and mustn't scan the jobs table.
+        """
+        cached = cache.get(STATUS_CACHE_KEY) or dict()
+
+        return dict(
+            by_type=cached.get("by_type", dict()),
+            stale_jobs=cached.get("stale_jobs", dict()),
+            failing_jobs=cached.get("failing_jobs", dict()),
+            totals=cached.get("totals", dict(running=0, stale=0, failing=0)),
+            checked_on=cached.get("checked_on"),
+        )
+
+    @classmethod
+    def get_status_counts(cls):
+        """
+        The public form of the report - counts only, no scopes, org ids or error text.
+        """
+        report = cls.get_status_report()
+
+        return dict(**report["totals"], checked_on=report["checked_on"])
+
+    def pause(self):
+        """
+        Stops the job being claimed again, from the next chunk onwards. Refused while a
+        lease is live: the holder is mid chunk and its own completion writes would race
+        this one. The lease is cleared as part of pausing, because a worker whose lease
+        merely lapsed is still alive and its ownership guarded writes would otherwise land
+        on the paused row and take it out of the paused state. Returns whether it paused.
+        """
+        return self._update_unleased(status=self.STATUS_PAUSED, lease_owner=None, lease_expires_on=None)
+
+    def resume(self):
+        """
+        Returns a paused job to the pool. A job paused mid run goes back to the between
+        chunks state - running with no lease - so that the next claim resumes it instead of
+        starting a run that would discard its progress. The job is only picked up when its
+        type is next triggered, this doesn't enqueue anything itself. Returns whether it
+        was resumed.
+        """
+        self.refresh_from_db()
+
+        # a run that never ended is still in flight, whatever the pause made the status
+        in_flight = self.started_on is not None and self.ended_on is None
+        now = timezone.now()
+
+        updated = SyncJob.objects.filter(id=self.id, status=self.STATUS_PAUSED).update(
+            status=self.STATUS_RUNNING if in_flight else self.STATUS_PENDING,
+            lease_owner=None,
+            lease_expires_on=None,
+            modified_on=now,
+        )
+        if not updated:
+            logger.warning("Job #%d (%s:%s) not paused, resume skipped", self.id, self.job_type, self.scope)
+            return False
+
+        self.refresh_from_db()
+        return True
+
+    def force_resync(self):
+        """
+        Discards the job's resume position so the next run starts from scratch, e.g. after
+        a backend correction that the incremental cursor would skip over. The failure
+        counters are left alone so a job that keeps failing stays visible until a run
+        actually completes. Refused while a lease is live. Returns whether it was reset.
+        """
+        return self._update_unleased(
+            status=self.STATUS_PENDING,
+            cursor={},
+            progress={},
+            needs_finalize=False,
+            started_on=None,
+            ended_on=None,
+            lease_owner=None,
+            lease_expires_on=None,
+        )
+
+    def _update_unleased(self, **updates):
+        """
+        Applies an operator update only while no worker holds a live lease, so manual
+        intervention can never clobber a chunk that is still running.
+        """
+        now = timezone.now()
+
+        updated = (
+            SyncJob.objects.filter(id=self.id)
+            .filter(Q(lease_expires_on__lt=now) | Q(lease_expires_on__isnull=True))
+            .update(modified_on=now, **updates)
+        )
+        if not updated:
+            logger.warning("Job #%d (%s:%s) is leased, update skipped", self.id, self.job_type, self.scope)
+            return False
+
+        self.refresh_from_db()
+        return True
 
     def _update_owned(self, **updates):
         """

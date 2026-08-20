@@ -4,16 +4,55 @@ import uuid
 
 from celery.exceptions import MaxRetriesExceededError
 
+from django.core.cache import cache
 from django.utils import timezone
 
 from ureport.celery import app
 
-from .models import DEFAULT_LEASE_SECONDS, LeaseLost, SyncJob
+from .models import DEFAULT_LEASE_SECONDS, STATUS_CACHE_KEY, LeaseLost, SyncJob
 
 logger = logging.getLogger(__name__)
 
 # how long after a lease expires a blocked redelivery waits before retrying its claim
 LEASE_RETRY_GRACE = 5
+
+# how many problem jobs the monitor task describes in detail, counts cover the rest
+MAX_REPORTED_JOBS = 50
+
+
+@app.task(name="syncjobs.check_jobs")
+def check_jobs():
+    """
+    Records the state of the sync jobs, and which of them need an operator's attention -
+    abandoned by a dead worker, or failing the same way run after run. The status views
+    read this rather than the jobs table, so they cost nothing per request.
+    """
+    now = timezone.now()
+
+    stale = SyncJob.objects.stale().order_by("modified_on")
+    failing = SyncJob.objects.failing().order_by("-consecutive_failures")
+
+    # the detail is for humans to read, so only enough of it to work through
+    stale_jobs = {f"{job.id}": job.as_status(now) for job in stale[:MAX_REPORTED_JOBS]}
+    failing_jobs = {f"{job.id}": job.as_status(now) for job in failing[:MAX_REPORTED_JOBS]}
+
+    totals = dict(
+        running=SyncJob.objects.filter(status=SyncJob.STATUS_RUNNING).count(),
+        stale=stale.count(),
+        failing=failing.count(),
+    )
+
+    for key, job in stale_jobs.items():
+        logger.warning("Job #%s (%s:%s) stale for %ss", key, job["job_type"], job["scope"], job["stale_for"])
+
+    output = dict(
+        by_type=SyncJob.count_by_type(),
+        stale_jobs=stale_jobs,
+        failing_jobs=failing_jobs,
+        totals=totals,
+        checked_on=now.isoformat(),
+    )
+    cache.set(STATUS_CACHE_KEY, output, None)
 
 
 def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, finalize=None, name=None):

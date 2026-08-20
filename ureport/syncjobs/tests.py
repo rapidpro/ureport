@@ -5,13 +5,16 @@ from unittest.mock import patch
 from celery.exceptions import Retry
 
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db import IntegrityError, transaction
 from django.test import TestCase
+from django.urls import reverse
 from django.utils import timezone
 
 from dash.orgs.models import Org
-from ureport.syncjobs.models import MAX_ERROR_LENGTH, LeaseLost, SyncJob
-from ureport.syncjobs.tasks import chunked_task
+from ureport.syncjobs.models import MAX_ERROR_LENGTH, MAX_ERROR_SUMMARY_LENGTH, STATUS_CACHE_KEY, LeaseLost, SyncJob
+from ureport.syncjobs.tasks import MAX_REPORTED_JOBS, check_jobs, chunked_task
+from ureport.tests import UreportTest
 
 
 class SyncJobTest(TestCase):
@@ -411,3 +414,462 @@ class ChunkedTaskTest(TestCase):
 
         self.assertEqual(ran, [])
         mock_continue.assert_not_called()
+
+    def test_continuation_of_paused_job_stops_quietly(self):
+        task, ran = _make_task(chunks_to_run=3)
+
+        with patch.object(task, "apply_async") as mock_continue:
+            task(self.job.id)
+            self.assertEqual(mock_continue.call_count, 1)
+
+            # an operator pauses between chunks - the queued continuation stops the run,
+            # without retrying against a lease that isn't there
+            self.assertTrue(SyncJob.objects.get(id=self.job.id).pause())
+            task(self.job.id)
+
+        self.assertEqual(ran, [0])
+        self.assertEqual(mock_continue.call_count, 1)
+        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_PAUSED)
+
+    def test_continuation_after_force_resync_restarts(self):
+        task, ran = _make_task(chunks_to_run=4)
+
+        with patch.object(task, "apply_async"):
+            task(self.job.id)
+            task(self.job.id)
+            self.assertEqual(ran, [0, 1])
+
+            # the old cursor can't come back through the continuation that was already
+            # queued when the resync was requested
+            self.assertTrue(SyncJob.objects.get(id=self.job.id).force_resync())
+            task(self.job.id)
+
+        self.assertEqual(ran, [0, 1, 0])
+        job = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(job.cursor, {"chunk": 1})
+        self.assertEqual(job.progress, {"chunks": 1})
+
+
+class SyncJobQueriesTest(TestCase):
+    def setUp(self):
+        self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+
+    def expire_lease(self, job, seconds_ago):
+        SyncJob.objects.filter(id=job.id).update(lease_expires_on=timezone.now() - timedelta(seconds=seconds_ago))
+        job.refresh_from_db()
+
+    def set_modified(self, job, seconds_ago):
+        SyncJob.objects.filter(id=job.id).update(modified_on=timezone.now() - timedelta(seconds=seconds_ago))
+        job.refresh_from_db()
+
+    def test_stale_respects_grace(self):
+        # a job whose worker is still renewing its lease is working, not stale
+        self.job.claim("worker-1", lease_seconds=600)
+        self.assertEqual(list(SyncJob.objects.stale()), [])
+
+        # a lease that expired moments ago may still be taken over by a redelivered chunk
+        self.expire_lease(self.job, 60)
+        self.assertEqual(list(SyncJob.objects.stale()), [])
+        self.assertEqual(list(SyncJob.objects.stale(grace_seconds=30)), [self.job])
+
+        # the grace is measured from the expiry, not from now
+        self.assertEqual(list(SyncJob.objects.stale(grace_seconds=61)), [])
+        self.assertEqual(list(SyncJob.objects.stale(grace_seconds=59)), [self.job])
+
+        self.expire_lease(self.job, 60 * 30)
+        self.assertEqual(list(SyncJob.objects.stale()), [self.job])
+
+    def test_stale_covers_lost_continuations(self):
+        # the between-chunks state - no lease to expire, the continuation is queued
+        self.job.claim("worker-1")
+        self.job.release_lease()
+        self.assertEqual(list(SyncJob.objects.stale()), [])
+
+        # but if that continuation never arrives the run is just as abandoned
+        self.set_modified(self.job, 60 * 30)
+        self.assertEqual(list(SyncJob.objects.stale()), [self.job])
+
+    def test_stale_ignores_ended_runs(self):
+        self.job.claim("worker-1")
+        self.job.record_failure("boom")
+        self.expire_lease(self.job, 60 * 30)
+        self.set_modified(self.job, 60 * 30)
+
+        self.assertEqual(list(SyncJob.objects.stale()), [])
+
+    def test_failing_respects_threshold(self):
+        other = SyncJob.get_or_create_job(None, "test-sync", "flow-2")
+        SyncJob.objects.filter(id=self.job.id).update(consecutive_failures=2)
+        SyncJob.objects.filter(id=other.id).update(consecutive_failures=3)
+
+        self.assertEqual(list(SyncJob.objects.failing()), [other])
+        self.assertEqual(list(SyncJob.objects.failing(threshold=2).order_by("id")), [self.job, other])
+        self.assertEqual(list(SyncJob.objects.failing(threshold=4)), [])
+
+    def test_failing_ignores_paused_jobs(self):
+        SyncJob.objects.filter(id=self.job.id).update(consecutive_failures=5)
+        self.assertEqual(list(SyncJob.objects.failing()), [self.job])
+
+        # a job stopped on purpose shouldn't keep alerting about why it was stopped
+        self.assertTrue(self.job.pause())
+        self.assertEqual(list(SyncJob.objects.failing()), [])
+
+    def test_error_summary(self):
+        self.assertEqual(self.job.error_summary, "")
+
+        self.job.last_error = "Traceback (most recent call last):\n  File x\nValueError: boom\n"
+        self.assertEqual(self.job.error_summary, "ValueError: boom")
+
+        self.job.last_error = "x" * 500
+        self.assertEqual(len(self.job.error_summary), MAX_ERROR_SUMMARY_LENGTH)
+
+
+class OperatorActionsTest(TestCase):
+    def setUp(self):
+        self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+
+    def expire_lease(self, job):
+        SyncJob.objects.filter(id=job.id).update(lease_expires_on=timezone.now() - timedelta(seconds=1))
+        job.refresh_from_db()
+
+    def test_pause_refused_under_live_lease(self):
+        self.job.claim("worker-1", lease_seconds=600)
+        self.assertFalse(self.job.pause())
+
+        current = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(current.status, SyncJob.STATUS_RUNNING)
+        self.assertEqual(current.lease_owner, "worker-1")
+
+    def test_pause_between_chunks(self):
+        self.job.claim("worker-1")
+        self.job.checkpoint(cursor={"after": "t1"})
+        self.job.release_lease()
+
+        self.assertTrue(self.job.pause())
+        self.assertEqual(self.job.status, SyncJob.STATUS_PAUSED)
+
+        # the paused job is no longer claimable, and its cursor is kept for the resume
+        self.assertIsNone(SyncJob.objects.get(id=self.job.id).claim("worker-2"))
+        self.assertEqual(self.job.cursor, {"after": "t1"})
+
+    def test_pause_allowed_once_lease_expires(self):
+        self.job.claim("worker-1")
+        self.expire_lease(self.job)
+
+        self.assertTrue(self.job.pause())
+
+        current = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(current.status, SyncJob.STATUS_PAUSED)
+
+        # the lapsed lease is dropped with the pause, see test_paused_job_survives_its_worker
+        self.assertIsNone(current.lease_owner)
+        self.assertIsNone(current.lease_expires_on)
+
+    def test_paused_job_survives_its_worker(self):
+        # a worker whose lease lapsed is still alive and still finishing its chunk
+        self.job.claim("worker-1")
+        self.expire_lease(self.job)
+        self.assertTrue(self.job.pause())
+
+        # its writes must not take the job back out of the paused state
+        worker_view = SyncJob.objects.get(id=self.job.id)
+        worker_view.lease_owner = "worker-1"
+
+        self.assertFalse(worker_view.mark_complete())
+        self.assertFalse(worker_view.record_failure("boom"))
+        self.assertFalse(worker_view.clear_finalize())
+
+        current = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(current.status, SyncJob.STATUS_PAUSED)
+        self.assertEqual(current.last_error, "")
+        self.assertIsNone(current.claim("worker-1"))
+
+    def test_resume(self):
+        # only a paused job can be resumed
+        self.assertFalse(self.job.resume())
+        self.assertEqual(self.job.status, SyncJob.STATUS_PENDING)
+
+        self.job.claim("worker-1")
+        self.job.checkpoint(cursor={"chunk": 3}, progress={"chunks": 3})
+        self.job.release_lease()
+        self.assertTrue(self.job.pause())
+
+        # a run paused in flight resumes rather than restarting, so it keeps its progress
+        self.assertTrue(self.job.resume())
+        self.assertEqual(self.job.status, SyncJob.STATUS_RUNNING)
+        self.assertIsNone(self.job.lease_owner)
+
+        claimed = SyncJob.objects.get(id=self.job.id).claim("worker-2")
+        self.assertIsNotNone(claimed)
+        self.assertEqual(claimed.progress, {"chunks": 3})
+        self.assertEqual(claimed.cursor, {"chunk": 3})
+
+    def test_resume_of_job_between_runs(self):
+        # nothing in flight - a completed job goes back to waiting for its next trigger
+        self.job.claim("worker-1")
+        self.job.checkpoint(cursor={"after": "t1"}, progress={"chunks": 3})
+        self.job.mark_complete()
+        self.job.release_lease()
+        self.assertTrue(self.job.pause())
+
+        self.assertTrue(self.job.resume())
+        self.assertEqual(self.job.status, SyncJob.STATUS_PENDING)
+
+        # and the next claim starts a fresh run from the carried forward cursor
+        claimed = SyncJob.objects.get(id=self.job.id).claim("worker-2")
+        self.assertEqual(claimed.progress, {})
+        self.assertEqual(claimed.cursor, {"after": "t1"})
+
+    def test_force_resync_refused_under_live_lease(self):
+        self.job.claim("worker-1", lease_seconds=600)
+        self.job.checkpoint(cursor={"after": "t1"}, progress={"chunks": 2})
+
+        self.assertFalse(self.job.force_resync())
+
+        current = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(current.cursor, {"after": "t1"})
+        self.assertEqual(current.progress, {"chunks": 2})
+        self.assertEqual(current.status, SyncJob.STATUS_RUNNING)
+
+    def test_force_resync_clears_position(self):
+        self.job.claim("worker-1")
+        self.job.checkpoint(cursor={"after": "t1"}, progress={"chunks": 2})
+        self.job.record_failure("boom")
+
+        self.assertTrue(self.job.force_resync())
+
+        current = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(current.status, SyncJob.STATUS_PENDING)
+        self.assertEqual(current.cursor, {})
+        self.assertEqual(current.progress, {})
+        self.assertIsNone(current.started_on)
+        self.assertIsNone(current.ended_on)
+        self.assertIsNone(current.lease_owner)
+        self.assertIsNone(current.lease_expires_on)
+        self.assertFalse(current.needs_finalize)
+
+        # the failure streak stays until a run actually completes
+        self.assertEqual(current.consecutive_failures, 1)
+
+        # the next run starts from scratch
+        claimed = SyncJob.objects.get(id=self.job.id).claim("worker-2")
+        self.assertIsNotNone(claimed)
+        self.assertEqual(claimed.cursor, {})
+
+    def test_force_resync_of_completed_job_drops_finalization(self):
+        self.job.claim("worker-1")
+        self.job.mark_complete(needs_finalize=True)
+        self.job.release_lease()
+
+        self.assertTrue(self.job.force_resync())
+        self.assertFalse(SyncJob.objects.get(id=self.job.id).needs_finalize)
+
+
+class CheckJobsTest(TestCase):
+    def setUp(self):
+        cache.delete(STATUS_CACHE_KEY)
+        self.addCleanup(cache.delete, STATUS_CACHE_KEY)
+
+    def test_no_problems(self):
+        healthy = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+        healthy.claim("worker-1", lease_seconds=600)
+        SyncJob.get_or_create_job(None, "other-sync", "backend")
+
+        check_jobs()
+
+        output = cache.get(STATUS_CACHE_KEY)
+        self.assertEqual(output["stale_jobs"], {})
+        self.assertEqual(output["failing_jobs"], {})
+        self.assertEqual(output["totals"], dict(running=1, stale=0, failing=0))
+        self.assertEqual(output["by_type"], {"test-sync": {"Running": 1}, "other-sync": {"Pending": 1}})
+        self.assertIsNotNone(output["checked_on"])
+
+    def test_reports_stale_and_failing_jobs(self):
+        stale = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+        stale.claim("dead-worker")
+        stale.checkpoint(progress={"chunks": 4})
+        expired_on = timezone.now() - timedelta(hours=1)
+        SyncJob.objects.filter(id=stale.id).update(lease_expires_on=expired_on)
+
+        failing = SyncJob.get_or_create_job(None, "test-sync", "flow-2")
+        SyncJob.objects.filter(id=failing.id).update(
+            status=SyncJob.STATUS_FAILED, consecutive_failures=4, last_error="Traceback:\n  File x\nValueError: boom"
+        )
+
+        check_jobs()
+
+        output = cache.get(STATUS_CACHE_KEY)
+        self.assertEqual(list(output["stale_jobs"]), [f"{stale.id}"])
+
+        stale_status = output["stale_jobs"][f"{stale.id}"]
+        self.assertEqual(stale_status["id"], stale.id)
+        self.assertIsNone(stale_status["org"])
+        self.assertEqual(stale_status["job_type"], "test-sync")
+        self.assertEqual(stale_status["scope"], "flow-1")
+        self.assertEqual(stale_status["status"], "Running")
+        self.assertEqual(stale_status["progress"], {"chunks": 4})
+        self.assertEqual(stale_status["last_error"], "")
+        self.assertEqual(stale_status["lease_expires_on"], expired_on.isoformat())
+        self.assertEqual(stale_status["stale_for"], 3600)
+
+        self.assertEqual(list(output["failing_jobs"]), [f"{failing.id}"])
+        failing_status = output["failing_jobs"][f"{failing.id}"]
+        self.assertEqual(failing_status["id"], failing.id)
+        self.assertEqual(failing_status["scope"], "flow-2")
+        self.assertEqual(failing_status["consecutive_failures"], 4)
+        self.assertEqual(failing_status["last_error"], "ValueError: boom")
+        self.assertIsNone(failing_status["lease_expires_on"])
+        self.assertIsNone(failing_status["stale_for"])
+
+        self.assertEqual(output["totals"], dict(running=1, stale=1, failing=1))
+
+    def test_detail_is_capped_but_totals_are_not(self):
+        for num in range(MAX_REPORTED_JOBS + 5):
+            job = SyncJob.get_or_create_job(None, "test-sync", f"flow-{num}")
+            SyncJob.objects.filter(id=job.id).update(consecutive_failures=3)
+
+        check_jobs()
+
+        output = cache.get(STATUS_CACHE_KEY)
+        self.assertEqual(len(output["failing_jobs"]), MAX_REPORTED_JOBS)
+        self.assertEqual(output["totals"]["failing"], MAX_REPORTED_JOBS + 5)
+
+
+class StatusReportTest(TestCase):
+    def setUp(self):
+        cache.delete(STATUS_CACHE_KEY)
+        self.addCleanup(cache.delete, STATUS_CACHE_KEY)
+
+    def test_report_without_monitor_output(self):
+        self.assertEqual(
+            SyncJob.get_status_report(),
+            dict(
+                by_type={},
+                stale_jobs={},
+                failing_jobs={},
+                totals=dict(running=0, stale=0, failing=0),
+                checked_on=None,
+            ),
+        )
+        self.assertEqual(SyncJob.get_status_counts(), dict(running=0, stale=0, failing=0, checked_on=None))
+
+    def test_report_reads_only_the_cache(self):
+        running = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+        running.claim("worker-1")
+        check_jobs()
+
+        # a job that appears after the check isn't counted until the next one
+        SyncJob.get_or_create_job(None, "other-sync", "backend")
+
+        with self.assertNumQueries(0):
+            report = SyncJob.get_status_report()
+            counts = SyncJob.get_status_counts()
+
+        self.assertEqual(report["by_type"], {"test-sync": {"Running": 1}})
+        self.assertEqual(counts["running"], 1)
+        self.assertIsNotNone(counts["checked_on"])
+
+        # and the public counts carry no scopes, orgs or error text
+        self.assertEqual(set(counts), {"running", "stale", "failing", "checked_on"})
+
+
+class SyncJobCRUDLTest(UreportTest):
+    def setUp(self):
+        super().setUp()
+
+        self.job = SyncJob.get_or_create_job(self.uganda, "test-sync", "flow-1")
+        self.other_job = SyncJob.get_or_create_job(self.nigeria, "other-sync", "backend")
+
+        cache.delete(STATUS_CACHE_KEY)
+        self.addCleanup(cache.delete, STATUS_CACHE_KEY)
+
+    def test_list(self):
+        list_url = reverse("syncjobs.syncjob_list")
+
+        # the controls are operational, so no org admin gets to see them
+        self.login(self.admin)
+        response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
+        self.assertLoginRedirect(response)
+
+        self.login(self.superuser)
+        response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
+        # every org's jobs, not just the one whose site we're on
+        self.assertEqual(set(response.context["object_list"]), {self.job, self.other_job})
+
+        response = self.client.get(list_url + "?job_type=other-sync", SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(list(response.context["object_list"]), [self.other_job])
+
+        SyncJob.objects.filter(id=self.job.id).update(status=SyncJob.STATUS_FAILED)
+        response = self.client.get(list_url + "?status=F", SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(list(response.context["object_list"]), [self.job])
+
+        response = self.client.get(list_url + "?search=flow-1", SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(list(response.context["object_list"]), [self.job])
+
+    def test_list_shows_last_check(self):
+        self.job.claim("worker-1", lease_seconds=600)
+        check_jobs()
+
+        self.login(self.superuser)
+        response = self.client.get(reverse("syncjobs.syncjob_list"), SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.context["report"]["totals"], dict(running=1, stale=0, failing=0))
+
+    def test_actions(self):
+        pause_url = reverse("syncjobs.syncjob_pause", args=[self.job.id])
+        resume_url = reverse("syncjobs.syncjob_resume", args=[self.job.id])
+        resync_url = reverse("syncjobs.syncjob_force_resync", args=[self.job.id])
+
+        self.login(self.admin)
+        self.assertLoginRedirect(self.client.post(pause_url, SERVER_NAME="uganda.ureport.io"))
+        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_PENDING)
+
+        self.login(self.superuser)
+
+        # nothing to control by GET - the actions only apply on a post
+        response = self.client.get(pause_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.post(pause_url, SERVER_NAME="uganda.ureport.io", follow=True)
+        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_PAUSED)
+        self.assertContains(response, f"Paused job #{self.job.id}")
+
+        response = self.client.post(resume_url, SERVER_NAME="uganda.ureport.io", follow=True)
+        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_PENDING)
+        self.assertContains(response, f"Resumed job #{self.job.id}")
+
+        SyncJob.objects.filter(id=self.job.id).update(cursor={"after": "t1"}, progress={"chunks": 2})
+        response = self.client.post(resync_url, SERVER_NAME="uganda.ureport.io", follow=True)
+
+        current = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(current.cursor, {})
+        self.assertEqual(current.progress, {})
+
+    def test_actions_refused_while_job_is_running(self):
+        self.job.claim("worker-1", lease_seconds=600)
+        self.job.checkpoint(cursor={"after": "t1"})
+
+        self.login(self.superuser)
+        response = self.client.post(
+            reverse("syncjobs.syncjob_pause", args=[self.job.id]), SERVER_NAME="uganda.ureport.io", follow=True
+        )
+        self.assertContains(response, "being worked on")
+
+        response = self.client.post(
+            reverse("syncjobs.syncjob_force_resync", args=[self.job.id]), SERVER_NAME="uganda.ureport.io", follow=True
+        )
+        self.assertContains(response, "being worked on")
+
+        # the worker's run is untouched by both
+        current = SyncJob.objects.get(id=self.job.id)
+        self.assertEqual(current.status, SyncJob.STATUS_RUNNING)
+        self.assertEqual(current.lease_owner, "worker-1")
+        self.assertEqual(current.cursor, {"after": "t1"})
+
+    def test_resume_of_unpaused_job_is_refused(self):
+        self.login(self.superuser)
+        response = self.client.post(
+            reverse("syncjobs.syncjob_resume", args=[self.job.id]), SERVER_NAME="uganda.ureport.io", follow=True
+        )
+        self.assertContains(response, "isn&#x27;t paused")

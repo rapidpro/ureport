@@ -7,6 +7,7 @@ from urllib.parse import quote
 
 import mock
 
+from django.core.cache import cache
 from django.test import override_settings
 from django.urls import reverse
 from django.utils import timezone
@@ -19,6 +20,8 @@ from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.news.models import NewsItem
 from ureport.polls.models import Poll
+from ureport.syncjobs.models import STATUS_CACHE_KEY, SyncJob
+from ureport.syncjobs.tasks import check_jobs
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 
 
@@ -1081,8 +1084,8 @@ class PublicTest(UreportTest):
         status_url = reverse("public.task_status")
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(list(response.json())), 3)
-        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks"}))
+        self.assertEqual(len(list(response.json())), 4)
+        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks", "sync_jobs"}))
 
         three_hours_ago = timezone.now() - timedelta(hours=3)
         TaskState.objects.create(
@@ -1090,16 +1093,53 @@ class PublicTest(UreportTest):
         )
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 500)
-        self.assertEqual(len(list(response.json())), 3)
-        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks"}))
+        self.assertEqual(len(list(response.json())), 4)
+        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks", "sync_jobs"}))
 
         self.uganda.domain = "beta"
         self.uganda.save()
 
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(list(response.json())), 3)
-        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks"}))
+        self.assertEqual(len(list(response.json())), 4)
+        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks", "sync_jobs"}))
+
+    def test_task_status_view_sync_jobs(self):
+        status_url = reverse("public.task_status")
+
+        job = SyncJob.get_or_create_job(self.uganda, "poll-results", "flow-1")
+        job.claim("worker-1")
+        job.checkpoint(progress={"chunks": 2, "created": 20})
+        SyncJob.objects.filter(id=job.id).update(lease_expires_on=timezone.now() - timedelta(hours=1))
+
+        failing = SyncJob.get_or_create_job(self.uganda, "contact-pull", "rapidpro")
+        SyncJob.objects.filter(id=failing.id).update(
+            status=SyncJob.STATUS_FAILED, consecutive_failures=4, last_error="ValueError: boom from api.example.com"
+        )
+
+        cache.delete(STATUS_CACHE_KEY)
+        self.addCleanup(cache.delete, STATUS_CACHE_KEY)
+
+        # until the monitor has run there is nothing to report
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.json()["sync_jobs"], dict(running=0, stale=0, failing=0, checked_on=None))
+
+        check_jobs()
+
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        sync_jobs = response.json()["sync_jobs"]
+        self.assertEqual(sync_jobs["running"], 1)
+        self.assertEqual(sync_jobs["stale"], 1)
+        self.assertEqual(sync_jobs["failing"], 1)
+        self.assertIsNotNone(sync_jobs["checked_on"])
+
+        # this endpoint is public, so it carries counts only - no scopes, orgs or errors
+        self.assertNotContains(response, "api.example.com")
+        self.assertNotContains(response, "flow-1")
+
+        # the existing task state output is unaffected
+        self.assertEqual(response.json()["contact_sync_up"], True)
+        self.assertEqual(response.json()["failing_tasks"], {})
 
     @mock.patch("django.core.cache.cache.get")
     def test_counts_status_view(self, mock_cache_get):

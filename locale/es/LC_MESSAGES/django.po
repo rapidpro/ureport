@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 15:54+0000\n"
+"POT-Creation-Date: 2026-08-12 10:05+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: WILDNEY RAPHAEL SILVA CAVALCANTE, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1280,6 +1280,42 @@ msgid "+ New Story"
 msgstr "+ Nueva historia"
 
 #, python-format
+msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
+msgstr ""
+
+#, python-format
+msgid "last checked %(checked_on)s"
+msgstr ""
+
+msgid "not checked yet"
+msgstr ""
+
+msgid "All job types"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+#, fuzzy
+#| msgid "All locations"
+msgid "Actions"
+msgstr "Todas las ubicaciones"
+
+msgid "Pause"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Resume"
+msgstr "Resultados"
+
+msgid "Force resync"
+msgstr ""
+
+#, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Actualizado %s cache para esta organización"
 
@@ -1937,6 +1973,26 @@ msgstr "Tasa de respuesta"
 
 msgid "Active Users"
 msgstr "Usuarios activos"
+
+#, python-format
+msgid "Job #%(job_id)d is being worked on, try again in a moment"
+msgstr ""
+
+#, python-format
+msgid "Paused job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Resumed job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d isn't paused"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d will resync from scratch on its next run"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "

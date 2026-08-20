@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 15:54+0000\n"
+"POT-Creation-Date: 2026-08-12 10:05+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -1406,6 +1406,42 @@ msgid "+ New Story"
 msgstr "+Nove priče"
 
 #, python-format
+msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
+msgstr ""
+
+#, python-format
+msgid "last checked %(checked_on)s"
+msgstr ""
+
+msgid "not checked yet"
+msgstr ""
+
+msgid "All job types"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+#, fuzzy
+#| msgid "Location"
+msgid "Actions"
+msgstr "Lokacija"
+
+msgid "Pause"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Resume"
+msgstr "Rezultati"
+
+msgid "Force resync"
+msgstr ""
+
+#, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Ažurirano %spredmemorije organizacije"
 
@@ -2146,6 +2182,26 @@ msgstr "Stopa odgovora"
 
 msgid "Active Users"
 msgstr "Aktivni korisnici"
+
+#, python-format
+msgid "Job #%(job_id)d is being worked on, try again in a moment"
+msgstr ""
+
+#, python-format
+msgid "Paused job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Resumed job #%(job_id)d"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d isn't paused"
+msgstr ""
+
+#, python-format
+msgid "Job #%(job_id)d will resync from scratch on its next run"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
