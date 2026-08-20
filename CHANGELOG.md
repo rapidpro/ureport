@@ -1,3 +1,9 @@
+v1.6.7 (2026-08-20)
+-------------------------
+ * Update locale files with the sync job management strings
+ * Add monitoring and operator controls for sync jobs
+ * Add chunk-aware backend pull methods
+
 v1.6.6 (2026-08-19)
 -------------------------
  * Ack admin-triggered poll tasks late so worker stops can't drop them
