@@ -1,3 +1,7 @@
+v1.6.8 (2026-08-24)
+-------------------------
+ * Convert the contact pull to a chunked resumable sync job
+
 v1.6.7 (2026-08-20)
 -------------------------
  * Update locale files with the sync job management strings
