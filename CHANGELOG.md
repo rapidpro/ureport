@@ -1,3 +1,7 @@
+v1.6.9 (2026-08-25)
+-------------------------
+ * Make poll results and archive syncs resumable sync jobs
+
 v1.6.8 (2026-08-24)
 -------------------------
  * Convert the contact pull to a chunked resumable sync job
