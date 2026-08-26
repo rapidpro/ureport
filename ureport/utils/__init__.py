@@ -28,6 +28,9 @@ GLOBAL_COUNT_CACHE_KEY = "global_count"
 ORG_CONTACT_COUNT_KEY = "org:%d:contacts-counts"
 ORG_CONTACT_COUNT_TIMEOUT = 3600
 
+# how far the unchunked age and gender walk got, kept only to seed the jobs that replace it
+LAST_POPULATED_CONTACT_KEY = "last-contact-id-populated"
+
 logger = logging.getLogger(__name__)
 
 
@@ -1006,12 +1009,33 @@ def get_segment_org_boundaries(org, segment):
     return location_boundaries
 
 
-def populate_age_and_gender_poll_results(org=None):
+def populate_age_and_gender_for_contacts(contact_ids):
+    """
+    Copies the age and gender of the given contacts onto the poll results they answered.
+    """
     from ureport.contacts.models import Contact
 
-    LAST_POPULATED_CONTACT = "last-contact-id-populated"
+    for contact in Contact.objects.filter(id__in=contact_ids).order_by("id"):
+        update_fields = dict()
+        if contact.born > 0:
+            update_fields["born"] = contact.born
 
-    last_contact_id_populated = cache.get(LAST_POPULATED_CONTACT, 0)
+        if contact.gender != "":
+            update_fields["gender"] = contact.gender
+
+        if update_fields:
+            results_ids = list(PollResult.objects.filter(contact=contact.uuid).values_list("id", flat=True))
+            PollResult.objects.filter(id__in=results_ids).update(**update_fields)
+
+
+def populate_age_and_gender_poll_results(org=None):
+    """
+    Walks contacts in one pass, superseded by the chunked backfill job which resumes rather
+    than starting over when it is interrupted.
+    """
+    from ureport.contacts.models import Contact
+
+    last_contact_id_populated = cache.get(LAST_POPULATED_CONTACT_KEY, 0)
 
     all_contacts = Contact.objects.filter(id__gt=last_contact_id_populated).values_list("id", flat=True).order_by("id")
 
@@ -1025,23 +1049,12 @@ def populate_age_and_gender_poll_results(org=None):
 
     for contact_id_batch in chunk_list(all_contacts, 1000):
         contact_batch = list(contact_id_batch)
-        contacts = Contact.objects.filter(id__in=contact_batch)
-        for contact in contacts:
-            i += 1
 
-            update_fields = dict()
-            if contact.born > 0:
-                update_fields["born"] = contact.born
+        populate_age_and_gender_for_contacts(contact_batch)
+        i += len(contact_batch)
 
-            if contact.gender != "":
-                update_fields["gender"] = contact.gender
-
-            if update_fields:
-                results_ids = list(PollResult.objects.filter(contact=contact.uuid).values_list("id", flat=True))
-                PollResult.objects.filter(id__in=results_ids).update(**update_fields)
-
-            if org is None:
-                cache.set(LAST_POPULATED_CONTACT, contact.pk, None)
+        if org is None:
+            cache.set(LAST_POPULATED_CONTACT_KEY, contact_batch[-1], None)
 
         logger.info(
             "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)

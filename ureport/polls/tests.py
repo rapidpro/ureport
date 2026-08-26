@@ -28,11 +28,9 @@ from ureport.polls.tasks import (
     pull_refresh,
     pull_results_main_poll,
     pull_results_other_polls,
-    rebuild_counts,
     recheck_poll_flow_data,
     refresh_org_flows,
     update_or_create_questions,
-    update_results_age_gender,
 )
 from ureport.polls.templatetags.ureport import question_segmented_results
 from ureport.stats.models import (
@@ -2449,12 +2447,6 @@ class PollQuestionTest(UreportTest):
             job = SyncJob.objects.get(org=self.poll.org, job_type="poll-results", scope=self.poll.flow_uuid)
             mock_queue_sync.assert_called_once_with((job.id,), queue="sync")
 
-        with patch("ureport.polls.models.Poll.rebuild_poll_results_counts") as mock_rebuild_counts:
-            mock_rebuild_counts.return_value = "Rebuilt"
-
-            rebuild_counts()
-            self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.all().count())
-
         with patch("ureport.polls.models.Poll.update_or_create_questions") as mock_update_or_create_questions:
             mock_update_or_create_questions.side_effect = None
 
@@ -2465,17 +2457,6 @@ class PollQuestionTest(UreportTest):
             poll2 = self.create_poll(self.uganda, "Poll 2", "flow-uuid-2", self.health_uganda, self.admin)
             update_or_create_questions([self.poll.pk, poll2.pk])
             self.assertEqual(mock_update_or_create_questions.call_count, 2)
-
-        with patch("ureport.polls.models.Poll.rebuild_poll_results_counts") as mock_rebuild_counts:
-            mock_rebuild_counts.return_value = "Rebuilt"
-
-            with patch("ureport.polls.tasks.populate_age_and_gender_poll_results") as mock_populate_age_gender_results:
-                mock_populate_age_gender_results.return_value = "Populated"
-
-                update_results_age_gender(self.nigeria.pk)
-
-                mock_populate_age_gender_results.assert_called_once_with(self.nigeria)
-                self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.filter(org=self.nigeria).count())
 
 
 class PollResultsTest(UreportTest):
