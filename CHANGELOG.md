@@ -1,3 +1,10 @@
+v1.6.10 (2026-08-26)
+-------------------------
+ * Convert the stats tasks to chunked resumable sync jobs
+ * Convert the poll maintenance tasks to chunked resumable sync jobs
+ * Convert the contacts maintenance tasks to chunked resumable sync jobs
+ * Consolidate sync job dispatch, locking and test plumbing
+
 v1.6.9 (2026-08-25)
 -------------------------
  * Make poll results and archive syncs resumable sync jobs
