@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-12 10:05+0000\n"
+"POT-Creation-Date: 2026-08-26 16:40+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -758,6 +758,11 @@ msgstr "Orgs"
 
 msgid "Images"
 msgstr "Images"
+
+#, fuzzy
+#| msgid "Jobs"
+msgid "Sync Jobs"
+msgstr "Emplois"
 
 msgid "About"
 msgstr "À Propos"
