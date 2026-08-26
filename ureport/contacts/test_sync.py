@@ -15,15 +15,16 @@ from ureport.backend import ChunkResult
 from ureport.contacts.models import Contact
 from ureport.contacts.sync import (
     JOB_TYPE,
+    LEASE_SECONDS,
     LOCK_BACKOFF,
     RATE_LIMIT_BACKOFF,
-    STALE_RUN_AFTER,
     enqueue_org_syncs,
     finalize_contacts_sync,
     sync_contacts,
     sync_contacts_dispatch,
 )
-from ureport.syncjobs.models import SyncJob
+from ureport.syncjobs.models import ABORTED, SyncJob
+from ureport.syncjobs.testing import SyncJobTestMixin, drop_lease, held_lock, make_stale, run_task
 from ureport.tests import UreportTest
 
 RAPIDPRO_BACKEND = "ureport.backend.rapidpro.RapidProBackend"
@@ -42,23 +43,7 @@ def chunk_counts(created=0, updated=0, deleted=0, ignored=0):
     return {"created": created, "updated": updated, "deleted": deleted, "ignored": ignored}
 
 
-def mock_pulls(test):
-    """
-    Patches everything a chunk reaches out of the process for, passed to the test in the
-    order patched: fields, boundaries, contacts, then the org counts refresh finalization
-    does.
-    """
-    for patcher in (
-        patch(f"{RAPIDPRO_BACKEND}.pull_fields"),
-        patch(f"{RAPIDPRO_BACKEND}.pull_boundaries"),
-        patch(f"{RAPIDPRO_BACKEND}.pull_contacts_chunk"),
-        patch("ureport.contacts.sync.update_cache_org_contact_counts"),
-    ):
-        test = patcher(test)
-    return test
-
-
-class SyncContactsTest(UreportTest):
+class SyncContactsTest(SyncJobTestMixin, UreportTest):
     def setUp(self):
         super().setUp()
 
@@ -67,25 +52,23 @@ class SyncContactsTest(UreportTest):
         self.last_fetched_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (self.nigeria.pk, "rapidpro")
         cache.delete(self.last_fetched_key)
 
+        # everything a chunk reaches out of the process for, and the org counts refresh
+        # finalization does
+        self.mock_pull_fields = self.start_patch(patch(f"{RAPIDPRO_BACKEND}.pull_fields"))
+        self.mock_pull_boundaries = self.start_patch(patch(f"{RAPIDPRO_BACKEND}.pull_boundaries"))
+        self.mock_pull_contacts_chunk = self.start_patch(patch(f"{RAPIDPRO_BACKEND}.pull_contacts_chunk"))
+        self.mock_update_counts = self.start_patch(patch("ureport.contacts.sync.update_cache_org_contact_counts"))
+
     def _run(self, times=1):
-        """
-        Runs the task the given number of times, as a worker would with each continuation.
-        """
-        with patch.object(sync_contacts, "apply_async") as mock_continue:
-            for _ in range(times):
-                sync_contacts(self.job.id)
-        return mock_continue
+        return run_task(sync_contacts, self.job.id, times=times)
 
     def _task_state(self):
         return TaskState.objects.filter(org=self.nigeria, task_key=JOB_TYPE).first()
 
-    @mock_pulls
-    def test_stages_run_in_order_across_chunks(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
-        mock_pull_fields.return_value = outcome_counts(created=1, updated=2, deleted=3, ignored=4)
-        mock_pull_boundaries.return_value = outcome_counts(created=5, updated=6, deleted=7, ignored=8)
-        mock_pull_contacts_chunk.side_effect = [
+    def test_stages_run_in_order_across_chunks(self):
+        self.mock_pull_fields.return_value = outcome_counts(created=1, updated=2, deleted=3, ignored=4)
+        self.mock_pull_boundaries.return_value = outcome_counts(created=5, updated=6, deleted=7, ignored=8)
+        self.mock_pull_contacts_chunk.side_effect = [
             ChunkResult(counts=chunk_counts(created=9, updated=10), cursor={"stage": "active", "resume": "c1"}),
             ChunkResult(counts=chunk_counts(deleted=11, ignored=12), cursor={}, done=True),
         ]
@@ -97,14 +80,14 @@ class SyncContactsTest(UreportTest):
         self.assertIsNone(job.cursor["since"])
         until = job.cursor["until"]
         mock_continue.assert_called_once_with((self.job.id,), queue="celery", countdown=None)
-        mock_pull_boundaries.assert_not_called()
+        self.mock_pull_boundaries.assert_not_called()
 
         # boundaries
         self._run()
         job = SyncJob.objects.get(id=self.job.id)
         self.assertEqual(job.cursor["stage"], "contacts")
         self.assertEqual(job.cursor["until"], until)
-        mock_pull_contacts_chunk.assert_not_called()
+        self.mock_pull_contacts_chunk.assert_not_called()
 
         # first chunk of contacts, resuming from the backend's own sub-cursor on the next
         self._run()
@@ -137,9 +120,9 @@ class SyncContactsTest(UreportTest):
             },
         )
 
-        self.assertEqual(mock_pull_contacts_chunk.call_args_list[0][0], (self.nigeria, None, until, {}))
+        self.assertEqual(self.mock_pull_contacts_chunk.call_args_list[0][0], (self.nigeria, None, until, {}))
         self.assertEqual(
-            mock_pull_contacts_chunk.call_args_list[1][0],
+            self.mock_pull_contacts_chunk.call_args_list[1][0],
             (self.nigeria, None, until, {"stage": "active", "resume": "c1"}),
         )
 
@@ -147,13 +130,10 @@ class SyncContactsTest(UreportTest):
         # it released
         self.assertIsNone(get_valkey_connection().get(TaskState.get_lock_key(self.nigeria, JOB_TYPE)))
 
-    @mock_pulls
-    def test_window_frozen_until_run_completes(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
-        mock_pull_contacts_chunk.side_effect = [
+    def test_window_frozen_until_run_completes(self):
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.side_effect = [
             ChunkResult(counts=chunk_counts(), cursor={"stage": "deleted"}),
             ChunkResult(counts=chunk_counts(), cursor={}, done=True),
             ChunkResult(counts=chunk_counts(), cursor={}, done=True),
@@ -168,7 +148,7 @@ class SyncContactsTest(UreportTest):
             self._run(times=2)
 
         first_until = SyncJob.objects.get(id=self.job.id).cursor["last_until"]
-        windows = [call[0][1:3] for call in mock_pull_contacts_chunk.call_args_list]
+        windows = [call[0][1:3] for call in self.mock_pull_contacts_chunk.call_args_list]
         self.assertEqual(windows, [(None, first_until), (None, first_until)])
 
         # the next run picks up where this one ended and freezes a new window
@@ -178,15 +158,14 @@ class SyncContactsTest(UreportTest):
 
         job = SyncJob.objects.get(id=self.job.id)
         self.assertNotEqual(job.cursor["last_until"], first_until)
-        self.assertEqual(mock_pull_contacts_chunk.call_args_list[-1][0][1:3], (first_until, job.cursor["last_until"]))
+        self.assertEqual(
+            self.mock_pull_contacts_chunk.call_args_list[-1][0][1:3], (first_until, job.cursor["last_until"])
+        )
 
-    @mock_pulls
-    def test_failed_run_resumes_with_the_same_window(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
-        mock_pull_contacts_chunk.side_effect = ValueError("boom")
+    def test_failed_run_resumes_with_the_same_window(self):
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.side_effect = ValueError("boom")
 
         self._run(times=2)  # fields, boundaries
         until = SyncJob.objects.get(id=self.job.id).cursor["until"]
@@ -202,69 +181,56 @@ class SyncContactsTest(UreportTest):
         self.assertTrue(self._task_state().is_failing)
 
         # the retry resumes the interrupted run against its frozen window
-        mock_pull_contacts_chunk.side_effect = None
-        mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
+        self.mock_pull_contacts_chunk.side_effect = None
+        self.mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
         self._run()
 
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(mock_pull_contacts_chunk.call_args[0][1:3], (None, until))
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
-        self.assertEqual(job.cursor, {"last_until": until})
+        self.assertEqual(self.mock_pull_contacts_chunk.call_args[0][1:3], (None, until))
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={"last_until": until})
         self.assertFalse(self._task_state().is_failing)
 
         # the fields and boundaries stages aren't redone by the retry
-        self.assertEqual(mock_pull_fields.call_count, 1)
-        self.assertEqual(mock_pull_boundaries.call_count, 1)
+        self.assertEqual(self.mock_pull_fields.call_count, 1)
+        self.assertEqual(self.mock_pull_boundaries.call_count, 1)
 
-    @mock_pulls
-    def test_lost_lease_discards_the_chunk(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
+    def test_lost_lease_discards_the_chunk(self):
         def steal_lease(org):
             SyncJob.objects.filter(id=self.job.id).update(lease_owner="thief")
             return outcome_counts()
 
-        mock_pull_fields.side_effect = steal_lease
-        mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_fields.side_effect = steal_lease
+        self.mock_pull_boundaries.return_value = outcome_counts()
 
         self._run()
 
         # the stage advance went down with the chunk - nothing was written
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.cursor, {})
-        self.assertEqual(job.status, SyncJob.STATUS_RUNNING)
+        self.assertJobState(self.job, cursor={}, status=SyncJob.STATUS_RUNNING)
         self.assertIsNone(self._task_state())  # a lost lease isn't this worker's failure
 
         # so the run that takes over pulls the fields stage again
-        mock_pull_fields.side_effect = None
-        mock_pull_fields.return_value = outcome_counts()
-        SyncJob.objects.filter(id=self.job.id).update(lease_owner=None, lease_expires_on=None)
+        self.mock_pull_fields.side_effect = None
+        self.mock_pull_fields.return_value = outcome_counts()
+        drop_lease(self.job)
 
         self._run()
 
-        self.assertEqual(mock_pull_fields.call_count, 2)
+        self.assertEqual(self.mock_pull_fields.call_count, 2)
         self.assertEqual(SyncJob.objects.get(id=self.job.id).cursor["stage"], "boundaries")
 
-    @mock_pulls
-    def test_first_run_seeds_since_from_legacy_cache_key(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
+    def test_first_run_seeds_since_from_legacy_cache_key(self):
         cache.set(self.last_fetched_key, "2026-08-10T10:00:00.000Z", None)
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
-        mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
 
         self._run(times=3)
 
-        self.assertEqual(mock_pull_contacts_chunk.call_args[0][1], "2026-08-10T10:00:00.000Z")
+        self.assertEqual(self.mock_pull_contacts_chunk.call_args[0][1], "2026-08-10T10:00:00.000Z")
 
-    @mock_pulls
-    def test_rate_limited_chunk_delays_continuation(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
-        mock_pull_contacts_chunk.return_value = ChunkResult(
+    def test_rate_limited_chunk_delays_continuation(self):
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.return_value = ChunkResult(
             counts=chunk_counts(created=3), cursor={"stage": "active", "resume": "c1"}, rate_limited=True
         )
 
@@ -278,34 +244,23 @@ class SyncContactsTest(UreportTest):
         self.assertEqual(job.progress["contacts_created"], 3)
         self.assertEqual(job.cursor["resume"], {"stage": "active", "resume": "c1"})
 
-    @mock_pulls
-    def test_backs_off_while_another_contact_task_holds_the_lock(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
-        lock = get_valkey_connection().lock(TaskState.get_lock_key(self.nigeria, JOB_TYPE), timeout=60)
-        self.assertTrue(lock.acquire(blocking=False))
-
-        try:
+    def test_backs_off_while_another_contact_task_holds_the_lock(self):
+        with held_lock(TaskState.get_lock_key(self.nigeria, JOB_TYPE)):
             mock_continue = self._run()
-        finally:
-            lock.release()
 
         mock_continue.assert_called_once_with((self.job.id,), queue="celery", countdown=LOCK_BACKOFF)
-        mock_pull_fields.assert_not_called()
-        self.assertEqual(SyncJob.objects.get(id=self.job.id).cursor, {})
+        self.mock_pull_fields.assert_not_called()
+        self.assertJobState(self.job, cursor={})
 
-    @mock_pulls
-    def test_completion_finalizes(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
-        mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
+    def test_completion_finalizes(self):
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
 
         self._run(times=3)
 
         job = SyncJob.objects.get(id=self.job.id)
-        mock_update_counts.assert_called_once_with(self.nigeria)
+        self.mock_update_counts.assert_called_once_with(self.nigeria)
         self.assertFalse(job.needs_finalize)
 
         # the pre-chunking task's resume point is kept up to date so a rollback resumes here
@@ -324,10 +279,7 @@ class SyncContactsTest(UreportTest):
         self.assertEqual(cache.get(self.last_fetched_key), job.cursor["last_until"])
         self.assertEqual(json.loads(self._task_state().last_results), {"rapidpro": job.progress})
 
-    @mock_pulls
-    def test_finalize_keeps_the_other_backends_results(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
+    def test_finalize_keeps_the_other_backends_results(self):
         self.nigeria.backends.create(
             slug="floip",
             backend_type=RAPIDPRO_BACKEND,
@@ -336,9 +288,9 @@ class SyncContactsTest(UreportTest):
             created_by=self.admin,
             modified_by=self.admin,
         )
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
-        mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(created=1), cursor={}, done=True)
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(created=1), cursor={}, done=True)
 
         self._run(times=3)
         rapidpro_progress = SyncJob.objects.get(id=self.job.id).progress
@@ -352,68 +304,54 @@ class SyncContactsTest(UreportTest):
             {"rapidpro": rapidpro_progress, "floip": floip_progress},
         )
 
-    @mock_pulls
-    def test_deactivated_backend_aborts_the_run(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
+    def test_deactivated_backend_aborts_the_run(self):
         cache.set(self.last_fetched_key, "2026-08-10T10:00:00.000Z", None)
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
 
         self._run(times=2)  # fields, boundaries - a run with a window in flight
         self.nigeria.backends.filter(slug="rapidpro").update(is_active=False)
 
         self._run()
 
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
-        mock_pull_contacts_chunk.assert_not_called()
+        self.mock_pull_contacts_chunk.assert_not_called()
 
         # the window this run never covered is left for the next one to pull again, and the
         # page cursor it was resuming from is dropped with it
-        self.assertEqual(job.cursor, {"last_until": "2026-08-10T10:00:00.000Z"})
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={"last_until": "2026-08-10T10:00:00.000Z"})
 
         # a run that didn't sync anything isn't reported as one that did
         self.assertEqual(cache.get(self.last_fetched_key), "2026-08-10T10:00:00.000Z")
         self.assertIsNone(self._task_state())
-        mock_update_counts.assert_not_called()
+        self.mock_update_counts.assert_not_called()
 
-    @mock_pulls
-    def test_deactivated_backend_leaves_an_idle_job_alone(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
+    def test_deactivated_backend_leaves_an_idle_job_alone(self):
         SyncJob.objects.filter(id=self.job.id).update(cursor={"last_until": "2026-08-10T10:00:00.000Z"})
         self.nigeria.backends.filter(slug="rapidpro").update(is_active=False)
 
         self._run()
 
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
-        self.assertEqual(job.cursor, {"last_until": "2026-08-10T10:00:00.000Z"})
-        mock_pull_fields.assert_not_called()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={"last_until": "2026-08-10T10:00:00.000Z"})
+        self.mock_pull_fields.assert_not_called()
 
-    @mock_pulls
-    def test_disabling_the_pull_aborts_the_run(
-        self, mock_pull_fields, mock_pull_boundaries, mock_pull_contacts_chunk, mock_update_counts
-    ):
-        mock_pull_fields.return_value = outcome_counts()
-        mock_pull_boundaries.return_value = outcome_counts()
+    def test_disabling_the_pull_aborts_the_run(self):
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
 
         self._run(times=2)  # fields, boundaries
         TaskState.objects.update_or_create(org=self.nigeria, task_key=JOB_TYPE, defaults={"is_disabled": True})
 
         self._run()
 
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
-        self.assertEqual(job.cursor, {})  # nothing to resume from, and no window claimed
-        self.assertEqual(job.progress["aborted"], 1)
-        mock_pull_contacts_chunk.assert_not_called()
+        # nothing to resume from, and no window claimed
+        job = self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={})
+        self.assertEqual(job.progress[ABORTED], 1)
+        self.mock_pull_contacts_chunk.assert_not_called()
 
         state = self._task_state()
         self.assertIsNone(state.last_successfully_started_on)
         self.assertIsNone(cache.get(self.last_fetched_key))
-        mock_update_counts.assert_not_called()
+        self.mock_update_counts.assert_not_called()
 
 
 class DispatchTest(UreportTest):
@@ -473,7 +411,7 @@ class DispatchTest(UreportTest):
         mock_enqueue.assert_not_called()
 
         # a run that stopped checkpointing entirely lost its continuation, so nudge it
-        SyncJob.objects.filter(id=job.id).update(modified_on=timezone.now() - STALE_RUN_AFTER - timedelta(minutes=1))
+        make_stale(job, seconds_ago=2 * LEASE_SECONDS + 60)
 
         with patch.object(sync_contacts, "apply_async") as mock_enqueue:
             sync_contacts_dispatch()

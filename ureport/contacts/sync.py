@@ -2,10 +2,6 @@
 
 import json
 import logging
-from datetime import timedelta
-
-from django_valkey import get_valkey_connection
-from valkey.exceptions import LockError
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -14,6 +10,8 @@ from dash.orgs.models import Org, TaskState
 from ureport.backend import BaseBackend
 from ureport.celery import app
 from ureport.contacts.models import Contact
+from ureport.syncjobs.dispatch import enqueue, in_flight
+from ureport.syncjobs.locks import chunk_lock
 from ureport.syncjobs.models import LeaseLost, SyncJob
 from ureport.syncjobs.tasks import chunked_task
 from ureport.utils import datetime_to_json_date, update_cache_org_contact_counts
@@ -35,12 +33,9 @@ RATE_LIMIT_BACKOFF = 60
 LOCK_BACKOFF = 300
 
 # must comfortably exceed the slowest single chunk - the fields and boundaries stages are
-# each one unbounded pull, and a lease that expires mid chunk loses that chunk's work
+# each one unbounded pull, and a lease that expires mid chunk loses that chunk's work. It is
+# also what tells beat a running job has stopped moving, see syncjobs.dispatch.in_flight
 LEASE_SECONDS = 60 * 30
-
-# a running job is driven by its own continuations, so beat only nudges one again if it has
-# gone this long without checkpointing - i.e. its continuation was lost, not just slow
-STALE_RUN_AFTER = timedelta(seconds=LEASE_SECONDS * 2)
 
 
 def _last_fetched_key(org, backend_slug):
@@ -78,11 +73,6 @@ def finalize_contacts_sync(job):
     """
     org = job.org
     if not org:
-        return
-
-    # an aborted run stopped without covering its window, so none of the below is true of it
-    if job.progress.get("aborted"):
-        logger.info("Job #%d (%s:%s) aborted, skipping finalization", job.id, JOB_TYPE, job.scope)
         return
 
     update_cache_org_contact_counts(org)
@@ -127,30 +117,28 @@ def sync_contacts(job):
         logger.info("Contact pull disabled for org #%d, stopping", org.pk)
         return _abort_run(job, cursor)
 
-    # the ad-hoc contact tasks still coordinate through this lock: two of them rebuild
-    # counters and need exclusive access, and the mismatch check reads it to tell a sync in
-    # progress from real drift
-    r = get_valkey_connection()
-    lock = r.lock(TaskState.get_lock_key(org, JOB_TYPE), timeout=LEASE_SECONDS)
-    if not lock.acquire(blocking=False):
-        logger.info("Contact pull lock held for org #%d, backing off", org.pk)
-        return LOCK_BACKOFF
+    with _contact_pull_lock(org) as acquired:
+        if not acquired:
+            logger.info("Contact pull lock held for org #%d, backing off", org.pk)
+            return job.back_off(LOCK_BACKOFF)
 
-    try:
-        return _run_chunk(job, org, backend_obj, cursor)
-    except LeaseLost:
-        # not our run to report on anymore - the worker that took it over owns its outcome
-        raise
-    except Exception:
-        _mark_state_failing(org)
-        raise
-    finally:
         try:
-            lock.release()
-        except LockError:
-            # the chunk outlived the lock's timeout - don't let that fail an otherwise
-            # successful chunk or mask an in-flight exception
-            logger.warning("Unable to release contact pull lock for org #%d as it is no longer owned", org.pk)
+            return _run_chunk(job, org, backend_obj, cursor)
+        except LeaseLost:
+            # not our run to report on anymore - the worker that took it over owns its outcome
+            raise
+        except Exception:
+            _mark_state_failing(org)
+            raise
+
+
+def _contact_pull_lock(org):
+    """
+    The lock the ad-hoc contact tasks still coordinate through: two of them rebuild counters
+    and need exclusive access, and the mismatch check reads it to tell a sync in progress
+    from real drift.
+    """
+    return chunk_lock(TaskState.get_lock_key(org, JOB_TYPE), LEASE_SECONDS)
 
 
 def _run_chunk(job, org, backend_obj, cursor):
@@ -170,13 +158,13 @@ def _run_chunk(job, org, backend_obj, cursor):
     if stage == STAGE_FIELDS:
         counts = BaseBackend._outcome_counts_dict(backend.pull_fields(org))
         cursor["stage"] = STAGE_BOUNDARIES
-        _checkpoint(job, cursor, job.add_progress(chunks=1, **_counts("fields", counts)))
+        job.checkpoint(cursor=cursor, progress=job.add_progress(chunks=1, **_counts("fields", counts)))
         return False
 
     if stage == STAGE_BOUNDARIES:
         counts = BaseBackend._outcome_counts_dict(backend.pull_boundaries(org))
         cursor["stage"] = STAGE_CONTACTS
-        _checkpoint(job, cursor, job.add_progress(chunks=1, **_counts("boundaries", counts)))
+        job.checkpoint(cursor=cursor, progress=job.add_progress(chunks=1, **_counts("boundaries", counts)))
         return False
 
     result = backend.pull_contacts_chunk(org, cursor.get("since"), cursor.get("until"), cursor.get("resume") or {})
@@ -184,11 +172,11 @@ def _run_chunk(job, org, backend_obj, cursor):
 
     if result.done:
         # window end becomes the next run's start, and what finalization dual-writes
-        _checkpoint(job, {"last_until": cursor.get("until")}, progress)
+        job.checkpoint(cursor={"last_until": cursor.get("until")}, progress=progress)
         return True
 
     cursor["resume"] = result.cursor
-    _checkpoint(job, cursor, progress)
+    job.checkpoint(cursor=cursor, progress=progress)
 
     return RATE_LIMIT_BACKOFF if result.rate_limited else False
 
@@ -205,12 +193,7 @@ def _abort_run(job, cursor):
         since = cursor.get("since")
         cursor = {"last_until": since} if since else {}
 
-    _checkpoint(job, cursor, job.add_progress(aborted=1))
-    return True
-
-
-def _checkpoint(job, cursor, progress):
-    job.checkpoint(cursor=cursor, progress=progress, lease_seconds=LEASE_SECONDS)
+    return job.abort(cursor=cursor)
 
 
 def enqueue_org_syncs(org):
@@ -225,27 +208,15 @@ def enqueue_org_syncs(org):
     for backend_obj in org.backends.filter(is_active=True):
         job = SyncJob.get_or_create_job(org, JOB_TYPE, scope=backend_obj.slug)
 
-        if job.status == SyncJob.STATUS_PAUSED or _is_in_flight(job, now):
+        if job.status == SyncJob.STATUS_PAUSED or in_flight(job, now):
             logger.info("Job #%d (%s:%s) not nudged, %s", job.id, JOB_TYPE, job.scope, job.get_status_display())
             skipped[backend_obj.slug] = job.id
             continue
 
         enqueued[backend_obj.slug] = job.id
-        sync_contacts.apply_async((job.id,), queue=QUEUE)
+        enqueue(job)
 
     return {"enqueued": enqueued, "skipped": skipped}
-
-
-def _is_in_flight(job, now):
-    """
-    Whether a run is already being driven, so that nudging it would only start a duplicate
-    chain of chunks. The lease is released between chunks, so a running job counts as in
-    flight until its continuation stops arriving - after which beat is what recovers it.
-    """
-    if job.lease_expires_on and job.lease_expires_on > now:
-        return True
-
-    return job.status == SyncJob.STATUS_RUNNING and job.modified_on > now - STALE_RUN_AFTER
 
 
 @app.task(name="contacts.sync_contacts_dispatch")

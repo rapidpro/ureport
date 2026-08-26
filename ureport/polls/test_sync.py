@@ -32,6 +32,7 @@ from ureport.polls.tasks import (
 )
 from ureport.polls.views import PollCRUDL
 from ureport.syncjobs.models import SyncJob
+from ureport.syncjobs.testing import SyncJobTestMixin, drop_lease, end_run, hold_lease, make_stale, run_task
 from ureport.tests import UreportTest
 from ureport.utils import datetime_to_json_date
 
@@ -50,7 +51,7 @@ def results_counts(**overrides):
     return counts
 
 
-class PollSyncTestBase(UreportTest):
+class PollSyncTestBase(SyncJobTestMixin, UreportTest):
     def setUp(self):
         super(PollSyncTestBase, self).setUp()
 
@@ -86,11 +87,6 @@ class SyncPollResultsTest(PollSyncTestBase):
         self.mock_queue_archives = self.start_patch(patch.object(sync_poll_archives, "apply_async"))
         self.mock_rebuild = self.start_patch(patch.object(Poll, "rebuild_poll_results_counts"))
 
-    def start_patch(self, patcher):
-        mock = patcher.start()
-        self.addCleanup(patcher.stop)
-        return mock
-
     def test_seeds_cursor_from_legacy_cache_key(self):
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, "uuid-1"), "2026-08-01T10:00:00.000Z", None)
 
@@ -98,16 +94,14 @@ class SyncPollResultsTest(PollSyncTestBase):
             mock_chunk.return_value = ChunkResult(
                 counts=results_counts(num_val_created=3), cursor={"after": "2026-08-02T10:00:00.000Z"}, done=True
             )
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         self.assertEqual(mock_chunk.call_args[0][1], {"after": "2026-08-01T10:00:00.000Z"})
 
     def test_starts_from_scratch_without_legacy_position(self):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": None}, done=True)
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         self.assertEqual(mock_chunk.call_args[0][1], {})
 
@@ -122,23 +116,17 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.side_effect = chunks
 
-            with patch.object(sync_poll_results, "apply_async") as mock_continue:
-                sync_poll_results(self.job.id)
+            mock_continue = run_task(sync_poll_results, self.job.id)
+            mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=None)
 
-                mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=None)
+            self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, cursor={"after": "t1", "resume": "c1"})
 
-                job = self.get_job()
-                self.assertEqual(job.status, SyncJob.STATUS_RUNNING)
-                self.assertEqual(job.cursor, {"after": "t1", "resume": "c1"})
-
-                # the continuation picks up from the checkpointed position
-                sync_poll_results(self.job.id)
+            # the continuation picks up from the checkpointed position
+            run_task(sync_poll_results, self.job.id)
 
         self.assertEqual(mock_chunk.call_args_list[1][0][1], {"after": "t1", "resume": "c1"})
 
-        job = self.get_job()
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
-        self.assertEqual(job.cursor, {"after": "t2"})
+        job = self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={"after": "t2"})
         self.assertEqual(job.progress["chunks"], 2)
         self.assertEqual(job.progress["num_val_created"], 3)
         self.assertEqual(job.progress["num_synced"], 15)
@@ -148,11 +136,10 @@ class SyncPollResultsTest(PollSyncTestBase):
             mock_chunk.return_value = ChunkResult(
                 counts=results_counts(), cursor={"after": "t1", "resume": "c1"}, rate_limited=True
             )
-            with patch.object(sync_poll_results, "apply_async") as mock_continue:
-                sync_poll_results(self.job.id)
+            mock_continue = run_task(sync_poll_results, self.job.id)
 
         mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=RATE_LIMITED_BACKOFF)
-        self.assertEqual(self.get_job().cursor, {"after": "t1", "resume": "c1"})
+        self.assertJobState(self.job, cursor={"after": "t1", "resume": "c1"})
 
     def test_rebuilds_counts_periodically(self):
         # a run four chunks in, i.e. between chunks of an interrupted traversal
@@ -161,14 +148,13 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(num_val_created=1), cursor={"after": "t5"})
 
-            with patch.object(sync_poll_results, "apply_async"):
-                # the fifth chunk rebuilds so partial results reach the public site
-                sync_poll_results(self.job.id)
-                self.mock_rebuild.assert_called_once()
+            # the fifth chunk rebuilds so partial results reach the public site
+            run_task(sync_poll_results, self.job.id)
+            self.mock_rebuild.assert_called_once()
 
-                self.mock_rebuild.reset_mock()
-                sync_poll_results(self.job.id)
-                self.mock_rebuild.assert_not_called()
+            self.mock_rebuild.reset_mock()
+            run_task(sync_poll_results, self.job.id)
+            self.mock_rebuild.assert_not_called()
 
     def test_queues_archives_on_first_sync(self):
         self.mock_flow_date.return_value = None
@@ -176,8 +162,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t1"}, done=True)
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         archives_job = self.get_job(ARCHIVES_JOB_TYPE)
         self.mock_queue_archives.assert_called_once_with((archives_job.id,), queue="sync")
@@ -186,14 +171,13 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t1"}, done=True)
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
-                self.mock_queue_archives.assert_not_called()
+            run_task(sync_poll_results, self.job.id)
+            self.mock_queue_archives.assert_not_called()
 
-                # nor once the polls on the flow have completed their first sync
-                self.mock_flow_date.return_value = None
-                sync_poll_results(self.job.id)
-                self.mock_queue_archives.assert_not_called()
+            # nor once the polls on the flow have completed their first sync
+            self.mock_flow_date.return_value = None
+            run_task(sync_poll_results, self.job.id)
+            self.mock_queue_archives.assert_not_called()
 
         self.assertTrue(Poll.objects.get(id=self.poll.id).has_synced)
         self.assertFalse(SyncJob.objects.filter(job_type=ARCHIVES_JOB_TYPE).exists())
@@ -216,8 +200,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         # the traversal starts over, the deleted results are gone and the archives are walked again
         self.assertEqual(mock_chunk.call_args[0][1], {})
@@ -243,12 +226,10 @@ class SyncPollResultsTest(PollSyncTestBase):
                 with self.assertRaises(ValueError):
                     sync_poll_results(self.job.id)
 
-                job = self.get_job()
-                self.assertEqual(job.status, SyncJob.STATUS_FAILED)
-                self.assertEqual(job.cursor, {})
+            self.assertJobState(self.job, status=SyncJob.STATUS_FAILED, cursor={})
 
-                # the retry pulls from scratch rather than resuming past the deleted results
-                sync_poll_results(self.job.id)
+            # the retry pulls from scratch rather than resuming past the deleted results
+            run_task(sync_poll_results, self.job.id)
 
         self.assertEqual(mock_chunk.call_args[0][1], {})
 
@@ -263,8 +244,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         self.assertEqual(mock_chunk.call_args[0][1], {})
         self.assertEqual(mock_chunk.call_args[0][0].pk, newest.pk)
@@ -288,15 +268,14 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"})
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
-                # its worker still owns the cursor, so the reset is deferred, not dropped
-                self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {"before": "2026-01-01"})
-                self.assertEqual(self.get_job().progress["archives_reset_pending"], 1)
+            # its worker still owns the cursor, so the reset is deferred, not dropped
+            self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {"before": "2026-01-01"})
+            self.assertEqual(self.get_job().progress["archives_reset_pending"], 1)
 
-                SyncJob.objects.filter(id=archives_job.id).update(lease_owner=None, lease_expires_on=None)
-                sync_poll_results(self.job.id)
+            drop_lease(archives_job)
+            run_task(sync_poll_results, self.job.id)
 
         self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {})
         self.assertNotIn("archives_reset_pending", self.get_job().progress)
@@ -314,7 +293,7 @@ class SyncPollResultsTest(PollSyncTestBase):
                 with self.assertRaises(ValueError):
                     sync_poll_results(self.job.id)
 
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         # one job, nudged by both attempts - the failed one never got to run the archives
         self.assertEqual(SyncJob.objects.filter(job_type=ARCHIVES_JOB_TYPE, scope="uuid-1").count(), 1)
@@ -324,8 +303,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(num_val_ignored=7), cursor={}, done=True)
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         self.mock_rebuild.assert_not_called()
         self.assertTrue(Poll.objects.get(id=self.poll.id).has_synced)
@@ -342,13 +320,12 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         # the leftover finalize saw the completed run's counters, this run's changed nothing
         self.mock_rebuild.assert_called_once()
         self.assertTrue(Poll.objects.get(id=self.poll.id).has_synced)
-        self.assertFalse(self.get_job().needs_finalize)
+        self.assertJobState(self.job, needs_finalize=False)
         self.assertEqual(cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, "uuid-1")), "t2")
 
     def test_completed_cursor_is_not_reseeded_from_the_legacy_key(self):
@@ -359,8 +336,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t3"}, done=True)
 
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         self.assertEqual(mock_chunk.call_args[0][1], {"after": "t2"})
 
@@ -371,8 +347,7 @@ class SyncPollResultsTest(PollSyncTestBase):
             mock_chunk.return_value = ChunkResult(
                 counts=results_counts(num_val_created=1), cursor={"after": "2026-08-11T09:00:00.000Z"}, done=True
             )
-            with patch.object(sync_poll_results, "apply_async"):
-                sync_poll_results(self.job.id)
+            run_task(sync_poll_results, self.job.id)
 
         self.mock_rebuild.assert_called_once()
 
@@ -391,13 +366,12 @@ class SyncPollResultsTest(PollSyncTestBase):
         Poll.objects.filter(id=self.poll.id).update(stopped_syncing=True)
 
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
-            with patch.object(sync_poll_results, "apply_async") as mock_continue:
-                sync_poll_results(self.job.id)
+            mock_continue = run_task(sync_poll_results, self.job.id)
 
         mock_chunk.assert_not_called()
         mock_continue.assert_not_called()
         self.mock_rebuild.assert_not_called()
-        self.assertEqual(self.get_job().status, SyncJob.STATUS_COMPLETE)
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
 
 
 class SyncPollArchivesTest(PollSyncTestBase):
@@ -415,20 +389,16 @@ class SyncPollArchivesTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_from_archives_chunk") as mock_chunk:
             mock_chunk.side_effect = chunks
 
-            with (
-                patch.object(sync_poll_archives, "apply_async") as mock_continue,
-                patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild,
-            ):
-                sync_poll_archives(self.job.id)
+            with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
+                mock_continue = run_task(sync_poll_archives, self.job.id)
                 mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=None)
 
-                sync_poll_archives(self.job.id)
+                run_task(sync_poll_archives, self.job.id)
 
         self.assertEqual(mock_chunk.call_args_list[1][0][1], {"before": "2026-07-01", "seen": ["a"]})
         mock_rebuild.assert_called_once()
 
-        job = self.get_job(ARCHIVES_JOB_TYPE)
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
+        job = self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
         self.assertEqual(job.progress["chunks"], 2)
 
         self.poll.refresh_from_db()
@@ -438,11 +408,8 @@ class SyncPollArchivesTest(PollSyncTestBase):
         with patch.object(RapidProBackend, "pull_results_from_archives_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"before": "2026-06-01"}, done=True)
 
-            with (
-                patch.object(sync_poll_archives, "apply_async"),
-                patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild,
-            ):
-                sync_poll_archives(self.job.id)
+            with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
+                run_task(sync_poll_archives, self.job.id)
 
         mock_rebuild.assert_not_called()
         self.poll.refresh_from_db()
@@ -453,8 +420,7 @@ class SyncPollArchivesTest(PollSyncTestBase):
             mock_chunk.return_value = ChunkResult(
                 counts=results_counts(), cursor={"before": "2026-07-01"}, rate_limited=True
             )
-            with patch.object(sync_poll_archives, "apply_async") as mock_continue:
-                sync_poll_archives(self.job.id)
+            mock_continue = run_task(sync_poll_archives, self.job.id)
 
         mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=RATE_LIMITED_BACKOFF)
 
@@ -492,35 +458,86 @@ class DispatchTest(PollSyncTestBase):
 
     def test_queues_unsynced_polls_every_pass(self):
         # the unsynced poll is queued even though its job just completed
-        job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
-        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_COMPLETE, ended_on=timezone.now())
+        end_run(SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1"))
 
         self.assertIn("uuid-1", self.dispatch())
+
+    def complete_runs(self, started_on, ended_on):
+        """
+        Leaves every results job of the org as a run that started and ended when given.
+        """
+        SyncJob.objects.filter(org=self.nigeria, job_type=RESULTS_JOB_TYPE).update(
+            status=SyncJob.STATUS_COMPLETE, started_on=started_on, ended_on=ended_on
+        )
 
     def test_respects_cadence_of_completed_jobs(self):
         now = timezone.now()
         self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main", "uuid-other"})
 
-        SyncJob.objects.filter(org=self.nigeria, job_type=RESULTS_JOB_TYPE).update(
-            status=SyncJob.STATUS_COMPLETE, ended_on=now - timedelta(minutes=10)
-        )
+        self.complete_runs(now - timedelta(minutes=11), now - timedelta(minutes=10))
         self.assertEqual(self.dispatch(), {"uuid-1"})
 
         # the main poll is due again after twenty minutes, the other poll only after a day
-        SyncJob.objects.filter(org=self.nigeria, job_type=RESULTS_JOB_TYPE).update(
-            status=SyncJob.STATUS_COMPLETE, ended_on=now - timedelta(minutes=30)
-        )
+        self.complete_runs(now - timedelta(minutes=31), now - timedelta(minutes=30))
         self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main"})
 
-        SyncJob.objects.filter(org=self.nigeria, job_type=RESULTS_JOB_TYPE).update(
-            status=SyncJob.STATUS_COMPLETE, ended_on=now - timedelta(days=2)
-        )
+        self.complete_runs(now - timedelta(days=2), now - timedelta(days=2))
         self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main", "uuid-other"})
 
-    def test_skips_jobs_under_a_live_lease(self):
-        SyncJob.objects.filter(id=SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1").id).update(
-            lease_owner="worker-1", lease_expires_on=timezone.now() + timedelta(minutes=5)
+    def test_cadence_is_spent_by_a_long_run(self):
+        # the cadence is how often a run should start, so a run that takes longer than it
+        # leaves the next one due as soon as it ends rather than a whole cadence later
+        now = timezone.now()
+        self.dispatch()  # the jobs the cadence applies to exist once their flows are dispatched
+
+        self.complete_runs(now - timedelta(hours=3), now - timedelta(minutes=1))
+
+        self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main"})
+
+        # the daily cadence hasn't been spent by three hours, so the other poll waits
+        self.complete_runs(now - timedelta(days=2), now - timedelta(minutes=1))
+        self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main", "uuid-other"})
+
+    def test_failure_backoff_never_outpaces_the_cadence(self):
+        # a job that fails after a run long enough to spend its cadence is held back by the
+        # backoff alone, which must not retry it faster than it would run when healthy
+        now = timezone.now()
+        job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-other")
+        end_run(
+            job,
+            status=SyncJob.STATUS_FAILED,
+            started_on=now - timedelta(days=3),
+            ended_on=now - timedelta(hours=2),
+            failures=1,
         )
+
+        self.assertNotIn("uuid-other", self.dispatch())
+
+        # and once its own cadence is up, it is retried
+        end_run(
+            job,
+            status=SyncJob.STATUS_FAILED,
+            started_on=now - timedelta(days=3),
+            ended_on=now - timedelta(days=2),
+            failures=1,
+        )
+
+        self.assertIn("uuid-other", self.dispatch())
+
+    def test_nudges_a_run_that_never_ended(self):
+        # a chain that died without recording a failure left no end to schedule the next run
+        # from, so it is nudged as soon as it stops checkpointing, whatever its cadence
+        now = timezone.now()
+        job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-other")
+        SyncJob.objects.filter(id=job.id).update(
+            status=SyncJob.STATUS_RUNNING, started_on=now - timedelta(minutes=5), ended_on=None
+        )
+        make_stale(job, seconds_ago=3 * 60 * 60)
+
+        self.assertIn("uuid-other", self.dispatch())
+
+    def test_skips_jobs_under_a_live_lease(self):
+        hold_lease(SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1"))
 
         self.assertNotIn("uuid-1", self.dispatch())
 
@@ -533,7 +550,7 @@ class DispatchTest(PollSyncTestBase):
 
         # but a run that stopped checkpointing is picked back up - the recovery nudge for a
         # chain that died without recording a failure
-        SyncJob.objects.filter(id=job.id).update(modified_on=timezone.now() - timedelta(hours=3))
+        make_stale(job, seconds_ago=3 * 60 * 60)
 
         self.assertIn("uuid-1", self.dispatch())
 
@@ -542,19 +559,17 @@ class DispatchTest(PollSyncTestBase):
         job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
 
         # a failed job is not retried at the dispatcher's rate, even at the always-due cadence
-        SyncJob.objects.filter(id=job.id).update(
-            status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(minutes=5), consecutive_failures=1
-        )
+        end_run(job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(minutes=5), failures=1)
         self.assertNotIn("uuid-1", self.dispatch())
 
-        SyncJob.objects.filter(id=job.id).update(ended_on=now - timedelta(minutes=25))
+        end_run(job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(minutes=25), failures=1)
         self.assertIn("uuid-1", self.dispatch())
 
         # and the streak stretches the wait
-        SyncJob.objects.filter(id=job.id).update(consecutive_failures=3)
+        end_run(job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(minutes=25), failures=3)
         self.assertNotIn("uuid-1", self.dispatch())
 
-        SyncJob.objects.filter(id=job.id).update(ended_on=now - timedelta(hours=3))
+        end_run(job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=3), failures=3)
         self.assertIn("uuid-1", self.dispatch())
 
     def test_never_queues_paused_jobs(self):
@@ -566,11 +581,9 @@ class DispatchTest(PollSyncTestBase):
     def test_nudges_unfinished_archive_traversals(self):
         now = timezone.now()
         failed = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
-        SyncJob.objects.filter(id=failed.id).update(
-            status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=2), consecutive_failures=1
-        )
+        end_run(failed, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=2), failures=1)
         done = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-main")
-        SyncJob.objects.filter(id=done.id).update(status=SyncJob.STATUS_COMPLETE, ended_on=now)
+        end_run(done, ended_on=now)
         paused = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-other")
         SyncJob.objects.filter(id=paused.id).update(status=SyncJob.STATUS_PAUSED)
 
@@ -628,7 +641,7 @@ class TaskShimTest(PollSyncTestBase):
 
     def test_pull_refresh_from_archives_restarts_the_traversal(self):
         job = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
-        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_COMPLETE, cursor={"before": "2026-01-01"})
+        end_run(job, cursor={"before": "2026-01-01"})
 
         with patch.object(sync_poll_archives, "apply_async") as mock_queue:
             pull_refresh_from_archives(self.poll.pk)
@@ -694,17 +707,14 @@ class ClearOldResultsTest(PollSyncTestBase):
 
     def test_leaves_a_flow_alone_while_its_sync_holds_the_lease(self):
         job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
-        SyncJob.objects.filter(id=job.id).update(
-            status=SyncJob.STATUS_RUNNING,
-            lease_owner="worker-1",
-            lease_expires_on=timezone.now() + timedelta(minutes=5),
-        )
+        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_RUNNING)
+        hold_lease(job)
 
         self.clear().assert_not_called()
         self.assertFalse(Poll.objects.get(id=self.poll.id).stopped_syncing)
 
         # once the lease is gone the results can be cleared
-        SyncJob.objects.filter(id=job.id).update(lease_owner=None, lease_expires_on=None)
+        drop_lease(job)
 
         self.clear().assert_called_once()
         self.assertTrue(Poll.objects.get(id=self.poll.id).stopped_syncing)
@@ -725,14 +735,11 @@ class SyncStatusTest(PollSyncTestBase):
         job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
         self.assertEqual(self.view.get_sync_status(self.poll), "Synced")
 
-        SyncJob.objects.filter(id=job.id).update(
-            status=SyncJob.STATUS_COMPLETE, ended_on=timezone.now() - timedelta(hours=8)
-        )
+        end_run(job, ended_on=timezone.now() - timedelta(hours=8))
         self.assertIn("8", self.view.get_sync_status(self.poll))
 
-        SyncJob.objects.filter(id=job.id).update(
-            status=SyncJob.STATUS_RUNNING, lease_expires_on=timezone.now() + timedelta(minutes=5)
-        )
+        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_RUNNING)
+        hold_lease(job)
         self.assertIn("in progress", self.view.get_sync_status(self.poll))
 
     def test_reports_progress_for_an_unsynced_poll(self):
