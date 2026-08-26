@@ -4,11 +4,11 @@ import logging
 from datetime import timedelta
 
 from django.core.cache import cache
-from django.db.models import Q
 from django.utils import timezone
 
 from dash.orgs.models import Org
 from ureport.celery import app
+from ureport.syncjobs.dispatch import Backoff, enqueue, is_due
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tasks import chunked_task
 
@@ -40,11 +40,9 @@ MAIN_POLL_INTERVAL = timedelta(minutes=20)
 RECENT_POLLS_INTERVAL = timedelta(hours=1)
 OTHER_POLLS_INTERVAL = timedelta(hours=24)
 
-# a failing job backs off exponentially from this, so a deterministically broken sync isn't
-# retried at the dispatcher's full rate
-FAILURE_BACKOFF = timedelta(minutes=20)
-MAX_FAILURE_BACKOFF = timedelta(hours=24)
-MAX_BACKOFF_DOUBLINGS = 10
+# a failing job backs off exponentially, so a deterministically broken sync isn't retried at
+# the dispatcher's full rate
+FAILURE_BACKOFF = Backoff(base=timedelta(minutes=20), cap=timedelta(hours=24), max_doublings=10)
 
 # other polls created this recently are covered by the recent polls cadence
 OTHER_POLLS_NEW_WINDOW = timedelta(days=7)
@@ -69,14 +67,14 @@ def queue_results_sync(org, flow_uuid, reset_cursor=False):
     """
     Ensures the results job for this flow exists and asks for a chunk of it to run.
     """
-    return _queue(sync_poll_results, SyncJob.get_or_create_job(org, RESULTS_JOB_TYPE, flow_uuid), reset_cursor)
+    return _queue(SyncJob.get_or_create_job(org, RESULTS_JOB_TYPE, flow_uuid), reset_cursor)
 
 
 def queue_archives_sync(org, flow_uuid, reset_cursor=False):
     """
     Ensures the archives job for this flow exists and asks for a chunk of it to run.
     """
-    return _queue(sync_poll_archives, SyncJob.get_or_create_job(org, ARCHIVES_JOB_TYPE, flow_uuid), reset_cursor)
+    return _queue(SyncJob.get_or_create_job(org, ARCHIVES_JOB_TYPE, flow_uuid), reset_cursor)
 
 
 def is_flow_syncing(org_id, flow_uuid):
@@ -93,34 +91,12 @@ def is_flow_syncing(org_id, flow_uuid):
     ).exists()
 
 
-def _queue(task, job, reset_cursor=False):
+def _queue(job, reset_cursor=False):
     if reset_cursor:
-        _reset_cursor(job)
+        job.reset_cursor()
 
-    _enqueue(task, job)
+    enqueue(job)
     return job
-
-
-def _enqueue(task, job):
-    task.apply_async((job.id,), queue=SYNC_QUEUE)
-
-
-def _reset_cursor(job):
-    """
-    Sends a job back to the start of its traversal, e.g. when the results it synced have
-    been deleted. A job under a live lease is left alone - its worker owns the cursor -
-    so callers must retry a refused reset rather than assume it landed.
-    """
-    now = timezone.now()
-    updated = (
-        SyncJob.objects.filter(id=job.id)
-        .filter(Q(lease_expires_on__isnull=True) | Q(lease_expires_on__lt=now))
-        .update(cursor={}, modified_on=now)
-    )
-    if updated:
-        job.refresh_from_db()
-
-    return bool(updated)
 
 
 def _get_backend(poll):
@@ -170,11 +146,11 @@ def _queue_archives_rewalk(poll):
     """
     job = SyncJob.get_or_create_job(poll.org, ARCHIVES_JOB_TYPE, poll.flow_uuid)
 
-    reset = _reset_cursor(job)
+    reset = job.reset_cursor()
     if not reset:
         logger.warning("Archives job #%d is still running, deferring its cursor reset" % job.id)
 
-    _enqueue(sync_poll_archives, job)
+    enqueue(job)
     return reset
 
 
@@ -254,14 +230,14 @@ def sync_poll_results(job):
         # flag and the legacy position key, so a crash in between would leave the old
         # cursor resuming an incremental pull over results that are gone. Crashing after
         # this checkpoint instead just deletes and re-pulls again, which is harmless.
-        job.checkpoint(cursor={}, lease_seconds=RESULTS_LEASE_SECONDS)
+        job.checkpoint(cursor={})
         cursor = {}
 
         _delete_flow_results(job, poll)
 
         # everything synced so far is discarded, so the archives have to be walked again too
         reset_pending = not _queue_archives_rewalk(poll)
-        job.checkpoint(progress=_set_reset_pending(job.progress, reset_pending), lease_seconds=RESULTS_LEASE_SECONDS)
+        job.checkpoint(progress=_set_reset_pending(job.progress, reset_pending))
     else:
         if reset_pending:
             reset_pending = not _queue_archives_rewalk(poll)
@@ -285,7 +261,7 @@ def sync_poll_results(job):
     result = _get_backend(poll).pull_results_chunk(poll, cursor)
 
     progress = _set_reset_pending(job.add_progress(chunks=1, **result.counts), reset_pending)
-    job.checkpoint(cursor=result.cursor, progress=progress, lease_seconds=RESULTS_LEASE_SECONDS)
+    job.checkpoint(cursor=result.cursor, progress=progress)
 
     if result.done:
         return True
@@ -295,7 +271,7 @@ def sync_poll_results(job):
 
         # a rebuild of a big flow can outlast the lease, so renew before the next chunk -
         # if it's gone this raises and the chunk is dropped rather than writing on
-        job.checkpoint(lease_seconds=RESULTS_LEASE_SECONDS)
+        job.checkpoint()
 
     return RATE_LIMITED_BACKOFF if result.rate_limited else False
 
@@ -314,11 +290,7 @@ def sync_poll_archives(job):
 
     result = _get_backend(poll).pull_results_from_archives_chunk(poll, dict(job.cursor or {}))
 
-    job.checkpoint(
-        cursor=result.cursor,
-        progress=job.add_progress(chunks=1, **result.counts),
-        lease_seconds=ARCHIVES_LEASE_SECONDS,
-    )
+    job.checkpoint(cursor=result.cursor, progress=job.add_progress(chunks=1, **result.counts))
 
     if result.done:
         return True
@@ -380,8 +352,8 @@ def dispatch_archives(org):
 
     jobs = SyncJob.objects.filter(org=org, job_type=ARCHIVES_JOB_TYPE).exclude(status=SyncJob.STATUS_COMPLETE)
     for job in jobs:
-        if _is_due(job, None, now):
-            _enqueue(sync_poll_archives, job)
+        if is_due(job, now, backoff=FAILURE_BACKOFF):
+            enqueue(job)
             queued.append(job.scope)
 
     return queued
@@ -405,47 +377,8 @@ def dispatch_flows(org, flow_uuids, interval=None, handled=None):
         handled.add(flow_uuid)
 
         job = SyncJob.get_or_create_job(org, RESULTS_JOB_TYPE, flow_uuid)
-        if _is_due(job, interval, now):
-            _queue(sync_poll_results, job)
+        if is_due(job, now, interval=interval, backoff=FAILURE_BACKOFF):
+            _queue(job)
             queued.append(flow_uuid)
 
     return queued
-
-
-def _is_due(job, interval, now):
-    """
-    A job is due unless it is paused, a run is still moving, or its last run ended recently
-    enough - for the cadence asked for, an interval of None meaning any finished run is
-    stale, or for the backoff its failure streak has earned. The failure backoff matters
-    because a job that fails deterministically would otherwise be retried on every pass.
-    """
-    if job.status == SyncJob.STATUS_PAUSED or _in_flight(job, now):
-        return False
-
-    wait = interval
-    if job.consecutive_failures:
-        doublings = min(job.consecutive_failures - 1, MAX_BACKOFF_DOUBLINGS)
-        backoff = min(FAILURE_BACKOFF * 2**doublings, MAX_FAILURE_BACKOFF)
-        wait = max(wait, backoff) if wait else backoff
-
-    if not wait:
-        return True
-
-    return not (job.ended_on and job.ended_on > now - wait)
-
-
-def _in_flight(job, now):
-    """
-    Whether a run is still moving: a live lease, or a running job that checkpointed
-    recently - chunks release the lease between continuations, so a healthy run looks idle
-    from here while its next message waits in the queue. A running job that stopped
-    checkpointing is deliberately not in flight: nudging it is how a chain that died
-    without recording a failure gets picked back up.
-    """
-    if job.lease_expires_on and job.lease_expires_on > now:
-        return True
-
-    lease_seconds = ARCHIVES_LEASE_SECONDS if job.job_type == ARCHIVES_JOB_TYPE else RESULTS_LEASE_SECONDS
-    stale_after = now - timedelta(seconds=2 * lease_seconds)
-
-    return job.status == SyncJob.STATUS_RUNNING and bool(job.modified_on) and job.modified_on > stale_after

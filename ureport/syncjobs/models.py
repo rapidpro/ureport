@@ -26,6 +26,10 @@ DEFAULT_FAILING_THRESHOLD = 3
 # where the monitor task leaves its findings for the status page
 STATUS_CACHE_KEY = "syncjobs_status"
 
+# progress key marking a run that ended without covering its work - see SyncJob.abort. Named
+# so that it can't collide with a counter an app keeps, whatever it calls it
+ABORTED = "__aborted"
+
 
 class LeaseLost(Exception):
     """
@@ -113,6 +117,15 @@ class SyncJob(models.Model):
 
     objects = SyncJobQuerySet.as_manager()
 
+    # how long the lease a chunk renews at each checkpoint lasts. Stamped by chunked_task on
+    # the job it hands its chunk, from what the task declared - a job fetched anywhere else,
+    # including one a chunk re-fetches for itself, checkpoints for the default instead
+    lease_seconds = DEFAULT_LEASE_SECONDS
+
+    # whether the claim this job is held under started a run rather than resuming one, set
+    # by claim(). Unclaimed jobs aren't running anything, so nothing is fresh about them
+    new_run = False
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -134,7 +147,8 @@ class SyncJob(models.Model):
         live lease is not - including the lease deliberately held through finalization.
         Claiming a job whose previous run finished (or never started) begins a new run;
         claiming a running or failed job resumes the interrupted run. Returns the refreshed
-        job if the claim succeeded, None otherwise.
+        job - with new_run saying which of those it did - if the claim succeeded, None
+        otherwise.
         """
         now = timezone.now()
         resuming = Q(status__in=(self.STATUS_RUNNING, self.STATUS_FAILED))
@@ -160,18 +174,30 @@ class SyncJob(models.Model):
             return None
 
         self.refresh_from_db()
+
+        # only a claim that started a run stamped this now onto started_on, so it is what
+        # says which of the two this claim was - the state the job was in beforehand can't,
+        # a run may have ended between reading it and claiming
+        self.new_run = self.started_on == now
+
         return self
 
-    def checkpoint(self, cursor=None, progress=None, lease_seconds=DEFAULT_LEASE_SECONDS):
+    def checkpoint(self, cursor=None, progress=None, lease_seconds=None):
         """
         Persists the job's resume position and renews its lease. When the chunk's data
         writes are transactional, call this inside the same transaction so the cursor can
         never run ahead of or behind the data; chunks whose writes autocommit must instead
         make them idempotent under replay from the previous cursor. Raises LeaseLost if
         this worker no longer owns the job.
+
+        The lease is renewed for as long as the task declared when it claimed the job,
+        unless a chunk asks for something different.
         """
         if not self.lease_owner:
             raise LeaseLost(f"no lease held on job #{self.id} ({self.job_type}:{self.scope})")
+
+        if lease_seconds is None:
+            lease_seconds = self.lease_seconds
 
         now = timezone.now()
         updates = dict(lease_expires_on=now + timedelta(seconds=lease_seconds), modified_on=now)
@@ -198,6 +224,28 @@ class SyncJob(models.Model):
         for key, value in counts.items():
             progress[key] = progress.get(key, 0) + value
         return progress
+
+    def abort(self, cursor=None, **counts):
+        """
+        Ends a run that can't do the work it was claimed for - the thing it syncs went away,
+        or was disabled - by checkpointing the position the next run should pick up from
+        (nothing, unless the chunk knows better) and marking the run aborted, so that
+        completion doesn't report it as a run that covered its work. Returns True, i.e. done,
+        so that a chunk can return it directly.
+        """
+        self.checkpoint(cursor={} if cursor is None else cursor, progress=self.add_progress(**counts, **{ABORTED: 1}))
+        return True
+
+    def back_off(self, seconds, **counts):
+        """
+        Records that this chunk couldn't do its work yet - typically because something it
+        needs is held elsewhere - and returns the delay to wait before the continuation, so
+        that a chunk can return it directly. Only writes if there are counters to record.
+        """
+        if counts:
+            self.checkpoint(progress=self.add_progress(**counts))
+
+        return seconds
 
     def mark_complete(self, needs_finalize=False):
         """
@@ -341,6 +389,18 @@ class SyncJob(models.Model):
         self.refresh_from_db()
         return True
 
+    def reset_cursor(self):
+        """
+        Sends a job back to the start of its traversal, e.g. when what it synced has been
+        deleted, without otherwise disturbing its run state. A job under a live lease is
+        left alone - its worker owns the cursor - so callers must retry a refused reset
+        rather than assume it landed. Returns whether it was applied.
+
+        A refusal is left for the caller to report: unlike an operator's action, it is an
+        ordinary outcome, and what it means depends on what the caller does about it.
+        """
+        return self._update_unleased(warn=False, cursor={})
+
     def force_resync(self):
         """
         Discards the job's resume position so the next run starts from scratch, e.g. after
@@ -359,10 +419,11 @@ class SyncJob(models.Model):
             lease_expires_on=None,
         )
 
-    def _update_unleased(self, **updates):
+    def _update_unleased(self, warn=True, **updates):
         """
-        Applies an operator update only while no worker holds a live lease, so manual
-        intervention can never clobber a chunk that is still running.
+        Applies an update only while no worker holds a live lease, so it can never clobber a
+        chunk that is still running. A refusal is worth reporting for an operator's action,
+        which is why it warns unless the caller says it does its own reporting.
         """
         now = timezone.now()
 
@@ -372,7 +433,8 @@ class SyncJob(models.Model):
             .update(modified_on=now, **updates)
         )
         if not updated:
-            logger.warning("Job #%d (%s:%s) is leased, update skipped", self.id, self.job_type, self.scope)
+            if warn:
+                logger.warning("Job #%d (%s:%s) is leased, update skipped", self.id, self.job_type, self.scope)
             return False
 
         self.refresh_from_db()

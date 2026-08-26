@@ -6,19 +6,43 @@ from celery.exceptions import Retry
 
 from django.contrib.auth.models import User
 from django.core.cache import cache
+from django.core.exceptions import ImproperlyConfigured
 from django.db import IntegrityError, transaction
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
 from dash.orgs.models import Org
-from ureport.syncjobs.models import MAX_ERROR_LENGTH, MAX_ERROR_SUMMARY_LENGTH, STATUS_CACHE_KEY, LeaseLost, SyncJob
-from ureport.syncjobs.tasks import MAX_REPORTED_JOBS, check_jobs, chunked_task
+from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due
+from ureport.syncjobs.models import (
+    ABORTED,
+    DEFAULT_LEASE_SECONDS,
+    MAX_ERROR_LENGTH,
+    MAX_ERROR_SUMMARY_LENGTH,
+    STATUS_CACHE_KEY,
+    LeaseLost,
+    SyncJob,
+)
+from ureport.syncjobs.tasks import JOB_TASKS, MAX_REPORTED_JOBS, check_jobs, chunked_task
+from ureport.syncjobs.testing import (
+    SyncJobTestMixin,
+    drop_lease,
+    end_run,
+    expire_lease,
+    hold_lease,
+    make_stale,
+    make_task,
+    reload,
+    run_task,
+    run_to_completion,
+)
 from ureport.tests import UreportTest
 
 
-class SyncJobTest(TestCase):
+class SyncJobTest(SyncJobTestMixin, TestCase):
     def setUp(self):
+        super().setUp()
+
         self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
 
     def test_get_or_create_is_idempotent(self):
@@ -152,6 +176,86 @@ class SyncJobTest(TestCase):
         self.assertGreater(self.job.lease_expires_on, first_expiry)
         self.assertEqual(self.job.cursor, {"after": "t1"})
 
+    def test_checkpoint_renews_for_the_declared_lease(self):
+        # a job nobody declared a lease for - one claimed by hand, or re-fetched by a chunk
+        # rather than the one its task handed it - renews for the default
+        self.job.claim("worker-1", lease_seconds=60)
+
+        self.job.checkpoint(cursor={"after": "t1"})
+        self.assertAlmostEqual(
+            (self.job.lease_expires_on - timezone.now()).total_seconds(), DEFAULT_LEASE_SECONDS, delta=30
+        )
+
+        # and one a task stamped renews for as long as that task claimed it
+        self.job.lease_seconds = 1800
+        self.job.checkpoint(cursor={"after": "t2"})
+        self.assertAlmostEqual((self.job.lease_expires_on - timezone.now()).total_seconds(), 1800, delta=30)
+
+    def test_claim_reports_whether_it_started_a_run(self):
+        claimed = self.job.claim("worker-1")
+        self.assertTrue(claimed.new_run)
+        claimed.checkpoint(cursor={"after": "t1"})
+        claimed.release_lease()
+
+        # the continuation of a run in flight resumes it, so it isn't a new one - and the
+        # state the job was in before the claim can't say that: a run may have ended between
+        # reading it and claiming, which is what a duplicate delivery does
+        self.assertFalse(reload(self.job).claim("worker-2").new_run)
+
+        # nor is the retry of a failed one
+        self.job.refresh_from_db()
+        self.job.record_failure("boom")
+        self.assertFalse(reload(self.job).claim("worker-3").new_run)
+
+        # but the next claim of a job whose run ended is
+        self.job.refresh_from_db()
+        self.job.mark_complete()
+        self.job.release_lease()
+        self.assertTrue(reload(self.job).claim("worker-4").new_run)
+
+        # an unclaimed job is running nothing, so nothing about it is fresh
+        self.assertFalse(SyncJob.get_or_create_job(None, "test-sync", "flow-2").new_run)
+
+    def test_abort(self):
+        self.job.claim("worker-1")
+        self.job.checkpoint(cursor={"stage": "contacts"}, progress={"chunks": 2})
+
+        # aborting is done, with nothing left for the next run to resume from
+        self.assertTrue(self.job.abort(skipped=1))
+        self.assertJobState(self.job, cursor={}, progress={"chunks": 2, ABORTED: 1, "skipped": 1})
+
+        # the marker is the framework's own, so an app counter can't be mistaken for it
+        self.assertNotIn("aborted", reload(self.job).progress)
+
+        # unless the chunk knows where the next run should pick up
+        self.assertTrue(self.job.abort(cursor={"last_until": "t1"}))
+        self.assertJobState(self.job, cursor={"last_until": "t1"})
+
+    def test_back_off(self):
+        self.job.claim("worker-1")
+        modified_on = self.job.modified_on
+
+        # nothing to record, so nothing is written - the delay is all the chunk wanted
+        self.assertEqual(self.job.back_off(300), 300)
+        self.assertJobState(self.job, modified_on=modified_on, progress={})
+
+        self.assertEqual(self.job.back_off(300, lock_backoffs=1), 300)
+        self.assertJobState(self.job, progress={"lock_backoffs": 1})
+
+    def test_reset_cursor(self):
+        self.job.claim("worker-1", lease_seconds=600)
+        self.job.checkpoint(cursor={"after": "t1"}, progress={"chunks": 2})
+
+        # its worker owns the cursor while the lease is live, so the reset is refused
+        self.assertFalse(self.job.reset_cursor())
+        self.assertJobState(self.job, cursor={"after": "t1"})
+
+        drop_lease(self.job)
+        self.assertTrue(self.job.reset_cursor())
+
+        # only the position is dropped - the run it belongs to is left as it was
+        self.assertJobState(self.job, cursor={}, progress={"chunks": 2}, status=SyncJob.STATUS_RUNNING)
+
     def test_non_owner_cannot_mutate(self):
         self.job.claim("worker-1")
 
@@ -226,32 +330,14 @@ class SyncJobTest(TestCase):
         self.assertEqual(len(self.job.last_error), MAX_ERROR_LENGTH)
 
 
-def _make_task(chunks_to_run, finalize=None, fail_on_chunk=None):
-    """
-    Builds a chunked task that pretends to have the given number of chunks of work,
-    recording each chunk it runs.
-    """
-    ran = []
-
-    @chunked_task("test-sync", queue="testq", finalize=finalize, name=f"test.sync.{uuid.uuid4().hex}")
-    def sync_test(job):
-        chunk = job.cursor.get("chunk", 0)
-        if fail_on_chunk is not None and chunk == fail_on_chunk:
-            raise ValueError(f"failing on chunk {chunk}")
-
-        ran.append(chunk)
-        job.checkpoint(cursor={"chunk": chunk + 1}, progress=job.add_progress(chunks=1))
-        return chunk + 1 >= chunks_to_run
-
-    return sync_test, ran
-
-
-class ChunkedTaskTest(TestCase):
+class ChunkedTaskTest(SyncJobTestMixin, TestCase):
     def setUp(self):
+        super().setUp()
+
         self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
 
     def test_runs_chunks_to_completion(self):
-        task, ran = _make_task(chunks_to_run=3)
+        task, ran = make_task(chunks_to_run=3)
 
         with patch.object(task, "apply_async") as mock_continue:
             # each continuation is enqueued, not executed - drive them by hand as a worker would
@@ -263,14 +349,12 @@ class ChunkedTaskTest(TestCase):
 
         self.assertEqual(ran, [0, 1, 2])
 
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
-        self.assertEqual(job.cursor, {"chunk": 3})
-        self.assertEqual(job.progress, {"chunks": 3})
-        self.assertIsNone(job.lease_owner)
+        self.assertJobState(
+            self.job, status=SyncJob.STATUS_COMPLETE, cursor={"chunk": 3}, progress={"chunks": 3}, lease_owner=None
+        )
 
     def test_trigger_against_live_lease_retries_after_expiry(self):
-        task, ran = _make_task(chunks_to_run=2)
+        task, ran = make_task(chunks_to_run=2)
 
         # a job someone else is running under a live lease - e.g. a redelivered chunk
         # whose original worker is still alive
@@ -284,43 +368,37 @@ class ChunkedTaskTest(TestCase):
         mock_continue.assert_not_called()
 
         # the job itself is untouched
-        current = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(current.lease_owner, "other-worker")
+        self.assertJobState(self.job, lease_owner="other-worker")
 
     def test_trigger_against_paused_job_skips(self):
-        task, ran = _make_task(chunks_to_run=2)
+        task, ran = make_task(chunks_to_run=2)
         SyncJob.objects.filter(id=self.job.id).update(status=SyncJob.STATUS_PAUSED)
 
-        with patch.object(task, "apply_async") as mock_continue:
-            task(self.job.id)  # no retry, no error
+        mock_continue = run_task(task, self.job.id)  # no retry, no error
 
         self.assertEqual(ran, [])
         mock_continue.assert_not_called()
 
     def test_finalize_runs_once_on_completion(self):
         finalized = []
-        task, ran = _make_task(chunks_to_run=1, finalize=lambda job: finalized.append(job.id))
+        task, ran = make_task(chunks_to_run=1, finalize=lambda job: finalized.append(job.id))
 
-        with patch.object(task, "apply_async"):
-            task(self.job.id)
+        run_task(task, self.job.id)
 
         self.assertEqual(finalized, [self.job.id])
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertFalse(job.needs_finalize)
-        self.assertIsNone(job.lease_owner)
+        self.assertJobState(self.job, needs_finalize=False, lease_owner=None)
 
     def test_crashed_finalize_is_retried_with_completed_runs_state(self):
         finalized = []
-        task, ran = _make_task(chunks_to_run=2, finalize=lambda job: finalized.append(dict(job.progress)))
+        task, ran = make_task(chunks_to_run=2, finalize=lambda job: finalized.append(dict(job.progress)))
 
         # simulate a worker that completed a run with real progress but died before finalizing
         self.job.claim("dead-worker")
         self.job.checkpoint(progress={"chunks": 7, "created": 700})
         self.job.mark_complete(needs_finalize=True)
-        SyncJob.objects.filter(id=self.job.id).update(lease_owner=None, lease_expires_on=None)
+        drop_lease(self.job)
 
-        with patch.object(task, "apply_async"):
-            task(self.job.id)
+        run_task(task, self.job.id)
 
         # the leftover finalization saw the completed run's progress, not the fresh run's
         # reset state, and ran before the new run's first chunk
@@ -328,29 +406,25 @@ class ChunkedTaskTest(TestCase):
         self.assertEqual(ran, [0])
 
     def test_chunk_failure_records_and_reraises(self):
-        task, ran = _make_task(chunks_to_run=3, fail_on_chunk=1)
+        task, ran = make_task(chunks_to_run=3, fail_on_chunk=1)
 
         with patch.object(task, "apply_async"):
             task(self.job.id)  # chunk 0 succeeds
             with self.assertRaises(ValueError):
                 task(self.job.id)  # chunk 1 fails
 
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.status, SyncJob.STATUS_FAILED)
-        self.assertEqual(job.consecutive_failures, 1)
-        self.assertIn("failing on chunk 1", job.last_error)
         # cursor still points at the failed chunk so a retry resumes there
-        self.assertEqual(job.cursor, {"chunk": 1})
-        self.assertIsNone(job.lease_owner)
+        job = self.assertJobState(
+            self.job, status=SyncJob.STATUS_FAILED, consecutive_failures=1, cursor={"chunk": 1}, lease_owner=None
+        )
+        self.assertIn("failing on chunk 1", job.last_error)
 
         # the failed job is claimable again and the retry resumes from the cursor
-        task2, ran2 = _make_task(chunks_to_run=3)
-        with patch.object(task2, "apply_async"):
-            task2(self.job.id)
-            task2(self.job.id)
+        task2, ran2 = make_task(chunks_to_run=3)
+        run_task(task2, self.job.id, times=2)
 
         self.assertEqual(ran2, [1, 2])
-        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_COMPLETE)
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
 
     def test_failing_finalize_records_failure_and_is_retried(self):
         attempts = []
@@ -360,7 +434,7 @@ class ChunkedTaskTest(TestCase):
             if len(attempts) == 1:
                 raise ValueError("finalize blew up")
 
-        task, ran = _make_task(chunks_to_run=1, finalize=finalize)
+        task, ran = make_task(chunks_to_run=1, finalize=finalize)
 
         with patch.object(task, "apply_async"):
             with self.assertRaises(ValueError):
@@ -369,22 +443,20 @@ class ChunkedTaskTest(TestCase):
         # the work completed but the failed finalization is recorded and retryable:
         # failure counted, lease released so the retry needn't wait out its expiry,
         # and needs_finalize still set so the retry finalizes before anything else
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.status, SyncJob.STATUS_FAILED)
-        self.assertEqual(job.consecutive_failures, 1)
-        self.assertTrue(job.needs_finalize)
-        self.assertIsNone(job.lease_owner)
+        self.assertJobState(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            consecutive_failures=1,
+            needs_finalize=True,
+            lease_owner=None,
+        )
 
-        with patch.object(task, "apply_async"):
-            task(self.job.id)
+        run_task(task, self.job.id)
 
         # the retry runs the leftover finalization first, then its own completion's -
         # at-least-once semantics, which is why finalize hooks must be idempotent
         self.assertEqual(len(attempts), 3)
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertFalse(job.needs_finalize)
-        self.assertEqual(job.status, SyncJob.STATUS_COMPLETE)
-        self.assertEqual(job.consecutive_failures, 0)
+        self.assertJobState(self.job, needs_finalize=False, status=SyncJob.STATUS_COMPLETE, consecutive_failures=0)
 
     def test_chunk_can_delay_continuation(self):
         delayed = []
@@ -404,19 +476,18 @@ class ChunkedTaskTest(TestCase):
             sync_backoff(self.job.id)
 
         self.assertEqual(delayed, [True])
-        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_COMPLETE)
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
 
     def test_missing_job_is_skipped(self):
-        task, ran = _make_task(chunks_to_run=1)
+        task, ran = make_task(chunks_to_run=1)
 
-        with patch.object(task, "apply_async") as mock_continue:
-            task(-1)
+        mock_continue = run_task(task, -1)
 
         self.assertEqual(ran, [])
         mock_continue.assert_not_called()
 
     def test_continuation_of_paused_job_stops_quietly(self):
-        task, ran = _make_task(chunks_to_run=3)
+        task, ran = make_task(chunks_to_run=3)
 
         with patch.object(task, "apply_async") as mock_continue:
             task(self.job.id)
@@ -424,15 +495,15 @@ class ChunkedTaskTest(TestCase):
 
             # an operator pauses between chunks - the queued continuation stops the run,
             # without retrying against a lease that isn't there
-            self.assertTrue(SyncJob.objects.get(id=self.job.id).pause())
+            self.assertTrue(reload(self.job).pause())
             task(self.job.id)
 
         self.assertEqual(ran, [0])
         self.assertEqual(mock_continue.call_count, 1)
-        self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_PAUSED)
+        self.assertJobState(self.job, status=SyncJob.STATUS_PAUSED)
 
     def test_continuation_after_force_resync_restarts(self):
-        task, ran = _make_task(chunks_to_run=4)
+        task, ran = make_task(chunks_to_run=4)
 
         with patch.object(task, "apply_async"):
             task(self.job.id)
@@ -441,26 +512,299 @@ class ChunkedTaskTest(TestCase):
 
             # the old cursor can't come back through the continuation that was already
             # queued when the resync was requested
-            self.assertTrue(SyncJob.objects.get(id=self.job.id).force_resync())
+            self.assertTrue(reload(self.job).force_resync())
             task(self.job.id)
 
         self.assertEqual(ran, [0, 1, 0])
-        job = SyncJob.objects.get(id=self.job.id)
-        self.assertEqual(job.cursor, {"chunk": 1})
-        self.assertEqual(job.progress, {"chunks": 1})
+        self.assertJobState(self.job, cursor={"chunk": 1}, progress={"chunks": 1})
+
+
+class ChunkedTaskStateTest(SyncJobTestMixin, TestCase):
+    """
+    What the framework tells a chunk about the claim it is running under, and what it does
+    with what the chunk tells it back.
+    """
+
+    def setUp(self):
+        super().setUp()
+
+        self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+
+    def test_chunk_checkpoints_with_the_declared_lease(self):
+        renewals = []
+
+        @chunked_task("test-sync", queue="testq", lease_seconds=1800, name=f"test.sync.{uuid.uuid4().hex}")
+        def sync_leases(job):
+            job.checkpoint(cursor={"chunk": 1})
+            renewals.append(job.lease_expires_on)
+
+            # a chunk that knows better can still say so
+            job.checkpoint(lease_seconds=60)
+            renewals.append(job.lease_expires_on)
+            return True
+
+        run_task(sync_leases, self.job.id)
+
+        now = timezone.now()
+        self.assertAlmostEqual((renewals[0] - now).total_seconds(), 1800, delta=30)
+        self.assertAlmostEqual((renewals[1] - now).total_seconds(), 60, delta=30)
+
+    def test_new_run_marks_the_first_chunk_of_a_run(self):
+        seen = []
+
+        @chunked_task("test-sync", queue="testq", name=f"test.sync.{uuid.uuid4().hex}")
+        def sync_runs(job):
+            seen.append(job.new_run)
+            chunk = job.cursor.get("chunk", 0)
+            job.checkpoint(cursor={"chunk": chunk + 1})
+            return chunk >= 1
+
+        # a job that has never run starts one, and its continuation resumes that same run
+        self.assertEqual(run_to_completion(sync_runs, self.job.id), 2)
+        self.assertEqual(seen, [True, False])
+
+        # the next claim of a completed job starts a fresh run
+        seen.clear()
+        run_task(sync_runs, self.job.id)
+        self.assertEqual(seen, [True])
+
+        # while a failed run is retried rather than restarted
+        seen.clear()
+        SyncJob.objects.filter(id=self.job.id).update(status=SyncJob.STATUS_FAILED)
+        run_task(sync_runs, self.job.id)
+        self.assertEqual(seen, [False])
+
+    def test_aborted_run_completes_without_finalizing(self):
+        finalized = []
+
+        @chunked_task(
+            "test-sync", queue="testq", finalize=lambda job: finalized.append(job.id), name=f"test.{uuid.uuid4().hex}"
+        )
+        def sync_aborts(job):
+            return job.abort(skipped=1)
+
+        run_task(sync_aborts, self.job.id)
+
+        # there is nothing for finalization to report on, but the run is still finished and
+        # its lease released, and nothing is left over for the next one
+        self.assertEqual(finalized, [])
+        self.assertJobState(
+            self.job,
+            status=SyncJob.STATUS_COMPLETE,
+            cursor={},
+            progress={ABORTED: 1, "skipped": 1},
+            needs_finalize=False,
+            lease_owner=None,
+        )
+
+    def test_leftover_finalize_of_an_aborted_run_is_skipped(self):
+        finalized = []
+        task, ran = make_task(chunks_to_run=1, finalize=lambda job: finalized.append(job.id))
+
+        # a worker that aborted a run and died before clearing its finalize flag
+        self.job.claim("dead-worker")
+        self.job.checkpoint(progress={ABORTED: 1})
+        self.job.mark_complete(needs_finalize=True)
+        drop_lease(self.job)
+
+        run_task(task, self.job.id)
+
+        # the leftover finalization went with the run it belonged to, this run's still ran
+        self.assertEqual(finalized, [self.job.id])
+        self.assertEqual(ran, [0])
+
+    def test_one_task_per_job_type(self):
+        make_task(chunks_to_run=1)
+
+        # two tasks for a type would each drive the other's jobs, on whatever queue and
+        # lease they happened to declare
+        with self.assertRaises(ImproperlyConfigured):
+
+            @chunked_task("test-sync", queue="testq", name=f"test.sync.{uuid.uuid4().hex}")
+            def sync_again(job):
+                return True
+
+    def test_chunk_can_back_off_and_record_why(self):
+        @chunked_task("test-sync", queue="testq", name=f"test.sync.{uuid.uuid4().hex}")
+        def sync_blocked(job):
+            if job.progress.get("lock_backoffs"):
+                job.checkpoint(cursor={"chunk": 1})
+                return True
+
+            return job.back_off(300, lock_backoffs=1)
+
+        mock_continue = run_task(sync_blocked, self.job.id)
+
+        mock_continue.assert_called_once_with((self.job.id,), queue="testq", countdown=300)
+        self.assertJobState(self.job, progress={"lock_backoffs": 1}, cursor={})
+
+        run_task(sync_blocked, self.job.id)
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={"chunk": 1})
+
+
+class DispatchTest(SyncJobTestMixin, TestCase):
+    def setUp(self):
+        super().setUp()
+
+        self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+
+        # the task this job type is run by, i.e. what the registry resolves for it - and
+        # with it the lease everything here is measured against
+        self.task, _ = make_task(chunks_to_run=2)
+
+    def test_enqueue_routes_to_the_job_types_task(self):
+        task, ran = make_task(chunks_to_run=1, queue="slowq")
+        self.assertEqual(JOB_TASKS["test-sync"], task)
+
+        with patch.object(task, "apply_async") as mock_enqueue:
+            enqueue(self.job)
+            enqueue(self.job, countdown=300)
+
+        # the job knows its type, and the queue comes with the task that type is run by
+        self.assertEqual(mock_enqueue.call_args_list[0][0], ((self.job.id,),))
+        self.assertEqual(mock_enqueue.call_args_list[0][1], dict(queue="slowq"))
+        self.assertEqual(mock_enqueue.call_args_list[1][1], dict(queue="slowq", countdown=300))
+
+    def test_in_flight_under_a_live_lease(self):
+        self.assertFalse(in_flight(self.job, timezone.now()))
+
+        # a chunk is being worked on, whatever state the row is otherwise in
+        hold_lease(self.job)
+        self.assertTrue(in_flight(self.job, timezone.now()))
+
+    def test_in_flight_between_chunks(self):
+        SyncJob.objects.filter(id=self.job.id).update(status=SyncJob.STATUS_RUNNING)
+
+        # the lease is released between continuations, so a moving run looks idle from here
+        self.assertTrue(in_flight(reload(self.job), timezone.now()))
+
+        # but a run that stopped checkpointing is deliberately not in flight - nudging it is
+        # how a chain that died without recording a failure gets picked back up
+        job = make_stale(self.job, 2 * DEFAULT_LEASE_SECONDS + 60)
+        self.assertFalse(in_flight(job, timezone.now()))
+
+    def test_in_flight_of_a_pending_job(self):
+        now = timezone.now()
+
+        # a job nobody has claimed is only in flight for callers whose enqueue records the
+        # nudge on the row, i.e. where a fresh modified_on means a message is on the queue
+        self.assertFalse(in_flight(self.job, now))
+        self.assertTrue(in_flight(self.job, now, include_pending=True))
+
+        job = make_stale(self.job, 2 * DEFAULT_LEASE_SECONDS + 60)
+        self.assertFalse(in_flight(job, now, include_pending=True))
+
+    def test_in_flight_of_an_unregistered_job_type(self):
+        job = SyncJob.get_or_create_job(None, "no-such-task", "flow-1")
+        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_RUNNING)
+
+        # nothing declares how long its chunks take, so the default lease is what it gets
+        self.assertTrue(in_flight(reload(job), timezone.now()))
+        self.assertFalse(in_flight(make_stale(job, 2 * DEFAULT_LEASE_SECONDS + 60), timezone.now()))
+
+    def test_is_due_measures_the_cadence_from_the_last_start(self):
+        now = timezone.now()
+        hourly = timedelta(hours=1)
+
+        # a job that has never run is due at any cadence
+        self.assertTrue(is_due(self.job, now, interval=hourly))
+
+        job = end_run(self.job, started_on=now - timedelta(minutes=30), ended_on=now - timedelta(minutes=5))
+        self.assertFalse(is_due(job, now, interval=hourly))
+
+        # no cadence asked for means any run that isn't moving is due
+        self.assertTrue(is_due(job, now))
+
+        job = end_run(self.job, started_on=now - timedelta(hours=2), ended_on=now - timedelta(minutes=5))
+        self.assertTrue(is_due(job, now, interval=hourly))
+
+        # a run that ended without ever starting - an abort, say - falls back to its end
+        job = end_run(self.job, started_on=None, ended_on=now - timedelta(minutes=5))
+        self.assertFalse(is_due(job, now, interval=hourly))
+
+    def test_is_due_waits_out_the_failure_backoff(self):
+        now = timezone.now()
+        backoff = Backoff(base=timedelta(minutes=20), cap=timedelta(hours=2), max_doublings=3)
+
+        job = end_run(self.job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(minutes=5), failures=1)
+        self.assertTrue(is_due(job, now))  # nobody asked for a backoff
+        self.assertFalse(is_due(job, now, backoff=backoff))
+
+        job = end_run(self.job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(minutes=25), failures=1)
+        self.assertTrue(is_due(job, now, backoff=backoff))
+
+        # each further failure doubles the wait - 20, 40, 80 minutes ...
+        job = end_run(self.job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(minutes=25), failures=3)
+        self.assertFalse(is_due(job, now, backoff=backoff))
+
+        # ... up to the cap, however long the streak
+        job = end_run(self.job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=1), failures=9)
+        self.assertFalse(is_due(job, now, backoff=backoff))
+
+        job = end_run(self.job, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=3), failures=9)
+        self.assertTrue(is_due(job, now, backoff=backoff))
+
+    def test_failure_backoff_never_outpaces_the_cadence(self):
+        # a run long enough to outlast its own cadence keeps the cadence open from then on,
+        # so the backoff is what has to hold a failing job back - the ladder's early rungs
+        # must not retry it faster than it would run when healthy
+        now = timezone.now()
+        daily = timedelta(hours=24)
+        backoff = Backoff(base=timedelta(minutes=20), cap=timedelta(days=7), max_doublings=10)
+
+        job = end_run(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            started_on=now - timedelta(days=3),
+            ended_on=now - timedelta(hours=2),
+            failures=1,
+        )
+        self.assertFalse(is_due(job, now, interval=daily, backoff=backoff))
+
+        # and once the cadence itself is up, it is due
+        job = end_run(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            started_on=now - timedelta(days=3),
+            ended_on=now - timedelta(days=2),
+            failures=1,
+        )
+        self.assertTrue(is_due(job, now, interval=daily, backoff=backoff))
+
+        # a streak whose ladder climbs past the cadence stretches the wait beyond it
+        job = end_run(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            started_on=now - timedelta(days=3),
+            ended_on=now - timedelta(days=2),
+            failures=9,  # 20 minutes doubled eight times, i.e. more than three days
+        )
+        self.assertFalse(is_due(job, now, interval=daily, backoff=backoff))
+
+    def test_is_due_nudges_a_run_that_never_ended(self):
+        # a chain that died without recording a failure left no end to schedule from, and
+        # the run it was still in the middle of says nothing about when the next one is due
+        now = timezone.now()
+        SyncJob.objects.filter(id=self.job.id).update(
+            status=SyncJob.STATUS_RUNNING, started_on=now - timedelta(minutes=5), ended_on=None
+        )
+
+        job = make_stale(self.job, 2 * DEFAULT_LEASE_SECONDS + 60)
+        self.assertTrue(is_due(job, now, interval=timedelta(hours=24)))
+
+    def test_is_due_leaves_paused_and_moving_jobs_alone(self):
+        SyncJob.objects.filter(id=self.job.id).update(status=SyncJob.STATUS_PAUSED)
+        self.assertFalse(is_due(reload(self.job), timezone.now()))
+
+        SyncJob.objects.filter(id=self.job.id).update(status=SyncJob.STATUS_RUNNING)
+        self.assertFalse(is_due(reload(self.job), timezone.now()))
 
 
 class SyncJobQueriesTest(TestCase):
     def setUp(self):
+        super().setUp()
+
         self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
-
-    def expire_lease(self, job, seconds_ago):
-        SyncJob.objects.filter(id=job.id).update(lease_expires_on=timezone.now() - timedelta(seconds=seconds_ago))
-        job.refresh_from_db()
-
-    def set_modified(self, job, seconds_ago):
-        SyncJob.objects.filter(id=job.id).update(modified_on=timezone.now() - timedelta(seconds=seconds_ago))
-        job.refresh_from_db()
 
     def test_stale_respects_grace(self):
         # a job whose worker is still renewing its lease is working, not stale
@@ -468,7 +812,7 @@ class SyncJobQueriesTest(TestCase):
         self.assertEqual(list(SyncJob.objects.stale()), [])
 
         # a lease that expired moments ago may still be taken over by a redelivered chunk
-        self.expire_lease(self.job, 60)
+        expire_lease(self.job, 60)
         self.assertEqual(list(SyncJob.objects.stale()), [])
         self.assertEqual(list(SyncJob.objects.stale(grace_seconds=30)), [self.job])
 
@@ -476,7 +820,7 @@ class SyncJobQueriesTest(TestCase):
         self.assertEqual(list(SyncJob.objects.stale(grace_seconds=61)), [])
         self.assertEqual(list(SyncJob.objects.stale(grace_seconds=59)), [self.job])
 
-        self.expire_lease(self.job, 60 * 30)
+        expire_lease(self.job, 60 * 30)
         self.assertEqual(list(SyncJob.objects.stale()), [self.job])
 
     def test_stale_covers_lost_continuations(self):
@@ -486,14 +830,14 @@ class SyncJobQueriesTest(TestCase):
         self.assertEqual(list(SyncJob.objects.stale()), [])
 
         # but if that continuation never arrives the run is just as abandoned
-        self.set_modified(self.job, 60 * 30)
+        make_stale(self.job, 60 * 30)
         self.assertEqual(list(SyncJob.objects.stale()), [self.job])
 
     def test_stale_ignores_ended_runs(self):
         self.job.claim("worker-1")
         self.job.record_failure("boom")
-        self.expire_lease(self.job, 60 * 30)
-        self.set_modified(self.job, 60 * 30)
+        expire_lease(self.job, 60 * 30)
+        make_stale(self.job, 60 * 30)
 
         self.assertEqual(list(SyncJob.objects.stale()), [])
 
@@ -524,13 +868,11 @@ class SyncJobQueriesTest(TestCase):
         self.assertEqual(len(self.job.error_summary), MAX_ERROR_SUMMARY_LENGTH)
 
 
-class OperatorActionsTest(TestCase):
+class OperatorActionsTest(SyncJobTestMixin, TestCase):
     def setUp(self):
-        self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
+        super().setUp()
 
-    def expire_lease(self, job):
-        SyncJob.objects.filter(id=job.id).update(lease_expires_on=timezone.now() - timedelta(seconds=1))
-        job.refresh_from_db()
+        self.job = SyncJob.get_or_create_job(None, "test-sync", "flow-1")
 
     def test_pause_refused_under_live_lease(self):
         self.job.claim("worker-1", lease_seconds=600)
@@ -554,7 +896,7 @@ class OperatorActionsTest(TestCase):
 
     def test_pause_allowed_once_lease_expires(self):
         self.job.claim("worker-1")
-        self.expire_lease(self.job)
+        expire_lease(self.job)
 
         self.assertTrue(self.job.pause())
 
@@ -568,7 +910,7 @@ class OperatorActionsTest(TestCase):
     def test_paused_job_survives_its_worker(self):
         # a worker whose lease lapsed is still alive and still finishing its chunk
         self.job.claim("worker-1")
-        self.expire_lease(self.job)
+        expire_lease(self.job)
         self.assertTrue(self.job.pause())
 
         # its writes must not take the job back out of the paused state

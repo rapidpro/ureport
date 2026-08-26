@@ -5,11 +5,12 @@ import uuid
 from celery.exceptions import MaxRetriesExceededError
 
 from django.core.cache import cache
+from django.core.exceptions import ImproperlyConfigured
 from django.utils import timezone
 
 from ureport.celery import app
 
-from .models import DEFAULT_LEASE_SECONDS, STATUS_CACHE_KEY, LeaseLost, SyncJob
+from .models import ABORTED, DEFAULT_LEASE_SECONDS, STATUS_CACHE_KEY, LeaseLost, SyncJob
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +19,11 @@ LEASE_RETRY_GRACE = 5
 
 # how many problem jobs the monitor task describes in detail, counts cover the rest
 MAX_REPORTED_JOBS = 50
+
+# the task that runs each job type, by job type - filled in as the chunked tasks are
+# declared, so that anything holding a job can enqueue or size up its work without having to
+# know which module the task lives in. See ureport.syncjobs.dispatch.
+JOB_TASKS = {}
 
 
 @app.task(name="syncjobs.check_jobs")
@@ -55,7 +61,7 @@ def check_jobs():
     cache.set(STATUS_CACHE_KEY, output, None)
 
 
-def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, finalize=None, name=None):
+def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, finalize=None):
     """
     Creates a Celery task that runs a SyncJob one bounded chunk at a time. The decorated
     function performs a single chunk of work: it reads its resume position from job.cursor,
@@ -74,13 +80,13 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
     be idempotent: it runs at least once per completed run and can run again after crashes,
     takeovers or duplicate triggers. If the worker dies between completing and finalizing,
     the job's needs_finalize flag makes the next invocation run the leftover finalization
-    first - against the completed run's state, before this invocation's run touches it.
+    first - against the completed run's state, before this invocation's run touches it. A
+    run a chunk aborted (see SyncJob.abort) is not finalized at all - there is nothing it
+    covered to report on.
     """
 
     def decorator(chunk_func):
-        task_name = name or f"syncjobs.{job_type}"
-
-        @app.task(name=task_name, bind=True, queue=queue, acks_late=True, reject_on_worker_lost=True)
+        @app.task(name=name, bind=True, queue=queue, acks_late=True, reject_on_worker_lost=True)
         def _task(self, job_id):
             job = SyncJob.objects.filter(id=job_id).first()
             if not job:
@@ -99,10 +105,14 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
                 _retry_if_leased(self, job_id)
                 return
 
+            # the lease the chunk's checkpoints renew for - the claim already told it whether
+            # it is starting a run or resuming one
+            job.lease_seconds = lease_seconds
+
             try:
                 if snapshot.needs_finalize:
                     if finalize:
-                        finalize(snapshot)
+                        _finalize_run(snapshot)
                     job.clear_finalize()
 
                 done = chunk_func(job)
@@ -120,13 +130,16 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
                     return  # job was taken over - the new holder owns finalization
                 if finalize:
                     try:
-                        finalize(job)
+                        _finalize_run(job)
                     except Exception:
                         # record the failure so backoff engages and release the lease so
                         # the retry needn't wait out its expiry; needs_finalize stays set
                         # so the retry runs the leftover finalization before anything else
                         job.record_failure(traceback.format_exc())
                         raise
+
+                    # the flag is cleared even for a run nothing was finalized for - there
+                    # is nothing left for the next invocation to pick up
                     job.clear_finalize()
                 job.release_lease()
             else:
@@ -138,6 +151,17 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
                 # against our still-held lease instead of racing the release
                 _task.apply_async((job_id,), queue=queue, countdown=countdown)
                 job.release_lease()
+
+        def _finalize_run(state):
+            """
+            Runs the finalize hook against the state of the run it belongs to, unless that
+            run was aborted - it never covered the work finalization reports on.
+            """
+            if _was_aborted(state):
+                logger.info("Job #%s (%s) aborted, skipping finalization", state.id, job_type)
+                return
+
+            finalize(state)
 
         def _retry_if_leased(task_self, job_id):
             """
@@ -162,6 +186,32 @@ def chunked_task(job_type, queue="celery", lease_seconds=DEFAULT_LEASE_SECONDS, 
             else:
                 logger.info("Job #%s (%s) not claimable, skipping", job_id, job_type)
 
+        # what a job of this type is run by - the queue comes with the task itself
+        _task.lease_seconds = lease_seconds
+        _register(job_type, _task)
+
         return _task
 
     return decorator
+
+
+def _register(job_type, task):
+    """
+    Records which task runs a job type, so that a job can be enqueued and sized up from
+    anywhere. One task owns a job type: two would each drive the other's jobs from a
+    different module, on whatever queue and lease they happened to declare.
+    """
+    registered = JOB_TASKS.get(job_type)
+    if registered is not None and registered.name != task.name:
+        raise ImproperlyConfigured(
+            f"job type '{job_type}' is already run by task '{registered.name}', can't also be run by '{task.name}'"
+        )
+
+    JOB_TASKS[job_type] = task
+
+
+def _was_aborted(job):
+    """
+    Whether the run ended without covering its work - see SyncJob.abort.
+    """
+    return bool((job.progress or {}).get(ABORTED))
