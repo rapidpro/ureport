@@ -1,0 +1,130 @@
+# -*- coding: utf-8 -*-
+# settings for running as a container - everything deployment-specific comes from the
+# environment so one image serves any install; symlinked to ureport/settings.py at build
+
+import os
+
+import dj_database_url
+
+from ureport.settings_common import *  # noqa
+
+
+def env_bool(name, default):
+    return os.environ.get(name, "on" if default else "off").lower() in ("1", "true", "yes", "on")
+
+
+IS_PROD = env_bool("IS_PROD", False)
+
+DEBUG = env_bool("DJANGO_DEBUG", False)
+THUMBNAIL_DEBUG = DEBUG
+COMPRESS_ENABLED = True
+
+# fail on boot rather than fall back to the publicly-known development key
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
+
+# note HOSTNAME the setting can't come from HOSTNAME the env var - containers set that
+# to the container id
+HOSTNAME = os.environ.get("SITE_HOSTNAME", "localhost:8000")
+EMPTY_SUBDOMAIN_HOST = os.environ.get("EMPTY_SUBDOMAIN_HOST", "http://" + HOSTNAME)
+SITE_API_HOST = os.environ.get("SITE_API_HOST", "https://api.rapidpro.io")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+SESSION_CACHE_ALIAS = "default"
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+CSRF_COOKIE_SAMESITE = "Strict"
+CSRF_COOKIE_AGE = 10800
+
+# on by default for TLS-terminating deployments; turn off to log in over plain http
+if env_bool("DJANGO_SECURE", True):
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "HTTPS")
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_PRELOAD = False
+    SECURE_HSTS_SECONDS = 86400
+
+if os.environ.get("ADMIN_EMAIL"):
+    ADMINS = (("Ops", os.environ["ADMIN_EMAIL"]),)
+    MANAGERS = ADMINS
+
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
+
+# DATABASE_URL is required at runtime; at image build (collectstatic/compress) it is
+# absent and the sqlite default from settings_common stands in - no queries are run
+_database = dj_database_url.config(conn_max_age=60)
+if _database:
+    DATABASES["default"] = _database  # noqa
+
+CELERY_BROKER_URL = os.environ.get("VALKEY_URL") or "redis://%s:%s/%s" % (
+    os.environ.get("VALKEY_HOST", "valkey"),
+    os.environ.get("VALKEY_PORT", "6379"),
+    os.environ.get("VALKEY_DB", "1"),
+)
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_valkey.cache.ValkeyCache",
+        "LOCATION": CELERY_BROKER_URL,
+    }
+}
+
+# media is on the filesystem (mount a volume) unless a bucket is configured
+if os.environ.get("AWS_STORAGE_BUCKET_NAME"):
+    AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    AWS_S3_SECURE_URLS = True
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+    STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}  # noqa
+    THUMBNAIL_STORAGE = STORAGES["default"]["BACKEND"]  # noqa
+    MEDIA_URL = os.environ.get("MEDIA_URL", "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME)
+
+# no debug toolbar, and the security middleware first
+MIDDLEWARE = (
+    "django.middleware.security.SecurityMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "dash.orgs.middleware.SetOrgMiddleware",
+)
+
+# everything to stdout for the container runtime to collect
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"},
+    },
+    "handlers": {
+        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "verbose"},
+        "null": {"level": "DEBUG", "class": "logging.NullHandler"},
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
+    "loggers": {
+        "django.db.backends": {"level": "ERROR", "handlers": ["console"], "propagate": False},
+        "django.security.DisallowedHost": {"handlers": ["null"], "propagate": False},
+    },
+}
+
+# static assets are collected and compressed into the image at build time
+COMPRESS_CSS_HASHING_METHOD = "content"
+COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE_CONTEXT = [
+    dict(STATIC_URL=STATIC_URL, base_template="frame.html", org=None, debug=False, testing=False),  # noqa
+    dict(STATIC_URL=STATIC_URL, base_template="public_base.html", org=None, debug=False, testing=False),  # noqa
+]

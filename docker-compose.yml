@@ -1,0 +1,65 @@
+# local/demo stack - run the whole application from containers:
+#   docker compose up --build
+# then create the schema and a superuser:
+#   docker compose exec web python manage.py migrate
+#   docker compose exec web python manage.py createsuperuser
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ureport
+      POSTGRES_USER: ureport
+      POSTGRES_PASSWORD: nyaruka
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ureport"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  valkey:
+    image: valkey/valkey:8.1-alpine
+
+  web:
+    build: .
+    ports:
+      - "${WEB_PORT:-8000}:8000"
+    environment: &env
+      DJANGO_SECRET_KEY: local-only-secret-key
+      DJANGO_SECURE: "off"
+      DATABASE_URL: postgres://ureport:nyaruka@postgres/ureport
+      VALKEY_HOST: valkey
+      SITE_HOSTNAME: localhost:8000
+      EMPTY_SUBDOMAIN_HOST: http://localhost:8000
+    volumes:
+      - media-data:/app/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_started
+
+  worker:
+    build: .
+    command: celery -A ureport worker -Q celery,sync,slow -Ofair --loglevel=INFO
+    environment: *env
+    volumes:
+      - media-data:/app/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_started
+
+  beat:
+    build: .
+    command: celery -A ureport beat --loglevel=INFO
+    environment: *env
+    depends_on:
+      valkey:
+        condition: service_started
+
+volumes:
+  postgres-data:
+  media-data:
