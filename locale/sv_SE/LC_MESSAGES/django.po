@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-12 10:05+0000\n"
+"POT-Creation-Date: 2026-08-26 16:40+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -750,6 +750,11 @@ msgstr "Organisationer"
 
 msgid "Images"
 msgstr "Bilder"
+
+#, fuzzy
+#| msgid "Jobs"
+msgid "Sync Jobs"
+msgstr "Jobb"
 
 msgid "About"
 msgstr "Om oss"

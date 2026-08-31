@@ -1215,3 +1215,18 @@ class SyncJobCRUDLTest(UreportTest):
             reverse("syncjobs.syncjob_resume", args=[self.job.id]), SERVER_NAME="uganda.ureport.io", follow=True
         )
         self.assertContains(response, "isn&#x27;t paused")
+
+    def test_admin_menu_link_is_superuser_only(self):
+        menu_page_url = reverse("polls.poll_list")
+        list_url = reverse("syncjobs.syncjob_list")
+
+        # the link sits in the superuser-only part of the admin menu, so org admins never see it
+        self.login(self.admin)
+        response = self.client.get(menu_page_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, list_url)
+
+        self.login(self.superuser)
+        response = self.client.get(menu_page_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, list_url)
