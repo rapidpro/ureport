@@ -45,15 +45,11 @@ msgstr "Soubor obrázku, který se má použít"
 msgid "The human readable name for this content type"
 msgstr "Lidsky čitelný název tohoto typu obsahu"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Slug pro identifikaci tohoto typu obsahu, který se používá se značkami šablony."
+msgstr "Slug pro identifikaci tohoto typu obsahu, používaný se značkami šablony"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Popis, kde se tento typ obsahu na webu používá a jak se bude zobrazovat."
+msgstr "Popis, kde se tento typ obsahu na webu používá a jak se bude zobrazovat"
 
 msgid "Whether this content should include a title"
 msgstr "Zda má tento obsah obsahovat název"
@@ -336,8 +332,6 @@ msgstr "Musíte mít alespoň jednoho správce"
 msgid "Select your Organization"
 msgstr "Vyberte svou organizaci"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Váš účet není přidružen k žádné organizaci. Kontaktujte prosím administrátora."
 
@@ -757,10 +751,8 @@ msgstr "Organizace"
 msgid "Images"
 msgstr "Obrázky"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Úlohy"
+msgstr "Synchronizační úlohy"
 
 msgid "About"
 msgstr "O ..."
@@ -1010,10 +1002,8 @@ msgstr "Jak byste se chtěli přidat?"
 msgid "Text"
 msgstr "Text"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "Stáhnout zprávu"
+msgstr "Nebo si stáhněte aplikaci U-Report:"
 
 msgid "PAGE"
 msgstr "STRÁNKA"
@@ -1294,39 +1284,35 @@ msgstr "+ Nový příběh"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s běžících, %(stale)s zastaralých, %(failing)s selhávajících"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "naposledy zkontrolováno %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "zatím nezkontrolováno"
 
 msgid "All job types"
-msgstr ""
+msgstr "Všechny typy úloh"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Všechny stavy"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtrovat"
 
-#, fuzzy
-#| msgid "All locations"
 msgid "Actions"
-msgstr "Všechny lokality"
+msgstr "Akce"
 
 msgid "Pause"
-msgstr ""
+msgstr "Pozastavit"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Výsledky"
+msgstr "Obnovit"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Vynutit novou synchronizaci"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1483,7 +1469,7 @@ msgid "Whether this page should be active to the public"
 msgstr "Zda má být tato stránka aktivní pro veřejnost"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Slug může obsahovat pouze písmena, číslice, podtržítka a pomlčky"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Toto je ID OSM pro tuto správní hranici."
@@ -1731,17 +1717,16 @@ msgstr "Volba skrytých grafů"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Vyberte členění grafů, které chcete skrýt pro tuto otázku pro veřejnost."
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Kategorie obrázku"
+msgstr "Kategorie %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Označení kategorie z backendu (například RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Zobrazení %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "Štítek, který se má zobrazit u kategorie na veřejném webu."
@@ -1756,14 +1741,13 @@ msgstr "Poslední výsledky synchronizované před %(time)s"
 msgid "Synced"
 msgstr "Synchronizováno"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "Plánovaná synchronizace právě probíhá..."
+msgstr "Synchronizace právě probíhá... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Upravit průzkum pro tok [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1822,7 +1806,7 @@ msgid "The Line bot link that users will use to contact U-Report if you have one
 msgstr "Odkaz na Line bot, který uživatelé použijí pro kontaktování U-Report, pokud jej máte."
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Pokud je k dispozici aplikace U-Report."
 
 msgid "The join button text"
 msgstr "Text tlačítka pro připojení"
@@ -1833,10 +1817,8 @@ msgstr "Krátký text, který návštěvníky nasměruje k připojení k U-Repor
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Text výzvy k akci, abyste se připojili, v horní části U-Report"
 
-#, fuzzy
-#| msgid "The link for the extra menu."
 msgid "The link for the external stories."
-msgstr "Odkaz na extra menu."
+msgstr "Odkaz na externí příběhy."
 
 msgid "A short text for the extra menu."
 msgstr "Krátký text pro extra menu."
@@ -1926,7 +1908,7 @@ msgid "Whether to activate an extra gender."
 msgstr "Zda se má aktivovat další pohlaví."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Pokud je nastaveno, budou veřejní návštěvníci webu přesměrováni na tuto adresu URL."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Zda skrýt grafy rozdělení závazků."
@@ -1993,23 +1975,23 @@ msgstr "Aktivní uživatelé"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Úloha #%(job_id)d se právě zpracovává, zkuste to za chvíli znovu"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Úloha #%(job_id)d byla pozastavena"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Úloha #%(job_id)d byla obnovena"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Úloha #%(job_id)d není pozastavena"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Úloha #%(job_id)d se při příštím spuštění synchronizuje znovu od začátku"
 
 msgid "Something to trigger localizations"
 msgstr "Něco pro spouštění lokalizací"

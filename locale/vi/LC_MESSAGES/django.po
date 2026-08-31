@@ -40,15 +40,11 @@ msgstr "Tệp hình ảnh để sử dụng"
 msgid "The human readable name for this content type"
 msgstr "Tên dễ gọi cho nội dung này"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
 msgstr "Slug để nhận dạng loại nội dung này, được sử dụng với các thẻ khuôn mẫu"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Mô tả vị trí nội dung này và cách thức nó được bố trí trên trang web"
+msgstr "Mô tả vị trí loại nội dung này được sử dụng trên trang web và cách thức nó sẽ được hiển thị"
 
 msgid "Whether this content should include a title"
 msgstr "Liệu có cần thiết đặt tiêu đề cho nội dung này không"
@@ -129,10 +125,10 @@ msgid "Content Types"
 msgstr "Các loại nội dung"
 
 msgid "Link Slug"
-msgstr ""
+msgstr "Slug liên kết"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "Slug hoặc từ để sử dụng trong liên kết của trang"
 
 msgid "Content Blocks"
 msgstr "Khối nội dung"
@@ -285,43 +281,24 @@ msgstr "Loại nền"
 msgid "The image file"
 msgstr "Tệp hình ảnh"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The API token for this backend"
-msgstr "Tiêu đề cho mục này"
+msgstr "API token cho backend này"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Bạn được mời tham gia %(org_name)s.\n"
-"<br/>\n"
-"Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>."
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Bạn được mời tham gia %(org_name)s.\n      <br />\n      Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
-msgstr ""
+msgstr "Bạn được mời tham gia {{org.name}}."
 
 msgid "Click this link to join"
-msgstr ""
+msgstr "Bấm vào liên kết này để tham gia"
 
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Manage Backends"
-msgstr "Quản lý người dùng"
+msgstr "Quản lý backend"
 
 msgid "Manage Users"
 msgstr "Quản lý người dùng"
@@ -341,8 +318,6 @@ msgstr "Bạn phải có ít nhất một quản trị viên"
 msgid "Select your Organization"
 msgstr "Lựa chọn tổ chức của bạn"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Tài khoản của bạn không được liên kết với một tổ chức. Vui lòng liên hệ với quản trị viên."
 
@@ -372,8 +347,6 @@ msgstr "Liên kết lời mời của bạn không hợp lệ. Vui lòng liên h
 msgid "Join %(name)s"
 msgstr "Tham gia %(name)s"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join"
 msgstr "Tham gia"
 
@@ -387,13 +360,11 @@ msgid "Tasks"
 msgstr "Các nhiệm vụ"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "Chỉ hỗ trợ tệp PDF."
 
 msgid "The title for this story"
 msgstr "Tiêu đề cho câu chuyện này"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Câu chuyện này có nổi bật hay không"
 
@@ -410,7 +381,7 @@ msgid "A link to an mp3 file to publish on this story"
 msgstr "Liên kết đến tệp mp3 để đăng trên câu chuyện này"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "Báo cáo PDF để đính kèm"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id của video YouTube được dẫn đến câu hcuyeejn này (đây là đoạn văn bản theo sau v= và trước & in URL YouTube)"
@@ -449,29 +420,18 @@ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước (tùy chọn)"
 
-#, fuzzy
-#| msgid "The name of this category"
 msgid "The name of this tag"
-msgstr "Tên của danh mục này"
+msgstr "Tên của thẻ này"
 
 msgid "Delete"
-msgstr ""
+msgstr "Xóa"
 
 msgid "Remove Item?"
 msgstr "Xóa Mục?"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
+#, python-format
+msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
+msgstr "\n    Bạn có chắc chắn muốn xóa <b>%(object)s</b>?\n    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Không có cách nào để hoàn tác thao tác này."
@@ -479,39 +439,14 @@ msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Khôn
 msgid "Cancel"
 msgstr "Đóng"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-"\n"
-"%(counter)s kết quả"
+#, python-format
+msgid "\n\t %(counter)s result\n\t"
+msgid_plural "\n         %(counter)s results\n        "
+msgstr[0] "\n\t %(counter)s kết quả\n\t"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"\t Kết quả %(start)s-%(end)s trong số %(count)s"
+#, python-format
+msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
+msgstr "\n\tKết quả %(start)s-%(end)s trong số %(count)s\n\t"
 
 msgid "Previous"
 msgstr "Trước"
@@ -537,31 +472,13 @@ msgstr "Mã hết hạn"
 msgid "Login Failure"
 msgstr "Đăng nhập thất bại"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
+#, python-format
+msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
+msgstr "\n      Xin lỗi, bạn không thể đăng nhập lúc này vì chúng tôi đã nhận được %(failed_login_limit)s lần đăng nhập sai.\n      "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
+#, python-format
+msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
+msgstr "\n      Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại.\n      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Ngoài ra, bạn có thể điền vào mẫu dưới đây để đặt lại mật khẩu của bạn qua e-mail."
@@ -578,18 +495,9 @@ msgstr "Khôi phục"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Vui lòng nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ giúp bạn khôi phục lại mật khẩu."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
+#, python-format
+msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
+msgstr "\n  <strong>Mật khẩu của bạn đã hết hạn.</strong> Chính sách của trang web yêu cầu bạn phải chọn mật khẩu mới sau mỗi %(expire_days)s ngày và mật khẩu không được trùng với mật khẩu đã sử dụng trong %(window_days)s ngày trước đó.\n  "
 
 msgid "New Password"
 msgstr "Mật khẩu mới"
@@ -725,54 +633,50 @@ msgid "Form"
 msgstr "Mẫu đơn"
 
 msgid "Save"
-msgstr ""
+msgstr "Lưu"
 
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s mới của bạn đã được tạo."
 
 msgid "Back to Website"
-msgstr ""
+msgstr "Quay lại trang web"
 
 msgid "Welcome, "
-msgstr ""
+msgstr "Chào mừng, "
 
 msgid "Logout"
 msgstr "Đăng xuất"
 
 msgid "Opinions"
-msgstr ""
+msgstr "Ý kiến"
 
 msgid "Bots"
-msgstr ""
+msgstr "Bot"
 
 msgid "Users"
 msgstr "Người dùng"
 
 msgid "Settings"
-msgstr ""
+msgstr "Cài đặt"
 
-#, fuzzy
-#| msgid "Images"
 msgid "Pages"
-msgstr "Hình ảnh"
+msgstr "Trang"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "Trang đích"
 
 msgid "Jobs"
 msgstr "Công việc"
 
 msgid "Tags"
-msgstr ""
+msgstr "Thẻ"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "Logo đối tác"
 
-#, fuzzy
-#| msgid "Category Images"
 msgid "Categories Images"
-msgstr "Các hình ảnh cho danh mục"
+msgstr "Hình ảnh danh mục"
 
 msgid "News Items"
 msgstr "Các mục mới"
@@ -783,30 +687,26 @@ msgstr "Tổ chức"
 msgid "Images"
 msgstr "Hình ảnh"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Công việc"
+msgstr "Công việc đồng bộ"
 
 msgid "About"
 msgstr "Thông tin"
 
 msgid "Engagement"
-msgstr ""
+msgstr "Mức độ tham gia"
 
-#, fuzzy
-#| msgid "U-Reporters"
 msgid "Reports"
-msgstr "U-Reporters"
+msgstr "Báo cáo"
 
 msgid "Category Images"
 msgstr "Các hình ảnh cho danh mục"
 
 msgid "+ New "
-msgstr ""
+msgstr "+ Thêm "
 
 msgid "+ New Page"
-msgstr ""
+msgstr "+ Trang mới"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -857,18 +757,16 @@ msgid "Additional Menu"
 msgstr "Menu bổ sung"
 
 msgid "SELECT YOUR COUNTRY"
-msgstr ""
+msgstr "CHỌN QUỐC GIA CỦA BẠN"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join Now"
-msgstr "Tham gia"
+msgstr "Tham gia ngay"
 
 msgid "READ MORE"
 msgstr "XEM THÊM"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr ""
+msgstr "KHÁM PHÁ MỨC ĐỘ THAM GIA"
 
 msgid ""
 "\n"
@@ -893,74 +791,65 @@ msgid "Back"
 msgstr "Quay lại"
 
 msgid "Select bots"
-msgstr ""
+msgstr "Chọn bot"
 
 msgid "View public page"
-msgstr ""
+msgstr "Xem trang công khai"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST NOTIFICATIONS"
-msgstr "ĐỊA ĐIỂM"
+msgstr "THÔNG BÁO MỚI NHẤT"
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Backends"
-msgstr "Quản lý người dùng"
+msgstr "Backend"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Bạn có thể gửi lại lời mời bằng trường ở trên"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Thêm hoặc chọn thẻ"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
+msgstr[0] "Hiện có %(counter)s khảo sát mới đang đồng bộ. Các khảo sát sẽ được hiển thị trên trang công khai sau khi kết quả được đồng bộ hoàn tất."
 
 msgid "+ New Poll"
-msgstr ""
+msgstr "+ Khảo sát mới"
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "Câu hỏi khảo sát"
+msgstr[0] "%(counter)s câu hỏi khảo sát"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "Đồng bộ ban đầu cho khảo sát mới được lên lịch mỗi 10 phút"
 
 msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
+msgstr "Không còn lên lịch đồng bộ cho các khảo sát cũ, các lượt chạy đã được lưu trữ"
 
 msgid "Main poll syncs scheduled every 20min"
-msgstr ""
+msgstr "Đồng bộ khảo sát chính được lên lịch mỗi 20 phút"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "Đồng bộ khảo sát gần đây được lên lịch mỗi 60 phút"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "Đồng bộ khảo sát được lên lịch mỗi 24 giờ"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "Không lên lịch đồng bộ, không hoạt động"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "Không lên lịch đồng bộ, khảo sát không có flow"
 
-#, fuzzy
-#| msgid "View full results"
 msgid "Preview results"
-msgstr "Xem toàn bộ kết quả"
+msgstr "Xem trước kết quả"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Refresh Results"
-msgstr "Kết quả"
+msgstr "Làm mới kết quả"
 
 msgid "Partners"
-msgstr ""
+msgstr "Đối tác"
 
 msgid "MORE POLLS"
 msgstr "THÊM KHẢO SÁT"
@@ -984,121 +873,101 @@ msgid "LIST"
 msgstr "DANH SÁCH"
 
 msgid "Send"
-msgstr ""
+msgstr "Gửi"
 
 msgid "to"
-msgstr ""
+msgstr "đến"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST OPINION"
-msgstr "ĐỊA ĐIỂM"
+msgstr "Ý KIẾN MỚI NHẤT"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
-msgstr "KẾT QUẢ KHẢO SÁT"
+msgstr "XEM TOÀN BỘ KẾT QUẢ"
 
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERS TẠI"
 
 msgid "PARTNERING WITH"
-msgstr ""
+msgstr "HỢP TÁC VỚI"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS"
-msgstr "U-REPORTERS TẠI"
+msgstr "U-REPORTERS"
 
 msgid "IN"
-msgstr ""
+msgstr "TẠI"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "COUNTRIES WORLDWIDE"
-msgstr "U-REPORTERS TẠI"
+msgstr "QUỐC GIA TRÊN TOÀN THẾ GIỚI"
 
 msgid "AGES"
-msgstr ""
+msgstr "ĐỘ TUỔI"
 
 msgid "Available bots"
-msgstr ""
+msgstr "Các bot khả dụng"
 
 msgid "More bots"
-msgstr ""
+msgstr "Thêm bot"
 
 msgid "Join U-Report, Your voice matters."
-msgstr ""
+msgstr "Tham gia U-Report, tiếng nói của bạn rất quan trọng."
 
 msgid "FEATURED STORY"
 msgstr "CÂU CHUYỆN NỔI BẬT"
 
 msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
+msgstr "Chúng tôi là một phần của nền tảng toàn cầu hoạt động nhằm thay đổi cuộc sống của những người trẻ trên khắp thế giới."
 
 msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
+msgstr "Tìm hiểu thêm về cách U-Report trao quyền và kết nối những người trẻ để lên tiếng về những vấn đề quan trọng với họ."
 
-#, fuzzy
-#| msgid "READ MORE"
 msgid "LEARN MORE"
-msgstr "XEM THÊM"
+msgstr "TÌM HIỂU THÊM"
 
 msgid "Visit"
 msgstr "Ghé thăm"
 
 msgid "How would you like to join?"
-msgstr ""
+msgstr "Bạn muốn tham gia bằng cách nào?"
 
 msgid "Text"
-msgstr ""
+msgstr "Nhắn tin"
 
 msgid "Or download the U-Report App:"
-msgstr ""
+msgstr "Hoặc tải ứng dụng U-Report:"
 
 msgid "PAGE"
-msgstr ""
+msgstr "TRANG"
 
 msgid "SEARCH"
-msgstr ""
+msgstr "TÌM KIẾM"
 
 msgid "No results found"
-msgstr ""
+msgstr "Không tìm thấy kết quả"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "Bản xem trước khảo sát chưa xuất bản. Bấm Chỉnh sửa để xuất bản"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "Khảo sát đã xuất bản. Bấm Chỉnh sửa để hủy xuất bản"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "Khảo sát chưa được đồng bộ để hiển thị công khai"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "RESPONDERS"
-msgstr "TỶ LỆ PHẢN HỒI"
+msgstr "NGƯỜI PHẢN HỒI"
 
 msgid "RESPONSE RATE"
 msgstr "TỶ LỆ PHẢN HỒI"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "TOTAL RESPONDERS"
-msgstr "TỶ LỆ PHẢN HỒI"
+msgstr "TỔNG SỐ NGƯỜI PHẢN HỒI"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
+#, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr ""
-"\n"
-"%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
+msgstr "%(responded)s đã phản hồi trong số %(polled)s được khảo sát"
 
 msgid "ALL"
-msgstr ""
+msgstr "TẤT CẢ"
 
 msgid "AGE"
 msgstr "TUỔI"
@@ -1106,27 +975,23 @@ msgstr "TUỔI"
 msgid "GENDER"
 msgstr "GIỚI TÍNH"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LOCATION"
 msgstr "ĐỊA ĐIỂM"
 
 msgid "Written by:"
-msgstr ""
+msgstr "Viết bởi:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "Chưa có báo cáo nào được xuất bản"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "REPORT"
-msgstr "U-REPORTERS TẠI"
+msgstr "BÁO CÁO"
 
 msgid "STORY"
 msgstr "Câu chuyện"
 
 msgid "Download Report"
-msgstr ""
+msgstr "Tải báo cáo"
 
 msgid "Even"
 msgstr "Thậm chí"
@@ -1143,10 +1008,8 @@ msgstr "Quận, huyện"
 msgid "Participation Level"
 msgstr "Mức độ tham gia"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "Phản hồi"
+msgstr "Người phản hồi"
 
 msgid "Reporters in"
 msgstr "Phóng viên tại"
@@ -1173,262 +1036,190 @@ msgid "of"
 msgstr "của"
 
 msgid "the"
-msgstr ""
+msgstr " "
 
-#, fuzzy
-#| msgid "U-REPORTER STATISTICS"
 msgid "OVERALL STATISTICS"
-msgstr "SỐ LIỆU VỀ U-REPORTERS"
+msgstr "THỐNG KÊ TỔNG QUAN"
 
 msgid "THIS YEAR"
-msgstr ""
+msgstr "NĂM NAY"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
-msgstr "TỶ LỆ PHẢN HỒI"
+msgstr "TỶ LỆ PHẢN HỒI TRUNG BÌNH"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS TẠI"
+msgstr "U-REPORTERS THEO KHU VỰC"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "FILTER RESULTS"
-msgstr "KẾT QUẢ KHẢO SÁT"
+msgstr "LỌC KẾT QUẢ"
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "Biểu đồ chỉ hiển thị cho quản trị viên đã đăng nhập"
 
 msgid "Export and Share"
-msgstr ""
+msgstr "Xuất và chia sẻ"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr ""
+msgstr "Muốn chia sẻ điều này với mọi người? Hãy tải hình ảnh này để dễ dàng chia sẻ trên mạng xã hội hoặc dùng cho một bài thuyết trình đẹp mắt!"
 
 msgid "SELECT LANGUAGE"
-msgstr ""
+msgstr "CHỌN NGÔN NGỮ"
 
 msgid "SELECT COUNTRY"
-msgstr ""
+msgstr "CHỌN QUỐC GIA"
 
 msgid "Custom pages"
-msgstr ""
+msgstr "Trang tùy chỉnh"
 
 msgid "Landing pages"
-msgstr ""
+msgstr "Trang đích"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
+msgstr "Xem qua các con số cách chúng tôi kết nối tiếng nói của giới trẻ vì sự thay đổi xã hội tích cực."
 
-#, fuzzy
-#| msgid "polled"
 msgid "Polled"
-msgstr "đã khảo sát"
+msgstr "Được khảo sát"
 
-#, fuzzy
-#| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-Reporters"
 
 msgid "Top Region"
-msgstr ""
+msgstr "Khu vực dẫn đầu"
 
 msgid "January"
-msgstr ""
+msgstr "Tháng 1"
 
 msgid "February"
-msgstr ""
+msgstr "Tháng 2"
 
-#, fuzzy
-#| msgid "Search"
 msgid "March"
-msgstr "Tìm kiếm"
+msgstr "Tháng 3"
 
 msgid "April"
-msgstr ""
+msgstr "Tháng 4"
 
 msgid "May"
-msgstr ""
+msgstr "Tháng 5"
 
 msgid "June"
-msgstr ""
+msgstr "Tháng 6"
 
 msgid "July"
-msgstr ""
+msgstr "Tháng 7"
 
 msgid "August"
-msgstr ""
+msgstr "Tháng 8"
 
 msgid "September"
-msgstr ""
+msgstr "Tháng 9"
 
 msgid "October"
-msgstr ""
+msgstr "Tháng 10"
 
 msgid "November"
-msgstr ""
+msgstr "Tháng 11"
 
 msgid "December"
-msgstr ""
+msgstr "Tháng 12"
 
 msgid "Jan"
-msgstr ""
+msgstr "Thg 1"
 
 msgid "Feb"
-msgstr ""
+msgstr "Thg 2"
 
 msgid "Mar"
-msgstr ""
+msgstr "Thg 3"
 
 msgid "Apr"
-msgstr ""
+msgstr "Thg 4"
 
 msgid "Jun"
-msgstr ""
+msgstr "Thg 6"
 
 msgid "Jul"
-msgstr ""
+msgstr "Thg 7"
 
 msgid "Aug"
-msgstr ""
+msgstr "Thg 8"
 
 msgid "Sep"
-msgstr ""
+msgstr "Thg 9"
 
 msgid "Oct"
-msgstr ""
+msgstr "Thg 10"
 
-#, fuzzy
-#| msgid "No"
 msgid "Nov"
-msgstr "Không"
+msgstr "Thg 11"
 
 msgid "Dec"
-msgstr ""
+msgstr "Thg 12"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-"Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
+#, python-format
+msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
+msgstr "\n            Bạn có chắc chắn muốn xóa <strong>%(object)s</strong>?\n          "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
-"\n"
-"%(counter)s kết quả"
+msgstr[0] "%(counter)s kết quả"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
-"\n"
-"\t Kết quả %(start)s-%(end)s trong số %(count)s"
+msgstr "Kết quả %(start)s-%(end)s trong số %(count)s"
 
 msgid "Error"
-msgstr ""
+msgstr "Lỗi"
 
 msgid "Enter Dashboard"
-msgstr ""
+msgstr "Vào bảng điều khiển"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
+#, python-format
+msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
+msgstr "\n                Xin lỗi, bạn không thể đăng nhập lúc này vì chúng tôi đã nhận được %(failed_login_limit)s lần đăng nhập sai.\n              "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
+#, python-format
+msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
+msgstr "\n                    Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại.\n                  "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
+#, python-format
+msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
+msgstr "\n        <strong>Mật khẩu của bạn đã hết hạn.</strong> Chính sách của trang web yêu cầu bạn phải chọn mật khẩu mới sau mỗi %(expire_days)s ngày và mật khẩu không được trùng với mật khẩu đã sử dụng trong %(window_days)s ngày trước đó.\n      "
 
 msgid "+ New Story"
-msgstr ""
+msgstr "+ Câu chuyện mới"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s đang chạy, %(stale)s bị trễ, %(failing)s bị lỗi"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "kiểm tra lần cuối %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "chưa được kiểm tra"
 
 msgid "All job types"
-msgstr ""
+msgstr "Tất cả loại công việc"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Tất cả trạng thái"
 
 msgid "Filter"
-msgstr ""
+msgstr "Lọc"
 
-#, fuzzy
-#| msgid "Population"
 msgid "Actions"
-msgstr "Dân số"
+msgstr "Hành động"
 
 msgid "Pause"
-msgstr ""
+msgstr "Tạm dừng"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Kết quả"
+msgstr "Tiếp tục"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Buộc đồng bộ lại"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1438,7 +1229,7 @@ msgid "Flag"
 msgstr "Cờ"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "Về logo đối tác"
 
 msgid "The organization to which the image will be used"
 msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
@@ -1449,71 +1240,47 @@ msgstr "Tên mô tả ngắn cho hình ảnh này"
 msgid "Image type"
 msgstr "Loại hình ảnh"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "Mức độ ưu tiên của câu hỏi này trên trang khảo sát, những đề mục ưu tiên hơn xuất hiện trước"
+msgstr "Số thứ tự ưu tiên của hình ảnh này so với các hình ảnh khác trong danh sách, mức ưu tiên cao hơn xuất hiện trước"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this bot is part of"
-msgstr "Khảo sát này nằm trong tổ chức"
+msgstr "Tổ chức mà bot này thuộc về"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
+msgstr "Bot này có được hiển thị trên trang chủ hay không, chỉ tối đa 3 bot có mức ưu tiên cao nhất được hiển thị"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+msgstr "Bot này có bị ẩn trên các trang công khai ngoại trừ trang đích hay không"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this bot"
-msgstr "Tiêu đề cho mục này"
+msgstr "Tiêu đề hiển thị cho bot này"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "Mã ngắn, số điện thoại hoặc tên bot của kênh cho bot này"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The keyword for this bot"
-msgstr "Danh mục của câu chuyện này"
+msgstr "Từ khóa cho bot này"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Facebook bot deeplink, optional"
-msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+msgstr "Deeplink của bot Facebook, tùy chọn"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Telegram bot deeplink, optional"
-msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+msgstr "Deeplink của bot Telegram, tùy chọn"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Viber bot deeplink, optional"
-msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+msgstr "Deeplink của bot Viber, tùy chọn"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The WhatsApp bot deeplink, optional"
-msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+msgstr "Deeplink của bot WhatsApp, tùy chọn"
 
-#, fuzzy
-#| msgid "A short summary description for this item"
 msgid "A short description for this bot, required"
-msgstr "Mô tả ngắn cho muc này"
+msgstr "Mô tả ngắn cho bot này, bắt buộc"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "Mức độ ưu tiên của câu hỏi này trên trang khảo sát, những đề mục ưu tiên hơn xuất hiện trước"
+msgstr "Số thứ tự ưu tiên của bot này so với các bot khác trong danh sách, mức ưu tiên cao hơn xuất hiện trước"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot should be shown to the public"
-msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+msgstr "Bot này có nên được hiển thị công khai hay không"
 
 msgid "Label"
 msgstr "Nhãn"
@@ -1587,43 +1354,29 @@ msgstr "Nguồn công việc của bạn đã được thêm mới thành công"
 msgid "Your job source has been updated successfully"
 msgstr "Nguồn công việc của bạn đã được cập nhật thành công"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this landing page is part of"
-msgstr "Khảo sát này nằm trong tổ chức"
+msgstr "Tổ chức mà trang đích này thuộc về"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this landing page"
-msgstr "Tiêu đề cho mục này"
+msgstr "Tiêu đề hiển thị cho trang đích này"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The call to action text for this landing page"
-msgstr "Phần nội dung của câu chuyện"
+msgstr "Văn bản kêu gọi hành động cho trang đích này"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "The slug to use on the link for this landing page"
-msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+msgstr "Slug để sử dụng trong liên kết của trang đích này"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for the landing page"
-msgstr "Phần nội dung của câu chuyện"
+msgstr "Phần nội dung văn bản của trang đích"
 
-#, fuzzy
-#| msgid "The image file to use"
 msgid "The image file to use for the page"
-msgstr "Tệp hình ảnh để sử dụng"
+msgstr "Tệp hình ảnh để sử dụng cho trang"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this page should be active to the public"
-msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+msgstr "Trang này có nên hoạt động công khai hay không"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Slug chỉ có thể chứa chữ cái, chữ số, dấu gạch dưới và dấu gạch ngang"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Đây là id OSM cho ranh giới quản trị này"
@@ -1673,10 +1426,8 @@ msgstr "Tên của danh mục khảo sát này"
 msgid "Poll Categories"
 msgstr "Danh mục khảo sát"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+msgstr "Khảo sát này nên hiển thị hay ẩn trên trang công khai"
 
 msgid "The Flow this Poll is based on"
 msgstr "Luồng thông tin mà cuộc khảo sát này áp dụng"
@@ -1696,10 +1447,8 @@ msgstr "Số lượng phóng viên đã khảo sát trong khảo sát này"
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Khảo sát đã hoàn thành việc đồng bộ kết quả ban đầu hay chưa"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether the poll should stop regenerating stats."
-msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+msgstr "Khảo sát có nên ngừng tạo lại số liệu thống kê hay không."
 
 msgid "The title for this Poll"
 msgstr "Tiêu đề của khảo sát này"
@@ -1716,15 +1465,11 @@ msgstr "Ảnh gây chú ý để hiển thị cho cuộc khảo sát (tùy chọ
 msgid "The organization this poll is part of"
 msgstr "Khảo sát này nằm trong tổ chức"
 
-#, fuzzy
-#| msgid "The title for this story"
 msgid "The title for this response story"
-msgstr "Tiêu đề cho câu chuyện này"
+msgstr "Tiêu đề cho câu chuyện phản hồi này"
 
-#, fuzzy
-#| msgid "The writer of the story"
 msgid "The writer of the response story"
-msgstr "Người viết câu chuyện"
+msgstr "Người viết câu chuyện phản hồi"
 
 msgid "The poll to associate to"
 msgstr "Khảo sát để kết hợp với"
@@ -1742,42 +1487,40 @@ msgid "The featured response message"
 msgstr "Tin nhắn phản hồi nổi bật"
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "Nền Tối 1 và chữ Trắng"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "Nền Sáng 1 và chữ Đen"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "Nền Tối 2 và chữ Trắng"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "Nền Tối 3 và chữ Đen"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "Hiển thị biểu đồ Độ tuổi, Giới tính và Địa điểm"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "CHỈ ẩn biểu đồ Độ tuổi"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "CHỈ ẩn biểu đồ Giới tính"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "CHỈ ẩn biểu đồ Địa điểm"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "Ẩn biểu đồ Độ tuổi và Giới tính"
 
-#, fuzzy
-#| msgid "Participation Level"
 msgid "Hide Age and Location charts"
-msgstr "Mức độ tham gia"
+msgstr "Ẩn biểu đồ Độ tuổi và Địa điểm"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "Ẩn biểu đồ Giới tính và Địa điểm"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "Ẩn biểu đồ Độ tuổi, Giới tính và Địa điểm"
 
 msgid "The poll this question is part of"
 msgstr "Câu hỏi này nằm trong khảo sát"
@@ -1797,13 +1540,11 @@ msgstr "Con số ưu tiên cho câu hỏi này trong cuộc khảo sát"
 msgid "The Rule this response category is based on"
 msgstr "Nguyên tắc mà danh mục phản hồi này dựa vào"
 
-#, fuzzy
-#| msgid "The title for this Poll"
 msgid "Select tags for this poll"
-msgstr "Tiêu đề của khảo sát này"
+msgstr "Chọn thẻ cho khảo sát này"
 
 msgid "Your org does not have any API token configuration."
-msgstr ""
+msgstr "Tổ chức của bạn chưa có cấu hình API token nào."
 
 msgid "You must include a title for every included question."
 msgstr "Bạn phải có một tiêu đề cho mỗi câu hỏi"
@@ -1820,20 +1561,14 @@ msgstr "Điều chỉnh ngày khảo sát"
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr "Khảo sát của bạn đã được cập nhật, bây giờ hãy chọn câu hỏi"
 
-#, fuzzy
-#| msgid "Configuration"
 msgid "Configure flow"
-msgstr "Cấu hình"
+msgstr "Cấu hình flow"
 
-#, fuzzy
-#| msgid "Your poll has been created, now adjust the poll date."
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr "Khảo sát của bạn đã được tạo, bây giờ hãy điều chỉnh ngày khảo sát"
+msgstr "Khảo sát của bạn đã được cấu hình, bây giờ hãy điều chỉnh ngày khảo sát."
 
-#, fuzzy
-#| msgid "Your poll has been created, now adjust the poll date."
 msgid "Your poll has been created, now configure its flow."
-msgstr "Khảo sát của bạn đã được tạo, bây giờ hãy điều chỉnh ngày khảo sát"
+msgstr "Khảo sát của bạn đã được tạo, bây giờ hãy cấu hình flow cho nó."
 
 msgid "Poll Images"
 msgstr "HÌnh ảnh cho khảo sát"
@@ -1847,10 +1582,8 @@ msgstr "Hình ảnh để hiển thị trên trang khảo sát và trong phần 
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Hình ảnh để hiển thị trên trang khảo sát và trong phần xem trước (không bắt buộc)"
 
-#, fuzzy
-#| msgid "Poll Questions"
 msgid "Poll Response"
-msgstr "Câu hỏi khảo sát"
+msgstr "Phản hồi khảo sát"
 
 msgid "Your poll has been updated."
 msgstr "Khảo sát đã được cập nhật"
@@ -1886,59 +1619,51 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Câu hỏi đặt ra cho đối tượng nhắm đến của bạn, sẽ được hiển thị công khai"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Lựa chọn ẩn biểu đồ"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Chọn các biểu đồ phân tích cần ẩn công khai cho câu hỏi này"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Các hình ảnh cho danh mục"
+msgstr "Danh mục %s"
 
-#, fuzzy
-#| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr "Nhãn của ruleset từ RapidPro"
+msgstr "Nhãn của danh mục từ backend (chẳng hạn như RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Hiển thị %s"
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site"
 msgid "The label to display of the category on the public site"
-msgstr "Nếu có công việc để được hiển thị trên trang web công cộng"
+msgstr "Nhãn hiển thị của danh mục trên trang công khai"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Đồng bộ theo lịch đang được tiến hành..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Kết quả được đồng bộ lần cuối %(time)s trước"
 
 msgid "Synced"
-msgstr ""
+msgstr "Đã đồng bộ"
 
 #, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr ""
+msgstr "Đang đồng bộ... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Chỉnh sửa khảo sát cho flow [%(flow_name)s (%(flow_date_hint)s)]"
 
-#, fuzzy, python-format
-#| msgid "Scheduled a pull refresh for poll #%d on org #%d"
+#, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr "Đã lên lịch làm mới cho cuộc thăm dò dư luận #%d trong tổ chức #%d"
+msgstr "Đã lên lịch làm mới dữ liệu cho khảo sát #%(poll_id)d trong tổ chức #%(org_id)d"
 
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#, fuzzy
-#| msgid "The name of txbhe Contact Group that contains registered reporters"
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr "Tên của Nhóm Liên lạc chứa các phóng viên đã đăng ký"
 
@@ -1969,96 +1694,74 @@ msgstr "Nhãn được gán cho các U-Reporters nữ."
 msgid "Whether this org should be show on the landing page"
 msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
 
-#, fuzzy
-#| msgid "Whether this content should include a link"
 msgid "Whether this org count should consider the count from link only"
-msgstr "Nội dung này có nên bao gồm liên kết hay không"
+msgstr "Số liệu của tổ chức này có nên chỉ tính số lượng từ liên kết hay không"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
+msgstr "Số WhatsApp mà người dùng sẽ sử dụng để liên hệ với U-Report nếu bạn có"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
+msgstr "Bot Telegram mà người dùng sẽ sử dụng để liên hệ với U-Report nếu bạn có"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
+msgstr "Tên người dùng Viber mà người dùng sẽ sử dụng để liên hệ với U-Report nếu bạn có"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
+msgstr "Liên kết bot Line mà người dùng sẽ sử dụng để liên hệ với U-Report nếu bạn có"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Nếu có ứng dụng U-Report khả dụng."
 
 msgid "The join button text"
-msgstr ""
+msgstr "Văn bản nút tham gia"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Văn bản ngắn sử dụng để hướng khách truy cập tham gia U-Report"
 
 msgid "The call to action text to join on the top section on U-Report"
-msgstr ""
+msgstr "Văn bản kêu gọi hành động để tham gia ở phần đầu trang U-Report"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Địa điểm của phản hồi"
+msgstr "Liên kết cho các câu chuyện bên ngoài."
 
-#, fuzzy
-#| msgid "The text of the featured response."
 msgid "A short text for the extra menu."
-msgstr "Văn bản của phản hồi nổi bật."
+msgstr "Văn bản ngắn cho trình đơn bổ sung."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Địa điểm của phản hồi"
+msgstr "Liên kết cho trình đơn bổ sung."
 
 msgid "The YouTube video ID for how to join U-Report section"
-msgstr ""
+msgstr "ID video YouTube cho phần hướng dẫn cách tham gia U-Report"
 
 msgid "The title of the photos section U-Report homepage"
-msgstr ""
+msgstr "Tiêu đề của phần hình ảnh trên trang chủ U-Report"
 
 msgid "The description of the photos section U-Report homepage"
-msgstr ""
+msgstr "Mô tả của phần hình ảnh trên trang chủ U-Report"
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the opinions page"
-msgstr "Địa phương của phóng viên."
+msgstr "Mô tả của trang ý kiến"
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the stories page"
-msgstr "Địa phương của phóng viên."
+msgstr "Mô tả của trang câu chuyện"
 
 msgid "The description of the engagement page"
-msgstr ""
+msgstr "Mô tả của trang mức độ tham gia"
 
 msgid "The callout message on the footer engagement section"
-msgstr ""
+msgstr "Thông điệp nổi bật ở phần mức độ tham gia cuối trang"
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "Các tỉnh/bang chỉ hiển thị trên bản đồ"
 
 msgid "The states to show on maps only, used to filter poll results"
-msgstr ""
+msgstr "Các tỉnh/bang chỉ hiển thị trên bản đồ, được sử dụng để lọc kết quả khảo sát"
 
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
 msgid "The Google Tag Manager ID for this organization"
-msgstr "Google Analytics Tracking ID cho tổ chức này"
+msgstr "ID Google Tag Manager cho tổ chức này"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Google Analytics Tracking ID cho tổ chức này"
@@ -2067,7 +1770,7 @@ msgid "The URL to the Youtube channel for this organization"
 msgstr "URL kênh Youtube cho tổ chức này"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Nội dung cho thẻ meta dùng để Xác minh Tên miền Facebook"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL trang Facebook cho tổ chức này"
@@ -2078,10 +1781,8 @@ msgstr "Mã số nguyên đối với trang Facebook cho tổ chức này (tùy 
 msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr "Mã số nguyên đối với ứng dụng Facebook cho ứng dụng chat của tổ chức này (tùy chọn)"
 
-#, fuzzy
-#| msgid "The short text used to direct visitors to join U-Report"
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr "Văn bản ngắn sử dụng để hướng khách truy cập tham gia U-Report"
+msgstr "Văn bản ngắn dùng để chào người dùng trên Facebook Messenger Plugin"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "Id của Facebook Pixel cho tổ chức này (tùy chọn)"
@@ -2089,10 +1790,8 @@ msgstr "Id của Facebook Pixel cho tổ chức này (tùy chọn)"
 msgid "The Instagram username for this organization"
 msgstr "Tên đăng nhập Instagram của tổ chức này"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Tên đăng nhập Instagram của tổ chức này"
+msgstr "Tên người dùng Instagram sẽ hiển thị trên trang tham gia dưới dạng deeplink cho tổ chức này"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Tiện ích Instagram id từ lightwidget.com"
@@ -2104,150 +1803,132 @@ msgid "The Twitter widget used for searching"
 msgstr "Tiện ích Twitter được sử dụng để tìm kiếm"
 
 msgid "The words to filter out from the results on public site"
-msgstr ""
+msgstr "Các từ cần lọc bỏ khỏi kết quả trên trang công khai"
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site"
 msgid "If there are jobs to be shown on the public site."
-msgstr "Nếu có công việc để được hiển thị trên trang web công cộng"
+msgstr "Nếu có công việc để được hiển thị trên trang công khai."
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Liệu tổ chức này có áp dụng đối với thông tin toàn cầu, ví dụ: đưa ra bản đồ thế giới thay vì bản đồ quốc gia"
 
 msgid "Whether to activate an extra gender."
-msgstr ""
+msgstr "Có kích hoạt thêm một giới tính bổ sung hay không."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Nếu được đặt, người dùng công khai truy cập trang web sẽ được chuyển hướng đến URL này."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Có ẩn các biểu đồ phân tích mức độ tham gia hay không."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Người dung được đăng nhập vào trang hay không"
+msgstr "Có hiển thị logo UNICEF ở cuối trang hay không."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Mã alpha-3 ISO của tổ chức để hiển thị các câu chuyện ứng dụng Ureport tiện ích, ví dụ BRA, NIG, CMR (dùng GLOBAL nếu là U-Report toàn cầu)."
 
 msgid "The font used for headline texts"
-msgstr ""
+msgstr "Phông chữ dùng cho văn bản tiêu đề"
 
 msgid "The font used for normal text"
-msgstr ""
+msgstr "Phông chữ dùng cho văn bản thường"
 
-#, fuzzy
-#| msgid "Participation Level"
 msgid "Hide participation stats"
-msgstr "Mức độ tham gia"
+msgstr "Ẩn số liệu tham gia"
 
-#, fuzzy
-#| msgid "The name of the sender of the message"
 msgid "The text to describe the sponsors of free messages"
-msgstr "Tên của người gửi tin nhắn"
+msgstr "Văn bản mô tả các nhà tài trợ tin nhắn miễn phí"
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "Phông chữ dùng cho văn bản nhỏ"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Nếu bạn cần bao gồm một số mã HTML tùy chỉnh trong trang tổ chức của mình, như đoạn mã phân tích tùy chỉnh"
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "Liên kết đến các trang ngôn ngữ khác"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
-msgstr "Câu chuyện này có nổi bật hay không"
+msgstr "Hàng này có được tạo bằng cách gộp (squash) hay không"
 
 msgid "90 Days"
-msgstr ""
+msgstr "90 ngày"
 
 msgid "6 Months"
-msgstr ""
+msgstr "6 tháng"
 
 msgid "12 Months"
-msgstr ""
+msgstr "12 tháng"
 
 msgid "Age"
-msgstr ""
+msgstr "Độ tuổi"
 
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Channels"
-msgstr "Lưu thay đổi"
+msgstr "Kênh"
 
-#, fuzzy
-#| msgid "Population"
 msgid "Location"
-msgstr "Dân số"
+msgstr "Địa điểm"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Opinion Responses"
-msgstr "Phản hồi"
+msgstr "Phản hồi ý kiến"
 
 msgid "Sign Up Rate"
-msgstr ""
+msgstr "Tỷ lệ đăng ký"
 
 msgid "Response Rate"
 msgstr "Tỉ lệ phản hồi"
 
 msgid "Active Users"
-msgstr ""
+msgstr "Người dùng hoạt động"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Công việc #%(job_id)d đang được xử lý, vui lòng thử lại sau giây lát"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Đã tạm dừng công việc #%(job_id)d"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Đã tiếp tục công việc #%(job_id)d"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Công việc #%(job_id)d không bị tạm dừng"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Công việc #%(job_id)d sẽ đồng bộ lại từ đầu trong lần chạy tiếp theo"
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
 
-#, fuzzy
-#| msgid "Population"
 msgid "All locations"
-msgstr "Dân số"
+msgstr "Tất cả địa điểm"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Đông Á và Thái Bình Dương"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Đông và Nam Phi"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Châu Âu và Trung Á"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Châu Mỹ Latinh và Caribe"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Trung Đông và Bắc Phi"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Nam Á"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Các quốc gia có Ủy ban Quốc gia của UNICEF"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Tây và Trung Phi"
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

@@ -46,15 +46,11 @@ msgstr "ملف الصورة التي تريد إستخدامها "
 msgid "The human readable name for this content type"
 msgstr "الاسم المقروء للإنسان لهذا النوع من المحتوى"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Slug لتعريف هذا نوع من المحتوى، ويستخدم مع علامات القالب"
+msgstr "المعرّف المختصر (slug) لتحديد نوع المحتوى هذا، ويُستخدم مع وسوم القالب"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "وصف عن مكان استخدام نوع المحتوى هذا في الموقع وكيف سيتم عرضه"
+msgstr "وصف لمكان استخدام نوع المحتوى هذا في الموقع وكيفية عرضه"
 
 msgid "Whether this content should include a title"
 msgstr "بحال كان المحتوى يجب أن يحوى عنوان"
@@ -135,10 +131,10 @@ msgid "Content Types"
 msgstr "نوع المحتوى "
 
 msgid "Link Slug"
-msgstr ""
+msgstr "معرّف الرابط"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "المعرّف المختصر أو الكلمة المستخدمة في رابط الصفحة"
 
 msgid "Content Blocks"
 msgstr "مجموعات المحتوى الخاصة بالصفحة الإلكترونية "
@@ -291,43 +287,24 @@ msgstr "نوع الخلفية "
 msgid "The image file"
 msgstr "ملف الصورة "
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The API token for this backend"
-msgstr "عنوان البند "
+msgstr "رمز API الخاص بهذه الواجهة الخلفية"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"لقد تمت دعوتك للمشاركة في%(org_name)s. \n"
-"\n"
-"لقبول الدعوة، <a href='%(host)s%(join_url)s'> اضغط هنا "
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      لقد تمت دعوتك للانضمام إلى %(org_name)s.\n      <br />\n      لقبول الدعوة، <a href='%(host)s%(join_url)s'>اضغط هنا</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
-msgstr ""
+msgstr "أنت مدعو للانضمام إلى {{org.name}}."
 
 msgid "Click this link to join"
-msgstr ""
+msgstr "اضغط على هذا الرابط للانضمام"
 
 msgid "Edit"
 msgstr "تعديل "
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Manage Backends"
-msgstr "إدارة حسابات المستخدمين "
+msgstr "إدارة الواجهات الخلفية"
 
 msgid "Manage Users"
 msgstr "إدارة حسابات المستخدمين "
@@ -347,10 +324,8 @@ msgstr "يجب أن يكون لديك مشرف واحد على الأقل"
 msgid "Select your Organization"
 msgstr "قم بإختيار المنظمة التي تتبع لها "
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "حسابك غير مرتبط بالمنظمة التي قمت بإختيارها، الرجاء التواصل مع المشرف في منظمتك "
+msgstr "حسابك غير مرتبط بأي منظمة. يرجى التواصل مع المشرف."
 
 msgid "Your Organization"
 msgstr "مؤسستك"
@@ -378,10 +353,8 @@ msgstr "رابط الدعوة الخاص بك لا يعمل، الرجاء ال�
 msgid "Join %(name)s"
 msgstr "إنضم الى %(name)s"
 
-#, fuzzy
-#| msgid "Join Now"
 msgid "Join"
-msgstr "انضم الآن!"
+msgstr "انضم"
 
 msgid "Your invitation link has expired. Please contact your organization administrator."
 msgstr "لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف في منظمتك. "
@@ -393,15 +366,13 @@ msgid "Tasks"
 msgstr "مهام"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "يتم دعم ملفات PDF فقط."
 
 msgid "The title for this story"
 msgstr "عنوان المقال"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
-msgstr "هل هذه المقالة إستثنائية أو مميزة "
+msgstr "ما إذا كانت هذه المقالة مميزة"
 
 msgid "The summary for the story"
 msgstr "ملخص المقال "
@@ -416,7 +387,7 @@ msgid "A link to an mp3 file to publish on this story"
 msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "تقرير PDF المراد إرفاقه"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
@@ -458,23 +429,18 @@ msgstr "الصورة التي تريد إدراجها في صفحة عرض ال�
 msgid "Image to display on story page and in previews (optional)"
 msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
 
-#, fuzzy
-#| msgid "The name of this category"
 msgid "The name of this tag"
-msgstr "اسم الفئة "
+msgstr "اسم هذا الوسم"
 
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 msgid "Remove Item?"
 msgstr "حذف "
 
 #, python-format
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
+msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
+msgstr "\n    هل أنت متأكد من أنك تريد إزالة <b>%(object)s</b>؟\n    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إعادة هذه العملية للخلف"
@@ -483,27 +449,18 @@ msgid "Cancel"
 msgstr "إلغاء"
 
 #, python-format
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgid "\n\t %(counter)s result\n\t"
+msgid_plural "\n         %(counter)s results\n        "
+msgstr[0] "\n\t %(counter)s نتيجة\n\t"
+msgstr[1] "\n\t %(counter)s نتيجة\n\t"
+msgstr[2] "\n\t %(counter)s نتيجة\n\t"
+msgstr[3] "\n\t %(counter)s نتائج\n\t"
+msgstr[4] "\n\t %(counter)s نتيجة\n\t"
+msgstr[5] "\n\t %(counter)s نتيجة\n\t"
 
 #, python-format
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
+msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
+msgstr "\n\tالنتائج %(start)s-%(end)s من %(count)s\n\t"
 
 msgid "Previous"
 msgstr "السابق"
@@ -530,18 +487,12 @@ msgid "Login Failure"
 msgstr "تسجيل دخول خاطئ"
 
 #, python-format
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
+msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
+msgstr "\n      عذراً، لا يمكنك تسجيل الدخول حالياً لأننا تلقينا %(failed_login_limit)s محاولات تسجيل دخول خاطئة.\n      "
 
 #, python-format
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
+msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
+msgstr "\n      يرجى الانتظار %(lockout_timeout)s دقائق قبل محاولة تسجيل الدخول مرة أخرى.\n      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
@@ -559,11 +510,8 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
 
 #, python-format
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
+msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
+msgstr "\n  <strong>انتهت صلاحية كلمة المرور الخاصة بك.</strong> تنص سياسة الموقع على أنه يجب عليك اختيار كلمة مرور جديدة كل %(expire_days)s يوماً، وألا تكون كلمات المرور قد استُخدمت خلال %(window_days)s يوماً الماضية.\n  "
 
 msgid "New Password"
 msgstr "كلمة المرور الجديدة"
@@ -699,17 +647,17 @@ msgid "Form"
 msgstr "نموذج"
 
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 #, python-format
 msgid "Your new %s has been created."
 msgstr "تم خلق مستخدم جديد %s"
 
 msgid "Back to Website"
-msgstr ""
+msgstr "العودة إلى الموقع"
 
 msgid "Welcome, "
-msgstr ""
+msgstr "مرحباً، "
 
 msgid "Logout"
 msgstr "تسجيل الخروج "
@@ -718,31 +666,31 @@ msgid "Opinions"
 msgstr "استطلاع الرأي"
 
 msgid "Bots"
-msgstr ""
+msgstr "البوتات"
 
 msgid "Users"
 msgstr "المستخدمين"
 
 msgid "Settings"
-msgstr ""
+msgstr "الإعدادات"
 
 msgid "Pages"
-msgstr ""
+msgstr "الصفحات"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "الصفحات المقصودة"
 
 msgid "Jobs"
 msgstr "الأعمال"
 
 msgid "Tags"
-msgstr ""
+msgstr "الوسوم"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "شعارات الشركاء"
 
 msgid "Categories Images"
-msgstr ""
+msgstr "صور الفئات"
 
 msgid "News Items"
 msgstr "مواد الأخبار"
@@ -753,10 +701,8 @@ msgstr "المؤسسات"
 msgid "Images"
 msgstr "الصور"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "الأعمال"
+msgstr "مهام المزامنة"
 
 msgid "About"
 msgstr "نبذة عن "
@@ -764,19 +710,17 @@ msgstr "نبذة عن "
 msgid "Engagement"
 msgstr "مشاركة"
 
-#, fuzzy
-#| msgid "U-Report"
 msgid "Reports"
-msgstr "يو-ريبورت"
+msgstr "التقارير"
 
 msgid "Category Images"
 msgstr "صور الفئة"
 
 msgid "+ New "
-msgstr ""
+msgstr "+ جديد "
 
 msgid "+ New Page"
-msgstr ""
+msgstr "+ صفحة جديدة"
 
 msgid "U-Report"
 msgstr "يو-ريبورت"
@@ -862,78 +806,75 @@ msgid "Back"
 msgstr "العودة"
 
 msgid "Select bots"
-msgstr ""
+msgstr "اختر البوتات"
 
 msgid "View public page"
-msgstr ""
+msgstr "عرض الصفحة العامة"
 
 msgid "LATEST NOTIFICATIONS"
-msgstr ""
+msgstr "أحدث الإشعارات"
 
 msgid "Backends"
-msgstr ""
+msgstr "الواجهات الخلفية"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "يمكنك إعادة إرسال الدعوة باستخدام الحقل أعلاه"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "أضف أو اختر الوسوم"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "يوجد حالياً %(counter)s استطلاع جديد قيد المزامنة. تُعرض الاستطلاعات على الموقع العام بمجرد اكتمال مزامنة نتائجها."
+msgstr[1] "يوجد حالياً %(counter)s استطلاع جديد قيد المزامنة. تُعرض الاستطلاعات على الموقع العام بمجرد اكتمال مزامنة نتائجها."
+msgstr[2] "يوجد حالياً استطلاعان جديدان (%(counter)s) قيد المزامنة. تُعرض الاستطلاعات على الموقع العام بمجرد اكتمال مزامنة نتائجها."
+msgstr[3] "توجد حالياً %(counter)s استطلاعات جديدة قيد المزامنة. تُعرض الاستطلاعات على الموقع العام بمجرد اكتمال مزامنة نتائجها."
+msgstr[4] "يوجد حالياً %(counter)s استطلاعاً جديداً قيد المزامنة. تُعرض الاستطلاعات على الموقع العام بمجرد اكتمال مزامنة نتائجها."
+msgstr[5] "يوجد حالياً %(counter)s استطلاع جديد قيد المزامنة. تُعرض الاستطلاعات على الموقع العام بمجرد اكتمال مزامنة نتائجها."
 
 msgid "+ New Poll"
-msgstr ""
+msgstr "+ استطلاع جديد"
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "أسئلة الإستطلاع "
-msgstr[1] "أسئلة الإستطلاع "
-msgstr[2] "أسئلة الإستطلاع "
-msgstr[3] "أسئلة الإستطلاع "
-msgstr[4] "أسئلة الإستطلاع "
-msgstr[5] "أسئلة الإستطلاع "
+msgstr[0] "%(counter)s سؤال استطلاع"
+msgstr[1] "%(counter)s سؤال استطلاع"
+msgstr[2] "سؤالا استطلاع (%(counter)s)"
+msgstr[3] "%(counter)s أسئلة استطلاع"
+msgstr[4] "%(counter)s سؤال استطلاع"
+msgstr[5] "%(counter)s سؤال استطلاع"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "تتم جدولة المزامنات الأولية للاستطلاعات الجديدة كل 10 دقائق"
 
 msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
+msgstr "لم تعد تتم جدولة المزامنات للاستطلاعات القديمة، وتمت أرشفة التشغيلات"
 
 msgid "Main poll syncs scheduled every 20min"
-msgstr ""
+msgstr "تتم جدولة المزامنات الرئيسية للاستطلاع كل 20 دقيقة"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "تتم جدولة مزامنات الاستطلاعات الحديثة كل 60 دقيقة"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "تتم جدولة مزامنات الاستطلاع كل 24 ساعة"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "لا تتم جدولة المزامنات، غير نشط"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "لا تتم جدولة المزامنات، لا يوجد تدفق للاستطلاع"
 
-#, fuzzy
-#| msgid "View full results"
 msgid "Preview results"
-msgstr "إظهار النتائج كاملة"
+msgstr "معاينة النتائج"
 
 msgid "Refresh Results"
-msgstr ""
+msgstr "تحديث النتائج"
 
 msgid "Partners"
-msgstr ""
+msgstr "الشركاء"
 
 msgid "MORE POLLS"
 msgstr "المزيد من إستطلاعات الرأي العام والمسوحات"
@@ -957,10 +898,10 @@ msgid "LIST"
 msgstr "القائمة "
 
 msgid "Send"
-msgstr ""
+msgstr "أرسل"
 
 msgid "to"
-msgstr ""
+msgstr "إلى"
 
 msgid "LATEST OPINION"
 msgstr "آخر استطلاعات الرأي"
@@ -972,28 +913,28 @@ msgid "U-REPORTERS IN"
 msgstr "المشاركين في يو-ريبورت في"
 
 msgid "PARTNERING WITH"
-msgstr ""
+msgstr "بالشراكة مع"
 
 msgid "U-REPORTERS"
-msgstr ""
+msgstr "مشاركون في يو-ريبورت"
 
 msgid "IN"
-msgstr ""
+msgstr "في"
 
 msgid "COUNTRIES WORLDWIDE"
-msgstr ""
+msgstr "دولة حول العالم"
 
 msgid "AGES"
 msgstr "الأعمار"
 
 msgid "Available bots"
-msgstr ""
+msgstr "البوتات المتاحة"
 
 msgid "More bots"
-msgstr ""
+msgstr "المزيد من البوتات"
 
 msgid "Join U-Report, Your voice matters."
-msgstr ""
+msgstr "انضم إلى يو-ريبورت، صوتك مهم."
 
 msgid "FEATURED STORY"
 msgstr "مقالة إستثنائية "
@@ -1014,48 +955,44 @@ msgid "How would you like to join?"
 msgstr "كيف تريد الانضمام"
 
 msgid "Text"
-msgstr ""
+msgstr "أرسل رسالة نصية"
 
 msgid "Or download the U-Report App:"
-msgstr ""
+msgstr "أو حمّل تطبيق يو-ريبورت:"
 
 msgid "PAGE"
-msgstr ""
+msgstr "صفحة"
 
 msgid "SEARCH"
 msgstr "ابحث "
 
 msgid "No results found"
-msgstr ""
+msgstr "لم يتم العثور على نتائج"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "معاينة استطلاع غير منشور. اضغط على تعديل لنشره"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "استطلاع منشور. اضغط على تعديل لإلغاء نشره"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "لم تتم مزامنة الاستطلاع بعد ليتم عرضه للعامة"
 
-#, fuzzy
-#| msgid "RESPONSES"
 msgid "RESPONDERS"
-msgstr "ستجابات"
+msgstr "المستجيبون"
 
 msgid "RESPONSE RATE"
 msgstr "نسبة التجاوب "
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
 msgid "TOTAL RESPONDERS"
-msgstr "مجموع الردود"
+msgstr "إجمالي المستجيبين"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr ""
+msgstr "استجاب %(responded)s من أصل %(polled)s شملهم الاستطلاع"
 
 msgid "ALL"
-msgstr ""
+msgstr "الكل"
 
 msgid "AGE"
 msgstr "العمر "
@@ -1064,24 +1001,22 @@ msgid "GENDER"
 msgstr "الجنس "
 
 msgid "LOCATION"
-msgstr ""
+msgstr "الموقع"
 
 msgid "Written by:"
-msgstr ""
+msgstr "بقلم:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "لم يتم نشر أي تقارير بعد"
 
-#, fuzzy
-#| msgid "JOIN U-REPORT"
 msgid "REPORT"
-msgstr "شارك في يوريبورت U-REPORT الآن "
+msgstr "تقرير"
 
 msgid "STORY"
 msgstr "قصة"
 
 msgid "Download Report"
-msgstr ""
+msgstr "تنزيل التقرير"
 
 msgid "Even"
 msgstr "حتى"
@@ -1098,10 +1033,8 @@ msgstr "منطقة"
 msgid "Participation Level"
 msgstr "درجة المشاركة"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "الاستجابات"
+msgstr "المستجيبون"
 
 msgid "Reporters in"
 msgstr "المراسلون في"
@@ -1140,198 +1073,183 @@ msgid "AVG RESPONSE RATE"
 msgstr "متوسط ​​معدل الاستجابة"
 
 msgid "U-REPORTERS BY REGION"
-msgstr ""
+msgstr "المشاركون في يو-ريبورت حسب المنطقة"
 
 msgid "FILTER RESULTS"
 msgstr "تصفية النتائج"
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "الرسوم البيانية مرئية فقط للمشرفين المسجلين الدخول"
 
 msgid "Export and Share"
-msgstr ""
+msgstr "تصدير ومشاركة"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr ""
+msgstr "هل تريد إخبار العالم بهذا؟ حمّل هذه الصورة لمشاركتها بسهولة على وسائل التواصل الاجتماعي أو لاستخدامها في عرض تقديمي جميل!"
 
 msgid "SELECT LANGUAGE"
-msgstr ""
+msgstr "اختر اللغة"
 
 msgid "SELECT COUNTRY"
-msgstr ""
+msgstr "اختر الدولة"
 
 msgid "Custom pages"
-msgstr ""
+msgstr "صفحات مخصصة"
 
 msgid "Landing pages"
-msgstr ""
+msgstr "الصفحات المقصودة"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "بالأرقام – احصائيات مراسلي يو-ريبورت"
 
 msgid "Polled"
-msgstr ""
+msgstr "شملهم الاستطلاع"
 
 msgid "Reporters"
-msgstr ""
+msgstr "المراسلون"
 
 msgid "Top Region"
-msgstr ""
+msgstr "المنطقة الأعلى مشاركة"
 
 msgid "January"
-msgstr ""
+msgstr "يناير"
 
 msgid "February"
-msgstr ""
+msgstr "فبراير"
 
 msgid "March"
-msgstr ""
+msgstr "مارس"
 
 msgid "April"
-msgstr ""
+msgstr "أبريل"
 
 msgid "May"
-msgstr ""
+msgstr "مايو"
 
 msgid "June"
-msgstr ""
+msgstr "يونيو"
 
 msgid "July"
-msgstr ""
+msgstr "يوليو"
 
 msgid "August"
-msgstr ""
+msgstr "أغسطس"
 
 msgid "September"
-msgstr ""
+msgstr "سبتمبر"
 
 msgid "October"
-msgstr ""
+msgstr "أكتوبر"
 
 msgid "November"
-msgstr ""
+msgstr "نوفمبر"
 
 msgid "December"
-msgstr ""
+msgstr "ديسمبر"
 
 msgid "Jan"
-msgstr ""
+msgstr "يناير"
 
 msgid "Feb"
-msgstr ""
+msgstr "فبراير"
 
 msgid "Mar"
-msgstr ""
+msgstr "مارس"
 
 msgid "Apr"
-msgstr ""
+msgstr "أبريل"
 
 msgid "Jun"
-msgstr ""
+msgstr "يونيو"
 
 msgid "Jul"
-msgstr ""
+msgstr "يوليو"
 
 msgid "Aug"
-msgstr ""
+msgstr "أغسطس"
 
 msgid "Sep"
-msgstr ""
+msgstr "سبتمبر"
 
 msgid "Oct"
-msgstr ""
+msgstr "أكتوبر"
 
 msgid "Nov"
-msgstr ""
+msgstr "نوفمبر"
 
 msgid "Dec"
-msgstr ""
+msgstr "ديسمبر"
 
 #, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
+msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
+msgstr "\n            هل أنت متأكد من أنك تريد إزالة <strong>%(object)s</strong>؟\n          "
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] "أسئلة الإستطلاع "
-msgstr[1] "أسئلة الإستطلاع "
-msgstr[2] "أسئلة الإستطلاع "
-msgstr[3] "أسئلة الإستطلاع "
-msgstr[4] "أسئلة الإستطلاع "
-msgstr[5] "أسئلة الإستطلاع "
+msgstr[0] "%(counter)s نتيجة"
+msgstr[1] "%(counter)s نتيجة"
+msgstr[2] "%(counter)s نتيجة"
+msgstr[3] "%(counter)s نتائج"
+msgstr[4] "%(counter)s نتيجة"
+msgstr[5] "%(counter)s نتيجة"
 
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
+msgstr "النتائج %(start)s-%(end)s من %(count)s"
 
 msgid "Error"
-msgstr ""
+msgstr "خطأ"
 
 msgid "Enter Dashboard"
-msgstr ""
+msgstr "دخول لوحة التحكم"
 
 #, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
+msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
+msgstr "\n                عذراً، لا يمكنك تسجيل الدخول حالياً لأننا تلقينا %(failed_login_limit)s محاولات تسجيل دخول خاطئة.\n              "
 
 #, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
+msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
+msgstr "\n                    يرجى الانتظار %(lockout_timeout)s دقائق قبل محاولة تسجيل الدخول مرة أخرى.\n                  "
 
 #, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
+msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
+msgstr "\n        <strong>انتهت صلاحية كلمة المرور الخاصة بك.</strong> تنص سياسة الموقع على أنه يجب عليك اختيار كلمة مرور جديدة كل %(expire_days)s يوماً، وألا تكون كلمات المرور قد استُخدمت خلال %(window_days)s يوماً الماضية.\n      "
 
 msgid "+ New Story"
-msgstr ""
+msgstr "+ مقالة جديدة"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s قيد التشغيل، %(stale)s متأخرة، %(failing)s متعثرة"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "آخر فحص %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "لم يتم الفحص بعد"
 
 msgid "All job types"
-msgstr ""
+msgstr "جميع أنواع المهام"
 
 msgid "All statuses"
-msgstr ""
+msgstr "جميع الحالات"
 
 msgid "Filter"
-msgstr ""
+msgstr "تصفية"
 
 msgid "Actions"
-msgstr ""
+msgstr "إجراءات"
 
 msgid "Pause"
-msgstr ""
+msgstr "إيقاف مؤقت"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "النتائج"
+msgstr "استئناف"
 
 msgid "Force resync"
-msgstr ""
+msgstr "فرض إعادة المزامنة"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1341,7 +1259,7 @@ msgid "Flag"
 msgstr "علم"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "حول شعار الشريك"
 
 msgid "The organization to which the image will be used"
 msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
@@ -1352,71 +1270,47 @@ msgstr "وصف مختصر عن الصورة"
 msgid "Image type"
 msgstr "نوع الصورة "
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "ترتيب هذا السؤال على صفحة الاستطلاع، الأكثر أولوية يأتي أولاً "
+msgstr "رقم أولوية هذه الصورة بين غيرها في القائمة، الأولوية الأعلى تأتي أولاً"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this bot is part of"
-msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+msgstr "المنظمة التي يتبع لها هذا البوت"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
+msgstr "ما إذا كان هذا البوت يُعرض على الصفحة الرئيسية، يتم عرض 3 فقط كحد أقصى من ذات الأولويات الأعلى"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+msgstr "ما إذا كان هذا البوت مخفياً في الصفحات العامة باستثناء الصفحات المقصودة"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this bot"
-msgstr "عنوان البند "
+msgstr "العنوان الذي يُعرض لهذا البوت"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "الرمز المختصر أو الرقم أو اسم البوت للقناة الخاصة بهذا البوت"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The keyword for this bot"
-msgstr "فئة المقال"
+msgstr "الكلمة المفتاحية لهذا البوت"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Facebook bot deeplink, optional"
-msgstr "عنوان كتلة المحتوى، اختياري"
+msgstr "الرابط المباشر لبوت فيسبوك، اختياري"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Telegram bot deeplink, optional"
-msgstr "عنوان كتلة المحتوى، اختياري"
+msgstr "الرابط المباشر لبوت تيليجرام، اختياري"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Viber bot deeplink, optional"
-msgstr "عنوان كتلة المحتوى، اختياري"
+msgstr "الرابط المباشر لبوت فايبر، اختياري"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The WhatsApp bot deeplink, optional"
-msgstr "عنوان كتلة المحتوى، اختياري"
+msgstr "الرابط المباشر لبوت واتساب، اختياري"
 
-#, fuzzy
-#| msgid "A short summary description for this item"
 msgid "A short description for this bot, required"
-msgstr "وصف مختصر عن البند "
+msgstr "وصف مختصر لهذا البوت، مطلوب"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "ترتيب هذا السؤال على صفحة الاستطلاع، الأكثر أولوية يأتي أولاً "
+msgstr "رقم أولوية هذا البوت بين غيره في القائمة، الأولوية الأعلى تأتي أولاً"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot should be shown to the public"
-msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+msgstr "ما إذا كان يجب عرض هذا البوت للعامة"
 
 msgid "Label"
 msgstr "ملصق"
@@ -1455,7 +1349,7 @@ msgid "District Field"
 msgstr "حقل الناحية"
 
 msgid "Ward Field"
-msgstr ""
+msgstr "حقل الحي"
 
 msgid "Number of items with this counter"
 msgstr "عدد المواد في هذه الزاوية"
@@ -1490,43 +1384,29 @@ msgstr "تم إضافة مصدر العمل بنجاح"
 msgid "Your job source has been updated successfully"
 msgstr "تم تحديث مصدر العمل بنجاح"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this landing page is part of"
-msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
+msgstr "المنظمة التي تتبع لها هذه الصفحة المقصودة"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this landing page"
-msgstr "عنوان البند "
+msgstr "العنوان الذي يُعرض لهذه الصفحة المقصودة"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The call to action text for this landing page"
-msgstr "نص المقال"
+msgstr "نص الدعوة إلى الإجراء لهذه الصفحة المقصودة"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "The slug to use on the link for this landing page"
-msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+msgstr "المعرّف المختصر المستخدم في رابط هذه الصفحة المقصودة"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for the landing page"
-msgstr "نص المقال"
+msgstr "النص الأساسي للصفحة المقصودة"
 
-#, fuzzy
-#| msgid "The image file to use"
 msgid "The image file to use for the page"
-msgstr "ملف الصورة التي تريد إستخدامها "
+msgstr "ملف الصورة المستخدم للصفحة"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this page should be active to the public"
-msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+msgstr "ما إذا كان يجب أن تكون هذه الصفحة نشطة للعامة"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "لا يمكن أن يحتوي المعرّف المختصر إلا على حروف وأرقام وشرطات سفلية وشرطات"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "هذا هو رمز الـOSM الخاص بالحدود الإدارية "
@@ -1576,16 +1456,14 @@ msgstr "إسم الفئة الخاصة بهذه االإستطلاع"
 msgid "Poll Categories"
 msgstr "الفئات التي ينتمي لها الإستطلاعات والمسوحات المتوافرة "
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+msgstr "ما إذا كان هذا الاستطلاع مرئياً أو مخفياً على الموقع العام"
 
 msgid "The Flow this Poll is based on"
 msgstr "يستند تسلسل هذه الإستطلاعات على "
 
 msgid "The date to display for this poll. Leave empty to use flow creation date."
-msgstr ""
+msgstr "التاريخ الذي يُعرض لهذا الاستطلاع. اتركه فارغاً لاستخدام تاريخ إنشاء التدفق."
 
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr "ما إذا تمت أرشفة تدفق هذا الاستطلاع على RapidPro"
@@ -1599,10 +1477,8 @@ msgstr "عدد المبلّغين الذين شملهم الاستطلاع "
 msgid "Whether the poll has finished the initial results sync."
 msgstr "ما إذا أتم  الاستطلاع مزامنة النتائج الأولية."
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether the poll should stop regenerating stats."
-msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+msgstr "ما إذا كان يجب أن يتوقف الاستطلاع عن إعادة توليد الإحصائيات."
 
 msgid "The title for this Poll"
 msgstr "عنوان الإستطلاع "
@@ -1620,10 +1496,10 @@ msgid "The organization this poll is part of"
 msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
 
 msgid "The title for this response story"
-msgstr ""
+msgstr "عنوان مقالة الاستجابة هذه"
 
 msgid "The writer of the response story"
-msgstr ""
+msgstr "كاتب مقالة الاستجابة"
 
 msgid "The poll to associate to"
 msgstr "يرتبط هذا الإستطلاع في "
@@ -1641,40 +1517,40 @@ msgid "The featured response message"
 msgstr "الرد الإستثنائي "
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "خلفية داكنة 1 ونص أبيض"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "خلفية فاتحة 1 ونص أسود"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "خلفية داكنة 2 ونص أبيض"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "خلفية داكنة 3 ونص أسود"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "إظهار الرسوم البيانية للعمر والنوع الاجتماعي والموقع"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "إخفاء الرسم البياني للعمر فقط"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "إخفاء الرسم البياني للنوع الاجتماعي فقط"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "إخفاء الرسم البياني للموقع فقط"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "إخفاء الرسوم البيانية للعمر والنوع الاجتماعي"
 
 msgid "Hide Age and Location charts"
-msgstr ""
+msgstr "إخفاء الرسوم البيانية للعمر والموقع"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "إخفاء الرسوم البيانية للنوع الاجتماعي والموقع"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "إخفاء الرسوم البيانية للعمر والنوع الاجتماعي والموقع"
 
 msgid "The poll this question is part of"
 msgstr "الإستطلاع الذي يتبع له هذا السؤال "
@@ -1694,13 +1570,11 @@ msgstr "ترتيب أولوية هذا السؤال على الاستطلاع"
 msgid "The Rule this response category is based on"
 msgstr "القاعدة التي تستند عليها فئة الإجابة هذه"
 
-#, fuzzy
-#| msgid "The title for this Poll"
 msgid "Select tags for this poll"
-msgstr "عنوان الإستطلاع "
+msgstr "اختر الوسوم لهذا الاستطلاع"
 
 msgid "Your org does not have any API token configuration."
-msgstr ""
+msgstr "لا تمتلك منظمتك أي إعداد لرمز API."
 
 msgid "You must include a title for every included question."
 msgstr "الرجاء إدخال عنوان لكل سؤال (إلزامي)"
@@ -1715,16 +1589,16 @@ msgid "Adjust poll date"
 msgstr "ضبط تاريخ الإستطلاع"
 
 msgid "Your poll has been updated, now pick which questions to include."
-msgstr ""
+msgstr "تم تحديث استطلاعك، اختر الآن الأسئلة المراد تضمينها."
 
 msgid "Configure flow"
-msgstr ""
+msgstr "إعداد التدفق"
 
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr ""
+msgstr "تم إعداد استطلاعك، اضبط الآن تاريخ الاستطلاع."
 
 msgid "Your poll has been created, now configure its flow."
-msgstr ""
+msgstr "تم إنشاء استطلاعك، قم الآن بإعداد التدفق الخاص به."
 
 msgid "Poll Images"
 msgstr "الصور الخاصة بالإستطلاع"
@@ -1739,7 +1613,7 @@ msgid "Image to display on poll page and in previews (optional)"
 msgstr "الصور التي تود نشرها على صفحة الإستطلاع (إختياري) "
 
 msgid "Poll Response"
-msgstr ""
+msgstr "استجابة الاستطلاع"
 
 msgid "Your poll has been updated."
 msgstr "تم تحديث الإستطلاع الخاص بك "
@@ -1766,7 +1640,7 @@ msgid "Ruleset Label"
 msgstr "مسمى القاعدة"
 
 msgid "The label of the ruleset from RapidPro"
-msgstr ""
+msgstr "مسمى مجموعة القواعد من RapidPro"
 
 msgid "Title"
 msgstr "العنوان "
@@ -1775,56 +1649,53 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "سيتم مشاركة السؤال الذي قمت بطرحه للفئة المستهدفة خاصتك، علناً "
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "اختيار الرسوم البيانية المخفية"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "اختر تفصيل الرسوم البيانية المراد إخفاؤه لهذا السؤال عن العامة"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "صور الفئة"
+msgstr "الفئة %s"
 
-#, fuzzy
-#| msgid "The label of the ruleset on RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr "مسمى القاعدة على RapidPro"
+msgstr "مسمى الفئة من الواجهة الخلفية (مثل RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "عرض %s"
 
 msgid "The label to display of the category on the public site"
-msgstr ""
+msgstr "المسمى الذي يُعرض للفئة على الموقع العام"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "المزامنة المجدولة قيد التنفيذ حالياً..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "آخر مزامنة للنتائج منذ %(time)s"
 
 msgid "Synced"
-msgstr ""
+msgstr "تمت المزامنة"
 
 #, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr ""
+msgstr "المزامنة قيد التنفيذ حالياً... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "تعديل الاستطلاع للتدفق [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr ""
+msgstr "تمت جدولة تحديث بالسحب للاستطلاع #%(poll_id)d في المنظمة #%(org_id)d"
 
 #, python-format
 msgid "%s"
 msgstr "%s"
 
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr ""
+msgstr "اسم مجموعة جهات الاتصال التي تضم المراسلين المسجلين"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "اسم الحقل الخاص في إدخال تاريخ ميلاد الماسح  "
@@ -1842,7 +1713,7 @@ msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "اسم الحقل الخاص في إدخال منطقة الماسح الجغرافية "
 
 msgid "The label of the Contact Field that contains the Ward of reporters"
-msgstr ""
+msgstr "مسمى حقل جهة الاتصال الذي يحتوي على حي المراسلين"
 
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "الاسم الذي يرمز للأعضاء الذكور "
@@ -1854,87 +1725,73 @@ msgid "Whether this org should be show on the landing page"
 msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
 msgid "Whether this org count should consider the count from link only"
-msgstr ""
+msgstr "ما إذا كان يجب أن يعتمد عدّاد هذه المنظمة على العدد من الرابط فقط"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
+msgstr "رقم واتساب الذي سيستخدمه المستخدمون للتواصل مع يو-ريبورت إن وُجد"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
+msgstr "بوت تيليجرام الذي سيستخدمه المستخدمون للتواصل مع يو-ريبورت إن وُجد"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
+msgstr "اسم مستخدم فايبر الذي سيستخدمه المستخدمون للتواصل مع يو-ريبورت إن وُجد"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
+msgstr "رابط بوت لاين الذي سيستخدمه المستخدمون للتواصل مع يو-ريبورت إن وُجد"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "ما إذا كان هناك تطبيق يو-ريبورت متاح."
 
 msgid "The join button text"
-msgstr ""
+msgstr "نص زر الانضمام"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "النص القصير المستخدم لتوجيه الزائرين للتسجيل في يو-ريبورت"
 
 msgid "The call to action text to join on the top section on U-Report"
-msgstr ""
+msgstr "نص الدعوة إلى الانضمام في القسم العلوي من يو-ريبورت"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "الموقع الجغرافي الذي أتى منه هذا الرد "
+msgstr "رابط المقالات الخارجية."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "نص قصير للقائمة الإضافية."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "الموقع الجغرافي الذي أتى منه هذا الرد "
+msgstr "رابط القائمة الإضافية."
 
 msgid "The YouTube video ID for how to join U-Report section"
-msgstr ""
+msgstr "معرّف فيديو يوتيوب لقسم كيفية الانضمام إلى يو-ريبورت"
 
 msgid "The title of the photos section U-Report homepage"
-msgstr ""
+msgstr "عنوان قسم الصور في الصفحة الرئيسية ليو-ريبورت"
 
 msgid "The description of the photos section U-Report homepage"
-msgstr ""
+msgstr "وصف قسم الصور في الصفحة الرئيسية ليو-ريبورت"
 
 msgid "The description of the opinions page"
-msgstr ""
+msgstr "وصف صفحة استطلاعات الرأي"
 
 msgid "The description of the stories page"
-msgstr ""
+msgstr "وصف صفحة المقالات"
 
 msgid "The description of the engagement page"
-msgstr ""
+msgstr "وصف صفحة المشاركة"
 
 msgid "The callout message on the footer engagement section"
-msgstr ""
+msgstr "رسالة الدعوة في قسم المشاركة أسفل الصفحة"
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "الولايات التي تُعرض على الخرائط فقط"
 
 msgid "The states to show on maps only, used to filter poll results"
-msgstr ""
+msgstr "الولايات التي تُعرض على الخرائط فقط، وتُستخدم لتصفية نتائج الاستطلاع"
 
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
 msgid "The Google Tag Manager ID for this organization"
-msgstr "الرجاء إدخال رمز التتبع الخاص بهذه الجمعية أو المنظمة من محلل جوجل  Google Analytics   "
+msgstr "معرّف Google Tag Manager لهذه المنظمة"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "الرجاء إدخال رمز التتبع الخاص بهذه الجمعية أو المنظمة من محلل جوجل  Google Analytics   "
@@ -1943,7 +1800,7 @@ msgid "The URL to the Youtube channel for this organization"
 msgstr "رابط قناة اليوتيوب الخاصة بهذه الجمعية أو المنظمة "
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "محتوى وسم meta الخاص بالتحقق من نطاق فيسبوك"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "رابط صفحة الفيس بوك الخاصة بهذه الجمعية أو المنظمة "
@@ -1955,18 +1812,16 @@ msgid "The integer id to the Facebook app for this organization's chat app (opti
 msgstr "عدد صحيح من معرّف تطبيق الفيسبوك لتطبيق محادثة هذه المنظمة (اختياري)"
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr ""
+msgstr "النص القصير المستخدم للترحيب بالمستخدمين في إضافة فيسبوك ماسنجر"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr ""
+msgstr "معرّف Facebook Pixel لهذه المنظمة (اختياري)"
 
 msgid "The Instagram username for this organization"
 msgstr "اسم حساب الإنستغرام الخاص بهذه المؤسسة"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "اسم حساب الإنستغرام الخاص بهذه المؤسسة"
+msgstr "اسم مستخدم إنستغرام الذي يجب عرضه على صفحة الانضمام كرابط مباشر لهذه المنظمة"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "هوية تطبيق انستغرام المصغر من lightwidget.com"
@@ -1978,56 +1833,52 @@ msgid "The Twitter widget used for searching"
 msgstr "التطبيق المساند الخاص بالبحث على تويتر "
 
 msgid "The words to filter out from the results on public site"
-msgstr ""
+msgstr "الكلمات المراد استبعادها من النتائج على الموقع العام"
 
 msgid "If there are jobs to be shown on the public site."
-msgstr ""
+msgstr "ما إذا كانت هناك وظائف لعرضها على الموقع العام."
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "إذا كانت هذه المنظمة للبيانات العالمية، مثال: إنها تظهر خريطة عالمية بدل الخريطة المحلية"
 
 msgid "Whether to activate an extra gender."
-msgstr ""
+msgstr "ما إذا كان يجب تفعيل نوع اجتماعي إضافي."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "إذا تم تعيينه، ستتم إعادة توجيه زوار الموقع إلى هذا الرابط."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "ما إذا كان يجب إخفاء الرسوم البيانية التفصيلية للمشاركة."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr "إذا كان هذا المستخدم مسموح له بالدخول للموقع"
+msgstr "ما إذا كان يجب إظهار شعار اليونيسف أسفل الصفحة."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
-msgstr ""
+msgstr "رمز ISO المكوّن من ثلاثة أحرف للمنظمة لكي تظهر في أداة المقالات بتطبيق يو-ريبورت. مثال: BRA، NIG، CMR (استخدم GLOBAL إذا كان يو-ريبورت عالمياً)."
 
 msgid "The font used for headline texts"
-msgstr ""
+msgstr "الخط المستخدم لنصوص العناوين"
 
 msgid "The font used for normal text"
-msgstr ""
+msgstr "الخط المستخدم للنص العادي"
 
 msgid "Hide participation stats"
-msgstr ""
+msgstr "إخفاء إحصائيات المشاركة"
 
 msgid "The text to describe the sponsors of free messages"
-msgstr ""
+msgstr "النص الذي يصف رعاة الرسائل المجانية"
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "الخط المستخدم للنص الصغير"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "إذا كنت تريد إدراج بعض رموز النطاقات الخاصة على صفحات منظمتك، مثل custom analytics code snippets "
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "روابط مواقع اللغات الأخرى"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
-msgstr "هل هذه المقالة إستثنائية أو مميزة "
+msgstr "ما إذا كان هذا الصف قد أُنشئ عن طريق الدمج"
 
 msgid "90 Days"
 msgstr "90 يوم "
@@ -2041,13 +1892,11 @@ msgstr "12 شهر "
 msgid "Age"
 msgstr "العمر "
 
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Channels"
-msgstr "حفظ التغييرات"
+msgstr "القنوات"
 
 msgid "Location"
-msgstr ""
+msgstr "الموقع"
 
 msgid "Opinion Responses"
 msgstr "ردود الرأي"
@@ -2063,53 +1912,53 @@ msgstr "مستخدمين فعالين"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "المهمة #%(job_id)d قيد المعالجة، حاول مرة أخرى بعد قليل"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "تم إيقاف المهمة #%(job_id)d مؤقتاً"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "تم استئناف المهمة #%(job_id)d"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "المهمة #%(job_id)d ليست متوقفة مؤقتاً"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "ستقوم المهمة #%(job_id)d بإعادة المزامنة من البداية في تشغيلها القادم"
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
 
 msgid "All locations"
-msgstr ""
+msgstr "جميع المواقع"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "شرق آسيا والمحيط الهادئ"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "شرق أفريقيا والجنوب الأفريقي"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "أوروبا وآسيا الوسطى"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "أمريكا اللاتينية ومنطقة البحر الكاريبي"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "الشرق الأوسط وشمال أفريقيا"
 
 msgid "South Asia"
-msgstr ""
+msgstr "جنوب آسيا"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "بلدان اللجان الوطنية لليونيسف"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "غرب ووسط أفريقيا"
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

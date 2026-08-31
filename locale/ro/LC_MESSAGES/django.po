@@ -47,15 +47,11 @@ msgstr "Fișierul imagine pentru utilizare"
 msgid "The human readable name for this content type"
 msgstr "Denumirea lizibilă de către om pentru acest tip de conținut"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Câmpul pentru identificarea acestui tip de conținut, utilizat cu tag-uri șablon"
+msgstr "Slug-ul pentru identificarea acestui tip de conținut, utilizat cu tag-urile șablon"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "O descriere a locului unde acest tip de conținut este folosit pe site și modul în care va fi afișat"
+msgstr "O descriere a locului unde acest tip de conținut este folosit pe site și a modului în care va fi afișat"
 
 msgid "Whether this content should include a title"
 msgstr "Dacă acest conținut ar trebui să includă un titlu"
@@ -136,10 +132,10 @@ msgid "Content Types"
 msgstr "Tipuri de conținut"
 
 msgid "Link Slug"
-msgstr ""
+msgstr "Slug-ul linkului"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "Slug-ul sau cuvântul utilizat în linkul paginii"
 
 msgid "Content Blocks"
 msgstr "Blocuri de conţinut"
@@ -295,24 +291,9 @@ msgstr "Fișierul imagine"
 msgid "The API token for this backend"
 msgstr "Tokenul API pentru acest backend"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Ai fost invitat să te alături %(org_name)s.\n"
-"<br/>\n"
-"Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>clic aici</a>."
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Ai fost invitat să te alături %(org_name)s.\n      <br />\n      Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>dă clic aici</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Tu ești invitat să te alături {{org.name}}."
@@ -344,10 +325,8 @@ msgstr "Trebuie să aveți cel puțin un administrator"
 msgid "Select your Organization"
 msgstr "Selectați organizația voastră"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "Contul dat nu este asociat unei organizații. Vă rugăm să contactați administratorul."
+msgstr "Contul dvs. nu este asociat unei organizații. Vă rugăm să contactați administratorul."
 
 msgid "Your Organization"
 msgstr "Organizația voastră"
@@ -388,13 +367,11 @@ msgid "Tasks"
 msgstr "Sarcini"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "Sunt acceptate doar fișiere PDF."
 
 msgid "The title for this story"
 msgstr "Titlul pentru acest articol"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Dacă acest articol este recomandat"
 
@@ -411,7 +388,7 @@ msgid "A link to an mp3 file to publish on this story"
 msgstr "Un link către un fişier MP3 care să fie publicat în acest articol"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "Raportul PDF de atașat"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "ID-ul videoului de pe YouTube care trebuie să fie ataşat la acest articol (acesta este textul care urmează după v= și înainte de & în adresa URL a canalului YouTube)"
@@ -450,13 +427,11 @@ msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări (opțional)"
 
-#, fuzzy
-#| msgid "The name of this category"
 msgid "The name of this tag"
-msgstr "Denumirea acestei categorii"
+msgstr "Denumirea acestui tag"
 
 msgid "Delete"
-msgstr ""
+msgstr "Șterge"
 
 msgid "Remove Item?"
 msgstr "Elimină element?"
@@ -708,7 +683,7 @@ msgid "Form"
 msgstr "Formular"
 
 msgid "Save"
-msgstr ""
+msgstr "Salvează"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -727,7 +702,7 @@ msgid "Opinions"
 msgstr "Opinii"
 
 msgid "Bots"
-msgstr ""
+msgstr "Boți"
 
 msgid "Users"
 msgstr "Utilizatori"
@@ -739,16 +714,16 @@ msgid "Pages"
 msgstr "Pagini"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "Pagini de destinație"
 
 msgid "Jobs"
 msgstr "Oferte de muncă"
 
 msgid "Tags"
-msgstr ""
+msgstr "Tag-uri"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "Logourile partenerilor"
 
 msgid "Categories Images"
 msgstr "Categoriile imaginilor"
@@ -762,10 +737,8 @@ msgstr "Organizații"
 msgid "Images"
 msgstr "Imagini"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Oferte de muncă"
+msgstr "Sarcini de sincronizare"
 
 msgid "About"
 msgstr "Despre noi"
@@ -773,10 +746,8 @@ msgstr "Despre noi"
 msgid "Engagement"
 msgstr "Implicare"
 
-#, fuzzy
-#| msgid "Reporters"
 msgid "Reports"
-msgstr "Raportori"
+msgstr "Rapoarte"
 
 msgid "Category Images"
 msgstr "Categorie imagini"
@@ -870,10 +841,10 @@ msgid "Back"
 msgstr "Înapoi"
 
 msgid "Select bots"
-msgstr ""
+msgstr "Selectează boții"
 
 msgid "View public page"
-msgstr ""
+msgstr "Vezi pagina publică"
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "ULTIMELE NOTIFICĂRI"
@@ -882,60 +853,57 @@ msgid "Backends"
 msgstr "Backends"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Poți retrimite o invitație folosind câmpul de mai sus"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Adaugă sau selectează tag-uri"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "În prezent se sincronizează %(counter)s sondaj nou. Sondajele sunt afișate pe site-ul public după ce rezultatele lor au fost sincronizate complet."
+msgstr[1] "În prezent se sincronizează %(counter)s sondaje noi. Sondajele sunt afișate pe site-ul public după ce rezultatele lor au fost sincronizate complet."
+msgstr[2] "În prezent se sincronizează %(counter)s de sondaje noi. Sondajele sunt afișate pe site-ul public după ce rezultatele lor au fost sincronizate complet."
 
 msgid "+ New Poll"
 msgstr "+ Sondaj Nou"
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "Întrebările din sondaj"
-msgstr[1] "Întrebările din sondaj"
-msgstr[2] "Întrebările din sondaj"
+msgstr[0] "%(counter)s întrebare de sondaj"
+msgstr[1] "%(counter)s întrebări de sondaj"
+msgstr[2] "%(counter)s de întrebări de sondaj"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "Sincronizările inițiale ale sondajelor noi sunt programate la fiecare 10 minute"
 
 msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
+msgstr "Sincronizările nu mai sunt programate pentru sondajele vechi, rulările au fost arhivate"
 
 msgid "Main poll syncs scheduled every 20min"
-msgstr ""
+msgstr "Sincronizările principale ale sondajului sunt programate la fiecare 20 de minute"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "Sincronizările sondajelor recente sunt programate la fiecare 60 de minute"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "Sincronizările sondajului sunt programate la fiecare 24 de ore"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "Nu se programează sincronizări, sondajul nu este activ"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "Nu se programează sincronizări, sondajul nu are flux"
 
-#, fuzzy
-#| msgid "View full results"
 msgid "Preview results"
-msgstr "Vezi toate rezultatele"
+msgstr "Previzualizează rezultatele"
 
 msgid "Refresh Results"
 msgstr "Actualizare Rezultate"
 
 msgid "Partners"
-msgstr ""
+msgstr "Parteneri"
 
 msgid "MORE POLLS"
 msgstr "MAI MULTE SONDAJE"
@@ -959,10 +927,10 @@ msgid "LIST"
 msgstr "LISTĂ"
 
 msgid "Send"
-msgstr ""
+msgstr "Trimite"
 
 msgid "to"
-msgstr ""
+msgstr "către"
 
 msgid "LATEST OPINION"
 msgstr "ULTIMELE OPINII"
@@ -989,10 +957,10 @@ msgid "AGES"
 msgstr "ANI"
 
 msgid "Available bots"
-msgstr ""
+msgstr "Boți disponibili"
 
 msgid "More bots"
-msgstr ""
+msgstr "Mai mulți boți"
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Alăturați-vă U-report, Vocea Ta Contează."
@@ -1019,10 +987,10 @@ msgid "Text"
 msgstr "Text "
 
 msgid "Or download the U-Report App:"
-msgstr ""
+msgstr "Sau descarcă aplicația U-Report:"
 
 msgid "PAGE"
-msgstr ""
+msgstr "PAGINA"
 
 msgid "SEARCH"
 msgstr "CAUTĂ"
@@ -1031,26 +999,22 @@ msgid "No results found"
 msgstr "Nici un rezultat găsit"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "Previzualizare sondaj nepublicat. Dă clic pe Editează pentru a-l publica"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "Sondaj publicat. Dă clic pe Editează pentru a anula publicarea"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "Sondajul nu s-a sincronizat încă pentru a fi afișat publicului"
 
-#, fuzzy
-#| msgid "RESPONSES"
 msgid "RESPONDERS"
-msgstr "RĂSPUNSURI"
+msgstr "RESPONDENȚI"
 
 msgid "RESPONSE RATE"
 msgstr "RATA DE RĂSPUNS"
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
 msgid "TOTAL RESPONDERS"
-msgstr "TOATE RĂSPUNSURILE "
+msgstr "TOTAL RESPONDENȚI"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1072,18 +1036,16 @@ msgid "Written by:"
 msgstr "Scris de către:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "Niciun raport publicat încă"
 
-#, fuzzy
-#| msgid "U-REPORTERS"
 msgid "REPORT"
-msgstr "U-REPORTERS"
+msgstr "RAPORT"
 
 msgid "STORY"
 msgstr "ARTICOL"
 
 msgid "Download Report"
-msgstr ""
+msgstr "Descarcă raportul"
 
 msgid "Even"
 msgstr "Pe aceeași temă"
@@ -1100,10 +1062,8 @@ msgstr "Regional"
 msgid "Participation Level"
 msgstr "Nivelul de participare"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "Răspunsuri"
+msgstr "Respondenți"
 
 msgid "Reporters in"
 msgstr "Reporteri în"
@@ -1148,7 +1108,7 @@ msgid "FILTER RESULTS"
 msgstr "FILTRU DE REZULTATE"
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "Graficele sunt vizibile doar pentru administratorii autentificați"
 
 msgid "Export and Share"
 msgstr "Exportă și Partajează"
@@ -1157,7 +1117,7 @@ msgid "Want to tell the world about this? Download this image to easily share on
 msgstr "Vrei să spui lumii despre asta? Descărcați această imagine pentru a partaja cu ușurință pe rețelile sociale sau pentru o prezentare frumoasă!"
 
 msgid "SELECT LANGUAGE"
-msgstr ""
+msgstr "SELECTEAZĂ LIMBA"
 
 msgid "SELECT COUNTRY"
 msgstr "SELECTEAZĂ ȚARA"
@@ -1166,7 +1126,7 @@ msgid "Custom pages"
 msgstr "Pagini personalizate"
 
 msgid "Landing pages"
-msgstr ""
+msgstr "Pagini de destinație"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Vedeți după numere cum interacționăm cu propunerile tinerilor pentru schimbări sociale pozitive."
@@ -1258,40 +1218,16 @@ msgstr ""
 "\n"
 "Ești sigur că vrei să elimini %(object)s?"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t %(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
-"\n"
-"\t %(counter)s rezultate\n"
-"\t"
-msgstr[1] ""
-"\n"
-"         %(counter)s rezultate\n"
-"        "
-msgstr[2] ""
-"\n"
-"         %(counter)s rezultate\n"
-"        "
+msgstr[0] "%(counter)s rezultat"
+msgstr[1] "%(counter)s rezultate"
+msgstr[2] "%(counter)s de rezultate"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
-"\n"
-"\t\n"
-"Rezultate %(start)s-%(end)s of %(count)s\t"
+msgstr "Rezultatele %(start)s-%(end)s din %(count)s"
 
 msgid "Error"
 msgstr "Eroare"
@@ -1331,39 +1267,35 @@ msgstr "+ Istorie Nouă"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s în execuție, %(stale)s învechite, %(failing)s eșuate"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "ultima verificare %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "neverificat încă"
 
 msgid "All job types"
-msgstr ""
+msgstr "Toate tipurile de sarcini"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Toate stările"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtrează"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Locația"
+msgstr "Acțiuni"
 
 msgid "Pause"
-msgstr ""
+msgstr "Suspendă"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Rezultate"
+msgstr "Reia"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Forțează resincronizarea"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1373,7 +1305,7 @@ msgid "Flag"
 msgstr "Steag"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "Despre logoul partenerului"
 
 msgid "The organization to which the image will be used"
 msgstr "Organizația pentru care imaginea va fi utilizată"
@@ -1384,71 +1316,47 @@ msgstr "O scurtă denumire descriptivă pentru această imagine"
 msgid "Image type"
 msgstr "Tipul imaginii"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "Prioritatea acestei întrebări pe pagina de sondaj, prioritatea mai mare se află în partea de sus a paginii"
+msgstr "Numărul de prioritate al acestei imagini față de celelalte din listă, prioritatea mai mare apare prima"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this bot is part of"
-msgstr "Organizația la care face parte acest sondaj"
+msgstr "Organizația din care face parte acest bot"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
+msgstr "Dacă acest bot este afișat pe pagina principală; sunt afișați doar cel mult 3 boți cu cele mai mari priorități"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+msgstr "Dacă acest bot este ascuns pe paginile publice, cu excepția paginilor de destinație"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this bot"
-msgstr "Titlul pentru acest element"
+msgstr "Titlul afișat pentru acest bot"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "Codul scurt, numărul sau numele de bot al canalului pentru acest bot"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The keyword for this bot"
-msgstr "Categoria pentru acest articol"
+msgstr "Cuvântul-cheie pentru acest bot"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Facebook bot deeplink, optional"
-msgstr "Titlul pentru acest bloc de conținut, opțional"
+msgstr "Linkul direct al botului de Facebook, opțional"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Telegram bot deeplink, optional"
-msgstr "Titlul pentru acest bloc de conținut, opțional"
+msgstr "Linkul direct al botului de Telegram, opțional"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Viber bot deeplink, optional"
-msgstr "Titlul pentru acest bloc de conținut, opțional"
+msgstr "Linkul direct al botului de Viber, opțional"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The WhatsApp bot deeplink, optional"
-msgstr "Titlul pentru acest bloc de conținut, opțional"
+msgstr "Linkul direct al botului de WhatsApp, opțional"
 
-#, fuzzy
-#| msgid "A short summary description for this item"
 msgid "A short description for this bot, required"
-msgstr "O descriere pe scurt pentru acest element"
+msgstr "O descriere scurtă pentru acest bot, obligatorie"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "Prioritatea acestei întrebări pe pagina de sondaj, prioritatea mai mare se află în partea de sus a paginii"
+msgstr "Numărul de prioritate al acestui bot față de ceilalți din listă, prioritatea mai mare apare prima"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot should be shown to the public"
-msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+msgstr "Dacă acest bot trebuie afișat publicului"
 
 msgid "Label"
 msgstr "Etichetă"
@@ -1522,43 +1430,29 @@ msgstr "Sursa ta de oferte de muncă a fost adăugată cu succes"
 msgid "Your job source has been updated successfully"
 msgstr "Sursa ta de oferte de muncă a fost actualizată cu succes"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this landing page is part of"
-msgstr "Organizația la care face parte acest sondaj"
+msgstr "Organizația din care face parte această pagină de destinație"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this landing page"
-msgstr "Titlul pentru acest element"
+msgstr "Titlul afișat pentru această pagină de destinație"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The call to action text for this landing page"
-msgstr "Corpul de text pentru articol"
+msgstr "Textul de îndemn la acțiune pentru această pagină de destinație"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "The slug to use on the link for this landing page"
-msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+msgstr "Slug-ul utilizat în linkul acestei pagini de destinație"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for the landing page"
-msgstr "Corpul de text pentru articol"
+msgstr "Corpul de text pentru pagina de destinație"
 
-#, fuzzy
-#| msgid "The image file to use"
 msgid "The image file to use for the page"
-msgstr "Fișierul imagine pentru utilizare"
+msgstr "Fișierul imagine utilizat pentru pagină"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this page should be active to the public"
-msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+msgstr "Dacă această pagină trebuie să fie activă pentru public"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Slug-ul poate conține doar litere, cifre, liniuțe de subliniere și cratime"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Acesta este ID-ul OSM pentru această frontieră administrativă"
@@ -1608,10 +1502,8 @@ msgstr "Denumirea acestei categorii de sondaje"
 msgid "Poll Categories"
 msgstr "Categorii de sondaje"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+msgstr "Dacă acest sondaj trebuie să fie vizibil/ascuns pe site-ul public"
 
 msgid "The Flow this Poll is based on"
 msgstr "Fluxul care stă la baza acestui sondaj"
@@ -1671,42 +1563,40 @@ msgid "The featured response message"
 msgstr "Mesajul cu răspunsul recomandat"
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "Fundal Întunecat 1 și text alb"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "Fundal Luminos 1 și text negru"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "Fundal Întunecat 2 și text alb"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "Fundal Întunecat 3 și text negru"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "Afișează graficele de vârstă, gen și locație"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "Ascunde DOAR graficul de vârstă"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "Ascunde DOAR graficul de gen"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "Ascunde DOAR graficul de locație"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "Ascunde graficele de vârstă și gen"
 
-#, fuzzy
-#| msgid "Hide participation stats"
 msgid "Hide Age and Location charts"
-msgstr "Ascundeți statisticile de participare"
+msgstr "Ascunde graficele de vârstă și locație"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "Ascunde graficele de gen și locație"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "Ascunde graficele de vârstă, gen și locație"
 
 msgid "The poll this question is part of"
 msgstr "Sondajul din care face parte această întrebare"
@@ -1726,10 +1616,8 @@ msgstr "Numărul priorităţii în sondaj pentru această întrebare"
 msgid "The Rule this response category is based on"
 msgstr "Regula pe care se bazează această categorie de răspuns"
 
-#, fuzzy
-#| msgid "The title for this Poll"
 msgid "Select tags for this poll"
-msgstr "Titlul pentru acest sondaj"
+msgstr "Selectează tag-urile pentru acest sondaj"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Organizația dvs. nu are nicio configurație cu simbolul API."
@@ -1807,47 +1695,42 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Întrebarea pusă persoanelor pe care le-ai intervievat va fi afișată pentru toți"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Alegerea graficelor ascunse"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Alege defalcarea graficelor care să fie ascunsă publicului pentru această întrebare"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Categorie imagini"
+msgstr "Categoria %s"
 
-#, fuzzy
-#| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr "Eticheta setului de reguli de pe RapidPro"
+msgstr "Eticheta categoriei din backend (cum ar fi RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Afișare %s"
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site."
 msgid "The label to display of the category on the public site"
-msgstr "Cuvintele pentru a filtra rezultatele de pe site-ul public"
+msgstr "Eticheta categoriei afișată pe site-ul public"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Sincronizarea programată este în curs..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Ultimele rezultate au fost sincronizate acum %(time)s"
 
 msgid "Synced"
-msgstr ""
+msgstr "Sincronizat"
 
 #, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr ""
+msgstr "Sincronizare în curs... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Editează sondajul pentru fluxul [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1893,54 +1776,38 @@ msgstr "Dacă dacă acest număr de org ar trebui să ia în considerare doar nu
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Numărul scurt pe care utilizatorii îl vor folosi pentru a contacta U-Reporterul la nivel local"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
+msgstr "Numărul WhatsApp pe care utilizatorii îl vor folosi pentru a contacta U-Report, dacă aveți unul"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
+msgstr "Botul de Telegram pe care utilizatorii îl vor folosi pentru a contacta U-Report, dacă aveți unul"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
+msgstr "Numele de utilizator Viber pe care utilizatorii îl vor folosi pentru a contacta U-Report, dacă aveți unul"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
+msgstr "Linkul botului de Line pe care utilizatorii îl vor folosi pentru a contacta U-Report, dacă aveți unul"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Dacă există o aplicație U-Report disponibilă."
 
-#, fuzzy
-#| msgid "The font used for normal text"
 msgid "The join button text"
-msgstr "Fontul folosit pentru textul normal"
+msgstr "Textul butonului de alăturare"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Textul scurt care va fi utilizat pentru a direcționa vizitatorii să se alăture la U-Report"
 
-#, fuzzy
-#| msgid "The title of the photos section U-Report homepage"
 msgid "The call to action text to join on the top section on U-Report"
-msgstr "Titlul secțiunii fotografii pe Pagina de pornire U-Report"
+msgstr "Textul de îndemn la alăturare din secțiunea de sus a U-Report"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Regiunea la care aparţine acest răspuns"
+msgstr "Linkul pentru articolele externe."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Un text scurt pentru meniul suplimentar."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Regiunea la care aparţine acest răspuns"
+msgstr "Linkul pentru meniul suplimentar."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Codul video YouTube pentru a vă alătura secțiunii U-Report"
@@ -1969,10 +1836,8 @@ msgstr "Statele trebuie afișate doar pe hărți"
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Statele vor fi afișate doar pe hărți, folosite pentru a filtra rezultatele sondajului"
 
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
 msgid "The Google Tag Manager ID for this organization"
-msgstr "ID-ul de urmărire Google Analytics pentru această organizație"
+msgstr "ID-ul Google Tag Manager pentru această organizație"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID-ul de urmărire Google Analytics pentru această organizație"
@@ -1981,7 +1846,7 @@ msgid "The URL to the Youtube channel for this organization"
 msgstr "Adresa URL la canalul YouTube al acestei organizații"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Conținutul meta tag-ului pentru verificarea domeniului Facebook"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "Adresa URL la pagina Facebook a acestei organizații"
@@ -2001,10 +1866,8 @@ msgstr "ID-ul pixelului Facebook al acestei organizații (opțional)"
 msgid "The Instagram username for this organization"
 msgstr "Numele de utilizator pe Instagram al acestei organizații"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Numele de utilizator pe Instagram al acestei organizații"
+msgstr "Numele de utilizator Instagram care să fie afișat pe pagina de alăturare ca link direct pentru această organizație"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Widget ID-ul pentru Instagram de la lightwidget.com"
@@ -2028,15 +1891,13 @@ msgid "Whether to activate an extra gender."
 msgstr "În caz dacă activați un gen suplimentar."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Dacă este setat, utilizatorii publici care vizitează site-ul vor fi redirecționați către acest URL."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Dacă să fie ascunse graficele de defalcare a implicării."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
+msgstr "Dacă să fie afișat logoul UNICEF în subsol."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Codul ISO alpha-3 pentru organizaţie care va apărea în widget-ul de istorii U-Report App. De exemplu: BRA, NIG, CMR (a se utiliza GLOBAL dacă U-Reporterul este Global)."
@@ -2060,12 +1921,10 @@ msgid "If you need to include some custom HTML codes in you org pages, like cust
 msgstr "Dacă ai nevoie să incluzi unele coduri HTML personalizate în paginile organizaţiei tale, cum ar fi fragmente de cod personalizat de analiză"
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "Linkuri către site-urile în alte limbi"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
-msgstr "Dacă acest articol este recomandat"
+msgstr "Dacă acest rând a fost creat prin comasare"
 
 msgid "90 Days"
 msgstr "90 zile"
@@ -2079,10 +1938,8 @@ msgstr "12 Luni"
 msgid "Age"
 msgstr "Vârsta"
 
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Channels"
-msgstr "Salvează modificările"
+msgstr "Canale"
 
 msgid "Location"
 msgstr "Locația"
@@ -2101,55 +1958,53 @@ msgstr "Utilizatori Activi"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Sarcina #%(job_id)d este în lucru, încearcă din nou peste puțin timp"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Sarcina #%(job_id)d a fost suspendată"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Sarcina #%(job_id)d a fost reluată"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Sarcina #%(job_id)d nu este suspendată"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Sarcina #%(job_id)d se va resincroniza de la zero la următoarea rulare"
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "Locația"
+msgstr "Toate locațiile"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Asia de Est și Pacific"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Africa de Est și de Sud"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Europa și Asia Centrală"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "America Latină și Caraibe"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Orientul Mijlociu și Africa de Nord"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Asia de Sud"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Țările Comitetelor Naționale UNICEF"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Africa de Vest și Centrală"
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

@@ -46,15 +46,11 @@ msgstr "Fajl za sliku koja će se koristiti"
 msgid "The human readable name for this content type"
 msgstr "Čitljivo ime ove vrste sadržaja"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
 msgstr "Umetak (deo URL-a) za identifikaciju ove vrste sadržaja, koristi se sa oznakama template-a"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Opis gde se ovaj tip sadržaja koristi na stranici i kako će biti prikazan"
+msgstr "Opis gde se ovaj tip sadržaja koristi na sajtu i kako će biti prikazan"
 
 msgid "Whether this content should include a title"
 msgstr "Da li bi ovaj sadržaj trebalo da sadrži naslov"
@@ -337,8 +333,6 @@ msgstr "Morate imati najmanje jednog administratora"
 msgid "Select your Organization"
 msgstr "Odaberite vašu organizaciju"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Vaš nalog nije povezan sa organizacijom. Molimo kontaktirajte administratora."
 
@@ -696,7 +690,7 @@ msgid "Form"
 msgstr "Formular"
 
 msgid "Save"
-msgstr ""
+msgstr "Sačuvaj"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -750,10 +744,8 @@ msgstr "Orgs"
 msgid "Images"
 msgstr "Slike"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Poslovi"
+msgstr "Poslovi sinhronizacije"
 
 msgid "About"
 msgstr "O nama"
@@ -868,7 +860,7 @@ msgid "Backends"
 msgstr "Pozadinski sistemi"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Pozivnicu možete ponovo poslati koristeći polje iznad"
 
 msgid "Add os Select tags"
 msgstr "Dodaj ili selektuj oznake"
@@ -1001,10 +993,8 @@ msgstr "Kako želiš da se pridružiš?"
 msgid "Text"
 msgstr "Tekst"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "Preuzmi izveštaj"
+msgstr "Ili preuzmi U-Report aplikaciju:"
 
 msgid "PAGE"
 msgstr "STRANICA"
@@ -1291,39 +1281,35 @@ msgstr "+ Nova Priča"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s u toku, %(stale)s zastarelih, %(failing)s neuspešnih"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "poslednja provera %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "još nije provereno"
 
 msgid "All job types"
-msgstr ""
+msgstr "Svi tipovi poslova"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Svi statusi"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtriraj"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Lokacija"
+msgstr "Radnje"
 
 msgid "Pause"
-msgstr ""
+msgstr "Pauziraj"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Rezultati"
+msgstr "Nastavi"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Prinudna ponovna sinhronizacija"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1480,7 +1466,7 @@ msgid "Whether this page should be active to the public"
 msgstr "Treba li anketa biti prikazana na početnoj stranici"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Umetak može sadržati samo slova, brojeve, donje crte i crtice"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ovo je OSM ID za ovo administrativno ograničenje"
@@ -1530,10 +1516,8 @@ msgstr "Naziv kategorije ove ankete"
 msgid "Poll Categories"
 msgstr "Kategorije ankete"
 
-#, fuzzy
-#| msgid "Whether this bot should be shown to the public"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Da li ovaj bot treba da se prikaže javnosti"
+msgstr "Da li ova anketa treba da bude vidljiva/skrivena na javnom sajtu"
 
 msgid "The Flow this Poll is based on"
 msgstr "Dijagram na kome je ova anketa zasnovana"
@@ -1730,17 +1714,16 @@ msgstr "Izbor sakrivenih grafikona"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Odaberite raspored grafikona da biste sakrili ovo pitanje za javnost"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Slike kategorija"
+msgstr "Kategorija %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Oznaka kategorije backend-a (poput RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Prikaz %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "Oznaka za prikaz kategorije na sajtu"
@@ -1755,14 +1738,13 @@ msgstr "Poslednji rezultati sinhronizovani pre %(time)s"
 msgid "Synced"
 msgstr "Sinhronizovano"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "Zakazana sinhronizacija je trenutno u toku ..."
+msgstr "Sinhronizacija je trenutno u toku... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Izmeni anketu za tok [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1821,7 +1803,7 @@ msgid "The Line bot link that users will use to contact U-Report if you have one
 msgstr "Link bot koji će korisnici koristiti da kontaktiraju U-Report, ukoliko ga imate"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Ako je dostupna U-Report aplikacija."
 
 msgid "The join button text"
 msgstr "Tekst tastera za pridruživanje"
@@ -1832,18 +1814,14 @@ msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Tekst poziva da se pridružite u gornjem odeljku U-Reporta"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Lokacija za ovaj odgovor"
+msgstr "Link za eksterne priče."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Kratak tekst za dodatni meni."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Lokacija za ovaj odgovor"
+msgstr "Link za dodatni meni."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "YouTube video ID za priključivanje U-Reportu"
@@ -1902,10 +1880,8 @@ msgstr "ID Facebook Pixela vaše organizacije (opciono)"
 msgid "The Instagram username for this organization"
 msgstr "Instagram korisnicko ime organizacije"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Instagram korisnicko ime organizacije"
+msgstr "Instagram korisničko ime koje će biti prikazano na stranici za pridruživanje kao deeplink za ovu organizaciju"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Instagram widget ID sa lightwidget.com"
@@ -1929,7 +1905,7 @@ msgid "Whether to activate an extra gender."
 msgstr "Da li aktivirati dodatni pol."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Ako je podešeno, javni posetioci sajta biće preusmereni na ovaj URL."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Da li da sakrijete grafikone razlaganja uključenosti."
@@ -1996,55 +1972,53 @@ msgstr "Aktivni Korisnici"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Posao #%(job_id)d je trenutno u obradi, pokušajte ponovo za trenutak"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Posao #%(job_id)d je pauziran"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Posao #%(job_id)d je nastavljen"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Posao #%(job_id)d nije pauziran"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Posao #%(job_id)d će se pri sledećem pokretanju ponovo sinhronizovati ispočetka"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "Lokacija"
+msgstr "Sve lokacije"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Istočna Azija i Pacifik"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Istočna i južna Afrika"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Evropa i centralna Azija"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Latinska Amerika i Karibi"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Bliski istok i severna Afrika"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Južna Azija"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Zemlje nacionalnih komiteta UNICEF-a"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Zapadna i centralna Afrika"
 
 #~ msgid "Color Choice"
 #~ msgstr "Odabir boje"

@@ -48,15 +48,11 @@ msgstr "El archivo de la imagen que se va a utilizar"
 msgid "The human readable name for this content type"
 msgstr "El nombre legible para este tipo de contenido"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Cadena de texto para identificar el tipo de contenido, será usada con los modelos de etiquetas"
+msgstr "El slug para identificar este tipo de contenido, usado con las etiquetas de plantilla"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Una descripción de dónde se usará este tipo de contenido en el sitio y cómo será visibilizado"
+msgstr "Una descripción de dónde se usa este tipo de contenido en el sitio y cómo se mostrará"
 
 msgid "Whether this content should include a title"
 msgstr "Si este contenido debe incluir un título"
@@ -339,8 +335,6 @@ msgstr "Debes tener al menos un administrador."
 msgid "Select your Organization"
 msgstr "Elija su Organización"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Su cuenta no está asociada a una organización. Por favor, contacte al administrador."
 
@@ -752,10 +746,8 @@ msgstr "Orgs"
 msgid "Images"
 msgstr "Imágenes"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Empleos"
+msgstr "Trabajos de sincronización"
 
 msgid "About"
 msgstr "Acerca"
@@ -1003,10 +995,8 @@ msgstr "¿Cómo te gustaría unirte?"
 msgid "Text"
 msgstr "Texto"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "Descargar informe"
+msgstr "O descarga la aplicación de U-Report:"
 
 msgid "PAGE"
 msgstr "PAGINA"
@@ -1286,39 +1276,35 @@ msgstr "+ Nueva historia"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s en ejecución, %(stale)s desactualizados, %(failing)s fallando"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "última verificación %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "aún no verificado"
 
 msgid "All job types"
-msgstr ""
+msgstr "Todos los tipos de trabajo"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Todos los estados"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
-#, fuzzy
-#| msgid "All locations"
 msgid "Actions"
-msgstr "Todas las ubicaciones"
+msgstr "Acciones"
 
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Resultados"
+msgstr "Reanudar"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Forzar resincronización"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1475,7 +1461,7 @@ msgid "Whether this page should be active to the public"
 msgstr "Indica si esta página debe estar activa para el público."
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "El slug solo puede contener letras, números, guiones bajos y guiones"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Este es el ID de OSM para este límite administrativo "
@@ -1812,7 +1798,7 @@ msgid "The Line bot link that users will use to contact U-Report if you have one
 msgstr "El link del bot de Line que los usuarios utilizarán para contactar a U-Report, si tienes uno."
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Si hay una aplicación de U-Report disponible."
 
 msgid "The join button text"
 msgstr "El texto del botón para unirte."
@@ -1914,7 +1900,7 @@ msgid "Whether to activate an extra gender."
 msgstr "Si hay que activar otro género."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Si se configura, los usuarios públicos que visiten el sitio serán redirigidos a esta URL."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Indica si se deben ocultar los gráficos de desglose de participación."
@@ -1981,23 +1967,23 @@ msgstr "Usuarios activos"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "El trabajo #%(job_id)d está siendo procesado, intente de nuevo en un momento"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Trabajo #%(job_id)d pausado"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Trabajo #%(job_id)d reanudado"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "El trabajo #%(job_id)d no está pausado"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "El trabajo #%(job_id)d se resincronizará desde cero en su próxima ejecución"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "

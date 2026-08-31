@@ -47,13 +47,9 @@ msgstr "Визуальный файл для использования"
 msgid "The human readable name for this content type"
 msgstr "Название для такого типа категории"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Определение этого типа контента, который используется с примерными тегами"
+msgstr "Слаг для идентификации этого типа контента, используется с тегами шаблонов"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Описание того, где этот тип контента используется на сайте и как он будет отображаться"
 
@@ -136,10 +132,10 @@ msgid "Content Types"
 msgstr "Типы контента"
 
 msgid "Link Slug"
-msgstr ""
+msgstr "Слаг ссылки"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "Слаг или слово для использования в ссылке страницы"
 
 msgid "Content Blocks"
 msgstr "Блоки контента"
@@ -295,24 +291,9 @@ msgstr "Файл изображения"
 msgid "The API token for this backend"
 msgstr "токен API для этого бэкэнда"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Вас пригласили присоединиться %(org_name)s\n"
-"<br/>\n"
-"Чтобы принять приглашение, <a href='%(host)s%(join_url)s'>щелкните здесь</a>"
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Вас пригласили присоединиться к %(org_name)s.\n      <br />\n      Чтобы принять приглашение, <a href='%(host)s%(join_url)s'>нажмите здесь</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Вас приглашают присоединиться к {{org.name}}"
@@ -344,8 +325,6 @@ msgstr "У вас должен быть хотя бы один админист�
 msgid "Select your Organization"
 msgstr "Выберите вашу организацию"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "Ваша учетная запись не связана с организацией. Обратитесь к администратору."
 
@@ -388,7 +367,7 @@ msgid "Tasks"
 msgstr "Задания"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "Поддерживаются только файлы PDF."
 
 msgid "The title for this story"
 msgstr "Заголовок для истории"
@@ -409,7 +388,7 @@ msgid "A link to an mp3 file to publish on this story"
 msgstr "Ссылка на mp3-файл для публикации этой истории"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "PDF-отчет для прикрепления"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Идентификатор видео YouTube, которое должно быть связано с этой историей (это текст, который идет после v = и перед & в URL-адресе YouTube)"
@@ -448,13 +427,11 @@ msgstr "Изображение для отображения на страниц
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Изображение для отображения на странице истории и в предварительном просмотре (необязательно)"
 
-#, fuzzy
-#| msgid "The name of this category"
 msgid "The name of this tag"
-msgstr "Название этой категории"
+msgstr "Название этого тега"
 
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 msgid "Remove Item?"
 msgstr "Удалить предмет?"
@@ -705,7 +682,7 @@ msgid "Form"
 msgstr "Форма"
 
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -724,7 +701,7 @@ msgid "Opinions"
 msgstr "Мнения"
 
 msgid "Bots"
-msgstr ""
+msgstr "Боты"
 
 msgid "Users"
 msgstr "Пользователи"
@@ -736,16 +713,16 @@ msgid "Pages"
 msgstr "Страницы"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "Посадочные страницы"
 
 msgid "Jobs"
 msgstr "Работы"
 
 msgid "Tags"
-msgstr ""
+msgstr "Теги"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "Логотипы партнеров"
 
 msgid "Categories Images"
 msgstr "Фотографии категорий"
@@ -759,10 +736,8 @@ msgstr "Организации"
 msgid "Images"
 msgstr "Изображения"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Работы"
+msgstr "Задачи синхронизации"
 
 msgid "About"
 msgstr "О нас"
@@ -770,10 +745,8 @@ msgstr "О нас"
 msgid "Engagement"
 msgstr "Участие"
 
-#, fuzzy
-#| msgid "Reporters"
 msgid "Reports"
-msgstr "Репортеры"
+msgstr "Отчеты"
 
 msgid "Category Images"
 msgstr "Фотографии категорий"
@@ -867,10 +840,10 @@ msgid "Back"
 msgstr "Назад"
 
 msgid "Select bots"
-msgstr ""
+msgstr "Выберите ботов"
 
 msgid "View public page"
-msgstr ""
+msgstr "Посмотреть публичную страницу"
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "НЕДАВНИЕ УВЕДОМЛЕНИЯ "
@@ -879,10 +852,10 @@ msgid "Backends"
 msgstr "Бэкэнды"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Вы можете повторно отправить приглашение, используя поле выше"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Добавьте или выберите теги"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -906,15 +879,11 @@ msgstr[3] "%(counter)sй вопрос опросника"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr "Для нового опроса синхронизация запланирована каждые 10 минут "
 
-#, fuzzy
-#| msgid "No longer scheduling syncs, runs archived"
 msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr "Синхронизация больше не запланирована, запускается в архиве "
+msgstr "Синхронизация старых опросов больше не планируется, прохождения архивированы"
 
-#, fuzzy
-#| msgid "Main poll syncs scheduled every 10min"
 msgid "Main poll syncs scheduled every 20min"
-msgstr "Для главного опроса синхронизация запланирована каждые 10 минут"
+msgstr "Для главного опроса синхронизация запланирована каждые 20 минут"
 
 msgid "Recent poll syncs scheduled every 60min"
 msgstr "Для последнего опроса синхронизация запланирована каждые 60 минут"
@@ -928,16 +897,14 @@ msgstr "Синхронизация не запланирована, не акт�
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Не запланирована синхронизация, нет потока для опроса "
 
-#, fuzzy
-#| msgid "Previous"
 msgid "Preview results"
-msgstr "Предыдущий"
+msgstr "Предварительный просмотр результатов"
 
 msgid "Refresh Results"
 msgstr "Обновить результат"
 
 msgid "Partners"
-msgstr ""
+msgstr "Партнеры"
 
 msgid "MORE POLLS"
 msgstr "БОЛЬШЕ ОПРОСОВ "
@@ -961,10 +928,10 @@ msgid "LIST"
 msgstr "СПИСОК"
 
 msgid "Send"
-msgstr ""
+msgstr "Отправьте"
 
 msgid "to"
-msgstr ""
+msgstr "на"
 
 msgid "LATEST OPINION"
 msgstr "ПОСЛЕДНЕЕ МНЕНИЕ "
@@ -991,10 +958,10 @@ msgid "AGES"
 msgstr "ВОЗРАСТЫ"
 
 msgid "Available bots"
-msgstr ""
+msgstr "Доступные боты"
 
 msgid "More bots"
-msgstr ""
+msgstr "Больше ботов"
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Присоединяйтесь к U-Report, ваш голос имеет значение. "
@@ -1021,10 +988,10 @@ msgid "Text"
 msgstr "Текст"
 
 msgid "Or download the U-Report App:"
-msgstr ""
+msgstr "Или скачайте приложение U-Report:"
 
 msgid "PAGE"
-msgstr ""
+msgstr "СТРАНИЦА"
 
 msgid "SEARCH"
 msgstr "ПОИСК"
@@ -1033,26 +1000,22 @@ msgid "No results found"
 msgstr "Результаты не найдены"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "Предпросмотр неопубликованного опроса. Нажмите «Редактировать», чтобы опубликовать его"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "Опубликованный опрос. Нажмите «Редактировать», чтобы снять его с публикации"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "Опрос еще не синхронизирован, чтобы отображаться публично"
 
-#, fuzzy
-#| msgid "RESPONSES"
 msgid "RESPONDERS"
-msgstr "ОТВЕТЫ "
+msgstr "ОТВЕТИВШИЕ"
 
 msgid "RESPONSE RATE"
 msgstr "СКОРОСТЬ ОТКЛИКА"
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
 msgid "TOTAL RESPONDERS"
-msgstr "ВСЕ ОТВЕТЫ "
+msgstr "ВСЕГО ОТВЕТИВШИХ"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1074,18 +1037,16 @@ msgid "Written by:"
 msgstr "Автор:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "Отчеты еще не опубликованы"
 
-#, fuzzy
-#| msgid "U-REPORTERS"
 msgid "REPORT"
-msgstr "Ю-РЕПОРТЕРЫ"
+msgstr "ОТЧЕТ"
 
 msgid "STORY"
-msgstr ""
+msgstr "ИСТОРИЯ"
 
 msgid "Download Report"
-msgstr ""
+msgstr "Скачать отчет"
 
 msgid "Even"
 msgstr "Даже"
@@ -1102,10 +1063,8 @@ msgstr "Район"
 msgid "Participation Level"
 msgstr "Уровень участия"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "Ответы"
+msgstr "Ответившие"
 
 msgid "Reporters in"
 msgstr "Репортеры в"
@@ -1150,7 +1109,7 @@ msgid "FILTER RESULTS"
 msgstr "ФИЛЬТР РЕЗУЛЬТАТОВ "
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "Диаграммы видны только администраторам, выполнившим вход"
 
 msgid "Export and Share"
 msgstr "Экспортировать и Поделиться"
@@ -1168,7 +1127,7 @@ msgid "Custom pages"
 msgstr "Пользовательские страницы "
 
 msgid "Landing pages"
-msgstr ""
+msgstr "Посадочные страницы"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Посмотрите цифры, как мы привлекаем голоса молодежи к позитивным социальным изменениям."
@@ -1310,39 +1269,35 @@ msgstr "+ Новая история"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s выполняются, %(stale)s устарели, %(failing)s со сбоями"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "последняя проверка %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "еще не проверялось"
 
 msgid "All job types"
-msgstr ""
+msgstr "Все типы задач"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Все статусы"
 
 msgid "Filter"
-msgstr ""
+msgstr "Фильтр"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Место нахождения"
+msgstr "Действия"
 
 msgid "Pause"
-msgstr ""
+msgstr "Приостановить"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Результаты"
+msgstr "Возобновить"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Принудительная повторная синхронизация"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1352,7 +1307,7 @@ msgid "Flag"
 msgstr "Флаг"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "О логотипе партнера"
 
 msgid "The organization to which the image will be used"
 msgstr "Изображение организации которое будет использовано"
@@ -1363,63 +1318,47 @@ msgstr "Краткое описательное название для этог
 msgid "Image type"
 msgstr "Тип изображения"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "Приоритет этого вопроса на странице опроса, более высокий приоритет идет первым"
+msgstr "Приоритет этого изображения среди других в списке, более высокий приоритет идет первым"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this bot is part of"
-msgstr "Организация, в которой проводится этот опрос"
+msgstr "Организация, к которой относится этот бот"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
+msgstr "Отображается ли этот бот на главной странице; показываются не более 3 ботов с наивысшим приоритетом"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "Должна ли эта org отображаться на главной странице"
+msgstr "Скрыт ли этот бот на публичных страницах, кроме посадочных страниц"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this bot"
-msgstr "Название этого элемента "
+msgstr "Название, отображаемое для этого бота"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "Короткий код, номер или имя бота канала для этого бота"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The keyword for this bot"
-msgstr "Категория для этой истории"
+msgstr "Ключевое слово для этого бота"
 
 msgid "The Facebook bot deeplink, optional"
-msgstr ""
+msgstr "Диплинк бота Facebook, необязательно"
 
 msgid "The Telegram bot deeplink, optional"
-msgstr ""
+msgstr "Диплинк бота Telegram, необязательно"
 
 msgid "The Viber bot deeplink, optional"
-msgstr ""
+msgstr "Диплинк бота Viber, необязательно"
 
 msgid "The WhatsApp bot deeplink, optional"
-msgstr ""
+msgstr "Диплинк бота WhatsApp, необязательно"
 
-#, fuzzy
-#| msgid "A short summary description for this item"
 msgid "A short description for this bot, required"
-msgstr "Краткое описание этого элемента "
+msgstr "Краткое описание этого бота, обязательно"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "Приоритет этого вопроса на странице опроса, более высокий приоритет идет первым"
+msgstr "Приоритет этого бота среди других в списке, более высокий приоритет идет первым"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot should be shown to the public"
-msgstr "Должна ли эта org отображаться на главной странице"
+msgstr "Должен ли этот бот отображаться публично"
 
 msgid "Label"
 msgstr "Ярлык"
@@ -1493,43 +1432,29 @@ msgstr "Ваш источник работы успешно добавлен"
 msgid "Your job source has been updated successfully"
 msgstr "Ваш источник вакансий был успешно обновлен"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this landing page is part of"
-msgstr "Организация, в которой проводится этот опрос"
+msgstr "Организация, к которой относится эта посадочная страница"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this landing page"
-msgstr "Название этого элемента "
+msgstr "Название, отображаемое для этой посадочной страницы"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The call to action text for this landing page"
-msgstr "Основной текст истории"
+msgstr "Текст призыва к действию для этой посадочной страницы"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "The slug to use on the link for this landing page"
-msgstr "Должна ли эта org отображаться на главной странице"
+msgstr "Слаг для использования в ссылке этой посадочной страницы"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for the landing page"
-msgstr "Основной текст истории"
+msgstr "Основной текст посадочной страницы"
 
-#, fuzzy
-#| msgid "The image file to use"
 msgid "The image file to use for the page"
-msgstr "Визуальный файл для использования"
+msgstr "Файл изображения для использования на странице"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this page should be active to the public"
-msgstr "Должна ли эта org отображаться на главной странице"
+msgstr "Должна ли эта страница быть активной для публики"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Слаг может содержать только буквы, цифры, подчеркивания и дефисы"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Это идентификатор OSM для этой административной границы. "
@@ -1579,10 +1504,8 @@ msgstr "Название этой категории опроса"
 msgid "Poll Categories"
 msgstr "Категория опроса"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Должна ли эта org отображаться на главной странице"
+msgstr "Должен ли этот опрос быть видимым/скрытым на публичном сайте"
 
 msgid "The Flow this Poll is based on"
 msgstr "Поток, на котором основан этот опрос "
@@ -1642,42 +1565,40 @@ msgid "The featured response message"
 msgstr "Рекомендуемое ответное сообщение"
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "Темный фон 1 и белый текст"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "Светлый фон 1 и черный текст"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "Темный фон 2 и белый текст"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "Темный фон 3 и черный текст"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "Показать диаграммы возраста, пола и местоположения"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "Скрыть ТОЛЬКО диаграмму возраста"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "Скрыть ТОЛЬКО диаграмму пола"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "Скрыть ТОЛЬКО диаграмму местоположения"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "Скрыть диаграммы возраста и пола"
 
-#, fuzzy
-#| msgid "Hide participation stats"
 msgid "Hide Age and Location charts"
-msgstr "Скрыть статистику участия"
+msgstr "Скрыть диаграммы возраста и местоположения"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "Скрыть диаграммы пола и местоположения"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "Скрыть диаграммы возраста, пола и местоположения"
 
 msgid "The poll this question is part of"
 msgstr "Опрос, в который входит этот вопрос "
@@ -1697,10 +1618,8 @@ msgstr "Номер приоритета для этого вопроса в оп
 msgid "The Rule this response category is based on"
 msgstr "Правило этой категории ответа основано на "
 
-#, fuzzy
-#| msgid "The title for this Poll"
 msgid "Select tags for this poll"
-msgstr "Название этого опроса"
+msgstr "Выберите теги для этого опроса"
 
 msgid "Your org does not have any API token configuration."
 msgstr "В вашей организации нет конфигурации токена API"
@@ -1778,22 +1697,21 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Вопрос, заданный вашей аудитории, будет опубликован"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Выбор скрытых диаграмм"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Выберите, какие диаграммы разбивки скрыть от публики для этого вопроса"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Фотографии категорий"
+msgstr "Категория %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Ярлык категории из бэкэнда (например, RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Отображение %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "Ярлык для отображения категории на общедоступном сайте"
@@ -1808,14 +1726,13 @@ msgstr "Последние результаты синхронизированы
 msgid "Synced"
 msgstr "Синхронизировано"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "Выполняется запланированная синхронизация ..."
+msgstr "Синхронизация выполняется... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Редактировать опрос для потока [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1861,26 +1778,20 @@ msgstr "Должна ли эта организация учитывать сч�
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Короткий код, который пользователи будут использовать для локальной связи с U-Report "
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "Номер whatapp, который пользователи будут использовать для связи с Ю-Репорт, если он у вас есть"
+msgstr "Номер WhatsApp, который пользователи будут использовать для связи с U-Report, если он у вас есть"
 
-#, fuzzy
-#| msgid "The viber username that users will use to contact U-Report if you have one"
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "Имя пользователя viber, которое пользователи будут использовать для связи с Ю-Репорт, если он у вас есть"
+msgstr "Бот Telegram, который пользователи будут использовать для связи с U-Report, если он у вас есть"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Имя пользователя viber, которое пользователи будут использовать для связи с Ю-Репорт, если он у вас есть"
 
-#, fuzzy
-#| msgid "The viber username that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Имя пользователя viber, которое пользователи будут использовать для связи с Ю-Репорт, если он у вас есть"
+msgstr "Ссылка на бота Line, которую пользователи будут использовать для связи с U-Report, если она у вас есть"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Если доступно приложение U-Report."
 
 msgid "The join button text"
 msgstr "Текст кнопки присоединения"
@@ -1888,23 +1799,17 @@ msgstr "Текст кнопки присоединения"
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Краткий текст, используемый для направления посетителей присоединиться к U-Report "
 
-#, fuzzy
-#| msgid "The title of the photos section U-Report homepage"
 msgid "The call to action text to join on the top section on U-Report"
-msgstr "Название раздела фотографий на домашней странице Ю-Репорт"
+msgstr "Текст призыва присоединиться в верхнем разделе U-Report"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Место для этого ответа"
+msgstr "Ссылка для внешних историй."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Краткий текст для дополнительного меню."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Место для этого ответа"
+msgstr "Ссылка для дополнительного меню."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "ID видео YouTube для того, как присоединиться к разделу Ю-Репорт"
@@ -1933,10 +1838,8 @@ msgstr "Области для отображения исключительно 
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Области, отображаемые только на картах, используются для фильтрации результатов опроса"
 
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
 msgid "The Google Tag Manager ID for this organization"
-msgstr "Идентификатор отслеживания Google Analytics для этой организации"
+msgstr "Идентификатор Google Tag Manager для этой организации"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Идентификатор отслеживания Google Analytics для этой организации"
@@ -1945,7 +1848,7 @@ msgid "The URL to the Youtube channel for this organization"
 msgstr "Ссылка на Ютуб канал этой организации"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Содержимое метатега для подтверждения домена Facebook"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "Ссылка на страницу этой организации в Facebook"
@@ -1965,10 +1868,8 @@ msgstr "Идентификатор пикселя Facebook для этой ор�
 msgid "The Instagram username for this organization"
 msgstr "Instagram аккаунт этой организации"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Instagram аккаунт этой организации"
+msgstr "Имя пользователя Instagram, отображаемое на странице присоединения как диплинк для этой организации"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Instagram виджет от lightwidget.com"
@@ -1992,15 +1893,13 @@ msgid "Whether to activate an extra gender."
 msgstr "Активировать ли дополнительный пол."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Если задано, публичные посетители сайта будут перенаправлены на этот URL."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Скрывать ли диаграммы разбивки участия."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Разрешено ли этому пользователю войти на сайт"
+msgstr "Показывать ли логотип ЮНИСЕФ в нижнем колонтитуле."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Альфа-3 ISO-код организации, чтобы он отображался в виджете историй U-Report App. Пример: BRA, NIG, CMR (используйте GLOBAL, если U-Report глобальный)."
@@ -2041,10 +1940,8 @@ msgstr "12 месяцев"
 msgid "Age"
 msgstr "Возраст"
 
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Channels"
-msgstr "Сохранить изменения"
+msgstr "Каналы"
 
 msgid "Location"
 msgstr "Место нахождения"
@@ -2063,55 +1960,53 @@ msgstr "Активные пользователи"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Задача #%(job_id)d обрабатывается, повторите попытку чуть позже"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Задача #%(job_id)d приостановлена"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Задача #%(job_id)d возобновлена"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Задача #%(job_id)d не приостановлена"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Задача #%(job_id)d будет заново синхронизирована с нуля при следующем запуске"
 
 msgid "Something to trigger localizations"
 msgstr "Что-то для запуска локализаций"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "Место нахождения"
+msgstr "Все местоположения"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Восточная Азия и Тихоокеанский регион"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Восточная и Южная Африка"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Европа и Центральная Азия"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Латинская Америка и Карибский бассейн"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Ближний Восток и Северная Африка"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Южная Азия"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Страны национальных комитетов ЮНИСЕФ"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Западная и Центральная Африка"
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

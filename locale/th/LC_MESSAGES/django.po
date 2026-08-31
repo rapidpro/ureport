@@ -46,15 +46,11 @@ msgstr "ไฟล์รูปภาพที่จะใช้"
 msgid "The human readable name for this content type"
 msgstr "ชื่อสำหรับประเภทเนื้อหานี้"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Slug เพื่อระบุประเภทเนื้อหานี้ เพื่อใช้กับแท็กของเทมเพลต"
+msgstr "Slug ที่ใช้ระบุประเภทเนื้อหานี้ เพื่อใช้กับแท็กของเทมเพลต"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "คำอธิบายว่าประเภทเนื้อหานี้จะใช้ที่ใดบนหน้าเว็บไซต์ และจะแสดงผลให้เห็นอย่างไร"
+msgstr "คำอธิบายว่าประเภทเนื้อหานี้จะใช้ที่ใดบนหน้าเว็บไซต์ และจะแสดงผลอย่างไร"
 
 msgid "Whether this content should include a title"
 msgstr "เนื้อหานี้ควรมีชื่อหัวข้อหรือไม่"
@@ -294,25 +290,9 @@ msgstr "ไฟล์รูปภาพ"
 msgid "The API token for this backend"
 msgstr "API Token สำหรับระบบ Backend"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"คุณได้รับคำเชิญให้เข้าร่วม %(org_name)s\n"
-"<br/>\n"
-"หากต้องการตอบรับคำเชิญ <a href='%(host)s%(join_url)s'>คลิกที่นี่</a>\n"
-" "
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      คุณได้รับคำเชิญให้เข้าร่วม %(org_name)s\n      <br />\n      หากต้องการตอบรับคำเชิญ <a href='%(host)s%(join_url)s'>คลิกที่นี่</a>\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "คุณได้รับคำเชิญให้เข้าร่วม {{org.name}}"
@@ -344,8 +324,6 @@ msgstr "คุณต้องมีผู้ดูแลระบบอย่า
 msgid "Select your Organization"
 msgstr "เลือกองค์กรของคุณ"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "บัญชีของคุณยังไม่ได้เชื่อมโยงกับองค์กร กรุณาติดต่อผู้ดูแลระบบ"
 
@@ -700,7 +678,7 @@ msgid "Form"
 msgstr "แบบฟอร์ม"
 
 msgid "Save"
-msgstr ""
+msgstr "บันทึก"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -754,10 +732,8 @@ msgstr "องค์กร"
 msgid "Images"
 msgstr "รูปภาพ"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "ตำแหน่งงาน"
+msgstr "งานซิงค์ข้อมูล"
 
 msgid "About"
 msgstr "รู้จักยูรีพอร์ต"
@@ -874,7 +850,7 @@ msgid "Backends"
 msgstr "ฺBackends"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "คุณสามารถส่งคำเชิญอีกครั้งได้โดยใช้ช่องด้านบน"
 
 msgid "Add os Select tags"
 msgstr "เพิ่มหรือเลือกแท็ก"
@@ -1003,10 +979,8 @@ msgstr "คุณต้องการเข้าร่วมอย่างไ
 msgid "Text"
 msgstr "ข้อความ"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "ดาวน์โหลดรายงาน"
+msgstr "หรือดาวน์โหลดแอปยูรีพอร์ต:"
 
 msgid "PAGE"
 msgstr "หน้า"
@@ -1288,39 +1262,35 @@ msgstr "+ เพิ่ม เรื่อง"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "กำลังทำงาน %(running)s, ค้าง %(stale)s, ล้มเหลว %(failing)s"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "ตรวจสอบล่าสุด %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "ยังไม่ได้ตรวจสอบ"
 
 msgid "All job types"
-msgstr ""
+msgstr "งานทุกประเภท"
 
 msgid "All statuses"
-msgstr ""
+msgstr "ทุกสถานะ"
 
 msgid "Filter"
-msgstr ""
+msgstr "กรอง"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "ที่อยู่"
+msgstr "การดำเนินการ"
 
 msgid "Pause"
-msgstr ""
+msgstr "หยุดชั่วคราว"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "ผลลัพธ์"
+msgstr "ทำงานต่อ"
 
 msgid "Force resync"
-msgstr ""
+msgstr "บังคับซิงค์ใหม่"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1477,7 +1447,7 @@ msgid "Whether this page should be active to the public"
 msgstr "เพจนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Slug สามารถประกอบด้วยตัวอักษร ตัวเลข ขีดล่าง และยัติภังค์เท่านั้น"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "นี่คือ OSM ID (OpenStreetMap ID) สำหรับเขตการปกครองนี้"
@@ -1527,10 +1497,8 @@ msgstr "ชื่อของหมวดหมู่โพลนี้"
 msgid "Poll Categories"
 msgstr "หมวดหมู่โพล"
 
-#, fuzzy
-#| msgid "Whether this bot should be shown to the public"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "บอทนี้ควรเปิดเป็นสถานะสาธารณะหรือไม่"
+msgstr "โพลนี้ควรแสดงหรือซ่อนบนเว็บไซต์สาธารณะหรือไม่"
 
 msgid "The Flow this Poll is based on"
 msgstr "Flow ที่ใช้สำหรับหมวดหมู่นี้"
@@ -1727,17 +1695,16 @@ msgstr "ตัวเลือกซ่อนกราฟ"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "เลือกรายละเอียดกราฟของคำถามนี้ที่จะไม่โชว์ต่อสาธารณะ"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "ภาพหมวดหมู่"
+msgstr "หมวดหมู่ %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "ป้ายกำกับหมวดหมู่ของระบบ Backend (เช่น RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "แสดงผล %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "ป้ายที่จะแสดงหมวดหมู่บนหน้าเว็บไซต์สาธารณะ"
@@ -1752,14 +1719,13 @@ msgstr "ระบบกำลังซิงค์ผลลัพธ์ล่า
 msgid "Synced"
 msgstr "ซิงค์"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "ระบบกำลังซิงค์ข้อมูลตามเวลาที่กำหนดไว้..."
+msgstr "กำลังซิงค์ข้อมูลอยู่ในขณะนี้... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "แก้ไขโพลสำหรับ Flow [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1814,13 +1780,11 @@ msgstr "Telegram บอทที่ผู้ใช้งานสามารถ
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Username ของ Viber ที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
 
-#, fuzzy
-#| msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Telegram บอทที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
+msgstr "ลิงก์บอท Line ที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตได้ - หากมี"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "หากมีแอปยูรีพอร์ตให้ใช้งาน"
 
 msgid "The join button text"
 msgstr "ข้อความของปุ่มเข้าร่วม"
@@ -1831,18 +1795,14 @@ msgstr "ข้อความสั้น ๆ เชิญชวนให้ผ�
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "ข้อความ Call to Action เชิญชวนเข้าร่วมยูรีพอร์ต ที่จะอยู่ด้านบนสุดของเพจยูรีพอร์ต"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "ที่อยู่ของโพลสำรวจนี้"
+msgstr "ลิงก์สำหรับเรื่องราวภายนอก"
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "ข้อความสั้น ๆ สำหรับเมนูเสริม"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "ที่อยู่ของโพลสำรวจนี้"
+msgstr "ลิงก์สำหรับเมนูเสริม"
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "วิดีโอ YouTube ID สำหรับวิธีเข้าร่วมบนหน้าเพจยูรีพอร์ต"
@@ -1901,10 +1861,8 @@ msgstr "ID ของ Facebook Pixel ขององค์กรนี้  (ไ�
 msgid "The Instagram username for this organization"
 msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
+msgstr "ชื่อผู้ใช้งานอินสตาแกรมที่จะแสดงบนหน้าเข้าร่วมเป็น deeplink ขององค์กรนี้"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Widget ID ของอินสตาแกรมจาก lightwidget.com"
@@ -1928,7 +1886,7 @@ msgid "Whether to activate an extra gender."
 msgstr "เปิดใช้งานเพศรายการอื่นเพิ่มเติมหรือไม่"
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "หากตั้งค่าไว้ ผู้เข้าชมเว็บไซต์สาธารณะจะถูกนำไปยัง URL นี้"
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "ซ่อนรายละเอียดกราฟของการมีส่วนร่วมหรือไม่"
@@ -1995,55 +1953,53 @@ msgstr "จำนวนผู้ใช้งาน"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "งาน #%(job_id)d กำลังดำเนินการอยู่ กรุณาลองอีกครั้งในอีกสักครู่"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "หยุดงาน #%(job_id)d ชั่วคราวแล้ว"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "ให้งาน #%(job_id)d ทำงานต่อแล้ว"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "งาน #%(job_id)d ไม่ได้ถูกหยุดชั่วคราว"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "งาน #%(job_id)d จะซิงค์ข้อมูลใหม่ทั้งหมดในการทำงานครั้งถัดไป"
 
 msgid "Something to trigger localizations"
 msgstr "สิ่งที่จะเริ่มต้นการแปลภาษาท้องถิ่น"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "ที่อยู่"
+msgstr "ทุกพื้นที่"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "เอเชียตะวันออกและแปซิฟิก"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "แอฟริกาตะวันออกและตอนใต้"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "ยุโรปและเอเชียกลาง"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "ลาตินอเมริกาและแคริบเบียน"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "ตะวันออกกลางและแอฟริกาเหนือ"
 
 msgid "South Asia"
-msgstr ""
+msgstr "เอเชียใต้"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "ประเทศที่มีคณะกรรมการระดับชาติของยูนิเซฟ"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "แอฟริกาตะวันตกและแอฟริกากลาง"
 
 #~ msgid "Color Choice"
 #~ msgstr "ตัวเลือกสี"

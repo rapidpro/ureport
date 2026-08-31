@@ -43,15 +43,11 @@ msgstr "Ishlatiladigan surat-fayli"
 msgid "The human readable name for this content type"
 msgstr "Mazkur kontent turi uchun inson o'qiy oladigan nom"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Mazkur kontent turini aniqlash uchun andozaviy teglar bilan birga ishlatiladigan slag."
+msgstr "Mazkur kontent turini aniqlash uchun slag, andoza teglari bilan ishlatiladi"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Sahifaning qayerida mazkur kontent turi qo'llanilishi va u qay tarzda namoyish etilishining ta'rifi"
+msgstr "Mazkur kontent turi saytning qayerida ishlatilishi va u qanday ko'rsatilishining ta'rifi"
 
 msgid "Whether this content should include a title"
 msgstr "Mazkur kontentda sarlavha bo'lishi kerakmi"
@@ -132,10 +128,10 @@ msgid "Content Types"
 msgstr "Kontent turlari"
 
 msgid "Link Slug"
-msgstr ""
+msgstr "Havola slagi"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "Sahifa havolasida ishlatiladigan slag yoki so'z"
 
 msgid "Content Blocks"
 msgstr "Kontent to'plamlari"
@@ -291,25 +287,9 @@ msgstr "Tasvir fayli"
 msgid "The API token for this backend"
 msgstr "Ushbu bekend uchun API tokeni"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"      Siz%(org_name)sga qo'shilish uchun taklif etildingiz.\n"
-"      <br/>\n"
-"      Taklifni qabul qilishu uchun be yerga bosing<a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Siz %(org_name)s tashkilotiga qo'shilishga taklif etildingiz.\n      <br />\n      Taklifni qabul qilish uchun <a href='%(host)s%(join_url)s'>bu yerga bosing</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Siz {{tashk.nomi}}ga qo'shilishga taklif qilindingiz"
@@ -341,10 +321,8 @@ msgstr "Sizda eng kamida bitta administrator bo'lishi lozim"
 msgid "Select your Organization"
 msgstr "O'z tashkilotingizni tanlang"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "Sizning akkauntingizngig tashkilot bilan aloqasi yo'q. Iltimos administrator bilan bog'laning"
+msgstr "Sizning hisobingiz hech qanday tashkilotga bog'lanmagan. Iltimos, administrator bilan bog'laning."
 
 msgid "Your Organization"
 msgstr "Sizning Tashkilotingiz"
@@ -385,7 +363,7 @@ msgid "Tasks"
 msgstr "Topshiriqlar"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "Faqat PDF fayllar qo'llab-quvvatlanadi."
 
 msgid "The title for this story"
 msgstr "Ushbu hikoya uchun sarlavha"
@@ -406,7 +384,7 @@ msgid "A link to an mp3 file to publish on this story"
 msgstr "Mazkur hikoyani chop etish uchun mp3 fayliga link"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "Biriktiriladigan PDF hisobot"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Ushbu hikoyaga ulanishi zarur bo'lgan YouTube videolavhasining identifikatori (bu v= dan keyin va YouTube URL dan avval va ichida keladigan matn)"
@@ -445,13 +423,11 @@ msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan tasvir (ixtiyoriy)."
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan tasvir (ixtiyoriy)."
 
-#, fuzzy
-#| msgid "The name of this category"
 msgid "The name of this tag"
-msgstr "Ushbu toifaning nomi"
+msgstr "Ushbu tegning nomi"
 
 msgid "Delete"
-msgstr ""
+msgstr "O'chirish"
 
 msgid "Remove Item?"
 msgstr "Element olib tashlansinmi?"
@@ -698,7 +674,7 @@ msgid "Form"
 msgstr "Shakl"
 
 msgid "Save"
-msgstr ""
+msgstr "Saqlash"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -717,7 +693,7 @@ msgid "Opinions"
 msgstr "Mulohazalar"
 
 msgid "Bots"
-msgstr ""
+msgstr "Botlar"
 
 msgid "Users"
 msgstr "Foydalanuvchilar"
@@ -729,16 +705,16 @@ msgid "Pages"
 msgstr "Sahifalar"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "Maqsadli sahifalar"
 
 msgid "Jobs"
 msgstr "Ish o'rinlari"
 
 msgid "Tags"
-msgstr ""
+msgstr "Teglar"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "Hamkorlar logotiplari"
 
 msgid "Categories Images"
 msgstr "Toifalar tasvirlari"
@@ -752,10 +728,8 @@ msgstr "Tashkr"
 msgid "Images"
 msgstr "Suratlar"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Ish o'rinlari"
+msgstr "Sinxronlash vazifalari"
 
 msgid "About"
 msgstr "Haqida"
@@ -763,10 +737,8 @@ msgstr "Haqida"
 msgid "Engagement"
 msgstr "Mashg'ullik"
 
-#, fuzzy
-#| msgid "Reporters"
 msgid "Reports"
-msgstr "Reportyorlar"
+msgstr "Hisobotlar"
 
 msgid "Category Images"
 msgstr "Toifa tasvirlari"
@@ -862,10 +834,10 @@ msgid "Back"
 msgstr "Ortga"
 
 msgid "Select bots"
-msgstr ""
+msgstr "Botlarni tanlang"
 
 msgid "View public page"
-msgstr ""
+msgstr "Ommaviy sahifani ko'rish"
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "SO'NGGI BILDIRISHLAR"
@@ -874,56 +846,53 @@ msgid "Backends"
 msgstr "Bekendlar"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Yuqoridagi maydon orqali taklifnomani qayta yuborishingiz mumkin"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Teglarni qo'shing yoki tanlang"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
+msgstr[0] "Hozirda %(counter)s ta yangi so'rovnoma sinxronlanmoqda. So'rovnomalar natijalari to'liq sinxronlangach ommaviy saytda ko'rsatiladi."
 
 msgid "+ New Poll"
 msgstr "+ Yangi ovoz berish"
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "So'rovnoma savollari"
+msgstr[0] "%(counter)s ta so'rovnoma savoli"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "Yangi so'rovnomalarning dastlabki sinxronlashlari har 10 daqiqada rejalashtirilgan"
 
 msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
+msgstr "Eski so'rovnomalar uchun sinxronlashlar endi rejalashtirilmaydi, natijalar arxivlangan"
 
 msgid "Main poll syncs scheduled every 20min"
-msgstr ""
+msgstr "Asosiy so'rovnoma sinxronlashlari har 20 daqiqada rejalashtirilgan"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "Yaqinda o'tkazilgan so'rovnoma sinxronlashlari har 60 daqiqada rejalashtirilgan"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "So'rovnoma sinxronlashlari har 24 soatda rejalashtirilgan"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "Sinxronlashlar rejalashtirilmaydi, faol emas"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "Sinxronlashlar rejalashtirilmaydi, so'rovnoma uchun oqim yo'q"
 
-#, fuzzy
-#| msgid "Previous"
 msgid "Preview results"
-msgstr "Avvalgisi"
+msgstr "Natijalarni oldindan ko'rish"
 
 msgid "Refresh Results"
 msgstr "Natijalarni yangilash"
 
 msgid "Partners"
-msgstr ""
+msgstr "Hamkorlar"
 
 msgid "MORE POLLS"
 msgstr "YANADA KO'PROQ SO'ROVLAR"
@@ -947,10 +916,10 @@ msgid "LIST"
 msgstr "RO'YXAT"
 
 msgid "Send"
-msgstr ""
+msgstr "Yuborish"
 
 msgid "to"
-msgstr ""
+msgstr "ga"
 
 msgid "LATEST OPINION"
 msgstr "ENG SO'NGGI MULOHAZA"
@@ -977,10 +946,10 @@ msgid "AGES"
 msgstr "YOSHLAR"
 
 msgid "Available bots"
-msgstr ""
+msgstr "Mavjud botlar"
 
 msgid "More bots"
-msgstr ""
+msgstr "Ko'proq botlar"
 
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Reportga qo'shiling, Sizning fikringiz muhimdir."
@@ -1007,10 +976,10 @@ msgid "Text"
 msgstr "Matn"
 
 msgid "Or download the U-Report App:"
-msgstr ""
+msgstr "Yoki U-Report ilovasini yuklab oling:"
 
 msgid "PAGE"
-msgstr ""
+msgstr "SAHIFA"
 
 msgid "SEARCH"
 msgstr "IZLASH"
@@ -1019,26 +988,22 @@ msgid "No results found"
 msgstr "Hech qanday natija topilmadi"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "E'lon qilinmagan so'rovnoma ko'rinishi. E'lon qilish uchun Tahrirlash tugmasini bosing"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "E'lon qilingan so'rovnoma. E'londan olish uchun Tahrirlash tugmasini bosing"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "So'rovnoma ommaga ko'rsatilishi uchun hali sinxronlanmagan"
 
-#, fuzzy
-#| msgid "RESPONSES"
 msgid "RESPONDERS"
-msgstr "JAVOBLAR"
+msgstr "JAVOB BERGANLAR"
 
 msgid "RESPONSE RATE"
 msgstr "JAVOB BERGANLAR ULUSHI"
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
 msgid "TOTAL RESPONDERS"
-msgstr "JA'MI JAVOBLAR"
+msgstr "JAMI JAVOB BERGANLAR"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1060,18 +1025,16 @@ msgid "Written by:"
 msgstr "Muallif:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "Hozircha hech qanday hisobot e'lon qilinmagan"
 
-#, fuzzy
-#| msgid "U-REPORTERS"
 msgid "REPORT"
-msgstr "U-REPORTYORLAR"
+msgstr "HISOBOT"
 
 msgid "STORY"
-msgstr ""
+msgstr "HIKOYA"
 
 msgid "Download Report"
-msgstr ""
+msgstr "Hisobotni yuklab olish"
 
 msgid "Even"
 msgstr "Hatto"
@@ -1088,10 +1051,8 @@ msgstr "Tuman"
 msgid "Participation Level"
 msgstr "Ishtirok etish darajasi"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "Javoblar"
+msgstr "Javob berganlar"
 
 msgid "Reporters in"
 msgstr "Reportyorlar"
@@ -1136,7 +1097,7 @@ msgid "FILTER RESULTS"
 msgstr "FILTR NATIJALARI"
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "Diagrammalar faqat tizimga kirgan administratorlarga ko'rinadi"
 
 msgid "Export and Share"
 msgstr "Chiqarish va Bo'lishish"
@@ -1145,7 +1106,7 @@ msgid "Want to tell the world about this? Download this image to easily share on
 msgstr "Bu haqida butun dunyoga ma'lum qilmoqchimisiz? Ijtimoiy tarmoqlarda oson o'rtoqlashish yoki taqdimotingizni bezash uchun ushbu tasvirni yuklab oling!"
 
 msgid "SELECT LANGUAGE"
-msgstr ""
+msgstr "TILNI TANLANG"
 
 msgid "SELECT COUNTRY"
 msgstr "MAMLAKATNI TANLANG"
@@ -1154,7 +1115,7 @@ msgid "Custom pages"
 msgstr "Maxsus yaratiluvchi sahifalar"
 
 msgid "Landing pages"
-msgstr ""
+msgstr "Maqsadli sahifalar"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Ijobiy ijtimoiy o'zgarishlarga erishishda yoshlarning fikrlarini qanday qo'llayotganimizni raqamlarda ko'ring."
@@ -1247,32 +1208,14 @@ msgstr ""
 "             <strong>%(object)s</strong>ni olib tashlashga ishonchingiz komilmi?\n"
 "          "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t %(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
-"\n"
-"         %(counter)s natijalar\n"
-"        "
+msgstr[0] "%(counter)s ta natija"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
-"\n"
-"\tNatijalar%(start)s-%(end)s of %(count)s\n"
-"\t"
+msgstr "Natijalar: %(count)s tadan %(start)s-%(end)s"
 
 msgid "Error"
 msgstr "Xato"
@@ -1314,39 +1257,35 @@ msgstr "+ Yangi Hikoya"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s ta ishlamoqda, %(stale)s ta eskirgan, %(failing)s ta xatolik bermoqda"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "oxirgi tekshiruv: %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "hali tekshirilmagan"
 
 msgid "All job types"
-msgstr ""
+msgstr "Barcha vazifa turlari"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Barcha holatlar"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtrlash"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Joylashgan o'rni"
+msgstr "Amallar"
 
 msgid "Pause"
-msgstr ""
+msgstr "To'xtatib turish"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Natijalar"
+msgstr "Davom ettirish"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Majburiy qayta sinxronlash"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1356,7 +1295,7 @@ msgid "Flag"
 msgstr "Bayroq"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "Hamkor logotipi haqida"
 
 msgid "The organization to which the image will be used"
 msgstr "Surat uning uchun ishlatiladigan tashkilot"
@@ -1367,71 +1306,47 @@ msgstr "Ushbu suratga qisqacha ta'riflovchi nom"
 msgid "Image type"
 msgstr "Tasvir turi"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "Mazkur savolning so'rovnoma sahifasidagi ustivorligi, ustivorligi yoqori bo'lgani avval keladi"
+msgstr "Ro'yxatdagi boshqa tasvirlar orasida ushbu tasvirning ustuvorlik raqami, ustuvorligi yuqorisi avval keladi"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this bot is part of"
-msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
+msgstr "Ushbu bot tegishli bo'lgan tashkilot"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
+msgstr "Ushbu bot bosh sahifada ko'rsatilishi kerakmi, faqat ustuvorligi eng yuqori bo'lgan 3 tagacha bot ko'rsatiladi"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+msgstr "Ushbu bot maqsadli sahifalardan tashqari ommaviy sahifalarda yashirilishi kerakmi"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this bot"
-msgstr "Ushbu element uchun sarlavha"
+msgstr "Ushbu bot uchun ko'rsatiladigan sarlavha"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "Ushbu bot kanalining qisqa kodi, raqami yoki bot nomi"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The keyword for this bot"
-msgstr "Ushbu hikoya uchun toifa"
+msgstr "Ushbu bot uchun kalit so'z"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Facebook bot deeplink, optional"
-msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+msgstr "Facebook botining deeplink havolasi, ixtiyoriy"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Telegram bot deeplink, optional"
-msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+msgstr "Telegram botining deeplink havolasi, ixtiyoriy"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Viber bot deeplink, optional"
-msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+msgstr "Viber botining deeplink havolasi, ixtiyoriy"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The WhatsApp bot deeplink, optional"
-msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+msgstr "WhatsApp botining deeplink havolasi, ixtiyoriy"
 
-#, fuzzy
-#| msgid "A short summary description for this item"
 msgid "A short description for this bot, required"
-msgstr "Ushbu elementning qisqacha ta'rifi"
+msgstr "Ushbu bot uchun qisqacha ta'rif, majburiy"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "Mazkur savolning so'rovnoma sahifasidagi ustivorligi, ustivorligi yoqori bo'lgani avval keladi"
+msgstr "Ro'yxatdagi boshqa botlar orasida ushbu botning ustuvorlik raqami, ustuvorligi yuqorisi avval keladi"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot should be shown to the public"
-msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+msgstr "Ushbu bot ommaga ko'rsatilishi kerakmi"
 
 msgid "Label"
 msgstr "Yorliq"
@@ -1505,43 +1420,29 @@ msgstr "Sizning ish o'rinlari bo'yicha manbaingiz muvaffaqiyatli tarzda qo'shib 
 msgid "Your job source has been updated successfully"
 msgstr "Sizning ish o'rinlari bo'yicha manbaingiz muvaffaqiyatli tarzda yangilandi"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this landing page is part of"
-msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
+msgstr "Ushbu maqsadli sahifa tegishli bo'lgan tashkilot"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this landing page"
-msgstr "Ushbu element uchun sarlavha"
+msgstr "Ushbu maqsadli sahifa uchun ko'rsatiladigan sarlavha"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The call to action text for this landing page"
-msgstr "Hikoya uchun asosiy matn"
+msgstr "Ushbu maqsadli sahifa uchun harakatga chorlovchi matn"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "The slug to use on the link for this landing page"
-msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+msgstr "Ushbu maqsadli sahifa havolasida ishlatiladigan slag"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for the landing page"
-msgstr "Hikoya uchun asosiy matn"
+msgstr "Maqsadli sahifaning asosiy matni"
 
-#, fuzzy
-#| msgid "The image file to use"
 msgid "The image file to use for the page"
-msgstr "Ishlatiladigan surat-fayli"
+msgstr "Sahifa uchun ishlatiladigan tasvir fayli"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this page should be active to the public"
-msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+msgstr "Ushbu sahifa omma uchun faol bo'lishi kerakmi"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Slag faqat harflar, raqamlar, pastki chiziq va defislardan iborat bo'lishi mumkin"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Bu mazkur ma'muriy chegara uchun OSM - Operasion Tizim Darajasining identifikatori."
@@ -1591,10 +1492,8 @@ msgstr "Ushbu so'rov toifasining nomi"
 msgid "Poll Categories"
 msgstr "So'rov toifalari"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+msgstr "Ushbu so'rovnoma ommaviy saytda ko'rinishi yoki yashirilishi kerakmi"
 
 msgid "The Flow this Poll is based on"
 msgstr "Usbu so'rov asoslangan Oqim"
@@ -1654,42 +1553,40 @@ msgid "The featured response message"
 msgstr "Tavsiya etiladigan javob"
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "To'q 1 fon va oq matn"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "Och 1 fon va qora matn"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "To'q 2 fon va oq matn"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "To'q 3 fon va qora matn"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "Yosh, gender va joylashuv diagrammalarini ko'rsatish"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "FAQAT yosh diagrammasini yashirish"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "FAQAT gender diagrammasini yashirish"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "FAQAT joylashuv diagrammasini yashirish"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "Yosh va gender diagrammalarini yashirish"
 
-#, fuzzy
-#| msgid "Hide participation stats"
 msgid "Hide Age and Location charts"
-msgstr "Ishtirok statistikasini yashirish"
+msgstr "Yosh va joylashuv diagrammalarini yashirish"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "Gender va joylashuv diagrammalarini yashirish"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "Yosh, gender va joylashuv diagrammalarini yashirish"
 
 msgid "The poll this question is part of"
 msgstr "Ushbu savol uning qismi bo'lgan so'rov"
@@ -1709,10 +1606,8 @@ msgstr "So'rovdagi mazkur savol uchun ustivor raqam"
 msgid "The Rule this response category is based on"
 msgstr "Ushbu javob toifasi asoslanadigan Qoida"
 
-#, fuzzy
-#| msgid "The title for this Poll"
 msgid "Select tags for this poll"
-msgstr "Ushbu so'rov uchun sarlavha"
+msgstr "Ushbu so'rovnoma uchun teglarni tanlang"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Tashkilotingizning hech qanday API tokeni konfiguratsiyasi yo'q"
@@ -1790,47 +1685,42 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "O'z auditoriyangizga berilgan savol, ochiq ommaga namoyish etiladi"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Yashiriladigan diagrammalar tanlovi"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Ushbu savol uchun ommadan yashiriladigan diagrammalar taqsimotini tanlang"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Toifa tasvirlari"
+msgstr "Toifa %s"
 
-#, fuzzy
-#| msgid "The label of the ruleset from RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr "RapidPro dan qoidalar majmuasining tamg'asi"
+msgstr "Backend (masalan, RapidPro) dagi toifaning yorlig'i"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Ko'rsatish %s"
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site."
 msgid "The label to display of the category on the public site"
-msgstr "Ommaviy sahifada ko'rsatilishi kerak bo'lgan ish o'rinlari bormi"
+msgstr "Ommaviy saytda ko'rsatiladigan toifa yorlig'i"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Rejalashtirilgan sinxronlash hozirda davom etmoqda..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Oxirgi natijalar %(time)s oldin sinxronlangan"
 
 msgid "Synced"
-msgstr ""
+msgstr "Sinxronlangan"
 
 #, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr ""
+msgstr "Sinxronlash hozirda davom etmoqda... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "[%(flow_name)s (%(flow_date_hint)s)] oqimi uchun so'rovnomani tahrirlash"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1876,54 +1766,38 @@ msgstr "Mazkur tashkilot sanog'i faqat linkdagilarni hisobga olishi kerakmi"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Foydalanuvchilar mahalliy darajada U-Report bilan bog'lanish uchun ishlatadigan qisqa kod"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "Foydalanuvchilar U-Report bilan bog'lanishlari mumkin bo'lgan whatsapp raqami, agar sizda mavjud bo'lsa. "
+msgstr "Agar mavjud bo'lsa, foydalanuvchilar U-Report bilan bog'lanish uchun ishlatadigan WhatsApp raqami"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "Foydalanuvchilar U-Report bilan bog'lanishlari mumkin bo'lgan whatsapp raqami, agar sizda mavjud bo'lsa. "
+msgstr "Agar mavjud bo'lsa, foydalanuvchilar U-Report bilan bog'lanish uchun ishlatadigan Telegram boti"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr "Foydalanuvchilar U-Report bilan bog'lanishlari mumkin bo'lgan whatsapp raqami, agar sizda mavjud bo'lsa. "
+msgstr "Agar mavjud bo'lsa, foydalanuvchilar U-Report bilan bog'lanish uchun ishlatadigan Viber foydalanuvchi nomi"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Foydalanuvchilar U-Report bilan bog'lanishlari mumkin bo'lgan whatsapp raqami, agar sizda mavjud bo'lsa. "
+msgstr "Agar mavjud bo'lsa, foydalanuvchilar U-Report bilan bog'lanish uchun ishlatadigan Line bot havolasi"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "U-Report ilovasi mavjudmi."
 
-#, fuzzy
-#| msgid "The font used for normal text"
 msgid "The join button text"
-msgstr "Oddiy matn uchun qo'llaniluvchi shrift"
+msgstr "Qo'shilish tugmasi matni"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
 
-#, fuzzy
-#| msgid "The title of the photos section U-Report homepage"
 msgid "The call to action text to join on the top section on U-Report"
-msgstr "U-Report sahifasidagi fotosur'atlar qismining sarlavhasi"
+msgstr "U-Report yuqori qismidagi qo'shilishga chorlovchi matn"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Ushbu javob berilgan yer"
+msgstr "Tashqi hikoyalar uchun havola."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Qo'shimcha menyu uchun qisqa matn."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Ushbu javob berilgan yer"
+msgstr "Qo'shimcha menyu uchun havola."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "U-Report qismiga qanday qo'shilish haqidagi YouTube video IDsi"
@@ -1952,10 +1826,8 @@ msgstr "Faqat xaritalarda ko'rsatiladigan mamlakatlar"
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Faqat xaritalarda ko'rsatiladigan mamlakatlar, so'rovnoma natijalarini filtrdan o'tkazish uchun ishlatiladi"
 
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
 msgid "The Google Tag Manager ID for this organization"
-msgstr "Mazkur tashkilot uchun Google Analytics Kuzatib borish identifikatori"
+msgstr "Mazkur tashkilot uchun Google Tag Manager identifikatori"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Mazkur tashkilot uchun Google Analytics Kuzatib borish identifikatori"
@@ -1964,7 +1836,7 @@ msgid "The URL to the Youtube channel for this organization"
 msgstr "Mazkur tashkilot uchun Youtube kanaliga URL"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Facebook domenini tasdiqlash uchun meta teg mazmuni"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "Mazkur tashkilot uchun Facebook sahifasiga URL"
@@ -1984,10 +1856,8 @@ msgstr "Mazkur tashkilot uchun Facebook Pixel ning identifikatori (ixtiyoriy)"
 msgid "The Instagram username for this organization"
 msgstr "Mazkur tashkilot uchun Instagram foydalanuvchisi nomi"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Mazkur tashkilot uchun Instagram foydalanuvchisi nomi"
+msgstr "Mazkur tashkilot uchun qo'shilish sahifasida deeplink sifatida ko'rsatiladigan Instagram foydalanuvchi nomi"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Lightwidget.com dan Instagram widjet identifikatori"
@@ -2011,15 +1881,13 @@ msgid "Whether to activate an extra gender."
 msgstr "Qo'shimcha jinsni faollashtirish lozimmi"
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Agar o'rnatilsa, saytga tashrif buyurgan foydalanuvchilar ushbu URL manzilga yo'naltiriladi."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Mashg'ullik taqsimoti diagrammalarini yashirish kerakmi."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Mazkur foydalanuvchi sahifaga kirish ruhsatiga egami"
+msgstr "Sahifa pastida UNICEF logotipini ko'rsatish kerakmi."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Tashkilotning alpha-3 ISO kodi, maqsad shuki, unda U-Report ilovasining hikoyalar widjeti namoyish etilsin. Misol: BRA, NIG, CMR (GLOBAL ni ishlating, agar U-Report umumjahon bo'lsa)"
@@ -2043,7 +1911,7 @@ msgid "If you need to include some custom HTML codes in you org pages, like cust
 msgstr "Siz o'z tashkilotingiz sahifalariga ayrim xususiy HTML kodlarini kiritmoqchimisiz, xususiy tahlil dasturi bo'lagi, kabi"
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "Boshqa tillardagi saytlar havolalari"
 
 msgid "Whether this row was created by squashing"
 msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
@@ -2060,10 +1928,8 @@ msgstr "12 oy"
 msgid "Age"
 msgstr "Yosh"
 
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Channels"
-msgstr "O'zgarishlarni saqlash"
+msgstr "Kanallar"
 
 msgid "Location"
 msgstr "Joylashgan o'rni"
@@ -2082,55 +1948,53 @@ msgstr "Faol Foydalanuvchilar"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "#%(job_id)d vazifa ustida ish olib borilmoqda, birozdan so'ng qayta urinib ko'ring"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "#%(job_id)d vazifa to'xtatib turildi"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "#%(job_id)d vazifa davom ettirildi"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "#%(job_id)d vazifa to'xtatib turilmagan"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "#%(job_id)d vazifa keyingi ishga tushishida boshidan qayta sinxronlanadi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "Joylashgan o'rni"
+msgstr "Barcha joylashuvlar"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Sharqiy Osiyo va Tinch okeani"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Sharqiy va Janubiy Afrika"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Yevropa va Markaziy Osiyo"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Lotin Amerikasi va Karib havzasi"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Yaqin Sharq va Shimoliy Afrika"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Janubiy Osiyo"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "UNICEF Milliy qo'mitalari mamlakatlari"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "G'arbiy va Markaziy Afrika"
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"
