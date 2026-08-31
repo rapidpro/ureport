@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone as tzone
 
 from mock import Mock, patch
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -1161,7 +1162,7 @@ class PollTest(UreportTest):
             CACHES={
                 "default": {
                     "BACKEND": "django_valkey.cache.ValkeyCache",
-                    "LOCATION": "redis://127.0.0.1:6379/1",
+                    "LOCATION": "redis://%s:6379/1" % getattr(settings, "VALKEY_HOST", "localhost"),
                 }
             }
         ):

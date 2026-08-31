@@ -51,8 +51,7 @@ class UtilsTest(UreportTest):
         self.poll = self.create_poll(self.org, "Poll 1", "uuid-1", self.education, self.admin)
 
     def clear_cache(self):
-        # hardcoded to localhost
-        r = valkey.StrictValkey(host="localhost", db=1)
+        r = valkey.StrictValkey(host=getattr(settings, "VALKEY_HOST", "localhost"), db=1)
         r.flushdb()
 
     def test_datetime_to_json_date(self):
@@ -546,7 +545,7 @@ class UtilsTest(UreportTest):
             CACHES={
                 "default": {
                     "BACKEND": "django_valkey.cache.ValkeyCache",
-                    "LOCATION": "redis://127.0.0.1:6379/1",
+                    "LOCATION": "redis://%s:6379/1" % getattr(settings, "VALKEY_HOST", "localhost"),
                 }
             }
         ):

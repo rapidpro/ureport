@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 from ureport.settings_common import *
 
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
@@ -46,13 +48,15 @@ LOGGING['loggers']['celery.worker'] = {
 #     'compressor.finders.CompressorFinder',
 # )
 
+# the backing services default to localhost; set POSTGRES_HOST / VALKEY_HOST to reach them
+# elsewhere, e.g. by container name from a dev container
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ureport',
         'USER': 'ureport',
         'PASSWORD': 'nyaruka',
-        'HOST': 'localhost',
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
         'PORT': '',
         'ATOMIC_REQUESTS': True,
         'OPTIONS': {
@@ -60,7 +64,7 @@ DATABASES = {
     }
 }
 
-VALKEY_HOST = "localhost"
+VALKEY_HOST = os.environ.get("VALKEY_HOST", "localhost")
 VALKEY_PORT = 6379
 VALKEY_DB = '1'
 
