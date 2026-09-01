@@ -47,15 +47,11 @@ msgstr "Файл зображення"
 msgid "The human readable name for this content type"
 msgstr "Читабельна назва контенту такого типу"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Плагін для ідентифікації цього типу контенту, що використовується з тегами шаблонів"
+msgstr "Слаг для ідентифікації цього типу контенту, що використовується з тегами шаблонів"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Опис того, де знаходиться цей тип контенту на сайті, і як він відображатиметься"
+msgstr "Опис того, де цей тип контенту використовується на сайті і як він відображатиметься"
 
 msgid "Whether this content should include a title"
 msgstr "Чи має цей контент включати заголовок"
@@ -295,25 +291,9 @@ msgstr "Файл зображення"
 msgid "The API token for this backend"
 msgstr "Токен API для цього бекенду"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"      Вас було запрошено до %(org_name)s.\n"
-"      <br/>\n"
-"      Щоб прийняти запрошення, <a href='%(host)s%(join_url)s'>натисніть сюди</a>.\n"
-"  "
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Вас запрошено приєднатися до %(org_name)s.\n      <br />\n      Щоб прийняти запрошення, <a href='%(host)s%(join_url)s'>натисніть сюди</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Вас запрошено приєднатися до {{org.name}}."
@@ -345,10 +325,8 @@ msgstr "Вам потрібен хоча б один адміністратор"
 msgid "Select your Organization"
 msgstr "Оберіть організацію"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "Ваш обліковий запис не пов'язаний з жодною організацією. Будь ласка, зв'яжіться із адмінстратором"
+msgstr "Ваш обліковий запис не пов'язаний з жодною організацією. Будь ласка, зв'яжіться з адміністратором."
 
 msgid "Your Organization"
 msgstr "Ваша організація"
@@ -705,7 +683,7 @@ msgid "Form"
 msgstr "Форма"
 
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -759,10 +737,8 @@ msgstr "Організації"
 msgid "Images"
 msgstr "Зображення"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Вакансії"
+msgstr "Завдання синхронізації"
 
 msgid "About"
 msgstr "Про нас"
@@ -879,7 +855,7 @@ msgid "Backends"
 msgstr "Бекенди"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Ви можете повторно надіслати запрошення за допомогою поля вище"
 
 msgid "Add os Select tags"
 msgstr "Додати os Виберіть теги"
@@ -924,10 +900,8 @@ msgstr "Синхронізація не планується, не активн�
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Не планується синхронізація, немає потоку для опитування"
 
-#, fuzzy
-#| msgid "Previous"
 msgid "Preview results"
-msgstr "Попередній"
+msgstr "Попередній перегляд результатів"
 
 msgid "Refresh Results"
 msgstr "Оновити результати"
@@ -1016,10 +990,8 @@ msgstr "Яким чином Вам хотілося б приєднатися?"
 msgid "Text"
 msgstr "Текст"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "Завантажити звіт"
+msgstr "Або завантажте додаток U-Report:"
 
 msgid "PAGE"
 msgstr "СТОРІНКА"
@@ -1031,13 +1003,13 @@ msgid "No results found"
 msgstr "За Вашим запитом нічого не знайдено."
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "Попередній перегляд неопублікованого опитування. Натисніть «Редагувати», щоб опублікувати його"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "Опубліковане опитування. Натисніть «Редагувати», щоб скасувати публікацію"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "Опитування ще не синхронізоване, щоб відображатися на загальнодоступному сайті"
 
 msgid "RESPONDERS"
 msgstr "РЕСПОНДЕНТИ"
@@ -1302,39 +1274,35 @@ msgstr "+ Нова історія"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s працює, %(stale)s застаріло, %(failing)s з помилками"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "остання перевірка %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "ще не перевірено"
 
 msgid "All job types"
-msgstr ""
+msgstr "Усі типи завдань"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Усі статуси"
 
 msgid "Filter"
-msgstr ""
+msgstr "Фільтрувати"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Локація"
+msgstr "Дії"
 
 msgid "Pause"
-msgstr ""
+msgstr "Призупинити"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Результати"
+msgstr "Відновити"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Примусова повторна синхронізація"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1491,7 +1459,7 @@ msgid "Whether this page should be active to the public"
 msgstr "Чи повинна ця сторінка бути загальнодоступною?"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Слаг може містити лише літери, цифри, підкреслення та дефіси"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Це OSM id для цього адміністративного кордону"
@@ -1541,10 +1509,8 @@ msgstr "Назва категорії опитування"
 msgid "Poll Categories"
 msgstr "Категорії опитувань"
 
-#, fuzzy
-#| msgid "Whether this bot should be shown to the public"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Чи показувати цей бот на загальнодоступній сторінці?"
+msgstr "Чи має це опитування бути видимим/прихованим на загальнодоступному сайті"
 
 msgid "The Flow this Poll is based on"
 msgstr "Flow, з яким пов'язане опитування"
@@ -1741,17 +1707,16 @@ msgstr "Вибір прихованих діаграм"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Виберіть розбивку діаграм, щоб приховати це запитання "
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Зображення до категорій"
+msgstr "Категорія %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Мітка категорії з бекенду (наприклад, RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Відображення %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "Мітка для відображення категорії на загальнодоступному сайті"
@@ -1766,14 +1731,13 @@ msgstr "Востаннє результати сихронізовано %(time)
 msgid "Synced"
 msgstr "Синхронізовано"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "Триває запловананий процес сихронізації"
+msgstr "Триває синхронізація... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Редагувати опитування для потоку [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1828,13 +1792,11 @@ msgstr "Telegram номер, який користувачі використо�
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Viber номер, який користувачі використовуватимуть для контакту з U-Report, якщо такий є"
 
-#, fuzzy
-#| msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Telegram номер, який користувачі використовуватимуть для контакту з U-Report, якщо такий є"
+msgstr "Посилання на бот Line, яке користувачі використовуватимуть для зв'язку з U-Report, якщо він у вас є"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Чи доступний додаток U-Report."
 
 msgid "The join button text"
 msgstr "Приєднатись"
@@ -1845,18 +1807,14 @@ msgstr "Щоб приєднатись, надішліть СТАРТ у теле
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Долучайся до U-report, твоя думка важлива!"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Місце знаходження для цієї відповіді"
+msgstr "Посилання для зовнішніх історій."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Короткий текст для додаткового меню."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Місце знаходження для цієї відповіді"
+msgstr "Посилання для додаткового меню."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "ID відео на YouTube, де пояснено, як приєнатися до U-Report"
@@ -1915,10 +1873,8 @@ msgstr "id Facebook Pixel цієї організації (вибірково)"
 msgid "The Instagram username for this organization"
 msgstr "Ім'я організації в Instagram "
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Ім'я організації в Instagram "
+msgstr "Ім'я користувача Instagram, яке показуватиметься на сторінці приєднання як пряме посилання для цієї організації"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "id віджету Instagram з lightwidget.com"
@@ -1942,7 +1898,7 @@ msgid "Whether to activate an extra gender."
 msgstr "Чи активувати \"додаткову\" стать?"
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Якщо вказано, відвідувачів загальнодоступного сайту буде перенаправлено на цю URL-адресу."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Чи потрібно приховувати діаграми розбивки залученння?"
@@ -2009,55 +1965,53 @@ msgstr "Активні користувачі"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Завдання #%(job_id)d наразі виконується, спробуйте ще раз за мить"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Завдання #%(job_id)d призупинено"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Завдання #%(job_id)d відновлено"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Завдання #%(job_id)d не призупинене"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Завдання #%(job_id)d буде повторно синхронізовано з нуля під час наступного запуску"
 
 msgid "Something to trigger localizations"
 msgstr "Щось для запуску локалізації"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "Локація"
+msgstr "Усі локації"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Східна Азія та Тихоокеанський регіон"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Східна та Південна Африка"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Європа та Центральна Азія"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Латинська Америка та Карибський басейн"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Близький Схід та Північна Африка"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Південна Азія"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Країни національних комітетів ЮНІСЕФ"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Західна та Центральна Африка"
 
 #~ msgid "Color Choice"
 #~ msgstr "Вибір кольору"

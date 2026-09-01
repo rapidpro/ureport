@@ -46,13 +46,9 @@ msgstr "O ficheiro de imagem a ser usado"
 msgid "The human readable name for this content type"
 msgstr "O nome legível para este tipo de conteúdo"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "O espaçador usado para identificar esse tipo de conteúdo,usado com modelo de etiquetas"
+msgstr "O slug para identificar este tipo de conteúdo, usado com as etiquetas de modelo"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
 msgstr "Uma descrição de onde este tipo de conteúdo é usado no site e como será exibido"
 
@@ -337,8 +333,6 @@ msgstr "Você deve ter pelo menos um administrador"
 msgid "Select your Organization"
 msgstr "Escolha a sua Organização"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
 msgstr "A sua conta não está associada a uma organização. Por favor contacte o administrador."
 
@@ -700,7 +694,7 @@ msgid "Form"
 msgstr "Formulário"
 
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -754,10 +748,8 @@ msgstr "Organizações"
 msgid "Images"
 msgstr "Imagens"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Empregos"
+msgstr "Tarefas de Sincronização"
 
 msgid "About"
 msgstr "Sobre Nós"
@@ -872,7 +864,7 @@ msgid "Backends"
 msgstr "Backends"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Pode reenviar um convite usando o campo acima"
 
 msgid "Add os Select tags"
 msgstr "Adicionar os Select tags"
@@ -1005,10 +997,8 @@ msgstr "Como você gostaria de fazer parte?"
 msgid "Text"
 msgstr "Texto"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "Baixar Relatório"
+msgstr "Ou descarregue a aplicação U-Report:"
 
 msgid "PAGE"
 msgstr "PÁGINA"
@@ -1292,39 +1282,35 @@ msgstr "+ Nova história"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s em execução, %(stale)s desatualizadas, %(failing)s com falhas"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "última verificação %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "ainda não verificada"
 
 msgid "All job types"
-msgstr ""
+msgstr "Todos os tipos de tarefa"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Todos os estados"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Localização"
+msgstr "Ações"
 
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Resultados"
+msgstr "Retomar"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Forçar ressincronização"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1481,7 +1467,7 @@ msgid "Whether this page should be active to the public"
 msgstr "Se esta página deve ativa para o público"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "O slug só pode conter letras, números, sublinhados e hífenes"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Este é o id OSM para este limite administrativo"
@@ -1531,10 +1517,8 @@ msgstr "O nome da categoria deste inquérito"
 msgid "Poll Categories"
 msgstr "Categorias de Inquérito"
 
-#, fuzzy
-#| msgid "Whether this bot should be shown to the public"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Se este bot deve aparecer na página de destino"
+msgstr "Se este inquérito deve estar visível/oculto no site público"
 
 msgid "The Flow this Poll is based on"
 msgstr "O fluxo na qual este inquérito é baseado em"
@@ -1731,17 +1715,16 @@ msgstr "Escolha de gráficos ocultos"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Selecionar a desagregação dos gráficos a ocultar para esta pergunta ao público"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Categoria de Imagens"
+msgstr "Categoria %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "A etiqueta da categoria a partir do backend (como o RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Exibição %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "A etiqueta a apresentar da categoria no sítio público"
@@ -1756,14 +1739,13 @@ msgstr "Últimos resultados atualizados a %(time)s minutos atrás"
 msgid "Synced"
 msgstr "Sincronizado"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "Sincronização programada atualmente em curso..."
+msgstr "Sincronização atualmente em curso... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Editar Inquérito para o fluxo [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1822,7 +1804,7 @@ msgid "The Line bot link that users will use to contact U-Report if you have one
 msgstr "O link do bot de linha que os utilizadores utilizarão para contactar o U-Report, se tiver um"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Se existe uma aplicação U-Report disponível."
 
 msgid "The join button text"
 msgstr "O texto do botão juntar"
@@ -1833,18 +1815,14 @@ msgstr "O texto curto usado para direcionar os visitantes para se juntar ao SMS 
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "O texto de apelo à ação para aderir na secção superior do U-Report"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "A província para esta resposta"
+msgstr "O link para as histórias externas."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Um texto curto para o menu extra."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "A província para esta resposta"
+msgstr "O link para o menu extra."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "O vídeo ID do YouTube sobre como aderir à secção U-Report"
@@ -1903,10 +1881,8 @@ msgstr "O ID numérico para o Facebook Pixel dessa org (opcional)"
 msgid "The Instagram username for this organization"
 msgstr "O nome de utlilizador do Instagram para esta organização"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "O nome de utlilizador do Instagram para esta organização"
+msgstr "O nome de utilizador do Instagram a ser mostrado na página de adesão como deeplink para esta organização"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "O ID no Instagram widget do lightwidget.com"
@@ -1930,7 +1906,7 @@ msgid "Whether to activate an extra gender."
 msgstr "Se deve ativar um gênero extra."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Se definido, os utilizadores públicos que visitem o site serão redirecionados para este URL."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Se pretende ocultar os gráficos de repartição do compromisso."
@@ -1997,55 +1973,53 @@ msgstr "Usuários ativos"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "A tarefa #%(job_id)d está a ser processada, tente novamente dentro de momentos"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Tarefa #%(job_id)d pausada"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Tarefa #%(job_id)d retomada"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "A tarefa #%(job_id)d não está pausada"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "A tarefa #%(job_id)d será ressincronizada do zero na próxima execução"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para inicializar as localizações"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "Localização"
+msgstr "Todas as localizações"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Ásia Oriental e Pacífico"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "África Oriental e Austral"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Europa e Ásia Central"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "América Latina e Caraíbas"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Médio Oriente e Norte de África"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Ásia do Sul"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Países dos Comités Nacionais da UNICEF"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "África Ocidental e Central"
 
 #~ msgid "Color Choice"
 #~ msgstr "Escolha de Cor"

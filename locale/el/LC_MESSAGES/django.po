@@ -47,15 +47,11 @@ msgstr "Αρχείο εικόνας"
 msgid "The human readable name for this content type"
 msgstr "Τίτλος περιεχομένου"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
 msgstr "Το όνομα για την αναγνώριση αυτού του τύπου περιεχομένου, που χρησιμοποιείται με τις ετικέτες του προτύπου"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Μία περιγραφή για το πού χρησιμοποιείται αυτός ο τύπος περιεχομένου στον ιστότοπο και  πώς θα εμφανίζεται"
+msgstr "Μια περιγραφή για το πού χρησιμοποιείται αυτός ο τύπος περιεχομένου στον ιστότοπο και πώς θα εμφανίζεται"
 
 msgid "Whether this content should include a title"
 msgstr "Εάν αυτό το περιεχόμενο πρέπει να περιλαμβάνει τίτλο"
@@ -295,24 +291,9 @@ msgstr "Το αρχείο εικόνας"
 msgid "The API token for this backend"
 msgstr "Το διακριτικό API για αυτό το backend"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Έχετε προσκληθεί για να συμμετάσχετε . %(org_name)s.\n"
-"<br/>\n"
-"<a href='%(host)s%(join_url)s'>Κλικάρετε εδώ</a> προκειμένου να αποδεχτείτε την πρόσκληση"
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Έχετε προσκληθεί να συμμετάσχετε στο %(org_name)s.\n      <br />\n      Για να αποδεχτείτε την πρόσκληση, <a href='%(host)s%(join_url)s'>κάντε κλικ εδώ</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Έχετε προσκληθεί να εγγραφείτε στο {{org.name}}."
@@ -344,10 +325,8 @@ msgstr "Πρέπει να έχετε τουλάχιστον έναν διαχε�
 msgid "Select your Organization"
 msgstr "Επιλέξτε τον οργανισμό σας"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "Ο λογαριασμός σας δεν σχετίζεται με κάποιον οργανισμό. Επικοινωνήστε με τον διαχειριστή."
+msgstr "Ο λογαριασμός σας δεν σχετίζεται με κάποιον οργανισμό. Παρακαλούμε επικοινωνήστε με τον διαχειριστή."
 
 msgid "Your Organization"
 msgstr "Ο οργανισμός σου"
@@ -697,7 +676,7 @@ msgid "Form"
 msgstr "Φόρμα"
 
 msgid "Save"
-msgstr ""
+msgstr "Αποθήκευση"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -751,10 +730,8 @@ msgstr "Οργ."
 msgid "Images"
 msgstr "Εικόνες"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Θέσεις εργασίας"
+msgstr "Εργασίες συγχρονισμού"
 
 msgid "About"
 msgstr "Σχετικά με εμάς"
@@ -869,7 +846,7 @@ msgid "Backends"
 msgstr "backends"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Μπορείτε να στείλετε ξανά μια πρόσκληση χρησιμοποιώντας το παραπάνω πεδίο"
 
 msgid "Add os Select tags"
 msgstr "Προσθέστε ή επιλέξτε ετικέτες"
@@ -910,10 +887,8 @@ msgstr "Δεν προγραμματίζονται συγχρονισμοί, δε
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Δεν υπάρχει προγραμματισμός για τους συγχρονισμούς, δεν υπάρχει ροή για την δημοσκόπηση"
 
-#, fuzzy
-#| msgid "Previous"
 msgid "Preview results"
-msgstr "Προηγούμενο"
+msgstr "Προεπισκόπηση αποτελεσμάτων"
 
 msgid "Refresh Results"
 msgstr "Ανανέωση αποτελεσμάτων"
@@ -1002,10 +977,8 @@ msgstr "Πώς θα ήθελες να εγγραφείς;"
 msgid "Text"
 msgstr "Κείμενο"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "Λήψη αναφοράς"
+msgstr "Ή κατεβάστε την εφαρμογή U-Report:"
 
 msgid "PAGE"
 msgstr "Σελίδα"
@@ -1017,13 +990,13 @@ msgid "No results found"
 msgstr "Δεν βρέθηκαν αποτελέσματα"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "Προεπισκόπηση μη δημοσιευμένης δημοσκόπησης. Κάντε κλικ στην Επεξεργασία για να τη δημοσιεύσετε"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "Δημοσιευμένη δημοσκόπηση. Κάντε κλικ στην Επεξεργασία για να αναιρέσετε τη δημοσίευσή της"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "Η δημοσκόπηση δεν έχει συγχρονιστεί ακόμα ώστε να εμφανίζεται στο κοινό"
 
 msgid "RESPONDERS"
 msgstr "ΑΠΑΝΤΗΣΕΙΣ"
@@ -1284,39 +1257,35 @@ msgstr "+ Νέα δημοσίευση"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s σε εκτέλεση, %(stale)s σε καθυστέρηση, %(failing)s αποτυγχάνουν"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "τελευταίος έλεγχος %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "δεν έχει ελεγχθεί ακόμα"
 
 msgid "All job types"
-msgstr ""
+msgstr "Όλοι οι τύποι εργασιών"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Όλες οι καταστάσεις"
 
 msgid "Filter"
-msgstr ""
+msgstr "Φιλτράρισμα"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "ΤΟΠΟΘΕΣΙΑ"
+msgstr "Ενέργειες"
 
 msgid "Pause"
-msgstr ""
+msgstr "Παύση"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Αποτελέσματα"
+msgstr "Συνέχιση"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Επιβολή επανασυγχρονισμού"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1473,7 +1442,7 @@ msgid "Whether this page should be active to the public"
 msgstr "Εάν αυτή η σελίδα πρέπει να είναι ενεργή για το κοινό"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Το slug μπορεί να περιέχει μόνο γράμματα, αριθμούς, κάτω παύλες και παύλες"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Αυτό είναι το OSM id για αυτό το διοικητικό όριο"
@@ -1523,10 +1492,8 @@ msgstr "Κατηγορία δημοσκοπήσεων"
 msgid "Poll Categories"
 msgstr "Κατηγορίες Δημοσκοπήσεων"
 
-#, fuzzy
-#| msgid "Whether this bot should be shown to the public"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Εάν αυτό το bot θα πρέπει να εμφανίζεται στο κοινό"
+msgstr "Εάν αυτή η δημοσκόπηση θα εμφανίζεται ή θα είναι κρυφή στον δημόσιο ιστότοπο"
 
 msgid "The Flow this Poll is based on"
 msgstr "Η Ροή στην οποία βασίζεται αυτή η Δημοσκόπηση"
@@ -1723,17 +1690,16 @@ msgstr "Επιλογή κρυφών γραφημάτων"
 msgid "Choose the charts breakdown to hide to for this question to the public"
 msgstr "Επιλέξτε την ανάλυση των γραφημάτων για απόκρυψη για αυτήν την ερώτηση στο κοινό"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Εικόνες κατηγορίας"
+msgstr "Κατηγορία %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Η ετικέτα της κατηγορίας από το backend (όπως το RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Εμφάνιση %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "Η ετικέτα για την εμφάνιση της κατηγορίας στον δημόσιο ιστότοπο"
@@ -1748,14 +1714,13 @@ msgstr "Τα τελευταία αποτελέσματα συγχρονίστη�
 msgid "Synced"
 msgstr "Συγχρονισμένος"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "Προγραμματισμένος συγχρονισμός σε εξέλιξη."
+msgstr "Συγχρονισμός σε εξέλιξη... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Επεξεργασία δημοσκόπησης για τη ροή [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1810,13 +1775,11 @@ msgstr "Το Telegram bot που θα χρησιμοποιήσουν οι χρή
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Το όνομα χρήστη viber που θα χρησιμοποιήσουν οι χρήστες για να επικοινωνήσουν με το U-Report, αν έχετε"
 
-#, fuzzy
-#| msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Το Telegram bot που θα χρησιμοποιήσουν οι χρήστες για να επικοινωνήσουν με το U-Report εάν έχετε"
+msgstr "Ο σύνδεσμος του bot στο Line που θα χρησιμοποιούν οι χρήστες για να επικοινωνούν με το U-Report, εάν διαθέτετε"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Εάν υπάρχει διαθέσιμη εφαρμογή U-Report."
 
 msgid "The join button text"
 msgstr "Το κείμενο του κουμπιού Εγγραφή"
@@ -1827,18 +1790,14 @@ msgstr "Το σύντομο κείμενο που χρησιμοποιείται
 msgid "The call to action text to join on the top section on U-Report"
 msgstr "Το κείμενο παρότρυνσης για συμμετοχή στην επάνω ενότητα του U-Report"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Η τοποθεσία γι΄αυτή την απάντηση"
+msgstr "Ο σύνδεσμος για τις εξωτερικές δημοσιεύσεις."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Ένα σύντομο κείμενο για το επιπλέον μενού."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Η τοποθεσία γι΄αυτή την απάντηση"
+msgstr "Ο σύνδεσμος για το επιπλέον μενού."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "Το id του Youtube βίντεο για το πώς να συμμετάσχετε στην ενότητα U-Report"
@@ -1897,10 +1856,8 @@ msgstr "Το id του Facebook Pixel για αυτόν τον οργανισμ�
 msgid "The Instagram username for this organization"
 msgstr "Το όνομα χρήστη στο Instagram γι' αυτόν τον οργανισμό"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Το όνομα χρήστη στο Instagram γι' αυτόν τον οργανισμό"
+msgstr "Το όνομα χρήστη στο Instagram που θα εμφανίζεται στη σελίδα εγγραφής ως deeplink γι' αυτόν τον οργανισμό"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Το widget id στο Instagram από το lightwidget.com"
@@ -1924,7 +1881,7 @@ msgid "Whether to activate an extra gender."
 msgstr "Εάν θα ενεργοποιήσετε ένα επιπλέον φύλο"
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Εάν οριστεί, οι επισκέπτες του ιστότοπου θα ανακατευθύνονται σε αυτή τη διεύθυνση URL."
 
 msgid "Whether to hide the engagement breakdown charts."
 msgstr "Εάν θα πρέπει να κρύψετε τα γραφήματα ανάλυσης της σύνδεσης."
@@ -1991,55 +1948,53 @@ msgstr "Ενεργοί Χρήστες"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Η εργασία #%(job_id)d βρίσκεται σε επεξεργασία, δοκιμάστε ξανά σε λίγο"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Η εργασία #%(job_id)d τέθηκε σε παύση"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Η εργασία #%(job_id)d συνεχίστηκε"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Η εργασία #%(job_id)d δεν βρίσκεται σε παύση"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Η εργασία #%(job_id)d θα συγχρονιστεί ξανά από την αρχή στην επόμενη εκτέλεσή της"
 
 msgid "Something to trigger localizations"
 msgstr "Κάτι για να ενεργοποιήσει τους εντοπισμούς"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "ΤΟΠΟΘΕΣΙΑ"
+msgstr "Όλες οι τοποθεσίες"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Ανατολική Ασία και Ειρηνικός"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Ανατολική και Νότια Αφρική"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Ευρώπη και Κεντρική Ασία"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Λατινική Αμερική και Καραϊβική"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Μέση Ανατολή και Βόρεια Αφρική"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Νότια Ασία"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Χώρες των Εθνικών Επιτροπών της UNICEF"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Δυτική και Κεντρική Αφρική"
 
 #~ msgid "Color Choice"
 #~ msgstr "Επιλογή χρώματος"

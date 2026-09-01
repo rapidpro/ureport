@@ -46,15 +46,11 @@ msgstr "Bildefilen som skal benyttes"
 msgid "The human readable name for this content type"
 msgstr "Det menneskelige lesbare navnet for denne innholdstypen"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "URL-kode til å identifisere denne innholdstypen, brukt sammen med template tags"
+msgstr "URL-koden som identifiserer denne innholdstypen, brukt sammen med template tags"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "En beskrivelse av hvor denne innholdstypen er brukt på siden, og hvordan det vil se ut"
+msgstr "En beskrivelse av hvor denne innholdstypen brukes på siden, og hvordan den vil vises"
 
 msgid "Whether this content should include a title"
 msgstr "Innholdet skal ha en tittel"
@@ -135,10 +131,10 @@ msgid "Content Types"
 msgstr "Innholdstyper"
 
 msgid "Link Slug"
-msgstr ""
+msgstr "URL-kode for lenke"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "URL-koden eller ordet som skal brukes i lenken til siden"
 
 msgid "Content Blocks"
 msgstr "Innholdsblokker"
@@ -294,24 +290,9 @@ msgstr "Bildefil"
 msgid "The API token for this backend"
 msgstr "API nøkkel for denne backend-serveren "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Du har blitt invitert til å bli med i %(org_name)s.\n"
-"<br/>\n"
-"For å akseptere invitasjonen, <a href='%(host)s%(join_url)s'>klikk her</a>."
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Du har blitt invitert til å bli med i %(org_name)s.\n      <br />\n      For å akseptere invitasjonen, <a href='%(host)s%(join_url)s'>klikk her</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Du er invitert til å bli med i {{org.navn}}."
@@ -343,10 +324,8 @@ msgstr "Du må ha minst én administrator"
 msgid "Select your Organization"
 msgstr "Velg din Organisasjon"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "Kontoen din er ikke tilknyttet en organisasjon. Vennligst Kontakt administratoren."
+msgstr "Kontoen din er ikke tilknyttet en organisasjon. Vennligst kontakt administratoren."
 
 msgid "Your Organization"
 msgstr "Din Organisasjon"
@@ -387,7 +366,7 @@ msgid "Tasks"
 msgstr "Oppgaver"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "Kun PDF-filer støttes."
 
 msgid "The title for this story"
 msgstr "Tittel for denne historien"
@@ -408,7 +387,7 @@ msgid "A link to an mp3 file to publish on this story"
 msgstr "Lenke til mp3 fil som skal publiseres med denne historien"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "PDF-rapporten som skal legges ved"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id til YouTube-video som skal linkes til denne historien (dette er teksten som kommer etter \"v=\" og før \"&\" i YouTube videoens URL)"
@@ -447,13 +426,11 @@ msgstr "Bilde som skal vises på historiesiden og i forhåndsvisninger. (valgfri
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Bilde som skal vises på historiesiden og i forhåndsvisninger (valgfritt)"
 
-#, fuzzy
-#| msgid "The name of this category"
 msgid "The name of this tag"
-msgstr "Navnet på denne kategorien"
+msgstr "Navnet på denne emneknaggen"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 msgid "Remove Item?"
 msgstr "Vil du slette objektet?"
@@ -700,7 +677,7 @@ msgid "Form"
 msgstr "Skjema"
 
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -719,7 +696,7 @@ msgid "Opinions"
 msgstr "Meninger"
 
 msgid "Bots"
-msgstr ""
+msgstr "Boter"
 
 msgid "Users"
 msgstr "Brukere"
@@ -731,16 +708,16 @@ msgid "Pages"
 msgstr "Sider"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "Landingssider"
 
 msgid "Jobs"
 msgstr "Jobber"
 
 msgid "Tags"
-msgstr ""
+msgstr "Emneknagger"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "Partnerlogoer"
 
 msgid "Categories Images"
 msgstr "Kategori Bilder"
@@ -754,10 +731,8 @@ msgstr "Organisasjoner"
 msgid "Images"
 msgstr "Bilder"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Jobber"
+msgstr "Synkroniseringsjobber"
 
 msgid "About"
 msgstr "Om oss"
@@ -765,10 +740,8 @@ msgstr "Om oss"
 msgid "Engagement"
 msgstr "Engasjement"
 
-#, fuzzy
-#| msgid "Reporters"
 msgid "Reports"
-msgstr "U-Reporters"
+msgstr "Rapporter"
 
 msgid "Category Images"
 msgstr "Bildekategorier"
@@ -862,10 +835,10 @@ msgid "Back"
 msgstr "Tilbake"
 
 msgid "Select bots"
-msgstr ""
+msgstr "Velg boter"
 
 msgid "View public page"
-msgstr ""
+msgstr "Vis offentlig side"
 
 msgid "LATEST NOTIFICATIONS"
 msgstr "SISTE VARSLER"
@@ -874,10 +847,10 @@ msgid "Backends"
 msgstr "Backends"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Du kan sende en invitasjon på nytt ved å bruke feltet ovenfor"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Legg til eller velg emneknagger"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -897,15 +870,11 @@ msgstr[1] "%(counter)s undersøkelsesspørsmål"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr "Nye undersøkelser synkroniseres hvert 10 minutt"
 
-#, fuzzy
-#| msgid "No longer scheduling syncs, runs archived"
 msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr "Planlegger ikke lenger synkroniseringer, sykroniserte løp er arkivert"
+msgstr "Planlegger ikke lenger synkroniseringer for gamle undersøkelser, løpene er arkivert"
 
-#, fuzzy
-#| msgid "Main poll syncs scheduled every 10min"
 msgid "Main poll syncs scheduled every 20min"
-msgstr "Hovedundersøkelsen synkroniseres hvert 10 minutt"
+msgstr "Hovedundersøkelsen synkroniseres hvert 20. minutt"
 
 msgid "Recent poll syncs scheduled every 60min"
 msgstr "Nylige undersøkelser synkronieres hvert 60 minutt"
@@ -919,16 +888,14 @@ msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for undersøkelsen"
 
-#, fuzzy
-#| msgid "Previous"
 msgid "Preview results"
-msgstr "Forrige"
+msgstr "Forhåndsvis resultater"
 
 msgid "Refresh Results"
 msgstr "Oppdater resultatene"
 
 msgid "Partners"
-msgstr ""
+msgstr "Partnere"
 
 msgid "MORE POLLS"
 msgstr "FLERE UNDERSØKELSER"
@@ -952,10 +919,10 @@ msgid "LIST"
 msgstr "LISTE"
 
 msgid "Send"
-msgstr ""
+msgstr "Send"
 
 msgid "to"
-msgstr ""
+msgstr "til"
 
 msgid "LATEST OPINION"
 msgstr "NYESTE ALTERNATIV  "
@@ -982,10 +949,10 @@ msgid "AGES"
 msgstr "ALDER"
 
 msgid "Available bots"
-msgstr ""
+msgstr "Tilgjengelige boter"
 
 msgid "More bots"
-msgstr ""
+msgstr "Flere boter"
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Bli en U-Reporter, din stemme betyr noe. "
@@ -1012,10 +979,10 @@ msgid "Text"
 msgstr "Tekst"
 
 msgid "Or download the U-Report App:"
-msgstr ""
+msgstr "Eller last ned U-Report-appen:"
 
 msgid "PAGE"
-msgstr ""
+msgstr "SIDE"
 
 msgid "SEARCH"
 msgstr "SØK"
@@ -1024,26 +991,22 @@ msgid "No results found"
 msgstr "Ingen resultater"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "Forhåndsvisning av upublisert undersøkelse. Klikk Rediger for å publisere den"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "Publisert undersøkelse. Klikk Rediger for å avpublisere den"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "Undersøkelsen er ikke ferdig synkronisert og kan ennå ikke vises offentlig"
 
-#, fuzzy
-#| msgid "RESPONSES"
 msgid "RESPONDERS"
-msgstr "SVAR"
+msgstr "RESPONDENTER"
 
 msgid "RESPONSE RATE"
 msgstr "SVARPROSENT"
 
-#, fuzzy
-#| msgid "TOTAL RESPONSES"
 msgid "TOTAL RESPONDERS"
-msgstr "TOTALT ANTALL SVAR"
+msgstr "TOTALT ANTALL RESPONDENTER"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1065,18 +1028,16 @@ msgid "Written by:"
 msgstr "Skrevet av:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "Ingen rapporter er publisert ennå"
 
-#, fuzzy
-#| msgid "U-REPORTERS"
 msgid "REPORT"
-msgstr "U-REPORTERS"
+msgstr "RAPPORT"
 
 msgid "STORY"
-msgstr ""
+msgstr "HISTORIE"
 
 msgid "Download Report"
-msgstr ""
+msgstr "Last ned rapport"
 
 msgid "Even"
 msgstr "Til og med"
@@ -1093,10 +1054,8 @@ msgstr "Kommune"
 msgid "Participation Level"
 msgstr "Deltakelsenivå"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "Svar"
+msgstr "Respondenter"
 
 msgid "Reporters in"
 msgstr "U-Reporters i"
@@ -1141,7 +1100,7 @@ msgid "FILTER RESULTS"
 msgstr "FILTRER SVAR"
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "Diagrammer er kun synlige for innloggede administratorer"
 
 msgid "Export and Share"
 msgstr "Eksporter og del"
@@ -1159,7 +1118,7 @@ msgid "Custom pages"
 msgstr "Egendefinerte sider"
 
 msgid "Landing pages"
-msgstr ""
+msgstr "Landingssider"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Se hvor mange barn og unge som ønsker at vi skal høre akkurat deres stemme som bidrar til en positiv endring."
@@ -1299,39 +1258,35 @@ msgstr "+ Ny historie"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s kjører, %(stale)s har stoppet opp, %(failing)s feiler"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "sist sjekket %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "ikke sjekket ennå"
 
 msgid "All job types"
-msgstr ""
+msgstr "Alle jobbtyper"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Alle statuser"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtrer"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Bosted"
+msgstr "Handlinger"
 
 msgid "Pause"
-msgstr ""
+msgstr "Sett på pause"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Resultater"
+msgstr "Gjenoppta"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Tving ny synkronisering"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1341,7 +1296,7 @@ msgid "Flag"
 msgstr "Flagg"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "Om partnerlogo"
 
 msgid "The organization to which the image will be used"
 msgstr "Bildet som vil brukes sammen med organisasjonen"
@@ -1352,71 +1307,47 @@ msgstr "En kort  beskrivelse av dette bildet"
 msgid "Image type"
 msgstr "Bildetype"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
+msgstr "Prioritetsnummeret for dette bildet blant andre på en liste, høy prioritet kommer først"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this bot is part of"
-msgstr "Organisasjonen denne undersøkelsen tilhører"
+msgstr "Organisasjonen denne boten tilhører"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
+msgstr "Om denne boten vises på hjemmesiden, kun opptil 3 med høyest prioritet vises"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "Organisasjonen skal vises på landingssiden"
+msgstr "Om denne boten er skjult på offentlige sider bortsett fra landingssider"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this bot"
-msgstr "Tittelen på dette elementet"
+msgstr "Tittelen som skal vises for denne boten"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "Kortkoden, nummeret eller botnavnet til kanalen for denne boten"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The keyword for this bot"
-msgstr "Kategorien til denne historien"
+msgstr "Nøkkelordet for denne boten"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Facebook bot deeplink, optional"
-msgstr "Tittel for denne innholdsblokken, valgfritt"
+msgstr "Dyplenken til Facebook-boten, valgfritt"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Telegram bot deeplink, optional"
-msgstr "Tittel for denne innholdsblokken, valgfritt"
+msgstr "Dyplenken til Telegram-boten, valgfritt"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Viber bot deeplink, optional"
-msgstr "Tittel for denne innholdsblokken, valgfritt"
+msgstr "Dyplenken til Viber-boten, valgfritt"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The WhatsApp bot deeplink, optional"
-msgstr "Tittel for denne innholdsblokken, valgfritt"
+msgstr "Dyplenken til WhatsApp-boten, valgfritt"
 
-#, fuzzy
-#| msgid "A short summary description for this item"
 msgid "A short description for this bot, required"
-msgstr "En kort oppsummerende beskrivelse av dette elementet"
+msgstr "En kort beskrivelse av denne boten, påkrevd"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
+msgstr "Prioritetsnummeret for denne boten blant andre på en liste, høy prioritet kommer først"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot should be shown to the public"
-msgstr "Organisasjonen skal vises på landingssiden"
+msgstr "Om denne boten skal vises offentlig"
 
 msgid "Label"
 msgstr "Etikett"
@@ -1490,43 +1421,29 @@ msgstr "Jobbkilden har blitt lagt til"
 msgid "Your job source has been updated successfully"
 msgstr "Jobbkilden har blitt oppdatert"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this landing page is part of"
-msgstr "Organisasjonen denne undersøkelsen tilhører"
+msgstr "Organisasjonen denne landingssiden tilhører"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this landing page"
-msgstr "Tittelen på dette elementet"
+msgstr "Tittelen som skal vises for denne landingssiden"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The call to action text for this landing page"
-msgstr "Brødteksten for denne historien"
+msgstr "Handlingsoppfordringsteksten for denne landingssiden"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "The slug to use on the link for this landing page"
-msgstr "Organisasjonen skal vises på landingssiden"
+msgstr "URL-koden som skal brukes i lenken til denne landingssiden"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for the landing page"
-msgstr "Brødteksten for denne historien"
+msgstr "Brødteksten for landingssiden"
 
-#, fuzzy
-#| msgid "The image file to use"
 msgid "The image file to use for the page"
-msgstr "Bildefilen som skal benyttes"
+msgstr "Bildefilen som skal brukes for siden"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this page should be active to the public"
-msgstr "Organisasjonen skal vises på landingssiden"
+msgstr "Om denne siden skal være aktiv for offentligheten"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "URL-koden kan kun inneholde bokstaver, tall, understreker og bindestreker"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Dette er OSM id for denne administrative grensen"
@@ -1576,10 +1493,8 @@ msgstr "Navnet på denne avstemningskategorien"
 msgid "Poll Categories"
 msgstr "Avstemningskategorier"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Organisasjonen skal vises på landingssiden"
+msgstr "Om denne undersøkelsen skal være synlig/skjult på den offentlige siden"
 
 msgid "The Flow this Poll is based on"
 msgstr "Flowen denne avstemningen er basert på"
@@ -1639,42 +1554,40 @@ msgid "The featured response message"
 msgstr "Feature responsmelding "
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "Mørk 1-bakgrunn og hvit tekst"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "Lys 1-bakgrunn og svart tekst"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "Mørk 2-bakgrunn og hvit tekst"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "Mørk 3-bakgrunn og svart tekst"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "Vis diagrammer for alder, kjønn og bosted"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "Skjul KUN aldersdiagrammet"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "Skjul KUN kjønnsdiagrammet"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "Skjul KUN bostedsdiagrammet"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "Skjul alders- og kjønnsdiagrammene"
 
-#, fuzzy
-#| msgid "Hide participation stats"
 msgid "Hide Age and Location charts"
-msgstr "Skjul deltakelsesstatistikk"
+msgstr "Skjul alders- og bostedsdiagrammene"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "Skjul kjønns- og bostedsdiagrammene"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "Skjul alders-, kjønns- og bostedsdiagrammene"
 
 msgid "The poll this question is part of"
 msgstr "Undersøkelsen dette spørsmålet er en del av"
@@ -1694,10 +1607,8 @@ msgstr "Nummer på prioritering av dette spørsmålet i undersøkelsen"
 msgid "The Rule this response category is based on"
 msgstr "Regelen denne responskategorien er basert på"
 
-#, fuzzy
-#| msgid "The title for this Poll"
 msgid "Select tags for this poll"
-msgstr "Tittelen for denne undersøkelsen"
+msgstr "Velg emneknagger for denne undersøkelsen"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Din organisasjon har ingen API token konfigurasjon."
@@ -1775,22 +1686,21 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Valg av skjulte diagrammer"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Velg hvilken diagramfordeling som skal skjules for offentligheten for dette spørsmålet"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Bildekategorier"
+msgstr "Kategori %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
 msgstr "Etikett for backend kategori (feks RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Visning %s"
 
 msgid "The label to display of the category on the public site"
 msgstr "Etiketten for kategorien som skal vises på den offentlige siden"
@@ -1805,14 +1715,13 @@ msgstr "Siste resultat ble synkronisert %(time)s siden"
 msgid "Synced"
 msgstr "Synkronisert"
 
-#, fuzzy, python-format
-#| msgid "Scheduled Sync currently in progress..."
+#, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr "Planlagt synkronisering under arbeid..."
+msgstr "Synkronisering pågår... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Rediger undersøkelse for flyten [%(flow_name)s (%(flow_date_hint)s)]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1858,52 +1767,38 @@ msgstr "Organisasjonsopptellingen skal kun ta i betraktning tall fra linken"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "En enkel kode brukere vil benytte for å kontakte U-Report lokalt"
 
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "Nummeret til Whatsapp som brukere vil benytte for å kontakte U-Report"
+msgstr "WhatsApp-nummeret brukere vil benytte for å kontakte U-Report, hvis du har et"
 
-#, fuzzy
-#| msgid "The viber username that users will use to contact U-Report if you have one"
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Report Norge"
+msgstr "Telegram-boten brukere vil benytte for å kontakte U-Report, hvis du har en"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Report Norge"
 
-#, fuzzy
-#| msgid "The viber username that users will use to contact U-Report if you have one"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Report Norge"
+msgstr "Lenken til Line-boten brukere vil benytte for å kontakte U-Report, hvis du har en"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Om det finnes en tilgjengelig U-Report-app."
 
-#, fuzzy
-#| msgid "The font used for normal text"
 msgid "The join button text"
-msgstr "Font til normal tekst"
+msgstr "Teksten på bli med-knappen"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "En enkel tekst som brukes til å veilede besøkende til å bli med i U-Report"
 
-#, fuzzy
-#| msgid "The title of the photos section U-Report homepage"
 msgid "The call to action text to join on the top section on U-Report"
-msgstr "Tittel på bildeseksjonen for U-Report landingssiden"
+msgstr "Handlingsoppfordringsteksten for å bli med i toppseksjonen på U-Report"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Lokasjon for denne responsen "
+msgstr "Lenken til de eksterne historiene."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "En kort tekst for ekstramenyen."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Lokasjon for denne responsen "
+msgstr "Lenken til ekstramenyen."
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "YouTube video ID til video for \"Hvordan bli en U-Reporter\" - seksjonen"
@@ -1932,10 +1827,8 @@ msgstr "Fylkene som kun skal vises på kartet"
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Fylkene som skal vises på kart, brukes til å filtrere undersøkelsesresultater"
 
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
 msgid "The Google Tag Manager ID for this organization"
-msgstr "Google Analytics Tracking ID for denne organisasjonen"
+msgstr "Google Tag Manager-ID-en for denne organisasjonen"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Google Analytics Tracking ID for denne organisasjonen"
@@ -1944,7 +1837,7 @@ msgid "The URL to the Youtube channel for this organization"
 msgstr "URL til YouTube kanalen til denne organisasjonen"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Innholdet i meta-taggen for Facebook-domeneverifisering"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL til Facebook siden til denne organisasjonen"
@@ -1964,10 +1857,8 @@ msgstr "Id for Facebook Pixel til denne organisasjonen (valgfritt)"
 msgid "The Instagram username for this organization"
 msgstr "Instagram brukernavn for denne organisasjonen"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "Instagram brukernavn for denne organisasjonen"
+msgstr "Instagram-brukernavnet som skal vises på bli med-siden som dyplenke for denne organisasjonen"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "Instagram widget id fra lightwidget.com"
@@ -1991,15 +1882,13 @@ msgid "Whether to activate an extra gender."
 msgstr "Aktiver fler kjønnsidentiteter"
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Hvis satt, vil offentlige brukere som besøker siden bli videresendt til denne URL-en."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Om diagrammene for engasjementsfordeling skal skjules."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Brukeren kan logge inn på siden"
+msgstr "Om UNICEF-logoen skal vises i bunnteksten."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO koden for organisasjonen, slik at story widget fra U-Report appen fremvises. For eksempel: BRA, NIG, CMR (bruk GLOBAL hvis U-Reporten er global)."
@@ -2040,10 +1929,8 @@ msgstr "12 måneder"
 msgid "Age"
 msgstr "Alder"
 
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Channels"
-msgstr "Lagre endringer"
+msgstr "Kanaler"
 
 msgid "Location"
 msgstr "Bosted"
@@ -2062,55 +1949,53 @@ msgstr "Aktive brukere"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Jobb #%(job_id)d blir behandlet, prøv igjen om et øyeblikk"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Satte jobb #%(job_id)d på pause"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Gjenopptok jobb #%(job_id)d"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Jobb #%(job_id)d er ikke satt på pause"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Jobb #%(job_id)d vil synkronisere på nytt fra bunnen av ved neste kjøring"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
 
-#, fuzzy
-#| msgid "Location"
 msgid "All locations"
-msgstr "Bosted"
+msgstr "Alle steder"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Øst-Asia og Stillehavet"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Østlige og sørlige Afrika"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Europa og Sentral-Asia"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Latin-Amerika og Karibia"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Midtøsten og Nord-Afrika"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Sør-Asia"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "UNICEFs nasjonalkomitéland"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Vest- og Sentral-Afrika"
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

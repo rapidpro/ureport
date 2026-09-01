@@ -45,15 +45,11 @@ msgstr "Пайдаланылатын сурет файлы"
 msgid "The human readable name for this content type"
 msgstr "Осы контент түрінің адам оқи алатын атауы"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Үлгілік тегтермен бірге пайдаланылатын осы контент түрін сәйкестендіретін слаг"
+msgstr "Үлгі тегтерімен бірге пайдаланылатын, осы контент түрін сәйкестендіретін слаг"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Осы контент түрі сайтта қай жерде қолданылатынының және қалай көрсетілетінінің сипаттамасы"
+msgstr "Осы контент түрінің сайтта қай жерде қолданылатынының және қалай көрсетілетінінің сипаттамасы"
 
 msgid "Whether this content should include a title"
 msgstr "Осы контентте тақырып болуы керек пе"
@@ -294,13 +290,8 @@ msgid "The API token for this backend"
 msgstr "Осы сервер бөлігіне арналған API-токен"
 
 #, python-format
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Сізді %(org_name)s ұйымына қосылуға шақырды.\n      <br />\n      Шақыруды қабылдау үшін <a href='%(host)s%(join_url)s'>осы жерді басыңыз</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Сіз {{org.name}} қосылуға шақыру алдыңыз"
@@ -332,10 +323,8 @@ msgstr "Сізде кем дегенде бір әкімші болуы кере
 msgid "Select your Organization"
 msgstr "Ұйымыңызды таңдаңыз"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "Сіздің аккаунтыңыз ұйыммен байланысты емес. Өтінеміз, әкімшіге хабарласыңыз"
+msgstr "Сіздің аккаунтыңыз ешбір ұйыммен байланыстырылмаған. Өтінеміз, әкімшіге хабарласыңыз."
 
 msgid "Your Organization"
 msgstr "Сіздің ұйымыңыз"
@@ -446,11 +435,8 @@ msgid "Remove Item?"
 msgstr "Нысанды алып тастау керек пе?"
 
 #, python-format
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
+msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
+msgstr "\n    <b>%(object)s</b> алып тастағыңыз келетініне сенімдісіз бе?\n    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Оны алып тастаған соң, ол мәңгілікке жойылады. Қалпына келтірудің ешқандай жолы жоқ"
@@ -459,23 +445,14 @@ msgid "Cancel"
 msgstr "Болдырмау"
 
 #, python-format
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-msgstr[1] ""
+msgid "\n\t %(counter)s result\n\t"
+msgid_plural "\n         %(counter)s results\n        "
+msgstr[0] "\n\t %(counter)s нәтиже\n\t"
+msgstr[1] "\n         %(counter)s нәтиже\n        "
 
 #, python-format
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
+msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
+msgstr "\n\tНәтижелер: %(count)s ішінен %(start)s-%(end)s\n\t"
 
 msgid "Previous"
 msgstr "Алдыңғы"
@@ -502,18 +479,12 @@ msgid "Login Failure"
 msgstr "Жүйеге кіру сәтсіз болды"
 
 #, python-format
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
+msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
+msgstr "\n      Кешіріңіз, қазір жүйеге кіре алмайсыз, себебі %(failed_login_limit)s қате кіру әрекеті тіркелді.\n      "
 
 #, python-format
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
+msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
+msgstr "\n      Қайта кіріп көру үшін %(lockout_timeout)s минут күте тұрыңыз.\n      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Мүмкіндігінше, төмендегі нысанды толтырып, құпия сөзді электрондық пошта арқылы қалпына келтіре аласыз"
@@ -531,11 +502,8 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "Тіркелу кезінде пайдаланған электрондық поштаңызды енгізіңіз, біз сізге құпия сөзіңізді қалпына келтіруге көмектесеміз"
 
 #, python-format
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
+msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
+msgstr "\n  <strong>Құпиясөзіңіздің мерзімі өтті.</strong> Сайт саясаты бойынша әр %(expire_days)s күн сайын жаңа құпиясөз таңдауыңыз керек және құпиясөз алдыңғы %(window_days)s күн ішінде пайдаланылмаған болуы тиіс.\n  "
 
 msgid "New Password"
 msgstr "Жаңа құпия сөз"
@@ -671,7 +639,7 @@ msgid "Form"
 msgstr "Пішін"
 
 msgid "Save"
-msgstr ""
+msgstr "Сақтау"
 
 #, python-format
 msgid "Your new %s has been created."
@@ -725,10 +693,8 @@ msgstr "Ұйымдар"
 msgid "Images"
 msgstr "Суреттер"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Жұмыстар"
+msgstr "Синхрондау жұмыстары"
 
 msgid "About"
 msgstr "Туралы"
@@ -808,20 +774,14 @@ msgstr "ӘРІ ҚАРАЙ ОҚУ"
 msgid "EXPLORE ENGAGEMENT"
 msgstr "ӘРЕКЕТТЕСТІКТІ ЗЕРТТЕУ"
 
-msgid ""
-"\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
+msgid "\n        To add a Twitter job source you are required to get a widget id from twitter.\n      "
+msgstr "\n        Twitter жұмыс көзін қосу үшін twitter-ден виджет идентификаторын алуыңыз керек.\n      "
 
 msgid "Follow this step by step guide"
 msgstr "Осы қадам-қадамдық нұсқаулықты орындаңыз"
 
-msgid ""
-"\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
-"      "
-msgstr ""
+msgid "\n        <div>After you create the widget copy the widget id from the url as shown on</div>\n      "
+msgstr "\n        <div>Виджетті жасағаннан кейін виджет идентификаторын URL-мекенжайдан көрсетілгендей көшіріңіз</div>\n      "
 
 msgid "Back"
 msgstr "Артқа"
@@ -842,13 +802,13 @@ msgid "You can resend an invite using the field above"
 msgstr "Жоғарыдағы кестен пайдалана отырып, шақыруды қайта жібере аласыз"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Тегтерді қосыңыз немесе таңдаңыз"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Қазіргі уақытта %(counter)s жаңа сауалнама синхрондалуда. Сауалнамалар нәтижелері толық синхрондалғаннан кейін жалпыға ашық сайтта көрсетіледі."
+msgstr[1] "Қазіргі уақытта %(counter)s жаңа сауалнама синхрондалуда. Сауалнамалар нәтижелері толық синхрондалғаннан кейін жалпыға ашық сайтта көрсетіледі."
 
 msgid "+ New Poll"
 msgstr "+ Жаңа сауалнама"
@@ -856,8 +816,8 @@ msgstr "+ Жаңа сауалнама"
 #, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s сауалнама сұрағы"
+msgstr[1] "%(counter)s сауалнама сұрағы"
 
 msgid "New poll initial syncs scheduled every 10min"
 msgstr "Жаңа сауалнаманы бастапқы синхрондауды әр 10 минут сайын жасау жоспарланған"
@@ -970,10 +930,8 @@ msgstr "Қалай қосылғыңыз келеді?"
 msgid "Text"
 msgstr "Мәтін"
 
-#, fuzzy
-#| msgid "Download Report"
 msgid "Or download the U-Report App:"
-msgstr "Есепті жүктеп алу"
+msgstr "Немесе U-Report қосымшасын жүктеп алыңыз:"
 
 msgid "PAGE"
 msgstr "ПАРАҚША"
@@ -1196,21 +1154,18 @@ msgid "Dec"
 msgstr "Желтоқсан"
 
 #, python-format
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
+msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
+msgstr "\n            <strong>%(object)s</strong> алып тастағыңыз келетініне сенімдісіз бе?\n          "
 
 #, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s нәтиже"
+msgstr[1] "%(counter)s нәтиже"
 
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
+msgstr "Нәтижелер: %(count)s ішінен %(start)s-%(end)s"
 
 msgid "Error"
 msgstr "Қате"
@@ -1219,62 +1174,51 @@ msgid "Enter Dashboard"
 msgstr "Бақылау тақтасын енгізіңіз"
 
 #, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
+msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
+msgstr "\n                Кешіріңіз, қазір жүйеге кіре алмайсыз, себебі %(failed_login_limit)s қате кіру әрекеті тіркелді.\n              "
 
 #, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
+msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
+msgstr "\n                    Қайта кіріп көру үшін %(lockout_timeout)s минут күте тұрыңыз.\n                  "
 
 #, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
+msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
+msgstr "\n        <strong>Құпиясөзіңіздің мерзімі өтті.</strong> Сайт саясаты бойынша әр %(expire_days)s күн сайын жаңа құпиясөз таңдауыңыз керек және құпиясөз алдыңғы %(window_days)s күн ішінде пайдаланылмаған болуы тиіс.\n      "
 
 msgid "+ New Story"
 msgstr "+ Жаңа әңгіме"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s жұмыс істеп тұр, %(stale)s ескірген, %(failing)s сәтсіз"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "соңғы тексеру: %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "әлі тексерілмеген"
 
 msgid "All job types"
-msgstr ""
+msgstr "Барлық жұмыс түрлері"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Барлық күйлер"
 
 msgid "Filter"
-msgstr ""
+msgstr "Сүзгі"
 
 msgid "Actions"
-msgstr ""
+msgstr "Әрекеттер"
 
 msgid "Pause"
-msgstr ""
+msgstr "Кідірту"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Нәтижелер"
+msgstr "Жалғастыру"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Мәжбүрлеп қайта синхрондау"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1431,7 +1375,7 @@ msgid "Whether this page should be active to the public"
 msgstr "Осы парақша көпшілік үшін белсенді болуы керек пе"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Слаг тек әріптерден, сандардан, астыңғы сызықтардан және дефистерден тұруы мүмкін"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Бұл - осы әкімшілік шекара үшін OSM идентификаторы"
@@ -1596,7 +1540,7 @@ msgid "The Rule this response category is based on"
 msgstr "Жауаптардың осы санатына негіз болған ереже"
 
 msgid "Select tags for this poll"
-msgstr ""
+msgstr "Осы сауалнамаға тегтерді таңдаңыз"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Ұйымыңызда API-токен конфигурациясы жоқ."
@@ -1647,345 +1591,340 @@ msgid "Poll Questions"
 msgstr "Сауалнама сұрақтары"
 
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr ""
+msgstr "Енді сауалнама парақшасында қандай суреттер көрсетілетінін орнатыңыз. (егер бар болса)"
 
 msgid "Include"
-msgstr ""
+msgstr "Қосу"
 
 msgid "Whether to include this question in your public results"
-msgstr ""
+msgstr "Осы сұрақ жалпыға ашық нәтижелерге қосыла ма"
 
 msgid "Priority"
-msgstr ""
+msgstr "Басымдық"
 
 msgid "The priority of this question on the poll page, higher priority comes first"
-msgstr ""
+msgstr "Осы сұрақтың сауалнама парақшасындағы басымдығы, басымдығы жоғарырақ сұрақ бірінші тұрады"
 
 msgid "Ruleset Label"
-msgstr ""
+msgstr "Ережелер жиынының белгісі"
 
 msgid "The label of the ruleset from RapidPro"
-msgstr ""
+msgstr "RapidPro-дағы ережелер жиынының белгісі"
 
 msgid "Title"
-msgstr ""
+msgstr "Тақырып"
 
 msgid "The question posed to your audience, will be displayed publicly"
-msgstr ""
+msgstr "Аудиторияңызға қойылған сұрақ, жалпыға ашық көрсетіледі"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Жасырын диаграммаларды таңдау"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Осы сұрақ бойынша жалпы жұртшылықтан жасырылатын диаграммалар бөлінісін таңдаңыз"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Суреттердің санаттары"
+msgstr "Санат %s"
 
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr ""
+msgstr "Бэкендтегі (мысалы, RapidPro) санаттың белгісі"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Көрсету %s"
 
 msgid "The label to display of the category on the public site"
-msgstr ""
+msgstr "Жалпыға ашық сайтта көрсетілетін санат белгісі"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Жоспарланған синхрондау қазір жүріп жатыр..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Соңғы нәтижелер %(time)s бұрын синхрондалды"
 
 msgid "Synced"
-msgstr ""
+msgstr "Синхрондалды"
 
 #, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr ""
+msgstr "Синхрондау қазір жүріп жатыр... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "[%(flow_name)s (%(flow_date_hint)s)] ағыны үшін сауалнаманы өңдеу"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr ""
+msgstr "#%(org_id)d ұйымындағы #%(poll_id)d сауалнамасы үшін нәтижелерді жаңарту жоспарланды"
 
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr ""
+msgstr "Тіркелген репортерлер бар контактілер тобының атауы"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
-msgstr ""
+msgstr "Репортерлердің туған күні бар контакт өрісінің белгісі"
 
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr ""
+msgstr "Репортерлердің жынысы бар контакт өрісінің белгісі"
 
 msgid "The label of the Contact Field that contains the registration date of reporters"
-msgstr ""
+msgstr "Репортерлердің тіркелу күні бар контакт өрісінің белгісі"
 
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr ""
+msgstr "Репортерлердің облысы бар контакт өрісінің белгісі"
 
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr ""
+msgstr "Репортерлердің ауданы бар контакт өрісінің белгісі"
 
 msgid "The label of the Contact Field that contains the Ward of reporters"
-msgstr ""
+msgstr "Репортерлердің учаскесі бар контакт өрісінің белгісі"
 
 msgid "The label assigned to U-Reporters that are Male."
-msgstr ""
+msgstr "Ер жынысты U-Reporter-лерге тағайындалған белгі."
 
 msgid "The label assigned to U-Reporters that are Female."
-msgstr ""
+msgstr "Әйел жынысты U-Reporter-лерге тағайындалған белгі."
 
 msgid "Whether this org should be show on the landing page"
-msgstr ""
+msgstr "Осы ұйым басты (лендинг) парақшада көрсетіле ме"
 
 msgid "Whether this org count should consider the count from link only"
-msgstr ""
+msgstr "Осы ұйымның санағы тек сілтеме бойынша келгендерді ғана ескере ме"
 
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr ""
+msgstr "Пайдаланушылар U-Report-пен жергілікті байланысу үшін қолданатын қысқа нөмір"
 
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr ""
+msgstr "Егер бар болса, пайдаланушылар U-Report-пен байланысу үшін қолданатын WhatsApp нөмірі"
 
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr ""
+msgstr "Егер бар болса, пайдаланушылар U-Report-пен байланысу үшін қолданатын Telegram боты"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr ""
+msgstr "Егер бар болса, пайдаланушылар U-Report-пен байланысу үшін қолданатын Viber пайдаланушы аты"
 
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr ""
+msgstr "Егер бар болса, пайдаланушылар U-Report-пен байланысу үшін қолданатын Line ботының сілтемесі"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "U-Report қосымшасы бар болса."
 
 msgid "The join button text"
-msgstr ""
+msgstr "Қосылу түймесінің мәтіні"
 
 msgid "The short text used to direct visitors to join U-Report"
-msgstr ""
+msgstr "Келушілерді U-Report-қа қосылуға бағыттау үшін қолданылатын қысқа мәтін"
 
 msgid "The call to action text to join on the top section on U-Report"
-msgstr ""
+msgstr "U-Report жоғарғы бөлімінде қосылуға шақыратын мәтін"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Осы жауаптың орналасқан жері"
+msgstr "Сыртқы әңгімелерге арналған сілтеме."
 
 msgid "A short text for the extra menu."
-msgstr ""
+msgstr "Қосымша мәзірге арналған қысқа мәтін."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Осы жауаптың орналасқан жері"
+msgstr "Қосымша мәзірге арналған сілтеме."
 
 msgid "The YouTube video ID for how to join U-Report section"
-msgstr ""
+msgstr "U-Report-қа қалай қосылу керектігі бөліміне арналған YouTube бейнесінің идентификаторы"
 
 msgid "The title of the photos section U-Report homepage"
-msgstr ""
+msgstr "U-Report басты бетіндегі фотосуреттер бөлімінің тақырыбы"
 
 msgid "The description of the photos section U-Report homepage"
-msgstr ""
+msgstr "U-Report басты бетіндегі фотосуреттер бөлімінің сипаттамасы"
 
 msgid "The description of the opinions page"
-msgstr ""
+msgstr "Пікірлер парақшасының сипаттамасы"
 
 msgid "The description of the stories page"
-msgstr ""
+msgstr "Әңгімелер парақшасының сипаттамасы"
 
 msgid "The description of the engagement page"
-msgstr ""
+msgstr "Әрекеттестік парақшасының сипаттамасы"
 
 msgid "The callout message on the footer engagement section"
-msgstr ""
+msgstr "Төменгі колонтитулдағы әрекеттестік бөлімінің шақыру хабарламасы"
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "Тек карталарда көрсетілетін облыстар"
 
 msgid "The states to show on maps only, used to filter poll results"
-msgstr ""
+msgstr "Тек карталарда көрсетілетін облыстар, сауалнама нәтижелерін сүзгілеу үшін қолданылады"
 
 msgid "The Google Tag Manager ID for this organization"
-msgstr ""
+msgstr "Осы ұйымға арналған Google Tag Manager идентификаторы"
 
 msgid "The Google Analytics Tracking ID for this organization"
-msgstr ""
+msgstr "Осы ұйымға арналған Google Analytics бақылау идентификаторы"
 
 msgid "The URL to the Youtube channel for this organization"
-msgstr ""
+msgstr "Осы ұйымның Youtube арнасының URL-мекенжайы"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Facebook доменін растауға арналған мета тегтің мазмұны"
 
 msgid "The URL to the Facebook page for this organization"
-msgstr ""
+msgstr "Осы ұйымның Facebook парақшасының URL-мекенжайы"
 
 msgid "The integer id to the Facebook page for this organization (optional)"
-msgstr ""
+msgstr "Осы ұйымның Facebook парақшасының бүтін сандық идентификаторы (міндетті емес)"
 
 msgid "The integer id to the Facebook app for this organization's chat app (optional)"
-msgstr ""
+msgstr "Осы ұйымның чат қосымшасына арналған Facebook қосымшасының бүтін сандық идентификаторы (міндетті емес)"
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr ""
+msgstr "Facebook Messenger плагинінде пайдаланушылармен амандасу үшін қолданылатын қысқа мәтін"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr ""
+msgstr "Осы ұйымға арналған Facebook Pixel идентификаторы (міндетті емес)"
 
 msgid "The Instagram username for this organization"
-msgstr ""
+msgstr "Осы ұйымның Instagram пайдаланушы аты"
 
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr ""
+msgstr "Осы ұйым үшін Instagram пайдаланушы аты қосылу парақшасында диплинк ретінде көрсетілуі керек"
 
 msgid "The Instagram widget id from lightwidget.com"
-msgstr ""
+msgstr "lightwidget.com сайтынан алынған Instagram виджетінің идентификаторы"
 
 msgid "The Twitter handle for this organization"
-msgstr ""
+msgstr "Осы ұйымның Twitter аккаунт аты"
 
 msgid "The Twitter widget used for searching"
-msgstr ""
+msgstr "Іздеу үшін қолданылатын Twitter виджеті"
 
 msgid "The words to filter out from the results on public site"
-msgstr ""
+msgstr "Жалпыға ашық сайттағы нәтижелерден сүзіп алып тасталатын сөздер"
 
 msgid "If there are jobs to be shown on the public site."
-msgstr ""
+msgstr "Жалпыға ашық сайтта көрсетілетін жұмыстар бар болса."
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
-msgstr ""
+msgstr "Осы ұйым жаһандық деректерге арналған болса. Мысалы: ел картасының орнына әлем картасы көрсетіледі."
 
 msgid "Whether to activate an extra gender."
-msgstr ""
+msgstr "Қосымша жынысты іске қосу керек пе."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Орнатылса, сайтқа кірген пайдаланушылар осы URL-мекенжайға қайта бағытталады."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Әрекеттестік бөлінісінің диаграммаларын жасыру керек пе."
 
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr ""
+msgstr "Төменгі колонтитулда UNICEF логотипін көрсету керек пе."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
-msgstr ""
+msgstr "U-Report қосымшасының әңгімелер виджетінде көрсетілуі үшін ұйымның alpha-3 ISO коды. Мысалы: BRA, NIG, CMR (Егер U-Report жаһандық болса, GLOBAL қолданыңыз)."
 
 msgid "The font used for headline texts"
-msgstr ""
+msgstr "Тақырып мәтіндері үшін қолданылатын қаріп"
 
 msgid "The font used for normal text"
-msgstr ""
+msgstr "Қалыпты мәтін үшін қолданылатын қаріп"
 
 msgid "Hide participation stats"
-msgstr ""
+msgstr "Қатысу статистикасын жасыру"
 
 msgid "The text to describe the sponsors of free messages"
-msgstr ""
+msgstr "Тегін хабарламалардың демеушілерін сипаттайтын мәтін"
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "Ұсақ мәтін үшін қолданылатын қаріп"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
-msgstr ""
+msgstr "Ұйым парақшаларына арнайы HTML кодтарын, мысалы, арнайы аналитика код үзінділерін қосу қажет болса"
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "Басқа тілдердегі сайттардың сілтемелері"
 
 msgid "Whether this row was created by squashing"
-msgstr ""
+msgstr "Осы жол біріктіру (squash) арқылы жасалған ба"
 
 msgid "90 Days"
-msgstr ""
+msgstr "90 күн"
 
 msgid "6 Months"
-msgstr ""
+msgstr "6 ай"
 
 msgid "12 Months"
-msgstr ""
+msgstr "12 ай"
 
 msgid "Age"
-msgstr ""
+msgstr "Жас"
 
 msgid "Channels"
-msgstr ""
+msgstr "Арналар"
 
 msgid "Location"
-msgstr ""
+msgstr "Орналасқан жері"
 
 msgid "Opinion Responses"
-msgstr ""
+msgstr "Пікір жауаптары"
 
 msgid "Sign Up Rate"
-msgstr ""
+msgstr "Тіркелу қарқыны"
 
 msgid "Response Rate"
-msgstr ""
+msgstr "Жауап беру қарқыны"
 
 msgid "Active Users"
-msgstr ""
+msgstr "Белсенді пайдаланушылар"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "#%(job_id)d жұмысы өңделуде, сәлден кейін қайталап көріңіз"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "#%(job_id)d жұмысы кідіртілді"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "#%(job_id)d жұмысы жалғастырылды"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "#%(job_id)d жұмысы кідіртілмеген"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "#%(job_id)d жұмысы келесі іске қосылғанда басынан бастап қайта синхрондалады"
 
 msgid "Something to trigger localizations"
-msgstr ""
+msgstr "Локализацияларды іске қосуға арналған нәрсе"
 
 msgid "All locations"
-msgstr ""
+msgstr "Барлық орындар"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Шығыс Азия және Тынық мұхиты аймағы"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Шығыс және Оңтүстік Африка"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Еуропа және Орталық Азия"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Латын Америкасы және Кариб бассейні"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Таяу Шығыс және Солтүстік Африка"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Оңтүстік Азия"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "ЮНИСЕФ Ұлттық комитеттері бар елдер"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Батыс және Орталық Африка"

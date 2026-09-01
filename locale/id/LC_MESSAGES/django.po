@@ -42,15 +42,11 @@ msgstr "File gambar yang akan digunakan"
 msgid "The human readable name for this content type"
 msgstr "Nama yang familiar untuk jenis konten ini"
 
-#, fuzzy
-#| msgid "The slug to idenfity this content type, used with the template tags"
 msgid "The slug to identify this content type, used with the template tags"
-msgstr "Untuk mengidentifikasi jenis konten ini, digunakan dengan tag template"
+msgstr "Slug untuk mengidentifikasi jenis konten ini, digunakan dengan tag template"
 
-#, fuzzy
-#| msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgid "A description of where this content type is used on the site and how it will be displayed"
-msgstr "Sebuah deskripsi di mana jenis konten ini digunakan di dalam situs dan bagaimana hal itu akan ditampilkan"
+msgstr "Deskripsi tentang di mana jenis konten ini digunakan di situs dan bagaimana konten itu akan ditampilkan"
 
 msgid "Whether this content should include a title"
 msgstr "Apakah konten ini harus mencakup judul"
@@ -131,10 +127,10 @@ msgid "Content Types"
 msgstr "Jenis Konten"
 
 msgid "Link Slug"
-msgstr ""
+msgstr "Slug Tautan"
 
 msgid "The slug or word to use in the link of the page"
-msgstr ""
+msgstr "Slug atau kata yang digunakan dalam tautan halaman"
 
 msgid "Content Blocks"
 msgstr "Blok Konten"
@@ -287,43 +283,24 @@ msgstr "Jenis latar belakang"
 msgid "The image file"
 msgstr "File gambar"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The API token for this backend"
-msgstr "Judul untuk item ini"
+msgstr "Token API untuk backend ini"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      You've been invited to join %(org_name)s.\n"
-#| "      <br/>\n"
-#| "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#| "  "
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br />\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Anda telah diundang untuk bergabung %(org_name)s.\n"
-"<br/>\n"
-"Untuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
+#, python-format
+msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
+msgstr "\n      Anda telah diundang untuk bergabung dengan %(org_name)s.\n      <br />\n      Untuk menerima undangan, <a href='%(host)s%(join_url)s'>klik di sini</a>.\n  "
 
 msgid "You are invited to join {{org.name}}."
-msgstr ""
+msgstr "Anda diundang untuk bergabung dengan {{org.name}}."
 
 msgid "Click this link to join"
-msgstr ""
+msgstr "Klik tautan ini untuk bergabung"
 
 msgid "Edit"
 msgstr "Rubah"
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Manage Backends"
-msgstr "Kelola Pengguna"
+msgstr "Kelola Backend"
 
 msgid "Manage Users"
 msgstr "Kelola Pengguna"
@@ -343,10 +320,8 @@ msgstr "Kamu harus mempunyai setidaknya satu administrator"
 msgid "Select your Organization"
 msgstr "Pilih Organisasi"
 
-#, fuzzy
-#| msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgid "Your account is not associated to an organization. Please contact the administrator."
-msgstr "Akun Anda tidak terkait dengan organisasi. Silahkan Hubungi administrator."
+msgstr "Akun Anda tidak terkait dengan organisasi mana pun. Silakan hubungi administrator."
 
 msgid "Your Organization"
 msgstr "Organisasi Anda"
@@ -374,8 +349,6 @@ msgstr "link undangan Anda tidak valid. Silahkan hubungi administrator organisas
 msgid "Join %(name)s"
 msgstr "Gabung %(name)s"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join"
 msgstr "Gabung"
 
@@ -389,15 +362,13 @@ msgid "Tasks"
 msgstr "Tugas-tugas"
 
 msgid "Only PDF files are supported."
-msgstr ""
+msgstr "Hanya file PDF yang didukung."
 
 msgid "The title for this story"
 msgstr "Judul cerita"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
-msgstr "Cerita ini di tampilkan di halaman depan"
+msgstr "Apakah cerita ini ditampilkan sebagai unggulan"
 
 msgid "The summary for the story"
 msgstr "Ringkasan cerita"
@@ -412,7 +383,7 @@ msgid "A link to an mp3 file to publish on this story"
 msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
 
 msgid "The PDF report to attach"
-msgstr ""
+msgstr "Laporan PDF yang akan dilampirkan"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
@@ -451,29 +422,18 @@ msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Image to display on story page and in previews (optional)"
 
-#, fuzzy
-#| msgid "The name of this category"
 msgid "The name of this tag"
-msgstr "Nama kategori ini"
+msgstr "Nama tag ini"
 
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 msgid "Remove Item?"
 msgstr "Hapus daftar?"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
+#, python-format
+msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
+msgstr "\n    Apakah Anda yakin ingin menghapus <b>%(object)s</b>?\n    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatalkan operasi ini."
@@ -481,40 +441,14 @@ msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatal
 msgid "Cancel"
 msgstr "Batal"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-"\n"
-"%(counter)s hasil"
+#, python-format
+msgid "\n\t %(counter)s result\n\t"
+msgid_plural "\n         %(counter)s results\n        "
+msgstr[0] "\n\t %(counter)s hasil\n\t"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"⇥Hasil %(start)s-%(end)s of %(count)s\n"
-"⇥"
+#, python-format
+msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
+msgstr "\n\tHasil %(start)s-%(end)s dari %(count)s\n\t"
 
 msgid "Previous"
 msgstr "Sebelumnya"
@@ -540,31 +474,13 @@ msgstr "Token Kadaluarsa"
 msgid "Login Failure"
 msgstr "Kegagalan Masuk"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Maaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
+#, python-format
+msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
+msgstr "\n      Maaf, Anda tidak bisa masuk saat ini karena kami menerima %(failed_login_limit)s percobaan masuk yang salah.\n      "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
+#, python-format
+msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
+msgstr "\n      Silakan tunggu %(lockout_timeout)s menit sebelum mencoba masuk kembali.\n      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Atau, Anda bisa mengisi form di bawah ini untuk memiliki password ulang via e-mail."
@@ -581,18 +497,9 @@ msgstr "Pemulihan"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Masukkan alamat surel yang Anda gunakan untuk mendaftar dan kami akan membantu Anda mengembalikan kata kunci Anda."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<Strong> Kata sandi Anda telah kedaluwarsa. </ Strong> menyatakan kebijakan Site bahwa Anda harus memilih password baru setiap %(expire_days)s hari, dan bahwa password harus tidak telah digunakan dalam sebelumnya %(window_days)s hari"
+#, python-format
+msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
+msgstr "\n  <strong>Kata sandi Anda telah kedaluwarsa.</strong> Kebijakan situs mengharuskan Anda memilih kata sandi baru setiap %(expire_days)s hari, dan kata sandi tidak boleh pernah digunakan dalam %(window_days)s hari sebelumnya.\n  "
 
 msgid "New Password"
 msgstr "Kata kunci baru"
@@ -728,52 +635,48 @@ msgid "Form"
 msgstr "Form"
 
 msgid "Save"
-msgstr ""
+msgstr "Simpan"
 
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s baru anda sudah berhasil dibuat"
 
 msgid "Back to Website"
-msgstr ""
+msgstr "Kembali ke Situs Web"
 
 msgid "Welcome, "
-msgstr ""
+msgstr "Selamat datang, "
 
 msgid "Logout"
 msgstr "Keluar"
 
 msgid "Opinions"
-msgstr ""
+msgstr "Opini"
 
 msgid "Bots"
-msgstr ""
+msgstr "Bot"
 
 msgid "Users"
 msgstr "Nama Pengguna"
 
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
-#, fuzzy
-#| msgid "Images"
 msgid "Pages"
-msgstr "Gambar"
+msgstr "Halaman"
 
 msgid "Landing Pages"
-msgstr ""
+msgstr "Halaman Arahan"
 
 msgid "Jobs"
 msgstr "Pekerjaan"
 
 msgid "Tags"
-msgstr ""
+msgstr "Tag"
 
 msgid "Partners Logos"
-msgstr ""
+msgstr "Logo Mitra"
 
-#, fuzzy
-#| msgid "Category Images"
 msgid "Categories Images"
 msgstr "Gambar Kategori"
 
@@ -786,30 +689,26 @@ msgstr "Orgs"
 msgid "Images"
 msgstr "Gambar"
 
-#, fuzzy
-#| msgid "Jobs"
 msgid "Sync Jobs"
-msgstr "Pekerjaan"
+msgstr "Pekerjaan Sinkronisasi"
 
 msgid "About"
 msgstr "Tentang Kami"
 
 msgid "Engagement"
-msgstr ""
+msgstr "Keterlibatan"
 
-#, fuzzy
-#| msgid "U-Reporters"
 msgid "Reports"
-msgstr "U-Reporters"
+msgstr "Laporan"
 
 msgid "Category Images"
 msgstr "Gambar Kategori"
 
 msgid "+ New "
-msgstr ""
+msgstr "+ Baru "
 
 msgid "+ New Page"
-msgstr ""
+msgstr "+ Halaman Baru"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -860,18 +759,16 @@ msgid "Additional Menu"
 msgstr "Menu Tambahan"
 
 msgid "SELECT YOUR COUNTRY"
-msgstr ""
+msgstr "PILIH NEGARA ANDA"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join Now"
-msgstr "Gabung"
+msgstr "Gabung Sekarang"
 
 msgid "READ MORE"
 msgstr "LANJUT"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr ""
+msgstr "JELAJAHI KETERLIBATAN"
 
 msgid ""
 "\n"
@@ -896,74 +793,65 @@ msgid "Back"
 msgstr "Kembali"
 
 msgid "Select bots"
-msgstr ""
+msgstr "Pilih bot"
 
 msgid "View public page"
-msgstr ""
+msgstr "Lihat halaman publik"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST NOTIFICATIONS"
-msgstr "LOKASI"
+msgstr "NOTIFIKASI TERBARU"
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Backends"
-msgstr "Kelola Pengguna"
+msgstr "Backend"
 
 msgid "You can resend an invite using the field above"
-msgstr ""
+msgstr "Anda dapat mengirim ulang undangan menggunakan kolom di atas"
 
 msgid "Add os Select tags"
-msgstr ""
+msgstr "Tambah atau pilih tag"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
+msgstr[0] "Saat ini ada %(counter)s jajak pendapat baru yang sedang disinkronkan. Jajak pendapat ditampilkan di situs publik setelah hasilnya selesai disinkronkan sepenuhnya."
 
 msgid "+ New Poll"
-msgstr ""
+msgstr "+ Jajak Pendapat Baru"
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "Pertanyaan polling"
+msgstr[0] "%(counter)s pertanyaan jajak pendapat"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "Sinkronisasi awal jajak pendapat baru dijadwalkan setiap 10 menit"
 
 msgid "No longer scheduling syncs for old polls, runs archived"
-msgstr ""
+msgstr "Tidak lagi menjadwalkan sinkronisasi untuk jajak pendapat lama, run telah diarsipkan"
 
 msgid "Main poll syncs scheduled every 20min"
-msgstr ""
+msgstr "Sinkronisasi jajak pendapat utama dijadwalkan setiap 20 menit"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "Sinkronisasi jajak pendapat terkini dijadwalkan setiap 60 menit"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "Sinkronisasi jajak pendapat dijadwalkan setiap 24 jam"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "Tidak menjadwalkan sinkronisasi, tidak aktif"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "Tidak menjadwalkan sinkronisasi, tidak ada flow untuk jajak pendapat"
 
-#, fuzzy
-#| msgid "Previous"
 msgid "Preview results"
-msgstr "Sebelumnya"
+msgstr "Pratinjau hasil"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Refresh Results"
-msgstr "Hasil"
+msgstr "Segarkan Hasil"
 
 msgid "Partners"
-msgstr ""
+msgstr "Mitra"
 
 msgid "MORE POLLS"
 msgstr "POLLING LAINNYA"
@@ -987,121 +875,101 @@ msgid "LIST"
 msgstr "DAFTAR"
 
 msgid "Send"
-msgstr ""
+msgstr "Kirim"
 
 msgid "to"
-msgstr ""
+msgstr "ke"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST OPINION"
-msgstr "LOKASI"
+msgstr "OPINI TERBARU"
 
-#, fuzzy
-#| msgid "VIEW FULL RESULT"
 msgid "VIEW FULL RESULTS"
-msgstr "LIHAT HASIL"
+msgstr "LIHAT HASIL LENGKAP"
 
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERS DI"
 
 msgid "PARTNERING WITH"
-msgstr ""
+msgstr "BERMITRA DENGAN"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS"
-msgstr "U-REPORTERS DI"
+msgstr "U-REPORTERS"
 
 msgid "IN"
-msgstr ""
+msgstr "DI"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "COUNTRIES WORLDWIDE"
-msgstr "U-REPORTERS DI"
+msgstr "NEGARA DI SELURUH DUNIA"
 
 msgid "AGES"
-msgstr ""
+msgstr "USIA"
 
 msgid "Available bots"
-msgstr ""
+msgstr "Bot yang tersedia"
 
 msgid "More bots"
-msgstr ""
+msgstr "Bot lainnya"
 
 msgid "Join U-Report, Your voice matters."
-msgstr ""
+msgstr "Gabung U-Report, Suara Anda berarti."
 
 msgid "FEATURED STORY"
 msgstr "FITUR CERITA"
 
 msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
+msgstr "Kami adalah bagian dari platform global yang bekerja untuk mengubah kehidupan anak muda di seluruh dunia."
 
 msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
+msgstr "Pelajari lebih lanjut bagaimana U-Report memberdayakan dan menghubungkan anak muda untuk menyuarakan isu-isu yang penting bagi mereka."
 
-#, fuzzy
-#| msgid "READ MORE"
 msgid "LEARN MORE"
-msgstr "LANJUT"
+msgstr "PELAJARI LEBIH LANJUT"
 
 msgid "Visit"
-msgstr ""
+msgstr "Kunjungi"
 
 msgid "How would you like to join?"
-msgstr ""
+msgstr "Bagaimana Anda ingin bergabung?"
 
 msgid "Text"
-msgstr ""
+msgstr "SMS"
 
 msgid "Or download the U-Report App:"
-msgstr ""
+msgstr "Atau unduh Aplikasi U-Report:"
 
 msgid "PAGE"
-msgstr ""
+msgstr "HALAMAN"
 
 msgid "SEARCH"
-msgstr ""
+msgstr "CARI"
 
 msgid "No results found"
-msgstr ""
+msgstr "Tidak ada hasil yang ditemukan"
 
 msgid "Unpublished poll preview. Click Edit to publish it"
-msgstr ""
+msgstr "Pratinjau jajak pendapat yang belum dipublikasikan. Klik Edit untuk mempublikasikannya"
 
 msgid "Published poll. Click Edit to unpublish it"
-msgstr ""
+msgstr "Jajak pendapat yang dipublikasikan. Klik Edit untuk membatalkan publikasinya"
 
 msgid "Poll has not synced yet to be displayed to the public"
-msgstr ""
+msgstr "Jajak pendapat belum disinkronkan untuk dapat ditampilkan kepada publik"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "RESPONDERS"
-msgstr "RATING TANGGAPAN"
+msgstr "RESPONDEN"
 
 msgid "RESPONSE RATE"
 msgstr "RATING TANGGAPAN"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "TOTAL RESPONDERS"
-msgstr "RATING TANGGAPAN"
+msgstr "TOTAL RESPONDEN"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
+#, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr ""
-"\n"
-"%(responded)s direspon dari %(polled)s jajak pendapat"
+msgstr "%(responded)s merespons dari %(polled)s yang disurvei"
 
 msgid "ALL"
-msgstr ""
+msgstr "SEMUA"
 
 msgid "AGE"
 msgstr "UMUR"
@@ -1109,27 +977,23 @@ msgstr "UMUR"
 msgid "GENDER"
 msgstr "JENIS KELAMIN"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LOCATION"
 msgstr "LOKASI"
 
 msgid "Written by:"
-msgstr ""
+msgstr "Ditulis oleh:"
 
 msgid "No reports published yet"
-msgstr ""
+msgstr "Belum ada laporan yang dipublikasikan"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "REPORT"
-msgstr "U-REPORTERS DI"
+msgstr "LAPORAN"
 
 msgid "STORY"
 msgstr "CERITA"
 
 msgid "Download Report"
-msgstr ""
+msgstr "Unduh Laporan"
 
 msgid "Even"
 msgstr "Genap"
@@ -1146,10 +1010,8 @@ msgstr "Kota"
 msgid "Participation Level"
 msgstr "Tingkat Partisipasi"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Responders"
-msgstr "Tanggapan"
+msgstr "Responden"
 
 msgid "Reporters in"
 msgstr "Reporters di"
@@ -1178,261 +1040,188 @@ msgstr "dari"
 msgid "the"
 msgstr "itu"
 
-#, fuzzy
-#| msgid "U-REPORTER STATISTICS"
 msgid "OVERALL STATISTICS"
-msgstr "U-REPORTER STATISTIK"
+msgstr "STATISTIK KESELURUHAN"
 
 msgid "THIS YEAR"
-msgstr ""
+msgstr "TAHUN INI"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
-msgstr "RATING TANGGAPAN"
+msgstr "RATA-RATA TINGKAT RESPONS"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS DI"
+msgstr "U-REPORTERS BERDASARKAN WILAYAH"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "FILTER RESULTS"
-msgstr "HASIL POLLING"
+msgstr "SARING HASIL"
 
 msgid "Charts only visible for logged in admins"
-msgstr ""
+msgstr "Grafik hanya terlihat untuk admin yang masuk"
 
 msgid "Export and Share"
-msgstr ""
+msgstr "Ekspor dan Bagikan"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr ""
+msgstr "Ingin memberi tahu dunia tentang ini? Unduh gambar ini untuk dibagikan dengan mudah di media sosial atau untuk presentasi yang menarik!"
 
 msgid "SELECT LANGUAGE"
-msgstr ""
+msgstr "PILIH BAHASA"
 
 msgid "SELECT COUNTRY"
-msgstr ""
+msgstr "PILIH NEGARA"
 
 msgid "Custom pages"
-msgstr ""
+msgstr "Halaman kustom"
 
 msgid "Landing pages"
-msgstr ""
+msgstr "Halaman arahan"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
+msgstr "Lihat melalui angka bagaimana kami melibatkan suara anak muda untuk perubahan sosial yang positif."
 
-#, fuzzy
-#| msgid "Polls"
 msgid "Polled"
-msgstr "Polling"
+msgstr "Disurvei"
 
-#, fuzzy
-#| msgid "U-Reporters"
 msgid "Reporters"
-msgstr "U-Reporters"
+msgstr "Reporter"
 
 msgid "Top Region"
-msgstr ""
+msgstr "Wilayah Teratas"
 
 msgid "January"
-msgstr ""
+msgstr "Januari"
 
 msgid "February"
-msgstr ""
+msgstr "Februari"
 
-#, fuzzy
-#| msgid "Search"
 msgid "March"
-msgstr "Cari"
+msgstr "Maret"
 
 msgid "April"
-msgstr ""
+msgstr "April"
 
 msgid "May"
-msgstr ""
+msgstr "Mei"
 
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 msgid "August"
-msgstr ""
+msgstr "Agustus"
 
 msgid "September"
-msgstr ""
+msgstr "September"
 
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 msgid "November"
-msgstr ""
+msgstr "November"
 
 msgid "December"
-msgstr ""
+msgstr "Desember"
 
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
 msgid "Aug"
-msgstr ""
+msgstr "Agu"
 
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
-#, fuzzy
-#| msgid "No"
 msgid "Nov"
-msgstr "Tidak"
+msgstr "Nov"
 
 msgid "Dec"
-msgstr ""
+msgstr "Des"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-"          "
-msgstr ""
-"\n"
-"Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
+#, python-format
+msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
+msgstr "\n            Apakah Anda yakin ingin menghapus <strong>%(object)s</strong>?\n          "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
-"\n"
-"%(counter)s hasil"
+msgstr[0] "%(counter)s hasil"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
-"\n"
-"⇥Hasil %(start)s-%(end)s of %(count)s\n"
-"⇥"
+msgstr "Hasil %(start)s-%(end)s dari %(count)s"
 
 msgid "Error"
-msgstr ""
+msgstr "Kesalahan"
 
 msgid "Enter Dashboard"
-msgstr ""
+msgstr "Masuk ke Dasbor"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Maaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
+#, python-format
+msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
+msgstr "\n                Maaf, Anda tidak bisa masuk saat ini karena kami menerima %(failed_login_limit)s percobaan masuk yang salah.\n              "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
+#, python-format
+msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
+msgstr "\n                    Silakan tunggu %(lockout_timeout)s menit sebelum mencoba masuk kembali.\n                  "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<Strong> Kata sandi Anda telah kedaluwarsa. </ Strong> menyatakan kebijakan Site bahwa Anda harus memilih password baru setiap %(expire_days)s hari, dan bahwa password harus tidak telah digunakan dalam sebelumnya %(window_days)s hari"
+#, python-format
+msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
+msgstr "\n        <strong>Kata sandi Anda telah kedaluwarsa.</strong> Kebijakan situs mengharuskan Anda memilih kata sandi baru setiap %(expire_days)s hari, dan kata sandi tidak boleh pernah digunakan dalam %(window_days)s hari sebelumnya.\n      "
 
 msgid "+ New Story"
-msgstr ""
+msgstr "+ Cerita Baru"
 
 #, python-format
 msgid "%(running)s running, %(stale)s stale, %(failing)s failing"
-msgstr ""
+msgstr "%(running)s berjalan, %(stale)s usang, %(failing)s gagal"
 
 #, python-format
 msgid "last checked %(checked_on)s"
-msgstr ""
+msgstr "terakhir diperiksa %(checked_on)s"
 
 msgid "not checked yet"
-msgstr ""
+msgstr "belum diperiksa"
 
 msgid "All job types"
-msgstr ""
+msgstr "Semua jenis pekerjaan"
 
 msgid "All statuses"
-msgstr ""
+msgstr "Semua status"
 
 msgid "Filter"
-msgstr ""
+msgstr "Saring"
 
-#, fuzzy
-#| msgid "Population"
 msgid "Actions"
-msgstr "Populasi"
+msgstr "Tindakan"
 
 msgid "Pause"
-msgstr ""
+msgstr "Jeda"
 
-#, fuzzy
-#| msgid "Results"
 msgid "Resume"
-msgstr "Hasil"
+msgstr "Lanjutkan"
 
 msgid "Force resync"
-msgstr ""
+msgstr "Paksa sinkronisasi ulang"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1442,7 +1231,7 @@ msgid "Flag"
 msgstr "Bendera"
 
 msgid "About Partner Logo"
-msgstr ""
+msgstr "Tentang Logo Mitra"
 
 msgid "The organization to which the image will be used"
 msgstr "Organisasi yang akan di gunakan untuk gambar ini"
@@ -1453,71 +1242,47 @@ msgstr "Sebuah nama deskriptif singkat untuk gambar ini"
 msgid "Image type"
 msgstr "Tipe Gambar"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this image among others on a list, high priority comes first"
-msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih tinggi yang lebih dulu"
+msgstr "Nomor prioritas gambar ini di antara yang lain pada daftar, prioritas tinggi didahulukan"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this bot is part of"
-msgstr "organisasi jajak pendapat ini adalah bagian dari"
+msgstr "Organisasi tempat bot ini menjadi bagian"
 
 msgid "Whether this bot is displayed on the homepage, up to 3 only with the highest priorities are displayed"
-msgstr ""
+msgstr "Apakah bot ini ditampilkan di halaman depan, hanya maksimal 3 bot dengan prioritas tertinggi yang ditampilkan"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot is hidden on public pages except landing pages"
-msgstr "Centang jika ingin ditampilkan di halaman depan"
+msgstr "Apakah bot ini disembunyikan di halaman publik kecuali halaman arahan"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this bot"
-msgstr "Judul untuk item ini"
+msgstr "Judul yang ditampilkan untuk bot ini"
 
 msgid "The shortcode, number or bot name of the channel for this bot"
-msgstr ""
+msgstr "Shortcode, nomor, atau nama bot dari saluran untuk bot ini"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The keyword for this bot"
-msgstr "Kategori cerita"
+msgstr "Kata kunci untuk bot ini"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Facebook bot deeplink, optional"
-msgstr "Judul untuk blok konten ini, opsional"
+msgstr "Deeplink bot Facebook, opsional"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Telegram bot deeplink, optional"
-msgstr "Judul untuk blok konten ini, opsional"
+msgstr "Deeplink bot Telegram, opsional"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The Viber bot deeplink, optional"
-msgstr "Judul untuk blok konten ini, opsional"
+msgstr "Deeplink bot Viber, opsional"
 
-#, fuzzy
-#| msgid "The title for this block of content, optional"
 msgid "The WhatsApp bot deeplink, optional"
-msgstr "Judul untuk blok konten ini, opsional"
+msgstr "Deeplink bot WhatsApp, opsional"
 
-#, fuzzy
-#| msgid "A short summary description for this item"
 msgid "A short description for this bot, required"
-msgstr "Deskripsi ringkasan pendek untuk item ini"
+msgstr "Deskripsi singkat untuk bot ini, wajib diisi"
 
-#, fuzzy
-#| msgid "The priority of this question on the poll page, higher priority comes first"
 msgid "The priority number for this bot among others on a list, high priority comes first"
-msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih tinggi yang lebih dulu"
+msgstr "Nomor prioritas bot ini di antara yang lain pada daftar, prioritas tinggi didahulukan"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this bot should be shown to the public"
-msgstr "Centang jika ingin ditampilkan di halaman depan"
+msgstr "Apakah bot ini ditampilkan kepada publik"
 
 msgid "Label"
 msgstr "Label"
@@ -1591,43 +1356,29 @@ msgstr "Sumber pekerjaan Anda telah berhasil ditambahkan"
 msgid "Your job source has been updated successfully"
 msgstr "Sumber pekerjaan Anda telah berhasil diperbarui"
 
-#, fuzzy
-#| msgid "The organization this poll is part of"
 msgid "The organization this landing page is part of"
-msgstr "organisasi jajak pendapat ini adalah bagian dari"
+msgstr "Organisasi tempat halaman arahan ini menjadi bagian"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The title to display for this landing page"
-msgstr "Judul untuk item ini"
+msgstr "Judul yang ditampilkan untuk halaman arahan ini"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The call to action text for this landing page"
-msgstr "Isi cerita"
+msgstr "Teks ajakan bertindak untuk halaman arahan ini"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "The slug to use on the link for this landing page"
-msgstr "Centang jika ingin ditampilkan di halaman depan"
+msgstr "Slug yang digunakan pada tautan untuk halaman arahan ini"
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for the landing page"
-msgstr "Isi cerita"
+msgstr "Isi teks untuk halaman arahan"
 
-#, fuzzy
-#| msgid "The image file to use"
 msgid "The image file to use for the page"
-msgstr "File gambar yang akan digunakan"
+msgstr "File gambar yang akan digunakan untuk halaman ini"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this page should be active to the public"
-msgstr "Centang jika ingin ditampilkan di halaman depan"
+msgstr "Apakah halaman ini aktif untuk publik"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
-msgstr ""
+msgstr "Slug hanya boleh berisi huruf, angka, garis bawah, dan tanda hubung"
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Ini adalah id OSM untuk batas administrasi ini"
@@ -1677,18 +1428,14 @@ msgstr "Nama kategori jajak pendapat ini"
 msgid "Poll Categories"
 msgstr "Kategori Jajak Pendapat"
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether this poll should be visible/hidden on the public site"
-msgstr "Centang jika ingin ditampilkan di halaman depan"
+msgstr "Apakah jajak pendapat ini ditampilkan/disembunyikan di situs publik"
 
 msgid "The Flow this Poll is based on"
 msgstr "Arus Poll ini berdasarkan"
 
-#, fuzzy
-#| msgid "The date to display for this poll. Make it empty to use flow created_on."
 msgid "The date to display for this poll. Leave empty to use flow creation date."
-msgstr "Tanggal untuk menampilkan untuk jajak pendapat ini. Buatlah kosong untuk menggunakan aliran created_on."
+msgstr "Tanggal yang ditampilkan untuk jajak pendapat ini. Biarkan kosong untuk menggunakan tanggal pembuatan flow."
 
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr "Apakah aliran untuk jajak pendapat ini diarsipkan pada RapidPro"
@@ -1702,10 +1449,8 @@ msgstr "Jumlah UReporter yang disurvei pada jajak pendapat ini"
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Apakah jajak pendapat telah selesai hasil awal sync."
 
-#, fuzzy
-#| msgid "Whether this org should be show on the landing page"
 msgid "Whether the poll should stop regenerating stats."
-msgstr "Centang jika ingin ditampilkan di halaman depan"
+msgstr "Apakah jajak pendapat ini berhenti memperbarui statistik."
 
 msgid "The title for this Poll"
 msgstr "Judul dari jajak pendapat ini"
@@ -1722,15 +1467,11 @@ msgstr "Kategori gambar untuk ditampilkan untuk jajak pendapat (opsional)"
 msgid "The organization this poll is part of"
 msgstr "organisasi jajak pendapat ini adalah bagian dari"
 
-#, fuzzy
-#| msgid "The title for this story"
 msgid "The title for this response story"
-msgstr "Judul cerita"
+msgstr "Judul untuk cerita tanggapan ini"
 
-#, fuzzy
-#| msgid "The writer of the story"
 msgid "The writer of the response story"
-msgstr "Penulis cerita"
+msgstr "Penulis cerita tanggapan"
 
 msgid "The poll to associate to"
 msgstr "Jajak pendapat untuk mengaitkan ke"
@@ -1748,42 +1489,40 @@ msgid "The featured response message"
 msgstr "Pesan respon unggulan"
 
 msgid "Dark 1 background and White text"
-msgstr ""
+msgstr "Latar belakang Gelap 1 dan teks Putih"
 
 msgid "Light 1 background and Black text"
-msgstr ""
+msgstr "Latar belakang Terang 1 dan teks Hitam"
 
 msgid "Dark 2 background and White text"
-msgstr ""
+msgstr "Latar belakang Gelap 2 dan teks Putih"
 
 msgid "Dark 3 background and Black text"
-msgstr ""
+msgstr "Latar belakang Gelap 3 dan teks Hitam"
 
 msgid "Show Age, Gender and Location charts"
-msgstr ""
+msgstr "Tampilkan grafik Usia, Jenis Kelamin, dan Lokasi"
 
 msgid "Hide Age chart ONLY"
-msgstr ""
+msgstr "Sembunyikan grafik Usia SAJA"
 
 msgid "Hide Gender chart ONLY"
-msgstr ""
+msgstr "Sembunyikan grafik Jenis Kelamin SAJA"
 
 msgid "Hide Location chart ONLY"
-msgstr ""
+msgstr "Sembunyikan grafik Lokasi SAJA"
 
 msgid "Hide Age and Gender charts"
-msgstr ""
+msgstr "Sembunyikan grafik Usia dan Jenis Kelamin"
 
-#, fuzzy
-#| msgid "Participation Level"
 msgid "Hide Age and Location charts"
-msgstr "Tingkat Partisipasi"
+msgstr "Sembunyikan grafik Usia dan Lokasi"
 
 msgid "Hide Gender and Location charts"
-msgstr ""
+msgstr "Sembunyikan grafik Jenis Kelamin dan Lokasi"
 
 msgid "Hide Age, Gender and Location charts"
-msgstr ""
+msgstr "Sembunyikan grafik Usia, Jenis Kelamin, dan Lokasi"
 
 msgid "The poll this question is part of"
 msgstr "Jajak pendapat pertanyaan ini adalah bagian dari"
@@ -1803,13 +1542,11 @@ msgstr "Nomor prioritas untuk pertanyaan ini dalam polling"
 msgid "The Rule this response category is based on"
 msgstr "Aturan kategori respons ini didasarkan pada"
 
-#, fuzzy
-#| msgid "The title for this Poll"
 msgid "Select tags for this poll"
-msgstr "Judul dari jajak pendapat ini"
+msgstr "Pilih tag untuk jajak pendapat ini"
 
 msgid "Your org does not have any API token configuration."
-msgstr ""
+msgstr "Organisasi Anda tidak memiliki konfigurasi token API."
 
 msgid "You must include a title for every included question."
 msgstr "Anda harus menyertakan judul untuk setiap pertanyaan disertakan."
@@ -1821,27 +1558,19 @@ msgid "You must include at least one poll question."
 msgstr "Anda harus menyertakan setidaknya satu pertanyaan jajak pendapat."
 
 msgid "Adjust poll date"
-msgstr ""
+msgstr "Sesuaikan tanggal jajak pendapat"
 
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been updated, now pick which questions to include."
-msgstr "Jajak pendapat Anda telah dibuat, sekarang pilih mana pertanyaan untuk disertakan."
+msgstr "Jajak pendapat Anda telah diperbarui, sekarang pilih pertanyaan yang akan disertakan."
 
-#, fuzzy
-#| msgid "Configuration"
 msgid "Configure flow"
-msgstr "Konfigurasi"
+msgstr "Konfigurasikan flow"
 
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr "Jajak pendapat Anda telah dibuat, sekarang pilih mana pertanyaan untuk disertakan."
+msgstr "Jajak pendapat Anda telah dikonfigurasi, sekarang sesuaikan tanggal jajak pendapat."
 
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been created, now configure its flow."
-msgstr "Jajak pendapat Anda telah dibuat, sekarang pilih mana pertanyaan untuk disertakan."
+msgstr "Jajak pendapat Anda telah dibuat, sekarang konfigurasikan flow-nya."
 
 msgid "Poll Images"
 msgstr "Gambar jajak pendapat"
@@ -1855,10 +1584,8 @@ msgstr "Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pili
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pilihan)"
 
-#, fuzzy
-#| msgid "Poll Questions"
 msgid "Poll Response"
-msgstr "Pertanyaan polling"
+msgstr "Tanggapan Jajak Pendapat"
 
 msgid "Your poll has been updated."
 msgstr "Polling anda sudah di rubah"
@@ -1884,10 +1611,8 @@ msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang leb
 msgid "Ruleset Label"
 msgstr "Label Ruleset"
 
-#, fuzzy
-#| msgid "The label of the ruleset on RapidPro"
 msgid "The label of the ruleset from RapidPro"
-msgstr "Label aturan ditetapkan pada RapidPro"
+msgstr "Label ruleset dari RapidPro"
 
 msgid "Title"
 msgstr "Judul"
@@ -1896,61 +1621,53 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
 
 msgid "Hidden Charts Choice"
-msgstr ""
+msgstr "Pilihan Grafik Tersembunyi"
 
 msgid "Choose the charts breakdown to hide to for this question to the public"
-msgstr ""
+msgstr "Pilih rincian grafik yang disembunyikan dari publik untuk pertanyaan ini"
 
-#, fuzzy, python-format
-#| msgid "Category Images"
+#, python-format
 msgid "Category %s"
-msgstr "Gambar Kategori"
+msgstr "Kategori %s"
 
-#, fuzzy
-#| msgid "The label of the ruleset on RapidPro"
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr "Label aturan ditetapkan pada RapidPro"
+msgstr "Label kategori dari backend (seperti RapidPro)"
 
 #, python-format
 msgid "Display %s"
-msgstr ""
+msgstr "Tampilan %s"
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site"
 msgid "The label to display of the category on the public site"
-msgstr "Jika ada pekerjaan yang akan ditampilkan pada situs umum"
+msgstr "Label kategori yang ditampilkan di situs publik"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Sinkronisasi terjadwal sedang berlangsung..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Hasil terakhir disinkronkan %(time)s yang lalu"
 
 msgid "Synced"
-msgstr ""
+msgstr "Tersinkronisasi"
 
 #, python-format
 msgid "Sync currently in progress... %.1f"
-msgstr ""
+msgstr "Sinkronisasi sedang berlangsung... %.1f"
 
 #, python-format
 msgid "Edit Poll for flow [%(flow_name)s (%(flow_date_hint)s)]"
-msgstr ""
+msgstr "Edit Jajak Pendapat untuk flow [%(flow_name)s (%(flow_date_hint)s)]"
 
-#, fuzzy, python-format
-#| msgid "Scheduled a pull refresh for poll #%d on org #%d"
+#, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr "Dijadwalkan refresh untuk pemungutan suara #%d di org #%d"
+msgstr "Menjadwalkan penyegaran data untuk jajak pendapat #%(poll_id)d pada organisasi #%(org_id)d"
 
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#, fuzzy
-#| msgid "The name of txbhe Contact Group that contains registered reporters"
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr "Nama Kelompok Kontak yang berisi anggota U-Reporters"
+msgstr "Nama Grup Kontak yang berisi reporter terdaftar"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "Label Kolom kontak yang berisi Tanggal Lahir dari U-Reporters"
@@ -1979,96 +1696,74 @@ msgstr "Label untuk U-Reporters yang Perempuan."
 msgid "Whether this org should be show on the landing page"
 msgstr "Centang jika ingin ditampilkan di halaman depan"
 
-#, fuzzy
-#| msgid "Whether this content should include a link"
 msgid "Whether this org count should consider the count from link only"
-msgstr "Apakah konten ini harus menyertakan link"
+msgstr "Apakah hitungan organisasi ini hanya mempertimbangkan hitungan dari tautan saja"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The WhatsApp number that users will use to contact U-Report if you have one"
-msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+msgstr "Nomor WhatsApp yang akan digunakan pengguna untuk menghubungi U-Report jika Anda memilikinya"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The Telegram bot that users will use to contact U-Report if you have one"
-msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+msgstr "Bot Telegram yang akan digunakan pengguna untuk menghubungi U-Report jika Anda memilikinya"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+msgstr "Nama pengguna Viber yang akan digunakan pengguna untuk menghubungi U-Report jika Anda memilikinya"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The Line bot link that users will use to contact U-Report if you have one"
-msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+msgstr "Tautan bot Line yang akan digunakan pengguna untuk menghubungi U-Report jika Anda memilikinya"
 
 msgid "If there is a U-Report app available."
-msgstr ""
+msgstr "Jika ada aplikasi U-Report yang tersedia."
 
 msgid "The join button text"
-msgstr ""
+msgstr "Teks tombol gabung"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung U-Report"
 
 msgid "The call to action text to join on the top section on U-Report"
-msgstr ""
+msgstr "Teks ajakan bertindak untuk bergabung pada bagian atas U-Report"
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the external stories."
-msgstr "Lokasi dari tanggapan ini"
+msgstr "Tautan untuk cerita eksternal."
 
-#, fuzzy
-#| msgid "The text of the featured response."
 msgid "A short text for the extra menu."
-msgstr "Respon unggulan"
+msgstr "Teks singkat untuk menu tambahan."
 
-#, fuzzy
-#| msgid "The location for this response"
 msgid "The link for the extra menu."
-msgstr "Lokasi dari tanggapan ini"
+msgstr "Tautan untuk menu tambahan."
 
 msgid "The YouTube video ID for how to join U-Report section"
-msgstr ""
+msgstr "ID video YouTube untuk bagian cara bergabung dengan U-Report"
 
 msgid "The title of the photos section U-Report homepage"
-msgstr ""
+msgstr "Judul bagian foto di halaman depan U-Report"
 
 msgid "The description of the photos section U-Report homepage"
-msgstr ""
+msgstr "Deskripsi bagian foto di halaman depan U-Report"
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the opinions page"
-msgstr "Lokasi responden"
+msgstr "Deskripsi halaman opini"
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the stories page"
-msgstr "Lokasi responden"
+msgstr "Deskripsi halaman cerita"
 
 msgid "The description of the engagement page"
-msgstr ""
+msgstr "Deskripsi halaman keterlibatan"
 
 msgid "The callout message on the footer engagement section"
-msgstr ""
+msgstr "Pesan ajakan pada bagian keterlibatan di footer"
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "Wilayah yang hanya ditampilkan di peta"
 
 msgid "The states to show on maps only, used to filter poll results"
-msgstr ""
+msgstr "Wilayah yang hanya ditampilkan di peta, digunakan untuk menyaring hasil jajak pendapat"
 
-#, fuzzy
-#| msgid "The Google Analytics Tracking ID for this organization"
 msgid "The Google Tag Manager ID for this organization"
-msgstr "Google Analytics Tracking ID untuk organisasi ini"
+msgstr "ID Google Tag Manager untuk organisasi ini"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Google Analytics Tracking ID untuk organisasi ini"
@@ -2077,7 +1772,7 @@ msgid "The URL to the Youtube channel for this organization"
 msgstr "URL ke saluran Youtube untuk organisasi ini"
 
 msgid "The content for the meta tag for Facebook Domain Verification"
-msgstr ""
+msgstr "Konten untuk tag meta Verifikasi Domain Facebook"
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL ke halaman Facebook untuk organisasi ini"
@@ -2088,23 +1783,17 @@ msgstr "Integer id ke halaman Facebook untuk organisasi ini (opsional)"
 msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr "Id yang digunakan ke aplikasi Facebook untuk organisasi ini aplikasi chat (opsional)"
 
-#, fuzzy
-#| msgid "The short text used to direct visitors to join U-Report"
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung U-Report"
+msgstr "Teks singkat yang digunakan untuk menyapa pengguna pada Plugin Facebook Messenger"
 
-#, fuzzy
-#| msgid "The integer id to the Facebook page for this organization (optional)"
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr "Integer id ke halaman Facebook untuk organisasi ini (opsional)"
+msgstr "ID Facebook Pixel untuk organisasi ini (opsional)"
 
 msgid "The Instagram username for this organization"
 msgstr "nama pengguna Instagram untuk organisasi ini"
 
-#, fuzzy
-#| msgid "The Instagram username for this organization"
 msgid "The Instagram username should be shown on the join page as deeplink for this organization"
-msgstr "nama pengguna Instagram untuk organisasi ini"
+msgstr "Nama pengguna Instagram yang ditampilkan di halaman gabung sebagai deeplink untuk organisasi ini"
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "The Instagram widget id dari lightwidget.com"
@@ -2116,150 +1805,132 @@ msgid "The Twitter widget used for searching"
 msgstr "Twitter widget yang digunakan untuk mencari"
 
 msgid "The words to filter out from the results on public site"
-msgstr ""
+msgstr "Kata-kata yang disaring dari hasil di situs publik"
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site"
 msgid "If there are jobs to be shown on the public site."
-msgstr "Jika ada pekerjaan yang akan ditampilkan pada situs umum"
+msgstr "Jika ada pekerjaan yang akan ditampilkan di situs publik."
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Jika org ini jika untuk data global. mis: Ini menunjukkan peta dunia bukan peta negara."
 
 msgid "Whether to activate an extra gender."
-msgstr ""
+msgstr "Apakah mengaktifkan jenis kelamin tambahan."
 
 msgid "If set, public users visiting the site will be redirected to this URL."
-msgstr ""
+msgstr "Jika diatur, pengunjung publik situs akan dialihkan ke URL ini."
 
 msgid "Whether to hide the engagement breakdown charts."
-msgstr ""
+msgstr "Apakah menyembunyikan grafik rincian keterlibatan."
 
-#, fuzzy
-#| msgid "Whether this user is allowed to log into the site"
 msgid "Whether to show the UNICEF logo in the footer."
-msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
+msgstr "Apakah menampilkan logo UNICEF di footer."
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
-msgstr ""
+msgstr "Kode ISO alpha-3 organisasi agar muncul di widget cerita Aplikasi U-Report. Contoh: BRA, NIG, CMR (Gunakan GLOBAL jika U-Report bersifat Global)."
 
 msgid "The font used for headline texts"
-msgstr ""
+msgstr "Font yang digunakan untuk teks judul"
 
 msgid "The font used for normal text"
-msgstr ""
+msgstr "Font yang digunakan untuk teks normal"
 
-#, fuzzy
-#| msgid "Participation Level"
 msgid "Hide participation stats"
-msgstr "Tingkat Partisipasi"
+msgstr "Sembunyikan statistik partisipasi"
 
-#, fuzzy
-#| msgid "The name of the sender of the message"
 msgid "The text to describe the sponsors of free messages"
-msgstr "Nama pengirim pesan"
+msgstr "Teks untuk mendeskripsikan sponsor pesan gratis"
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "Font yang digunakan untuk teks kecil"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, seperti modifikasi kode analytics"
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "Tautan situs bahasa lain"
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
-msgstr "Cerita ini di tampilkan di halaman depan"
+msgstr "Apakah baris ini dibuat melalui proses squash"
 
 msgid "90 Days"
-msgstr ""
+msgstr "90 Hari"
 
 msgid "6 Months"
-msgstr ""
+msgstr "6 Bulan"
 
 msgid "12 Months"
-msgstr ""
+msgstr "12 Bulan"
 
 msgid "Age"
-msgstr ""
+msgstr "Usia"
 
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Channels"
-msgstr "Simpan Perubahan"
+msgstr "Saluran"
 
-#, fuzzy
-#| msgid "Population"
 msgid "Location"
-msgstr "Populasi"
+msgstr "Lokasi"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Opinion Responses"
-msgstr "Tanggapan"
+msgstr "Tanggapan Opini"
 
 msgid "Sign Up Rate"
-msgstr ""
+msgstr "Tingkat Pendaftaran"
 
 msgid "Response Rate"
 msgstr "Rating Tanggapan"
 
 msgid "Active Users"
-msgstr ""
+msgstr "Pengguna Aktif"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
-msgstr ""
+msgstr "Pekerjaan #%(job_id)d sedang dikerjakan, coba lagi sebentar lagi"
 
 #, python-format
 msgid "Paused job #%(job_id)d"
-msgstr ""
+msgstr "Pekerjaan #%(job_id)d dijeda"
 
 #, python-format
 msgid "Resumed job #%(job_id)d"
-msgstr ""
+msgstr "Pekerjaan #%(job_id)d dilanjutkan"
 
 #, python-format
 msgid "Job #%(job_id)d isn't paused"
-msgstr ""
+msgstr "Pekerjaan #%(job_id)d tidak sedang dijeda"
 
 #, python-format
 msgid "Job #%(job_id)d will resync from scratch on its next run"
-msgstr ""
+msgstr "Pekerjaan #%(job_id)d akan disinkronkan ulang dari awal pada eksekusi berikutnya"
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
 
-#, fuzzy
-#| msgid "Population"
 msgid "All locations"
-msgstr "Populasi"
+msgstr "Semua lokasi"
 
 msgid "East Asia and Pacific"
-msgstr ""
+msgstr "Asia Timur dan Pasifik"
 
 msgid "Eastern and Southern Africa"
-msgstr ""
+msgstr "Afrika Timur dan Selatan"
 
 msgid "Europe and Central Asia"
-msgstr ""
+msgstr "Eropa dan Asia Tengah"
 
 msgid "Latin America and the Caribbean"
-msgstr ""
+msgstr "Amerika Latin dan Karibia"
 
 msgid "Middle East and North Africa"
-msgstr ""
+msgstr "Timur Tengah dan Afrika Utara"
 
 msgid "South Asia"
-msgstr ""
+msgstr "Asia Selatan"
 
 msgid "UNICEF’s National Committee countries"
-msgstr ""
+msgstr "Negara-negara Komite Nasional UNICEF"
 
 msgid "West and Central Africa"
-msgstr ""
+msgstr "Afrika Barat dan Tengah"
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"
