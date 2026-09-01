@@ -1,0 +1,22 @@
+.git
+.github
+.claude
+.venv
+env
+venv
+venv_ureport
+node_modules
+sitestatic
+media
+__pycache__
+*.py[cod]
+.idea
+*.sqlite
+dash
+smartmin
+fabric
+deploy/__pycache__
+
+# a developer's personal settings must never reach the image - the build symlinks
+# settings.py.docker into place instead
+ureport/settings.py
