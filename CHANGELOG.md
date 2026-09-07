@@ -1,3 +1,8 @@
+v1.6.12 (2026-09-07)
+-------------------------
+ * Replace deprecated EMAIL_* settings with MAILERS
+ * Update to Django 6.1
+
 v1.6.11 (2026-09-01)
 -------------------------
  * Recompile locale MO files
