@@ -50,12 +50,19 @@ DATABASES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-# set the mail settings, we send throught gmail
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "server@nyaruka.com"
+# set the mail settings, we send through gmail
+MAILERS = {
+    "default": {
+        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+        "OPTIONS": {
+            "host": "smtp.gmail.com",
+            "username": "server@nyaruka.com",
+            "password": "NOTREAL",
+            "use_tls": True,
+        },
+    }
+}
 DEFAULT_FROM_EMAIL = "server@nyaruka.com"
-EMAIL_HOST_PASSWORD = "NOTREAL"
-EMAIL_USE_TLS = True
 
 EMPTY_SUBDOMAIN_HOST = "http://localhost:8000"
 SITE_API_HOST = "http://localhost:8001"

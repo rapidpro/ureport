@@ -65,7 +65,10 @@ class NewsTest(UreportTest):
         self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
         self.assertEqual(
             list(response.context["form"].fields["category"].choices),
-            [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+            [
+                ("", response.context["form"].fields["category"].empty_label),
+                (self.health_uganda.pk, "uganda - Health"),
+            ],
         )
         self.assertTrue("loc" in response.context["form"].fields)
 
@@ -100,7 +103,10 @@ class NewsTest(UreportTest):
         self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
         self.assertEqual(
             list(response.context["form"].fields["category"].choices),
-            [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+            [
+                ("", response.context["form"].fields["category"].empty_label),
+                (self.health_uganda.pk, "uganda - Health"),
+            ],
         )
         self.assertTrue("loc" in response.context["form"].fields)
 
@@ -200,7 +206,10 @@ class NewsTest(UreportTest):
         self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
         self.assertEqual(
             list(response.context["form"].fields["category"].choices),
-            [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+            [
+                ("", response.context["form"].fields["category"].empty_label),
+                (self.health_uganda.pk, "uganda - Health"),
+            ],
         )
         self.assertTrue("loc" in response.context["form"].fields)
 
@@ -252,7 +261,10 @@ class VideoTest(UreportTest):
         self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
         self.assertEqual(
             list(response.context["form"].fields["category"].choices),
-            [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+            [
+                ("", response.context["form"].fields["category"].empty_label),
+                (self.health_uganda.pk, "uganda - Health"),
+            ],
         )
         self.assertTrue("loc" in response.context["form"].fields)
 
@@ -392,7 +404,10 @@ class VideoTest(UreportTest):
         self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
         self.assertEqual(
             list(response.context["form"].fields["category"].choices),
-            [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+            [
+                ("", response.context["form"].fields["category"].empty_label),
+                (self.health_uganda.pk, "uganda - Health"),
+            ],
         )
         self.assertTrue("loc" in response.context["form"].fields)
 
