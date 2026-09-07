@@ -459,7 +459,10 @@ class PollTest(UreportTest):
             self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
             self.assertEqual(
                 list(response.context["form"].fields["category"].choices),
-                [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+                [
+                    ("", response.context["form"].fields["category"].empty_label),
+                    (self.health_uganda.pk, "uganda - Health"),
+                ],
             )
             self.assertIn("category_image", response.context["form"].fields)
             self.assertIn("poll_tags", response.context["form"].fields)
@@ -571,7 +574,10 @@ class PollTest(UreportTest):
                 self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
                 self.assertEqual(
                     list(response.context["form"].fields["category"].choices),
-                    [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+                    [
+                        ("", response.context["form"].fields["category"].empty_label),
+                        (self.health_uganda.pk, "uganda - Health"),
+                    ],
                 )
                 self.assertIn("category_image", response.context["form"].fields)
                 self.assertIn("poll_tags", response.context["form"].fields)
@@ -586,7 +592,13 @@ class PollTest(UreportTest):
                             for elt in response.context["form"].fields["backend"].choices
                         ]
                     ),
-                    set([("", "---------"), (poll.backend.pk, "rapidpro"), (floip_backend.pk, "floip")]),
+                    set(
+                        [
+                            ("", response.context["form"].fields["backend"].empty_label),
+                            (poll.backend.pk, "rapidpro"),
+                            (floip_backend.pk, "floip"),
+                        ]
+                    ),
                 )
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
@@ -789,7 +801,10 @@ class PollTest(UreportTest):
             self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
             self.assertEqual(
                 list(response.context["form"].fields["category"].choices),
-                [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+                [
+                    ("", response.context["form"].fields["category"].empty_label),
+                    (self.health_uganda.pk, "uganda - Health"),
+                ],
             )
             self.assertIn("category_image", response.context["form"].fields)
             self.assertIn("poll_tags", response.context["form"].fields)
