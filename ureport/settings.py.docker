@@ -90,9 +90,11 @@ if os.environ.get("AWS_STORAGE_BUCKET_NAME"):
     THUMBNAIL_STORAGE = STORAGES["default"]["BACKEND"]  # noqa
     MEDIA_URL = os.environ.get("MEDIA_URL", "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME)
 
-# no debug toolbar, and the security middleware first
+# no debug toolbar, and the security middleware first; whitenoise right after it so the
+# web process serves the static files baked into the image
 MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -124,6 +126,10 @@ LOGGING = {
 # static assets are collected and compressed into the image at build time
 COMPRESS_CSS_HASHING_METHOD = "content"
 COMPRESS_OFFLINE = True
+WHITENOISE_MAX_AGE = 3600
+# compressor writes its offline bundles under CACHE/ with content-hashed names, so those
+# can be cached forever
+WHITENOISE_IMMUTABLE_FILE_TEST = r"/CACHE/"
 COMPRESS_OFFLINE_CONTEXT = [
     dict(STATIC_URL=STATIC_URL, base_template="frame.html", org=None, debug=False, testing=False),  # noqa
     dict(STATIC_URL=STATIC_URL, base_template="public_base.html", org=None, debug=False, testing=False),  # noqa
