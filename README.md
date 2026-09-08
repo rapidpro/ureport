@@ -44,12 +44,12 @@ The repository ships a `Dockerfile` that builds a single image serving all the
 process types — static assets are collected and offline-compressed into the
 image and served by the web process itself (whitenoise), and all deployment configuration comes from environment variables (see
 `ureport/settings.py.docker`). The web process is the default command; workers
-and the beat scheduler run from the same image:
+run from the same image with the beat scheduler embedded (`-B` - RedBeat's redis lock
+keeps exactly one beat active, so it's safe on every worker):
 
 ```
 % gunicorn ureport.wsgi:application            # default CMD
-% celery -A ureport worker -Q sync -Ofair      # a queue worker
-% celery -A ureport beat                       # the scheduler (safe to run replicas)
+% celery -A ureport worker -B -Q sync -Ofair   # a queue worker (embedded scheduler)
 ```
 
 Required environment: `DJANGO_SECRET_KEY`, `DATABASE_URL` and `VALKEY_HOST` (or

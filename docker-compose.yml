@@ -42,21 +42,14 @@ services:
 
   worker:
     build: .
-    command: celery -A ureport worker -Q celery,sync,slow -Ofair --loglevel=INFO
+    # -B embeds the beat scheduler - RedBeat's redis lock keeps exactly one active
+    command: celery -A ureport worker -B -Q celery,sync,slow -Ofair --loglevel=INFO
     environment: *env
     volumes:
       - media-data:/app/media
     depends_on:
       postgres:
         condition: service_healthy
-      valkey:
-        condition: service_started
-
-  beat:
-    build: .
-    command: celery -A ureport beat --loglevel=INFO
-    environment: *env
-    depends_on:
       valkey:
         condition: service_started
 

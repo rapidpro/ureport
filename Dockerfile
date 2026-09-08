@@ -48,10 +48,8 @@ ENV PATH="/app/.venv/bin:$PATH" \
 USER ureport
 EXPOSE 8000
 
-# the web process; workers and beat run from the same image by overriding the command:
-#   celery -A ureport worker -Q sync -Ofair --loglevel=INFO
-#   celery -A ureport beat --loglevel=INFO
-# (beat runs as its own process - RedBeat's redis lock keeps exactly one active, so
-# running beat replicas is safe; the worker's embedded -B beat is not used as it fails
-# to spawn on this celery/python combination)
+# the web process; workers run from the same image by overriding the command, with the
+# beat scheduler embedded via -B (RedBeat's redis lock keeps exactly one beat active,
+# so this is safe on every worker, replicas included):
+#   celery -A ureport worker -B -Q sync -Ofair --loglevel=INFO
 CMD ["gunicorn", "ureport.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "--access-logfile", "-"]
