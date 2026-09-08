@@ -156,11 +156,19 @@ STATICFILES_FINDERS = (
 
 COMPRESS_PRECOMPILERS = (("text/less", "lessc {infile} {outfile}"),)
 
+# static files are served by whitenoise from STATIC_ROOT (the collectstatic output); its
+# autorefresh/finders defaults follow DEBUG so development serves straight from the
+# source dirs. Non-debug settings set WHITENOISE_MAX_AGE for browser caching.
+# compressor writes its offline bundles under CACHE/ with content-hashed names, so those
+# can be cached forever.
+WHITENOISE_IMMUTABLE_FILE_TEST = r"/CACHE/"
+
 # Make this unique, and don't share it with anybody. Deployments must set this
 # via the DJANGO_SECRET_KEY environment variable; the default is for development only.
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-secret-key-not-used-anywhere-else")
 
 MIDDLEWARE = (
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

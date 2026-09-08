@@ -134,9 +134,6 @@ LOGGING = {
 COMPRESS_CSS_HASHING_METHOD = "content"
 COMPRESS_OFFLINE = True
 WHITENOISE_MAX_AGE = 3600
-# compressor writes its offline bundles under CACHE/ with content-hashed names, so those
-# can be cached forever
-WHITENOISE_IMMUTABLE_FILE_TEST = r"/CACHE/"
 COMPRESS_OFFLINE_CONTEXT = [
     dict(STATIC_URL=STATIC_URL, base_template="frame.html", org=None, debug=False, testing=False),  # noqa
     dict(STATIC_URL=STATIC_URL, base_template="public_base.html", org=None, debug=False, testing=False),  # noqa

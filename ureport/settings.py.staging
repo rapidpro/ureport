@@ -99,6 +99,7 @@ DATABASES['default'] = dj_database_url.config()
 # no debug toolbar in prod
 MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -108,6 +109,8 @@ MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'dash.orgs.middleware.SetOrgMiddleware',
 )
+
+WHITENOISE_MAX_AGE = 3600
 
 LOGGING = {
     'version': 1,
