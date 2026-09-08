@@ -16,7 +16,10 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 EMPTY_SUBDOMAIN_HOST = 'http://nigeria.ureport.staging.nyaruka.com'
 HOSTNAME = 'ureport.staging.nyaruka.com'
-ALLOWED_HOSTS = ['.nyaruka.com', '.ureport.in']
+# as prod: a load balancer's health checks arrive with the target's IP as the Host header,
+# and CommonMiddleware validates every request's host, so a domain allowlist here turns each
+# check into a 400. Host validation is the load balancer's job (it only forwards our domains).
+ALLOWED_HOSTS = ['*']
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_SECURE = True
