@@ -1,3 +1,15 @@
+v1.6.12 (2026-09-07)
+-------------------------
+ * Replace deprecated EMAIL_* settings with MAILERS
+ * Update to Django 6.1
+
+v1.6.11 (2026-09-01)
+-------------------------
+ * Recompile locale MO files
+ * Fill in missing and stale translations in locale files
+ * Allow postgres and valkey hosts in dev settings to come from the environment
+ * Add sync jobs to the superuser admin menus
+
 v1.6.10 (2026-08-26)
 -------------------------
  * Convert the stats tasks to chunked resumable sync jobs

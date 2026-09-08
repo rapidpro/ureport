@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone as tzone
 
 from mock import Mock, patch
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -458,7 +459,10 @@ class PollTest(UreportTest):
             self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
             self.assertEqual(
                 list(response.context["form"].fields["category"].choices),
-                [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+                [
+                    ("", response.context["form"].fields["category"].empty_label),
+                    (self.health_uganda.pk, "uganda - Health"),
+                ],
             )
             self.assertIn("category_image", response.context["form"].fields)
             self.assertIn("poll_tags", response.context["form"].fields)
@@ -570,7 +574,10 @@ class PollTest(UreportTest):
                 self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
                 self.assertEqual(
                     list(response.context["form"].fields["category"].choices),
-                    [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+                    [
+                        ("", response.context["form"].fields["category"].empty_label),
+                        (self.health_uganda.pk, "uganda - Health"),
+                    ],
                 )
                 self.assertIn("category_image", response.context["form"].fields)
                 self.assertIn("poll_tags", response.context["form"].fields)
@@ -585,7 +592,13 @@ class PollTest(UreportTest):
                             for elt in response.context["form"].fields["backend"].choices
                         ]
                     ),
-                    set([("", "---------"), (poll.backend.pk, "rapidpro"), (floip_backend.pk, "floip")]),
+                    set(
+                        [
+                            ("", response.context["form"].fields["backend"].empty_label),
+                            (poll.backend.pk, "rapidpro"),
+                            (floip_backend.pk, "floip"),
+                        ]
+                    ),
                 )
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
@@ -788,7 +801,10 @@ class PollTest(UreportTest):
             self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
             self.assertEqual(
                 list(response.context["form"].fields["category"].choices),
-                [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
+                [
+                    ("", response.context["form"].fields["category"].empty_label),
+                    (self.health_uganda.pk, "uganda - Health"),
+                ],
             )
             self.assertIn("category_image", response.context["form"].fields)
             self.assertIn("poll_tags", response.context["form"].fields)
@@ -1161,7 +1177,7 @@ class PollTest(UreportTest):
             CACHES={
                 "default": {
                     "BACKEND": "django_valkey.cache.ValkeyCache",
-                    "LOCATION": "redis://127.0.0.1:6379/1",
+                    "LOCATION": "redis://%s:6379/1" % getattr(settings, "VALKEY_HOST", "localhost"),
                 }
             }
         ):

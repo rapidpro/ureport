@@ -288,6 +288,14 @@
                                                     <span class="menu-link-title">{% trans "Images" %}</span>
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="{% url 'syncjobs.syncjob_list' %}">
+                                                    <span class="icon">
+                                                        <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                                                    </span>
+                                                    <span class="menu-link-title">{% trans "Sync Jobs" %}</span>
+                                                </a>
+                                            </li>
                                         {% endif %}
                                     </ul>
                                 </aside>

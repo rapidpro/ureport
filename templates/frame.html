@@ -159,6 +159,9 @@
                                             <li>
                                                 <a href="{% url 'dashblocks.dashblocktype_list' %}">{% trans "Content Types" %}</a>
                                             </li>
+                                            <li>
+                                                <a href="{% url 'syncjobs.syncjob_list' %}">{% trans "Sync Jobs" %}</a>
+                                            </li>
                                             {% if request.user.is_superuser or org_perms.assets.image_list %}
                                                 <li>
                                                     <a href="{% url 'assets.image_list' %}">{% trans "Images" %}</a>

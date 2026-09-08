@@ -43,11 +43,18 @@ ADMINS = (
 )
 
 # set the mail settings, we send through gmail
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '${gmail_user}')
+MAILERS = {
+    'default': {
+        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
+        'OPTIONS': {
+            'host': os.environ.get('EMAIL_HOST', 'smtp.gmail.com'),
+            'username': os.environ.get('EMAIL_HOST_USER', '${gmail_user}'),
+            'password': os.environ.get('EMAIL_HOST_PASSWORD', '${gmail_password}'),
+            'use_tls': True,
+        },
+    }
+}
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '${gmail_user}')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '${gmail_password}')
-EMAIL_USE_TLS = True
 
 MANAGERS = ADMINS
 
