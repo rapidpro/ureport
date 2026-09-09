@@ -1,3 +1,8 @@
+v1.6.14 (2026-09-09)
+-------------------------
+ * Compare the proxy scheme header against lowercase https
+ * Allow any host on staging, as prod does
+
 v1.6.13 (2026-09-09)
 -------------------------
  * Share the whitenoise config across all settings
