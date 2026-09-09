@@ -1,3 +1,10 @@
+v1.6.13 (2026-09-09)
+-------------------------
+ * Share the whitenoise config across all settings
+ * Drop the beat container and embed the scheduler in the worker
+ * Serve static files from the container with whitenoise
+ * Add container support
+
 v1.6.12 (2026-09-07)
 -------------------------
  * Replace deprecated EMAIL_* settings with MAILERS
