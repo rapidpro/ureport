@@ -58,6 +58,12 @@ jobs:
         sudo apt-get install gettext
         uv run ./code_check.py --debug
 
+        # check static files can be collected (hashed and precompressed), bundled and
+        # the bundles precompressed, as the container build does
+        uv run python manage.py collectstatic --noinput
+        uv run python manage.py compress --force
+        uv run python -m whitenoise.compress sitestatic/CACHE
+
     - name: Run tests
       run: |
         uv run coverage run manage.py test --verbosity=2 --noinput
