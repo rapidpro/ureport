@@ -34,7 +34,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = False
 SECURE_HSTS_SECONDS = 86400
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
+# trust the proxy's scheme header; proxies and load balancers send the scheme in lowercase,
+# and Django compares the value exactly
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_REDIRECT_EXEMPT =  []
 SECURE_SSL_HOST = None
 SECURE_SSL_REDIRECT = False
@@ -121,7 +123,9 @@ WHITENOISE_MAX_AGE = 3600
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    # keep loggers that exist before Django configures logging — the WSGI server's own
+    # access and error loggers in particular — instead of silencing them
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -159,9 +163,6 @@ LOGGING = {
 # use our cache backend for sessions
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 SESSION_CACHE_ALIAS = "default"
-
-# trust connections that are coming in on this protocol
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 
 # compress arguments
 COMPRESS_CSS_HASHING_METHOD = 'content'
