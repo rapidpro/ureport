@@ -723,7 +723,7 @@ wheels = [
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.22.0"
+version = "1.23.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery", extra = ["redis"] },
@@ -739,9 +739,9 @@ dependencies = [
     { name = "smartmin" },
     { name = "sorl-thumbnail" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ff/ec/fb7a98879ea90763610f41ecfe5da4d1a49aa6dc2a7d87198a374511f965/rapidpro_dash-1.22.0.tar.gz", hash = "sha256:627c172f99c172ae156588eb1ccf438bf73c88a57adebddd176db77014f7892e", size = 735736, upload-time = "2026-09-07T11:49:22.759Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/8e/b5a3eee5b8b1a493503ed45f8ec3ce02e297ac4a467362050e7c24a831af/rapidpro_dash-1.23.0.tar.gz", hash = "sha256:974a3aa590e2903d2ebfc7f27442bff6de87200e26d749015d6f2369395e08d4", size = 736494, upload-time = "2026-09-14T13:04:31.107Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/bb/73/bd7a364b28d368844ae839110555bd0c84bbb9432ddf94d5019da0681329/rapidpro_dash-1.22.0-py3-none-any.whl", hash = "sha256:627b0f788579975adbfd03dec84daf9f86ff99123f505ceb4834b832dc6819b9", size = 171335, upload-time = "2026-09-07T11:49:21.59Z" },
+    { url = "https://files.pythonhosted.org/packages/45/ce/cea2725dbd296045655c2cf246d435c34afb7648b99150b62f098d9508cd/rapidpro_dash-1.23.0-py3-none-any.whl", hash = "sha256:43d3b7fd15821e0c8b406d24f4b7cbf8e61ab3d215b11005d75ecf8c379ab1e5", size = 171580, upload-time = "2026-09-14T13:04:29.766Z" },
 ]
 
 [[package]]
@@ -1075,7 +1075,7 @@ requires-dist = [
     { name = "pillow", specifier = "~=12.3.0" },
     { name = "psycopg", specifier = "~=3.2.3" },
     { name = "pycountry", specifier = ">=24.5.1" },
-    { name = "rapidpro-dash", specifier = ">=1.22.0,<2.0.0" },
+    { name = "rapidpro-dash", specifier = ">=1.23.0,<2.0.0" },
     { name = "rapidpro-python", specifier = ">=2.22.1,<3.0.0" },
     { name = "regex", specifier = "~=2026.4.4" },
     { name = "sentry-sdk", specifier = "~=2.19.2" },
