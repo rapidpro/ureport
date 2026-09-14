@@ -76,6 +76,44 @@ class PollTest(UreportTest):
 
         mock_task_delay.assert_called_once_with([poll1.pk, poll2.pk])
 
+    def test_global_access_users(self):
+        poll = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        list_url = reverse("polls.poll_list")
+        questions_url = reverse("polls.poll_questions", args=[poll.pk])
+
+        staff_user = self.create_user("Staffuser")
+        staff_user.is_staff = True
+        staff_user.save()
+        global_user = self.create_user("Globaluser", group_names=("Global",))
+
+        for user in (staff_user, global_user):
+            self.assertNotIn(user, self.uganda.get_org_users())
+            self.login(user)
+
+            # the chooser offers every org
+            response = self.client.get(reverse("orgs.org_choose"))
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual({self.uganda, self.nigeria}, set(response.context["orgs"]))
+
+            # and they administer an org site they hold no role on, with the admin navbar shown
+            response = self.client.get(reverse("orgs.org_home"), SERVER_NAME="uganda.ureport.io")
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.context["org"], self.uganda)
+            self.assertContains(response, reverse("orgs.org_manage_accounts"))
+
+            response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(list(response.context["object_list"]), [poll])
+
+            response = self.client.get(questions_url, SERVER_NAME="uganda.ureport.io")
+            self.assertEqual(response.status_code, 200)
+
+            # but not superuser-only views
+            response = self.client.get(reverse("orgs.org_list"), SERVER_NAME="uganda.ureport.io")
+            self.assertLoginRedirect(response)
+
+            self.client.logout()
+
     def test_poll_pull_refresh(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
