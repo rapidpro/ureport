@@ -1,3 +1,7 @@
+v1.6.15 (2026-09-14)
+-------------------------
+ * Update rapidpro-dash to 1.23.0 for staff and global group org access
+
 v1.6.14 (2026-09-09)
 -------------------------
  * Compare the proxy scheme header against lowercase https
