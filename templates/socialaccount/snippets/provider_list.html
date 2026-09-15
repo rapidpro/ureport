@@ -1,0 +1,16 @@
+{% load i18n socialaccount sso %}
+
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+    <div class="buttons sso-providers">
+        {% for provider in socialaccount_providers %}
+            <a href="{% sso_login_url provider process|default:'login' %}" class="button is-fullwidth" title="{{ provider.name }}">
+                {% if process == "connect" %}
+                    {% blocktrans with provider=provider.name %}Connect {{ provider }}{% endblocktrans %}
+                {% else %}
+                    {% blocktrans with provider=provider.name %}Sign In with {{ provider }}{% endblocktrans %}
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}
