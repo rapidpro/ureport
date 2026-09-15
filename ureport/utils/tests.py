@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import json
+import os
+import tempfile
 import zoneinfo
 from datetime import datetime, timezone as tzone
 
@@ -10,6 +12,7 @@ from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
+from django.test import SimpleTestCase
 from django.utils import timezone
 
 from dash.categories.models import Category
@@ -37,6 +40,7 @@ from ureport.utils import (
     json_date_to_datetime,
     update_poll_flow_data,
 )
+from ureport.utils.storage import StaticFilesStorage
 
 
 class UtilsTest(UreportTest):
@@ -569,3 +573,34 @@ class UtilsTest(UreportTest):
 
                 self.assertEqual(get_global_count(), 20)
                 cache_get_mock.assert_called_once_with("global_count", None)
+
+
+class StaticFilesStorageTest(SimpleTestCase):
+    def test_post_process(self):
+        with tempfile.TemporaryDirectory() as root:
+            os.makedirs(os.path.join(root, "css"))
+            os.makedirs(os.path.join(root, "img"))
+            with open(os.path.join(root, "img", "u.png"), "wb") as f:
+                f.write(b"png")
+            with open(os.path.join(root, "css", "site.css"), "w") as f:
+                f.write("body { background: url(../img/u.png) }\n")
+                f.write(".x { color: red }\n" * 50)  # enough content for compression to shrink it
+                f.write("/*# sourceMappingURL=site.css.map */\n")
+
+            storage = StaticFilesStorage(location=root)
+            paths = {name: (storage, name) for name in ("css/site.css", "img/u.png")}
+            results = list(storage.post_process(paths))
+
+            # a reference to a missing file isn't an error and is left alone, whereas one to an existing
+            # file is rewritten to its hashed name
+            self.assertFalse([r for r in results if isinstance(r[2], Exception)])
+            hashed_css = storage.stored_name("css/site.css")
+            self.assertRegex(hashed_css, r"^css/site\.[0-9a-f]{12}\.css$")
+            with storage.open(hashed_css) as f:
+                content = f.read().decode()
+            self.assertRegex(content, r"url\(\"\.\./img/u\.[0-9a-f]{12}\.png\"\)")
+            self.assertIn("sourceMappingURL=site.css.map", content)
+
+            # and precompressed variants are written alongside
+            self.assertTrue(storage.exists(hashed_css + ".br"))
+            self.assertTrue(storage.exists(hashed_css + ".gz"))

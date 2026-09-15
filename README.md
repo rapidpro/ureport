@@ -41,8 +41,8 @@ Note that the endpoint called for API calls is by default 'localhost:8001', you 
 ## Running with Docker
 
 The repository ships a `Dockerfile` that builds a single image serving all the
-process types — static assets are collected and offline-compressed into the
-image and served by the web process itself (whitenoise), and all deployment configuration comes from environment variables (see
+process types — static assets are collected, content-hashed, offline-compressed and precompressed
+(brotli and gzip) into the image and served by the web process itself (whitenoise), and all deployment configuration comes from environment variables (see
 `ureport/settings.py.docker`). The web process is the default command; workers
 run from the same image with the beat scheduler embedded (`-B` - RedBeat's redis lock
 keeps exactly one beat active, so it's safe on every worker):
