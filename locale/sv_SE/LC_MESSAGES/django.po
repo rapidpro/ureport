@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -706,6 +706,27 @@ msgstr "Registrera dig"
 msgid "Enter Dashboard"
 msgstr "Gå till dashboard"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Konton"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanaler"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nytt lösenord"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Tillbaka till webbsidan"
 
@@ -1243,15 +1264,11 @@ msgstr[1] "%(counter)s resultat"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Resultat %(start)s-%(end)s av %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Nytt lösenord"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Kanaler"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Ny berättelse"
@@ -1969,6 +1986,13 @@ msgstr "Jobb #%(job_id)d synkroniseras om från början vid nästa körning"
 
 msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Alla platser"

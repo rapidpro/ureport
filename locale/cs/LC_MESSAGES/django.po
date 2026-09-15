@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -719,6 +719,27 @@ msgstr "Přihlásit se"
 msgid "Enter Dashboard"
 msgstr "Vstup na ovládací panel"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Účty"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanály"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nové heslo"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Zpět na webovou stranu"
 
@@ -1262,15 +1283,11 @@ msgstr[3] "%(counter)s výsledků"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Výsledky %(start)s-%(end)s z %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Nové heslo"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Kanály"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Nový příběh"
@@ -1988,6 +2005,13 @@ msgstr "Úloha #%(job_id)d se při příštím spuštění synchronizuje znovu o
 
 msgid "Something to trigger localizations"
 msgstr "Něco pro spouštění lokalizací"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Všechny lokality"

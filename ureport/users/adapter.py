@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
 
 from allauth.account.adapter import DefaultAccountAdapter
+from allauth.mfa.adapter import DefaultMFAAdapter
 
 from django.conf import settings
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -23,6 +24,12 @@ class AccountAdapter(DefaultAccountAdapter):
         allowed_hosts = {host} if host and is_site_host(host) else set()
 
         return url_has_allowed_host_and_scheme(url, allowed_hosts=allowed_hosts)
+
+
+class MFAAdapter(DefaultMFAAdapter):
+    def _get_site_name(self) -> str:
+        # the org site the user is on rather than the django.contrib.sites record
+        return self.request.get_host()
 
 
 def is_site_host(host: str) -> bool:

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -711,6 +711,27 @@ msgstr "প্রবেশ করুন "
 msgid "Enter Dashboard"
 msgstr "ড্যাশবোর্ড-এ প্রবেশ করুন"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "একাউন্টস"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "চ্যানেলগুলো"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "নতুন পাসওয়ার্ড"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "ওয়েবসাইটে ফিরে যান"
 
@@ -1248,15 +1269,11 @@ msgstr[1] "%(counter)s টি ফলাফল"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "%(count)s টির মধ্যে %(start)s-%(end)s ফলাফল"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "নতুন পাসওয়ার্ড"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "চ্যানেলগুলো"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ নতুন ঘটনা"
@@ -1976,6 +1993,13 @@ msgstr "কাজ #%(job_id)d পরবর্তী রানে শুরু �
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "সব অবস্থান"

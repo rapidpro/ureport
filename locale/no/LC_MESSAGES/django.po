@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -709,6 +709,27 @@ msgstr "Registrer deg"
 msgid "Enter Dashboard"
 msgstr "Gå til dashbord"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Kontoer"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanaler"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nytt passord"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Tilbake til nettsiden"
 
@@ -1246,15 +1267,11 @@ msgstr[1] "%(counter)s resultater"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Resultater %(start)s-%(end)s av %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Nytt passord"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Kanaler"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Ny historie"
@@ -1972,6 +1989,13 @@ msgstr "Jobb #%(job_id)d vil synkronisere på nytt fra bunnen av ved neste kjør
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Alle steder"

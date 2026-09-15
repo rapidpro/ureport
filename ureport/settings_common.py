@@ -701,6 +701,7 @@ INSTALLED_APPS = (
     # allauth
     "allauth",
     "allauth.account",
+    "allauth.mfa",
     # dash apps
     "dash.orgs",
     "dash.dashblocks",
@@ -931,6 +932,10 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_LOGOUT_REDIRECT_URL = LOGOUT_REDIRECT_URL
 
+MFA_ADAPTER = "ureport.users.adapter.MFAAdapter"
+MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
+MFA_TOTP_ISSUER = "U-Report"
+
 if TESTING:
     ACCOUNT_RATE_LIMITS = False  # rate limit state in the cache would otherwise persist between test runs
 
@@ -1122,6 +1127,15 @@ SITE_ALLOW_NO_ORG = (
     "account_verify_phone",
     "account_change_phone",
     "account_signup_by_passkey",
+    "mfa_index",
+    "mfa_authenticate",
+    "mfa_reauthenticate",
+    "mfa_trust",
+    "mfa_activate_totp",
+    "mfa_deactivate_totp",
+    "mfa_view_recovery_codes",
+    "mfa_generate_recovery_codes",
+    "mfa_download_recovery_codes",
     # sync jobs are listed and controlled across all orgs, so they need no org context
     "syncjobs.syncjob_list",
     "syncjobs.syncjob_pause",

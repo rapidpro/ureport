@@ -1,0 +1,14 @@
+{% load allauth %}
+<div class="box account-panel">
+    <h2 class="title is-5">
+        {% slot title %}
+        {% endslot %}
+    </h2>
+    {% slot body %}
+    {% endslot %}
+    {% if slots.actions %}
+        <div class="buttons">
+            {% for action in slots.actions %}{{ action }}{% endfor %}
+        </div>
+    {% endif %}
+</div>
