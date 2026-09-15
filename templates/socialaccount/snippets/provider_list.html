@@ -1,0 +1,12 @@
+{% load i18n socialaccount sso %}
+
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+    <div class="buttons sso-providers">
+        {% for provider in socialaccount_providers %}
+            <a href="{% sso_login_url provider %}" class="button is-fullwidth" title="{{ provider.name }}">
+                {% blocktrans with provider=provider.name %}Sign In with {{ provider }}{% endblocktrans %}
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -26,6 +26,12 @@
                         <li>
                             <a href="{{ password_url }}" class="{% if request.path == password_url %}is-active{% endif %}">{% trans "Change Password" %}</a>
                         </li>
+                        {% url 'socialaccount_connections' as connections_url %}
+                        {% if connections_url %}
+                            <li>
+                                <a href="{{ connections_url }}" class="{% if request.path == connections_url %}is-active{% endif %}">{% trans "Account Connections" %}</a>
+                            </li>
+                        {% endif %}
                         {% url 'mfa_index' as mfa_url %}
                         {% if mfa_url %}
                             <li>

@@ -1,0 +1,23 @@
+from urllib.parse import urlparse
+
+from django import template
+from django.conf import settings
+
+register = template.Library()
+
+
+@register.simple_tag(takes_context=True)
+def sso_login_url(context, provider):
+    """
+    The URL to start a single sign-on login with the given provider. Identity providers need one registered callback
+    URL, so the login is always started on the root host and the user is sent back to the host they came from.
+    """
+    request = context["request"]
+
+    next_url = context.get("redirect_field_value") or settings.LOGIN_REDIRECT_URL
+    if not urlparse(next_url).netloc:
+        next_url = f"{request.scheme}://{request.get_host()}{next_url}"
+
+    login_url = provider.get_login_url(request, process="login", next=next_url)
+
+    return f"{request.scheme}://{settings.HOSTNAME}{login_url}"

@@ -53,6 +53,39 @@ if env_bool("DJANGO_SECURE", True):
     SECURE_HSTS_PRELOAD = False
     SECURE_HSTS_SECONDS = 86400
 
+# single sign-on: a Google client and/or one generic OpenID Connect provider (e.g. an Entra ID tenant), each enabled by
+# setting its client id. Providers send users back to the callback URL on SITE_HOSTNAME, so register
+# https://<SITE_HOSTNAME>/accounts/google/login/callback/ and https://<SITE_HOSTNAME>/accounts/oidc/<provider id>/login/callback/
+SOCIALACCOUNT_PROVIDERS = {}
+
+if os.environ.get("SSO_GOOGLE_CLIENT_ID"):
+    SOCIALACCOUNT_PROVIDERS["google"] = {
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+        "OAUTH_PKCE_ENABLED": True,
+        "FETCH_USER_INFO": True,
+        "APP": {"client_id": os.environ["SSO_GOOGLE_CLIENT_ID"], "secret": os.environ.get("SSO_GOOGLE_SECRET", "")},
+    }
+
+if os.environ.get("SSO_OIDC_CLIENT_ID"):
+    SOCIALACCOUNT_PROVIDERS["openid_connect"] = {
+        "OAUTH_PKCE_ENABLED": False,
+        "APPS": [
+            {
+                "provider_id": os.environ.get("SSO_OIDC_PROVIDER_ID", "oidc"),
+                "name": os.environ.get("SSO_OIDC_NAME", "Single Sign-On"),
+                "client_id": os.environ["SSO_OIDC_CLIENT_ID"],
+                "secret": os.environ.get("SSO_OIDC_SECRET", ""),
+                "settings": {
+                    "server_url": os.environ["SSO_OIDC_SERVER_URL"],
+                    "token_auth_method": "client_secret_basic",
+                    "scopes": ["openid", "email", "profile"],
+                    "response_type": "code",
+                },
+            }
+        ],
+    }
+
 if os.environ.get("ADMIN_EMAIL"):
     ADMINS = (("Ops", os.environ["ADMIN_EMAIL"]),)
     MANAGERS = ADMINS

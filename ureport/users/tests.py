@@ -1,4 +1,5 @@
 from allauth.account.models import EmailAddress
+from allauth.core import context
 from allauth.mfa.adapter import get_adapter as get_mfa_adapter
 from allauth.mfa.models import Authenticator
 from allauth.mfa.totp.internal.auth import (
@@ -7,11 +8,18 @@ from allauth.mfa.totp.internal.auth import (
     hotp_value,
     yield_hotp_counters_from_time,
 )
+from allauth.socialaccount.adapter import get_adapter as get_social_adapter
+from allauth.socialaccount.helpers import complete_social_login
+from allauth.socialaccount.models import SocialAccount, SocialLogin
 
 from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AnonymousUser
+from django.contrib.messages.storage.fallback import FallbackStorage
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.core import mail
+from django.test import RequestFactory, override_settings
 from django.urls import URLPattern, URLResolver, reverse
 
 from dash.orgs.middleware import ALLOW_NO_ORG
@@ -431,3 +439,146 @@ class MFATest(UreportTest):
         )
         self.assertEqual(404, response.status_code)
         self.assertEqual(1, self.superuser.authenticator_set.count())
+
+
+GOOGLE_PROVIDER = {
+    "google": {
+        "SCOPE": ["profile", "email"],
+        "APP": {"client_id": "test-client", "secret": "test-secret", "key": ""},
+    }
+}
+
+
+@override_settings(SOCIALACCOUNT_PROVIDERS=GOOGLE_PROVIDER)
+class SSOTest(UreportTest):
+    def setUp(self):
+        super().setUp()
+
+        self.editor = self.create_user("editor")
+        self.editor.set_password("Qwerty123")
+        self.editor.save()
+
+    def test_login_buttons(self):
+        login_url = reverse("account_login")
+
+        # provider buttons start the login on the root host and come back to the host the user is on
+        response = self.client.get(login_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertContains(response, "Sign In with Google")
+        self.assertContains(
+            response,
+            'href="http://ureport.io/accounts/google/login/?process=login&amp;next=http%3A%2F%2Fnigeria.ureport.io%2Fmanage%2Forg%2Fchoose%2F"',
+        )
+
+        response = self.client.get(login_url + "?next=/manage/org/home/", SERVER_NAME="nigeria.ureport.io")
+        self.assertContains(
+            response,
+            'href="http://ureport.io/accounts/google/login/?process=login&amp;next=http%3A%2F%2Fnigeria.ureport.io%2Fmanage%2Forg%2Fhome%2F"',
+        )
+
+        # clicking one goes straight to the provider
+        response = self.client.get(
+            "/accounts/google/login/?process=login&next=http%3A%2F%2Fnigeria.ureport.io%2Fmanage%2Forg%2Fhome%2F",
+            SERVER_NAME="ureport.io",
+        )
+        self.assertEqual(302, response.status_code)
+        self.assertTrue(response["Location"].startswith("https://accounts.google.com/o/oauth2/v2/auth?"))
+        # the callback is always on the root host, over https as ACCOUNT_DEFAULT_HTTP_PROTOCOL dictates
+        self.assertIn(
+            "redirect_uri=https%3A%2F%2Fureport.io%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F", response["Location"]
+        )
+
+        # no buttons when no provider is configured
+        with override_settings(SOCIALACCOUNT_PROVIDERS={}):
+            response = self.client.get(login_url, SERVER_NAME="nigeria.ureport.io")
+            self.assertNotContains(response, "Sign In with")
+
+    def social_login(self, extra_data, email_addresses=(), next_url="http://nigeria.ureport.io/manage/org/home/"):
+        """
+        Simulates the provider having authenticated a user, i.e. what happens after the callback
+        """
+        request = RequestFactory().get(reverse("google_callback"), SERVER_NAME="ureport.io")
+        request.user = AnonymousUser()
+        request.org = None  # the root host has no org
+        SessionMiddleware(lambda r: None).process_request(request)
+        request._messages = FallbackStorage(request)
+
+        with context.request_context(request):
+            provider = get_social_adapter().get_provider(request, "google")
+            sociallogin = SocialLogin(
+                user=User(email=extra_data.get("email", ""), first_name="Bob", last_name="Marley"),
+                account=SocialAccount(provider="google", uid="12345", extra_data=extra_data),
+                email_addresses=[EmailAddress(email=e, verified=True, primary=True) for e in email_addresses],
+                provider=provider,
+            )
+            sociallogin.state = {"next": next_url, "process": "login"}
+            response = complete_social_login(request, sociallogin)
+
+        return request, response
+
+    def test_social_login_existing_user(self):
+        request, response = self.social_login(
+            {"email": "editor@nyaruka.com", "verified_email": True}, email_addresses=["editor@nyaruka.com"]
+        )
+        self.assertEqual(302, response.status_code)
+        self.assertEqual("http://nigeria.ureport.io/manage/org/home/", response["Location"])
+        self.assertEqual(self.editor, request.user)
+
+        # the social account is now connected to the existing user
+        self.assertEqual(self.editor, SocialAccount.objects.get(provider="google", uid="12345").user)
+
+    def test_social_login_by_upn(self):
+        # some providers don't include an email claim but do identify the user by their principal name
+        request, response = self.social_login({"upn": "Editor@nyaruka.com"})
+        self.assertEqual(302, response.status_code)
+        self.assertEqual(self.editor, request.user)
+        self.assertEqual(self.editor, SocialAccount.objects.get(provider="google", uid="12345").user)
+
+    def test_social_login_unknown_user(self):
+        request, response = self.social_login(
+            {"email": "stranger@nyaruka.com", "verified_email": True}, email_addresses=["stranger@nyaruka.com"]
+        )
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, "Sign Up Closed")
+        self.assertFalse(request.user.is_authenticated)
+        self.assertFalse(User.objects.filter(email="stranger@nyaruka.com").exists())
+        self.assertFalse(SocialAccount.objects.exists())
+
+    def test_social_login_unverified_email(self):
+        # an email claim the provider hasn't verified doesn't identify the user
+        request = RequestFactory().get(reverse("google_callback"), SERVER_NAME="ureport.io")
+        request.user = AnonymousUser()
+        request.org = None
+        SessionMiddleware(lambda r: None).process_request(request)
+        request._messages = FallbackStorage(request)
+
+        with context.request_context(request):
+            provider = get_social_adapter().get_provider(request, "google")
+            sociallogin = SocialLogin(
+                user=User(email="editor@nyaruka.com"),
+                account=SocialAccount(provider="google", uid="12345", extra_data={"email": "editor@nyaruka.com"}),
+                email_addresses=[EmailAddress(email="editor@nyaruka.com", verified=False, primary=True)],
+                provider=provider,
+            )
+            sociallogin.state = {"process": "login"}
+            response = complete_social_login(request, sociallogin)
+
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, "Sign Up Closed")
+        self.assertFalse(request.user.is_authenticated)
+        self.assertFalse(SocialAccount.objects.exists())
+
+    def test_social_login_inactive_user(self):
+        self.editor.is_active = False
+        self.editor.save()
+
+        request, response = self.social_login({"upn": "editor@nyaruka.com"})
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, "Sign Up Closed")
+        self.assertFalse(request.user.is_authenticated)
+
+    def test_connections_page(self):
+        self.login(self.editor)
+
+        response = self.client.get(reverse("socialaccount_connections"), SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, "Account Connections")

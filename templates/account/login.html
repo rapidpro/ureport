@@ -22,4 +22,7 @@
     <div class="forgot-password-link">
         <a href="{% url 'account_reset_password' %}" class="has-text-info is-large">{% trans "Forgot Password?" %}</a>
     </div>
+    {% if SOCIALACCOUNT_ENABLED %}
+        {% include "socialaccount/snippets/login.html" %}
+    {% endif %}
 {% endblock content %}
