@@ -1,4 +1,5 @@
 from allauth.account.models import EmailAddress
+from allauth.mfa.adapter import get_adapter as get_mfa_adapter
 from allauth.mfa.models import Authenticator
 from allauth.mfa.totp.internal.auth import (
     SECRET_SESSION_KEY,
@@ -15,8 +16,6 @@ from django.urls import URLPattern, URLResolver, reverse
 
 from dash.orgs.middleware import ALLOW_NO_ORG
 from ureport.tests import UreportTest
-
-from .adapter import MFAAdapter
 
 User = get_user_model()
 
@@ -334,8 +333,14 @@ class MFATest(UreportTest):
         self.assertTrue(response.context["form"].errors)
         self.assertFalse(self.editor.authenticator_set.exists())
 
-        response = self.client.post(activate_url, {"code": self.totp_code(secret)}, SERVER_NAME="nigeria.ureport.io")
+        # allauth sends the notification email once the activation commits
+        with self.captureOnCommitCallbacks(execute=True):
+            response = self.client.post(
+                activate_url, {"code": self.totp_code(secret)}, SERVER_NAME="nigeria.ureport.io"
+            )
         self.assertRedirect(response, reverse("mfa_view_recovery_codes"))
+        self.assertEqual(["editor@nyaruka.com"], mail.outbox[-1].to)
+        self.assertIn("Authenticator app activated", mail.outbox[-1].body)
         self.assertEqual(
             {Authenticator.Type.TOTP, Authenticator.Type.RECOVERY_CODES},
             set(self.editor.authenticator_set.values_list("type", flat=True)),
@@ -361,7 +366,7 @@ class MFATest(UreportTest):
         self.assertEqual(200, response.status_code)
         self.assertFalse(response.wsgi_request.user.is_authenticated)
 
-        activated_secret = MFAAdapter().decrypt(
+        activated_secret = get_mfa_adapter().decrypt(
             self.editor.authenticator_set.get(type=Authenticator.Type.TOTP).data["secret"]
         )
         response = self.client.post(
@@ -412,5 +417,17 @@ class MFATest(UreportTest):
         self.assertRedirect(response, update_url)
         self.assertEqual(0, self.editor.authenticator_set.count())
 
+        # and the user is told
+        self.assertEqual(["editor@nyaruka.com"], mail.outbox[-1].to)
+        self.assertIn("Authenticator app deactivated", mail.outbox[-1].body)
+
         response = self.client.get(update_url, SERVER_NAME="nigeria.ureport.io")
         self.assertNotContains(response, disable_url)
+
+        # staff can't do this to each other
+        Authenticator.objects.create(user=self.superuser, type=Authenticator.Type.TOTP, data={"secret": "sesame"})
+        response = self.client.post(
+            reverse("users.user_disable_mfa", args=[self.superuser.id]), {}, SERVER_NAME="nigeria.ureport.io"
+        )
+        self.assertEqual(404, response.status_code)
+        self.assertEqual(1, self.superuser.authenticator_set.count())

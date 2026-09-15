@@ -1,3 +1,4 @@
+from allauth.account.adapter import get_adapter as get_account_adapter
 from allauth.mfa.models import Authenticator
 
 from django import forms
@@ -68,11 +69,16 @@ class UserCRUDL(SmartUserCRUDL):
 
         fields = ("id",)
 
+        def derive_queryset(self, **kwargs):
+            # like mimicking, not something staff should be able to do to each other
+            return super().derive_queryset(**kwargs).exclude(is_staff=True).exclude(is_superuser=True)
+
         def pre_process(self, request, *args, **kwargs):
             user = self.get_object()
 
             if request.method == "POST":
                 user.authenticator_set.all().delete()
+                get_account_adapter(request).send_notification_mail("mfa/email/totp_deactivated", user)
                 messages.success(request, _("Two-factor authentication disabled for %s.") % user.username)
 
             return HttpResponseRedirect(reverse("users.user_update", args=[user.id]))
