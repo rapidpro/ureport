@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -715,6 +715,27 @@ msgstr "Conectează-te"
 msgid "Enter Dashboard"
 msgstr "Introduce Dashboard "
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Conturi"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Canale"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Parola nouă"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Înapoi la website "
 
@@ -1255,15 +1276,11 @@ msgstr[2] "%(counter)s de rezultate"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Rezultatele %(start)s-%(end)s din %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Parola nouă"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Canale"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Istorie Nouă"
@@ -1981,6 +1998,13 @@ msgstr "Sarcina #%(job_id)d se va resincroniza de la zero la următoarea rulare"
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Toate locațiile"

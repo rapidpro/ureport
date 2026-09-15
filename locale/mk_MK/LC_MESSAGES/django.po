@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -714,6 +714,27 @@ msgstr "Пријави се"
 msgid "Enter Dashboard"
 msgstr "Влез во контролна табла"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Кориснички сметки"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Канали"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Нова лозинка"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Назад кон веб страната"
 
@@ -1254,15 +1275,11 @@ msgstr[1] "%(counter)s резултати"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Резултати %(start)s-%(end)s од %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Нова лозинка"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Канали"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Нова статија"
@@ -1980,6 +1997,13 @@ msgstr "Задачата #%(job_id)d ќе се синхронизира одно
 
 msgid "Something to trigger localizations"
 msgstr "Нешто што ја иницира локализацијата"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Сите локации"

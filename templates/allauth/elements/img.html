@@ -1,0 +1,5 @@
+{% load allauth %}
+<figure class="image {% if 'qr' in attrs.tags %}is-256x256{% endif %}">
+    <img src="{{ attrs.src }}"
+         {% if attrs.alt %}alt="{{ attrs.alt }}"{% endif %}>
+</figure>

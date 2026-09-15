@@ -1,5 +1,5 @@
 {% extends "smartmin/update.html" %}
-{% load smartmin %}
+{% load smartmin i18n %}
 
 {% block post-form %}
     {% if perms.auth.user_mimic %}
@@ -15,6 +15,24 @@
                 <div class="field-body">
                     <div class="field is-expanded">
                         <button type="submit" class="button is-primary">{{ object|user_as_string }}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endif %}
+    {% if perms.auth.user_disable_mfa and object.authenticator_set.exists %}
+        <form action="{% url 'users.user_disable_mfa' object.id %}"
+              method="post"
+              class="smartmin-form">
+            {% csrf_token %}
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">{% trans "Two-Factor Authentication" %}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-expanded">
+                        <button type="submit" class="button is-danger">{% trans "Disable" %}</button>
+                        <p class="help">{% trans "Removes the user's authenticator app and recovery codes so they can log in with just their password." %}</p>
                     </div>
                 </div>
             </div>
