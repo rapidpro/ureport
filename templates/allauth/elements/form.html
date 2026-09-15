@@ -1,0 +1,12 @@
+{% load allauth %}
+<form method="{{ attrs.method }}"
+      class="account-form"
+      {% if attrs.action %}action="{{ attrs.action }}"{% endif %}>
+    {% slot body %}
+    {% endslot %}
+    {% if slots.actions %}
+        <div class="field is-grouped">
+            {% for action in slots.actions %}<div class="control">{{ action }}</div>{% endfor %}
+        </div>
+    {% endif %}
+</form>

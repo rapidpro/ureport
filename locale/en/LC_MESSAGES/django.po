@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -667,6 +667,18 @@ msgstr ""
 msgid "Your new %s has been created."
 msgstr ""
 
+msgid "Hello,"
+msgstr ""
+
+msgid "The U-Report team"
+msgstr ""
+
+msgid "Sign In"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
 msgid "Back to Website"
 msgstr ""
 
@@ -1198,31 +1210,10 @@ msgstr[1] ""
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 
-msgid "Error"
+msgid "Change Password"
 msgstr ""
 
-msgid "Enter Dashboard"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
+msgid "Change Email"
 msgstr ""
 
 msgid "+ New Story"

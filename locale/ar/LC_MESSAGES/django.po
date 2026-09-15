@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -291,8 +291,18 @@ msgid "The API token for this backend"
 msgstr "رمز API الخاص بهذه الواجهة الخلفية"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      لقد تمت دعوتك للانضمام إلى %(org_name)s.\n      <br />\n      لقبول الدعوة، <a href='%(host)s%(join_url)s'>اضغط هنا</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      لقد تمت دعوتك للانضمام إلى %(org_name)s.\n"
+"      <br />\n"
+"      لقبول الدعوة، <a href='%(host)s%(join_url)s'>اضغط هنا</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "أنت مدعو للانضمام إلى {{org.name}}."
@@ -439,8 +449,14 @@ msgid "Remove Item?"
 msgstr "حذف "
 
 #, python-format
-msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
-msgstr "\n    هل أنت متأكد من أنك تريد إزالة <b>%(object)s</b>؟\n    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"    هل أنت متأكد من أنك تريد إزالة <b>%(object)s</b>؟\n"
+"    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إعادة هذه العملية للخلف"
@@ -449,18 +465,48 @@ msgid "Cancel"
 msgstr "إلغاء"
 
 #, python-format
-msgid "\n\t %(counter)s result\n\t"
-msgid_plural "\n         %(counter)s results\n        "
-msgstr[0] "\n\t %(counter)s نتيجة\n\t"
-msgstr[1] "\n\t %(counter)s نتيجة\n\t"
-msgstr[2] "\n\t %(counter)s نتيجة\n\t"
-msgstr[3] "\n\t %(counter)s نتائج\n\t"
-msgstr[4] "\n\t %(counter)s نتيجة\n\t"
-msgstr[5] "\n\t %(counter)s نتيجة\n\t"
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t %(counter)s نتيجة\n"
+"\t"
+msgstr[1] ""
+"\n"
+"\t %(counter)s نتيجة\n"
+"\t"
+msgstr[2] ""
+"\n"
+"\t %(counter)s نتيجة\n"
+"\t"
+msgstr[3] ""
+"\n"
+"\t %(counter)s نتائج\n"
+"\t"
+msgstr[4] ""
+"\n"
+"\t %(counter)s نتيجة\n"
+"\t"
+msgstr[5] ""
+"\n"
+"\t %(counter)s نتيجة\n"
+"\t"
 
 #, python-format
-msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
-msgstr "\n\tالنتائج %(start)s-%(end)s من %(count)s\n\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tالنتائج %(start)s-%(end)s من %(count)s\n"
+"\t"
 
 msgid "Previous"
 msgstr "السابق"
@@ -487,12 +533,24 @@ msgid "Login Failure"
 msgstr "تسجيل دخول خاطئ"
 
 #, python-format
-msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
-msgstr "\n      عذراً، لا يمكنك تسجيل الدخول حالياً لأننا تلقينا %(failed_login_limit)s محاولات تسجيل دخول خاطئة.\n      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"      عذراً، لا يمكنك تسجيل الدخول حالياً لأننا تلقينا %(failed_login_limit)s محاولات تسجيل دخول خاطئة.\n"
+"      "
 
 #, python-format
-msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
-msgstr "\n      يرجى الانتظار %(lockout_timeout)s دقائق قبل محاولة تسجيل الدخول مرة أخرى.\n      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"      يرجى الانتظار %(lockout_timeout)s دقائق قبل محاولة تسجيل الدخول مرة أخرى.\n"
+"      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
@@ -510,8 +568,14 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
 
 #, python-format
-msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
-msgstr "\n  <strong>انتهت صلاحية كلمة المرور الخاصة بك.</strong> تنص سياسة الموقع على أنه يجب عليك اختيار كلمة مرور جديدة كل %(expire_days)s يوماً، وألا تكون كلمات المرور قد استُخدمت خلال %(window_days)s يوماً الماضية.\n  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>انتهت صلاحية كلمة المرور الخاصة بك.</strong> تنص سياسة الموقع على أنه يجب عليك اختيار كلمة مرور جديدة كل %(expire_days)s يوماً، وألا تكون كلمات المرور قد استُخدمت خلال %(window_days)s يوماً الماضية.\n"
+"  "
 
 msgid "New Password"
 msgstr "كلمة المرور الجديدة"
@@ -652,6 +716,22 @@ msgstr "حفظ"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "تم خلق مستخدم جديد %s"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "يو-ريبورت"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "تسجيل الدخول "
+
+msgid "Enter Dashboard"
+msgstr "دخول لوحة التحكم"
 
 msgid "Back to Website"
 msgstr "العودة إلى الموقع"
@@ -1181,8 +1261,14 @@ msgid "Dec"
 msgstr "ديسمبر"
 
 #, python-format
-msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
-msgstr "\n            هل أنت متأكد من أنك تريد إزالة <strong>%(object)s</strong>؟\n          "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            هل أنت متأكد من أنك تريد إزالة <strong>%(object)s</strong>؟\n"
+"          "
 
 #, python-format
 msgid "%(counter)s result"
@@ -1198,23 +1284,15 @@ msgstr[5] "%(counter)s نتيجة"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "النتائج %(start)s-%(end)s من %(count)s"
 
-msgid "Error"
-msgstr "خطأ"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "كلمة المرور الجديدة"
 
-msgid "Enter Dashboard"
-msgstr "دخول لوحة التحكم"
-
-#, python-format
-msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
-msgstr "\n                عذراً، لا يمكنك تسجيل الدخول حالياً لأننا تلقينا %(failed_login_limit)s محاولات تسجيل دخول خاطئة.\n              "
-
-#, python-format
-msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
-msgstr "\n                    يرجى الانتظار %(lockout_timeout)s دقائق قبل محاولة تسجيل الدخول مرة أخرى.\n                  "
-
-#, python-format
-msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
-msgstr "\n        <strong>انتهت صلاحية كلمة المرور الخاصة بك.</strong> تنص سياسة الموقع على أنه يجب عليك اختيار كلمة مرور جديدة كل %(expire_days)s يوماً، وألا تكون كلمات المرور قد استُخدمت خلال %(window_days)s يوماً الماضية.\n      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "القنوات"
 
 msgid "+ New Story"
 msgstr "+ مقالة جديدة"
@@ -1959,6 +2037,39 @@ msgstr "بلدان اللجان الوطنية لليونيسف"
 
 msgid "West and Central Africa"
 msgstr "غرب ووسط أفريقيا"
+
+#~ msgid "Error"
+#~ msgstr "خطأ"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "                عذراً، لا يمكنك تسجيل الدخول حالياً لأننا تلقينا %(failed_login_limit)s محاولات تسجيل دخول خاطئة.\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    يرجى الانتظار %(lockout_timeout)s دقائق قبل محاولة تسجيل الدخول مرة أخرى.\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>انتهت صلاحية كلمة المرور الخاصة بك.</strong> تنص سياسة الموقع على أنه يجب عليك اختيار كلمة مرور جديدة كل %(expire_days)s يوماً، وألا تكون كلمات المرور قد استُخدمت خلال %(window_days)s يوماً الماضية.\n"
+#~ "      "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

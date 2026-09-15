@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -292,8 +292,18 @@ msgid "The API token for this backend"
 msgstr "Το διακριτικό API για αυτό το backend"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Έχετε προσκληθεί να συμμετάσχετε στο %(org_name)s.\n      <br />\n      Για να αποδεχτείτε την πρόσκληση, <a href='%(host)s%(join_url)s'>κάντε κλικ εδώ</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Έχετε προσκληθεί να συμμετάσχετε στο %(org_name)s.\n"
+"      <br />\n"
+"      Για να αποδεχτείτε την πρόσκληση, <a href='%(host)s%(join_url)s'>κάντε κλικ εδώ</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Έχετε προσκληθεί να εγγραφείτε στο {{org.name}}."
@@ -681,6 +691,22 @@ msgstr "Αποθήκευση"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Το νέο σας %s δημιουργήθηκε"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Συνδεθείτε"
+
+msgid "Enter Dashboard"
+msgstr "Εισαγωγή Ταμπλό"
 
 msgid "Back to Website"
 msgstr "Επιστροφή στον Ιστότοπο"
@@ -1219,38 +1245,15 @@ msgstr[1] "%(counter)sΑποτελέσματα"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Αποτελέσματα %(start)s-%(end)sαπό%(count)s"
 
-msgid "Error"
-msgstr "Λάθος"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Νέος κωδικός"
 
-msgid "Enter Dashboard"
-msgstr "Εισαγωγή Ταμπλό"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Λυπούμαστε, δεν μπορείτε να συνδεθείτε αυτήν τη στιγμή επειδή λάβαμε %(failed_login_limit)sλανθασμένες προσπάθειες σύνδεσης"
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Περιμένετε %(lockout_timeout)sλεπτά πριν προσπαθήσετε να συνδεθείτε ξανά."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Ο κωδικός πρόσβασής σας έχει λήξει.</strong>Η πολιτική του ιστότοπου αναφέρει ότι πρέπει να επιλέγετε έναν νέο κωδικό πρόσβασης κάθε %(expire_days)sημέρες, και ότι οι κωδικοί πρόσβασης δεν πρέπει να έχουν χρησιμοποιηθεί τις προηγούμενες %(window_days)sημέρες."
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "ΚΑΝΑΛΙΑ"
 
 msgid "+ New Story"
 msgstr "+ Νέα δημοσίευση"
@@ -1995,6 +1998,36 @@ msgstr "Χώρες των Εθνικών Επιτροπών της UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Δυτική και Κεντρική Αφρική"
+
+#~ msgid "Error"
+#~ msgstr "Λάθος"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Λυπούμαστε, δεν μπορείτε να συνδεθείτε αυτήν τη στιγμή επειδή λάβαμε %(failed_login_limit)sλανθασμένες προσπάθειες σύνδεσης"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Περιμένετε %(lockout_timeout)sλεπτά πριν προσπαθήσετε να συνδεθείτε ξανά."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Ο κωδικός πρόσβασής σας έχει λήξει.</strong>Η πολιτική του ιστότοπου αναφέρει ότι πρέπει να επιλέγετε έναν νέο κωδικό πρόσβασης κάθε %(expire_days)sημέρες, και ότι οι κωδικοί πρόσβασης δεν πρέπει να έχουν χρησιμοποιηθεί τις προηγούμενες %(window_days)sημέρες."
 
 #~ msgid "Color Choice"
 #~ msgstr "Επιλογή χρώματος"
