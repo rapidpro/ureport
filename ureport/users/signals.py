@@ -1,9 +1,13 @@
+import logging
+
 from allauth.account.models import EmailAddress
 from allauth.account.signals import email_changed
 
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+
+logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
@@ -13,21 +17,29 @@ def sync_email_address(user):
     Keeps a single verified, primary allauth email address in step with the user's email field. Accounts are only ever
     created by staff or by accepting an emailed invitation, so the address is trusted without a confirmation round trip.
     """
-    if not user.email:
+    email = user.email
+
+    # an address the user no longer has must stop working as a login
+    user.emailaddress_set.exclude(email=email).delete()
+
+    if not email:
         return
 
-    existing = user.emailaddress_set.filter(email__iexact=user.email).first()
-    if existing and existing.verified and existing.primary:
+    if user.emailaddress_set.filter(email=email, verified=True, primary=True).exists():
         return
 
-    with_email = EmailAddress.objects.filter(email__iexact=user.email).exclude(user=user)
-    if with_email.exists():
-        return  # another account already owns this address, leave it for staff to sort out
+    if EmailAddress.objects.filter(email=email).exclude(user=user).exists():
+        logger.warning("user %s has email %s which already belongs to another account", user.pk, email)
+        return
 
-    user.emailaddress_set.exclude(email__iexact=user.email).delete()
-    EmailAddress.objects.update_or_create(
-        user=user, email__iexact=user.email, defaults={"email": user.email, "verified": True, "primary": True}
-    )
+    EmailAddress.objects.update_or_create(user=user, email=email, defaults={"verified": True, "primary": True})
+
+
+@receiver(pre_save, sender=User)
+def on_user_pre_save(sender, instance, raw, **kwargs):
+    # allauth stores and looks up emails in lowercase, so keep the user's email that way too
+    if not raw and instance.email:
+        instance.email = instance.email.strip().lower()
 
 
 @receiver(post_save, sender=User)
@@ -40,6 +52,8 @@ def on_user_saved(sender, instance, raw, **kwargs):
 def on_email_changed(sender, request, user, from_email_address, to_email_address, **kwargs):
     # users created through the org invitation flow have their username set to their email so keep that in step
     if from_email_address and user.username == from_email_address.email:
-        if not User.objects.filter(username=user.email).exclude(pk=user.pk).exists():
+        if User.objects.filter(username=user.email).exclude(pk=user.pk).exists():
+            logger.warning("username %s is taken so user %s keeps their previous username", user.email, user.pk)
+        else:
             user.username = user.email
             user.save(update_fields=("username",))

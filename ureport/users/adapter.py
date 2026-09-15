@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 from allauth.account.adapter import DefaultAccountAdapter
 
 from django.conf import settings
+from django.utils.http import url_has_allowed_host_and_scheme
 
 
 class AccountAdapter(DefaultAccountAdapter):
@@ -13,23 +14,15 @@ class AccountAdapter(DefaultAccountAdapter):
     def is_safe_url(self, url: str) -> bool:
         """
         Each org site is served from its own subdomain of HOSTNAME so redirects between those hosts are allowed, but
-        nowhere else, regardless of how permissive ALLOWED_HOSTS is.
+        nowhere else, regardless of how permissive ALLOWED_HOSTS is. Django does the parsing as browsers are lenient
+        about slashes and backslashes in ways that are easy to get wrong.
         """
         url = (url or "").strip()
-        if not url or url.startswith("///"):
-            return False
+        host = urlparse(url).netloc
 
-        # check the URL as given and with backslashes normalized, as browsers treat them as slashes
-        for candidate in (url, url.replace("\\", "/")):
-            parsed = urlparse(candidate)
-            if parsed.scheme and parsed.scheme not in ("http", "https"):
-                return False
-            if parsed.scheme and not parsed.netloc:
-                return False
-            if parsed.netloc and not is_site_host(parsed.netloc):
-                return False
+        allowed_hosts = {host} if host and is_site_host(host) else set()
 
-        return True
+        return url_has_allowed_host_and_scheme(url, allowed_hosts=allowed_hosts)
 
 
 def is_site_host(host: str) -> bool:

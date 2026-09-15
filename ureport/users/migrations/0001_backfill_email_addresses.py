@@ -1,5 +1,9 @@
+import logging
+
 from django.db import migrations
 from django.db.models import F
+
+logger = logging.getLogger(__name__)
 
 
 def backfill_email_addresses(apps, schema_editor):
@@ -12,7 +16,6 @@ def backfill_email_addresses(apps, schema_editor):
 
     taken = {e.lower() for e in EmailAddress.objects.values_list("email", flat=True)}
     users_with_address = set(EmailAddress.objects.values_list("user_id", flat=True))
-    skipped = []
 
     users = (
         User.objects.exclude(email="")
@@ -20,18 +23,13 @@ def backfill_email_addresses(apps, schema_editor):
         .order_by(F("last_login").desc(nulls_last=True), "id")
     )
     for user in users:
-        email = user.email.strip()
-        if email.lower() in taken:
-            skipped.append(f"{user.username} ({email})")
+        email = user.email.strip().lower()
+        if email in taken:
+            logger.warning("skipping user %s (%s) as that email already belongs to another account", user.pk, email)
             continue
 
         EmailAddress.objects.create(user=user, email=email, verified=True, primary=True)
-        taken.add(email.lower())
-
-    if skipped:
-        print(f"\nSkipped {len(skipped)} user(s) whose email is already taken by another account:")
-        for entry in skipped:
-            print(f"  {entry}")
+        taken.add(email)
 
 
 class Migration(migrations.Migration):

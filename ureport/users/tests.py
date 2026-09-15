@@ -29,6 +29,9 @@ class LoginTest(UreportTest):
         self.assertContains(response, "Forgot Password?")
         self.assertContains(response, "Enter Dashboard")
 
+        # fields on the login form are unlabeled with the label used as a placeholder
+        self.assertContains(response, f'placeholder="{response.context["form"]["login"].label}"')
+
         # login is by email, not username
         response = self.client.post(
             login_url, {"login": "editor", "password": "Qwerty123"}, SERVER_NAME="nigeria.ureport.io"
@@ -50,6 +53,19 @@ class LoginTest(UreportTest):
         self.assertRedirect(response, settings.LOGIN_REDIRECT_URL)
         self.assertEqual(self.editor, response.wsgi_request.user)
 
+    def test_login_with_mixed_case_email(self):
+        # the test base class creates users with mixed case emails, as staff might
+        self.assertEqual("administrator@nyaruka.com", self.admin.email)
+
+        self.client.logout()
+        response = self.client.post(
+            reverse("account_login"),
+            {"login": "Administrator@nyaruka.com", "password": "Administrator"},
+            SERVER_NAME="nigeria.ureport.io",
+        )
+        self.assertRedirect(response, settings.LOGIN_REDIRECT_URL)
+        self.assertEqual(self.admin, response.wsgi_request.user)
+
     def test_login_redirects_within_site_hosts(self):
         login_url = reverse("account_login")
         credentials = {"login": "editor@nyaruka.com", "password": "Qwerty123"}
@@ -65,6 +81,9 @@ class LoginTest(UreportTest):
         for unsafe in (
             "https://evil.example.com/",
             "//evil.example.com/",
+            "///evil.example.com/",
+            "\\\\\\evil.example.com/",
+            "/\\/evil.example.com/",
             "https://ureport.io.example.com/",
             "javascript:alert(1)",
         ):
@@ -88,11 +107,29 @@ class LoginTest(UreportTest):
 
     def test_legacy_urls(self):
         response = self.client.get("/users/login/?next=/manage/", SERVER_NAME="nigeria.ureport.io")
-        self.assertRedirect(response, "/accounts/login/", status_code=301)
+        self.assertRedirect(response, "/accounts/login/")
         self.assertEqual("/accounts/login/?next=/manage/", response["Location"])
 
         response = self.client.get("/users/logout/", SERVER_NAME="nigeria.ureport.io")
-        self.assertRedirect(response, "/accounts/logout/", status_code=301)
+        self.assertRedirect(response, "/accounts/logout/")
+
+    def test_account_pages_render(self):
+        self.login(self.editor)
+
+        for url_name in (
+            "account_email",
+            "account_change_password",
+            "account_logout",
+            "account_reauthenticate",
+            "account_reset_password",
+            "account_reset_password_done",
+            "account_inactive",
+        ):
+            response = self.client.get(reverse(url_name), SERVER_NAME="nigeria.ureport.io")
+            self.assertEqual(200, response.status_code, url_name)
+
+        response = self.client.get(reverse("account_email"), SERVER_NAME="nigeria.ureport.io")
+        self.assertContains(response, "editor@nyaruka.com")
 
     def test_signup_closed(self):
         response = self.client.get(reverse("account_signup"), SERVER_NAME="nigeria.ureport.io")
@@ -193,7 +230,9 @@ class EmailAddressSyncTest(UreportTest):
         )
 
     def test_sync_on_save(self):
-        user = User.objects.create_user("jim", "jim@nyaruka.com", "Qwerty123")
+        # emails are lowercased, as allauth expects
+        user = User.objects.create_user("jim", " Jim@Nyaruka.com ", "Qwerty123")
+        self.assertEqual("jim@nyaruka.com", user.email)
         self.assertEmailAddresses(user, "jim@nyaruka.com")
 
         # changing the email replaces the address
@@ -203,13 +242,23 @@ class EmailAddressSyncTest(UreportTest):
         self.assertEqual(1, user.emailaddress_set.count())
 
         # a user without an email gets no address
-        user = User.objects.create_user("bob", "", "Qwerty123")
-        self.assertEmailAddresses(user)
+        bob = User.objects.create_user("bob", "", "Qwerty123")
+        self.assertEmailAddresses(bob)
 
         # an email already belonging to another account is left alone
-        user.email = "JIM.BOB@nyaruka.com"
+        bob.email = "JIM.BOB@nyaruka.com"
+        bob.save()
+        self.assertEmailAddresses(bob)
+        self.assertEmailAddresses(user, "jim.bob@nyaruka.com")
+
+        # clearing an email removes the address so it can no longer be used to log in
+        user.email = ""
         user.save()
-        self.assertEmailAddresses(user)
+        self.assertEqual(0, user.emailaddress_set.count())
+
+        # and now bob can have it
+        bob.save()
+        self.assertEmailAddresses(bob, "jim.bob@nyaruka.com")
 
     def test_backfill_migration(self):
         from importlib import import_module
@@ -220,16 +269,17 @@ class EmailAddressSyncTest(UreportTest):
         user2 = User.objects.create_user("user2", "shared@nyaruka.com", "Qwerty123")
         user3 = User.objects.create_user("user3", "SHARED@nyaruka.com", "Qwerty123")
         user4 = User.objects.create_user("user4", "", "Qwerty123")
-        User.objects.filter(pk=user3.pk).update(last_login="2026-01-01T00:00:00Z")
+        User.objects.filter(pk=user3.pk).update(last_login="2026-01-01T00:00:00Z", email="SHARED@nyaruka.com")
         EmailAddress.objects.all().delete()
 
         migration.backfill_email_addresses(apps, None)
 
         self.assertEmailAddresses(user1, "user1@nyaruka.com")
         self.assertEmailAddresses(user2)  # lost out to user3 who logged in more recently
-        self.assertEmailAddresses(user3, "SHARED@nyaruka.com")
+        self.assertEmailAddresses(user3, "shared@nyaruka.com")
         self.assertEmailAddresses(user4)
 
-        # running again changes nothing (the count includes the users created by the test base class)
+        # running again changes nothing
+        count = EmailAddress.objects.count()
         migration.backfill_email_addresses(apps, None)
-        self.assertEqual(5, EmailAddress.objects.count())
+        self.assertEqual(count, EmailAddress.objects.count())

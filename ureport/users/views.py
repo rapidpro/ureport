@@ -21,12 +21,6 @@ class UserCRUDL(SmartUserCRUDL):
 
     actions = ("create", "list", "update", "profile", "mimic")
 
-    class Create(SmartUserCRUDL.Create):
-        fields = ("username", "new_password", "first_name", "last_name", "email", "groups")
-
-    class Update(SmartUserCRUDL.Update):
-        fields = ("username", "new_password", "first_name", "last_name", "email", "is_active", "last_login", "groups")
-
     class Profile(SmartUserCRUDL.Profile):
         form_class = ProfileForm
         fields = ("username", "email", "first_name", "last_name")
