@@ -5,7 +5,6 @@ from allauth.account.models import EmailAddress
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.utils.http import url_has_allowed_host_and_scheme
 
 
@@ -39,29 +38,69 @@ def is_site_host(host: str) -> bool:
 
 class SocialAccountAdapter(DefaultSocialAccountAdapter):
     """
-    Single sign-on only ever logs in an existing account. The provider's email is matched against our users, so a
-    login with an unknown email ends on the signup closed page rather than creating an account.
+    Single sign-on only ever logs in an existing account, matched by an email address the provider has verified and
+    which we have verified for that account too. A login with an unknown email ends on the signup closed page rather
+    than creating an account.
+
+    Some providers identify users by a claim other than a verified email, e.g. the principal name from Entra ID.
+    Because such claims are only as trustworthy as the tenant issuing them, a provider app can opt in with
+    `identity_claim` (the claim name) and `identity_claim_domains` (the email domains it may vouch for) in its
+    settings.
     """
 
     def is_open_for_signup(self, request, sociallogin):
         return False
 
-    def pre_social_login(self, request, sociallogin):
-        extra_data = sociallogin.account.extra_data
+    def authenticate_by_email(self, sociallogin):
+        self._add_identity_claim(sociallogin)
 
-        # providers vary in what identifies the user: an email they have verified, or for Entra ID the principal
-        # name. An email claim the provider hasn't verified is not enough to log into the account with that email.
-        verified = [a.email for a in sociallogin.email_addresses if a.verified]
-        email = verified[0] if verified else (extra_data.get("upn") or extra_data.get("preferred_username"))
-        if not email:
+        match = super().authenticate_by_email(sociallogin)
+        if not match:
+            return None
+
+        user, email = match
+
+        # only accept a match backed by a verified address on our side: matching on the user's email field alone
+        # would have allauth wipe their password as a precaution, and an inactive account shouldn't be connected
+        if not user.is_active or not EmailAddress.objects.filter(user=user, email=email, verified=True).exists():
+            return None
+
+        return match
+
+    def _add_identity_claim(self, sociallogin):
+        """
+        Adds the provider's configured identity claim as a verified email address if it's in a trusted domain
+        """
+        if any(a.verified for a in sociallogin.email_addresses):
             return
 
-        email = email.lower()
-        if not sociallogin.email_addresses:
-            sociallogin.email_addresses = [EmailAddress(email=email, verified=True, primary=True)]
+        app = sociallogin.provider.app if sociallogin.provider else None
+        app_settings = app.settings if app else {}
+        claim = app_settings.get("identity_claim")
+        domains = {d.lower() for d in app_settings.get("identity_claim_domains", [])}
+        if not claim or not domains:
+            return
 
-        # connect a first-time social login to the account that already has that email
-        if not sociallogin.is_existing:
-            user = get_user_model().objects.filter(email=email, is_active=True).first()
-            if user:
-                sociallogin.connect(request, user)
+        value = get_claim(sociallogin.account.extra_data, claim)
+        if not value or "@" not in value:
+            return
+
+        value = value.strip().lower()
+        if value.rpartition("@")[2] not in domains:
+            return
+
+        sociallogin.email_addresses.append(
+            EmailAddress(email=value, verified=True, primary=not sociallogin.email_addresses)
+        )
+
+
+def get_claim(extra_data: dict, name: str):
+    """
+    Looks up a claim in a provider's extra data. OpenID Connect data is nested by source, with the ID token carrying
+    claims the userinfo endpoint may not.
+    """
+    for source in (extra_data.get("userinfo"), extra_data.get("id_token"), extra_data):
+        if isinstance(source, dict) and source.get(name):
+            return str(source[name])
+
+    return None

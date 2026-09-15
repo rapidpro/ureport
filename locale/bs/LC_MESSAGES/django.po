@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 14:37+0000\n"
+"POT-Creation-Date: 2026-09-15 16:20+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -1367,6 +1367,10 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
 msgstr ""
 
 #, python-format

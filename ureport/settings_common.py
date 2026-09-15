@@ -939,7 +939,7 @@ MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
 MFA_TOTP_ISSUER = "U-Report"
 
 # single sign-on providers are configured per deployment (see settings.py.docker), and only ever log in existing
-# accounts whose email the provider has verified
+# accounts, matched by email (see ureport.users.adapter.SocialAccountAdapter for what counts as a trusted email)
 SOCIALACCOUNT_ADAPTER = "ureport.users.adapter.SocialAccountAdapter"
 SOCIALACCOUNT_PROVIDERS = {}
 SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
