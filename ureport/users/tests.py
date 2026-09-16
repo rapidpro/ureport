@@ -468,6 +468,7 @@ class SSOTest(UreportTest):
         self.editor = self.create_user("editor")
         self.editor.set_password("Qwerty123")
         self.editor.save()
+        verify_email(self.editor)
 
     def test_login_buttons(self):
         login_url = reverse("account_login")
@@ -608,6 +609,7 @@ class SSOTest(UreportTest):
         # the provider doesn't say the email is verified but it's in a domain the deployment trusts it for
         self.editor.email = "editor@trusted.example.com"
         self.editor.save()
+        verify_email(self.editor)
 
         request, response = self.social_login("oidc", self.oidc_data({"email": "editor@trusted.example.com"}, {}))
         self.assertSignedIn(request, response, self.editor)
@@ -616,6 +618,7 @@ class SSOTest(UreportTest):
         SocialAccount.objects.all().delete()
         self.editor.email = "editor@nyaruka.com"
         self.editor.save()
+        verify_email(self.editor)
 
         request, response = self.social_login("oidc", self.oidc_data({"email": "editor@nyaruka.com"}, {}))
         self.assertSignupClosed(request, response)
@@ -632,6 +635,7 @@ class SSOTest(UreportTest):
         SocialAccount.objects.all().delete()
         self.editor.email = "editor@other.example.com"
         self.editor.save()
+        verify_email(self.editor)
 
         request, response = self.social_login(
             "oidc", self.oidc_data({"name": "Bob"}, {"preferred_username": "editor@other.example.com"})
@@ -641,6 +645,7 @@ class SSOTest(UreportTest):
         # and not at all for a provider without the claim configured
         self.editor.email = "editor@nyaruka.com"
         self.editor.save()
+        verify_email(self.editor)
 
         request, response = self.social_login(
             "google", {"sub": "12345", "name": "Bob", "preferred_username": "editor@nyaruka.com"}
