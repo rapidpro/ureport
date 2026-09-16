@@ -17,12 +17,15 @@ RUN bun install --frozen-lockfile && ln -sf /usr/local/bin/bun node_modules/.bin
 COPY . .
 RUN ln -s settings.py.docker ureport/settings.py
 
-# collect and offline-compress static assets; the secret is build-only and no database
-# or broker is touched
+# collect static assets (the manifest storage hashes and precompresses them as .gz/.br),
+# build compressor's offline css/js bundles, then precompress those too since they are
+# written after collectstatic; the secret is build-only and no database or broker is
+# touched
 RUN PATH="/app/node_modules/.bin:$PATH" DJANGO_SECRET_KEY=build-only \
     uv run --no-sync python manage.py collectstatic --noinput && \
     PATH="/app/node_modules/.bin:$PATH" DJANGO_SECRET_KEY=build-only \
     uv run --no-sync python manage.py compress --force && \
+    uv run --no-sync python -m whitenoise.compress sitestatic/CACHE && \
     rm -rf node_modules
 
 # runtime stage
