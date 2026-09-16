@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -710,6 +710,27 @@ msgstr "Registrati"
 msgid "Enter Dashboard"
 msgstr "Inserisci Dashboard"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Account"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Canali"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nuova password"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Ritorna al sito"
 
@@ -1248,15 +1269,11 @@ msgstr[1] "%(counter)s risultati"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Risultati %(start)s-%(end)s di %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Nuova password"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Canali"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Nuova Storia"
@@ -1974,6 +1991,13 @@ msgstr "Il processo #%(job_id)d si risincronizzerà da zero alla prossima esecuz
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Tutte le località"

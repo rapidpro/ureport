@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:59+0000\n"
+"POT-Creation-Date: 2026-09-15 11:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -679,6 +679,21 @@ msgstr ""
 msgid "Enter Dashboard"
 msgstr ""
 
+msgid "Account"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Change Email"
+msgstr ""
+
+msgid "Change Password"
+msgstr ""
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr ""
 
@@ -1210,10 +1225,10 @@ msgstr[1] ""
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 
-msgid "Change Password"
+msgid "Disable"
 msgstr ""
 
-msgid "Change Email"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
 msgstr ""
 
 msgid "+ New Story"
@@ -1931,6 +1946,13 @@ msgid "Job #%(job_id)d will resync from scratch on its next run"
 msgstr ""
 
 msgid "Something to trigger localizations"
+msgstr ""
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
 msgstr ""
 
 msgid "All locations"

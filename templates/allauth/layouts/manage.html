@@ -1,1 +1,46 @@
 {% extends "allauth/layouts/base.html" %}
+{% load i18n %}
+
+{% comment %}Account settings pages get a menu of the other account pages alongside the content{% endcomment %}
+{% block content-div %}
+    <div class="content-div account-page">
+        {% block messages %}
+            {% if messages %}
+                {% for message in messages %}<div class="is-{{ message.tags }} notification">{{ message }}</div>{% endfor %}
+            {% endif %}
+        {% endblock messages %}
+        <div class="columns is-desktop">
+            <div class="column is-one-quarter">
+                <aside class="menu account-menu">
+                    <p class="menu-label">{% trans "Account" %}</p>
+                    <ul class="menu-list">
+                        {% url 'users.user_profile' request.user.pk as profile_url %}
+                        <li>
+                            <a href="{{ profile_url }}" class="{% if request.path == profile_url %}is-active{% endif %}">{% trans "Profile" %}</a>
+                        </li>
+                        {% url 'account_email' as email_url %}
+                        <li>
+                            <a href="{{ email_url }}" class="{% if request.path == email_url %}is-active{% endif %}">{% trans "Change Email" %}</a>
+                        </li>
+                        {% url 'account_change_password' as password_url %}
+                        <li>
+                            <a href="{{ password_url }}" class="{% if request.path == password_url %}is-active{% endif %}">{% trans "Change Password" %}</a>
+                        </li>
+                        {% url 'mfa_index' as mfa_url %}
+                        {% if mfa_url %}
+                            <li>
+                                <a href="{{ mfa_url }}" class="{% if request.path == mfa_url %}is-active{% endif %}">{% trans "Two-Factor Authentication" %}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </aside>
+            </div>
+            <div class="column">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+    {% block extra_body %}
+    {% endblock extra_body %}
+{% endblock content-div %}
