@@ -1,25 +1,8 @@
 {% extends "smartmin/update.html" %}
-{% load smartmin i18n %}
+{% load i18n %}
 
+{% comment %}Overrides the packaged template, which offers to log in as the user being edited{% endcomment %}
 {% block post-form %}
-    {% if perms.auth.user_mimic %}
-        <form action="{% url 'users.user_mimic' object.id %}"
-              method="post"
-              enctype="multipart/form-data"
-              class="smartmin-form">
-            {% csrf_token %}
-            <div class="field is-horizontal">
-                <div class="field-label">
-                    <label class="label">Login as</label>
-                </div>
-                <div class="field-body">
-                    <div class="field is-expanded">
-                        <button type="submit" class="button is-primary">{{ object|user_as_string }}</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    {% endif %}
     {% if perms.auth.user_disable_mfa and object.authenticator_set.exists %}
         <form action="{% url 'users.user_disable_mfa' object.id %}"
               method="post"

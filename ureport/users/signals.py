@@ -1,6 +1,5 @@
 import logging
 
-from allauth.account.models import EmailAddress
 from allauth.account.signals import email_changed
 
 from django.contrib.auth import get_user_model
@@ -12,29 +11,6 @@ logger = logging.getLogger(__name__)
 User = get_user_model()
 
 
-def sync_email_address(user):
-    """
-    Keeps a single verified, primary allauth email address in step with the user's email field. Accounts are only ever
-    created by staff or by accepting an emailed invitation, so the address is trusted without a confirmation round trip.
-    """
-    email = user.email
-
-    # an address the user no longer has must stop working as a login
-    user.emailaddress_set.exclude(email=email).delete()
-
-    if not email:
-        return
-
-    if user.emailaddress_set.filter(email=email, verified=True, primary=True).exists():
-        return
-
-    if EmailAddress.objects.filter(email=email).exclude(user=user).exists():
-        logger.warning("user %s has email %s which already belongs to another account", user.pk, email)
-        return
-
-    EmailAddress.objects.update_or_create(user=user, email=email, defaults={"verified": True, "primary": True})
-
-
 @receiver(pre_save, sender=User)
 def on_user_pre_save(sender, instance, raw, **kwargs):
     # allauth stores and looks up emails in lowercase, so keep the user's email that way too
@@ -44,8 +20,10 @@ def on_user_pre_save(sender, instance, raw, **kwargs):
 
 @receiver(post_save, sender=User)
 def on_user_saved(sender, instance, raw, **kwargs):
+    # an address the user no longer has must stop working as a login. Their current address is verified by allauth
+    # the next time they log in.
     if not raw:
-        sync_email_address(instance)
+        instance.emailaddress_set.exclude(email=instance.email).delete()
 
 
 @receiver(email_changed)
