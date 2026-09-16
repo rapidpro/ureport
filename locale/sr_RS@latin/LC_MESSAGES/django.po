@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 11:56+0000\n"
+"POT-Creation-Date: 2026-09-15 16:20+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -730,6 +730,11 @@ msgstr "Kanali"
 msgid "Change Password"
 msgstr "Nova lozinka"
 
+#, fuzzy
+#| msgid "About Content"
+msgid "Account Connections"
+msgstr "Sadržaj odeljka \"O nama\""
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1282,6 +1287,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"

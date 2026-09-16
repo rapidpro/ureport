@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 11:56+0000\n"
+"POT-Creation-Date: 2026-09-15 16:20+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -733,6 +733,11 @@ msgstr "Canaux"
 msgid "Change Password"
 msgstr "Nouveau mot de passe"
 
+#, fuzzy
+#| msgid "About Content"
+msgid "Account Connections"
+msgstr "Contenu A-propos"
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1281,6 +1286,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"
