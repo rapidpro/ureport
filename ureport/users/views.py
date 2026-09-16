@@ -1,8 +1,5 @@
 from django import forms
-from django.conf import settings
-from django.contrib import auth
 from django.contrib.auth import get_user_model
-from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
 
 from smartmin.users.views import UserCRUDL as SmartUserCRUDL
@@ -19,7 +16,7 @@ class UserCRUDL(SmartUserCRUDL):
     Staff-side user management. Login, logout, password changes and password recovery are handled by allauth.
     """
 
-    actions = ("create", "list", "update", "profile", "mimic")
+    actions = ("create", "list", "update", "profile")
 
     class Profile(SmartUserCRUDL.Profile):
         form_class = ProfileForm
@@ -32,11 +29,3 @@ class UserCRUDL(SmartUserCRUDL):
 
         def has_permission(self, request, *args, **kwargs):
             return self.request.user.is_authenticated
-
-    class Mimic(SmartUserCRUDL.Mimic):
-        def pre_process(self, request, *args, **kwargs):
-            user = self.get_object()
-
-            auth.login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])
-
-            return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)

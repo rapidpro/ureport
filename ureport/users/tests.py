@@ -1,6 +1,7 @@
+import re
+
 from allauth.account.models import EmailAddress
 
-from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core import mail
@@ -12,6 +13,13 @@ from ureport.tests import UreportTest
 User = get_user_model()
 
 
+def verify_email(user):
+    """
+    Marks the user's email as verified, as allauth does the first time they confirm it
+    """
+    EmailAddress.objects.update_or_create(user=user, email=user.email, defaults={"verified": True, "primary": True})
+
+
 class LoginTest(UreportTest):
     def setUp(self):
         super().setUp()
@@ -20,6 +28,7 @@ class LoginTest(UreportTest):
         self.editor.email = "editor@nyaruka.com"
         self.editor.set_password("Qwerty123")
         self.editor.save()
+        verify_email(self.editor)
 
     def test_login(self):
         login_url = reverse("account_login")
@@ -56,6 +65,7 @@ class LoginTest(UreportTest):
     def test_login_with_mixed_case_email(self):
         # the test base class creates users with mixed case emails, as staff might
         self.assertEqual("administrator@nyaruka.com", self.admin.email)
+        verify_email(self.admin)
 
         self.client.logout()
         response = self.client.post(
@@ -63,6 +73,39 @@ class LoginTest(UreportTest):
             {"login": "Administrator@nyaruka.com", "password": "Administrator"},
             SERVER_NAME="nigeria.ureport.io",
         )
+        self.assertRedirect(response, settings.LOGIN_REDIRECT_URL)
+        self.assertEqual(self.admin, response.wsgi_request.user)
+
+    def test_login_requires_verified_email(self):
+        login_url = reverse("account_login")
+        credentials = {"login": self.admin.email, "password": "Administrator"}
+
+        # existing users have never verified their email, so their first login sends them a confirmation
+        response = self.client.post(login_url, credentials, SERVER_NAME="nigeria.ureport.io")
+        self.assertRedirect(response, reverse("account_email_verification_sent"))
+        self.assertFalse(response.wsgi_request.user.is_authenticated)
+
+        self.assertEqual(1, len(mail.outbox))
+        self.assertEqual([self.admin.email], mail.outbox[0].to)
+        confirm_url = re.search(
+            r"https://nigeria\.ureport\.io(/accounts/confirm-email/\S+/)", mail.outbox[0].body
+        ).group(1)
+
+        response = self.client.get(reverse("account_email_verification_sent"), SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(200, response.status_code)
+
+        # confirming is a click on the emailed page, not the link itself
+        response = self.client.get(confirm_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, self.admin.email)
+        self.assertFalse(EmailAddress.objects.get(user=self.admin).verified)
+
+        response = self.client.post(confirm_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(302, response.status_code)
+        self.assertTrue(EmailAddress.objects.get(user=self.admin).verified)
+
+        # after which logging in works
+        response = self.client.post(login_url, credentials, SERVER_NAME="nigeria.ureport.io")
         self.assertRedirect(response, settings.LOGIN_REDIRECT_URL)
         self.assertEqual(self.admin, response.wsgi_request.user)
 
@@ -200,15 +243,6 @@ class UserCRUDLTest(UreportTest):
         self.assertEqual("Ad", self.admin.first_name)
         self.assertEqual("Min", self.admin.last_name)
 
-    def test_mimic(self):
-        mimic_url = reverse("users.user_mimic", args=[self.admin.pk])
-
-        self.login(self.superuser)
-
-        response = self.client.post(mimic_url, {}, SERVER_NAME="nigeria.ureport.io")
-        self.assertRedirect(response, settings.LOGIN_REDIRECT_URL)
-        self.assertEqual(self.admin, response.wsgi_request.user)
-
     def test_removed_actions(self):
         self.login(self.superuser)
 
@@ -217,69 +251,29 @@ class UserCRUDLTest(UreportTest):
             "/users/user/failed/",
             "/users/user/expired/",
             "/users/user/newpassword/0/",
+            "/users/user/mimic/1/",
         ):
             response = self.client.get(path, SERVER_NAME="nigeria.ureport.io")
             self.assertEqual(404, response.status_code, path)
 
 
 class EmailAddressSyncTest(UreportTest):
-    def assertEmailAddresses(self, user, *emails):
-        self.assertEqual(
-            list(emails),
-            list(user.emailaddress_set.filter(verified=True, primary=True).values_list("email", flat=True)),
-        )
-
     def test_sync_on_save(self):
         # emails are lowercased, as allauth expects
         user = User.objects.create_user("jim", " Jim@Nyaruka.com ", "Qwerty123")
         self.assertEqual("jim@nyaruka.com", user.email)
-        self.assertEmailAddresses(user, "jim@nyaruka.com")
 
-        # changing the email replaces the address
+        # nothing is verified until the user confirms it themselves
+        self.assertEqual(0, user.emailaddress_set.count())
+        verify_email(user)
+
+        # changing the email drops the old address so it can no longer be used to log in
         user.email = "jim.bob@nyaruka.com"
         user.save()
-        self.assertEmailAddresses(user, "jim.bob@nyaruka.com")
-        self.assertEqual(1, user.emailaddress_set.count())
+        self.assertEqual(0, user.emailaddress_set.count())
+        verify_email(user)
 
-        # a user without an email gets no address
-        bob = User.objects.create_user("bob", "", "Qwerty123")
-        self.assertEmailAddresses(bob)
-
-        # an email already belonging to another account is left alone
-        bob.email = "JIM.BOB@nyaruka.com"
-        bob.save()
-        self.assertEmailAddresses(bob)
-        self.assertEmailAddresses(user, "jim.bob@nyaruka.com")
-
-        # clearing an email removes the address so it can no longer be used to log in
+        # as does clearing it
         user.email = ""
         user.save()
         self.assertEqual(0, user.emailaddress_set.count())
-
-        # and now bob can have it
-        bob.save()
-        self.assertEmailAddresses(bob, "jim.bob@nyaruka.com")
-
-    def test_backfill_migration(self):
-        from importlib import import_module
-
-        migration = import_module("ureport.users.migrations.0001_backfill_email_addresses")
-
-        user1 = User.objects.create_user("user1", "user1@nyaruka.com", "Qwerty123")
-        user2 = User.objects.create_user("user2", "shared@nyaruka.com", "Qwerty123")
-        user3 = User.objects.create_user("user3", "SHARED@nyaruka.com", "Qwerty123")
-        user4 = User.objects.create_user("user4", "", "Qwerty123")
-        User.objects.filter(pk=user3.pk).update(last_login="2026-01-01T00:00:00Z", email="SHARED@nyaruka.com")
-        EmailAddress.objects.all().delete()
-
-        migration.backfill_email_addresses(apps, None)
-
-        self.assertEmailAddresses(user1, "user1@nyaruka.com")
-        self.assertEmailAddresses(user2)  # lost out to user3 who logged in more recently
-        self.assertEmailAddresses(user3, "shared@nyaruka.com")
-        self.assertEmailAddresses(user4)
-
-        # running again changes nothing
-        count = EmailAddress.objects.count()
-        migration.backfill_email_addresses(apps, None)
-        self.assertEqual(count, EmailAddress.objects.count())
