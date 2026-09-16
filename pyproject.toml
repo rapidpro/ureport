@@ -1,6 +1,6 @@
 [project]
 name = "ureport"
-version = "1.6.15"
+version = "1.7.0"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = [
     {"name" = "Nyaruka", "email" = "code@nyaruka.com"}
@@ -39,7 +39,8 @@ dependencies = [
     "drf-yasg~=1.21.8",
     "django-valkey>=0.2.1,<0.3.0",
     "celery-redbeat>=2.4.2,<3.0.0",
-    "whitenoise~=6.12.0",
+    "whitenoise[brotli]~=6.12.0",
+    "django-http-compression[brotli]~=1.4.0",
     "django-allauth[mfa]>=65.8.1,<66.0.0",
 ]
 

@@ -1,3 +1,9 @@
+v1.7.0 (2026-09-16)
+-------------------------
+ * Set security, caching and compression headers from the app
+ * Check static files can be collected and compressed in CI
+ * Serve static files content-hashed and precompressed with brotli
+
 v1.6.15 (2026-09-14)
 -------------------------
  * Update rapidpro-dash to 1.23.0 for staff and global group org access

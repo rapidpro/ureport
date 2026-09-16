@@ -11,6 +11,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration, ignore_logger
 
 from django.forms import Textarea
+from django.utils.csp import CSP
 from django.utils.translation import gettext_lazy as _
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
@@ -159,16 +160,28 @@ COMPRESS_PRECOMPILERS = (("text/less", "lessc {infile} {outfile}"),)
 # static files are served by whitenoise from STATIC_ROOT (the collectstatic output); its
 # autorefresh/finders defaults follow DEBUG so development serves straight from the
 # source dirs. Non-debug settings set WHITENOISE_MAX_AGE for browser caching.
-# compressor writes its offline bundles under CACHE/ with content-hashed names, so those
-# can be cached forever.
-WHITENOISE_IMMUTABLE_FILE_TEST = r"/CACHE/"
+# Files whose name carries a 12-hex content hash (compressor's CACHE/ bundles and the
+# copies made by a manifest staticfiles storage, e.g. name.0123456789ab.css) change url
+# when their content changes, so they can be cached forever. Precompressed .gz/.br
+# siblings are served to browsers that accept them; whitenoise never compresses at
+# request time.
+WHITENOISE_IMMUTABLE_FILE_TEST = r"\.[0-9a-f]{12}\."
 
 # Make this unique, and don't share it with anybody. Deployments must set this
 # via the DJANGO_SECRET_KEY environment variable; the default is for development only.
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-secret-key-not-used-anywhere-else")
 
+# security, caching and compression headers are set by the app itself so no reverse proxy
+# needs to add them: SecurityMiddleware sets HSTS (in settings that enable it), nosniff and
+# the referrer policy, the CSP middleware forbids framing, dynamic responses default to
+# Cache-Control: no-store (static files carry whitenoise's own cache headers) and response
+# bodies are compressed with zstd, brotli or gzip per the client's Accept-Encoding
 MIDDLEWARE = (
+    "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django_http_compression.middleware.HttpCompressionMiddleware",
+    "django.middleware.csp.ContentSecurityPolicyMiddleware",
+    "ureport.utils.middleware.CacheControlMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -182,6 +195,9 @@ MIDDLEWARE = (
 )
 
 X_FRAME_OPTIONS = "DENY"
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "strict-origin"
+SECURE_CSP = {"frame-ancestors": [CSP.NONE]}
 
 SESSION_COOKIE_AGE = 900
 CSRF_COOKIE_AGE = 7200
@@ -781,9 +797,14 @@ MEDIA_URL = "/media/"
 # Storage
 # -----------------------------------------------------------------------------------
 
+# collectstatic writes a content-hashed copy of every static file (served with an immutable
+# cache header, see WHITENOISE_IMMUTABLE_FILE_TEST) with .gz/.br variants alongside; the
+# unhashed originals stay available for templates that build urls from STATIC_URL, cached
+# for WHITENOISE_MAX_AGE. Without a collected manifest (development, tests) urls fall back
+# to the unhashed names.
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
+    "staticfiles": {"BACKEND": "ureport.utils.storage.StaticFilesStorage"},
 }
 
 # -----------------------------------------------------------------------------------
