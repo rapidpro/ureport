@@ -1043,7 +1043,7 @@ wheels = [
 
 [[package]]
 name = "ureport"
-version = "1.6.15"
+version = "1.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "boto3" },
