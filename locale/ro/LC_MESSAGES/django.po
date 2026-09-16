@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -292,8 +292,18 @@ msgid "The API token for this backend"
 msgstr "Tokenul API pentru acest backend"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Ai fost invitat să te alături %(org_name)s.\n      <br />\n      Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>dă clic aici</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Ai fost invitat să te alături %(org_name)s.\n"
+"      <br />\n"
+"      Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>dă clic aici</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Tu ești invitat să te alături {{org.name}}."
@@ -688,6 +698,22 @@ msgstr "Salvează"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s tau nou a fost creat."
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Conectează-te"
+
+msgid "Enter Dashboard"
+msgstr "Introduce Dashboard "
 
 msgid "Back to Website"
 msgstr "Înapoi la website "
@@ -1229,38 +1255,15 @@ msgstr[2] "%(counter)s de rezultate"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Rezultatele %(start)s-%(end)s din %(count)s"
 
-msgid "Error"
-msgstr "Eroare"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Parola nouă"
 
-msgid "Enter Dashboard"
-msgstr "Introduce Dashboard "
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit %(failed_login_limit)s încercări de conectare incorecte."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Vă rugăm să așteptați %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"1 Parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare %(expire_days)s days, și că parolele nu trebuie să fi fost utilizate în precedentele %(window_days)s days."
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Canale"
 
 msgid "+ New Story"
 msgstr "+ Istorie Nouă"
@@ -2005,6 +2008,36 @@ msgstr "Țările Comitetelor Naționale UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Africa de Vest și Centrală"
+
+#~ msgid "Error"
+#~ msgstr "Eroare"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit %(failed_login_limit)s încercări de conectare incorecte."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Vă rugăm să așteptați %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "1 Parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare %(expire_days)s days, și că parolele nu trebuie să fi fost utilizate în precedentele %(window_days)s days."
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

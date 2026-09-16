@@ -1,4 +1,4 @@
-smartmin
+/smartmin
 node_modules/
 
 # Byte-compiled / optimized / DLL files
@@ -90,9 +90,9 @@ media/
 db/
 
 # symlink to dash and smartmin for dev
-dash
-smartmin
-temba_client
+/dash
+/smartmin
+/temba_client
 
 # country-list repo
 country-list/

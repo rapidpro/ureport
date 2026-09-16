@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -291,8 +291,18 @@ msgid "The API token for this backend"
 msgstr " API-token-ът за това backend приложение"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Поканени сте да се присъедините към %(org_name)s.\n      <br />\n      За да приемете поканата, <a href='%(host)s%(join_url)s'>кликнете тук</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Поканени сте да се присъедините към %(org_name)s.\n"
+"      <br />\n"
+"      За да приемете поканата, <a href='%(host)s%(join_url)s'>кликнете тук</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Поканени сте да се присъедините към {{името на организацията}}."
@@ -681,6 +691,22 @@ msgstr "Запази"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Нов %sе създаден"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Вход"
+
+msgid "Enter Dashboard"
+msgstr "Влез в таблото"
 
 msgid "Back to Website"
 msgstr "Връщане към уебстраницата"
@@ -1219,38 +1245,15 @@ msgstr[1] "%(counter)s резултата"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Резултати %(start)s-%(end)s от %(count)s"
 
-msgid "Error"
-msgstr "Грешка"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Нова парола"
 
-msgid "Enter Dashboard"
-msgstr "Влез в таблото"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Съжаляваме, не може да влезете в момента, тъй като получихме %(failed_login_limit)sнеправилни опита за влизане"
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Моля, изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)s дни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)s дни. "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Канали"
 
 msgid "+ New Story"
 msgstr "Нова История"
@@ -1995,6 +1998,36 @@ msgstr "Държави с национални комитети на УНИЦЕ�
 
 msgid "West and Central Africa"
 msgstr "Западна и Централна Африка"
+
+#~ msgid "Error"
+#~ msgstr "Грешка"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Съжаляваме, не може да влезете в момента, тъй като получихме %(failed_login_limit)sнеправилни опита за влизане"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Моля, изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)s дни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)s дни. "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

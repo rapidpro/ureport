@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Askhat Makitov, 2024\n"
 "Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
@@ -290,8 +290,18 @@ msgid "The API token for this backend"
 msgstr "Осы сервер бөлігіне арналған API-токен"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Сізді %(org_name)s ұйымына қосылуға шақырды.\n      <br />\n      Шақыруды қабылдау үшін <a href='%(host)s%(join_url)s'>осы жерді басыңыз</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Сізді %(org_name)s ұйымына қосылуға шақырды.\n"
+"      <br />\n"
+"      Шақыруды қабылдау үшін <a href='%(host)s%(join_url)s'>осы жерді басыңыз</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Сіз {{org.name}} қосылуға шақыру алдыңыз"
@@ -435,8 +445,14 @@ msgid "Remove Item?"
 msgstr "Нысанды алып тастау керек пе?"
 
 #, python-format
-msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
-msgstr "\n    <b>%(object)s</b> алып тастағыңыз келетініне сенімдісіз бе?\n    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"    <b>%(object)s</b> алып тастағыңыз келетініне сенімдісіз бе?\n"
+"    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Оны алып тастаған соң, ол мәңгілікке жойылады. Қалпына келтірудің ешқандай жолы жоқ"
@@ -445,14 +461,32 @@ msgid "Cancel"
 msgstr "Болдырмау"
 
 #, python-format
-msgid "\n\t %(counter)s result\n\t"
-msgid_plural "\n         %(counter)s results\n        "
-msgstr[0] "\n\t %(counter)s нәтиже\n\t"
-msgstr[1] "\n         %(counter)s нәтиже\n        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t %(counter)s нәтиже\n"
+"\t"
+msgstr[1] ""
+"\n"
+"         %(counter)s нәтиже\n"
+"        "
 
 #, python-format
-msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
-msgstr "\n\tНәтижелер: %(count)s ішінен %(start)s-%(end)s\n\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tНәтижелер: %(count)s ішінен %(start)s-%(end)s\n"
+"\t"
 
 msgid "Previous"
 msgstr "Алдыңғы"
@@ -479,12 +513,24 @@ msgid "Login Failure"
 msgstr "Жүйеге кіру сәтсіз болды"
 
 #, python-format
-msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
-msgstr "\n      Кешіріңіз, қазір жүйеге кіре алмайсыз, себебі %(failed_login_limit)s қате кіру әрекеті тіркелді.\n      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"      Кешіріңіз, қазір жүйеге кіре алмайсыз, себебі %(failed_login_limit)s қате кіру әрекеті тіркелді.\n"
+"      "
 
 #, python-format
-msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
-msgstr "\n      Қайта кіріп көру үшін %(lockout_timeout)s минут күте тұрыңыз.\n      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"      Қайта кіріп көру үшін %(lockout_timeout)s минут күте тұрыңыз.\n"
+"      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Мүмкіндігінше, төмендегі нысанды толтырып, құпия сөзді электрондық пошта арқылы қалпына келтіре аласыз"
@@ -502,8 +548,14 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "Тіркелу кезінде пайдаланған электрондық поштаңызды енгізіңіз, біз сізге құпия сөзіңізді қалпына келтіруге көмектесеміз"
 
 #, python-format
-msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
-msgstr "\n  <strong>Құпиясөзіңіздің мерзімі өтті.</strong> Сайт саясаты бойынша әр %(expire_days)s күн сайын жаңа құпиясөз таңдауыңыз керек және құпиясөз алдыңғы %(window_days)s күн ішінде пайдаланылмаған болуы тиіс.\n  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>Құпиясөзіңіздің мерзімі өтті.</strong> Сайт саясаты бойынша әр %(expire_days)s күн сайын жаңа құпиясөз таңдауыңыз керек және құпиясөз алдыңғы %(window_days)s күн ішінде пайдаланылмаған болуы тиіс.\n"
+"  "
 
 msgid "New Password"
 msgstr "Жаңа құпия сөз"
@@ -645,6 +697,22 @@ msgstr "Сақтау"
 msgid "Your new %s has been created."
 msgstr "Жаңа %s жасалды."
 
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Кіру"
+
+msgid "Enter Dashboard"
+msgstr "Бақылау тақтасын енгізіңіз"
+
 msgid "Back to Website"
 msgstr "Веб-сайтқа оралу"
 
@@ -774,14 +842,26 @@ msgstr "ӘРІ ҚАРАЙ ОҚУ"
 msgid "EXPLORE ENGAGEMENT"
 msgstr "ӘРЕКЕТТЕСТІКТІ ЗЕРТТЕУ"
 
-msgid "\n        To add a Twitter job source you are required to get a widget id from twitter.\n      "
-msgstr "\n        Twitter жұмыс көзін қосу үшін twitter-ден виджет идентификаторын алуыңыз керек.\n      "
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"        Twitter жұмыс көзін қосу үшін twitter-ден виджет идентификаторын алуыңыз керек.\n"
+"      "
 
 msgid "Follow this step by step guide"
 msgstr "Осы қадам-қадамдық нұсқаулықты орындаңыз"
 
-msgid "\n        <div>After you create the widget copy the widget id from the url as shown on</div>\n      "
-msgstr "\n        <div>Виджетті жасағаннан кейін виджет идентификаторын URL-мекенжайдан көрсетілгендей көшіріңіз</div>\n      "
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"        <div>Виджетті жасағаннан кейін виджет идентификаторын URL-мекенжайдан көрсетілгендей көшіріңіз</div>\n"
+"      "
 
 msgid "Back"
 msgstr "Артқа"
@@ -1154,8 +1234,14 @@ msgid "Dec"
 msgstr "Желтоқсан"
 
 #, python-format
-msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
-msgstr "\n            <strong>%(object)s</strong> алып тастағыңыз келетініне сенімдісіз бе?\n          "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            <strong>%(object)s</strong> алып тастағыңыз келетініне сенімдісіз бе?\n"
+"          "
 
 #, python-format
 msgid "%(counter)s result"
@@ -1167,23 +1253,15 @@ msgstr[1] "%(counter)s нәтиже"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Нәтижелер: %(count)s ішінен %(start)s-%(end)s"
 
-msgid "Error"
-msgstr "Қате"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Жаңа құпия сөз"
 
-msgid "Enter Dashboard"
-msgstr "Бақылау тақтасын енгізіңіз"
-
-#, python-format
-msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
-msgstr "\n                Кешіріңіз, қазір жүйеге кіре алмайсыз, себебі %(failed_login_limit)s қате кіру әрекеті тіркелді.\n              "
-
-#, python-format
-msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
-msgstr "\n                    Қайта кіріп көру үшін %(lockout_timeout)s минут күте тұрыңыз.\n                  "
-
-#, python-format
-msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
-msgstr "\n        <strong>Құпиясөзіңіздің мерзімі өтті.</strong> Сайт саясаты бойынша әр %(expire_days)s күн сайын жаңа құпиясөз таңдауыңыз керек және құпиясөз алдыңғы %(window_days)s күн ішінде пайдаланылмаған болуы тиіс.\n      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Арналар"
 
 msgid "+ New Story"
 msgstr "+ Жаңа әңгіме"
@@ -1928,3 +2006,36 @@ msgstr "ЮНИСЕФ Ұлттық комитеттері бар елдер"
 
 msgid "West and Central Africa"
 msgstr "Батыс және Орталық Африка"
+
+#~ msgid "Error"
+#~ msgstr "Қате"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "                Кешіріңіз, қазір жүйеге кіре алмайсыз, себебі %(failed_login_limit)s қате кіру әрекеті тіркелді.\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    Қайта кіріп көру үшін %(lockout_timeout)s минут күте тұрыңыз.\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>Құпиясөзіңіздің мерзімі өтті.</strong> Сайт саясаты бойынша әр %(expire_days)s күн сайын жаңа құпиясөз таңдауыңыз керек және құпиясөз алдыңғы %(window_days)s күн ішінде пайдаланылмаған болуы тиіс.\n"
+#~ "      "

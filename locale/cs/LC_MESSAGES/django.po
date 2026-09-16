@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -703,6 +703,22 @@ msgstr "Uložit"
 msgid "Your new %s has been created."
 msgstr "Váš nový %s byl vytvořen."
 
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Přihlásit se"
+
+msgid "Enter Dashboard"
+msgstr "Vstup na ovládací panel"
+
 msgid "Back to Website"
 msgstr "Zpět na webovou stranu"
 
@@ -1246,38 +1262,15 @@ msgstr[3] "%(counter)s výsledků"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Výsledky %(start)s-%(end)s z %(count)s"
 
-msgid "Error"
-msgstr "Chyba"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nové heslo"
 
-msgid "Enter Dashboard"
-msgstr "Vstup na ovládací panel"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-" Je nám líto, ale v tuto chvíli se nemůžete přihlásit, protože jsme obdrželi %(failed_login_limit)s nesprávné pokusy o přihlášení."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-" Počkejte prosím %(lockout_timeout)sminut, než se zkusíte přihlásit znovu."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-" <strong>Platnost vašeho hesla vypršela</strong>. Zásady webu stanoví, že si musíte každý %(expire_days)s den zvolit nové heslo a že hesla nesměla být v předchozích %(window_days)s dnech použita."
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanály"
 
 msgid "+ New Story"
 msgstr "+ Nový příběh"
@@ -2022,6 +2015,36 @@ msgstr "Země národního výboru UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Západní a střední Afrika"
+
+#~ msgid "Error"
+#~ msgstr "Chyba"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ " Je nám líto, ale v tuto chvíli se nemůžete přihlásit, protože jsme obdrželi %(failed_login_limit)s nesprávné pokusy o přihlášení."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ " Počkejte prosím %(lockout_timeout)sminut, než se zkusíte přihlásit znovu."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ " <strong>Platnost vašeho hesla vypršela</strong>. Zásady webu stanoví, že si musíte každý %(expire_days)s den zvolit nové heslo a že hesla nesměla být v předchozích %(window_days)s dnech použita."
 
 #~ msgid "Color Choice"
 #~ msgstr "Výběr barvy"

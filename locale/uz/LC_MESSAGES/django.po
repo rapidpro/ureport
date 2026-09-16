@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -288,8 +288,18 @@ msgid "The API token for this backend"
 msgstr "Ushbu bekend uchun API tokeni"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Siz %(org_name)s tashkilotiga qo'shilishga taklif etildingiz.\n      <br />\n      Taklifni qabul qilish uchun <a href='%(host)s%(join_url)s'>bu yerga bosing</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Siz %(org_name)s tashkilotiga qo'shilishga taklif etildingiz.\n"
+"      <br />\n"
+"      Taklifni qabul qilish uchun <a href='%(host)s%(join_url)s'>bu yerga bosing</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Siz {{tashk.nomi}}ga qo'shilishga taklif qilindingiz"
@@ -679,6 +689,22 @@ msgstr "Saqlash"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Sizning yangi %s giz yaratildi."
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Ro'yxatdan o'tish"
+
+msgid "Enter Dashboard"
+msgstr "Ko'rsatkichlar taxtasiga kirish"
 
 msgid "Back to Website"
 msgstr "Vebsaytga qaytish"
@@ -1217,40 +1243,15 @@ msgstr[0] "%(counter)s ta natija"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Natijalar: %(count)s tadan %(start)s-%(end)s"
 
-msgid "Error"
-msgstr "Xato"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Yangi parol"
 
-msgid "Enter Dashboard"
-msgstr "Ko'rsatkichlar taxtasiga kirish"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Kechirasiz, siz hozir kira olmaysiz, chunki bizda %(failed_login_limit)s noto'g'ri kirish harakatlari\n"
-" qayd etildi."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqa kuting."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq har %(expire_days)s kunda siz yangi parol tanlashingiz kerak, hamda ushbu parollar oldingi%(window_days)s kun ichida ishlatilmagan bo'lishi lozim.\n"
-" "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanallar"
 
 msgid "+ New Story"
 msgstr "+ Yangi Hikoya"
@@ -1995,6 +1996,38 @@ msgstr "UNICEF Milliy qo'mitalari mamlakatlari"
 
 msgid "West and Central Africa"
 msgstr "G'arbiy va Markaziy Afrika"
+
+#~ msgid "Error"
+#~ msgstr "Xato"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Kechirasiz, siz hozir kira olmaysiz, chunki bizda %(failed_login_limit)s noto'g'ri kirish harakatlari\n"
+#~ " qayd etildi."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqa kuting."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq har %(expire_days)s kunda siz yangi parol tanlashingiz kerak, hamda ushbu parollar oldingi%(window_days)s kun ichida ishlatilmagan bo'lishi lozim.\n"
+#~ " "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

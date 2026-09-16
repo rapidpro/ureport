@@ -41,6 +41,7 @@ dependencies = [
     "celery-redbeat>=2.4.2,<3.0.0",
     "whitenoise[brotli]~=6.12.0",
     "django-http-compression[brotli]~=1.4.0",
+    "django-allauth[mfa]>=65.8.1,<66.0.0",
 ]
 
 [dependency-groups]

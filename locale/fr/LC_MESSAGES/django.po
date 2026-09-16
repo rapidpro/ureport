@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -292,8 +292,18 @@ msgid "The API token for this backend"
 msgstr "Le token d’API pour ce backend"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Vous avez été invité à rejoindre %(org_name)s.\n      <br />\n      Pour accepter l'invitation, <a href='%(host)s%(join_url)s'>cliquez ici</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Vous avez été invité à rejoindre %(org_name)s.\n"
+"      <br />\n"
+"      Pour accepter l'invitation, <a href='%(host)s%(join_url)s'>cliquez ici</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Vous êtes invité à rejoindre {{org.name}}"
@@ -688,6 +698,22 @@ msgstr "Enregistrer"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Votre nouveau %s a été créé."
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Se connecter"
+
+msgid "Enter Dashboard"
+msgstr "Entrer dans le tableau de bord"
 
 msgid "Back to Website"
 msgstr "Retour au site"
@@ -1230,38 +1256,15 @@ msgstr[2] "%(counter)s résultats"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Résultats %(start)s-%(end)s de %(count)s"
 
-msgid "Error"
-msgstr "Erreur"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nouveau mot de passe"
 
-msgid "Enter Dashboard"
-msgstr "Entrer dans le tableau de bord"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Désolé, vous ne pouvez pas vous connecter en ce moment, nous avons reçu %(failed_login_limit)s tentatives de connexion incorrecte"
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Patientez svp %(lockout_timeout)s minutes avant de réessayer de vous connecter."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Votre mot de passe a expiré.</strong> Les conditions générales d’utilisation du site précisent que vous devez choisir un nouveau mot de passe tous les %(expire_days)s jours, et que les mots de passe ne doivent pas avoir été utilisés lors des %(window_days)s précédents jours. "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Canaux"
 
 msgid "+ New Story"
 msgstr "+ Nouveau Article"
@@ -2006,6 +2009,36 @@ msgstr "Pays des comités nationaux de l'UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Afrique de l'Ouest et centrale"
+
+#~ msgid "Error"
+#~ msgstr "Erreur"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Désolé, vous ne pouvez pas vous connecter en ce moment, nous avons reçu %(failed_login_limit)s tentatives de connexion incorrecte"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Patientez svp %(lockout_timeout)s minutes avant de réessayer de vous connecter."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Votre mot de passe a expiré.</strong> Les conditions générales d’utilisation du site précisent que vous devez choisir un nouveau mot de passe tous les %(expire_days)s jours, et que les mots de passe ne doivent pas avoir été utilisés lors des %(window_days)s précédents jours. "
 
 #~ msgid "Color Choice"
 #~ msgstr "Choix de la couleur"

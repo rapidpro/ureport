@@ -280,14 +280,14 @@
                                        class="pull-left">{{ request.user.username }}</a>
                                 </li>
                                 <li>
-                                    <form method="post" action="{% url 'users.user_logout' %}?go=/">
+                                    <form method="post" action="{% url 'account_logout' %}?next=/">
                                         {% csrf_token %}
                                         <button type="submit" class="pull-right">{% trans "Logout" %}</button>
                                     </form>
                                 </li>
                             {% else %}
                                 <li>
-                                    <a href="{% org_host_link %}{% url 'users.user_login' %}">{% trans "Login" %}</a>
+                                    <a href="{% org_host_link %}{% url 'account_login' %}">{% trans "Login" %}</a>
                                 </li>
                             {% endif %}
                         {% endblock login %}

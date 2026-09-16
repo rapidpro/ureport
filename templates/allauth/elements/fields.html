@@ -1,0 +1,33 @@
+{% load allauth %}
+
+{% if attrs.form.non_field_errors %}
+    <div class="notification is-danger form-errors">
+        {% for error in attrs.form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+    </div>
+{% endif %}
+{% for bound_field in attrs.form %}
+    {% with input_type=bound_field.field.widget.input_type %}
+        {% if not input_type or input_type == "select" or input_type == "radio" %}
+            {% comment %}widgets the field element doesn't know how to draw, e.g. selects and textareas, render themselves{% endcomment %}
+            <div class="field {{ bound_field.name }}_container">
+                {% if not attrs.unlabeled %}<label class="label" for="{{ bound_field.auto_id }}">{{ bound_field.label }}</label>{% endif %}
+                <div class="control">
+                    {% if input_type == "select" %}
+                        <div class="select">{{ bound_field }}</div>
+                    {% else %}
+                        {{ bound_field }}
+                    {% endif %}
+                </div>
+                {% if bound_field.field.help_text %}<p class="help">{{ bound_field.field.help_text }}</p>{% endif %}
+                {% for error in bound_field.errors %}<p class="help is-danger">{{ error }}</p>{% endfor %}
+            </div>
+        {% else %}
+            {% element field disabled=bound_field.field.widget.attrs.disabled unlabeled=attrs.unlabeled name=bound_field.name type=input_type required=bound_field.field.required value=bound_field.value id=bound_field.auto_id errors=bound_field.errors placeholder=bound_field.field.widget.attrs.placeholder autocomplete=bound_field.field.widget.attrs.autocomplete checked=bound_field.value %}
+                {% slot label %}{{ bound_field.label }}{% endslot %}
+                {% if bound_field.field.help_text %}
+                    {% slot help_text %}{{ bound_field.field.help_text }}{% endslot %}
+                {% endif %}
+            {% endelement %}
+        {% endif %}
+    {% endwith %}
+{% endfor %}

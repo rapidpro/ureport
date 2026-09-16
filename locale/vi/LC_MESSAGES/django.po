@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-15 08:59+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -285,8 +285,18 @@ msgid "The API token for this backend"
 msgstr "API token cho backend này"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Bạn được mời tham gia %(org_name)s.\n      <br />\n      Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Bạn được mời tham gia %(org_name)s.\n"
+"      <br />\n"
+"      Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Bạn được mời tham gia {{org.name}}."
@@ -430,8 +440,14 @@ msgid "Remove Item?"
 msgstr "Xóa Mục?"
 
 #, python-format
-msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
-msgstr "\n    Bạn có chắc chắn muốn xóa <b>%(object)s</b>?\n    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"    Bạn có chắc chắn muốn xóa <b>%(object)s</b>?\n"
+"    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Không có cách nào để hoàn tác thao tác này."
@@ -440,13 +456,28 @@ msgid "Cancel"
 msgstr "Đóng"
 
 #, python-format
-msgid "\n\t %(counter)s result\n\t"
-msgid_plural "\n         %(counter)s results\n        "
-msgstr[0] "\n\t %(counter)s kết quả\n\t"
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t %(counter)s kết quả\n"
+"\t"
 
 #, python-format
-msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
-msgstr "\n\tKết quả %(start)s-%(end)s trong số %(count)s\n\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tKết quả %(start)s-%(end)s trong số %(count)s\n"
+"\t"
 
 msgid "Previous"
 msgstr "Trước"
@@ -473,12 +504,24 @@ msgid "Login Failure"
 msgstr "Đăng nhập thất bại"
 
 #, python-format
-msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
-msgstr "\n      Xin lỗi, bạn không thể đăng nhập lúc này vì chúng tôi đã nhận được %(failed_login_limit)s lần đăng nhập sai.\n      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"      Xin lỗi, bạn không thể đăng nhập lúc này vì chúng tôi đã nhận được %(failed_login_limit)s lần đăng nhập sai.\n"
+"      "
 
 #, python-format
-msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
-msgstr "\n      Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại.\n      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"      Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại.\n"
+"      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Ngoài ra, bạn có thể điền vào mẫu dưới đây để đặt lại mật khẩu của bạn qua e-mail."
@@ -496,8 +539,14 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "Vui lòng nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ giúp bạn khôi phục lại mật khẩu."
 
 #, python-format
-msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
-msgstr "\n  <strong>Mật khẩu của bạn đã hết hạn.</strong> Chính sách của trang web yêu cầu bạn phải chọn mật khẩu mới sau mỗi %(expire_days)s ngày và mật khẩu không được trùng với mật khẩu đã sử dụng trong %(window_days)s ngày trước đó.\n  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>Mật khẩu của bạn đã hết hạn.</strong> Chính sách của trang web yêu cầu bạn phải chọn mật khẩu mới sau mỗi %(expire_days)s ngày và mật khẩu không được trùng với mật khẩu đã sử dụng trong %(window_days)s ngày trước đó.\n"
+"  "
 
 msgid "New Password"
 msgstr "Mật khẩu mới"
@@ -638,6 +687,22 @@ msgstr "Lưu"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s mới của bạn đã được tạo."
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Đăng ký"
+
+msgid "Enter Dashboard"
+msgstr "Vào bảng điều khiển"
 
 msgid "Back to Website"
 msgstr "Quay lại trang web"
@@ -1156,8 +1221,14 @@ msgid "Dec"
 msgstr "Thg 12"
 
 #, python-format
-msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
-msgstr "\n            Bạn có chắc chắn muốn xóa <strong>%(object)s</strong>?\n          "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            Bạn có chắc chắn muốn xóa <strong>%(object)s</strong>?\n"
+"          "
 
 #, python-format
 msgid "%(counter)s result"
@@ -1168,23 +1239,15 @@ msgstr[0] "%(counter)s kết quả"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Kết quả %(start)s-%(end)s trong số %(count)s"
 
-msgid "Error"
-msgstr "Lỗi"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Mật khẩu mới"
 
-msgid "Enter Dashboard"
-msgstr "Vào bảng điều khiển"
-
-#, python-format
-msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
-msgstr "\n                Xin lỗi, bạn không thể đăng nhập lúc này vì chúng tôi đã nhận được %(failed_login_limit)s lần đăng nhập sai.\n              "
-
-#, python-format
-msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
-msgstr "\n                    Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại.\n                  "
-
-#, python-format
-msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
-msgstr "\n        <strong>Mật khẩu của bạn đã hết hạn.</strong> Chính sách của trang web yêu cầu bạn phải chọn mật khẩu mới sau mỗi %(expire_days)s ngày và mật khẩu không được trùng với mật khẩu đã sử dụng trong %(window_days)s ngày trước đó.\n      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kênh"
 
 msgid "+ New Story"
 msgstr "+ Câu chuyện mới"
@@ -1929,6 +1992,39 @@ msgstr "Các quốc gia có Ủy ban Quốc gia của UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Tây và Trung Phi"
+
+#~ msgid "Error"
+#~ msgstr "Lỗi"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "                Xin lỗi, bạn không thể đăng nhập lúc này vì chúng tôi đã nhận được %(failed_login_limit)s lần đăng nhập sai.\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại.\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>Mật khẩu của bạn đã hết hạn.</strong> Chính sách của trang web yêu cầu bạn phải chọn mật khẩu mới sau mỗi %(expire_days)s ngày và mật khẩu không được trùng với mật khẩu đã sử dụng trong %(window_days)s ngày trước đó.\n"
+#~ "      "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

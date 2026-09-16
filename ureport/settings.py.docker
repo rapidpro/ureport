@@ -31,6 +31,12 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1209600  # 2 weeks
+
+# each org site is served from a subdomain of SITE_HOSTNAME; set this to ".<SITE_HOSTNAME>" so that a login on one
+# host (e.g. the root host where SSO callbacks land) is valid on all of them
+if os.environ.get("SESSION_COOKIE_DOMAIN"):
+    SESSION_COOKIE_DOMAIN = os.environ["SESSION_COOKIE_DOMAIN"]
+    CSRF_COOKIE_DOMAIN = os.environ["SESSION_COOKIE_DOMAIN"]
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 SESSION_CACHE_ALIAS = "default"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
