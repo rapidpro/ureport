@@ -12,7 +12,8 @@ from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
-from django.test import SimpleTestCase
+from django.http import HttpResponse
+from django.test import RequestFactory, SimpleTestCase
 from django.utils import timezone
 
 from dash.categories.models import Category
@@ -40,6 +41,7 @@ from ureport.utils import (
     json_date_to_datetime,
     update_poll_flow_data,
 )
+from ureport.utils.middleware import CacheControlMiddleware
 from ureport.utils.storage import StaticFilesStorage
 
 
@@ -604,3 +606,26 @@ class StaticFilesStorageTest(SimpleTestCase):
             # and precompressed variants are written alongside
             self.assertTrue(storage.exists(hashed_css + ".br"))
             self.assertTrue(storage.exists(hashed_css + ".gz"))
+
+
+class MiddlewareTest(UreportTest):
+    def test_headers(self):
+        # every response carries the security headers and, lacking a Cache-Control of its own, no-store
+        response = self.client.get("/", SERVER_NAME="random.ureport.io")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response["X-Content-Type-Options"], "nosniff")
+        self.assertEqual(response["X-Frame-Options"], "DENY")
+        self.assertEqual(response["Referrer-Policy"], "strict-origin")
+        self.assertEqual(response["Content-Security-Policy"], "frame-ancestors 'none'")
+        self.assertEqual(response["Cache-Control"], "no-store")
+        self.assertFalse(response.has_header("Content-Encoding"))
+
+        # a view's own Cache-Control is kept
+        middleware = CacheControlMiddleware(lambda r: HttpResponse("x", headers={"Cache-Control": "max-age=600"}))
+        self.assertEqual(middleware(RequestFactory().get("/"))["Cache-Control"], "max-age=600")
+
+        # bodies are compressed with what the client accepts
+        for encoding in ("br", "gzip", "zstd"):
+            response = self.client.get("/", SERVER_NAME="random.ureport.io", HTTP_ACCEPT_ENCODING=encoding)
+            self.assertEqual(response["Content-Encoding"], encoding)
+            self.assertIn("accept-encoding", response["Vary"].lower())

@@ -40,6 +40,7 @@ dependencies = [
     "django-valkey>=0.2.1,<0.3.0",
     "celery-redbeat>=2.4.2,<3.0.0",
     "whitenoise[brotli]~=6.12.0",
+    "django-http-compression[brotli]~=1.4.0",
 ]
 
 [dependency-groups]

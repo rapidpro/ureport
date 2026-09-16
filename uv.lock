@@ -365,6 +365,25 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/99/69/dc9b0d7fca9d88f920ebca3a0d0134047ab62b17f3890304342ed9dc5d5c/django-digest-1.13.tar.gz", hash = "sha256:e91b5b440e7c200800da4fd26828cd9e3dc855271b143dac58d54ddca5d81041", size = 14355, upload-time = "2011-03-04T22:54:06.661Z" }
 
 [[package]]
+name = "django-http-compression"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "django" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6d/08/4acb01609bba92b6202065336934ff9885c7078586974cc5b4b8f39be3d4/django_http_compression-1.4.0.tar.gz", hash = "sha256:6201c8908917b5ccbd4eb46a0f12840413e869c66ba9a7a38988b99ad9854ba0", size = 17954, upload-time = "2026-04-08T20:59:44.075Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/07/aa/75680f5fde48795e8650575ffbe04ced38936caa6d034b316df4f1b107e9/django_http_compression-1.4.0-py3-none-any.whl", hash = "sha256:98b39d7040e8e2a03a87f0997fb126bb867f5eba0ef883d585f8889cec18825d", size = 10121, upload-time = "2026-04-08T20:59:42.824Z" },
+]
+
+[package.optional-dependencies]
+brotli = [
+    { name = "brotli" },
+]
+
+[[package]]
 name = "django-rosetta"
 version = "0.10.3"
 source = { registry = "https://pypi.org/simple" }
@@ -1037,6 +1056,7 @@ dependencies = [
     { name = "django-countries" },
     { name = "django-debug-toolbar" },
     { name = "django-digest" },
+    { name = "django-http-compression", extra = ["brotli"] },
     { name = "django-rosetta" },
     { name = "django-storages" },
     { name = "django-valkey" },
@@ -1080,6 +1100,7 @@ requires-dist = [
     { name = "django-countries", specifier = "~=7.6.1" },
     { name = "django-debug-toolbar", specifier = "~=4.4.6" },
     { name = "django-digest", specifier = "~=1.13" },
+    { name = "django-http-compression", extras = ["brotli"], specifier = "~=1.4.0" },
     { name = "django-rosetta", specifier = "~=0.10.1" },
     { name = "django-storages", specifier = "~=1.14.4" },
     { name = "django-valkey", specifier = ">=0.2.1,<0.3.0" },
