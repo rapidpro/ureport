@@ -14,11 +14,17 @@ from django.forms import Textarea
 from django.utils.csp import CSP
 from django.utils.translation import gettext_lazy as _
 
+from ureport import __version__
+
 SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
 
 if SENTRY_DSN:  # pragma: no cover
     sentry_sdk.init(
         dsn=SENTRY_DSN,
+        # which deployment an event came from, for when several report to the same project - unset leaves the SDK's
+        # default of "production"
+        environment=os.environ.get("SENTRY_ENVIRONMENT"),
+        release=__version__,
         integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
         send_default_pii=True,
         traces_sample_rate=0.0,
