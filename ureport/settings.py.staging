@@ -35,9 +35,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD =  False
 SECURE_HSTS_SECONDS = 86400
-# trust the proxy's scheme header; proxies and load balancers send the scheme in lowercase,
-# and Django compares the value exactly
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# TLS is always terminated in front of the app and the Secure cookies above already make plain
+# http unusable, so treat every request as https rather than trust a forwarded header
+SECURE_ASSUME_HTTPS = True
 SECURE_REDIRECT_EXEMPT = []
 SECURE_SSL_HOST = None
 SECURE_SSL_REDIRECT = False

@@ -37,11 +37,13 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 CSRF_COOKIE_SAMESITE = "Strict"
 CSRF_COOKIE_AGE = 10800
 
-# on by default for TLS-terminating deployments; turn off to log in over plain http
+# on by default for TLS-terminating deployments; turn off to log in over plain http. Since the
+# Secure cookies make plain http unusable anyway, every request is treated as https rather than
+# trusting a forwarded header from whatever terminates TLS.
 if env_bool("DJANGO_SECURE", True):
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_ASSUME_HTTPS = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = False
     SECURE_HSTS_SECONDS = 86400
