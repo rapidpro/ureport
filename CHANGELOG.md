@@ -1,3 +1,9 @@
+v1.7.1 (2026-09-17)
+-------------------------
+ * Add a setting to treat every request as https instead of trusting a forwarded header
+ * Add a JSON access logger for gunicorn using OpenTelemetry's HTTP field names
+ * Keep loggers that exist before Django configures logging
+
 v1.7.0 (2026-09-16)
 -------------------------
  * Set security, caching and compression headers from the app
