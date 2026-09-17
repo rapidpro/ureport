@@ -101,20 +101,6 @@ SITE_API_HOST = 'https://api.rapidpro.io'
 # Set your production database settings here
 DATABASES['default'] = dj_database_url.config()
 
-# no debug toolbar in prod
-MIDDLEWARE = (
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'dash.orgs.middleware.SetOrgMiddleware',
-)
-
 WHITENOISE_MAX_AGE = 3600
 
 LOGGING = {
