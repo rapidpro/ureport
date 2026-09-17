@@ -1,3 +1,7 @@
+v1.7.2 (2026-09-17)
+-------------------------
+ * Stop overriding the middleware in the prod and staging settings
+
 v1.7.1 (2026-09-17)
 -------------------------
  * Add a setting to treat every request as https instead of trusting a forwarded header
