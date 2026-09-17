@@ -55,4 +55,6 @@ EXPOSE 8000
 # beat scheduler embedded via -B (RedBeat's redis lock keeps exactly one beat active,
 # so this is safe on every worker, replicas included):
 #   celery -A ureport worker -B -Q sync -Ofair --loglevel=INFO
-CMD ["gunicorn", "ureport.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "--access-logfile", "-"]
+# the access log goes to stdout as JSON, built by a logger class rather than a format string so
+# client-controlled values are escaped
+CMD ["gunicorn", "ureport.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "--access-logfile", "-", "--logger-class", "ureport.gunicorn.JSONAccessLogger"]
