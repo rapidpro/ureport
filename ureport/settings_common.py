@@ -740,31 +740,6 @@ INSTALLED_APPS = (
     "drf_yasg",
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"},
-        "simple": {"format": "%(levelname)s %(message)s"},
-    },
-    "handlers": {
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        }
-    },
-    "loggers": {
-        "httprouterthread": {"handlers": ["console"], "level": "INFO"},
-        "django.request": {"handlers": ["console"], "level": "ERROR"},
-    },
-}
-
 # -----------------------------------------------------------------------------------
 # Directory Configuration
 # -----------------------------------------------------------------------------------
@@ -2045,7 +2020,9 @@ STORY_WIDGET_URL = "https://ureportapp.ilhasoft.mobi/widget/"
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    # loggers created before this is applied stay enabled - gunicorn sets up its access and error loggers in the
+    # master before the app loads in a worker, and disabling them silences its request log
+    "disable_existing_loggers": False,
     "root": {"level": "WARNING", "handlers": ["console"]},
     "formatters": {"verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"}},
     "handlers": {

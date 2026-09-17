@@ -99,7 +99,8 @@ if os.environ.get("AWS_STORAGE_BUCKET_NAME"):
 # everything to stdout for the container runtime to collect
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    # keep loggers created before this is applied, i.e. gunicorn's access and error loggers
+    "disable_existing_loggers": False,
     "formatters": {
         "verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"},
     },
