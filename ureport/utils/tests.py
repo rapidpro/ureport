@@ -12,8 +12,9 @@ from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
+from django.core.exceptions import MiddlewareNotUsed
 from django.http import HttpResponse
-from django.test import RequestFactory, SimpleTestCase
+from django.test import RequestFactory, SimpleTestCase, override_settings
 from django.utils import timezone
 
 from dash.categories.models import Category
@@ -41,7 +42,7 @@ from ureport.utils import (
     json_date_to_datetime,
     update_poll_flow_data,
 )
-from ureport.utils.middleware import CacheControlMiddleware
+from ureport.utils.middleware import AssumeHTTPSMiddleware, CacheControlMiddleware
 from ureport.utils.storage import StaticFilesStorage
 
 
@@ -629,3 +630,27 @@ class MiddlewareTest(UreportTest):
             response = self.client.get("/", SERVER_NAME="random.ureport.io", HTTP_ACCEPT_ENCODING=encoding)
             self.assertEqual(response["Content-Encoding"], encoding)
             self.assertIn("accept-encoding", response["Vary"].lower())
+
+    def test_assume_https(self):
+        # off by default, and then it takes itself out of the stack
+        with self.assertRaises(MiddlewareNotUsed):
+            AssumeHTTPSMiddleware(lambda r: HttpResponse("x"))
+
+        request = RequestFactory().get("/", HTTP_HOST="uganda.ureport.io")
+        self.assertFalse(request.is_secure())
+
+        with override_settings(SECURE_ASSUME_HTTPS=True):
+            AssumeHTTPSMiddleware(lambda r: HttpResponse("x"))(request)
+
+            self.assertTrue(request.is_secure())
+            self.assertEqual(request.build_absolute_uri("/"), "https://uganda.ureport.io/")
+
+            # a forwarded header saying otherwise isn't consulted
+            request = RequestFactory().get("/", HTTP_X_FORWARDED_PROTO="http")
+            AssumeHTTPSMiddleware(lambda r: HttpResponse("x"))(request)
+            self.assertTrue(request.is_secure())
+
+            # and the rest of the stack sees it, e.g. HSTS is only sent on secure requests
+            with override_settings(SECURE_HSTS_SECONDS=3600):
+                response = self.client.get("/", SERVER_NAME="random.ureport.io")
+                self.assertEqual(response["Strict-Transport-Security"], "max-age=3600")

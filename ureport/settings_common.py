@@ -177,6 +177,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-secret-key-not-used-a
 # Cache-Control: no-store (static files carry whitenoise's own cache headers) and response
 # bodies are compressed with zstd, brotli or gzip per the client's Accept-Encoding
 MIDDLEWARE = (
+    "ureport.utils.middleware.AssumeHTTPSMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django_http_compression.middleware.HttpCompressionMiddleware",
@@ -192,6 +193,10 @@ MIDDLEWARE = (
     "dash.orgs.middleware.SetOrgMiddleware",
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
+
+# whether to treat every request as having arrived over https regardless of what the connection or any forwarded header
+# says - for when TLS is always terminated in front of the app
+SECURE_ASSUME_HTTPS = False
 
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
