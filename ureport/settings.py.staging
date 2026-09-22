@@ -70,15 +70,16 @@ INSTALLED_APPS = INSTALLED_APPS + ('gunicorn',)
 STATIC_URL = '/sitestatic/'
 COMPRESS_URL = '/sitestatic/'
 
-# our media is all on S3
-MEDIA_URL = 'https://dl-ureport.s3.amazonaws.com/'
+# our media is all on S3, in staging's own bucket — sharing production's would let a staging
+# credential write production media
+MEDIA_URL = 'https://dl-ureport-staging.s3.amazonaws.com/'
 
 # we store files on S3 on prod boxes
 # static keys when the environment provides them; otherwise left unset so that the storage
 # backend falls back to the default credential chain, e.g. a role the host or task runs as
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
+AWS_STORAGE_BUCKET_NAME = 'dl-ureport-staging'
 STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}
 
 THUMBNAIL_STORAGE = STORAGES['default']['BACKEND']
