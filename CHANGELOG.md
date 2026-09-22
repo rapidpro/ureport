@@ -1,3 +1,7 @@
+v1.7.4 (2026-09-22)
+-------------------------
+ * Point the staging settings' media at a bucket of their own
+
 v1.7.3 (2026-09-22)
 -------------------------
  * Fall back to the default credential chain for media storage
