@@ -25,33 +25,33 @@
     }
 
     .welcome-container {
+      position: relative;
       width: 100%;
       padding: 200px 15% 0px 15%;
-      position: relative;
     }
 
     .welcome-logo {
       position: absolute;
       top: 0px;
-      height: 125px;
       width: 301px;
+      height: 125px;
       background-image: url('/sitestatic/img/landing_logo.png');
     }
   </style>
   <style type="text/css">
     @font-face {
-      font-family: MontserratBold;
       src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
+      font-family: MontserratBold;
     }
 
     @font-face {
-      font-family: RobotoSlab;
       src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
+      font-family: RobotoSlab;
     }
 
     @font-face {
-      font-family: DroidSerif;
       src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
+      font-family: DroidSerif;
     }
   </style>
   {% compress css %}
@@ -65,13 +65,11 @@
     <div class="welcome-container">
       <div class="welcome-logo"></div>
       <div class="welcome-text">
-        U-Report is a free youth-facing engagement application led by UNICEF to amplify the voices of youth and empower
-        them to speak out about the issues that matter most to them.
+        U-Report is a free youth-facing engagement application led by UNICEF to amplify the voices of youth and empower them to speak out about the issues that matter most to them.
         <br>
         <br>
-        Using this free application, U-Reporters can connect through a range of communication channels to voice their
-        opinions about what is happening in their communities and work together with leaders at the community and
-        national level for positive social change.
+        Using this free application, U-Reporters can connect through a range of communication channels to voice their opinions about what is happening in their communities and work together with
+        leaders at the community and national level for positive social change.
       </div>
       <div class="welcome-flags">{% show_org_flags %}</div>
     </div>

@@ -2,434 +2,415 @@
 {% load smartmin i18n thumbnail ureport compress %}
 
 {% block styles %}
+  {% compress css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/tailwind.css">
+  {% endcompress %}
+  {% if is_rtl_org %}
     {% compress css %}
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/tailwind.css">
+      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css">
+      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css">
+      <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
     {% endcompress %}
-    {% if is_rtl_org %}
-        {% compress css %}
-            <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css">
-            <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css">
-            <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
-        {% endcompress %}
-    {% else %}
-        {% compress css %}
-            <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css">
-            <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css">
-            <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
-        {% endcompress %}
-    {% endif %}
-    <style type="text/css">
-      table.list-table {
-        font-size: 0.85rem;
-      }
+  {% else %}
+    {% compress css %}
+      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css">
+      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css">
+      <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
+    {% endcompress %}
+  {% endif %}
+  <style type="text/css">
+    table.list-table {
+      font-size: 0.85rem;
+    }
 
-      .row1 a,
-      .row2 a {
-        display: block;
-        padding-left: 5px;
-
-        color: #98DFF9;
-
-        border-left: 5px solid #98DFF9;
-      }
-
-      .row1 a:hover,
-      .row2 a:hover {
-        background-color: #E6E7E8;
-
-        color: #98DFF9;
-      }
-
-      .row1.inactive a,
-      .row2.inactive a,
-      {
-      border-left: 5px solid #bbb;
+    .row1 a,
+    .row2 a {
+      display: block;
       padding-left: 5px;
-      }
 
-      .row1.inactive a,
-      .row2.inactive a,
-      .row1.inactive td,
-      .row2.inactive td {
-        color: #ccc;
-      }
+      color: #98DFF9;
 
-      .row1.inactive a:hover,
-      .row2.inactive a:hover {
-        color: #ccc;
-        text-decoration: none;
-        font-weight: normal;
+      border-left: 5px solid #98DFF9;
+    }
 
-      }
-    </style>
+    .row1 a:hover,
+    .row2 a:hover {
+      background-color: #E6E7E8;
+
+      color: #98DFF9;
+    }
+
+    .row1.inactive a,
+    .row2.inactive a,
+    {
+    border-left: 5px solid #bbb;
+    padding-left: 5px;
+    }
+
+    .row1.inactive a,
+    .row2.inactive a,
+    .row1.inactive td,
+    .row2.inactive td {
+      color: #ccc;
+    }
+
+    .row1.inactive a:hover,
+    .row2.inactive a:hover {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: normal;
+
+    }
+  </style>
 {% endblock styles %}
 {% block body-content %}
-    <section class="section is-paddingless is-marginless">
-        <div>
-            <div style="height:15px" class="level is-marginless has-background-black"></div>
+  <section class="section is-paddingless is-marginless">
+    <div>
+      <div style="height: 15px" class="level is-marginless has-background-black"></div>
+    </div>
+    {% block navbar %}
+      <div class="top-nav-container">
+        <div class="level">
+          {% if is_rtl_org %}<div class="level-left"></div>{% endif %}
+          <div class="{% if is_rtl_org %}level-right{% else %}level-left{% endif %}">
+            <a href="{% url 'public.index' %}" style="justify-content: start" class="level-item has-text-black">
+              <div style="{% if is_rtl_org %}margin-right:0; margin-left:1.25rem; {% endif %}" class="icon">
+                <i class="{% if is_rtl_org %}fa-arrow-circle-right{% else %}fa-arrow-circle-left{% endif %} fas"></i>
+              </div>
+              {% trans "Back to Website" %}
+            </a>
+          </div>
         </div>
-        {% block navbar %}
-            <div class="top-nav-container">
-                <div class="level">
-                    {% if is_rtl_org %}<div class="level-left"></div>{% endif %}
-                    <div class="{% if is_rtl_org %}level-right{% else %}level-left{% endif %}">
-                        <a href="{% url 'public.index' %}" style="justify-content: start" class="level-item has-text-black">
-                            <div style="{% if is_rtl_org %}margin-right:0; margin-left:1.25rem; {% endif %}" class="icon">
-                                <i class="{% if is_rtl_org %}fa-arrow-circle-right{% else %}fa-arrow-circle-left{% endif %} fas"></i>
-                            </div>
-                            {% trans "Back to Website" %}
+      </div>
+      <div class="admin-header border-b border-gray-600">
+        <div class="level">
+          {% if not is_rtl_org %}
+            <div class="level-left">
+              <div style="justify-content: start" class="level-item square-logo">
+                <div style="width: 360px">
+                  {% if org.subdomain == "drc" %}
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                  {% elif org.language != "ar" and org.language != "ru" %}
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                  {% else %}
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                  {% endif %}
+                </div>
+                <div class="flex-1 text-center font-bold flex-center-y mx-4 mt-4" style="font-family: 'Noto Sans', sans-serif">{{ org.name }}</div>
+              </div>
+            </div>
+          {% endif %}
+          <div class="{% if is_rtl_org %}level-left{% else %}level-right{% endif %}">
+            {% block login %}
+              {% if request.user and request.user.is_authenticated %}
+                <div class="{% if is_rtl_org %}has-text-left{% else %}has-text-right{% endif %} level-item logged-in-account">
+                  {% trans "Welcome, " %}
+                  {{ request.user.first_name }} {{ request.user.last_name }}
+                  <br class="is-hidden-mobile">
+                  {{ request.user.username }}
+                </div>
+                <form method="post" action="{% url 'users.user_logout' %}?go=/">
+                  {% csrf_token %}
+                  <button type="submit" class="level-item button is-outlined logout-button">{% trans "Logout" %}</button>
+                </form>
+              {% else %}
+                <a href="{% org_host_link %}{% url 'users.user_login' %}" class="level-item button is-outlined">{% trans "Login" %}</a>
+              {% endif %}
+            {% endblock login %}
+          </div>
+          {% if is_rtl_org %}
+            <div class="level-right">
+              <div style="justify-content: start; margin-right: 0rem" class="level-item square-logo">
+                <div style="width: 360px">
+                  {% if org.subdomain == "drc" %}
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+                  {% elif org.language != "ar" and org.language != "ru" %}
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+                  {% else %}
+                    <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endblock navbar %}
+  </section>
+  <section class="section is-paddingless is-marginless">
+    <div class="content-section-container">
+      {% block content-section %}
+        <div class="columns is-marginless">
+          <div class="column is-one-fifth block" id="left-menu">
+            {% block menu %}
+              {% if request.user and request.user.is_authenticated %}
+                <aside class="menu">
+                  <ul class="menu-list">
+                    <li>
+                      <a href="{% url 'polls.poll_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/polls_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Opinions" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'stories.story_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/stories_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Stories" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'bots.bot_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Bots" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'orgs.org_manage_accounts' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/users_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Users" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'orgs.org_edit' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Settings" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'dashblocks.dashblock_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/pages_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Pages" %}</span>
+                      </a>
+                      <li>
+                        <a href="{% url 'landingpages.landingpage_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/pages_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "Landing Pages" %}</span>
                         </a>
-                    </div>
-                </div>
-            </div>
-            <div class="admin-header border-b border-gray-600">
-                <div class="level">
-                    {% if not is_rtl_org %}
-                        <div class="level-left">
-                            <div style="justify-content: start;" class="level-item square-logo">
-                                <div style="width:360px">
-                                    {% if org.subdomain == "drc" %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
-                                    {% elif org.language != "ar" and org.language != "ru" %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
-                                    {% else %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
-                                    {% endif %}
-                                </div>
-                                <div class="flex-1 text-center font-bold flex-center-y mx-4 mt-4"
-                                    style="font-family:'Noto Sans', sans-serif">{{ org.name }}</div>
-                            </div>
-                        </div>
+                      </li>
+                    </li>
+                    <li>
+                      <a href="{% url 'jobs.jobsource_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/jobs_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Jobs" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'categories.category_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/categories_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Categories" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'tags.tag_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/categories_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Tags" %}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'assets.image_list' %}">
+                        <span class="icon">
+                          <img src="{{ STATIC_URL }}img/icons/photos_icon.png" alt="">
+                        </span>
+                        <span class="menu-link-title">{% trans "Partners Logos" %}</span>
+                      </a>
+                    </li>
+                    {% if request.user.is_superuser %}
+                      <li>
+                        <a href="{% url 'categories.categoryimage_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/photos_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "Categories Images" %}</span>
+                        </a>
+                      </li>
                     {% endif %}
-                    <div class="{% if is_rtl_org %}level-left{% else %}level-right{% endif %}">
-                        {% block login %}
-                            {% if request.user and request.user.is_authenticated %}
-                                <div class="{% if is_rtl_org %}has-text-left{% else %}has-text-right{% endif %} level-item logged-in-account">
-                                    {% trans "Welcome, " %}
-                                    {{ request.user.first_name }} {{ request.user.last_name }}
-                                    <br class="is-hidden-mobile">
-                                    {{ request.user.username }}
-                                </div>
-                                <form method="post" action="{% url 'users.user_logout' %}?go=/">
-                                    {% csrf_token %}
-                                    <button type="submit" class="level-item button is-outlined logout-button">{% trans "Logout" %}</button>
-                                </form>
-                            {% else %}
-                                <a href="{% org_host_link %}{% url 'users.user_login' %}" class="level-item button is-outlined">{% trans "Login" %}</a>
-                            {% endif %}
-                        {% endblock login %}
-                    </div>
-                    {% if is_rtl_org %}
-                        <div class="level-right">
-                            <div style="justify-content: start; margin-right: 0rem" class="level-item square-logo">
-                                <div style="width:360px">
-                                    {% if org.subdomain == "drc" %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
-                                    {% elif org.language != "ar" and org.language != "ru" %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
-                                    {% else %}
-                                        <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
+                    {% if request.user.is_superuser %}
+                      <li>
+                        <a href="{% url 'news.newsitem_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/news_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "News Items" %}</span>
+                        </a>
+                      </li>
                     {% endif %}
-                </div>
-            </div>
-        {% endblock navbar %}
-    </section>
-    <section class="section is-paddingless is-marginless">
-        <div class="content-section-container">
-            {% block content-section %}
-                <div class="columns is-marginless">
-                    <div class="column is-one-fifth block" id="left-menu">
-                        {% block menu %}
-                            {% if request.user and request.user.is_authenticated %}
-                                <aside class="menu">
-                                    <ul class="menu-list">
-                                        <li>
-                                            <a href="{% url 'polls.poll_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/polls_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Opinions" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'stories.story_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/stories_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Stories" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'bots.bot_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Bots" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'orgs.org_manage_accounts' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/users_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Users" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'orgs.org_edit' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Settings" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'dashblocks.dashblock_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/pages_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Pages" %}</span>
-                                            </a>
-                                            <li>
-                                                <a href="{% url 'landingpages.landingpage_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/pages_icon.png" alt="">
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "Landing Pages" %}</span>
-                                                </a>
-                                            </li>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'jobs.jobsource_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/jobs_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Jobs" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'categories.category_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/categories_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Categories" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'tags.tag_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/categories_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Tags" %}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'assets.image_list' %}">
-                                                <span class="icon">
-                                                    <img src="{{ STATIC_URL }}img/icons/photos_icon.png" alt="">
-                                                </span>
-                                                <span class="menu-link-title">{% trans "Partners Logos" %}</span>
-                                            </a>
-                                        </li>
-                                        {% if request.user.is_superuser %}
-                                            <li>
-                                                <a href="{% url 'categories.categoryimage_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/photos_icon.png" alt="">
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "Categories Images" %}</span>
-                                                </a>
-                                            </li>
-                                        {% endif %}
-                                        {% if request.user.is_superuser %}
-                                            <li>
-                                                <a href="{% url 'news.newsitem_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/news_icon.png" alt="">
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "News Items" %}</span>
-                                                </a>
-                                            </li>
-                                        {% endif %}
-                                        {% if request.user.is_superuser %}
-                                            <li>
-                                                <a href="{% url 'orgs.org_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "Orgs" %}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{% url 'users.user_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="" >
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "Users" %}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{% url 'dashblocks.dashblocktype_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "Content Types" %}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{% url 'assets.image_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "Images" %}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{% url 'syncjobs.syncjob_list' %}">
-                                                    <span class="icon">
-                                                        <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
-                                                    </span>
-                                                    <span class="menu-link-title">{% trans "Sync Jobs" %}</span>
-                                                </a>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                                </aside>
-                            {% endif %}
-                        {% endblock menu %}
-                    </div>
-                    <div class="bg-white column is-four-fifths is-offset-one block">
-                        {% block content-div %}
-                            <div class="content-div">
-                                {% block messages %}
-                                    {% if messages %}
-                                        {% for message in messages %}<div class="is-{{ message.tags }} notification">{{ message }}</div>{% endfor %}
-                                    {% endif %}
-                                {% endblock messages %}
-                                {% block pre-content %}
-                                {% endblock pre-content %}
-                                {% block content %}
-                                {% endblock content %}
-                            </div>
-                        {% endblock content-div %}
-                    </div>
-                </div>
-            {% endblock content-section %}
+                    {% if request.user.is_superuser %}
+                      <li>
+                        <a href="{% url 'orgs.org_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "Orgs" %}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'users.user_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "Users" %}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'dashblocks.dashblocktype_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "Content Types" %}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'assets.image_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "Images" %}</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'syncjobs.syncjob_list' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">{% trans "Sync Jobs" %}</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </aside>
+              {% endif %}
+            {% endblock menu %}
+          </div>
+          <div class="bg-white column is-four-fifths is-offset-one block">
+            {% block content-div %}
+              <div class="content-div">
+                {% block messages %}
+                  {% if messages %}
+                    {% for message in messages %}<div class="is-{{ message.tags }} notification">{{ message }}</div>{% endfor %}
+                  {% endif %}
+                {% endblock messages %}
+                {% block pre-content %}
+                {% endblock pre-content %}
+                {% block content %}
+                {% endblock content %}
+              </div>
+            {% endblock content-div %}
+          </div>
         </div>
-    </section>
-    <section class="section is-paddingless is-marginless">
-        <footer class="footer is-paddingless">
-            {% block footer %}
-                <!-- footer navbar -->
-                <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 px-home mt-12 mb-3">
-                    <a href="{% url 'public.index' %}" class="md:block flex-1 text-center mb-2 hidden">
-                        <div style="max-width:220px">
-                            <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
-                        </div>
-                    </a>
-                    <div class="md:flex justify-center hidden">
-                        <div style="max-width:150px" class="md:block block">
-                            {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" %}
-                                <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="">
-                            {% else %}
-                                <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
-                                     class="md:-ml-0 -ml-2"
-                                     alt="">
-                            {% endif %}
-                        </div>
-                    </div>
-                    <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
-                        <div style="width:180px">
-                            {% if org.subdomain == "drc" %}
-                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
-                            {% elif org.language != "ar" and org.language != "ru" %}
-                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
-                            {% else %}
-                                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
-                            {% endif %}
-                        </div>
-                        <div class="md:hidden flex flex-1 justify-end float-right">
-                            <div style="width:120px" class="md:block block">
-                                {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" %}
-                                    <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png"
-                                         class="md:-ml-0 -ml-2"
-                                         alt="UNICEF logo">
-                                {% else %}
-                                    <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png"
-                                         class="md:-ml-0 -ml-2"
-                                         alt="UNICEF logo">
-                                {% endif %}
-                            </div>
-                        </div>
-                    </a>
-                    <div class="md:justify-end flex-1 flex">
-                        <div class="md:ml-6 font-bold text-2xl flex-center-y">
-                            <div>
-                                <a href="{% url 'public.opinions' %}"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Opinions" %}</a>
-                            </div>
-                        </div>
-                        <div class="font-bold text-2xl ml-6 flex-center-y">
-                            <div>
-                                <a href="{{ stories_link }}"
-                                   class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:grid grid-cols-2 gap-4 px-home mt-5 mb-12">
-                    <div class="text-sm font-bold">
-                        <a href="{% url 'public.about' %}" class="hover:text-gray-750 flex-initial py-menu">{% trans "About" %}</a>
-                        <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
-                        <a href="{% url 'public.bots' %}"
-                           class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Bots" %}</a>
-                        <a href="{% url 'public.reports' %}"
-                           class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Reports" %}</a>
-                        {% if org|config:"has_jobs" %}
-                            <a href="{% url 'public.jobs' %}"
-                               class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Jobs" %}</a>
-                        {% endif %}
-                    </div>
-                    <div class="md:justify-end flex text-sm font-bold">
-                        {% if org|config:"instagram_username" %}
-                            <a href="https://www.instagram.com/{{ org|config:'instagram_username' }}/"
-                               target="_blank"
-                               class="hover:text-gray-750 flex-initial py-menu">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        {% endif %}
-                        {% if org|config:"facebook_page_url" %}
-                            <a href="{{ org|config:'facebook_page_url' }}"
-                               target="_blank"
-                               class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        {% endif %}
-                        {% if org|config:"twitter_handle" %}
-                            <a href="https://twitter.com/{{ org|config:'twitter_handle' }}"
-                               target="_blank"
-                               class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        {% endif %}
-                        {% if show_login %}
-                            {% if request.user and request.user.is_authenticated %}
-                            <form method="post" action="{% url 'users.user_logout' %}?go=/">
-                                {% csrf_token %}
-                                <button type="submit" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu font-bold">{% trans "Logout" %}</button>
-                            </form>
-                            {% else %}
-                                <a href="{% org_host_link %}{% url 'users.user_login' %}"
-                                   class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Login" %}</a>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                </div>
-            {% endblock footer %}
-        </footer>
-    </section>
+      {% endblock content-section %}
+    </div>
+  </section>
+  <section class="section is-paddingless is-marginless">
+    <footer class="footer is-paddingless">
+      {% block footer %}
+        <!-- footer navbar -->
+        <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 px-home mt-12 mb-3">
+          <a href="{% url 'public.index' %}" class="md:block flex-1 text-center mb-2 hidden">
+            <div style="max-width: 220px">
+              <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_footer.png" alt="{{ org.name }}" class="logo">
+            </div>
+          </a>
+          <div class="md:flex justify-center hidden">
+            <div style="max-width: 150px" class="md:block block">
+              {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" %}
+                <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="">
+              {% else %}
+                <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png" class="md:-ml-0 -ml-2" alt="">
+              {% endif %}
+            </div>
+          </div>
+          <a href="{% url 'public.index' %}" class="md:hidden flex-1 text-center mb-6 inline-flex">
+            <div style="width: 180px">
+              {% if org.subdomain == "drc" %}
+                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
+              {% elif org.language != "ar" and org.language != "ru" %}
+                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_EN.png" alt="{{ org.name }}" class="logo">
+              {% else %}
+                <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_Logo_{{ org.language|upper }}.png" alt="{{ org.name }}" class="logo">
+              {% endif %}
+            </div>
+            <div class="md:hidden flex flex-1 justify-end float-right">
+              <div style="width: 120px" class="md:block block">
+                {% if org.language != "ar" and org.language != "ru" and org.language != "ch" and org.language != "fr" and org.language != "sl" %}
+                  <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_EN.png" class="md:-ml-0 -ml-2" alt="UNICEF logo">
+                {% else %}
+                  <img src="{{ STATIC_URL }}img/logos/UNICEF/UNICEF_logo_footer_{{ org.language|upper }}.png" class="md:-ml-0 -ml-2" alt="UNICEF logo">
+                {% endif %}
+              </div>
+            </div>
+          </a>
+          <div class="md:justify-end flex-1 flex">
+            <div class="md:ml-6 font-bold text-2xl flex-center-y">
+              <div>
+                <a href="{% url 'public.opinions' %}" class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Opinions" %}</a>
+              </div>
+            </div>
+            <div class="font-bold text-2xl ml-6 flex-center-y">
+              <div>
+                <a href="{{ stories_link }}" class="hover:text-gray-750 hover:border-dark1-v2024 pb-2 border-b-2 border-black">{% trans "Stories" %}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:grid grid-cols-2 gap-4 px-home mt-5 mb-12">
+          <div class="text-sm font-bold">
+            <a href="{% url 'public.about' %}" class="hover:text-gray-750 flex-initial py-menu">{% trans "About" %}</a>
+            <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
+            <a href="{% url 'public.bots' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Bots" %}</a>
+            <a href="{% url 'public.reports' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Reports" %}</a>
+            {% if org|config:"has_jobs" %}
+              <a href="{% url 'public.jobs' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Jobs" %}</a>
+            {% endif %}
+          </div>
+          <div class="md:justify-end flex text-sm font-bold">
+            {% if org|config:"instagram_username" %}
+              <a href="https://www.instagram.com/{{ org|config:'instagram_username' }}/" target="_blank" class="hover:text-gray-750 flex-initial py-menu">
+                <i class="fab fa-instagram"></i>
+              </a>
+            {% endif %}
+            {% if org|config:"facebook_page_url" %}
+              <a href="{{ org|config:'facebook_page_url' }}" target="_blank" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            {% endif %}
+            {% if org|config:"twitter_handle" %}
+              <a href="https://twitter.com/{{ org|config:'twitter_handle' }}" target="_blank" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">
+                <i class="fab fa-twitter"></i>
+              </a>
+            {% endif %}
+            {% if show_login %}
+              {% if request.user and request.user.is_authenticated %}
+                <form method="post" action="{% url 'users.user_logout' %}?go=/">
+                  {% csrf_token %}
+                  <button type="submit" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu font-bold">{% trans "Logout" %}</button>
+                </form>
+              {% else %}
+                <a href="{% org_host_link %}{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750 flex-initial py-menu">{% trans "Login" %}</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      {% endblock footer %}
+    </footer>
+  </section>
 {% endblock body-content %}
