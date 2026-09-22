@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import os
 
 from django_valkey import get_valkey_connection
 
@@ -10,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 from dash.orgs.models import Org, OrgBackend
 
 BOUNDARY_LOCK_KEY = "lock:boundary:%d:%s"
+
+COUNTRIES_GEOJSON_PATH = os.path.join(os.path.dirname(__file__), "geojson", "countries.json")
 
 
 class Boundary(models.Model):
@@ -66,13 +69,11 @@ class Boundary(models.Model):
     def build_global_boundaries(cls):
         from temba_client.v2.types import Boundary as TembaBoundary
 
-        from django.conf import settings
+        # reference data that ships with the code, rather than media - read only, since an installed release need
+        # not be writable by the user it runs as
+        with open(COUNTRIES_GEOJSON_PATH, "r") as handle:
+            boundaries_json = json.loads(handle.read())
 
-        handle = open("%s/geojson/countries.json" % settings.MEDIA_ROOT, "r+")
-        contents = handle.read()
-        handle.close()
-
-        boundaries_json = json.loads(contents)
         boundaries = []
         for elt in boundaries_json["features"]:
             temba_geometry = TembaBoundary.Geometry.create(

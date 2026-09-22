@@ -8,7 +8,7 @@ from django.urls import reverse
 
 from ureport.tests import UreportTest
 
-from .models import Boundary
+from .models import COUNTRIES_GEOJSON_PATH, Boundary
 
 
 class LocationTest(UreportTest):
@@ -111,3 +111,12 @@ class LocationTest(UreportTest):
             self.assertEqual(faroe.level, 0)
             self.assertEqual(faroe.geometry.type, "Polygon")
             self.assertEqual(faroe.geometry.coordinates, [[[5, 6], [7, 8]]])
+
+            # opened read only - the file ships with the code, which needn't be writable by the user it runs as
+            my_mock.assert_called_once_with(COUNTRIES_GEOJSON_PATH, "r")
+
+        # and the file that ships is there and parses
+        boundaries = Boundary.build_global_boundaries()
+        self.assertGreater(len(boundaries), 200)
+        self.assertEqual({0}, {b.level for b in boundaries})
+        self.assertIn("UG", {b.osm_id for b in boundaries})
