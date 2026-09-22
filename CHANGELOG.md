@@ -1,3 +1,9 @@
+v1.7.3 (2026-09-22)
+-------------------------
+ * Fall back to the default credential chain for media storage
+ * Tell Sentry which deployment and release an event came from
+ * Ship the countries geojson with the code and read it read only
+
 v1.7.2 (2026-09-17)
 -------------------------
  * Stop overriding the middleware in the prod and staging settings
