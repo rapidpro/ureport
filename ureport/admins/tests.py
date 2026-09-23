@@ -29,10 +29,10 @@ class PollTest(UreportTest):
             self.login(self.admin)
 
             response = self.client.get(refresh_cache_url, SERVER_NAME="uganda.ureport.io")
-            self.assertLoginRedirect(response)
+            self.assertEqual(403, response.status_code)
 
             response = self.client.post(refresh_cache_url, post_data, SERVER_NAME="uganda.ureport.io")
-            self.assertLoginRedirect(response)
+            self.assertEqual(403, response.status_code)
 
             self.login(self.superuser)
 

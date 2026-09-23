@@ -110,7 +110,7 @@ class PollTest(UreportTest):
 
             # but not superuser-only views
             response = self.client.get(reverse("orgs.org_list"), SERVER_NAME="uganda.ureport.io")
-            self.assertLoginRedirect(response)
+            self.assertEqual(403, response.status_code)
 
             self.client.logout()
 
@@ -134,7 +134,7 @@ class PollTest(UreportTest):
             self.login(self.admin)
 
             response = self.client.post(pull_refresh_url, post_data, SERVER_NAME="uganda.ureport.io")
-            self.assertLoginRedirect(response)
+            self.assertEqual(403, response.status_code)
             mock_pull_refresh.assert_not_called()
 
             # neither can org editors
@@ -143,7 +143,7 @@ class PollTest(UreportTest):
             self.login(org_editor)
 
             response = self.client.post(pull_refresh_url, post_data, SERVER_NAME="uganda.ureport.io")
-            self.assertLoginRedirect(response)
+            self.assertEqual(403, response.status_code)
             mock_pull_refresh.assert_not_called()
 
             # staff users can pull refresh
@@ -719,7 +719,7 @@ class PollTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(nigeria_poll_date_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         with patch("dash.orgs.models.Org.get_flows") as mock_get_flows:
             flows_cached = dict()
@@ -800,7 +800,7 @@ class PollTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(nigeria_update_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         with patch("dash.orgs.models.Org.get_flows") as mock_get_flows:
             flows_cached = dict()
@@ -923,7 +923,7 @@ class PollTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(nigeria_questions_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(uganda_questions_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
@@ -1019,7 +1019,7 @@ class PollTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(nigeria_poll_images_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(uganda_poll_images_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
@@ -1065,7 +1065,7 @@ class PollTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(nigeria_poll_responses_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(uganda_poll_responses_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)

@@ -129,7 +129,7 @@ class JobSourceTest(UreportJobsTest):
         self.login(self.admin)
 
         response = self.client.get(update_url_fb_nigeria, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(update_url_fb_uganda, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
