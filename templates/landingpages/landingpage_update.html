@@ -3,10 +3,7 @@
 
 {% block post-form %}
   {% if object.is_active %}
-    <a href="{% url 'public.landing_page' object.slug %}"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="button is-info">{% trans "View public page" %}</a>
+    <a href="{% url 'public.landing_page' object.slug %}" target="_blank" rel="noopener noreferrer" class="button is-info">{% trans "View public page" %}</a>
   {% endif %}
 {% endblock post-form %}
 {% block extra-style %}
@@ -20,11 +17,11 @@
     }
 
     .select2-container {
-      width: 75%
+      width: 75%;
     }
 
     .select2-container .selection {
-      width: 100%
+      width: 100%;
     }
 
     .select2-results__option--selected {

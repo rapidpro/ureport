@@ -9,11 +9,10 @@
         {% for img in object.sorted_images %}
           {% thumbnail img.image "100x100" crop="center" as im %}
             <a href="{% url 'dashblocks.dashblockimage_update' img.id %}">
-              <img class="thumb" src="{{ im.url }}" width="{{ img.x }}" height="{{ img.y }}" alt="" />
+              <img class="thumb" src="{{ im.url }}" width="{{ img.x }}" height="{{ img.y }}" alt="">
             </a>
           {% endthumbnail %}
-          <a href="{% url 'dashblocks.dashblockimage_create' %}?dashblock={{ object.id }}"
-             class="btn btn-default btn-small">{% trans "Add Image" %}</a>
+          <a href="{% url 'dashblocks.dashblockimage_create' %}?dashblock={{ object.id }}" class="btn btn-default btn-small">{% trans "Add Image" %}</a>
         {% endfor %}
       </div>
     </div>

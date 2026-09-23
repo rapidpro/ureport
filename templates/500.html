@@ -7,14 +7,14 @@
     <title>U-Report Problem - Uh oh!</title>
     <style>
       body {
-        background-color: #FFFFFF;
-        font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+        background-color: #ffffff;
+        font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
       }
 
       .logo {
         width: 100%;
-        text-align: center;
         margin: 140px auto 50px;
+        text-align: center;
       }
 
       h3 {
@@ -27,34 +27,33 @@
       h4 {}
 
       .message {
+        width: 500px;
         margin: 0 auto;
         color: #333;
         font-size: 14px;
-        width: 500px;
       }
 
       .reference {
+        width: 460px;
+        margin: 30px auto 0;
         padding: 20px;
         background: #f3f3f3;
         font-size: 14px;
         text-align: center;
-        width: 460px;
-        margin: 30px auto 0;
       }
     </style>
   </head>
   <body>
     <div class="logo">
-      <img src="/sitestatic/img/logos/UREPORT/U-Report_Logo_EN.png" alt="" />
+      <img src="/sitestatic/img/logos/UREPORT/U-Report_Logo_EN.png" alt="">
     </div>
-    <div style="text-align: center;">
+    <div style="text-align: center">
       <h3>Sometimes bad things happen to good people.</h3>
     </div>
     <div class="message">
-      While we do our best to write bug-free code, every now and again things do go wrong. Good news though!
-      We've already been notified of the problem.
-      <br />
-      <br />
+      While we do our best to write bug-free code, every now and again things do go wrong. Good news though! We've already been notified of the problem.
+      <br>
+      <br>
     </div>
     {% if request.sentry.id %}
       <div class="reference">

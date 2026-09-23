@@ -78,13 +78,15 @@ if __name__ == "__main__":
     cmd("ruff format ureport")
     status("Running ruff check")
     cmd("ruff check ureport")
+    status("Running djangofmt")
+    cmd("djangofmt templates")
     status("Updating locale PO files")
     update_po_files()
     status("Recompiling locale MO files")
     cmd("python manage.py compilemessages --ignore='.venv/*'")
 
     # if any code changes were made, including new untracked files such as generated migrations, exit with error
-    if cmd("git status --porcelain ureport locale"):
+    if cmd("git status --porcelain ureport templates locale"):
         print("👎 " + colorama.Fore.RED + "Changes to be committed")
         exit(1)
     else:
