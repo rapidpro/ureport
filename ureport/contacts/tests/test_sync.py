@@ -24,7 +24,7 @@ from ureport.contacts.sync import (
     sync_contacts_dispatch,
 )
 from ureport.syncjobs.models import ABORTED, SyncJob
-from ureport.syncjobs.testing import SyncJobTestMixin, drop_lease, held_lock, make_stale, run_task
+from ureport.syncjobs.tests.base import SyncJobTestMixin, drop_lease, held_lock, make_stale, run_task
 from ureport.tests import UreportTest
 
 RAPIDPRO_BACKEND = "ureport.backend.rapidpro.RapidProBackend"

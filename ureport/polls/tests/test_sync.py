@@ -44,7 +44,7 @@ from ureport.polls.tasks import (
 )
 from ureport.polls.views import PollCRUDL
 from ureport.syncjobs.models import SyncJob
-from ureport.syncjobs.testing import (
+from ureport.syncjobs.tests.base import (
     SyncJobTestMixin,
     drop_lease,
     end_run,
