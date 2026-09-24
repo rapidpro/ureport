@@ -1,3 +1,7 @@
+v1.7.6 (2026-09-24)
+-------------------------
+ * Consolidate test-only files under test-data/ and per-app tests packages
+
 v1.7.5 (2026-09-24)
 -------------------------
  * Bump sqlparse from 0.5.5 to 0.6.0
