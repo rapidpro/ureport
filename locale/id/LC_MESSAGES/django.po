@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -287,8 +287,18 @@ msgid "The API token for this backend"
 msgstr "Token API untuk backend ini"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Anda telah diundang untuk bergabung dengan %(org_name)s.\n      <br />\n      Untuk menerima undangan, <a href='%(host)s%(join_url)s'>klik di sini</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Anda telah diundang untuk bergabung dengan %(org_name)s.\n"
+"      <br />\n"
+"      Untuk menerima undangan, <a href='%(host)s%(join_url)s'>klik di sini</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Anda diundang untuk bergabung dengan {{org.name}}."
@@ -432,8 +442,14 @@ msgid "Remove Item?"
 msgstr "Hapus daftar?"
 
 #, python-format
-msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
-msgstr "\n    Apakah Anda yakin ingin menghapus <b>%(object)s</b>?\n    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"    Apakah Anda yakin ingin menghapus <b>%(object)s</b>?\n"
+"    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatalkan operasi ini."
@@ -442,13 +458,28 @@ msgid "Cancel"
 msgstr "Batal"
 
 #, python-format
-msgid "\n\t %(counter)s result\n\t"
-msgid_plural "\n         %(counter)s results\n        "
-msgstr[0] "\n\t %(counter)s hasil\n\t"
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t %(counter)s hasil\n"
+"\t"
 
 #, python-format
-msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
-msgstr "\n\tHasil %(start)s-%(end)s dari %(count)s\n\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tHasil %(start)s-%(end)s dari %(count)s\n"
+"\t"
 
 msgid "Previous"
 msgstr "Sebelumnya"
@@ -475,12 +506,24 @@ msgid "Login Failure"
 msgstr "Kegagalan Masuk"
 
 #, python-format
-msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
-msgstr "\n      Maaf, Anda tidak bisa masuk saat ini karena kami menerima %(failed_login_limit)s percobaan masuk yang salah.\n      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"      Maaf, Anda tidak bisa masuk saat ini karena kami menerima %(failed_login_limit)s percobaan masuk yang salah.\n"
+"      "
 
 #, python-format
-msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
-msgstr "\n      Silakan tunggu %(lockout_timeout)s menit sebelum mencoba masuk kembali.\n      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"      Silakan tunggu %(lockout_timeout)s menit sebelum mencoba masuk kembali.\n"
+"      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Atau, Anda bisa mengisi form di bawah ini untuk memiliki password ulang via e-mail."
@@ -498,8 +541,14 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "Masukkan alamat surel yang Anda gunakan untuk mendaftar dan kami akan membantu Anda mengembalikan kata kunci Anda."
 
 #, python-format
-msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
-msgstr "\n  <strong>Kata sandi Anda telah kedaluwarsa.</strong> Kebijakan situs mengharuskan Anda memilih kata sandi baru setiap %(expire_days)s hari, dan kata sandi tidak boleh pernah digunakan dalam %(window_days)s hari sebelumnya.\n  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>Kata sandi Anda telah kedaluwarsa.</strong> Kebijakan situs mengharuskan Anda memilih kata sandi baru setiap %(expire_days)s hari, dan kata sandi tidak boleh pernah digunakan dalam %(window_days)s hari sebelumnya.\n"
+"  "
 
 msgid "New Password"
 msgstr "Kata kunci baru"
@@ -640,6 +689,22 @@ msgstr "Simpan"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s baru anda sudah berhasil dibuat"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Masuk"
+
+msgid "Enter Dashboard"
+msgstr "Masuk ke Dasbor"
 
 msgid "Back to Website"
 msgstr "Kembali ke Situs Web"
@@ -1158,8 +1223,14 @@ msgid "Dec"
 msgstr "Des"
 
 #, python-format
-msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
-msgstr "\n            Apakah Anda yakin ingin menghapus <strong>%(object)s</strong>?\n          "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            Apakah Anda yakin ingin menghapus <strong>%(object)s</strong>?\n"
+"          "
 
 #, python-format
 msgid "%(counter)s result"
@@ -1170,23 +1241,15 @@ msgstr[0] "%(counter)s hasil"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Hasil %(start)s-%(end)s dari %(count)s"
 
-msgid "Error"
-msgstr "Kesalahan"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Kata kunci baru"
 
-msgid "Enter Dashboard"
-msgstr "Masuk ke Dasbor"
-
-#, python-format
-msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
-msgstr "\n                Maaf, Anda tidak bisa masuk saat ini karena kami menerima %(failed_login_limit)s percobaan masuk yang salah.\n              "
-
-#, python-format
-msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
-msgstr "\n                    Silakan tunggu %(lockout_timeout)s menit sebelum mencoba masuk kembali.\n                  "
-
-#, python-format
-msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
-msgstr "\n        <strong>Kata sandi Anda telah kedaluwarsa.</strong> Kebijakan situs mengharuskan Anda memilih kata sandi baru setiap %(expire_days)s hari, dan kata sandi tidak boleh pernah digunakan dalam %(window_days)s hari sebelumnya.\n      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Saluran"
 
 msgid "+ New Story"
 msgstr "+ Cerita Baru"
@@ -1931,6 +1994,39 @@ msgstr "Negara-negara Komite Nasional UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Afrika Barat dan Tengah"
+
+#~ msgid "Error"
+#~ msgstr "Kesalahan"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "                Maaf, Anda tidak bisa masuk saat ini karena kami menerima %(failed_login_limit)s percobaan masuk yang salah.\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    Silakan tunggu %(lockout_timeout)s menit sebelum mencoba masuk kembali.\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>Kata sandi Anda telah kedaluwarsa.</strong> Kebijakan situs mengharuskan Anda memilih kata sandi baru setiap %(expire_days)s hari, dan kata sandi tidak boleh pernah digunakan dalam %(window_days)s hari sebelumnya.\n"
+#~ "      "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -291,8 +291,18 @@ msgid "The API token for this backend"
 msgstr "API nøkkel for denne backend-serveren "
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Du har blitt invitert til å bli med i %(org_name)s.\n      <br />\n      For å akseptere invitasjonen, <a href='%(host)s%(join_url)s'>klikk her</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Du har blitt invitert til å bli med i %(org_name)s.\n"
+"      <br />\n"
+"      For å akseptere invitasjonen, <a href='%(host)s%(join_url)s'>klikk her</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Du er invitert til å bli med i {{org.navn}}."
@@ -682,6 +692,22 @@ msgstr "Lagre"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Ditt nye %s har blitt opprettet."
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Registrer deg"
+
+msgid "Enter Dashboard"
+msgstr "Gå til dashbord"
 
 msgid "Back to Website"
 msgstr "Tilbake til nettsiden"
@@ -1220,38 +1246,15 @@ msgstr[1] "%(counter)s resultater"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Resultater %(start)s-%(end)s av %(count)s"
 
-msgid "Error"
-msgstr "Feilmelding"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nytt passord"
 
-msgid "Enter Dashboard"
-msgstr "Gå til dashbord"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Beklager, du kan ikke logge inn fordi vi har registerert %(failed_login_limit)s ukorrekte innloggingsforsøk. "
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Passordet ditt er utdatert. </strong>Du må endre ditt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene. "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanaler"
 
 msgid "+ New Story"
 msgstr "+ Ny historie"
@@ -1996,6 +1999,36 @@ msgstr "UNICEFs nasjonalkomitéland"
 
 msgid "West and Central Africa"
 msgstr "Vest- og Sentral-Afrika"
+
+#~ msgid "Error"
+#~ msgstr "Feilmelding"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Beklager, du kan ikke logge inn fordi vi har registerert %(failed_login_limit)s ukorrekte innloggingsforsøk. "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Passordet ditt er utdatert. </strong>Du må endre ditt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene. "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

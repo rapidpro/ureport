@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: WILDNEY RAPHAEL SILVA CAVALCANTE, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/rapidpro/teams/226/es/)\n"
@@ -698,6 +698,22 @@ msgstr "Guardar"
 msgid "Your new %s has been created."
 msgstr "Su nuevo %s ha sido creado."
 
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Entrar"
+
+msgid "Enter Dashboard"
+msgstr "Ingresar al tablero"
+
 msgid "Back to Website"
 msgstr "Volver al sitio web"
 
@@ -1238,38 +1254,15 @@ msgstr[2] "%(counter)sresultados"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Resultados %(start)s-%(end)s de %(count)s"
 
-msgid "Error"
-msgstr "Error"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nueva contraseña"
 
-msgid "Enter Dashboard"
-msgstr "Ingresar al tablero"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Disculpa, no puedes entrar en este momento porque hemos recibido %(failed_login_limit)s intentos de ingreso incorrectos."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Por favor espera %(lockout_timeout)s minutos antes de intentar el acceso nuevamente."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong>Tu contraseña expiró.</strong> La política del sitio establece que debes elegir una nueva clave cada %(expire_days)s días, y que tu nueva contraseña no debe haber sido usada en los %(window_days)s días previos."
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Canales"
 
 msgid "+ New Story"
 msgstr "+ Nueva historia"
@@ -2014,6 +2007,36 @@ msgstr "Países del Comité Nacional de UNICEF"
 
 msgid "West and Central Africa"
 msgstr "África Occidental y Central"
+
+#~ msgid "Error"
+#~ msgstr "Error"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Disculpa, no puedes entrar en este momento porque hemos recibido %(failed_login_limit)s intentos de ingreso incorrectos."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Por favor espera %(lockout_timeout)s minutos antes de intentar el acceso nuevamente."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Tu contraseña expiró.</strong> La política del sitio establece que debes elegir una nueva clave cada %(expire_days)s días, y que tu nueva contraseña no debe haber sido usada en los %(window_days)s días previos."
 
 #~ msgid "Color Choice"
 #~ msgstr "Elección de color"

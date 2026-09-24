@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -292,8 +292,18 @@ msgid "The API token for this backend"
 msgstr "Токен API для цього бекенду"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Вас запрошено приєднатися до %(org_name)s.\n      <br />\n      Щоб прийняти запрошення, <a href='%(host)s%(join_url)s'>натисніть сюди</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Вас запрошено приєднатися до %(org_name)s.\n"
+"      <br />\n"
+"      Щоб прийняти запрошення, <a href='%(host)s%(join_url)s'>натисніть сюди</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Вас запрошено приєднатися до {{org.name}}."
@@ -688,6 +698,22 @@ msgstr "Зберегти"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Ваш новий %s створено"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Зареєструватись"
+
+msgid "Enter Dashboard"
+msgstr "Відкрити консоль"
 
 msgid "Back to Website"
 msgstr "Повернутися до сайту"
@@ -1234,40 +1260,15 @@ msgstr[3] "%(counter)s результатів"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Результати%(start)s-%(end)s з %(count)s"
 
-msgid "Error"
-msgstr "Помилка"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Новий пароль"
 
-msgid "Enter Dashboard"
-msgstr "Відкрити консоль"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Вибачте, можливість увійти у ваш обліковий запис тимчасово заблоковано. Кількість невдалих спроб%(failed_login_limit)s."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"                    Будь ласка, зачекайте %(lockout_timeout)s і спробуйте увійти знову\n"
-"                  "
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"        <strong>Ваш пароль більше не дійсний.</strong> Відповідно до політики сайту необхідно оновлювати пароль кожні %(expire_days)s днів. Зверніть увагу, що пароль має відрізнятись від попереднього, що використовувався протягом останніх %(window_days)s днів.\n"
-"      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Канали"
 
 msgid "+ New Story"
 msgstr "+ Нова історія"
@@ -2012,6 +2013,38 @@ msgstr "Країни національних комітетів ЮНІСЕФ"
 
 msgid "West and Central Africa"
 msgstr "Західна та Центральна Африка"
+
+#~ msgid "Error"
+#~ msgstr "Помилка"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Вибачте, можливість увійти у ваш обліковий запис тимчасово заблоковано. Кількість невдалих спроб%(failed_login_limit)s."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    Будь ласка, зачекайте %(lockout_timeout)s і спробуйте увійти знову\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>Ваш пароль більше не дійсний.</strong> Відповідно до політики сайту необхідно оновлювати пароль кожні %(expire_days)s днів. Зверніть увагу, що пароль має відрізнятись від попереднього, що використовувався протягом останніх %(window_days)s днів.\n"
+#~ "      "
 
 #~ msgid "Color Choice"
 #~ msgstr "Вибір кольору"

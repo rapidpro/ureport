@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -291,8 +291,18 @@ msgid "The API token for this backend"
 msgstr "ဤ backend အတွက် API တိုကင်"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      %(org_name)s သို့ ပူးပေါင်းရန် သင့်အား ဖိတ်ကြားထားပါသည်။\n      <br />\n      ဖိတ်ကြားချက်ကို လက်ခံရန် <a href='%(host)s%(join_url)s'>ဤနေရာကို နှိပ်ပါ</a>။\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      %(org_name)s သို့ ပူးပေါင်းရန် သင့်အား ဖိတ်ကြားထားပါသည်။\n"
+"      <br />\n"
+"      ဖိတ်ကြားချက်ကို လက်ခံရန် <a href='%(host)s%(join_url)s'>ဤနေရာကို နှိပ်ပါ</a>။\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "{{org.name}} သို့ ပူးပေါင်းရန် သင့်အား ဖိတ်ကြားထားပါသည်။"
@@ -436,8 +446,14 @@ msgid "Remove Item?"
 msgstr "Remove Item?"
 
 #, python-format
-msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
-msgstr "\n    <b>%(object)s</b> ကို ဖယ်ရှားရန် သေချာပါသလား။\n    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"    <b>%(object)s</b> ကို ဖယ်ရှားရန် သေချာပါသလား။\n"
+"    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Once it is removed, it will be gone forever. There is no way to undo this operation."
@@ -446,13 +462,28 @@ msgid "Cancel"
 msgstr "Cancel"
 
 #, python-format
-msgid "\n\t %(counter)s result\n\t"
-msgid_plural "\n         %(counter)s results\n        "
-msgstr[0] "\n\t ရလဒ် %(counter)s ခု\n\t"
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t ရလဒ် %(counter)s ခု\n"
+"\t"
 
 #, python-format
-msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
-msgstr "\n\tရလဒ် %(count)s ခုအနက် %(start)s-%(end)s\n\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tရလဒ် %(count)s ခုအနက် %(start)s-%(end)s\n"
+"\t"
 
 msgid "Previous"
 msgstr "Previous"
@@ -479,12 +510,24 @@ msgid "Login Failure"
 msgstr "Login Failure"
 
 #, python-format
-msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
-msgstr "\n      မှားယွင်းသော အကောင့်ဝင်ရောက်ရန် ကြိုးပမ်းမှု %(failed_login_limit)s ကြိမ် ရရှိထားသောကြောင့် ယခုအချိန်တွင် ဝင်ရောက်၍မရပါ။\n      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"      မှားယွင်းသော အကောင့်ဝင်ရောက်ရန် ကြိုးပမ်းမှု %(failed_login_limit)s ကြိမ် ရရှိထားသောကြောင့် ယခုအချိန်တွင် ဝင်ရောက်၍မရပါ။\n"
+"      "
 
 #, python-format
-msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
-msgstr "\n      ထပ်မံဝင်ရောက်ရန် မကြိုးစားမီ %(lockout_timeout)s မိနစ် စောင့်ဆိုင်းပါ။\n      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"      ထပ်မံဝင်ရောက်ရန် မကြိုးစားမီ %(lockout_timeout)s မိနစ် စောင့်ဆိုင်းပါ။\n"
+"      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Alternatively, you can fill out the form below to have your password reset via e-mail."
@@ -502,8 +545,14 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "Please enter the email address you used to sign up and we will help you recover your password."
 
 #, python-format
-msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
-msgstr "\n  <strong>သင့်စကားဝှက် သက်တမ်းကုန်သွားပါပြီ။</strong> ဝဘ်ဆိုဒ်မူဝါဒအရ %(expire_days)s ရက်တိုင်း စကားဝှက်အသစ် ရွေးချယ်ရမည်ဖြစ်ပြီး ပြီးခဲ့သော %(window_days)s ရက်အတွင်း အသုံးပြုခဲ့သော စကားဝှက်များကို ပြန်လည်အသုံးမပြုရပါ။\n  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>သင့်စကားဝှက် သက်တမ်းကုန်သွားပါပြီ။</strong> ဝဘ်ဆိုဒ်မူဝါဒအရ %(expire_days)s ရက်တိုင်း စကားဝှက်အသစ် ရွေးချယ်ရမည်ဖြစ်ပြီး ပြီးခဲ့သော %(window_days)s ရက်အတွင်း အသုံးပြုခဲ့သော စကားဝှက်များကို ပြန်လည်အသုံးမပြုရပါ။\n"
+"  "
 
 msgid "New Password"
 msgstr "စကားဝှက်အသစ်"
@@ -645,6 +694,22 @@ msgstr "သိမ်းဆည်းရန်"
 msgid "Your new %s has been created."
 msgstr "သင်၏ %s အသစ်ကို ဖန်တီးပြီးပါပြီ။"
 
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Sign in"
+
+msgid "Enter Dashboard"
+msgstr "ဒက်ရှ်ဘုတ်သို့ ဝင်ရန်"
+
 msgid "Back to Website"
 msgstr "ဝဘ်ဆိုဒ်သို့ ပြန်သွားရန်"
 
@@ -774,14 +839,26 @@ msgstr "ထပ်မံဖတ်ရှုရန်"
 msgid "EXPLORE ENGAGEMENT"
 msgstr "ပါဝင်ဆောင်ရွက်မှုကို လေ့လာရန်"
 
-msgid "\n        To add a Twitter job source you are required to get a widget id from twitter.\n      "
-msgstr "\n        Twitter အလုပ်အကိုင်ရင်းမြစ် ထည့်သွင်းရန် Twitter မှ widget id တစ်ခု ရယူရန် လိုအပ်ပါသည်။\n      "
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"        Twitter အလုပ်အကိုင်ရင်းမြစ် ထည့်သွင်းရန် Twitter မှ widget id တစ်ခု ရယူရန် လိုအပ်ပါသည်။\n"
+"      "
 
 msgid "Follow this step by step guide"
 msgstr "ဤအဆင့်ဆင့်လမ်းညွှန်ကို လိုက်နာပါ"
 
-msgid "\n        <div>After you create the widget copy the widget id from the url as shown on</div>\n      "
-msgstr "\n        <div>Widget ကို ဖန်တီးပြီးနောက် ဖော်ပြထားသည့်အတိုင်း URL မှ widget id ကို ကူးယူပါ</div>\n      "
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"        <div>Widget ကို ဖန်တီးပြီးနောက် ဖော်ပြထားသည့်အတိုင်း URL မှ widget id ကို ကူးယူပါ</div>\n"
+"      "
 
 msgid "Back"
 msgstr "နောက်သို့"
@@ -1152,8 +1229,14 @@ msgid "Dec"
 msgstr "ဒီဇင်"
 
 #, python-format
-msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
-msgstr "\n            <strong>%(object)s</strong> ကို ဖယ်ရှားရန် သေချာပါသလား။\n          "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            <strong>%(object)s</strong> ကို ဖယ်ရှားရန် သေချာပါသလား။\n"
+"          "
 
 #, python-format
 msgid "%(counter)s result"
@@ -1164,23 +1247,15 @@ msgstr[0] "ရလဒ် %(counter)s ခု"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "ရလဒ် %(count)s ခုအနက် %(start)s-%(end)s"
 
-msgid "Error"
-msgstr "အမှား"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "စကားဝှက်အသစ်"
 
-msgid "Enter Dashboard"
-msgstr "ဒက်ရှ်ဘုတ်သို့ ဝင်ရန်"
-
-#, python-format
-msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
-msgstr "\n                မှားယွင်းသော အကောင့်ဝင်ရောက်ရန် ကြိုးပမ်းမှု %(failed_login_limit)s ကြိမ် ရရှိထားသောကြောင့် ယခုအချိန်တွင် ဝင်ရောက်၍မရပါ။\n              "
-
-#, python-format
-msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
-msgstr "\n                    ထပ်မံဝင်ရောက်ရန် မကြိုးစားမီ %(lockout_timeout)s မိနစ် စောင့်ဆိုင်းပါ။\n                  "
-
-#, python-format
-msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
-msgstr "\n        <strong>သင့်စကားဝှက် သက်တမ်းကုန်သွားပါပြီ။</strong> ဝဘ်ဆိုဒ်မူဝါဒအရ %(expire_days)s ရက်တိုင်း စကားဝှက်အသစ် ရွေးချယ်ရမည်ဖြစ်ပြီး ပြီးခဲ့သော %(window_days)s ရက်အတွင်း အသုံးပြုခဲ့သော စကားဝှက်များကို ပြန်လည်အသုံးမပြုရပါ။\n      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "ချန်နယ်များ"
 
 msgid "+ New Story"
 msgstr "+ သတင်းဆောင်းပါးအသစ်"
@@ -1925,3 +2000,36 @@ msgstr "UNICEF ၏ အမျိုးသားကော်မတီ နိုင
 
 msgid "West and Central Africa"
 msgstr "အနောက်ပိုင်းနှင့် ဗဟို အာဖရိက"
+
+#~ msgid "Error"
+#~ msgstr "အမှား"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "                မှားယွင်းသော အကောင့်ဝင်ရောက်ရန် ကြိုးပမ်းမှု %(failed_login_limit)s ကြိမ် ရရှိထားသောကြောင့် ယခုအချိန်တွင် ဝင်ရောက်၍မရပါ။\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    ထပ်မံဝင်ရောက်ရန် မကြိုးစားမီ %(lockout_timeout)s မိနစ် စောင့်ဆိုင်းပါ။\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>သင့်စကားဝှက် သက်တမ်းကုန်သွားပါပြီ။</strong> ဝဘ်ဆိုဒ်မူဝါဒအရ %(expire_days)s ရက်တိုင်း စကားဝှက်အသစ် ရွေးချယ်ရမည်ဖြစ်ပြီး ပြီးခဲ့သော %(window_days)s ရက်အတွင်း အသုံးပြုခဲ့သော စကားဝှက်များကို ပြန်လည်အသုံးမပြုရပါ။\n"
+#~ "      "
