@@ -168,6 +168,32 @@ class UreportTest(SmartminTest, DashTest):
 
         self.floip_backend = floip_backend
 
+    def login(self, user):
+        self.client.force_login(user)
+
+    def fetch_protected(self, url, user, post_data=None, failOnFormValidation=True):
+        """
+        Fetches the given url. Fails if it can be fetched without first logging in as given user
+        """
+        self.client.logout()
+
+        response = self.client.get(url)
+        self.assertLoginRedirect(response, msg="'%s' loaded without being logged in first" % url)
+        self.login(user)
+
+        if not post_data:
+            response = self.client.get(url)
+            self.assertEqual(200, response.status_code)
+        else:
+            response = self.client.post(url, data=post_data)
+            self.assertNotRedirect(response, settings.LOGIN_URL, msg="Unexpected redirect to login")
+
+            if failOnFormValidation:
+                self.assertNoFormErrors(response, post_data)
+                self.assertEqual(302, response.status_code)
+
+        return response
+
     def create_org(self, subdomain, timezone, user):
         name = subdomain
 

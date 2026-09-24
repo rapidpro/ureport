@@ -1,0 +1,19 @@
+{% extends "base_admin_dashboard.html" %}
+{% load i18n %}
+
+{% block content-div %}
+  <div class="content-div account-page">
+    {% block messages %}
+      {% if messages %}
+        {% for message in messages %}<div class="is-{{ message.tags }} notification">{{ message }}</div>{% endfor %}
+      {% endif %}
+    {% endblock messages %}
+    <div class="columns is-centered is-desktop">
+      <div class="column is-half">
+        {% block content %} {% endblock content %}
+      </div>
+    </div>
+  </div>
+  {% block extra_body %}
+  {% endblock extra_body %}
+{% endblock content-div %}

@@ -1,0 +1,5 @@
+{% load allauth %}
+<div class="notification {% if 'error' in attrs.tags or 'danger' in attrs.tags %}is-danger{% elif 'warning' in attrs.tags %}is-warning{% else %}is-info{% endif %}">
+  {% slot message %}
+  {% endslot %}
+</div>

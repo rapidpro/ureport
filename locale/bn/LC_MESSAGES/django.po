@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -291,8 +291,18 @@ msgid "The API token for this backend"
 msgstr "ব্যাকএন্ডে ব্যবহার করার জন্য API টোকেন"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      আপনাকে %(org_name)s-এ যোগ দেওয়ার আমন্ত্রণ জানানো হয়েছে।\n      <br />\n      আমন্ত্রণটি গ্রহণ করতে, <a href='%(host)s%(join_url)s'>এখানে ক্লিক করুন</a>।\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      আপনাকে %(org_name)s-এ যোগ দেওয়ার আমন্ত্রণ জানানো হয়েছে।\n"
+"      <br />\n"
+"      আমন্ত্রণটি গ্রহণ করতে, <a href='%(host)s%(join_url)s'>এখানে ক্লিক করুন</a>।\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "আপনাকে যোগদান করতে আমন্ত্রন জানানো হয়েছে {{org.name}}."
@@ -684,6 +694,22 @@ msgstr "সংরক্ষণ করুন"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "আপনার নতুন %s তৈরি সম্পূর্ণ হয়েছে "
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "u-report "
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "প্রবেশ করুন "
+
+msgid "Enter Dashboard"
+msgstr "ড্যাশবোর্ড-এ প্রবেশ করুন"
 
 msgid "Back to Website"
 msgstr "ওয়েবসাইটে ফিরে যান"
@@ -1222,38 +1248,15 @@ msgstr[1] "%(counter)s টি ফলাফল"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "%(count)s টির মধ্যে %(start)s-%(end)s ফলাফল"
 
-msgid "Error"
-msgstr "ভুল"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "নতুন পাসওয়ার্ড"
 
-msgid "Enter Dashboard"
-msgstr "ড্যাশবোর্ড-এ প্রবেশ করুন"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"দুঃখিত, আপনি এই মূহুর্তে লগ ইন করতে পারবেন না কারন আমরা %(failed_login_limit)s ভুল লগ ইন প্রচেষ্টা সনাক্ত করেছি "
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"অনুগ্রহ করে আবার লগ ইন করতে %(lockout_timeout)s মিনিট অপেক্ষা করুন"
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"আপনার পাসওয়ার্ডটির মেয়াদ শেষ। 1 সাইট এর নিয়ম অনুযায়ী আপনাকে প্রতি 1 %(expire_days)s দিনে নতুন পাসওয়ার্ড ঠিক করতে হবে, এবং সেই পাসওয়ার্ডটি  2 %(window_days)s দিনের আগে অবশ্যই ব্যবহার করা যাবে না "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "চ্যানেলগুলো"
 
 msgid "+ New Story"
 msgstr "+ নতুন ঘটনা"
@@ -2000,6 +2003,36 @@ msgstr "UNICEF-এর জাতীয় কমিটির দেশসমূ�
 
 msgid "West and Central Africa"
 msgstr "পশ্চিম ও মধ্য আফ্রিকা"
+
+#~ msgid "Error"
+#~ msgstr "ভুল"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "দুঃখিত, আপনি এই মূহুর্তে লগ ইন করতে পারবেন না কারন আমরা %(failed_login_limit)s ভুল লগ ইন প্রচেষ্টা সনাক্ত করেছি "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "অনুগ্রহ করে আবার লগ ইন করতে %(lockout_timeout)s মিনিট অপেক্ষা করুন"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "আপনার পাসওয়ার্ডটির মেয়াদ শেষ। 1 সাইট এর নিয়ম অনুযায়ী আপনাকে প্রতি 1 %(expire_days)s দিনে নতুন পাসওয়ার্ড ঠিক করতে হবে, এবং সেই পাসওয়ার্ডটি  2 %(window_days)s দিনের আগে অবশ্যই ব্যবহার করা যাবে না "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"
