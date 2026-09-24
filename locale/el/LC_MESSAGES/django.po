@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -708,6 +708,27 @@ msgstr "Συνδεθείτε"
 msgid "Enter Dashboard"
 msgstr "Εισαγωγή Ταμπλό"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Λογαριασμοί"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "ΚΑΝΑΛΙΑ"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Νέος κωδικός"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Επιστροφή στον Ιστότοπο"
 
@@ -1245,15 +1266,11 @@ msgstr[1] "%(counter)sΑποτελέσματα"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Αποτελέσματα %(start)s-%(end)sαπό%(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Νέος κωδικός"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "ΚΑΝΑΛΙΑ"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Νέα δημοσίευση"
@@ -1971,6 +1988,13 @@ msgstr "Η εργασία #%(job_id)d θα συγχρονιστεί ξανά α�
 
 msgid "Something to trigger localizations"
 msgstr "Κάτι για να ενεργοποιήσει τους εντοπισμούς"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Όλες οι τοποθεσίες"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -715,6 +715,27 @@ msgstr "Зареєструватись"
 msgid "Enter Dashboard"
 msgstr "Відкрити консоль"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Облікові записи"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Канали"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Новий пароль"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Повернутися до сайту"
 
@@ -1260,15 +1281,11 @@ msgstr[3] "%(counter)s результатів"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Результати%(start)s-%(end)s з %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Новий пароль"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Канали"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Нова історія"
@@ -1986,6 +2003,13 @@ msgstr "Завдання #%(job_id)d буде повторно синхроні�
 
 msgid "Something to trigger localizations"
 msgstr "Щось для запуску локалізації"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Усі локації"

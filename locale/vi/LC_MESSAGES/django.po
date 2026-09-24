@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -704,6 +704,27 @@ msgstr "Đăng ký"
 msgid "Enter Dashboard"
 msgstr "Vào bảng điều khiển"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Các tài khoản"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kênh"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Mật khẩu mới"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Quay lại trang web"
 
@@ -1239,15 +1260,11 @@ msgstr[0] "%(counter)s kết quả"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Kết quả %(start)s-%(end)s trong số %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Mật khẩu mới"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Kênh"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Câu chuyện mới"
@@ -1965,6 +1982,13 @@ msgstr "Công việc #%(job_id)d sẽ đồng bộ lại từ đầu trong lần
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Tất cả địa điểm"
