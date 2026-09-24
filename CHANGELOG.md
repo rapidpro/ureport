@@ -1,3 +1,10 @@
+v1.7.5 (2026-09-24)
+-------------------------
+ * Bump sqlparse from 0.5.5 to 0.6.0
+ * Update smartmin and dash to latest releases
+ * Reformat templates with djangofmt
+ * Replace djlint with djangofmt for template formatting
+
 v1.7.4 (2026-09-22)
 -------------------------
  * Point the staging settings' media at a bucket of their own
