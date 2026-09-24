@@ -42,7 +42,7 @@ from ureport.contacts.tasks import (
 from ureport.polls.models import PollResult
 from ureport.stats.models import ContactActivity
 from ureport.syncjobs.models import SyncJob
-from ureport.syncjobs.testing import (
+from ureport.syncjobs.tests.base import (
     SyncJobTestMixin,
     drop_lease,
     expire_lease,

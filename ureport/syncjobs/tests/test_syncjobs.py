@@ -24,7 +24,7 @@ from ureport.syncjobs.models import (
     SyncJob,
 )
 from ureport.syncjobs.tasks import JOB_TASKS, MAX_REPORTED_JOBS, check_jobs, chunked_task
-from ureport.syncjobs.testing import (
+from ureport.syncjobs.tests.base import (
     SyncJobTestMixin,
     drop_lease,
     end_run,

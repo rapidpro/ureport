@@ -1030,7 +1030,7 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollImage.objects.filter(poll=poll1))
 
-        upload = open("test-data/image.jpg", "rb")
+        upload = open(f"{settings.TESTDATA_DIR}/image.jpg", "rb")
         post_data = dict(image_1=upload)
         response = self.client.post(uganda_poll_images_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertTrue(PollImage.objects.filter(poll=poll1))
@@ -1040,7 +1040,7 @@ class PollTest(UreportTest):
         self.assertEqual(len(response.context["form"].fields), 3)
         self.assertTrue(response.context["form"].fields["image_1"].initial)
 
-        upload = open("test-data/image.jpg", "rb")
+        upload = open(f"{settings.TESTDATA_DIR}/image.jpg", "rb")
         post_data = dict(image_1=upload)
         response = self.client.post(uganda_poll_images_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertTrue(PollImage.objects.filter(poll=poll1))

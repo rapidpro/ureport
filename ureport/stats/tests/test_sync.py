@@ -32,7 +32,7 @@ from ureport.stats.tasks import (
     refresh_engagement_data,
 )
 from ureport.syncjobs.models import ABORTED, SyncJob
-from ureport.syncjobs.testing import SyncJobTestMixin, end_run, held_lock, make_stale, reload, run_task
+from ureport.syncjobs.tests.base import SyncJobTestMixin, end_run, held_lock, make_stale, reload, run_task
 from ureport.tests import UreportTest
 
 REFRESH_ENGAGEMENT_DATA = "ureport.stats.models.PollEngagementDailyCount.refresh_engagement_data"

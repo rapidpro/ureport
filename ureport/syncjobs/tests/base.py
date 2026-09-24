@@ -13,8 +13,8 @@ from django_valkey import get_valkey_connection
 
 from django.utils import timezone
 
-from .models import SyncJob
-from .tasks import JOB_TASKS, chunked_task
+from ureport.syncjobs.models import SyncJob
+from ureport.syncjobs.tasks import JOB_TASKS, chunked_task
 
 DEFAULT_MAX_CHUNKS = 20
 
