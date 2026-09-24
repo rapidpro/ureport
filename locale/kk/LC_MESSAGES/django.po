@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Askhat Makitov, 2024\n"
 "Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
@@ -713,6 +713,27 @@ msgstr "Кіру"
 msgid "Enter Dashboard"
 msgstr "Бақылау тақтасын енгізіңіз"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Аккаунттар"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Арналар"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Жаңа құпия сөз"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Веб-сайтқа оралу"
 
@@ -1253,15 +1274,11 @@ msgstr[1] "%(counter)s нәтиже"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Нәтижелер: %(count)s ішінен %(start)s-%(end)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Жаңа құпия сөз"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Арналар"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Жаңа әңгіме"
@@ -1979,6 +1996,13 @@ msgstr "#%(job_id)d жұмысы келесі іске қосылғанда ба
 
 msgid "Something to trigger localizations"
 msgstr "Локализацияларды іске қосуға арналған нәрсе"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Барлық орындар"
