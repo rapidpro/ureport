@@ -182,10 +182,10 @@ class BotTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(uganda_update_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(nigeria_update_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(uganda_update_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)

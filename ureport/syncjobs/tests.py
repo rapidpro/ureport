@@ -1131,7 +1131,7 @@ class SyncJobCRUDLTest(UreportTest):
         # the controls are operational, so no org admin gets to see them
         self.login(self.admin)
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         self.login(self.superuser)
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
@@ -1164,7 +1164,7 @@ class SyncJobCRUDLTest(UreportTest):
         resync_url = reverse("syncjobs.syncjob_force_resync", args=[self.job.id])
 
         self.login(self.admin)
-        self.assertLoginRedirect(self.client.post(pause_url, SERVER_NAME="uganda.ureport.io"))
+        self.assertEqual(403, self.client.post(pause_url, SERVER_NAME="uganda.ureport.io").status_code)
         self.assertEqual(SyncJob.objects.get(id=self.job.id).status, SyncJob.STATUS_PENDING)
 
         self.login(self.superuser)

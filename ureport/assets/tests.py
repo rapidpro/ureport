@@ -67,10 +67,10 @@ class ImageTest(UreportTest):
         nigeria_bg_update_url = reverse("assets.image_update", args=[nigeria_org_bg.pk])
 
         response = self.client.get(uganda_bg_update_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(nigeria_bg_update_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
+        self.assertEqual(403, response.status_code)
 
         response = self.client.get(uganda_bg_update_url, follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], uganda_bg_update_url)

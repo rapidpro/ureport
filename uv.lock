@@ -711,7 +711,7 @@ wheels = [
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.23.0"
+version = "1.23.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery", extra = ["redis"] },
@@ -727,9 +727,9 @@ dependencies = [
     { name = "smartmin" },
     { name = "sorl-thumbnail" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8a/8e/b5a3eee5b8b1a493503ed45f8ec3ce02e297ac4a467362050e7c24a831af/rapidpro_dash-1.23.0.tar.gz", hash = "sha256:974a3aa590e2903d2ebfc7f27442bff6de87200e26d749015d6f2369395e08d4", size = 736494, upload-time = "2026-09-14T13:04:31.107Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a0/b3/88e0eea4cc4cf91c7dfcfd52ffa04327692b782af52eb0f58a048af38519/rapidpro_dash-1.23.1.tar.gz", hash = "sha256:8eb4a81f0f731b8cdd1b727473d61d3c294fbf9f3334f807ea8a00cf7c11b54e", size = 724675, upload-time = "2026-09-23T10:21:57.214Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/45/ce/cea2725dbd296045655c2cf246d435c34afb7648b99150b62f098d9508cd/rapidpro_dash-1.23.0-py3-none-any.whl", hash = "sha256:43d3b7fd15821e0c8b406d24f4b7cbf8e61ab3d215b11005d75ecf8c379ab1e5", size = 171580, upload-time = "2026-09-14T13:04:29.766Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/c6/db1e299078d276597032b29225ab10fad3169196685fe28a843722e596bb/rapidpro_dash-1.23.1-py3-none-any.whl", hash = "sha256:9e4d602a428a0991b7f37ae5fd89b403e2001b437c70e20f0da5059a14a61093", size = 171532, upload-time = "2026-09-23T10:21:55.282Z" },
 ]
 
 [[package]]
@@ -916,7 +916,7 @@ wheels = [
 
 [[package]]
 name = "smartmin"
-version = "6.2.1"
+version = "6.2.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -924,9 +924,9 @@ dependencies = [
     { name = "xlrd" },
     { name = "xlwt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/42/b4/e815508e3456f2816ed35d4456a780651419fd12cd06b11c640cc50021f1/smartmin-6.2.1.tar.gz", hash = "sha256:ae6b8d533a469f53adf9c56d1e98cdfa630951096fdb28b90cb4777a5b18e5d0", size = 474623, upload-time = "2026-08-21T15:13:23.217Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6c/a5/92896900e5d604766f33ea1468565ad9dc14405d14cda8c8fe4db06da47e/smartmin-6.2.3.tar.gz", hash = "sha256:c631b1bfa2d39a49bbf8b8cc0c3cc0d66f790a13d25302523edb4bc1c6397abd", size = 477937, upload-time = "2026-09-23T07:30:30.073Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/df/4c6f83c20d363f4469e555d8100d6c2e21d1eabe105383864cb351aaa4c0/smartmin-6.2.1-py3-none-any.whl", hash = "sha256:1f9d01fda0bdc0dd7f5a69d9134b739889aa099a5183445b38814af75dbc7253", size = 351118, upload-time = "2026-08-21T15:13:22.034Z" },
+    { url = "https://files.pythonhosted.org/packages/6b/9e/c46764308bc962d737b0b0689a843bce81a06ef03c056af48c9c53a46ab5/smartmin-6.2.3-py3-none-any.whl", hash = "sha256:84406bf281dfc1783af2fc799f670114138c44b69027c03eeccdb30213c8cc19", size = 351381, upload-time = "2026-09-23T07:30:28.738Z" },
 ]
 
 [[package]]
@@ -1053,11 +1053,11 @@ requires-dist = [
     { name = "pillow", specifier = "~=12.3.0" },
     { name = "psycopg", specifier = "~=3.2.3" },
     { name = "pycountry", specifier = ">=24.5.1" },
-    { name = "rapidpro-dash", specifier = ">=1.23.0,<2.0.0" },
+    { name = "rapidpro-dash", specifier = ">=1.23.1,<2.0.0" },
     { name = "rapidpro-python", specifier = ">=2.22.1,<3.0.0" },
     { name = "regex", specifier = "~=2026.4.4" },
     { name = "sentry-sdk", specifier = "~=2.19.2" },
-    { name = "smartmin", specifier = ">=6.2.1,<6.3.0" },
+    { name = "smartmin", specifier = ">=6.2.3,<6.3.0" },
     { name = "sorl-thumbnail", specifier = "~=12.11.0" },
     { name = "stop-words", specifier = "~=2018.7.23" },
     { name = "whitenoise", extras = ["brotli"], specifier = "~=6.12.0" },
