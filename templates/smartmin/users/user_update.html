@@ -1,2 +1,22 @@
 {% extends "smartmin/update.html" %}
+{% load i18n %}
+
 {% comment %}Overrides the packaged template, which offers to log in as the user being edited{% endcomment %}
+{% block post-form %}
+  {% if perms.auth.user_disable_mfa and object.authenticator_set.exists %}
+    <form action="{% url 'users.user_disable_mfa' object.id %}" method="post" class="smartmin-form">
+      {% csrf_token %}
+      <div class="field is-horizontal">
+        <div class="field-label">
+          <label class="label">{% trans "Two-Factor Authentication" %}</label>
+        </div>
+        <div class="field-body">
+          <div class="field is-expanded">
+            <button type="submit" class="button is-danger">{% trans "Disable" %}</button>
+            <p class="help">{% trans "Removes the user's authenticator app and recovery codes so they can log in with just their password." %}</p>
+          </div>
+        </div>
+      </div>
+    </form>
+  {% endif %}
+{% endblock post-form %}
