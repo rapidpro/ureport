@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -291,8 +291,18 @@ msgid "The API token for this backend"
 msgstr "L'API token per questo backend"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      Sei stato invitato a unirti a %(org_name)s.\n      <br />\n      Per accettare l'invito, <a href='%(host)s%(join_url)s'>clicca qui</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Sei stato invitato a unirti a %(org_name)s.\n"
+"      <br />\n"
+"      Per accettare l'invito, <a href='%(host)s%(join_url)s'>clicca qui</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Sei invitato ad unirti {{org.name}}."
@@ -683,6 +693,22 @@ msgstr "Salva"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "la tua nuova %s è stata creata"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Registrati"
+
+msgid "Enter Dashboard"
+msgstr "Inserisci Dashboard"
 
 msgid "Back to Website"
 msgstr "Ritorna al sito"
@@ -1222,38 +1248,15 @@ msgstr[1] "%(counter)s risultati"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Risultati %(start)s-%(end)s di %(count)s"
 
-msgid "Error"
-msgstr "Errore"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nuova password"
 
-msgid "Enter Dashboard"
-msgstr "Inserisci Dashboard"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"Spiacenti, in questo momento non puoi accedere perché abbiamo registrato %(failed_login_limit)s tentativi di accesso sbagliati."
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"Per favore attendi %(lockout_timeout)s minuti prima di tentare di accedere di nuovo."
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"<strong> La tua password è scaduta. </strong> La politica del sito richiede che tu debba selezionare una nuova password ogni %(expire_days)s giorni, e che le password non devono essere già state utilizzate nei %(window_days)s giorni precedenti."
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Canali"
 
 msgid "+ New Story"
 msgstr "+ Nuova Storia"
@@ -1998,6 +2001,36 @@ msgstr "Paesi dei Comitati Nazionali UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Africa occidentale e centrale"
+
+#~ msgid "Error"
+#~ msgstr "Errore"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Spiacenti, in questo momento non puoi accedere perché abbiamo registrato %(failed_login_limit)s tentativi di accesso sbagliati."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Per favore attendi %(lockout_timeout)s minuti prima di tentare di accedere di nuovo."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong> La tua password è scaduta. </strong> La politica del sito richiede che tu debba selezionare una nuova password ogni %(expire_days)s giorni, e che le password non devono essere già state utilizzate nei %(window_days)s giorni precedenti."
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

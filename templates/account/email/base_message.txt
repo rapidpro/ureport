@@ -1,0 +1,6 @@
+{% load i18n %}{% autoescape off %}{% trans "Hello," %}
+
+{% block content %}{% endblock content %}
+
+{% trans "The U-Report team" %}
+{% endautoescape %}

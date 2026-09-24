@@ -1,0 +1,9 @@
+{% extends "smartmin/update.html" %}
+{% load i18n %}
+
+{% block post-form %}
+  <div class="buttons">
+    <a href="{% url 'account_change_password' %}" class="button">{% trans "Change Password" %}</a>
+    <a href="{% url 'account_email' %}" class="button">{% trans "Change Email" %}</a>
+  </div>
+{% endblock post-form %}

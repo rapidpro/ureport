@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Tjaša Jazbinšek, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -701,6 +701,22 @@ msgstr "Shrani"
 msgid "Your new %s has been created."
 msgstr "Ustvarjen je tvoj nov %s."
 
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Registriraj se"
+
+msgid "Enter Dashboard"
+msgstr "Enter Dashboard"
+
 msgid "Back to Website"
 msgstr "Nazaj na spletno stran"
 
@@ -1247,41 +1263,15 @@ msgstr[3] "%(counter)s rezultatov"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Rezultati %(start)s-%(end)s od %(count)s"
 
-msgid "Error"
-msgstr "Napaka"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Novo geslo"
 
-msgid "Enter Dashboard"
-msgstr "Enter Dashboard"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"               Žal se trenutno ne moreš prijaviti, ker smo prejeli %(failed_login_limit)s napačnih prijav.\n"
-"              "
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"                    Prosimo, počakaj %(lockout_timeout)s minut preden se ponovno vpišeš.\n"
-"                  "
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"        <strong>Tvoje geslo je poteklo.</strong> Pogoji uporabe strani določajo, da moraš izbrati novo geslo vsakih %(expire_days)s dni. Geslo ne sme biti enako kot geslo, ki si ga uporabil_a v preteklih%(window_days)s dneh.\n"
-"      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanali"
 
 msgid "+ New Story"
 msgstr "+ Nov prispevek"
@@ -2026,6 +2016,39 @@ msgstr "Države nacionalnih odborov UNICEF-a"
 
 msgid "West and Central Africa"
 msgstr "Zahodna in osrednja Afrika"
+
+#~ msgid "Error"
+#~ msgstr "Napaka"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "               Žal se trenutno ne moreš prijaviti, ker smo prejeli %(failed_login_limit)s napačnih prijav.\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    Prosimo, počakaj %(lockout_timeout)s minut preden se ponovno vpišeš.\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "        <strong>Tvoje geslo je poteklo.</strong> Pogoji uporabe strani določajo, da moraš izbrati novo geslo vsakih %(expire_days)s dni. Geslo ne sme biti enako kot geslo, ki si ga uporabil_a v preteklih%(window_days)s dneh.\n"
+#~ "      "
 
 #~ msgid "Color Choice"
 #~ msgstr "Izbira barve"
