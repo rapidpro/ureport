@@ -35,6 +35,7 @@ from smartmin.tests import SmartminTest
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.gunicorn import JSONAccessLogger
+from ureport.gunicorn_conf import on_starting
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
 from ureport.public.views import IndexView
@@ -505,3 +506,22 @@ class JSONAccessLoggerTest(SimpleTestCase):
             logger.access(resp, None, {"REQUEST_METHOD": "GET"}, None)
 
         self.assertIn("AttributeError", captured.records[0].getMessage())
+
+
+class GunicornConfTest(SimpleTestCase):
+    @patch("sentry_sdk.init")
+    def test_on_starting(self, mock_init):
+        with patch.dict(os.environ, clear=True):
+            on_starting(None)
+
+        mock_init.assert_not_called()
+
+        with patch.dict(os.environ, {"SENTRY_DSN": "https://key@sentry.example.com/1", "SENTRY_ENVIRONMENT": "test"}):
+            on_starting(None)
+
+        mock_init.assert_called_once()
+        kwargs = mock_init.call_args.kwargs
+        self.assertEqual("https://key@sentry.example.com/1", kwargs["dsn"])
+        self.assertEqual("test", kwargs["environment"])
+        self.assertFalse(kwargs["auto_enabling_integrations"])
+        self.assertEqual(0, kwargs["traces_sample_rate"])
