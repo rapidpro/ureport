@@ -1,3 +1,7 @@
+v1.7.7 (2026-09-28)
+-------------------------
+ * Report gunicorn master errors to Sentry
+
 v1.7.6 (2026-09-24)
 -------------------------
  * Consolidate test-only files under test-data/ and per-app tests packages
