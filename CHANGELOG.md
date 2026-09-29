@@ -1,126 +1,103 @@
-v1.8.0 (2026-09-29)
--------------------------
+## v1.8.0 (2026-09-29)
  * Replace smartmin login with django-allauth
 
-v1.7.7 (2026-09-28)
--------------------------
+## v1.7.7 (2026-09-28)
  * Report gunicorn master errors to Sentry
 
-v1.7.6 (2026-09-24)
--------------------------
+## v1.7.6 (2026-09-24)
  * Consolidate test-only files under test-data/ and per-app tests packages
 
-v1.7.5 (2026-09-24)
--------------------------
+## v1.7.5 (2026-09-24)
  * Bump sqlparse from 0.5.5 to 0.6.0
  * Update smartmin and dash to latest releases
  * Reformat templates with djangofmt
  * Replace djlint with djangofmt for template formatting
 
-v1.7.4 (2026-09-22)
--------------------------
+## v1.7.4 (2026-09-22)
  * Point the staging settings' media at a bucket of their own
 
-v1.7.3 (2026-09-22)
--------------------------
+## v1.7.3 (2026-09-22)
  * Fall back to the default credential chain for media storage
  * Tell Sentry which deployment and release an event came from
  * Ship the countries geojson with the code and read it read only
 
-v1.7.2 (2026-09-17)
--------------------------
+## v1.7.2 (2026-09-17)
  * Stop overriding the middleware in the prod and staging settings
 
-v1.7.1 (2026-09-17)
--------------------------
+## v1.7.1 (2026-09-17)
  * Add a setting to treat every request as https instead of trusting a forwarded header
  * Add a JSON access logger for gunicorn using OpenTelemetry's HTTP field names
  * Keep loggers that exist before Django configures logging
 
-v1.7.0 (2026-09-16)
--------------------------
+## v1.7.0 (2026-09-16)
  * Set security, caching and compression headers from the app
  * Check static files can be collected and compressed in CI
  * Serve static files content-hashed and precompressed with brotli
 
-v1.6.15 (2026-09-14)
--------------------------
+## v1.6.15 (2026-09-14)
  * Update rapidpro-dash to 1.23.0 for staff and global group org access
 
-v1.6.14 (2026-09-09)
--------------------------
+## v1.6.14 (2026-09-09)
  * Compare the proxy scheme header against lowercase https
  * Allow any host on staging, as prod does
 
-v1.6.13 (2026-09-09)
--------------------------
+## v1.6.13 (2026-09-09)
  * Share the whitenoise config across all settings
  * Drop the beat container and embed the scheduler in the worker
  * Serve static files from the container with whitenoise
  * Add container support
 
-v1.6.12 (2026-09-07)
--------------------------
+## v1.6.12 (2026-09-07)
  * Replace deprecated EMAIL_* settings with MAILERS
  * Update to Django 6.1
 
-v1.6.11 (2026-09-01)
--------------------------
+## v1.6.11 (2026-09-01)
  * Recompile locale MO files
  * Fill in missing and stale translations in locale files
  * Allow postgres and valkey hosts in dev settings to come from the environment
  * Add sync jobs to the superuser admin menus
 
-v1.6.10 (2026-08-26)
--------------------------
+## v1.6.10 (2026-08-26)
  * Convert the stats tasks to chunked resumable sync jobs
  * Convert the poll maintenance tasks to chunked resumable sync jobs
  * Convert the contacts maintenance tasks to chunked resumable sync jobs
  * Consolidate sync job dispatch, locking and test plumbing
 
-v1.6.9 (2026-08-25)
--------------------------
+## v1.6.9 (2026-08-25)
  * Make poll results and archive syncs resumable sync jobs
 
-v1.6.8 (2026-08-24)
--------------------------
+## v1.6.8 (2026-08-24)
  * Convert the contact pull to a chunked resumable sync job
 
-v1.6.7 (2026-08-20)
--------------------------
+## v1.6.7 (2026-08-20)
  * Update locale files with the sync job management strings
  * Add monitoring and operator controls for sync jobs
  * Add chunk-aware backend pull methods
 
-v1.6.6 (2026-08-19)
--------------------------
+## v1.6.6 (2026-08-19)
  * Ack admin-triggered poll tasks late so worker stops can't drop them
  * Harden Celery config for containerized workers
  * Record and retry failures in completion finalization
  * Support delayed continuations in chunked tasks
  * Add syncjobs app with resumable chunked task framework
 
-v1.6.5 (2026-08-18)
--------------------------
+## v1.6.5 (2026-08-18)
  * Use RedBeat as celery beat scheduler so beat can be embedded in workers
  * Add fake pip-requires.txt to solve Dependabot alerts
  * Bump django from 6.0.6 to 6.0.7
  * Add aggregate Test job so required status check name is stable across CI matrix changes
 
-v1.6.4 (2026-07-28)
--------------------------
+## v1.6.4 (2026-07-28)
  * Update rapidpro-dash to 1.21.1
  * Fix code check recreation of package symlinks under uv
 
-v1.6.3 (2026-07-27)
--------------------------
+## v1.6.3 (2026-07-27)
  * Update .gitignore to cover AI agent files
  * Update smartmin to 6.1.0 and rapidpro-dash to 1.21.0
  * Update smartmin to 6.0.1
  * Remove SECRET_KEY_FALLBACKS and the old development fallback key
 
-v1.6.2 (2026-07-27)
--------------------------
+## v1.6.2 (2026-07-27)
  * Run code checkes
  * Read SECRET_KEY from the DJANGO_SECRET_KEY environment variable
  * Restrict poll pull refresh to superusers and staff
@@ -129,47 +106,39 @@ v1.6.2 (2026-07-27)
  * Re-enable code check failure on drift and regenerate locale files
  * Add timeouts to task locks so a killed worker cannot wedge syncing
 
-v1.6.1 (2026-07-23)
--------------------------
+## v1.6.1 (2026-07-23)
  * Bump django from 6.0.5 to 6.0.6
 
-v1.6.0 (2026-07-22)
--------------------------
+## v1.6.0 (2026-07-22)
  * Update pillow to 12.3.0
  * Pin bun version and use frozen lockfile in CI
  * Use bun instead of npm for JS tooling
  * Update .gitignore to cover .devcontainer and AI agent files
 
-v1.5.7 (2026-05-26)
--------------------------
+## v1.5.7 (2026-05-26)
  * Require Python 3.14.5+
  * Fix FLOIP sync quadratic num_synced growth
 
-v1.5.6 (2026-05-22)
--------------------------
+## v1.5.6 (2026-05-22)
  * Force gc.collect after each sync fetch page to release per-page lookup maps
  * Bump idna from 3.13 to 3.15
 
-v1.5.5 (2026-05-19)
--------------------------
+## v1.5.5 (2026-05-19)
  * Merge pull request #1352 from rapidpro/dependabot/uv/django-6.0.5
  * Merge pull request #1351 from rapidpro/dependabot/uv/urllib3-2.7.0
  * Bump django from 6.0.4 to 6.0.5
  * Bump urllib3 from 2.6.3 to 2.7.0
 
-v1.5.4 (2026-05-05)
--------------------------
+## v1.5.4 (2026-05-05)
  * Merge pull request #1350 from rapidpro/remove-panama
  * Remove Panama
 
-v1.5.3 (2026-05-04)
--------------------------
+## v1.5.3 (2026-05-04)
  * Merge pull request #1349 from rapidpro/cleanup-unused-code
  * Merge pull request #1348 from rapidpro/remove-coffee
  * Address PR review comments
 
-v1.5.0 (2026-04-30)
--------------------------
+## v1.5.0 (2026-04-30)
  * Merge pull request #1347 from rapidpro/use-python3.14
  * Test on python 3.14 only
  * Update GH action
@@ -179,8 +148,7 @@ v1.5.0 (2026-04-30)
  * Merge pull request #1345 from rapidpro/update-pillow
  * Update pillow to 12.2.0
 
-v1.4.1 (2026-04-08)
--------------------------
+## v1.4.1 (2026-04-08)
  * Merge pull request #1344 from rapidpro/django-6.0
  * Add CI test matrix for Python 3.12, 3.13 and 3.14
  * Update to Django 6.0
@@ -191,58 +159,48 @@ v1.4.1 (2026-04-08)
  * Merge pull request #1342 from rapidpro/valkey-8.1
  * Bump valkey from 8.0 to 8.1 in CI
 
-v1.4.0 (2026-03-30)
--------------------------
+## v1.4.0 (2026-03-30)
  * Update README
  * Update deps
  * Switch to use UV package and project manager
 
-v1.3.2 (2026-03-25)
--------------------------
+## v1.3.2 (2026-03-25)
  * Update deps
  * Update actions/checkout and codecov-action to v5
  * Bump lodash from 4.17.21 to 4.17.23
  * Bump django from 5.2.9 to 5.2.12
 
-v1.3.1 (2026-02-18)
--------------------------
+## v1.3.1 (2026-02-18)
  * Merge pull request #1333 from rapidpro/fix-get-redirect
  * Run code checks
  * Show 404 status code for missing sites
 
-v1.3.0 (2026-01-19)
--------------------------
+## v1.3.0 (2026-01-19)
  * Merge pull request #1332 from rapidpro/remove-old-branding
 
-v1.2.185 (2026-01-08)
--------------------------
+## v1.2.185 (2026-01-08)
  * Merge pull request #1331 from rapidpro/dependabot/pip/urllib3-2.6.3
  * Bump urllib3 from 2.6.2 to 2.6.3
 
-v1.2.184 (2026-01-08)
--------------------------
+## v1.2.184 (2026-01-08)
  * Merge pull request #1330 from rapidpro/update-rapidpro-python
  * Update rapidpro-python to 2.22.0
 
-v1.2.183 (2025-12-18)
--------------------------
+## v1.2.183 (2025-12-18)
  * Merge pull request #1329 from rapidpro/task-schedule
  * Adjust stats squash schedule to 10 min
  * Merge pull request #1328 from rapidpro/update-django
  * Regenerate poetry lock file
 
-v1.2.182 (2025-12-15)
--------------------------
+## v1.2.182 (2025-12-15)
  * Merge pull request #1325 from rapidpro/new-stats-8
  * Adjust tasks schedules
 
-v1.2.181 (2025-12-11)
--------------------------
+## v1.2.181 (2025-12-11)
  * Merge pull request #1324 from rapidpro/new-stats-7
  * Stop writting PollStats rows
 
-v1.2.180 (2025-12-08)
--------------------------
+## v1.2.180 (2025-12-08)
  * Merge pull request #1322 from rapidpro/new-stats-6
  * Fix variable name
  * Run code_checks
@@ -252,8 +210,7 @@ v1.2.180 (2025-12-08)
  * Merge pull request #1323 from rapidpro/squash-more-often
  * Squash the new stats tables more often
 
-v1.2.178 (2025-12-02)
--------------------------
+## v1.2.178 (2025-12-02)
  * Apply copilot code review suggestions
  * Apply suggestions from code review
  * Apply suggestions from code review
@@ -261,16 +218,13 @@ v1.2.178 (2025-12-02)
  * Apply suggestions from code review
  * Rebackfill the poll stats counter and engagement counter after deduplicating the poll stats
 
-v1.2.177 (2025-11-28)
--------------------------
+## v1.2.177 (2025-11-28)
  * Fix date values field
 
-v1.2.176 (2025-11-28)
--------------------------
+## v1.2.176 (2025-11-28)
  * Fix date values field
 
-v1.2.175 (2025-11-28)
--------------------------
+## v1.2.175 (2025-11-28)
  * Increase squash max distinct
  * Compare lists of data
  * Fix log
@@ -281,8 +235,7 @@ v1.2.175 (2025-11-28)
  * Compare response rates stats for repoters locations
  * Compare stats for old table and new tables for all polls
 
-v1.2.174 (2025-11-26)
--------------------------
+## v1.2.174 (2025-11-26)
  * First backfill should clear any existing rows for stats and engagement counters
  * Only record state level for engagement counters
  * Apply copilot code review suggestions
@@ -290,15 +243,13 @@ v1.2.174 (2025-11-26)
  * Apply copilot code review suggestions
  * Add data migration to backfill the poll stats counters and engagement counts
 
-v1.2.173 (2025-11-25)
--------------------------
+## v1.2.173 (2025-11-25)
  * Reuse log stats comparison
  * Extract duplicated stats comparison logic into _log_stats_comparison helper method
  * Start comparing stats from new table to existing table
  * Adjust location scopes for poll stats counters and engagement counts
 
-v1.2.172 (2025-11-24)
--------------------------
+## v1.2.172 (2025-11-24)
  * Generate new stats as poll results are synced for now
  * Remove help text
  * Make sure the new stats models are removed the same way as the old one if needed to be cleared
@@ -306,8 +257,7 @@ v1.2.172 (2025-11-24)
  * Add new poll stats and engagement models
  * Add counts abstract models, that are squashable
 
-v1.2.171 (2025-11-18)
--------------------------
+## v1.2.171 (2025-11-18)
  * Merge pull request #1302 from rapidpro/trim-reporters-counts
  * use postgres is distinct to
  * Only add counters for signup in the recent 400 days
@@ -315,77 +265,64 @@ v1.2.171 (2025-11-18)
  * Apply copilot code review
  * Cleanup references of occupation no longer used
 
-v1.2.170 (2025-11-06)
--------------------------
+## v1.2.170 (2025-11-06)
  * Merge pull request #1300 from rapidpro/update-django
  * Update django
  * Merge pull request #1298 from rapidpro/add-bissau
  * Rename countries_codes key to country_codes
  * Add Guinea Bissau to countries list
 
-v1.2.169 (2025-10-31)
--------------------------
+## v1.2.169 (2025-10-31)
  * Reduce squash items query rows
  * Use batch size for bulk create
 
-v1.2.168 (2025-10-31)
--------------------------
+## v1.2.168 (2025-10-31)
  * Loop on all objects to insert
  * Use queryset iterator for getting reporters counts
 
-v1.2.167 (2025-10-30)
--------------------------
+## v1.2.167 (2025-10-30)
  * Remove no longer needed periodic task schedule
  * Remove use of list for all contacts
  * Run code_checks
  * Use iterator for large querysets
 
-v1.2.166 (2025-10-29)
--------------------------
+## v1.2.166 (2025-10-29)
  * Merge pull request #1292 from rapidpro/insert_batches
  * Insert poll stats using batch size with bulk create
 
-v1.2.165 (2025-10-29)
--------------------------
+## v1.2.165 (2025-10-29)
  * Merge pull request #1291 from rapidpro/reduce-db-load
  * Merge pull request #1289 from rapidpro/fcm-display
  * Stop updting past results on contact sync
  * Add ureport app links to join page
 
-v1.2.164 (2025-10-28)
--------------------------
+## v1.2.164 (2025-10-28)
  * Merge pull request #1290 from rapidpro/reduce-db-load-1
  * Fix date
 
-v1.2.162 (2025-10-10)
--------------------------
+## v1.2.162 (2025-10-10)
  * Merge pull request #1286 from rapidpro/update-rp-client
  * Update rapidpro-client
 
-v1.2.161 (2025-10-07)
--------------------------
+## v1.2.161 (2025-10-07)
  * Merge pull request #1285 from rapidpro/validate-slug-landing-page
  * Allow hyphens in landing pages slug
  * Update django
  * Validate landing pages slug
 
-v1.2.160 (2025-09-10)
--------------------------
+## v1.2.160 (2025-09-10)
  * Merge pull request #1284 from rapidpro/updates
  * Update django
  * Merge pull request #1282 from rapidpro/dependabot/pip/urllib3-2.5.0
  * Bump urllib3 from 2.3.0 to 2.5.0
 
-v1.2.159 (2025-06-17)
--------------------------
+## v1.2.159 (2025-06-17)
  * Merge pull request #1279 from rapidpro/more-valkey
 
-v1.2.157 (2025-06-17)
--------------------------
+## v1.2.157 (2025-06-17)
  * Merge pull request #1277 from rapidpro/django_valkey
 
-v1.2.155 (2025-06-12)
--------------------------
+## v1.2.155 (2025-06-12)
  * Merge pull request #1276 from rapidpro/updates
  * Update archive type param
  * Update deps
@@ -394,86 +331,70 @@ v1.2.155 (2025-06-12)
  * Bump django from 5.2.1 to 5.2.2
  * Bump requests from 2.32.3 to 2.32.4
 
-v1.2.154 (2025-06-03)
--------------------------
+## v1.2.154 (2025-06-03)
  * Merge pull request #1273 from rapidpro/gtm-check
 
-v1.2.152 (2025-05-21)
--------------------------
+## v1.2.152 (2025-05-21)
  * Merge pull request #1272 from rapidpro/add-eth
  * Add ETH to dropdown
 
-v1.2.151 (2025-05-19)
--------------------------
+## v1.2.151 (2025-05-19)
  * Merge pull request #1271 from rapidpro/update-django
  * Update to support django 5.2
 
-v1.2.150 (2025-04-04)
--------------------------
+## v1.2.150 (2025-04-04)
  * Merge pull request #1264 from rapidpro/custom-html
  * Add custom_html config to the public pages
 
-v1.2.149 (2025-04-01)
--------------------------
+## v1.2.149 (2025-04-01)
  * Merge pull request #1270 from rapidpro/add-aus
  * Add AUS link to countries dropdown
 
-v1.2.148 (2025-03-26)
--------------------------
+## v1.2.148 (2025-03-26)
  * Merge pull request #1269 from rapidpro/translations_locale-en-lc-messages-django-po--main_es
  * Run code checks
  * Translate locale/en/LC_MESSAGES/django.po in es
 
-v1.2.147 (2025-02-25)
--------------------------
+## v1.2.147 (2025-02-25)
  * Adjust categories labels and displays labels
 
-v1.2.145 (2025-02-24)
--------------------------
+## v1.2.145 (2025-02-24)
  * Update locales
  * Run test on latest ubuntu
  * Run code checks
  * Update deps
  * Remove csv_imports
 
-v1.2.144 (2025-02-21)
--------------------------
+## v1.2.144 (2025-02-21)
  * Fix logout button to use POST method
  * Update GH action to use postgress image on CI
  * Update pyproject.toml for poetry 2
 
-v1.2.143 (2025-01-06)
--------------------------
+## v1.2.143 (2025-01-06)
  * Merge pull request #1260 from rapidpro/poll-results-big-int
  * Change poll result id to big int
 
-v1.2.142 (2025-01-02)
--------------------------
+## v1.2.142 (2025-01-02)
  * Update Brasil host url
 
-v1.2.141 (2024-12-19)
--------------------------
+## v1.2.141 (2024-12-19)
  * Fix set
 
-v1.2.140 (2024-12-18)
--------------------------
+## v1.2.140 (2024-12-18)
  * Merge pull request #1258 from rapidpro/fix-clearing-results
  * Prevent clearing results for polls with the same flow
 
-v1.2.139 (2024-12-12)
--------------------------
+## v1.2.139 (2024-12-12)
  * Merge pull request #1255 from rapidpro/sync-paths-no-time
  * Sync results from paths without time
 
-v1.2.138 (2024-12-10)
--------------------------
+## v1.2.138 (2024-12-10)
  * Merge pull request #1257 from rapidpro/dependabot/pip/django-5.1.4
  * Bump django from 5.1.2 to 5.1.4
  * Merge pull request #1256 from rapidpro/malawi-site-fix
  * Fix Malawi site domain
 
-v1.2.137 (2024-12-04)
--------------------------
+## v1.2.137 (2024-12-04)
  * Merge pull request #1254 from rapidpro/custom-stories-link
  * Merge pull request #1253 from rapidpro/comment-sync
  * Merge pull request #1240 from rapidpro/cleanup-used-files
@@ -483,46 +404,38 @@ v1.2.137 (2024-12-04)
  * Update rapidpro python client to 2.16.0
  * Cleanup old unused files
 
-v1.2.136 (2024-10-24)
--------------------------
+## v1.2.136 (2024-10-24)
  * Merge pull request #1249 from rapidpro/update-python
 
-v1.2.134 (2024-10-23)
--------------------------
+## v1.2.134 (2024-10-23)
  * Update deps
  * Support django 5.1
  * Adjust old migrations to not use index_together
  * Use GH actions services for Redis and Postgres
 
-v1.2.133 (2024-09-26)
--------------------------
+## v1.2.133 (2024-09-26)
  * Add lock to run the contacts activities squash once
 
-v1.2.132 (2024-09-24)
--------------------------
+## v1.2.132 (2024-09-24)
  * Squash contacts activities counts every 15min
  * Run code checks
  * Translate locale/en/LC_MESSAGES/django.po in cs
 
-v1.2.131 (2024-09-18)
--------------------------
+## v1.2.131 (2024-09-18)
  * Set the max length for poll result text
  * Do not sync empty contacts not having URNs set
 
-v1.2.130 (2024-08-28)
--------------------------
+## v1.2.130 (2024-08-28)
  * Merge pull request #1239 from rapidpro/extra-menu
  * Use extra menu link config for global site
 
-v1.2.129 (2024-08-28)
--------------------------
+## v1.2.129 (2024-08-28)
  * Merge pull request #1236 from rapidpro/extra-menu
  * Merge pull request #1238 from rapidpro/add-dominicana
  * Fix name
  * Add support for extra link on menu
 
-v1.2.128 (2024-08-28)
--------------------------
+## v1.2.128 (2024-08-28)
  * Merge pull request #1237 from rapidpro/add-dominicana
  * Merge pull request #1235 from rapidpro/fix-index-together-unique-toghether-use
  * Add Dominicana link
@@ -534,72 +447,60 @@ v1.2.128 (2024-08-28)
  * Update deps
  * Reduce size of logo images to load faster on pages
 
-v1.2.127 (2024-07-26)
--------------------------
+## v1.2.127 (2024-07-26)
  * Merge pull request #1229 from rapidpro/kazakh-unicef-logo
  * Adjust UNICEF logo for Kazakh
  * Merge pull request #1228 from rapidpro/update_dash
  * Update dash to order admins on org forms
 
-v1.2.126 (2024-07-12)
--------------------------
+## v1.2.126 (2024-07-12)
  * Merge pull request #1227 from rapidpro/add-kazakhstan
  * Add Kazakhstan
 
-v1.2.125 (2024-07-11)
--------------------------
+## v1.2.125 (2024-07-11)
  * Merge pull request #1226 from rapidpro/update-deps
  * Update JS deps
  * Merge pull request #1225 from rapidpro/update-deps
  * Run code checks
  * Update deps
 
-v1.2.124 (2024-07-09)
--------------------------
+## v1.2.124 (2024-07-09)
  * Merge pull request #1223 from rapidpro/kaz-updates
  * Fix type for Macedonia
  * Update KK translations
 
-v1.2.123 (2024-07-02)
--------------------------
+## v1.2.123 (2024-07-02)
  * Merge pull request #1222 from rapidpro/use-py-3.11
 
-v1.2.119 (2024-06-28)
--------------------------
+## v1.2.119 (2024-06-28)
  * Merge pull request #1220 from rapidpro/GA4
  * Merge pull request #1221 from rapidpro/fix-polls-queries-for-sync
  * Make sure polls with inactive category are hidden from the public
  * Support GA4 measurement ID
  * fix queries for polls used to sync results to always sync polls even if there categories are inactive
 
-v1.2.118 (2024-06-06)
--------------------------
+## v1.2.118 (2024-06-06)
  * Merge pull request #1219 from rapidpro/add-kazakh
  * Add Kazakh
 
-v1.2.117 (2024-05-29)
--------------------------
+## v1.2.117 (2024-05-29)
  * Fix extra spaces typo
 
-v1.2.116 (2024-05-24)
--------------------------
+## v1.2.116 (2024-05-24)
  * Merge pull request #1218 from rapidpro/support-IG-deeplinks
  * Add config for Instagram deeplink checkbox
 
-v1.2.115 (2024-05-23)
--------------------------
+## v1.2.115 (2024-05-23)
  * Merge pull request #1214 from rapidpro/support-IG-deeplinks
  * Run poetry lock
  * Add Instagram deeplink on join page
  * Merge pull request #1212 from rapidpro/update-CI-actions
  * Update Github actions to latest versions
 
-v1.2.114 (2024-05-02)
--------------------------
+## v1.2.114 (2024-05-02)
  * Merge pull request #1210 from rapidpro/fix-homepage-poll-bg-color-new-brand
 
-v1.2.112 (2024-04-17)
--------------------------
+## v1.2.112 (2024-04-17)
  * Merge pull request #1209 from rapidpro/fix-stories-api
  * Run code checks
  * Fix stories API queryset
@@ -610,8 +511,7 @@ v1.2.112 (2024-04-17)
  * Merge pull request #1206 from rapidpro/dependabot/pip/gunicorn-22.0.0
  * Bump gunicorn from 20.1.0 to 22.0.0
 
-v1.2.111 (2024-04-16)
--------------------------
+## v1.2.111 (2024-04-16)
  * Merge pull request #1205 from rapidpro/update-depsss
  * Run poetry lock
  * Run poetry lock
@@ -619,24 +519,19 @@ v1.2.111 (2024-04-16)
  * Merge pull request #1202 from Ilhasoft/fix/check-new-brand-in-rtl-orgs
  * Check new brand in RTL organizations
 
-v1.2.110 (2024-04-16)
--------------------------
+## v1.2.110 (2024-04-16)
  * Merge pull request #1201 from rapidpro/fix-drf-base-template
 
-v1.2.108 (2024-04-11)
--------------------------
+## v1.2.108 (2024-04-11)
  * Merge pull request #1200 from rapidpro/message-storage-sessions
 
-v1.2.106 (2024-04-11)
--------------------------
+## v1.2.106 (2024-04-11)
  * Merge pull request #1199 from rapidpro/update-js-libraries
 
-v1.2.104 (2024-04-11)
--------------------------
+## v1.2.104 (2024-04-11)
  * Merge pull request #1198 from rapidpro/error-page
 
-v1.2.102 (2024-04-09)
--------------------------
+## v1.2.102 (2024-04-09)
  * Update FB JS SDK versions
  * Merge pull request #1171 from rapidpro/prep-django5
  * Update DRF to 3.15.0
@@ -646,8 +541,7 @@ v1.2.102 (2024-04-09)
  * Update django
  * Update to latest black, ruff, isort and djlint
 
-v1.2.101 (2024-03-05)
--------------------------
+## v1.2.101 (2024-03-05)
  * Merge pull request #1193 from rapidpro/polls-cyan
  * Use cyan, black and white colors for new brand on polls page
  * Merge pull request #1191 from rapidpro/dependabot/pip/jinja2-3.1.3
@@ -655,51 +549,41 @@ v1.2.101 (2024-03-05)
  * Bump django from 4.2.7 to 4.2.10
  * Bump jinja2 from 3.1.2 to 3.1.3
 
-v1.2.100 (2024-02-28)
--------------------------
+## v1.2.100 (2024-02-28)
  * Merge pull request #1190 from rapidpro/fix-drc-logo
 
-v1.2.99 (2024-02-28)
--------------------------
+## v1.2.99 (2024-02-28)
  * Merge pull request #1189 from rapidpro/drc-logo
  * Quick workaround custom DRC logo
  * Merge pull request #1188 from rapidpro/drc-logo
  * Quick workaround custom DRC logo
 
-v1.2.98 (2024-02-26)
--------------------------
+## v1.2.98 (2024-02-26)
  * Merge pull request #1187 from rapidpro/logo-lang
 
-v1.2.96 (2024-02-08)
--------------------------
+## v1.2.96 (2024-02-08)
  * Fix tab title
 
-v1.2.95 (2024-02-07)
--------------------------
+## v1.2.95 (2024-02-07)
  * Merge pull request #1186 from rapidpro/links-updates
  * Update VOY links
 
-v1.2.94 (2024-02-05)
--------------------------
+## v1.2.94 (2024-02-05)
  * Merge pull request #1185 from rapidpro/fix-org-name-spacing
  * Fix site name spacing for global site
 
-v1.2.93 (2024-02-05)
--------------------------
+## v1.2.93 (2024-02-05)
  * Merge pull request #1183 from rapidpro/fix-co-create
  * Fix logic to display co-create link
 
-v1.2.92 (2024-01-30)
--------------------------
+## v1.2.92 (2024-01-30)
  * Merge pull request #1182 from rapidpro/staging-pushes
  * Hide name for global site
 
-v1.2.91 (2024-01-29)
--------------------------
+## v1.2.91 (2024-01-29)
  * Fix configured colors load CSS classes
 
-v1.2.90 (2024-01-29)
--------------------------
+## v1.2.90 (2024-01-29)
  * Merge pull request #1180 from rapidpro/staging-pushes
  * Show co create link for new brand only
  * Format templates
@@ -724,40 +608,33 @@ v1.2.90 (2024-01-29)
  * Merge pull request #1177 from rapidpro/djlint
  * HTML templates linting
 
-v1.2.89 (2024-01-24)
--------------------------
+## v1.2.89 (2024-01-24)
  * Merge pull request #1179 from rapidpro/dependabot/pip/pillow-10.2.0
  * Bump pillow from 10.1.0 to 10.2.0
  * Merge pull request #1177 from rapidpro/djlint
  * HTML templates linting
 
-v1.2.88 (2023-11-17)
--------------------------
+## v1.2.88 (2023-11-17)
  * Merge pull request #1168 from rapidpro/update-ro
  * Fix romanian translations
 
-v1.2.87 (2023-11-03)
--------------------------
+## v1.2.87 (2023-11-03)
  * Merge pull request #1167 from rapidpro/update-deps-1
  * Update deps
 
-v1.2.86 (2023-10-27)
--------------------------
+## v1.2.86 (2023-10-27)
  * Merge pull request #1165 from rapidpro/namibia-icon
  * Add Namibia icon
 
-v1.2.85 (2023-10-25)
--------------------------
+## v1.2.85 (2023-10-25)
  * Merge pull request #1166 from rapidpro/poll-published
  * Add back the sync status message for inactive polls
 
-v1.2.83 (2023-10-18)
--------------------------
+## v1.2.83 (2023-10-18)
  * Merge pull request #1164 from rapidpro/update-dash
  * Update deps
 
-v1.2.82 (2023-10-17)
--------------------------
+## v1.2.82 (2023-10-17)
  * Merge pull request #1163 from Ilhasoft/fix/update-translations-locale-for-en-lc
  * Fix conflict on locale/sl/LC_MESSAGES/django.po file
  * Update the django.mo file
@@ -773,8 +650,7 @@ v1.2.82 (2023-10-17)
  * Translate locale/en/LC_MESSAGES/django.po in sl
  * Translate locale/en/LC_MESSAGES/django.po in sl
 
-v1.2.81 (2023-10-05)
--------------------------
+## v1.2.81 (2023-10-05)
  * Merge pull request #1162 from rapidpro/invite-date-display
  * Run code checks
  * Add notification message for resending invites
@@ -786,13 +662,11 @@ v1.2.81 (2023-10-05)
  * Bump urllib3 from 1.26.16 to 1.26.17
  * Bump postcss from 8.4.21 to 8.4.31
 
-v1.2.80 (2023-09-28)
--------------------------
+## v1.2.80 (2023-09-28)
  * Merge pull request #1157 from Ilhasoft/add-slovenija
  * Add Slovenija Flag
 
-v1.2.79 (2023-09-11)
--------------------------
+## v1.2.79 (2023-09-11)
  * Merge pull request #1148 from rapidpro/translations_locale-en-lc-messages-django-po--main_sr_RS@latin
  * Run code checks
  * Translate django.po in sr_RS@latin
@@ -803,28 +677,23 @@ v1.2.79 (2023-09-11)
  * Translate locale/en/LC_MESSAGES/django.po in pt
  * Translate locale/en/LC_MESSAGES/django.po in sl
 
-v1.2.78 (2023-08-22)
--------------------------
+## v1.2.78 (2023-08-22)
  * Merge pull request #1152 from rapidpro/convert_templates
  * Update deps
  * Merge pull request #1154 from rapidpro/rowanseymour-patch-1
  * Update ci.yml
 
-v1.2.76 (2023-07-25)
--------------------------
+## v1.2.76 (2023-07-25)
  * Proper variable for STORAGES
 
-v1.2.75 (2023-07-25)
--------------------------
+## v1.2.75 (2023-07-25)
  * Merge pull request #1151 from rapidpro/fix-storage-settings
  * Update django storages, fix thumbnail storage setting
 
-v1.2.74 (2023-07-06)
--------------------------
+## v1.2.74 (2023-07-06)
  * Merge pull request #1149 from rapidpro/update-django
 
-v1.2.72 (2023-07-05)
--------------------------
+## v1.2.72 (2023-07-05)
  * Merge pull request #1147 from rapidpro/add-sudan
  * Add Sudan to countries dropdown
  * Merge pull request #1146 from rapidpro/translations_locale-en-lc-messages-django-po--main_sr_RS@latin
@@ -832,43 +701,36 @@ v1.2.72 (2023-07-05)
  * Translate django.po in sr_RS@latin
  * Translate django.po in sr_RS@latin
 
-v1.2.71 (2023-06-16)
--------------------------
+## v1.2.71 (2023-06-16)
  * Merge pull request #1098 from rapidpro/south-pacific
  * Add Somalia icon
  * Update South Pacific icon
 
-v1.2.70 (2023-05-10)
--------------------------
+## v1.2.70 (2023-05-10)
  * Merge pull request #1145 from rapidpro/fix-fields
  * Run code checks
  * Remove pisa
  * Update django
  * Add transformer to client to support old fields
 
-v1.2.69 (2023-04-20)
--------------------------
+## v1.2.69 (2023-04-20)
  * Fix scheme count query
  * Fix scheme count query
 
-v1.2.68 (2023-04-20)
--------------------------
+## v1.2.68 (2023-04-20)
  * Merge pull request #1144 from rapidpro/fix-activity-counts
  * Fix activity counters counts queries
 
-v1.2.67 (2023-04-20)
--------------------------
+## v1.2.67 (2023-04-20)
  * Merge pull request #1143 from rapidpro/fix-activity-counts
  * Fix activity counters counts queries
 
-v1.2.66 (2023-04-20)
--------------------------
+## v1.2.66 (2023-04-20)
  * Merge pull request #1140 from rapidpro/contact-activities-counters-5
  * Make sure to refresh the engagement counts after recalculation
  * Switch to use contact activities counts for the graph stats
 
-v1.2.65 (2023-04-19)
--------------------------
+## v1.2.65 (2023-04-19)
  * Merge pull request #1138 from rapidpro/contact-activities-counters-4
  * Merge pull request #1139 from rapidpro/contact-activities-counters-3
  * Merge pull request #1137 from rapidpro/contact-activities-counters-2
@@ -883,8 +745,7 @@ v1.2.65 (2023-04-19)
  * Merge pull request #1142 from rapidpro/fix-coverage
  * Replace codecov with coverage
 
-v1.2.64 (2023-04-19)
--------------------------
+## v1.2.64 (2023-04-19)
  * Merge pull request #1134 from rapidpro/more-optimizations
  * More queries optimizations
  * Merge pull request #1141 from rapidpro/update-dash
@@ -895,8 +756,7 @@ v1.2.64 (2023-04-19)
  * Update npm deps
  * Remove unused deps
 
-v1.2.63 (2023-04-03)
--------------------------
+## v1.2.63 (2023-04-03)
  * Merge pull request #1131 from rapidpro/update-deps
  * Update deps
  * Merge pull request #1129 from rapidpro/more-optimizations
@@ -905,22 +765,18 @@ v1.2.63 (2023-04-03)
  * Fix tests
  * WIP more optimizations to reduce queries with prefetch
 
-v1.2.62 (2023-03-30)
--------------------------
+## v1.2.62 (2023-03-30)
  * Merge pull request #1128 from rapidpro/more-optimizations
  * Add indexes to optimize more the page loading
 
-v1.2.61 (2023-03-29)
--------------------------
+## v1.2.61 (2023-03-29)
  * Fix delete old contact activities
 
-v1.2.60 (2023-03-28)
--------------------------
+## v1.2.60 (2023-03-28)
  * Merge pull request #1127 from rapidpro/delete-old-contact-activities
  * Delete old contact activities task
 
-v1.2.59 (2023-03-28)
--------------------------
+## v1.2.59 (2023-03-28)
  * Merge pull request #1126 from rapidpro/line-button
  * Run code checks
  * Fix conflicts
@@ -929,12 +785,10 @@ v1.2.59 (2023-03-28)
  * Run code checks
  * Translate locale/en/LC_MESSAGES/django.po in th
 
-v1.2.58 (2023-03-16)
--------------------------
+## v1.2.58 (2023-03-16)
  * Add Thai
 
-v1.2.57 (2023-03-16)
--------------------------
+## v1.2.57 (2023-03-16)
  * Merge pull request #1111 from rapidpro/translations_locale-en-lc-messages-django-po--main_th
  * Run code_checks
  * Translate locale/en/LC_MESSAGES/django.po in th
@@ -956,8 +810,7 @@ v1.2.57 (2023-03-16)
  * Run black
  * Remove flake8, Add ruff
 
-v1.2.56 (2023-03-02)
--------------------------
+## v1.2.56 (2023-03-02)
  * Merge pull request #1096 from rapidpro/fix-translations
  * Add caching to the shared sites count view
  * Disable update PO files
@@ -965,19 +818,16 @@ v1.2.56 (2023-03-02)
  * Merge pull request #1095 from rapidpro/update-GA-actions
  * Remove testing on old versions
 
-v1.2.55 (2023-02-27)
--------------------------
+## v1.2.55 (2023-02-27)
  * Merge pull request #1094 from rapidpro/fix-story-errors
  * Fix stories validation and have the errors well noticeable
 
-v1.2.54 (2023-02-22)
--------------------------
+## v1.2.54 (2023-02-22)
  * Update dash and poetry lock file
  * Use latest deps updates
  * Update Thailand icons
 
-v1.2.51
-----------
+## v1.2.51 (2022-11-18)
  * Merge pull request #1084 from rapidpro/micronesia
  * Add micronesia
  * Merge pull request #1083 from rapidpro/test-pg-14
@@ -985,16 +835,14 @@ v1.2.51
  * Merge pull request #1082 from rapidpro/test-pg-14
  * Test on PG 14
 
-v1.2.50
-----------
+## v1.2.50 (2022-11-03)
  * Merge pull request #1081 from rapidpro/update-cg-logo
  * Update CG logo
  * Merge pull request #1079 from rapidpro/update-test-db
  * Update deps
  * Start testing PG 13
 
-v1.2.49
-----------
+## v1.2.49 (2022-08-12)
  * Merge pull request #1076 from rapidpro/poll-preview
  * Run code checks
  * Add preview button on poll admin list
@@ -1002,8 +850,7 @@ v1.2.49
  * Add poll preview view for admin to see stats for unpublished polls
  * Move black setting into pyproject.toml
 
-v1.2.48
-----------
+## v1.2.48 (2022-08-12)
  * Merge pull request #1077 from rapidpro/add-mauritania
  * Run code checks
  * Add Mauritania flag
@@ -1011,8 +858,7 @@ v1.2.48
  * update locale mo file for uk language
  * Translate /locale/en/LC_MESSAGES/django.po in uk
 
-v1.2.47
-----------
+## v1.2.47 (2022-06-07)
  * Merge pull request #1073 from rapidpro/add-morocco
  * Merge pull request #1072 from Ilhasoft/feature/europe.flag
  * rename flag and countries code
@@ -1021,40 +867,34 @@ v1.2.47
  * fix identation
  * Adding Europe's Flag
 
-v1.2.46
-----------
+## v1.2.46 (2022-05-26)
  * Merge pull request #1071 from rapidpro/dependabot/pip/django-4.0.4
  * Merge pull request #1070 from rapidpro/dependabot/npm_and_yarn/minimist-1.2.6
  * Bump django from 4.0.3 to 4.0.4
  * Bump minimist from 1.2.5 to 1.2.6
  * Run code checks
 
-v1.2.45
-----------
+## v1.2.45 (2022-05-26)
  * Merge pull request #1069 from rapidpro/fix-lock-time
  * Adjust lock timeout for rebuilding poll results
 
-v1.2.44
-----------
+## v1.2.44 (2022-05-09)
  * Merge pull request #1067 from rapidpro/fix-rebuild-counts-task
  * Run code checks
  * Add lock when  task rebuilding counts is running
 
-v1.2.43
-----------
+## v1.2.43 (2022-04-29)
  * Merge pull request #1066 from rapidpro/fix-week-number-bug
  * Avoid using date that will match same week as the current week in the past year
 
-v1.2.42
-----------
+## v1.2.42 (2022-04-19)
  * Merge pull request #1065 from pauloabreu/fix/unicef-logo
  * fix unicef logo
  * Merge pull request #1064 from Ilhasoft/locale-el-adjusts
  * update locale for el language
  * Translate /locale/en/LC_MESSAGES/django.po in el
 
-v1.2.41
-----------
+## v1.2.41 (2022-04-05)
  * Merge pull request #986 from rapidpro/optimization-debug
  * Update deps
  * fix conflicts
@@ -1063,8 +903,7 @@ v1.2.41
  * Reduce queries
  * Update and activate django debug toolbar
 
-v1.2.40
-----------
+## v1.2.40 (2022-03-31)
  * Merge pull request #1031 from Ilhasoft/update-el-language
  * Merge pull request #1030 from rapidpro/inc_paths
  * update .mo file for el language
@@ -1073,18 +912,15 @@ v1.2.40
  * Merge pull request #985 from Ilhasoft/feature/greece.flag
  * Adding Greece's Flag
 
-v1.2.39
-----------
+## v1.2.39 (2022-03-22)
  * Merge pull request #952 from rapidpro/optimize-home
  * More optimization and update tests
 
-v1.2.38
-----------
+## v1.2.38 (2022-03-21)
  * Merge pull request #951 from rapidpro/cache-no-expire
  * Do not expire the cached counts
 
-v1.2.37
-----------
+## v1.2.37 (2022-03-17)
  * Merge pull request #950 from rapidpro/fix-pills
  * Merge pull request #949 from Ilhasoft/locale/greek
  * Fix pills borders
@@ -1093,27 +929,22 @@ v1.2.37
  * fix bugs on el locale
  * Translate /locale/en/LC_MESSAGES/django.po in el
 
-v1.2.36
-----------
+## v1.2.36 (2022-03-15)
  * Merge pull request #947 from Ilhasoft/fix/change-name-Nic-countries_codes
  * add s in countries_codes Nicaragua
 
-v1.2.35
-----------
+## v1.2.35 (2022-03-05)
  * Merge pull request #946 from rapidpro/org-contacts-count-cache
  * do not expire the org contact counts cache
 
-v1.2.34
-----------
+## v1.2.34 (2022-02-23)
  * Merge pull request #945 from rapidpro/hide-menu-for-anon
  * Hide left menu of forget password page
 
-v1.2.33
-----------
+## v1.2.33 (2022-02-11)
  * Merge pull request #941 from rapidpro/sec-updates
 
-v1.2.31
-----------
+## v1.2.31 (2022-02-10)
  * Merge pull request #940 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
  * Merge pull request #942 from rapidpro/update-deps
  * Run code checks
@@ -1121,17 +952,14 @@ v1.2.31
  * Translate /locale/en/LC_MESSAGES/django.po in fr
  * Merge pull request #897 from rapidpro/sec-updates
 
-v1.2.30
-----------
+## v1.2.30 (2022-02-01)
  * Merge pull request #895 from rapidpro/percent-graphs
  * Fix polls graphs percentage bar lengths
 
-v1.2.29
-----------
+## v1.2.29 (2022-01-20)
  * Merge pull request #859 from rapidpro/update-deps
 
-v1.2.26
-----------
+## v1.2.26 (2022-01-20)
  * Update deps
  * Merge pull request #857 from rapidpro/translations_locale-en-lc-messages-django-po--main_fr
  * Merge pull request #858 from rapidpro/django4
@@ -1145,8 +973,7 @@ v1.2.26
  * Run code_checks
  * Prep update for django 4.0
 
-v1.2.25
-----------
+## v1.2.25 (2022-01-12)
  * Merge pull request #851 from alviriseup/main
  * Changes commited
  * Removed whitespaces and unused variables
@@ -1159,13 +986,11 @@ v1.2.25
  * example for field and exclude API call
  * Added functions for fields and exclude API call
 
-v1.2.24
-----------
+## v1.2.24 (2022-01-05)
  * Merge pull request #853 from rapidpro/gender-label-stats-fix
  * Fix issue for gender stats
 
-v1.2.23
-----------
+## v1.2.23 (2022-01-04)
  * Run code checks
  * Merge pull request #852 from rapidpro/absolute_count
  * Merge pull request #846 from rapidpro/translations_locale-en-lc-messages-django-po--main_cs
@@ -1173,8 +998,7 @@ v1.2.23
  * Add absolute count of age stats and schemes stats for API only
  * Translate /locale/en/LC_MESSAGES/django.po in cs
 
-v1.2.22
-----------
+## v1.2.22 (2021-12-24)
  * Remove Niger logo
  * Merge pull request #848 from Ilhasoft/feature/nicaragua-flag
  * Add Favico Flag Nicaragua
@@ -1182,18 +1006,15 @@ v1.2.22
  * Adding Nicaragua's Flag - update 2
  * Adding Nicaragua's Flag
 
-v1.2.21
-----------
+## v1.2.21 (2021-12-15)
  * Merge pull request #845 from rapidpro/add-niger
  * Add Niger flag
 
-v1.2.20
-----------
+## v1.2.20 (2021-12-09)
  * Merge pull request #843 from rapidpro/revert-poll-stats-insert-on-sync
  * Revert to always recalculate poll stats
 
-v1.2.19
-----------
+## v1.2.19 (2021-12-02)
  * Merge pull request #841 from rapidpro/gender-stats-fix
  * Make sure the org language is activate for gender stats
  * Merge pull request #840 from rapidpro/word-cloud-fix
@@ -1201,56 +1022,46 @@ v1.2.19
  * Merge pull request #839 from rapidpro/install_poetry
  * Install poetry the proper way during CI
 
-v1.2.18
-----------
+## v1.2.18 (2021-11-25)
  * Merge pull request #837 from rapidpro/rebuild-polls-counts
  * Rebuild stats once a day
 
-v1.2.17
-----------
+## v1.2.17 (2021-11-24)
  * Merge pull request #836 from rapidpro/squash-stats-dedupe
  * Make sure only one task is squashing the stats at a time
 
-v1.2.16
-----------
+## v1.2.16 (2021-11-24)
  * Merge pull request #834 from rapidpro/optimize-sync-stats-creations
 
-v1.2.15
-----------
+## v1.2.15 (2021-11-23)
  * Merge pull request #833 from rapidpro/syncing-improvements
  * Run code checks
  * Remove brick polls tasks, only clear results for poll not stopped syncing
 
-v1.2.14
-----------
+## v1.2.14 (2021-11-18)
  * Merge pull request #832 from rapidpro/remove-unused-context-variables
  * Remove border on partner logos
  * Remove unused context variables
 
-v1.2.13
-----------
+## v1.2.13 (2021-11-18)
  * Merge pull request #831 from rapidpro/remove-photos
  * Run code checks
  * Remove photos section
 
-v1.2.12
-----------
+## v1.2.12 (2021-11-17)
  * Merge pull request #830 from rapidpro/about-partners
  * fix conflicts
  * Merge pull request #829 from rapidpro/question-hidden-charts-config
  * Merge pull request #816 from rapidpro/landing_pages_bots
 
-v1.2.11
-----------
+## v1.2.11 (2021-11-10)
  * Merge pull request #828 from rapidpro/fix-dashblock-views
  * Update deps
 
-v1.2.10
-----------
+## v1.2.10 (2021-11-10)
  * Fix flags name
 
-v1.2.9
-----------
+## v1.2.9 (2021-11-10)
  * Merge pull request #813 from rapidpro/story-attachment-reports
  * fix conflicts, merge main
  * Merge pull request #827 from rapidpro/unicef-footer-logo
@@ -1289,32 +1100,26 @@ v1.2.9
  * Run code checks
  * Filter stories to keep current behaviour excluding rows with PDF attachments
 
-v1.2.8
-----------
+## v1.2.8 (2021-11-04)
  * Merge pull request #822 from rapidpro/more-stats-indexes
  * Add more stats indexes
 
-v1.2.7
-----------
+## v1.2.7 (2021-11-04)
  * Merge pull request #821 from rapidpro/fix-indexes
  * Rebuild the index properly
 
-v1.2.6
-----------
+## v1.2.6 (2021-11-02)
  * Merge pull request #818 from rapidpro/better-indexes-2
  * Remove unused indexes
 
-v1.2.5
-----------
+## v1.2.5 (2021-11-02)
  * Merge pull request #817 from rapidpro/better-indexes
  * Rebuild indexes properly
 
-v1.2.4
-----------
+## v1.2.4 (2021-10-28)
  * Fix variable referenced before assignment
 
-v1.2.3
-----------
+## v1.2.3 (2021-10-28)
  * Run code checks
  * Merge pull request #807 from rapidpro/task-update-old-contact-activities
  * Merge pull request #806 from rapidpro/contact-activity-better-smaller-indexes
@@ -1322,48 +1127,38 @@ v1.2.3
  * Add better smaller index and use used field in the queries
  * Add task to update old contact activities to have used field False
 
-v1.2.2
-----------
+## v1.2.2 (2021-10-26)
  * Merge pull request #812 from rapidpro/fix-html-unescape
 
-v1.2.1
-----------
+## v1.2.1 (2021-10-26)
  * Fix prod settings for celery
 
-v1.2.0
-----------
+## v1.2.0 (2021-10-26)
  * Merge pull request #810 from rapidpro/update-deps-dash-1.8.1
 
-v1.1.305
-----------
+## v1.1.305 (2021-10-25)
  * Merge pull request #809 from rapidpro/add-gabon
  * Add Gabon flag
 
-v1.1.304
-----------
+## v1.1.304 (2021-10-25)
  * Merge pull request #808 from rapidpro/disable_sentry_transactions
  * Disable sentry transaction collecting
 
-v1.1.303
-----------
+## v1.1.303 (2021-10-19)
  * Merge pull request #805 from rapidpro/contact-activities-optimizations-part2
  * Populate the used field for contact activities with a date in the last 13 months
 
-v1.1.302
-----------
+## v1.1.302 (2021-10-19)
  * Merge pull request #799 from rapidpro/contact-activities-optimizations
 
-v1.1.301
-----------
+## v1.1.301 (2021-10-18)
  * Merge pull request #801 from rapidpro/fix-age-chart-labels
  * Merge pull request #803 from rapidpro/poll-search-feedback
 
-v1.1.300
-----------
+## v1.1.300 (2021-10-18)
  * Fix bots padding
 
-v1.1.299
-----------
+## v1.1.299 (2021-10-18)
  * Merge pull request #798 from rapidpro/bot-listing
  * Fix the ordering of links
  * Merge pull request #794 from rapidpro/question-colors-choice
@@ -1380,20 +1175,17 @@ v1.1.299
  * Remove count of poll results IDs in rebuilt poll stats
  * Add more index on contact activities
 
-v1.1.298
-----------
+## v1.1.298 (2021-10-14)
  * Merge pull request #795 from rapidpro/more-indexes
  * Add more index on contact activities
 
-v1.1.297
-----------
+## v1.1.297 (2021-10-14)
  * Merge pull request #793 from rapidpro/few-queries-for-rebuild-stats
  * Merge pull request #796 from Ilhasoft/feature/translations_django-po--master_ru
  * translation completed for the source file '/locale/en/LC_MESSAGES/django.po' on the 'ru' language.
  * Remove count of poll results IDs in rebuilt poll stats
 
-v1.1.296
-----------
+## v1.1.296 (2021-10-12)
  * Merge pull request #781 from rapidpro/engagement-chart-2
  * Fix conflicts
  * Merge pull request #790 from rapidpro/dependabot/npm_and_yarn/nth-check-2.0.1
@@ -1413,8 +1205,7 @@ v1.1.296
  * Merge pull request #787 from rapidpro/fix-reverse-migrations
  * Merge branch 'main' of github.com:rapidpro/ureport into engagement-chart-2
 
-v1.1.295
-----------
+## v1.1.295 (2021-09-30)
  * Merge pull request #784 from rapidpro/FB-customerchat-dialog-hidden
  * Merge pull request #783 from rapidpro/resumable-scheme-backfill
  * Merge pull request #782 from rapidpro/better-index
@@ -1427,18 +1218,15 @@ v1.1.295
  * Merge pull request #780 from Ilhasoft/feature/kyrgyzstan-flag
  * feat: Add Kyrgyzstan flag
 
-v1.1.294
-----------
+## v1.1.294 (2021-09-17)
  * Merge pull request #778 from rapidpro/use-slow-queue-to-backfill
  * Use the slow queue to backfill the schemes
 
-v1.1.293
-----------
+## v1.1.293 (2021-09-17)
  * Merge pull request #777 from rapidpro/make_many_different_task_to_backfill
  * Distribute the backfill task for schemes
 
-v1.1.292
-----------
+## v1.1.292 (2021-09-16)
  * Merge pull request #775 from rapidpro/support-scheme-2
  * Fix returned tuple assignment for get_or_create
  * Copy actually task code to not go through the decorator
@@ -1452,55 +1240,46 @@ v1.1.292
  * Run code checks
  * Write scheme for contacts and poll results when syncing
 
-v1.1.291
-----------
+## v1.1.291 (2021-09-16)
  * Merge pull request #776 from rapidpro/add-benin
  * Add Benin icon
  * Merge pull request #774 from rapidpro/support-scheme-1
  * WIP add Benin to countries list
 
-v1.1.289
-----------
+## v1.1.289 (2021-09-08)
  * Merge pull request #773 from rapidpro/dashblock-api
 
-v1.1.286
-----------
+## v1.1.286 (2021-09-07)
  * Merge pull request #771 from rapidpro/poll-cloud-query
  * Adjust poll word cloud query
 
-v1.1.285
-----------
+## v1.1.285 (2021-09-06)
  * Merge pull request #770 from rapidpro/fix-engagements-queries
  * Update engagment stats to start using flow result foreign key
 
-v1.1.284
-----------
+## v1.1.284 (2021-09-06)
  * Merge pull request #769 from rapidpro/fix-responded
  * Fix query for responded counts
 
-v1.1.283
-----------
+## v1.1.283 (2021-09-06)
  * Merge pull request #753 from rapidpro/flow-results-6
  * Merge pull request #768 from Ilhasoft/feature/sverige_flag
  * feature: sverige flag
  * Merge branch 'main' of github.com:rapidpro/ureport into flow-results-6
  * Build a unique set of stats going forward, for existing stats check if we need to filter by question
 
-v1.1.282
-----------
+## v1.1.282 (2021-09-03)
  * Merge pull request #767 from rapidpro/fix-localization
  * Adjust styles
  * Make text localizable
 
-v1.1.281
-----------
+## v1.1.281 (2021-09-03)
  * Merge pull request #766 from rapidpro/add-tags
  * Merge pull request #765 from rapidpro/dependabot/npm_and_yarn/path-parse-1.0.7
  * Remove is_active tag check
  * Bump path-parse from 1.0.6 to 1.0.7
 
-v1.1.277
-----------
+## v1.1.277 (2021-08-31)
  * Add MO file
  * Merge pull request #764 from rapidpro/contact-counts-monitor
  * Merge pull request #763 from rapidpro/update-README
@@ -1509,8 +1288,7 @@ v1.1.277
  * Merge pull request #761 from rapidpro/translations_django-po--master_sv_SE
  * Apply translations in sv_SE
 
-v1.1.276
-----------
+## v1.1.276 (2021-08-24)
  * Merge pull request #756 from rapidpro/update-contacts-triggers
  * Merge branch 'main' of github.com:rapidpro/ureport into update-contacts-triggers
  * Merge branch 'main' of github.com:rapidpro/ureport into update-contacts-triggers
@@ -1518,49 +1296,40 @@ v1.1.276
  * Grab lock when recalculating the contacts stats
  * Fix bugs in contacts triggers
 
-v1.1.275
-----------
+## v1.1.275 (2021-08-20)
  * Merge pull request #760 from rapidpro/counts-status
  * Show calculated stats too on counts status
 
-v1.1.274
-----------
+## v1.1.274 (2021-08-19)
  * Merge pull request #759 from rapidpro/counts-status
  * Better stats on counts status
 
-v1.1.273
-----------
+## v1.1.273 (2021-08-19)
  * Merge pull request #758 from rapidpro/counts-status
  * consider mismatch for a diff more that 50 or 2.5%
 
-v1.1.272
-----------
+## v1.1.272 (2021-08-19)
  * Merge pull request #757 from rapidpro/counts-status
  * Add counts status view
 
-v1.1.271
-----------
+## v1.1.271 (2021-08-16)
  * Merge pull request #755 from rapidpro/update-result-for-new-contacts
  * Merge branch 'main' of github.com:rapidpro/ureport into update-result-for-new-contacts
  * Run code_checks
  * Update results for new contacts
 
-v1.1.270
-----------
+## v1.1.270 (2021-08-16)
  * Merge pull request #754 from rapidpro/django-3
 
-v1.1.269
-----------
+## v1.1.269 (2021-08-04)
  * Merge pull request #752 from evansmurithi/add-madagasikara-flag
  * Add Madagascar flag
 
-v1.1.268
-----------
+## v1.1.268 (2021-08-04)
  * Merge pull request #746 from rapidpro/flow-results-5
  * Populate flow result on poll stats
 
-v1.1.267
-----------
+## v1.1.267 (2021-08-03)
  * Merge pull request #745 from rapidpro/flow-results-4
  * Merge branch 'main' of github.com:rapidpro/ureport into flow-results-4
  * Update CHANGELOG.md for v1.1.265
@@ -1591,40 +1360,33 @@ v1.1.267
  * Add test methods to create questions and response categories
  * Remove unused polls import
 
-v1.1.265
-----------
+## v1.1.265 (2021-08-02)
  * Merge pull request #751 from rapidpro/dedupe-poll-response-categories
  * Merge pull request #750 from rapidpro/unique-pollresponsecategory-constraint
  * Add constraint for unique together on poll response categories
 
-v1.1.264
-----------
+## v1.1.264 (2021-08-02)
  * Fix migration queryset
  * Fix migration queryset
 
-v1.1.263
-----------
+## v1.1.263 (2021-08-02)
  * Merge pull request #749 from rapidpro/dedupe-poll-response-categories
 
-v1.1.260
-----------
+## v1.1.260 (2021-07-22)
  * Merge pull request #748 from rapidpro/fix-constraint
 
-v1.1.258
-----------
+## v1.1.258 (2021-07-22)
  * Merge pull request #747 from rapidpro/flow-results-2
  * Merge pull request #744 from rapidpro/flow-results-3
  * fix conflicts
  * Use fields from flow results and flow result categories
 
-v1.1.257
-----------
+## v1.1.257 (2021-07-22)
  * Merge pull request #741 from rapidpro/flow-results-2
  * Migrate poll question that do not have the flow result field yet set
  * Add data migrations to populate the flow results and flow result categories
 
-v1.1.256
-----------
+## v1.1.256 (2021-07-22)
  * Merge pull request #743 from rapidpro/tests-methods
  * Merge master
  * Merge pull request #742 from rapidpro/remove-poll-import
@@ -1633,8 +1395,7 @@ v1.1.256
  * Add test methods to create questions and response categories
  * Remove unused polls import
 
-v1.1.254
-----------
+## v1.1.254 (2021-07-09)
  * Merge pull request #736 from rapidpro/sync-reverse
  * Change last pull results redis key so polls still syncing do not miss results
  * Update CHANGELOG.md for v1.1.252
@@ -1647,21 +1408,18 @@ v1.1.254
  * fix uniendo voces ecuador sintaxe
  * add uniendo voces flags
 
-v1.1.252
-----------
+## v1.1.252 (2021-07-01)
  * Merge pull request #739 from rapidpro/fix-boundaries-ids
  * Fix boundaries to allow IDs with dots
 
-v1.1.251
-----------
+## v1.1.251 (2021-06-29)
  * Merge pull request #643 from Ilhasoft/feature/add-uniendovoces-flags
  * add country codes to uniendo voces workspaces
  * Merge branch 'main' of https://github.com/rapidpro/ureport into feature/add-uniendovoces-flags
  * fix uniendo voces ecuador sintaxe
  * add uniendo voces flags
 
-v1.1.250
-----------
+## v1.1.250 (2021-06-22)
  * Merge pull request #728 from Ilhasoft/feature/eastern-caribbean-flag
  * Merge pull request #644 from Ilhasoft/feature/add-oecs-flag
  * fix: Adjusted Eastern Caribbean flag
@@ -1672,133 +1430,110 @@ v1.1.250
  * fix the name of flag file
  * add oecs flag
 
-v1.1.249
-----------
+## v1.1.249 (2021-06-21)
  * Merge pull request #735 from rapidpro/responders
  * Compile messages
  * Update translations
  * Merge pull request #734 from rapidpro/responders
  * Rename responses to responders
 
-v1.1.248
-----------
+## v1.1.248 (2021-06-16)
  * Merge pull request #733 from rapidpro/contact-pull-on-status
  * Better ordering or keys
 
-v1.1.247
-----------
+## v1.1.247 (2021-06-16)
  * Merge pull request #732 from rapidpro/contact-pull-on-status
  * Add tasks last successful time on task status endpoint
 
-v1.1.246
-----------
+## v1.1.246 (2021-06-15)
  * Merge pull request #731 from rapidpro/contact-pull-on-status
  * Add a new task status endpoint
 
-v1.1.245
-----------
+## v1.1.245 (2021-06-15)
  * Merge pull request #730 from rapidpro/icons
  * Add view to display icons added are matching the dimensions expected
  * Merge pull request #729 from rapidpro/contact-pull-on-status
  * Add contact sync up key to status monitoring endpoint
 
-v1.1.244
-----------
+## v1.1.244 (2021-06-02)
  * Merge pull request #727 from rapidpro/fix-reported-errors
  * Fix API endpoint to only accept int IDs
 
-v1.1.243
-----------
+## v1.1.243 (2021-06-02)
  * Merge pull request #726 from rapidpro/increase-engagement-data-lock-time
  * Increase lock timeout for refreshing engagement data task
 
-v1.1.242
-----------
+## v1.1.242 (2021-05-31)
  * Merge pull request #725 from rapidpro/update-js-deps
 
-v1.1.240
-----------
+## v1.1.240 (2021-05-26)
  * Merge pull request #723 from rapidpro/add-index-org-question
  * Add index on poll stats org and question
 
-v1.1.239
-----------
+## v1.1.239 (2021-05-24)
  * Merge pull request #722 from Ilhasoft/feature/paraguay-flag
  * Merge pull request #721 from rapidpro/dependabot/npm_and_yarn/lodash-4.17.21
  * Add Paraguay flag
  * Bump lodash from 4.17.19 to 4.17.21
 
-v1.1.238
-----------
+## v1.1.238 (2021-05-20)
  * Merge pull request #719 from rapidpro/fix-join-icons
  * fix join icons to use a grid of 3 cols
  * Merge pull request #718 from Ilhasoft/hotfix/change-kenya-address
  * fix to change address from Kenya Ureport
 
-v1.1.237
-----------
+## v1.1.237 (2021-05-20)
  * Merge pull request #716 from rapidpro/add-Angola
  * Merge pull request #717 from rapidpro/add-telegram-bot-config
  * Add Telegram bot org config
  * Add Angola icon
 
-v1.1.236
-----------
+## v1.1.236 (2021-05-19)
  * Merge pull request #715 from Ilhasoft/feature/italia-flag
  * fix: Update Italy map
  * Merge pull request #714 from Ilhasoft/feature/kenya-flag
  * feat: Add Italia flag
  * feat: Add Kenya flag
 
-v1.1.235
-----------
+## v1.1.235 (2021-05-12)
  * Merge pull request #712 from Ilhasoft/feature/stp-flag
  * fix: Removed ST from countries_codes
  * feat: Added São Tomé and Príncipe flag
 
-v1.1.234
-----------
+## v1.1.234 (2021-05-12)
  * Merge pull request #713 from rapidpro/GTM
  * Add support for Google Tag Manager
 
-v1.1.233
-----------
+## v1.1.233 (2021-05-11)
  * Merge pull request #711 from rapidpro/fix-errors
  * Fix errors breaking the clear old results
 
-v1.1.232
-----------
+## v1.1.232 (2021-05-10)
  * Merge pull request #710 from rapidpro/add-exc-info-to-error
  * add execution info on error logging
 
-v1.1.231
-----------
+## v1.1.231 (2021-05-07)
  * Merge pull request #709 from rapidpro/FB-verification
  * Add configuration for FB domain verification
 
-v1.1.230
-----------
+## v1.1.230 (2021-05-05)
  * Merge pull request #708 from rapidpro/fix-top-question-lookup
  * Skip rebuilding stats for inactive polls
 
-v1.1.229
-----------
+## v1.1.229 (2021-05-05)
  * Merge pull request #707 from rapidpro/fix-top-question-lookup
  * Fix top question lookup
 
-v1.1.228
-----------
+## v1.1.228 (2021-05-05)
  * Merge pull request #706 from rapidpro/update-district-caches
  * Run code checks
  * Update district poll results cache
 
-v1.1.227
-----------
+## v1.1.227 (2021-04-29)
  * Merge pull request #705 from rapidpro/adjust-sync-schedule-message
  * Adjust message for sync schedule
 
-v1.1.226
-----------
+## v1.1.226 (2021-04-29)
  * Merge pull request #701 from rapidpro/translations_django-po--master_hr_HR
  * Merge pull request #704 from rapidpro/keep-results-longer
  * Run code checks
@@ -1809,36 +1544,30 @@ v1.1.226
  * Add partial indexes
  * Apply translations in hr_HR
 
-v1.1.225
-----------
+## v1.1.225 (2021-04-29)
  * Merge pull request #702 from rapidpro/fix-colors-poll-status-message
  * Fix primary  color, adjust poll status message
 
-v1.1.224
-----------
+## v1.1.224 (2021-04-15)
  * Merge pull request #699 from rapidpro/fix-clear-results
  * Log error for clearing results, and continue for other polls
 
-v1.1.223
-----------
+## v1.1.223 (2021-04-14)
  * Merge pull request #698 from rapidpro/fix-boundaries-url
  * Run code checks
  * Add support for hyphens and underscore in osm IDs for boundaries URLs
 
-v1.1.222
-----------
+## v1.1.222 (2021-04-14)
  * Merge pull request #697 from rapidpro/fix-date-format
  * Fix to handle flow date as a json datetime
 
-v1.1.221
-----------
+## v1.1.221 (2021-04-14)
  * Merge pull request #696 from rapidpro/adding-poll-from-flow-archived-results
  * More tests
  * Update django
  * Pull results from archives for really old flow polls
 
-v1.1.220
-----------
+## v1.1.220 (2021-04-01)
  * Merge pull request #691 from rapidpro/update-dash
  * Merge pull request #694 from rapidpro/fix-search
  * Fix search toggle button
@@ -1850,8 +1579,7 @@ v1.1.220
  * Apply translations in sr_RS@latin
  * Update to use latest rapidpro-dash
 
-v1.1.219
-----------
+## v1.1.219 (2021-03-31)
  * Merge pull request #690 from rapidpro/poll-sync-modified-on
  * Update Poll modified_on when the new poll results are completed
  * Merge pull request #689 from rapidpro/update-deps
@@ -1867,89 +1595,75 @@ v1.1.219
  * Run code checks
  * Apply translations in mk_MK
 
-v1.1.218
-----------
+## v1.1.218 (2021-03-17)
  * Bump elliptic from 6.5.3 to 6.5.4
  * Add Solomon Islands flag
 
-v1.1.217
-----------
+## v1.1.217 (2021-03-15)
  * Merge pull request #666 from rapidpro/panama-flag
  * Update README.md
  * Merge pull request #681 from Ilhasoft/feature/macedonia-language
  * feat: Added Macedonian language
  * Add Panama icon
 
-v1.1.216
-----------
+## v1.1.216 (2021-03-01)
  * Revert Add Macedonia's flag
 
 
-v1.1.215
-----------
+## v1.1.215 (2021-02-25)
  * Fix Canada URL
 
-v1.1.214
-----------
+## v1.1.214 (2021-02-25)
  * Fix changelog
  * Revert Update AWS DEFAULT ACL
  * Update AWS DEFAULT ACL
  * Revert Add a public storage class to use with thumbnail
 
 
-v1.1.213
-----------
+## v1.1.213 (2021-02-25)
  * Merge pull request #679 from rapidpro/fix-thumbnail-storage0-permission
  * Merge pull request #678 from Ilhasoft/feature/add-macedonia-flag
  * Add a public storage class to use with thumbnail
  * Add flag file and inset into settings_common dict
 
-v1.1.212
-----------
+## v1.1.212 (2021-02-19)
  * Merge pull request #677 from rapidpro/polls-api-order
  * Add optional parameters to sort polls by modified on descending when that is specified
  * Merge pull request #676 from rapidpro/use-poetry
 
-v1.1.210
-----------
+## v1.1.210 (2021-02-09)
  * Merge pull request #675 from rapidpro/better-display-of-login-errors
  * Better display login errors
 
-v1.1.209
-----------
+## v1.1.209 (2021-02-09)
  * Merge pull request #673 from rapidpro/update-smartmin
  * Merge pull request #672 from rapidpro/fix-sec-issues
  * Update deps
  * Update jquery
  * Make more variables safer with strip_tags
 
-v1.1.208
-----------
+## v1.1.208 (2021-02-05)
  * Add locale
  * Merge pull request #671 from rapidpro/custom-join-button
  * Run code checks
  * Allow customizing join button text
 
-v1.1.207
-----------
+## v1.1.207 (2021-02-04)
  * Fix count link
 
-v1.1.206
-----------
+## v1.1.206 (2021-02-03)
  * Merge pull request #669 from rapidpro/translations_django-po--master_mk_MK
  * Merge pull request #670 from rapidpro/update-sentry-sdk
  * Update sentry SDK
  * Apply translations in mk_MK
 
-v1.1.205
-----------
+## v1.1.205 (2021-01-29)
  * Merge pull request #667 from rapidpro/update-idx
  * Move FB pixel to public site
  * Add index on reporterscounter
  * Bump CI testing to PG 11 and 12
 
-v1.1.204
-----------
+## v1.1.204 (2021-01-07)
  * Merge pull request #664 from rapidpro/polls-api
  * Merge pull request #665 from rapidpro/countries-flag
  * Run code checks
@@ -1958,75 +1672,61 @@ v1.1.204
  * Merge pull request #662 from rapidpro/dependabot/npm_and_yarn/ini-1.3.8
  * Bump ini from 1.3.5 to 1.3.8
 
-v1.1.203
-----------
+## v1.1.203 (2020-12-02)
  * Merge pull request #659 from rapidpro/fix-chart-labels-alignment
  * Align labels to the left
 
-v1.1.202
-----------
+## v1.1.202 (2020-12-01)
  * Merge pull request #658 from rapidpro/fix-stories-homepage
 
-v1.1.200
-----------
+## v1.1.200 (2020-12-01)
  * Merge pull request #657 from rapidpro/sec-adjustments
 
-v1.1.197
-----------
+## v1.1.197 (2020-11-11)
  * Merge pull request #656 from rapidpro/fix-counts-cache-to-consider
  * Generate cache keys for the configured sites only
 
-v1.1.196
-----------
+## v1.1.196 (2020-11-11)
  * Merge pull request #655 from rapidpro/pacific-as-1
  * Regional site countries excluded from count for now
 
-v1.1.195
-----------
+## v1.1.195 (2020-11-10)
  * Merge pull request #654 from rapidpro/add-np
  * Add Nepal to countries dropdown
  * Run code check
  * Merge pull request #653 from rapidpro/translations_django-po--master_no
  * Translate /locale/en/LC_MESSAGES/django.po in no
 
-v1.1.194
-----------
+## v1.1.194 (2020-11-06)
  * Merge pull request #646 from rapidpro/fix-countries-count
  * Update pacific countries
 
-v1.1.193
-----------
+## v1.1.193 (2020-11-05)
  * Merge pull request #645 from rapidpro/fix-countries-count
  * Remove unused flags
  * Use ISO codes of countries to count site countries
 
-v1.1.192
-----------
+## v1.1.192 (2020-11-04)
  * Merge pull request #642 from rapidpro/shared-flags
  * Add view for shared sites count
 
-v1.1.191
-----------
+## v1.1.191 (2020-10-20)
  * Merge pull request #641 from rapidpro/fix-duplicated-country-name
  * Fix counries duplicate name
 
-v1.1.190
-----------
+## v1.1.190 (2020-10-20)
  * Merge pull request #640 from rapidpro/add-AFG
  * Update tests
  * Add Afghanistan link
 
-v1.1.189
-----------
+## v1.1.189 (2020-10-15)
  * Update API docs
 
-v1.1.188
-----------
+## v1.1.188 (2020-10-15)
  * Update npm packages
  * Merge pull request #639 from rapidpro/updates
 
-v1.1.183
-----------
+## v1.1.183 (2020-10-01)
  * Merge pull request #635 from rapidpro/remove-zambia-link
  * Run code check
  * Remove broken Zambia link
@@ -2039,26 +1739,22 @@ v1.1.183
  * Apply translations in sr_RS@latin
  * Translate /locale/en/LC_MESSAGES/django.po in no
 
-v1.1.182
-----------
+## v1.1.182 (2020-09-24)
  * Merge pull request #630 from rapidpro/fix-polls-page-slow
  * Run code check
  * Cache question responded count and polled count
 
-v1.1.181
-----------
+## v1.1.181 (2020-09-24)
  * Merge pull request #629 from rapidpro/fix-polls-page-slow
  * Fix opinions page to load faster
 
-v1.1.180
-----------
+## v1.1.180 (2020-09-23)
  * Merge pull request #626 from rapidpro/get-public-poll-query
  * Run code check
  * Never expire cache for poll results and rebuild them once a day
  * Try to use category index for getting polls
 
-v1.1.179
-----------
+## v1.1.179 (2020-09-11)
  * Log cache misses
  * Merge pull request #578 from Ilhasoft/feature/viber
  * Merge pull request #624 from Ilhasoft/feature/enable-no-language
@@ -2095,8 +1791,7 @@ v1.1.179
  * Added support for viber
  * Added support for viber
 
-v1.1.178
-----------
+## v1.1.178 (2020-09-09)
  * Run code check
  * Merge pull request #622 from Ilhasoft/fix/temba_client-migrate-version
  * Merge pull request #582 from Ilhasoft/feature/font-aweasome-5
@@ -2118,33 +1813,27 @@ v1.1.178
  * Fix icons
  * Updated icons for font aweasome 5
 
-v1.1.177
-----------
+## v1.1.177 (2020-08-31)
  * Merge pull request #620 from rapidpro/update-cache-for-polls-no-longer-syncing
  * Update cache for results for poll stopped syncing, reduce number we call slow queries
  * Merge pull request #618 from Ilhasoft/feature/add-croatian-flag
  * fix the white space
  * add Croatia flag
 
-v1.1.176
-----------
+## v1.1.176 (2020-08-25)
  * Increase session age
 
-v1.1.175
-----------
+## v1.1.175 (2020-08-11)
  * Adjust SECURE HSTS SECONDS
 
-v1.1.174
-----------
+## v1.1.174 (2020-08-11)
  * Merge pull request #617 from rapidpro/adjust-hsts-time
  * Adjust SECURE HSTS SECONDS
 
-v1.1.173
-----------
+## v1.1.173 (2020-08-04)
  * Fix typo
 
-v1.1.172
-----------
+## v1.1.172 (2020-07-31)
  * Merge pull request #615 from rapidpro/poll-list
  * Add sync schedule on opinions admin list
  * Merge pull request #616 from rapidpro/update-cssnano
@@ -2155,8 +1844,7 @@ v1.1.172
  * Run code check
  * Apply translations in hr_HR
 
-v1.1.171
-----------
+## v1.1.171 (2020-07-24)
  * Merge pull request #608 from rapidpro/increase-recent-polls-window
  * Merge pull request #607 from Ilhasoft/feature/add-croatian-language
  * fix correct path for croatian language
@@ -2171,59 +1859,48 @@ v1.1.171
  * Apply translations in hr_HR
  * Apply translations in hr_HR
 
-v1.1.170
-----------
+## v1.1.170 (2020-07-15)
  * Merge pull request #605 from rapidpro/clear-old-results-with-lock-key
  * Grab lock before clearing old results so we do not interfere with ongoing sync
 
-v1.1.169
-----------
+## v1.1.169 (2020-07-15)
  * Merge pull request #604 from rapidpro/fix-bug-rebuilding-polls-stats
  * Merge pull request #603 from rapidpro/recalculate-stats
  * Only update stats for polls that are not stopped syncing
  * Trigger update results cache in a task when a poll questions are updated
 
-v1.1.168
-----------
+## v1.1.168 (2020-07-13)
  * Merge pull request #601 from rapidpro/update-sec
 
-v1.1.163
-----------
+## v1.1.163 (2020-07-02)
  * Merge pull request #600 from rapidpro/add-south-asia
  * Add South Asia flag
 
-v1.1.162
-----------
+## v1.1.162 (2020-06-18)
  * Merge pull request #599 from rapidpro/limit-global-map
  * Add config to limit countries on World map
 
-v1.1.161
-----------
+## v1.1.161 (2020-06-16)
  * Merge pull request #598 from rapidpro/fix-image-size
  * Adjust about image size
 
-v1.1.160
-----------
+## v1.1.160 (2020-06-15)
  * Merge pull request #597 from rapidpro/fix-arabic-design
  * Adjustments for RTL design on admin site
 
-v1.1.159
-----------
+## v1.1.159 (2020-06-11)
  * Merge pull request #596 from rapidpro/LB-flag
  * Add Lebanon flag
 
-v1.1.158
-----------
+## v1.1.158 (2020-06-09)
  * Merge pull request #593 from Ilhasoft/feature/create-contact
  * Removed unique from the uuid field of the contact model
 
-v1.1.157
-----------
+## v1.1.157 (2020-06-08)
  * Merge pull request #595 from rapidpro/update-django
  * Update django
 
-v1.1.156
-----------
+## v1.1.156 (2020-05-29)
  * Merge pull request #592 from rapidpro/update-settings
  * Update settings
  * Update README.md
@@ -2233,18 +1910,15 @@ v1.1.156
  * Merge branch 'master' of github.com:rapidpro/ureport
  * Update CHANGELOG.md for v1.1.155
 
-v1.1.155
-----------
+## v1.1.155 (2020-05-21)
  * Merge pull request #591 from rapidpro/order-categories
  * Reorder the categories
 
-v1.1.154
-----------
+## v1.1.154 (2020-05-20)
  * Merge pull request #589 from rapidpro/slow-queue
  * Add slow queue, fix django compressor offline context
 
-v1.1.153
-----------
+## v1.1.153 (2020-05-06)
  * Better message
  * Hide multiple pages for mobile
  * Improve mobile site
@@ -2254,32 +1928,27 @@ v1.1.153
  * Add a way to configure the display of the category for poll questions
  * Show clear feedback to admin on polls being synced
 
-v1.1.152
-----------
+## v1.1.152 (2020-05-04)
  * Merge pull request #583 from rapidpro/fix-locations-sync
  * Merge pull request #584 from Ilhasoft/feature/add-lesotho
  * add lesotho to ureport
  * Add ordering so we can delete to update the locations boundaries without constraint
 
-v1.1.151
-----------
+## v1.1.151 (2020-05-02)
  * Merge pull request #581 from rapidpro/move-task-queues
  * Move task queues
 
-v1.1.150
-----------
+## v1.1.150 (2020-04-30)
  * Merge pull request #580 from Ilhasoft/hotfix/fix-size-bulgaria-flag
  * Remove overflow style
  * fix size bulgaria flag
 
-v1.1.149
-----------
+## v1.1.149 (2020-04-29)
  * Merge pull request #579 from rapidpro/other-lang-sites
  * Include current site with a check mark
  * Add a way to link sites as connected sites in a different language
 
-v1.1.148
-----------
+## v1.1.148 (2020-04-04)
  * Rebuild locale
  * Merge pull request #573 from rapidpro/translations_django-po--master_uz
  * Merge pull request #572 from rapidpro/translations_django-po--master_bg
@@ -2290,12 +1959,10 @@ v1.1.148
  * Translate /locale/en/LC_MESSAGES/django.po in uz
  * Translate /locale/en/LC_MESSAGES/django.po in bg
 
-v1.1.147
-----------
+## v1.1.147 (2020-03-27)
  * Fix if block
 
-v1.1.146
-----------
+## v1.1.146 (2020-03-27)
  * Merge pull request #570 from rapidpro/translations_django-po--master_bg
  * Rebuild locale
  * Fix conflicts
@@ -2305,108 +1972,90 @@ v1.1.146
  * Translate /locale/en/LC_MESSAGES/django.po in bg
  * Do not show login on custom domain
 
-v1.1.145
-----------
+## v1.1.145 (2020-03-25)
  * Merge pull request #569 from rapidpro/support-results-without-input
  * Allo saving text for node results without reporter input
 
-v1.1.144
-----------
+## v1.1.144 (2020-03-19)
  * Merge pull request #568 from rapidpro/api-poll-data
  * Merge pull request #567 from Ilhasoft/feature/add-bulgaria
  * Only include the results segmentation maintained for the existing graphs
  * fix a trailing space
  * add bulgaria to ureport
 
-v1.1.143
-----------
+## v1.1.143 (2020-03-18)
  * Merge pull request #566 from rapidpro/fix-pill-button-broken-by-translate
  * Fix alerts
  * Fix pills button broken by translate
 
-v1.1.142
-----------
+## v1.1.142 (2020-03-13)
  * Update django
  * Rebuild locale
  * Merge pull request #565 from rapidpro/translations_django-po--master_bg
  * Translate /locale/en/LC_MESSAGES/django.po in bg
 
-v1.1.141
-----------
+## v1.1.141 (2020-03-13)
  * Merge pull request #564 from rapidpro/contacts-counts-performance
  * More tests
  * Increase cache time for contacts counts and add task to update the cache
 
-v1.1.140
-----------
+## v1.1.140 (2020-03-12)
  * Merge pull request #563 from rapidpro/stats-for-same-flow-polls
  * Rebuild stats for polls of the same flow at the same time
 
-v1.1.139
-----------
+## v1.1.139 (2020-03-11)
  * Update Burmese
  * Rebuild locale
  * Rebuild locale
  * Fix maps stats to properly count the parents stats
  * Translate /locale/en/LC_MESSAGES/django.po in bs
 
-v1.1.138
-----------
+## v1.1.138 (2020-02-13)
  * Merge pull request #558 from rapidpro/v1-design-remove-part3
 
-v1.1.136
-----------
+## v1.1.136 (2020-02-10)
  * Merge pull request #559 from rapidpro/fix-countries
  * Merge branch 'fix-countries' of github.com:rapidpro/ureport into fix-countries
  * Add countries view back
  * Add coutries view back
 
-v1.1.135
-----------
+## v1.1.135 (2020-02-10)
  * Merge pull request #557 from rapidpro/v1-design-remove-part2
  * Pin less to 3.10.3
  * Pin less to 3.10.3
 
-v1.1.134
-----------
+## v1.1.134 (2020-02-10)
  * Merge pull request #556 from rapidpro/v1-design-remove-part2
  * Merge branch 'master' of github.com:rapidpro/ureport into v1-design-remove-part2
  * Update flake8
  * Replace print statement
  * Stop using PollReporterCounter and improve the tests to be more correct
 
-v1.1.133
-----------
+## v1.1.133 (2020-02-07)
  * Add back the status view
 
-v1.1.132
-----------
+## v1.1.132 (2020-02-07)
  * Merge pull request #555 from rapidpro/v1-design-remove-part1
  * Remove V1 design templates
 
-v1.1.131
-----------
+## v1.1.131 (2020-02-04)
  * Merge pull request #554 from rapidpro/fix-geojson
  * Update countries geoJSON
 
-v1.1.130
-----------
+## v1.1.130 (2020-01-30)
  * Merge pull request #553 from rapidpro/add-fsm
  * Add FSM icon
 
-v1.1.129
-----------
+## v1.1.129 (2020-01-29)
  * Merge pull request #552 from rapidpro/fix-active-users-charts-data
  * Active users are stored by month only so use the date for the month
 
-v1.1.128
-----------
+## v1.1.128 (2020-01-28)
  * Merge pull request #551 from rapidpro/squash-stats-part-2
  * Add migrations
  * Add squash method and task
 
-v1.1.127
-----------
+## v1.1.127 (2020-01-28)
  * Merge pull request #550 from rapidpro/squash-stats-part-1
  * Update Django
  * Add is_squashed field to stats model
@@ -2414,13 +2063,11 @@ v1.1.127
  * Merge pull request #549 from rapidpro/remove-ca
  * Remove CA flag
 
-v1.1.126
-----------
+## v1.1.126 (2020-01-15)
  * Merge pull request #549 from rapidpro/remove-ca
  * Remove CA flag
 
-v1.1.125
-----------
+## v1.1.125 (2020-01-14)
  * Merge pull request #547 from rapidpro/pacific-flag
  * Add Pacific flag
  * Update CHANGELOG.md for v1.1.124
@@ -2435,8 +2082,7 @@ v1.1.125
  * Add Botswana flag, fix links properly
  * Translate /locale/en/LC_MESSAGES/django.po in bs
 
-v1.1.124
-----------
+## v1.1.124 (2020-01-10)
  * Rebuild locales, with symlinks
  * Rebuild locales
  * Rebuild locales
@@ -2448,8 +2094,7 @@ v1.1.124
  * Add Botswana flag, fix links properly
  * Translate /locale/en/LC_MESSAGES/django.po in bs
 
-v1.1.123
-----------
+## v1.1.123 (2019-12-10)
  * Update JS deps
  * Rebuild locales
  * Merge pull request #538 from Ilhasoft/update/costa-rica-flag
@@ -2457,8 +2102,7 @@ v1.1.123
  * Translate /locale/en/LC_MESSAGES/django.po in ro
  * Added flag for Costa Rica
 
-v1.1.122
-----------
+## v1.1.122 (2019-12-05)
  * Rebuild locales
  * Merge pull request #534 from rapidpro/translations_django-po--master_pt_BR
  * Merge pull request #537 from rapidpro/deps-update
@@ -2467,22 +2111,18 @@ v1.1.122
  * Adjustments on chunk_list(iterable, size), to avoid a runtime error 'generator raised StopIteration'
  * Apply translations in pt_BR
 
-v1.1.121
-----------
+## v1.1.121 (2019-12-05)
  * Include GA on the v2 public site
 
-v1.1.120
-----------
+## v1.1.120 (2019-12-02)
  * Merge pull request #535 from rapidpro/fix-poll-gender-for-gender-custom-labels
  * Fix gender stats with custom gender labels
 
-v1.1.119
-----------
+## v1.1.119 (2019-11-25)
  * Merge pull request #533 from Ilhasoft/hotfix/img_sizing_on_stories_v1
  * Fixing on image responsivity while scaling large images on story detail
 
-v1.1.118
-----------
+## v1.1.118 (2019-11-25)
  * Merge pull request #521 from rapidpro/old-poll-results-clear
  * Fix conflicts and merge master
  * Rebuild locale
@@ -2493,13 +2133,11 @@ v1.1.118
  * remove sr_latn from languages on settings_common
  * enable locale for Serbian Latin Serbia language
 
-v1.1.116
-----------
+## v1.1.116 (2019-11-21)
  * Merge pull request #531 from rapidpro/language-fix
  * Make sure we have the org language activated for precalculated data
 
-v1.1.115
-----------
+## v1.1.115 (2019-11-20)
  * Rebuild locale
  * Merge pull request #526 from Ilhasoft/hotfix/limit-poll-states
  * Merge pull request #530 from rapidpro/rebuild-locale
@@ -2510,8 +2148,7 @@ v1.1.115
  * Update form fields size for superadmin
  * Add limit poll states config for superusers
 
-v1.1.114
-----------
+## v1.1.114 (2019-11-20)
  * Merge pull request #528 from rapidpro/fix-engagement-data-to-ignore-inactive-questions
  * Merge pull request #529 from rapidpro/update-locale-arabic
  * Add Jordan flag
@@ -2519,8 +2156,7 @@ v1.1.114
  * Update Arabic, rebuild locale
  * Filter for active questions on the engagement data
 
-v1.1.113
-----------
+## v1.1.113 (2019-11-14)
  * Add mo files
  * Merge pull request #525 from rapidpro/arabic-locale
  * Rebuild locale
@@ -2534,37 +2170,30 @@ v1.1.113
  * fixed parameter when only one social media widget is used
  * Apply translations in sr_RS@latin
 
-v1.1.112
-----------
+## v1.1.112 (2019-10-31)
  * Merge pull request #520 from rapidpro/add-canada-flag
  * Add Canada flag
 
-v1.1.111
-----------
+## v1.1.111 (2019-10-28)
  * Remove New Zealand flag
 
-v1.1.110
-----------
+## v1.1.110 (2019-10-28)
  * Merge pull request #519 from rapidpro/fix-global-count
  * Add Bengali language option
  * Fix global count
 
-v1.1.109
-----------
+## v1.1.109 (2019-10-28)
  * Fix typo
 
-v1.1.108
-----------
+## v1.1.108 (2019-10-28)
  * Merge pull request #518 from rapidpro/remove-syria-flag
  * Remove Syria flag and fix chooser flags
 
-v1.1.107
-----------
+## v1.1.107 (2019-10-25)
  * Merge pull request #517 from rapidpro/country-flags-common
  * Countries count are for sites that are for the country entirely
 
-v1.1.105
-----------
+## v1.1.105 (2019-10-23)
  * Rebuild locales
  * Rebuild locales
  * Merge pull request #509 from rapidpro/translations_django-po--master_bn
@@ -2572,63 +2201,51 @@ v1.1.105
  * Merge pull request #508 from rapidpro/max-upload-size
  * Increase max size allowed to upload to 10MB
 
-v1.1.104
-----------
+## v1.1.104 (2019-10-16)
  * Merge pull request #507 from rapidpro/limit-opinion-responses-by-date
  * Precalculate the avearage response for the engagement page
 
-v1.1.103
-----------
+## v1.1.103 (2019-10-16)
  * Merge pull request #506 from rapidpro/limit-opinion-responses-by-date
  * Limit all opinions response to the last year
 
-v1.1.102
-----------
+## v1.1.102 (2019-10-15)
  * Merge pull request #504 from rapidpro/counters-config
  * Merge pull request #505 from rapidpro/fix-countries-number
  * Add way to sync counts from all providers for orgs that do not display flags
  * Update rebuild counts to include older polls too
  * Fix the query for number for countries on homepage
 
-v1.1.101
-----------
+## v1.1.101 (2019-10-14)
  * Fix Facebook share URL
 
-v1.1.100
-----------
+## v1.1.100 (2019-10-14)
  * Merge pull request #503 from rapidpro/translations-1
  * Add callback for summernote to hints user the file is big
  * Rebuild locales
  * Rebuild locales
  * Add translations manually
 
-v1.1.99
-----------
+## v1.1.99 (2019-10-13)
  * Add tests
  * Fix poll stats without date
 
-v1.1.98
-----------
+## v1.1.98 (2019-10-11)
  * Merge pull request #502 from rapidpro/add-indexes
 
-v1.1.96
-----------
+## v1.1.96 (2019-10-11)
  * Disable the squash for reporters counters
 
-v1.1.95
-----------
+## v1.1.95 (2019-10-11)
  * Refresh engagement data once a day
 
-v1.1.94
-----------
+## v1.1.94 (2019-10-10)
  * Add overflow scroll on longer labels
 
-v1.1.93
-----------
+## v1.1.93 (2019-10-10)
  * Use HTML for hightcharts labels
 
-v1.1.92
-----------
+## v1.1.92 (2019-10-10)
  * Merge pull request #501 from rapidpro/calculate-results-poll-stats-2
  * Show day in tooltip date
  * Show day in tooltip date
@@ -2638,17 +2255,14 @@ v1.1.92
  * Fix date key lookup
  * Use smaller intervals for small time filters on engagement
 
-v1.1.90
-----------
+## v1.1.90 (2019-10-10)
  * Merge pull request #484 from rapidpro/calculate-results-poll-stats
 
-v1.1.89
-----------
+## v1.1.89 (2019-10-10)
  * Add back some hover background with static colors
  * Rebuild locales
 
-v1.1.88
-----------
+## v1.1.88 (2019-10-10)
  * Rebuild locales
  * Merge pull request #500 from rapidpro/avoid-compressor-context-loop
  * Rebuild locales
@@ -2656,27 +2270,22 @@ v1.1.88
  * Fix typo
  * Add if block for admin site
 
-v1.1.83
-----------
+## v1.1.83 (2019-10-09)
 
 
-v1.1.82
-----------
+## v1.1.82 (2019-10-09)
  * Fix links
 
-v1.1.81
-----------
+## v1.1.81 (2019-10-09)
  * Merge pull request #499 from rapidpro/stories-og-tags
  * Add open graph tags for facebook image sharing on story page
 
-v1.1.80
-----------
+## v1.1.80 (2019-10-08)
  * Rebuild locales
  * Merge pull request #498 from rapidpro/translations_django-po--master_fr
  * Translate /locale/en/LC_MESSAGES/django.po in fr
 
-v1.1.79
-----------
+## v1.1.79 (2019-10-08)
  * Rebuild locales
  * Rebuild locales
  * Merge pull request #496 from rapidpro/translations_django-po--master_es
@@ -2684,15 +2293,13 @@ v1.1.79
  * Merge remote-tracking branch 'rapidpro/master' into translations_django-po--master_es
  * Translate /locale/en/LC_MESSAGES/django.po in es
 
-v1.1.78
-----------
+## v1.1.78 (2019-10-07)
  * Merge pull request #494 from rapidpro/argentina-bugs
  * Revert join now changes
  * Rebuild locales
  * Fixes social media new tabs, polls and stories order, age chart fix
 
-v1.1.77
-----------
+## v1.1.77 (2019-10-07)
  * Merge pull request #493 from rapidpro/fr-trans
  * Rebuild locales
  * Fix tests
@@ -2700,8 +2307,7 @@ v1.1.77
  * No jobs page if not configured
  * Manual FR updates
 
-v1.1.76
-----------
+## v1.1.76 (2019-10-07)
  * Rebuild locales
  * Merge pull request #486 from Ilhasoft/fix/static
  * Rebuild locales
@@ -2709,8 +2315,7 @@ v1.1.76
  * Translate /locale/en/LC_MESSAGES/django.po in it
  * Added "sitestatic" in middleware
 
-v1.1.75
-----------
+## v1.1.75 (2019-10-06)
  * Rebuild locales
  * Merge pull request #491 from rapidpro/fr-trans
  * Rebuild locales
@@ -2719,8 +2324,7 @@ v1.1.75
  * Update FR translations
  * Apply translations in fr_FR
 
-v1.1.74
-----------
+## v1.1.74 (2019-10-05)
  * Merge pull request #489 from rapidpro/admin-links
  * REduce more longer titles
  * Merge pull request #488 from rapidpro/admin-links
@@ -2735,12 +2339,10 @@ v1.1.74
  * Rebuild locales
  * Improve admin links to be noticeable
 
-v1.1.73
-----------
+## v1.1.73 (2019-10-04)
  * Fix to force label shows on all chart bars
 
-v1.1.72
-----------
+## v1.1.72 (2019-10-03)
  * Merge pull request #485 from rapidpro/bugs-fix
  * Auto rotate labels on opinion page
  * Update FB SDK version
@@ -2751,75 +2353,61 @@ v1.1.72
  * Merge pull request #483 from Ilhasoft/fix/api-page
  * Fix css/js
 
-v1.1.71
-----------
+## v1.1.71 (2019-10-01)
  * Merge pull request #482 from rapidpro/beta-fixes
  * Rebuild locales
  * Fix modal scrolling behavior
 
-v1.1.70
-----------
+## v1.1.70 (2019-09-30)
  * Allow status view without org
 
-v1.1.69
-----------
+## v1.1.69 (2019-09-30)
  * Merge pull request #481 from rapidpro/status-view
  * Add status view
 
-v1.1.68
-----------
+## v1.1.68 (2019-09-30)
  * Merge pull request #480 from rapidpro/beta-fixes
  * consistent read more button
  * Fix stories button hover state, and screenshot modal z-index
 
-v1.1.67
-----------
+## v1.1.67 (2019-09-28)
  * Screenshot modal position
 
-v1.1.66
-----------
+## v1.1.66 (2019-09-27)
  * Fix polls maps
 
-v1.1.65
-----------
+## v1.1.65 (2019-09-27)
  * Use center bottom to redraw
 
-v1.1.64
-----------
+## v1.1.64 (2019-09-27)
  * Use top-bottom anchor to trigger redraw
 
-v1.1.63
-----------
+## v1.1.63 (2019-09-27)
  * Merge pull request #479 from rapidpro/beta-fixes
 
-v1.1.61
-----------
+## v1.1.61 (2019-09-27)
  * Hide photos section if no photos can be displayed
 
-v1.1.60
-----------
+## v1.1.60 (2019-09-27)
  * Merge pull request #478 from rapidpro/beta-fixes
  * Add select country image
  * Add select country image
  * Update CHANGELOG.md for v1.1.59
  * Merge pull request #476 from rapidpro/beta-fixes
 
-v1.1.59
-----------
+## v1.1.59 (2019-09-26)
  * Merge pull request #476 from rapidpro/beta-fixes
  * Move anchor placement to top center for aos and trigger redraw fast
  * Add migration to add photo blocks type
  * Rebuild locales
 
-v1.1.47
-----------
+## v1.1.47 (2019-09-25)
  * Adjuts jobs page
  * Larger circles
  * Merge pull request #473 from rapidpro/beta-fixes
  * Refresh AOS
 
-v1.1.45
-----------
+## v1.1.45 (2019-09-23)
  * Merge pull request #472 from rapidpro/fix-stats
  * Merge branch 'master' of github.com:rapidpro/ureport into fix-stats
  * Merge pull request #471 from rapidpro/poll-date-api
@@ -2827,8 +2415,7 @@ v1.1.45
  * Add timeout to lock of poll counts rebuild
  * Add poll date to API
 
-v1.1.38
-----------
+## v1.1.38 (2019-09-20)
  * Show top region on maps
  * state pill label to STATE
  * lighten button backgrounds on hover
@@ -2836,8 +2423,7 @@ v1.1.38
  * Reduce line height on poll title on homepage
  * Add bottom border on navbar
 
-v1.1.37
-----------
+## v1.1.37 (2019-09-19)
  * Merge pull request #469 from rapidpro/beta-fixes
  * Fix crop argument
  * Add spinner on maps before they load
@@ -2845,32 +2431,26 @@ v1.1.37
  * Adjust label font weight on opinions page
  * Hide question number on screenshot capture
 
-v1.1.36
-----------
+## v1.1.36 (2019-09-19)
  * Merge pull request #467 from rapidpro/edit-blocks
  * Fix tests
  * Merge pull request #465 from rapidpro/translations_djangojs-po--master_my
  * Translate locale/en/LC_MESSAGES/djangojs.po in my
 
-v1.1.34
-----------
+## v1.1.34 (2019-09-18)
  * Increment after using the color
 
-v1.1.33
-----------
+## v1.1.33 (2019-09-18)
  * Merge pull request #466 from rapidpro/beta-fixes
  * Fix conflicting colors for state segmentation
 
-v1.1.27
-----------
+## v1.1.27 (2019-09-17)
  * Fix admin navbar
 
-v1.1.26
-----------
+## v1.1.26 (2019-09-17)
  * Quick fixes
 
-v1.1.25
-----------
+## v1.1.25 (2019-09-17)
  * Merge pull request #461 from rapidpro/RTL-support
  * Merge pull request #462 from rapidpro/use-cached-results
  * Really fix conflicts and merge
@@ -2880,20 +2460,16 @@ v1.1.25
  * update locales
  * tweak styles for admin nav
 
-v1.1.19
-----------
+## v1.1.19 (2019-09-14)
  * Add social media tab icons
 
-v1.1.18
-----------
+## v1.1.18 (2019-09-13)
  * Align text in the left boxes with the left angle applied too
 
-v1.1.17
-----------
+## v1.1.17 (2019-09-13)
  * Merge pull request #458 from rapidpro/engagement-charts
 
-v1.1.8
-----------
+## v1.1.8 (2019-09-11)
  * Adjust cursor and sticky bar
  * Merge pull request #451 from rapidpro/layout-tweaks
  * age graph pane only 1/2
@@ -2905,12 +2481,10 @@ v1.1.8
  * new layouyg
  * transition menu with slide
 
-v1.1.6
-----------
+## v1.1.6 (2019-09-11)
 
 
-v1.1.5
-----------
+## v1.1.5 (2019-09-10)
  * Merge pull request #444 from rapidpro/admin-nav-public-site
  * labels for age charts
  * Extra utility classes for the admin menu links
@@ -2951,42 +2525,34 @@ v1.1.5
  * Update CHANGELOG.md for v1.1.0
  * Merge pull request #432 from rapidpro/uikit
 
-v1.1.4
-----------
+## v1.1.4 (2019-09-09)
  * Fix contacts triggers to not consider contacts with is_active False
  * Fix recalculate to ignore contact not active
 
-v1.1.3
-----------
+## v1.1.3 (2019-09-09)
  * Revert leaflet library
  * Revert maps change to keep supporting properly the old version
 
-v1.1.2
-----------
+## v1.1.2 (2019-09-08)
  * Ignore node_mudules
  * Fix endif tag place
 
-v1.1.1
-----------
+## v1.1.1 (2019-09-07)
  * Merge pull request #433 from rapidpro/post-deploy-fixes
  * More adjustements
  * Remove placeholders and adjust logos
 
-v1.1.0
-----------
+## v1.1.0 (2019-09-07)
  * Merge pull request #432 from rapidpro/uikit
 
-v1.0.459
-----------
+## v1.0.459 (2019-08-21)
  * Fix staging DATABASES config
 
-v1.0.458
-----------
+## v1.0.458 (2019-08-20)
  * Merge pull request #420 from rapidpro/contact-activity
  * Merge pull request #419 from rapidpro/poll-stats
 
-v1.0.457
-----------
+## v1.0.457 (2019-07-10)
  * Merge pull request #415 from rapidpro/fix-global-locations-data
  * Fix coverage
  * Change World geojson data
@@ -2995,39 +2561,31 @@ v1.0.457
  * Added Honduras, Iraq and removed U.K. flags.
  * Merge pull request #83 from rapidpro/master
 
-v1.0.456
-----------
+## v1.0.456 (2019-06-20)
  * Rerun compilemessages and makemessages
  * Fix poll response categories to be deactivated if they are replaced
 
-v1.0.455
-----------
+## v1.0.455 (2019-06-17)
  * Merge pull request #411 from rapidpro/dependabot/pip/django-2.1.9
  * Bump django from 2.1.5 to 2.1.9
 
-v1.0.454
-----------
+## v1.0.454 (2019-06-10)
  * Add Bolivia and Ecuador flags on the footer
 
-v1.0.453
-----------
+## v1.0.453 (2019-06-06)
  * Add India flag on the footer
 
-v1.0.452
-----------
+## v1.0.452 (2019-05-29)
  * Merge pull request #409 from rapidpro/no-flow-def-use
  * Use flow results metada for all poll flows
 
-v1.0.451
-----------
+## v1.0.451 (2019-05-29)
  * Update rapidpro-python to 2.6.1
 
-v1.0.450
-----------
+## v1.0.450 (2019-05-28)
  * Make flow metadate node uuids optional
 
-v1.0.449
-----------
+## v1.0.449 (2019-05-28)
  * Merge pull request #408 from rapidpro/use-flow-metadata
  * Update the rapidpro client
  * Use the metadata only for flows that do not have rulesets on the definition
@@ -3038,12 +2596,10 @@ v1.0.449
  * Update CHANGELOG.md for v1.0.448
  * Increase contact pull lock timeout to 12 hours
 
-v1.0.448
-----------
+## v1.0.448 (2019-04-26)
  * Increase contact pull lock timeout to 12 hours
 
-v1.0.447
-----------
+## v1.0.447 (2019-04-03)
  * Merge pull request #405 from rapidpro/ureport-v2-1
  * Add missing file
  * Disable some tests temporaly
@@ -3058,46 +2614,38 @@ v1.0.447
  * Merge pull request #78 from rapidpro/master
  * Merge pull request #76 from rapidpro/master
 
-v1.0.446
-----------
+## v1.0.446 (2019-02-22)
  * Update FB customerchat plugin SDK
  * Refactor Serbian Latin translation files
  * Add romanian translation files updates
  * Refactor serbian to serbian latin language config
  * Fix unordered list
 
-v1.0.445
-----------
+## v1.0.445 (2019-01-30)
  * Polls without flow uuid should not sync
  * Run tests on Postgresql9.6 and Postgresql10
 
-v1.0.444
-----------
+## v1.0.444 (2019-01-17)
  * Update Django
  * Update deps
 
-v1.0.443
-----------
+## v1.0.443 (2018-11-27)
  * Add Romania flag
  * Remove opacity on map legend
 
-v1.0.442
-----------
+## v1.0.442 (2018-10-30)
  * Add locations stats to poll API endpoint
  * Update pt_br strings translations
 
-v1.0.441
-----------
+## v1.0.441 (2018-10-25)
  * Add Serbia flag, update settings
  
 
-v1.0.440
-----------
+## v1.0.440 (2018-10-19)
  * Merge pull request #385 from rapidpro/age-category-case
  * Keep category case for age  seggments
 
-v1.0.439
-----------
+## v1.0.439 (2018-10-16)
  * Pin django to 2.0.9
  * Update tests
  * Change scale label to use ALL instead of National
@@ -3105,52 +2653,43 @@ v1.0.439
  * Add config to control the states we render on the maps
  * Add results grouped by gender and by age to the API
 
-v1.0.438
-----------
+## v1.0.438 (2018-09-26)
  * Refactor strings on bosnian files
  * Add bosnia country flag
 
-v1.0.437
-----------
+## v1.0.437 (2018-09-07)
  * Add bosnian language option
  * Fix assertion for the country order
  * Add uzbekistan logo
  * Update Trinidad and Tobago flag
  * Add uzbek language
 
-v1.0.436
-----------
+## v1.0.436 (2018-08-23)
  * No response case has a datetime in value, we should not consider that as text if we did not have an input
 
-v1.0.435
-----------
+## v1.0.435 (2018-08-17)
  * Do not show ignored words on word clouds
 
-v1.0.434
-----------
+## v1.0.434 (2018-08-14)
  * Support Django 2.0
 
-v1.0.432
-----------
+## v1.0.432 (2018-07-31)
  * Merge pull request #377 from rapidpro/specific-category-order
  * Fix Facebook page embed without facebook appId
  * Fix Facebook page embed without facebook appId
  * Fix poll questions category order
  * Merge pull request #376 from rapidpro/pip-tools
 
-v1.0.425
-----------
+## v1.0.425 (2018-07-26)
  * Merge pull request #375 from rapidpro/fix-RSS-jobs
  * Fix RSS feed jobs summary look up
 
-v1.0.424
-----------
+## v1.0.424 (2018-07-24)
  * Merge pull request #372 from rapidpro/use-archives
  * Merge pull request #373 from rapidpro/brasil-count
  * upadate link for Brasil count
 
-v1.0.421
-----------
+## v1.0.421 (2018-07-19)
  * Merge pull request #371 from Ilhasoft/feature/new-flags
  * Fix flags ordering
  * Add Bangladesh logo
@@ -3164,39 +2703,31 @@ v1.0.421
  * Merge pull request #55 from rapidpro/master
  * Merge pull request #54 from rapidpro/master
 
-v1.0.420
-----------
+## v1.0.420 (2018-06-26)
  * Merge pull request #369 from rapidpro/map-colors
  * Add config for custom maps colors
 
-v1.0.419
-----------
+## v1.0.419 (2018-06-12)
  * Add config for announcement
 
-v1.0.418
-----------
+## v1.0.418 (2018-06-04)
  * Fix bug, no response should not be considered as responded
 
-v1.0.417
-----------
+## v1.0.417 (2018-05-29)
  * Strip trailing spaces on ignore words
 
-v1.0.416
-----------
+## v1.0.416 (2018-05-28)
  * Switch to use Summernote JS library for text editor
 
-v1.0.413
-----------
+## v1.0.413 (2018-05-25)
  * Merge pull request #362 from rapidpro/ignore-words
  * Add config for ignore words to filter out on the public page
 
-v1.0.412
-----------
+## v1.0.412 (2018-05-24)
  * Merge pull request #361 from rapidpro/hide-participations
  * Add config to hide participations stats
 
-v1.0.411
-----------
+## v1.0.411 (2018-05-23)
  * Merge pull request #359 from Ilhasoft/balkans-flag
  * Merge pull request #358 from Ilhasoft/feature/facebook-welcome-message
  * Fix org config fields by incrementing fields on superuser test
@@ -3210,334 +2741,262 @@ v1.0.411
  * Merge pull request #50 from rapidpro/master
  * Merge pull request #49 from rapidpro/master
 
-v1.0.410
-----------
+## v1.0.410 (2018-05-08)
  * Support FLOIP backend type
  * Switch to Python3
 
-v1.0.408
-----------
+## v1.0.408 (2018-05-02)
  * Remove attribution attribute
 
-v1.0.407
-----------
+## v1.0.407 (2018-05-02)
  * Fix syntax
 
-v1.0.406
-----------
+## v1.0.406 (2018-05-02)
  * Use latest FB SDK version
 
-v1.0.405
-----------
+## v1.0.405 (2018-05-02)
  * More HTTPS use
 
-v1.0.404
-----------
+## v1.0.404 (2018-05-01)
  * Add FB messenger customer chat plugin
 
-v1.0.403
-----------
+## v1.0.403 (2018-04-27)
  * Fix for None values and datetime type in the recent changes
 
-v1.0.402
-----------
+## v1.0.402 (2018-04-26)
  * Update rapidpro-dash
  * Trim poll results long text values
  * Specify the backend attr on the syncers
  * Use remote contact created on if the registered on value in None
 
-v1.0.401
-----------
+## v1.0.401 (2018-04-20)
  * Fix to display age charts
  * Default value for fetch_flows for the cache miss should be an empty dict
 
-v1.0.400
-----------
+## v1.0.400 (2018-04-10)
  * Default value for fetch_flows for the cache miss should be an empty dict
 
-v1.0.399
-----------
+## v1.0.399 (2018-04-10)
  * Only exclude the main poll if we have one
 
-v1.0.398
-----------
+## v1.0.398 (2018-04-10)
  * Make sure tasks do no sync polls synced by other tasks that run more often
 
-v1.0.397
-----------
+## v1.0.397 (2018-04-09)
  * Fix get_flow and enable the cached times in contacts pull
 
-v1.0.396
-----------
+## v1.0.396 (2018-04-08)
  * Hold on to use redis cache times for contacts sycn until we have some values set
  * Add backend fields as Foreign keys
  * Use .paths to set and retrieve Org config values 
 
-v1.0.393
-----------
+## v1.0.393 (2018-04-04)
  * Update test
 
-v1.0.392
-----------
+## v1.0.392 (2018-04-04)
  * Fix poll brick ids
 
-v1.0.391
-----------
+## v1.0.391 (2018-04-04)
 
 
-v1.0.389
-----------
+## v1.0.389 (2018-04-04)
  * Remove unused function
  * Remove unecessary configs
  * Switch to use rapidpro config
  * Update to use latest pillow and boto3
 
-v1.0.388
-----------
+## v1.0.388 (2018-03-27)
  * Do not add backend field on poll results
 
-v1.0.387
-----------
+## v1.0.387 (2018-03-27)
 * Fix import
  * Better log
  * Update pull results default value in batches
 
-v1.0.386
-----------
+## v1.0.386 (2018-03-27)
  * Add default value and constraints migrations
  * Faster migrations
 
-v1.0.385
-----------
+## v1.0.385 (2018-03-27)
  * Add backend field
  * Update dash to 1.3.1
  * Fix test
  * Contacts pull should loop on all configured backends
 
-v1.0.383
-----------
+## v1.0.383 (2018-03-27)
  * Add argentina flag to settings
  * Fix tests
  * Fix PEP8 errors
 
-v1.0.382
-----------
+## v1.0.382 (2018-03-20)
  * Update sorl-thumbnail to mute unecessary logs 
 
-v1.0.379
-----------
+## v1.0.379 (2018-03-14)
  * Update sorl-thumbnail and more deps
 
-v1.0.377
-----------
+## v1.0.377 (2018-03-12)
  * Fix inexistent key lookup, and Add DB slice config
 
-v1.0.372
-----------
+## v1.0.372 (2018-03-07)
  * Add TEMPLATE_DEBUG settings
 
-v1.0.371
-----------
+## v1.0.371 (2018-03-06)
  * Update deps
 
-v1.0.370
-----------
+## v1.0.370 (2018-02-16)
  * update gitignore
  * Merge pull request #330 from rapidpro/fix-registration-map-month
  * Better month lookup from date
 
-v1.0.369
-----------
+## v1.0.369 (2018-01-30)
  * Rebuild poll results counts only when we have new or updated poll results
 
-v1.0.368
-----------
+## v1.0.368 (2018-01-29)
  * Fix poll admin list styles
 
-v1.0.367
-----------
+## v1.0.367 (2018-01-23)
  * Make sure we handle properly the rate error in the batch syncs too
 
-v1.0.366
-----------
+## v1.0.366 (2018-01-19)
  * Add tests
  * Ignore Rate limit exception since we'll resume the next hour
 
-v1.0.365
-----------
+## v1.0.365 (2018-01-19)
  * More coverage and remove duplicate tests
  * Use django cache methods and update tests
  * Use redis to record the last time a poll synced for long running poll sync tasks
 
-v1.0.364
-----------
+## v1.0.364 (2018-01-09)
  * Prevent timeout trying to check the progress while we know we synced at least once
 
-v1.0.363
-----------
+## v1.0.363 (2018-01-09)
  * Display read only org config fields
  * Display last sync times using timesince
 
-v1.0.359
-----------
+## v1.0.359 (2017-12-13)
  * Add Moldova flag to footer
  * Remove unused codes
 
-v1.0.358
-----------
+## v1.0.358 (2017-12-11)
  * Fix contacts sync
 
-v1.0.357
-----------
+## v1.0.357 (2017-12-01)
  * Use the leaf to lookup location object in a simple way as usual
  * Support consuming datetimes in iso8601 format
 
-v1.0.356
-----------
+## v1.0.356 (2017-11-13)
  * Fix small text fonts
  * Allow configuring of custom fonts
 
-v1.0.355
-----------
+## v1.0.355 (2017-11-07)
  * Fix height of map to prevent overflow
  * Update Spanish
  * Add Vietnamese
 
-v1.0.354
-----------
+## v1.0.354 (2017-11-06)
  * Update message on homepage
 
-v1.0.353
-----------
+## v1.0.353 (2017-10-31)
  * Filter by is_active too to consider similar poll
  * Limit the creation of polls to 1 per flow in 5 minutes
  * Fix Zambia count link
 
-v1.0.352
-----------
+## v1.0.352 (2017-10-25)
  * Update the rapidpro client to support flow minor versions
 
-v1.0.351
-----------
+## v1.0.351 (2017-09-09)
  * Update to use better names
  * Make all recent polls sync every hour
 
-v1.0.350
-----------
+## v1.0.350 (2017-08-17)
  * Add New Zealand
  * Add romanian language
 
-v1.0.349
-----------
+## v1.0.349 (2017-07-06)
   * Mark sync poll result paused before the lock times out
   * Increase lock timeout for poll pull results
 
-v1.0.348
-----------
+## v1.0.348 (2017-06-29)
  * Update smartmin
  * Refactor pull results to shorter size methods
 
-v1.0.347
-----------
+## v1.0.347 (2017-06-20)
  * Update fix for pycountry update
 
-v1.0.346
-----------
+## v1.0.346 (2017-06-20)
  * Update all deps to the latests
 
-v1.0.345
-----------
+## v1.0.345 (2017-06-19)
  * Update django-storages
 
-v1.0.344
-----------
+## v1.0.344 (2017-06-16)
  * Use big int for poll results counter primary key, migrations
  * Update dependencies
 
-v1.0.343
-----------
+## v1.0.343 (2017-06-13)
  * Merge pull request #293 from rapidpro/result-text-field
 
-v1.0.341
-----------
+## v1.0.341 (2017-05-12)
  * More italian
  * Display only featured stories on home page
 
-v1.0.340
-----------
+## v1.0.340 (2017-05-09)
  * Update Italian
 
-v1.0.339
-----------
+## v1.0.339 (2017-05-08)
  * Add El Salvador
 
-v1.0.338
-----------
+## v1.0.338 (2017-05-08)
  * Update translations
 
-v1.0.336
-----------
+## v1.0.336 (2017-04-27)
  * Fix refetch poll on big orgs
 
-v1.0.335
-----------
+## v1.0.335 (2017-04-16)
  * Fix flow definition lookup from flow definition endpoint using the right uuid
 
-v1.0.334
-----------
+## v1.0.334 (2017-04-04)
  * Remove all use of API v1
 
-v1.0.333
-----------
+## v1.0.333 (2017-03-09)
  * Reschedule poll pull task in 5 min if pull did not finish
 
-v1.0.332
-----------
+## v1.0.332 (2017-03-02)
  * Fix get boundaries
  * Update Arabic language
 
-v1.0.331
-----------
+## v1.0.331 (2017-03-02)
  * More fix for remote missing geometry
 
-v1.0.330
-----------
+## v1.0.330 (2017-03-02)
  * Fix building global boundaries and boundary missing geometry
 
-v1.0.329
-----------
+## v1.0.329 (2017-03-02)
  * Switch locations sync to use RapidPro API v2
  * Ordering open ended words cloud responses first then limit the list to 100
 
-v1.0.328
-----------
+## v1.0.328 (2017-02-22)
  * Update ukrainian translations
 
-v1.0.327
-----------
+## v1.0.327 (2017-02-20)
  * Change story widget URL to https
 
-v1.0.326
-----------
+## v1.0.326 (2017-01-26)
  * Add migrations to remove inactive objects not needed
  * FIx typo in method name for syncers
 
-v1.0.325
-----------
+## v1.0.325 (2017-01-24)
  * Tweak date styles
 
-v1.0.324
-----------
+## v1.0.324 (2017-01-24)
  * Add Facebook message us button on home page
  * Add story date
  * Make all script load on https
 
-v1.0.323
-----------
+## v1.0.323 (2017-01-17)
 * remove escape on news link text
 
-v1.0.322
-----------
+## v1.0.322 (2017-01-12)
  * Add CHANGELOG.md
  * AWS S3 secure urls
 
