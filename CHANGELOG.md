@@ -1,3 +1,7 @@
+v1.8.0 (2026-09-29)
+-------------------------
+ * Replace smartmin login with django-allauth
+
 v1.7.7 (2026-09-28)
 -------------------------
  * Report gunicorn master errors to Sentry
