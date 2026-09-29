@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -291,8 +291,18 @@ msgid "The API token for this backend"
 msgstr "API Token สำหรับระบบ Backend"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\n      คุณได้รับคำเชิญให้เข้าร่วม %(org_name)s\n      <br />\n      หากต้องการตอบรับคำเชิญ <a href='%(host)s%(join_url)s'>คลิกที่นี่</a>\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      คุณได้รับคำเชิญให้เข้าร่วม %(org_name)s\n"
+"      <br />\n"
+"      หากต้องการตอบรับคำเชิญ <a href='%(host)s%(join_url)s'>คลิกที่นี่</a>\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "คุณได้รับคำเชิญให้เข้าร่วม {{org.name}}"
@@ -683,6 +693,22 @@ msgstr "บันทึก"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s ใหม่ของคุณได้ถูกสร้างแล้ว"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "ยูรีพอร์ต"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "ลงชื่อเข้าใช้"
+
+msgid "Enter Dashboard"
+msgstr "เข้าสู่แดชบอร์ด"
 
 msgid "Back to Website"
 msgstr "กลับไปที่เว็ปไซด์"
@@ -1221,41 +1247,15 @@ msgstr[0] "%(counter)sผลลัพธ์"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "ผลลัพธ์%(start)s-%(end)sจาก%(count)s"
 
-msgid "Error"
-msgstr "เกิดข้อผิดพลาด"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "รหัสผ่านใหม่"
 
-msgid "Enter Dashboard"
-msgstr "เข้าสู่แดชบอร์ด"
-
-#, python-format
-msgid ""
-"\n"
-"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"              "
-msgstr ""
-"\n"
-"      ขออภัย คุณไม่สามารถลงชื่อเข้าใช้งานขณะนี้ได้ เนื่องจากคุณลงชื่อเข้าใช้ไม่สำเร็จแล้ว %(failed_login_limit)s ครั้ง\n"
-"      "
-
-#, python-format
-msgid ""
-"\n"
-"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"                  "
-msgstr ""
-"\n"
-"      กรุณารอ %(lockout_timeout)s นาที ก่อนลองลงชื่อเข้าใช้ใหม่\n"
-"      "
-
-#, python-format
-msgid ""
-"\n"
-"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"      "
-msgstr ""
-"\n"
-"  <strong>รหัสผ่านของคุณหมดอายุแล้ว</strong> ตามนโยบายของระบบ คุณจะต้องเปลี่ยนรหัสผ่านใหม่ทุก ๆ %(expire_days)s วัน และรหัสผ่านนั้นจะต้องไม่ถูกใช้ภายใน %(window_days)s วันก่อน\n"
-"  "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "ช่องทาง"
 
 msgid "+ New Story"
 msgstr "+ เพิ่ม เรื่อง"
@@ -2000,6 +2000,39 @@ msgstr "ประเทศที่มีคณะกรรมการระด
 
 msgid "West and Central Africa"
 msgstr "แอฟริกาตะวันตกและแอฟริกากลาง"
+
+#~ msgid "Error"
+#~ msgstr "เกิดข้อผิดพลาด"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "      ขออภัย คุณไม่สามารถลงชื่อเข้าใช้งานขณะนี้ได้ เนื่องจากคุณลงชื่อเข้าใช้ไม่สำเร็จแล้ว %(failed_login_limit)s ครั้ง\n"
+#~ "      "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "      กรุณารอ %(lockout_timeout)s นาที ก่อนลองลงชื่อเข้าใช้ใหม่\n"
+#~ "      "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "  <strong>รหัสผ่านของคุณหมดอายุแล้ว</strong> ตามนโยบายของระบบ คุณจะต้องเปลี่ยนรหัสผ่านใหม่ทุก ๆ %(expire_days)s วัน และรหัสผ่านนั้นจะต้องไม่ถูกใช้ภายใน %(window_days)s วันก่อน\n"
+#~ "  "
 
 #~ msgid "Color Choice"
 #~ msgstr "ตัวเลือกสี"

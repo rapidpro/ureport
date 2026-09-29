@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-26 16:40+0000\n"
+"POT-Creation-Date: 2026-09-24 10:27+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -288,8 +288,18 @@ msgid "The API token for this backend"
 msgstr "API token za ovaj backend"
 
 #, python-format
-msgid "\n      You've been invited to join %(org_name)s.\n      <br />\n      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n  "
-msgstr "\nPozvani ste da se pridružite %(org_name)s.\n<br />\nDa prihvatite poziv, <a href='%(host)s%(join_url)s'>kliknite ovde</a>.\n  "
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br />\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"Pozvani ste da se pridružite %(org_name)s.\n"
+"<br />\n"
+"Da prihvatite poziv, <a href='%(host)s%(join_url)s'>kliknite ovde</a>.\n"
+"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr "Pozvani ste da se pridružite {{org.name}}."
@@ -433,8 +443,14 @@ msgid "Remove Item?"
 msgstr "Ukloni stavku?"
 
 #, python-format
-msgid "\n    Are you sure you want to remove <b>%(object)s</b>?\n    "
-msgstr "\nDa li ste sigurni da želite da uklonite <b>%(object)s</b>?\n    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Da li ste sigurni da želite da uklonite <b>%(object)s</b>?\n"
+"    "
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Kada uklonite, nema načina da vratite sadržaj."
@@ -443,15 +459,36 @@ msgid "Cancel"
 msgstr "Otkaži"
 
 #, python-format
-msgid "\n\t %(counter)s result\n\t"
-msgid_plural "\n         %(counter)s results\n        "
-msgstr[0] "\n\t %(counter)s rezultat\n\t"
-msgstr[1] "\n\t %(counter)s rezultata\n\t"
-msgstr[2] "\n\t %(counter)s rezultata\n\t"
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t %(counter)s rezultat\n"
+"\t"
+msgstr[1] ""
+"\n"
+"\t %(counter)s rezultata\n"
+"\t"
+msgstr[2] ""
+"\n"
+"\t %(counter)s rezultata\n"
+"\t"
 
 #, python-format
-msgid "\n\tResults %(start)s-%(end)s of %(count)s\n\t"
-msgstr "\n\tRezultati %(start)s-%(end)s od %(count)s\n\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tRezultati %(start)s-%(end)s od %(count)s\n"
+"\t"
 
 msgid "Previous"
 msgstr "Prethodni"
@@ -478,12 +515,24 @@ msgid "Login Failure"
 msgstr "Greška u prijavi"
 
 #, python-format
-msgid "\n      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n      "
-msgstr "\nŽao nam je, trenutno ne možete da se prijavite jer smo primili %(failed_login_limit)s pogrešnih pokušaja prijave.\n      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Žao nam je, trenutno ne možete da se prijavite jer smo primili %(failed_login_limit)s pogrešnih pokušaja prijave.\n"
+"      "
 
 #, python-format
-msgid "\n      Please wait %(lockout_timeout)s minutes before to try log in again.\n      "
-msgstr "\nMolimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave.\n      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Molimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave.\n"
+"      "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Možete ispuniti formular ispod, kako biste obnovili lozinku putem e-maila."
@@ -501,8 +550,14 @@ msgid "Please enter the email address you used to sign up and we will help you r
 msgstr "Molimo upišite e-mail adresu koju koristite za pristup i mi ćemo vam pomoći da obnovite lozinku"
 
 #, python-format
-msgid "\n  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n  "
-msgstr "\n<strong>Vaša lozinka je istekla.</strong> Pravila sajta nalažu da morate izabrati novu lozinku svakih %(expire_days)s dana, i da lozinka ne sme biti korišćena u prethodnih %(window_days)s dana.\n  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Vaša lozinka je istekla.</strong> Pravila sajta nalažu da morate izabrati novu lozinku svakih %(expire_days)s dana, i da lozinka ne sme biti korišćena u prethodnih %(window_days)s dana.\n"
+"  "
 
 msgid "New Password"
 msgstr "Nova lozinka"
@@ -643,6 +698,22 @@ msgstr "Sačuvaj"
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Vaš novi %s je kreiran"
+
+msgid "Hello,"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "The U-Report team"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Upiši se"
+
+msgid "Enter Dashboard"
+msgstr "Uđi u kontrolnu tablu"
 
 msgid "Back to Website"
 msgstr "Nazad na sajt"
@@ -1165,8 +1236,14 @@ msgid "Dec"
 msgstr "Dec"
 
 #, python-format
-msgid "\n            Are you sure you want to remove <strong>%(object)s</strong>?\n          "
-msgstr "\nDa li ste sigurni da želite da uklonite <strong>%(object)s</strong>?\n          "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Da li ste sigurni da želite da uklonite <strong>%(object)s</strong>?\n"
+"          "
 
 #, python-format
 msgid "%(counter)s result"
@@ -1179,23 +1256,15 @@ msgstr[2] "%(counter)s rezultata"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Rezultati %(start)s-%(end)s od %(count)s"
 
-msgid "Error"
-msgstr "Greška"
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nova lozinka"
 
-msgid "Enter Dashboard"
-msgstr "Uđi u kontrolnu tablu"
-
-#, python-format
-msgid "\n                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n              "
-msgstr "\nŽao nam je, trenutno ne možete da se prijavite jer smo primili %(failed_login_limit)s pogrešnih pokušaja prijave.\n              "
-
-#, python-format
-msgid "\n                    Please wait %(lockout_timeout)s minutes before to try log in again.\n                  "
-msgstr "\nMolimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave.\n                  "
-
-#, python-format
-msgid "\n        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n      "
-msgstr "\n<strong>Vaša lozinka je istekla.</strong> Pravila sajta nalažu da morate izabrati novu lozinku svakih %(expire_days)s dana, i da lozinka ne sme biti korišćena u prethodnih %(window_days)s dana.\n      "
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanali"
 
 msgid "+ New Story"
 msgstr "+ Nova priča"
@@ -1940,6 +2009,39 @@ msgstr "Zemlje UNICEF-ovih nacionalnih komiteta"
 
 msgid "West and Central Africa"
 msgstr "Zapadna i centralna Afrika"
+
+#~ msgid "Error"
+#~ msgstr "Greška"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "Žao nam je, trenutno ne možete da se prijavite jer smo primili %(failed_login_limit)s pogrešnih pokušaja prijave.\n"
+#~ "              "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "Molimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave.\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "<strong>Vaša lozinka je istekla.</strong> Pravila sajta nalažu da morate izabrati novu lozinku svakih %(expire_days)s dana, i da lozinka ne sme biti korišćena u prethodnih %(window_days)s dana.\n"
+#~ "      "
 
 #, fuzzy
 #~| msgid "The question posed to your audience, will be displayed publicly"

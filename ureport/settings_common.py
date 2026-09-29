@@ -197,6 +197,7 @@ MIDDLEWARE = (
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
@@ -724,6 +725,9 @@ INSTALLED_APPS = (
     "smartmin",
     # smartmin users
     "smartmin.users",
+    # allauth
+    "allauth",
+    "allauth.account",
     # dash apps
     "dash.orgs",
     "dash.dashblocks",
@@ -746,6 +750,7 @@ INSTALLED_APPS = (
     "ureport.polls",
     "ureport.stats",
     "ureport.syncjobs",
+    "ureport.users",
     "django_countries",
     "rest_framework",
     "drf_yasg",
@@ -907,15 +912,31 @@ GROUP_PERMISSIONS = {
 # -----------------------------------------------------------------------------------
 # Login / Logout
 # -----------------------------------------------------------------------------------
-LOGIN_URL = "/users/login/"
-LOGOUT_URL = "/users/logout/"
+LOGIN_URL = "/accounts/login/"
+LOGOUT_URL = "/accounts/logout/"
 LOGIN_REDIRECT_URL = "/manage/org/choose/"
 LOGOUT_REDIRECT_URL = "/"
 
 # -----------------------------------------------------------------------------------
 # Auth Configuration
 # -----------------------------------------------------------------------------------
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+AUTHENTICATION_BACKENDS = ("allauth.account.auth_backends.AuthenticationBackend",)
+
+ACCOUNT_ADAPTER = "ureport.users.adapter.AccountAdapter"
+
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*"]  # signup is closed, but allauth still validates this setting
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_NOTIFICATIONS = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[U-Report] "
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_CHANGE_EMAIL = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_LOGOUT_REDIRECT_URL = LOGOUT_REDIRECT_URL
+
+if TESTING:
+    ACCOUNT_RATE_LIMITS = False  # rate limit state in the cache would otherwise persist between test runs
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -1082,6 +1103,29 @@ UREPORT_DEFAULT_SECONDARY_COLOR = "#1F49BF"
 # non org urls
 # -----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = (
+    # allauth account pages are served on the root host too
+    "account_login",
+    "account_logout",
+    "account_inactive",
+    "account_signup",
+    "account_reauthenticate",
+    "account_email",
+    "account_email_verification_sent",
+    "account_change_password",
+    "account_set_password",
+    "account_reset_password",
+    "account_reset_password_done",
+    "account_reset_password_from_key",
+    "account_reset_password_from_key_done",
+    "account_confirm_email",
+    "account_confirm_login_code",
+    "account_request_login_code",
+    "account_confirm_password_reset_code",
+    "account_complete_password_reset",
+    "account_password_reset_completed",
+    "account_verify_phone",
+    "account_change_phone",
+    "account_signup_by_passkey",
     # sync jobs are listed and controlled across all orgs, so they need no org context
     "syncjobs.syncjob_list",
     "syncjobs.syncjob_pause",
