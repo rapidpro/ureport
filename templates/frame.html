@@ -261,7 +261,7 @@
             {% block login %}
               {% if request.user and request.user.is_authenticated %}
                 <li>
-                  <a href="{% org_host_link %}{% url 'users.user_profile' request.user.pk %}" class="pull-left">{{ request.user.username }}</a>
+                  <a href="{% org_host_link %}{% url 'users.user_profile' request.user.pk %}" class="pull-left">{{ request.user.email }}</a>
                 </li>
                 <li>
                   <form method="post" action="{% url 'account_logout' %}?next=/">

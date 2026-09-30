@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:37+0000\n"
+"POT-Creation-Date: 2026-09-30 14:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -2082,6 +2082,9 @@ msgstr "Posao #%(job_id)d će se ponovo sinhronizovati ispočetka pri sljedećem
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+msgid "A user with this email already exists."
+msgstr ""
 
 msgid "2FA"
 msgstr ""

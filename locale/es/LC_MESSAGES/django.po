@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:37+0000\n"
+"POT-Creation-Date: 2026-09-30 14:57+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: WILDNEY RAPHAEL SILVA CAVALCANTE, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1997,6 +1997,9 @@ msgstr "El trabajo #%(job_id)d se resincronizará desde cero en su próxima ejec
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
+
+msgid "A user with this email already exists."
+msgstr ""
 
 msgid "2FA"
 msgstr ""
