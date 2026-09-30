@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -797,6 +797,27 @@ msgstr "Upiši se"
 msgid "Enter Dashboard"
 msgstr "Uđji u komandnu ploču"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Nalozi"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Kanali"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Nova lozinka"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Povratak na stranicu"
 
@@ -1337,15 +1358,11 @@ msgstr[2] "%(counter)s rezultata"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Rezultati %(start)s-%(end)s od %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Nova lozinka"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Kanali"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+Nove priče"
@@ -2065,6 +2082,13 @@ msgstr "Posao #%(job_id)d će se ponovo sinhronizovati ispočetka pri sljedećem
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Sve lokacije"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -706,6 +706,27 @@ msgstr "Masuk"
 msgid "Enter Dashboard"
 msgstr "Masuk ke Dasbor"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Akun"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "Saluran"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "Kata kunci baru"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "Kembali ke Situs Web"
 
@@ -1241,15 +1262,11 @@ msgstr[0] "%(counter)s hasil"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "Hasil %(start)s-%(end)s dari %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "Kata kunci baru"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "Saluran"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ Cerita Baru"
@@ -1967,6 +1984,13 @@ msgstr "Pekerjaan #%(job_id)d akan disinkronkan ulang dari awal pada eksekusi be
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "Semua lokasi"

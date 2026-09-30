@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -733,6 +733,27 @@ msgstr "تسجيل الدخول "
 msgid "Enter Dashboard"
 msgstr "دخول لوحة التحكم"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "حسابات "
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "القنوات"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "كلمة المرور الجديدة"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "العودة إلى الموقع"
 
@@ -1284,15 +1305,11 @@ msgstr[5] "%(counter)s نتيجة"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "النتائج %(start)s-%(end)s من %(count)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "كلمة المرور الجديدة"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "القنوات"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ مقالة جديدة"
@@ -2010,6 +2027,13 @@ msgstr "ستقوم المهمة #%(job_id)d بإعادة المزامنة من �
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "جميع المواقع"

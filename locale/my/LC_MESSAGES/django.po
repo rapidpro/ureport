@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:27+0000\n"
+"POT-Creation-Date: 2026-09-24 10:37+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -710,6 +710,27 @@ msgstr "Sign in"
 msgid "Enter Dashboard"
 msgstr "ဒက်ရှ်ဘုတ်သို့ ဝင်ရန်"
 
+#, fuzzy
+#| msgid "Accounts"
+msgid "Account"
+msgstr "Accounts"
+
+msgid "Profile"
+msgstr ""
+
+#, fuzzy
+#| msgid "Channels"
+msgid "Change Email"
+msgstr "ချန်နယ်များ"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Change Password"
+msgstr "စကားဝှက်အသစ်"
+
+msgid "Two-Factor Authentication"
+msgstr ""
+
 msgid "Back to Website"
 msgstr "ဝဘ်ဆိုဒ်သို့ ပြန်သွားရန်"
 
@@ -1247,15 +1268,11 @@ msgstr[0] "ရလဒ် %(counter)s ခု"
 msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr "ရလဒ် %(count)s ခုအနက် %(start)s-%(end)s"
 
-#, fuzzy
-#| msgid "New Password"
-msgid "Change Password"
-msgstr "စကားဝှက်အသစ်"
+msgid "Disable"
+msgstr ""
 
-#, fuzzy
-#| msgid "Channels"
-msgid "Change Email"
-msgstr "ချန်နယ်များ"
+msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
 
 msgid "+ New Story"
 msgstr "+ သတင်းဆောင်းပါးအသစ်"
@@ -1973,6 +1990,13 @@ msgstr "လုပ်ငန်း #%(job_id)d သည် နောက်တစ်�
 
 msgid "Something to trigger localizations"
 msgstr "Localization များ စတင်စေရန် တစ်ခုခု"
+
+msgid "2FA"
+msgstr ""
+
+#, python-format
+msgid "Two-factor authentication disabled for %s."
+msgstr ""
 
 msgid "All locations"
 msgstr "တည်နေရာ အားလုံး"
