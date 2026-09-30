@@ -107,7 +107,7 @@
                   {% trans "Welcome, " %}
                   {{ request.user.first_name }} {{ request.user.last_name }}
                   <br class="is-hidden-mobile">
-                  {{ request.user.username }}
+                  {{ request.user.email }}
                 </div>
                 <form method="post" action="{% url 'account_logout' %}?next=/">
                   {% csrf_token %}

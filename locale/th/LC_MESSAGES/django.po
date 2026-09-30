@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:37+0000\n"
+"POT-Creation-Date: 2026-09-30 14:57+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -1990,6 +1990,9 @@ msgstr "งาน #%(job_id)d จะซิงค์ข้อมูลใหม�
 
 msgid "Something to trigger localizations"
 msgstr "สิ่งที่จะเริ่มต้นการแปลภาษาท้องถิ่น"
+
+msgid "A user with this email already exists."
+msgstr ""
 
 msgid "2FA"
 msgstr ""

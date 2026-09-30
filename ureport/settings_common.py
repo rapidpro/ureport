@@ -924,6 +924,7 @@ LOGOUT_REDIRECT_URL = "/"
 AUTHENTICATION_BACKENDS = ("allauth.account.auth_backends.AuthenticationBackend",)
 
 ACCOUNT_ADAPTER = "ureport.users.adapter.AccountAdapter"
+ACCOUNT_USER_DISPLAY = "ureport.users.adapter.user_display"
 
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*"]  # signup is closed, but allauth still validates this setting

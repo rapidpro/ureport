@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 10:37+0000\n"
+"POT-Creation-Date: 2026-09-30 14:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1946,6 +1946,9 @@ msgid "Job #%(job_id)d will resync from scratch on its next run"
 msgstr ""
 
 msgid "Something to trigger localizations"
+msgstr ""
+
+msgid "A user with this email already exists."
 msgstr ""
 
 msgid "2FA"

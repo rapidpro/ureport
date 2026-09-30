@@ -97,7 +97,8 @@ class LoginTest(UreportTest):
         # confirming is a click on the emailed page, not the link itself
         response = self.client.get(confirm_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(200, response.status_code)
-        self.assertContains(response, self.admin.email)
+        self.assertContains(response, f"is an email address for user {self.admin.email}")
+        self.assertNotContains(response, self.admin.username)
         self.assertFalse(EmailAddress.objects.get(user=self.admin).verified)
 
         response = self.client.post(confirm_url, SERVER_NAME="nigeria.ureport.io")
@@ -231,6 +232,8 @@ class UserCRUDLTest(UreportTest):
         self.assertIn("first_name", response.context["form"].fields)
         self.assertNotIn("email", response.context["form"].fields)
         self.assertNotIn("new_password", response.context["form"].fields)
+        self.assertContains(response, self.admin.email)
+        self.assertNotContains(response, "Username")
         self.assertContains(response, reverse("account_change_password"))
         self.assertContains(response, reverse("account_email"))
 
@@ -242,6 +245,72 @@ class UserCRUDLTest(UreportTest):
         self.admin.refresh_from_db()
         self.assertEqual("Ad", self.admin.first_name)
         self.assertEqual("Min", self.admin.last_name)
+
+    def test_staff_user_management(self):
+        list_url = reverse("users.user_list")
+        create_url = reverse("users.user_create")
+
+        self.login(self.superuser)
+
+        # users are listed and searched by email, never username
+        response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(["email", "name", "group", "mfa", "last_login"], list(response.context["fields"]))
+        self.assertContains(response, self.admin.email)
+        self.assertNotContains(response, "Username")
+
+        response = self.client.get(list_url + "?search=administrator", SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual([self.admin], list(response.context["object_list"]))
+
+        # creating a user takes an email, which becomes their username too
+        response = self.client.get(create_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(
+            ["email", "new_password", "first_name", "last_name", "groups"], list(response.context["fields"])
+        )
+        self.assertNotIn("username", response.context["form"].fields)
+
+        response = self.client.post(
+            create_url,
+            {"email": "New.User@Nyaruka.com", "new_password": "Qwerty123", "first_name": "New", "last_name": "User"},
+            SERVER_NAME="nigeria.ureport.io",
+        )
+        self.assertEqual(302, response.status_code)
+
+        user = User.objects.get(email="new.user@nyaruka.com")
+        self.assertEqual("new.user@nyaruka.com", user.username)
+        self.assertTrue(user.check_password("Qwerty123"))
+
+        # and has to be unique
+        response = self.client.post(
+            create_url,
+            {"email": "NEW.USER@nyaruka.com", "new_password": "Qwerty123", "first_name": "Dupe", "last_name": "User"},
+            SERVER_NAME="nigeria.ureport.io",
+        )
+        self.assertEqual(200, response.status_code)
+        self.assertFormError(response.context["form"], "email", "A user with this email already exists.")
+
+        # changing an email keeps the username in step
+        update_url = reverse("users.user_update", args=[user.pk])
+        response = self.client.get(update_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertNotIn("username", response.context["form"].fields)
+
+        response = self.client.post(
+            update_url,
+            {"email": "renamed@nyaruka.com", "first_name": "New", "last_name": "User", "is_active": True},
+            SERVER_NAME="nigeria.ureport.io",
+        )
+        self.assertEqual(302, response.status_code)
+
+        user.refresh_from_db()
+        self.assertEqual("renamed@nyaruka.com", user.email)
+        self.assertEqual("renamed@nyaruka.com", user.username)
+
+        response = self.client.post(
+            update_url,
+            {"email": self.admin.email, "first_name": "New", "last_name": "User", "is_active": True},
+            SERVER_NAME="nigeria.ureport.io",
+        )
+        self.assertFormError(response.context["form"], "email", "A user with this email already exists.")
 
     def test_removed_actions(self):
         self.login(self.superuser)

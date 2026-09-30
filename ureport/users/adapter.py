@@ -32,3 +32,8 @@ def is_site_host(host: str) -> bool:
     site_host = settings.HOSTNAME.lower()
     host = host.lower()
     return host == site_host or host.endswith("." + site_host)
+
+
+def user_display(user) -> str:
+    # users are identified by email everywhere, so that's what allauth's pages and messages should show
+    return user.email or str(user)
