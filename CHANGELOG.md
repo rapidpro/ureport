@@ -1,3 +1,8 @@
+## v1.8.1 (2026-09-30)
+ * Add two-factor authentication with allauth.mfa
+ * Identify users by email rather than username everywhere
+ * Add reconstructed dates to older CHANGELOG entries and switch headers to ATX style
+
 ## v1.8.0 (2026-09-29)
  * Replace smartmin login with django-allauth
 
