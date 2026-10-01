@@ -267,11 +267,12 @@ class UserCRUDLTest(UreportTest):
             admin = next(u for u in response.context["object_list"] if u == self.admin)
             return response.context["view"].get_verified(admin)
 
-        self.assertEqual("", listed_verified())
+        self.assertIn("Not verified", listed_verified())
         EmailAddress.objects.create(user=self.admin, email=self.admin.email, verified=False, primary=True)
-        self.assertEqual("", listed_verified())
+        self.assertIn("Not verified", listed_verified())
         verify_email(self.admin)
-        self.assertEqual("✓", listed_verified())
+        self.assertNotIn("Not verified", listed_verified())
+        self.assertIn("Verified", listed_verified())
 
         response = self.client.get(list_url + "?search=administrator", SERVER_NAME="nigeria.ureport.io")
         self.assertEqual([self.admin], list(response.context["object_list"]))

@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -79,10 +80,11 @@ class UserCRUDL(SmartUserCRUDL):
             )
 
         def get_verified(self, obj):
-            return "✓" if any(a.email == obj.email for a in obj.emailaddress_set.all()) else ""
+            verified = any(a.email == obj.email for a in obj.emailaddress_set.all())
+            return render_to_string("users/verified_tag.html", {"verified": verified})
 
         def get_mfa(self, obj):
-            return "✓" if obj.authenticator_set.all() else ""
+            return render_to_string("users/mfa_tag.html", {"mfa": bool(obj.authenticator_set.all())})
 
     class Create(SmartUserCRUDL.Create):
         form_class = UserForm

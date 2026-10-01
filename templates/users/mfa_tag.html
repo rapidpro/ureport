@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if mfa %}
+  <span class="tag is-primary"><i class="fas fa-shield-alt"></i>&nbsp;{% trans "2FA" %}</span>
+{% else %}
+  <span class="tag is-light"><i class="fas fa-unlock"></i>&nbsp;{% trans "No 2FA" %}</span>
+{% endif %}

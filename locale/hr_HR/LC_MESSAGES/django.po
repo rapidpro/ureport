@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 12:51+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -907,18 +907,6 @@ msgstr "Pozadine"
 msgid "You can resend an invite using the field above"
 msgstr "Poziv možete ponovno poslati pomoću polja iznad"
 
-msgid "Verified"
-msgstr ""
-
-msgid "Not verified"
-msgstr ""
-
-msgid "2FA"
-msgstr ""
-
-msgid "No 2FA"
-msgstr ""
-
 #, python-format
 msgid "Invite sent %(date)s"
 msgstr ""
@@ -1338,6 +1326,18 @@ msgstr "Nastavi"
 
 msgid "Force resync"
 msgstr "Prisilna ponovna sinkronizacija"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"

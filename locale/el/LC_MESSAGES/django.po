@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 12:51+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -895,18 +895,6 @@ msgstr "backends"
 msgid "You can resend an invite using the field above"
 msgstr "Μπορείτε να στείλετε ξανά μια πρόσκληση χρησιμοποιώντας το παραπάνω πεδίο"
 
-msgid "Verified"
-msgstr ""
-
-msgid "Not verified"
-msgstr ""
-
-msgid "2FA"
-msgstr ""
-
-msgid "No 2FA"
-msgstr ""
-
 #, python-format
 msgid "Invite sent %(date)s"
 msgstr ""
@@ -1322,6 +1310,18 @@ msgstr "Συνέχιση"
 
 msgid "Force resync"
 msgstr "Επιβολή επανασυγχρονισμού"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"

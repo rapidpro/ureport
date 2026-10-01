@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 12:51+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -902,18 +902,6 @@ msgstr "Backend sistemi"
 msgid "You can resend an invite using the field above"
 msgstr "Možete ponovo poslati pozivnicu koristeći polje iznad"
 
-msgid "Verified"
-msgstr ""
-
-msgid "Not verified"
-msgstr ""
-
-msgid "2FA"
-msgstr ""
-
-msgid "No 2FA"
-msgstr ""
-
 #, python-format
 msgid "Invite sent %(date)s"
 msgstr ""
@@ -1333,6 +1321,18 @@ msgstr "Nastavi"
 
 msgid "Force resync"
 msgstr "Prinudna ponovna sinhronizacija"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"

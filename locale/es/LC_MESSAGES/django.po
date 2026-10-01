@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 12:51+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: WILDNEY RAPHAEL SILVA CAVALCANTE, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/rapidpro/teams/226/es/)\n"
@@ -901,18 +901,6 @@ msgstr "Servicios"
 msgid "You can resend an invite using the field above"
 msgstr "Puede volver a enviar una invitación utilizando el campo anterior"
 
-msgid "Verified"
-msgstr ""
-
-msgid "Not verified"
-msgstr ""
-
-msgid "2FA"
-msgstr ""
-
-msgid "No 2FA"
-msgstr ""
-
 #, python-format
 msgid "Invite sent %(date)s"
 msgstr ""
@@ -1331,6 +1319,18 @@ msgstr "Reanudar"
 
 msgid "Force resync"
 msgstr "Forzar resincronización"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
