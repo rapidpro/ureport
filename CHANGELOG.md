@@ -1,3 +1,8 @@
+## v1.8.2 (2026-10-01)
+ * Remove Sentry and deployment-specific settings from the app
+ * Default to no error-mail recipients
+ * Drop the unused story widget setting
+
 ## v1.8.1 (2026-09-30)
  * Add two-factor authentication with allauth.mfa
  * Identify users by email rather than username everywhere
