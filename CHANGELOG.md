@@ -1,3 +1,9 @@
+## v1.8.3 (2026-10-01)
+ * Show email verification and 2FA status on the manage accounts page, the users list and the staff users list
+ * Style account status tags with the primary button colour
+ * Align the user profile page with the account settings pages
+ * Bump urllib3 from 2.7.0 to 2.8.0
+
 ## v1.8.2 (2026-10-01)
  * Remove Sentry and deployment-specific settings from the app
  * Default to no error-mail recipients
