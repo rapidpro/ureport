@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 12:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -900,6 +900,22 @@ msgstr "Бэкэнды"
 
 msgid "You can resend an invite using the field above"
 msgstr "Вы можете повторно отправить приглашение, используя поле выше"
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr "Добавьте или выберите теги"
@@ -2002,9 +2018,6 @@ msgid "Something to trigger localizations"
 msgstr "Что-то для запуска локализаций"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

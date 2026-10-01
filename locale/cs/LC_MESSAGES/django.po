@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 12:51+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -905,6 +905,22 @@ msgstr "Backendy"
 
 msgid "You can resend an invite using the field above"
 msgstr "Pozvánku můžete znovu odeslat pomocí výše uvedeného pole"
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr "Přidat nebo Vybrat značky"
@@ -2007,9 +2023,6 @@ msgid "Something to trigger localizations"
 msgstr "Něco pro spouštění lokalizací"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 12:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -895,6 +895,22 @@ msgstr "Backends"
 
 msgid "You can resend an invite using the field above"
 msgstr "Du kan sende en invitasjon på nytt ved å bruke feltet ovenfor"
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr "Legg til eller velg emneknagger"
@@ -1991,9 +2007,6 @@ msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

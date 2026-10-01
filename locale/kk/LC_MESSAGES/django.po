@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 12:51+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Askhat Makitov, 2024\n"
 "Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
@@ -901,6 +901,22 @@ msgstr "Артқы жүйелер"
 
 msgid "You can resend an invite using the field above"
 msgstr "Жоғарыдағы кестен пайдалана отырып, шақыруды қайта жібере аласыз"
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr "Тегтерді қосыңыз немесе таңдаңыз"
@@ -1998,9 +2014,6 @@ msgid "Something to trigger localizations"
 msgstr "Локализацияларды іске қосуға арналған нәрсе"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

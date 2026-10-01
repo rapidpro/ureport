@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 12:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -901,6 +901,22 @@ msgstr "Backends"
 
 msgid "You can resend an invite using the field above"
 msgstr "Você pode reenviar um convite usando o campo acima"
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr "Adicione ou selecione tags"
@@ -1998,9 +2014,6 @@ msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

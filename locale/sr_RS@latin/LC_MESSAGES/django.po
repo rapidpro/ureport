@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 12:51+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -898,6 +898,22 @@ msgstr "Pozadinski sistemi"
 
 msgid "You can resend an invite using the field above"
 msgstr "Pozivnicu možete ponovo poslati koristeći polje iznad"
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
 
 msgid "Add os Select tags"
 msgstr "Dodaj ili selektuj oznake"
@@ -2002,9 +2018,6 @@ msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

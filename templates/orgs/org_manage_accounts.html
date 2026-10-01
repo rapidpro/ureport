@@ -1,5 +1,5 @@
 {% extends "smartmin/form.html" %}
-{% load smartmin i18n %}
+{% load smartmin i18n accounts %}
 
 {% block pre-content %}
 {% endblock pre-content %}
@@ -58,6 +58,19 @@
           <td>
             {{ user.email }}
             {% if user.first_name or user.last_name %}({{ user.first_name }} {{ user.last_name }}){% endif %}
+            {% account_status user as status %}
+            <div class="tags account-status">
+              {% if status.verified %}
+                <span class="tag is-success is-light"><i class="fas fa-check-circle"></i>&nbsp;{% trans "Verified" %}</span>
+              {% else %}
+                <span class="tag is-warning is-light"><i class="fas fa-envelope"></i>&nbsp;{% trans "Not verified" %}</span>
+              {% endif %}
+              {% if status.mfa %}
+                <span class="tag is-success is-light"><i class="fas fa-shield-alt"></i>&nbsp;{% trans "2FA" %}</span>
+              {% else %}
+                <span class="tag is-light"><i class="fas fa-unlock"></i>&nbsp;{% trans "No 2FA" %}</span>
+              {% endif %}
+            </div>
           </td>
           {% with group_fields|get:user as row_fields %}
             {% for check_name in row_fields %}<td class="check permission">{{ form|field:check_name }}</td>{% endfor %}
@@ -70,7 +83,10 @@
       {% for invite in invites %}
         <tr class="{% cycle 'row2' 'row1' %} invite">
           <td>
-            {{ invite.email }} (Invite Sent on <span class="italic is-size-7">{{ invite.modified_on }}</span>)
+            {{ invite.email }}
+            <div class="tags account-status">
+              <span class="tag is-light"><i class="fas fa-paper-plane"></i>&nbsp;{% blocktrans with date=invite.modified_on|date:"j M Y" %}Invite sent {{ date }}{% endblocktrans %}</span>
+            </div>
           </td>
           <td class="permission">
             {% if invite.user_group == 'A' %}
