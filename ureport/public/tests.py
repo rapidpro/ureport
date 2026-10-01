@@ -136,9 +136,21 @@ class PublicTest(UreportTest):
 
     def test_set_story_widget_url(self):
         home_url = reverse("public.index")
-        response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertTrue(response.context["story_widget_url"])
+
+        # nothing configured, nothing in the context
+        with self.settings(STORY_WIDGET_URL=None):
+            response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
+            self.assertEqual(response.request["PATH_INFO"], "/")
+            self.assertIsNone(response.context["story_widget_url"])
+
+        # a configured URL always ends with a slash
+        with self.settings(STORY_WIDGET_URL="https://widget.example.com/widget"):
+            response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
+            self.assertEqual("https://widget.example.com/widget/", response.context["story_widget_url"])
+
+        with self.settings(STORY_WIDGET_URL="https://widget.example.com/widget/"):
+            response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
+            self.assertEqual("https://widget.example.com/widget/", response.context["story_widget_url"])
 
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
     @mock.patch("django.core.cache.cache.get")

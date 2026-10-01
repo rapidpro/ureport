@@ -9,7 +9,6 @@ from datetime import datetime, timedelta, timezone as tzone
 from itertools import chain, islice
 
 import iso8601
-from sentry_sdk import capture_exception
 
 from django.conf import settings
 from django.core.cache import cache
@@ -172,11 +171,9 @@ def fetch_flows(org, backend=None):
             cache_key = CACHE_ORG_FLOWS_KEY % (org.pk, backend_obj.slug)
             cache.set(cache_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
-        except Exception as e:
-            capture_exception(e)
-            import traceback
-
-            traceback.print_exc()
+        except Exception:
+            # logged with the traceback so an error reporter attached to logging picks it up
+            logger.exception("Error fetching flows for %s from %s", org.name, backend_obj.slug)
 
     logger.info("Fetch %s flows took %ss" % (org.name, time.time() - start))
 

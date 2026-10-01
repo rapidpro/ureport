@@ -84,8 +84,6 @@ fabconfig.py
 
 # ignore sitestatic directory
 sitestatic/
-config/
-deploy
 media/
 db/
 
