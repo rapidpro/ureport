@@ -4,33 +4,11 @@ import os
 import sys
 from datetime import timedelta
 
-import sentry_sdk
 from celery.schedules import crontab
-from sentry_sdk.integrations.celery import CeleryIntegration
-from sentry_sdk.integrations.django import DjangoIntegration
-from sentry_sdk.integrations.logging import LoggingIntegration, ignore_logger
 
 from django.forms import Textarea
 from django.utils.csp import CSP
 from django.utils.translation import gettext_lazy as _
-
-from ureport import __version__
-
-SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
-
-if SENTRY_DSN:  # pragma: no cover
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,
-        # which deployment an event came from, for when several report to the same project - unset leaves the SDK's
-        # default of "production"
-        environment=os.environ.get("SENTRY_ENVIRONMENT"),
-        release=__version__,
-        integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
-        send_default_pii=True,
-        traces_sample_rate=0.0,
-    )
-    ignore_logger("django.security.DisallowedHost")
-
 
 # -----------------------------------------------------------------------------------
 # Sets TESTING to True if this configuration is read during a unit test
@@ -40,7 +18,9 @@ TESTING = sys.argv[1:2] == ["test"]
 DEBUG = True
 THUMBNAIL_DEBUG = DEBUG
 
-ADMINS = (("Nyaruka", "code@nyaruka.com"),)
+# who Django mails about server errors - nobody until a deployment names its operators, since the default
+# logging config sends a mail for every 500 whenever this is non-empty
+ADMINS = []
 
 MANAGERS = ADMINS
 
@@ -57,19 +37,19 @@ DATABASES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-# set the mail settings, we send through gmail
+# outgoing mail - placeholders a deployment overrides in its settings
 MAILERS = {
     "default": {
         "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
         "OPTIONS": {
-            "host": "smtp.gmail.com",
-            "username": "server@nyaruka.com",
+            "host": "smtp.example.com",
+            "username": "server@example.com",
             "password": "NOTREAL",
             "use_tls": True,
         },
     }
 }
-DEFAULT_FROM_EMAIL = "server@nyaruka.com"
+DEFAULT_FROM_EMAIL = "server@example.com"
 
 EMPTY_SUBDOMAIN_HOST = "http://localhost:8000"
 SITE_API_HOST = "http://localhost:8001"
@@ -811,7 +791,6 @@ TEMPLATES = [
                 "ureport.public.context_processors.set_linked_sites",
                 "ureport.public.context_processors.set_config_display_flags",
                 "ureport.public.context_processors.set_org_lang_params",
-                "ureport.public.context_processors.set_story_widget_url",
             ],
             "loaders": [
                 "django.template.loaders.filesystem.Loader",
@@ -2080,8 +2059,6 @@ REST_FRAMEWORK = {
 
 
 SWAGGER_SETTINGS = {"SECURITY_DEFINITIONS": {"basic": {"type": "basic"}}}
-
-STORY_WIDGET_URL = "https://ureportapp.ilhasoft.mobi/widget/"
 
 
 LOGGING = {

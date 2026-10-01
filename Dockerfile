@@ -57,4 +57,4 @@ EXPOSE 8000
 #   celery -A ureport worker -B -Q sync -Ofair --loglevel=INFO
 # the access log goes to stdout as JSON, built by a logger class rather than a format string so
 # client-controlled values are escaped
-CMD ["gunicorn", "ureport.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "--access-logfile", "-", "--logger-class", "ureport.gunicorn.JSONAccessLogger", "-c", "python:ureport.gunicorn_conf"]
+CMD ["gunicorn", "ureport.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "--access-logfile", "-", "--logger-class", "ureport.gunicorn.JSONAccessLogger"]

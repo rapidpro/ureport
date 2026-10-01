@@ -78,14 +78,9 @@ dash.sqlite
 
 # never check in the settings file/link
 ureport/settings.py
-fabric
-fabfile.py
-fabconfig.py
 
 # ignore sitestatic directory
 sitestatic/
-config/
-deploy
 media/
 db/
 

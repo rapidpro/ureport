@@ -32,15 +32,6 @@
         color: #333;
         font-size: 14px;
       }
-
-      .reference {
-        width: 460px;
-        margin: 30px auto 0;
-        padding: 20px;
-        background: #f3f3f3;
-        font-size: 14px;
-        text-align: center;
-      }
     </style>
   </head>
   <body>
@@ -55,11 +46,5 @@
       <br>
       <br>
     </div>
-    {% if request.sentry.id %}
-      <div class="reference">
-        If you'd like to contact us about this error, please be sure to include your reference number
-        <b>{{ request.sentry.id }}</b>
-      </div>
-    {% endif %}
   </body>
 </html>

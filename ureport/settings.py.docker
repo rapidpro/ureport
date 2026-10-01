@@ -55,7 +55,7 @@ if env_bool("DJANGO_SECURE", True):
     SECURE_HSTS_SECONDS = 86400
 
 if os.environ.get("ADMIN_EMAIL"):
-    ADMINS = (("Ops", os.environ["ADMIN_EMAIL"]),)
+    ADMINS = [os.environ["ADMIN_EMAIL"]]
     MANAGERS = ADMINS
 
 MAILERS = {

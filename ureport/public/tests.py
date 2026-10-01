@@ -134,12 +134,6 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
         self.assertEqual("https://example.com/stories", response.context["stories_link"])
 
-    def test_set_story_widget_url(self):
-        home_url = reverse("public.index")
-        response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertTrue(response.context["story_widget_url"])
-
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
     @mock.patch("django.core.cache.cache.get")
     @mock.patch("ureport.public.views.get_global_count")
