@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if verified %}
+  <span class="tag is-primary"><i class="fas fa-check-circle"></i>&nbsp;{% trans "Verified" %}</span>
+{% else %}
+  <span class="tag is-warning is-light"><i class="fas fa-envelope"></i>&nbsp;{% trans "Not verified" %}</span>
+{% endif %}

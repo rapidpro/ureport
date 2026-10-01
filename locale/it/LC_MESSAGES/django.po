@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -897,6 +897,10 @@ msgstr "Backends"
 msgid "You can resend an invite using the field above"
 msgstr "Puoi inviare di nuovo un invito usando il campo qui sopra"
 
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
+
 msgid "Add os Select tags"
 msgstr "Aggiungi o seleziona tag"
 
@@ -1309,6 +1313,18 @@ msgstr "Riprendi"
 
 msgid "Force resync"
 msgstr "Forza la risincronizzazione"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1993,9 +2009,6 @@ msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

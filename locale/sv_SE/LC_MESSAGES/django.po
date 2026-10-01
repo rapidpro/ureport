@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Malin Åkerlöf <malin.akerlof@unicef.se>, 2021\n"
 "Language-Team: Swedish (Sweden) (https://www.transifex.com/rapidpro/teams/226/sv_SE/)\n"
@@ -893,6 +893,10 @@ msgstr "Backends"
 msgid "You can resend an invite using the field above"
 msgstr "Du kan skicka en inbjudan igen med hjälp av fältet ovan"
 
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
+
 msgid "Add os Select tags"
 msgstr "Lägg till eller välj etiketter"
 
@@ -1304,6 +1308,18 @@ msgstr "Återuppta"
 
 msgid "Force resync"
 msgstr "Tvinga omsynkronisering"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1988,9 +2004,6 @@ msgid "Something to trigger localizations"
 msgstr "Något som kommer att utlösa lokalisering"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

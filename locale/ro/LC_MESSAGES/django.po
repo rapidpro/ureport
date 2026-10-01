@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -902,6 +902,10 @@ msgstr "Backends"
 msgid "You can resend an invite using the field above"
 msgstr "Poți retrimite o invitație folosind câmpul de mai sus"
 
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
+
 msgid "Add os Select tags"
 msgstr "Adaugă sau selectează tag-uri"
 
@@ -1316,6 +1320,18 @@ msgstr "Reia"
 
 msgid "Force resync"
 msgstr "Forțează resincronizarea"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -2000,9 +2016,6 @@ msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

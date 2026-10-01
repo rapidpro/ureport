@@ -1,4 +1,5 @@
 from allauth.account.adapter import get_adapter as get_account_adapter
+from allauth.account.models import EmailAddress
 from allauth.mfa.models import Authenticator
 
 from django import forms
@@ -6,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -62,7 +64,7 @@ class UserCRUDL(SmartUserCRUDL):
 
     class List(SmartUserCRUDL.List):
         search_fields = ("email__icontains", "first_name__icontains", "last_name__icontains")
-        fields = ("email", "name", "group", "mfa", "last_login")
+        fields = ("email", "name", "group", "verified", "mfa", "last_login")
         link_fields = ("email", "name")
         default_order = "email"
         field_config = {"mfa": dict(label=_("2FA"))}
@@ -71,11 +73,18 @@ class UserCRUDL(SmartUserCRUDL):
             return (
                 super()
                 .get_queryset(**kwargs)
-                .prefetch_related(Prefetch("authenticator_set", queryset=Authenticator.objects.all()))
+                .prefetch_related(
+                    Prefetch("authenticator_set", queryset=Authenticator.objects.all()),
+                    Prefetch("emailaddress_set", queryset=EmailAddress.objects.filter(verified=True)),
+                )
             )
 
+        def get_verified(self, obj):
+            verified = any(a.email == obj.email for a in obj.emailaddress_set.all())
+            return render_to_string("users/verified_tag.html", {"verified": verified})
+
         def get_mfa(self, obj):
-            return "✓" if obj.authenticator_set.all() else ""
+            return render_to_string("users/mfa_tag.html", {"mfa": bool(obj.authenticator_set.all())})
 
     class Create(SmartUserCRUDL.Create):
         form_class = UserForm

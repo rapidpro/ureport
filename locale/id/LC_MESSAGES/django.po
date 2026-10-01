@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -893,6 +893,10 @@ msgstr "Backend"
 msgid "You can resend an invite using the field above"
 msgstr "Anda dapat mengirim ulang undangan menggunakan kolom di atas"
 
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
+
 msgid "Add os Select tags"
 msgstr "Tambah atau pilih tag"
 
@@ -1302,6 +1306,18 @@ msgstr "Lanjutkan"
 
 msgid "Force resync"
 msgstr "Paksa sinkronisasi ulang"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1986,9 +2002,6 @@ msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

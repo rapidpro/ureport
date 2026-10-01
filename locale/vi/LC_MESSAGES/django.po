@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -891,6 +891,10 @@ msgstr "Backend"
 msgid "You can resend an invite using the field above"
 msgstr "Bạn có thể gửi lại lời mời bằng trường ở trên"
 
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
+
 msgid "Add os Select tags"
 msgstr "Thêm hoặc chọn thẻ"
 
@@ -1300,6 +1304,18 @@ msgstr "Tiếp tục"
 
 msgid "Force resync"
 msgstr "Buộc đồng bộ lại"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1984,9 +2000,6 @@ msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

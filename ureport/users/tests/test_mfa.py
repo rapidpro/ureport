@@ -131,8 +131,8 @@ class MFATest(UreportTest):
         response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(200, response.status_code)
         self.assertContains(response, "2FA")
-        self.assertEqual("✓", response.context["view"].get_mfa(self.editor))
-        self.assertEqual("", response.context["view"].get_mfa(self.admin))
+        self.assertNotIn("No 2FA", response.context["view"].get_mfa(self.editor))
+        self.assertIn("No 2FA", response.context["view"].get_mfa(self.admin))
 
         response = self.client.get(update_url, SERVER_NAME="nigeria.ureport.io")
         self.assertContains(response, disable_url)

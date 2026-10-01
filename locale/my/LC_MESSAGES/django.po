@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -899,6 +899,10 @@ msgstr "Backend များ"
 msgid "You can resend an invite using the field above"
 msgstr "အထက်ပါအကွက်ကို အသုံးပြု၍ ဖိတ်ကြားချက်ကို ပြန်လည်ပေးပို့နိုင်သည်"
 
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
+
 msgid "Add os Select tags"
 msgstr "Tag များ ထည့်ရန် သို့မဟုတ် ရွေးချယ်ရန်"
 
@@ -1308,6 +1312,18 @@ msgstr "ပြန်လည်ဆက်လက်ရန်"
 
 msgid "Force resync"
 msgstr "အတင်း ပြန်လည် sync လုပ်ရန်"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1992,9 +2008,6 @@ msgid "Something to trigger localizations"
 msgstr "Localization များ စတင်စေရန် တစ်ခုခု"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format

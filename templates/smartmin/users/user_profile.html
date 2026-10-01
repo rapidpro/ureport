@@ -1,10 +1,26 @@
-{% extends "smartmin/update.html" %}
-{% load i18n %}
+{% extends "allauth/layouts/manage.html" %}
+{% load i18n allauth %}
 
-{% block post-form %}
-  <div class="buttons">
-    <a href="{% url 'account_change_password' %}" class="button">{% trans "Change Password" %}</a>
-    <a href="{% url 'account_email' %}" class="button">{% trans "Change Email" %}</a>
-    <a href="{% url 'mfa_index' %}" class="button">{% trans "Two-Factor Authentication" %}</a>
-  </div>
-{% endblock post-form %}
+{% block head_title %}
+  {% trans "Profile" %}
+{% endblock head_title %}
+{% block content %}
+  {% element h1 %}
+  {% trans "Profile" %}
+  {% endelement %}
+  {% element form form=form method="post" action=request.path %}
+  {% slot body %}
+  {% csrf_token %}
+  {% element field type="email" id="id_email" value=request.user.email disabled=True %}
+  {% slot label %}{% trans "Email" %}{% endslot %}
+  {% endelement %}
+  {% element fields form=form %}
+  {% endelement %}
+  {% endslot %}
+  {% slot actions %}
+  {% element button type="submit" %}
+  {% trans "Save" %}
+  {% endelement %}
+  {% endslot %}
+  {% endelement %}
+{% endblock content %}

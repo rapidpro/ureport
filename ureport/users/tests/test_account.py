@@ -1,6 +1,7 @@
 import re
 
 from allauth.account.models import EmailAddress
+from allauth.mfa.models import Authenticator
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -8,6 +9,7 @@ from django.core import mail
 from django.urls import URLPattern, URLResolver, reverse
 
 from dash.orgs.middleware import ALLOW_NO_ORG
+from dash.orgs.models import Invitation
 from ureport.tests import UreportTest
 
 User = get_user_model()
@@ -255,9 +257,22 @@ class UserCRUDLTest(UreportTest):
         # users are listed and searched by email, never username
         response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(200, response.status_code)
-        self.assertEqual(["email", "name", "group", "mfa", "last_login"], list(response.context["fields"]))
+        self.assertEqual(["email", "name", "group", "verified", "mfa", "last_login"], list(response.context["fields"]))
         self.assertContains(response, self.admin.email)
         self.assertNotContains(response, "Username")
+
+        # only a verified address matching the user's current email counts
+        def listed_verified():
+            response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
+            admin = next(u for u in response.context["object_list"] if u == self.admin)
+            return response.context["view"].get_verified(admin)
+
+        self.assertIn("Not verified", listed_verified())
+        EmailAddress.objects.create(user=self.admin, email=self.admin.email, verified=False, primary=True)
+        self.assertIn("Not verified", listed_verified())
+        verify_email(self.admin)
+        self.assertNotIn("Not verified", listed_verified())
+        self.assertIn("Verified", listed_verified())
 
         response = self.client.get(list_url + "?search=administrator", SERVER_NAME="nigeria.ureport.io")
         self.assertEqual([self.admin], list(response.context["object_list"]))
@@ -324,6 +339,34 @@ class UserCRUDLTest(UreportTest):
         ):
             response = self.client.get(path, SERVER_NAME="nigeria.ureport.io")
             self.assertEqual(404, response.status_code, path)
+
+
+class ManageAccountsTest(UreportTest):
+    def test_account_status(self):
+        manage_url = reverse("orgs.org_manage_accounts")
+
+        editor = self.create_user("Editor")
+        self.uganda.editors.add(editor)
+        verify_email(editor)
+        Authenticator.objects.create(user=editor, type=Authenticator.Type.TOTP, data={})
+        Invitation.objects.create(
+            org=self.uganda, email="invited@nyaruka.com", user_group="E", created_by=self.admin, modified_by=self.admin
+        )
+
+        self.login(self.admin)
+
+        response = self.client.get(manage_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(200, response.status_code)
+
+        # the admin has neither verified their email nor set up 2FA, the editor has done both
+        self.assertContains(response, "Not verified", count=1)
+        self.assertContains(response, "No 2FA", count=1)
+        self.assertContains(response, "fa-check-circle", count=1)
+        self.assertContains(response, "fa-shield-alt", count=1)
+
+        # invites only show when they were sent
+        self.assertContains(response, "invited@nyaruka.com")
+        self.assertContains(response, "Invite sent", count=1)
 
 
 class EmailAddressSyncTest(UreportTest):

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 14:57+0000\n"
+"POT-Creation-Date: 2026-10-01 13:10+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -899,6 +899,10 @@ msgstr "ฺBackends"
 msgid "You can resend an invite using the field above"
 msgstr "คุณสามารถส่งคำเชิญอีกครั้งได้โดยใช้ช่องด้านบน"
 
+#, python-format
+msgid "Invite sent %(date)s"
+msgstr ""
+
 msgid "Add os Select tags"
 msgstr "เพิ่มหรือเลือกแท็ก"
 
@@ -1308,6 +1312,18 @@ msgstr "ทำงานต่อ"
 
 msgid "Force resync"
 msgstr "บังคับซิงค์ใหม่"
+
+msgid "2FA"
+msgstr ""
+
+msgid "No 2FA"
+msgstr ""
+
+msgid "Verified"
+msgstr ""
+
+msgid "Not verified"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1992,9 +2008,6 @@ msgid "Something to trigger localizations"
 msgstr "สิ่งที่จะเริ่มต้นการแปลภาษาท้องถิ่น"
 
 msgid "A user with this email already exists."
-msgstr ""
-
-msgid "2FA"
 msgstr ""
 
 #, python-format
