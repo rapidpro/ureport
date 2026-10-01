@@ -61,12 +61,12 @@
             {% account_status user as status %}
             <div class="tags account-status">
               {% if status.verified %}
-                <span class="tag is-success is-light"><i class="fas fa-check-circle"></i>&nbsp;{% trans "Verified" %}</span>
+                <span class="tag is-primary"><i class="fas fa-check-circle"></i>&nbsp;{% trans "Verified" %}</span>
               {% else %}
                 <span class="tag is-warning is-light"><i class="fas fa-envelope"></i>&nbsp;{% trans "Not verified" %}</span>
               {% endif %}
               {% if status.mfa %}
-                <span class="tag is-success is-light"><i class="fas fa-shield-alt"></i>&nbsp;{% trans "2FA" %}</span>
+                <span class="tag is-primary"><i class="fas fa-shield-alt"></i>&nbsp;{% trans "2FA" %}</span>
               {% else %}
                 <span class="tag is-light"><i class="fas fa-unlock"></i>&nbsp;{% trans "No 2FA" %}</span>
               {% endif %}
