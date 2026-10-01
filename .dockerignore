@@ -14,8 +14,6 @@ __pycache__
 *.sqlite
 dash
 smartmin
-fabric
-deploy/__pycache__
 
 # a developer's personal settings must never reach the image - the build symlinks
 # settings.py.docker into place instead

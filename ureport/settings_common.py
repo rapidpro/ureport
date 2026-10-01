@@ -18,8 +18,9 @@ TESTING = sys.argv[1:2] == ["test"]
 DEBUG = True
 THUMBNAIL_DEBUG = DEBUG
 
-# who gets error reports; a deployment sets its own operators in its settings
-ADMINS = (("Admin", "admin@example.com"),)
+# who Django mails about server errors - nobody until a deployment names its operators, since the default
+# logging config sends a mail for every 500 whenever this is non-empty
+ADMINS = []
 
 MANAGERS = ADMINS
 
@@ -790,7 +791,6 @@ TEMPLATES = [
                 "ureport.public.context_processors.set_linked_sites",
                 "ureport.public.context_processors.set_config_display_flags",
                 "ureport.public.context_processors.set_org_lang_params",
-                "ureport.public.context_processors.set_story_widget_url",
             ],
             "loaders": [
                 "django.template.loaders.filesystem.Loader",
@@ -2059,9 +2059,6 @@ REST_FRAMEWORK = {
 
 
 SWAGGER_SETTINGS = {"SECURITY_DEFINITIONS": {"basic": {"type": "basic"}}}
-
-# the story widget's base URL when a deployment hosts one; unset leaves it out of the pages
-STORY_WIDGET_URL = os.environ.get("STORY_WIDGET_URL")
 
 
 LOGGING = {
