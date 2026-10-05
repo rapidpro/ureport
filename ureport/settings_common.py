@@ -1792,6 +1792,14 @@ COUNTRY_FLAGS_SITES = [
         region="LACRO",
     ),
     dict(
+        name="Peru",
+        host="//peru.ureport.in",
+        flag="",
+        country_codes=["PER"],
+        count_link="http://peru.ureport.in/count/",
+        region="LACRO",
+    ),
+    dict(
         name="Philippines",
         host="//philippines.ureport.in",
         flag="flag_philippines.png",
