@@ -43,6 +43,7 @@ from ureport.stats.models import (
     PollStats,
     PollStatsCounter,
     PollWordCloud,
+    SchemeSegment,
 )
 from ureport.syncjobs.models import SyncJob
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
@@ -3161,6 +3162,89 @@ class PollResultsTest(UreportTest):
             self.poll_question.calculate_results(segment=dict(location="Ward", parent="R-OYO"))[0]["categories"],
             [{"count": 1, "label": "Yes"}, {"count": 0, "label": "No"}],
         )
+
+    def test_rebuild_poll_results_counts_aggregates(self):
+        rule_uuid = uuid.uuid4()
+        yes_category = self.create_poll_response_category(self.poll_question, rule_uuid, "Yes")
+
+        yesterday = self.now - timedelta(days=1)
+        for born, gender, scheme, date in [
+            (1990, "M", "tel", self.now),
+            (1990, "F", "tel", self.now),
+            (2000, "M", "telegram", yesterday),
+            (None, None, None, yesterday),
+        ]:
+            PollResult.objects.create(
+                org=self.nigeria,
+                flow=self.poll.flow_uuid,
+                ruleset=self.poll_question.flow_result.result_uuid,
+                contact="contact-uuid",
+                category="Yes",
+                text="Yeah",
+                completed=False,
+                born=born,
+                gender=gender,
+                scheme=scheme,
+                date=date,
+            )
+
+        self.assertFalse(SchemeSegment.objects.filter(scheme="telegram").exists())
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertTrue(SchemeSegment.objects.filter(scheme="telegram").exists())
+
+        # one row per distinct (flow result, category, scope), with stats keys that differ only in other fields summed
+        def stats_counts():
+            return {
+                (c.flow_result_category_id, c.scope): c.count
+                for c in PollStatsCounter.objects.filter(org=self.nigeria, flow_result=self.poll_question.flow_result)
+            }
+
+        yes_id = yes_category.flow_result_category_id
+        age_1990 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 1990)
+        age_2000 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 2000)
+        expected = {
+            (yes_id, "all"): 4,
+            (yes_id, f"age:{age_1990}"): 2,
+            (yes_id, f"age:{age_2000}"): 1,
+            (yes_id, "gender:m"): 2,
+            (yes_id, "gender:f"): 1,
+            (yes_id, "scheme:tel"): 2,
+            (yes_id, "scheme:telegram"): 1,
+        }
+        self.assertEqual(expected, stats_counts())
+        self.assertEqual(len(expected), PollStatsCounter.objects.count())
+
+        engagement = {
+            (c.scope, c.day): c.count
+            for c in PollEngagementDailyCount.objects.filter(
+                org=self.nigeria, flow_result=self.poll_question.flow_result
+            )
+        }
+        today, yesterday = self.now.date(), yesterday.date()
+        self.assertEqual(
+            {
+                ("all", today): 2,
+                ("all", yesterday): 2,
+                (f"age:{age_1990}", today): 2,
+                (f"age:{age_2000}", yesterday): 1,
+                ("gender:m", today): 1,
+                ("gender:f", today): 1,
+                ("gender:m", yesterday): 1,
+                ("scheme:tel", today): 2,
+                ("scheme:telegram", yesterday): 1,
+            },
+            engagement,
+        )
+
+        # a failed rebuild leaves the existing counters in place
+        PollResult.objects.filter(org=self.nigeria, born=None).delete()
+        with patch("ureport.stats.models.PollEngagementDailyCount.objects.bulk_create", side_effect=ValueError):
+            with self.assertRaises(ValueError):
+                self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual(expected, stats_counts())
 
 
 class PollsTasksTest(UreportTest):
