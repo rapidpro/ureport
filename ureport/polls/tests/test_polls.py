@@ -4,6 +4,7 @@ import uuid
 import zoneinfo
 from datetime import datetime, timedelta, timezone as tzone
 
+from django_valkey import get_valkey_connection
 from mock import Mock, patch
 
 from django.conf import settings
@@ -35,6 +36,7 @@ from ureport.polls.tasks import (
 )
 from ureport.polls.templatetags.ureport import question_segmented_results
 from ureport.stats.models import (
+    STATS_COUNTS_SQUASH_LOCK,
     AgeSegment,
     ContactActivity,
     ContactActivityCounter,
@@ -3168,25 +3170,30 @@ class PollResultsTest(UreportTest):
         yes_category = self.create_poll_response_category(self.poll_question, rule_uuid, "Yes")
 
         yesterday = self.now - timedelta(days=1)
-        for born, gender, scheme, date in [
-            (1990, "M", "tel", self.now),
-            (1990, "F", "tel", self.now),
-            (2000, "M", "telegram", yesterday),
-            (None, None, None, yesterday),
-        ]:
+        long_ago = self.now - timedelta(days=500)
+        ruleset = self.poll_question.flow_result.result_uuid
+
+        def create_result(contact, category="Yes", ruleset=ruleset, date=self.now, **kwargs):
             PollResult.objects.create(
                 org=self.nigeria,
                 flow=self.poll.flow_uuid,
-                ruleset=self.poll_question.flow_result.result_uuid,
-                contact="contact-uuid",
-                category="Yes",
+                ruleset=ruleset,
+                contact=contact,
+                category=category,
                 text="Yeah",
                 completed=False,
-                born=born,
-                gender=gender,
-                scheme=scheme,
                 date=date,
+                **kwargs,
             )
+
+        create_result("c1", born=1990, gender="M", scheme="tel")
+        create_result("c2", born=1990, gender="F", scheme="tel")
+        create_result("c3", born=2000, gender="M", scheme="telegram", date=yesterday)
+        create_result("c4", date=yesterday)
+        create_result("c5", category="Maybe", gender="F")  # no matching category
+        create_result("c6", date=long_ago)  # too old for engagement
+        create_result("c7", state="R-LAGOS", district="R-OYO", ward="R-IKEJA")
+        create_result("c8", ruleset="other-ruleset", gender="M")  # not a question of this poll
 
         self.assertFalse(SchemeSegment.objects.filter(scheme="telegram").exists())
 
@@ -3205,19 +3212,25 @@ class PollResultsTest(UreportTest):
         age_1990 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 1990)
         age_2000 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 2000)
         expected = {
-            (yes_id, "all"): 4,
+            (yes_id, "all"): 6,
             (yes_id, f"age:{age_1990}"): 2,
             (yes_id, f"age:{age_2000}"): 1,
             (yes_id, "gender:m"): 2,
             (yes_id, "gender:f"): 1,
             (yes_id, "scheme:tel"): 2,
             (yes_id, "scheme:telegram"): 1,
+            (yes_id, "state:R-LAGOS"): 1,
+            (yes_id, "district:R-OYO"): 1,
+            (yes_id, "ward:R-IKEJA"): 1,
+            (None, "all"): 1,
+            (None, "gender:f"): 1,
         }
         self.assertEqual(expected, stats_counts())
         self.assertEqual(len(expected), PollStatsCounter.objects.count())
 
+        # likewise for engagement, which leaves out districts, wards and results over 400 days old
         engagement = {
-            (c.scope, c.day): c.count
+            (c.is_responded, c.scope, c.day): c.count
             for c in PollEngagementDailyCount.objects.filter(
                 org=self.nigeria, flow_result=self.poll_question.flow_result
             )
@@ -3225,26 +3238,33 @@ class PollResultsTest(UreportTest):
         today, yesterday = self.now.date(), yesterday.date()
         self.assertEqual(
             {
-                ("all", today): 2,
-                ("all", yesterday): 2,
-                (f"age:{age_1990}", today): 2,
-                (f"age:{age_2000}", yesterday): 1,
-                ("gender:m", today): 1,
-                ("gender:f", today): 1,
-                ("gender:m", yesterday): 1,
-                ("scheme:tel", today): 2,
-                ("scheme:telegram", yesterday): 1,
+                (True, "all", today): 3,
+                (True, "all", yesterday): 2,
+                (True, f"age:{age_1990}", today): 2,
+                (True, f"age:{age_2000}", yesterday): 1,
+                (True, "gender:m", today): 1,
+                (True, "gender:f", today): 1,
+                (True, "gender:m", yesterday): 1,
+                (True, "scheme:tel", today): 2,
+                (True, "scheme:telegram", yesterday): 1,
+                (True, "state:R-LAGOS", today): 1,
+                (False, "all", today): 1,
+                (False, "gender:f", today): 1,
             },
             engagement,
         )
+        self.assertEqual(len(engagement), PollEngagementDailyCount.objects.count())
 
         # a failed rebuild leaves the existing counters in place
-        PollResult.objects.filter(org=self.nigeria, born=None).delete()
+        PollResult.objects.filter(org=self.nigeria, contact="c4").delete()
         with patch("ureport.stats.models.PollEngagementDailyCount.objects.bulk_create", side_effect=ValueError):
             with self.assertRaises(ValueError):
                 self.poll.rebuild_poll_results_counts()
 
         self.assertEqual(expected, stats_counts())
+
+        # and the squash lock is released again
+        self.assertIsNone(get_valkey_connection().get(STATS_COUNTS_SQUASH_LOCK))
 
 
 class PollsTasksTest(UreportTest):

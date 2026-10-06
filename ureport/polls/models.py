@@ -101,6 +101,9 @@ class Poll(SmartModel):
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
+    # how long a rebuild waits for, and then holds, the stats squash lock while it replaces a poll's counters
+    POLL_REPLACE_COUNTS_LOCK_TIMEOUT = 60 * 30
+
     # archive pulls have no pause/resume checkpoint so their lock lease must cover a full worst-case run
     POLL_PULL_ARCHIVES_LOCK_TIMEOUT = 60 * 60 * 12
 
@@ -238,7 +241,6 @@ class Poll(SmartModel):
 
     def delete_poll_stats(self):
         from ureport.stats.models import PollEngagementDailyCount, PollStatsCounter
-        from ureport.utils import chunk_list
 
         if self.stopped_syncing:
             logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id), exc_info=True)
@@ -246,34 +248,19 @@ class Poll(SmartModel):
 
         flow_result_ids = self.questions.all().values_list("flow_result_id", flat=True)
 
-        poll_stats_counters_ids = PollStatsCounter.objects.filter(
+        # a single statement each, so the delete covers every matching row rather than a snapshot of their ids
+        num_deleted, _ = PollStatsCounter.objects.filter(
             org_id=self.org_id, flow_result_id__in=flow_result_ids
-        )
-        poll_stats_counters_ids = poll_stats_counters_ids.values_list("pk", flat=True)
+        ).delete()
 
-        poll_stats_counters_ids_count = len(poll_stats_counters_ids)
+        logger.info("Deleted %d poll stats counters for poll #%d on org #%d" % (num_deleted, self.pk, self.org_id))
 
-        for batch in chunk_list(poll_stats_counters_ids, 1000):
-            PollStatsCounter.objects.filter(pk__in=batch).delete()
+        num_deleted, _ = PollEngagementDailyCount.objects.filter(
+            org_id=self.org_id, flow_result_id__in=flow_result_ids
+        ).delete()
 
         logger.info(
-            "Deleted %d poll stats counters for poll #%d on org #%d"
-            % (poll_stats_counters_ids_count, self.pk, self.org_id)
-        )
-
-        poll_engagement_daily_count_ids = PollEngagementDailyCount.objects.filter(
-            org_id=self.org_id, flow_result_id__in=flow_result_ids
-        )
-        poll_engagement_daily_count_ids = poll_engagement_daily_count_ids.values_list("pk", flat=True)
-
-        poll_engagement_daily_count_ids_count = len(poll_engagement_daily_count_ids)
-
-        for batch in chunk_list(poll_engagement_daily_count_ids, 1000):
-            PollEngagementDailyCount.objects.filter(pk__in=batch).delete()
-
-        logger.info(
-            "Deleted %d poll engagement daily counts for poll #%d on org #%d"
-            % (poll_engagement_daily_count_ids_count, self.pk, self.org_id)
+            "Deleted %d poll engagement daily counts for poll #%d on org #%d" % (num_deleted, self.pk, self.org_id)
         )
 
     def delete_poll_results(self):
@@ -361,11 +348,13 @@ class Poll(SmartModel):
         import time
 
         from ureport.stats.models import (
+            STATS_COUNTS_SQUASH_LOCK,
             AgeSegment,
             PollEngagementDailyCount,
             PollStatsCounter,
             SchemeSegment,
         )
+        from ureport.utils import chunk_list
 
         start = time.time()
 
@@ -492,37 +481,45 @@ class Poll(SmartModel):
                         ):
                             engagement_counts[(flow_result_id, bool(flow_category_id), scope, date.date())] += count
 
-                # replace the existing counters in one transaction so a failed rebuild leaves them in place
-                with transaction.atomic():
-                    self.delete_poll_stats()
+                del stats_dict
 
-                    PollStatsCounter.objects.bulk_create(
-                        [
-                            PollStatsCounter(
-                                org_id=org_id,
-                                flow_result_id=flow_result_id,
-                                flow_result_category_id=flow_category_id,
-                                scope=scope,
-                                count=count,
-                            )
-                            for (flow_result_id, flow_category_id, scope), count in stats_counts.items()
-                        ],
-                        batch_size=1000,
+                stats_counters = (
+                    PollStatsCounter(
+                        org_id=org_id,
+                        flow_result_id=flow_result_id,
+                        flow_result_category_id=flow_category_id,
+                        scope=scope,
+                        count=count,
                     )
-                    PollEngagementDailyCount.objects.bulk_create(
-                        [
-                            PollEngagementDailyCount(
-                                org_id=org_id,
-                                flow_result_id=flow_result_id,
-                                is_responded=is_responded,
-                                scope=scope,
-                                day=day,
-                                count=count,
-                            )
-                            for (flow_result_id, is_responded, scope, day), count in engagement_counts.items()
-                        ],
-                        batch_size=1000,
+                    for (flow_result_id, flow_category_id, scope), count in stats_counts.items()
+                )
+                engagement_counters = (
+                    PollEngagementDailyCount(
+                        org_id=org_id,
+                        flow_result_id=flow_result_id,
+                        is_responded=is_responded,
+                        scope=scope,
+                        day=day,
+                        count=count,
                     )
+                    for (flow_result_id, is_responded, scope, day), count in engagement_counts.items()
+                )
+
+                # replace the existing counters in one transaction so a failed rebuild leaves them in place, holding
+                # the squash lock so squashing can't replace rows the delete would then miss
+                with r.lock(
+                    STATS_COUNTS_SQUASH_LOCK,
+                    timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
+                    blocking_timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
+                ):
+                    with transaction.atomic():
+                        self.delete_poll_stats()
+
+                        # bulk_create builds a list from what it's given, so give it a chunk at a time
+                        for batch in chunk_list(stats_counters, 1000):
+                            PollStatsCounter.objects.bulk_create(batch)
+                        for batch in chunk_list(engagement_counters, 1000):
+                            PollEngagementDailyCount.objects.bulk_create(batch)
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
