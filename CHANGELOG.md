@@ -1,3 +1,6 @@
+## v1.8.5 (2026-10-07)
+ * Size error page logo via stylesheet and let it shrink on narrow screens
+
 ## v1.8.4 (2026-10-07)
  * Fix max width for logo on error pages
  * Rebuild poll counters by aggregating results in the database one question at a time, inserting them in chunks
