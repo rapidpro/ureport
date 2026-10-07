@@ -5,6 +5,8 @@ import logging
 import uuid
 from collections import defaultdict
 from datetime import timedelta, timezone as tzone
+from itertools import groupby
+from operator import itemgetter
 
 from django_valkey import get_valkey_connection
 
@@ -13,7 +15,7 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.db import connection, models, transaction
 from django.db.models import Count, F, Prefetch, Sum
-from django.db.models.functions import Lower
+from django.db.models.functions import Lower, Trunc
 from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.text import slugify
@@ -239,29 +241,52 @@ class Poll(SmartModel):
 
         return latest_synced_obj_time, pull_after_delete
 
-    def delete_poll_stats(self):
-        from ureport.stats.models import PollEngagementDailyCount, PollStatsCounter
+    def _replace_question_counters(self, r, flow_result_id, stats_counts, engagement_counts):
+        """
+        Replaces a question's stats counters and engagement daily counts with the given counts, keyed by
+        (flow_result_category_id, scope) and (is_responded, scope, day) respectively
+        """
+        from ureport.stats.models import STATS_COUNTS_SQUASH_LOCK, PollEngagementDailyCount, PollStatsCounter
+        from ureport.utils import chunk_list
 
-        if self.stopped_syncing:
-            logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id), exc_info=True)
-            return
-
-        flow_result_ids = self.questions.all().values_list("flow_result_id", flat=True)
-
-        # a single statement each, so the delete covers every matching row rather than a snapshot of their ids
-        num_deleted, _ = PollStatsCounter.objects.filter(
-            org_id=self.org_id, flow_result_id__in=flow_result_ids
-        ).delete()
-
-        logger.info("Deleted %d poll stats counters for poll #%d on org #%d" % (num_deleted, self.pk, self.org_id))
-
-        num_deleted, _ = PollEngagementDailyCount.objects.filter(
-            org_id=self.org_id, flow_result_id__in=flow_result_ids
-        ).delete()
-
-        logger.info(
-            "Deleted %d poll engagement daily counts for poll #%d on org #%d" % (num_deleted, self.pk, self.org_id)
+        stats_counters = (
+            PollStatsCounter(
+                org_id=self.org_id,
+                flow_result_id=flow_result_id,
+                flow_result_category_id=flow_category_id,
+                scope=scope,
+                count=count,
+            )
+            for (flow_category_id, scope), count in stats_counts.items()
         )
+        engagement_counters = (
+            PollEngagementDailyCount(
+                org_id=self.org_id,
+                flow_result_id=flow_result_id,
+                is_responded=is_responded,
+                scope=scope,
+                day=day,
+                count=count,
+            )
+            for (is_responded, scope, day), count in engagement_counts.items()
+        )
+
+        # replace them in one transaction so a failure leaves the existing counters in place, holding the squash lock
+        # so squashing can't replace rows the delete would then miss
+        with r.lock(
+            STATS_COUNTS_SQUASH_LOCK,
+            timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
+            blocking_timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
+        ):
+            with transaction.atomic():
+                PollStatsCounter.objects.filter(org_id=self.org_id, flow_result_id=flow_result_id).delete()
+                PollEngagementDailyCount.objects.filter(org_id=self.org_id, flow_result_id=flow_result_id).delete()
+
+                # bulk_create builds a list from what it's given, so give it a chunk at a time
+                for batch in chunk_list(stats_counters, 1000):
+                    PollStatsCounter.objects.bulk_create(batch)
+                for batch in chunk_list(engagement_counters, 1000):
+                    PollEngagementDailyCount.objects.bulk_create(batch)
 
     def delete_poll_results(self):
         from ureport.utils import chunk_list
@@ -347,14 +372,7 @@ class Poll(SmartModel):
     def rebuild_poll_results_counts(self):
         import time
 
-        from ureport.stats.models import (
-            STATS_COUNTS_SQUASH_LOCK,
-            AgeSegment,
-            PollEngagementDailyCount,
-            PollStatsCounter,
-            SchemeSegment,
-        )
-        from ureport.utils import chunk_list
+        from ureport.stats.models import AgeSegment, SchemeSegment
 
         start = time.time()
 
@@ -386,8 +404,6 @@ class Poll(SmartModel):
 
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                poll_results = PollResult.objects.filter(org_id=org_id, flow=flow).iterator(chunk_size=1000)
-
                 questions = self.questions.all().select_related("flow_result").prefetch_related("response_categories")
                 results_dict = dict()
 
@@ -397,129 +413,95 @@ class Poll(SmartModel):
 
                 for qsn in questions:
                     categories = qsn.response_categories.all().select_related("flow_result_category")
-                    categories_dict = {elt.flow_result_category.category.lower(): elt.id for elt in categories}
                     flow_categories_dict = {
                         elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories
                     }
                     results_dict[qsn.flow_result.result_uuid] = dict(
-                        id=qsn.id,
-                        flow_result_id=qsn.flow_result_id,
-                        categories=categories_dict,
-                        flow_categories=flow_categories_dict,
+                        flow_result_id=qsn.flow_result_id, flow_categories=flow_categories_dict
                     )
 
                 known_schemes = {elt.scheme.lower() for elt in SchemeSegment.objects.all()}
-
-                logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
-
-                processed_results = 0
-                stats_dict = defaultdict(int)
-
-                for result in poll_results:
-                    gen_stats = result.generate_poll_stats()
-                    for dict_key in gen_stats.keys():
-                        stats_dict[dict_key] += gen_stats[dict_key]
-
-                    processed_results += 1
-
-                    if processed_results % 50000 == 0:
-                        logger.info(
-                            "Rebuild counts progress... build counters dict for pair %s, %s, processed %d in %ds"
-                            % (org_id, flow, processed_results, time.time() - start)
-                        )
-
-                logger.info(
-                    "Rebuild counts progress... build counters dict for pair %s, %s, processed %d in %ds"
-                    % (org_id, flow, processed_results, time.time() - start)
-                )
-
-                # a counter row is identified by its model's squash_over fields, so sum counts over those here rather
-                # than creating a row per stats key for squashing to merge later - for large flows that's millions of
-                # model instances held in memory at once
-                stats_counts = defaultdict(int)
-                engagement_counts = defaultdict(int)
                 engagement_since = timezone.now() - timedelta(days=400)
 
-                for stat_tuple, count in stats_dict.items():
-                    _, ruleset, category, born, gender, state, district, ward, scheme, date = stat_tuple
-
-                    if ruleset not in results_dict:
-                        continue
-
-                    flow_result_id = results_dict[ruleset].get("flow_result_id")
-                    if not flow_result_id:
-                        continue
-
-                    flow_category_id = results_dict[ruleset].get("flow_categories", dict()).get(category)
-
-                    if scheme and scheme not in known_schemes:
-                        SchemeSegment.objects.get_or_create(scheme=scheme)
-                        known_schemes.add(scheme)
-
-                    scopes = ["all"]
-                    if born:
-                        scopes.append("age:%s" % AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
-                    if gender:
-                        scopes.append("gender:%s" % gender)
-                    if scheme:
-                        scopes.append("scheme:%s" % scheme)
-                    if ward:
-                        scopes.append("ward:%s" % ward)
-                    if district:
-                        scopes.append("district:%s" % district)
-                    if state:
-                        scopes.append("state:%s" % state)
-
-                    for scope in scopes:
-                        stats_counts[(flow_result_id, flow_category_id, scope)] += count
-
-                        if (
-                            date is not None
-                            and date >= engagement_since
-                            and "district:" not in scope
-                            and "ward:" not in scope
-                        ):
-                            engagement_counts[(flow_result_id, bool(flow_category_id), scope, date.date())] += count
-
-                del stats_dict
-
-                stats_counters = (
-                    PollStatsCounter(
-                        org_id=org_id,
-                        flow_result_id=flow_result_id,
-                        flow_result_category_id=flow_category_id,
-                        scope=scope,
-                        count=count,
-                    )
-                    for (flow_result_id, flow_category_id, scope), count in stats_counts.items()
-                )
-                engagement_counters = (
-                    PollEngagementDailyCount(
-                        org_id=org_id,
-                        flow_result_id=flow_result_id,
-                        is_responded=is_responded,
-                        scope=scope,
-                        day=day,
-                        count=count,
-                    )
-                    for (flow_result_id, is_responded, scope, day), count in engagement_counts.items()
+                # let the database count results grouped by the fields they're counted by, sorted by question so that
+                # only one question's counts are held at a time
+                groups = (
+                    PollResult.objects.filter(org_id=org_id, flow=flow)
+                    .annotate(ruleset_key=Lower("ruleset"), day=Trunc("date", "day", tzinfo=tzone.utc))
+                    .values("ruleset_key", "category", "born", "gender", "state", "district", "ward", "scheme", "day")
+                    .annotate(count=Count("id"))
+                    .order_by("ruleset_key")
+                    .iterator(chunk_size=10000)
                 )
 
-                # replace the existing counters in one transaction so a failed rebuild leaves them in place, holding
-                # the squash lock so squashing can't replace rows the delete would then miss
-                with r.lock(
-                    STATS_COUNTS_SQUASH_LOCK,
-                    timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
-                    blocking_timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
-                ):
-                    with transaction.atomic():
-                        self.delete_poll_stats()
+                rebuilt_flow_result_ids = set()
 
-                        # bulk_create builds a list from what it's given, so give it a chunk at a time
-                        for batch in chunk_list(stats_counters, 1000):
-                            PollStatsCounter.objects.bulk_create(batch)
-                        for batch in chunk_list(engagement_counters, 1000):
-                            PollEngagementDailyCount.objects.bulk_create(batch)
+                for ruleset, question_groups in groupby(groups, key=itemgetter("ruleset_key")):
+                    question = results_dict.get(ruleset)
+                    if not question or not question["flow_result_id"]:
+                        continue
+
+                    # a counter row is identified by its model's squash_over fields, so sum counts over those rather
+                    # than creating a row per group for squashing to merge later. Within a question the org and flow
+                    # result are fixed, and scopes and days repeat across keys, so they share one copy of each
+                    stats_counts = defaultdict(int)
+                    engagement_counts = defaultdict(int)
+                    shared = dict()
+                    num_groups = 0
+
+                    for group in question_groups:
+                        category, born, gender, state, district, ward, scheme = PollResult.get_stats_fields(
+                            group["category"],
+                            group["born"],
+                            group["gender"],
+                            group["state"],
+                            group["district"],
+                            group["ward"],
+                            group["scheme"],
+                        )
+                        date, count = group["day"], group["count"]
+                        flow_category_id = question["flow_categories"].get(category)
+                        num_groups += 1
+
+                        if scheme and scheme not in known_schemes:
+                            SchemeSegment.objects.get_or_create(scheme=scheme)
+                            known_schemes.add(scheme)
+
+                        scopes = ["all"]
+                        if born:
+                            scopes.append("age:%s" % AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
+                        if gender:
+                            scopes.append("gender:%s" % gender)
+                        if scheme:
+                            scopes.append("scheme:%s" % scheme)
+                        if ward:
+                            scopes.append("ward:%s" % ward)
+                        if district:
+                            scopes.append("district:%s" % district)
+                        if state:
+                            scopes.append("state:%s" % state)
+
+                        day = shared.setdefault(date.date(), date.date()) if date is not None else None
+
+                        for scope in scopes:
+                            scope = shared.setdefault(scope, scope)
+                            stats_counts[(flow_category_id, scope)] += count
+
+                            if day and date >= engagement_since and "district:" not in scope and "ward:" not in scope:
+                                engagement_counts[(bool(flow_category_id), scope, day)] += count
+
+                    self._replace_question_counters(r, question["flow_result_id"], stats_counts, engagement_counts)
+                    rebuilt_flow_result_ids.add(question["flow_result_id"])
+
+                    logger.info(
+                        "Rebuilt counts for question %s of pair %s, %s from %d result groups, %ds since start"
+                        % (ruleset, org_id, flow, num_groups, time.time() - start)
+                    )
+
+                # questions without any results still need any previous counters removing
+                for question in results_dict.values():
+                    if question["flow_result_id"] and question["flow_result_id"] not in rebuilt_flow_result_ids:
+                        self._replace_question_counters(r, question["flow_result_id"], {}, {})
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
@@ -1444,68 +1426,24 @@ class PollResult(models.Model):
 
     scheme = models.CharField(max_length=16, null=True)
 
-    def get_result_tuple(self):
-        if not self.org_id or not self.flow or not self.ruleset:
-            return ()
+    @classmethod
+    def get_stats_fields(cls, category, born, gender, state, district, ward, scheme) -> tuple:
+        """
+        Normalizes the fields results are counted by, so that values differing only by case are counted together
+        """
+        category = category.lower() if category else ""
+        if category in PollResponseCategory.IGNORED_CATEGORY_RULES:
+            category = ""
 
-        ruleset = ""
-        category = ""
-        state = ""
-        district = ""
-        ward = ""
-        born = ""
-        gender = ""
-        scheme = ""
-        text = ""
-        date = None
-        if self.date:
-            date = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
-
-        if self.text and self.text != "None":
-            text = self.text
-
-        if self.ruleset:
-            ruleset = self.ruleset.lower()
-
-        if (
-            self.category
-            and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES
-            or (
-                self.category is not None
-                and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES
-                and text
-            )
-        ):
-            category = self.category.lower()
-
-        if self.state:
-            state = self.state.upper()
-
-        if self.district:
-            district = self.district.upper()
-
-        if self.ward:
-            ward = self.ward.upper()
-
-        if self.born:
-            born = self.born
-
-        if self.gender:
-            gender = self.gender.lower()
-
-        if self.scheme:
-            scheme = self.scheme.lower()
-
-        return (self.org_id, ruleset, category, born, gender, state, district, ward, scheme, date)
-
-    def generate_poll_stats(self):
-        generated_stats = dict()
-
-        result_tuple = self.get_result_tuple()
-        if result_tuple:
-            generated_stats[result_tuple] = 1
-
-        return generated_stats
+        return (
+            category,
+            born or "",
+            gender.lower() if gender else "",
+            state.upper() if state else "",
+            district.upper() if district else "",
+            ward.upper() if ward else "",
+            scheme.lower() if scheme else "",
+        )
 
     class Meta:
         indexes = [
