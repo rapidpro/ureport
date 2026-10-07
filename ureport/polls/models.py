@@ -272,12 +272,21 @@ class Poll(SmartModel):
         )
 
         # replace them in one transaction so a failure leaves the existing counters in place, holding the squash lock
-        # so squashing can't replace rows the delete would then miss
-        with r.lock(
+        # so squashing can't replace rows the delete would then miss. If squashing holds on to it, leave this
+        # question's counters as they are for a later rebuild rather than failing the sync that's rebuilding
+        lock = r.lock(
             STATS_COUNTS_SQUASH_LOCK,
             timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
             blocking_timeout=Poll.POLL_REPLACE_COUNTS_LOCK_TIMEOUT,
-        ):
+        )
+        if not lock.acquire():
+            logger.error(
+                "Couldn't acquire the stats squash lock to replace counters for flow result #%d on org #%d"
+                % (flow_result_id, self.org_id)
+            )
+            return
+
+        try:
             with transaction.atomic():
                 PollStatsCounter.objects.filter(org_id=self.org_id, flow_result_id=flow_result_id).delete()
                 PollEngagementDailyCount.objects.filter(org_id=self.org_id, flow_result_id=flow_result_id).delete()
@@ -287,6 +296,8 @@ class Poll(SmartModel):
                     PollStatsCounter.objects.bulk_create(batch)
                 for batch in chunk_list(engagement_counters, 1000):
                     PollEngagementDailyCount.objects.bulk_create(batch)
+        finally:
+            lock.release()
 
     def delete_poll_results(self):
         from ureport.utils import chunk_list
@@ -438,15 +449,14 @@ class Poll(SmartModel):
 
                 for ruleset, question_groups in groupby(groups, key=itemgetter("ruleset_key")):
                     question = results_dict.get(ruleset)
-                    if not question or not question["flow_result_id"]:
+                    if not question:
                         continue
 
                     # a counter row is identified by its model's squash_over fields, so sum counts over those rather
-                    # than creating a row per group for squashing to merge later. Within a question the org and flow
-                    # result are fixed, and scopes and days repeat across keys, so they share one copy of each
+                    # than creating a row per group for squashing to merge later - within a question the org and flow
+                    # result are fixed so the keys leave them out
                     stats_counts = defaultdict(int)
                     engagement_counts = defaultdict(int)
-                    shared = dict()
                     num_groups = 0
 
                     for group in question_groups:
@@ -481,10 +491,9 @@ class Poll(SmartModel):
                         if state:
                             scopes.append("state:%s" % state)
 
-                        day = shared.setdefault(date.date(), date.date()) if date is not None else None
+                        day = date.date() if date is not None else None
 
                         for scope in scopes:
-                            scope = shared.setdefault(scope, scope)
                             stats_counts[(flow_category_id, scope)] += count
 
                             if day and date >= engagement_since and "district:" not in scope and "ward:" not in scope:
@@ -500,7 +509,7 @@ class Poll(SmartModel):
 
                 # questions without any results still need any previous counters removing
                 for question in results_dict.values():
-                    if question["flow_result_id"] and question["flow_result_id"] not in rebuilt_flow_result_ids:
+                    if question["flow_result_id"] not in rebuilt_flow_result_ids:
                         self._replace_question_counters(r, question["flow_result_id"], {}, {})
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)

@@ -3040,6 +3040,7 @@ class PollResultsTest(UreportTest):
         create_result("c7", state="R-LAGOS", district="R-OYO", ward="R-IKEJA")
         create_result("c8", ruleset="other-ruleset", gender="M")  # not a question of this poll
         create_result("c9", ruleset=ruleset.upper(), born=1990, gender="f", scheme="TEL")  # merged despite case
+        create_result("c10", born=0, date=None)  # no age or engagement
 
         self.assertFalse(SchemeSegment.objects.filter(scheme="telegram").exists())
 
@@ -3058,7 +3059,7 @@ class PollResultsTest(UreportTest):
         age_1990 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 1990)
         age_2000 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 2000)
         expected = {
-            (yes_id, "all"): 7,
+            (yes_id, "all"): 8,
             (yes_id, f"age:{age_1990}"): 3,
             (yes_id, f"age:{age_2000}"): 1,
             (yes_id, "gender:m"): 2,
@@ -3111,6 +3112,64 @@ class PollResultsTest(UreportTest):
 
         # and the squash lock is released again
         self.assertIsNone(get_valkey_connection().get(STATS_COUNTS_SQUASH_LOCK))
+
+    def test_rebuild_poll_results_counts_multiple_questions(self):
+        question1 = self.poll_question
+        question2 = self.create_poll_question(self.admin, self.poll, "question 2", "step-uuid-2")
+
+        def create_result(contact, ruleset):
+            PollResult.objects.create(
+                org=self.nigeria,
+                flow=self.poll.flow_uuid,
+                ruleset=ruleset,
+                contact=contact,
+                completed=False,
+                date=self.now,
+            )
+
+        # interleaved across questions, and differing in case so not every question's rows are stored together
+        create_result("c1", "step-uuid")
+        create_result("c2", "STEP-UUID-2")
+        create_result("c3", "STEP-UUID")
+        create_result("c4", "step-uuid-2")
+        create_result("c5", "step-uuid-2")
+
+        def counts(question):
+            return {
+                c.scope: c.count
+                for c in PollStatsCounter.objects.filter(org=self.nigeria, flow_result=question.flow_result)
+            }
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual({"all": 2}, counts(question1))
+        self.assertEqual({"all": 3}, counts(question2))
+
+        # a question left without results has its counters removed, without affecting the others
+        PollResult.objects.filter(org=self.nigeria, ruleset__iexact="step-uuid-2").delete()
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual({"all": 2}, counts(question1))
+        self.assertEqual({}, counts(question2))
+        self.assertFalse(PollEngagementDailyCount.objects.filter(flow_result=question2.flow_result))
+
+        # if squashing holds on to its lock, counters are left as they are rather than the rebuild failing
+        create_result("c6", "step-uuid")
+
+        squash_lock = get_valkey_connection().lock(STATS_COUNTS_SQUASH_LOCK, timeout=60)
+        squash_lock.acquire()
+        try:
+            with patch.object(Poll, "POLL_REPLACE_COUNTS_LOCK_TIMEOUT", 0.1):
+                self.poll.rebuild_poll_results_counts()
+        finally:
+            squash_lock.release()
+
+        self.assertEqual({"all": 2}, counts(question1))
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual({"all": 3}, counts(question1))
 
 
 class PollsTasksTest(UreportTest):
