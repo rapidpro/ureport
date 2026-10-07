@@ -75,10 +75,10 @@ def rebuild_contacts_activities_counts(org_id=None):
 
 @app.task(name="stats.stats_counts_squash")
 def stats_counts_squash():
-    from ureport.stats.models import PollEngagementDailyCount, PollStatsCounter
+    from ureport.stats.models import STATS_COUNTS_SQUASH_LOCK, PollEngagementDailyCount, PollStatsCounter
 
     r = get_valkey_connection()
-    key = "squash_stats_counts_lock"
+    key = STATS_COUNTS_SQUASH_LOCK
 
     lock_timeout = 60 * 60 * 2
 

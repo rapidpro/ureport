@@ -4,6 +4,7 @@ import uuid
 import zoneinfo
 from datetime import datetime, timedelta, timezone as tzone
 
+from django_valkey import get_valkey_connection
 from mock import Mock, patch
 
 from django.conf import settings
@@ -35,6 +36,7 @@ from ureport.polls.tasks import (
 )
 from ureport.polls.templatetags.ureport import question_segmented_results
 from ureport.stats.models import (
+    STATS_COUNTS_SQUASH_LOCK,
     AgeSegment,
     ContactActivity,
     ContactActivityCounter,
@@ -43,6 +45,7 @@ from ureport.stats.models import (
     PollStats,
     PollStatsCounter,
     PollWordCloud,
+    SchemeSegment,
 )
 from ureport.syncjobs.models import SyncJob
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
@@ -1194,7 +1197,7 @@ class PollTest(UreportTest):
 
             self.assertFalse(question_segmented_results(poll1_question, "gender"))
 
-    def test_delete_poll_stats(self):
+    def test_rebuild_poll_results_counts_replaces(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
         poll_question = self.create_poll_question(self.admin, poll, "question 1", "step-uuid")
@@ -1224,20 +1227,21 @@ class PollTest(UreportTest):
             self.assertTrue(PollStatsCounter.objects.all())
             self.assertTrue(PollEngagementDailyCount.objects.all())
 
-            poll.stopped_syncing = True
-            poll.save()
+            # a question without results has its counters removed
+            PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid).delete()
+            poll.rebuild_poll_results_counts()
 
-            poll.delete_poll_stats()
-
-            self.assertTrue(PollStatsCounter.objects.all())
-            self.assertTrue(PollEngagementDailyCount.objects.all())
-
-            poll.stopped_syncing = False
-            poll.save()
-
-            poll.delete_poll_stats()
             self.assertFalse(PollStatsCounter.objects.all())
             self.assertFalse(PollEngagementDailyCount.objects.all())
+
+            PollResult.objects.create(
+                org=self.nigeria,
+                flow=poll.flow_uuid,
+                ruleset=poll_question.flow_result.result_uuid,
+                date=timezone.now(),
+                contact="contact-uuid",
+                completed=False,
+            )
 
             poll2 = self.create_poll(self.nigeria, "Poll 2", "flow-uuid", self.education_nigeria, self.admin)
             poll_question2 = self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
@@ -2863,177 +2867,21 @@ class PollResultsTest(UreportTest):
             .count(),
         )
 
-    def test_poll_result_generate_stats(self):
-        poll_result1 = PollResult.objects.create(
-            org=self.nigeria,
-            flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.flow_result.result_uuid,
-            date=self.now,
-            contact="contact-uuid",
-            completed=False,
-        )
-
-        gen_stats = poll_result1.generate_poll_stats()
-        self.assertEqual(len(gen_stats.keys()), 1)
-        self.assertEqual(
-            list(gen_stats.keys()),
-            [
-                (
-                    self.nigeria.id,
-                    self.poll_question.flow_result.result_uuid,
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
-                )
-            ],
-        )
-
-        poll_result2 = PollResult.objects.create(
-            org=self.nigeria,
-            flow=self.poll.flow_uuid,
-            ruleset="other-uuid",
-            contact="contact-uuid",
-            category="No",
-            text="Nah",
-            completed=False,
-            date=self.now,
-            state="R-LAGOS",
-            district="R-oyo",
-            ward="R-IKEJA",
-            scheme="tel",
-        )
-
-        gen_stats = poll_result2.generate_poll_stats()
-
-        ruleset = poll_result2.ruleset.lower()
-        category = poll_result2.category.lower()
-        state = poll_result2.state.upper()
-        district = poll_result2.district.upper()
-        ward = poll_result2.ward.upper()
-
-        self.assertEqual(len(gen_stats.keys()), 1)
-        self.assertEqual(
-            list(gen_stats.keys()),
-            [
-                (
-                    self.nigeria.id,
-                    ruleset,
-                    category,
-                    "",
-                    "",
-                    state,
-                    district,
-                    ward,
-                    "tel",
-                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
-                )
-            ],
-        )
-
-        poll_result3 = PollResult.objects.create(
-            org=self.nigeria,
-            flow=self.poll.flow_uuid,
-            ruleset="other-uuid",
-            contact="contact-uuid",
-            category="No Response",
-            text="None",
-            completed=False,
-            date=self.now,
-            state="R-LAGOS",
-            district="R-oyo",
-            ward="R-IKEJA",
-            scheme="facebook",
-        )
-
-        gen_stats = poll_result3.generate_poll_stats()
-
-        ruleset = poll_result3.ruleset.lower()
-        state = poll_result3.state.upper()
-        district = poll_result3.district.upper()
-        ward = poll_result3.ward.upper()
-
-        self.assertEqual(len(gen_stats.keys()), 1)
-        self.assertEqual(
-            list(gen_stats.keys()),
-            [
-                (
-                    self.nigeria.id,
-                    ruleset,
-                    "",
-                    "",
-                    "",
-                    state,
-                    district,
-                    ward,
-                    "facebook",
-                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
-                )
-            ],
-        )
-
-        poll_result4 = PollResult.objects.create(
-            org=self.nigeria,
-            flow=self.poll.flow_uuid,
-            ruleset="other-uuid",
-            contact="contact-uuid",
-            category="Yes",
-            text="Yeah",
-            completed=False,
-            born=2015,
-            gender="M",
-            date=self.now,
-            state="R-LAGOS",
-            district="R-oyo",
-            ward="R-IKEJA",
-            scheme="tel",
-        )
-
-        gen_stats = poll_result4.generate_poll_stats()
-
-        ruleset = poll_result4.ruleset.lower()
-        state = poll_result4.state.upper()
-        district = poll_result4.district.upper()
-        ward = poll_result4.ward.upper()
-
-        self.assertEqual(len(gen_stats.keys()), 1)
-        self.assertEqual(
-            list(gen_stats.keys()),
-            [
-                (
-                    self.nigeria.id,
-                    ruleset,
-                    "yes",
-                    2015,
-                    "m",
-                    state,
-                    district,
-                    ward,
-                    "tel",
-                    self.now.replace(hour=0, minute=0, second=0, microsecond=0),
-                )
-            ],
-        )
-
-        poll_result5 = PollResult.objects.create(
-            org=self.nigeria,
-            flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.flow_result.result_uuid,
-            date=None,
-            contact="contact-uuid",
-            completed=False,
-        )
-
-        gen_stats = poll_result5.generate_poll_stats()
-        self.assertEqual(len(gen_stats.keys()), 1)
-        self.assertEqual(
-            list(gen_stats.keys()),
-            [(self.nigeria.id, self.poll_question.flow_result.result_uuid, "", "", "", "", "", "", "", None)],
-        )
+    def test_poll_result_get_stats_fields(self):
+        tcs = [
+            # category, born, gender, state, district, ward, scheme -> normalized
+            ((None, None, None, None, None, None, None), ("", "", "", "", "", "", "")),
+            (("", 0, "", "", "", "", ""), ("", "", "", "", "", "", "")),
+            (
+                ("No", None, None, "R-lagos", "R-oyo", "r-ikeja", "TEL"),
+                ("no", "", "", "R-LAGOS", "R-OYO", "R-IKEJA", "tel"),
+            ),
+            (("Yes", 2015, "M", None, None, None, "tel"), ("yes", 2015, "m", "", "", "", "tel")),
+            (("No Response", None, None, None, None, None, None), ("", "", "", "", "", "", "")),
+            (("Other", None, None, None, None, None, None), ("", "", "", "", "", "", "")),
+        ]
+        for fields, expected in tcs:
+            self.assertEqual(expected, PollResult.get_stats_fields(*fields), f"mismatch for {fields}")
 
     def test_poll_results_stats(self):
         nigeria_boundary = Boundary.objects.create(
@@ -3161,6 +3009,167 @@ class PollResultsTest(UreportTest):
             self.poll_question.calculate_results(segment=dict(location="Ward", parent="R-OYO"))[0]["categories"],
             [{"count": 1, "label": "Yes"}, {"count": 0, "label": "No"}],
         )
+
+    def test_rebuild_poll_results_counts_aggregates(self):
+        rule_uuid = uuid.uuid4()
+        yes_category = self.create_poll_response_category(self.poll_question, rule_uuid, "Yes")
+
+        yesterday = self.now - timedelta(days=1)
+        long_ago = self.now - timedelta(days=500)
+        ruleset = self.poll_question.flow_result.result_uuid
+
+        def create_result(contact, category="Yes", ruleset=ruleset, date=self.now, **kwargs):
+            PollResult.objects.create(
+                org=self.nigeria,
+                flow=self.poll.flow_uuid,
+                ruleset=ruleset,
+                contact=contact,
+                category=category,
+                text="Yeah",
+                completed=False,
+                date=date,
+                **kwargs,
+            )
+
+        create_result("c1", born=1990, gender="M", scheme="tel")
+        create_result("c2", born=1990, gender="F", scheme="tel")
+        create_result("c3", born=2000, gender="M", scheme="telegram", date=yesterday)
+        create_result("c4", date=yesterday)
+        create_result("c5", category="Maybe", gender="F")  # no matching category
+        create_result("c6", date=long_ago)  # too old for engagement
+        create_result("c7", state="R-LAGOS", district="R-OYO", ward="R-IKEJA")
+        create_result("c8", ruleset="other-ruleset", gender="M")  # not a question of this poll
+        create_result("c9", ruleset=ruleset.upper(), born=1990, gender="f", scheme="TEL")  # merged despite case
+        create_result("c10", born=0, date=None)  # no age or engagement
+
+        self.assertFalse(SchemeSegment.objects.filter(scheme="telegram").exists())
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertTrue(SchemeSegment.objects.filter(scheme="telegram").exists())
+
+        # one row per distinct (flow result, category, scope), with stats keys that differ only in other fields summed
+        def stats_counts():
+            return {
+                (c.flow_result_category_id, c.scope): c.count
+                for c in PollStatsCounter.objects.filter(org=self.nigeria, flow_result=self.poll_question.flow_result)
+            }
+
+        yes_id = yes_category.flow_result_category_id
+        age_1990 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 1990)
+        age_2000 = AgeSegment.get_age_segment_min_age(self.poll.poll_date.year - 2000)
+        expected = {
+            (yes_id, "all"): 8,
+            (yes_id, f"age:{age_1990}"): 3,
+            (yes_id, f"age:{age_2000}"): 1,
+            (yes_id, "gender:m"): 2,
+            (yes_id, "gender:f"): 2,
+            (yes_id, "scheme:tel"): 3,
+            (yes_id, "scheme:telegram"): 1,
+            (yes_id, "state:R-LAGOS"): 1,
+            (yes_id, "district:R-OYO"): 1,
+            (yes_id, "ward:R-IKEJA"): 1,
+            (None, "all"): 1,
+            (None, "gender:f"): 1,
+        }
+        self.assertEqual(expected, stats_counts())
+        self.assertEqual(len(expected), PollStatsCounter.objects.count())
+
+        # likewise for engagement, which leaves out districts, wards and results over 400 days old
+        engagement = {
+            (c.is_responded, c.scope, c.day): c.count
+            for c in PollEngagementDailyCount.objects.filter(
+                org=self.nigeria, flow_result=self.poll_question.flow_result
+            )
+        }
+        today, yesterday = self.now.date(), yesterday.date()
+        self.assertEqual(
+            {
+                (True, "all", today): 4,
+                (True, "all", yesterday): 2,
+                (True, f"age:{age_1990}", today): 3,
+                (True, f"age:{age_2000}", yesterday): 1,
+                (True, "gender:m", today): 1,
+                (True, "gender:f", today): 2,
+                (True, "gender:m", yesterday): 1,
+                (True, "scheme:tel", today): 3,
+                (True, "scheme:telegram", yesterday): 1,
+                (True, "state:R-LAGOS", today): 1,
+                (False, "all", today): 1,
+                (False, "gender:f", today): 1,
+            },
+            engagement,
+        )
+        self.assertEqual(len(engagement), PollEngagementDailyCount.objects.count())
+
+        # a failed rebuild leaves the existing counters in place
+        PollResult.objects.filter(org=self.nigeria, contact="c4").delete()
+        with patch("ureport.stats.models.PollEngagementDailyCount.objects.bulk_create", side_effect=ValueError):
+            with self.assertRaises(ValueError):
+                self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual(expected, stats_counts())
+
+        # and the squash lock is released again
+        self.assertIsNone(get_valkey_connection().get(STATS_COUNTS_SQUASH_LOCK))
+
+    def test_rebuild_poll_results_counts_multiple_questions(self):
+        question1 = self.poll_question
+        question2 = self.create_poll_question(self.admin, self.poll, "question 2", "step-uuid-2")
+
+        def create_result(contact, ruleset):
+            PollResult.objects.create(
+                org=self.nigeria,
+                flow=self.poll.flow_uuid,
+                ruleset=ruleset,
+                contact=contact,
+                completed=False,
+                date=self.now,
+            )
+
+        # interleaved across questions, and differing in case so not every question's rows are stored together
+        create_result("c1", "step-uuid")
+        create_result("c2", "STEP-UUID-2")
+        create_result("c3", "STEP-UUID")
+        create_result("c4", "step-uuid-2")
+        create_result("c5", "step-uuid-2")
+
+        def counts(question):
+            return {
+                c.scope: c.count
+                for c in PollStatsCounter.objects.filter(org=self.nigeria, flow_result=question.flow_result)
+            }
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual({"all": 2}, counts(question1))
+        self.assertEqual({"all": 3}, counts(question2))
+
+        # a question left without results has its counters removed, without affecting the others
+        PollResult.objects.filter(org=self.nigeria, ruleset__iexact="step-uuid-2").delete()
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual({"all": 2}, counts(question1))
+        self.assertEqual({}, counts(question2))
+        self.assertFalse(PollEngagementDailyCount.objects.filter(flow_result=question2.flow_result))
+
+        # if squashing holds on to its lock, counters are left as they are rather than the rebuild failing
+        create_result("c6", "step-uuid")
+
+        squash_lock = get_valkey_connection().lock(STATS_COUNTS_SQUASH_LOCK, timeout=60)
+        squash_lock.acquire()
+        try:
+            with patch.object(Poll, "POLL_REPLACE_COUNTS_LOCK_TIMEOUT", 0.1):
+                self.poll.rebuild_poll_results_counts()
+        finally:
+            squash_lock.release()
+
+        self.assertEqual({"all": 2}, counts(question1))
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual({"all": 3}, counts(question1))
 
 
 class PollsTasksTest(UreportTest):

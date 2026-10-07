@@ -19,6 +19,9 @@ from ureport.utils.models import SquashableModel
 
 logger = logging.getLogger(__name__)
 
+# held while squashing poll stats counters, and while a poll rebuild replaces them
+STATS_COUNTS_SQUASH_LOCK = "squash_stats_counts_lock"
+
 
 class GenderSegment(models.Model):
     GENDERS = {"M": _("Male"), "F": _("Female"), "O": _("Other")}
