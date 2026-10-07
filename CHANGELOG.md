@@ -1,3 +1,8 @@
+## v1.8.4 (2026-10-07)
+ * Fix max width for logo on error pages
+ * Rebuild poll counters by aggregating results in the database one question at a time, inserting them in chunks
+ * Hold the squash lock while replacing poll counters, and skip a question's replacement if the lock can't be acquired
+
 ## v1.8.3 (2026-10-01)
  * Show email verification and 2FA status on the manage accounts page, the users list and the staff users list
  * Style account status tags with the primary button colour
