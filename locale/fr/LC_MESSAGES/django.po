@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-08 10:57+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -733,6 +733,11 @@ msgstr "Canaux"
 msgid "Change Password"
 msgstr "Nouveau mot de passe"
 
+#, fuzzy
+#| msgid "About Content"
+msgid "Account Connections"
+msgstr "Contenu A-propos"
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1285,6 +1290,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"
@@ -1959,6 +1972,10 @@ msgstr "Si vous devez inclure des codes HTML personnalisés dans vos pages d'org
 
 msgid "Other language sites links"
 msgstr "Liens vers d'autres sites linguistiques"
+
+#, python-brace-format
+msgid "Accounts on {domain} can only sign in with single sign-on."
+msgstr ""
 
 msgid "Whether this row was created by squashing"
 msgstr "Si cette ligne a été créée en écrasant"

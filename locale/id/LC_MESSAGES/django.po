@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-08 10:57+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -724,6 +724,11 @@ msgstr "Saluran"
 msgid "Change Password"
 msgstr "Kata kunci baru"
 
+#, fuzzy
+#| msgid "About Content"
+msgid "Account Connections"
+msgstr "Tentang Konten"
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1270,6 +1275,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"
@@ -1944,6 +1957,10 @@ msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, sep
 
 msgid "Other language sites links"
 msgstr "Tautan situs bahasa lain"
+
+#, python-brace-format
+msgid "Accounts on {domain} can only sign in with single sign-on."
+msgstr ""
 
 msgid "Whether this row was created by squashing"
 msgstr "Apakah baris ini dibuat melalui proses squash"

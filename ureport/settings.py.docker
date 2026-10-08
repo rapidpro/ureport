@@ -6,6 +6,9 @@ import os
 
 import dj_database_url
 
+from django.core.exceptions import ImproperlyConfigured
+from django.utils.text import format_lazy
+
 from ureport.settings_common import *  # noqa
 
 
@@ -53,6 +56,64 @@ if env_bool("DJANGO_SECURE", True):
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = False
     SECURE_HSTS_SECONDS = 86400
+
+# single sign-on: a Google client and/or one generic OpenID Connect provider (e.g. an Entra ID tenant), each enabled by
+# setting its client id. Providers send users back to the callback URL on SITE_HOSTNAME, so register
+# https://<SITE_HOSTNAME>/accounts/google/login/callback/ with Google and
+# https://<SITE_HOSTNAME>/accounts/oidc/<SSO_OIDC_PROVIDER_ID>/login/callback/ with the OpenID Connect provider.
+SOCIALACCOUNT_PROVIDERS = {}
+
+
+def env_required(name):
+    if not os.environ.get(name):
+        raise ImproperlyConfigured(f"{name} must be set when single sign-on is configured")
+    return os.environ[name]
+
+
+def env_list(name):
+    return [v.strip() for v in os.environ.get(name, "").split(",") if v.strip()]
+
+
+if os.environ.get("SSO_GOOGLE_CLIENT_ID"):
+    # Google only reports addresses its users own as verified, so it can be trusted to identify users by email
+    SOCIALACCOUNT_PROVIDERS["google"] = {
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+        "OAUTH_PKCE_ENABLED": True,
+        "EMAIL_AUTHENTICATION": True,
+        "APP": {"client_id": os.environ["SSO_GOOGLE_CLIENT_ID"], "secret": env_required("SSO_GOOGLE_SECRET")},
+    }
+
+if os.environ.get("SSO_OIDC_CLIENT_ID"):
+    # SSO_OIDC_SERVER_URL is the issuer, i.e. where /.well-known/openid-configuration is served from. A provider that
+    # doesn't say whether emails are verified, or identifies users by a principal name rather than an email claim
+    # (e.g. Entra ID), is trusted for the domains in SSO_OIDC_VERIFIED_EMAIL_DOMAINS, which should be those the tenant
+    # owns and nothing else.
+    SOCIALACCOUNT_PROVIDERS["openid_connect"] = {
+        "OAUTH_PKCE_ENABLED": True,
+        "EMAIL_AUTHENTICATION": True,
+        "APPS": [
+            {
+                "provider_id": os.environ.get("SSO_OIDC_PROVIDER_ID", "oidc"),
+                "name": os.environ.get("SSO_OIDC_NAME", "Single Sign-On"),
+                "client_id": os.environ["SSO_OIDC_CLIENT_ID"],
+                "secret": env_required("SSO_OIDC_SECRET"),
+                "settings": {
+                    "server_url": env_required("SSO_OIDC_SERVER_URL"),
+                    "token_auth_method": "client_secret_basic",
+                    "verified_email": env_list("SSO_OIDC_VERIFIED_EMAIL_DOMAINS"),
+                },
+            }
+        ],
+    }
+
+# email domains whose users can only sign in with single sign-on, e.g. an organization's own domain once its tenant
+# is connected, so a password alone can't get into those accounts
+SSO_ONLY_DOMAINS = {domain: format_lazy(SSO_ONLY_MESSAGE, domain=domain) for domain in env_list("SSO_ONLY_DOMAINS")}
+
+# a login completed on the root host is only any use if the session is valid on the org subdomains too
+if SOCIALACCOUNT_PROVIDERS and not os.environ.get("SESSION_COOKIE_DOMAIN"):
+    SESSION_COOKIE_DOMAIN = CSRF_COOKIE_DOMAIN = "." + HOSTNAME.partition(":")[0]
 
 if os.environ.get("ADMIN_EMAIL"):
     ADMINS = [os.environ["ADMIN_EMAIL"]]

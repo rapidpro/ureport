@@ -709,6 +709,9 @@ INSTALLED_APPS = (
     "allauth",
     "allauth.account",
     "allauth.mfa",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.openid_connect",
     # dash apps
     "dash.orgs",
     "dash.dashblocks",
@@ -919,6 +922,20 @@ ACCOUNT_LOGOUT_REDIRECT_URL = LOGOUT_REDIRECT_URL
 MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
 MFA_TOTP_ISSUER = "U-Report"
 
+# single sign-on providers are configured per deployment (see settings.py.docker), and only ever log in existing
+# accounts, matched by an email the provider has verified. A provider has to be trusted for that with
+# EMAIL_AUTHENTICATION, and one that doesn't report whether emails are verified (e.g. Entra ID) also needs
+# VERIFIED_EMAIL, ideally as the list of domains it is authoritative for.
+SOCIALACCOUNT_ADAPTER = "ureport.users.adapter.SocialAccountAdapter"
+SOCIALACCOUNT_PROVIDERS = {}
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+# maps email domains whose users can only log in with single sign-on to the (translatable) error shown when they try
+# a password instead
+SSO_ONLY_DOMAINS = {}
+SSO_ONLY_MESSAGE = _("Accounts on {domain} can only sign in with single sign-on.")
+
 if TESTING:
     ACCOUNT_RATE_LIMITS = False  # rate limit state in the cache would otherwise persist between test runs
 
@@ -1119,6 +1136,15 @@ SITE_ALLOW_NO_ORG = (
     "mfa_view_recovery_codes",
     "mfa_generate_recovery_codes",
     "mfa_download_recovery_codes",
+    "socialaccount_login_cancelled",
+    "socialaccount_login_error",
+    "socialaccount_signup",
+    "socialaccount_connections",
+    "google_login",
+    "google_callback",
+    "google_login_by_token",
+    "openid_connect_login",
+    "openid_connect_callback",
     # sync jobs are listed and controlled across all orgs, so they need no org context
     "syncjobs.syncjob_list",
     "syncjobs.syncjob_pause",

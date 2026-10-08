@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-08 10:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -736,6 +736,11 @@ msgstr "Kanali"
 msgid "Change Password"
 msgstr "Nova lozinka"
 
+#, fuzzy
+#| msgid "About Content"
+msgid "Account Connections"
+msgstr "O sadržaju"
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1290,6 +1295,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"
@@ -1964,6 +1977,10 @@ msgstr "Ako trebate uključiti prilagodjeni HTML kod u vaše org stranice, poput
 
 msgid "Other language sites links"
 msgstr "."
+
+#, python-brace-format
+msgid "Accounts on {domain} can only sign in with single sign-on."
+msgstr ""
 
 msgid "Whether this row was created by squashing"
 msgstr "Je li priča objavljena"

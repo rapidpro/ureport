@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-08 10:57+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -737,6 +737,11 @@ msgstr "Kanály"
 msgid "Change Password"
 msgstr "Nové heslo"
 
+#, fuzzy
+#| msgid "About Content"
+msgid "Account Connections"
+msgstr "O obsahu"
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1291,6 +1296,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"
@@ -1965,6 +1978,10 @@ msgstr "Pokud potřebujete do svých stránek organizace zahrnout některé vlas
 
 msgid "Other language sites links"
 msgstr "Odkazy na další jazykové stránky"
+
+#, python-brace-format
+msgid "Accounts on {domain} can only sign in with single sign-on."
+msgstr ""
 
 msgid "Whether this row was created by squashing"
 msgstr "Zda byl tento řádek vytvořen stlačením"
