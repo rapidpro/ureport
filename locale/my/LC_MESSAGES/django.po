@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 17:08+0000\n"
+"POT-Creation-Date: 2026-10-08 10:57+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1963,6 +1963,10 @@ msgstr "သင့်အဖွဲ့အစည်းစာမျက်နှာမ
 
 msgid "Other language sites links"
 msgstr "အခြားဘာသာစကား ဆိုဒ်လင့်ခ်များ"
+
+#, python-brace-format
+msgid "Accounts on {domain} can only sign in with single sign-on."
+msgstr ""
 
 msgid "Whether this row was created by squashing"
 msgstr "ဤအတန်းကို squash လုပ်၍ ဖန်တီးထားခြင်း ဖြစ်၊ မဖြစ်"

@@ -923,12 +923,18 @@ MFA_SUPPORTED_TYPES = ["totp", "recovery_codes"]
 MFA_TOTP_ISSUER = "U-Report"
 
 # single sign-on providers are configured per deployment (see settings.py.docker), and only ever log in existing
-# accounts, matched by email (see ureport.users.adapter.SocialAccountAdapter for what counts as a trusted email)
+# accounts, matched by an email the provider has verified. A provider has to be trusted for that with
+# EMAIL_AUTHENTICATION, and one that doesn't report whether emails are verified (e.g. Entra ID) also needs
+# VERIFIED_EMAIL, ideally as the list of domains it is authoritative for.
 SOCIALACCOUNT_ADAPTER = "ureport.users.adapter.SocialAccountAdapter"
 SOCIALACCOUNT_PROVIDERS = {}
-SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
+
+# maps email domains whose users can only log in with single sign-on to the (translatable) error shown when they try
+# a password instead
+SSO_ONLY_DOMAINS = {}
+SSO_ONLY_MESSAGE = _("Accounts on {domain} can only sign in with single sign-on.")
 
 if TESTING:
     ACCOUNT_RATE_LIMITS = False  # rate limit state in the cache would otherwise persist between test runs

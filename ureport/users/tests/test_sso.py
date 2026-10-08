@@ -21,21 +21,18 @@ User = get_user_model()
 SSO_PROVIDERS = {
     "google": {
         "SCOPE": ["profile", "email"],
+        "EMAIL_AUTHENTICATION": True,
         "APP": {"client_id": "test-client", "secret": "test-secret", "key": ""},
     },
     "openid_connect": {
+        "EMAIL_AUTHENTICATION": True,
         "APPS": [
             {
                 "provider_id": "oidc",
                 "name": "Acme",
                 "client_id": "test-client",
                 "secret": "test-secret",
-                "settings": {
-                    "server_url": "https://login.example.com",
-                    "verified_email": ["trusted.example.com"],
-                    "identity_claim": "preferred_username",
-                    "identity_claim_domains": ["nyaruka.com"],
-                },
+                "settings": {"server_url": "https://login.example.com", "verified_email": ["trusted.example.com"]},
             }
         ],
     },
@@ -170,15 +167,27 @@ class SSOTest(UreportTest):
         self.assertSignupClosed(request, response)
         self.assertEqual(0, len(mail.outbox))
 
-    def test_google_login_unverified_local_address(self):
-        # an account whose address we don't hold as verified (e.g. it was shared with another account when we
-        # migrated) can't be entered by SSO, which would otherwise wipe its password
-        self.editor.emailaddress_set.update(verified=False)
+    def test_google_login_verifies_local_address(self):
+        # a trusted provider vouching for the address is as good as the user confirming it, so an account that never
+        # did (e.g. one created by staff that has only ever used single sign-on) gets in and keeps its password
+        self.editor.emailaddress_set.all().delete()
 
         request, response = self.social_login("google", self.google_data("editor@nyaruka.com"))
-        self.assertSignupClosed(request, response)
+        self.assertSignedIn(request, response, self.editor)
+        self.assertEqual(
+            ["editor@nyaruka.com"], [a.email for a in self.editor.emailaddress_set.filter(verified=True, primary=True)]
+        )
         self.editor.refresh_from_db()
         self.assertTrue(self.editor.has_usable_password())
+
+    def test_untrusted_provider(self):
+        # a provider that isn't trusted to identify users by email can't log anyone in, however verified the email
+        providers = {"google": {**SSO_PROVIDERS["google"], "EMAIL_AUTHENTICATION": False}}
+        with override_settings(SOCIALACCOUNT_PROVIDERS=providers):
+            with self.assertLogs("ureport.users.adapter", level="WARNING") as logs:
+                request, response = self.social_login("google", self.google_data("editor@nyaruka.com"))
+        self.assertSignupClosed(request, response)
+        self.assertIn("fell through to closed signup: provider=google email='editor@nyaruka.com'", logs.output[0])
 
     def test_oidc_login_by_verified_email(self):
         request, response = self.social_login(
@@ -205,34 +214,89 @@ class SSOTest(UreportTest):
         request, response = self.social_login("oidc", self.oidc_data({"email": "editor@nyaruka.com"}, {}))
         self.assertSignupClosed(request, response)
 
-    def test_oidc_login_by_identity_claim(self):
-        # no email claim at all, but the ID token identifies the user by a claim the deployment trusts for the domain
-        request, response = self.social_login(
-            "oidc", self.oidc_data({"name": "Bob"}, {"preferred_username": "Editor@Nyaruka.com"})
-        )
-        self.assertSignedIn(request, response, self.editor)
-        self.assertEqual(self.editor, SocialAccount.objects.get(provider="oidc", uid="abcde").user)
-
-        # not for a domain the claim isn't trusted for
-        SocialAccount.objects.all().delete()
-        self.editor.email = "editor@other.example.com"
+    def test_oidc_login_by_principal_name(self):
+        # no email claim at all, but the ID token identifies the user by a principal name in a trusted domain
+        self.editor.email = "editor@trusted.example.com"
         self.editor.save()
         verify_email(self.editor)
 
         request, response = self.social_login(
-            "oidc", self.oidc_data({"name": "Bob"}, {"preferred_username": "editor@other.example.com"})
+            "oidc", self.oidc_data({"name": "Bob"}, {"preferred_username": "Editor@Trusted.example.com"})
         )
-        self.assertSignupClosed(request, response)
+        self.assertSignedIn(request, response, self.editor)
+        self.assertEqual(self.editor, SocialAccount.objects.get(provider="oidc", uid="abcde").user)
 
-        # and not at all for a provider without the claim configured
+        # not for a domain the provider isn't trusted for
+        SocialAccount.objects.all().delete()
         self.editor.email = "editor@nyaruka.com"
         self.editor.save()
         verify_email(self.editor)
 
         request, response = self.social_login(
+            "oidc", self.oidc_data({"name": "Bob"}, {"preferred_username": "editor@nyaruka.com"})
+        )
+        self.assertSignupClosed(request, response)
+
+        # and not at all for a provider without trusted domains, or a principal name that isn't an email
+        request, response = self.social_login(
             "google", {"sub": "12345", "name": "Bob", "preferred_username": "editor@nyaruka.com"}
         )
         self.assertSignupClosed(request, response)
+
+        request, response = self.social_login("oidc", self.oidc_data({"name": "Bob"}, {"upn": "editor"}))
+        self.assertSignupClosed(request, response)
+
+    def test_sso_only_domains(self):
+        login_url = reverse("account_login")
+        credentials = {"login": self.editor.email, "password": "Qwerty123"}
+
+        with override_settings(SSO_ONLY_DOMAINS={"Nyaruka.com": "Use Sign In with Acme instead."}):
+            # a user whose email domain requires single sign-on is sent back to the login page with the error
+            response = self.client.post(login_url, credentials, SERVER_NAME="nigeria.ureport.io")
+            self.assertRedirect(response, login_url)
+            self.assertFalse(response.wsgi_request.user.is_authenticated)
+
+            response = self.client.get(login_url, SERVER_NAME="nigeria.ureport.io")
+            self.assertContains(response, "Use Sign In with Acme instead.")
+
+            # and keeps where they were going
+            response = self.client.post(
+                f"{login_url}?next=/manage/org/home/", credentials, SERVER_NAME="nigeria.ureport.io"
+            )
+            self.assertEqual(f"{login_url}?next=%2Fmanage%2Forg%2Fhome%2F", response["Location"])
+
+            # whereas single sign-on for the same user is allowed through
+            request, response = self.social_login("google", self.google_data("editor@nyaruka.com"))
+            self.assertSignedIn(request, response, self.editor)
+
+            # and other domains aren't affected
+            verify_email(self.admin)
+            response = self.client.post(
+                login_url,
+                {"login": "administrator@nyaruka.com", "password": "Administrator"},
+                SERVER_NAME="nigeria.ureport.io",
+            )
+            self.assertRedirect(response, login_url)  # still nyaruka.com, so still blocked
+            self.client.logout()
+
+        with override_settings(SSO_ONLY_DOMAINS={"other.example.com": "Nope."}):
+            response = self.client.post(login_url, credentials, SERVER_NAME="nigeria.ureport.io")
+            self.assertEqual(self.editor, response.wsgi_request.user)
+
+    def test_authentication_error_is_logged(self):
+        request = RequestFactory().get("/accounts/google/login/callback/?error=access_denied", SERVER_NAME="ureport.io")
+        request.user = AnonymousUser()
+        request.org = None
+        SessionMiddleware(lambda r: None).process_request(request)
+        request._messages = FallbackStorage(request)
+
+        with context.request_context(request):
+            provider = get_social_adapter().get_provider(request, "google")
+            with self.assertLogs("ureport.users.adapter", level="WARNING") as logs:
+                get_social_adapter().on_authentication_error(request, provider, error="cancelled")
+
+        self.assertIn("social login failed: provider=google error=cancelled", logs.output[0])
+        self.assertIn("idp_error='access_denied'", logs.output[0])
 
     def test_connect(self):
         self.login(self.editor)
