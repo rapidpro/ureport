@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-08 10:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -691,6 +691,9 @@ msgstr ""
 msgid "Change Password"
 msgstr ""
 
+msgid "Account Connections"
+msgstr ""
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1233,6 +1236,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"
@@ -1906,6 +1917,10 @@ msgid "If you need to include some custom HTML codes in you org pages, like cust
 msgstr ""
 
 msgid "Other language sites links"
+msgstr ""
+
+#, python-brace-format
+msgid "Accounts on {domain} can only sign in with single sign-on."
 msgstr ""
 
 msgid "Whether this row was created by squashing"

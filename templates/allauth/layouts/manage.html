@@ -1,5 +1,5 @@
 {% extends "allauth/layouts/base.html" %}
-{% load i18n %}
+{% load i18n socialaccount %}
 
 {% comment %}Account settings pages get a menu of the other account pages alongside the content{% endcomment %}
 {% block content-div %}
@@ -26,6 +26,13 @@
             <li>
               <a href="{{ password_url }}" class="{% if request.path == password_url %}is-active{% endif %}">{% trans "Change Password" %}</a>
             </li>
+            {% get_providers as socialaccount_providers %}
+            {% url 'socialaccount_connections' as connections_url %}
+            {% if socialaccount_providers %}
+              <li>
+                <a href="{{ connections_url }}" class="{% if request.path == connections_url %}is-active{% endif %}">{% trans "Account Connections" %}</a>
+              </li>
+            {% endif %}
             {% url 'mfa_index' as mfa_url %}
             {% if mfa_url %}
               <li>

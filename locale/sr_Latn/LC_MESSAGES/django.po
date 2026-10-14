@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-08 10:57+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -733,6 +733,11 @@ msgstr "Kanali"
 msgid "Change Password"
 msgstr "Nova lozinka"
 
+#, fuzzy
+#| msgid "About Content"
+msgid "Account Connections"
+msgstr "O nama, sadržaj"
+
 msgid "Two-Factor Authentication"
 msgstr ""
 
@@ -1285,6 +1290,14 @@ msgid "Disable"
 msgstr ""
 
 msgid "Removes the user's authenticator app and recovery codes so they can log in with just their password."
+msgstr ""
+
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#, python-format
+msgid "Sign In with %(provider)s"
 msgstr ""
 
 msgid "+ New Story"
@@ -1959,6 +1972,10 @@ msgstr "Ako treba uključiti prilagođeni HTML kod u vaše org stranice, poput p
 
 msgid "Other language sites links"
 msgstr "Linkovi ka sajtovima na drugim jezicima"
+
+#, python-brace-format
+msgid "Accounts on {domain} can only sign in with single sign-on."
+msgstr ""
 
 msgid "Whether this row was created by squashing"
 msgstr "Da li je ovaj red nastao sažimanjem"
