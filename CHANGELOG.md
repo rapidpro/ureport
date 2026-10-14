@@ -1,3 +1,6 @@
+## v1.8.6 (2026-10-14)
+ * Upgrade Tailwind CSS to v3.4
+
 ## v1.8.5 (2026-10-07)
  * Size error page logo via stylesheet and let it shrink on narrow screens
 
