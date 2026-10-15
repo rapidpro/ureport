@@ -525,7 +525,7 @@
               <div class="mx-2">{% trans "SELECT YOUR COUNTRY" %}</div>
             </a>
           </div>
-          <div class="md:justify-end li flex-grow flex">
+          <div class="md:justify-end li flex">
             <a href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750 flex-initial py-menu">{% trans "Engagement" %}</a>
             <a
               href="{% if org|config:"is_global" and org.subdomain == "" %}https://www.voicesofyouth.org/aboutureport{% else %}{% url 'public.about' %}{% endif %}"
@@ -574,11 +574,11 @@
                     <div class="pt-1 text-black">
                       {% for lang in other_languages_sites %}
                         {% if lang.link %}
-                          <button onclick="location.href='{{ lang.link }}'" type="button" class="focus:outline-none hover:bg-gray-200 w-full">
+                          <button onclick="location.href='{{ lang.link }}'" type="button" class="focus:outline-hidden hover:bg-gray-200 w-full">
                             <div class="whitespace-nowrap p-2">{{ lang.name }}</div>
                           </button>
                         {% else %}
-                          <button type="button" class="focus:outline-none w-full cursor-text">
+                          <button type="button" class="focus:outline-hidden w-full cursor-text">
                             <div class="whitespace-nowrap p-2">
                               <i class="fas fa-check inline"></i>
                               {{ lang.name }}

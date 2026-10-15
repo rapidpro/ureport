@@ -1,13 +1,171 @@
-// source file for tailwind.css, build by postcss
-//
-// rebuild by using
-//  `npm run build`
-//
-// for dev, watch this file and automatically rebuild using
-//  `npm run watch`
+/* source for tailwind.css, rebuild with `npm run build` (or `npm run watch` while developing) */
 
-@tailwind base;
-@tailwind components;
+/* imported without cascade layers so that, as with the other stylesheets on the page, specificity and order decide
+   which rule wins rather than layering putting every Tailwind rule below all unlayered CSS */
+@import "tailwindcss/theme.css";
+@import "tailwindcss/preflight.css";
+
+@source "../../templates";
+@source "../js/ureport.js";
+@source "../js/v2_*.js";
+@source "../../ureport";
+
+/* hover styles also apply on touch devices rather than only where hover is supported */
+@custom-variant hover (&:hover);
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-md: 768px;
+
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-gray-100: #f7f7f7;
+  --color-gray-200: #ededed;
+  --color-gray-300: #e2e2e2;
+  --color-gray-400: #cbcbcb;
+  --color-gray-500: #a0a0a0;
+  --color-gray-600: #717171;
+  --color-gray-700: #4a4a4a;
+  --color-gray-750: #333;
+  --color-gray-800: #2d2d2d;
+  --color-gray-900: #1a1a1a;
+
+  --spacing: 0.25rem;
+
+  --font-*: initial;
+  --font-sans: "Noto Sans", Roboto, sans-serif;
+  --font-alt: Livvic, Roboto, sans-serif;
+  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --text-*: initial;
+  --text-2xs: 0.5rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 4rem;
+
+  --font-weight-*: initial;
+  --font-weight-hairline: 100;
+  --font-weight-thin: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  --leading-*: initial;
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  --tracking-*: initial;
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  --radius-*: initial;
+  --radius-sm: 0.125rem;
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+
+  --shadow-*: initial;
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-outline: 0 0 0 3px rgba(66, 153, 225, 0.5);
+
+  --container-*: initial;
+  --container-xs: 20rem;
+  --container-sm: 24rem;
+  --container-md: 28rem;
+  --container-lg: 32rem;
+  --container-xl: 36rem;
+  --container-2xl: 42rem;
+  --container-3xl: 48rem;
+  --container-4xl: 56rem;
+  --container-5xl: 64rem;
+  --container-6xl: 72rem;
+}
+
+/* borders default to the light gray rather than currentColor */
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  border-color: var(--color-gray-300);
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1;
+  color: var(--color-gray-400);
+}
+
+/* buttons keep the pointer cursor and form controls keep the browser's own background and corners */
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
+button,
+input,
+select,
+optgroup,
+textarea {
+  border-radius: revert;
+}
+
+input,
+select,
+optgroup,
+textarea {
+  background-color: revert;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+/* elements whose browser spacing was never reset keep it, and file inputs keep the browser's own chooser button */
+option,
+td,
+th {
+  padding: revert;
+}
+
+dialog {
+  margin: revert;
+}
+
+::file-selector-button {
+  all: revert;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
 
 html {
   font-display: fallback;
@@ -23,7 +181,7 @@ html {
 }
 
 
-// languages toggle
+/* languages toggle */
 .language-menu {
   display: inline-block;
 
@@ -38,7 +196,7 @@ html {
   }
 }
 
-// countries menu
+/* countries menu */
 #countries {
   position: absolute;
   width: 100%;
@@ -121,7 +279,7 @@ html {
   }
 }
 
-// flags in our menu
+/* flags in our menu */
 .flag {
   width: 80px;
   height: 75px;
@@ -145,23 +303,23 @@ html {
 }
 
 
-// full width
+/* full width */
 .max-w-page {
   max-width: 1200px;
 }
 
-// half width
+/* half width */
 .max-w-half-page {
   max-width: 600px;
 }
 
-// button style
+/* button style */
 .btn {
   @apply text-base leading-none font-bold rounded-lg inline-block;
   padding: 1em 2em;
 }
 
-// pills for (90 days, 60 months, 12 months)
+/* pills for (90 days, 60 months, 12 months) */
 .pill {
   @apply inline-block px-4 text-center border-t border-b py-2 border-l border-r;
 }
@@ -200,7 +358,8 @@ html {
 }
 
 .pill-dark-blue {
-  @apply border-gray-400 bg-dark-blue text-white;
+  @apply border-gray-400 text-white;
+  background: #060e26;
   
   &:hover {
     @apply bg-gray-200;
@@ -219,7 +378,8 @@ html {
   }
 
   &.selected {
-    @apply bg-dark-blue text-white;
+    @apply text-white;
+    background: #060e26;
   }
 }
 
@@ -249,7 +409,7 @@ html {
   }
 }
 
-// admin nav bar on public site
+/* admin nav bar on public site */
 #admin-nav {
   background: rgb(32, 32, 32);
 
@@ -301,7 +461,7 @@ html {
 }
 
 
-// allows an element to fade in when a parent element hovers, supports up to three levels below
+/* allows an element to fade in when a parent element hovers, supports up to three levels below */
 .hover-show {
   opacity: 0;
   -webkit-transition:opacity .5s ease-in-out;
@@ -330,7 +490,7 @@ html {
   transition:opacity .5s ease-in-out;
 }
 
-// no background on our charts
+/* no background on our charts */
 .highcharts-background {
   fill: none;
 }
@@ -346,12 +506,12 @@ html {
 
 }
 
-// leaflet styles
+/* leaflet styles */
 .leaflet-container {
   background-color:rgba(255,0,0,0.0);
 }
 
-// leaflet info container in top right
+/* leaflet info container in top right */
 .leaflet-info {
   font-family: Noto Sans;
   font-weight: 700;
@@ -383,7 +543,7 @@ html {
   font-size: 2rem;
 }
 
-// circle around number, single digit only
+/* circle around number, single digit only */
 .bg-circle {
   display: inline-block;
   width: 40px;
@@ -393,7 +553,7 @@ html {
   font-size: 1rem;
 }
 
-// small circle around font awesome icon, used for sharing
+/* small circle around font awesome icon, used for sharing */
 .bg-circle-xs {
   display: inline-block;
   width: 32px;
@@ -411,7 +571,7 @@ html {
   }
 }
 
-// light grid background
+/* light grid background */
 .bg-grid {
   background: white;
   background-size: 43px 57px;
@@ -419,7 +579,7 @@ html {
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
 }
 
-// light squares background
+/* light squares background */
 .bg-squares {
   background: white;
   background-size: 43px 57px;
@@ -427,22 +587,22 @@ html {
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
 }
 
-// dark gray background
+/* dark gray background */
 .bg-dark-gray {
   background: #1d1d1d;
 }
 
-// dark blue border
+/* dark blue border */
 .border-dark-blue {
   border-color: #060e26;
 }
 
-// dark blue background
+/* dark blue background */
 .bg-dark-blue {
     background: #060e26;
 }
 
-// blue u background
+/* blue u background */
 .bg-blue-u {
   background-image: url("/sitestatic/img/blue_u.png");
   background-position-x: 6rem;
@@ -451,7 +611,7 @@ html {
   background-size: auto;
 }
 
-// white u background
+/* white u background */
 .bg-white-u {
   background-image: url("/sitestatic/img/white_u.png");
   background-position-x: -1rem;
@@ -459,22 +619,22 @@ html {
   background-size: 250px 250px;
 }
 
-// 5 rem border on right
+/* 5 rem border on right */
 .border-r-5rem {
   border-right-width: 5rem;
 }
 
-// 2.5 rem border on right
+/* 2.5 rem border on right */
 .border-r-25rem {
   border-right-width: 2.5rem;
 }
 
-// 2.5 rem border on left
+/* 2.5 rem border on left */
 .border-l-25rem {
   border-left-width: 2.5rem;
 }
 
-// video container that fills to width
+/* video container that fills to width */
 .video {
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
@@ -493,7 +653,7 @@ html {
   @apply py-2;
 }
 
-// search box input field
+/* search box input field */
 .search-box {
   width: 100%;
 
@@ -584,7 +744,7 @@ html {
   }
 }
 
-// desktop styles
+/* desktop styles */
 @media only screen and (min-width: 768px) {
   .vertical-angle-left, .vertical-angle-left-side {
     -webkit-clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
@@ -633,7 +793,7 @@ html {
   }
 }
 
-// mobile styles
+/* mobile styles */
 @media only screen and (max-width: 767px) {
   .vertical-angle-left, .vertical-angle-right {
     -webkit-clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
@@ -685,7 +845,7 @@ html {
   }
 }
 
-// applied to a div will center children vertically
+/* applied to a div will center children vertically */
 .flex-center-y {
   @apply flex flex-col justify-center
 }
@@ -699,4 +859,4 @@ html {
   color: #000;
 }
 
-@tailwind utilities;
+@import "tailwindcss/utilities.css" source(none);
