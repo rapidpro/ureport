@@ -1,3 +1,6 @@
+## v1.8.7 (2026-10-15)
+ * Add Peru
+
 ## v1.8.6 (2026-10-14)
  * Upgrade Tailwind CSS to v3.4
 
