@@ -8,7 +8,8 @@
     "tailwindcss": "^4.3.3"
   },
   "scripts": {
-    "build": "tailwindcss -i static/css/tailwind.src.css -o static/css/tailwind.css --minify",
-    "watch": "tailwindcss -i static/css/tailwind.src.css -o static/css/tailwind.css --watch"
+    "build": "tailwindcss -i static/css/tailwind.src.css -o static/css/tailwind.css --minify && tailwindcss -i static/css/admin.src.css -o static/css/admin.css --minify",
+    "watch": "tailwindcss -i static/css/tailwind.src.css -o static/css/tailwind.css --watch",
+    "watch:admin": "tailwindcss -i static/css/admin.src.css -o static/css/admin.css --watch"
   }
 }

@@ -6,7 +6,7 @@
 {% block content %}
     {% block table-controls %}
         <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-            <div class="[display:block] basis-0 grow shrink p-3">
+            <div class="block basis-0 grow shrink p-3">
                 {% block content-title %}
                     <h2 class="text-[2.5rem]! font-bold!">
                         <div class="icon colored">{{ icon }}</div>
@@ -14,7 +14,7 @@
                     </h2>
                 {% endblock content-title %}
             </div>
-            <div class="[display:block] basis-0 grow shrink p-3">
+            <div class="block basis-0 grow shrink p-3">
                 {% if view.search_fields %}
                     {% block search-form %}
                         <form role="form">
@@ -32,7 +32,7 @@
                     &nbsp;
                 {% endif %}
             </div>
-            <div class="{% if is_rtl_org %}float-left!{% else %}float-right!{% endif %} [display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[16.66667%]">
+            <div class="{% if is_rtl_org %}float-left!{% else %}float-right!{% endif %} block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[16.66667%]">
                 {% block table-buttons %}
                     {% if view.add_button %}
                         <a href="./create/"
@@ -45,7 +45,7 @@
     {% block pjax %}
         <div id="pjax">
             <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-                <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%] mobile-scroll">
+                <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%] mobile-scroll">
                     {% block pre-table %}
                     {% endblock pre-table %}
                     {% block table %}
@@ -89,7 +89,7 @@
     {% endblock pjax %}
     {% block paginator %}
         <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-            <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[25%]">
+            <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[25%]">
                 <div class="pagination-text">
                     {% if not paginator or paginator.num_pages <= 1 %}
                         {% blocktrans trimmed count counter=object_list|length %}
@@ -104,7 +104,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[75%] float-right!">
+            <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[75%] float-right!">
                 {% if paginator and paginator.num_pages > 1 %}
                     <nav role="navigation" aria-label="pagination" class="pagination is-right">
                         <ul class="pagination-list">
