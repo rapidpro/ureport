@@ -12,7 +12,7 @@
       &mdash; {% trans "not checked yet" %}
     {% endif %}
     {% for job_type, counts in report.by_type.items %}
-      <div class="is-size-7">
+      <div class="text-[0.75rem]!">
         {{ job_type }}:
         {% for status, count in counts.items %}{{ status }} {{ count }}{% if not forloop.last %}, {% endif %}{% endfor %}
       </div>

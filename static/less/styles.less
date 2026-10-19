@@ -389,7 +389,7 @@ a {
   background-color: white;
   color: @bg-dark-blue;
 
-  .level {
+  .admin-header-bar {
     border-bottom: 1px solid white;
     padding-bottom: 20px;
 
@@ -454,7 +454,7 @@ a {
         padding: 50px;
         font-family: @subheadlines-font;
 
-        .tile.is-child:not(:last-of-type) {
+        > :not(:last-of-type) {
           border-bottom: 1px solid;
           padding-bottom: 20px;
         }
@@ -463,7 +463,7 @@ a {
       .small-button-link {
         padding: 30px;
 
-        .tile.is-child:not(:last-of-type) {
+        > :not(:last-of-type) {
           border-bottom: 1px solid;
           padding-bottom: 20px;
         }
@@ -1759,7 +1759,7 @@ a.button {
   .admin-header {
     padding: 0 2rem;
 
-    .level {
+    .admin-header-bar {
       .logged-in-account {
         justify-content: flex-start;
         margin: 0;

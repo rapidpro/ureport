@@ -64,16 +64,16 @@
   </style>
 {% endblock styles %}
 {% block body-content %}
-  <section class="section is-paddingless is-marginless">
+  <section>
     <div>
-      <div style="height: 15px" class="level is-marginless has-background-black"></div>
+      <div style="height: 15px" class="items-center justify-between tablet:flex{% if is_rtl_org %} flex-row-reverse{% endif %} m-0! bg-[#0a0a0a]!"></div>
     </div>
     {% block navbar %}
       <div class="top-nav-container">
-        <div class="level">
-          {% if is_rtl_org %}<div class="level-left"></div>{% endif %}
-          <div class="{% if is_rtl_org %}level-right{% else %}level-left{% endif %}">
-            <a href="{% url 'public.index' %}" style="justify-content: start" class="level-item has-text-black">
+        <div class="items-center justify-between tablet:flex{% if is_rtl_org %} flex-row-reverse{% endif %}">
+          {% if is_rtl_org %}<div class="basis-auto grow-0 shrink-0 items-center tablet:flex justify-start"></div>{% endif %}
+          <div class="basis-auto grow-0 shrink-0 items-center tablet:flex {% if is_rtl_org %}justify-end max-tablet:mt-6{% else %}justify-start{% endif %}">
+            <a href="{% url 'public.index' %}" style="justify-content: start" class="flex basis-auto grow-0 shrink-0 items-center justify-center text-[#0a0a0a]! hover:text-black! focus:text-black!">
               <div style="{% if is_rtl_org %}margin-right:0; margin-left:1.25rem; {% endif %}" class="icon">
                 <i class="{% if is_rtl_org %}fa-arrow-circle-right{% else %}fa-arrow-circle-left{% endif %} fas"></i>
               </div>
@@ -83,10 +83,10 @@
         </div>
       </div>
       <div class="admin-header border-b border-gray-600">
-        <div class="level">
+        <div class="admin-header-bar items-center justify-between tablet:flex{% if is_rtl_org %} flex-row-reverse{% endif %} [&_img]:inline-block [&_img]:align-top">
           {% if not is_rtl_org %}
-            <div class="level-left">
-              <div style="justify-content: start" class="level-item square-logo">
+            <div class="basis-auto grow-0 shrink-0 items-center tablet:flex justify-start">
+              <div style="justify-content: start" class="flex basis-auto grow-0 shrink-0 items-center justify-center square-logo">
                 <div style="width: 360px">
                   {% if org.subdomain == "drc" %}
                     <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
@@ -100,27 +100,27 @@
               </div>
             </div>
           {% endif %}
-          <div class="{% if is_rtl_org %}level-left{% else %}level-right{% endif %}">
+          <div class="basis-auto grow-0 shrink-0 items-center tablet:flex {% if is_rtl_org %}justify-start{% else %}justify-end max-tablet:mt-6{% endif %}">
             {% block login %}
               {% if request.user and request.user.is_authenticated %}
-                <div class="{% if is_rtl_org %}has-text-left{% else %}has-text-right{% endif %} level-item logged-in-account">
+                <div class="{% if is_rtl_org %}text-left!{% else %}text-right!{% endif %} flex basis-auto grow-0 shrink-0 items-center justify-center max-tablet:not-last:mb-3 tablet:not-last:me-3 logged-in-account">
                   {% trans "Welcome, " %}
                   {{ request.user.first_name }} {{ request.user.last_name }}
-                  <br class="is-hidden-mobile">
+                  <br class="max-tablet:hidden!">
                   {{ request.user.email }}
                 </div>
                 <form method="post" action="{% url 'account_logout' %}?next=/">
                   {% csrf_token %}
-                  <button type="submit" class="level-item button is-outlined logout-button">{% trans "Logout" %}</button>
+                  <button type="submit" class="flex! basis-auto grow-0 shrink-0 items-center justify-center button is-outlined logout-button">{% trans "Logout" %}</button>
                 </form>
               {% else %}
-                <a href="{% org_host_link %}{% url 'account_login' %}" class="level-item button is-outlined">{% trans "Login" %}</a>
+                <a href="{% org_host_link %}{% url 'account_login' %}" class="flex! basis-auto grow-0 shrink-0 items-center justify-center button is-outlined">{% trans "Login" %}</a>
               {% endif %}
             {% endblock login %}
           </div>
           {% if is_rtl_org %}
-            <div class="level-right">
-              <div style="justify-content: start; margin-right: 0rem" class="level-item square-logo">
+            <div class="basis-auto grow-0 shrink-0 items-center tablet:flex justify-end max-tablet:mt-6">
+              <div style="justify-content: start; margin-right: 0rem" class="flex basis-auto grow-0 shrink-0 items-center justify-center square-logo">
                 <div style="width: 360px">
                   {% if org.subdomain == "drc" %}
                     <img src="{{ STATIC_URL }}img/logos/UREPORT/U-Report_LOGO_DRC.png" alt="{{ org.name }}" class="logo">
@@ -137,11 +137,11 @@
       </div>
     {% endblock navbar %}
   </section>
-  <section class="section is-paddingless is-marginless">
+  <section>
     <div class="content-section-container">
       {% block content-section %}
-        <div class="columns is-marginless">
-          <div class="column is-one-fifth block" id="left-menu">
+        <div class="tablet:flex m-0!">
+          <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-1/5" id="left-menu">
             {% block menu %}
               {% if request.user and request.user.is_authenticated %}
                 <aside class="menu">
@@ -301,7 +301,7 @@
               {% endif %}
             {% endblock menu %}
           </div>
-          <div class="bg-white column is-four-fifths is-offset-one block">
+          <div class="bg-white [display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-4/5">
             {% block content-div %}
               <div class="content-div">
                 {% block messages %}
@@ -320,8 +320,8 @@
       {% endblock content-section %}
     </div>
   </section>
-  <section class="section is-paddingless is-marginless">
-    <footer class="footer is-paddingless">
+  <section>
+    <footer class="footer p-0!">
       {% block footer %}
         <!-- footer navbar -->
         <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-4 px-home mt-12 mb-3">

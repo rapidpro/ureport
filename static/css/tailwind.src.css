@@ -16,6 +16,9 @@
 @theme {
   --breakpoint-*: initial;
   --breakpoint-md: 768px;
+  /* the admin pages' breakpoint, where their layout switches between stacked and side by side */
+  --breakpoint-tablet: 769px;
+  --breakpoint-desktop: 1088px;
 
   --color-*: initial;
   --color-transparent: transparent;

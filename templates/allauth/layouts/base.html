@@ -8,8 +8,8 @@
         {% for message in messages %}<div class="is-{{ message.tags }} notification">{{ message }}</div>{% endfor %}
       {% endif %}
     {% endblock messages %}
-    <div class="columns is-centered is-desktop">
-      <div class="column is-half">
+    <div class="desktop:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3 justify-center">
+      <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[50%]">
         {% block content %} {% endblock content %}
       </div>
     </div>

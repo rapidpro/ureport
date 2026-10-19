@@ -5,16 +5,16 @@
 {% endblock pre-content %}
 {% block content %}
     {% block table-controls %}
-        <div class="columns">
-            <div class="column">
+        <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+            <div class="[display:block] basis-0 grow shrink p-3">
                 {% block content-title %}
-                    <h2 class="is-size-2 has-text-weight-bold">
+                    <h2 class="text-[2.5rem]! font-bold!">
                         <div class="icon colored">{{ icon }}</div>
-                        <div class="is-inline-block content-title-text">{{ title }}</div>
+                        <div class="inline-block! content-title-text">{{ title }}</div>
                     </h2>
                 {% endblock content-title %}
             </div>
-            <div class="column">
+            <div class="[display:block] basis-0 grow shrink p-3">
                 {% if view.search_fields %}
                     {% block search-form %}
                         <form role="form">
@@ -32,11 +32,11 @@
                     &nbsp;
                 {% endif %}
             </div>
-            <div class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} column is-2">
+            <div class="{% if is_rtl_org %}float-left!{% else %}float-right!{% endif %} [display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[16.66667%]">
                 {% block table-buttons %}
                     {% if view.add_button %}
                         <a href="./create/"
-                           class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} button is-primary">{% trans "Add" %}</a>
+                           class="{% if is_rtl_org %}float-left!{% else %}float-right!{% endif %} button is-primary">{% trans "Add" %}</a>
                     {% endif %}
                 {% endblock table-buttons %}
             </div>
@@ -44,8 +44,8 @@
     {% endblock table-controls %}
     {% block pjax %}
         <div id="pjax">
-            <div class="columns">
-                <div class="column is-12 mobile-scroll">
+            <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+                <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%] mobile-scroll">
                     {% block pre-table %}
                     {% endblock pre-table %}
                     {% block table %}
@@ -88,8 +88,8 @@
         </div>
     {% endblock pjax %}
     {% block paginator %}
-        <div class="columns">
-            <div class="column is-3">
+        <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+            <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[25%]">
                 <div class="pagination-text">
                     {% if not paginator or paginator.num_pages <= 1 %}
                         {% blocktrans trimmed count counter=object_list|length %}
@@ -104,7 +104,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="column is-9 is-pulled-right">
+            <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[75%] float-right!">
                 {% if paginator and paginator.num_pages > 1 %}
                     <nav role="navigation" aria-label="pagination" class="pagination is-right">
                         <ul class="pagination-list">
@@ -131,16 +131,16 @@
                                 {% else %}
                                     {% if page_obj.number < 5 %}
                                         {% if page_num < 10 %}
-                                            <li class="is-hidden-mobile">
+                                            <li class="max-tablet:hidden!">
                                                 <a href="{{ url_params|safe }}{{ order_params|safe }}page={{ page_num }}" class="pagination-link">{{ page_num }}</a>
                                             </li>
                                         {% endif %}
                                     {% elif page_num < page_obj.number|add:"5" and page_num > page_obj.number|add:"-5" %}
-                                        <li class="is-hidden-mobile">
+                                        <li class="max-tablet:hidden!">
                                             <a href="{{ url_params|safe }}{{ order_params|safe }}page={{ page_num }}" class="pagination-link">{{ page_num }}</a>
                                         </li>
                                     {% elif page_obj.number > paginator.num_pages|add:"-5" %}
-                                        <li class="is-hidden-mobile">
+                                        <li class="max-tablet:hidden!">
                                             <a href="{{ url_params|safe }}{{ order_params|safe }}page={{ page_num }}" class="pagination-link">{{ page_num }}</a>
                                         </li>
                                     {% endif %}
