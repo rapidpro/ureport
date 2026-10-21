@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 13:20+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1479,6 +1479,9 @@ msgstr "Εάν αυτή η σελίδα πρέπει να είναι ενεργ�
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr "Το slug μπορεί να περιέχει μόνο γράμματα, αριθμούς, κάτω παύλες και παύλες"
+
+msgid "A landing page with this slug already exists"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Αυτό είναι το OSM id για αυτό το διοικητικό όριο"
