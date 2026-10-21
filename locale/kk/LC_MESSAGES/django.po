@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 13:20+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Askhat Makitov, 2024\n"
 "Language-Team: Kazakh (https://app.transifex.com/rapidpro/teams/226/kk/)\n"
@@ -1487,6 +1487,9 @@ msgstr "Осы парақша көпшілік үшін белсенді бол�
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr "Слаг тек әріптерден, сандардан, астыңғы сызықтардан және дефистерден тұруы мүмкін"
+
+msgid "A landing page with this slug already exists"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Бұл - осы әкімшілік шекара үшін OSM идентификаторы"
