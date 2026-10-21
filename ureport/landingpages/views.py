@@ -70,7 +70,7 @@ class LandingPageCRUDL(SmartCRUDL):
         def get_public_page(self, obj):
             if obj.is_active:
                 return mark_safe(
-                    f'<a href="{reverse("public.landing_page", args=[obj.slug])}" target="_blank" rel="noopener noreferrer" class="button  is-inline-block is-info">View public page</a>'
+                    f'<a href="{reverse("public.landing_page", args=[obj.slug])}" target="_blank" rel="noopener noreferrer" class="button inline-block! is-info">View public page</a>'
                 )
             else:
                 return "Deactivated page"

@@ -4,17 +4,17 @@
 {% block content %}
   {% block pjax %}
     <div id="read-view">
-      <div class="columns">
-        <div class="column is-12 buttons">
+      <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+        <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%] buttons">
           {% block read-buttons %}
           {% endblock read-buttons %}
           {% if view.edit_button %}
-            <a href="../../update/{{ object.id }}/" class="button is-primary is-pulled-right">{% trans "edit" %}</a>
+            <a href="../../update/{{ object.id }}/" class="button is-primary float-right!">{% trans "edit" %}</a>
           {% endif %}
         </div>
       </div>
-      <div class="columns">
-        <div class="column is-12">
+      <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+        <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%]">
           {% block pre-fields %}
           {% endblock pre-fields %}
           {% block fields %}

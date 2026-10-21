@@ -2,15 +2,15 @@
 {% load thumbnail smartmin i18n %}
 
 {% block content-title %}
-  <h2 class="is-size-2 has-text-weight-bold">
+  <h2 class="text-[2.5rem]! font-bold!">
     <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
-    <div class="is-inline-block content-title-text">{% trans "Category Images" %}</div>
+    <div class="inline-block! content-title-text">{% trans "Category Images" %}</div>
   </h2>
 {% endblock content-title %}
 {% block table %}
-  <div class="columns is-multiline">
+  <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3 flex-wrap">
     {% for obj in object_list %}
-      <div class="column is-one-fifth">
+      <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[20%]">
         <div class="category-obj">
           {% for field in fields %}
             {% if field in link_fields %}

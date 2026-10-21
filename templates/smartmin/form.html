@@ -3,8 +3,8 @@
 
 {% block content %}
   {% block pjax %}
-    <div class="columns" id="pjax">
-      <div class="{% block form-span %}is-12{% endblock form-span %} column">
+    <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3" id="pjax">
+      <div class="{% block form-span %}tablet:flex-none tablet:w-[100%]{% endblock form-span %} [display:block] basis-0 grow shrink p-3">
         {% block pre-form %}
         {% endblock pre-form %}
         <form method="post" enctype="multipart/form-data" role="form" class="smartmin-form">

@@ -9,8 +9,8 @@
         {% for message in messages %}<div class="is-{{ message.tags }} notification">{{ message }}</div>{% endfor %}
       {% endif %}
     {% endblock messages %}
-    <div class="columns is-desktop">
-      <div class="column is-one-quarter">
+    <div class="desktop:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+      <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[25%]">
         <aside class="menu account-menu">
           <p class="menu-label">{% trans "Account" %}</p>
           <ul class="menu-list">
@@ -35,7 +35,7 @@
           </ul>
         </aside>
       </div>
-      <div class="column">
+      <div class="[display:block] basis-0 grow shrink p-3">
         {% block content %} {% endblock content %}
       </div>
     </div>

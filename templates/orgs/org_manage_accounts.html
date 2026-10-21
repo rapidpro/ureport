@@ -4,17 +4,17 @@
 {% block pre-content %}
 {% endblock pre-content %}
 {% block post-form-errors %}
-  <div class="columns">
-    <div class="column">
+  <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+    <div class="[display:block] basis-0 grow shrink p-3">
       {% block content-title %}
-        <h2 class="is-size-2 has-text-weight-bold">
+        <h2 class="text-[2.5rem]! font-bold!">
           <img src="{{ STATIC_URL }}img/icons/users_icon.png" alt="">
-          <div class="is-inline-block content-title-text">{% trans "Users" %}</div>
+          <div class="inline-block! content-title-text">{% trans "Users" %}</div>
         </h2>
       {% endblock content-title %}
     </div>
-    <div class="column">
-      <div class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %} field is-horizontal">
+    <div class="[display:block] basis-0 grow shrink p-3">
+      <div class="{% if is_rtl_org %}float-left!{% else %}float-right!{% endif %} field is-horizontal">
         <div class="field-label"></div>
         <div class="field-body">
           <div class="field is-grouped">
@@ -33,7 +33,7 @@
 {% block form-buttons %}
 {% endblock form-buttons %}
 {% block form-span %}
-  is-12
+  tablet:flex-none tablet:w-[100%]
 {% endblock form-span %}
 {% block form-help %}
   <div class="notification">
@@ -101,8 +101,8 @@
   </table>
 {% endblock fields %}
 {% block pre-fields %}
-  <div class="columns">
-    <div class="column is-8">
+  <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+    <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[66.66667%]">
       <div class="field">
         <label for="" class="label">Invite people to your organization</label>
         <div class="field is-expanded">
@@ -110,7 +110,7 @@
         </div>
       </div>
     </div>
-    <div class="column is-4">
+    <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[33.33333%]">
       <div class="field is-expanded">
         <label class="label">{% trans "User group" %}</label>
         <div class="control is-expanded">
