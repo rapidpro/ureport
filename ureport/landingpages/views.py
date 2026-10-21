@@ -26,6 +26,14 @@ class LandingPageForm(forms.ModelForm):
         slug = self.cleaned_data["slug"]
         if re.findall(r"[^\w-]", slug):
             raise forms.ValidationError(_("The slug can only contain letters, numbers, underscores and hyphens"))
+
+        # org isn't a form field so the model's unique constraint isn't checked by the form
+        existing = LandingPage.objects.filter(org=self.org, slug=slug)
+        if self.instance.pk:
+            existing = existing.exclude(pk=self.instance.pk)
+        if existing.exists():
+            raise forms.ValidationError(_("A landing page with this slug already exists"))
+
         return slug
 
     class Meta:

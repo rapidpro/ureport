@@ -68,6 +68,16 @@ class LandingPageTest(UreportTest):
         self.assertEqual(landing_page.title, "Foo Bar")
         self.assertEqual(landing_page.slug, "foo")
 
+        # slug already used in this org
+        post_data = dict(title="Other", content="Other content.", slug="foo")
+        response = self.client.post(create_url, post_data, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual("A landing page with this slug already exists", response.context["form"].errors["slug"][0])
+
+        # but can be reused in another org
+        response = self.client.post(create_url, post_data, follow=True, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.request["PATH_INFO"], reverse("landingpages.landingpage_list"))
+        self.assertEqual(2, LandingPage.objects.filter(slug="foo").count())
+
     def test_list(self):
         uganda_foo_lp = LandingPage.objects.create(
             org=self.uganda,
@@ -204,3 +214,20 @@ class LandingPageTest(UreportTest):
         self.assertEqual(landing_page.title, "Bar Bar")
         self.assertEqual(landing_page.slug, "bar")
         self.assertEqual(landing_page.content, "Phasellus id arcu quis urna faucibus eleifend.")
+
+        # can keep its own slug
+        response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.request["PATH_INFO"], reverse("landingpages.landingpage_list"))
+
+        # but not take one used by another page in the same org
+        LandingPage.objects.create(
+            org=self.uganda,
+            title="baz",
+            slug="baz",
+            content="Baz, Baz.",
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+        post_data["slug"] = "baz"
+        response = self.client.post(uganda_update_url, post_data, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual("A landing page with this slug already exists", response.context["form"].errors["slug"][0])
