@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 12:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1341,6 +1341,14 @@ msgstr ""
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Оновлено %s кеш для цієї організації"
+
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "Слаг може містити лише літери, цифри, підкреслення та дефіси"
+
+msgid "Another page already uses this link"
+msgstr ""
 
 msgid "Flag"
 msgstr "Прапор"

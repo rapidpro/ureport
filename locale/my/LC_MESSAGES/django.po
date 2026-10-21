@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 12:59+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1328,6 +1328,14 @@ msgstr ""
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "ဤအဖွဲ့အစည်းအတွက် %s cache ကို ပြန်လည်ဆန်းသစ်ပြီးပါပြီ"
+
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "slug တွင် စာလုံးများ၊ ဂဏန်းများ၊ underscore နှင့် hyphen များသာ ပါဝင်နိုင်သည်"
+
+msgid "Another page already uses this link"
+msgstr ""
 
 msgid "Flag"
 msgstr "အလံ"
