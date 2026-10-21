@@ -1,3 +1,6 @@
+## v1.8.9 (2026-10-21)
+ * Replace Bulma layout and helper classes with Tailwind utilities
+
 ## v1.8.8 (2026-10-21)
  * Upgrade Tailwind CSS to v4
 
