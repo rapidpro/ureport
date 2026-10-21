@@ -47,7 +47,7 @@
   {% block extra-style %}
   {% endblock extra-style %}
 </head>
-<body>
+<body data-direction="{% if is_rtl_org %}rtl{% else %}ltr{% endif %}">
   {% block body-content %}
     <div id="fb-root"></div>
     {% if org|config:"facebook_page_id" and org|config:"facebook_app_id" %}

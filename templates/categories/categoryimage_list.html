@@ -10,7 +10,7 @@
 {% block table %}
   <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3 flex-wrap">
     {% for obj in object_list %}
-      <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[20%]">
+      <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[20%]">
         <div class="category-obj">
           {% for field in fields %}
             {% if field in link_fields %}

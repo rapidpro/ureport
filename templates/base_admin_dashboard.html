@@ -7,13 +7,12 @@
   {% endcompress %}
   {% if is_rtl_org %}
     {% compress css %}
-      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css">
-      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css">
+      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/admin.css">
       <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
     {% endcompress %}
   {% else %}
     {% compress css %}
-      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css">
+      <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/admin.css">
       <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css">
       <link type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less">
     {% endcompress %}
@@ -141,7 +140,7 @@
     <div class="content-section-container">
       {% block content-section %}
         <div class="tablet:flex m-0!">
-          <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-1/5" id="left-menu">
+          <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-1/5" id="left-menu">
             {% block menu %}
               {% if request.user and request.user.is_authenticated %}
                 <aside class="menu">
@@ -301,7 +300,7 @@
               {% endif %}
             {% endblock menu %}
           </div>
-          <div class="bg-white [display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-4/5">
+          <div class="bg-white block basis-0 grow shrink p-3 tablet:flex-none tablet:w-4/5">
             {% block content-div %}
               <div class="content-div">
                 {% block messages %}

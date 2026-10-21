@@ -5,7 +5,7 @@
   {% block pjax %}
     <div id="read-view">
       <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-        <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%] buttons">
+        <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%] buttons">
           {% block read-buttons %}
           {% endblock read-buttons %}
           {% if view.edit_button %}
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-        <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%]">
+        <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[100%]">
           {% block pre-fields %}
           {% endblock pre-fields %}
           {% block fields %}
