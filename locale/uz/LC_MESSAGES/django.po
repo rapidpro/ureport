@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 12:59+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1324,6 +1324,14 @@ msgstr ""
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "%s ning keshi bu tashkilot uchun yangilandi"
+
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "Slag faqat harflar, raqamlar, pastki chiziq va defislardan iborat bo'lishi mumkin"
+
+msgid "Another page already uses this link"
+msgstr ""
 
 msgid "Flag"
 msgstr "Bayroq"

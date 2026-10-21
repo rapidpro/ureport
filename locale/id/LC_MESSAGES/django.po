@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 12:59+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1322,6 +1322,14 @@ msgstr ""
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Refreshed %s cache untuk organisasi ini"
+
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "Slug hanya boleh berisi huruf, angka, garis bawah, dan tanda hubung"
+
+msgid "Another page already uses this link"
+msgstr ""
 
 msgid "Flag"
 msgstr "Bendera"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 12:59+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Tjaša Jazbinšek, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -1344,6 +1344,14 @@ msgstr ""
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "%s osveženega predpomnilnika za to organizacijo"
+
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "Čisti URL lahko vsebuje samo črke, številke, podčrtaje in vezaje"
+
+msgid "Another page already uses this link"
+msgstr ""
 
 msgid "Flag"
 msgstr "Logo"

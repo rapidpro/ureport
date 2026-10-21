@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:10+0000\n"
+"POT-Creation-Date: 2026-10-21 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1284,6 +1284,12 @@ msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
+msgstr ""
+
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr ""
+
+msgid "Another page already uses this link"
 msgstr ""
 
 msgid "Flag"
