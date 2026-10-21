@@ -1,3 +1,6 @@
+## v1.8.10 (2026-10-21)
+ * Replace Bulma with Tailwind-built admin component styles
+
 ## v1.8.9 (2026-10-21)
  * Replace Bulma layout and helper classes with Tailwind utilities
 
