@@ -3,18 +3,12 @@
   "private": true,
   "name": "ureport",
   "devDependencies": {
-    "autoprefixer": "^10.4.2",
-    "cssnano": "^5.0.16",
+    "@tailwindcss/cli": "^4.3.3",
     "less": "4.1.2",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^9.1.0",
-    "postcss-nested": "^5.0.6",
-    "postcss-scss": "^4.0.3",
-    "postcss-simple-vars": "^6.0.3",
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^4.3.3"
   },
   "scripts": {
-    "build": "postcss static/scss/tailwind.scss -o static/css/tailwind.css",
-    "watch": "postcss static/scss/tailwind.scss -o static/css/tailwind.css --watch"
+    "build": "tailwindcss -i static/css/tailwind.src.css -o static/css/tailwind.css --minify",
+    "watch": "tailwindcss -i static/css/tailwind.src.css -o static/css/tailwind.css --watch"
   }
 }
