@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 12:59+0000\n"
+"POT-Creation-Date: 2026-10-21 13:20+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1497,6 +1497,9 @@ msgstr "Dacă această pagină trebuie să fie activă pentru public"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr "Slug-ul poate conține doar litere, cifre, liniuțe de subliniere și cratime"
+
+msgid "A landing page with this slug already exists"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Acesta este ID-ul OSM pentru această frontieră administrativă"

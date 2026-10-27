@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 12:59+0000\n"
+"POT-Creation-Date: 2026-10-21 13:20+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1489,6 +1489,9 @@ msgstr "ဤစာမျက်နှာကို အများပြည်သ�
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr "slug တွင် စာလုံးများ၊ ဂဏန်းများ၊ underscore နှင့် hyphen များသာ ပါဝင်နိုင်သည်"
+
+msgid "A landing page with this slug already exists"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "ဤအုပ်ချုပ်ရေးနယ်နိမိတ်အတွက် OSM id ဖြစ်သည်"

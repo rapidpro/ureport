@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 12:59+0000\n"
+"POT-Creation-Date: 2026-10-21 13:20+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -1495,6 +1495,9 @@ msgstr "Se esta página deve estar ativa para o público"
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr "O slug pode conter apenas letras, números, sublinhados e hifens"
+
+msgid "A landing page with this slug already exists"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Este é o id OSM para este limite administrativo"

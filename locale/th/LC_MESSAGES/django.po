@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 12:59+0000\n"
+"POT-Creation-Date: 2026-10-21 13:20+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: M. S., 2023\n"
 "Language-Team: Thai (https://www.transifex.com/rapidpro/teams/226/th/)\n"
@@ -1489,6 +1489,9 @@ msgstr "เพจนี้ควรเปิดเป็นสถานะสา
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr "Slug สามารถประกอบด้วยตัวอักษร ตัวเลข ขีดล่าง และยัติภังค์เท่านั้น"
+
+msgid "A landing page with this slug already exists"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "นี่คือ OSM ID (OpenStreetMap ID) สำหรับเขตการปกครองนี้"

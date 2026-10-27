@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 12:59+0000\n"
+"POT-Creation-Date: 2026-10-21 13:20+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -1526,6 +1526,9 @@ msgstr "ما إذا كان يجب أن تكون هذه الصفحة نشطة ل�
 
 msgid "The slug can only contain letters, numbers, underscores and hyphens"
 msgstr "لا يمكن أن يحتوي المعرّف المختصر إلا على حروف وأرقام وشرطات سفلية وشرطات"
+
+msgid "A landing page with this slug already exists"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
 msgstr "هذا هو رمز الـOSM الخاص بالحدود الإدارية "
