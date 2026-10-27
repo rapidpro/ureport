@@ -1134,7 +1134,10 @@ class ContactActivityCounter(SquashableModel):
     def get_squash_query(cls, distinct_set):
         """
         Adds the set's unsquashed rows onto its single squashed row, updated in place, which never goes below zero and
-        is deleted when it reaches zero. A set without a squashed row only gets one if its deltas sum above zero
+        is deleted when it reaches zero. A set without a squashed row only gets one if its deltas sum above zero.
+        Whether it has one is read from the statement's snapshot, so if a recalculation of the org's counters deletes
+        it after that, a negative total can be inserted in its place - that recalculation is already lossy when it
+        overlaps the triggers writing deltas, and is corrected by the next one
         """
         sql = """
         WITH removed AS (

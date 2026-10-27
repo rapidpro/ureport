@@ -13,19 +13,19 @@ logger = logging.getLogger(__name__)
 def get_merge_squashed_sql(table: str, columns: tuple) -> str:
     """
     Builds a query which merges any squashed rows of the given table which share values for the given columns,
-    treating NULLs as equal, and drops them if they sum to zero.
+    treating NULLs as equal, and drops them if they sum to zero. Duplicates are found with a window function rather
+    than by joining on IS NOT DISTINCT FROM, which can only be done as a nested loop.
     """
 
     cols = ", ".join([f'"{col}"' for col in columns])
-    join_cond = " AND ".join([f'c."{col}" IS NOT DISTINCT FROM d."{col}"' for col in columns])
-    returning = ", ".join([f'c."{col}"' for col in columns])
 
     return f"""
-    WITH dupes AS (
-        SELECT {cols} FROM {table} WHERE "is_squashed" GROUP BY {cols} HAVING COUNT(*) > 1
-    ), removed AS (
-        DELETE FROM {table} c USING dupes d WHERE c."is_squashed" AND {join_cond}
-        RETURNING {returning}, c."count"
+    WITH removed AS (
+        DELETE FROM {table} WHERE "id" IN (
+            SELECT "id" FROM (
+                SELECT "id", COUNT(*) OVER (PARTITION BY {cols}) AS "num" FROM {table} WHERE "is_squashed"
+            ) s WHERE s."num" > 1
+        ) RETURNING {cols}, "count"
     )
     INSERT INTO {table} ({cols}, "count", "is_squashed")
     SELECT {cols}, SUM("count"), TRUE FROM removed GROUP BY {cols} HAVING SUM("count") != 0;

@@ -112,6 +112,13 @@ class SquashableCountTest(UreportTest):
         self.assertEqual(8, engagement.get(id=null_total.id).count)
         self.assertEqual(2, engagement.count())
 
+        # a total reaching zero is deleted
+        self.add_engagement(-8)
+        self.add_engagement(1, is_responded=True)
+
+        PollEngagementDailyCount.squash()
+        self.assertEqual([(True, 5)], list(engagement.values_list("is_responded", "count")))
+
     def test_squash_max_distinct(self):
         self.add_stats(1, scope="a")
         self.add_stats(1, scope="b")
@@ -153,7 +160,11 @@ class SquashableCountTest(UreportTest):
         self.assertEqual((5, True), (total.count, total.is_squashed))
 
         # deltas are added onto the squashed row, which keeps its id
-        self.add_activity(-1)
+        self.add_activity(2)
+        ContactActivityCounter.squash()
+        self.assertEqual([(total.id, 7)], list(counters.values_list("id", "count")))
+
+        self.add_activity(-3)
         ContactActivityCounter.squash()
         self.assertEqual([(total.id, 4)], list(counters.values_list("id", "count")))
 
@@ -198,4 +209,24 @@ class SquashableCountTest(UreportTest):
         self.assertEqual(
             {(None, "all", 5, True), (None, "other", 1, True), (None, "all", 6, False)},
             set(PollStatsCounter.objects.values_list("flow_result_category_id", "scope", "count", "is_squashed")),
+        )
+
+    def test_merge_squashed_sql_contact_activity(self):
+        table = ContactActivityCounter._meta.db_table
+        columns = ("org_id", "date", "type", "value")
+
+        with connection.cursor() as cursor:
+            cursor.execute('DROP INDEX "stats_cac_squashed"')
+
+        self.add_activity(2, is_squashed=True)
+        self.add_activity(3, is_squashed=True)
+        self.add_activity(4, value="F", is_squashed=True)
+        self.add_activity(1)
+
+        with connection.cursor() as cursor:
+            cursor.execute(get_merge_squashed_sql(table, columns))
+
+        self.assertEqual(
+            {("M", 5, True), ("F", 4, True), ("M", 1, False)},
+            set(ContactActivityCounter.objects.values_list("value", "count", "is_squashed")),
         )
