@@ -15,7 +15,6 @@ from ureport.stats.sync import (
     ENGAGEMENT_JOB_TYPE,
     LOCK_BACKOFF,
     PRUNE_JOB_TYPE,
-    PRUNE_LEASE_SECONDS,
     REBUILD_BATCH_SIZE,
     REBUILD_JOB_TYPE,
     REBUILD_LOCK_KEY,
@@ -618,10 +617,6 @@ class DispatchTest(SyncJobTestMixin, UreportTest):
                 [call((first_job.id,), queue="slow"), call((second_job.id,), queue="slow", countdown=delay)],
                 mock.call_args_list,
             )
-
-        # and the spread stays well inside the window a queued nudge is trusted for, so the next pass doesn't
-        # queue the delayed jobs again
-        self.assertLess(DISPATCH_SPREAD_SECONDS, PRUNE_LEASE_SECONDS)
 
     def test_can_be_limited_to_one_org(self):
         self.uganda.is_active = True

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django_valkey import get_valkey_connection
-from mock import patch
+from mock import Mock, call, patch
 
 from django.core.cache import cache
 from django.db import connection
@@ -97,12 +97,14 @@ class RebuildReportersCountsTest(MaintenanceTest):
     @patch("ureport.contacts.maintenance.update_cache_org_contact_counts")
     @patch("ureport.contacts.models.Contact.recalculate_reporters_stats")
     def test_rebuild_is_a_single_chunk(self, mock_recalculate, mock_update_counts):
+        calls = Mock()
+        calls.attach_mock(mock_recalculate, "recalculate")
+        calls.attach_mock(mock_update_counts, "update_counts")
+
         self.assertEqual(run_to_completion(rebuild_reporters_counts, self.job.id), 1)
 
-        mock_recalculate.assert_called_once_with(self.nigeria)
-
         # the org's cached counts are refreshed from the rebuilt counters
-        mock_update_counts.assert_called_once_with(self.nigeria)
+        self.assertEqual([call.recalculate(self.nigeria), call.update_counts(self.nigeria)], calls.mock_calls)
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, progress={"chunks": 1}, lease_owner=None)
 
         # the lock the contact tasks coordinate through is left released

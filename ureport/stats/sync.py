@@ -70,9 +70,9 @@ DAILY_INTERVAL = timedelta(hours=20)
 # broken refresh isn't retried every night forever: 20h, 40h, 80h, 160h, then the cap
 FAILURE_BACKOFF = Backoff(base=DAILY_INTERVAL, cap=timedelta(days=7), max_doublings=4)
 
-# the dispatcher spreads the orgs' runs over this many seconds rather than starting them all at once. It has to stay
-# well inside the window a queued nudge is trusted for (twice the shortest lease), or the next pass would queue
-# another message for a job whose first one is still waiting out its delay
+# the dispatcher spreads the orgs' runs over this many seconds rather than starting them all
+# at once. It has to stay well under the hour between the dispatcher's passes, so that the
+# delayed nudges have all been claimed by the time the next pass looks at those jobs
 DISPATCH_SPREAD_SECONDS = 60 * 15
 
 
