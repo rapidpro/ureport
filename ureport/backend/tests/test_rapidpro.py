@@ -256,6 +256,13 @@ class BoundarySyncerTest(UreportTest):
                 state.id, self.syncer.local_kwargs(self.nigeria, remote("R-OYO", "R-LAGOS", 2))["parent_id"]
             )
 
+        # where OSM ids differ only by case, the oldest boundary is the parent
+        Boundary.objects.create(
+            org=self.nigeria, osm_id="r-lagos", name="Lagos", level=1, parent=country, geometry="{}"
+        )
+        syncer = BoundarySyncer(self.rapidpro_backend)
+        self.assertEqual(state.id, syncer.local_kwargs(self.nigeria, remote("R-OYO", "R-LAGOS", 2))["parent_id"])
+
         # a parent that doesn't exist gives none
         with self.assertNumQueries(0):
             self.assertIsNone(self.syncer.local_kwargs(self.nigeria, remote("R-WARD", "R-MISSING", 3))["parent_id"])

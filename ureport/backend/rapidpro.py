@@ -72,7 +72,7 @@ class BoundarySyncer(BaseSyncer):
 
     def __init__(self, backend):
         super().__init__(backend)
-        self._parent_ids = {}
+        self._parent_ids = None
 
     def fetch_all(self, org):
         qs = self.model.objects.filter(org=org, backend=self.backend).order_by("-level")
@@ -84,13 +84,13 @@ class BoundarySyncer(BaseSyncer):
         the org's boundaries once rather than each remote's parent separately. Where OSM ids differ only by case, the
         oldest boundary wins
         """
-        if org.pk not in self._parent_ids:
-            self._parent_ids[org.pk] = {
+        if self._parent_ids is None:
+            self._parent_ids = {
                 b_osm_id.lower(): b_id
                 for b_id, b_osm_id in Boundary.objects.filter(org=org).order_by("-id").values_list("id", "osm_id")
             }
 
-        return self._parent_ids[org.pk].get(osm_id.lower())
+        return self._parent_ids.get(osm_id.lower())
 
     def local_kwargs(self, org, remote):
         geometry = json.dumps(dict())
@@ -115,9 +115,8 @@ class BoundarySyncer(BaseSyncer):
         local = super().create_local(remote_as_kwargs)
 
         # so boundaries further down this sync can find it as their parent
-        org_id = remote_as_kwargs["org"].pk
-        if org_id in self._parent_ids:
-            self._parent_ids[org_id][local.osm_id.lower()] = local.id
+        if self._parent_ids is not None:
+            self._parent_ids[local.osm_id.lower()] = local.id
 
         return local
 
@@ -154,7 +153,7 @@ class ContactSyncer(BaseSyncer):
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
 
-        # one query for the names and ids of all levels, rather than full rows (with geometry) per state and district
+        # only names and ids are needed, so fetch all three levels at once without their geometry
         boundaries = (
             Boundary.objects.filter(
                 org=org,
