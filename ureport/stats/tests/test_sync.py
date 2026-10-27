@@ -609,8 +609,7 @@ class DispatchTest(SyncJobTestMixin, UreportTest):
 
         # the first org's jobs go straight on the queue, the second's are delayed by half the spread
         delay = DISPATCH_SPREAD_SECONDS // 2
-        for mock in (mock_engagement, mock_prune):
-            job_type = ENGAGEMENT_JOB_TYPE if mock is mock_engagement else PRUNE_JOB_TYPE
+        for mock, job_type in ((mock_engagement, ENGAGEMENT_JOB_TYPE), (mock_prune, PRUNE_JOB_TYPE)):
             first_job = SyncJob.objects.get(org=first, job_type=job_type)
             second_job = SyncJob.objects.get(org=second, job_type=job_type)
             self.assertEqual(

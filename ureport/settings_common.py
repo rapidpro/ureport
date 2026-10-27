@@ -1016,8 +1016,7 @@ CELERY_BEAT_SCHEDULE = {
         "relative": True,
     },
     # counts every org's contacts, only to report drift on the counts status endpoint, so it
-    # runs once a day at a fixed time clear of the nightly stats and counts jobs, and between
-    # contact pulls so that fewer orgs are mid sync when it reaches them
+    # runs once a day at a fixed time clear of the nightly stats and counts jobs
     "check_contact_mismatch": {
         "task": "contacts.check_contacts_count_mismatch",
         "schedule": crontab(hour=10, minute=25),
