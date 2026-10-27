@@ -277,6 +277,14 @@ class PollStatsCounter(BaseScopedCount):
                 condition=Q(is_squashed=False),
             ),
         ]
+        constraints = [
+            models.UniqueConstraint(
+                name="stats_psc_squashed",
+                fields=("org", "flow_result", "flow_result_category", "scope"),
+                condition=Q(is_squashed=True),
+                nulls_distinct=False,
+            )
+        ]
 
 
 class PollEngagementDailyCount(BaseDailyCount):
@@ -820,6 +828,14 @@ class PollEngagementDailyCount(BaseDailyCount):
                 condition=Q(is_squashed=False),
             ),
         ]
+        constraints = [
+            models.UniqueConstraint(
+                name="stats_pedc_squashed",
+                fields=("org", "flow_result", "is_responded", "scope", "day"),
+                condition=Q(is_squashed=True),
+                nulls_distinct=False,
+            )
+        ]
 
 
 class ContactActivity(models.Model):
@@ -1116,19 +1132,38 @@ class ContactActivityCounter(SquashableModel):
 
     @classmethod
     def get_squash_query(cls, distinct_set):
+        """
+        Adds the set's unsquashed rows onto its single squashed row, updated in place, which never goes below zero and
+        is deleted when it reaches zero. A set without a squashed row only gets one if its deltas sum above zero
+        """
         sql = """
-        WITH deleted as (
-            DELETE FROM %(table)s WHERE "org_id" = %%s AND "date" = %%s AND "type" = %%s AND "value" = %%s RETURNING "count"
+        WITH removed AS (
+            DELETE FROM %(table)s WHERE NOT "is_squashed" AND %(cond)s RETURNING "count"
+        ), zeroed AS (
+            DELETE FROM %(table)s WHERE "is_squashed" AND %(cond)s
+            AND "count" + (SELECT SUM(r."count") FROM removed r) <= 0 RETURNING "id"
         )
-        INSERT INTO %(table)s("org_id", "date", "type", "value", "count", "is_squashed")
-        VALUES (%%s, %%s, %%s, %%s, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
-        """ % {"table": cls._meta.db_table}
+        INSERT INTO %(table)s AS t ("org_id", "date", "type", "value", "count", "is_squashed")
+        SELECT %%s, %%s, %%s, %%s, s.total, TRUE FROM (SELECT SUM("count") AS "total" FROM removed) s
+        WHERE s.total != 0 AND NOT EXISTS (SELECT 1 FROM zeroed)
+        AND (s.total > 0 OR EXISTS (SELECT 1 FROM %(table)s WHERE "is_squashed" AND %(cond)s))
+        ON CONFLICT ("org_id", "date", "type", "value") WHERE "is_squashed"
+        DO UPDATE SET "count" = t."count" + EXCLUDED."count";
+        """ % {
+            "table": cls._meta.db_table,
+            "cond": '"org_id" = %s AND "date" = %s AND "type" = %s AND "value" = %s',
+        }
 
-        return sql, (distinct_set.org_id, distinct_set.date, distinct_set.type, distinct_set.value) * 2
+        return sql, (distinct_set.org_id, distinct_set.date, distinct_set.type, distinct_set.value) * 4
 
     class Meta:
         indexes = [
             models.Index(name="contact_activitycntr_org_count", fields=["org", "date", "type", "value", "count"]),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                name="stats_cac_squashed", fields=("org", "date", "type", "value"), condition=Q(is_squashed=True)
+            )
         ]
 
 
