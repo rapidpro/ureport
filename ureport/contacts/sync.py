@@ -49,6 +49,14 @@ def _boundaries_synced_key(org, backend_slug):
     return "contact-pull:boundaries-synced:%d:%s" % (org.pk, backend_slug)
 
 
+def clear_boundaries_synced(org):
+    """
+    Makes the next contact sync run of each of the org's backends pull boundaries again, rather than waiting for the
+    daily pull
+    """
+    cache.delete_many([_boundaries_synced_key(org, slug) for slug in org.backends.values_list("slug", flat=True)])
+
+
 def _counts(prefix, counts):
     return {f"{prefix}_{key}": value for key, value in counts.items()}
 

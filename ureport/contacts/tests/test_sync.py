@@ -229,6 +229,38 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         self.assertEqual(self.mock_pull_fields.call_count, 3)
         self.assertEqual(SyncJob.objects.get(id=self.job.id).cursor["stage"], "boundaries")
 
+    def test_saving_org_config_clears_boundaries_synced(self):
+        self.nigeria.backends.create(slug="floip", api_token="token", created_by=self.admin, modified_by=self.admin)
+        keys = [_boundaries_synced_key(self.nigeria, slug) for slug in ("rapidpro", "floip")]
+        other_key = _boundaries_synced_key(self.uganda, "rapidpro")
+
+        def set_keys():
+            for key in keys + [other_key]:
+                cache.set(key, True, BOUNDARIES_SYNC_INTERVAL)
+
+        # saving the org without touching its config leaves them alone
+        set_keys()
+        self.nigeria.save(update_fields=("name",))
+        self.assertTrue(all(cache.get(key) for key in keys))
+
+        # a config change has every one of the org's backends pull boundaries on its next run
+        self.nigeria.set_config("rapidpro.district_label", "LGA")
+        self.assertEqual([None, None], [cache.get(key) for key in keys])
+
+        # as does any full save, which is how the org edit form saves config
+        set_keys()
+        self.nigeria.save()
+        self.assertEqual([None, None], [cache.get(key) for key in keys])
+
+        # other orgs are left alone
+        self.assertTrue(cache.get(other_key))
+
+        # and the next run pulls boundaries again
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self._run(times=2)
+        self.assertEqual(self.mock_pull_boundaries.call_count, 1)
+
     def test_lost_lease_discards_the_chunk(self):
         def steal_lease(org):
             SyncJob.objects.filter(id=self.job.id).update(lease_owner="thief")
