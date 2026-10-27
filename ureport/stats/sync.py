@@ -70,6 +70,11 @@ DAILY_INTERVAL = timedelta(hours=20)
 # broken refresh isn't retried every night forever: 20h, 40h, 80h, 160h, then the cap
 FAILURE_BACKOFF = Backoff(base=DAILY_INTERVAL, cap=timedelta(days=7), max_doublings=4)
 
+# the dispatcher spreads the orgs' runs over this many seconds rather than starting them all
+# at once. It has to stay well under the hour between the dispatcher's passes, so that the
+# delayed nudges have all been claimed by the time the next pass looks at those jobs
+DISPATCH_SPREAD_SECONDS = 60 * 15
+
 
 def engagement_combos():
     """
@@ -315,10 +320,10 @@ def enqueue_org_job(org, job_type):
     return job.id
 
 
-def dispatch_org_stats(org):
+def dispatch_org_stats(org, countdown=None):
     """
-    Ensures this org's daily stats jobs exist and nudges the ones that are due. Returns the
-    job types actually enqueued.
+    Ensures this org's daily stats jobs exist and nudges the ones that are due, delayed by the
+    given number of seconds. Returns the job types actually enqueued.
     """
     now = timezone.now()
     queued = []
@@ -332,7 +337,7 @@ def dispatch_org_stats(org):
         if not created and not _should_nudge(job, now):
             continue
 
-        _enqueue(job)
+        _enqueue(job, countdown=countdown)
         queued.append(job_type)
 
     return queued
@@ -366,8 +371,8 @@ def _recently_nudged(job, now):
     return job.modified_on > now - timedelta(seconds=2 * lease_seconds)
 
 
-def _enqueue(job):
-    enqueue(job)
+def _enqueue(job, countdown=None):
+    enqueue(job, countdown=countdown)
 
     # nothing writes to the row until a worker claims it, so record the nudge - it is what
     # tells the next pass that this job already has a message on the queue
@@ -390,12 +395,13 @@ def stats_dispatch(org_id=None):
     first slot starts the orgs that are due and the rest are retry slots for the ones whose
     run failed or was interrupted.
     """
-    orgs = Org.objects.filter(is_active=True)
+    orgs = Org.objects.filter(is_active=True).order_by("id")
     if org_id:
         orgs = orgs.filter(id=org_id)
+    orgs = list(orgs)
 
-    for org in orgs:
+    for i, org in enumerate(orgs):
         try:
-            dispatch_org_stats(org)
+            dispatch_org_stats(org, countdown=(i * DISPATCH_SPREAD_SECONDS // len(orgs)) or None)
         except Exception:
             logger.error("Error dispatching stats jobs for org #%d" % org.pk, exc_info=True)

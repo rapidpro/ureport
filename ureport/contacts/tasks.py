@@ -80,6 +80,10 @@ def check_contacts_count_mismatch():
 
 @org_task("update-org-contact-counts", 60 * 20)
 def update_org_contact_count(org, ignored_since, ignored_until):
+    """
+    Deprecated - kept for one release so already queued runs still work. The org's cached
+    counts are refreshed whenever a contact sync or a reporters rebuild changes them.
+    """
     update_cache_org_contact_counts(org)
 
 

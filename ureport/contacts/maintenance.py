@@ -20,7 +20,12 @@ from ureport.stats.models import ContactActivity
 from ureport.syncjobs.dispatch import enqueue, in_flight
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tasks import chunked_task
-from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
+from ureport.utils import (
+    chunk_list,
+    datetime_to_json_date,
+    json_date_to_datetime,
+    update_cache_org_contact_counts,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -109,6 +114,7 @@ def rebuild_reporters_counts(job):
             return job.back_off(LOCK_BACKOFF, lock_backoffs=1)
 
         Contact.recalculate_reporters_stats(org)
+        update_cache_org_contact_counts(org)
         job.checkpoint(progress=job.add_progress(chunks=1))
 
     return True
