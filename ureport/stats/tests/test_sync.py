@@ -10,10 +10,12 @@ from dash.orgs.models import TaskState
 from ureport.stats.models import ContactActivity
 from ureport.stats.sync import (
     DAILY_INTERVAL,
+    DISPATCH_SPREAD_SECONDS,
     ENGAGEMENT_BATCH_SIZE,
     ENGAGEMENT_JOB_TYPE,
     LOCK_BACKOFF,
     PRUNE_JOB_TYPE,
+    PRUNE_LEASE_SECONDS,
     REBUILD_BATCH_SIZE,
     REBUILD_JOB_TYPE,
     REBUILD_LOCK_KEY,
@@ -598,6 +600,28 @@ class DispatchTest(SyncJobTestMixin, UreportTest):
 
         self.assertEqual(mock_dispatch.call_count, 2)
         self.assertEqual(mock_logger.error.call_count, 1)
+
+    def test_runs_are_spread_across_orgs(self):
+        self.uganda.is_active = True
+        self.uganda.save(update_fields=("is_active",))
+        first, second = sorted([self.nigeria, self.uganda], key=lambda o: o.id)
+
+        mock_engagement, mock_prune = self._dispatch()
+
+        # the first org's jobs go straight on the queue, the second's are delayed by half the spread
+        delay = DISPATCH_SPREAD_SECONDS // 2
+        for mock in (mock_engagement, mock_prune):
+            job_type = ENGAGEMENT_JOB_TYPE if mock is mock_engagement else PRUNE_JOB_TYPE
+            first_job = SyncJob.objects.get(org=first, job_type=job_type)
+            second_job = SyncJob.objects.get(org=second, job_type=job_type)
+            self.assertEqual(
+                [call((first_job.id,), queue="slow"), call((second_job.id,), queue="slow", countdown=delay)],
+                mock.call_args_list,
+            )
+
+        # and the spread stays well inside the window a queued nudge is trusted for, so the next pass doesn't
+        # queue the delayed jobs again
+        self.assertLess(DISPATCH_SPREAD_SECONDS, PRUNE_LEASE_SECONDS)
 
     def test_can_be_limited_to_one_org(self):
         self.uganda.is_active = True

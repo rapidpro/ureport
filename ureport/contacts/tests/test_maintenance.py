@@ -94,11 +94,15 @@ class RebuildReportersCountsTest(MaintenanceTest):
     def _run(self, times=1):
         return run_task(rebuild_reporters_counts, self.job.id, times=times)
 
+    @patch("ureport.contacts.maintenance.update_cache_org_contact_counts")
     @patch("ureport.contacts.models.Contact.recalculate_reporters_stats")
-    def test_rebuild_is_a_single_chunk(self, mock_recalculate):
+    def test_rebuild_is_a_single_chunk(self, mock_recalculate, mock_update_counts):
         self.assertEqual(run_to_completion(rebuild_reporters_counts, self.job.id), 1)
 
         mock_recalculate.assert_called_once_with(self.nigeria)
+
+        # the org's cached counts are refreshed from the rebuilt counters
+        mock_update_counts.assert_called_once_with(self.nigeria)
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, progress={"chunks": 1}, lease_owner=None)
 
         # the lock the contact tasks coordinate through is left released

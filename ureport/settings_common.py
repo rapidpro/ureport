@@ -1015,9 +1015,10 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    # counts every org's contacts, only to report drift on the counts status endpoint
     "check_contact_mismatch": {
         "task": "contacts.check_contacts_count_mismatch",
-        "schedule": timedelta(minutes=30),
+        "schedule": timedelta(days=1),
         "relative": True,
     },
     "check_sync_jobs": {
@@ -1028,11 +1029,6 @@ CELERY_BEAT_SCHEDULE = {
     "contact-pull": {
         "task": "contacts.sync_contacts_dispatch",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
-    },
-    "update-org-contact-counts": {
-        "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(minute=[10, 30, 50]),
-        "args": ("ureport.contacts.tasks.update_org_contact_count",),
     },
     "sync-polls-dispatch": {
         "task": "polls.sync_polls_dispatch",
