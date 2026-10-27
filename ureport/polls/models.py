@@ -195,7 +195,7 @@ class Poll(SmartModel):
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
             poll.rebuild_poll_results_counts()
 
-        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
+        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid, has_synced=False).update(has_synced=True)
 
         return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
@@ -230,7 +230,7 @@ class Poll(SmartModel):
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
             poll.rebuild_poll_results_counts()
 
-        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
+        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid, has_synced=False).update(has_synced=True)
 
         return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
@@ -244,7 +244,8 @@ class Poll(SmartModel):
     def _replace_question_counters(self, r, flow_result_id, stats_counts, engagement_counts):
         """
         Replaces a question's stats counters and engagement daily counts with the given counts, keyed by
-        (flow_result_category_id, scope) and (is_responded, scope, day) respectively
+        (flow_result_category_id, scope) and (is_responded, scope, day) respectively. Each count is already the total
+        for its squash key, so the rows are created squashed and squashing leaves them alone
         """
         from ureport.stats.models import STATS_COUNTS_SQUASH_LOCK, PollEngagementDailyCount, PollStatsCounter
         from ureport.utils import chunk_list
@@ -256,6 +257,7 @@ class Poll(SmartModel):
                 flow_result_category_id=flow_category_id,
                 scope=scope,
                 count=count,
+                is_squashed=True,
             )
             for (flow_category_id, scope), count in stats_counts.items()
         )
@@ -267,6 +269,7 @@ class Poll(SmartModel):
                 scope=scope,
                 day=day,
                 count=count,
+                is_squashed=True,
             )
             for (is_responded, scope, day), count in engagement_counts.items()
         )
@@ -339,11 +342,21 @@ class Poll(SmartModel):
         if not top_question:
             return
 
+        # only precompute the levels the site zooms into, as configured for any of the org's backends
         org = self.org
+        backend_slugs = org.backends.filter(is_active=True).values_list("slug", flat=True)
+        has_districts = any(org.get_config("%s.district_label" % slug) for slug in backend_slugs)
+        has_wards = any(org.get_config("%s.ward_label" % slug) for slug in backend_slugs)
+        if not has_districts:
+            return
+
         states = org.get_segment_org_boundaries({"location": "State"})
         for state in states:
             top_question.calculate_results(segment=dict(location="District", parent=state["osm_id"]))
-            districts = org.get_segment_org_boundaries(dict(location="state", parent=state["osm_id"]))
+            if not has_wards:
+                continue
+
+            districts = org.get_segment_org_boundaries(dict(location="District", parent=state["osm_id"]))
             for district in districts:
                 top_question.calculate_results(segment=dict(location="Ward", parent=district["osm_id"]))
 
