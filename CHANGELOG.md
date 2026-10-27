@@ -1,3 +1,6 @@
+## v1.8.14 (2026-10-27)
+ * Calculate each question's polled and responded totals once per results cache refresh
+
 ## v1.8.13 (2026-10-27)
  * Reduce boundary and field work in contact syncs by pulling fields on every run and only skipping recently pulled boundaries, with boundaries pulled on the next sync after an org's config is saved
  * Skip redundant writes when rebuilding poll counters and maps
