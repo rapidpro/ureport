@@ -26,6 +26,9 @@ STAGE_FIELDS = "fields"
 STAGE_BOUNDARIES = "boundaries"
 STAGE_CONTACTS = "contacts"
 
+# fields and boundaries rarely change, so a run only pulls them when they haven't been pulled this long
+STRUCTURE_SYNC_INTERVAL = 60 * 60 * 24
+
 # how long to wait before the next chunk when the backend exhausted its API rate limit
 RATE_LIMIT_BACKOFF = 60
 
@@ -40,6 +43,10 @@ LEASE_SECONDS = 60 * 30
 
 def _last_fetched_key(org, backend_slug):
     return Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, backend_slug)
+
+
+def _structure_synced_key(org, backend_slug):
+    return "contact-pull:structure-synced:%d:%s" % (org.pk, backend_slug)
 
 
 def _counts(prefix, counts):
@@ -162,7 +169,8 @@ def _run_chunk(job, org, backend_obj, cursor):
         if not since:
             logger.info("First time run for org #%d. Will sync all contacts", org.pk)
 
-        stage = STAGE_FIELDS
+        # fields and boundaries first unless they were pulled recently
+        stage = STAGE_CONTACTS if cache.get(_structure_synced_key(org, job.scope)) else STAGE_FIELDS
         cursor = {"stage": stage, "since": since, "until": datetime_to_json_date(timezone.now())}
 
     if stage == STAGE_FIELDS:
@@ -173,6 +181,7 @@ def _run_chunk(job, org, backend_obj, cursor):
 
     if stage == STAGE_BOUNDARIES:
         counts = BaseBackend._outcome_counts_dict(backend.pull_boundaries(org))
+        cache.set(_structure_synced_key(org, job.scope), True, STRUCTURE_SYNC_INTERVAL)
         cursor["stage"] = STAGE_CONTACTS
         job.checkpoint(cursor=cursor, progress=job.add_progress(chunks=1, **_counts("boundaries", counts)))
         return False

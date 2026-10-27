@@ -99,7 +99,7 @@ class BoundarySyncerTest(UreportTest):
                 "backend": self.rapidpro_backend,
                 "org": self.nigeria,
                 "geometry": json.dumps(dict()),
-                "parent": None,
+                "parent_id": None,
                 "level": 0,
                 "name": "Nigeria",
                 "osm_id": "R12345",
@@ -118,7 +118,7 @@ class BoundarySyncerTest(UreportTest):
                 "backend": self.rapidpro_backend,
                 "org": self.nigeria,
                 "geometry": json.dumps(dict(type=geometry.type, coordinates=geometry.coordinates)),
-                "parent": None,
+                "parent_id": None,
                 "level": 0,
                 "name": "Nigeria",
                 "osm_id": "R12345",
@@ -140,7 +140,7 @@ class BoundarySyncerTest(UreportTest):
                 "osm_id": "R23456",
                 "name": "Lagos",
                 "level": Boundary.STATE_LEVEL,
-                "parent": country_boundary,
+                "parent_id": country_boundary.id,
                 "geometry": json.dumps(dict(type="MultiPolygon", coordinates=["COORDINATES"])),
             },
         )
@@ -154,7 +154,7 @@ class BoundarySyncerTest(UreportTest):
                 "osm_id": "R23456",
                 "name": "Lagos",
                 "level": Boundary.STATE_LEVEL,
-                "parent": country_boundary,
+                "parent_id": country_boundary.id,
                 "geometry": json.dumps(dict(type="MultiPolygon", coordinates=["COORDINATES"])),
             },
         )
@@ -229,6 +229,85 @@ class BoundarySyncerTest(UreportTest):
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
+
+    def test_parent_lookup(self):
+        country = Boundary.objects.create(
+            org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=Boundary.COUNTRY_LEVEL, geometry="{}"
+        )
+        state = Boundary.objects.create(
+            org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=Boundary.STATE_LEVEL, parent=country, geometry="{}"
+        )
+
+        def remote(osm_id, parent_osm_id, level):
+            return TembaBoundary.create(
+                osm_id=osm_id,
+                name=osm_id,
+                parent=TembaBoundary.BoundaryRef.create(osm_id=parent_osm_id, name=parent_osm_id),
+                level=level,
+                geometry=None,
+            )
+
+        # the org's boundaries are looked up once for the whole sync, matching OSM ids case insensitively
+        with self.assertNumQueries(1):
+            self.assertEqual(
+                country.id, self.syncer.local_kwargs(self.nigeria, remote("R-LAGOS", "r-nigeria", 1))["parent_id"]
+            )
+            self.assertEqual(
+                state.id, self.syncer.local_kwargs(self.nigeria, remote("R-OYO", "R-LAGOS", 2))["parent_id"]
+            )
+
+        # a parent that doesn't exist gives none
+        with self.assertNumQueries(0):
+            self.assertIsNone(self.syncer.local_kwargs(self.nigeria, remote("R-WARD", "R-MISSING", 3))["parent_id"])
+
+        # boundaries the sync creates are parents for those after them without another lookup
+        oyo = self.syncer.create_local(self.syncer.local_kwargs(self.nigeria, remote("R-OYO", "R-LAGOS", 2)))
+        self.assertEqual(state.id, oyo.parent_id)
+        with self.assertNumQueries(0):
+            self.assertEqual(oyo.id, self.syncer.local_kwargs(self.nigeria, remote("R-W1", "r-oyo", 3))["parent_id"])
+
+    def test_update_required_parent(self):
+        country = Boundary.objects.create(
+            org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=Boundary.COUNTRY_LEVEL, geometry="{}"
+        )
+        other = Boundary.objects.create(
+            org=self.nigeria, osm_id="R-GHANA", name="Ghana", level=Boundary.COUNTRY_LEVEL, geometry="{}"
+        )
+        local = Boundary.objects.create(
+            org=self.nigeria,
+            osm_id="R-LAGOS",
+            name="Lagos",
+            level=Boundary.STATE_LEVEL,
+            parent=country,
+            backend=self.rapidpro_backend,
+            geometry="{}",
+        )
+        local = Boundary.objects.get(id=local.id)
+
+        def remote(parent_osm_id):
+            return TembaBoundary.create(
+                osm_id="R-LAGOS",
+                name="Lagos",
+                parent=TembaBoundary.BoundaryRef.create(osm_id=parent_osm_id, name=parent_osm_id),
+                level=Boundary.STATE_LEVEL,
+                geometry=None,
+            )
+
+        same, moved, missing = remote("R-NIGERIA"), remote("R-GHANA"), remote("R-MISSING")
+        same_kwargs = self.syncer.local_kwargs(self.nigeria, same)
+        moved_kwargs = self.syncer.local_kwargs(self.nigeria, moved)
+        missing_kwargs = self.syncer.local_kwargs(self.nigeria, missing)
+        self.assertEqual(other.id, moved_kwargs["parent_id"])
+
+        # compared by id, without loading the local's parent or backend
+        with self.assertNumQueries(0):
+            self.assertFalse(self.syncer.update_required(local, same, same_kwargs))
+            self.assertTrue(self.syncer.update_required(local, moved, moved_kwargs))
+            self.assertTrue(self.syncer.update_required(local, missing, missing_kwargs))
+
+        # a parent that doesn't exist locally isn't an update every sync once the local has none either
+        local.parent = None
+        self.assertFalse(self.syncer.update_required(local, missing, missing_kwargs))
 
     def test_delete_local(self):
         local = Boundary.objects.create(
@@ -320,6 +399,43 @@ class ContactSyncerTest(UreportTest):
         self.gender_field = ContactField.objects.create(
             org=self.nigeria, key="gender", label="Gender", value_type="T", backend=self.rapidpro_backend
         )
+
+    def test_get_boundaries_data(self):
+        Boundary.objects.create(
+            org=self.nigeria,
+            osm_id="R-KANO",
+            name="Kano",
+            level=Boundary.STATE_LEVEL,
+            backend=self.rapidpro_backend,
+            parent=self.country,
+            geometry="{}",
+        )
+        # another backend's boundaries are left out
+        Boundary.objects.create(
+            org=self.nigeria,
+            osm_id="F-OGUN",
+            name="Ogun",
+            level=Boundary.DISTRICT_LEVEL,
+            backend=self.floip_backend,
+            parent=self.state,
+            geometry="{}",
+        )
+
+        with self.assertNumQueries(1):
+            data = self.syncer.get_boundaries_data(self.nigeria)
+
+        self.assertEqual(
+            (
+                {"lagos": "R-LAGOS", "kano": "R-KANO"},
+                {"R-LAGOS": {"oyo": "R-OYO"}, "R-KANO": {}},
+                {"R-OYO": {"ikeja": "R-IKEJA"}},
+            ),
+            data,
+        )
+
+        # and kept for the rest of the syncer's sync
+        with self.assertNumQueries(0):
+            self.assertEqual(data, self.syncer.get_boundaries_data(self.nigeria))
 
     def test_local_kwargs(self):
         temba_contact = TembaContact.create(
@@ -896,7 +1012,7 @@ class RapidProBackendTest(UreportTest):
             ),
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(8):
             contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual(
@@ -961,7 +1077,7 @@ class RapidProBackendTest(UreportTest):
             ),
         ]
 
-        with self.assertNumQueries(11):
+        with self.assertNumQueries(9):
             contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual(
@@ -1027,7 +1143,7 @@ class RapidProBackendTest(UreportTest):
             ),
         ]
 
-        with self.assertNumQueries(12):
+        with self.assertNumQueries(10):
             contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual(
@@ -1091,7 +1207,7 @@ class RapidProBackendTest(UreportTest):
             ),
         ]
 
-        with self.assertNumQueries(14):
+        with self.assertNumQueries(12):
             contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual(
@@ -1167,7 +1283,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(9):
+        with self.assertNumQueries(8):
             field_results = self.backend.pull_fields(self.nigeria)
 
         self.assertEqual(
@@ -1182,7 +1298,7 @@ class RapidProBackendTest(UreportTest):
         ContactField.objects.get(key="homestate", label="Homestate", value_type="S", is_active=True)
 
         # check that no changes means no updates
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(4):
             field_results = self.backend.pull_fields(self.nigeria)
 
         self.assertEqual(
@@ -1251,7 +1367,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(5):
             boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual(
@@ -1270,7 +1386,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(6):
             boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual(
@@ -1286,7 +1402,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(7):
             boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual(
@@ -1309,7 +1425,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(6):
             boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual(

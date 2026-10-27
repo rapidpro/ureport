@@ -18,6 +18,8 @@ from ureport.contacts.sync import (
     LEASE_SECONDS,
     LOCK_BACKOFF,
     RATE_LIMIT_BACKOFF,
+    STRUCTURE_SYNC_INTERVAL,
+    _structure_synced_key,
     enqueue_org_syncs,
     finalize_contacts_sync,
     sync_contacts,
@@ -51,6 +53,7 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         self.job = SyncJob.get_or_create_job(self.nigeria, JOB_TYPE, scope="rapidpro")
         self.last_fetched_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (self.nigeria.pk, "rapidpro")
         cache.delete(self.last_fetched_key)
+        cache.delete(_structure_synced_key(self.nigeria, "rapidpro"))
 
         # everything a chunk reaches out of the process for, and the org counts refresh
         # finalization does
@@ -151,10 +154,11 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         windows = [call[0][1:3] for call in self.mock_pull_contacts_chunk.call_args_list]
         self.assertEqual(windows, [(None, first_until), (None, first_until)])
 
-        # the next run picks up where this one ended and freezes a new window
+        # the next run picks up where this one ended and freezes a new window, going straight to contacts as
+        # fields and boundaries were pulled less than a day ago
         second_run = first_run + timedelta(hours=1)
         with patch("ureport.contacts.sync.timezone.now", return_value=second_run):
-            self._run(times=3)
+            self._run()
 
         job = SyncJob.objects.get(id=self.job.id)
         self.assertNotEqual(job.cursor["last_until"], first_until)
@@ -192,6 +196,36 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         # the fields and boundaries stages aren't redone by the retry
         self.assertEqual(self.mock_pull_fields.call_count, 1)
         self.assertEqual(self.mock_pull_boundaries.call_count, 1)
+
+    def test_fields_and_boundaries_pulled_at_most_daily(self):
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
+
+        self._run(times=3)  # fields, boundaries, contacts
+
+        self.assertEqual(self.mock_pull_fields.call_count, 1)
+        self.assertEqual(self.mock_pull_boundaries.call_count, 1)
+        self.assertEqual(self.mock_pull_contacts_chunk.call_count, 1)
+
+        key = _structure_synced_key(self.nigeria, "rapidpro")
+        self.assertTrue(cache.get(key))
+        self.assertAlmostEqual(cache.ttl(key), STRUCTURE_SYNC_INTERVAL, delta=60)
+
+        # the next run starts with contacts
+        self._run()
+
+        self.assertEqual(self.mock_pull_fields.call_count, 1)
+        self.assertEqual(self.mock_pull_boundaries.call_count, 1)
+        self.assertEqual(self.mock_pull_contacts_chunk.call_count, 2)
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
+
+        # and once that's expired, a run pulls them again
+        cache.delete(key)
+        self._run()
+
+        self.assertEqual(self.mock_pull_fields.call_count, 2)
+        self.assertEqual(SyncJob.objects.get(id=self.job.id).cursor["stage"], "boundaries")
 
     def test_lost_lease_discards_the_chunk(self):
         def steal_lease(org):
