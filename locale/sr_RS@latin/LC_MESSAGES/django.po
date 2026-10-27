@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 13:20+0000\n"
+"POT-Creation-Date: 2026-10-27 15:35+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2023\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://app.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1972,9 +1972,6 @@ msgstr "Ako treba uključiti prilagođeni HTML kod u vaše org stranice, poput p
 msgid "Other language sites links"
 msgstr "Linkovi sa sajta na drugom jeziku"
 
-msgid "Whether this row was created by squashing"
-msgstr "Da li je ovaj red stvoren zbijanjem"
-
 msgid "90 Days"
 msgstr "90 Dana"
 
@@ -2061,6 +2058,9 @@ msgstr "Zemlje nacionalnih komiteta UNICEF-a"
 
 msgid "West and Central Africa"
 msgstr "Zapadna i centralna Afrika"
+
+#~ msgid "Whether this row was created by squashing"
+#~ msgstr "Da li je ovaj red stvoren zbijanjem"
 
 #~ msgid "Error"
 #~ msgstr "Greška"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 13:20+0000\n"
+"POT-Creation-Date: 2026-10-27 15:35+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1960,9 +1960,6 @@ msgstr "Εάν χρειάζεται να συμπεριλάβετε ορισμέ
 msgid "Other language sites links"
 msgstr "Σύνδεσμοι ιστοτόπων άλλων γλωσσών"
 
-msgid "Whether this row was created by squashing"
-msgstr "Εάν αυτή η σειρά δημιουργήθηκε ύστερα από διάλυση"
-
 msgid "90 Days"
 msgstr "90 μέρες"
 
@@ -2049,6 +2046,9 @@ msgstr "Χώρες των Εθνικών Επιτροπών της UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Δυτική και Κεντρική Αφρική"
+
+#~ msgid "Whether this row was created by squashing"
+#~ msgstr "Εάν αυτή η σειρά δημιουργήθηκε ύστερα από διάλυση"
 
 #~ msgid "Error"
 #~ msgstr "Λάθος"

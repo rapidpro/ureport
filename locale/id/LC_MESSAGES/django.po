@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 13:20+0000\n"
+"POT-Creation-Date: 2026-10-27 15:35+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1956,9 +1956,6 @@ msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, sep
 msgid "Other language sites links"
 msgstr "Tautan situs bahasa lain"
 
-msgid "Whether this row was created by squashing"
-msgstr "Apakah baris ini dibuat melalui proses squash"
-
 msgid "90 Days"
 msgstr "90 Hari"
 
@@ -2045,6 +2042,9 @@ msgstr "Negara-negara Komite Nasional UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Afrika Barat dan Tengah"
+
+#~ msgid "Whether this row was created by squashing"
+#~ msgstr "Apakah baris ini dibuat melalui proses squash"
 
 #~ msgid "Error"
 #~ msgstr "Kesalahan"

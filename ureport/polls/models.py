@@ -917,47 +917,6 @@ class PollQuestion(SmartModel):
             .order_by("pk")
         )
 
-    def _log_stats_comparison(
-        self, old_stats_dict, new_stats_dict, old_unset, new_unset, segment_type, segment_id, org_id
-    ):
-        """Log comparison results between old PollStats and new PollStatsCounter."""
-        if new_stats_dict != old_stats_dict:
-            logger.info(
-                "PollStatsCounter CHECK: Mismatch in question results stats for question #%d for %s segment %s on org #%d, old stats: %s, new stats: %s",
-                self.id,
-                segment_type,
-                segment_id,
-                org_id,
-                old_stats_dict,
-                new_stats_dict,
-            )
-        else:
-            logger.info(
-                "PollStatsCounter CHECK: Match in question results stats for question #%d for %s segment %s on org #%d",
-                self.id,
-                segment_type,
-                segment_id,
-                org_id,
-            )
-        if new_unset != old_unset:
-            logger.info(
-                "PollStatsCounter CHECK: Mismatch in question unset stats for question #%d for %s segment %s on org #%d, old unset: %d, new unset: %d",
-                self.id,
-                segment_type,
-                segment_id,
-                org_id,
-                old_unset,
-                new_unset,
-            )
-        else:
-            logger.info(
-                "PollStatsCounter CHECK: Match in question unset stats for question #%d for %s segment %s on org #%d",
-                self.id,
-                segment_type,
-                segment_id,
-                org_id,
-            )
-
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:

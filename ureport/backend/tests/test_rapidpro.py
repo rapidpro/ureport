@@ -1409,7 +1409,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(6):
             boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual(
@@ -1455,7 +1455,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(15):
+        with self.assertNumQueries(13):
             boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual(

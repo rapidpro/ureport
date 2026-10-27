@@ -202,19 +202,3 @@ def recheck_poll_flow_data(org_id=None):
         update_poll_flow_data(org)
 
     logger.info("Task: recheck_poll_flow_data done")
-
-
-@app.task(name="polls.polls_stats_squash")
-def polls_stats_squash():
-    from ureport.stats.models import PollStats
-
-    r = get_valkey_connection()
-    key = "squash_polls_stats_lock"
-
-    lock_timeout = 60 * 60 * 2
-
-    if r.get(key):
-        logger.info("Skipping polls app squashing stats as it is still running")
-    else:
-        with r.lock(key, timeout=lock_timeout):
-            PollStats.squash()
