@@ -1,3 +1,8 @@
+## v1.8.12 (2026-10-27)
+ * Validate custom page links and fix existing invalid or duplicate ones
+ * Validate landing page slugs are unique per org and fix existing invalid slugs
+ * Update locale files
+
 ## v1.8.11 (2026-10-26)
  * Update Pillow, djangorestframework, brotli and certifi for security fixes
  * Update rapidpro-dash to 1.23.2
