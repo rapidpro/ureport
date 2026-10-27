@@ -1318,7 +1318,7 @@ class PollQuestion(SmartModel):
         polled = totals["polled"] or 0
         responded = totals["responded"] or 0
 
-        org_id, poll_id = self.poll.org_id, self.poll.pk
+        org_id, poll_id = self.poll.org.pk, self.poll.pk
         cache.set(PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (org_id, poll_id, self.pk), {"results": polled}, None)
         cache.set(
             PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (org_id, poll_id, self.pk), {"results": responded}, None

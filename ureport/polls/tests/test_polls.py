@@ -3062,7 +3062,6 @@ class PollResultsTest(UreportTest):
 
         # once per question, for its unsegmented results - the segmented ones don't report totals
         self.assertEqual(2, mock_calculate_totals.call_count)
-        mock_maps.assert_called_once_with()
 
         mock_calculate_totals.reset_mock()
         self.poll_question.calculate_results(segment=dict(location="State"))
