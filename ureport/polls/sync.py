@@ -235,7 +235,7 @@ def _finalize_results(job):
         # rebuilding refreshes the question caches of every poll on the flow itself
         poll.rebuild_poll_results_counts()
 
-    Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope).update(has_synced=True)
+    Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope, has_synced=False).update(has_synced=True)
 
     after = (job.cursor or {}).get("after")
     if after:
@@ -252,7 +252,7 @@ def _finalize_archives(job):
     if _changed_results(job):
         poll.rebuild_poll_results_counts()
 
-    Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope).update(has_synced=True)
+    Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope, has_synced=False).update(has_synced=True)
 
 
 @chunked_task(

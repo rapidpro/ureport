@@ -11,6 +11,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
+from django.db import connection
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Sum, TextField, Value
 from django.db.models.functions import Cast, ExtractYear
 from django.http import HttpRequest
@@ -1300,6 +1301,18 @@ class PollTest(UreportTest):
 
         self.assertEqual(mock_get_backend.call_args[1], {"backend_slug": "rapidpro"})
         mock_pull_results.assert_called_once()
+
+        # once synced, later pulls don't rewrite the poll's row to set the flag again
+        def row_version():
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT xmin::text FROM polls_poll WHERE id = %s", [poll.pk])
+                return cursor.fetchone()[0]
+
+        version = row_version()
+        Poll.pull_results(poll.pk)
+
+        self.assertEqual(version, row_version())
+        self.assertTrue(Poll.objects.get(pk=poll.pk).has_synced)
 
     @patch("ureport.polls.tasks.pull_refresh_from_archives.apply_async")
     @patch("ureport.polls.models.Poll.get_flow_date")
@@ -3010,6 +3023,48 @@ class PollResultsTest(UreportTest):
             [{"count": 1, "label": "Yes"}, {"count": 0, "label": "No"}],
         )
 
+    @patch("ureport.polls.models.PollQuestion.calculate_results")
+    def test_update_poll_participation_maps_cache(self, mock_calculate_results):
+        geometry = '{"type":"MultiPolygon", "coordinates":[[1, 2]]}'
+        lagos = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=1, geometry=geometry)
+        kano = Boundary.objects.create(org=self.nigeria, osm_id="R-KANO", name="Kano", level=1, geometry=geometry)
+        ikeja = Boundary.objects.create(
+            org=self.nigeria, osm_id="R-IKEJA", name="Ikeja", parent=lagos, level=2, geometry=geometry
+        )
+        Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", parent=kano, level=2, geometry=geometry)
+        Boundary.objects.create(
+            org=self.nigeria, osm_id="R-AGEGE", name="Agege", parent=ikeja, level=3, geometry=geometry
+        )
+
+        def calculated_segments():
+            segments = [c.kwargs["segment"] for c in mock_calculate_results.call_args_list]
+            mock_calculate_results.reset_mock()
+            return segments
+
+        # no districts configured, so no maps below the states
+        self.poll.update_poll_participation_maps_cache()
+        self.assertEqual([], calculated_segments())
+
+        self.nigeria.set_config("rapidpro.district_label", "LGA")
+        self.poll.update_poll_participation_maps_cache()
+        self.assertEqual(
+            [dict(location="District", parent="R-KANO"), dict(location="District", parent="R-LAGOS")],
+            calculated_segments(),
+        )
+
+        # with wards configured, each state's districts get their ward maps too
+        self.nigeria.set_config("rapidpro.ward_label", "Ward")
+        self.poll.update_poll_participation_maps_cache()
+        self.assertEqual(
+            [
+                dict(location="District", parent="R-KANO"),
+                dict(location="Ward", parent="R-OYO"),
+                dict(location="District", parent="R-LAGOS"),
+                dict(location="Ward", parent="R-IKEJA"),
+            ],
+            calculated_segments(),
+        )
+
     def test_rebuild_poll_results_counts_aggregates(self):
         rule_uuid = uuid.uuid4()
         yes_category = self.create_poll_response_category(self.poll_question, rule_uuid, "Yes")
@@ -3101,6 +3156,13 @@ class PollResultsTest(UreportTest):
             engagement,
         )
         self.assertEqual(len(engagement), PollEngagementDailyCount.objects.count())
+
+        # rebuilt counters are already one row per squash key, so they're created squashed and squashing skips them
+        self.assertFalse(PollStatsCounter.objects.filter(is_squashed=False))
+        self.assertFalse(PollEngagementDailyCount.objects.filter(is_squashed=False))
+        self.assertEqual(0, PollStatsCounter.squash())
+        self.assertEqual(0, PollEngagementDailyCount.squash())
+        self.assertEqual(expected, stats_counts())
 
         # a failed rebuild leaves the existing counters in place
         PollResult.objects.filter(org=self.nigeria, contact="c4").delete()
