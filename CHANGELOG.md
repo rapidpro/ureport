@@ -1,3 +1,9 @@
+## v1.8.13 (2026-10-27)
+ * Reduce boundary and field work in contact syncs by pulling fields on every run and only skipping recently pulled boundaries, with boundaries pulled on the next sync after an org's config is saved
+ * Skip redundant writes when rebuilding poll counters and maps
+ * Run the contact count mismatch check at a fixed time clear of the nightly jobs
+ * Cut repeated scheduled work
+
 ## v1.8.12 (2026-10-27)
  * Validate custom page links and fix existing invalid or duplicate ones
  * Validate landing page slugs are unique per org and fix existing invalid slugs
