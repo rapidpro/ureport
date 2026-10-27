@@ -30,6 +30,7 @@ from ureport.contacts.sync import (
     JOB_TYPE as PULL_JOB_TYPE,
     LEASE_SECONDS as PULL_LEASE_SECONDS,
     LOCK_BACKOFF,
+    _boundaries_synced_key,
     finalize_contacts_sync,
     sync_contacts,
 )
@@ -440,6 +441,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
     def test_trigger_forces_a_repull_the_backfill_then_waits_on(self):
         SyncJob.objects.filter(id=self.pull_job.id).update(cursor={"last_until": "2026-08-10T10:00:00.000Z"})
         cache.set(self.last_fetched_key, "2026-08-10T10:00:00.000Z", None)
+        cache.set(_boundaries_synced_key(self.nigeria, "rapidpro"), True, None)
 
         result, mock_pull, mock_backfill, mock_retry = self._trigger()
 
@@ -447,9 +449,10 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         mock_pull.assert_called_once_with((self.pull_job.id,), queue="celery")
         mock_retry.assert_not_called()
 
-        # both resume positions are dropped so the run pulls everything again
+        # both resume positions are dropped so the run pulls everything again, boundaries included
         self.assertJobState(self.pull_job, cursor={})
         self.assertIsNone(cache.get(self.last_fetched_key))
+        self.assertIsNone(cache.get(_boundaries_synced_key(self.nigeria, "rapidpro")))
 
         # the backfill isn't started yet - it would skip past contacts the re-pull hasn't
         # given a scheme to and never come back to them

@@ -21,10 +21,13 @@ logger = logging.getLogger(__name__)
 JOB_TYPE = "contact-pull"
 QUEUE = "celery"
 
-# a run is fields, then boundaries, then however many chunks of contacts it takes
+# a run is fields, then boundaries, then however many chunks of contacts it takes - boundaries rarely change and
+# are costly to pull with their geometry, so a run skips them if they were pulled within BOUNDARIES_SYNC_INTERVAL
 STAGE_FIELDS = "fields"
 STAGE_BOUNDARIES = "boundaries"
 STAGE_CONTACTS = "contacts"
+
+BOUNDARIES_SYNC_INTERVAL = 60 * 60 * 24
 
 # how long to wait before the next chunk when the backend exhausted its API rate limit
 RATE_LIMIT_BACKOFF = 60
@@ -40,6 +43,10 @@ LEASE_SECONDS = 60 * 30
 
 def _last_fetched_key(org, backend_slug):
     return Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, backend_slug)
+
+
+def _boundaries_synced_key(org, backend_slug):
+    return "contact-pull:boundaries-synced:%d:%s" % (org.pk, backend_slug)
 
 
 def _counts(prefix, counts):
@@ -167,12 +174,13 @@ def _run_chunk(job, org, backend_obj, cursor):
 
     if stage == STAGE_FIELDS:
         counts = BaseBackend._outcome_counts_dict(backend.pull_fields(org))
-        cursor["stage"] = STAGE_BOUNDARIES
+        cursor["stage"] = STAGE_CONTACTS if cache.get(_boundaries_synced_key(org, job.scope)) else STAGE_BOUNDARIES
         job.checkpoint(cursor=cursor, progress=job.add_progress(chunks=1, **_counts("fields", counts)))
         return False
 
     if stage == STAGE_BOUNDARIES:
         counts = BaseBackend._outcome_counts_dict(backend.pull_boundaries(org))
+        cache.set(_boundaries_synced_key(org, job.scope), True, BOUNDARIES_SYNC_INTERVAL)
         cursor["stage"] = STAGE_CONTACTS
         job.checkpoint(cursor=cursor, progress=job.add_progress(chunks=1, **_counts("boundaries", counts)))
         return False
@@ -252,6 +260,7 @@ def force_full_repull(org):
             # only once the cursor is actually gone, or a refused reset would still drop the
             # seed the next run would have resumed from
             cache.delete(_last_fetched_key(org, backend_obj.slug))
+            cache.delete(_boundaries_synced_key(org, backend_obj.slug))
             reset.append(backend_obj.slug)
             continue
 

@@ -40,7 +40,6 @@ class FieldSyncer(BaseSyncer):
     model = ContactField
     local_id_attr = "key"
     remote_id_attr = "key"
-    prefetch_related = ("backend",)
     local_backend_attr = "backend"
 
     def local_kwargs(self, org, remote):
@@ -53,7 +52,7 @@ class FieldSyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
-        if local_kwargs and local_kwargs["backend"] != local.backend:
+        if local_kwargs and local_kwargs["backend"].id != local.backend_id:
             return False
         return any([local.label != remote.name, local.value_type != self.model.TEMBA_TYPES.get(remote.type)])
 
@@ -69,34 +68,60 @@ class BoundarySyncer(BaseSyncer):
     model = Boundary
     local_id_attr = "osm_id"
     remote_id_attr = "osm_id"
-    prefetch_related = ("backend",)
     local_backend_attr = "backend"
+
+    def __init__(self, backend):
+        super().__init__(backend)
+        self._parent_ids = None
 
     def fetch_all(self, org):
         qs = self.model.objects.filter(org=org, backend=self.backend).order_by("-level")
         return qs
+
+    def get_parent_id(self, org, osm_id):
+        """
+        Gets the id of the org's boundary with the given OSM id (case insensitive, from any backend), looking up all
+        the org's boundaries once rather than each remote's parent separately. Where OSM ids differ only by case, the
+        oldest boundary wins
+        """
+        if self._parent_ids is None:
+            self._parent_ids = {
+                b_osm_id.lower(): b_id
+                for b_id, b_osm_id in Boundary.objects.filter(org=org).order_by("-id").values_list("id", "osm_id")
+            }
+
+        return self._parent_ids.get(osm_id.lower())
 
     def local_kwargs(self, org, remote):
         geometry = json.dumps(dict())
         if remote.geometry:
             geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
 
-        parent = None
+        parent_id = None
         if remote.parent:
-            parent = Boundary.objects.filter(osm_id__iexact=remote.parent.osm_id, org=org).first()
+            parent_id = self.get_parent_id(org, remote.parent.osm_id)
 
         return {
             "backend": self.backend,
             "org": org,
             "geometry": geometry,
-            "parent": parent,
+            "parent_id": parent_id,
             "level": remote.level,
             "name": remote.name,
             "osm_id": remote.osm_id,
         }
 
+    def create_local(self, remote_as_kwargs):
+        local = super().create_local(remote_as_kwargs)
+
+        # so boundaries further down this sync can find it as their parent
+        if self._parent_ids is not None:
+            self._parent_ids[local.osm_id.lower()] = local.id
+
+        return local
+
     def update_required(self, local, remote, local_kwargs):
-        if local_kwargs and local_kwargs["backend"] != local.backend:
+        if local_kwargs and local_kwargs["backend"].id != local.backend_id:
             return False
 
         if local.name != remote.name:
@@ -105,17 +130,14 @@ class BoundarySyncer(BaseSyncer):
         if local.level != remote.level:
             return True
 
-        if remote.parent:
-            if not local.parent:
-                return True
-            elif local.parent.osm_id != remote.parent.osm_id:
-                return True
+        if remote.parent and local.parent_id != local_kwargs["parent_id"]:
+            return True
 
-        geometry_dict = dict()
-        if remote.geometry:
-            geometry_dict = dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates)
+        # stored geometry is what local_kwargs serializes, so only parse it when the two differ
+        if local.geometry == local_kwargs["geometry"]:
+            return False
 
-        return not is_dict_equal(json.loads(local.geometry), geometry_dict)
+        return not is_dict_equal(json.loads(local.geometry), json.loads(local_kwargs["geometry"]))
 
     def delete_local(self, local):
         local.release()
@@ -131,27 +153,37 @@ class ContactSyncer(BaseSyncer):
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
 
+        # only names and ids are needed, so fetch all three levels at once without their geometry
+        boundaries = (
+            Boundary.objects.filter(
+                org=org,
+                backend=self.backend,
+                level__in=(Boundary.STATE_LEVEL, Boundary.DISTRICT_LEVEL, Boundary.WARD_LEVEL),
+            )
+            .order_by("level", "id")
+            .values("id", "level", "name", "osm_id", "parent_id")
+        )
+
         org_state_boundaries_data = dict()
         org_district_boundaries_data = dict()
         org_ward_boundaries_data = dict()
-        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL, backend=self.backend)
-        for state in state_boundaries:
-            org_state_boundaries_data[state.name.lower()] = state.osm_id
-            state_district_data = dict()
-            district_boundaries = Boundary.objects.filter(
-                org=org, level=Boundary.DISTRICT_LEVEL, parent=state, backend=self.backend
-            )
-            for district in district_boundaries:
-                state_district_data[district.name.lower()] = district.osm_id
-                district_ward_data = dict()
-                ward_boundaries = Boundary.objects.filter(
-                    org=org, level=Boundary.WARD_LEVEL, parent=district, backend=self.backend
-                )
-                for ward in ward_boundaries:
-                    district_ward_data[ward.name.lower()] = ward.osm_id
-                org_ward_boundaries_data[district.osm_id] = district_ward_data
-
-            org_district_boundaries_data[state.osm_id] = state_district_data
+        states_by_id = dict()
+        districts_by_id = dict()
+        for boundary in boundaries:
+            if boundary["level"] == Boundary.STATE_LEVEL:
+                org_state_boundaries_data[boundary["name"].lower()] = boundary["osm_id"]
+                org_district_boundaries_data[boundary["osm_id"]] = dict()
+                states_by_id[boundary["id"]] = boundary
+            elif boundary["level"] == Boundary.DISTRICT_LEVEL:
+                state = states_by_id.get(boundary["parent_id"])
+                if state:
+                    org_district_boundaries_data[state["osm_id"]][boundary["name"].lower()] = boundary["osm_id"]
+                    org_ward_boundaries_data[boundary["osm_id"]] = dict()
+                    districts_by_id[boundary["id"]] = boundary
+            else:
+                district = districts_by_id.get(boundary["parent_id"])
+                if district:
+                    org_ward_boundaries_data[district["osm_id"]][boundary["name"].lower()] = boundary["osm_id"]
 
         setattr(self, cache_attr, (org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data))
         return org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data
