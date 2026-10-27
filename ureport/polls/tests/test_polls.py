@@ -1302,10 +1302,11 @@ class PollTest(UreportTest):
         self.assertEqual(mock_get_backend.call_args[1], {"backend_slug": "rapidpro"})
         mock_pull_results.assert_called_once()
 
-        # once synced, later pulls don't rewrite the poll's row to set the flag again
+        # once synced, later pulls don't rewrite the poll's row to set the flag again - any update writes a new tuple
+        # version with a new ctid, whereas xmin would be the same as the whole test runs in one transaction
         def row_version():
             with connection.cursor() as cursor:
-                cursor.execute("SELECT xmin::text FROM polls_poll WHERE id = %s", [poll.pk])
+                cursor.execute("SELECT ctid::text FROM polls_poll WHERE id = %s", [poll.pk])
                 return cursor.fetchone()[0]
 
         version = row_version()
