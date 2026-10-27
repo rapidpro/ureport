@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.db import connection, models, transaction
-from django.db.models import Count, F, Prefetch, Sum
+from django.db.models import Count, F, Prefetch, Q, Sum
 from django.db.models.functions import Lower, Trunc
 from django.utils import timezone
 from django.utils.html import strip_tags
@@ -319,8 +319,7 @@ class Poll(SmartModel):
 
     def update_questions_results_cache(self):
         for question in self.questions.all():
-            question.calculate_polled()
-            question.calculate_responded()
+            # the unsegmented results also refresh the question's polled and responded caches
             question.calculate_results()
             question.calculate_results(segment=dict(location="State"))
             question.calculate_results(segment=dict(age="Age"))
@@ -1020,9 +1019,11 @@ class PollQuestion(SmartModel):
 
         org = self.poll.org
         open_ended = self.is_open_ended()
-        responded = self.calculate_responded()
-        polled = self.calculate_polled()
         org_gender_labels = org.get_gender_labels()
+
+        # only the unsegmented results report the totals
+        if not segment:
+            polled, responded = self.calculate_totals()
 
         results = []
 
@@ -1286,19 +1287,7 @@ class PollQuestion(SmartModel):
         return self.calculate_responded()
 
     def calculate_responded(self):
-        from ureport.stats.models import PollStatsCounter
-
-        key = PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
-
-        responded_stats = (
-            PollStatsCounter.objects.filter(org_id=self.poll.org_id, flow_result=self.flow_result, scope="all")
-            .exclude(flow_result_category=None)
-            .aggregate(Sum("count"))
-        )
-
-        results = responded_stats.get("count__sum", 0) or 0
-        cache.set(key, {"results": results}, None)
-        return results
+        return self.calculate_totals()[1]
 
     def get_polled(self):
         key = PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
@@ -1311,17 +1300,30 @@ class PollQuestion(SmartModel):
         return self.calculate_polled()
 
     def calculate_polled(self):
+        return self.calculate_totals()[0]
+
+    def calculate_totals(self):
+        """
+        Calculates how many contacts were polled with this question and how many of them responded, in one query,
+        and caches both. Returns them as (polled, responded)
+        """
         from ureport.stats.models import PollStatsCounter
 
-        key = PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
-
-        polled_stats = PollStatsCounter.objects.filter(
+        totals = PollStatsCounter.objects.filter(
             org_id=self.poll.org_id, flow_result=self.flow_result, scope="all"
-        ).aggregate(Sum("count"))
-        results = polled_stats.get("count__sum", 0) or 0
+        ).aggregate(
+            polled=Sum("count"),
+            responded=Sum("count", filter=Q(flow_result_category__isnull=False)),
+        )
+        polled = totals["polled"] or 0
+        responded = totals["responded"] or 0
 
-        cache.set(key, {"results": results}, None)
-        return results
+        org_id, poll_id = self.poll.org_id, self.poll.pk
+        cache.set(PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (org_id, poll_id, self.pk), {"results": polled}, None)
+        cache.set(
+            PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (org_id, poll_id, self.pk), {"results": responded}, None
+        )
+        return polled, responded
 
     def get_response_percentage(self):
         polled = self.get_polled()

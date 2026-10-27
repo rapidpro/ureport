@@ -3024,6 +3024,51 @@ class PollResultsTest(UreportTest):
             [{"count": 1, "label": "Yes"}, {"count": 0, "label": "No"}],
         )
 
+    def test_calculate_totals(self):
+        yes = self.create_poll_response_category(self.poll_question, "rule-uuid-1", "Yes")
+        flow_result = self.poll_question.flow_result
+
+        def counter(scope, count, category=None):
+            PollStatsCounter.objects.create(
+                org=self.nigeria, flow_result=flow_result, flow_result_category=category, scope=scope, count=count
+            )
+
+        counter("all", 3, yes.flow_result_category)
+        counter("all", 4, yes.flow_result_category)
+        counter("all", 2)
+        counter("gender:f", 5, yes.flow_result_category)  # other scopes aren't totals
+
+        # both come from one query, and are cached for the question
+        with self.assertNumQueries(1):
+            self.assertEqual((9, 7), self.poll_question.calculate_totals())
+
+        with self.assertNumQueries(0):
+            self.assertEqual(9, self.poll_question.get_polled())
+            self.assertEqual(7, self.poll_question.get_responded())
+
+        self.assertEqual(9, self.poll_question.calculate_polled())
+        self.assertEqual(7, self.poll_question.calculate_responded())
+
+        # a question without counters has none polled or responded
+        PollStatsCounter.objects.all().delete()
+        self.assertEqual((0, 0), self.poll_question.calculate_totals())
+
+    @patch("ureport.polls.models.Poll.update_poll_participation_maps_cache")
+    @patch("ureport.polls.models.PollQuestion.calculate_totals", return_value=(0, 0))
+    def test_update_questions_results_cache_calculates_totals_once(self, mock_calculate_totals, mock_maps):
+        self.create_poll_question(self.admin, self.poll, "question 2", "step-uuid-2")
+
+        self.poll.update_questions_results_cache()
+
+        # once per question, for its unsegmented results - the segmented ones don't report totals
+        self.assertEqual(2, mock_calculate_totals.call_count)
+        mock_maps.assert_called_once_with()
+
+        mock_calculate_totals.reset_mock()
+        self.poll_question.calculate_results(segment=dict(location="State"))
+        self.poll_question.calculate_results(segment=dict(gender="Gender"))
+        mock_calculate_totals.assert_not_called()
+
     @patch("ureport.polls.models.PollQuestion.calculate_results")
     def test_update_poll_participation_maps_cache(self, mock_calculate_results):
         geometry = '{"type":"MultiPolygon", "coordinates":[[1, 2]]}'
