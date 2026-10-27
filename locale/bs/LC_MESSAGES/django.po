@@ -1419,6 +1419,14 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Ažurirano %spredmemorije organizacije"
 
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "Slug može sadržavati samo slova, brojeve, donje crte i crtice"
+
+msgid "Another page already uses this link"
+msgstr ""
+
 msgid "Flag"
 msgstr "Oznaka"
 

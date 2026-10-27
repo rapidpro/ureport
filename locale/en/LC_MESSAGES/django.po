@@ -1286,6 +1286,12 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr ""
 
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr ""
+
+msgid "Another page already uses this link"
+msgstr ""
+
 msgid "Flag"
 msgstr ""
 

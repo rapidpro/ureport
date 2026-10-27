@@ -1327,6 +1327,14 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Ανανεώθηκε %sη προσωρινή μνήμη  για αυτόν τον οργανισμό"
 
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "Το slug μπορεί να περιέχει μόνο γράμματα, αριθμούς, κάτω παύλες και παύλες"
+
+msgid "Another page already uses this link"
+msgstr ""
+
 msgid "Flag"
 msgstr "Επισημαίνω"
 

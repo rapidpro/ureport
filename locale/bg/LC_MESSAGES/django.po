@@ -1327,6 +1327,14 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Обновени %s от кеша за тази организация"
 
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "Слъгът може да съдържа само букви, цифри, долни черти и тирета"
+
+msgid "Another page already uses this link"
+msgstr ""
+
 msgid "Flag"
 msgstr "Докладва/Flag"
 

@@ -1335,6 +1335,14 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Cache %s atualizado para esta organização"
 
+#, fuzzy
+#| msgid "The slug can only contain letters, numbers, underscores and hyphens"
+msgid "The link can only contain letters, numbers, underscores and hyphens"
+msgstr "O slug pode conter apenas letras, números, sublinhados e hifens"
+
+msgid "Another page already uses this link"
+msgstr ""
+
 msgid "Flag"
 msgstr "Bandeira"
 

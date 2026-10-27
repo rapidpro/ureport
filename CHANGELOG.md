@@ -1,3 +1,10 @@
+## v1.8.11 (2026-10-26)
+ * Update Pillow, djangorestframework, brotli and certifi for security fixes
+ * Update rapidpro-dash to 1.23.2
+
+## v1.8.10 (2026-10-21)
+ * Replace Bulma with Tailwind-built admin component styles
+
 ## v1.8.9 (2026-10-21)
  * Replace Bulma layout and helper classes with Tailwind utilities
 

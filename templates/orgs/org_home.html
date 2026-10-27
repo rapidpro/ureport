@@ -5,7 +5,7 @@
   <div style="padding: 3rem 80px" class="admin-home-bg">
     {% block content %}
       <div class="tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-        <div style="border: none" class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[33.33333%] left-block">
+        <div style="border: none" class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[33.33333%] left-block">
           <div class="page-title">{% trans "LATEST NOTIFICATIONS" %}</div>
           {% block messages %}
             {% if messages %}
@@ -21,75 +21,75 @@
             {% endif %}
           {% endfor %}
         </div>
-        <div class="[display:block] basis-0 grow shrink p-3 tablet:flex-none tablet:w-[66.66667%] right-block">
-          <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-            <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3">
-              <a href="{% url 'polls.poll_list' %}" class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! box text-center! link-button">
-                <div style="padding: 50px" class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! big-button-link">
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0!">
+        <div class="block basis-0 grow shrink p-3 tablet:flex-none tablet:w-[66.66667%] right-block">
+          <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+            <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3">
+              <a href="{% url 'polls.poll_list' %}" class="items-stretch block basis-0 grow shrink min-h-min m-0! box text-center! link-button">
+                <div style="padding: 50px" class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! big-button-link">
+                  <div class="items-stretch block basis-0 grow shrink min-h-min m-0!">
                     <img src="{{ STATIC_URL }}img/icons/polls_icon.png" alt="">
                   </div>
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! text-[2rem]!">{% trans "Opinions" %}</div>
+                  <div class="items-stretch block basis-0 grow shrink min-h-min m-0! text-[2rem]!">{% trans "Opinions" %}</div>
                 </div>
               </a>
             </div>
-            <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3">
-              <a href="{% url 'stories.story_list' %}" class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! box text-center! link-button">
-                <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! big-button-link">
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0!">
+            <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3">
+              <a href="{% url 'stories.story_list' %}" class="items-stretch block basis-0 grow shrink min-h-min m-0! box text-center! link-button">
+                <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! big-button-link">
+                  <div class="items-stretch block basis-0 grow shrink min-h-min m-0!">
                     <img src="{{ STATIC_URL }}img/icons/stories_icon.png" alt="">
                   </div>
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! text-[2rem]!">{% trans "Stories" %}</div>
+                  <div class="items-stretch block basis-0 grow shrink min-h-min m-0! text-[2rem]!">{% trans "Stories" %}</div>
                 </div>
               </a>
             </div>
           </div>
           <div style="margin: 20px 0px 30px 0px; height: 2px" class="bg-white!"></div>
-          <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+          <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
             {% if request.user.is_superuser or org_perms.orgs.org_manage_accounts %}
-              <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3">
-                <a href="{% url 'orgs.org_manage_accounts' %}" class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! box text-center! link-button">
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
-                    <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0!">
+              <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3">
+                <a href="{% url 'orgs.org_manage_accounts' %}" class="items-stretch block basis-0 grow shrink min-h-min m-0! box text-center! link-button">
+                  <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
+                    <div class="items-stretch block basis-0 grow shrink min-h-min m-0!">
                       <img src="{{ STATIC_URL }}img/icons/users_icon.png" alt="">
                     </div>
-                    <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Users" %}</div>
+                    <div class="items-stretch block basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Users" %}</div>
                   </div>
                 </a>
               </div>
             {% endif %}
             {% if request.user.is_superuser or org_perms.orgs.org_edit %}
-              <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3">
-                <a href="{% url 'orgs.org_edit' %}" class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! box text-center! link-button">
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
-                    <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0!">
+              <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3">
+                <a href="{% url 'orgs.org_edit' %}" class="items-stretch block basis-0 grow shrink min-h-min m-0! box text-center! link-button">
+                  <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
+                    <div class="items-stretch block basis-0 grow shrink min-h-min m-0!">
                       <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
                     </div>
-                    <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Settings" %}</div>
+                    <div class="items-stretch block basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Settings" %}</div>
                   </div>
                 </a>
               </div>
             {% endif %}
-            <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3">
-              <a href="{% url 'dashblocks.dashblock_list' %}" class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! box text-center! link-button">
-                <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0!">
+            <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3">
+              <a href="{% url 'dashblocks.dashblock_list' %}" class="items-stretch block basis-0 grow shrink min-h-min m-0! box text-center! link-button">
+                <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
+                  <div class="items-stretch block basis-0 grow shrink min-h-min m-0!">
                     <img src="{{ STATIC_URL }}img/icons/pages_icon.png" alt="">
                   </div>
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Pages" %}</div>
+                  <div class="items-stretch block basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Pages" %}</div>
                 </div>
               </a>
             </div>
           </div>
-          <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
-            <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3">
+          <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex -mx-3 -mt-3 last:-mb-3 not-last:mb-3">
+            <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3">
               {% if request.user.is_superuser or org_perms.orgs.orgbackend_list %}
-                <a href="{% url 'orgs.orgbackend_list' %}" class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! box text-center! link-button">
-                  <div class="items-stretch [display:block] basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
-                    <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0!">
+                <a href="{% url 'orgs.orgbackend_list' %}" class="items-stretch block basis-0 grow shrink min-h-min m-0! box text-center! link-button">
+                  <div class="items-stretch block basis-0 grow shrink min-h-min tablet:flex p-3 flex-col [&>*:not(:last-child)]:mb-6! small-button-link">
+                    <div class="items-stretch block basis-0 grow shrink min-h-min m-0!">
                       <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
                     </div>
-                    <div class="items-stretch [display:block] basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Backends" %}</div>
+                    <div class="items-stretch block basis-0 grow shrink min-h-min m-0! text-[1.5rem]!">{% trans "Backends" %}</div>
                   </div>
                 </a>
               {% endif %}
