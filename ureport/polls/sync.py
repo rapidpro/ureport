@@ -4,7 +4,6 @@ import logging
 from datetime import timedelta
 
 from django.core.cache import cache
-from django.db.models import F, Q
 from django.utils import timezone
 
 from dash.orgs.models import Org
@@ -68,6 +67,9 @@ COUNTS_FULL_REBUILD_DAYS = 7
 
 # on its full rebuild night, a poll whose counts were rebuilt more recently than this is left alone
 COUNTS_FULL_REBUILD_FRESH = timedelta(hours=12)
+
+# how many polls a counts rebuild chunk considers, of which it rebuilds at most COUNTS_CHUNK_SIZE
+COUNTS_SCAN_SIZE = 50
 
 # how many polls a maintenance chunk walks - pruning is the heaviest, it deletes results
 COUNTS_CHUNK_SIZE = 5
@@ -489,41 +491,53 @@ def rebuild_poll_counts(job):
     # retired polls lose the daily cache refresh they used to get: their cached results
     # never expire and are recalculated on read, but a cache flush leaves them uncached
     # until something asks for them
-    due = _counts_rebuild_due(Poll.objects.filter(is_active=True, stopped_syncing=False), job.started_on)
-
-    polls = list(due.filter(pk__gt=after_pk).order_by("pk")[:COUNTS_CHUNK_SIZE])
+    polls = list(
+        Poll.objects.filter(is_active=True, stopped_syncing=False, pk__gt=after_pk).order_by("pk")[:COUNTS_SCAN_SIZE]
+    )
     if not polls:
         return True
 
+    rebuilt = skipped = 0
+
     for poll in polls:
-        # rebuilding a poll rebuilds every poll of its flow, and a sync may have rebuilt it
-        # since the chunk was read, so whether it is still due is checked again
-        if due.filter(pk=poll.pk).exists():
-            poll.rebuild_poll_results_counts()
-            outcome = "rebuilt"
-        else:
-            outcome = "skipped"
+        # checked as each poll comes up rather than for the chunk up front, as rebuilding a
+        # poll rebuilds every poll of its flow and a sync may rebuild one meanwhile
+        if not _counts_rebuild_due(poll, job.started_on):
+            skipped += 1
+            continue
+
+        poll.rebuild_poll_results_counts()
+        rebuilt += 1
 
         # checkpointed per poll rather than per chunk: rebuilding a big flow can take
         # minutes, and a chunk that ran out of lease must not write on
-        job.checkpoint(cursor={"after_pk": poll.pk}, progress=job.add_progress(**{outcome: 1}))
+        job.checkpoint(cursor={"after_pk": poll.pk}, progress=_add_nonzero_progress(job, rebuilt=1, skipped=skipped))
+        skipped = 0
 
+        if rebuilt >= COUNTS_CHUNK_SIZE:
+            return False
+
+    job.checkpoint(cursor={"after_pk": polls[-1].pk}, progress=_add_nonzero_progress(job, skipped=skipped))
     return False
 
 
-def _counts_rebuild_due(polls, run_on):
-    """
-    Narrows the given polls to those whose counts the rebuild run started at run_on has to
-    rebuild: ones never rebuilt, ones whose results changed after their last rebuild started,
-    and ones on their full rebuild night that weren't rebuilt recently.
-    """
-    night = run_on.date().toordinal() % COUNTS_FULL_REBUILD_DAYS
+def _add_nonzero_progress(job, **counts):
+    return job.add_progress(**{key: value for key, value in counts.items() if value})
 
-    return polls.annotate(full_rebuild_night=F("pk") % COUNTS_FULL_REBUILD_DAYS).filter(
-        Q(counts_rebuilt_on=None)
-        | Q(results_changed_on__gt=F("counts_rebuilt_on"))
-        | Q(full_rebuild_night=night, counts_rebuilt_on__lt=run_on - COUNTS_FULL_REBUILD_FRESH)
-    )
+
+def _counts_rebuild_due(poll, run_on):
+    """
+    Whether the counts rebuild run started at run_on has to rebuild the poll's counts: ones
+    never rebuilt, ones whose results changed after their last rebuild started, and ones on
+    their full rebuild night that weren't rebuilt recently.
+    """
+    changed_on, rebuilt_on = poll.get_counts_stamps()
+
+    if rebuilt_on is None or (changed_on is not None and changed_on > rebuilt_on):
+        return True
+
+    night = run_on.date().toordinal() % COUNTS_FULL_REBUILD_DAYS
+    return poll.pk % COUNTS_FULL_REBUILD_DAYS == night and rebuilt_on < run_on - COUNTS_FULL_REBUILD_FRESH
 
 
 @chunked_task(

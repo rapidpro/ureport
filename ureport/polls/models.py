@@ -99,6 +99,12 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT = 60 * 60 * 24 * 2
 
+    # together these say whether a flow's counts are behind its results: a sync sets the first when it changes the
+    # flow's results, and a rebuild sets the second to when it started reading them. Neither expires, and losing
+    # them only means the flow is treated as never rebuilt
+    POLL_RESULTS_CHANGED_CACHE_KEY = "counts:results_changed:org:%d:flow:%s"
+    POLL_COUNTS_REBUILT_CACHE_KEY = "counts:rebuilt:org:%d:flow:%s"
+
     POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = "poll-results-pull-after-delete-flag:%s:%s"
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
@@ -134,11 +140,6 @@ class Poll(SmartModel):
     stopped_syncing = models.BooleanField(
         default=False, help_text=_("Whether the poll should stop regenerating stats.")
     )
-
-    # together these say whether the counts are behind the results: a sync stamps the first when it changes the
-    # flow's results, and a rebuild stamps the second with when it started reading them
-    results_changed_on = models.DateTimeField(null=True)
-    counts_rebuilt_on = models.DateTimeField(null=True)
 
     title = models.CharField(max_length=255, help_text=_("The title for this Poll"))
     category = models.ForeignKey(
@@ -393,7 +394,18 @@ class Poll(SmartModel):
         """
         Records that the results of a flow changed, so its counts are rebuilt by the next pass that reconciles them
         """
-        cls.objects.filter(org_id=org_id, flow_uuid=flow_uuid).update(results_changed_on=timezone.now())
+        cache.set(Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (org_id, flow_uuid), timezone.now(), None)
+
+    def get_counts_stamps(self):
+        """
+        Returns when the results of this poll's flow last changed and when its counts were last rebuilt, either of
+        which may be None
+        """
+        changed_key = Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (self.org_id, self.flow_uuid)
+        rebuilt_key = Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.org_id, self.flow_uuid)
+        stamps = cache.get_many([changed_key, rebuilt_key])
+
+        return stamps.get(changed_key), stamps.get(rebuilt_key)
 
     def rebuild_poll_counts_cache(self):
         org_id = self.org_id
@@ -571,8 +583,7 @@ class Poll(SmartModel):
                     )
 
     def _mark_counts_rebuilt(self, rebuilt_on):
-        # the counts are per flow, so every poll of it is as up to date as this one
-        Poll.objects.filter(org_id=self.org_id, flow_uuid=self.flow_uuid).update(counts_rebuilt_on=rebuilt_on)
+        cache.set(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.org_id, self.flow_uuid), rebuilt_on, None)
 
     def get_question_uuids(self):
         question_uuids = FlowResult.objects.filter(org=self.org, flow_uuid=self.flow_uuid).values_list(
