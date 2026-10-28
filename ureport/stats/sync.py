@@ -24,7 +24,7 @@ QUEUE = "slow"
 # a few of them rather than the whole product of segments and metrics
 ENGAGEMENT_BATCH_SIZE = 3
 
-# the rebuild's engagement pass only covers one metric, so it can afford wider chunks
+# the rebuild's engagement pass only covers one metric, so a chunk can take all its segments
 REBUILD_BATCH_SIZE = 5
 REBUILD_METRIC = "active-users"
 

@@ -180,6 +180,26 @@ class EngagementDataTest(UreportTest):
         self.assertEqual(10, len(data[3][0]["data"]))
         self.assertEqual("2025-12-01", min(data[3][0]["data"]))
 
+        # and each bucket sums the responses the fixture seeded on its days, from the start of the month a year ago
+        def bucket(day, time_filter):
+            if time_filter == 12:
+                return day.replace(day=1)
+            if time_filter == 6:
+                return day.replace(day=1 if day.day < 16 else 16)
+            return day.replace(day=1 if day.day < 11 else 11 if day.day < 21 else 21)
+
+        for time_filter in PollEngagementDailyCount.DATA_TIME_FILTERS:
+            expected = {key: 0 for key in data[time_filter][0]["data"]}
+            day = date(2025, 3, 1)
+            while day <= date(2026, 3, 1):
+                i = (day - self.SEED_START).days
+                key = str(bucket(day, time_filter))
+                if i % 5 and i % 3 and key in expected:
+                    expected[key] += (i * 3) % 5 + 1
+                day += timedelta(days=1)
+
+            self.assertEqual(expected, data[time_filter][0]["data"])
+
     def test_get_engagement_data_fills_cache_on_miss(self):
         with frozen_now(datetime(2026, 10, 16, 12, 0, tzinfo=tzone.utc)):
             for time_filter in PollEngagementDailyCount.DATA_TIME_FILTERS:
@@ -192,7 +212,9 @@ class EngagementDataTest(UreportTest):
                 self.assertIsNotNone(self.cached("active-users", "gender", time_filter))
             self.assertEqual({"results": data}, self.cached("active-users", "gender", 6))
 
-            # a filter outside the usual ones is still calculated, and cached
+            # a filter outside the usual ones is still calculated, and cached, on its own
+            cache.delete(f"org:{self.org.id}:metric:active-users:segment:gender:filter:6")
             data = PollEngagementDailyCount.get_engagement_data(self.org, "active-users", "gender", 1)
             self.assertTrue(data)
             self.assertEqual({"results": data}, self.cached("active-users", "gender", 1))
+            self.assertIsNone(self.cached("active-users", "gender", 6))

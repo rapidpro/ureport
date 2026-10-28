@@ -321,8 +321,8 @@ class PollEngagementDailyCount(BaseDailyCount):
         if output_data:
             return output_data["results"]
 
-        # the other time filters come from the same rows, so a miss refreshes them too
-        time_filters = {*PollEngagementDailyCount.DATA_TIME_FILTERS, time_filter}
+        # the other usual time filters come from the same rows, so a miss on one of them refreshes them all
+        time_filters = None if time_filter in PollEngagementDailyCount.DATA_TIME_FILTERS else [time_filter]
         return PollEngagementDailyCount.refresh_engagement_data(org, metric, segment_slug, time_filters)[time_filter]
 
     @classmethod
