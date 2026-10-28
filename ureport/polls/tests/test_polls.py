@@ -3292,6 +3292,43 @@ class PollResultsTest(UreportTest):
 
         self.assertEqual({"all": 3}, counts(question1))
 
+    def test_rebuild_poll_results_counts_counts_every_poll_of_the_flow(self):
+        # a duplicate poll of the flow with a question this one doesn't have
+        same_flow = self.create_poll(self.nigeria, "Same flow", self.poll.flow_uuid, self.poll.category, self.admin)
+        other_question = self.create_poll_question(self.admin, same_flow, "question 2", "step-uuid-2")
+
+        # and a retired one, whose questions aren't counted any more
+        stopped = self.create_poll(self.nigeria, "Stopped", self.poll.flow_uuid, self.poll.category, self.admin)
+        Poll.objects.filter(id=stopped.id).update(stopped_syncing=True)
+        stopped_question = self.create_poll_question(self.admin, stopped, "question 3", "step-uuid-3")
+
+        for contact, ruleset in (
+            ("c1", "step-uuid"),
+            ("c2", "step-uuid-2"),
+            ("c3", "step-uuid-2"),
+            ("c4", "step-uuid-3"),
+        ):
+            PollResult.objects.create(
+                org=self.nigeria,
+                flow=self.poll.flow_uuid,
+                ruleset=ruleset,
+                contact=contact,
+                completed=False,
+                date=self.now,
+            )
+
+        def counts(question):
+            return {
+                c.scope: c.count
+                for c in PollStatsCounter.objects.filter(org=self.nigeria, flow_result=question.flow_result)
+            }
+
+        self.poll.rebuild_poll_results_counts()
+
+        self.assertEqual({"all": 1}, counts(self.poll_question))
+        self.assertEqual({"all": 2}, counts(other_question))
+        self.assertEqual({}, counts(stopped_question))
+
     def test_rebuild_poll_results_counts_records_when_counts_were_rebuilt(self):
         same_flow = self.create_poll(self.nigeria, "Same flow", self.poll.flow_uuid, self.poll.category, self.admin)
         other_flow = self.create_poll(self.nigeria, "Other flow", "other-flow-uuid", self.poll.category, self.admin)

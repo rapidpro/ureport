@@ -464,7 +464,13 @@ class Poll(SmartModel):
                 # taken before any results are read, so results changed while this runs are newer than the rebuild
                 rebuild_started = timezone.now() - Poll.POLL_COUNTS_REBUILT_CLOCK_MARGIN
 
-                questions = self.questions.all().select_related("flow_result").prefetch_related("response_categories")
+                # the counts are kept per flow and recorded as rebuilt for the whole flow, so the questions of every
+                # poll on it are counted - a duplicate poll may have questions or categories this one doesn't
+                questions = (
+                    PollQuestion.objects.filter(poll__org_id=org_id, poll__flow_uuid=flow, poll__stopped_syncing=False)
+                    .select_related("flow_result")
+                    .prefetch_related("response_categories")
+                )
                 results_dict = dict()
 
                 if not questions.exists():
@@ -474,11 +480,11 @@ class Poll(SmartModel):
 
                 for qsn in questions:
                     categories = qsn.response_categories.all().select_related("flow_result_category")
-                    flow_categories_dict = {
-                        elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories
-                    }
-                    results_dict[qsn.flow_result.result_uuid] = dict(
-                        flow_result_id=qsn.flow_result_id, flow_categories=flow_categories_dict
+                    question = results_dict.setdefault(
+                        qsn.flow_result.result_uuid, dict(flow_result_id=qsn.flow_result_id, flow_categories={})
+                    )
+                    question["flow_categories"].update(
+                        {elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories}
                     )
 
                 known_schemes = {elt.scheme.lower() for elt in SchemeSegment.objects.all()}
