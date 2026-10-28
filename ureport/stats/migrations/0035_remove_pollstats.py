@@ -7,7 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('polls', '0064_deduplicate_pollresponsecategories'),
-        ('stats', '0033_backfill_poll_stats_counters_dedupes'),
+        ('stats', '0034_squashed_counts_unique'),
     ]
 
     operations = [
