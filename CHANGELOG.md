@@ -1,3 +1,6 @@
+## v1.8.15 (2026-10-28)
+ * Update squashed counts in place rather than rewriting them on every squash, merging duplicates with a window function and skipping fillfactor where updates can't be HOT
+
 ## v1.8.14 (2026-10-27)
  * Calculate each question's polled and responded totals once per results cache refresh
 
