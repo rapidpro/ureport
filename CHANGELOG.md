@@ -1,3 +1,10 @@
+## v1.8.16 (2026-10-28)
+ * Calculate engagement data for every time filter in one pass and spread nightly stats runs over 30 minutes
+ * Only rebuild the counts of polls whose results changed in the nightly pass, tracking in the cache when a flow's results changed and when its counts were rebuilt
+ * Keep flows due for a rebuild after question edits, failed rebuilds and rebuilds racing a delete
+ * Count the questions of every syncing poll on a flow when rebuilding its counts
+ * Only widen a cache miss to the usual time filters and check bucket sums against the seeded counts
+
 ## v1.8.15 (2026-10-28)
  * Update squashed counts in place rather than rewriting them on every squash, merging duplicates with a window function and skipping fillfactor where updates can't be HOT
 
