@@ -73,7 +73,7 @@ FAILURE_BACKOFF = Backoff(base=DAILY_INTERVAL, cap=timedelta(days=7), max_doubli
 # the dispatcher spreads the orgs' runs over this many seconds rather than starting them all
 # at once, to flatten the load of the nightly refresh. _recently_nudged trusts a delayed
 # nudge for this long on top of its usual window, so the next pass doesn't queue another.
-DISPATCH_SPREAD_SECONDS = 60 * 60
+DISPATCH_SPREAD_SECONDS = 60 * 30
 
 
 def engagement_combos():
