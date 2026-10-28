@@ -192,8 +192,10 @@ def _delete_flow_results(job, poll):
     """
     from ureport.polls.models import Poll
 
+    # marked after the delete too, as a rebuild that started during it counted some of the deleted results
     Poll.mark_results_changed(job.org_id, job.scope)
     poll.delete_poll_results()
+    Poll.mark_results_changed(job.org_id, job.scope)
 
     for poll_id in _flow_poll_ids(job):
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (job.org_id, poll_id))

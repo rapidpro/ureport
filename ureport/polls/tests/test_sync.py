@@ -255,6 +255,24 @@ class SyncPollResultsTest(PollSyncTestBase):
         # deleting the results changed them, even with nothing pulled back yet
         self.assertIsNotNone(self.poll.get_counts_stamps()[0])
 
+    def test_a_rebuild_during_the_delete_leaves_the_flow_due(self):
+        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+
+        # a rebuild that starts while the results are being deleted counts some of them
+        def rebuilt_during_delete():
+            self.poll._mark_counts_rebuilt(timezone.now())
+
+        with (
+            patch.object(Poll, "delete_poll_results", autospec=True, side_effect=lambda poll: rebuilt_during_delete()),
+            patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk,
+        ):
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
+
+            run_task(sync_poll_results, self.job.id)
+
+        changed_on, rebuilt_on = self.poll.get_counts_stamps()
+        self.assertGreater(changed_on, rebuilt_on)
+
     def test_restart_survives_an_interrupted_delete(self):
         # deleting consumes the flag and the legacy position, so the restart has to already
         # be durable when a chunk dies part way through

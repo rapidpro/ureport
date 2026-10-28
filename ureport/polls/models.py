@@ -100,10 +100,15 @@ class Poll(SmartModel):
     POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT = 60 * 60 * 24 * 2
 
     # together these say whether a flow's counts are behind its results: a sync sets the first when it changes the
-    # flow's results, and a rebuild sets the second to when it started reading them. Neither expires, and losing
-    # them only means the flow is treated as never rebuilt
+    # flow's results, and a rebuild sets the second to when it started reading them. Neither expires: losing the
+    # second makes the flow due as if never rebuilt, but losing only the first leaves it waiting for its next full
+    # rebuild, so these rely on the cache not evicting keys
     POLL_RESULTS_CHANGED_CACHE_KEY = "counts:results_changed:org:%d:flow:%s"
     POLL_COUNTS_REBUILT_CACHE_KEY = "counts:rebuilt:org:%d:flow:%s"
+
+    # how far back a rebuild dates itself, so a sync on a worker whose clock is a little behind can't stamp a change
+    # the rebuild missed as older than it
+    POLL_COUNTS_REBUILT_CLOCK_MARGIN = timedelta(minutes=1)
 
     POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = "poll-results-pull-after-delete-flag:%s:%s"
 
@@ -457,7 +462,7 @@ class Poll(SmartModel):
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 # taken before any results are read, so results changed while this runs are newer than the rebuild
-                rebuild_started = timezone.now()
+                rebuild_started = timezone.now() - Poll.POLL_COUNTS_REBUILT_CLOCK_MARGIN
 
                 questions = self.questions.all().select_related("flow_result").prefetch_related("response_categories")
                 results_dict = dict()
@@ -560,9 +565,11 @@ class Poll(SmartModel):
                     if question["flow_result_id"] not in rebuilt_flow_result_ids:
                         replaced_all &= self._replace_question_counters(r, question["flow_result_id"], {}, {})
 
-                # a question whose counters couldn't be replaced leaves the counts behind for the next pass to retry
+                # a question whose counters couldn't be replaced leaves the counts behind, so the next pass retries
                 if replaced_all:
                     self._mark_counts_rebuilt(rebuild_started)
+                else:
+                    Poll.mark_results_changed(org_id, flow)
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
@@ -726,6 +733,9 @@ class Poll(SmartModel):
         backend = org.get_backend(backend_slug=self.backend.slug)
 
         backend.update_poll_questions(org, self, user)
+
+        # questions or categories may have been added, which the counts of existing results need rebuilding for
+        Poll.mark_results_changed(self.org_id, self.flow_uuid)
 
     def response_percentage(self):
         """

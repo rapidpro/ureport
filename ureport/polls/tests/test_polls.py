@@ -1278,6 +1278,20 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
+    @patch("ureport.tests.TestBackend.update_poll_questions")
+    @patch("dash.orgs.models.Org.get_backend")
+    def test_update_or_create_questions_marks_results_changed(self, mock_get_backend, mock_update_poll_questions):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+        self.addCleanup(cache.delete, Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (poll.org_id, poll.flow_uuid))
+
+        poll.update_or_create_questions(user=self.admin)
+
+        # new questions or categories need the counts of existing results rebuilding
+        mock_update_poll_questions.assert_called_once_with(self.nigeria, poll, self.admin)
+        self.assertIsNotNone(poll.get_counts_stamps()[0])
+
     @patch("ureport.polls.tasks.pull_refresh_from_archives.apply_async")
     @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")
@@ -3284,6 +3298,7 @@ class PollResultsTest(UreportTest):
 
         for poll in (self.poll, other_flow):
             self.addCleanup(cache.delete, Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (poll.org_id, poll.flow_uuid))
+            self.addCleanup(cache.delete, Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (poll.org_id, poll.flow_uuid))
 
         def rebuilt_on(poll):
             return poll.get_counts_stamps()[1]
@@ -3291,13 +3306,14 @@ class PollResultsTest(UreportTest):
         before = timezone.now()
         self.poll.rebuild_poll_results_counts()
 
-        # the counts are per flow, so every poll of the flow is recorded as rebuilt
+        # the counts are per flow, so every poll of the flow is recorded as rebuilt, as of a little before it started
         stamped = rebuilt_on(self.poll)
-        self.assertGreaterEqual(stamped, before)
+        self.assertGreaterEqual(stamped, before - Poll.POLL_COUNTS_REBUILT_CLOCK_MARGIN)
+        self.assertLess(stamped, before)
         self.assertEqual(stamped, rebuilt_on(same_flow))
         self.assertIsNone(rebuilt_on(other_flow))
 
-        # a rebuild that couldn't replace every question's counters isn't recorded
+        # a rebuild that couldn't replace every question's counters isn't recorded, and leaves the flow due
         squash_lock = get_valkey_connection().lock(STATS_COUNTS_SQUASH_LOCK, timeout=60)
         squash_lock.acquire()
         try:
@@ -3307,6 +3323,7 @@ class PollResultsTest(UreportTest):
             squash_lock.release()
 
         self.assertEqual(stamped, rebuilt_on(self.poll))
+        self.assertGreater(self.poll.get_counts_stamps()[0], stamped)
 
         # nor is one skipped because another rebuild of the flow is running, which records its own
         with get_valkey_connection().lock(Poll.POLL_REBUILD_COUNTS_LOCK % (self.nigeria.id, self.poll.flow_uuid)):
