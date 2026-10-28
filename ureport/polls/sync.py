@@ -60,6 +60,17 @@ OTHER_POLLS_NEW_WINDOW = timedelta(days=7)
 # left short of a day so a run that started late isn't skipped the next day
 MAINTENANCE_INTERVAL = timedelta(hours=20)
 
+# the counts rebuild only rebuilds polls whose results changed since their counts were, but each poll also gets a
+# full rebuild on one night out of this many, picked by its pk so those are spread across nights. That reconciles
+# what doesn't come with a results change, like edited questions or results updated outside a sync
+COUNTS_FULL_REBUILD_DAYS = 7
+
+# on its full rebuild night, a poll whose counts were rebuilt more recently than this is left alone
+COUNTS_FULL_REBUILD_FRESH = timedelta(hours=12)
+
+# how many polls a counts rebuild chunk considers, of which it rebuilds at most COUNTS_CHUNK_SIZE
+COUNTS_SCAN_SIZE = 50
+
 # how many polls a maintenance chunk walks - pruning is the heaviest, it deletes results
 COUNTS_CHUNK_SIZE = 5
 PRUNE_CHUNK_SIZE = 3
@@ -181,7 +192,10 @@ def _delete_flow_results(job, poll):
     """
     from ureport.polls.models import Poll
 
+    # marked after the delete too, as a rebuild that started during it counted some of the deleted results
+    Poll.mark_results_changed(job.org_id, job.scope)
     poll.delete_poll_results()
+    Poll.mark_results_changed(job.org_id, job.scope)
 
     for poll_id in _flow_poll_ids(job):
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (job.org_id, poll_id))
@@ -215,8 +229,11 @@ def _set_reset_pending(progress, pending):
 
 
 def _changed_results(job):
-    progress = job.progress or {}
-    return any(progress.get(key, 0) for key in RESULT_CHANGE_KEYS)
+    return _has_changes(job.progress or {})
+
+
+def _has_changes(counts):
+    return any(counts.get(key, 0) for key in RESULT_CHANGE_KEYS)
 
 
 def _finalize_results(job):
@@ -309,6 +326,8 @@ def sync_poll_results(job):
                 queue_archives_sync(poll.org, poll.flow_uuid)
 
     result = _get_backend(poll).pull_results_chunk(poll, cursor)
+    if _has_changes(result.counts):
+        Poll.mark_results_changed(job.org_id, job.scope)
 
     progress = _set_reset_pending(job.add_progress(chunks=1, **result.counts), reset_pending)
     job.checkpoint(cursor=result.cursor, progress=progress)
@@ -334,11 +353,15 @@ def sync_poll_results(job):
     name="polls.sync_poll_archives",
 )
 def sync_poll_archives(job):
+    from ureport.polls.models import Poll
+
     poll = get_job_poll(job.org_id, job.scope)
     if not poll:
         return True
 
     result = _get_backend(poll).pull_results_from_archives_chunk(poll, dict(job.cursor or {}))
+    if _has_changes(result.counts):
+        Poll.mark_results_changed(job.org_id, job.scope)
 
     job.checkpoint(cursor=result.cursor, progress=job.add_progress(chunks=1, **result.counts))
 
@@ -452,13 +475,13 @@ def rebuild_poll_counts(job):
     """
     Rebuilds the results counts of a bounded number of polls per chunk, across every org -
     this is one install wide job, which is what replaces the multi day lock the unchunked
-    task held for the whole pass. Each run walks every syncing poll once, in pk order, and
-    the next run starts over from the first of them.
+    task held for the whole pass. Each run walks the syncing polls whose counts are due a
+    rebuild once, in pk order, and the next run starts over from the first of them.
     """
     from ureport.polls.models import Poll
 
     if job.new_run:
-        # a run has to cover every poll, so the position the last one left behind is dropped
+        # a run has to cover every due poll, so the position the last one left behind is dropped
         # - durably, or a chunk that failed before its first checkpoint would leave the retry
         # resuming below a completed run's position and walking nothing
         job.checkpoint(cursor={})
@@ -471,19 +494,52 @@ def rebuild_poll_counts(job):
     # never expire and are recalculated on read, but a cache flush leaves them uncached
     # until something asks for them
     polls = list(
-        Poll.objects.filter(is_active=True, stopped_syncing=False, pk__gt=after_pk).order_by("pk")[:COUNTS_CHUNK_SIZE]
+        Poll.objects.filter(is_active=True, stopped_syncing=False, pk__gt=after_pk).order_by("pk")[:COUNTS_SCAN_SIZE]
     )
     if not polls:
         return True
 
+    rebuilt = skipped = 0
+
     for poll in polls:
+        # checked as each poll comes up rather than for the chunk up front, as rebuilding a
+        # poll rebuilds every poll of its flow and a sync may rebuild one meanwhile
+        if not _counts_rebuild_due(poll, job.started_on):
+            skipped += 1
+            continue
+
         poll.rebuild_poll_results_counts()
+        rebuilt += 1
 
         # checkpointed per poll rather than per chunk: rebuilding a big flow can take
         # minutes, and a chunk that ran out of lease must not write on
-        job.checkpoint(cursor={"after_pk": poll.pk}, progress=job.add_progress(rebuilt=1))
+        job.checkpoint(cursor={"after_pk": poll.pk}, progress=_add_nonzero_progress(job, rebuilt=1, skipped=skipped))
+        skipped = 0
 
+        if rebuilt >= COUNTS_CHUNK_SIZE:
+            return False
+
+    job.checkpoint(cursor={"after_pk": polls[-1].pk}, progress=_add_nonzero_progress(job, skipped=skipped))
     return False
+
+
+def _add_nonzero_progress(job, **counts):
+    return job.add_progress(**{key: value for key, value in counts.items() if value})
+
+
+def _counts_rebuild_due(poll, run_on):
+    """
+    Whether the counts rebuild run started at run_on has to rebuild the poll's counts: ones
+    never rebuilt, ones whose results changed after their last rebuild started, and ones on
+    their full rebuild night that weren't rebuilt recently.
+    """
+    changed_on, rebuilt_on = poll.get_counts_stamps()
+
+    if rebuilt_on is None or (changed_on is not None and changed_on > rebuilt_on):
+        return True
+
+    night = run_on.date().toordinal() % COUNTS_FULL_REBUILD_DAYS
+    return poll.pk % COUNTS_FULL_REBUILD_DAYS == night and rebuilt_on < run_on - COUNTS_FULL_REBUILD_FRESH
 
 
 @chunked_task(

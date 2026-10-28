@@ -3095,6 +3095,11 @@ class PerfTest(UreportTest):
 
         expected_args = [
             (Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid), None, None),
+            (
+                Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                now_date - Poll.POLL_COUNTS_REBUILT_CLOCK_MARGIN,
+                None,
+            ),
         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))

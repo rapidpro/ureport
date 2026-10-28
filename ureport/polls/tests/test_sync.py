@@ -17,6 +17,7 @@ from ureport.polls.models import Poll, PollResult
 from ureport.polls.sync import (
     AGE_GENDER_JOB_TYPE,
     ARCHIVES_JOB_TYPE,
+    COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
     PRUNE_JOB_TYPE,
     RATE_LIMITED_BACKOFF,
@@ -89,6 +90,8 @@ class PollSyncTestBase(SyncJobTestMixin, UreportTest):
             cache.delete(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (poll.org_id, poll.flow_uuid))
             cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk))
             cache.delete(Poll.ORG_MAIN_POLL_ID % poll.org_id)
+            cache.delete(Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (poll.org_id, poll.flow_uuid))
+            cache.delete(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (poll.org_id, poll.flow_uuid))
 
     def get_job(self, job_type=RESULTS_JOB_TYPE, org=None, flow_uuid="uuid-1"):
         return SyncJob.objects.get(org=org or self.nigeria, job_type=job_type, scope=flow_uuid)
@@ -177,6 +180,25 @@ class SyncPollResultsTest(PollSyncTestBase):
             run_task(sync_poll_results, self.job.id)
             self.mock_rebuild.assert_not_called()
 
+    def test_records_when_results_changed(self):
+        same_flow = self.create_poll(self.nigeria, "Same flow", "uuid-1", self.education_nigeria, self.admin)
+
+        with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
+            # a chunk that changed nothing leaves the counts as up to date as they were
+            mock_chunk.return_value = ChunkResult(counts=results_counts(num_val_ignored=3), cursor={"after": "t1"})
+            run_task(sync_poll_results, self.job.id)
+
+            self.assertEqual((None, None), self.poll.get_counts_stamps())
+
+            before = timezone.now()
+            mock_chunk.return_value = ChunkResult(counts=results_counts(num_path_updated=1), cursor={"after": "t2"})
+            run_task(sync_poll_results, self.job.id)
+
+        # it's recorded for the flow, as all its polls' counts are rebuilt from the same results
+        changed_on, rebuilt_on = same_flow.get_counts_stamps()
+        self.assertGreaterEqual(changed_on, before)
+        self.assertIsNone(rebuilt_on)
+
     def test_queues_archives_on_first_sync(self):
         self.mock_flow_date.return_value = None
 
@@ -229,6 +251,27 @@ class SyncPollResultsTest(PollSyncTestBase):
         self.assertIsNone(cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk)))
         self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {})
         self.mock_queue_archives.assert_called_once_with((archives_job.id,), queue="sync")
+
+        # deleting the results changed them, even with nothing pulled back yet
+        self.assertIsNotNone(self.poll.get_counts_stamps()[0])
+
+    def test_a_rebuild_during_the_delete_leaves_the_flow_due(self):
+        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+
+        # a rebuild that starts while the results are being deleted counts some of them
+        def rebuilt_during_delete():
+            self.poll._mark_counts_rebuilt(timezone.now())
+
+        with (
+            patch.object(Poll, "delete_poll_results", autospec=True, side_effect=lambda poll: rebuilt_during_delete()),
+            patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk,
+        ):
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
+
+            run_task(sync_poll_results, self.job.id)
+
+        changed_on, rebuilt_on = self.poll.get_counts_stamps()
+        self.assertGreater(changed_on, rebuilt_on)
 
     def test_restart_survives_an_interrupted_delete(self):
         # deleting consumes the flag and the legacy position, so the restart has to already
@@ -424,6 +467,7 @@ class SyncPollArchivesTest(PollSyncTestBase):
 
         self.poll.refresh_from_db()
         self.assertTrue(self.poll.has_synced)
+        self.assertIsNotNone(self.poll.get_counts_stamps()[0])
 
     def test_finalize_skips_rebuild_without_results(self):
         with patch.object(RapidProBackend, "pull_results_from_archives_chunk") as mock_chunk:
@@ -435,6 +479,7 @@ class SyncPollArchivesTest(PollSyncTestBase):
         mock_rebuild.assert_not_called()
         self.poll.refresh_from_db()
         self.assertTrue(self.poll.has_synced)
+        self.assertIsNone(self.poll.get_counts_stamps()[0])
 
     def test_backs_off_when_rate_limited(self):
         with patch.object(RapidProBackend, "pull_results_from_archives_chunk") as mock_chunk:
@@ -849,6 +894,78 @@ class RebuildPollCountsTest(PollSyncTestBase):
         # checkpointed is not walked again by whoever took over
         self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, cursor={"after_pk": self.polls[0].pk})
         mock_continue.assert_not_called()
+
+    def set_rebuilt(self, polls, ago, changed_ago=None):
+        now = timezone.now()
+        for poll in polls:
+            poll._mark_counts_rebuilt(now - ago)
+            if changed_ago:
+                cache.set(Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (poll.org_id, poll.flow_uuid), now - changed_ago, None)
+
+    def full_rebuild_poll(self):
+        # the polls have consecutive pks, so exactly one of every seven has tonight as its full rebuild night
+        night = timezone.now().date().toordinal() % COUNTS_FULL_REBUILD_DAYS
+        return next(poll for poll in self.polls if poll.pk % COUNTS_FULL_REBUILD_DAYS == night)
+
+    def test_skips_polls_whose_counts_are_up_to_date(self):
+        self.set_rebuilt(self.polls, timedelta(hours=1), changed_ago=timedelta(hours=2))
+
+        rebuilt, mock_continue = self.rebuild()
+
+        # the chunk still moves the position past the polls it looked at
+        self.assertEqual(rebuilt, [])
+        mock_continue.assert_called_once()
+        self.assertJobState(
+            self.job, status=SyncJob.STATUS_RUNNING, cursor={"after_pk": self.polls[-1].pk}, progress={"skipped": 7}
+        )
+
+        rebuilt, mock_continue = self.rebuild()
+
+        self.assertEqual(rebuilt, [])
+        mock_continue.assert_not_called()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, progress={"skipped": 7})
+
+    def test_rebuilds_polls_whose_results_changed_or_were_never_counted(self):
+        self.set_rebuilt(self.polls, timedelta(hours=3), changed_ago=timedelta(hours=4))
+
+        # results changed after the last rebuild started, including while it ran
+        self.set_rebuilt([self.polls[1]], timedelta(hours=3), changed_ago=timedelta(hours=2))
+        self.set_rebuilt([self.polls[6]], timedelta(hours=3), changed_ago=timedelta(minutes=1))
+        cache.delete(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.polls[4].org_id, self.polls[4].flow_uuid))
+
+        # and tonight's full rebuild poll was rebuilt too recently to be rebuilt again
+        rebuilt, _ = self.rebuild()
+
+        self.assertEqual(rebuilt, [self.polls[index].pk for index in (1, 4, 6)])
+        self.assertJobState(self.job, progress={"rebuilt": 3, "skipped": 4})
+
+    def test_rebuilds_unchanged_polls_on_their_full_rebuild_night(self):
+        self.set_rebuilt(self.polls, timedelta(days=2))
+
+        rebuilt, _ = self.rebuild()
+
+        self.assertEqual(rebuilt, [self.full_rebuild_poll().pk])
+
+        # unless something else already rebuilt it since the last pass
+        self.set_rebuilt([self.full_rebuild_poll()], timedelta(hours=1))
+        self.job = end_run(self.job, ended_on=timezone.now() - timedelta(days=1))
+
+        rebuilt, _ = self.rebuild()
+
+        self.assertEqual(rebuilt, [])
+
+    def test_skips_a_poll_whose_flow_was_rebuilt_earlier_in_the_chunk(self):
+        # a duplicate poll of the first poll's flow, whose counts the first poll's rebuild rebuilds too
+        Poll.objects.filter(id=self.polls[2].id).update(flow_uuid=self.polls[0].flow_uuid)
+
+        with patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild:
+            mock_rebuild.side_effect = lambda poll: poll._mark_counts_rebuilt(timezone.now())
+
+            run_task(rebuild_poll_counts, self.job.id)
+
+        rebuilt = [call[0][0].pk for call in mock_rebuild.call_args_list]
+        self.assertEqual(rebuilt, [self.polls[index].pk for index in (0, 1, 3, 4, 5)])
+        self.assertJobState(self.job, cursor={"after_pk": self.polls[5].pk}, progress={"rebuilt": 5, "skipped": 1})
 
     def test_only_one_global_job_can_exist(self):
         with self.assertRaises(IntegrityError), transaction.atomic():

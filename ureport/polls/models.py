@@ -99,6 +99,17 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT = 60 * 60 * 24 * 2
 
+    # together these say whether a flow's counts are behind its results: a sync sets the first when it changes the
+    # flow's results, and a rebuild sets the second to when it started reading them. Neither expires: losing the
+    # second makes the flow due as if never rebuilt, but losing only the first leaves it waiting for its next full
+    # rebuild, so these rely on the cache not evicting keys
+    POLL_RESULTS_CHANGED_CACHE_KEY = "counts:results_changed:org:%d:flow:%s"
+    POLL_COUNTS_REBUILT_CACHE_KEY = "counts:rebuilt:org:%d:flow:%s"
+
+    # how far back a rebuild dates itself, so a sync on a worker whose clock is a little behind can't stamp a change
+    # the rebuild missed as older than it
+    POLL_COUNTS_REBUILT_CLOCK_MARGIN = timedelta(minutes=1)
+
     POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = "poll-results-pull-after-delete-flag:%s:%s"
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
@@ -193,6 +204,7 @@ class Poll(SmartModel):
         ) = backend.pull_results_from_archives(poll)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
+            Poll.mark_results_changed(poll.org_id, poll.flow_uuid)
             poll.rebuild_poll_results_counts()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid, has_synced=False).update(has_synced=True)
@@ -228,6 +240,7 @@ class Poll(SmartModel):
         ) = backend.pull_results(poll, None, None)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
+            Poll.mark_results_changed(poll.org_id, poll.flow_uuid)
             poll.rebuild_poll_results_counts()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid, has_synced=False).update(has_synced=True)
@@ -245,7 +258,8 @@ class Poll(SmartModel):
         """
         Replaces a question's stats counters and engagement daily counts with the given counts, keyed by
         (flow_result_category_id, scope) and (is_responded, scope, day) respectively. Each count is already the total
-        for its squash key, so the rows are created squashed and squashing leaves them alone
+        for its squash key, so the rows are created squashed and squashing leaves them alone. Returns whether they
+        were replaced
         """
         from ureport.stats.models import STATS_COUNTS_SQUASH_LOCK, PollEngagementDailyCount, PollStatsCounter
         from ureport.utils import chunk_list
@@ -287,7 +301,7 @@ class Poll(SmartModel):
                 "Couldn't acquire the stats squash lock to replace counters for flow result #%d on org #%d"
                 % (flow_result_id, self.org_id)
             )
-            return
+            return False
 
         try:
             with transaction.atomic():
@@ -301,6 +315,8 @@ class Poll(SmartModel):
                     PollEngagementDailyCount.objects.bulk_create(batch)
         finally:
             lock.release()
+
+        return True
 
     def delete_poll_results(self):
         from ureport.utils import chunk_list
@@ -378,6 +394,24 @@ class Poll(SmartModel):
         Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
         Poll.pull_poll_results_task(self)
 
+    @classmethod
+    def mark_results_changed(cls, org_id, flow_uuid):
+        """
+        Records that the results of a flow changed, so its counts are rebuilt by the next pass that reconciles them
+        """
+        cache.set(Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (org_id, flow_uuid), timezone.now(), None)
+
+    def get_counts_stamps(self):
+        """
+        Returns when the results of this poll's flow last changed and when its counts were last rebuilt, either of
+        which may be None
+        """
+        changed_key = Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (self.org_id, self.flow_uuid)
+        rebuilt_key = Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.org_id, self.flow_uuid)
+        stamps = cache.get_many([changed_key, rebuilt_key])
+
+        return stamps.get(changed_key), stamps.get(rebuilt_key)
+
     def rebuild_poll_counts_cache(self):
         org_id = self.org_id
         flow = self.flow_uuid
@@ -427,20 +461,30 @@ class Poll(SmartModel):
 
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                questions = self.questions.all().select_related("flow_result").prefetch_related("response_categories")
+                # taken before any results are read, so results changed while this runs are newer than the rebuild
+                rebuild_started = timezone.now() - Poll.POLL_COUNTS_REBUILT_CLOCK_MARGIN
+
+                # the counts are kept per flow and recorded as rebuilt for the whole flow, so the questions of every
+                # poll on it are counted - a duplicate poll may have questions or categories this one doesn't
+                questions = (
+                    PollQuestion.objects.filter(poll__org_id=org_id, poll__flow_uuid=flow, poll__stopped_syncing=False)
+                    .select_related("flow_result")
+                    .prefetch_related("response_categories")
+                )
                 results_dict = dict()
 
                 if not questions.exists():
                     logger.info("Poll cannot sync without questions for poll #%d on org #%d" % (poll_id, org_id))
+                    self._mark_counts_rebuilt(rebuild_started)
                     return
 
                 for qsn in questions:
                     categories = qsn.response_categories.all().select_related("flow_result_category")
-                    flow_categories_dict = {
-                        elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories
-                    }
-                    results_dict[qsn.flow_result.result_uuid] = dict(
-                        flow_result_id=qsn.flow_result_id, flow_categories=flow_categories_dict
+                    question = results_dict.setdefault(
+                        qsn.flow_result.result_uuid, dict(flow_result_id=qsn.flow_result_id, flow_categories={})
+                    )
+                    question["flow_categories"].update(
+                        {elt.flow_result_category.category.lower(): elt.flow_result_category.id for elt in categories}
                     )
 
                 known_schemes = {elt.scheme.lower() for elt in SchemeSegment.objects.all()}
@@ -458,6 +502,7 @@ class Poll(SmartModel):
                 )
 
                 rebuilt_flow_result_ids = set()
+                replaced_all = True
 
                 for ruleset, question_groups in groupby(groups, key=itemgetter("ruleset_key")):
                     question = results_dict.get(ruleset)
@@ -511,7 +556,9 @@ class Poll(SmartModel):
                             if day and date >= engagement_since and "district:" not in scope and "ward:" not in scope:
                                 engagement_counts[(bool(flow_category_id), scope, day)] += count
 
-                    self._replace_question_counters(r, question["flow_result_id"], stats_counts, engagement_counts)
+                    replaced_all &= self._replace_question_counters(
+                        r, question["flow_result_id"], stats_counts, engagement_counts
+                    )
                     rebuilt_flow_result_ids.add(question["flow_result_id"])
 
                     logger.info(
@@ -522,7 +569,13 @@ class Poll(SmartModel):
                 # questions without any results still need any previous counters removing
                 for question in results_dict.values():
                     if question["flow_result_id"] not in rebuilt_flow_result_ids:
-                        self._replace_question_counters(r, question["flow_result_id"], {}, {})
+                        replaced_all &= self._replace_question_counters(r, question["flow_result_id"], {}, {})
+
+                # a question whose counters couldn't be replaced leaves the counts behind, so the next pass retries
+                if replaced_all:
+                    self._mark_counts_rebuilt(rebuild_started)
+                else:
+                    Poll.mark_results_changed(org_id, flow)
 
                 flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
@@ -541,6 +594,9 @@ class Poll(SmartModel):
                         "Poll responses counts for poll #%d on org #%d: %s responses received out of %s participants polled"
                         % (poll_id, org_id, flow_poll.responded_runs(), flow_poll.runs())
                     )
+
+    def _mark_counts_rebuilt(self, rebuilt_on):
+        cache.set(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.org_id, self.flow_uuid), rebuilt_on, None)
 
     def get_question_uuids(self):
         question_uuids = FlowResult.objects.filter(org=self.org, flow_uuid=self.flow_uuid).values_list(
@@ -683,6 +739,9 @@ class Poll(SmartModel):
         backend = org.get_backend(backend_slug=self.backend.slug)
 
         backend.update_poll_questions(org, self, user)
+
+        # questions or categories may have been added, which the counts of existing results need rebuilding for
+        Poll.mark_results_changed(self.org_id, self.flow_uuid)
 
     def response_percentage(self):
         """
