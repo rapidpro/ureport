@@ -490,7 +490,7 @@ def get_schemes_stats(org):
     return output
 
 
-def get_sign_up_rate(org, time_filter):
+def get_sign_up_rate(org, time_filters):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
@@ -500,29 +500,32 @@ def get_sign_up_rate(org, time_filter):
 
     registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
 
-    interval_dict = defaultdict(int)
+    output_data = {}
+    for time_filter in time_filters:
+        interval_dict = defaultdict(int)
 
-    dates_map = get_time_filter_dates_map(time_filter=time_filter)
-    keys = list(set(dates_map.values()))
+        dates_map = get_time_filter_dates_map(time_filter=time_filter)
+        keys = list(set(dates_map.values()))
 
-    for date_key, date_count in registered_on_counts.items():
-        parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
-            hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
-        )
+        for date_key, date_count in registered_on_counts.items():
+            parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
+                hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
+            )
 
-        if parsed_time > start:
-            key = dates_map.get(str(parsed_time.date()))
+            if parsed_time > start:
+                key = dates_map.get(str(parsed_time.date()))
 
-            interval_dict[key] += date_count
+                interval_dict[key] += date_count
 
-    data = dict()
-    for key in keys:
-        data[key] = interval_dict[key]
+        data = dict()
+        for key in keys:
+            data[key] = interval_dict[key]
 
-    return [dict(name="Sign-Up Rate", data=data)]
+        output_data[time_filter] = [dict(name="Sign-Up Rate", data=data)]
+    return output_data
 
 
-def get_sign_up_rate_location(org, time_filter):
+def get_sign_up_rate_location(org, time_filters):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
@@ -534,35 +537,35 @@ def get_sign_up_rate_location(org, time_filter):
 
     top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
 
-    dates_map = get_time_filter_dates_map(time_filter=time_filter)
-    keys = list(set(dates_map.values()))
+    output_data = {time_filter: [] for time_filter in time_filters}
+    for time_filter in time_filters:
+        dates_map = get_time_filter_dates_map(time_filter=time_filter)
+        keys = list(set(dates_map.values()))
 
-    output_data = []
+        for osm_id, name in top_boundaries.items():
+            interval_dict = defaultdict(int)
+            for date_key, date_count in registered_on_counts.items():
+                if date_key.endswith(f":{osm_id.upper()}"):
+                    date_key = date_key[:10]
+                else:
+                    continue
 
-    for osm_id, name in top_boundaries.items():
-        interval_dict = defaultdict(int)
-        for date_key, date_count in registered_on_counts.items():
-            if date_key.endswith(f":{osm_id.upper()}"):
-                date_key = date_key[:10]
-            else:
-                continue
+                parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
+                    hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
+                )
 
-            parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
-                hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
-            )
+                if parsed_time > start:
+                    key = dates_map.get(str(parsed_time.date()))
+                    interval_dict[key] += date_count
 
-            if parsed_time > start:
-                key = dates_map.get(str(parsed_time.date()))
-                interval_dict[key] += date_count
-
-        data = dict()
-        for key in keys:
-            data[key] = interval_dict[key]
-        output_data.append(dict(name=name, osm_id=osm_id, data=data))
+            data = dict()
+            for key in keys:
+                data[key] = interval_dict[key]
+            output_data[time_filter].append(dict(name=name, osm_id=osm_id, data=data))
     return output_data
 
 
-def get_sign_up_rate_gender(org, time_filter):
+def get_sign_up_rate_gender(org, time_filters):
     from ureport.stats.models import GenderSegment
 
     now = timezone.now()
@@ -580,36 +583,37 @@ def get_sign_up_rate_gender(org, time_filter):
     if not org.get_config("common.has_extra_gender"):
         genders = genders.exclude(gender="O")
 
-    genders = genders.values("gender", "id")
+    genders = list(genders.values("gender", "id"))
 
-    dates_map = get_time_filter_dates_map(time_filter=time_filter)
-    keys = list(set(dates_map.values()))
-    output_data = []
+    output_data = {time_filter: [] for time_filter in time_filters}
+    for time_filter in time_filters:
+        dates_map = get_time_filter_dates_map(time_filter=time_filter)
+        keys = list(set(dates_map.values()))
 
-    for gender in genders:
-        interval_dict = defaultdict(int)
-        for date_key, date_count in registered_on_counts.items():
-            if date_key.endswith(f":{gender['gender'].lower()}"):
-                date_key = date_key[:-2]
-            else:
-                continue
+        for gender in genders:
+            interval_dict = defaultdict(int)
+            for date_key, date_count in registered_on_counts.items():
+                if date_key.endswith(f":{gender['gender'].lower()}"):
+                    date_key = date_key[:-2]
+                else:
+                    continue
 
-            parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
-                hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
-            )
+                parsed_time = datetime.strptime(date_key, "%Y-%m-%d").replace(
+                    hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
+                )
 
-            if parsed_time > start:
-                key = dates_map.get(str(parsed_time.date()))
-                interval_dict[key] += date_count
+                if parsed_time > start:
+                    key = dates_map.get(str(parsed_time.date()))
+                    interval_dict[key] += date_count
 
-        data = dict()
-        for key in keys:
-            data[key] = interval_dict[key]
-        output_data.append(dict(name=org_gender_labels.get(gender["gender"]), data=data))
+            data = dict()
+            for key in keys:
+                data[key] = interval_dict[key]
+            output_data[time_filter].append(dict(name=org_gender_labels.get(gender["gender"]), data=data))
     return output_data
 
 
-def get_sign_up_rate_age(org, time_filter):
+def get_sign_up_rate_age(org, time_filters):
     from ureport.stats.models import AgeSegment
 
     now = timezone.now()
@@ -621,69 +625,72 @@ def get_sign_up_rate_age(org, time_filter):
     org_contacts_counts = get_org_contacts_counts(org)
 
     registered_on_counts = {k[16:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_born")}
-    registered_on_counts_by_age = {
-        "0-14": defaultdict(int),
-        "15-19": defaultdict(int),
-        "20-24": defaultdict(int),
-        "25-30": defaultdict(int),
-        "31-34": defaultdict(int),
-        "35+": defaultdict(int),
-    }
 
-    dates_map = get_time_filter_dates_map(time_filter=time_filter)
-    keys = list(set(dates_map.values()))
+    ages = list(AgeSegment.objects.all().values("id", "min_age", "max_age"))
 
-    for date_key, date_count in registered_on_counts.items():
-        date_key_date, date_key_year = date_key.split(":")
-        parsed_time = datetime.strptime(date_key_date, "%Y-%m-%d").replace(
-            hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
-        )
-        if parsed_time < start:
-            continue
+    output_data = {time_filter: [] for time_filter in time_filters}
+    for time_filter in time_filters:
+        registered_on_counts_by_age = {
+            "0-14": defaultdict(int),
+            "15-19": defaultdict(int),
+            "20-24": defaultdict(int),
+            "25-30": defaultdict(int),
+            "31-34": defaultdict(int),
+            "35+": defaultdict(int),
+        }
 
-        date_key_date = dates_map.get(str(parsed_time.date()))
+        dates_map = get_time_filter_dates_map(time_filter=time_filter)
+        keys = list(set(dates_map.values()))
 
-        age = current_year - int(date_key_year)
-        if age > 34:
-            registered_on_counts_by_age["35+"][date_key_date] += date_count
-        elif age > 30:
-            registered_on_counts_by_age["31-34"][date_key_date] += date_count
-        elif age > 24:
-            registered_on_counts_by_age["25-30"][date_key_date] += date_count
-        elif age > 19:
-            registered_on_counts_by_age["20-24"][date_key_date] += date_count
-        elif age > 14:
-            registered_on_counts_by_age["15-19"][date_key_date] += date_count
-        else:
-            registered_on_counts_by_age["0-14"][date_key_date] += date_count
+        for date_key, date_count in registered_on_counts.items():
+            date_key_date, date_key_year = date_key.split(":")
+            parsed_time = datetime.strptime(date_key_date, "%Y-%m-%d").replace(
+                hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
+            )
+            if parsed_time < start:
+                continue
 
-    ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
-    output_data = []
-    for age in ages:
-        if age["min_age"] == 0:
-            data_key = "0-14"
-        elif age["min_age"] == 15:
-            data_key = "15-19"
-        elif age["min_age"] == 20:
-            data_key = "20-24"
-        elif age["min_age"] == 25:
-            data_key = "25-30"
-        elif age["min_age"] == 31:
-            data_key = "31-34"
-        elif age["min_age"] == 35:
-            data_key = "35+"
+            date_key_date = dates_map.get(str(parsed_time.date()))
 
-        age_data = registered_on_counts_by_age[data_key]
-        data = dict()
-        for key in keys:
-            data[key] = age_data[key]
+            age = current_year - int(date_key_year)
+            if age > 34:
+                registered_on_counts_by_age["35+"][date_key_date] += date_count
+            elif age > 30:
+                registered_on_counts_by_age["31-34"][date_key_date] += date_count
+            elif age > 24:
+                registered_on_counts_by_age["25-30"][date_key_date] += date_count
+            elif age > 19:
+                registered_on_counts_by_age["20-24"][date_key_date] += date_count
+            elif age > 14:
+                registered_on_counts_by_age["15-19"][date_key_date] += date_count
+            else:
+                registered_on_counts_by_age["0-14"][date_key_date] += date_count
 
-        output_data.append(dict(name=data_key, data=data))
+        for age in ages:
+            if age["min_age"] == 0:
+                data_key = "0-14"
+            elif age["min_age"] == 15:
+                data_key = "15-19"
+            elif age["min_age"] == 20:
+                data_key = "20-24"
+            elif age["min_age"] == 25:
+                data_key = "25-30"
+            elif age["min_age"] == 31:
+                data_key = "31-34"
+            elif age["min_age"] == 35:
+                data_key = "35+"
+
+            age_data = registered_on_counts_by_age[data_key]
+            data = dict()
+            for key in keys:
+                data[key] = age_data[key]
+
+            output_data[time_filter].append(dict(name=data_key, data=data))
 
     return output_data
 
 
-def get_sign_up_rate_scheme(org, time_filter):
+def get_sign_up_rate_scheme(org, time_filters):
     from ureport.stats.models import SchemeSegment
 
     now = timezone.now()
@@ -696,39 +703,41 @@ def get_sign_up_rate_scheme(org, time_filter):
     registered_on_counts = {k[18:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_scheme")}
 
     schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:] and k[7:] != "ext"]
-    registered_on_counts_by_scheme = {}
 
-    for scheme in schemes:
-        registered_on_counts_by_scheme[scheme] = defaultdict(int)
+    output_data = {time_filter: [] for time_filter in time_filters}
+    for time_filter in time_filters:
+        registered_on_counts_by_scheme = {}
 
-    dates_map = get_time_filter_dates_map(time_filter=time_filter)
-    keys = list(set(dates_map.values()))
-
-    for date_key, date_count in registered_on_counts.items():
-        date_key_date, scheme = date_key.split(":")
-        parsed_time = datetime.strptime(date_key_date, "%Y-%m-%d").replace(
-            hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
-        )
-        if parsed_time < start:
-            continue
-
-        date_key_date = dates_map.get(str(parsed_time.date()))
-
-        if scheme not in registered_on_counts_by_scheme:
+        for scheme in schemes:
             registered_on_counts_by_scheme[scheme] = defaultdict(int)
-        registered_on_counts_by_scheme[scheme][date_key_date] += date_count
 
-    output_data = []
-    for scheme in registered_on_counts_by_scheme.keys():
-        scheme_data = registered_on_counts_by_scheme[scheme]
-        data = dict()
-        for key in keys:
-            data[key] = scheme_data[key]
+        dates_map = get_time_filter_dates_map(time_filter=time_filter)
+        keys = list(set(dates_map.values()))
 
-        name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
-        if not name:
-            continue
-        output_data.append(dict(name=name, data=data))
+        for date_key, date_count in registered_on_counts.items():
+            date_key_date, scheme = date_key.split(":")
+            parsed_time = datetime.strptime(date_key_date, "%Y-%m-%d").replace(
+                hour=0, minute=0, second=0, microsecond=0, tzinfo=tz
+            )
+            if parsed_time < start:
+                continue
+
+            date_key_date = dates_map.get(str(parsed_time.date()))
+
+            if scheme not in registered_on_counts_by_scheme:
+                registered_on_counts_by_scheme[scheme] = defaultdict(int)
+            registered_on_counts_by_scheme[scheme][date_key_date] += date_count
+
+        for scheme in registered_on_counts_by_scheme.keys():
+            scheme_data = registered_on_counts_by_scheme[scheme]
+            data = dict()
+            for key in keys:
+                data[key] = scheme_data[key]
+
+            name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
+            if not name:
+                continue
+            output_data[time_filter].append(dict(name=name, data=data))
 
     return output_data
 

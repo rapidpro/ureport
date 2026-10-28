@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import math
 from datetime import timedelta
 from unittest.mock import call, patch
 
@@ -15,7 +16,6 @@ from ureport.stats.sync import (
     ENGAGEMENT_JOB_TYPE,
     LOCK_BACKOFF,
     PRUNE_JOB_TYPE,
-    REBUILD_BATCH_SIZE,
     REBUILD_JOB_TYPE,
     REBUILD_LOCK_KEY,
     REBUILD_METRIC,
@@ -52,7 +52,7 @@ class RefreshEngagementTest(SyncJobTestMixin, UreportTest):
 
     def test_combos_refreshed_a_batch_at_a_time(self):
         combos = engagement_combos()
-        self.assertEqual(len(combos), 60)
+        self.assertEqual(len(combos), 20)
 
         mock_continue = run_task(refresh_engagement, self.job.id)
 
@@ -64,16 +64,16 @@ class RefreshEngagementTest(SyncJobTestMixin, UreportTest):
         )
         mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
 
-        # the metric leads the call, the cursor position doesn't
+        # the metric leads the call, the cursor position doesn't, and each call covers every time filter
         self.assertEqual(
             self.mock_refresh.call_args_list,
-            [call(self.nigeria, metric, segment, time_filter) for time_filter, segment, metric in combos[:3]],
+            [call(self.nigeria, metric, segment) for segment, metric in combos[:3]],
         )
 
         # the response rate is only derived once the whole product has been refreshed
         self.mock_response_rate.assert_not_called()
 
-        chunks_left = len(combos) // ENGAGEMENT_BATCH_SIZE - 1
+        chunks_left = math.ceil(len(combos) / ENGAGEMENT_BATCH_SIZE) - 1
         run_task(refresh_engagement, self.job.id, times=chunks_left)
 
         # the finished run leaves nothing to resume from, so the next run refreshes it all again
@@ -103,7 +103,7 @@ class RefreshEngagementTest(SyncJobTestMixin, UreportTest):
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={}, progress={"chunks": 1, "combos": 2})
         self.assertEqual(
             self.mock_refresh.call_args_list,
-            [call(self.nigeria, metric, segment, time_filter) for time_filter, segment, metric in combos[-2:]],
+            [call(self.nigeria, metric, segment) for segment, metric in combos[-2:]],
         )
 
     def test_cursor_past_the_end_completes(self):
@@ -119,7 +119,7 @@ class RefreshEngagementTest(SyncJobTestMixin, UreportTest):
         # a release that adds or drops a metric or segment leaves the position pointing at
         # different combinations than it was taken against
         run_task(refresh_engagement, self.job.id, times=2)
-        shorter = engagement_combos()[:30]
+        shorter = engagement_combos()[:10]
 
         with patch("ureport.stats.sync.engagement_combos", return_value=shorter):
             run_task(refresh_engagement, self.job.id)
@@ -270,7 +270,7 @@ class RebuildContactActivityCountsTest(SyncJobTestMixin, UreportTest):
     def test_counters_are_rebuilt_before_what_they_feed(self, mock_recalculate):
         mock_recalculate.return_value = {("a",): 1, ("b",): 2}
         combos = rebuild_combos()
-        self.assertEqual(len(combos), 15)
+        self.assertEqual(len(combos), 5)
 
         # the counter rebuild is a chunk of its own
         mock_continue = run_task(rebuild_contact_activity_counts, self.job.id)
@@ -285,25 +285,26 @@ class RebuildContactActivityCountsTest(SyncJobTestMixin, UreportTest):
         mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
 
         # then the engagement data it feeds, a batch at a time
-        run_task(rebuild_contact_activity_counts, self.job.id)
+        with patch("ureport.stats.sync.REBUILD_BATCH_SIZE", 3):
+            run_task(rebuild_contact_activity_counts, self.job.id)
 
-        self.assertJobState(
-            self.job,
-            cursor={"stage": "engagement", "combo_index": REBUILD_BATCH_SIZE, "combo_count": len(combos)},
-            progress={"chunks": 2, "counters": 2, "combos": REBUILD_BATCH_SIZE},
-        )
-        self.assertEqual(
-            self.mock_refresh.call_args_list,
-            [call(self.nigeria, REBUILD_METRIC, segment, time_filter) for time_filter, segment in combos[:5]],
-        )
+            self.assertJobState(
+                self.job,
+                cursor={"stage": "engagement", "combo_index": 3, "combo_count": len(combos)},
+                progress={"chunks": 2, "counters": 2, "combos": 3},
+            )
+            self.assertEqual(
+                self.mock_refresh.call_args_list,
+                [call(self.nigeria, REBUILD_METRIC, segment) for segment in combos[:3]],
+            )
 
-        run_task(rebuild_contact_activity_counts, self.job.id, times=len(combos) // REBUILD_BATCH_SIZE - 1)
+            run_task(rebuild_contact_activity_counts, self.job.id)
 
         self.assertJobState(
             self.job,
             status=SyncJob.STATUS_COMPLETE,
             cursor={},
-            progress={"chunks": 4, "counters": 2, "combos": len(combos)},
+            progress={"chunks": 3, "counters": 2, "combos": len(combos)},
         )
         self.assertEqual(self.mock_refresh.call_count, len(combos))
 
@@ -455,8 +456,14 @@ class DispatchTest(SyncJobTestMixin, UreportTest):
         mock_engagement, _ = self._dispatch()
         mock_engagement.assert_not_called()
 
+        # including a nudge delayed by the dispatcher's spread
+        make_stale(engagement, seconds_ago=60 * 60 + DISPATCH_SPREAD_SECONDS - 60)
+
+        mock_engagement, _ = self._dispatch()
+        mock_engagement.assert_not_called()
+
         # unless nothing came of it, in which case it is queued afresh
-        make_stale(engagement, seconds_ago=2 * 60 * 60)
+        make_stale(engagement, seconds_ago=60 * 60 + DISPATCH_SPREAD_SECONDS + 60)
 
         mock_engagement, _ = self._dispatch()
         mock_engagement.assert_called_once_with((engagement.id,), queue="slow")

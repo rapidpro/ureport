@@ -21,10 +21,10 @@ REBUILD_JOB_TYPE = "activities-rebuild"
 QUEUE = "slow"
 
 # each of these is a handful of aggregate queries over the org's counters, so a chunk does
-# a few of them rather than the whole product of filters, segments and metrics
+# a few of them rather than the whole product of segments and metrics
 ENGAGEMENT_BATCH_SIZE = 3
 
-# the rebuild's engagement pass only covers one metric, so it can afford wider chunks
+# the rebuild's engagement pass only covers one metric, so a chunk can take all its segments
 REBUILD_BATCH_SIZE = 5
 REBUILD_METRIC = "active-users"
 
@@ -71,23 +71,23 @@ DAILY_INTERVAL = timedelta(hours=20)
 FAILURE_BACKOFF = Backoff(base=DAILY_INTERVAL, cap=timedelta(days=7), max_doublings=4)
 
 # the dispatcher spreads the orgs' runs over this many seconds rather than starting them all
-# at once. It has to stay well under the hour between the dispatcher's passes, so that the
-# delayed nudges have all been claimed by the time the next pass looks at those jobs
-DISPATCH_SPREAD_SECONDS = 60 * 15
+# at once, to flatten the load of the nightly refresh. _recently_nudged trusts a delayed
+# nudge for this long on top of its usual window, so the next pass doesn't queue another.
+DISPATCH_SPREAD_SECONDS = 60 * 30
 
 
 def engagement_combos():
     """
     The engagement data an org's refresh covers, as a deterministic list so that a cursor
-    into it means the same thing to the chunk that resumes from it. A release that changes
-    the metrics or segments changes the list, which is why the cursor carries its length -
-    see _resume_index.
+    into it means the same thing to the chunk that resumes from it. Each combination is
+    refreshed for every time filter at once, as they are all derived from the same counts.
+    A release that changes the metrics or segments changes the list, which is why the
+    cursor carries its length - see _resume_index.
     """
     from .models import PollEngagementDailyCount
 
     return [
-        (time_filter, segment, metric)
-        for time_filter in PollEngagementDailyCount.DATA_TIME_FILTERS
+        (segment, metric)
         for segment in PollEngagementDailyCount.DATA_SEGMENTS
         for metric in PollEngagementDailyCount.DATA_METRICS
     ]
@@ -95,16 +95,12 @@ def engagement_combos():
 
 def rebuild_combos():
     """
-    The engagement data a counter rebuild invalidates, i.e. every segment and time filter of
-    the metric the contact activity counters feed.
+    The engagement data a counter rebuild invalidates, i.e. every segment of the metric the
+    contact activity counters feed, each refreshed for every time filter.
     """
     from .models import PollEngagementDailyCount
 
-    return [
-        (time_filter, segment)
-        for time_filter in PollEngagementDailyCount.DATA_TIME_FILTERS
-        for segment in PollEngagementDailyCount.DATA_SEGMENTS
-    ]
+    return list(PollEngagementDailyCount.DATA_SEGMENTS)
 
 
 def finalize_engagement_refresh(job):
@@ -145,15 +141,9 @@ def refresh_engagement(job):
     index = _resume_index(job.cursor, len(combos))
     batch = combos[index : index + ENGAGEMENT_BATCH_SIZE]
 
-    for time_filter, segment, metric in batch:
-        PollEngagementDailyCount.refresh_engagement_data(org, metric, segment, time_filter)
-        logger.info(
-            "Refreshed engagement data for org #%d, time_filter - %s, segment - %s, metric - %s",
-            org.id,
-            time_filter,
-            segment,
-            metric,
-        )
+    for segment, metric in batch:
+        PollEngagementDailyCount.refresh_engagement_data(org, metric, segment)
+        logger.info("Refreshed engagement data for org #%d, segment - %s, metric - %s", org.id, segment, metric)
 
     index += len(batch)
     done = index >= len(combos)
@@ -245,14 +235,10 @@ def rebuild_contact_activity_counts(job):
     index = _resume_index(cursor, len(combos))
     batch = combos[index : index + REBUILD_BATCH_SIZE]
 
-    for time_filter, segment in batch:
-        PollEngagementDailyCount.refresh_engagement_data(org, REBUILD_METRIC, segment, time_filter)
+    for segment in batch:
+        PollEngagementDailyCount.refresh_engagement_data(org, REBUILD_METRIC, segment)
         logger.info(
-            "Refreshed rebuilt engagement data for org #%d, time_filter - %s, segment - %s, metric - %s",
-            org.id,
-            time_filter,
-            segment,
-            REBUILD_METRIC,
+            "Refreshed rebuilt engagement data for org #%d, segment - %s, metric - %s", org.id, segment, REBUILD_METRIC
         )
 
     index += len(batch)
@@ -360,15 +346,16 @@ def _recently_nudged(job, now):
     means a message was queued for it and hasn't been picked up yet. A job keeps the status
     of its last run until a worker claims the nudge, so in_flight can't see this one - and
     without it the dispatcher would queue another message on every pass until one is. The
-    window is the one in_flight allows a running job, so a nudge is trusted for as long as
-    a chunk of this job may take to start moving.
+    window is the one in_flight allows a running job plus the longest delay the dispatcher
+    gives a nudge, so a nudge is trusted for as long as a chunk of this job may take to
+    start moving once its delay is up.
     """
     if not job.ended_on or not job.modified_on or job.modified_on <= job.ended_on:
         return False
 
     lease_seconds = getattr(JOB_TASKS.get(job.job_type), "lease_seconds", DEFAULT_LEASE_SECONDS)
 
-    return job.modified_on > now - timedelta(seconds=2 * lease_seconds)
+    return job.modified_on > now - timedelta(seconds=2 * lease_seconds + DISPATCH_SPREAD_SECONDS)
 
 
 def _enqueue(job, countdown=None):
