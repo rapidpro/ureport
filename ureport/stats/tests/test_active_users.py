@@ -8,11 +8,12 @@ from unittest.mock import patch
 from django_valkey import get_valkey_connection
 
 from django.core.cache import cache
-from django.core.management import call_command
+from django.core.management import CommandError, call_command
 from django.db import connection
 from django.test import override_settings
 
 from dash.categories.models import Category
+from dash.orgs.models import Org
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
@@ -633,6 +634,56 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual(1, out.count("No contact activity tables, backfilling from results only"))
         self.assertIn(f"org #{self.org.id} (uganda): {len(results)} results", out)
         self.assertIn(f"org #{self.nigeria.id} (nigeria): 0 results", out)
+
+    def test_backfill_command_orgs(self):
+        def run(*args):
+            out, err = StringIO(), StringIO()
+            with frozen_now(NOW):
+                call_command("active_users", "backfill", *args, stdout=out, stderr=err)
+            return out.getvalue(), err.getvalue()
+
+        uganda, nigeria = self.org, self.nigeria
+        self.assertLess(uganda.id, nigeria.id)
+        active = Org.objects.filter(is_active=True).order_by("id")
+
+        # capped, saying where to pick up
+        out, _ = run("--limit", "1")
+        self.assertIn(f"org #{active[0].id} ", out)
+        self.assertNotIn(f"org #{active[1].id} ", out)
+        self.assertIn(f"Stopped after 1 orgs, {active.count() - 1} left - resume with --from-org {active[1].id}", out)
+
+        # resumed
+        out, _ = run("--from-org", str(nigeria.id), "--org", str(uganda.id), "--org", str(nigeria.id))
+        self.assertNotIn(f"org #{uganda.id} ", out)
+        self.assertIn(f"org #{nigeria.id} (nigeria): ", out)
+        self.assertNotIn("Stopped", out)
+
+        # an org that fails doesn't stop the others, and is listed to be run again
+        backfill = active_users.backfill
+
+        def failing(org, **kwargs):
+            if org == uganda:
+                raise ValueError("boom")
+            return backfill(org, **kwargs)
+
+        logs = self.assertLogs("ureport.stats.management.commands.active_users", level="ERROR")
+        with patch("ureport.stats.active_users.backfill", side_effect=failing), logs:
+            with self.assertRaisesMessage(CommandError, f"1 orgs failed, run them again with: --org {uganda.id}"):
+                out, err = StringIO(), StringIO()
+                with frozen_now(NOW):
+                    call_command(
+                        "active_users",
+                        "backfill",
+                        "--org",
+                        str(uganda.id),
+                        "--org",
+                        str(nigeria.id),
+                        stdout=out,
+                        stderr=err,
+                    )
+
+        self.assertIn(f"org #{uganda.id} (uganda) failed: boom", err.getvalue())
+        self.assertIn(f"org #{nigeria.id} (nigeria): ", out.getvalue())
 
     def test_tasks(self):
         active_users.add_results([self.result("c1", datetime(2026, 1, 5, tzinfo=tzone.utc))])

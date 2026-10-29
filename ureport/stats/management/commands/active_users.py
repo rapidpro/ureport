@@ -1,10 +1,13 @@
 import csv
+import logging
 from datetime import date
 
 from django.core.management.base import BaseCommand, CommandError
 
 from dash.orgs.models import Org
 from ureport.stats import active_users
+
+logger = logging.getLogger(__name__)
 
 
 def parse_month(value):
@@ -30,6 +33,8 @@ class Command(BaseCommand):
         backfill.add_argument("--since", type=parse_month, help="First month to add (YYYY-MM), all kept by default")
         backfill.add_argument("--until", type=parse_month, help="Last month to add (YYYY-MM), this month by default")
         backfill.add_argument("--clear", action="store_true", help="Delete the org's sketches first")
+        backfill.add_argument("--from-org", type=int, help="Start at this org id, e.g. to resume an earlier run")
+        backfill.add_argument("--limit", type=int, help="Backfill at most this many orgs")
         backfill.add_argument(
             "--prefix-length",
             type=int,
@@ -61,23 +66,45 @@ class Command(BaseCommand):
             orgs = Org.objects.filter(id__in=org_ids).order_by("id")
         return list(orgs)
 
-    def handle_backfill(self, orgs, since, until, clear, prefix_length, **options):
+    def handle_backfill(self, orgs, since, until, clear, prefix_length, from_org, limit, **options):
         if not active_users.activity_table_exists():
             self.stdout.write("No contact activity tables, backfilling from results only")
 
-        for org in self.get_orgs(orgs):
-            if clear:
-                self.stdout.write(f"Deleted {active_users.clear(org)} sketches of org #{org.id}")
+        todo = [o for o in self.get_orgs(orgs) if from_org is None or o.id >= from_org]
+        if limit is not None:
+            todo, rest = todo[:limit], todo[limit:]
+        else:
+            rest = []
 
-            answers, results = active_users.backfill(
-                org,
-                since=since,
-                until=until,
-                prefix_length=prefix_length,
-                progress=lambda source, part, n: n and self.stdout.write(f"  org #{org.id} {part}: {n} {source}"),
-            )
+        # a backfill only adds to the sketches, so an org that fails is logged and left to be run again
+        failed = []
+        for org in todo:
+            try:
+                if clear:
+                    self.stdout.write(f"Deleted {active_users.clear(org)} sketches of org #{org.id}")
+
+                answers, results = active_users.backfill(
+                    org,
+                    since=since,
+                    until=until,
+                    prefix_length=prefix_length,
+                    progress=lambda source, part, n: n and self.stdout.write(f"  org #{org.id} {part}: {n} {source}"),
+                )
+            except Exception as e:
+                logger.exception("Error backfilling active users of org #%d", org.id)
+                self.stderr.write(f"org #{org.id} ({org.name}) failed: {e}")
+                failed.append(org)
+                continue
+
             from_activities = "" if answers is None else f"{answers} answer months from activity tables, "
             self.stdout.write(f"org #{org.id} ({org.name}): {from_activities}{results} results")
+
+        if rest:
+            self.stdout.write(f"Stopped after {len(todo)} orgs, {len(rest)} left - resume with --from-org {rest[0].id}")
+
+        if failed:
+            ids = " ".join(f"--org {o.id}" for o in failed)
+            raise CommandError(f"{len(failed)} orgs failed, run them again with: {ids}")
 
     def handle_compare(self, orgs, segments, worst, min_count, csv_path, **options):
         segments = segments or active_users.COMPARE_SEGMENTS
