@@ -274,10 +274,7 @@ class ReportersCounter(BaseSquashableCount):
             logger.info("Squash reporters counts already running.")
         else:
             with r.lock(key, timeout=60 * 60):
-                start = time.time()
-                num_sets = cls.squash()
-
-                logger.info("Squashed reporters counts for %d types in %0.3fs" % (num_sets, time.time() - start))
+                cls.squash()
 
     @classmethod
     def get_squash_query(cls, distinct_set: dict) -> tuple:
@@ -323,7 +320,6 @@ class ReportersCounter(BaseSquashableCount):
 
     class Meta:
         indexes = [
-            models.Index(name="contacts_rptrscntr_org_id_idx", fields=["org", "type"]),
             models.Index(name="contacts_rptrscntr_org_typ_cnt", fields=["org", "type", "count"]),
             # for squashing task
             models.Index(name="contacts_rptrscntr_unsquashed", fields=["org", "type"], condition=Q(is_squashed=False)),

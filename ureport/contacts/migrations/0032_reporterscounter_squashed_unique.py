@@ -20,7 +20,7 @@ SELECT "org_id", "type", SUM("count"), TRUE FROM removed GROUP BY "org_id", "typ
 """
 
 
-def merge_squashed(apps, schema_editor):  # pragma: no cover
+def merge_squashed(apps, schema_editor):
     # hold the squash lock so an org's counters can't be rebuilt part way through the merge
     lock = get_valkey_connection().lock(LOCK_KEY, timeout=LOCK_TIMEOUT, blocking_timeout=LOCK_TIMEOUT)
     if not lock.acquire():
@@ -37,13 +37,15 @@ class Migration(migrations.Migration):
     # Squashing upserts each group's single squashed row, which needs a unique index over the squashed rows, so any
     # groups with more than one are merged first. The indexes are built concurrently because the contact triggers
     # write to this table constantly, and each is dropped first so that one left invalid by a failed build doesn't
-    # stop the migration being re-run.
+    # stop the migration being re-run. The plain index on ("org_id", "type") is dropped, as it's covered by the one that
+    # also includes "count".
     #
     # Installations large enough to care can run the merge and the following ahead of the deploy, and fake this
     # migration:
     #
     #   CREATE UNIQUE INDEX CONCURRENTLY "contacts_rptrscntr_squashed" ON contacts_reporterscounter ("org_id", "type") WHERE "is_squashed";
     #   CREATE INDEX CONCURRENTLY "contacts_rptrscntr_unsquashed" ON contacts_reporterscounter ("org_id", "type") WHERE NOT "is_squashed";
+    #   DROP INDEX CONCURRENTLY IF EXISTS "contacts_rptrscntr_org_id_idx";
     #
     atomic = False
 
@@ -53,7 +55,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(merge_squashed, migrations.RunPython.noop),
-        migrations.RunSQL('DROP INDEX CONCURRENTLY IF EXISTS "contacts_rptrscntr_squashed"'),
+        migrations.RunSQL('DROP INDEX CONCURRENTLY IF EXISTS "contacts_rptrscntr_squashed"', migrations.RunSQL.noop),
         migrations.RunSQL(
             sql=(
                 'CREATE UNIQUE INDEX CONCURRENTLY "contacts_rptrscntr_squashed" '
@@ -71,7 +73,7 @@ class Migration(migrations.Migration):
                 ),
             ],
         ),
-        migrations.RunSQL('DROP INDEX CONCURRENTLY IF EXISTS "contacts_rptrscntr_unsquashed"'),
+        migrations.RunSQL('DROP INDEX CONCURRENTLY IF EXISTS "contacts_rptrscntr_unsquashed"', migrations.RunSQL.noop),
         migrations.RunSQL(
             sql=(
                 'CREATE INDEX CONCURRENTLY "contacts_rptrscntr_unsquashed" '
@@ -87,6 +89,16 @@ class Migration(migrations.Migration):
                         name="contacts_rptrscntr_unsquashed",
                     ),
                 ),
+            ],
+        ),
+        migrations.RunSQL(
+            sql='DROP INDEX CONCURRENTLY IF EXISTS "contacts_rptrscntr_org_id_idx"',
+            reverse_sql=(
+                'CREATE INDEX CONCURRENTLY IF NOT EXISTS "contacts_rptrscntr_org_id_idx" '
+                'ON contacts_reporterscounter ("org_id", "type")'
+            ),
+            state_operations=[
+                migrations.RemoveIndex(model_name="reporterscounter", name="contacts_rptrscntr_org_id_idx"),
             ],
         ),
     ]
