@@ -85,10 +85,11 @@ AGE_GENDER_CHUNK_SIZE = 5
 POPULATE_BATCH_SIZE = 1000
 POPULATE_BATCHES_PER_CHUNK = 5
 
-# results of polls are dropped once both the poll's date and its creation are older than
-# this - a poll's date defaults to its flow's, so a new poll on an old flow still gets the
-# full period
+# results of polls whose date is older than this are dropped, unless the poll itself was
+# only created recently - a poll's date defaults to its flow's, so a new poll on an old flow
+# is still synced for a while
 RESULTS_RETENTION = timedelta(days=365)
+NEW_POLL_WINDOW = timedelta(days=30)
 
 # a flow old enough to retire is retired by the end of its next results sync, so that nothing
 # pulled before it is lost - when that was asked for is kept until its counts were rebuilt on
@@ -664,7 +665,7 @@ def prune_poll_results(job):
         Poll.objects.filter(org=org, pk__gt=after_pk)
         .filter(Q(stopped_syncing=False) | (has_results & ~flow_syncing))
         .exclude(poll_date__gte=now - RESULTS_RETENTION)
-        .exclude(created_on__gte=now - RESULTS_RETENTION)
+        .exclude(created_on__gte=now - NEW_POLL_WINDOW)
         .exclude(flow_protected)
     )
     main_poll = Poll.get_main_poll(org)
@@ -699,9 +700,9 @@ def _protected_flow_polls(org, now):
     """
     The polls of an org syncing a flow that is too recent to retire
     """
-    cutoff = now - RESULTS_RETENTION
-
-    return _syncing_flow_polls(org).filter(Q(poll_date__gte=cutoff) | Q(created_on__gte=cutoff))
+    return _syncing_flow_polls(org).filter(
+        Q(poll_date__gte=now - RESULTS_RETENTION) | Q(created_on__gte=now - NEW_POLL_WINDOW)
+    )
 
 
 def _archives_walked(archives_job):
