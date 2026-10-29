@@ -88,7 +88,7 @@ POPULATE_BATCHES_PER_CHUNK = 5
 # results of polls are dropped once both the poll's date and its creation are older than
 # this - a poll's date defaults to its flow's, so a new poll on an old flow still gets the
 # full period
-RESULTS_RETENTION = timedelta(days=90)
+RESULTS_RETENTION = timedelta(days=365)
 
 # a flow old enough to retire is retired by the end of its next results sync, so that nothing
 # pulled before it is lost - when that was asked for is kept until its counts were rebuilt on

@@ -1131,11 +1131,11 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertEqual(reload(self.job).progress, {"cleared": 1, "skipped_retired": 1, "skipped_pulling": 1})
 
     def test_leaves_recent_polls_alone(self):
-        # results are kept for 90 days from the poll's date
-        Poll.objects.filter(id=self.poll.id).update(poll_date=timezone.now() - timedelta(days=91))
-        Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=89))
-        # and for 90 days from its creation, as a new poll's date defaults to its flow's
-        Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=89))
+        # results are kept for a year from the poll's date
+        Poll.objects.filter(id=self.poll.id).update(poll_date=timezone.now() - timedelta(days=366))
+        Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=364))
+        # and for a year from its creation, as a new poll's date defaults to its flow's
+        Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=364))
 
         self.prune()
         self.prune()
