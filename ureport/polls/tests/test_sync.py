@@ -19,6 +19,8 @@ from ureport.polls.sync import (
     ARCHIVES_JOB_TYPE,
     COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
+    FINAL_PULL_KEY,
+    FINAL_PULL_WAIT,
     PRUNE_JOB_TYPE,
     PRUNE_SKIPPED_PROTECTED,
     PRUNE_SKIPPED_RETIRED,
@@ -26,6 +28,7 @@ from ureport.polls.sync import (
     RESULTS_JOB_TYPE,
     RESULTS_LEASE_SECONDS,
     _clear_poll_results,
+    _final_pull_done,
     backfill_age_gender,
     dispatch_org_polls,
     prune_poll_results,
@@ -96,6 +99,7 @@ class PollSyncTestBase(SyncJobTestMixin, UreportTest):
             cache.delete(Poll.ORG_MAIN_POLL_ID % poll.org_id)
             cache.delete(Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (poll.org_id, poll.flow_uuid))
             cache.delete(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (poll.org_id, poll.flow_uuid))
+            cache.delete(FINAL_PULL_KEY % (poll.org_id, poll.flow_uuid))
 
     def get_job(self, job_type=RESULTS_JOB_TYPE, org=None, flow_uuid="uuid-1"):
         return SyncJob.objects.get(org=org or self.nigeria, job_type=job_type, scope=flow_uuid)
@@ -992,6 +996,9 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         self.job = SyncJob.get_or_create_job(self.nigeria, PRUNE_JOB_TYPE)
 
+        # the final pull before a flow is retired has tests of its own
+        self.mock_final_pull = self.start_patch(patch("ureport.polls.sync._final_pull_done", return_value=True))
+
     def prune(self):
         with (
             patch.object(Poll, "rebuild_poll_results_counts"),
@@ -1108,6 +1115,33 @@ class PrunePollResultsTest(PollSyncTestBase):
         # still syncing on results that are half gone
         self.assertEqual(stopped_when_deleting, [True, True])
 
+    def test_waits_for_the_counts_to_be_rebuilt(self):
+        # another rebuild holds the first flow, or one of its questions' counters couldn't be replaced
+        def rebuild(poll):
+            return poll.flow_uuid != "uuid-1"
+
+        with (
+            patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild,
+            patch.object(Poll, "delete_poll_results", autospec=True) as mock_delete,
+        ):
+            mock_rebuild.side_effect = rebuild
+
+            run_task(prune_poll_results, self.job.id)
+
+        # the flow isn't retired on counts that may be missing results, and is left for a later run
+        self.assertEqual([call[0][0].pk for call in mock_delete.call_args_list], [self.second.pk])
+        self.assertEqual(self.stopped(), {self.second.pk})
+        self.assertJobState(self.job, progress={"skipped_rebuilding": 2, "cleared": 1})
+
+    def test_waits_for_the_final_pull(self):
+        self.mock_final_pull.side_effect = lambda org, flow_uuid: flow_uuid != "uuid-1"
+
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [self.second.pk])
+        self.assertEqual(self.stopped(), {self.second.pk})
+        self.assertJobState(self.job, progress={"skipped_pulling": 2, "cleared": 1})
+
     def test_finishes_a_delete_that_was_interrupted(self):
         # the first flow was retired, but its delete didn't get through all of its results
         Poll.objects.filter(flow_uuid="uuid-1").update(stopped_syncing=True)
@@ -1198,6 +1232,7 @@ class PrunePollResultsTest(PollSyncTestBase):
         def rebuild(poll):
             if poll.flow_uuid == "uuid-1":
                 raise ValueError("boom")
+            return True
 
         with (
             patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild,
@@ -1213,6 +1248,46 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         # a poll failing every run is told apart from one that was merely busy
         self.assertJobState(self.job, cursor={"after_pk": self.second.pk}, progress={"cleared": 1, "errors": 2})
+
+
+class FinalPullTest(PollSyncTestBase):
+    def setUp(self):
+        super(FinalPullTest, self).setUp()
+
+        self.results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
+        self.mock_queue = self.start_patch(patch.object(sync_poll_results, "apply_async"))
+
+    def test_pulls_a_flow_once_more_before_it_is_retired(self):
+        end_run(self.results_job, started_on=timezone.now() - timedelta(hours=10))
+
+        # the flow last synced hours ago, so a pull is asked for
+        self.assertFalse(_final_pull_done(self.nigeria, "uuid-1"))
+        self.assertEqual(self.mock_queue.call_count, 1)
+
+        # and until a run that started since then has completed, the flow isn't retired
+        self.assertFalse(_final_pull_done(self.nigeria, "uuid-1"))
+
+        end_run(self.results_job, started_on=timezone.now())
+
+        self.assertTrue(_final_pull_done(self.nigeria, "uuid-1"))
+
+    def test_gives_up_on_a_flow_whose_sync_keeps_failing(self):
+        end_run(self.results_job, status=SyncJob.STATUS_FAILED, started_on=timezone.now(), failures=3)
+
+        self.assertFalse(_final_pull_done(self.nigeria, "uuid-1"))
+        self.assertFalse(_final_pull_done(self.nigeria, "uuid-1"))
+
+        # a flow whose final pull never happens is retired once the wait is over
+        asked_on = timezone.now() - FINAL_PULL_WAIT - timedelta(minutes=1)
+        cache.set(FINAL_PULL_KEY % (self.nigeria.pk, "uuid-1"), asked_on, None)
+
+        self.assertTrue(_final_pull_done(self.nigeria, "uuid-1"))
+
+    def test_rebuild_reports_one_that_did_not_run(self):
+        with held_lock(Poll.POLL_REBUILD_COUNTS_LOCK % (self.nigeria.pk, "uuid-1")):
+            self.assertFalse(self.poll.rebuild_poll_results_counts())
+
+        self.assertTrue(self.poll.rebuild_poll_results_counts())
 
 
 @patch("ureport.polls.sync.POPULATE_BATCH_SIZE", 2)

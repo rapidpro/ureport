@@ -753,7 +753,15 @@ class PollTest(UreportTest):
         self.assertEqual([call[0][0].pk for call in mock_refresh.call_args_list], [poll.pk])
         mock_pull.assert_not_called()
 
-        # but a flow only retired in another org is a different flow there
+        # but once a poll syncs the flow again, it has the flow's results, and another poll
+        # on it carries on from there
+        Poll.objects.filter(id=poll.id).update(created_on=long_ago)
+        poll, mock_refresh, mock_pull = set_flow("uuid-25")
+
+        mock_refresh.assert_not_called()
+        self.assertEqual([call[0][0].pk for call in mock_pull.call_args_list], [poll.pk])
+
+        # and a flow only retired in another org is a different flow there
         poll, mock_refresh, mock_pull = set_flow("uuid-26")
 
         mock_refresh.assert_not_called()

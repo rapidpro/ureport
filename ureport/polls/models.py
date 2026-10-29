@@ -427,6 +427,11 @@ class Poll(SmartModel):
                 flow_poll.update_questions_results_cache()
 
     def rebuild_poll_results_counts(self):
+        """
+        Rebuilds the counts of this poll's flow from its results. Returns whether every one of its questions' counts
+        was replaced - not when another rebuild of the flow was already running, or a question's counters were left
+        behind for a later pass to retry
+        """
         import time
 
         from ureport.stats.models import AgeSegment, SchemeSegment
@@ -450,7 +455,7 @@ class Poll(SmartModel):
                     )
 
             logger.info("Poll stopped regenerating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
-            return
+            return True
 
         r = get_valkey_connection()
 
@@ -458,6 +463,7 @@ class Poll(SmartModel):
 
         if r.get(key):
             logger.info("Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id))
+            return False
 
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
@@ -476,7 +482,7 @@ class Poll(SmartModel):
                 if not questions.exists():
                     logger.info("Poll cannot sync without questions for poll #%d on org #%d" % (poll_id, org_id))
                     self._mark_counts_rebuilt(rebuild_started)
-                    return
+                    return True
 
                 for qsn in questions:
                     categories = qsn.response_categories.all().select_related("flow_result_category")
@@ -594,6 +600,8 @@ class Poll(SmartModel):
                         "Poll responses counts for poll #%d on org #%d: %s responses received out of %s participants polled"
                         % (poll_id, org_id, flow_poll.responded_runs(), flow_poll.runs())
                     )
+
+                return replaced_all
 
     def _mark_counts_rebuilt(self, rebuilt_on):
         cache.set(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.org_id, self.flow_uuid), rebuilt_on, None)
