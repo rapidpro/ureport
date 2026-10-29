@@ -2,15 +2,23 @@
 
 from datetime import timedelta
 
+from django_valkey import get_valkey_connection
 from mock import patch
 
+from django.conf import settings
 from django.utils import timezone
 
 from dash.orgs.models import TaskState
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
-from ureport.contacts.tasks import check_contacts_count_mismatch, pull_contacts, update_org_contact_count
+from ureport.contacts.tasks import (
+    check_contacts_count_mismatch,
+    pull_contacts,
+    squash_reporters_counts,
+    update_org_contact_count,
+)
 from ureport.locations.models import Boundary
 from ureport.syncjobs.models import SyncJob
+from ureport.syncjobs.tests.base import held_lock
 from ureport.tests import UreportTest
 from ureport.utils import json_date_to_datetime
 
@@ -304,10 +312,67 @@ class ContactTest(UreportTest):
 
         self.assertTrue(counter_type_a.count, 5)
 
+    def test_squash_reporters_resumes_from_last_squashed(self):
+        r = get_valkey_connection()
+        r.delete(ReportersCounter.LAST_SQUASHED_ID_KEY)
+        self.addCleanup(r.delete, ReportersCounter.LAST_SQUASHED_ID_KEY)
+
+        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=2)
+        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=3)
+        last_counter = ReportersCounter.objects.create(org=self.uganda, type="type-a", count=4)
+
+        ReportersCounter.squash_counts()
+
+        # it records the newest row it started from, not the rows its own squashing added
+        self.assertEqual(ReportersCounter.objects.count(), 2)
+        self.assertEqual(int(r.get(ReportersCounter.LAST_SQUASHED_ID_KEY)), last_counter.id)
+
+        # rows added since are squashed with the rows before them, and only for their own org and type
+        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=-1)
+        uganda_counter = ReportersCounter.objects.get(org=self.uganda, type="type-a")
+
+        ReportersCounter.squash_counts()
+
+        self.assertEqual(ReportersCounter.objects.count(), 2)
+        self.assertEqual(ReportersCounter.objects.get(org=self.nigeria, type="type-a").count, 4)
+        self.assertTrue(ReportersCounter.objects.filter(pk=uganda_counter.pk, count=4).exists())
+
+    def test_squash_reporters_with_no_counters(self):
+        r = get_valkey_connection()
+        r.delete(ReportersCounter.LAST_SQUASHED_ID_KEY)
+
+        ReportersCounter.squash_counts()
+
+        self.assertIsNone(r.get(ReportersCounter.LAST_SQUASHED_ID_KEY))
+
+    def test_recalculate_reporters_stats_waits_for_squashing(self):
+        Contact.objects.create(uuid="C-007", org=self.nigeria, gender="M")
+        ReportersCounter.objects.create(org=self.nigeria, type="gender:m", count=5)
+
+        with patch.object(ReportersCounter, "REPLACE_COUNTS_LOCK_TIMEOUT", 1):
+            with held_lock(ReportersCounter.COUNTS_SQUASH_LOCK):
+                self.assertIsNone(Contact.recalculate_reporters_stats(self.nigeria))
+
+        # the counters are left as they were
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria, ["gender:m"]), {"gender:m": 6})
+
+        self.assertIsNotNone(Contact.recalculate_reporters_stats(self.nigeria))
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria, ["gender:m"]), {"gender:m": 1})
+        self.assertIsNone(get_valkey_connection().get(ReportersCounter.COUNTS_SQUASH_LOCK))
+
 
 class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
+
+    @patch("ureport.contacts.models.ReportersCounter.squash_counts")
+    def test_squash_reporters_counts(self, mock_squash_counts):
+        squash_reporters_counts()
+
+        mock_squash_counts.assert_called_once_with()
+
+        entry = settings.CELERY_BEAT_SCHEDULE["reporters_counts_squash"]
+        self.assertEqual(entry["task"], squash_reporters_counts.name)
 
     @patch("valkey.client.StrictValkey.get")
     @patch("django.core.cache.cache.set")

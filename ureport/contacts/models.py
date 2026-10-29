@@ -7,7 +7,7 @@ from datetime import timedelta
 
 from django_valkey import get_valkey_connection
 
-from django.db import connection, models
+from django.db import connection, models, transaction
 from django.db.models import Count
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -123,8 +123,10 @@ class Contact(models.Model):
 
     @classmethod
     def recalculate_reporters_stats(cls, org):
-        ReportersCounter.objects.filter(org_id=org.id).delete()
-
+        """
+        Replaces the org's reporter counters with ones recalculated from its contacts. Returns the counts, or None if
+        squashing held on to its lock and the counters were left as they are
+        """
         all_contacts = Contact.objects.filter(org=org).order_by("id").iterator(chunk_size=1000)
         start = time.time()
 
@@ -144,7 +146,23 @@ class Contact(models.Model):
             count = counters_dict[counter_tuple]
             counters_to_insert.append(ReportersCounter(org_id=org_id, type=counter_type, count=count))
 
-        ReportersCounter.objects.bulk_create(counters_to_insert, batch_size=1000)
+        # replace them in one transaction so a failure leaves the existing counters in place, holding the squash lock
+        # so squashing can't replace rows the delete would then miss
+        lock = get_valkey_connection().lock(
+            ReportersCounter.COUNTS_SQUASH_LOCK,
+            timeout=ReportersCounter.REPLACE_COUNTS_LOCK_TIMEOUT,
+            blocking_timeout=ReportersCounter.REPLACE_COUNTS_LOCK_TIMEOUT,
+        )
+        if not lock.acquire():
+            logger.error("Couldn't acquire the reporters squash lock to replace counters for org #%d" % org.id)
+            return None
+
+        try:
+            with transaction.atomic():
+                ReportersCounter.objects.filter(org_id=org.id).delete()
+                ReportersCounter.objects.bulk_create(counters_to_insert, batch_size=1000)
+        finally:
+            lock.release()
 
         logger.info(
             "Finished rebuilding contacts reporters counters (aggregated statistics for contacts) for org #%d in %ds, inserted %d counter objects for %s contacts"
@@ -229,6 +247,9 @@ class ReportersCounter(models.Model):
     COUNTS_SQUASH_LOCK = "org-reporters-counts-squash-lock"
     LAST_SQUASHED_ID_KEY = "org-reporters-last-squashed-id"
 
+    # how long a rebuild waits for, and then holds, the squash lock while it replaces an org's counters
+    REPLACE_COUNTS_LOCK_TIMEOUT = 60 * 10
+
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="reporters_counters")
 
     type = models.CharField(max_length=255)
@@ -253,9 +274,15 @@ class ReportersCounter(models.Model):
                 start = time.time()
                 squash_count = 0
 
+                # bound this pass by the newest row now, so rows added while it runs are left for the next one
+                max_id = ReportersCounter.objects.order_by("-id").values_list("id", flat=True).first()
+                if not max_id:
+                    return
+
                 if last_squash < 1:
                     counters = (
-                        ReportersCounter.objects.values("org_id", "type")
+                        ReportersCounter.objects.filter(id__lte=max_id)
+                        .values("org_id", "type")
                         .annotate(Count("id"))
                         .filter(id__count__gt=1)
                         .order_by("org_id", "type")
@@ -263,7 +290,7 @@ class ReportersCounter(models.Model):
 
                 else:
                     counters = (
-                        ReportersCounter.objects.filter(id__gt=last_squash)
+                        ReportersCounter.objects.filter(id__gt=last_squash, id__lte=max_id)
                         .values("org_id", "type")
                         .order_by("org_id", "type")
                         .distinct("org_id", "type")
@@ -287,12 +314,9 @@ class ReportersCounter(models.Model):
                             % (squash_count * 100 / total_counters, time.time() - start)
                         )
 
-                # insert our new top squashed id
-                max_id = ReportersCounter.objects.all().order_by("-id").first()
-                if max_id:
-                    r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id.id)
+                r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id)
 
-                logger.info("Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start))
+                logger.info("Squashed reporters counts for %d types in %0.3fs" % (squash_count, time.time() - start))
 
     @classmethod
     def get_counts(cls, org, types=None):

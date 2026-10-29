@@ -130,6 +130,17 @@ class RebuildReportersCountsTest(MaintenanceTest):
         mock_recalculate.assert_called_once_with(self.nigeria)
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, progress={"lock_backoffs": 1, "chunks": 1})
 
+    @patch("ureport.contacts.maintenance.update_cache_org_contact_counts")
+    @patch("ureport.contacts.models.Contact.recalculate_reporters_stats")
+    def test_backs_off_while_squashing_holds_its_lock(self, mock_recalculate, mock_update_counts):
+        mock_recalculate.return_value = None
+
+        mock_continue = self._run()
+
+        mock_continue.assert_called_once_with((self.job.id,), queue=QUEUE, countdown=LOCK_BACKOFF)
+        mock_update_counts.assert_not_called()
+        self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, progress={"lock_backoffs": 1})
+
     @patch("ureport.contacts.models.Contact.recalculate_reporters_stats")
     def test_chunk_holds_the_lock_beyond_its_lease(self, mock_recalculate):
         ttls = []
