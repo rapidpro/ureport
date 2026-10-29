@@ -1,3 +1,6 @@
+## v1.8.18 (2026-10-29)
+ * Squash reporter counters on a schedule
+
 ## v1.8.17 (2026-10-29)
  * Make the PollStats removal migration follow the squashed counts migration
  * Renumber the PollStats removal migration after the squashed counts migration
