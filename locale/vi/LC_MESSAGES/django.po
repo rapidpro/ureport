@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 13:20+0000\n"
+"POT-Creation-Date: 2026-10-27 15:35+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1954,9 +1954,6 @@ msgstr "Nếu bạn cần bao gồm một số mã HTML tùy chỉnh trong trang
 msgid "Other language sites links"
 msgstr "Liên kết đến các trang ngôn ngữ khác"
 
-msgid "Whether this row was created by squashing"
-msgstr "Hàng này có được tạo bằng cách gộp (squash) hay không"
-
 msgid "90 Days"
 msgstr "90 ngày"
 
@@ -2043,6 +2040,9 @@ msgstr "Các quốc gia có Ủy ban Quốc gia của UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Tây và Trung Phi"
+
+#~ msgid "Whether this row was created by squashing"
+#~ msgstr "Hàng này có được tạo bằng cách gộp (squash) hay không"
 
 #~ msgid "Error"
 #~ msgstr "Lỗi"

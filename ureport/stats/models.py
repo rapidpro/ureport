@@ -4,7 +4,7 @@ from collections import defaultdict
 from datetime import timedelta
 
 from django.core.cache import cache
-from django.db import connection, models
+from django.db import models
 from django.db.models import IntegerField, JSONField, Q, Sum
 from django.db.models.functions import Cast
 from django.utils import timezone, translation
@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from dash.orgs.models import Org
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
-from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
+from ureport.polls.models import Poll, PollQuestion
 from ureport.utils.counts import BaseDailyCount, BaseScopedCount
 from ureport.utils.models import SquashableModel
 
@@ -43,175 +43,6 @@ class SchemeSegment(models.Model):
     SCHEME_DISPLAY = {"tel": "SMS", "twitterid": "TWITTER", "ext": None, "fcm": "U-REPORT APP"}
 
     scheme = models.CharField(max_length=16, unique=True)
-
-
-class PollStats(models.Model):
-    id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
-
-    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats")
-
-    question = models.ForeignKey(PollQuestion, null=True, on_delete=models.SET_NULL)
-
-    flow_result = models.ForeignKey(FlowResult, null=True, on_delete=models.SET_NULL)
-
-    category = models.ForeignKey(PollResponseCategory, null=True, on_delete=models.SET_NULL)
-
-    flow_result_category = models.ForeignKey(FlowResultCategory, null=True, on_delete=models.SET_NULL)
-
-    age_segment = models.ForeignKey(AgeSegment, null=True, on_delete=models.SET_NULL)
-
-    gender_segment = models.ForeignKey(GenderSegment, null=True, on_delete=models.SET_NULL)
-
-    scheme_segment = models.ForeignKey(SchemeSegment, null=True, on_delete=models.SET_NULL)
-
-    location = models.ForeignKey(Boundary, null=True, on_delete=models.SET_NULL)
-
-    date = models.DateTimeField(null=True)
-
-    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
-
-    is_squashed = models.BooleanField(null=True, help_text=_("Whether this row was created by squashing"))
-
-    @classmethod
-    def squash(cls):
-        start = time.time()
-        num_sets = 0
-
-        stats_objs = (
-            cls.objects.exclude(is_squashed=True)
-            .exclude(date=None)
-            .order_by(
-                "org_id",
-                "question_id",
-                "flow_result_id",
-                "category_id",
-                "flow_result_category_id",
-                "age_segment_id",
-                "gender_segment_id",
-                "scheme_segment_id",
-                "location_id",
-                "date",
-            )
-            .distinct(
-                "org_id",
-                "question_id",
-                "flow_result_id",
-                "category_id",
-                "flow_result_category_id",
-                "age_segment_id",
-                "gender_segment_id",
-                "scheme_segment_id",
-                "location_id",
-                "date",
-            )[:30000]
-        )
-
-        for distinct_set in stats_objs:
-            with connection.cursor() as cursor:
-                where_sql = ""
-                if distinct_set.org_id is not None:
-                    where_sql += '"org_id" = %s AND ' % distinct_set.org_id
-                else:
-                    where_sql += '"org_id" IS NULL AND'
-
-                if distinct_set.question_id is not None:
-                    where_sql += '"question_id" = %s AND' % distinct_set.question_id
-                else:
-                    where_sql += '"question_id" IS NULL AND'
-
-                if distinct_set.flow_result_id is not None:
-                    where_sql += '"flow_result_id" = %s AND' % distinct_set.flow_result_id
-                else:
-                    where_sql += '"flow_result_id" IS NULL AND'
-
-                if distinct_set.category_id is not None:
-                    where_sql += '"category_id" = %s AND' % distinct_set.category_id
-                else:
-                    where_sql += '"category_id" IS NULL AND'
-
-                if distinct_set.flow_result_category_id is not None:
-                    where_sql += '"flow_result_category_id" = %s AND' % distinct_set.flow_result_category_id
-                else:
-                    where_sql += '"flow_result_category_id" IS NULL AND'
-
-                if distinct_set.age_segment_id is not None:
-                    where_sql += '"age_segment_id" = %s AND' % distinct_set.age_segment_id
-                else:
-                    where_sql += '"age_segment_id" IS NULL AND'
-
-                if distinct_set.gender_segment_id is not None:
-                    where_sql += '"gender_segment_id" = %s AND' % distinct_set.gender_segment_id
-                else:
-                    where_sql += '"gender_segment_id" IS NULL AND'
-
-                if distinct_set.scheme_segment_id is not None:
-                    where_sql += '"scheme_segment_id" = %s AND' % distinct_set.scheme_segment_id
-                else:
-                    where_sql += '"scheme_segment_id" IS NULL AND'
-
-                if distinct_set.location_id is not None:
-                    where_sql += '"location_id" = %s AND' % distinct_set.location_id
-                else:
-                    where_sql += '"location_id" IS NULL AND'
-
-                where_sql += """
-                "date" = date_trunc('day', TIMESTAMP '%s')::TIMESTAMP
-                """ % str(distinct_set.date)
-
-                sql = """
-                WITH deleted as (
-                  DELETE FROM stats_pollstats WHERE "id" IN (
-                    SELECT "id" FROM stats_pollstats
-                      WHERE %(where_sql)s
-                      LIMIT 10000
-                  ) RETURNING "count"
-                )
-                INSERT INTO stats_pollstats("org_id", "question_id", "flow_result_id", "category_id", "flow_result_category_id", "age_segment_id", "gender_segment_id", "scheme_segment_id", "location_id", "date", "count", "is_squashed")
-                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
-                """ % {"where_sql": where_sql}
-
-                params = (
-                    distinct_set.org_id,
-                    distinct_set.question_id,
-                    distinct_set.flow_result_id,
-                    distinct_set.category_id,
-                    distinct_set.flow_result_category_id,
-                    distinct_set.age_segment_id,
-                    distinct_set.gender_segment_id,
-                    distinct_set.scheme_segment_id,
-                    distinct_set.location_id,
-                    str(distinct_set.date),
-                )
-
-                cursor.execute(sql, params)
-
-            num_sets += 1
-
-        time_taken = time.time() - start
-
-        logger.info("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
-
-    @classmethod
-    def _log_stats_comparison(cls, model_name, old_stats_dict, new_stats_dict, segment_type, segment_id, org_id):
-        """Log comparison results between old PollStats and new PollStatsCounter."""
-        if new_stats_dict != old_stats_dict:
-            logger.info(
-                "%s CHECK: Mismatch in results stats for %s segment %s on org #%d, old stats: %s, new stats: %s",
-                model_name,
-                segment_type,
-                segment_id,
-                org_id,
-                old_stats_dict,
-                new_stats_dict,
-            )
-        else:
-            logger.info(
-                "%s CHECK: Match in results stats for %s segment %s on org #%d",
-                model_name,
-                segment_type,
-                segment_id,
-                org_id,
-            )
 
 
 class PollStatsCounter(BaseScopedCount):

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 13:20+0000\n"
+"POT-Creation-Date: 2026-10-27 15:35+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1975,9 +1975,6 @@ msgstr "Чи потрібно включити деякі користуваць
 msgid "Other language sites links"
 msgstr "Посилання на іншомовні версії сайту"
 
-msgid "Whether this row was created by squashing"
-msgstr "Чи створено цей рядок шляхом стискання"
-
 msgid "90 Days"
 msgstr "90 днів"
 
@@ -2064,6 +2061,9 @@ msgstr "Країни національних комітетів ЮНІСЕФ"
 
 msgid "West and Central Africa"
 msgstr "Західна та Центральна Африка"
+
+#~ msgid "Whether this row was created by squashing"
+#~ msgstr "Чи створено цей рядок шляхом стискання"
 
 #~ msgid "Error"
 #~ msgstr "Помилка"

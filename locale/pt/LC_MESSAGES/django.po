@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 13:20+0000\n"
+"POT-Creation-Date: 2026-10-27 15:35+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Rodolfo Pedro, 2023\n"
 "Language-Team: Portuguese (https://app.transifex.com/rapidpro/teams/226/pt/)\n"
@@ -1972,9 +1972,6 @@ msgstr "Se você precisar incluir alguns códigos HTML personalizados nas suas p
 msgid "Other language sites links"
 msgstr "Ligações para outros sítios linguísticos"
 
-msgid "Whether this row was created by squashing"
-msgstr "Se esta linha foi criada por esmagamento"
-
 msgid "90 Days"
 msgstr "90 dias"
 
@@ -2061,6 +2058,9 @@ msgstr "Países dos Comités Nacionais da UNICEF"
 
 msgid "West and Central Africa"
 msgstr "África Ocidental e Central"
+
+#~ msgid "Whether this row was created by squashing"
+#~ msgstr "Se esta linha foi criada por esmagamento"
 
 #~ msgid "Error"
 #~ msgstr "Erro"

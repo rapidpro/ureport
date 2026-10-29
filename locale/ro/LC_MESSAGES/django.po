@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 13:20+0000\n"
+"POT-Creation-Date: 2026-10-27 15:35+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1970,9 +1970,6 @@ msgstr "Dacă ai nevoie să incluzi unele coduri HTML personalizate în paginile
 msgid "Other language sites links"
 msgstr "Linkuri către site-urile în alte limbi"
 
-msgid "Whether this row was created by squashing"
-msgstr "Dacă acest rând a fost creat prin comasare"
-
 msgid "90 Days"
 msgstr "90 zile"
 
@@ -2059,6 +2056,9 @@ msgstr "Țările Comitetelor Naționale UNICEF"
 
 msgid "West and Central Africa"
 msgstr "Africa de Vest și Centrală"
+
+#~ msgid "Whether this row was created by squashing"
+#~ msgstr "Dacă acest rând a fost creat prin comasare"
 
 #~ msgid "Error"
 #~ msgstr "Eroare"
