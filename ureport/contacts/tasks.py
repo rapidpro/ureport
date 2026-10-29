@@ -37,6 +37,11 @@ def rebuild_contacts_counts(org_id=None):
     return enqueue_reporters_rebuilds(org_id=org_id)
 
 
+@app.task(name="contacts.squash_reporters_counts")
+def squash_reporters_counts():
+    ReportersCounter.squash_counts()
+
+
 @app.task(name="contacts.check_contacts_count_mismatch")
 def check_contacts_count_mismatch():
     r = get_valkey_connection()

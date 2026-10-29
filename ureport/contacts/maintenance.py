@@ -113,7 +113,10 @@ def rebuild_reporters_counts(job):
             logger.info("Contact pull lock held for org #%d, backing off rebuild", org.pk)
             return job.back_off(LOCK_BACKOFF, lock_backoffs=1)
 
-        Contact.recalculate_reporters_stats(org)
+        if Contact.recalculate_reporters_stats(org) is None:
+            logger.info("Reporters squash lock held for org #%d, backing off rebuild", org.pk)
+            return job.back_off(LOCK_BACKOFF, lock_backoffs=1)
+
         update_cache_org_contact_counts(org)
         job.checkpoint(progress=job.add_progress(chunks=1))
 
