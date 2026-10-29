@@ -20,6 +20,7 @@ from ureport.polls.sync import (
     COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
     PRUNE_JOB_TYPE,
+    PRUNE_SKIPPED_PROTECTED,
     PRUNE_SKIPPED_RETIRED,
     RATE_LIMITED_BACKOFF,
     RESULTS_JOB_TYPE,
@@ -1130,6 +1131,31 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         self.assertEqual(pruned, [])
         mock_continue.assert_not_called()
+
+    def test_leaves_a_flow_shared_with_a_recent_poll_alone(self):
+        recent = self.create_poll(self.nigeria, "Poll 1 recent", "uuid-1", self.education_nigeria, self.admin)
+
+        # retiring the old polls of the flow would retire the recent one with them
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [self.second.pk, self.third.pk])
+        self.assertEqual(self.stopped(), {self.second.pk, self.third.pk})
+
+        # nor is the flow retired by a walk that picked it before the recent poll came along
+        self.assertEqual(_clear_poll_results(self.nigeria, self.poll), PRUNE_SKIPPED_PROTECTED)
+        self.assertFalse(Poll.objects.get(id=recent.id).stopped_syncing)
+
+        # once the recent poll is old too, the next run retires the whole flow
+        self.prune()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
+
+        long_ago = timezone.now() - timedelta(days=91)
+        Poll.objects.filter(id=recent.id).update(poll_date=long_ago, created_on=long_ago)
+
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [self.poll.pk])
+        self.assertEqual(self.stopped(), {poll.pk for poll in self.old_polls} | {recent.pk})
 
     def test_leaves_the_results_of_a_reused_flow_alone(self):
         # the first flow was retired long ago, and a new poll on it is syncing its results again

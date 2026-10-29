@@ -97,6 +97,7 @@ PRUNE_CLEARED = "cleared"
 PRUNE_FINISHED = "finished"
 PRUNE_SKIPPED_SYNCING = "skipped_syncing"
 PRUNE_SKIPPED_RETIRED = "skipped_retired"
+PRUNE_SKIPPED_PROTECTED = "skipped_protected"
 PRUNE_ERRORED = "errors"
 
 
@@ -551,8 +552,10 @@ def prune_poll_results(job):
     """
     Retires a bounded number of an org's polls that are too old to keep syncing: their
     counts are rebuilt one last time, their results deleted, and every poll on the flow
-    marked as no longer syncing. Polls whose flow is still being synced are stepped over
-    rather than waited for, and reconsidered by a later run. A retired poll whose flow still
+    marked as no longer syncing. As that retires the whole flow, a flow is only retired once
+    none of the polls syncing it is still within the retention period. Polls whose flow is
+    still being synced are stepped over rather than waited for, and reconsidered by a later
+    run. A retired poll whose flow still
     has results, and no other poll still syncing it, is one whose delete failed or was
     interrupted, and is walked again so that the delete is finished.
     """
@@ -570,12 +573,14 @@ def prune_poll_results(job):
 
     has_results = Exists(PollResult.objects.filter(org_id=org.pk, flow=OuterRef("flow_uuid")))
     flow_syncing = Exists(_syncing_flow_polls(org).filter(flow_uuid=OuterRef("flow_uuid")))
+    flow_protected = Exists(_protected_flow_polls(org, now).filter(flow_uuid=OuterRef("flow_uuid")))
 
     polls = list(
         Poll.objects.filter(org=org, pk__gt=after_pk)
         .filter(Q(stopped_syncing=False) | (has_results & ~flow_syncing))
         .exclude(poll_date__gte=now - RESULTS_RETENTION)
         .exclude(created_on__gte=now - RESULTS_RETENTION)
+        .exclude(flow_protected)
         .order_by("pk")[:PRUNE_CHUNK_SIZE]
     )
     if not polls:
@@ -600,6 +605,15 @@ def _syncing_flow_polls(org):
     return Poll.objects.filter(org=org, is_active=True, stopped_syncing=False)
 
 
+def _protected_flow_polls(org, now):
+    """
+    The polls of an org syncing a flow that is too recent to retire
+    """
+    cutoff = now - RESULTS_RETENTION
+
+    return _syncing_flow_polls(org).filter(Q(poll_date__gte=cutoff) | Q(created_on__gte=cutoff))
+
+
 def _clear_poll_results(org, poll):
     """
     Retires one poll, returning what became of it. A flow still being synced is left alone
@@ -607,7 +621,7 @@ def _clear_poll_results(org, poll):
     poll already retired, which is how the duplicated polls of a flow are recognised now
     that a chunk can't carry a set of them forward in memory. A retired flow that still has
     results only has its delete finished, unless a newer poll on the flow is syncing it again
-    and the results are that poll's.
+    and the results are that poll's. A flow that a recent poll is syncing isn't retired.
     """
     from ureport.polls.models import Poll, PollResult
 
@@ -655,6 +669,14 @@ def _clear_poll_results(org, poll):
                 return PRUNE_ERRORED
 
             return PRUNE_FINISHED
+
+        # rechecked here as a poll may have been published on the flow since the walk
+        if _protected_flow_polls(org, timezone.now()).filter(flow_uuid=poll.flow_uuid).exists():
+            logger.info(
+                "Skipping clearing old results for poll #%d on org #%d as a recent poll shares its flow"
+                % (poll.pk, org.pk)
+            )
+            return PRUNE_SKIPPED_PROTECTED
 
         try:
             # one last stats rebuild for the poll, while its results are still there
