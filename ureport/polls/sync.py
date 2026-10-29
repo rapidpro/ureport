@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import uuid
+from collections import defaultdict
 from datetime import timedelta
 
 from django.core.cache import cache
@@ -20,6 +22,7 @@ logger = logging.getLogger(__name__)
 
 RESULTS_JOB_TYPE = "poll-results"
 ARCHIVES_JOB_TYPE = "poll-archives"
+ARCHIVES_BATCH_JOB_TYPE = "poll-archives-batch"
 COUNTS_JOB_TYPE = "counts-rebuild"
 PRUNE_JOB_TYPE = "poll-results-prune"
 AGE_GENDER_JOB_TYPE = "age-gender-backfill"
@@ -37,6 +40,9 @@ MAINTENANCE_LEASE_SECONDS = 60 * 30
 
 # how long to wait before the next chunk when the backend exhausted its rate limit
 RATE_LIMITED_BACKOFF = 300
+
+# how long an archives batch waits for a per flow archives chunk it took over to finish
+ARCHIVES_BATCH_BUSY_BACKOFF = 300
 
 # counts are rebuilt this often mid-run so a long first sync still reaches the public site
 REBUILD_COUNTS_EVERY = 5
@@ -173,6 +179,85 @@ def queue_maintenance(job_type, org=None):
     return job
 
 
+def queue_archives_batch(org, flow_uuids, backend_slug):
+    """
+    Queues one archives job walking the archives of all the given flows at once, which
+    downloads each archive once rather than once per flow. The batch takes over the
+    archive traversals of its flows: their own archives jobs stand down until it is done,
+    so that two jobs never write one flow's results at the same time. Flows another
+    unfinished batch already owns are left to that batch. Returns the job, or None if
+    there was no flow left for it.
+    """
+    owned = batch_owned_flows(org.pk)
+    flow_uuids = sorted({flow_uuid for flow_uuid in flow_uuids if flow_uuid and flow_uuid not in owned})
+    if not flow_uuids:
+        return None
+
+    # the flows can't go in the scope, which is too short for more than one of them
+    job = SyncJob.objects.create(
+        org=org,
+        job_type=ARCHIVES_BATCH_JOB_TYPE,
+        scope=uuid.uuid4().hex,
+        cursor={"flows": flow_uuids, "backend": backend_slug},
+    )
+
+    # ends the per flow traversals that aren't mid chunk, so they aren't picked back up
+    # after the batch covered them. One that is mid chunk ends itself at its next chunk,
+    # and the batch waits for it - see sync_poll_archives_batch
+    now = timezone.now()
+    SyncJob.objects.filter(org=org, job_type=ARCHIVES_JOB_TYPE, scope__in=flow_uuids).exclude(
+        status__in=(SyncJob.STATUS_COMPLETE, SyncJob.STATUS_PAUSED)
+    ).filter(Q(lease_expires_on__lt=now) | Q(lease_expires_on__isnull=True)).update(
+        status=SyncJob.STATUS_COMPLETE,
+        cursor={},
+        needs_finalize=False,
+        ended_on=now,
+        lease_owner=None,
+        lease_expires_on=None,
+        modified_on=now,
+    )
+
+    enqueue(job)
+    return job
+
+
+def queue_archives_repair(polls):
+    """
+    Queues the archives of the given polls to be walked again, in as few passes as possible:
+    one batch per org and backend. Re-pulling is an upsert, so this fills in results
+    missing from the archived runs and updates stale ones. Polls that no longer sync are
+    skipped. Returns the jobs queued.
+    """
+    flows = defaultdict(set)
+    for poll in polls:
+        job_poll = get_job_poll(poll.org_id, poll.flow_uuid)
+        if job_poll:
+            flows[(job_poll.org, job_poll.backend.slug)].add(job_poll.flow_uuid)
+
+    jobs = []
+    for (org, backend_slug), flow_uuids in flows.items():
+        job = queue_archives_batch(org, flow_uuids, backend_slug)
+        if job:
+            jobs.append(job)
+
+    return jobs
+
+
+def batch_owned_flows(org_id):
+    """
+    The flows of the org whose archives an unfinished batch has taken over.
+    """
+    jobs = SyncJob.objects.filter(org_id=org_id, job_type=ARCHIVES_BATCH_JOB_TYPE).exclude(
+        status=SyncJob.STATUS_COMPLETE
+    )
+
+    owned = set()
+    for cursor in jobs.values_list("cursor", flat=True):
+        owned.update((cursor or {}).get("flows") or [])
+
+    return owned
+
+
 def is_flow_syncing(org_id, flow_uuid):
     """
     Whether a sync job is actively working on this flow's results - holding a live lease, or
@@ -181,8 +266,11 @@ def is_flow_syncing(org_id, flow_uuid):
     """
     now = timezone.now()
     jobs = _flow_sync_jobs(org_id, flow_uuid).filter(status=SyncJob.STATUS_RUNNING)
+    if any(in_flight(job, now) for job in jobs):
+        return True
 
-    return any(in_flight(job, now) for job in jobs)
+    batches = SyncJob.objects.filter(org_id=org_id, job_type=ARCHIVES_BATCH_JOB_TYPE, status=SyncJob.STATUS_RUNNING)
+    return any(in_flight(job, now) and flow_uuid in (job.cursor or {}).get("flows", ()) for job in batches)
 
 
 def _queue(job, reset_cursor=False):
@@ -246,6 +334,12 @@ def _queue_archives_rewalk(poll):
     completed cursor resumes below its last position, so a refused reset has to be retried
     or the archived half of a full re-pull is silently skipped.
     """
+    if poll.flow_uuid in batch_owned_flows(poll.org_id):
+        # the batch owns the flow's archives until it's done, and resetting a traversal
+        # it took over would only have the per flow job walk them alongside it
+        logger.warning("Archives of flow %s are owned by a batch, deferring the cursor reset" % poll.flow_uuid)
+        return False
+
     job = SyncJob.get_or_create_job(poll.org, ARCHIVES_JOB_TYPE, poll.flow_uuid)
 
     reset = job.reset_cursor()
@@ -363,6 +457,19 @@ def _finalize_flow(job, retire):
         poll.rebuild_poll_results_counts()
 
 
+def _finalize_archives_batch(job):
+    """
+    Completes a batch: its counts were already rebuilt flow by flow in its last chunks,
+    where the lease is renewed between them, so all that is left is marking its polls synced.
+    """
+    from ureport.polls.models import Poll
+
+    flow_uuids = (job.cursor or {}).get("flows") or []
+    Poll.objects.filter(org_id=job.org_id, flow_uuid__in=flow_uuids, has_synced=False).exclude(flow_uuid="").update(
+        has_synced=True
+    )
+
+
 @chunked_task(
     RESULTS_JOB_TYPE,
     queue=SYNC_QUEUE,
@@ -383,7 +490,14 @@ def sync_poll_results(job):
     first_chunk = not progress
     reset_pending = bool(progress.get(ARCHIVES_RESET_PENDING))
 
-    if _pull_after_delete_requested(job):
+    delete_requested = _pull_after_delete_requested(job)
+    if delete_requested and job.scope in batch_owned_flows(job.org_id):
+        # a batch may be writing the flow's archived results, so the delete waits for it
+        # to finish - the flags stay set, so a chunk after that picks it up
+        logger.info("Deferring results delete of flow %s until its archives batch is done" % job.scope)
+        delete_requested = False
+
+    if delete_requested:
         # the restart has to be durable before anything is deleted: deleting consumes the
         # flag and the legacy position key, so a crash in between would leave the old
         # cursor resuming an incremental pull over results that are gone. Crashing after
@@ -452,6 +566,11 @@ def sync_poll_archives(job):
     if not poll:
         return True
 
+    if job.scope in batch_owned_flows(job.org_id):
+        # a batch took this traversal over - see queue_archives_batch
+        logger.info("Archives of flow %s are owned by a batch, ending job #%d" % (job.scope, job.id))
+        return job.abort()
+
     cursor = dict(job.cursor or {})
     if job.new_run and _archives_to_retry(cursor):
         # a new run of a finished walk tries the archives it failed to pull again
@@ -472,6 +591,112 @@ def sync_poll_archives(job):
         return True
 
     return RATE_LIMITED_BACKOFF if result.rate_limited else False
+
+
+@chunked_task(
+    ARCHIVES_BATCH_JOB_TYPE,
+    queue=SYNC_QUEUE,
+    lease_seconds=ARCHIVES_LEASE_SECONDS,
+    finalize=_finalize_archives_batch,
+    name="polls.sync_poll_archives_batch",
+)
+def sync_poll_archives_batch(job):
+    """
+    Walks the archives of several flows at once, an archive per chunk, then rebuilds the
+    counts of the flows whose results changed a few per chunk. The flows are kept in the
+    cursor next to the listing position, as the scope is too short to hold them.
+    """
+    from ureport.polls.models import Poll
+
+    cursor = dict(job.cursor or {})
+    flow_uuids = cursor.get("flows") or []
+
+    if cursor.get("stage") == STAGE_REBUILD:
+        return _rebuild_batch_counts(job, cursor)
+
+    polls = {}
+    for flow_uuid in flow_uuids:
+        poll = get_job_poll(job.org_id, flow_uuid)
+        if poll:
+            polls[flow_uuid] = poll
+
+    if not polls:
+        return True
+
+    # a per flow chunk that was already running when the batch took its flow over may still
+    # be writing, and they'd race each other's lookups into duplicate results
+    if SyncJob.objects.filter(
+        org_id=job.org_id, job_type=ARCHIVES_JOB_TYPE, scope__in=polls.keys(), lease_expires_on__gt=timezone.now()
+    ).exists():
+        return ARCHIVES_BATCH_BUSY_BACKOFF
+
+    backend = job.org.get_backend(backend_slug=cursor.get("backend"))
+
+    # an archive holds runs of every flow, which can take a long time to save, so the lease
+    # is renewed after each batch of them - if it's gone this raises and the chunk is dropped
+    result = backend.pull_results_from_archives_batch_chunk(job.org, polls, cursor, on_save=job.checkpoint)
+
+    for flow_uuid, counts in result.counts.items():
+        if _has_changes(counts):
+            Poll.mark_results_changed(job.org_id, flow_uuid)
+
+    next_cursor = {**result.cursor, "flows": flow_uuids, "backend": cursor.get("backend")}
+    if result.done:
+        next_cursor["stage"] = STAGE_REBUILD
+
+    job.checkpoint(cursor=next_cursor, progress=_add_batch_progress(job, result.counts))
+
+    return RATE_LIMITED_BACKOFF if result.rate_limited else False
+
+
+def _rebuild_batch_counts(job, cursor):
+    """
+    Rebuilds the counts of a few of the flows whose results the batch changed, each one
+    checkpointed so a resumed chunk doesn't rebuild it again and the lease is renewed
+    between rebuilds of big flows.
+    """
+    flow_progress = (job.progress or {}).get("flows") or {}
+    rebuilt = set(cursor.get("rebuilt") or [])
+    count = 0
+
+    for flow_uuid in cursor.get("flows") or []:
+        if flow_uuid in rebuilt or not _has_changes(flow_progress.get(flow_uuid) or {}):
+            continue
+
+        if count >= COUNTS_CHUNK_SIZE:
+            return False
+
+        poll = get_job_poll(job.org_id, flow_uuid)
+        if poll:
+            poll.rebuild_poll_results_counts()
+
+        rebuilt.add(flow_uuid)
+        count += 1
+        job.checkpoint(cursor={**cursor, "rebuilt": sorted(rebuilt)})
+
+    return True
+
+
+def _add_batch_progress(job, flow_counts):
+    """
+    The batch's progress with a chunk's counts added in, both in total and per flow.
+    """
+    totals = defaultdict(int)
+    for counts in flow_counts.values():
+        for key, value in counts.items():
+            totals[key] += value
+
+    progress = job.add_progress(chunks=1, **totals)
+
+    flows = {flow_uuid: dict(counts) for flow_uuid, counts in (progress.get("flows") or {}).items()}
+    for flow_uuid, counts in flow_counts.items():
+        for key, value in counts.items():
+            if value:
+                entry = flows.setdefault(flow_uuid, {})
+                entry[key] = entry.get(key, 0) + value
+
+    progress["flows"] = flows
+    return progress
 
 
 @app.task(name="polls.sync_polls_dispatch")
@@ -521,16 +746,21 @@ def dispatch_archives(org):
     Nudges unfinished archive traversals, and finished ones with archive files they failed
     to pull that are due to be tried again. They are queued once by the results sync, so
     without this an interrupted or failed one would never be retried - while the polls on
-    the flow already tell the public site their results are complete. Returns the flows
+    the flow already tell the public site their results are complete. Returns the scopes
     actually queued.
     """
     now = timezone.now()
     queued = []
 
-    jobs = SyncJob.objects.filter(org=org, job_type=ARCHIVES_JOB_TYPE).filter(
-        ~Q(status=SyncJob.STATUS_COMPLETE) | Q(cursor__has_key="failed")
+    # a batch is nudged like any traversal, and the flows it owns are left to it
+    owned = batch_owned_flows(org.pk)
+    jobs = SyncJob.objects.filter(org=org, job_type__in=(ARCHIVES_JOB_TYPE, ARCHIVES_BATCH_JOB_TYPE)).filter(
+        ~Q(status=SyncJob.STATUS_COMPLETE) | Q(job_type=ARCHIVES_JOB_TYPE, cursor__has_key="failed")
     )
     for job in jobs:
+        if job.job_type == ARCHIVES_JOB_TYPE and job.scope in owned:
+            continue
+
         if job.status == SyncJob.STATUS_COMPLETE and not _archives_retry_due(job, now):
             continue
 

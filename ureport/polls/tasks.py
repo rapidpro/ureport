@@ -27,6 +27,7 @@ from ureport.polls.sync import (  # noqa: F401 - imported here so the worker reg
     rebuild_counts_dispatch,
     rebuild_poll_counts,
     sync_poll_archives,
+    sync_poll_archives_batch,
     sync_poll_results,
     sync_polls_dispatch,
 )

@@ -112,6 +112,16 @@ class BaseBackend(object):
         """
         return ChunkResult(counts=self._results_counts_dict(()), cursor={"done": True}, done=True)
 
+    def pull_results_from_archives_batch_chunk(self, org, polls, cursor, archive_budget=None, on_save=None):
+        """
+        Pulls one bounded chunk of archived results for the polls of several flows at once,
+        given as a dict of poll by flow UUID. Backends without archives complete immediately.
+        :param cursor: the resume position returned by the previous chunk, or {} to start
+        :return: a ChunkResult whose counts are the num_val_* / num_path_* / num_synced keys by flow UUID
+        """
+        counts = {flow_uuid: self._results_counts_dict(()) for flow_uuid in polls}
+        return ChunkResult(counts=counts, cursor=dict(cursor), done=True)
+
     @staticmethod
     def _results_counts_dict(counts_tuple):
         keys = (
