@@ -17,6 +17,8 @@ from ureport.polls.models import Poll, PollQuestion
 from ureport.utils.counts import BaseDailyCount, BaseScopedCount
 from ureport.utils.models import SquashableModel
 
+from . import active_users
+
 logger = logging.getLogger(__name__)
 
 # held while squashing poll stats counters, and while a poll rebuild replaces them
@@ -202,7 +204,9 @@ class PollEngagementDailyCount(BaseDailyCount):
             if segment_slug == "scheme":
                 output_data = PollEngagementDailyCount.get_scheme_response_rate_series(org, time_filters)
 
-        if metric == "active-users":
+        if metric == "active-users" and active_users.is_read_enabled(org):
+            output_data = active_users.get_activity(org, segment_slug, time_filters)
+        elif metric == "active-users":
             if segment_slug == "all":
                 output_data = ContactActivity.get_activity(org, time_filters)
             if segment_slug == "age":
@@ -1035,6 +1039,28 @@ class ContactActivityCounter(SquashableModel):
                 name="stats_cac_squashed", fields=("org", "date", "type", "value"), condition=Q(is_squashed=True)
             )
         ]
+
+
+class ActiveUsersCheckpoint(models.Model):
+    """
+    The raw bytes of an active users sketch as of a nightly checkpoint, from which it can be restored - see
+    ureport.stats.active_users
+    """
+
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="active_users_checkpoints")
+
+    key = models.CharField(max_length=255, unique=True)
+
+    month = models.DateField(help_text="The month the sketch counts")
+
+    value = models.BinaryField()
+
+    taken_on = models.DateTimeField()
+
+    watermark = models.BigIntegerField(help_text="The latest poll result id when the checkpoint was taken")
+
+    class Meta:
+        indexes = [models.Index(fields=["org", "month"], name="stats_actuserscp_org_month")]
 
 
 class PollWordCloud(models.Model):
