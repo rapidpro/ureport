@@ -84,7 +84,7 @@ POPULATE_BATCHES_PER_CHUNK = 5
 
 # results of polls whose date is older than this are dropped, unless the poll itself was
 # only created recently, i.e. it's an old poll someone is still setting up
-RESULTS_RETENTION = timedelta(days=365)
+RESULTS_RETENTION = timedelta(days=90)
 NEW_POLL_WINDOW = timedelta(days=14)
 
 # an age and gender backfill populates the results, then rebuilds what they feed

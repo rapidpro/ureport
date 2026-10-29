@@ -1025,7 +1025,9 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
 
     def test_leaves_recent_polls_alone(self):
-        Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=10))
+        # results are kept for 90 days from the poll's date
+        Poll.objects.filter(id=self.poll.id).update(poll_date=timezone.now() - timedelta(days=91))
+        Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=89))
         # an old poll only just created is someone still setting it up
         Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=2))
 
