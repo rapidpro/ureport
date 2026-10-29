@@ -705,12 +705,22 @@ def _mark_batch_walked(job, walked_cursor):
     """
     Records the archives of the batch's flows as walked, on their own archives jobs where
     they have one, for a full re-pull or a retirement waiting on them - see _archives_walked.
+    The archives the batch failed to pull are handed on to every flow's own job, whose runs
+    try them again on the usual schedule once the batch is done - see dispatch_archives.
     """
     flow_uuids = (job.cursor or {}).get("flows") or []
+    now = timezone.now()
+
+    if failed_archives(walked_cursor):
+        for flow_uuid in flow_uuids:
+            SyncJob.get_or_create_job(job.org, ARCHIVES_JOB_TYPE, flow_uuid)
 
     SyncJob.objects.filter(
-        org_id=job.org_id, job_type=ARCHIVES_JOB_TYPE, scope__in=flow_uuids, status=SyncJob.STATUS_COMPLETE
-    ).update(cursor=walked_cursor or {"done": True}, modified_on=timezone.now())
+        org_id=job.org_id,
+        job_type=ARCHIVES_JOB_TYPE,
+        scope__in=flow_uuids,
+        status__in=(SyncJob.STATUS_COMPLETE, SyncJob.STATUS_PENDING),
+    ).update(status=SyncJob.STATUS_COMPLETE, cursor=walked_cursor or {"done": True}, ended_on=now, modified_on=now)
 
 
 def _rebuild_batch_counts(job, cursor):

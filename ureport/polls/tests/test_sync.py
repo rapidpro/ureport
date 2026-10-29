@@ -936,6 +936,25 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
         end_run(job)
         self.assertEqual(_retire_flow(self.nigeria, "uuid-1", results_job), PRUNE_RETIRED)
 
+    def test_hands_the_archives_it_failed_to_pull_to_each_flow(self):
+        job = self.queue_batch()
+        failed = {"2026-06-01|monthly": 1}
+
+        self.walk(job, ChunkResult(counts={}, cursor={"before": "2026-06-01", "failed": failed}, done=True))
+
+        # each flow's own walk is done but for that archive, which it tries again once the wait is over
+        for flow_uuid in ("uuid-1", "uuid-2"):
+            archives_job = self.get_job(ARCHIVES_JOB_TYPE, flow_uuid=flow_uuid)
+            self.assertJobState(archives_job, status=SyncJob.STATUS_COMPLETE)
+            self.assertEqual(archives_job.cursor["failed"], failed)
+            self.assertFalse(_archives_walked(archives_job))
+
+        end_run(job)
+        SyncJob.objects.filter(job_type=ARCHIVES_JOB_TYPE).update(ended_on=timezone.now() - timedelta(hours=2))
+
+        with patch.object(sync_poll_archives, "apply_async"):
+            self.assertEqual(set(dispatch_archives(self.nigeria)), {"uuid-1", "uuid-2"})
+
     def test_full_repulls_queue_a_batch_per_org(self):
         uganda_poll = self.create_poll(self.uganda, "Uganda poll", "uuid-ug", self.education_nigeria, self.admin)
         retired = self.create_poll(self.nigeria, "Retired", "uuid-retired", self.education_nigeria, self.admin)
