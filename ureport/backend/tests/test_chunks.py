@@ -570,10 +570,10 @@ class BaseBackendChunkDefaultsTest(UreportTest):
         self.assertEqual(result.counts["num_synced"], 0)
 
     def test_pull_archives_batch_chunk_default(self):
-        result = self.backend.pull_results_from_archives_batch_chunk(self.nigeria, {"flow-1": None}, {"before": "t"})
+        result = self.backend.pull_results_from_archives_batch_chunk(self.nigeria, {"flow-1": None}, {})
 
         self.assertTrue(result.done)
-        self.assertEqual(result.cursor, {"before": "t"})
+        self.assertEqual(result.cursor, {"done": True})
         self.assertEqual(result.counts["flow-1"]["num_synced"], 0)
 
 
