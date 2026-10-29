@@ -24,6 +24,7 @@ from ureport.polls.sync import (
     PRUNE_SKIPPED_RETIRED,
     RATE_LIMITED_BACKOFF,
     RESULTS_JOB_TYPE,
+    RESULTS_LEASE_SECONDS,
     _clear_poll_results,
     backfill_age_gender,
     dispatch_org_polls,
@@ -1057,8 +1058,20 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.prune()
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
 
-        # once its lease is gone, the next run picks the flow back up
+        # between chunks the sync holds no lease, but its next chunk is on the queue, so a
+        # full re-pull isn't counted and deleted half way through
         drop_lease(job)
+
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [])
+        self.assertJobState(self.job, progress={"skipped_syncing": 2})
+
+        self.prune()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
+
+        # a sync that stopped checkpointing died, and the next run picks the flow back up
+        make_stale(job, seconds_ago=2 * RESULTS_LEASE_SECONDS + 60)
 
         pruned, _ = self.prune()
 

@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from dash.orgs.models import Org
 from ureport.celery import app
-from ureport.syncjobs.dispatch import Backoff, enqueue, is_due
+from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due
 from ureport.syncjobs.locks import chunk_lock
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tasks import chunked_task
@@ -143,16 +143,19 @@ def queue_maintenance(job_type, org=None):
 
 def is_flow_syncing(org_id, flow_uuid):
     """
-    Whether a sync job is actively working on this flow's results, i.e. holds a live lease.
+    Whether a sync job is actively working on this flow's results - holding a live lease, or
+    between chunks of a run, which release the lease while the next one waits in the queue.
     Callers that destroy a flow's results must not do so mid traversal.
     """
-    return SyncJob.objects.filter(
+    now = timezone.now()
+    jobs = SyncJob.objects.filter(
         org_id=org_id,
         job_type__in=(RESULTS_JOB_TYPE, ARCHIVES_JOB_TYPE),
         scope=flow_uuid,
         status=SyncJob.STATUS_RUNNING,
-        lease_expires_on__gt=timezone.now(),
-    ).exists()
+    )
+
+    return any(in_flight(job, now) for job in jobs)
 
 
 def _queue(job, reset_cursor=False):
