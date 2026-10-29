@@ -89,11 +89,12 @@ class BaseBackend(object):
     def pull_results_from_archives_chunk(self, poll, cursor, archive_budget=None):
         """
         Pulls one bounded chunk of archived results for the given poll. Backends without
-        archives complete immediately.
+        archives complete immediately, on a position that says the walk was done - an empty
+        one is what a walk sent back to the start has.
         :param cursor: the resume position returned by the previous chunk, or {} to start
         :return: a ChunkResult whose counts dict has the num_val_* / num_path_* / num_synced keys
         """
-        return ChunkResult(counts=self._results_counts_dict(()), cursor=dict(cursor), done=True)
+        return ChunkResult(counts=self._results_counts_dict(()), cursor={"done": True}, done=True)
 
     @staticmethod
     def _results_counts_dict(counts_tuple):

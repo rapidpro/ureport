@@ -222,8 +222,10 @@ def _delete_flow_results(job, poll):
     """
     from ureport.polls.models import Poll
 
-    # the counts stay as they were until the archives have been walked again too
+    # the counts stay as they were until the archives have been walked again too, and a
+    # retirement asked for before is moot - the flow is pulled again in full either way
     cache.set(FULL_REPULL_KEY % (job.org_id, job.scope), True, FULL_REPULL_KEY_TTL)
+    cache.delete(RETIRE_KEY % (job.org_id, job.scope))
 
     # marked after the delete too, as a rebuild that started during it counted some of the deleted results
     Poll.mark_results_changed(job.org_id, job.scope)
@@ -244,10 +246,12 @@ def _queue_archives_rewalk(poll):
     job = SyncJob.get_or_create_job(poll.org, ARCHIVES_JOB_TYPE, poll.flow_uuid)
 
     reset = job.reset_cursor()
-    if not reset:
+    if reset:
+        enqueue(job)
+    else:
+        # the chunk holding the lease carries its own walk on, so it needs no message
         logger.warning("Archives job #%d is still running, deferring its cursor reset" % job.id)
 
-    enqueue(job)
     return reset
 
 
@@ -273,18 +277,47 @@ def _full_repull_pending(org_id, flow_uuid):
     return bool(cache.get(FULL_REPULL_KEY % (org_id, flow_uuid)))
 
 
+def _end_full_repull(org_id, flow_uuid):
+    """
+    Ends a full re-pull of the flow if both of its halves are done, returning whether it did:
+    its results sync has completed the run that pulled them again, and its archives have been
+    walked from the start since. Called by the end of either sync, as whichever ends last
+    ends the re-pull - a results run waiting for its archives reset to land is still running,
+    so an archives walk ending before that doesn't, nor one ending while the results are
+    still being pulled.
+    """
+    if not _full_repull_pending(org_id, flow_uuid):
+        return False
+
+    jobs = {
+        j.job_type: j
+        for j in SyncJob.objects.filter(
+            org_id=org_id, job_type__in=(RESULTS_JOB_TYPE, ARCHIVES_JOB_TYPE), scope=flow_uuid
+        )
+    }
+    results = jobs.get(RESULTS_JOB_TYPE)
+    if not results or results.status != SyncJob.STATUS_COMPLETE or not _archives_walked(jobs.get(ARCHIVES_JOB_TYPE)):
+        return False
+
+    cache.delete(FULL_REPULL_KEY % (org_id, flow_uuid))
+    return True
+
+
 def _finalize_results(job):
     """
     Completes a results run: a flow waiting to be retired is retired now that everything up
     to this moment has been pulled, otherwise counts are rebuilt from everything the run
-    changed and the polls on the flow are marked synced. The position is mirrored to the
-    cache key the unchunked task resumes from either way.
+    changed, or everything a full re-pull it ends did, and the polls on the flow are marked
+    synced. The position is mirrored to the cache key the unchunked task resumes from
+    either way.
     """
     from ureport.polls.models import Poll
 
     after = (job.cursor or {}).get("after")
     if after:
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (job.org_id, job.scope), after, None)
+
+    repulled = _end_full_repull(job.org_id, job.scope)
 
     poll = get_job_poll(job.org_id, job.scope)
     if not poll:
@@ -293,8 +326,8 @@ def _finalize_results(job):
     if cache.get(RETIRE_KEY % (job.org_id, job.scope)) and _retire_flow(job.org, job.scope, job) == PRUNE_RETIRED:
         return
 
-    # during a full re-pull the counts wait for the archives, which finalize them
-    if _changed_results(job) and not _full_repull_pending(job.org_id, job.scope):
+    # during a full re-pull the counts wait for both of its halves to be done
+    if (repulled or _changed_results(job)) and not _full_repull_pending(job.org_id, job.scope):
         # rebuilding refreshes the question caches of every poll on the flow itself
         poll.rebuild_poll_results_counts()
 
@@ -303,20 +336,19 @@ def _finalize_results(job):
 
 def _finalize_archives(job):
     """
-    Completes an archives run, which also ends a full re-pull: counts are rebuilt from
-    everything the run changed, or everything the re-pull did. A flow waiting to be retired
-    is retired by the end of its next results sync, once its archives have been walked.
+    Completes an archives run: counts are rebuilt from everything the run changed, or
+    everything a full re-pull it ends did. A flow waiting to be retired is retired by the end
+    of its next results sync, once its archives have been walked.
     """
     from ureport.polls.models import Poll
 
-    repulled = _full_repull_pending(job.org_id, job.scope)
-    cache.delete(FULL_REPULL_KEY % (job.org_id, job.scope))
+    repulled = _end_full_repull(job.org_id, job.scope)
 
     poll = get_job_poll(job.org_id, job.scope)
     if not poll:
         return
 
-    if repulled or _changed_results(job):
+    if (repulled or _changed_results(job)) and not _full_repull_pending(job.org_id, job.scope):
         poll.rebuild_poll_results_counts()
 
     Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope, has_synced=False).update(has_synced=True)
@@ -584,7 +616,7 @@ def _counts_rebuild_due(poll, run_on):
     Whether the counts rebuild run started at run_on has to rebuild the poll's counts: ones
     never rebuilt, ones whose results changed after their last rebuild started, and ones on
     their full rebuild night that weren't rebuilt recently. A flow being pulled again in
-    full isn't, as its archives sync rebuilds it once it has all of its results again.
+    full isn't, as the end of the re-pull rebuilds it once it has all of its results again.
     """
     if _full_repull_pending(poll.org_id, poll.flow_uuid):
         return False
@@ -728,11 +760,20 @@ def _retire_flow(org, flow_uuid, holder=None, fallback=False):
             cache.delete(key)
             return PRUNE_SKIPPED_PROTECTED
 
+        # until the rebuild below replaced all of the counts, the prune has to rebuild them
+        # before deleting the results, so the request is kept for good from here - set before
+        # the polls are, so that a crash in between can't leave a flow retired without it
+        cache.set(key, now, None)
+
         Poll.objects.filter(pk__in=[p.pk for p in polls]).update(stopped_syncing=True)
 
-    # until the rebuild below replaced all of the counts, the prune has to rebuild them
-    # before deleting the results, so the request is kept for good from here
-    cache.set(key, now, None)
+    if _full_repull_pending(org.pk, flow_uuid):
+        # only the fallback retires a flow whose full re-pull isn't done, and its counts were
+        # left as they were before its results were deleted - more of them than it has now
+        cache.delete(key)
+        cache.delete(FULL_REPULL_KEY % (org.pk, flow_uuid))
+        logger.info("Retired flow %s on org #%d on the counts it had before it was pulled again" % (flow_uuid, org.pk))
+        return PRUNE_RETIRED
 
     poll = Poll.objects.get(pk=polls[0].pk)
     if poll.rebuild_poll_results_counts(retiring=True):

@@ -486,8 +486,9 @@ class BaseBackendChunkDefaultsTest(UreportTest):
         self.assertEqual(result.counts["num_synced"], 0)
 
     def test_pull_archives_chunk_default(self):
-        result = self.backend.pull_results_from_archives_chunk(None, {"before": "t"})
+        result = self.backend.pull_results_from_archives_chunk(None, {})
 
+        # a walk that was done is told apart from one sent back to the start, which has no position
         self.assertTrue(result.done)
-        self.assertEqual(result.cursor, {"before": "t"})
+        self.assertEqual(result.cursor, {"done": True})
         self.assertEqual(result.counts["num_synced"], 0)

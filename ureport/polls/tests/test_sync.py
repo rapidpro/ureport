@@ -28,6 +28,7 @@ from ureport.polls.sync import (
     PRUNE_JOB_TYPE,
     PRUNE_SKIPPED_RETIRED,
     RATE_LIMITED_BACKOFF,
+    REBUILD_COUNTS_EVERY,
     RESULTS_JOB_TYPE,
     RESULTS_LEASE_SECONDS,
     RETIRE_FALLBACK_WAIT,
@@ -69,6 +70,7 @@ from ureport.syncjobs.tests.base import (
     make_stale,
     reload,
     run_task,
+    run_to_completion,
 )
 from ureport.tests import UreportTest
 from ureport.utils import LAST_POPULATED_CONTACT_KEY, datetime_to_json_date
@@ -377,12 +379,16 @@ class SyncPollResultsTest(PollSyncTestBase):
             self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING)
             self.assertEqual(self.get_job().progress[ARCHIVES_RESET_PENDING], 1)
 
+            # the walk holding the lease carries itself on, so no message is queued for it
+            self.mock_queue_archives.assert_not_called()
+
             drop_lease(archives_job)
             mock_continue = run_task(sync_poll_results, self.job.id)
 
         mock_continue.assert_not_called()
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
         self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {})
+        self.assertEqual(self.mock_queue_archives.call_count, 1)
 
     def test_queues_archives_again_after_a_failed_chunk(self):
         self.mock_flow_date.return_value = None
@@ -1237,6 +1243,34 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.finish_sync("uuid-1")
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
 
+    def test_retires_a_flow_by_the_end_of_a_sync_holding_its_own_lease(self):
+        # an old flow has synced before, so its sync doesn't start an archives walk of its own
+        Poll.objects.filter(flow_uuid="uuid-1").update(has_synced=True)
+        self.prune()
+
+        # a whole run of the sync, whose lease is held through its finalization
+        with (
+            patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk,
+            patch.object(Poll, "rebuild_poll_results_counts", return_value=True),
+        ):
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t1"}, done=True)
+
+            run_task(sync_poll_results, self.results_job().id)
+
+        self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
+        self.assertJobState(self.results_job(), status=SyncJob.STATUS_COMPLETE, lease_owner=None)
+
+    def test_waits_for_an_archives_walk_still_finalizing(self):
+        self.prune()
+
+        # the walk is done, but its finalization still holds the lease
+        archives = self.archives_job()
+        SyncJob.objects.filter(id=archives.id).update(status=SyncJob.STATUS_COMPLETE, cursor={"before": "2026-01-01"})
+        hold_lease(archives)
+
+        self.finish_sync("uuid-1")
+        self.assertEqual(self.stopped(), set())
+
     def test_waits_for_the_flows_archives_to_be_walked(self):
         self.prune()
 
@@ -1353,6 +1387,22 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
         self.assertJobState(job, status=SyncJob.STATUS_FAILED, lease_owner=None)
 
+    def test_retires_a_flow_failing_mid_full_repull_on_the_counts_it_had(self):
+        # its results were deleted to be pulled again, and its archives walk then kept failing
+        end_run(self.results_job(), status=SyncJob.STATUS_FAILED, failures=3)
+        cache.set(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1"), True, None)
+        asked_on = timezone.now() - RETIRE_FALLBACK_WAIT - timedelta(minutes=1)
+        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), asked_on, None)
+
+        with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
+            run_to_completion(prune_poll_results, self.job.id)
+
+        # the counts left as they were before the delete have more results than a rebuild would count
+        self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
+        mock_rebuild.assert_not_called()
+        self.assertIsNone(self.requested("uuid-1"))
+        self.assertFalse(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+
     def test_waits_for_a_paused_sync_however_long(self):
         self.prune()
 
@@ -1410,28 +1460,69 @@ class FullRepullTest(PollSyncTestBase):
 
         self.results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
         self.archives_job = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
-        self.addCleanup(cache.delete, FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1"))
 
-    def test_counts_wait_for_the_archives(self):
+        # the results were deleted by a run of the results sync, which is still going
+        SyncJob.objects.filter(id=self.results_job.id).update(status=SyncJob.STATUS_RUNNING)
+        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), timezone.now(), None)
+
         with patch.object(Poll, "delete_poll_results"):
             _delete_flow_results(self.results_job, self.poll)
+
+    def set_state(self, job, **fields):
+        SyncJob.objects.filter(id=job.id).update(**fields)
+        return reload(job)
+
+    def finalize(self, job):
+        with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
+            (_finalize_archives if job.job_type == ARCHIVES_JOB_TYPE else _finalize_results)(reload(job))
+
+        return mock_rebuild.call_count
+
+    def test_counts_wait_for_both_halves(self):
+        # a retirement asked for before is moot, as the flow is pulled again in full
+        self.assertIsNone(cache.get(RETIRE_KEY % (self.nigeria.pk, "uuid-1")))
 
         # neither the nightly pass nor the results sync rebuilds a flow pulled again in part
         self.assertFalse(_counts_rebuild_due(self.poll, timezone.now()))
 
-        SyncJob.objects.filter(id=self.results_job.id).update(progress={"num_val_created": 3})
+        # a flow with few archives walks them before its results are pulled again
+        self.set_state(self.archives_job, status=SyncJob.STATUS_COMPLETE, cursor={"before": "2026-01-01"})
+        self.assertEqual(self.finalize(self.archives_job), 0)
 
-        with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
-            _finalize_results(reload(self.results_job))
+        # and the end of the results run ends the re-pull, rebuilding the flow on all of its results
+        self.set_state(self.results_job, status=SyncJob.STATUS_COMPLETE, progress={"num_val_created": 3})
+        self.assertEqual(self.finalize(self.results_job), 1)
 
-        mock_rebuild.assert_not_called()
-
-        # the end of the archives walk does, once the flow has all of its results again
-        with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
-            _finalize_archives(reload(self.archives_job))
-
-        mock_rebuild.assert_called_once_with()
+        self.assertFalse(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
         self.assertTrue(_counts_rebuild_due(self.poll, timezone.now()))
+
+    def test_a_walk_from_before_the_reset_does_not_end_it(self):
+        # the reset was refused, so the old walk carries on while the results run waits for it
+        self.set_state(self.archives_job, status=SyncJob.STATUS_COMPLETE, cursor={"before": "2026-01-01"})
+        self.assertEqual(self.finalize(self.archives_job), 0)
+
+        # the reset lands and the results run ends, but the new walk hasn't been done
+        self.set_state(self.archives_job, cursor={})
+        self.set_state(self.results_job, status=SyncJob.STATUS_COMPLETE, progress={"num_val_created": 3})
+        self.assertEqual(self.finalize(self.results_job), 0)
+
+        self.set_state(self.archives_job, cursor={"before": "2026-02-01"})
+        self.assertEqual(self.finalize(self.archives_job), 1)
+        self.assertFalse(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+
+    def test_results_chunks_leave_the_counts_alone(self):
+        self.set_state(self.results_job, progress={"chunks": REBUILD_COUNTS_EVERY - 1})
+
+        with (
+            patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild,
+            patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk,
+        ):
+            mock_chunk.return_value = ChunkResult(counts=results_counts(num_val_created=1), cursor={"after": "t1"})
+
+            run_task(sync_poll_results, self.results_job.id)
+
+        self.assertEqual(reload(self.results_job).progress["chunks"], REBUILD_COUNTS_EVERY)
+        mock_rebuild.assert_not_called()
 
 
 class RebuildRetiringTest(PollSyncTestBase):

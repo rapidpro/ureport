@@ -397,9 +397,11 @@ class SyncJob(models.Model):
         rather than assume it landed. Returns whether it was applied.
 
         A refusal is left for the caller to report: unlike an operator's action, it is an
-        ordinary outcome, and what it means depends on what the caller does about it.
+        ordinary outcome, and what it means depends on what the caller does about it. As with
+        pause, a lease that merely lapsed is cleared too, so that the worker whose lease it was
+        can't checkpoint its old position over the reset.
         """
-        return self._update_unleased(warn=False, cursor={})
+        return self._update_unleased(warn=False, cursor={}, lease_owner=None, lease_expires_on=None)
 
     def force_resync(self):
         """
