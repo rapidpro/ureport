@@ -9,6 +9,7 @@ from django_valkey import get_valkey_connection
 
 from django.core.cache import cache
 from django.core.management import call_command
+from django.db import connection
 from django.test import override_settings
 
 from dash.categories.models import Category
@@ -406,7 +407,10 @@ class ActiveUsersTest(UreportTest):
         )
 
         with frozen_now(NOW):
-            added = active_users.backfill(self.org, since=date(2026, 1, 1), until=date(2026, 3, 1), batch_size=3)
+            answers, added = active_users.backfill(
+                self.org, since=date(2026, 1, 1), until=date(2026, 3, 1), batch_size=3
+            )
+            self.assertGreater(answers, 0)
             self.assertEqual(len([r for r in results if date(2026, 1, 1) <= r.date.date() < date(2026, 4, 1)]), added)
             self.assertEqual(0, self.pfcount(date(2025, 12, 1), "all"))
             self.assertGreater(self.pfcount(date(2026, 3, 1), "all"), 0)
@@ -414,7 +418,7 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(0, self.pfcount(date(2026, 1, 1), "all", org=self.nigeria))
 
             # the rest, overlapping what's there
-            self.assertEqual(len(results), active_users.backfill(self.org))
+            self.assertEqual(len(results), active_users.backfill(self.org)[1])
             for segment in active_users.COMPARE_SEGMENTS:
                 self.assertEqual(
                     active_users._existing_activity(self.org, segment, [12]),
@@ -450,7 +454,7 @@ class ActiveUsersTest(UreportTest):
         self.r.delete(probe)
         return found
 
-    def test_seed_reconstructs_answers(self):
+    def test_backfill_reconstructs_activity_answers(self):
         org = self.nigeria
         ContactActivity.objects.bulk_create(
             # a long run, which answered at its start, a year later, and 12 months before its end
@@ -466,11 +470,13 @@ class ActiveUsersTest(UreportTest):
 
         with frozen_now(NOW):
             progress = []
-            self.assertEqual(6, active_users.seed(org, prefix_length=1, progress=lambda *a: progress.append(a)))
+            answers, _ = active_users.backfill(org, prefix_length=1, progress=lambda *a: progress.append(a))
+            self.assertEqual(6, answers)
 
+        progress = [p for p in progress if p[0] == "activities"]
         self.assertEqual(16, len(progress))
-        self.assertEqual((None, "1", 3), progress[0])  # the long run
-        self.assertEqual(("f", None), progress[-1][:2])
+        self.assertEqual(("activities", "contacts [, 1)", 3), progress[0])  # the long run
+        self.assertEqual("contacts [f, )", progress[-1][1])
         # wherever the collation puts uppercase and non hex uuids, the ranges between them cover every one
         self.assertEqual(6, sum(n for *_, n in progress))
 
@@ -483,7 +489,7 @@ class ActiveUsersTest(UreportTest):
         # the sketches it touched are left to be checkpointed
         self.assertIn(active_users.sketch_key(org.id, date(2025, 4, 1), "gender:F"), self.dirty())
 
-    def test_seed_matches_contact_activity(self):
+    def test_backfill_matches_contact_activity(self):
         genders = ["M", "F", "O", None]
         states = ["R1", "r2", None]
         schemes = ["tel", "twitterid", "TEL", None]
@@ -511,15 +517,14 @@ class ActiveUsersTest(UreportTest):
         ContactActivity.objects.bulk_create(rows)
 
         with frozen_now(NOW):
-            added = active_users.seed(self.org)
+            answers, _ = active_users.backfill(self.org)
             for segment in active_users.COMPARE_SEGMENTS:
                 existing = active_users._existing_activity(self.org, segment, [12])
                 self.assertEqual(existing, active_users.get_activity(self.org, segment, [12]), segment)
                 self.assertTrue(any(v for s in existing[12] for v in s["data"].values()), segment)
 
-            # seeding again, and backfilling on top, changes nothing
-            self.assertEqual(added, active_users.seed(self.org, prefix_length=0))
-            active_users.backfill(self.org)
+            # backfilling again changes nothing
+            self.assertEqual((answers, 0), active_users.backfill(self.org, prefix_length=0))
             for segment in active_users.COMPARE_SEGMENTS:
                 self.assertEqual(
                     active_users._existing_activity(self.org, segment, [12]),
@@ -587,9 +592,9 @@ class ActiveUsersTest(UreportTest):
         self.assertIn("mean", out)
 
         ContactActivity.objects.create(org=self.nigeria, contact="abc", date=date(2026, 1, 1), used=True)
-        out = run("seed", "--org", str(self.nigeria.id), "--prefix-length", "1")
-        self.assertIn(f"org #{self.nigeria.id} [a, b): 1 answers", out)
-        self.assertIn(f"Seeded 1 answers of org #{self.nigeria.id} (nigeria)", out)
+        out = run("backfill", "--org", str(self.nigeria.id), "--prefix-length", "1")
+        self.assertIn(f"org #{self.nigeria.id} contacts [a, b): 1 activities", out)
+        self.assertIn(f"org #{self.nigeria.id} (nigeria): 1 answer months from activity tables, 0 results", out)
 
         self.assertIn("Checkpointed", run("checkpoint"))
         self.assertIn(f"sketches of org #{self.org.id} and replayed", run("restore", "--org", str(self.org.id)))
@@ -601,6 +606,33 @@ class ActiveUsersTest(UreportTest):
             run("backfill", "--since", "nope")
 
         self.assertTrue(len(results))
+
+    def test_backfill_without_activity_tables(self):
+        results = self.seed()
+        with frozen_now(NOW):
+            expected = {s: active_users._existing_activity(self.org, s, [12]) for s in active_users.COMPARE_SEGMENTS}
+
+        # a later release drops the tables
+        self.assertTrue(active_users.activity_table_exists())
+        with connection.cursor() as cursor:
+            cursor.execute("SET CONSTRAINTS ALL IMMEDIATE")
+            cursor.execute("DROP TABLE stats_contactactivity CASCADE")
+        self.assertFalse(active_users.activity_table_exists())
+
+        # just the results
+        with frozen_now(NOW):
+            self.assertEqual((None, len(results)), active_users.backfill(self.org))
+            self.assertTrue(self.dirty())
+            for segment in active_users.COMPARE_SEGMENTS:
+                self.assertEqual(expected[segment], active_users.get_activity(self.org, segment, [12]), segment)
+
+            out = StringIO()
+            call_command("active_users", "backfill", stdout=out)
+
+        out = out.getvalue()
+        self.assertEqual(1, out.count("No contact activity tables, backfilling from results only"))
+        self.assertIn(f"org #{self.org.id} (uganda): {len(results)} results", out)
+        self.assertIn(f"org #{self.nigeria.id} (nigeria): 0 results", out)
 
     def test_tasks(self):
         active_users.add_results([self.result("c1", datetime(2026, 1, 5, tzinfo=tzone.utc))])

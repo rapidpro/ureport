@@ -17,29 +17,26 @@ def parse_month(value):
 
 class Command(BaseCommand):
     help = (
-        "Seeds, backfills, compares, checkpoints and restores the active users counted by HyperLogLog sketches. To "
-        "fill the sketches of an org, seed them from its contact activities first, then backfill from its results - "
-        "both only add to the sketches, so either can be run again."
+        "Backfills, compares, checkpoints and restores the active users counted by HyperLogLog sketches. A backfill "
+        "fills an org's sketches from its contact activities, while those tables exist, and then from its results - "
+        "it only adds to the sketches, so it can be run again."
     )
 
     def add_arguments(self, parser):
         sub = parser.add_subparsers(dest="action", required=True)
 
-        seed = sub.add_parser("seed", help="Seed the sketches from the contact activities, before any backfill")
-        seed.add_argument("--org", type=int, action="append", dest="orgs", help="Org id, all active by default")
-        seed.add_argument(
-            "--prefix-length",
-            type=int,
-            default=active_users.SEED_PREFIX_LENGTH,
-            choices=range(0, 4),
-            help="Read the activities of contacts in 16^N ranges of uuids at a time",
-        )
-
-        backfill = sub.add_parser("backfill", help="Add existing poll results to the sketches, after any seed")
+        backfill = sub.add_parser("backfill", help="Fill the sketches from the contact activities and the results")
         backfill.add_argument("--org", type=int, action="append", dest="orgs", help="Org id, all active by default")
         backfill.add_argument("--since", type=parse_month, help="First month to add (YYYY-MM), all kept by default")
         backfill.add_argument("--until", type=parse_month, help="Last month to add (YYYY-MM), this month by default")
         backfill.add_argument("--clear", action="store_true", help="Delete the org's sketches first")
+        backfill.add_argument(
+            "--prefix-length",
+            type=int,
+            default=active_users.ACTIVITY_PREFIX_LENGTH,
+            choices=range(0, 4),
+            help="Read the activities of contacts in 16^N ranges of uuids at a time",
+        )
 
         compare = sub.add_parser("compare", help="Compare the sketches with the contact activity counters")
         compare.add_argument("--org", type=int, action="append", dest="orgs", help="Org id, all active by default")
@@ -64,29 +61,23 @@ class Command(BaseCommand):
             orgs = Org.objects.filter(id__in=org_ids).order_by("id")
         return list(orgs)
 
-    def handle_seed(self, orgs, prefix_length, **options):
-        for org in self.get_orgs(orgs):
-            added = active_users.seed(
-                org,
-                prefix_length=prefix_length,
-                progress=lambda start, end, n: (
-                    n and self.stdout.write(f"  org #{org.id} [{start}, {end}): {n} answers")
-                ),
-            )
-            self.stdout.write(f"Seeded {added} answers of org #{org.id} ({org.name})")
+    def handle_backfill(self, orgs, since, until, clear, prefix_length, **options):
+        if not active_users.activity_table_exists():
+            self.stdout.write("No contact activity tables, backfilling from results only")
 
-    def handle_backfill(self, orgs, since, until, clear, **options):
         for org in self.get_orgs(orgs):
             if clear:
                 self.stdout.write(f"Deleted {active_users.clear(org)} sketches of org #{org.id}")
 
-            added = active_users.backfill(
+            answers, results = active_users.backfill(
                 org,
                 since=since,
                 until=until,
-                progress=lambda flow, n: self.stdout.write(f"  org #{org.id} flow {flow}: {n} results", ending="\n"),
+                prefix_length=prefix_length,
+                progress=lambda source, part, n: n and self.stdout.write(f"  org #{org.id} {part}: {n} {source}"),
             )
-            self.stdout.write(f"Added {added} results of org #{org.id} ({org.name})")
+            from_activities = "" if answers is None else f"{answers} answer months from activity tables, "
+            self.stdout.write(f"org #{org.id} ({org.name}): {from_activities}{results} results")
 
     def handle_compare(self, orgs, segments, worst, min_count, csv_path, **options):
         segments = segments or active_users.COMPARE_SEGMENTS

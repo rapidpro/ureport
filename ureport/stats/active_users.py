@@ -47,7 +47,7 @@ MIN_BORN = 1900
 # how many commands are sent in one pipeline
 PIPELINE_SIZE = 1000
 
-# results read per query by the backfill and restore
+# results, or reconstructed answers, read per query by the backfill and restore
 RESULTS_BATCH_SIZE = 5000
 
 # a restore replays results answered this long before its checkpoint was taken, to cover the ones that were saved
@@ -207,39 +207,13 @@ def _add_results_qs(qs, batch_size=RESULTS_BATCH_SIZE):
     return added
 
 
-def backfill(org, since=None, until=None, batch_size=RESULTS_BATCH_SIZE, progress=None):
-    """
-    Adds an org's existing results answered between the given months (inclusive) to the sketches, one poll at a time.
-    Defaults to every month still kept. Safe to run again, or alongside the sync.
-    """
-    from ureport.polls.models import Poll, PollResult
-
-    today = month_start(timezone.now())
-    since = month_start(since) if since else add_months(today, 1 - RETENTION_MONTHS)
-    until = add_months(month_start(until) if until else today, 1)
-
-    after = datetime.combine(since, datetime.min.time(), tzinfo=tzone.utc)
-    before = datetime.combine(until, datetime.min.time(), tzinfo=tzone.utc)
-
-    added = 0
-    flows = Poll.objects.filter(org=org).values_list("flow_uuid", flat=True).distinct().order_by("flow_uuid")
-    for flow in flows:
-        qs = PollResult.objects.filter(org=org, flow=flow, date__gte=after, date__lt=before)
-        flow_added = _add_results_qs(qs, batch_size=batch_size)
-        added += flow_added
-        if progress:
-            progress(flow, flow_added)
-
-    return added
-
-
-# the reconstructed answers of one chunk of an org's contacts, from its contact activity rows. Every answer writes
+# the reconstructed answers of one range of an org's contacts, from its contact activity rows. Every answer writes
 # rows for its month and the 11 after, so each contact's active months are split into runs of consecutive months
 # (gaps and islands), and each run [s, e] gets answers at s, s+12, s+24... while below e-11, then at e-11 - whose
 # windows of 12 months together cover the run exactly. A run shorter than 12 months, which the prune has cut into at
 # the start, just gets e-11, before its first row, and takes that row's segments. Months are numbered year * 12 +
 # month - 1.
-SEED_SQL = """
+ACTIVITY_ANSWERS_SQL = """
 WITH months AS (
     SELECT contact, born, gender, state, scheme,
            (EXTRACT(YEAR FROM date)::int * 12 + EXTRACT(MONTH FROM date)::int - 1) AS mi
@@ -254,14 +228,25 @@ WITH months AS (
     FROM runs
     WHERE (MOD(mi - s, 12) = 0 AND mi <= e - 12) OR mi = e - 11 OR (mi = s AND s > e - 11)
 )
-SELECT contact, answer_mi, born, gender, state, scheme FROM answers WHERE answer_mi >= %%s
+SELECT contact, answer_mi, born, gender, state, scheme FROM answers WHERE answer_mi >= %%s AND answer_mi < %%s
 """
 
-# a seed reads an org's activities a range of contact uuids at a time, split on their first characters
-SEED_PREFIX_LENGTH = 2
+# the activities are read a range of contact uuids at a time, split on their first characters
+ACTIVITY_PREFIX_LENGTH = 2
 
 
-def _seed_ranges(prefix_length):
+def activity_table_exists():
+    """
+    Whether the contact activity table is still there to backfill from
+    """
+    from django.db import connection
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT to_regclass('stats_contactactivity') IS NOT NULL")
+        return cursor.fetchone()[0]
+
+
+def _contact_ranges(prefix_length):
     """
     Ranges of contact uuids that together cover every string, split on hex prefixes of the given length, as
     (from inclusive, to exclusive) with None for unbounded
@@ -273,20 +258,17 @@ def _seed_ranges(prefix_length):
     return list(zip([None] + bounds, bounds + [None]))
 
 
-def seed(org, prefix_length=SEED_PREFIX_LENGTH, batch_size=RESULTS_BATCH_SIZE, progress=None):
+def _backfill_activities(org, since, until, prefix_length, batch_size, progress):
     """
-    Seeds an org's sketches from its contact activity rows, with answers reconstructed so that every contact is
-    active in exactly the months it's active in now. Unlike a backfill this recovers the contacts of results that
-    have since been deleted, so seeding first and then backfilling gives the fullest sketches - both only add to
-    them, so either can be run again. Returns the number of answers added.
+    Adds the answers reconstructed from an org's contact activity rows, so that every contact is active in exactly
+    the months it's active in there. That includes the contacts of results that have since been deleted.
     """
     from django.db import connection, transaction
 
     r = get_valkey_connection()
-    first_mi = _month_index(add_months(month_start(timezone.now()), 1 - RETENTION_MONTHS))
 
     added = 0
-    for start, end in _seed_ranges(prefix_length):
+    for start, end in _contact_ranges(prefix_length):
         conds, params = [], [org.id]
         if start is not None:
             conds.append("AND contact >= %s")
@@ -294,13 +276,13 @@ def seed(org, prefix_length=SEED_PREFIX_LENGTH, batch_size=RESULTS_BATCH_SIZE, p
         if end is not None:
             conds.append("AND contact < %s")
             params.append(end)
-        params.append(first_mi)
+        params += [_month_index(since), _month_index(until)]
 
         range_added = 0
-        # a server side cursor, which needs a transaction, streams the chunk's answers rather than loading them
+        # a server side cursor, which needs a transaction, streams the range's answers rather than loading them
         with transaction.atomic():
             with connection.chunked_cursor() as cursor:
-                cursor.execute(SEED_SQL % {"range": " ".join(conds)}, params)
+                cursor.execute(ACTIVITY_ANSWERS_SQL % {"range": " ".join(conds)}, params)
                 while rows := cursor.fetchmany(batch_size):
                     contacts_by_key = defaultdict(set)
                     for contact, answer_mi, born, gender, state, scheme in rows:
@@ -312,10 +294,53 @@ def seed(org, prefix_length=SEED_PREFIX_LENGTH, batch_size=RESULTS_BATCH_SIZE, p
 
         added += range_added
         if progress:
-            progress(start, end, range_added)
+            progress("activities", f"contacts [{start or ''}, {end or ''})", range_added)
 
-    logger.info("Seeded %d answers into the active users sketches of org #%d", added, org.id)
     return added
+
+
+def _backfill_results(org, since, until, batch_size, progress):
+    """
+    Adds an org's existing results, one poll at a time
+    """
+    from ureport.polls.models import Poll, PollResult
+
+    after = datetime.combine(since, datetime.min.time(), tzinfo=tzone.utc)
+    before = datetime.combine(until, datetime.min.time(), tzinfo=tzone.utc)
+
+    added = 0
+    flows = Poll.objects.filter(org=org).values_list("flow_uuid", flat=True).distinct().order_by("flow_uuid")
+    for flow in flows:
+        qs = PollResult.objects.filter(org=org, flow=flow, date__gte=after, date__lt=before)
+        flow_added = _add_results_qs(qs, batch_size=batch_size)
+        added += flow_added
+        if progress:
+            progress("results", f"flow {flow}", flow_added)
+
+    return added
+
+
+def backfill(
+    org, since=None, until=None, prefix_length=ACTIVITY_PREFIX_LENGTH, batch_size=RESULTS_BATCH_SIZE, progress=None
+):
+    """
+    Fills an org's sketches with everything answered between the given months (inclusive), defaulting to every month
+    still kept: first the answers reconstructed from the contact activity tables while they exist, then the results
+    still there. Both only add to the sketches, so this is safe to run again, or alongside the sync. Returns the
+    number of answers from the activities (None without the tables) and of results added.
+    """
+    today = month_start(timezone.now())
+    since = month_start(since) if since else add_months(today, 1 - RETENTION_MONTHS)
+    until = add_months(month_start(until) if until else today, 1)
+
+    answers = None
+    if activity_table_exists():
+        answers = _backfill_activities(org, since, until, prefix_length, batch_size, progress)
+
+    results = _backfill_results(org, since, until, batch_size, progress)
+
+    logger.info("Backfilled %s activity answers and %d results for org #%d", answers, results, org.id)
+    return answers, results
 
 
 def _month_index(month):
@@ -567,7 +592,7 @@ def restore(org, batch_size=500):
 
     # with no checkpoint to restore, everything still kept is replayed
     if taken_on is None:
-        return restored, backfill(org)
+        return restored, backfill(org)[1]
 
     # results saved after the checkpoint, and results of polls still syncing that were answered after it, which
     # covers the ones whose answers changed in place since
