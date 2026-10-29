@@ -16,12 +16,26 @@ def parse_month(value):
 
 
 class Command(BaseCommand):
-    help = "Backfills, compares, checkpoints and restores the active users counted by HyperLogLog sketches"
+    help = (
+        "Seeds, backfills, compares, checkpoints and restores the active users counted by HyperLogLog sketches. To "
+        "fill the sketches of an org, seed them from its contact activities first, then backfill from its results - "
+        "both only add to the sketches, so either can be run again."
+    )
 
     def add_arguments(self, parser):
         sub = parser.add_subparsers(dest="action", required=True)
 
-        backfill = sub.add_parser("backfill", help="Add existing poll results to the sketches")
+        seed = sub.add_parser("seed", help="Seed the sketches from the contact activities, before any backfill")
+        seed.add_argument("--org", type=int, action="append", dest="orgs", help="Org id, all active by default")
+        seed.add_argument(
+            "--prefix-length",
+            type=int,
+            default=active_users.SEED_PREFIX_LENGTH,
+            choices=range(0, 4),
+            help="Read the activities of contacts in 16^N ranges of uuids at a time",
+        )
+
+        backfill = sub.add_parser("backfill", help="Add existing poll results to the sketches, after any seed")
         backfill.add_argument("--org", type=int, action="append", dest="orgs", help="Org id, all active by default")
         backfill.add_argument("--since", type=parse_month, help="First month to add (YYYY-MM), all kept by default")
         backfill.add_argument("--until", type=parse_month, help="Last month to add (YYYY-MM), this month by default")
@@ -49,6 +63,17 @@ class Command(BaseCommand):
         if org_ids:
             orgs = Org.objects.filter(id__in=org_ids).order_by("id")
         return list(orgs)
+
+    def handle_seed(self, orgs, prefix_length, **options):
+        for org in self.get_orgs(orgs):
+            added = active_users.seed(
+                org,
+                prefix_length=prefix_length,
+                progress=lambda start, end, n: (
+                    n and self.stdout.write(f"  org #{org.id} [{start}, {end}): {n} answers")
+                ),
+            )
+            self.stdout.write(f"Seeded {added} answers of org #{org.id} ({org.name})")
 
     def handle_backfill(self, orgs, since, until, clear, **options):
         for org in self.get_orgs(orgs):

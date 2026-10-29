@@ -421,6 +421,112 @@ class ActiveUsersTest(UreportTest):
                     active_users.get_activity(self.org, segment, [12]),
                 )
 
+    def activities(self, contact, first, last, org=None, **kwargs):
+        """
+        Contact activity rows for every month from first to last, as the trigger would have written them
+        """
+        fields = dict(born=None, gender=None, state=None, district=None, ward=None, scheme=None)
+        fields.update(kwargs)
+        rows, month = [], first
+        while month <= last:
+            rows.append(ContactActivity(org=org or self.org, contact=contact, date=month, used=True, **fields))
+            month = active_users.add_months(month, 1)
+        return rows
+
+    def months_of(self, contact, org):
+        """
+        The months a contact is in org's sketches for, i.e. those whose count doesn't change with it added
+        """
+        probe = active_users.sketch_key(999999, date(2000, 1, 1), "probe")
+        self.r.pfadd(probe, contact)
+
+        found, month = [], date(2023, 1, 1)
+        while month <= date(2027, 12, 1):
+            key = active_users.sketch_key(org.id, month, "all")
+            if self.r.exists(key) and self.r.pfcount(key) == self.r.pfcount(key, probe):
+                found.append(month)
+            month = active_users.add_months(month, 1)
+
+        self.r.delete(probe)
+        return found
+
+    def test_seed_reconstructs_answers(self):
+        org = self.nigeria
+        ContactActivity.objects.bulk_create(
+            # a long run, which answered at its start, a year later, and 12 months before its end
+            self.activities("0aaa", date(2024, 10, 1), date(2026, 12, 1), org=org)
+            # two runs with a gap between
+            + self.activities("Fbbb", date(2025, 1, 1), date(2025, 12, 1), org=org)
+            + self.activities("Fbbb", date(2026, 3, 1), date(2027, 2, 1), org=org)
+            # a run the prune has cut into at the start, which answered before its first row
+            + self.activities("zccc", date(2025, 10, 1), date(2026, 3, 1), org=org, gender="F")
+            # answered before the sketches are kept
+            + self.activities("9ddd", date(2024, 1, 1), date(2024, 12, 1), org=org)
+        )
+
+        with frozen_now(NOW):
+            progress = []
+            self.assertEqual(6, active_users.seed(org, prefix_length=1, progress=lambda *a: progress.append(a)))
+
+        self.assertEqual(16, len(progress))
+        self.assertEqual((None, "1", 3), progress[0])  # the long run
+        self.assertEqual(("f", None), progress[-1][:2])
+        # wherever the collation puts uppercase and non hex uuids, the ranges between them cover every one
+        self.assertEqual(6, sum(n for *_, n in progress))
+
+        self.assertEqual([date(2024, 10, 1), date(2025, 10, 1), date(2026, 1, 1)], self.months_of("0aaa", org))
+        self.assertEqual([date(2025, 1, 1), date(2026, 3, 1)], self.months_of("Fbbb", org))
+        self.assertEqual([date(2025, 4, 1)], self.months_of("zccc", org))
+        self.assertEqual([], self.months_of("9ddd", org))
+        self.assertEqual(1, self.pfcount(date(2025, 4, 1), "gender:F", org=org))
+
+        # the sketches it touched are left to be checkpointed
+        self.assertIn(active_users.sketch_key(org.id, date(2025, 4, 1), "gender:F"), self.dirty())
+
+    def test_seed_matches_contact_activity(self):
+        genders = ["M", "F", "O", None]
+        states = ["R1", "r2", None]
+        schemes = ["tel", "twitterid", "TEL", None]
+        borns = [2011, 2008, 2004, 1999, 1994, 1980, None]
+
+        rows = []
+        for i in range(60):
+            attrs = dict(
+                born=borns[i % len(borns)],
+                gender=genders[i % len(genders)],
+                state=states[i % len(states)],
+                scheme=schemes[i % len(schemes)],
+            )
+            contact = f"{i:02x}-contact"
+            first = active_users.add_months(date(2024, 10, 1), i % 9)
+            if i % 3 == 0:  # one long run
+                rows += self.activities(contact, first, active_users.add_months(first, 14 + i % 13), **attrs)
+            elif i % 3 == 1:  # runs with gaps between
+                rows += self.activities(contact, first, active_users.add_months(first, 11), **attrs)
+                second = active_users.add_months(first, 13 + i % 5)
+                rows += self.activities(contact, second, active_users.add_months(second, 11 + i % 7), **attrs)
+            else:  # cut short at the start by the prune
+                start = date(2025, 10, 1)
+                rows += self.activities(contact, start, active_users.add_months(start, i % 11), **attrs)
+        ContactActivity.objects.bulk_create(rows)
+
+        with frozen_now(NOW):
+            added = active_users.seed(self.org)
+            for segment in active_users.COMPARE_SEGMENTS:
+                existing = active_users._existing_activity(self.org, segment, [12])
+                self.assertEqual(existing, active_users.get_activity(self.org, segment, [12]), segment)
+                self.assertTrue(any(v for s in existing[12] for v in s["data"].values()), segment)
+
+            # seeding again, and backfilling on top, changes nothing
+            self.assertEqual(added, active_users.seed(self.org, prefix_length=0))
+            active_users.backfill(self.org)
+            for segment in active_users.COMPARE_SEGMENTS:
+                self.assertEqual(
+                    active_users._existing_activity(self.org, segment, [12]),
+                    active_users.get_activity(self.org, segment, [12]),
+                    segment,
+                )
+
     def test_compare(self):
         results = self.seed()
         active_users.add_results(results)
@@ -479,6 +585,11 @@ class ActiveUsersTest(UreportTest):
 
         out = run("compare", "--org", str(self.org.id), "--segment", "gender")
         self.assertIn("mean", out)
+
+        ContactActivity.objects.create(org=self.nigeria, contact="abc", date=date(2026, 1, 1), used=True)
+        out = run("seed", "--org", str(self.nigeria.id), "--prefix-length", "1")
+        self.assertIn(f"org #{self.nigeria.id} [a, b): 1 answers", out)
+        self.assertIn(f"Seeded 1 answers of org #{self.nigeria.id} (nigeria)", out)
 
         self.assertIn("Checkpointed", run("checkpoint"))
         self.assertIn(f"sketches of org #{self.org.id} and replayed", run("restore", "--org", str(self.org.id)))

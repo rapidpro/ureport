@@ -233,6 +233,95 @@ def backfill(org, since=None, until=None, batch_size=RESULTS_BATCH_SIZE, progres
     return added
 
 
+# the reconstructed answers of one chunk of an org's contacts, from its contact activity rows. Every answer writes
+# rows for its month and the 11 after, so each contact's active months are split into runs of consecutive months
+# (gaps and islands), and each run [s, e] gets answers at s, s+12, s+24... while below e-11, then at e-11 - whose
+# windows of 12 months together cover the run exactly. A run shorter than 12 months, which the prune has cut into at
+# the start, just gets e-11, before its first row, and takes that row's segments. Months are numbered year * 12 +
+# month - 1.
+SEED_SQL = """
+WITH months AS (
+    SELECT contact, born, gender, state, scheme,
+           (EXTRACT(YEAR FROM date)::int * 12 + EXTRACT(MONTH FROM date)::int - 1) AS mi
+    FROM stats_contactactivity
+    WHERE org_id = %%s %(range)s
+), islands AS (
+    SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact ORDER BY mi) AS island FROM months
+), runs AS (
+    SELECT *, MIN(mi) OVER w AS s, MAX(mi) OVER w AS e FROM islands WINDOW w AS (PARTITION BY contact, island)
+), answers AS (
+    SELECT contact, CASE WHEN s > e - 11 THEN e - 11 ELSE mi END AS answer_mi, born, gender, state, scheme
+    FROM runs
+    WHERE (MOD(mi - s, 12) = 0 AND mi <= e - 12) OR mi = e - 11 OR (mi = s AND s > e - 11)
+)
+SELECT contact, answer_mi, born, gender, state, scheme FROM answers WHERE answer_mi >= %%s
+"""
+
+# a seed reads an org's activities a range of contact uuids at a time, split on their first characters
+SEED_PREFIX_LENGTH = 2
+
+
+def _seed_ranges(prefix_length):
+    """
+    Ranges of contact uuids that together cover every string, split on hex prefixes of the given length, as
+    (from inclusive, to exclusive) with None for unbounded
+    """
+    if not prefix_length:
+        return [(None, None)]
+
+    bounds = [f"{i:0{prefix_length}x}" for i in range(1, 16**prefix_length)]
+    return list(zip([None] + bounds, bounds + [None]))
+
+
+def seed(org, prefix_length=SEED_PREFIX_LENGTH, batch_size=RESULTS_BATCH_SIZE, progress=None):
+    """
+    Seeds an org's sketches from its contact activity rows, with answers reconstructed so that every contact is
+    active in exactly the months it's active in now. Unlike a backfill this recovers the contacts of results that
+    have since been deleted, so seeding first and then backfilling gives the fullest sketches - both only add to
+    them, so either can be run again. Returns the number of answers added.
+    """
+    from django.db import connection, transaction
+
+    r = get_valkey_connection()
+    first_mi = _month_index(add_months(month_start(timezone.now()), 1 - RETENTION_MONTHS))
+
+    added = 0
+    for start, end in _seed_ranges(prefix_length):
+        conds, params = [], [org.id]
+        if start is not None:
+            conds.append("AND contact >= %s")
+            params.append(start)
+        if end is not None:
+            conds.append("AND contact < %s")
+            params.append(end)
+        params.append(first_mi)
+
+        range_added = 0
+        # a server side cursor, which needs a transaction, streams the chunk's answers rather than loading them
+        with transaction.atomic():
+            with connection.chunked_cursor() as cursor:
+                cursor.execute(SEED_SQL % {"range": " ".join(conds)}, params)
+                while rows := cursor.fetchmany(batch_size):
+                    contacts_by_key = defaultdict(set)
+                    for contact, answer_mi, born, gender, state, scheme in rows:
+                        month = date(answer_mi // 12, answer_mi % 12 + 1, 1)
+                        for segment in result_segments(born, gender, state, scheme):
+                            contacts_by_key[sketch_key(org.id, month, segment)].add(contact)
+                    _add(r, contacts_by_key)
+                    range_added += len(rows)
+
+        added += range_added
+        if progress:
+            progress(start, end, range_added)
+
+    logger.info("Seeded %d answers into the active users sketches of org #%d", added, org.id)
+    return added
+
+
+def _month_index(month):
+    return month.year * 12 + month.month - 1
+
+
 # ------------------------------------------------------------------------------
 # Reading
 # ------------------------------------------------------------------------------
