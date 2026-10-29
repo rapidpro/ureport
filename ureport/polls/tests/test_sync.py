@@ -19,6 +19,8 @@ from ureport.polls.models import Poll, PollResult
 from ureport.polls.sync import (
     AGE_GENDER_JOB_TYPE,
     ARCHIVES_JOB_TYPE,
+    ARCHIVES_LEASE_SECONDS,
+    ARCHIVES_RESET_BACKOFF,
     ARCHIVES_RESET_PENDING,
     COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
@@ -358,6 +360,29 @@ class SyncPollResultsTest(PollSyncTestBase):
 
         self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {})
         self.assertNotIn("archives_reset_pending", self.get_job().progress)
+
+    def test_a_run_waits_for_a_refused_archives_reset_to_land(self):
+        archives_job = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
+        SyncJob.objects.filter(id=archives_job.id).update(cursor={"before": "2026-01-01"})
+        hold_lease(archives_job)
+        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+
+        with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
+
+            # the pull is done, but ending the run would drop the reset its next run knows nothing of
+            mock_continue = run_task(sync_poll_results, self.job.id)
+
+            mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=ARCHIVES_RESET_BACKOFF)
+            self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING)
+            self.assertEqual(self.get_job().progress[ARCHIVES_RESET_PENDING], 1)
+
+            drop_lease(archives_job)
+            mock_continue = run_task(sync_poll_results, self.job.id)
+
+        mock_continue.assert_not_called()
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
+        self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {})
 
     def test_queues_archives_again_after_a_failed_chunk(self):
         self.mock_flow_date.return_value = None
@@ -1202,22 +1227,14 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertEqual(self.stopped(), set())
         self.assertTrue(self.requested("uuid-1"))
 
-        # and when that walk ends, a chunk of the results sync is under way again
+        # nor does the end of that walk, it is the end of the next results sync that does
         drop_lease(archives)
         SyncJob.objects.filter(id=archives.id).update(status=SyncJob.STATUS_COMPLETE, cursor={"before": "2026-01-01"})
-        results = self.results_job()
-        SyncJob.objects.filter(id=results.id).update(status=SyncJob.STATUS_RUNNING)
-        hold_lease(results)
-
         self.finish_sync(job=archives)
 
         self.assertEqual(self.stopped(), set())
 
-        # whichever of the two ends last retires the flow
-        drop_lease(results)
-        SyncJob.objects.filter(id=results.id).update(status=SyncJob.STATUS_COMPLETE)
-        self.finish_sync(job=archives)
-
+        self.finish_sync("uuid-1")
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
 
     def test_waits_for_the_flows_archives_to_be_walked(self):
@@ -1230,14 +1247,7 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.finish_sync("uuid-1")
         self.assertEqual(self.stopped(), set())
 
-        # nor has one whose reset the results sync is still waiting to apply
         SyncJob.objects.filter(id=archives.id).update(cursor={"before": "2026-01-01"})
-        SyncJob.objects.filter(id=self.results_job().id).update(progress={ARCHIVES_RESET_PENDING: 1})
-
-        self.finish_sync("uuid-1")
-        self.assertEqual(self.stopped(), set())
-
-        SyncJob.objects.filter(id=self.results_job().id).update(progress={})
 
         self.finish_sync("uuid-1")
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
@@ -1251,6 +1261,9 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
         self.assertTrue(self.requested("uuid-1"))
+
+        # and that is kept for however long it takes, as the results are deleted without a rebuild once it's gone
+        self.assertIsNone(cache.ttl(RETIRE_KEY % (self.nigeria.pk, "uuid-1")))
 
         # the results are kept until a rebuild replaced all of the counts
         self.prune()
@@ -1317,30 +1330,56 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertEqual(self.stopped(), set())
         self.assertTrue(self.mock_queue_results.called)
 
-        # but not forever - the prune retires it, holding the sync's lease while it does
+        # but not forever - the prune retires it, unless a chunk of either sync is under way
         asked_on = timezone.now() - RETIRE_FALLBACK_WAIT - timedelta(minutes=1)
         cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), asked_on, None)
+        archives = self.archives_job()
+        SyncJob.objects.filter(id=archives.id).update(status=SyncJob.STATUS_RUNNING)
+        hold_lease(archives)
+
+        self.prune()
+        self.prune()
+        self.prune()
+        self.assertEqual(self.stopped(), set())
+
+        # once there is none, it is retired on what it has, its archives walked or not
+        drop_lease(archives)
+        make_stale(archives, seconds_ago=2 * ARCHIVES_LEASE_SECONDS + 60)
+
         self.prune()
         self.prune()
         self.prune()
 
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
-        self.assertJobState(job, status=SyncJob.STATUS_COMPLETE, lease_owner=None)
+        self.assertJobState(job, status=SyncJob.STATUS_FAILED, lease_owner=None)
 
     def test_waits_for_a_paused_sync_however_long(self):
         self.prune()
 
-        job = self.results_job()
-        job.pause()
         asked_on = timezone.now() - RETIRE_FALLBACK_WAIT - timedelta(days=10)
         cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), asked_on, None)
 
-        self.prune()
-        self.prune()
+        # whichever of the flow's syncs it is
+        for job in (self.results_job(), self.archives_job()):
+            job.pause()
+
+            self.prune()
+            self.prune()
+            self.prune()
+
+            self.assertEqual(self.stopped(), set())
+            self.assertJobState(job, status=SyncJob.STATUS_PAUSED)
+
+            job.resume()
+
+    def test_retires_a_flow_whose_polls_are_all_inactive_straight_away(self):
+        # no sync is run for inactive polls, so there is none to wait for
+        Poll.objects.filter(flow_uuid="uuid-1").update(is_active=False)
+
         self.prune()
 
-        self.assertEqual(self.stopped(), set())
-        self.assertJobState(job, status=SyncJob.STATUS_PAUSED)
+        self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
+        self.assertJobState(self.job, progress={"retired": 1, "skipped_retired": 1, "requested": 1})
 
     @patch("ureport.polls.sync.PRUNE_MAX_REQUESTS", 1)
     def test_spreads_a_backlog_of_flows_over_runs(self):
