@@ -6,6 +6,7 @@ import json
 import logging
 from datetime import timedelta
 
+import requests
 from mock import PropertyMock, patch
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import (
@@ -16,6 +17,7 @@ from temba_client.v2.types import (
     ObjectRef,
     Run as TembaRun,
 )
+from urllib3.response import HTTPResponse
 
 from django.db import connection, reset_queries
 from django.test import override_settings
@@ -30,10 +32,27 @@ from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.stats.models import ContactActivity
-from ureport.tests import MockResponse, UreportTest
+from ureport.tests import UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
 logger = logging.getLogger(__name__)
+
+
+def archive_response(records, status=200, headers=None):
+    """
+    Builds a streamed response for a gzipped JSONL archive of the given records
+    """
+    body = io.BytesIO()
+    with gzip.GzipFile(fileobj=body, mode="wb") as gz:
+        for record in records:
+            gz.write(json.dumps(record).encode("utf-8"))
+            gz.write(b"\n")
+    body.seek(0)
+
+    response = requests.Response()
+    response.status_code = status
+    response.raw = HTTPResponse(body=body, headers=headers or {}, status=status, preload_content=False)
+    return response
 
 
 class FieldSyncerTest(UreportTest):
@@ -1969,6 +1988,44 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.category, "Win")
         self.assertEqual(poll_result.text, "We'll win today")
 
+    @patch("requests.get")
+    def test_iter_archive_records(self, mock_request_get):
+        archive = TembaArchive.create(
+            type="run",
+            period="daily",
+            record_count=3,
+            size=23,
+            hash="f0d79988b7772c003d04a28bd7417a62",
+            download_url="http://s3-bucket.aws.com/my/archive.jsonl.gz",
+        )
+        records = [
+            {"id": 1, "flow": {"uuid": "flow-uuid"}},
+            {"id": 2, "flow": {"uuid": "survey-uuid"}},
+            {"id": 3, "flow": {"uuid": "flow-uuid"}},
+        ]
+
+        # archive is decompressed from the response stream and only lines mentioning the flow are parsed
+        response = archive_response(records)
+        mock_request_get.return_value = response
+
+        self.assertEqual(list(self.backend._iter_archive_records(archive, "flow-uuid")), [records[0], records[2]])
+        mock_request_get.assert_called_once_with("http://s3-bucket.aws.com/my/archive.jsonl.gz", stream=True)
+        self.assertTrue(response.raw.closed)
+
+        # a gzip Content-Encoding header doesn't cause the archive to be decompressed twice
+        mock_request_get.return_value = archive_response(records, headers={"Content-Encoding": "gzip"})
+
+        self.assertEqual(list(self.backend._iter_archive_records(archive, "survey-uuid")), [records[1]])
+
+        # a failed download raises rather than being parsed
+        response = archive_response([], status=403)
+        mock_request_get.return_value = response
+
+        with self.assertRaises(requests.HTTPError):
+            list(self.backend._iter_archive_records(archive, "flow-uuid"))
+
+        self.assertTrue(response.raw.closed)
+
     @patch("valkey.client.StrictValkey.lock")
     @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.TembaClient.get_archives")
@@ -1977,17 +2034,6 @@ class RapidProBackendTest(UreportTest):
     def test_pull_results_from_archives(
         self, mock_request_get, mock_timezone_now, mock_get_archives, mock_poll_flow_date, mock_valkey_lock
     ):
-        def gzipped_records(records):
-            stream = io.BytesIO()
-            gz = gzip.GzipFile(fileobj=stream, mode="wb")
-
-            for record in records:
-                gz.write(json.dumps(record).encode("utf-8"))
-                gz.write(b"\n")
-            gz.close()
-            stream.seek(0)
-            return MockResponse(200, stream.read())
-
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
@@ -2019,7 +2065,7 @@ class RapidProBackendTest(UreportTest):
             exit_type="completed",
         )
 
-        mock_request_get.side_effect = gzipped_records([temba_run.serialize()])
+        mock_request_get.return_value = archive_response([temba_run.serialize()])
         mock_get_archives.side_effect = [
             MockClientQuery(
                 *[
@@ -2101,7 +2147,7 @@ class RapidProBackendTest(UreportTest):
             exit_type="completed",
         )
 
-        mock_request_get.side_effect = gzipped_records([temba_run_1.serialize(), temba_run_2.serialize()])
+        mock_request_get.return_value = archive_response([temba_run_1.serialize(), temba_run_2.serialize()])
         mock_get_archives.side_effect = [
             MockClientQuery(
                 *[

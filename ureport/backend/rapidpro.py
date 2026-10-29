@@ -2,7 +2,6 @@
 
 import gc
 import gzip
-import io
 import json
 import logging
 import time
@@ -462,16 +461,17 @@ class RapidProBackend(BaseBackend):
         )
 
     def _iter_archive_records(self, archive, flow_uuid):
-        r = requests.get(archive.download_url, stream=True)
-        stream = gzip.GzipFile(fileobj=io.BytesIO(r.content))
+        with requests.get(archive.download_url, stream=True) as r:
+            r.raise_for_status()
 
-        while True:
-            line = stream.readline()
-            if not line:
-                break
-            line_decoded = line.decode("utf-8")
-            if line_decoded.find(flow_uuid) > 0:
-                yield json.loads(line_decoded)
+            # read the raw gzipped bytes and decompress them ourselves, whatever the Content-Encoding header says
+            r.raw.decode_content = False
+
+            with gzip.GzipFile(fileobj=r.raw) as stream:
+                for line in stream:
+                    line_decoded = line.decode("utf-8")
+                    if line_decoded.find(flow_uuid) > 0:
+                        yield json.loads(line_decoded)
 
     def _iter_poll_record_runs(self, archive, poll_flow_uuid):
         for record_batch in chunk_list(self._iter_archive_records(archive, poll_flow_uuid), 1000):
