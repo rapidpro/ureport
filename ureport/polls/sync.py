@@ -82,10 +82,10 @@ AGE_GENDER_CHUNK_SIZE = 5
 POPULATE_BATCH_SIZE = 1000
 POPULATE_BATCHES_PER_CHUNK = 5
 
-# results of polls whose date is older than this are dropped, unless the poll itself was
-# only created recently, i.e. it's an old poll someone is still setting up
+# results of polls are dropped once both the poll's date and its creation are older than
+# this - a poll's date defaults to its flow's, so a new poll on an old flow still gets the
+# full period
 RESULTS_RETENTION = timedelta(days=90)
-NEW_POLL_WINDOW = timedelta(days=14)
 
 # an age and gender backfill populates the results, then rebuilds what they feed
 STAGE_POPULATE = "populate"
@@ -553,8 +553,8 @@ def prune_poll_results(job):
     counts are rebuilt one last time, their results deleted, and every poll on the flow
     marked as no longer syncing. Polls whose flow is still being synced are stepped over
     rather than waited for, and reconsidered by a later run. A retired poll whose flow still
-    has results is one whose delete failed or was interrupted, and is walked again so that
-    the delete is finished.
+    has results, and no other poll still syncing it, is one whose delete failed or was
+    interrupted, and is walked again so that the delete is finished.
     """
     from ureport.polls.models import Poll, PollResult
 
@@ -569,12 +569,13 @@ def prune_poll_results(job):
     after_pk = (job.cursor or {}).get("after_pk") or 0
 
     has_results = Exists(PollResult.objects.filter(org_id=org.pk, flow=OuterRef("flow_uuid")))
+    flow_syncing = Exists(_syncing_flow_polls(org).filter(flow_uuid=OuterRef("flow_uuid")))
 
     polls = list(
         Poll.objects.filter(org=org, pk__gt=after_pk)
-        .filter(Q(stopped_syncing=False) | has_results)
+        .filter(Q(stopped_syncing=False) | (has_results & ~flow_syncing))
         .exclude(poll_date__gte=now - RESULTS_RETENTION)
-        .exclude(created_on__gte=now - NEW_POLL_WINDOW)
+        .exclude(created_on__gte=now - RESULTS_RETENTION)
         .order_by("pk")[:PRUNE_CHUNK_SIZE]
     )
     if not polls:
@@ -590,13 +591,23 @@ def prune_poll_results(job):
     return False
 
 
+def _syncing_flow_polls(org):
+    """
+    The polls of an org that keep their flow syncing - see get_job_poll
+    """
+    from ureport.polls.models import Poll
+
+    return Poll.objects.filter(org=org, is_active=True, stopped_syncing=False)
+
+
 def _clear_poll_results(org, poll):
     """
     Retires one poll, returning what became of it. A flow still being synced is left alone
     - its results must not be deleted mid traversal - and so is a poll whose flow another
     poll already retired, which is how the duplicated polls of a flow are recognised now
     that a chunk can't carry a set of them forward in memory. A retired flow that still has
-    results only has its delete finished.
+    results only has its delete finished, unless a newer poll on the flow is syncing it again
+    and the results are that poll's.
     """
     from ureport.polls.models import Poll, PollResult
 
@@ -619,7 +630,10 @@ def _clear_poll_results(org, poll):
         poll.refresh_from_db()
 
         if poll.stopped_syncing:
-            if not PollResult.objects.filter(org_id=org.pk, flow=poll.flow_uuid).exists():
+            if (
+                not PollResult.objects.filter(org_id=org.pk, flow=poll.flow_uuid).exists()
+                or _syncing_flow_polls(org).filter(flow_uuid=poll.flow_uuid).exists()
+            ):
                 logger.info(
                     "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated"
                     % (poll.pk, org.pk)

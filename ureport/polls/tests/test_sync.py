@@ -20,8 +20,10 @@ from ureport.polls.sync import (
     COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
     PRUNE_JOB_TYPE,
+    PRUNE_SKIPPED_RETIRED,
     RATE_LIMITED_BACKOFF,
     RESULTS_JOB_TYPE,
+    _clear_poll_results,
     backfill_age_gender,
     dispatch_org_polls,
     prune_poll_results,
@@ -1028,8 +1030,8 @@ class PrunePollResultsTest(PollSyncTestBase):
         # results are kept for 90 days from the poll's date
         Poll.objects.filter(id=self.poll.id).update(poll_date=timezone.now() - timedelta(days=91))
         Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=89))
-        # an old poll only just created is someone still setting it up
-        Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=2))
+        # and for 90 days from its creation, as a new poll's date defaults to its flow's
+        Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=89))
 
         pruned, _ = self.prune()
 
@@ -1128,6 +1130,30 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         self.assertEqual(pruned, [])
         mock_continue.assert_not_called()
+
+    def test_leaves_the_results_of_a_reused_flow_alone(self):
+        # the first flow was retired long ago, and a new poll on it is syncing its results again
+        Poll.objects.filter(flow_uuid="uuid-1").update(stopped_syncing=True)
+        reused = self.create_poll(self.nigeria, "Poll 1 reused", "uuid-1", self.education_nigeria, self.admin)
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow="uuid-1",
+            ruleset="ruleset-uuid",
+            contact="contact-1",
+            date=timezone.now(),
+            completed=False,
+        )
+
+        # the retired polls of the flow aren't walked, so the results stay with the new poll
+        pruned, _ = self.prune()
+
+        self.assertEqual(pruned, [self.second.pk, self.third.pk])
+        self.assertTrue(PollResult.objects.filter(org=self.nigeria, flow="uuid-1").exists())
+        self.assertFalse(Poll.objects.get(id=reused.id).stopped_syncing)
+
+        # nor is a retired poll the walk had already picked when the new poll came along
+        self.assertEqual(_clear_poll_results(self.nigeria, self.poll), PRUNE_SKIPPED_RETIRED)
+        self.assertTrue(PollResult.objects.filter(org=self.nigeria, flow="uuid-1").exists())
 
     def test_moves_past_a_poll_that_errors(self):
         def rebuild(poll):
