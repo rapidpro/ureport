@@ -60,6 +60,7 @@ from ureport.polls.tasks import (
     update_results_age_gender,
 )
 from ureport.polls.views import PollCRUDL
+from ureport.stats.models import PollStatsCounter
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tests.base import (
     SyncJobTestMixin,
@@ -1662,6 +1663,74 @@ class RefreshReusedFlowsTest(PollSyncTestBase):
             call_command("refresh_reused_flows", "--refresh", stdout=StringIO())
 
         self.assertEqual([call[0][0].pk for call in mock_refresh.call_args_list], [self.poll.pk])
+
+    def test_lists_and_refreshes_the_retired_flows_with_zeroed_counts(self):
+        def retired_poll(title, flow_uuid, is_active=True, question=True):
+            poll = self.create_poll(self.nigeria, title, flow_uuid, self.education_nigeria, self.admin)
+            Poll.objects.filter(id=poll.id).update(stopped_syncing=True, is_active=is_active)
+            if question:
+                return self.create_poll_question(self.admin, poll, "Question", "ruleset-%s" % flow_uuid)
+
+        # zeroed: retired, no results left and no positive counts, including a zero counter left behind
+        zeroed = self.create_poll_question(self.admin, self.poll, "Question", "ruleset-uuid-1")
+        Poll.objects.filter(id=self.poll.id).update(stopped_syncing=True)
+        PollStatsCounter.objects.create(org=self.nigeria, flow_result=zeroed.flow_result, scope="all", count=0)
+
+        # an older inactive duplicate of the zeroed flow isn't the one pulled again
+        retired_poll("Poll 1 dupe", "uuid-1", is_active=False, question=False)
+
+        counted = retired_poll("Poll 2 counted", "uuid-2")
+        PollStatsCounter.objects.create(org=self.nigeria, flow_result=counted.flow_result, scope="all", count=3)
+
+        retired_poll("Poll 3 with results", "uuid-3")
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow="uuid-3",
+            ruleset="ruleset-uuid-3",
+            contact="contact-1",
+            date=timezone.now(),
+            completed=False,
+        )
+
+        retired_poll("Poll 4 reused", "uuid-4")
+        self.create_poll(self.nigeria, "Poll 4 syncing", "uuid-4", self.education_nigeria, self.admin)
+
+        retired_poll("Poll 5 inactive", "uuid-5", is_active=False)
+        retired_poll("Poll 6 without questions", "uuid-6", question=False)
+
+        other = retired_poll("Poll 7 zeroed", "uuid-7")
+
+        out = StringIO()
+        with patch.object(Poll, "pull_refresh_task", autospec=True) as mock_refresh:
+            call_command("refresh_reused_flows", "--zeroed", stdout=out)
+
+        mock_refresh.assert_not_called()
+        self.assertIn("flow uuid-1 (poll #%d" % self.poll.pk, out.getvalue())
+        self.assertIn("flow uuid-7 (poll #%d" % other.poll.pk, out.getvalue())
+        for flow_uuid in ("uuid-2", "uuid-3", "uuid-4", "uuid-5", "uuid-6"):
+            self.assertNotIn(flow_uuid, out.getvalue())
+        self.assertIn("Found 2 flows", out.getvalue())
+
+        out = StringIO()
+        with patch.object(Poll, "pull_refresh_task", autospec=True) as mock_refresh:
+            call_command("refresh_reused_flows", "--zeroed", "--refresh", "--limit", "1", stdout=out)
+
+        self.assertEqual([call[0][0].pk for call in mock_refresh.call_args_list], [self.poll.pk])
+        self.assertIn("Scheduled a full pull of 1 flows", out.getvalue())
+
+        # an actual refresh syncs the flow again, which takes it off the list until it's retired again
+        with patch.object(Poll, "pull_poll_results_task") as mock_pull:
+            call_command("refresh_reused_flows", "--zeroed", "--refresh", "--org", self.nigeria.pk, stdout=StringIO())
+
+        self.assertEqual(mock_pull.call_count, 2)
+        self.assertEqual(
+            set(Poll.objects.filter(stopped_syncing=False).values_list("flow_uuid", flat=True)),
+            {"uuid-1", "uuid-4", "uuid-7"},
+        )
+
+        out = StringIO()
+        call_command("refresh_reused_flows", "--zeroed", stdout=out)
+        self.assertIn("Found 0 flows", out.getvalue())
 
 
 @patch("ureport.polls.sync.POPULATE_BATCH_SIZE", 2)
