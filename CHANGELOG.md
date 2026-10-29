@@ -1,3 +1,9 @@
+## v1.8.17 (2026-10-29)
+ * Make the PollStats removal migration follow the squashed counts migration
+ * Renumber the PollStats removal migration after the squashed counts migration
+ * Make the PollStats removal migration run after the polls migration that still loads it
+ * Remove the PollStats model and its squash task
+
 ## v1.8.16 (2026-10-28)
  * Calculate engagement data for every time filter in one pass and spread nightly stats runs over 30 minutes
  * Only rebuild the counts of polls whose results changed in the nightly pass, tracking in the cache when a flow's results changed and when its counts were rebuilt
