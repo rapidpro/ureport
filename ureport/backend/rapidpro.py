@@ -1227,7 +1227,7 @@ class RapidProBackend(BaseBackend):
                 self._process_archive(archive, process_archive)
 
             failed.pop(key, None)
-        except (TembaRateExceededError, LeaseLost):
+        except TembaRateExceededError, LeaseLost:
             raise
         except Exception as e:
             failed[key] = failed.get(key, 0) + 1
