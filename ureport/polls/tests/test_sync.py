@@ -1090,6 +1090,43 @@ class PrunePollResultsTest(PollSyncTestBase):
         # still syncing on results that are half gone
         self.assertEqual(stopped_when_deleting, [True, True])
 
+    def test_finishes_a_delete_that_was_interrupted(self):
+        # the first flow was retired, but its delete didn't get through all of its results
+        Poll.objects.filter(flow_uuid="uuid-1").update(stopped_syncing=True)
+        for contact in ("contact-1", "contact-2"):
+            PollResult.objects.create(
+                org=self.nigeria,
+                flow="uuid-1",
+                ruleset="ruleset-uuid",
+                contact=contact,
+                date=timezone.now(),
+                completed=False,
+            )
+
+        with patch.object(Poll, "rebuild_poll_results_counts", autospec=True) as mock_rebuild:
+            run_task(prune_poll_results, self.job.id)
+
+        # the leftovers are deleted without rebuilding the counts from them, and the
+        # duplicate poll of the flow finds nothing left to delete
+        self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow="uuid-1").exists())
+        self.assertEqual([call[0][0].pk for call in mock_rebuild.call_args_list], [self.second.pk])
+        self.assertJobState(
+            self.job,
+            cursor={"after_pk": self.second.pk},
+            progress={"finished": 1, "skipped_retired": 1, "cleared": 1},
+        )
+
+        # the run then retires the last poll and completes
+        self.assertEqual(self.prune()[0], [self.third.pk])
+        self.assertEqual(self.prune()[0], [])
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
+
+        # and a retired flow with no results left isn't walked by the next run
+        pruned, mock_continue = self.prune()
+
+        self.assertEqual(pruned, [])
+        mock_continue.assert_not_called()
+
     def test_moves_past_a_poll_that_errors(self):
         def rebuild(poll):
             if poll.flow_uuid == "uuid-1":

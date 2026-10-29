@@ -4,6 +4,7 @@ import logging
 from datetime import timedelta
 
 from django.core.cache import cache
+from django.db.models import Exists, OuterRef, Q
 from django.utils import timezone
 
 from dash.orgs.models import Org
@@ -93,6 +94,7 @@ STAGE_REBUILD = "rebuild"
 # what a prune did with a poll, kept apart in the job's counters so that a poll failing
 # every run is distinguishable from one that was merely busy
 PRUNE_CLEARED = "cleared"
+PRUNE_FINISHED = "finished"
 PRUNE_SKIPPED_SYNCING = "skipped_syncing"
 PRUNE_SKIPPED_RETIRED = "skipped_retired"
 PRUNE_ERRORED = "errors"
@@ -550,9 +552,11 @@ def prune_poll_results(job):
     Retires a bounded number of an org's polls that are too old to keep syncing: their
     counts are rebuilt one last time, their results deleted, and every poll on the flow
     marked as no longer syncing. Polls whose flow is still being synced are stepped over
-    rather than waited for, and reconsidered by a later run.
+    rather than waited for, and reconsidered by a later run. A retired poll whose flow still
+    has results is one whose delete failed or was interrupted, and is walked again so that
+    the delete is finished.
     """
-    from ureport.polls.models import Poll
+    from ureport.polls.models import Poll, PollResult
 
     org = job.org
     now = timezone.now()
@@ -564,11 +568,13 @@ def prune_poll_results(job):
 
     after_pk = (job.cursor or {}).get("after_pk") or 0
 
+    has_results = Exists(PollResult.objects.filter(org_id=org.pk, flow=OuterRef("flow_uuid")))
+
     polls = list(
         Poll.objects.filter(org=org, pk__gt=after_pk)
+        .filter(Q(stopped_syncing=False) | has_results)
         .exclude(poll_date__gte=now - RESULTS_RETENTION)
         .exclude(created_on__gte=now - NEW_POLL_WINDOW)
-        .exclude(stopped_syncing=True)
         .order_by("pk")[:PRUNE_CHUNK_SIZE]
     )
     if not polls:
@@ -589,9 +595,10 @@ def _clear_poll_results(org, poll):
     Retires one poll, returning what became of it. A flow still being synced is left alone
     - its results must not be deleted mid traversal - and so is a poll whose flow another
     poll already retired, which is how the duplicated polls of a flow are recognised now
-    that a chunk can't carry a set of them forward in memory.
+    that a chunk can't carry a set of them forward in memory. A retired flow that still has
+    results only has its delete finished.
     """
-    from ureport.polls.models import Poll
+    from ureport.polls.models import Poll, PollResult
 
     if is_flow_syncing(org.pk, poll.flow_uuid):
         logger.info("Skipping clearing old results for poll #%d on org #%d as it is still syncing" % (poll.pk, org.pk))
@@ -612,11 +619,28 @@ def _clear_poll_results(org, poll):
         poll.refresh_from_db()
 
         if poll.stopped_syncing:
-            logger.info(
-                "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated"
-                % (poll.pk, org.pk)
-            )
-            return PRUNE_SKIPPED_RETIRED
+            if not PollResult.objects.filter(org_id=org.pk, flow=poll.flow_uuid).exists():
+                logger.info(
+                    "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated"
+                    % (poll.pk, org.pk)
+                )
+                return PRUNE_SKIPPED_RETIRED
+
+            # the counts were rebuilt one last time before the flow was retired, so rebuilding
+            # them from what is left of its results would only undercount them
+            try:
+                poll.delete_poll_results()
+
+                logger.info("Finished clearing poll results for poll #%s on org #%s" % (poll.id, poll.org_id))
+            except Exception:
+                logger.error(
+                    "Error finishing clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
+                    exc_info=True,
+                    extra={"stack": True},
+                )
+                return PRUNE_ERRORED
+
+            return PRUNE_FINISHED
 
         try:
             # one last stats rebuild for the poll, while its results are still there
