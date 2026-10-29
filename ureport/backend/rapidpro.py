@@ -27,7 +27,7 @@ from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.stats.models import ContactActivity
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
-from . import BaseBackend, ChunkResult
+from . import BaseBackend, ChunkResult, failed_archives
 
 logger = logging.getLogger(__name__)
 
@@ -986,7 +986,9 @@ class RapidProBackend(BaseBackend):
         and "seen" the period keys already processed at that exact date - together they
         say "resume strictly below this position". Archives newer than "before" are
         outside this traversal; their runs were still in the live API when the traversal
-        started. Archives that fail to process are recorded under "failed" and skipped.
+        started. Archives that fail to process are recorded under "failed" and skipped, and
+        those under "retry" are pulled again first, each taking from the budget - a daily
+        archive since rolled up into its month's is pulled from that.
         """
         if archive_budget is None:
             archive_budget = self.ARCHIVES_BUDGET
@@ -1017,19 +1019,26 @@ class RapidProBackend(BaseBackend):
 
         before = cursor.get("before")
         seen = set(cursor.get("seen") or [])
-        failed = list(cursor.get("failed") or [])
-
-        # before filters start_date inclusively server-side, so archives at the boundary
-        # date reappear and are dropped by the seen set below
-        archives_query = client.get_archives(type="run", after=first, before=before)
-        archives_fetches = archives_query.iterfetches(retry_on_rate_exceed=True)
+        failed = failed_archives(cursor)
+        retry = list(cursor.get("retry") or [])
 
         processed = 0
         more = False
         rate_limited = False
 
         try:
-            for archives in archives_fetches:
+            while retry and processed < archive_budget:
+                self._retry_archive(client, org, poll, questions_uuids, retry[0], failed, stats_dict)
+                retry.pop(0)
+                processed += 1
+
+            more = bool(retry)
+
+            # before filters start_date inclusively server-side, so archives at the boundary
+            # date reappear and are dropped by the seen set below
+            archives_query = client.get_archives(type="run", after=first, before=before)
+
+            for archives in [] if more else archives_query.iterfetches(retry_on_rate_exceed=True):
                 for archive in archives:
                     # YYYY-MM-DD, so lexicographic comparison is chronological
                     start_iso = str(archive.start_date)[:10]
@@ -1051,38 +1060,11 @@ class RapidProBackend(BaseBackend):
 
                     try:
                         if archive.record_count > 0:
-                            start_archive = time.time()
-
-                            for fetch in self._iter_poll_record_runs(archive, poll.flow_uuid):
-                                (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(
-                                    fetch, org, poll
-                                )
-
-                                for temba_run in fetch:
-                                    contact_obj = contacts_map.get(temba_run.contact.uuid, None)
-                                    self._process_run_poll_results(
-                                        org,
-                                        questions_uuids,
-                                        temba_run,
-                                        contact_obj,
-                                        poll_results_map,
-                                        poll_results_to_save_map,
-                                        stats_dict,
-                                    )
-
-                                stats_dict["num_synced"] += len(fetch)
-                                self._save_new_poll_results_to_database(poll_results_to_save_map)
-
-                                # release per-page lookup maps holding cyclic references before next allocation
-                                del contacts_map, poll_results_map, poll_results_to_save_map
-                                gc.collect()
-
-                            logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
+                            self._pull_archive(org, poll, questions_uuids, archive, stats_dict)
                             processed += 1
                     except Exception as e:
-                        # advance past the broken archive but keep its key so the caller can
-                        # see the traversal was not clean
-                        failed.append(key)
+                        # advance past the broken archive but keep its key, so it is retried
+                        failed[key] = failed.get(key, 0) + 1
                         processed += 1
                         logger.error("Error processing archive %s for poll #%d" % (key, poll.pk), exc_info=e)
 
@@ -1100,7 +1082,75 @@ class RapidProBackend(BaseBackend):
         next_cursor = {"before": before, "seen": sorted(seen)}
         if failed:
             next_cursor["failed"] = failed
+        if retry:
+            next_cursor["retry"] = retry
         return ChunkResult(counts=stats_dict, cursor=next_cursor, done=done, rate_limited=rate_limited)
+
+    def _retry_archive(self, client, org, poll, questions_uuids, key, failed, stats_dict):
+        """
+        Pulls an archive an earlier chunk failed to again, keeping count of its failures in
+        failed. One that no longer exists has nothing left to pull.
+        """
+        try:
+            archive = self._find_archive(client, key)
+            if archive is None:
+                logger.warning("Archive %s for poll #%d no longer exists" % (key, poll.pk))
+            else:
+                self._pull_archive(org, poll, questions_uuids, archive, stats_dict)
+
+            failed.pop(key, None)
+        except TembaRateExceededError:
+            raise
+        except Exception as e:
+            failed[key] = failed.get(key, 0) + 1
+            logger.error("Error retrying archive %s for poll #%d" % (key, poll.pk), exc_info=e)
+
+    def _find_archive(self, client, key):
+        """
+        Finds the archive of a key an archives walk recorded, or the monthly one a daily
+        archive was rolled up into since
+        """
+        start_iso, period = key.split("|")
+        candidates = [(start_iso, period)]
+        if period == "daily":
+            candidates.append((start_iso[:8] + "01", "monthly"))
+
+        for start, period in candidates:
+            for fetch in client.get_archives(type="run", after=start, before=start).iterfetches(
+                retry_on_rate_exceed=True
+            ):
+                for archive in fetch:
+                    if str(archive.start_date)[:10] == start and archive.period == period:
+                        return archive
+
+        return None
+
+    def _pull_archive(self, org, poll, questions_uuids, archive, stats_dict):
+        start_archive = time.time()
+
+        for fetch in self._iter_poll_record_runs(archive, poll.flow_uuid):
+            (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(fetch, org, poll)
+
+            for temba_run in fetch:
+                contact_obj = contacts_map.get(temba_run.contact.uuid, None)
+                self._process_run_poll_results(
+                    org,
+                    questions_uuids,
+                    temba_run,
+                    contact_obj,
+                    poll_results_map,
+                    poll_results_to_save_map,
+                    stats_dict,
+                )
+
+            stats_dict["num_synced"] += len(fetch)
+            self._save_new_poll_results_to_database(poll_results_to_save_map)
+
+            # release per-page lookup maps holding cyclic references before next allocation
+            del contacts_map, poll_results_map, poll_results_to_save_map
+            gc.collect()
+
+        logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
 
     def _initiate_lookup_maps(self, fetch, org, poll):
         """

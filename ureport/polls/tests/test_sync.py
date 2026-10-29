@@ -18,6 +18,7 @@ from ureport.contacts.models import Contact
 from ureport.polls.models import Poll, PollResult
 from ureport.polls.sync import (
     AGE_GENDER_JOB_TYPE,
+    ARCHIVE_ATTEMPTS,
     ARCHIVES_JOB_TYPE,
     ARCHIVES_LEASE_SECONDS,
     ARCHIVES_RESET_BACKOFF,
@@ -33,12 +34,14 @@ from ureport.polls.sync import (
     RESULTS_LEASE_SECONDS,
     RETIRE_FALLBACK_WAIT,
     RETIRE_KEY,
+    _archives_walked,
     _counts_rebuild_due,
     _delete_flow_results,
     _finalize_archives,
     _finalize_results,
     _prune_poll,
     backfill_age_gender,
+    dispatch_archives,
     dispatch_org_polls,
     prune_poll_results,
     prune_results_dispatch,
@@ -536,6 +539,33 @@ class SyncPollArchivesTest(PollSyncTestBase):
 
         mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=RATE_LIMITED_BACKOFF)
 
+    def test_a_new_run_retries_the_archives_it_failed_to_pull(self):
+        failed = {"2026-03-03|daily": 1, "2026-02-01|monthly": ARCHIVE_ATTEMPTS}
+        end_run(self.job, cursor={"before": "2026-01-01", "seen": [], "failed": failed})
+
+        # until they've failed too often, when they are given up on
+        with patch.object(RapidProBackend, "pull_results_from_archives_chunk") as mock_chunk:
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"before": "2026-01-01"}, done=True)
+            run_task(sync_poll_archives, self.job.id)
+
+        self.assertEqual(mock_chunk.call_args.args[1]["retry"], ["2026-03-03|daily"])
+
+        # a chunk resuming the run carries on from its own position
+        end_run(self.job, status=SyncJob.STATUS_FAILED, cursor={"before": "2026-01-01", "failed": failed})
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_chunk") as mock_chunk:
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"before": "2026-01-01"}, done=True)
+            run_task(sync_poll_archives, self.job.id)
+
+        self.assertNotIn("retry", mock_chunk.call_args.args[1])
+
+    def test_waits_for_failed_archives_to_be_retried(self):
+        end_run(self.job, cursor={"before": "2026-01-01", "failed": {"2026-03-03|daily": 1}})
+        self.assertFalse(_archives_walked(reload(self.job)))
+
+        end_run(self.job, cursor={"before": "2026-01-01", "failed": {"2026-03-03|daily": ARCHIVE_ATTEMPTS}})
+        self.assertTrue(_archives_walked(reload(self.job)))
+
 
 class DispatchTest(PollSyncTestBase):
     def setUp(self):
@@ -713,6 +743,27 @@ class DispatchTest(PollSyncTestBase):
             dispatch_org_polls(self.nigeria)
 
         mock_queue.assert_called_once_with((failed.id,), queue="sync")
+
+    def test_nudges_walks_with_archives_to_retry_after_a_wait(self):
+        now = timezone.now()
+        job = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
+
+        def nudged(failures, hours_ago):
+            end_run(job, ended_on=now - timedelta(hours=hours_ago), cursor={"before": "2026-01-01", "failed": failures})
+
+            with patch.object(sync_poll_archives, "apply_async") as mock_queue:
+                dispatch_archives(self.nigeria)
+
+            return mock_queue.called
+
+        # the wait doubles with each failure
+        self.assertFalse(nudged({"2026-03-03|daily": 1}, 0.5))
+        self.assertTrue(nudged({"2026-03-03|daily": 1}, 1.5))
+        self.assertFalse(nudged({"2026-03-03|daily": 3}, 3.5))
+        self.assertTrue(nudged({"2026-03-03|daily": 3}, 4.5))
+
+        # until it is given up on
+        self.assertFalse(nudged({"2026-03-03|daily": ARCHIVE_ATTEMPTS}, 100))
 
     def test_skips_polls_created_within_the_last_week(self):
         Poll.objects.filter(id=self.other_poll.id).update(created_on=timezone.now() - timedelta(days=2))

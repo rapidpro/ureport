@@ -437,9 +437,84 @@ class PullArchivesChunkTest(UreportTest):
             result = self.backend.pull_results_from_archives_chunk(self.poll, {}, archive_budget=1)
 
         self.assertTrue(result.done)
-        self.assertEqual(result.cursor["failed"], [self._key(broken)])
+        self.assertEqual(result.cursor["failed"], {self._key(broken): 1})
         self.assertEqual(result.counts["num_val_created"], 0)
         json.dumps(result.cursor)
+
+    def _listings(self, mock_get_archives, by_date, walk=()):
+        """
+        Lists the archives starting on a date for a lookup of that date, and the walk's
+        archives otherwise
+        """
+
+        def get_archives(type, after=None, before=None):
+            if after is not None and after == before:
+                return CursorMockQuery([a for a in by_date if str(a.start_date)[:10] == after])
+            return CursorMockQuery(list(walk))
+
+        mock_get_archives.side_effect = get_archives
+
+    @patch("ureport.backend.rapidpro.RapidProBackend._iter_poll_record_runs")
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_retries_failed_archives(self, mock_get_archives, mock_iter_records):
+        now = timezone.now()
+        broken, other = self._archive("2026-03-03"), self._archive("2026-03-01")
+        self._listings(mock_get_archives, [broken, other])
+        cursor = {
+            "before": "2026-03-01",
+            "seen": [self._key(other)],
+            "failed": {self._key(broken): 1, self._key(other): 2},
+            "retry": [self._key(broken), self._key(other)],
+        }
+
+        # each takes from the budget, and one that fails again is counted
+        mock_iter_records.side_effect = [iter([[self._run(1234, "C-001", now)]]), ValueError("corrupt")]
+
+        first = self.backend.pull_results_from_archives_chunk(self.poll, cursor, archive_budget=1)
+
+        self.assertFalse(first.done)
+        self.assertEqual(first.counts["num_val_created"], 1)
+        self.assertEqual(first.cursor["failed"], {self._key(other): 2})
+        self.assertEqual(first.cursor["retry"], [self._key(other)])
+
+        second = self.backend.pull_results_from_archives_chunk(self.poll, first.cursor, archive_budget=1)
+
+        self.assertTrue(second.done)
+        self.assertEqual(
+            second.cursor, {"before": "2026-03-01", "seen": [self._key(other)], "failed": {self._key(other): 3}}
+        )
+
+    @patch("ureport.backend.rapidpro.RapidProBackend._iter_poll_record_runs")
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_retries_a_rolled_up_daily_from_its_month(self, mock_get_archives, mock_iter_records):
+        now = timezone.now()
+        monthly = self._archive("2026-02-01", period="monthly")
+        self._listings(mock_get_archives, [monthly])
+        mock_iter_records.side_effect = [iter([[self._run(1234, "C-001", now)]])]
+
+        # the failed list of an older walk counts each archive in it as failed once
+        cursor = {"before": "2026-01-01", "seen": [], "failed": ["2026-02-03|daily", "2026-01-15|daily"]}
+        cursor["retry"] = ["2026-01-15|daily", "2026-02-03|daily"]
+
+        result = self.backend.pull_results_from_archives_chunk(self.poll, cursor, archive_budget=5)
+
+        # one that's gone altogether has nothing left to pull
+        self.assertTrue(result.done)
+        self.assertNotIn("failed", result.cursor)
+        self.assertEqual(mock_iter_records.call_args.args[0], monthly)
+        self.assertEqual(result.counts["num_val_created"], 1)
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_a_rate_limited_retry_is_kept(self, mock_get_archives):
+        mock_get_archives.side_effect = TembaRateExceededError(0)
+        cursor = {"before": "2026-01-01", "seen": [], "failed": {"2026-02-03|daily": 1}, "retry": ["2026-02-03|daily"]}
+
+        result = self.backend.pull_results_from_archives_chunk(self.poll, cursor, archive_budget=1)
+
+        self.assertTrue(result.rate_limited)
+        self.assertFalse(result.done)
+        self.assertEqual(result.cursor["retry"], ["2026-02-03|daily"])
+        self.assertEqual(result.cursor["failed"], {"2026-02-03|daily": 1})
 
 
 class DummyBackend(BaseBackend):

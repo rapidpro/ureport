@@ -23,6 +23,18 @@ class ChunkResult:
     rate_limited: bool = False
 
 
+def failed_archives(cursor):
+    """
+    The archives an archives walk failed to pull, keyed by archive, with how many times each
+    has failed. Older walks kept them as a list, each of which failed once.
+    """
+    failed = cursor.get("failed") or {}
+    if isinstance(failed, list):
+        return {key: 1 for key in failed}
+
+    return dict(failed)
+
+
 class BaseBackend(object):
     __metaclass__ = ABCMeta
 
@@ -91,6 +103,10 @@ class BaseBackend(object):
         Pulls one bounded chunk of archived results for the given poll. Backends without
         archives complete immediately, on a position that says the walk was done - an empty
         one is what a walk sent back to the start has.
+
+        Archives that fail to pull are kept under the position's "failed" key (see
+        failed_archives), and those listed under its "retry" key are pulled again, before
+        the walk carries on.
         :param cursor: the resume position returned by the previous chunk, or {} to start
         :return: a ChunkResult whose counts dict has the num_val_* / num_path_* / num_synced keys
         """

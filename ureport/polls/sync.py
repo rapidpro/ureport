@@ -9,6 +9,7 @@ from django.db.models import Exists, OuterRef, Q
 from django.utils import timezone
 
 from dash.orgs.models import Org
+from ureport.backend import failed_archives
 from ureport.celery import app
 from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due
 from ureport.syncjobs.locks import chunk_lock
@@ -44,6 +45,12 @@ REBUILD_COUNTS_EVERY = 5
 # results run that is otherwise done waits before trying it again
 ARCHIVES_RESET_PENDING = "archives_reset_pending"
 ARCHIVES_RESET_BACKOFF = 300
+
+# an archive file a walk failed to pull is tried again by a later run, after a wait that
+# doubles with each failure, until it has failed this many times - about 15 hours after the
+# walk - when its results are given up on
+ARCHIVE_ATTEMPTS = 5
+ARCHIVE_RETRY_WAIT = timedelta(hours=1)
 
 # counters that mean a run actually changed results, i.e. counts are worth rebuilding
 RESULT_CHANGE_KEYS = ("num_val_created", "num_val_updated", "num_path_created", "num_path_updated")
@@ -445,11 +452,21 @@ def sync_poll_archives(job):
     if not poll:
         return True
 
-    result = _get_backend(poll).pull_results_from_archives_chunk(poll, dict(job.cursor or {}))
+    cursor = dict(job.cursor or {})
+    if job.new_run and _archives_to_retry(cursor):
+        # a new run of a finished walk tries the archives it failed to pull again
+        cursor["retry"] = _archives_to_retry(cursor)
+
+    result = _get_backend(poll).pull_results_from_archives_chunk(poll, cursor)
     if _has_changes(result.counts):
         Poll.mark_results_changed(job.org_id, job.scope)
 
     job.checkpoint(cursor=result.cursor, progress=job.add_progress(chunks=1, **result.counts))
+
+    given_up = set(failed_archives(result.cursor)) - set(_archives_to_retry(result.cursor))
+    given_up -= set(failed_archives(cursor)) - set(_archives_to_retry(cursor))
+    if given_up:
+        logger.error("Gave up pulling archives %s of flow %s on org #%d" % (sorted(given_up), job.scope, job.org_id))
 
     if result.done:
         return True
@@ -501,7 +518,8 @@ def dispatch_org_polls(org):
 
 def dispatch_archives(org):
     """
-    Nudges unfinished archive traversals. They are queued once by the results sync, so
+    Nudges unfinished archive traversals, and finished ones with archive files they failed
+    to pull that are due to be tried again. They are queued once by the results sync, so
     without this an interrupted or failed one would never be retried - while the polls on
     the flow already tell the public site their results are complete. Returns the flows
     actually queued.
@@ -509,8 +527,13 @@ def dispatch_archives(org):
     now = timezone.now()
     queued = []
 
-    jobs = SyncJob.objects.filter(org=org, job_type=ARCHIVES_JOB_TYPE).exclude(status=SyncJob.STATUS_COMPLETE)
+    jobs = SyncJob.objects.filter(org=org, job_type=ARCHIVES_JOB_TYPE).filter(
+        ~Q(status=SyncJob.STATUS_COMPLETE) | Q(cursor__has_key="failed")
+    )
     for job in jobs:
+        if job.status == SyncJob.STATUS_COMPLETE and not _archives_retry_due(job, now):
+            continue
+
         if is_due(job, now, backoff=FAILURE_BACKOFF):
             enqueue(job)
             queued.append(job.scope)
@@ -720,14 +743,38 @@ def _archives_walked(archives_job):
     """
     Whether the flow's archives have been walked to the end since its results were last
     pulled again in full: a job that has never been created isn't needed, one that hasn't
-    finished a walk - or was sent back to the start, which leaves its cursor empty - is. A
-    reset its results sync is still waiting to apply keeps that sync's run going, so it is
-    never pending by the end of one.
+    finished a walk - or was sent back to the start, which leaves its cursor empty - is, as
+    is one with archives it failed to pull still to be retried. A reset its results sync is
+    still waiting to apply keeps that sync's run going, so it is never pending by the end of
+    one.
     """
     if archives_job is None:
         return True
 
-    return archives_job.status == SyncJob.STATUS_COMPLETE and bool(archives_job.cursor)
+    return (
+        archives_job.status == SyncJob.STATUS_COMPLETE
+        and bool(archives_job.cursor)
+        and not _archives_to_retry(archives_job.cursor)
+    )
+
+
+def _archives_to_retry(cursor):
+    """
+    The archives a walk failed to pull that are still to be tried again
+    """
+    return sorted(key for key, failures in failed_archives(cursor).items() if failures < ARCHIVE_ATTEMPTS)
+
+
+def _archives_retry_due(job, now):
+    """
+    Whether a completed walk's failed archives are due to be tried again, each failure doubling
+    the wait since the run that last tried them
+    """
+    failures = [n for key, n in failed_archives(job.cursor or {}).items() if n < ARCHIVE_ATTEMPTS]
+    if not failures:
+        return False
+
+    return not job.ended_on or job.ended_on <= now - ARCHIVE_RETRY_WAIT * 2 ** (min(failures) - 1)
 
 
 def _retire_flow(org, flow_uuid, holder=None):
