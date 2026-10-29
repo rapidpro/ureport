@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import uuid
 from datetime import timedelta
 
 from django.core.cache import cache
+from django.db import transaction
 from django.db.models import Exists, OuterRef, Q
 from django.utils import timezone
 
@@ -87,11 +89,21 @@ POPULATE_BATCHES_PER_CHUNK = 5
 # full period
 RESULTS_RETENTION = timedelta(days=90)
 
-# a flow's results are pulled once more before it is retired, as the polls old enough to retire
-# only sync daily - when that was first asked for is kept for long enough to cover the wait
-FINAL_PULL_KEY = "poll-final-pull:org:%d:flow:%s"
-FINAL_PULL_WAIT = timedelta(days=3)
-FINAL_PULL_KEY_TTL = 60 * 60 * 24 * 7
+# a flow old enough to retire is retired by the end of its next sync, so that nothing pulled
+# before it is lost - when that was asked for is kept until its counts were rebuilt on the
+# flow retired, and a flow whose sync keeps failing is retired by the prune after a wait
+RETIRE_KEY = "poll-retire:org:%d:flow:%s"
+RETIRE_KEY_TTL = 60 * 60 * 24 * 7
+RETIRE_FALLBACK_WAIT = timedelta(days=3)
+
+# how many flows a prune run asks to retire, so a backlog of them is spread over nights
+# rather than queueing a sync of every one at once
+PRUNE_MAX_REQUESTS = 50
+
+# set while a full re-pull of a flow is under way, i.e. its results were deleted and are being
+# pulled again, so its counts are left as they were rather than rebuilt from part of them
+FULL_REPULL_KEY = "poll-full-repull:org:%d:flow:%s"
+FULL_REPULL_KEY_TTL = 60 * 60 * 24 * 3
 
 # an age and gender backfill populates the results, then rebuilds what they feed
 STAGE_POPULATE = "populate"
@@ -99,8 +111,10 @@ STAGE_REBUILD = "rebuild"
 
 # what a prune did with a poll, kept apart in the job's counters so that a poll failing
 # every run is distinguishable from one that was merely busy
+PRUNE_REQUESTED = "requested"
+PRUNE_DEFERRED = "deferred"
+PRUNE_RETIRED = "retired"
 PRUNE_CLEARED = "cleared"
-PRUNE_FINISHED = "finished"
 PRUNE_SKIPPED_SYNCING = "skipped_syncing"
 PRUNE_SKIPPED_RETIRED = "skipped_retired"
 PRUNE_SKIPPED_PROTECTED = "skipped_protected"
@@ -206,6 +220,9 @@ def _delete_flow_results(job, poll):
     """
     from ureport.polls.models import Poll
 
+    # the counts stay as they were until the archives have been walked again too
+    cache.set(FULL_REPULL_KEY % (job.org_id, job.scope), True, FULL_REPULL_KEY_TTL)
+
     # marked after the delete too, as a rebuild that started during it counted some of the deleted results
     Poll.mark_results_changed(job.org_id, job.scope)
     poll.delete_poll_results()
@@ -250,37 +267,58 @@ def _has_changes(counts):
     return any(counts.get(key, 0) for key in RESULT_CHANGE_KEYS)
 
 
+def _full_repull_pending(org_id, flow_uuid):
+    return bool(cache.get(FULL_REPULL_KEY % (org_id, flow_uuid)))
+
+
 def _finalize_results(job):
     """
-    Completes a results run: counts are rebuilt from everything the run changed, the polls
-    on the flow are marked synced, and the position is mirrored to the cache key the
-    unchunked task resumes from.
+    Completes a results run: a flow waiting to be retired is retired now that everything up
+    to this moment has been pulled, otherwise counts are rebuilt from everything the run
+    changed and the polls on the flow are marked synced. The position is mirrored to the
+    cache key the unchunked task resumes from either way.
     """
     from ureport.polls.models import Poll
-
-    poll = get_job_poll(job.org_id, job.scope)
-    if not poll:
-        return
-
-    if _changed_results(job):
-        # rebuilding refreshes the question caches of every poll on the flow itself
-        poll.rebuild_poll_results_counts()
-
-    Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope, has_synced=False).update(has_synced=True)
 
     after = (job.cursor or {}).get("after")
     if after:
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (job.org_id, job.scope), after, None)
 
+    poll = get_job_poll(job.org_id, job.scope)
+    if not poll:
+        return
+
+    # the lease this run holds through finalization keeps any other results chunk off the flow
+    if cache.get(RETIRE_KEY % (job.org_id, job.scope)) and _retire_flow(job.org, job.scope, job) == PRUNE_RETIRED:
+        return
+
+    # during a full re-pull the counts wait for the archives, which finalize them
+    if _changed_results(job) and not _full_repull_pending(job.org_id, job.scope):
+        # rebuilding refreshes the question caches of every poll on the flow itself
+        poll.rebuild_poll_results_counts()
+
+    Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope, has_synced=False).update(has_synced=True)
+
 
 def _finalize_archives(job):
+    """
+    Completes an archives run, which also ends a full re-pull: counts are rebuilt from
+    everything the run changed, or everything the re-pull did. A flow waiting to be retired
+    whose results sync finished before its archives did is retired now.
+    """
     from ureport.polls.models import Poll
+
+    repulled = _full_repull_pending(job.org_id, job.scope)
+    cache.delete(FULL_REPULL_KEY % (job.org_id, job.scope))
 
     poll = get_job_poll(job.org_id, job.scope)
     if not poll:
         return
 
-    if _changed_results(job):
+    if cache.get(RETIRE_KEY % (job.org_id, job.scope)) and _retire_flow(job.org, job.scope, job) == PRUNE_RETIRED:
+        return
+
+    if repulled or _changed_results(job):
         poll.rebuild_poll_results_counts()
 
     Poll.objects.filter(org_id=job.org_id, flow_uuid=job.scope, has_synced=False).update(has_synced=True)
@@ -349,7 +387,7 @@ def sync_poll_results(job):
     if result.done:
         return True
 
-    if progress.get("chunks", 0) % REBUILD_COUNTS_EVERY == 0:
+    if progress.get("chunks", 0) % REBUILD_COUNTS_EVERY == 0 and not _full_repull_pending(job.org_id, job.scope):
         poll.rebuild_poll_results_counts()
 
         # a rebuild of a big flow can outlast the lease, so renew before the next chunk -
@@ -545,8 +583,12 @@ def _counts_rebuild_due(poll, run_on):
     """
     Whether the counts rebuild run started at run_on has to rebuild the poll's counts: ones
     never rebuilt, ones whose results changed after their last rebuild started, and ones on
-    their full rebuild night that weren't rebuilt recently.
+    their full rebuild night that weren't rebuilt recently. A flow being pulled again in
+    full isn't, as its archives sync rebuilds it once it has all of its results again.
     """
+    if _full_repull_pending(poll.org_id, poll.flow_uuid):
+        return False
+
     changed_on, rebuilt_on = poll.get_counts_stamps()
 
     if rebuilt_on is None or (changed_on is not None and changed_on > rebuilt_on):
@@ -561,14 +603,14 @@ def _counts_rebuild_due(poll, run_on):
 )
 def prune_poll_results(job):
     """
-    Retires a bounded number of an org's polls that are too old to keep syncing: their
-    counts are rebuilt one last time, their results deleted, and every poll on the flow
-    marked as no longer syncing. As that retires the whole flow, a flow is only retired once
-    none of the polls syncing it is still within the retention period, its results have been
-    pulled once more, and its counts were all rebuilt. Polls whose flow is still being synced
-    are stepped over rather than waited for, and reconsidered by a later run. A retired poll
-    whose flow still has results, and no other poll still syncing it, is one whose delete
-    failed or was interrupted, and is walked again so that the delete is finished.
+    Retires the flows of an org's polls that are too old to keep syncing, then deletes their
+    results, a bounded number of polls per chunk. A flow is retired by the end of the sync
+    the prune asks for, so that its counts are rebuilt one last time on everything pulled
+    up to then and nothing can be pulled in after - see _retire_flow - and its results are
+    deleted by a later run. As retiring a flow retires every poll on it, a flow is only
+    retired once none of the polls syncing it is within the retention period, nor the main
+    poll. Polls whose flow is still being synced are stepped over rather than waited for,
+    and reconsidered by a later run.
     """
     from ureport.polls.models import Poll, PollResult
 
@@ -586,19 +628,24 @@ def prune_poll_results(job):
     flow_syncing = Exists(_syncing_flow_polls(org).filter(flow_uuid=OuterRef("flow_uuid")))
     flow_protected = Exists(_protected_flow_polls(org, now).filter(flow_uuid=OuterRef("flow_uuid")))
 
-    polls = list(
+    polls = (
         Poll.objects.filter(org=org, pk__gt=after_pk)
         .filter(Q(stopped_syncing=False) | (has_results & ~flow_syncing))
         .exclude(poll_date__gte=now - RESULTS_RETENTION)
         .exclude(created_on__gte=now - RESULTS_RETENTION)
         .exclude(flow_protected)
-        .order_by("pk")[:PRUNE_CHUNK_SIZE]
     )
+    main_poll = Poll.get_main_poll(org)
+    if main_poll:
+        polls = polls.exclude(flow_uuid=main_poll.flow_uuid)
+
+    polls = list(polls.order_by("pk")[:PRUNE_CHUNK_SIZE])
     if not polls:
         return True
 
     for poll in polls:
-        outcome = _clear_poll_results(org, poll)
+        can_request = (job.progress or {}).get(PRUNE_REQUESTED, 0) < PRUNE_MAX_REQUESTS
+        outcome = _prune_poll(org, poll, can_request)
 
         # the position advances past a poll that was skipped or errored too, so that one
         # unhappy poll can't stall everything behind it - the next run reconsiders it
@@ -625,39 +672,95 @@ def _protected_flow_polls(org, now):
     return _syncing_flow_polls(org).filter(Q(poll_date__gte=cutoff) | Q(created_on__gte=cutoff))
 
 
-def _final_pull_done(org, flow_uuid):
-    """
-    Whether the flow's results have been pulled once more since its retirement was first
-    attempted, so that the responses since its last scheduled sync aren't lost - requesting
-    that pull if not. A flow whose final pull hasn't happened in FINAL_PULL_WAIT is retired
-    anyway, so that one whose sync keeps failing, e.g. as its flow is gone, isn't kept forever.
-    """
-    key = FINAL_PULL_KEY % (org.pk, flow_uuid)
-    requested_on = cache.get(key)
-    job = SyncJob.get_or_create_job(org, RESULTS_JOB_TYPE, flow_uuid)
+def _is_protected(poll, now, main_poll_id):
+    cutoff = now - RESULTS_RETENTION
 
-    if requested_on:
-        if job.status == SyncJob.STATUS_COMPLETE and job.started_on and job.started_on >= requested_on:
-            return True
-        if requested_on < timezone.now() - FINAL_PULL_WAIT:
-            return True
-    else:
-        cache.set(key, timezone.now(), FINAL_PULL_KEY_TTL)
+    if poll.pk == main_poll_id:
+        return True
 
-    enqueue(job)
-    return False
+    syncing = poll.is_active and not poll.stopped_syncing
+    return syncing and (poll.poll_date >= cutoff or poll.created_on >= cutoff)
 
 
-def _clear_poll_results(org, poll):
+def _archives_walked(archives_job, results_job):
     """
-    Retires one poll, returning what became of it. A flow still being synced is left alone
-    - its results must not be deleted mid traversal - and so is a poll whose flow another
-    poll already retired, which is how the duplicated polls of a flow are recognised now
-    that a chunk can't carry a set of them forward in memory. A retired flow that still has
-    results only has its delete finished, unless a newer poll on the flow is syncing it again
-    and the results are that poll's. A flow that a recent poll is syncing isn't retired.
+    Whether the flow's archives have been walked to the end since its results were last
+    pulled again in full: a job that has never been created isn't needed, one that hasn't
+    finished a walk - or was sent back to the start, which leaves its cursor empty - is.
     """
-    from ureport.polls.models import Poll, PollResult
+    if results_job and (results_job.progress or {}).get(ARCHIVES_RESET_PENDING):
+        return False
+    if archives_job is None:
+        return True
+
+    return archives_job.status == SyncJob.STATUS_COMPLETE and bool(archives_job.cursor)
+
+
+def _retire_flow(org, flow_uuid, holder=None, fallback=False):
+    """
+    Retires every poll on a flow and rebuilds its counts one last time, returning what
+    became of it. Called by the end of a sync of the flow, whose job holder is - so the
+    caller's lease keeps that job's chunks off it - or by the prune for a flow whose sync
+    kept failing, holding the results job's lease for the same reason.
+
+    The polls are retired before the counts are rebuilt, under a lock on the flow's sync
+    jobs that a chunk has to wait on to claim them: a chunk that claims one after that sees
+    no poll to sync for, so nothing is written that the rebuild doesn't count. A rebuild
+    that didn't replace all of the counts keeps the retirement asked for, so that the prune
+    rebuilds them before deleting the results.
+    """
+    from ureport.polls.models import Poll
+
+    now = timezone.now()
+    main_poll = Poll.get_main_poll(org)
+    main_poll_id = main_poll.pk if main_poll else None
+
+    with transaction.atomic():
+        jobs = {
+            j.job_type: j
+            for j in SyncJob.objects.select_for_update().filter(
+                org=org, job_type__in=(RESULTS_JOB_TYPE, ARCHIVES_JOB_TYPE), scope=flow_uuid
+            )
+        }
+        for sync_job in jobs.values():
+            if (holder is None or sync_job.id != holder.id) and in_flight(sync_job, now):
+                return PRUNE_SKIPPED_SYNCING
+
+        # a flow whose sync keeps failing is retired on what it has rather than kept forever
+        if not fallback and not _archives_walked(jobs.get(ARCHIVES_JOB_TYPE), jobs.get(RESULTS_JOB_TYPE)):
+            return PRUNE_SKIPPED_PULLING
+
+        # locked, so a poll set up on the flow meanwhile is either seen here or set up after
+        # it is retired - in which case it pulls all of the flow's results again
+        polls = list(Poll.objects.select_for_update().filter(org=org, flow_uuid=flow_uuid))
+        if not any(p.is_active and not p.stopped_syncing for p in polls):
+            return PRUNE_SKIPPED_RETIRED
+
+        if any(_is_protected(p, now, main_poll_id) for p in polls):
+            cache.delete(RETIRE_KEY % (org.pk, flow_uuid))
+            return PRUNE_SKIPPED_PROTECTED
+
+        Poll.objects.filter(pk__in=[p.pk for p in polls]).update(stopped_syncing=True)
+
+    poll = Poll.objects.get(pk=polls[0].pk)
+
+    if poll.rebuild_poll_results_counts(retiring=True):
+        cache.delete(RETIRE_KEY % (org.pk, flow_uuid))
+
+    logger.info("Retired flow %s on org #%d" % (flow_uuid, org.pk))
+    return PRUNE_RETIRED
+
+
+def _prune_poll(org, poll, can_request):
+    """
+    Does the next step of retiring one poll's flow, returning what that was. A flow still
+    being synced is left alone - its results must not be deleted mid traversal. A retired
+    flow has its results deleted, unless a newer poll on the flow is syncing it again and
+    the results are that poll's, or none are left, which is how the duplicated polls of a
+    flow are recognised. A flow still syncing is asked to retire by the end of its next
+    sync, or retired here if that sync hasn't happened in RETIRE_FALLBACK_WAIT.
+    """
+    from ureport.polls.models import Poll
 
     if is_flow_syncing(org.pk, poll.flow_uuid):
         logger.info("Skipping clearing old results for poll #%d on org #%d as it is still syncing" % (poll.pk, org.pk))
@@ -677,67 +780,11 @@ def _clear_poll_results(org, poll):
         # refresh the object from the DB
         poll.refresh_from_db()
 
-        if poll.stopped_syncing:
-            if (
-                not PollResult.objects.filter(org_id=org.pk, flow=poll.flow_uuid).exists()
-                or _syncing_flow_polls(org).filter(flow_uuid=poll.flow_uuid).exists()
-            ):
-                logger.info(
-                    "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated"
-                    % (poll.pk, org.pk)
-                )
-                return PRUNE_SKIPPED_RETIRED
-
-            # the counts were rebuilt one last time before the flow was retired, so rebuilding
-            # them from what is left of its results would only undercount them
-            try:
-                poll.delete_poll_results()
-
-                logger.info("Finished clearing poll results for poll #%s on org #%s" % (poll.id, poll.org_id))
-            except Exception:
-                logger.error(
-                    "Error finishing clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
-                    exc_info=True,
-                    extra={"stack": True},
-                )
-                return PRUNE_ERRORED
-
-            return PRUNE_FINISHED
-
-        # rechecked here as a poll may have been published on the flow since the walk
-        if _protected_flow_polls(org, timezone.now()).filter(flow_uuid=poll.flow_uuid).exists():
-            logger.info(
-                "Skipping clearing old results for poll #%d on org #%d as a recent poll shares its flow"
-                % (poll.pk, org.pk)
-            )
-            return PRUNE_SKIPPED_PROTECTED
-
-        if not _final_pull_done(org, poll.flow_uuid):
-            logger.info(
-                "Skipping clearing old results for poll #%d on org #%d until its final pull is done" % (poll.pk, org.pk)
-            )
-            return PRUNE_SKIPPED_PULLING
-
         try:
-            # one last stats rebuild for the poll, while its results are still there. The
-            # counts it leaves are the flow's for good, so a rebuild that didn't replace all
-            # of them - or didn't run, as another rebuild of the flow is - is retried by a
-            # later run rather than retiring the flow on counts that may be missing results
-            if not poll.rebuild_poll_results_counts():
-                logger.info(
-                    "Skipping clearing old results for poll #%d on org #%d as its counts weren't all rebuilt"
-                    % (poll.pk, org.pk)
-                )
-                return PRUNE_SKIPPED_REBUILDING
+            if poll.stopped_syncing:
+                return _delete_retired_results(org, poll)
 
-            # retiring the flow before deleting its results, so that a delete interrupted
-            # part way leaves a flow that is durably retired on the counts just rebuilt,
-            # rather than one still syncing on results that are half gone
-            Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
-            poll.delete_poll_results()
-            cache.delete(FINAL_PULL_KEY % (org.pk, poll.flow_uuid))
-
-            logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
+            return _request_retirement(org, poll, can_request)
         except Exception:
             # one poll that fails every time would otherwise stall every poll after it, as
             # the traversal can only move past polls it has finished with
@@ -748,6 +795,72 @@ def _clear_poll_results(org, poll):
             )
             return PRUNE_ERRORED
 
+
+def _request_retirement(org, poll, can_request):
+    key = RETIRE_KEY % (org.pk, poll.flow_uuid)
+    requested_on = cache.get(key)
+    results_job = SyncJob.get_or_create_job(org, RESULTS_JOB_TYPE, poll.flow_uuid)
+
+    if not requested_on:
+        if not can_request:
+            return PRUNE_DEFERRED
+
+        cache.set(key, timezone.now(), RETIRE_KEY_TTL)
+        enqueue(results_job)
+        return PRUNE_REQUESTED
+
+    # a sync paused by hand is waited for however long, as there is no telling what it missed
+    if requested_on > timezone.now() - RETIRE_FALLBACK_WAIT or results_job.status == SyncJob.STATUS_PAUSED:
+        enqueue(results_job)
+        return PRUNE_SKIPPED_PULLING
+
+    owner = "prune:%s" % uuid.uuid4().hex[:8]
+    held = results_job.claim(owner, MAINTENANCE_LEASE_SECONDS)
+    if held is None:
+        return PRUNE_SKIPPED_SYNCING
+
+    try:
+        outcome = _retire_flow(org, poll.flow_uuid, held, fallback=True)
+
+        # a retired flow has nothing left to sync, otherwise the failing run is left to resume
+        if outcome == PRUNE_RETIRED:
+            held.mark_complete()
+    finally:
+        held.release_lease()
+
+    return outcome
+
+
+def _delete_retired_results(org, poll):
+    from ureport.polls.models import PollResult
+
+    if (
+        not PollResult.objects.filter(org_id=org.pk, flow=poll.flow_uuid).exists()
+        or _syncing_flow_polls(org).filter(flow_uuid=poll.flow_uuid).exists()
+    ):
+        logger.info(
+            "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated" % (poll.pk, org.pk)
+        )
+        return PRUNE_SKIPPED_RETIRED
+
+    # a retirement still asked for is one whose rebuild didn't replace all of the counts, and
+    # the counts left now are the flow's for good. Otherwise the counts were rebuilt when the
+    # flow was retired, and rebuilding them from what is left of its results would only
+    # undercount them
+    key = RETIRE_KEY % (org.pk, poll.flow_uuid)
+    if cache.get(key):
+        if not poll.rebuild_poll_results_counts(retiring=True):
+            logger.info(
+                "Skipping clearing old results for poll #%d on org #%d as its counts weren't all rebuilt"
+                % (poll.pk, org.pk)
+            )
+            return PRUNE_SKIPPED_REBUILDING
+
+        cache.delete(key)
+
+    poll.delete_poll_results()
+
+    logger.info("Cleared poll results for poll #%s on org #%s" % (poll.id, poll.org_id))
     return PRUNE_CLEARED
 
 
