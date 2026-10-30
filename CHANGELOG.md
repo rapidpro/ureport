@@ -1,3 +1,16 @@
+## v1.9.1 (2026-10-30)
+ * Retire a flow only after its counts are complete and its results have had a final pull, then delete its results at the end of its last sync
+ * Finish deleting the results of a retired flow whose delete was interrupted
+ * Don't retire a flow between the chunks of a sync or while a recent poll is still syncing it
+ * Pull all of a retired flow's results again when a new poll reuses it, and end the full re-pull only once both of its halves are done
+ * Keep a reused flow's results while any poll on it isn't retired
+ * Protect a new poll on an old flow for 30 days after its creation and keep the results of old polls for a year
+ * Let refresh_reused_flows find and re-pull retired flows whose counts are all zero
+ * Walk the archives of many flows in one pass, and walk those of full re-pulls from refresh_reused_flows in batches
+ * Hand the archives a batch failed to pull on to each flow's own walk
+ * Retry the archive files an archives walk failed to pull
+ * Stream run archives instead of reading them into memory, splitting download and decompression into _iter_archive_lines
+
 ## v1.9.0 (2026-10-30)
  * Count active users with HyperLogLog sketches alongside the contact activity tables
 
