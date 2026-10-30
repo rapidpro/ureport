@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import importlib
 from datetime import timedelta
 
 from django_valkey import get_valkey_connection
 from mock import patch
 
 from django.conf import settings
+from django.db import connection
 from django.utils import timezone
 
 from dash.orgs.models import TaskState
@@ -286,64 +288,126 @@ class ContactTest(UreportTest):
             {"total-reporters": 2, "gender:m": 2},
         )
 
-    @patch("valkey.client.StrictValkey.get")
-    def test_squash_reporters(self, mock_valkey_get):
-        mock_valkey_get.return_value = None
+    def test_squash_reporters(self):
+        def rows():
+            return set(ReportersCounter.objects.values_list("id", "org_id", "type", "count", "is_squashed"))
 
-        self.assertFalse(ReportersCounter.objects.all())
+        def totals():
+            return ReportersCounter.get_counts(self.nigeria), ReportersCounter.get_counts(self.uganda)
 
-        counter1 = ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=2)
-        counter2 = ReportersCounter.objects.create(org=self.nigeria, type="type-b", count=1)
-        counter3 = ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=3)
+        # nothing to squash
+        ReportersCounter.squash_counts()
+        self.assertFalse(ReportersCounter.objects.exists())
 
-        self.assertEqual(ReportersCounter.objects.all().count(), 3)
-        self.assertEqual(ReportersCounter.objects.filter(type="type-a").count(), 2)
+        # deltas as the contact triggers insert them, relying on the database default
+        with connection.cursor() as c:
+            c.execute(
+                "INSERT INTO contacts_reporterscounter (org_id, type, count) VALUES (%s, 'type-a', 2), "
+                "(%s, 'type-a', 3), (%s, 'type-b', 1), (%s, 'type-a', 4)",
+                (self.nigeria.id, self.nigeria.id, self.nigeria.id, self.uganda.id),
+            )
+        self.assertFalse(ReportersCounter.objects.filter(is_squashed=True).exists())
+        expected_totals = totals()
 
         ReportersCounter.squash_counts()
 
-        self.assertEqual(ReportersCounter.objects.all().count(), 2)
-        # type-a counters are squashed into one row
-        self.assertFalse(ReportersCounter.objects.filter(pk__in=[counter1.pk, counter3.pk]))
-        self.assertEqual(ReportersCounter.objects.filter(type="type-a").count(), 1)
+        # each group gets a single squashed row
+        self.assertEqual(
+            {("type-a", 5), ("type-b", 1)},
+            set(ReportersCounter.objects.filter(org=self.nigeria, is_squashed=True).values_list("type", "count")),
+        )
+        self.assertEqual(ReportersCounter.objects.count(), 3)
+        self.assertFalse(ReportersCounter.objects.filter(is_squashed=False).exists())
+        self.assertEqual(totals(), expected_totals)
+        squashed = rows()
 
-        self.assertTrue(ReportersCounter.objects.filter(pk=counter2.pk))
-
-        counter_type_a = ReportersCounter.objects.filter(type="type-a").first()
-
-        self.assertTrue(counter_type_a.count, 5)
-
-    def test_squash_reporters_resumes_from_last_squashed(self):
-        r = get_valkey_connection()
-        r.delete(ReportersCounter.LAST_SQUASHED_ID_KEY)
-        self.addCleanup(r.delete, ReportersCounter.LAST_SQUASHED_ID_KEY)
-
-        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=2)
-        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=3)
-        last_counter = ReportersCounter.objects.create(org=self.uganda, type="type-a", count=4)
-
+        # passes with no new deltas write nothing
         ReportersCounter.squash_counts()
+        ReportersCounter.squash_counts()
+        self.assertEqual(rows(), squashed)
 
-        # it records the newest row it started from, not the rows its own squashing added
-        self.assertEqual(ReportersCounter.objects.count(), 2)
-        self.assertEqual(int(r.get(ReportersCounter.LAST_SQUASHED_ID_KEY)), last_counter.id)
-
-        # rows added since are squashed with the rows before them, and only for their own org and type
+        # new deltas are added onto their group's squashed row, which keeps its id, and other groups are untouched
+        nigeria_a = ReportersCounter.objects.get(org=self.nigeria, type="type-a")
         ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=-1)
-        uganda_counter = ReportersCounter.objects.get(org=self.uganda, type="type-a")
+        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=3)
+        ReportersCounter.objects.create(org=self.nigeria, type="type-c", count=2)
 
         ReportersCounter.squash_counts()
 
-        self.assertEqual(ReportersCounter.objects.count(), 2)
-        self.assertEqual(ReportersCounter.objects.get(org=self.nigeria, type="type-a").count, 4)
-        self.assertTrue(ReportersCounter.objects.filter(pk=uganda_counter.pk, count=4).exists())
+        self.assertEqual(ReportersCounter.objects.get(org=self.nigeria, type="type-a"), nigeria_a)
+        self.assertEqual(ReportersCounter.objects.get(pk=nigeria_a.pk).count, 7)
+        self.assertEqual(ReportersCounter.objects.get(org=self.nigeria, type="type-c").count, 2)
+        self.assertTrue({row for row in squashed if row[2] == "type-b" or row[1] == self.uganda.id} <= rows())
+        self.assertEqual(totals(), ({"type-a": 7, "type-b": 1, "type-c": 2}, expected_totals[1]))
 
-    def test_squash_reporters_with_no_counters(self):
-        r = get_valkey_connection()
-        r.delete(ReportersCounter.LAST_SQUASHED_ID_KEY)
+    def test_squash_reporters_never_below_zero(self):
+        squashed = ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=2, is_squashed=True)
 
+        # a squashed row that reaches zero is deleted
+        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=-2)
         ReportersCounter.squash_counts()
+        self.assertFalse(ReportersCounter.objects.filter(pk=squashed.pk).exists())
 
-        self.assertIsNone(r.get(ReportersCounter.LAST_SQUASHED_ID_KEY))
+        # as is one that would go below zero
+        ReportersCounter.objects.create(org=self.nigeria, type="type-b", count=1, is_squashed=True)
+        ReportersCounter.objects.create(org=self.nigeria, type="type-b", count=-3)
+        ReportersCounter.squash_counts()
+        self.assertFalse(ReportersCounter.objects.filter(type="type-b").exists())
+
+        # and a group without one only gets one if its deltas sum above zero
+        ReportersCounter.objects.create(org=self.nigeria, type="type-c", count=-1)
+        ReportersCounter.objects.create(org=self.nigeria, type="type-d", count=0)
+        ReportersCounter.objects.create(org=self.nigeria, type="type-e", count=-1)
+        ReportersCounter.objects.create(org=self.nigeria, type="type-e", count=2)
+        ReportersCounter.squash_counts()
+        self.assertEqual(
+            [("type-e", 1, True)], list(ReportersCounter.objects.values_list("type", "count", "is_squashed"))
+        )
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), {"type-e": 1})
+
+    def test_squash_reporters_skipped_while_running(self):
+        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=2)
+
+        with held_lock(ReportersCounter.COUNTS_SQUASH_LOCK):
+            ReportersCounter.squash_counts()
+
+        self.assertFalse(ReportersCounter.objects.filter(is_squashed=True).exists())
+
+    def test_merge_squashed_reporters_counters(self):
+        migration = importlib.import_module("ureport.contacts.migrations.0032_reporterscounter_squashed_unique")
+
+        # put the table back as it is before the migration, with existing rows all counted as squashed
+        with connection.cursor() as c:
+            c.execute('DROP INDEX "contacts_rptrscntr_squashed"')
+
+        def add(org, type_, count):
+            ReportersCounter.objects.create(org=org, type=type_, count=count, is_squashed=True)
+
+        add(self.nigeria, "type-a", 2)
+        add(self.nigeria, "type-a", 3)
+        add(self.uganda, "type-a", 4)
+        add(self.nigeria, "type-b", 2)
+        add(self.nigeria, "type-b", -3)
+        add(self.nigeria, "type-c", 0)
+        add(self.nigeria, "type-d", -1)
+        single = ReportersCounter.objects.get(org=self.uganda, type="type-a")
+        ReportersCounter.objects.create(org=self.nigeria, type="type-a", count=1)
+
+        migration.merge_squashed(None, connection.schema_editor())
+
+        # groups are merged, or dropped if they don't sum above zero, single rows above zero and unsquashed rows are
+        # left alone
+        self.assertEqual(
+            {
+                (self.nigeria.id, "type-a", 5, True),
+                (self.nigeria.id, "type-a", 1, False),
+                (self.uganda.id, "type-a", 4, True),
+            },
+            set(ReportersCounter.objects.values_list("org_id", "type", "count", "is_squashed")),
+        )
+        self.assertTrue(ReportersCounter.objects.filter(pk=single.pk).exists())
+        self.assertIsNone(get_valkey_connection().get(ReportersCounter.COUNTS_SQUASH_LOCK))
 
     def test_recalculate_reporters_stats_waits_for_squashing(self):
         Contact.objects.create(uuid="C-007", org=self.nigeria, gender="M")
@@ -358,6 +422,9 @@ class ContactTest(UreportTest):
 
         self.assertIsNotNone(Contact.recalculate_reporters_stats(self.nigeria))
         self.assertEqual(ReportersCounter.get_counts(self.nigeria, ["gender:m"]), {"gender:m": 1})
+
+        # the rebuilt counters are one per type, so they're created squashed
+        self.assertFalse(ReportersCounter.objects.filter(org=self.nigeria, is_squashed=False).exists())
         self.assertIsNone(get_valkey_connection().get(ReportersCounter.COUNTS_SQUASH_LOCK))
 
 

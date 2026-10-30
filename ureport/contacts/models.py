@@ -7,12 +7,13 @@ from datetime import timedelta
 
 from django_valkey import get_valkey_connection
 
-from django.db import connection, models, transaction
-from django.db.models import Count
+from django.db import models, transaction
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from dash.orgs.models import Org, OrgBackend
+from ureport.utils.counts import BaseSquashableCount
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
 CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"
@@ -140,11 +141,12 @@ class Contact(models.Model):
             for dict_key in gen_counters.keys():
                 counters_dict[(org.id, dict_key)] += gen_counters[dict_key]
 
+        # there's one counter per type, so they're created squashed and squashing leaves them alone
         counters_to_insert = []
         for counter_tuple in counters_dict.keys():
             org_id, counter_type = counter_tuple
             count = counters_dict[counter_tuple]
-            counters_to_insert.append(ReportersCounter(org_id=org_id, type=counter_type, count=count))
+            counters_to_insert.append(ReportersCounter(org_id=org_id, type=counter_type, count=count, is_squashed=True))
 
         # replace them in one transaction so a failure leaves the existing counters in place, holding the squash lock
         # so squashing can't replace rows the delete would then miss
@@ -243,12 +245,17 @@ class Contact(models.Model):
         ]
 
 
-class ReportersCounter(models.Model):
+class ReportersCounter(BaseSquashableCount):
     COUNTS_SQUASH_LOCK = "org-reporters-counts-squash-lock"
-    LAST_SQUASHED_ID_KEY = "org-reporters-last-squashed-id"
 
     # how long a rebuild waits for, and then holds, the squash lock while it replaces an org's counters
     REPLACE_COUNTS_LOCK_TIMEOUT = 60 * 10
+
+    squash_over = ("org_id", "type")
+    squash_max_distinct = 100000
+
+    # the table predates the base class, so it keeps its narrower id and count columns
+    id = models.AutoField(auto_created=True, primary_key=True, verbose_name="ID")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="reporters_counters")
 
@@ -256,67 +263,43 @@ class ReportersCounter(models.Model):
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
 
+    # the contact triggers insert deltas without setting this, so they rely on the database default
+    is_squashed = models.BooleanField(default=False, db_default=False)
+
     @classmethod
     def squash_counts(cls):
-        # get the id of the last count we squashed
         r = get_valkey_connection()
         key = ReportersCounter.COUNTS_SQUASH_LOCK
         if r.get(key):
             logger.info("Squash reporters counts already running.")
         else:
             with r.lock(key, timeout=60 * 60):
-                last_squash = r.get(ReportersCounter.LAST_SQUASHED_ID_KEY)
-                if not last_squash:
-                    last_squash = 0
+                cls.squash()
 
-                last_squash = int(last_squash)
+    @classmethod
+    def get_squash_query(cls, distinct_set: dict) -> tuple:
+        """
+        Adds the set's unsquashed rows onto its single squashed row, updated in place, which never goes below zero and
+        is deleted when it reaches zero. A set without a squashed row only gets one if its deltas sum above zero.
+        """
+        table = cls._meta.db_table
+        cond = '"org_id" = %s AND "type" = %s'
 
-                start = time.time()
-                squash_count = 0
+        sql = f"""
+        WITH removed AS (
+            DELETE FROM {table} WHERE NOT "is_squashed" AND {cond} RETURNING "count"
+        ), zeroed AS (
+            DELETE FROM {table} WHERE "is_squashed" AND {cond}
+            AND "count" + (SELECT SUM(r."count") FROM removed r) <= 0 RETURNING "id"
+        )
+        INSERT INTO {table} AS t ("org_id", "type", "count", "is_squashed")
+        SELECT %s, %s, s.total, TRUE FROM (SELECT SUM("count") AS "total" FROM removed) s
+        WHERE s.total != 0 AND NOT EXISTS (SELECT 1 FROM zeroed)
+        AND (s.total > 0 OR EXISTS (SELECT 1 FROM {table} WHERE "is_squashed" AND {cond}))
+        ON CONFLICT ("org_id", "type") WHERE "is_squashed" DO UPDATE SET "count" = t."count" + EXCLUDED."count";
+        """
 
-                # bound this pass by the newest row now, so rows added while it runs are left for the next one
-                max_id = ReportersCounter.objects.order_by("-id").values_list("id", flat=True).first()
-                if not max_id:
-                    return
-
-                if last_squash < 1:
-                    counters = (
-                        ReportersCounter.objects.filter(id__lte=max_id)
-                        .values("org_id", "type")
-                        .annotate(Count("id"))
-                        .filter(id__count__gt=1)
-                        .order_by("org_id", "type")
-                    )
-
-                else:
-                    counters = (
-                        ReportersCounter.objects.filter(id__gt=last_squash, id__lte=max_id)
-                        .values("org_id", "type")
-                        .order_by("org_id", "type")
-                        .distinct("org_id", "type")
-                    )
-
-                total_counters = len(counters)
-
-                # get all the new added counters
-                for counter in counters:
-                    # perform our atomic squash in SQL by calling our squash method
-                    with connection.cursor() as c:
-                        c.execute(
-                            "SELECT ureport_squash_reporterscounters(%s, %s);", (counter["org_id"], counter["type"])
-                        )
-
-                    squash_count += 1
-
-                    if squash_count % 100 == 0:
-                        logger.info(
-                            "Squashing progress ... %0.2f/100 in in %0.3fs"
-                            % (squash_count * 100 / total_counters, time.time() - start)
-                        )
-
-                r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id)
-
-                logger.info("Squashed reporters counts for %d types in %0.3fs" % (squash_count, time.time() - start))
+        return sql, (distinct_set["org_id"], distinct_set["type"]) * 4
 
     @classmethod
     def get_counts(cls, org, types=None):
@@ -337,6 +320,12 @@ class ReportersCounter(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(name="contacts_rptrscntr_org_id_idx", fields=["org", "type"]),
             models.Index(name="contacts_rptrscntr_org_typ_cnt", fields=["org", "type", "count"]),
+            # for squashing task
+            models.Index(name="contacts_rptrscntr_unsquashed", fields=["org", "type"], condition=Q(is_squashed=False)),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                name="contacts_rptrscntr_squashed", fields=["org", "type"], condition=Q(is_squashed=True)
+            )
         ]
