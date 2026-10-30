@@ -1,3 +1,6 @@
+## v1.8.19 (2026-10-30)
+ * Squash reporter counters with BaseSquashableCount
+
 ## v1.8.18 (2026-10-29)
  * Squash reporter counters on a schedule
 
