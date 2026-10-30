@@ -19,6 +19,8 @@ from ureport.polls.models import Poll, PollResult
 from ureport.polls.sync import (
     AGE_GENDER_JOB_TYPE,
     ARCHIVE_ATTEMPTS,
+    ARCHIVES_BATCH_BUSY_BACKOFF,
+    ARCHIVES_BATCH_JOB_TYPE,
     ARCHIVES_JOB_TYPE,
     ARCHIVES_LEASE_SECONDS,
     ARCHIVES_RESET_BACKOFF,
@@ -27,6 +29,8 @@ from ureport.polls.sync import (
     COUNTS_JOB_TYPE,
     FULL_REPULL_KEY,
     PRUNE_JOB_TYPE,
+    PRUNE_RETIRED,
+    PRUNE_SKIPPED_PULLING,
     PRUNE_SKIPPED_RETIRED,
     RATE_LIMITED_BACKOFF,
     REBUILD_COUNTS_EVERY,
@@ -40,14 +44,20 @@ from ureport.polls.sync import (
     _finalize_archives,
     _finalize_results,
     _prune_poll,
+    _retire_flow,
     backfill_age_gender,
+    batch_owned_flows,
     dispatch_archives,
     dispatch_org_polls,
+    is_flow_syncing,
     prune_poll_results,
     prune_results_dispatch,
+    queue_archives_batch,
+    queue_full_repulls,
     rebuild_counts_dispatch,
     rebuild_poll_counts,
     sync_poll_archives,
+    sync_poll_archives_batch,
     sync_poll_results,
     sync_polls_dispatch,
 )
@@ -566,6 +576,408 @@ class SyncPollArchivesTest(PollSyncTestBase):
 
         end_run(self.job, cursor={"before": "2026-01-01", "failed": {"2026-03-03|daily": ARCHIVE_ATTEMPTS}})
         self.assertTrue(_archives_walked(reload(self.job)))
+
+
+class SyncPollArchivesBatchTest(PollSyncTestBase):
+    def setUp(self):
+        super(SyncPollArchivesBatchTest, self).setUp()
+
+        self.poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
+        self.mock_rebuild = self.start_patch(patch.object(Poll, "rebuild_poll_results_counts", autospec=True))
+
+    def queue_batch(self, flow_uuids=("uuid-1", "uuid-2")):
+        with patch.object(sync_poll_archives_batch, "apply_async") as mock_queue:
+            job = queue_archives_batch(self.nigeria, flow_uuids, "rapidpro")
+
+        if job:
+            mock_queue.assert_called_once_with((job.id,), queue="sync")
+        return job
+
+    def flow_counts(self, **by_flow):
+        return {flow_uuid: results_counts(**counts) for flow_uuid, counts in by_flow.items()}
+
+    def rebuilt_flows(self):
+        return [call[0][0].flow_uuid for call in self.mock_rebuild.call_args_list]
+
+    def walk(self, job, *results):
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
+            mock_chunk.side_effect = results
+            mock_continue = run_task(sync_poll_archives_batch, job.id, times=len(results))
+
+        return mock_chunk, mock_continue
+
+    def test_queue_and_start_take_over_the_flows_archive_jobs(self):
+        idle = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
+        SyncJob.objects.filter(id=idle.id).update(status=SyncJob.STATUS_RUNNING, cursor={"before": "2026-01-01"})
+        walked = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-2")
+        end_run(walked, cursor={"before": "2025-01-01"})
+
+        job = self.queue_batch(["uuid-2", "uuid-1", "uuid-1", ""])
+
+        self.assertEqual(job.job_type, ARCHIVES_BATCH_JOB_TYPE)
+        self.assertLessEqual(len(job.scope), 64)
+        self.assertEqual(job.cursor, {"flows": ["uuid-1", "uuid-2"], "backend": "rapidpro"})
+        self.assertEqual(batch_owned_flows(self.nigeria.pk), {"uuid-1", "uuid-2"})
+        self.assertEqual(batch_owned_flows(self.nigeria.pk, walking=True), set())
+
+        # flows another unfinished batch owns are left to it
+        self.assertIsNone(self.queue_batch(["uuid-1"]))
+
+        # starting the walk ends the per flow traversals, which read as not walked until the batch is done
+        self.walk(job, ChunkResult(counts={}, cursor={"before": "2026-07-01", "seen": ["a"]}))
+
+        self.assertJobState(idle, status=SyncJob.STATUS_COMPLETE, cursor={})
+        self.assertJobState(walked, status=SyncJob.STATUS_COMPLETE, cursor={})
+        self.assertEqual(batch_owned_flows(self.nigeria.pk, walking=True), {"uuid-1", "uuid-2"})
+
+        self.walk(job, ChunkResult(counts={}, cursor={"before": "2026-06-01", "seen": ["a", "b"]}, done=True))
+
+        self.assertJobState(idle, cursor={"before": "2026-06-01", "seen": ["a", "b"]})
+        self.assertJobState(walked, cursor={"before": "2026-06-01", "seen": ["a", "b"]})
+
+    def test_walks_the_flows_and_rebuilds_the_ones_that_changed(self):
+        job = self.queue_batch()
+
+        chunks = [
+            ChunkResult(
+                counts=self.flow_counts(**{"uuid-1": dict(num_val_created=3), "uuid-2": dict(num_val_ignored=2)}),
+                cursor={"before": "2026-07-01", "seen": ["2026-07-01|daily"]},
+            ),
+            ChunkResult(
+                counts=self.flow_counts(**{"uuid-1": dict(num_path_created=1), "uuid-2": {}}),
+                cursor={"before": "2026-06-01", "seen": ["2026-06-01|monthly"]},
+                done=True,
+            ),
+        ]
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
+            mock_chunk.side_effect = chunks
+            chunk_count = run_to_completion(sync_poll_archives_batch, job.id)
+
+        # two archive chunks then the rebuild stage
+        self.assertEqual(chunk_count, 3)
+
+        org, polls, cursor = mock_chunk.call_args_list[1][0]
+        self.assertEqual(set(polls), {"uuid-1", "uuid-2"})
+        self.assertEqual(cursor["before"], "2026-07-01")
+        self.assertEqual(cursor["flows"], ["uuid-1", "uuid-2"])
+        self.assertEqual(mock_chunk.call_args_list[1][1]["on_save"].__self__.id, job.id)
+
+        # only the flow whose results changed is marked and rebuilt
+        self.assertEqual(self.rebuilt_flows(), ["uuid-1"])
+        self.assertIsNotNone(self.poll.get_counts_stamps()[0])
+        self.assertIsNone(self.poll2.get_counts_stamps()[0])
+
+        job = self.assertJobState(job, status=SyncJob.STATUS_COMPLETE)
+        self.assertEqual(job.progress["chunks"], 2)
+        self.assertEqual(job.progress["num_val_created"], 3)
+        self.assertEqual(
+            job.progress["flows"],
+            {"uuid-1": dict(num_val_created=3, num_path_created=1), "uuid-2": dict(num_val_ignored=2)},
+        )
+
+        # both flows are synced, and the batch no longer owns them
+        self.assertEqual(
+            set(Poll.objects.filter(has_synced=True).values_list("flow_uuid", flat=True)), {"uuid-1", "uuid-2"}
+        )
+        self.assertEqual(batch_owned_flows(self.nigeria.pk), set())
+
+    def test_rebuild_stage_resumes_where_it_stopped(self):
+        job = self.queue_batch()
+        SyncJob.objects.filter(id=job.id).update(
+            status=SyncJob.STATUS_RUNNING,
+            started_on=timezone.now(),
+            cursor={**job.cursor, "before": "2026-06-01", "stage": "rebuild", "rebuilt": ["uuid-1"]},
+            progress={"flows": {"uuid-1": dict(num_val_created=1), "uuid-2": dict(num_val_updated=1)}},
+        )
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
+            run_task(sync_poll_archives_batch, job.id)
+
+        mock_chunk.assert_not_called()
+        self.assertEqual(self.rebuilt_flows(), ["uuid-2"])
+        self.assertJobState(job, status=SyncJob.STATUS_COMPLETE)
+
+    def test_resumes_from_the_last_archive_after_a_failure(self):
+        job = self.queue_batch()
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
+            mock_chunk.side_effect = [
+                ChunkResult(counts=self.flow_counts(**{"uuid-1": {}}), cursor={"before": "2026-07-01", "seen": ["a"]}),
+                ValueError("boom"),
+            ]
+            run_task(sync_poll_archives_batch, job.id)
+
+            with patch.object(sync_poll_archives_batch, "apply_async"):
+                with self.assertRaises(ValueError):
+                    sync_poll_archives_batch(job.id)
+
+            self.assertJobState(job, status=SyncJob.STATUS_FAILED)
+
+            mock_chunk.side_effect = None
+            mock_chunk.return_value = ChunkResult(counts={}, cursor={"before": "2026-06-01"}, done=True)
+            run_task(sync_poll_archives_batch, job.id)
+
+        self.assertEqual(mock_chunk.call_args[0][2]["before"], "2026-07-01")
+        self.assertEqual(mock_chunk.call_args[0][2]["seen"], ["a"])
+
+        # a failed batch still owns its flows, until it's done
+        self.assertEqual(batch_owned_flows(self.nigeria.pk), {"uuid-1", "uuid-2"})
+
+    def test_waits_for_a_per_flow_chunk_it_took_over(self):
+        busy = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-2")
+        SyncJob.objects.filter(id=busy.id).update(status=SyncJob.STATUS_RUNNING)
+        hold_lease(busy)
+        job = self.queue_batch()
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
+            mock_continue = run_task(sync_poll_archives_batch, job.id)
+
+            mock_chunk.assert_not_called()
+            mock_continue.assert_called_once_with((job.id,), queue="sync", countdown=ARCHIVES_BATCH_BUSY_BACKOFF)
+
+            # once that chunk is over, the per flow job ends itself rather than write on
+            drop_lease(busy)
+            with patch.object(RapidProBackend, "pull_results_from_archives_chunk") as mock_flow_chunk:
+                run_task(sync_poll_archives, busy.id)
+
+            mock_flow_chunk.assert_not_called()
+            self.assertJobState(busy, status=SyncJob.STATUS_COMPLETE, cursor={})
+            self.assertFalse(Poll.objects.get(id=self.poll2.id).has_synced)
+
+            mock_chunk.return_value = ChunkResult(counts={}, cursor={"before": "2026-06-01"}, done=True)
+            run_task(sync_poll_archives_batch, job.id)
+
+        mock_chunk.assert_called_once()
+
+    def test_a_lost_lease_between_saves_drops_the_chunk(self):
+        job = self.queue_batch()
+
+        def steal_lease(org, polls, cursor, on_save=None):
+            SyncJob.objects.filter(id=job.id).update(lease_owner="worker-2")
+            on_save()
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk", side_effect=steal_lease):
+            mock_continue = run_task(sync_poll_archives_batch, job.id)
+
+        mock_continue.assert_not_called()
+        self.assertJobState(
+            job, cursor={"flows": ["uuid-1", "uuid-2"], "backend": "rapidpro", "walking": True}, progress={}
+        )
+
+    def test_skips_flows_that_stopped_syncing(self):
+        job = self.queue_batch()
+        Poll.objects.filter(flow_uuid="uuid-2").update(stopped_syncing=True)
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
+            mock_chunk.return_value = ChunkResult(counts={}, cursor={"before": "2026-06-01"}, done=True)
+            run_task(sync_poll_archives_batch, job.id)
+
+        self.assertEqual(set(mock_chunk.call_args[0][1]), {"uuid-1"})
+
+        Poll.objects.filter(flow_uuid="uuid-1").update(stopped_syncing=True)
+        other = self.queue_batch(["uuid-3"])
+        poll3 = self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin)
+        Poll.objects.filter(id=poll3.id).update(stopped_syncing=True)
+        run_task(sync_poll_archives_batch, other.id)
+        self.assertJobState(other, status=SyncJob.STATUS_COMPLETE)
+
+    def test_dispatch_leaves_owned_flows_to_the_batch(self):
+        now = timezone.now()
+        owned = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
+        job = self.queue_batch(["uuid-1"])
+        end_run(owned, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=2), failures=1)
+        unowned = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-2")
+        end_run(unowned, status=SyncJob.STATUS_FAILED, ended_on=now - timedelta(hours=2), failures=1)
+
+        with (
+            patch.object(sync_poll_archives, "apply_async") as mock_flow_queue,
+            patch.object(sync_poll_archives_batch, "apply_async") as mock_batch_queue,
+        ):
+            self.assertEqual(set(dispatch_archives(self.nigeria)), {job.scope, "uuid-2"})
+
+        mock_flow_queue.assert_called_once_with((unowned.id,), queue="sync")
+        mock_batch_queue.assert_called_once_with((job.id,), queue="sync")
+
+    def test_flows_of_a_leased_batch_are_syncing(self):
+        job = self.queue_batch(["uuid-1"])
+        self.assertFalse(is_flow_syncing(self.nigeria.pk, "uuid-1"))
+
+        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_RUNNING)
+        hold_lease(job)
+
+        self.assertTrue(is_flow_syncing(self.nigeria.pk, "uuid-1"))
+        self.assertFalse(is_flow_syncing(self.nigeria.pk, "uuid-2"))
+        self.assertFalse(is_flow_syncing(self.uganda.pk, "uuid-1"))
+
+    def test_results_delete_waits_for_the_batch(self):
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow="uuid-1",
+            ruleset="ruleset-uuid",
+            contact="contact-uuid",
+            date=timezone.now(),
+            completed=False,
+        )
+        job = self.queue_batch(["uuid-1"])
+        self.walk(job, ChunkResult(counts={}, cursor={"before": "2026-07-01"}))
+        results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
+        SyncJob.objects.filter(id=results_job.id).update(cursor={"after": "t1"})
+        flag = Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk)
+        cache.set(flag, "2026-08-01", None)
+
+        with (
+            patch.object(Poll, "get_flow_date", return_value=None),
+            patch.object(sync_poll_archives, "apply_async") as mock_archives_queue,
+            patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk,
+        ):
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
+            run_task(sync_poll_results, results_job.id)
+
+            # nothing is deleted under the batch, and the request is kept for later
+            self.assertEqual(mock_chunk.call_args[0][1], {"after": "t1"})
+            self.assertTrue(PollResult.objects.filter(flow="uuid-1").exists())
+            self.assertIsNotNone(cache.get(flag))
+
+            # the first sync's archives job ends itself, the batch has them
+            archives_job = self.get_job(ARCHIVES_JOB_TYPE)
+            run_task(sync_poll_archives, archives_job.id)
+            self.assertJobState(archives_job, status=SyncJob.STATUS_COMPLETE)
+
+            end_run(job)
+            mock_archives_queue.reset_mock()
+            run_task(sync_poll_results, results_job.id)
+
+        # once the batch is done the delete goes ahead and the archives are walked again
+        self.assertEqual(mock_chunk.call_args[0][1], {})
+        self.assertFalse(PollResult.objects.filter(flow="uuid-1").exists())
+        self.assertIsNone(cache.get(flag))
+        mock_archives_queue.assert_called_once_with((archives_job.id,), queue="sync")
+
+    def test_pending_archives_reset_waits_for_the_batch(self):
+        job = self.queue_batch(["uuid-1"])
+        self.walk(job, ChunkResult(counts={}, cursor={"before": "2026-07-01"}))
+        results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
+        SyncJob.objects.filter(id=results_job.id).update(
+            status=SyncJob.STATUS_RUNNING, progress={"archives_reset_pending": 1}, cursor={"after": "t1"}
+        )
+
+        with (
+            patch.object(sync_poll_archives, "apply_async") as mock_archives_queue,
+            patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk,
+        ):
+            mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"})
+            run_task(sync_poll_results, results_job.id)
+
+        mock_archives_queue.assert_not_called()
+        self.assertEqual(self.get_job().progress["archives_reset_pending"], 1)
+
+    def test_walks_the_archives_of_a_full_repull_after_its_delete(self):
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow="uuid-1",
+            ruleset="ruleset-uuid",
+            contact="contact-uuid",
+            date=timezone.now(),
+            completed=False,
+        )
+        self.poll.request_full_repull()
+        job = self.queue_batch(["uuid-1"])
+        results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
+
+        # the batch waits for the flow's results sync to delete its results
+        mock_chunk, mock_continue = self.walk(job, ChunkResult(counts={}, cursor={}))
+        mock_chunk.assert_not_called()
+        mock_continue.assert_called_once_with((job.id,), queue="sync", countdown=ARCHIVES_BATCH_BUSY_BACKOFF)
+
+        with (
+            patch.object(sync_poll_archives, "apply_async") as mock_archives_queue,
+            patch.object(RapidProBackend, "pull_results_chunk") as mock_results_chunk,
+        ):
+            mock_results_chunk.return_value = ChunkResult(
+                counts=results_counts(num_val_created=1), cursor={"after": "t1"}, done=True
+            )
+            run_to_completion(sync_poll_results, results_job.id)
+
+        # the delete goes ahead, and the archives are left to the batch rather than walked by the flow's own job
+        self.assertFalse(PollResult.objects.filter(flow="uuid-1").exists())
+        mock_archives_queue.assert_not_called()
+        self.assertJobState(self.get_job(ARCHIVES_JOB_TYPE), cursor={})
+
+        # so the re-pull isn't over, and its counts wait for it
+        self.assertTrue(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.mock_rebuild.assert_not_called()
+
+        with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
+            mock_chunk.return_value = ChunkResult(
+                counts=self.flow_counts(**{"uuid-1": {}}), cursor={"before": "2026-06-01"}, done=True
+            )
+            run_to_completion(sync_poll_archives_batch, job.id)
+
+        # the end of the batch ends it, and rebuilds the counts on everything pulled again
+        self.assertIsNone(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertEqual(self.rebuilt_flows(), ["uuid-1"])
+        self.assertJobState(self.get_job(ARCHIVES_JOB_TYPE), cursor={"before": "2026-06-01"})
+
+    def test_a_flow_is_only_retired_once_its_batch_is_done(self):
+        long_ago = timezone.now() - timedelta(days=500)
+        Poll.objects.filter(id=self.poll.id).update(poll_date=long_ago, created_on=long_ago)
+        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), timezone.now(), None)
+        job = self.queue_batch(["uuid-1"])
+        results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
+
+        self.assertEqual(_retire_flow(self.nigeria, "uuid-1", results_job), PRUNE_SKIPPED_PULLING)
+
+        SyncJob.objects.filter(id=job.id).update(status=SyncJob.STATUS_RUNNING)
+        hold_lease(job)
+        self.assertNotEqual(_retire_flow(self.nigeria, "uuid-1"), PRUNE_RETIRED)
+        self.assertFalse(Poll.objects.get(id=self.poll.id).stopped_syncing)
+
+        end_run(job)
+        self.assertEqual(_retire_flow(self.nigeria, "uuid-1", results_job), PRUNE_RETIRED)
+
+    def test_hands_the_archives_it_failed_to_pull_to_each_flow(self):
+        job = self.queue_batch()
+        failed = {"2026-06-01|monthly": 1}
+
+        self.walk(job, ChunkResult(counts={}, cursor={"before": "2026-06-01", "failed": failed}, done=True))
+
+        # each flow's own walk is done but for that archive, which it tries again once the wait is over
+        for flow_uuid in ("uuid-1", "uuid-2"):
+            archives_job = self.get_job(ARCHIVES_JOB_TYPE, flow_uuid=flow_uuid)
+            self.assertJobState(archives_job, status=SyncJob.STATUS_COMPLETE)
+            self.assertEqual(archives_job.cursor["failed"], failed)
+            self.assertFalse(_archives_walked(archives_job))
+
+        end_run(job)
+        SyncJob.objects.filter(job_type=ARCHIVES_JOB_TYPE).update(ended_on=timezone.now() - timedelta(hours=2))
+
+        with patch.object(sync_poll_archives, "apply_async"):
+            self.assertEqual(set(dispatch_archives(self.nigeria)), {"uuid-1", "uuid-2"})
+
+    def test_full_repulls_queue_a_batch_per_org(self):
+        uganda_poll = self.create_poll(self.uganda, "Uganda poll", "uuid-ug", self.education_nigeria, self.admin)
+        retired = self.create_poll(self.nigeria, "Retired", "uuid-retired", self.education_nigeria, self.admin)
+        Poll.objects.filter(id=retired.id).update(stopped_syncing=True)
+
+        with (
+            patch.object(sync_poll_archives_batch, "apply_async") as mock_queue,
+            patch.object(Poll, "pull_poll_results_task") as mock_pull,
+        ):
+            jobs = queue_full_repulls([self.poll, self.poll2, retired, uganda_poll])
+
+        self.assertEqual(mock_queue.call_count, 2)
+        self.assertEqual(mock_pull.call_count, 4)
+        self.assertEqual(
+            {(job.org_id, tuple(job.cursor["flows"])) for job in jobs},
+            {(self.nigeria.pk, ("uuid-1", "uuid-2", "uuid-retired")), (self.uganda.pk, ("uuid-ug",))},
+        )
+
+        # each flow is asked to delete and pull its results again, a retired one syncing again
+        for poll in (self.poll, self.poll2, retired, uganda_poll):
+            flag = Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk)
+            self.assertIsNotNone(cache.get(flag))
+        self.assertFalse(Poll.objects.get(id=retired.id).stopped_syncing)
 
 
 class DispatchTest(PollSyncTestBase):
@@ -1702,18 +2114,18 @@ class RefreshReusedFlowsTest(PollSyncTestBase):
         self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
 
         out = StringIO()
-        with patch.object(Poll, "pull_refresh_task", autospec=True) as mock_refresh:
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
             call_command("refresh_reused_flows", stdout=out)
 
-        mock_refresh.assert_not_called()
+        mock_repulls.assert_not_called()
         self.assertIn("flow uuid-1 (poll #%d" % self.poll.pk, out.getvalue())
         self.assertNotIn("uuid-2", out.getvalue())
         self.assertIn("Found 1 flows", out.getvalue())
 
-        with patch.object(Poll, "pull_refresh_task", autospec=True) as mock_refresh:
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
             call_command("refresh_reused_flows", "--refresh", stdout=StringIO())
 
-        self.assertEqual([call[0][0].pk for call in mock_refresh.call_args_list], [self.poll.pk])
+        self.assertEqual([poll.pk for poll in mock_repulls.call_args[0][0]], [self.poll.pk])
 
     def test_lists_and_refreshes_the_retired_flows_with_zeroed_counts(self):
         def retired_poll(title, flow_uuid, is_active=True, question=True):
@@ -1752,10 +2164,10 @@ class RefreshReusedFlowsTest(PollSyncTestBase):
         other = retired_poll("Poll 7 zeroed", "uuid-7")
 
         out = StringIO()
-        with patch.object(Poll, "pull_refresh_task", autospec=True) as mock_refresh:
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
             call_command("refresh_reused_flows", "--zeroed", stdout=out)
 
-        mock_refresh.assert_not_called()
+        mock_repulls.assert_not_called()
         self.assertIn("flow uuid-1 (poll #%d" % self.poll.pk, out.getvalue())
         self.assertIn("flow uuid-7 (poll #%d" % other.poll.pk, out.getvalue())
         for flow_uuid in ("uuid-2", "uuid-3", "uuid-4", "uuid-5", "uuid-6"):
@@ -1763,17 +2175,22 @@ class RefreshReusedFlowsTest(PollSyncTestBase):
         self.assertIn("Found 2 flows", out.getvalue())
 
         out = StringIO()
-        with patch.object(Poll, "pull_refresh_task", autospec=True) as mock_refresh:
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
             call_command("refresh_reused_flows", "--zeroed", "--refresh", "--limit", "1", stdout=out)
 
-        self.assertEqual([call[0][0].pk for call in mock_refresh.call_args_list], [self.poll.pk])
+        self.assertEqual([poll.pk for poll in mock_repulls.call_args[0][0]], [self.poll.pk])
         self.assertIn("Scheduled a full pull of 1 flows", out.getvalue())
 
-        # an actual refresh syncs the flow again, which takes it off the list until it's retired again
-        with patch.object(Poll, "pull_poll_results_task") as mock_pull:
+        # an actual refresh syncs the flow again, which takes it off the list until it's retired again, and walks
+        # the archives of all of them in one batch
+        with (
+            patch.object(Poll, "pull_poll_results_task") as mock_pull,
+            patch.object(sync_poll_archives_batch, "apply_async"),
+        ):
             call_command("refresh_reused_flows", "--zeroed", "--refresh", "--org", self.nigeria.pk, stdout=StringIO())
 
         self.assertEqual(mock_pull.call_count, 2)
+        self.assertEqual(batch_owned_flows(self.nigeria.pk), {"uuid-1", "uuid-7"})
         self.assertEqual(
             set(Poll.objects.filter(stopped_syncing=False).values_list("flow_uuid", flat=True)),
             {"uuid-1", "uuid-4", "uuid-7"},
@@ -1782,6 +2199,25 @@ class RefreshReusedFlowsTest(PollSyncTestBase):
         out = StringIO()
         call_command("refresh_reused_flows", "--zeroed", stdout=out)
         self.assertIn("Found 0 flows", out.getvalue())
+
+    def test_lists_and_refreshes_the_flows_of_given_polls(self):
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
+        dupe = self.create_poll(self.nigeria, "Poll 1 again", "uuid-1", self.education_nigeria, self.admin)
+        inactive = self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin)
+        Poll.objects.filter(id=inactive.id).update(is_active=False)
+
+        out = StringIO()
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
+            call_command(
+                "refresh_reused_flows",
+                *["--poll", str(self.poll.pk), "--poll", str(dupe.pk), "--poll", str(poll2.pk)],
+                *["--poll", str(inactive.pk), "--refresh"],
+                stdout=out,
+            )
+
+        # one poll per flow, the newest
+        self.assertEqual([poll.pk for poll in mock_repulls.call_args[0][0]], [dupe.pk, poll2.pk])
+        self.assertIn("Scheduled a full pull of 2 flows", out.getvalue())
 
 
 @patch("ureport.polls.sync.POPULATE_BATCH_SIZE", 2)

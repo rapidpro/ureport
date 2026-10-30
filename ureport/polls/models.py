@@ -382,6 +382,13 @@ class Poll(SmartModel):
         pull_refresh.apply_async((poll.pk,), queue="sync")
 
     def pull_refresh_task(self):
+        self.request_full_repull()
+        Poll.pull_poll_results_task(self)
+
+    def request_full_repull(self):
+        """
+        Asks the next results sync of this poll's flow to delete its results and pull them all again
+        """
         from ureport.utils import datetime_to_json_date
 
         now = timezone.now()
@@ -392,7 +399,6 @@ class Poll(SmartModel):
         )
 
         Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
-        Poll.pull_poll_results_task(self)
 
     @classmethod
     def mark_results_changed(cls, org_id, flow_uuid):

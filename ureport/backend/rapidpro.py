@@ -2,9 +2,9 @@
 
 import gc
 import gzip
-import io
 import json
 import logging
+import re
 import time
 from collections import defaultdict
 from datetime import timedelta, timezone as tzone
@@ -25,11 +25,15 @@ from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.stats.models import ContactActivity
+from ureport.syncjobs.models import LeaseLost
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
 from . import BaseBackend, ChunkResult, failed_archives
 
 logger = logging.getLogger(__name__)
+
+# the flow reference near the start of an archived run's line
+ARCHIVE_LINE_FLOW_RE = re.compile(r'"flow":\s*\{[^{}]*?"uuid":\s*"([^"]+)"')
 
 
 class FieldSyncer(BaseSyncer):
@@ -462,16 +466,9 @@ class RapidProBackend(BaseBackend):
         )
 
     def _iter_archive_records(self, archive, flow_uuid):
-        r = requests.get(archive.download_url, stream=True)
-        stream = gzip.GzipFile(fileobj=io.BytesIO(r.content))
-
-        while True:
-            line = stream.readline()
-            if not line:
-                break
-            line_decoded = line.decode("utf-8")
-            if line_decoded.find(flow_uuid) > 0:
-                yield json.loads(line_decoded)
+        for line in self._iter_archive_lines(archive):
+            if line.find(flow_uuid) > 0:
+                yield json.loads(line)
 
     def _iter_poll_record_runs(self, archive, poll_flow_uuid):
         for record_batch in chunk_list(self._iter_archive_records(archive, poll_flow_uuid), 1000):
@@ -481,6 +478,29 @@ class RapidProBackend(BaseBackend):
                     record.update(start=None)
                     matching.append(record)
             yield Run.deserialize_list(matching)
+
+    def _iter_archive_lines(self, archive):
+        with requests.get(archive.download_url, stream=True) as r:
+            r.raise_for_status()
+
+            # read the raw gzipped bytes and decompress them ourselves, whatever the Content-Encoding header says
+            r.raw.decode_content = False
+
+            with gzip.GzipFile(fileobj=r.raw) as stream:
+                for line in stream:
+                    yield line.decode("utf-8")
+
+    @staticmethod
+    def _archive_line_flow(line):
+        """
+        The UUID of the flow an archived run belongs to, read off its line without parsing
+        the whole record - most lines of an archive belong to flows a pull doesn't want.
+        """
+        match = ARCHIVE_LINE_FLOW_RE.search(line)
+        if match:
+            return match.group(1)
+
+        return (json.loads(line).get("flow") or {}).get("uuid")
 
     def pull_results_from_archives(self, poll):
         org = poll.org
@@ -807,6 +827,7 @@ class RapidProBackend(BaseBackend):
     CONTACTS_TIME_BUDGET = 60 * 2  # seconds of active contact syncing per chunk
     CONTACTS_DELETED_PAGE_BUDGET = 25  # API pages of deleted contacts per chunk
     ARCHIVES_BUDGET = 1  # archive files with records per chunk
+    ARCHIVE_RUNS_BATCH = 1000  # archived runs of a flow saved at a time
 
     def pull_results_chunk(self, poll, cursor, page_budget=None):
         """
@@ -994,28 +1015,104 @@ class RapidProBackend(BaseBackend):
             archive_budget = self.ARCHIVES_BUDGET
         org = poll.org
 
-        stats_dict = dict(
-            num_val_created=0,
-            num_val_updated=0,
-            num_val_ignored=0,
-            num_path_created=0,
-            num_path_updated=0,
-            num_path_ignored=0,
-            num_synced=0,
-        )
+        stats_dict = self._results_counts_dict(())
 
         if poll.stopped_syncing:
             return ChunkResult(counts=stats_dict, cursor=dict(cursor), done=True)
 
-        flow_date_json = poll.get_flow_date()
-        first = (
-            json_date_to_datetime(flow_date_json).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-            if flow_date_json
-            else None
-        )
-
-        client = self._get_client(org, 2)
         questions_uuids = poll.get_question_uuids()
+
+        def process_archive(archive):
+            for fetch in self._iter_poll_record_runs(archive, poll.flow_uuid):
+                self._save_archive_runs(org, poll, questions_uuids, fetch, stats_dict)
+
+        next_cursor, done, rate_limited = self._walk_archives_chunk(
+            org, self._archives_after([poll]), cursor, archive_budget, process_archive, "poll #%d" % poll.pk
+        )
+        return ChunkResult(counts=stats_dict, cursor=next_cursor, done=done, rate_limited=rate_limited)
+
+    def pull_results_from_archives_batch_chunk(self, org, polls, cursor, archive_budget=None, on_save=None):
+        """
+        Pulls archived results for the polls of several flows at once, given as a dict of
+        poll by flow UUID. Each archive holds the runs of every flow of the org, so it is
+        downloaded once and each of its runs routed to the poll of its flow, rather than
+        downloaded once per flow. The cursor is the same listing position as
+        pull_results_from_archives_chunk's, the listing starting from the earliest month
+        of any of the polls. Counts are returned per flow UUID. Runs are saved a batch per
+        flow at a time, and on_save is called after each save so the caller can renew its
+        hold on the work in between - one archive can take many of them.
+        """
+        if archive_budget is None:
+            archive_budget = self.ARCHIVES_BUDGET
+
+        counts = {flow_uuid: self._results_counts_dict(()) for flow_uuid in polls}
+        polls = {flow_uuid: poll for flow_uuid, poll in polls.items() if not poll.stopped_syncing}
+
+        if not polls:
+            return ChunkResult(counts=counts, cursor=dict(cursor), done=True)
+
+        questions_uuids = {flow_uuid: poll.get_question_uuids() for flow_uuid, poll in polls.items()}
+
+        def save(flow_uuid, records):
+            poll = polls[flow_uuid]
+            self._save_archive_runs(
+                org, poll, questions_uuids[flow_uuid], Run.deserialize_list(records), counts[flow_uuid]
+            )
+            if on_save:
+                on_save()
+
+        def process_archive(archive):
+            pending = defaultdict(list)
+
+            for line in self._iter_archive_lines(archive):
+                if self._archive_line_flow(line) not in polls:
+                    continue
+
+                record = json.loads(line)
+                flow_uuid = record["flow"]["uuid"]
+                if flow_uuid not in polls:
+                    continue
+
+                record.update(start=None)
+                pending[flow_uuid].append(record)
+
+                if len(pending[flow_uuid]) >= self.ARCHIVE_RUNS_BATCH:
+                    save(flow_uuid, pending.pop(flow_uuid))
+
+            for flow_uuid, records in pending.items():
+                save(flow_uuid, records)
+
+        next_cursor, done, rate_limited = self._walk_archives_chunk(
+            org, self._archives_after(polls.values()), cursor, archive_budget, process_archive, "org #%d" % org.pk
+        )
+        return ChunkResult(counts=counts, cursor=next_cursor, done=done, rate_limited=rate_limited)
+
+    @staticmethod
+    def _archives_after(polls):
+        """
+        The month whose archives a pull for these polls starts from, None meaning all of
+        them - which a poll without a flow date needs.
+        """
+        months = []
+        for poll in polls:
+            flow_date_json = poll.get_flow_date()
+            if not flow_date_json:
+                return None
+
+            months.append(
+                json_date_to_datetime(flow_date_json).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            )
+
+        return min(months) if months else None
+
+    def _walk_archives_chunk(self, org, first, cursor, archive_budget, process_archive, label):
+        """
+        Visits up to archive_budget archives with records below the cursor's position,
+        handing each to process_archive. Returns the next cursor, whether the traversal is
+        done and whether it stopped on the rate limit - see pull_results_from_archives_chunk
+        for what the cursor means.
+        """
+        client = self._get_client(org, 2)
 
         before = cursor.get("before")
         seen = set(cursor.get("seen") or [])
@@ -1028,7 +1125,7 @@ class RapidProBackend(BaseBackend):
 
         try:
             while retry and processed < archive_budget:
-                self._retry_archive(client, org, poll, questions_uuids, retry[0], failed, stats_dict)
+                self._retry_archive(client, retry[0], failed, process_archive, label)
                 retry.pop(0)
                 processed += 1
 
@@ -1060,13 +1157,16 @@ class RapidProBackend(BaseBackend):
 
                     try:
                         if archive.record_count > 0:
-                            self._pull_archive(org, poll, questions_uuids, archive, stats_dict)
+                            self._process_archive(archive, process_archive)
                             processed += 1
+                    except LeaseLost:
+                        # the caller no longer owns the work, so nothing past here may be written
+                        raise
                     except Exception as e:
                         # advance past the broken archive but keep its key, so it is retried
                         failed[key] = failed.get(key, 0) + 1
                         processed += 1
-                        logger.error("Error processing archive %s for poll #%d" % (key, poll.pk), exc_info=e)
+                        logger.error("Error processing archive %s for %s" % (key, label), exc_info=e)
 
                     if start_iso == before:
                         seen.add(key)
@@ -1084,9 +1184,37 @@ class RapidProBackend(BaseBackend):
             next_cursor["failed"] = failed
         if retry:
             next_cursor["retry"] = retry
-        return ChunkResult(counts=stats_dict, cursor=next_cursor, done=done, rate_limited=rate_limited)
+        return next_cursor, done, rate_limited
 
-    def _retry_archive(self, client, org, poll, questions_uuids, key, failed, stats_dict):
+    def _save_archive_runs(self, org, poll, questions_uuids, fetch, stats_dict):
+        (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(fetch, org, poll)
+
+        for temba_run in fetch:
+            contact_obj = contacts_map.get(temba_run.contact.uuid, None)
+            self._process_run_poll_results(
+                org,
+                questions_uuids,
+                temba_run,
+                contact_obj,
+                poll_results_map,
+                poll_results_to_save_map,
+                stats_dict,
+            )
+
+        stats_dict["num_synced"] += len(fetch)
+        self._save_new_poll_results_to_database(poll_results_to_save_map)
+
+        # release per-page lookup maps holding cyclic references before next allocation
+        del contacts_map, poll_results_map, poll_results_to_save_map
+        gc.collect()
+
+    def _process_archive(self, archive, process_archive):
+        start_archive = time.time()
+        process_archive(archive)
+
+        logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
+
+    def _retry_archive(self, client, key, failed, process_archive, label):
         """
         Pulls an archive an earlier chunk failed to again, keeping count of its failures in
         failed. One that no longer exists has nothing left to pull.
@@ -1094,16 +1222,16 @@ class RapidProBackend(BaseBackend):
         try:
             archive = self._find_archive(client, key)
             if archive is None:
-                logger.warning("Archive %s for poll #%d no longer exists" % (key, poll.pk))
+                logger.warning("Archive %s for %s no longer exists" % (key, label))
             else:
-                self._pull_archive(org, poll, questions_uuids, archive, stats_dict)
+                self._process_archive(archive, process_archive)
 
             failed.pop(key, None)
-        except TembaRateExceededError:
+        except TembaRateExceededError, LeaseLost:
             raise
         except Exception as e:
             failed[key] = failed.get(key, 0) + 1
-            logger.error("Error retrying archive %s for poll #%d" % (key, poll.pk), exc_info=e)
+            logger.error("Error retrying archive %s for %s" % (key, label), exc_info=e)
 
     def _find_archive(self, client, key):
         """
@@ -1124,33 +1252,6 @@ class RapidProBackend(BaseBackend):
                         return archive
 
         return None
-
-    def _pull_archive(self, org, poll, questions_uuids, archive, stats_dict):
-        start_archive = time.time()
-
-        for fetch in self._iter_poll_record_runs(archive, poll.flow_uuid):
-            (contacts_map, poll_results_map, poll_results_to_save_map) = self._initiate_lookup_maps(fetch, org, poll)
-
-            for temba_run in fetch:
-                contact_obj = contacts_map.get(temba_run.contact.uuid, None)
-                self._process_run_poll_results(
-                    org,
-                    questions_uuids,
-                    temba_run,
-                    contact_obj,
-                    poll_results_map,
-                    poll_results_to_save_map,
-                    stats_dict,
-                )
-
-            stats_dict["num_synced"] += len(fetch)
-            self._save_new_poll_results_to_database(poll_results_to_save_map)
-
-            # release per-page lookup maps holding cyclic references before next allocation
-            del contacts_map, poll_results_map, poll_results_to_save_map
-            gc.collect()
-
-        logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
 
     def _initiate_lookup_maps(self, fetch, org, poll):
         """
