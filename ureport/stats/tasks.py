@@ -88,3 +88,37 @@ def stats_counts_squash():
         with r.lock(key, timeout=lock_timeout):
             PollStatsCounter.squash()
             PollEngagementDailyCount.squash()
+
+
+@app.task(name="stats.checkpoint_active_users")
+def checkpoint_active_users():
+    from . import active_users
+
+    r = get_valkey_connection()
+    key = "checkpoint_active_users_lock"
+
+    if r.get(key):
+        logger.info("Skipping checkpointing active users as it is still running")
+    else:
+        with r.lock(key, timeout=60 * 60):
+            active_users.checkpoint()
+
+
+@app.task(name="stats.compare_active_users")
+def compare_active_users():
+    """
+    Logs how far the active users counted by the sketches are from the contact activity counters, for each org
+    """
+    from django.conf import settings
+
+    from . import active_users
+
+    if not settings.ACTIVE_USERS_HLL_COMPARE:
+        return
+
+    for org in Org.objects.filter(is_active=True).order_by("id"):
+        try:
+            summary = active_users.summarize(active_users.compare_org(org))
+            logger.info("Active users comparison for org #%d: %s", org.id, summary)
+        except Exception:
+            logger.error("Error comparing active users for org #%d", org.id, exc_info=True)

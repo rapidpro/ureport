@@ -24,6 +24,7 @@ from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
+from ureport.stats import active_users
 from ureport.stats.models import ContactActivity
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
@@ -1214,6 +1215,7 @@ class RapidProBackend(BaseBackend):
                     existing_poll_result.completed = completed
 
                     existing_db_poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
+                    active_users.record_results([existing_poll_result])
 
                     stats_dict["num_val_updated"] += 1
                 else:
@@ -1416,6 +1418,7 @@ class RapidProBackend(BaseBackend):
                 if obj_to_create is not None:
                     new_poll_results.append(obj_to_create)
         PollResult.objects.bulk_create(new_poll_results, batch_size=1000)
+        active_users.record_results(new_poll_results)
 
     @staticmethod
     def _mark_poll_results_sync_paused(org, poll, latest_synced_obj_time):
