@@ -23,6 +23,18 @@ class ChunkResult:
     rate_limited: bool = False
 
 
+def failed_archives(cursor):
+    """
+    The archives an archives walk failed to pull, keyed by archive, with how many times each
+    has failed. Older walks kept them as a list, each of which failed once.
+    """
+    failed = cursor.get("failed") or {}
+    if isinstance(failed, list):
+        return {key: 1 for key in failed}
+
+    return dict(failed)
+
+
 class BaseBackend(object):
     __metaclass__ = ABCMeta
 
@@ -89,11 +101,27 @@ class BaseBackend(object):
     def pull_results_from_archives_chunk(self, poll, cursor, archive_budget=None):
         """
         Pulls one bounded chunk of archived results for the given poll. Backends without
-        archives complete immediately.
+        archives complete immediately, on a position that says the walk was done - an empty
+        one is what a walk sent back to the start has.
+
+        Archives that fail to pull are kept under the position's "failed" key (see
+        failed_archives), and those listed under its "retry" key are pulled again, before
+        the walk carries on.
         :param cursor: the resume position returned by the previous chunk, or {} to start
         :return: a ChunkResult whose counts dict has the num_val_* / num_path_* / num_synced keys
         """
-        return ChunkResult(counts=self._results_counts_dict(()), cursor=dict(cursor), done=True)
+        return ChunkResult(counts=self._results_counts_dict(()), cursor={"done": True}, done=True)
+
+    def pull_results_from_archives_batch_chunk(self, org, polls, cursor, archive_budget=None, on_save=None):
+        """
+        Pulls one bounded chunk of archived results for the polls of several flows at once,
+        given as a dict of poll by flow UUID. Backends without archives complete immediately,
+        on a position that says the walk was done, as pull_results_from_archives_chunk does.
+        :param cursor: the resume position returned by the previous chunk, or {} to start
+        :return: a ChunkResult whose counts are the num_val_* / num_path_* / num_synced keys by flow UUID
+        """
+        counts = {flow_uuid: self._results_counts_dict(()) for flow_uuid in polls}
+        return ChunkResult(counts=counts, cursor={"done": True}, done=True)
 
     @staticmethod
     def _results_counts_dict(counts_tuple):

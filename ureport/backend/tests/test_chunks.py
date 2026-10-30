@@ -13,6 +13,7 @@ from ureport.backend import BaseBackend, ChunkResult
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.contacts.models import Contact
 from ureport.polls.models import PollResult
+from ureport.syncjobs.models import LeaseLost
 from ureport.tests import UreportTest
 from ureport.utils import datetime_to_json_date
 
@@ -437,9 +438,84 @@ class PullArchivesChunkTest(UreportTest):
             result = self.backend.pull_results_from_archives_chunk(self.poll, {}, archive_budget=1)
 
         self.assertTrue(result.done)
-        self.assertEqual(result.cursor["failed"], [self._key(broken)])
+        self.assertEqual(result.cursor["failed"], {self._key(broken): 1})
         self.assertEqual(result.counts["num_val_created"], 0)
         json.dumps(result.cursor)
+
+    def _listings(self, mock_get_archives, by_date, walk=()):
+        """
+        Lists the archives starting on a date for a lookup of that date, and the walk's
+        archives otherwise
+        """
+
+        def get_archives(type, after=None, before=None):
+            if after is not None and after == before:
+                return CursorMockQuery([a for a in by_date if str(a.start_date)[:10] == after])
+            return CursorMockQuery(list(walk))
+
+        mock_get_archives.side_effect = get_archives
+
+    @patch("ureport.backend.rapidpro.RapidProBackend._iter_poll_record_runs")
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_retries_failed_archives(self, mock_get_archives, mock_iter_records):
+        now = timezone.now()
+        broken, other = self._archive("2026-03-03"), self._archive("2026-03-01")
+        self._listings(mock_get_archives, [broken, other])
+        cursor = {
+            "before": "2026-03-01",
+            "seen": [self._key(other)],
+            "failed": {self._key(broken): 1, self._key(other): 2},
+            "retry": [self._key(broken), self._key(other)],
+        }
+
+        # each takes from the budget, and one that fails again is counted
+        mock_iter_records.side_effect = [iter([[self._run(1234, "C-001", now)]]), ValueError("corrupt")]
+
+        first = self.backend.pull_results_from_archives_chunk(self.poll, cursor, archive_budget=1)
+
+        self.assertFalse(first.done)
+        self.assertEqual(first.counts["num_val_created"], 1)
+        self.assertEqual(first.cursor["failed"], {self._key(other): 2})
+        self.assertEqual(first.cursor["retry"], [self._key(other)])
+
+        second = self.backend.pull_results_from_archives_chunk(self.poll, first.cursor, archive_budget=1)
+
+        self.assertTrue(second.done)
+        self.assertEqual(
+            second.cursor, {"before": "2026-03-01", "seen": [self._key(other)], "failed": {self._key(other): 3}}
+        )
+
+    @patch("ureport.backend.rapidpro.RapidProBackend._iter_poll_record_runs")
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_retries_a_rolled_up_daily_from_its_month(self, mock_get_archives, mock_iter_records):
+        now = timezone.now()
+        monthly = self._archive("2026-02-01", period="monthly")
+        self._listings(mock_get_archives, [monthly])
+        mock_iter_records.side_effect = [iter([[self._run(1234, "C-001", now)]])]
+
+        # the failed list of an older walk counts each archive in it as failed once
+        cursor = {"before": "2026-01-01", "seen": [], "failed": ["2026-02-03|daily", "2026-01-15|daily"]}
+        cursor["retry"] = ["2026-01-15|daily", "2026-02-03|daily"]
+
+        result = self.backend.pull_results_from_archives_chunk(self.poll, cursor, archive_budget=5)
+
+        # one that's gone altogether has nothing left to pull
+        self.assertTrue(result.done)
+        self.assertNotIn("failed", result.cursor)
+        self.assertEqual(mock_iter_records.call_args.args[0], monthly)
+        self.assertEqual(result.counts["num_val_created"], 1)
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_a_rate_limited_retry_is_kept(self, mock_get_archives):
+        mock_get_archives.side_effect = TembaRateExceededError(0)
+        cursor = {"before": "2026-01-01", "seen": [], "failed": {"2026-02-03|daily": 1}, "retry": ["2026-02-03|daily"]}
+
+        result = self.backend.pull_results_from_archives_chunk(self.poll, cursor, archive_budget=1)
+
+        self.assertTrue(result.rate_limited)
+        self.assertFalse(result.done)
+        self.assertEqual(result.cursor["retry"], ["2026-02-03|daily"])
+        self.assertEqual(result.cursor["failed"], {"2026-02-03|daily": 1})
 
 
 class DummyBackend(BaseBackend):
@@ -486,8 +562,198 @@ class BaseBackendChunkDefaultsTest(UreportTest):
         self.assertEqual(result.counts["num_synced"], 0)
 
     def test_pull_archives_chunk_default(self):
-        result = self.backend.pull_results_from_archives_chunk(None, {"before": "t"})
+        result = self.backend.pull_results_from_archives_chunk(None, {})
+
+        # a walk that was done is told apart from one sent back to the start, which has no position
+        self.assertTrue(result.done)
+        self.assertEqual(result.cursor, {"done": True})
+        self.assertEqual(result.counts["num_synced"], 0)
+
+    def test_pull_archives_batch_chunk_default(self):
+        result = self.backend.pull_results_from_archives_batch_chunk(self.nigeria, {"flow-1": None}, {})
+
+        self.assertTrue(result.done)
+        self.assertEqual(result.cursor, {"done": True})
+        self.assertEqual(result.counts["flow-1"]["num_synced"], 0)
+
+
+class PullArchivesBatchChunkTest(UreportTest):
+    def setUp(self):
+        super().setUp()
+        self.backend = RapidProBackend(self.rapidpro_backend)
+        education = Category.objects.create(
+            org=self.nigeria, name="Education", created_by=self.admin, modified_by=self.admin
+        )
+        self.poll1 = self.create_poll(self.nigeria, "Flow 1", "flow-1", education, self.admin)
+        self.create_poll_question(self.admin, self.poll1, "question 1", "ruleset-1")
+        self.poll2 = self.create_poll(self.nigeria, "Flow 2", "flow-2", education, self.admin)
+        self.create_poll_question(self.admin, self.poll2, "question 2", "ruleset-2")
+        self.polls = {"flow-1": self.poll1, "flow-2": self.poll2}
+
+        # flows created now, so the listing isn't bounded unless a test asks for it
+        patcher = patch("ureport.polls.models.Poll.get_flow_date", return_value=None)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+        PollResult.objects.all().delete()
+        Contact.objects.create(org=self.nigeria, uuid="C-001", gender="M", born=1990)
+        Contact.objects.create(org=self.nigeria, uuid="C-002", gender="F", born=1995)
+
+    def _archive(self, start_date, record_count=1, period="daily"):
+        return TembaArchive.create(
+            type="run",
+            start_date=f"{start_date}T00:00:00.000Z",
+            period=period,
+            record_count=record_count,
+            size=1024,
+            hash="feca9988b7772c003204a28bd741d0d0",
+            download_url="http://example.com/archive.jsonl.gz",
+        )
+
+    def _line(self, run_id, flow_uuid, ruleset_uuid, contact_uuid="C-001"):
+        time = "2026-03-01T10:00:00.000000Z"
+        return json.dumps(
+            {
+                "id": run_id,
+                "uuid": f"run-{run_id}",
+                "flow": {"uuid": flow_uuid, "name": "Flow"},
+                "contact": {"uuid": contact_uuid, "name": "Reporter"},
+                "start": {"uuid": "start-uuid"},
+                "responded": True,
+                "path": [{"node": ruleset_uuid, "time": time}],
+                "values": {"q": {"value": "yes", "category": "Win", "node": ruleset_uuid, "time": time}},
+                "created_on": time,
+                "modified_on": time,
+                "exited_on": time,
+                "exit_type": "completed",
+            }
+        )
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_routes_runs_of_one_download_to_each_flow(self, mock_get_archives):
+        mock_get_archives.return_value = CursorMockQuery([self._archive("2026-03-03")])
+        lines = [
+            self._line(1, "flow-1", "ruleset-1"),
+            self._line(2, "other-flow", "ruleset-x"),
+            self._line(3, "flow-2", "ruleset-2"),
+            self._line(4, "flow-1", "ruleset-1", contact_uuid="C-002"),
+        ]
+        saves = []
+
+        with patch.object(RapidProBackend, "_iter_archive_lines", return_value=iter(lines)) as mock_lines:
+            result = self.backend.pull_results_from_archives_batch_chunk(
+                self.nigeria, self.polls, {}, archive_budget=1, on_save=lambda: saves.append(1)
+            )
+
+        # the archive was downloaded once for both flows
+        mock_lines.assert_called_once()
+        self.assertTrue(result.done)
+        self.assertEqual(result.cursor, {"before": "2026-03-03", "seen": ["2026-03-03|daily"]})
+        self.assertEqual(set(result.counts), {"flow-1", "flow-2"})
+        self.assertEqual(result.counts["flow-1"]["num_val_created"], 2)
+        self.assertEqual(result.counts["flow-1"]["num_synced"], 2)
+        self.assertEqual(result.counts["flow-2"]["num_val_created"], 1)
+        json.dumps(result.counts)
+
+        self.assertEqual(PollResult.objects.filter(flow="flow-1").count(), 2)
+        self.assertEqual(PollResult.objects.filter(flow="flow-2").count(), 1)
+        self.assertFalse(PollResult.objects.filter(flow="other-flow").exists())
+
+        # one save per flow, each followed by a chance to renew the lease
+        self.assertEqual(len(saves), 2)
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_saves_a_flow_a_batch_at_a_time(self, mock_get_archives):
+        mock_get_archives.return_value = CursorMockQuery([self._archive("2026-03-03")])
+        lines = [self._line(i, "flow-1", "ruleset-1", contact_uuid=f"C-00{i}") for i in (1, 2)]
+        lines.append(self._line(3, "flow-2", "ruleset-2"))
+        saves = []
+
+        with (
+            patch.object(RapidProBackend, "ARCHIVE_RUNS_BATCH", 1),
+            patch.object(RapidProBackend, "_iter_archive_lines", return_value=iter(lines)),
+        ):
+            result = self.backend.pull_results_from_archives_batch_chunk(
+                self.nigeria, self.polls, {}, on_save=lambda: saves.append(1)
+            )
+
+        self.assertEqual(len(saves), 3)
+        self.assertEqual(result.counts["flow-1"]["num_synced"], 2)
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_resumes_below_the_cursor(self, mock_get_archives):
+        newer, older = self._archive("2026-03-03"), self._archive("2026-03-02")
+        downloads = []
+
+        def lines(archive):
+            downloads.append(str(archive.start_date)[:10])
+            return iter([self._line(len(downloads), "flow-2", "ruleset-2")])
+
+        with patch.object(RapidProBackend, "_iter_archive_lines", side_effect=lines):
+            mock_get_archives.return_value = CursorMockQuery([newer, older])
+            first = self.backend.pull_results_from_archives_batch_chunk(self.nigeria, self.polls, {}, archive_budget=1)
+            self.assertFalse(first.done)
+
+            mock_get_archives.return_value = CursorMockQuery([newer, older])
+            second = self.backend.pull_results_from_archives_batch_chunk(
+                self.nigeria, self.polls, first.cursor, archive_budget=1
+            )
+
+        self.assertTrue(second.done)
+        self.assertEqual(second.cursor, {"before": "2026-03-02", "seen": ["2026-03-02|daily"]})
+        self.assertEqual(downloads, ["2026-03-03", "2026-03-02"])
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_lists_archives_from_the_earliest_flow(self, mock_get_archives):
+        mock_get_archives.return_value = CursorMockQuery([])
+        dates = {"flow-1": "2026-03-15T10:00:00.000Z", "flow-2": "2025-11-20T10:00:00.000Z"}
+
+        with (
+            patch.object(self.poll1, "get_flow_date", side_effect=lambda: dates["flow-1"]),
+            patch.object(self.poll2, "get_flow_date", side_effect=lambda: dates["flow-2"]),
+        ):
+            self.backend.pull_results_from_archives_batch_chunk(self.nigeria, self.polls, {})
+
+        self.assertEqual(str(mock_get_archives.call_args[1]["after"])[:10], "2025-11-01")
+
+        # a flow without a date needs every archive
+        dates["flow-1"] = None
+        with (
+            patch.object(self.poll1, "get_flow_date", side_effect=lambda: dates["flow-1"]),
+            patch.object(self.poll2, "get_flow_date", side_effect=lambda: dates["flow-2"]),
+        ):
+            self.backend.pull_results_from_archives_batch_chunk(self.nigeria, self.polls, {})
+
+        self.assertIsNone(mock_get_archives.call_args[1]["after"])
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_a_lost_lease_is_not_passed_off_as_a_broken_archive(self, mock_get_archives):
+        mock_get_archives.return_value = CursorMockQuery([self._archive("2026-03-03")])
+
+        def lost():
+            raise LeaseLost("gone")
+
+        with patch.object(
+            RapidProBackend, "_iter_archive_lines", return_value=iter([self._line(1, "flow-1", "ruleset-1")])
+        ):
+            with self.assertRaises(LeaseLost):
+                self.backend.pull_results_from_archives_batch_chunk(self.nigeria, self.polls, {}, on_save=lost)
+
+    @patch("dash.orgs.models.TembaClient.get_archives")
+    def test_skips_polls_that_stopped_syncing(self, mock_get_archives):
+        self.poll1.stopped_syncing = True
+        self.poll2.stopped_syncing = True
+
+        result = self.backend.pull_results_from_archives_batch_chunk(self.nigeria, self.polls, {"before": "t"})
 
         self.assertTrue(result.done)
         self.assertEqual(result.cursor, {"before": "t"})
-        self.assertEqual(result.counts["num_synced"], 0)
+        mock_get_archives.assert_not_called()
+
+    def test_reads_the_flow_off_a_line(self):
+        self.assertEqual(RapidProBackend._archive_line_flow(self._line(1, "flow-1", "ruleset-1")), "flow-1")
+        self.assertEqual(RapidProBackend._archive_line_flow('{"flow":{"uuid":"flow-2","name":"F"}}'), "flow-2")
+
+        # a line laid out some other way still resolves, by parsing it
+        self.assertEqual(RapidProBackend._archive_line_flow('{"flow": {"name": "F", "uuid": "flow-3"}}'), "flow-3")
+        self.assertIsNone(RapidProBackend._archive_line_flow('{"flow": null}'))

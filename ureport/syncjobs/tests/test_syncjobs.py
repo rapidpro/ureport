@@ -256,6 +256,18 @@ class SyncJobTest(SyncJobTestMixin, TestCase):
         # only the position is dropped - the run it belongs to is left as it was
         self.assertJobState(self.job, cursor={}, progress={"chunks": 2}, status=SyncJob.STATUS_RUNNING)
 
+    def test_reset_cursor_shuts_out_a_lapsed_holder(self):
+        job = self.job.claim("worker-1", lease_seconds=600)
+        expire_lease(self.job)
+
+        # a worker whose lease merely lapsed is still alive, and mustn't write its old position over the reset
+        self.assertTrue(SyncJob.objects.get(id=self.job.id).reset_cursor())
+
+        with self.assertRaises(LeaseLost):
+            job.checkpoint(cursor={"after": "t1"})
+
+        self.assertJobState(self.job, cursor={}, lease_owner=None)
+
     def test_non_owner_cannot_mutate(self):
         self.job.claim("worker-1")
 

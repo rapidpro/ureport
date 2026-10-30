@@ -705,6 +705,67 @@ class PollTest(UreportTest):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_poll_date", args=[poll.pk]))
 
+    @patch("dash.orgs.models.TembaClient", MockTembaClient)
+    def test_poll_poll_flow_view_on_a_retired_flow(self):
+        retired = self.create_poll(self.uganda, "Poll 1", "uuid-25", self.health_uganda, self.admin)
+        long_ago = timezone.now() - timedelta(days=200)
+        Poll.objects.filter(id=retired.id).update(stopped_syncing=True, created_on=long_ago)
+        other_org = self.create_poll(self.nigeria, "Poll 2", "uuid-26", self.education_nigeria, self.admin)
+        Poll.objects.filter(id=other_org.id).update(stopped_syncing=True)
+
+        flow = dict(
+            runs=300,
+            completed_runs=120,
+            participants=None,
+            labels="",
+            archived=False,
+            created_on="2015-04-08T08:30:40.000Z",
+            date_hint="2015-04-08",
+            results=[dict(key="color", name="Color", categories=["Orange", "Blue"], node_uuids=["node-uuid"])],
+        )
+
+        self.login(self.admin)
+
+        def set_flow(flow_uuid):
+            poll = self.create_poll(self.uganda, "Poll 3", "", self.health_uganda, self.admin)
+
+            with (
+                patch("dash.orgs.models.Org.get_flows") as mock_get_flows,
+                patch.object(Poll, "pull_refresh_task", autospec=True) as mock_refresh,
+                patch.object(Poll, "pull_poll_results_task") as mock_pull,
+            ):
+                mock_get_flows.return_value = {
+                    "uuid-25": dict(flow, uuid="uuid-25", name="Flow 1"),
+                    "uuid-26": dict(flow, uuid="uuid-26", name="Flow 2"),
+                }
+                self.client.post(
+                    reverse("polls.poll_poll_flow", args=[poll.pk]),
+                    dict(flow_uuid=flow_uuid),
+                    SERVER_NAME="uganda.ureport.io",
+                )
+
+            return poll, mock_refresh, mock_pull
+
+        # a poll reusing a flow that was retired pulls all of its results again
+        poll, mock_refresh, mock_pull = set_flow("uuid-25")
+
+        self.assertEqual([call[0][0].pk for call in mock_refresh.call_args_list], [poll.pk])
+        mock_pull.assert_not_called()
+
+        # but once a poll syncs the flow again, it has the flow's results, and another poll
+        # on it carries on from there
+        Poll.objects.filter(id=poll.id).update(created_on=long_ago)
+        poll, mock_refresh, mock_pull = set_flow("uuid-25")
+
+        mock_refresh.assert_not_called()
+        self.assertEqual([call[0][0].pk for call in mock_pull.call_args_list], [poll.pk])
+
+        # and a flow only retired in another org is a different flow there
+        poll, mock_refresh, mock_pull = set_flow("uuid-26")
+
+        mock_refresh.assert_not_called()
+        self.assertEqual([call[0][0].pk for call in mock_pull.call_args_list], [poll.pk])
+
     def test_poll_poll_date_view(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 

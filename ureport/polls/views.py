@@ -270,7 +270,19 @@ class PollCRUDL(SmartCRUDL):
             obj = super(PollCRUDL.PollFlow, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
 
-            Poll.pull_poll_results_task(obj)
+            # a retired flow's results were deleted, but its counts are shared by every poll on
+            # it, so a poll reusing it pulls all of the flow's results again rather than resuming
+            # where the flow stopped and replacing those counts with only the newer results. A
+            # flow another poll still syncs has its results, and is left to carry on
+            flow_polls = Poll.objects.filter(org=obj.org, flow_uuid=obj.flow_uuid).exclude(pk=obj.pk)
+            reuses_retired_flow = (
+                flow_polls.filter(stopped_syncing=True).exists()
+                and not flow_polls.filter(is_active=True, stopped_syncing=False).exists()
+            )
+            if reuses_retired_flow:
+                obj.pull_refresh_task()
+            else:
+                Poll.pull_poll_results_task(obj)
             return obj
 
     class Create(OrgPermsMixin, SmartCreateView):
