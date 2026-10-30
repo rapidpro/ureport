@@ -1,3 +1,6 @@
+## v1.9.0 (2026-10-30)
+ * Count active users with HyperLogLog sketches alongside the contact activity tables
+
 ## v1.8.19 (2026-10-30)
  * Squash reporter counters with BaseSquashableCount
 
