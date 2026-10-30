@@ -32,6 +32,9 @@ class GenderSegment(models.Model):
 
 
 class AgeSegment(models.Model):
+    # the names of the bands the active users charts show, by min age
+    ACTIVITY_LABELS = {0: "0-14", 15: "15-19", 20: "20-24", 25: "25-30", 31: "31-34", 35: "35+"}
+
     min_age = models.IntegerField(null=True)
     max_age = models.IntegerField(null=True)
 
@@ -850,18 +853,7 @@ class ContactActivity(models.Model):
         ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
         output_data = {time_filter: [] for time_filter in time_filters}
         for age in ages:
-            if age["min_age"] == 0:
-                data_key = "0-14"
-            elif age["min_age"] == 15:
-                data_key = "15-19"
-            elif age["min_age"] == 20:
-                data_key = "20-24"
-            elif age["min_age"] == 25:
-                data_key = "25-30"
-            elif age["min_age"] == 31:
-                data_key = "31-34"
-            elif age["min_age"] == 35:
-                data_key = "35+"
+            data_key = AgeSegment.ACTIVITY_LABELS.get(age["min_age"])
 
             activities = list(
                 ContactActivityCounter.objects.filter(
@@ -1049,7 +1041,7 @@ class ActiveUsersCheckpoint(models.Model):
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="active_users_checkpoints")
 
-    key = models.CharField(max_length=255, unique=True)
+    key = models.TextField(unique=True)
 
     month = models.DateField(help_text="The month the sketch counts")
 
@@ -1057,10 +1049,20 @@ class ActiveUsersCheckpoint(models.Model):
 
     taken_on = models.DateTimeField()
 
-    watermark = models.BigIntegerField(help_text="The latest poll result id when the checkpoint was taken")
-
     class Meta:
         indexes = [models.Index(fields=["org", "month"], name="stats_actuserscp_org_month")]
+
+
+class ActiveUsersCheckpointRun(models.Model):
+    """
+    A checkpoint run that saved every sketch touched before it started - see ureport.stats.active_users.restore
+    """
+
+    taken_on = models.DateTimeField(help_text="When the run started")
+
+    watermark = models.BigIntegerField(help_text="The latest poll result id when the run started")
+
+    saved = models.IntegerField(help_text="How many sketches the run saved")
 
 
 class PollWordCloud(models.Model):

@@ -58,11 +58,11 @@ COMPARE_SEGMENTS = ("all", "age", "gender", "location", "scheme")
 
 
 def is_write_enabled():
-    return getattr(settings, "ACTIVE_USERS_HLL_WRITE", True)
+    return settings.ACTIVE_USERS_HLL_WRITE
 
 
 def is_read_enabled(org):
-    return getattr(settings, "ACTIVE_USERS_HLL_READ", False) or bool(org.get_config("common.active_users_hll"))
+    return settings.ACTIVE_USERS_HLL_READ or bool(org.get_config("common.active_users_hll"))
 
 
 def month_start(d):
@@ -101,7 +101,7 @@ def result_segments(born, gender, state, scheme):
     the activity rows are - from the year of the month each row is for.
     """
     segments = ["all"]
-    if born is not None:
+    if born is not None and born >= MIN_BORN:
         segments.append(f"born:{born}")
     if gender:
         segments.append(f"gender:{gender.upper()}")
@@ -180,7 +180,7 @@ def record_results(results):
 
 def _countable_results(qs):
     """
-    The fields of the given results needed to add them, for those that make their contact active
+    Those of the given results that make their contact active, the same condition as is_countable
     """
     return qs.filter(category__isnull=False, date__isnull=False).exclude(flow="").exclude(ruleset="")
 
@@ -382,9 +382,12 @@ def _segment_series(org, segment_slug):
         return [(str(_("Active Users")), {}, lambda m: ["all"])]
 
     if segment_slug == "age":
-        labels = {0: "0-14", 15: "15-19", 20: "20-24", 25: "25-30", 31: "31-34", 35: "35+"}
         return [
-            (labels.get(a["min_age"]), {}, lambda m, a=a: _born_segments(m, a["min_age"], a["max_age"]))
+            (
+                AgeSegment.ACTIVITY_LABELS.get(a["min_age"]),
+                {},
+                lambda m, a=a: _born_segments(m, a["min_age"], a["max_age"]),
+            )
             for a in AgeSegment.objects.all().values("min_age", "max_age")
         ]
 
@@ -477,23 +480,39 @@ def checkpoint(batch_size=500):
     """
     Saves the raw bytes of every sketch touched since the last checkpoint. The dirty set is first moved aside, so
     that sketches touched while this runs are left for the next one, and only cleared a batch at a time once saved -
-    an interrupted run is picked up by the next one. Returns the number of sketches saved.
+    an interrupted run is picked up by the next one, which then goes on to the sketches touched since too. A run that
+    gets to the end is recorded, for a restore to replay the results since. Returns the number of sketches saved.
     """
     from ureport.polls.models import PollResult
 
-    from .models import ActiveUsersCheckpoint
+    from .models import ActiveUsersCheckpointRun
 
     r = get_valkey_connection()
-
-    if not r.exists(CHECKPOINTING_KEY):
-        if not r.exists(DIRTY_KEY):
-            return 0
-        r.rename(DIRTY_KEY, CHECKPOINTING_KEY)
 
     # results after these are replayed on restore - see restore()
     taken_on = timezone.now()
     watermark = PollResult.objects.order_by("-id").values_list("id", flat=True).first() or 0
 
+    # an interrupted run's sketches first, then everything touched before this run started
+    saved = _save_checkpointing(r, batch_size)
+    if r.exists(DIRTY_KEY):
+        r.rename(DIRTY_KEY, CHECKPOINTING_KEY)
+        saved += _save_checkpointing(r, batch_size)
+
+    ActiveUsersCheckpointRun.objects.create(taken_on=taken_on, watermark=watermark, saved=saved)
+    prune_checkpoints()
+
+    logger.info("Checkpointed %d active users sketches", saved)
+    return saved
+
+
+def _save_checkpointing(r, batch_size):
+    """
+    Saves the sketches in the checkpointing set, clearing them from it a batch at a time
+    """
+    from .models import ActiveUsersCheckpoint
+
+    taken_on = timezone.now()
     saved = 0
     while True:
         keys = [k.decode() if isinstance(k, bytes) else k for k in r.srandmember(CHECKPOINTING_KEY, batch_size)]
@@ -511,27 +530,19 @@ def checkpoint(batch_size=500):
                 continue
             org_id, month, _ = parse_key(key)
             checkpoints.append(
-                ActiveUsersCheckpoint(
-                    org_id=org_id, key=key, month=month, value=value, taken_on=taken_on, watermark=watermark
-                )
+                ActiveUsersCheckpoint(org_id=org_id, key=key, month=month, value=value, taken_on=taken_on)
             )
 
         org_ids = set(_existing_org_ids({c.org_id for c in checkpoints}))
         checkpoints = [c for c in checkpoints if c.org_id in org_ids]
 
         ActiveUsersCheckpoint.objects.bulk_create(
-            checkpoints,
-            update_conflicts=True,
-            unique_fields=["key"],
-            update_fields=["value", "taken_on", "watermark"],
+            checkpoints, update_conflicts=True, unique_fields=["key"], update_fields=["value", "taken_on"]
         )
         r.srem(CHECKPOINTING_KEY, *keys)
         saved += len(checkpoints)
 
     r.delete(CHECKPOINTING_KEY)
-    prune_checkpoints()
-
-    logger.info("Checkpointed %d active users sketches", saved)
     return saved
 
 
@@ -543,15 +554,19 @@ def _existing_org_ids(org_ids):
 
 def prune_checkpoints():
     """
-    Deletes checkpoints of sketches that have since expired, an org at a time
+    Deletes checkpoints of sketches that have since expired, an org at a time, and the records of all but the last
+    two runs, which a restore replays from
     """
     from dash.orgs.models import Org
 
-    from .models import ActiveUsersCheckpoint
+    from .models import ActiveUsersCheckpoint, ActiveUsersCheckpointRun
 
     cutoff = add_months(month_start(timezone.now()), 1 - RETENTION_MONTHS)
     for org_id in Org.objects.values_list("id", flat=True):
         ActiveUsersCheckpoint.objects.filter(org_id=org_id, month__lt=cutoff).delete()
+
+    keep = ActiveUsersCheckpointRun.objects.order_by("-id").values_list("id", flat=True)[:2]
+    ActiveUsersCheckpointRun.objects.exclude(id__in=list(keep)).delete()
 
 
 def restore(org, batch_size=500):
@@ -560,17 +575,21 @@ def restore(org, batch_size=500):
     are merged into whatever the sketches already hold rather than replacing it, and adding results already counted
     changes nothing, so this can't inflate counts however much it overlaps. Returns the number of sketches restored
     and the number of results replayed.
+
+    The last completed run saved every sketch touched before it started. Results are replayed from the run before
+    it rather than from it, so a result saved just before the last run started but only added to its sketches after
+    is replayed too. Results of polls still syncing answered since just before the last run are replayed as well,
+    which covers those whose answers changed in place since.
     """
     from ureport.polls.models import Poll, PollResult
 
-    from .models import ActiveUsersCheckpoint
+    from .models import ActiveUsersCheckpoint, ActiveUsersCheckpointRun
 
     r = get_valkey_connection()
     cutoff = add_months(month_start(timezone.now()), 1 - RETENTION_MONTHS)
     checkpoints = ActiveUsersCheckpoint.objects.filter(org=org, month__gte=cutoff).order_by("id")
 
     restored, last_id = 0, 0
-    taken_on, watermark = None, None
     while True:
         batch = list(checkpoints.filter(id__gt=last_id)[:batch_size])
         if not batch:
@@ -587,18 +606,18 @@ def restore(org, batch_size=500):
 
         restored += len(batch)
         last_id = batch[-1].id
-        taken_on = min([c.taken_on for c in batch] + ([taken_on] if taken_on else []))
-        watermark = min([c.watermark for c in batch] + ([watermark] if watermark is not None else []))
 
-    # with no checkpoint to restore, everything still kept is replayed
-    if taken_on is None:
+    runs = list(ActiveUsersCheckpointRun.objects.order_by("-id")[:2])
+
+    # with no checkpoint run to replay from, everything still kept is replayed
+    if not restored or not runs:
         return restored, backfill(org)[1]
 
-    # results saved after the checkpoint, and results of polls still syncing that were answered after it, which
-    # covers the ones whose answers changed in place since
-    replayed = _add_results_qs(PollResult.objects.filter(org=org, id__gt=watermark))
+    after = datetime.combine(cutoff, datetime.min.time(), tzinfo=tzone.utc)
+    watermark = runs[1].watermark if len(runs) > 1 else 0
+    replayed = _add_results_qs(PollResult.objects.filter(org=org, id__gt=watermark, date__gte=after))
 
-    since = taken_on - REPLAY_OVERLAP
+    since = runs[0].taken_on - REPLAY_OVERLAP
     flows = Poll.objects.filter(org=org, stopped_syncing=False).values_list("flow_uuid", flat=True).distinct()
     for flow in flows.order_by("flow_uuid"):
         replayed += _add_results_qs(PollResult.objects.filter(org=org, flow=flow, date__gte=since))
@@ -661,9 +680,15 @@ def compare_org(org, segments=COMPARE_SEGMENTS):
             hll_secs,
         )
 
-        for existing_series, hll_series in zip(existing, hll):
+        # series are matched by what they're of rather than by position, as each side lists them in its own order
+        def series_key(series):
+            return series.get("osm_id") or str(series["name"])
+
+        hll_by_key = {series_key(s): s for s in hll}
+        for existing_series in existing:
+            hll_data = hll_by_key.get(series_key(existing_series), {}).get("data", {})
             for month, expected in sorted(existing_series["data"].items()):
-                actual = hll_series["data"].get(month, 0)
+                actual = hll_data.get(month, 0)
                 error = actual - expected
                 rows.append(
                     dict(

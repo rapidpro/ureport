@@ -113,7 +113,7 @@ def compare_active_users():
 
     from . import active_users
 
-    if not getattr(settings, "ACTIVE_USERS_HLL_COMPARE", False):
+    if not settings.ACTIVE_USERS_HLL_COMPARE:
         return
 
     for org in Org.objects.filter(is_active=True).order_by("id"):

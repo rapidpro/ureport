@@ -14,6 +14,7 @@ from django.test import override_settings
 
 from dash.categories.models import Category
 from dash.orgs.models import Org
+from ureport.backend.floip import FLOIPBackend
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
@@ -21,6 +22,7 @@ from ureport.polls.models import PollResult
 from ureport.stats import active_users
 from ureport.stats.models import (
     ActiveUsersCheckpoint,
+    ActiveUsersCheckpointRun,
     AgeSegment,
     ContactActivity,
     PollEngagementDailyCount,
@@ -29,12 +31,13 @@ from ureport.stats.models import (
 from ureport.stats.tasks import checkpoint_active_users, compare_active_users
 from ureport.stats.tests.test_engagement import frozen_now
 from ureport.tests import UreportTest
-from ureport.utils import ORG_CONTACT_COUNT_KEY
+from ureport.utils import ORG_CONTACT_COUNT_KEY, datetime_to_json_date
 
 NOW = datetime(2026, 10, 15, 12, 0, tzinfo=tzone.utc)
 FAR_FUTURE = int(datetime(2100, 1, 1, tzinfo=tzone.utc).timestamp())
 
 
+@override_settings(ACTIVE_USERS_HLL_WRITE=True)
 class ActiveUsersTest(UreportTest):
     def setUp(self):
         super().setUp()
@@ -200,6 +203,29 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual(1, self.pfcount(april, "state:R1"))
         self.assertEqual(1, self.pfcount(april, "born:1990"))
 
+    def test_floip_sync_records_new_and_updated_results(self):
+        backend = FLOIPBackend(self.floip_backend)
+        march, april = date(2026, 3, 1), date(2026, 4, 1)
+
+        backend._save_new_poll_results_to_database(
+            {"c1": {"ruleset-1": self.result("c1", datetime(2026, 3, 2, tzinfo=tzone.utc), org=self.nigeria)}}
+        )
+        self.assertEqual(1, self.pfcount(march, "all", org=self.nigeria))
+
+        existing = PollResult.objects.get(org=self.nigeria, contact="c1")
+        result = [datetime_to_json_date(datetime(2026, 4, 3, tzinfo=tzone.utc)), "row-1", "c1", "s1", "ruleset-1", "No"]
+        contact = type("Contact", (), dict(state="R1", district="", ward="", born=1990, gender="M"))()
+
+        stats = {"num_val_updated": 0}
+        backend._process_run_poll_results(
+            self.nigeria, "flow-1", ["ruleset-1"], result, contact, {"c1": {"ruleset-1": existing}}, {}, stats
+        )
+
+        self.assertEqual(1, stats["num_val_updated"])
+        self.assertEqual(1, self.pfcount(april, "all", org=self.nigeria))
+        self.assertEqual(1, self.pfcount(april, "gender:M", org=self.nigeria))
+        self.assertEqual(1, self.pfcount(april, "born:1990", org=self.nigeria))
+
     def test_window_union(self):
         jan = date(2026, 1, 1)
         active_users.add_results(
@@ -308,10 +334,15 @@ class ActiveUsersTest(UreportTest):
         cp = ActiveUsersCheckpoint.objects.get(key=active_users.sketch_key(self.org.id, date(2026, 1, 1), "all"))
         self.assertEqual(self.r.get(cp.key), bytes(cp.value))
         self.assertEqual(NOW, cp.taken_on)
-        self.assertEqual(PollResult.objects.order_by("-id").first().id, cp.watermark)
+
+        run = ActiveUsersCheckpointRun.objects.get()
+        self.assertEqual(
+            (NOW, PollResult.objects.order_by("-id").first().id, saved), (run.taken_on, run.watermark, run.saved)
+        )
 
         # nothing touched since, so nothing to save
-        self.assertEqual(0, active_users.checkpoint())
+        with frozen_now(NOW):
+            self.assertEqual(0, active_users.checkpoint())
 
         # results saved since the checkpoint, one of them a contact already counted
         later = [
@@ -351,6 +382,7 @@ class ActiveUsersTest(UreportTest):
             PollResult.objects.bulk_create([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc))])
             active_users.backfill(self.org)
             active_users.checkpoint()
+            active_users.checkpoint()
 
             # an answer changed in place since, on a poll still syncing
             PollResult.objects.filter(org=self.org, contact="c1").update(
@@ -369,20 +401,50 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(1, self.pfcount(date(2026, 10, 1), "all"))
 
     def test_interrupted_checkpoint_resumed(self):
+        jan, feb = (active_users.sketch_key(self.org.id, date(2026, m, 1), "all") for m in (1, 2))
         active_users.add_results([self.result("c1", datetime(2026, 1, 5, tzinfo=tzone.utc))])
         self.r.rename(active_users.DIRTY_KEY, active_users.CHECKPOINTING_KEY)
         active_users.add_results([self.result("c2", datetime(2026, 2, 5, tzinfo=tzone.utc))])
 
-        # the interrupted run's sketches are saved, the ones touched since are left for the next
-        self.assertEqual(1, active_users.checkpoint())
-        self.assertEqual(
-            [active_users.sketch_key(self.org.id, date(2026, 1, 1), "all")],
-            list(ActiveUsersCheckpoint.objects.values_list("key", flat=True)),
-        )
-        self.assertEqual({active_users.sketch_key(self.org.id, date(2026, 2, 1), "all")}, self.dirty())
+        # a run that fails part way isn't recorded, and leaves its sketches to be saved
+        with patch("ureport.stats.models.ActiveUsersCheckpoint.objects.bulk_create", side_effect=ValueError("boom")):
+            with self.assertRaises(ValueError):
+                active_users.checkpoint()
+        self.assertFalse(ActiveUsersCheckpointRun.objects.exists())
+        self.assertEqual({jan}, {k.decode() for k in self.r.smembers(active_users.CHECKPOINTING_KEY)})
 
-        self.assertEqual(1, active_users.checkpoint())
-        self.assertEqual(2, ActiveUsersCheckpoint.objects.count())
+        # the next saves the interrupted run's sketches, then the ones touched since
+        self.assertEqual(2, active_users.checkpoint())
+        self.assertEqual({jan, feb}, set(ActiveUsersCheckpoint.objects.values_list("key", flat=True)))
+        self.assertEqual(set(), self.dirty())
+        self.assertFalse(self.r.exists(active_users.CHECKPOINTING_KEY))
+        self.assertEqual(1, ActiveUsersCheckpointRun.objects.count())
+
+    def test_restore_replays_since_previous_run(self):
+        with frozen_now(datetime(2026, 8, 1, tzinfo=tzone.utc)):
+            # an old month's sketch, checkpointed long before and not touched since
+            PollResult.objects.bulk_create([self.result("old", datetime(2025, 3, 5, tzinfo=tzone.utc))])
+            active_users.backfill(self.org)
+            active_users.checkpoint()
+
+        with frozen_now(datetime(2026, 9, 1, tzinfo=tzone.utc)):
+            PollResult.objects.bulk_create([self.result("sept", datetime(2026, 8, 31, tzinfo=tzone.utc))])
+            active_users.backfill(self.org)
+            active_users.checkpoint()
+
+        with frozen_now(NOW):
+            # saved after the previous run started, so replayed, however its sketches were checkpointed
+            PollResult.objects.bulk_create([self.result("late", datetime(2026, 10, 1, tzinfo=tzone.utc))])
+            active_users.add_results(list(PollResult.objects.filter(contact="late")))
+            active_users.checkpoint()
+
+            # only the last two runs are kept
+            self.assertEqual(2, ActiveUsersCheckpointRun.objects.count())
+
+            active_users.clear(self.org)
+            self.assertEqual((3, 1), active_users.restore(self.org))
+            for contact, month in (("old", date(2025, 3, 1)), ("sept", date(2026, 8, 1)), ("late", date(2026, 10, 1))):
+                self.assertEqual([month], self.months_of(contact, self.org), contact)
 
     def test_prune_checkpoints(self):
         active_users.add_results(
@@ -546,6 +608,21 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual(set(active_users.COMPARE_SEGMENTS), {r["segment"] for r in rows})
         self.assertTrue(all(r["error"] == 0 for r in rows))
 
+        # series are matched by name, whatever order each side lists them in
+        with frozen_now(NOW), patch("ureport.stats.active_users.get_activity", side_effect=lambda *a: {12: []}):
+            missing = active_users.compare_org(self.org, segments=["gender"])
+        self.assertEqual({0}, {r["hll"] for r in missing})
+        self.assertTrue(any(r["existing"] for r in missing))
+
+        reversed_get_activity = active_users.get_activity
+
+        def reverse(org, segment, tfs):
+            output = reversed_get_activity(org, segment, tfs)
+            return {tf: list(reversed(series)) for tf, series in output.items()}
+
+        with frozen_now(NOW), patch("ureport.stats.active_users.get_activity", side_effect=reverse):
+            self.assertTrue(all(r["error"] == 0 for r in active_users.compare_org(self.org)))
+
         # make one series undercount, and another count where there's nothing
         rows[0].update(existing=1000, hll=950, error=-50, rel_error=-0.05)
         rows[1].update(existing=0, hll=3, error=3, rel_error=None)
@@ -634,6 +711,20 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual(1, out.count("No contact activity tables, backfilling from results only"))
         self.assertIn(f"org #{self.org.id} (uganda): {len(results)} results", out)
         self.assertIn(f"org #{self.nigeria.id} (nigeria): 0 results", out)
+
+        # clearing what the results alone can't fill back needs forcing
+        with self.assertRaisesMessage(CommandError, "use --force to clear"):
+            call_command("active_users", "backfill", "--clear", stdout=StringIO())
+
+        out = StringIO()
+        with frozen_now(NOW):
+            call_command("active_users", "backfill", "--org", str(self.org.id), "--clear", "--force", stdout=out)
+        self.assertIn(f"sketches of org #{self.org.id}", out.getvalue())
+
+    def test_backfill_command_needs_writes(self):
+        with override_settings(ACTIVE_USERS_HLL_WRITE=False):
+            with self.assertRaisesMessage(CommandError, "ACTIVE_USERS_HLL_WRITE is off"):
+                call_command("active_users", "backfill", stdout=StringIO())
 
     def test_backfill_command_orgs(self):
         def run(*args):

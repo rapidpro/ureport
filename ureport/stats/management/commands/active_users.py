@@ -33,6 +33,9 @@ class Command(BaseCommand):
         backfill.add_argument("--since", type=parse_month, help="First month to add (YYYY-MM), all kept by default")
         backfill.add_argument("--until", type=parse_month, help="Last month to add (YYYY-MM), this month by default")
         backfill.add_argument("--clear", action="store_true", help="Delete the org's sketches first")
+        backfill.add_argument(
+            "--force", action="store_true", help="Allow --clear without the activity tables to fill them back from"
+        )
         backfill.add_argument("--from-org", type=int, help="Start at this org id, e.g. to resume an earlier run")
         backfill.add_argument("--limit", type=int, help="Backfill at most this many orgs")
         backfill.add_argument(
@@ -66,8 +69,18 @@ class Command(BaseCommand):
             orgs = Org.objects.filter(id__in=org_ids).order_by("id")
         return list(orgs)
 
-    def handle_backfill(self, orgs, since, until, clear, prefix_length, from_org, limit, **options):
+    def handle_backfill(self, orgs, since, until, clear, force, prefix_length, from_org, limit, **options):
+        # the sketches would otherwise miss whatever is synced from now on
+        if not active_users.is_write_enabled():
+            raise CommandError("ACTIVE_USERS_HLL_WRITE is off, turn it on before backfilling")
+
         if not active_users.activity_table_exists():
+            # the results alone can't fill back what was counted from deleted results
+            if clear and not force:
+                raise CommandError(
+                    "No contact activity tables to fill cleared sketches back from, use --force to clear"
+                )
+
             self.stdout.write("No contact activity tables, backfilling from results only")
 
         todo = [o for o in self.get_orgs(orgs) if from_org is None or o.id >= from_org]
