@@ -1,3 +1,6 @@
+## v1.9.2 (2026-10-31)
+ * Keep active users with born years before 1900 in their own sketch and count them in the oldest age band
+
 ## v1.9.1 (2026-10-30)
  * Retire a flow only after its counts are complete and its results have had a final pull, then delete its results at the end of its last sync
  * Finish deleting the results of a retired flow whose delete was interrupted
