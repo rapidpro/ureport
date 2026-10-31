@@ -43,7 +43,11 @@ RETENTION_MONTHS = 25
 
 # born years older than this are kept together in one sketch, which bounds the sketches the oldest age band unions
 MIN_BORN = 1900
-OLD_BORN_SEGMENT = "born:old"
+OLD_BORN_SEGMENT = "born:pre1900"
+
+# born years below this are left out, as the activity counters leave them out for being over the oldest age band - most
+# are contacts' ages typed in place of the year
+MIN_OLD_BORN = 26
 
 # how many commands are sent in one pipeline
 PIPELINE_SIZE = 1000
@@ -102,7 +106,7 @@ def result_segments(born, gender, state, scheme):
     the activity rows are - from the year of the month each row is for.
     """
     segments = ["all"]
-    if born:
+    if born is not None and born >= MIN_OLD_BORN:
         segments.append(f"born:{born}" if born >= MIN_BORN else OLD_BORN_SEGMENT)
     if gender:
         segments.append(f"gender:{gender.upper()}")
@@ -322,13 +326,20 @@ def _backfill_results(org, since, until, batch_size, progress):
 
 
 def backfill(
-    org, since=None, until=None, prefix_length=ACTIVITY_PREFIX_LENGTH, batch_size=RESULTS_BATCH_SIZE, progress=None
+    org,
+    since=None,
+    until=None,
+    prefix_length=ACTIVITY_PREFIX_LENGTH,
+    batch_size=RESULTS_BATCH_SIZE,
+    progress=None,
+    skip_results=False,
 ):
     """
     Fills an org's sketches with everything answered between the given months (inclusive), defaulting to every month
     still kept: first the answers reconstructed from the contact activity tables while they exist, then the results
-    still there. Both only add to the sketches, so this is safe to run again, or alongside the sync. Returns the
-    number of answers from the activities (None without the tables) and of results added.
+    still there, unless skipped as the activities already cover them. Both only add to the sketches, so this is safe to
+    run again, or alongside the sync. Returns the number of answers from the activities (None without the tables) and
+    of results added.
     """
     today = month_start(timezone.now())
     since = month_start(since) if since else add_months(today, 1 - RETENTION_MONTHS)
@@ -338,7 +349,7 @@ def backfill(
     if activity_table_exists():
         answers = _backfill_activities(org, since, until, prefix_length, batch_size, progress)
 
-    results = _backfill_results(org, since, until, batch_size, progress)
+    results = 0 if skip_results else _backfill_results(org, since, until, batch_size, progress)
 
     logger.info("Backfilled %s activity answers and %d results for org #%d", answers, results, org.id)
     return answers, results
