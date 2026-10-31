@@ -1147,6 +1147,9 @@ SITE_ALLOW_NO_ORG = (
     "syncjobs.syncjob_pause",
     "syncjobs.syncjob_resume",
     "syncjobs.syncjob_force_resync",
+    # these compare active users across all orgs, and are for superusers only as no permission of theirs exists
+    "admins.org_active_users",
+    "admins.org_active_users_charts",
     "public.countries",
     "public.status",
     "public.task_status",

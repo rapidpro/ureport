@@ -765,6 +765,16 @@ def _existing_activity(org, segment_slug, time_filters):
     return readers[segment_slug](org, time_filters)
 
 
+def get_chart_comparison(org, segment_slug, time_filter):
+    """
+    The active users chart data of a segment as read from the contact activity counters and from the sketches
+    """
+    return {
+        "existing": _existing_activity(org, segment_slug, [time_filter])[time_filter],
+        "hll": get_activity(org, segment_slug, [time_filter])[time_filter],
+    }
+
+
 def compare_org(org, segments=COMPARE_SEGMENTS):
     """
     Compares the active users of each month and series an org's charts show, as read from the contact activity

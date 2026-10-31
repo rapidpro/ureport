@@ -1,0 +1,100 @@
+{% extends "smartmin/base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <p>
+    {% blocktrans trimmed %}
+      Orgs ranked by the largest difference on their overall Active Users line. That line has no demographics, so
+      problems in the rebuilt activity data can't affect it, and what's left is sketch error. A standard error is 0.81%.
+    {% endblocktrans %}
+    <a href="{% url 'admins.org_active_users_charts' %}">{% trans "All charts" %}</a>
+  </p>
+  <p id="active-users-progress"></p>
+  <table class="table is-striped is-fullwidth is-hoverable list-table">
+    <thead>
+      <tr>
+        <th>{% trans "Org" %}</th>
+        <th>{% trans "Month" %}</th>
+        <th>{% trans "Activity tables" %}</th>
+        <th>{% trans "Sketches" %}</th>
+        <th>{% trans "Difference" %}</th>
+        <th>{% trans "Standard errors" %}</th>
+      </tr>
+    </thead>
+    <tbody id="active-users-ranking"></tbody>
+  </table>
+  {{ orgs_data|json_script:"active-users-orgs" }}
+{% endblock content %}
+{% block extra-script %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/active_users_compare.js"></script>
+  <script>
+    (function () {
+      var CONCURRENT = 4;
+      var STANDARD_ERROR = 0.0081;
+
+      var chartsUrl = "{% url 'admins.org_active_users_charts' %}";
+      var orgs = JSON.parse(document.getElementById("active-users-orgs").textContent);
+      var pending = orgs.slice();
+      var ranked = [];
+      var finished = 0;
+      var failed = 0;
+
+      var cell = function (row, text) {
+        var td = document.createElement("td");
+        td.textContent = text;
+        row.appendChild(td);
+      };
+
+      var render = function () {
+        ranked.sort(function (a, b) { return Math.abs(b.largest.value) - Math.abs(a.largest.value); });
+
+        var body = document.getElementById("active-users-ranking");
+        body.textContent = "";
+        ranked.forEach(function (entry) {
+          var row = document.createElement("tr");
+          var name = document.createElement("td");
+          var link = document.createElement("a");
+          link.href = chartsUrl + "#org-" + entry.org.id;
+          link.textContent = entry.org.name;
+          name.appendChild(link);
+          row.appendChild(name);
+          cell(row, entry.largest.key.slice(0, 7));
+          cell(row, entry.largest.existing.toLocaleString());
+          cell(row, entry.largest.hll.toLocaleString());
+          cell(row, (entry.largest.value * 100).toFixed(2) + "%");
+          cell(row, (Math.abs(entry.largest.value) / STANDARD_ERROR).toFixed(1));
+          body.appendChild(row);
+        });
+
+        document.getElementById("active-users-progress").textContent =
+          finished + " of " + orgs.length + " orgs loaded" + (failed ? ", " + failed + " failed" : "");
+      };
+
+      var next = function () {
+        var org = pending.shift();
+        if (!org) { return; }
+
+        var params = new URLSearchParams({ org: org.id, segment: "all", filter: 12 });
+        fetch(chartsUrl + "?" + params.toString(), { credentials: "same-origin" })
+          .then(function (response) {
+            if (!response.ok) { throw new Error(response.status); }
+            return response.json();
+          })
+          .then(function (data) {
+            var largest = ActiveUsersCompare.largestDifference(data.existing, data.hll);
+            if (largest) { ranked.push({ org: org, largest: largest }); }
+          })
+          .catch(function () { failed++; })
+          .then(function () {
+            finished++;
+            render();
+            next();
+          });
+      };
+
+      render();
+      for (var i = 0; i < CONCURRENT; i++) { next(); }
+    })();
+  </script>
+{% endblock extra-script %}
