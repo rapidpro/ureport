@@ -1,3 +1,6 @@
+## v1.9.5 (2026-10-31)
+ * Keep short runs of active users' values from answering before their first row
+
 ## v1.9.4 (2026-10-31)
  * Reconstruct active users answers from runs of months with the same values
 
