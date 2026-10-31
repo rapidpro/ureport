@@ -105,16 +105,22 @@ def result_segments(born, gender, state, scheme):
     Ages are kept by the year the contact was born, so that a month's age bands can be taken at that month just as
     the activity rows are - from the year of the month each row is for.
     """
-    segments = ["all"]
-    if born is not None and born >= MIN_OLD_BORN:
-        segments.append(f"born:{born}" if born >= MIN_BORN else OLD_BORN_SEGMENT)
-    if gender:
-        segments.append(f"gender:{gender.upper()}")
-    if state:
-        segments.append(f"state:{state.upper()}")
-    if scheme:
-        segments.append(f"scheme:{scheme.lower()}")
-    return segments
+    values = {"born": born, "gender": gender, "state": state, "scheme": scheme}
+    segments = (_value_segment(kind, value) for kind, value in values.items())
+    return ["all", *filter(None, segments)]
+
+
+def _value_segment(kind, value):
+    """
+    The segment of a value of the given kind of segment, or None if it isn't one that's counted
+    """
+    if kind == "born":
+        if value is None or value < MIN_OLD_BORN:
+            return None
+        return f"born:{value}" if value >= MIN_BORN else OLD_BORN_SEGMENT
+    if not value:
+        return None
+    return f"{kind}:{value.lower() if kind == 'scheme' else value.upper()}"
 
 
 def is_countable(result):
@@ -212,39 +218,43 @@ def _add_results_qs(qs, batch_size=RESULTS_BATCH_SIZE):
     return added
 
 
-# the reconstructed answers of one range of an org's contacts, from its contact activity rows. Every answer writes
-# rows for its month and the 11 after, and updating a contact rewrites its rows from that month on, so each contact's
-# active months are split into runs of consecutive months with the same values (gaps and islands), and each run [s, e]
-# gets answers at s, s+12, s+24... while below e-11, then at e-11 - whose windows of 12 months together cover the run
-# exactly. A run shorter than 12 months can't be covered exactly: when it's the first of months that start at the prune
-# it gets e-11, before its first row, as the months before that row have just been cut, otherwise it gets s, as answering
-# any earlier would give the months before it these values, which are the ones the charts would show wrong - or this
-# month if s is still to come, so that the sketches have it by then. Months are numbered year * 12 + month - 1.
+# the reconstructed answers of one range of an org's contacts, from its contact activity rows, for one kind of segment.
+# Every answer writes rows for its month and the 11 after, and updating a contact rewrites its rows from that month on,
+# so each contact's active months are split into runs of consecutive months with the same value of that kind (gaps and
+# islands) - a kind on its own, so that a change of one value doesn't affect the others - and each run [s, e] gets
+# answers at s, s+12, s+24... while below e-11, then at e-11 - whose windows of 12 months together cover the run exactly.
+# A run shorter than 12 months can't be covered exactly: when it's the first of months that start at the prune it gets
+# e-11, before its first row, as the months before that row have just been cut, otherwise it gets s, as answering any
+# earlier would give the months before it this value, which are the ones the charts would show wrong - or this month if
+# s is still to come, so that the sketches have it by then. Months are numbered year * 12 + month - 1.
 ACTIVITY_ANSWERS_SQL = """
 WITH months AS (
-    SELECT contact, born, gender, state, scheme,
+    SELECT contact, %(value)s AS value,
            (EXTRACT(YEAR FROM date)::int * 12 + EXTRACT(MONTH FROM date)::int - 1) AS mi
     FROM stats_contactactivity
     WHERE org_id = %%s %(range)s
 ), islands AS (
     SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact ORDER BY mi) AS island FROM months
 ), values_islands AS (
-    SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact, island, born, gender, state, scheme ORDER BY mi) AS run
+    SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact, island, value ORDER BY mi) AS run
     FROM islands
 ), runs AS (
     SELECT *, MIN(mi) OVER (PARTITION BY contact, island) AS first_mi, MIN(mi) OVER w AS s, MAX(mi) OVER w AS e
     FROM values_islands
-    WINDOW w AS (PARTITION BY contact, island, born, gender, state, scheme, run)
+    WINDOW w AS (PARTITION BY contact, island, value, run)
 ), answers AS (
-    SELECT contact, born, gender, state, scheme,
+    SELECT contact, value,
            CASE WHEN s <= e - 11 THEN mi
                 WHEN s = first_mi AND s <= %%s THEN e - 11
                 ELSE LEAST(s, %%s) END AS answer_mi
     FROM runs
     WHERE (MOD(mi - s, 12) = 0 AND mi <= e - 12) OR mi = GREATEST(s, e - 11)
 )
-SELECT contact, answer_mi, born, gender, state, scheme FROM answers WHERE answer_mi >= %%s AND answer_mi < %%s
+SELECT contact, answer_mi, value FROM answers WHERE answer_mi >= %%s AND answer_mi < %%s
 """
+
+# the kinds of segment the activities are read for, by the column of their values
+ACTIVITY_KINDS = {"all": "NULL::text", "born": "born", "gender": "gender", "state": "state", "scheme": "scheme"}
 
 # the activities are read a range of contact uuids at a time, split on their first characters
 ACTIVITY_PREFIX_LENGTH = 2
@@ -285,7 +295,8 @@ def _first_unpruned_month():
 def _backfill_activities(org, since, until, prefix_length, batch_size, progress):
     """
     Adds the answers reconstructed from an org's contact activity rows, so that every contact is active in exactly
-    the months it's active in there. That includes the contacts of results that have since been deleted.
+    the months it's active in there. That includes the contacts of results that have since been deleted. Returns the
+    number of answers, which are those of the all segment as the others split these by when their values changed.
     """
     from django.db import connection, transaction
 
@@ -304,18 +315,24 @@ def _backfill_activities(org, since, until, prefix_length, batch_size, progress)
         params += [_first_unpruned_month(), _month_index(today), _month_index(since), _month_index(until)]
 
         range_added = 0
-        # a server side cursor, which needs a transaction, streams the range's answers rather than loading them
-        with transaction.atomic():
-            with connection.chunked_cursor() as cursor:
-                cursor.execute(ACTIVITY_ANSWERS_SQL % {"range": " ".join(conds)}, params)
-                while rows := cursor.fetchmany(batch_size):
-                    contacts_by_key = defaultdict(set)
-                    for contact, answer_mi, born, gender, state, scheme in rows:
-                        month = date(answer_mi // 12, answer_mi % 12 + 1, 1)
-                        for segment in result_segments(born, gender, state, scheme):
-                            contacts_by_key[sketch_key(org.id, month, segment)].add(contact)
-                    _add(r, contacts_by_key)
-                    range_added += len(rows)
+        for kind, column in ACTIVITY_KINDS.items():
+            sql = ACTIVITY_ANSWERS_SQL % {"value": column, "range": " ".join(conds)}
+
+            # a server side cursor, which needs a transaction, streams the range's answers rather than loading them
+            with transaction.atomic():
+                with connection.chunked_cursor() as cursor:
+                    cursor.execute(sql, params)
+                    while rows := cursor.fetchmany(batch_size):
+                        contacts_by_key = defaultdict(set)
+                        for contact, answer_mi, value in rows:
+                            segment = "all" if kind == "all" else _value_segment(kind, value)
+                            if segment:
+                                month = date(answer_mi // 12, answer_mi % 12 + 1, 1)
+                                contacts_by_key[sketch_key(org.id, month, segment)].add(contact)
+                        if contacts_by_key:
+                            _add(r, contacts_by_key)
+                        if kind == "all":
+                            range_added += len(rows)
 
         added += range_added
         if progress:

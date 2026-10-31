@@ -585,11 +585,12 @@ class ActiveUsersTest(UreportTest):
         )
 
         with frozen_now(NOW):
-            self.assertEqual(7, active_users.backfill(org, prefix_length=0)[0])
+            self.assertEqual(5, active_users.backfill(org, prefix_length=0)[0])
 
-            self.assertEqual([date(2025, 6, 1), date(2026, 6, 1), date(2026, 10, 1)], self.months_of("aaaa", org))
-            self.assertEqual([date(2026, 3, 1), date(2026, 6, 1)], self.months_of("bbbb", org))
-            self.assertEqual([date(2025, 2, 1), date(2026, 2, 1)], self.months_of("cccc", org))
+            # being active doesn't depend on any of the values changing
+            self.assertEqual([date(2025, 10, 1), date(2026, 10, 1)], self.months_of("aaaa", org))
+            self.assertEqual([date(2026, 3, 1)], self.months_of("bbbb", org))
+            self.assertEqual([date(2025, 10, 1), date(2025, 12, 1)], self.months_of("cccc", org))
 
             self.assertEqual(0, active_users.count(org, date(2026, 1, 1), ["state:R1"]))
             self.assertEqual(1, active_users.count(org, date(2026, 2, 1), ["state:R1"]))
@@ -600,6 +601,25 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(0, active_users.count(org, june, active_users._born_segments(june, 20, 24)))
             self.assertEqual(1, active_users.count(org, may, ["gender:M"]))
             self.assertEqual(0, active_users.count(org, june, ["gender:M"]))
+
+    def test_backfill_activity_runs_of_each_kind(self):
+        org = self.nigeria
+        ContactActivity.objects.bulk_create(
+            self.activities("aaaa", date(2026, 1, 1), date(2026, 6, 1), org=org, gender="F", state="R1")
+            + self.activities("aaaa", date(2026, 7, 1), date(2026, 12, 1), org=org, gender="F", state="R2")
+        )
+
+        with frozen_now(NOW):
+            self.assertEqual(1, active_users.backfill(org, prefix_length=0)[0])
+
+            # the update only splits the state's months, so the rest answered once and aren't kept active past the rows
+            self.assertEqual([date(2026, 1, 1)], self.months_of("aaaa", org))
+            for segment in ("all", "gender:F"):
+                self.assertEqual(1, self.pfcount(date(2026, 1, 1), segment, org=org))
+                self.assertEqual(0, self.pfcount(date(2026, 7, 1), segment, org=org))
+
+            self.assertEqual(1, self.pfcount(date(2026, 1, 1), "state:R1", org=org))
+            self.assertEqual(1, self.pfcount(date(2026, 7, 1), "state:R2", org=org))
 
     def test_backfill_matches_contact_activity(self):
         genders = ["M", "F", "O", None]
