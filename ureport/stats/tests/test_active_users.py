@@ -412,10 +412,10 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(1, self.pfcount(date(2026, 8, 1), "all"))
             self.assertEqual(1, self.pfcount(date(2026, 10, 1), "gender:F"))
 
-            # nothing to restore from replays everything
+            # nothing to restore from fills back everything, here from the two answers of its activity rows
             ActiveUsersCheckpoint.objects.all().delete()
             active_users.clear(self.org)
-            self.assertEqual((0, 1), active_users.restore(self.org))
+            self.assertEqual((0, 2), active_users.restore(self.org))
             self.assertEqual(1, self.pfcount(date(2026, 10, 1), "all"))
 
     def test_interrupted_checkpoint_resumed(self):
@@ -489,7 +489,7 @@ class ActiveUsersTest(UreportTest):
 
         with frozen_now(NOW):
             answers, added = active_users.backfill(
-                self.org, since=date(2026, 1, 1), until=date(2026, 3, 1), batch_size=3
+                self.org, since=date(2026, 1, 1), until=date(2026, 3, 1), batch_size=3, with_results=True
             )
             self.assertGreater(answers, 0)
             self.assertEqual(len([r for r in results if date(2026, 1, 1) <= r.date.date() < date(2026, 4, 1)]), added)
@@ -499,7 +499,7 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(0, self.pfcount(date(2026, 1, 1), "all", org=self.nigeria))
 
             # the rest, overlapping what's there
-            self.assertEqual(len(results), active_users.backfill(self.org)[1])
+            self.assertEqual(len(results), active_users.backfill(self.org, with_results=True)[1])
             for segment in active_users.COMPARE_SEGMENTS:
                 self.assertEqual(
                     active_users._existing_activity(self.org, segment, [12]),
@@ -668,7 +668,17 @@ class ActiveUsersTest(UreportTest):
                 call_command("active_users", *args, stdout=out)
             return out.getvalue()
 
-        out = run("backfill", "--org", str(self.org.id), "--since", "2024-10", "--until", "2026-10", "--clear")
+        out = run(
+            "backfill",
+            "--org",
+            str(self.org.id),
+            "--since",
+            "2024-10",
+            "--until",
+            "2026-10",
+            "--clear",
+            "--with-results",
+        )
         self.assertIn(f"sketches of org #{self.org.id}", out)
         self.assertIn("flow flow-1", out)
 
@@ -703,12 +713,12 @@ class ActiveUsersTest(UreportTest):
 
         self.assertTrue(len(results))
 
-    def test_backfill_skip_results(self):
-        self.seed()
+    def test_backfill_results_only_without_activity_tables(self):
+        results = self.seed()
 
         out = StringIO()
         with frozen_now(NOW), patch("ureport.stats.active_users._backfill_results") as backfill_results:
-            call_command("active_users", "backfill", "--org", str(self.org.id), "--skip-results", stdout=out)
+            call_command("active_users", "backfill", "--org", str(self.org.id), stdout=out)
             backfill_results.assert_not_called()
 
             for segment in active_users.COMPARE_SEGMENTS:
@@ -721,6 +731,11 @@ class ActiveUsersTest(UreportTest):
         self.assertRegex(
             out.getvalue(), rf"org #{self.org.id} \(uganda\): \d+ answer months from activity tables, 0 results"
         )
+
+        out = StringIO()
+        with frozen_now(NOW):
+            call_command("active_users", "backfill", "--org", str(self.org.id), "--with-results", stdout=out)
+        self.assertIn(f"tables, {len(results)} results", out.getvalue())
 
     def test_backfill_without_activity_tables(self):
         results = self.seed()
@@ -748,9 +763,6 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual(1, out.count("No contact activity tables, backfilling from results only"))
         self.assertIn(f"org #{self.org.id} (uganda): {len(results)} results", out)
         self.assertIn(f"org #{self.nigeria.id} (nigeria): 0 results", out)
-
-        with self.assertRaisesMessage(CommandError, "the results can't be skipped"):
-            call_command("active_users", "backfill", "--skip-results", stdout=StringIO())
 
         # clearing what the results alone can't fill back needs forcing
         with self.assertRaisesMessage(CommandError, "use --force to clear"):

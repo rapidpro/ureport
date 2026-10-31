@@ -332,14 +332,14 @@ def backfill(
     prefix_length=ACTIVITY_PREFIX_LENGTH,
     batch_size=RESULTS_BATCH_SIZE,
     progress=None,
-    skip_results=False,
+    with_results=False,
 ):
     """
     Fills an org's sketches with everything answered between the given months (inclusive), defaulting to every month
-    still kept: first the answers reconstructed from the contact activity tables while they exist, then the results
-    still there, unless skipped as the activities already cover them. Both only add to the sketches, so this is safe to
-    run again, or alongside the sync. Returns the number of answers from the activities (None without the tables) and
-    of results added.
+    still kept: the answers reconstructed from the contact activity tables while they exist, otherwise the results still
+    there. Every result writes activity rows for the months it counts in, so the tables cover the results, which can be
+    read as well if asked for. Both only add to the sketches, so this is safe to run again, or alongside the sync.
+    Returns the number of answers from the activities (None without the tables) and of results added.
     """
     today = month_start(timezone.now())
     since = month_start(since) if since else add_months(today, 1 - RETENTION_MONTHS)
@@ -349,7 +349,9 @@ def backfill(
     if activity_table_exists():
         answers = _backfill_activities(org, since, until, prefix_length, batch_size, progress)
 
-    results = 0 if skip_results else _backfill_results(org, since, until, batch_size, progress)
+    results = 0
+    if answers is None or with_results:
+        results = _backfill_results(org, since, until, batch_size, progress)
 
     logger.info("Backfilled %s activity answers and %d results for org #%d", answers, results, org.id)
     return answers, results
@@ -628,7 +630,8 @@ def restore(org, batch_size=500):
 
     # with no checkpoint run to replay from, everything still kept is replayed
     if not restored or not runs:
-        return restored, backfill(org)[1]
+        answers, results = backfill(org)
+        return restored, (answers or 0) + results
 
     after = datetime.combine(cutoff, datetime.min.time(), tzinfo=tzone.utc)
     watermark = runs[1].watermark if len(runs) > 1 else 0

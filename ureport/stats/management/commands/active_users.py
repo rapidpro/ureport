@@ -39,7 +39,7 @@ class Command(BaseCommand):
         backfill.add_argument("--from-org", type=int, help="Start at this org id, e.g. to resume an earlier run")
         backfill.add_argument("--limit", type=int, help="Backfill at most this many orgs")
         backfill.add_argument(
-            "--skip-results", action="store_true", help="Only read the contact activities, which cover the results"
+            "--with-results", action="store_true", help="Read the results too, not just the activities covering them"
         )
         backfill.add_argument(
             "--prefix-length",
@@ -73,16 +73,13 @@ class Command(BaseCommand):
         return list(orgs)
 
     def handle_backfill(
-        self, orgs, since, until, clear, force, prefix_length, from_org, limit, skip_results, **options
+        self, orgs, since, until, clear, force, prefix_length, from_org, limit, with_results, **options
     ):
         # the sketches would otherwise miss whatever is synced from now on
         if not active_users.is_write_enabled():
             raise CommandError("ACTIVE_USERS_HLL_WRITE is off, turn it on before backfilling")
 
         if not active_users.activity_table_exists():
-            if skip_results:
-                raise CommandError("No contact activity tables to read, so the results can't be skipped")
-
             # the results alone can't fill back what was counted from deleted results
             if clear and not force:
                 raise CommandError(
@@ -109,7 +106,7 @@ class Command(BaseCommand):
                     since=since,
                     until=until,
                     prefix_length=prefix_length,
-                    skip_results=skip_results,
+                    with_results=with_results,
                     progress=lambda source, part, n: n and self.stdout.write(f"  org #{org.id} {part}: {n} {source}"),
                 )
             except Exception as e:
