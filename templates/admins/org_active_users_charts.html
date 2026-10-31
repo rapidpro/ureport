@@ -1,22 +1,21 @@
 {% extends "smartmin/base.html" %}
-{% load i18n %}
 
 {% block content %}
   <p>
-    {% trans "Each org's active users charts from the activity tables and from the sketches, on the same scale." %}
-    <a href="{% url 'admins.org_active_users' %}">{% trans "Back to the ranking" %}</a>
+    Each org's active users charts from the activity tables and from the sketches, on the same scale.
+    <a href="{% url 'admins.org_active_users' %}">Back to the ranking</a>
   </p>
   <div class="field is-grouped" id="active-users-controls">
     <div class="control">
       <div class="select">
-        <select id="active-users-segment" aria-label="{% trans "Segment" %}">
+        <select id="active-users-segment" aria-label="Segment">
           {% for segment in segments %}<option value="{{ segment }}">{{ segment }}</option>{% endfor %}
         </select>
       </div>
     </div>
     <div class="control">
       <div class="select">
-        <select id="active-users-filter" aria-label="{% trans "Period" %}">
+        <select id="active-users-filter" aria-label="Period">
           {% for value, label in time_filters %}
             <option value="{{ value }}" {% if value == 12 %}selected{% endif %}>{{ label }}</option>
           {% endfor %}
@@ -24,7 +23,7 @@
       </div>
     </div>
     <div class="control">
-      <input id="active-users-search" class="input" type="search" placeholder="{% trans "Filter orgs" %}" aria-label="{% trans "Filter orgs" %}">
+      <input id="active-users-search" class="input" type="search" placeholder="Filter orgs" aria-label="Filter orgs">
     </div>
   </div>
   {% for org in orgs %}
@@ -34,17 +33,17 @@
       </h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1rem;">
         <div>
-          <div>{% trans "Activity tables" %}</div>
+          <div>Activity tables</div>
           <div class="active-users-chart" data-source="existing" style="height: 18rem;"></div>
         </div>
         <div>
-          <div>{% trans "Sketches" %}</div>
+          <div>Sketches</div>
           <div class="active-users-chart" data-source="hll" style="height: 18rem;"></div>
         </div>
       </div>
     </div>
   {% empty %}
-    <p>{% trans "No active orgs." %}</p>
+    <p>No active orgs.</p>
   {% endfor %}
 {% endblock content %}
 {% block extra-script %}
