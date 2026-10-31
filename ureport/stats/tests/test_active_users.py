@@ -270,6 +270,22 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual({date(2025, 12, 1): 1}, series[0][2])
         self.assertEqual("born:1900", active_users._born_segments(date(2026, 1, 1), 35, 2000)[0])
 
+        # born years before the ones kept count together, in the band that reaches back past them, and no born year
+        # counts in none
+        active_users.add_results(
+            [
+                self.result("c2", datetime(2025, 12, 6, tzinfo=tzone.utc), born=1066),
+                self.result("c3", datetime(2025, 12, 6, tzinfo=tzone.utc), born=1850),
+                self.result("c4", datetime(2025, 12, 6, tzinfo=tzone.utc), born=0),
+            ]
+        )
+        self.assertEqual(2, self.pfcount(date(2025, 12, 1), active_users.OLD_BORN_SEGMENT))
+        self.assertEqual(4, self.pfcount(date(2025, 12, 1), "all"))
+        series = {s[0]: s[2] for s in active_users.get_series_counts(self.org, "age", [date(2025, 12, 1)])}
+        self.assertEqual({date(2025, 12, 1): 2}, series["35+"])
+        self.assertEqual({date(2025, 12, 1): 0}, series[None])
+        self.assertNotIn(active_users.OLD_BORN_SEGMENT, active_users._born_segments(date(2026, 1, 1), 31, 34))
+
     def test_reader_matches_contact_activity(self):
         results = self.seed()
         active_users.add_results(results)
