@@ -1,7 +1,7 @@
 import csv
 import os
 import tempfile
-from datetime import date, datetime, timezone as tzone
+from datetime import date, datetime, timedelta, timezone as tzone
 from io import StringIO
 from unittest.mock import patch
 
@@ -370,7 +370,7 @@ class ActiveUsersTest(UreportTest):
         PollResult.objects.bulk_create(later)
 
         # the sketches are lost
-        self.assertGreater(active_users.clear(self.org), 0)
+        self.assertGreater(active_users._delete_sketches(self.org), 0)
 
         with frozen_now(NOW):
             restored, replayed = active_users.restore(self.org)
@@ -406,7 +406,7 @@ class ActiveUsersTest(UreportTest):
             PollResult.objects.filter(org=self.org, contact="c1").update(
                 date=datetime(2026, 10, 14, 18, tzinfo=tzone.utc), gender="F"
             )
-            active_users.clear(self.org)
+            active_users._delete_sketches(self.org)
 
             self.assertEqual((1, 1), active_users.restore(self.org))
             self.assertEqual(1, self.pfcount(date(2026, 8, 1), "all"))
@@ -414,7 +414,7 @@ class ActiveUsersTest(UreportTest):
 
             # nothing to restore from fills back everything, here from the two answers of its activity rows
             ActiveUsersCheckpoint.objects.all().delete()
-            active_users.clear(self.org)
+            active_users._delete_sketches(self.org)
             self.assertEqual((0, 2), active_users.restore(self.org))
             self.assertEqual(1, self.pfcount(date(2026, 10, 1), "all"))
 
@@ -456,10 +456,7 @@ class ActiveUsersTest(UreportTest):
             active_users.add_results(list(PollResult.objects.filter(contact="late")))
             active_users.checkpoint()
 
-            # only the last two runs are kept
-            self.assertEqual(2, ActiveUsersCheckpointRun.objects.count())
-
-            active_users.clear(self.org)
+            active_users._delete_sketches(self.org)
             self.assertEqual((3, 1), active_users.restore(self.org))
             for contact, month in (("old", date(2025, 3, 1)), ("sept", date(2026, 8, 1)), ("late", date(2026, 10, 1))):
                 self.assertEqual([month], self.months_of(contact, self.org), contact)
@@ -480,6 +477,150 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual(
             [date(2026, 1, 1)], list(ActiveUsersCheckpoint.objects.filter(org=self.org).values_list("month", flat=True))
         )
+
+    def test_prune_checkpoint_history(self):
+        now = datetime(2026, 10, 15, tzinfo=tzone.utc)
+        jan = active_users.sketch_key(self.org.id, date(2026, 1, 1), "all")
+        feb = active_users.sketch_key(self.org.id, date(2026, 2, 1), "all")
+
+        # a sketch touched on each of these, and another only on the first
+        for days in (50, 40, 35, 10):
+            with frozen_now(now - timedelta(days=days)):
+                self.r.pfadd(jan, f"c{days}")
+                self.r.sadd(active_users.DIRTY_KEY, jan)
+                if days == 50:
+                    self.r.pfadd(feb, "c")
+                    self.r.sadd(active_users.DIRTY_KEY, feb)
+                active_users.checkpoint()
+
+        def taken(key):
+            rows = ActiveUsersCheckpoint.objects.filter(key=key).order_by("taken_on").values_list("taken_on", flat=True)
+            return [(now - t).days for t in rows]
+
+        self.assertEqual(4, ActiveUsersCheckpointRun.objects.count())
+
+        with frozen_now(now):
+            active_users.prune_checkpoints()
+
+        # what a restore as of the oldest day it can go back to needs, and everything since
+        self.assertEqual([35, 10], taken(jan))
+        self.assertEqual([50], taken(feb))
+        self.assertEqual(
+            [40, 35, 10],
+            [
+                (now - t).days
+                for t in ActiveUsersCheckpointRun.objects.order_by("id").values_list("taken_on", flat=True)
+            ],
+        )
+
+    def test_checkpoints_kept_each_night(self):
+        key = active_users.sketch_key(self.org.id, date(2026, 8, 1), "all")
+        with frozen_now(NOW - timedelta(days=1)):
+            active_users.add_results([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc))])
+            active_users.checkpoint()
+            first = bytes(ActiveUsersCheckpoint.objects.get(key=key).value)
+
+        with frozen_now(NOW):
+            active_users.add_results([self.result("c2", datetime(2026, 8, 2, tzinfo=tzone.utc))])
+
+            # a sketch saved by an interrupted run and touched again before the run resuming it is saved once
+            self.r.sunionstore(active_users.CHECKPOINTING_KEY, active_users.DIRTY_KEY)
+            self.assertEqual(2, active_users.checkpoint())
+
+            rows = list(ActiveUsersCheckpoint.objects.filter(key=key).order_by("taken_on"))
+            self.assertEqual([NOW - timedelta(days=1), NOW], [c.taken_on for c in rows])
+            self.assertEqual(first, bytes(rows[0].value))
+
+            # a restore takes the latest
+            active_users._delete_sketches(self.org)
+            self.assertEqual((1, 0), active_users.restore(self.org))
+            self.assertEqual(2, self.pfcount(date(2026, 8, 1), "all"))
+
+    def test_rollback(self):
+        august, september = date(2026, 8, 1), date(2026, 9, 1)
+        night1, night2 = NOW - timedelta(days=3), NOW - timedelta(days=1)
+
+        with frozen_now(night1):
+            PollResult.objects.bulk_create([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc))])
+            active_users.add_results(list(PollResult.objects.filter(contact="c1")))
+            active_users.checkpoint()
+
+        # a result after the good checkpoint, and contacts that were never answers in one sketch it has and one it hasn't
+        with frozen_now(night2):
+            PollResult.objects.bulk_create([self.result("c2", datetime(2026, 8, 2, tzinfo=tzone.utc))])
+            active_users.add_results(list(PollResult.objects.filter(contact="c2")))
+            for month in (august, september):
+                self.r.pfadd(active_users.sketch_key(self.org.id, month, "all"), "wrong")
+                self.r.sadd(active_users.DIRTY_KEY, active_users.sketch_key(self.org.id, month, "all"))
+            active_users.checkpoint()
+
+        self.assertEqual(3, self.pfcount(august, "all"))
+        self.assertEqual(1, self.pfcount(september, "all"))
+
+        with frozen_now(NOW):
+            self.assertEqual((1, 2), active_users.restore(self.org, as_of=night1))
+
+            self.assertEqual(2, self.pfcount(august, "all"))
+            self.assertEqual(0, self.pfcount(september, "all"))
+
+            # what was saved after it is gone, so a later restore doesn't bring it back
+            self.assertEqual(
+                {night1}, set(ActiveUsersCheckpoint.objects.filter(org=self.org).values_list("taken_on", flat=True))
+            )
+            active_users.restore(self.org)
+            self.assertEqual(2, self.pfcount(august, "all"))
+            self.assertEqual(0, self.pfcount(september, "all"))
+
+    def test_rollback_limits(self):
+        with frozen_now(NOW):
+            active_users.add_results([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc))])
+
+            with self.assertRaisesRegex(ValueError, "Can only roll back 30 days"):
+                active_users.restore(self.org, as_of=NOW - timedelta(days=31))
+            with self.assertRaisesRegex(ValueError, "No completed checkpoint"):
+                active_users.restore(self.org, as_of=NOW - timedelta(days=1))
+
+            # neither touched the sketches
+            self.assertEqual(1, self.pfcount(date(2026, 8, 1), "all"))
+
+    def test_rollback_with_nothing_to_restore(self):
+        with frozen_now(NOW - timedelta(days=1)):
+            active_users.checkpoint()
+
+        with frozen_now(NOW):
+            PollResult.objects.bulk_create([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc))])
+            self.assertEqual((0, 1), active_users.restore(self.org, as_of=NOW))
+            self.assertEqual(1, self.pfcount(date(2026, 8, 1), "all"))
+
+    def test_clear_ignores_earlier_checkpoints(self):
+        kept, dropped = date(2026, 8, 1), date(2026, 9, 1)
+        before, cleared, rebuilt = NOW - timedelta(days=3), NOW - timedelta(days=2), NOW - timedelta(days=1)
+
+        with frozen_now(before):
+            PollResult.objects.bulk_create([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc))])
+            active_users.add_results(
+                list(PollResult.objects.filter(contact="c1"))
+                + [self.result("wrong", datetime(2026, 9, 1, tzinfo=tzone.utc))]
+            )
+            active_users.checkpoint()
+
+        with frozen_now(cleared):
+            self.assertGreater(active_users.clear(self.org), 0)
+
+        with frozen_now(rebuilt):
+            active_users.backfill(self.org)
+            active_users.checkpoint()
+
+        # a sketch the rebuild didn't fill back isn't brought back
+        with frozen_now(NOW):
+            active_users._delete_sketches(self.org)
+            active_users.restore(self.org)
+            self.assertEqual(1, self.pfcount(kept, "all"))
+            self.assertEqual(0, self.pfcount(dropped, "all"))
+
+            # unless rolling back to before it was cleared
+            active_users.restore(self.org, as_of=before)
+            self.assertEqual(1, self.pfcount(dropped, "all"))
 
     def test_backfill(self):
         results = self.seed()
@@ -755,6 +896,13 @@ class ActiveUsersTest(UreportTest):
 
         self.assertIn("Checkpointed", run("checkpoint"))
         self.assertIn(f"sketches of org #{self.org.id} and replayed", run("restore", "--org", str(self.org.id)))
+
+        out = run("restore", "--org", str(self.org.id), "--as-of", "2026-10-15")
+        self.assertIn(f"sketches of org #{self.org.id} and replayed", out)
+        with self.assertRaisesRegex(CommandError, "Can only roll back 30 days"):
+            run("restore", "--org", str(self.org.id), "--as-of", "2020-01-01")
+        with self.assertRaisesRegex(CommandError, "Invalid day nope"):
+            run("restore", "--org", str(self.org.id), "--as-of", "nope")
 
         # all active orgs by default
         self.assertIn(f"org #{self.nigeria.id}", run("compare", "--segment", "all"))

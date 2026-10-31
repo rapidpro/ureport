@@ -7,8 +7,9 @@ their sketches - which is what the contact activity tables get by writing every 
 months. Sketches count within a standard error of 0.81%, in at most 12KB each.
 
 Valkey only holds the sketches being written to. The ones touched since the last checkpoint are tracked in a dirty
-set, and the checkpoint copies their raw bytes into Postgres every night, so they can be restored from there and
-topped up with the results since rather than rebuilt from every result.
+set, and the checkpoint adds a copy of their raw bytes to Postgres every night, so they can be restored from there and
+topped up with the results since rather than rebuilt from every result. The copies of the last 30 days are all kept,
+as a contact can't be taken back out of a sketch: sketches that went wrong are rolled back to a night before that.
 
 The contact activity tables still feed the charts. An org only reads these when ACTIVE_USERS_HLL_READ or its
 common.active_users_hll config is set, and compare() measures how far apart the two are.
@@ -23,6 +24,7 @@ from datetime import date, datetime, timedelta, timezone as tzone
 from django_valkey import get_valkey_connection
 
 from django.conf import settings
+from django.db.models import Exists, OuterRef
 from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
 
@@ -58,6 +60,9 @@ RESULTS_BATCH_SIZE = 5000
 # a restore replays results answered this long before its checkpoint was taken, to cover the ones that were saved
 # before the checkpoint but only added to their sketches after it
 REPLAY_OVERLAP = timedelta(days=1)
+
+# how far back a restore can roll sketches back to
+CHECKPOINT_HISTORY = timedelta(days=30)
 
 COMPARE_SEGMENTS = ("all", "age", "gender", "location", "scheme")
 
@@ -534,10 +539,11 @@ def get_activity(org, segment_slug, time_filters):
 
 def checkpoint(batch_size=500):
     """
-    Saves the raw bytes of every sketch touched since the last checkpoint. The dirty set is first moved aside, so
-    that sketches touched while this runs are left for the next one, and only cleared a batch at a time once saved -
-    an interrupted run is picked up by the next one, which then goes on to the sketches touched since too. A run that
-    gets to the end is recorded, for a restore to replay the results since. Returns the number of sketches saved.
+    Adds a copy of the raw bytes of every sketch touched since the last checkpoint. The dirty set is first moved
+    aside, so that sketches touched while this runs are left for the next one, and only cleared a batch at a time once
+    saved - an interrupted run is picked up by the next one, which then goes on to the sketches touched since too. A
+    run that gets to the end is recorded, for a restore to replay the results since. Returns the number of sketches
+    saved.
     """
     from ureport.polls.models import PollResult
 
@@ -550,10 +556,10 @@ def checkpoint(batch_size=500):
     watermark = PollResult.objects.order_by("-id").values_list("id", flat=True).first() or 0
 
     # an interrupted run's sketches first, then everything touched before this run started
-    saved = _save_checkpointing(r, batch_size)
+    saved = _save_checkpointing(r, taken_on, batch_size)
     if r.exists(DIRTY_KEY):
         r.rename(DIRTY_KEY, CHECKPOINTING_KEY)
-        saved += _save_checkpointing(r, batch_size)
+        saved += _save_checkpointing(r, taken_on, batch_size)
 
     ActiveUsersCheckpointRun.objects.create(taken_on=taken_on, watermark=watermark, saved=saved)
     prune_checkpoints()
@@ -562,13 +568,12 @@ def checkpoint(batch_size=500):
     return saved
 
 
-def _save_checkpointing(r, batch_size):
+def _save_checkpointing(r, taken_on, batch_size):
     """
     Saves the sketches in the checkpointing set, clearing them from it a batch at a time
     """
     from .models import ActiveUsersCheckpoint
 
-    taken_on = timezone.now()
     saved = 0
     while True:
         keys = [k.decode() if isinstance(k, bytes) else k for k in r.srandmember(CHECKPOINTING_KEY, batch_size)]
@@ -593,7 +598,7 @@ def _save_checkpointing(r, batch_size):
         checkpoints = [c for c in checkpoints if c.org_id in org_ids]
 
         ActiveUsersCheckpoint.objects.bulk_create(
-            checkpoints, update_conflicts=True, unique_fields=["key"], update_fields=["value", "taken_on"]
+            checkpoints, update_conflicts=True, unique_fields=["key", "taken_on"], update_fields=["value"]
         )
         r.srem(CHECKPOINTING_KEY, *keys)
         saved += len(checkpoints)
@@ -610,74 +615,104 @@ def _existing_org_ids(org_ids):
 
 def prune_checkpoints():
     """
-    Deletes checkpoints of sketches that have since expired, an org at a time, and the records of all but the last
-    two runs, which a restore replays from
+    Deletes checkpoints of sketches that have since expired, and those older than the history that a later one
+    as old replaces, an org at a time, and the records of runs older than the history but for the last two, which a
+    restore as of its start replays from
     """
     from dash.orgs.models import Org
 
     from .models import ActiveUsersCheckpoint, ActiveUsersCheckpointRun
 
     cutoff = add_months(month_start(timezone.now()), 1 - RETENTION_MONTHS)
+    oldest = timezone.now() - CHECKPOINT_HISTORY
+    replaced = ActiveUsersCheckpoint.objects.filter(
+        key=OuterRef("key"), taken_on__gt=OuterRef("taken_on"), taken_on__lte=oldest
+    )
     for org_id in Org.objects.values_list("id", flat=True):
         ActiveUsersCheckpoint.objects.filter(org_id=org_id, month__lt=cutoff).delete()
+        ActiveUsersCheckpoint.objects.filter(org_id=org_id, taken_on__lte=oldest).filter(Exists(replaced)).delete()
 
-    keep = ActiveUsersCheckpointRun.objects.order_by("-id").values_list("id", flat=True)[:2]
-    ActiveUsersCheckpointRun.objects.exclude(id__in=list(keep)).delete()
+    runs = ActiveUsersCheckpointRun.objects.filter(taken_on__lte=oldest).order_by("-id").values_list("id", flat=True)
+    ActiveUsersCheckpointRun.objects.filter(id__in=list(runs[2:])).delete()
 
 
-def restore(org, batch_size=500):
+def restore(org, as_of=None, batch_size=500):
     """
-    Restores an org's sketches from their checkpoints, then adds the results saved or answered since. Checkpoints
-    are merged into whatever the sketches already hold rather than replacing it, and adding results already counted
-    changes nothing, so this can't inflate counts however much it overlaps. Returns the number of sketches restored
-    and the number of results replayed.
+    Restores an org's sketches from the latest checkpoint of each, then adds the results saved or answered since.
+    Checkpoints are merged into whatever the sketches already hold rather than replacing it, and adding results
+    already counted changes nothing, so this can't inflate counts however much it overlaps. Returns the number of
+    sketches restored and the number of results replayed.
 
     The last completed run saved every sketch touched before it started. Results are replayed from the run before
     it rather than from it, so a result saved just before the last run started but only added to its sketches after
     is replayed too. Results of polls still syncing answered since just before the last run are replayed as well,
     which covers those whose answers changed in place since.
+
+    Given as_of, a time within the history, the sketches are instead rolled back to it: they're deleted first, as
+    merging into them wouldn't take anything out, checkpoints and runs after it are ignored, and once the results
+    since are replayed those checkpoints are deleted so that a later restore doesn't bring them back.
     """
     from ureport.polls.models import Poll, PollResult
 
     from .models import ActiveUsersCheckpoint, ActiveUsersCheckpointRun
 
     r = get_valkey_connection()
-    cutoff = add_months(month_start(timezone.now()), 1 - RETENTION_MONTHS)
-    checkpoints = ActiveUsersCheckpoint.objects.filter(org=org, month__gte=cutoff).order_by("id")
+    now = timezone.now()
+    cutoff = add_months(month_start(now), 1 - RETENTION_MONTHS)
+    rollback = as_of is not None
+    as_of = as_of or now
 
-    restored, last_id = 0, 0
+    runs = list(ActiveUsersCheckpointRun.objects.filter(taken_on__lte=as_of).order_by("-id")[:2])
+    if rollback:
+        if as_of < now - CHECKPOINT_HISTORY:
+            raise ValueError(f"Can only roll back {CHECKPOINT_HISTORY.days} days")
+        if not runs:
+            raise ValueError(f"No completed checkpoint as of {as_of}")
+        _delete_sketches(org)
+
+    # the latest checkpoint of each sketch - an empty one means it was deleted, see clear()
+    checkpoints = (
+        ActiveUsersCheckpoint.objects.filter(org=org, month__gte=cutoff, taken_on__lte=as_of)
+        .order_by("key", "-taken_on")
+        .distinct("key")
+    )
+
+    restored, last_key = 0, ""
     while True:
-        batch = list(checkpoints.filter(id__gt=last_id)[:batch_size])
+        batch = list(checkpoints.filter(key__gt=last_key)[:batch_size])
         if not batch:
             break
 
         pipe = r.pipeline(transaction=False)
         for c in batch:
+            if not c.value:
+                continue
             tmp_key = f"{c.key}:restoring"
             pipe.set(tmp_key, bytes(c.value), ex=60)
             pipe.pfmerge(c.key, c.key, tmp_key)
             pipe.expireat(c.key, _expire_at(c.month))
             pipe.delete(tmp_key)
+            restored += 1
         pipe.execute()
 
-        restored += len(batch)
-        last_id = batch[-1].id
-
-    runs = list(ActiveUsersCheckpointRun.objects.order_by("-id")[:2])
+        last_key = batch[-1].key
 
     # with no checkpoint run to replay from, everything still kept is replayed
     if not restored or not runs:
         answers, results = backfill(org)
-        return restored, (answers or 0) + results
+        replayed = (answers or 0) + results
+    else:
+        after = datetime.combine(cutoff, datetime.min.time(), tzinfo=tzone.utc)
+        watermark = runs[1].watermark if len(runs) > 1 else 0
+        replayed = _add_results_qs(PollResult.objects.filter(org=org, id__gt=watermark, date__gte=after))
 
-    after = datetime.combine(cutoff, datetime.min.time(), tzinfo=tzone.utc)
-    watermark = runs[1].watermark if len(runs) > 1 else 0
-    replayed = _add_results_qs(PollResult.objects.filter(org=org, id__gt=watermark, date__gte=after))
+        since = runs[0].taken_on - REPLAY_OVERLAP
+        flows = Poll.objects.filter(org=org, stopped_syncing=False).values_list("flow_uuid", flat=True).distinct()
+        for flow in flows.order_by("flow_uuid"):
+            replayed += _add_results_qs(PollResult.objects.filter(org=org, flow=flow, date__gte=since))
 
-    since = runs[0].taken_on - REPLAY_OVERLAP
-    flows = Poll.objects.filter(org=org, stopped_syncing=False).values_list("flow_uuid", flat=True).distinct()
-    for flow in flows.order_by("flow_uuid"):
-        replayed += _add_results_qs(PollResult.objects.filter(org=org, flow=flow, date__gte=since))
+    if rollback:
+        ActiveUsersCheckpoint.objects.filter(org=org, taken_on__gt=as_of).delete()
 
     logger.info("Restored %d active users sketches and replayed %d results for org #%d", restored, replayed, org.id)
     return restored, replayed
@@ -685,8 +720,24 @@ def restore(org, batch_size=500):
 
 def clear(org):
     """
-    Deletes an org's sketches
+    Deletes an org's sketches, for a backfill to fill back. Each of its checkpoints gets a later empty one, so that a
+    restore doesn't bring back sketches the backfill doesn't, while one to before now still can.
     """
+    from .models import ActiveUsersCheckpoint
+
+    taken_on = timezone.now()
+    checkpoints = ActiveUsersCheckpoint.objects.filter(org=org).order_by("key", "-taken_on").distinct("key")
+    ActiveUsersCheckpoint.objects.bulk_create(
+        [
+            ActiveUsersCheckpoint(org=org, key=key, month=month, value=b"", taken_on=taken_on)
+            for key, month in checkpoints.values_list("key", "month")
+        ],
+        batch_size=PIPELINE_SIZE,
+    )
+    return _delete_sketches(org)
+
+
+def _delete_sketches(org):
     r = get_valkey_connection()
     keys = list(r.scan_iter(match=f"{KEY_PREFIX}:{org.id}:*", count=1000))
     for chunk in _chunks(keys, PIPELINE_SIZE):
