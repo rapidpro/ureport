@@ -579,13 +579,20 @@ class ActiveUsersTest(UreportTest):
             # the same but first active after the prune, so not before its first row
             + self.activities("bbbb", date(2026, 3, 1), date(2026, 5, 1), org=org, born=0)
             + self.activities("bbbb", date(2026, 6, 1), date(2027, 2, 1), org=org, born=2007)
+            # updated with under a year of months left, which can't go before the update
+            + self.activities("cccc", date(2025, 10, 1), date(2026, 1, 1), org=org, state=None)
+            + self.activities("cccc", date(2026, 2, 1), date(2026, 11, 1), org=org, state="R1")
         )
 
         with frozen_now(NOW):
-            self.assertEqual(5, active_users.backfill(org, prefix_length=0)[0])
+            self.assertEqual(7, active_users.backfill(org, prefix_length=0)[0])
 
             self.assertEqual([date(2025, 6, 1), date(2026, 6, 1), date(2026, 10, 1)], self.months_of("aaaa", org))
-            self.assertEqual([date(2026, 3, 1)], self.months_of("bbbb", org))
+            self.assertEqual([date(2026, 3, 1), date(2026, 6, 1)], self.months_of("bbbb", org))
+            self.assertEqual([date(2025, 2, 1), date(2026, 2, 1)], self.months_of("cccc", org))
+
+            self.assertEqual(0, active_users.count(org, date(2026, 1, 1), ["state:R1"]))
+            self.assertEqual(1, active_users.count(org, date(2026, 2, 1), ["state:R1"]))
 
             # each month has the values of its own row
             june, may = date(2026, 6, 1), date(2026, 5, 1)
