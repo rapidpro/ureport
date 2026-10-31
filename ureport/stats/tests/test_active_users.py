@@ -570,6 +570,30 @@ class ActiveUsersTest(UreportTest):
         # the sketches it touched are left to be checkpointed
         self.assertIn(active_users.sketch_key(org.id, date(2025, 4, 1), "gender:F"), self.dirty())
 
+    def test_backfill_activity_runs_of_changed_values(self):
+        org = self.nigeria
+        ContactActivity.objects.bulk_create(
+            # updated in June, with months back to the prune
+            self.activities("aaaa", date(2025, 10, 1), date(2026, 5, 1), org=org, born=2003, gender="M")
+            + self.activities("aaaa", date(2026, 6, 1), date(2027, 9, 1), org=org, born=2009, gender="")
+            # the same but first active after the prune, so not before its first row
+            + self.activities("bbbb", date(2026, 3, 1), date(2026, 5, 1), org=org, born=0)
+            + self.activities("bbbb", date(2026, 6, 1), date(2027, 2, 1), org=org, born=2007)
+        )
+
+        with frozen_now(NOW):
+            self.assertEqual(5, active_users.backfill(org, prefix_length=0)[0])
+
+            self.assertEqual([date(2025, 6, 1), date(2026, 6, 1), date(2026, 10, 1)], self.months_of("aaaa", org))
+            self.assertEqual([date(2026, 3, 1)], self.months_of("bbbb", org))
+
+            # each month has the values of its own row
+            june, may = date(2026, 6, 1), date(2026, 5, 1)
+            self.assertEqual(1, active_users.count(org, may, active_users._born_segments(may, 20, 24)))
+            self.assertEqual(0, active_users.count(org, june, active_users._born_segments(june, 20, 24)))
+            self.assertEqual(1, active_users.count(org, may, ["gender:M"]))
+            self.assertEqual(0, active_users.count(org, june, ["gender:M"]))
+
     def test_backfill_matches_contact_activity(self):
         genders = ["M", "F", "O", None]
         states = ["R1", "r2", None]

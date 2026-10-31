@@ -213,11 +213,12 @@ def _add_results_qs(qs, batch_size=RESULTS_BATCH_SIZE):
 
 
 # the reconstructed answers of one range of an org's contacts, from its contact activity rows. Every answer writes
-# rows for its month and the 11 after, so each contact's active months are split into runs of consecutive months
-# (gaps and islands), and each run [s, e] gets answers at s, s+12, s+24... while below e-11, then at e-11 - whose
-# windows of 12 months together cover the run exactly. A run shorter than 12 months, which the prune has cut into at
-# the start, just gets e-11, before its first row, and takes that row's segments. Months are numbered year * 12 +
-# month - 1.
+# rows for its month and the 11 after, and updating a contact rewrites its rows from that month on, so each contact's
+# active months are split into runs of consecutive months with the same values (gaps and islands), and each run [s, e]
+# gets answers at s, s+12, s+24... while below e-11, then at e-11 - whose windows of 12 months together cover the run
+# exactly. A run shorter than 12 months can't be covered exactly: when its contact's months start at the prune it gets
+# e-11, before its first row, as the months before that row have just been cut, otherwise it stays within those months.
+# Months are numbered year * 12 + month - 1.
 ACTIVITY_ANSWERS_SQL = """
 WITH months AS (
     SELECT contact, born, gender, state, scheme,
@@ -226,12 +227,20 @@ WITH months AS (
     WHERE org_id = %%s %(range)s
 ), islands AS (
     SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact ORDER BY mi) AS island FROM months
+), values_islands AS (
+    SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact, island, born, gender, state, scheme ORDER BY mi) AS run
+    FROM islands
 ), runs AS (
-    SELECT *, MIN(mi) OVER w AS s, MAX(mi) OVER w AS e FROM islands WINDOW w AS (PARTITION BY contact, island)
+    SELECT *, MIN(mi) OVER (PARTITION BY contact, island) AS first_mi, MIN(mi) OVER w AS s, MAX(mi) OVER w AS e
+    FROM values_islands
+    WINDOW w AS (PARTITION BY contact, island, born, gender, state, scheme, run)
 ), answers AS (
-    SELECT contact, CASE WHEN s > e - 11 THEN e - 11 ELSE mi END AS answer_mi, born, gender, state, scheme
+    SELECT contact, born, gender, state, scheme,
+           CASE WHEN s <= e - 11 THEN mi
+                WHEN first_mi <= %%s THEN e - 11
+                ELSE GREATEST(e - 11, first_mi) END AS answer_mi
     FROM runs
-    WHERE (MOD(mi - s, 12) = 0 AND mi <= e - 12) OR mi = e - 11 OR (mi = s AND s > e - 11)
+    WHERE (MOD(mi - s, 12) = 0 AND mi <= e - 12) OR mi = GREATEST(s, e - 11)
 )
 SELECT contact, answer_mi, born, gender, state, scheme FROM answers WHERE answer_mi >= %%s AND answer_mi < %%s
 """
@@ -263,6 +272,15 @@ def _contact_ranges(prefix_length):
     return list(zip([None] + bounds, bounds + [None]))
 
 
+def _first_unpruned_month():
+    """
+    The index of the first month the prune of the contact activities leaves whole
+    """
+    from .sync import ACTIVITY_RETENTION
+
+    return _month_index(add_months(month_start(timezone.now() - ACTIVITY_RETENTION), 1))
+
+
 def _backfill_activities(org, since, until, prefix_length, batch_size, progress):
     """
     Adds the answers reconstructed from an org's contact activity rows, so that every contact is active in exactly
@@ -281,7 +299,7 @@ def _backfill_activities(org, since, until, prefix_length, batch_size, progress)
         if end is not None:
             conds.append("AND contact < %s")
             params.append(end)
-        params += [_month_index(since), _month_index(until)]
+        params += [_first_unpruned_month(), _month_index(since), _month_index(until)]
 
         range_added = 0
         # a server side cursor, which needs a transaction, streams the range's answers rather than loading them
