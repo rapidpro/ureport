@@ -216,9 +216,10 @@ def _add_results_qs(qs, batch_size=RESULTS_BATCH_SIZE):
 # rows for its month and the 11 after, and updating a contact rewrites its rows from that month on, so each contact's
 # active months are split into runs of consecutive months with the same values (gaps and islands), and each run [s, e]
 # gets answers at s, s+12, s+24... while below e-11, then at e-11 - whose windows of 12 months together cover the run
-# exactly. A run shorter than 12 months can't be covered exactly: when its contact's months start at the prune it gets
-# e-11, before its first row, as the months before that row have just been cut, otherwise it stays within those months.
-# Months are numbered year * 12 + month - 1.
+# exactly. A run shorter than 12 months can't be covered exactly: when it's the first of months that start at the prune
+# it gets e-11, before its first row, as the months before that row have just been cut, otherwise it gets s, as answering
+# any earlier would give the months before it these values, which are the ones the charts would show wrong - or this
+# month if s is still to come, so that the sketches have it by then. Months are numbered year * 12 + month - 1.
 ACTIVITY_ANSWERS_SQL = """
 WITH months AS (
     SELECT contact, born, gender, state, scheme,
@@ -237,8 +238,8 @@ WITH months AS (
 ), answers AS (
     SELECT contact, born, gender, state, scheme,
            CASE WHEN s <= e - 11 THEN mi
-                WHEN first_mi <= %%s THEN e - 11
-                ELSE GREATEST(e - 11, first_mi) END AS answer_mi
+                WHEN s = first_mi AND s <= %%s THEN e - 11
+                ELSE LEAST(s, %%s) END AS answer_mi
     FROM runs
     WHERE (MOD(mi - s, 12) = 0 AND mi <= e - 12) OR mi = GREATEST(s, e - 11)
 )
@@ -289,6 +290,7 @@ def _backfill_activities(org, since, until, prefix_length, batch_size, progress)
     from django.db import connection, transaction
 
     r = get_valkey_connection()
+    today = month_start(timezone.now())
 
     added = 0
     for start, end in _contact_ranges(prefix_length):
@@ -299,7 +301,7 @@ def _backfill_activities(org, since, until, prefix_length, batch_size, progress)
         if end is not None:
             conds.append("AND contact < %s")
             params.append(end)
-        params += [_first_unpruned_month(), _month_index(since), _month_index(until)]
+        params += [_first_unpruned_month(), _month_index(today), _month_index(since), _month_index(until)]
 
         range_added = 0
         # a server side cursor, which needs a transaction, streams the range's answers rather than loading them
