@@ -1,6 +1,6 @@
 import csv
 import logging
-from datetime import date
+from datetime import date, datetime, time, timezone
 
 from django.core.management.base import BaseCommand, CommandError
 
@@ -16,6 +16,13 @@ def parse_month(value):
         return date(int(year), int(month), 1)
     except ValueError:
         raise CommandError(f"Invalid month {value}, expected YYYY-MM")
+
+
+def parse_day(value):
+    try:
+        return datetime.combine(date.fromisoformat(value), time.max, tzinfo=timezone.utc)
+    except ValueError:
+        raise CommandError(f"Invalid day {value}, expected YYYY-MM-DD")
 
 
 class Command(BaseCommand):
@@ -62,6 +69,11 @@ class Command(BaseCommand):
 
         restore = sub.add_parser("restore", help="Restore sketches from their checkpoints and replay results since")
         restore.add_argument("--org", type=int, action="append", dest="orgs", help="Org id, all active by default")
+        restore.add_argument(
+            "--as-of",
+            type=parse_day,
+            help="Roll the sketches back to their checkpoints of this day (YYYY-MM-DD, UTC), dropping any since",
+        )
 
     def handle(self, *args, action, **options):
         getattr(self, f"handle_{action}")(**options)
@@ -145,9 +157,12 @@ class Command(BaseCommand):
     def handle_checkpoint(self, **options):
         self.stdout.write(f"Checkpointed {active_users.checkpoint()} sketches")
 
-    def handle_restore(self, orgs, **options):
+    def handle_restore(self, orgs, as_of, **options):
         for org in self.get_orgs(orgs):
-            restored, replayed = active_users.restore(org)
+            try:
+                restored, replayed = active_users.restore(org, as_of=as_of)
+            except ValueError as e:
+                raise CommandError(str(e))
             self.stdout.write(f"Restored {restored} sketches of org #{org.id} and replayed {replayed} results")
 
     def write_summary(self, label, summary):

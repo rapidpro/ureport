@@ -1035,13 +1035,13 @@ class ContactActivityCounter(SquashableModel):
 
 class ActiveUsersCheckpoint(models.Model):
     """
-    The raw bytes of an active users sketch as of a nightly checkpoint, from which it can be restored - see
-    ureport.stats.active_users
+    The raw bytes of an active users sketch as of a nightly checkpoint, from which it can be restored, or empty if it
+    was deleted then - see ureport.stats.active_users
     """
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="active_users_checkpoints")
 
-    key = models.TextField(unique=True)
+    key = models.TextField()
 
     month = models.DateField(help_text="The month the sketch counts")
 
@@ -1051,6 +1051,7 @@ class ActiveUsersCheckpoint(models.Model):
 
     class Meta:
         indexes = [models.Index(fields=["org", "month"], name="stats_actuserscp_org_month")]
+        constraints = [models.UniqueConstraint(fields=["key", "taken_on"], name="stats_actuserscp_key_taken_on")]
 
 
 class ActiveUsersCheckpointRun(models.Model):
