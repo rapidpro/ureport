@@ -1,3 +1,6 @@
+## v1.9.6 (2026-10-31)
+ * Reconstruct active users answers separately for each kind of segment
+
 ## v1.9.5 (2026-10-31)
  * Keep short runs of active users' values from answering before their first row
 
