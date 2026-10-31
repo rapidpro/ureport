@@ -27,18 +27,18 @@
     </div>
   </div>
   {% for org in orgs %}
-    <div class="active-users-org" id="org-{{ org.id }}" data-org="{{ org.id }}" data-name="{{ org.name|lower }} {{ org.subdomain|lower }}" style="margin-top: 2rem;">
+    <div class="active-users-org" id="org-{{ org.id }}" data-org="{{ org.id }}" data-name="{{ org.name|lower }} {{ org.subdomain|lower }}" style="margin-top: 2rem">
       <h3 class="font-bold!">
-        {{ org.name }} <span class="active-users-difference" style="font-weight: normal; margin-left: 0.5rem;"></span>
+        {{ org.name }} <span class="active-users-difference" style="font-weight: normal; margin-left: 0.5rem"></span>
       </h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1rem">
         <div>
           <div>Activity tables</div>
-          <div class="active-users-chart" data-source="existing" style="height: 18rem;"></div>
+          <div class="active-users-chart" data-source="existing" style="height: 18rem"></div>
         </div>
         <div>
           <div>Sketches</div>
-          <div class="active-users-chart" data-source="hll" style="height: 18rem;"></div>
+          <div class="active-users-chart" data-source="hll" style="height: 18rem"></div>
         </div>
       </div>
     </div>
