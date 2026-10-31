@@ -1,3 +1,7 @@
+## v1.9.3 (2026-10-31)
+ * Skip the activity tables when backfilling active users so the backfill only reads results
+ * Leave out of the active users' old born sketch the years the activity counters leave out
+
 ## v1.9.2 (2026-10-31)
  * Keep active users with born years before 1900 in their own sketch and count them in the oldest age band
 
