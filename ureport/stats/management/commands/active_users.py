@@ -39,6 +39,9 @@ class Command(BaseCommand):
         backfill.add_argument("--from-org", type=int, help="Start at this org id, e.g. to resume an earlier run")
         backfill.add_argument("--limit", type=int, help="Backfill at most this many orgs")
         backfill.add_argument(
+            "--with-results", action="store_true", help="Read the results too, not just the activities covering them"
+        )
+        backfill.add_argument(
             "--prefix-length",
             type=int,
             default=active_users.ACTIVITY_PREFIX_LENGTH,
@@ -69,7 +72,9 @@ class Command(BaseCommand):
             orgs = Org.objects.filter(id__in=org_ids).order_by("id")
         return list(orgs)
 
-    def handle_backfill(self, orgs, since, until, clear, force, prefix_length, from_org, limit, **options):
+    def handle_backfill(
+        self, orgs, since, until, clear, force, prefix_length, from_org, limit, with_results, **options
+    ):
         # the sketches would otherwise miss whatever is synced from now on
         if not active_users.is_write_enabled():
             raise CommandError("ACTIVE_USERS_HLL_WRITE is off, turn it on before backfilling")
@@ -101,6 +106,7 @@ class Command(BaseCommand):
                     since=since,
                     until=until,
                     prefix_length=prefix_length,
+                    with_results=with_results,
                     progress=lambda source, part, n: n and self.stdout.write(f"  org #{org.id} {part}: {n} {source}"),
                 )
             except Exception as e:
