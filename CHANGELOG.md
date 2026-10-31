@@ -1,3 +1,6 @@
+## v1.9.4 (2026-10-31)
+ * Reconstruct active users answers from runs of months with the same values
+
 ## v1.9.3 (2026-10-31)
  * Skip the activity tables when backfilling active users so the backfill only reads results
  * Leave out of the active users' old born sketch the years the activity counters leave out
