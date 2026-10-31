@@ -1,3 +1,6 @@
+## v1.9.7 (2026-10-31)
+ * Keep 30 days of active users checkpoints so sketches can be rolled back
+
 ## v1.9.6 (2026-10-31)
  * Reconstruct active users answers separately for each kind of segment
 
