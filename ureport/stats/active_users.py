@@ -41,8 +41,9 @@ WINDOW_MONTHS = 12
 # that plus the current month and a month of slack
 RETENTION_MONTHS = 25
 
-# born years older than this aren't read - it bounds the sketches the oldest age band unions
+# born years older than this are kept together in one sketch, which bounds the sketches the oldest age band unions
 MIN_BORN = 1900
+OLD_BORN_SEGMENT = "born:old"
 
 # how many commands are sent in one pipeline
 PIPELINE_SIZE = 1000
@@ -101,8 +102,8 @@ def result_segments(born, gender, state, scheme):
     the activity rows are - from the year of the month each row is for.
     """
     segments = ["all"]
-    if born is not None and born >= MIN_BORN:
-        segments.append(f"born:{born}")
+    if born:
+        segments.append(f"born:{born}" if born >= MIN_BORN else OLD_BORN_SEGMENT)
     if gender:
         segments.append(f"gender:{gender.upper()}")
     if state:
@@ -367,8 +368,13 @@ def _born_segments(month, min_age, max_age):
     """
     The born year segments of contacts in an age band in the given month
     """
-    first = max(month.year - max_age, MIN_BORN)
-    return [f"born:{born}" for born in range(first, month.year - min_age + 1)]
+    first, last = month.year - max_age, month.year - min_age
+    segments = [f"born:{born}" for born in range(max(first, MIN_BORN), last + 1)]
+
+    # the band reaching back past the kept born years also takes the older ones, as the activity counters count them
+    if first < MIN_BORN <= last:
+        segments.append(OLD_BORN_SEGMENT)
+    return segments
 
 
 def _segment_series(org, segment_slug):
