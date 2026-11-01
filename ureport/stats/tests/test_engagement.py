@@ -3,6 +3,7 @@ from datetime import date, datetime, timedelta, timezone as tzone
 from unittest.mock import patch
 
 from django.core.cache import cache
+from django.test import override_settings
 
 from dash.categories.models import Category
 from ureport.contacts.models import ReportersCounter
@@ -135,6 +136,7 @@ class EngagementDataTest(UreportTest):
         key = f"org:{self.org.id}:metric:{metric}:segment:{segment}:filter:{time_filter}"
         return cache.get(key)
 
+    @override_settings(ACTIVE_USERS_HLL_READ=False)
     def test_refresh_matches_per_filter_calculation(self):
         time_filters = list(PollEngagementDailyCount.DATA_TIME_FILTERS)
 

@@ -1088,15 +1088,16 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
-# Active users can also be counted by HyperLogLog sketches in Valkey, alongside the contact activity tables, so that
-# the two can be compared - see ureport.stats.active_users. Synced results are only added to the sketches when
-# ACTIVE_USERS_HLL_WRITE is set, the charts only read them when ACTIVE_USERS_HLL_READ is set or for orgs with the
-# common.active_users_hll config, and the nightly comparison is only logged when ACTIVE_USERS_HLL_COMPARE is set.
+# Active users are also counted by HyperLogLog sketches in Valkey, alongside the contact activity tables, which are
+# still written so the charts can go back to them - see ureport.stats.active_users. Synced results are only added to
+# the sketches when ACTIVE_USERS_HLL_WRITE is set, the charts read them when ACTIVE_USERS_HLL_READ is set or for orgs
+# with the common.active_users_hll config, and the nightly comparison is only logged when ACTIVE_USERS_HLL_COMPARE is
+# set.
 #
 # The sketches share Valkey with the cache and the broker, at up to 12KB each, and have expiry times, so Valkey needs
 # the room for them and a maxmemory-policy of noeviction - a policy that evicts would drop them without a trace.
 ACTIVE_USERS_HLL_WRITE = True
-ACTIVE_USERS_HLL_READ = False
+ACTIVE_USERS_HLL_READ = True
 ACTIVE_USERS_HLL_COMPARE = False
 
 # -----------------------------------------------------------------------------------

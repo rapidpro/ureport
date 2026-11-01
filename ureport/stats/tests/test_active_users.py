@@ -307,22 +307,21 @@ class ActiveUsersTest(UreportTest):
         active_users.add_results(self.seed())
 
         with frozen_now(NOW), patch.object(active_users, "get_activity", wraps=active_users.get_activity) as mock:
-            PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "gender")
-            self.assertEqual(0, mock.call_count)
+            with self.settings(ACTIVE_USERS_HLL_READ=False):
+                PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "gender")
+                self.assertEqual(0, mock.call_count)
 
-            self.org.set_config("common.active_users_hll", True)
-            PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "gender")
-            self.assertEqual(1, mock.call_count)
+                self.org.set_config("common.active_users_hll", True)
+                PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "gender")
+                self.assertEqual(1, mock.call_count)
 
             self.org.set_config("common.active_users_hll", False)
-            with self.settings(ACTIVE_USERS_HLL_READ=True):
-                result = PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "all", [12])
+            result = PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "all", [12])
             self.assertEqual(2, mock.call_count)
             self.assertEqual(ContactActivity.get_activity(self.org, [12]), result)
 
             # other metrics are unaffected
-            with self.settings(ACTIVE_USERS_HLL_READ=True):
-                PollEngagementDailyCount.refresh_engagement_data(self.org, "response-rate", "all")
+            PollEngagementDailyCount.refresh_engagement_data(self.org, "response-rate", "all")
             self.assertEqual(2, mock.call_count)
 
     def test_checkpoint_and_restore(self):
