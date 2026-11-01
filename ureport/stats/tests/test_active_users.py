@@ -605,7 +605,7 @@ class ActiveUsersTest(UreportTest):
         hll = {s["name"]: s["data"] for s in data["hll"]}
         self.assertEqual(1, max(hll["Female"].values()))
 
-        for bad in ({"segment": "nope"}, {"filter": 7}, {"org": 0}):
+        for bad in ({"segment": "nope"}, {"filter": 7}, {"filter": "x"}, {"org": 0}, {"org": "abc"}):
             response = self.client.get(charts_url, {**params, **bad}, SERVER_NAME="uganda.ureport.io")
             self.assertEqual(404, response.status_code)
 

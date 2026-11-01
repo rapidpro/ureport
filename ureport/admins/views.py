@@ -72,9 +72,13 @@ class AdminCRUDL(SmartCRUDL):
             if "org" not in request.GET:
                 return super().get(request, *args, **kwargs)
 
-            org = get_object_or_404(Org, pk=request.GET["org"], is_active=True)
+            try:
+                org = get_object_or_404(Org, pk=request.GET["org"], is_active=True)
+                time_filter = int(request.GET.get("filter", 12))
+            except ValueError:
+                raise Http404()
+
             segment = request.GET.get("segment", "all")
-            time_filter = int(request.GET.get("filter", 12))
             if (
                 segment not in active_users.COMPARE_SEGMENTS
                 or time_filter not in PollEngagementDailyCount.DATA_TIME_FILTERS

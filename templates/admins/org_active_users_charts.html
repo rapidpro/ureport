@@ -64,7 +64,7 @@
             return [Date.parse(key), series.data[key]];
           });
           points.sort(function (a, b) { return a[0] - b[0]; });
-          return { name: series.name, color: colorOf(series.name), data: points };
+          return { name: series.name, color: colorOf(series), data: points };
         });
       };
 
@@ -97,11 +97,14 @@
             // the controls may have moved on while this was loading
             if (row.dataset.request !== request) { return; }
 
-            var names = [];
+            var keys = [];
             data.existing.concat(data.hll).forEach(function (series) {
-              if (names.indexOf(series.name) < 0) { names.push(series.name); }
+              var key = ActiveUsersCompare.seriesKey(series);
+              if (keys.indexOf(key) < 0) { keys.push(key); }
             });
-            var colorOf = function (name) { return COLORS[names.indexOf(name) % COLORS.length]; };
+            var colorOf = function (series) {
+              return COLORS[keys.indexOf(ActiveUsersCompare.seriesKey(series)) % COLORS.length];
+            };
 
             var top = 0;
             data.existing.concat(data.hll).forEach(function (series) {
@@ -118,6 +121,8 @@
               : "";
           })
           .catch(function () {
+            if (row.dataset.request !== request) { return; }
+
             delete row.dataset.request;
             row.querySelector(".active-users-difference").textContent = "failed to load";
           });
