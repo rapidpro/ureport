@@ -294,6 +294,14 @@
                           <span class="menu-link-title">{% trans "Sync Jobs" %}</span>
                         </a>
                       </li>
+                      <li>
+                        <a href="{% url 'admins.org_active_users' %}">
+                          <span class="icon">
+                            <img src="{{ STATIC_URL }}img/icons/settings_icon.png" alt="">
+                          </span>
+                          <span class="menu-link-title">Active Users Comparison</span>
+                        </a>
+                      </li>
                     {% endif %}
                   </ul>
                 </aside>

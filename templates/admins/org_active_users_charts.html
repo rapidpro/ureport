@@ -1,0 +1,165 @@
+{% extends "smartmin/base.html" %}
+
+{% block content %}
+  <p>
+    Each org's active users charts from the activity tables and from the sketches, on the same scale.
+    <a href="{% url 'admins.org_active_users' %}">Back to the ranking</a>
+  </p>
+  <div class="field is-grouped" id="active-users-controls">
+    <div class="control">
+      <div class="select">
+        <select id="active-users-segment" aria-label="Segment">
+          {% for segment in segments %}<option value="{{ segment }}">{{ segment }}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="control">
+      <div class="select">
+        <select id="active-users-filter" aria-label="Period">
+          {% for value, label in time_filters %}
+            <option value="{{ value }}" {% if value == 12 %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="control">
+      <input id="active-users-search" class="input" type="search" placeholder="Filter orgs" aria-label="Filter orgs">
+    </div>
+  </div>
+  {% for org in orgs %}
+    <div class="active-users-org" id="org-{{ org.id }}" data-org="{{ org.id }}" data-name="{{ org.name|lower }} {{ org.subdomain|lower }}" style="margin-top: 2rem">
+      <h3 class="font-bold!">
+        {{ org.name }} <span class="active-users-difference" style="font-weight: normal; margin-left: 0.5rem"></span>
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1rem">
+        <div>
+          <div>Activity tables</div>
+          <div class="active-users-chart" data-source="existing" style="height: 18rem"></div>
+        </div>
+        <div>
+          <div>Sketches</div>
+          <div class="active-users-chart" data-source="hll" style="height: 18rem"></div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>No active orgs.</p>
+  {% endfor %}
+{% endblock content %}
+{% block extra-script %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/active_users_compare.js"></script>
+  <script>
+    (function () {
+      var COLORS = ["#2653B9", "#FF7100", "#1D9E75", "#e4002b", "#7F77DD", "#BA7517", "#143E49", "#D4537E"];
+
+      var rows = Array.prototype.slice.call(document.querySelectorAll(".active-users-org"));
+      var segmentInput = document.getElementById("active-users-segment");
+      var filterInput = document.getElementById("active-users-filter");
+      var searchInput = document.getElementById("active-users-search");
+
+      var toSeries = function (rawSeries, colorOf) {
+        return rawSeries.map(function (series) {
+          var points = Object.keys(series.data).map(function (key) {
+            return [Date.parse(key), series.data[key]];
+          });
+          points.sort(function (a, b) { return a[0] - b[0]; });
+          return { name: series.name, color: colorOf(series), data: points };
+        });
+      };
+
+      var drawChart = function (container, series, top) {
+        Highcharts.chart(container, {
+          chart: { type: "spline" },
+          credits: { enabled: false },
+          title: { text: null },
+          legend: { enabled: series.length > 1 },
+          xAxis: { type: "datetime" },
+          yAxis: { title: { text: null }, min: 0, max: top },
+          tooltip: { headerFormat: "<b>{series.name}</b><br>", pointFormat: "{point.x:%b %Y}: {point.y}" },
+          series: series
+        });
+      };
+
+      var loadRow = function (row) {
+        var segment = segmentInput.value;
+        var timeFilter = filterInput.value;
+        var request = segment + ":" + timeFilter;
+        row.dataset.request = request;
+
+        var params = new URLSearchParams({ org: row.dataset.org, segment: segment, filter: timeFilter });
+        fetch("?" + params.toString(), { credentials: "same-origin" })
+          .then(function (response) {
+            if (!response.ok) { throw new Error(response.status); }
+            return response.json();
+          })
+          .then(function (data) {
+            // the controls may have moved on while this was loading
+            if (row.dataset.request !== request) { return; }
+
+            var keys = [];
+            data.existing.concat(data.hll).forEach(function (series) {
+              var key = ActiveUsersCompare.seriesKey(series);
+              if (keys.indexOf(key) < 0) { keys.push(key); }
+            });
+            var colorOf = function (series) {
+              return COLORS[keys.indexOf(ActiveUsersCompare.seriesKey(series)) % COLORS.length];
+            };
+
+            var top = 0;
+            data.existing.concat(data.hll).forEach(function (series) {
+              Object.keys(series.data).forEach(function (key) { top = Math.max(top, series.data[key]); });
+            });
+
+            row.querySelectorAll(".active-users-chart").forEach(function (container) {
+              drawChart(container, toSeries(data[container.dataset.source], colorOf), top || null);
+            });
+
+            var largest = ActiveUsersCompare.largestDifference(data.existing, data.hll);
+            row.querySelector(".active-users-difference").textContent = largest
+              ? "largest difference " + (largest.value * 100).toFixed(2) + "% (" + largest.name + ", " + largest.key.slice(0, 7) + ")"
+              : "";
+          })
+          .catch(function () {
+            if (row.dataset.request !== request) { return; }
+
+            delete row.dataset.request;
+            row.querySelector(".active-users-difference").textContent = "failed to load";
+          });
+      };
+
+      var isVisible = function (row) {
+        var box = row.getBoundingClientRect();
+        return box.height > 0 && box.bottom > 0 && box.top < window.innerHeight;
+      };
+
+      var requestCurrent = function () { return segmentInput.value + ":" + filterInput.value; };
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.target.dataset.request !== requestCurrent()) {
+            loadRow(entry.target);
+          }
+        });
+      }, { rootMargin: "200px" });
+
+      var refresh = function () {
+        rows.forEach(function (row) {
+          if (isVisible(row)) { loadRow(row); }
+          else { delete row.dataset.request; observer.unobserve(row); observer.observe(row); }
+        });
+      };
+
+      segmentInput.addEventListener("change", refresh);
+      filterInput.addEventListener("change", refresh);
+      searchInput.addEventListener("input", function () {
+        var term = searchInput.value.trim().toLowerCase();
+        rows.forEach(function (row) {
+          row.style.display = row.dataset.name.indexOf(term) >= 0 ? "" : "none";
+        });
+      });
+
+      rows.forEach(function (row) { observer.observe(row); });
+    })();
+  </script>
+{% endblock extra-script %}

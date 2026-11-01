@@ -11,6 +11,7 @@ from django.core.cache import cache
 from django.core.management import CommandError, call_command
 from django.db import connection
 from django.test import override_settings
+from django.urls import reverse
 
 from dash.categories.models import Category
 from dash.orgs.models import Org
@@ -570,6 +571,43 @@ class ActiveUsersTest(UreportTest):
             active_users.restore(self.org)
             self.assertEqual(2, self.pfcount(august, "all"))
             self.assertEqual(0, self.pfcount(september, "all"))
+
+    def test_comparison_pages(self):
+        with frozen_now(NOW):
+            active_users.add_results([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc), gender="F")])
+
+        ranking_url = reverse("admins.org_active_users")
+        charts_url = reverse("admins.org_active_users_charts")
+
+        # as the permission doesn't exist, only superusers get in
+        self.login(self.admin)
+        for url in (ranking_url, charts_url):
+            self.assertEqual(403, self.client.get(url, SERVER_NAME="uganda.ureport.io").status_code)
+
+        self.login(self.superuser)
+        response = self.client.get(ranking_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(200, response.status_code)
+        self.assertIn({"id": self.org.id, "name": self.org.name}, response.context["orgs_data"])
+        self.assertContains(response, charts_url)
+
+        response = self.client.get(charts_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, f'id="org-{self.org.id}"')
+        self.assertContains(response, '<option value="location">')
+
+        # also reachable from a host without an org
+        self.assertEqual(200, self.client.get(ranking_url).status_code)
+
+        params = {"org": self.org.id, "segment": "gender", "filter": 12}
+        with frozen_now(NOW):
+            data = self.client.get(charts_url, params, SERVER_NAME="uganda.ureport.io").json()
+        self.assertEqual(["existing", "hll"], sorted(data))
+        hll = {s["name"]: s["data"] for s in data["hll"]}
+        self.assertEqual(1, max(hll["Female"].values()))
+
+        for bad in ({"segment": "nope"}, {"filter": 7}, {"filter": "x"}, {"org": 0}, {"org": "abc"}):
+            response = self.client.get(charts_url, {**params, **bad}, SERVER_NAME="uganda.ureport.io")
+            self.assertEqual(404, response.status_code)
 
     def test_rollback_limits(self):
         with frozen_now(NOW):
