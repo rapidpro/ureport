@@ -1,3 +1,6 @@
+## v1.10.0 (2026-11-01)
+ * Add superuser pages comparing active users charts with their sketches, ranking orgs whose sketches alone are large and matching series as the compare command does
+
 ## v1.9.7 (2026-10-31)
  * Keep 30 days of active users checkpoints so sketches can be rolled back
 
