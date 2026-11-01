@@ -66,6 +66,7 @@ class Command(BaseCommand):
         compare.add_argument("--csv", dest="csv_path", help="Write every row to this CSV file")
 
         sub.add_parser("checkpoint", help="Save the sketches touched since the last checkpoint")
+        sub.add_parser("remove-expiries", help="Take the expiry time off sketches that still have one")
 
         restore = sub.add_parser("restore", help="Restore sketches from their checkpoints and replay results since")
         restore.add_argument("--org", type=int, action="append", dest="orgs", help="Org id, all active by default")
@@ -76,7 +77,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, action, **options):
-        getattr(self, f"handle_{action}")(**options)
+        getattr(self, f"handle_{action.replace('-', '_')}")(**options)
 
     def get_orgs(self, org_ids):
         orgs = Org.objects.filter(is_active=True).order_by("id")
@@ -156,6 +157,9 @@ class Command(BaseCommand):
 
     def handle_checkpoint(self, **options):
         self.stdout.write(f"Checkpointed {active_users.checkpoint()} sketches")
+
+    def handle_remove_expiries(self, **options):
+        self.stdout.write(f"Removed the expiry of {active_users.remove_expiries()} sketches")
 
     def handle_restore(self, orgs, as_of, **options):
         for org in self.get_orgs(orgs):

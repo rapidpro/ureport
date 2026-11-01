@@ -35,7 +35,6 @@ from ureport.tests import UreportTest
 from ureport.utils import ORG_CONTACT_COUNT_KEY, datetime_to_json_date
 
 NOW = datetime(2026, 10, 15, 12, 0, tzinfo=tzone.utc)
-FAR_FUTURE = int(datetime(2100, 1, 1, tzinfo=tzone.utc).timestamp())
 
 
 @override_settings(ACTIVE_USERS_HLL_WRITE=True)
@@ -46,11 +45,6 @@ class ActiveUsersTest(UreportTest):
         self.org = self.uganda
         self.r = get_valkey_connection()
         self.clear()
-
-        # sketches expire by the real clock, which the months these tests use must not depend on
-        expire_patch = patch("ureport.stats.active_users._expire_at", return_value=FAR_FUTURE)
-        expire_patch.start()
-        self.addCleanup(expire_patch.stop)
 
         SchemeSegment.objects.get_or_create(scheme="tel")
         Boundary.objects.create(org=self.org, osm_id="R1", name="Kampala", level=Boundary.STATE_LEVEL)
@@ -151,7 +145,8 @@ class ActiveUsersTest(UreportTest):
             self.dirty(),
         )
 
-        self.assertEqual(FAR_FUTURE, self.r.expiretime(active_users.sketch_key(self.org.id, march, "all")))
+        # the policy Valkey evicts by only takes keys with an expiry
+        self.assertEqual(-1, self.r.ttl(active_users.sketch_key(self.org.id, march, "all")))
 
         self.assertEqual(0, active_users.add_results([self.result("c3", when, category=None)]))
 
@@ -331,7 +326,7 @@ class ActiveUsersTest(UreportTest):
         # a sketch of an org that has gone, which is dropped
         self.r.pfadd(active_users.sketch_key(999999, date(2026, 1, 1), "all"), "x")
         self.r.sadd(active_users.DIRTY_KEY, active_users.sketch_key(999999, date(2026, 1, 1), "all"))
-        # and one that expired after being touched
+        # and one that was deleted after being touched
         self.r.sadd(active_users.DIRTY_KEY, active_users.sketch_key(self.org.id, date(2026, 1, 1), "gone"))
 
         with frozen_now(NOW):
@@ -478,6 +473,10 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual(
             [date(2026, 1, 1)], list(ActiveUsersCheckpoint.objects.filter(org=self.org).values_list("month", flat=True))
         )
+
+        # the sketches past their retention go with them
+        self.assertEqual(0, self.pfcount(date(2024, 1, 1), "all"))
+        self.assertEqual(1, self.pfcount(date(2026, 1, 1), "all"))
 
     def test_prune_checkpoint_history(self):
         now = datetime(2026, 10, 15, tzinfo=tzone.utc)
@@ -1094,11 +1093,20 @@ class ActiveUsersTest(UreportTest):
                 with self.assertLogs("ureport.stats.tasks", level="ERROR"):
                     compare_active_users()
 
-    def test_expire_at(self):
-        patch.stopall()
+    def test_remove_expiries(self):
+        sketch = active_users.sketch_key(self.org.id, date(2026, 3, 1), "all")
+        tmp_key = f"{sketch}:restoring"
+        self.r.pfadd(sketch, "c1")
+        self.r.expire(sketch, 1000)
+        self.r.set(tmp_key, b"x", ex=60)
+        self.addCleanup(self.r.delete, tmp_key)
 
-        # kept until the charts no longer reach it
-        self.assertEqual(datetime(2028, 4, 1, tzinfo=tzone.utc).timestamp(), active_users._expire_at(date(2026, 3, 1)))
+        out = StringIO()
+        call_command("active_users", "remove-expiries", stdout=out)
+
+        self.assertRegex(out.getvalue(), r"Removed the expiry of \d+ sketches")
+        self.assertEqual(-1, self.r.ttl(sketch))
+        self.assertGreater(self.r.ttl(tmp_key), 0)
 
     def test_parse_key(self):
         self.assertEqual(

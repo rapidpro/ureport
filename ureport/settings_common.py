@@ -1093,8 +1093,9 @@ CELERY_BEAT_SCHEDULE = {
 # ACTIVE_USERS_HLL_WRITE is set, the charts only read them when ACTIVE_USERS_HLL_READ is set or for orgs with the
 # common.active_users_hll config, and the nightly comparison is only logged when ACTIVE_USERS_HLL_COMPARE is set.
 #
-# The sketches share Valkey with the cache and the broker, at up to 12KB each, and have expiry times, so Valkey needs
-# the room for them and a maxmemory-policy of noeviction - a policy that evicts would drop them without a trace.
+# The sketches share Valkey with the cache and the broker, at up to 12KB each, so Valkey needs the room for them. They
+# have no expiry times, so a maxmemory-policy of volatile-lru can't evict them, but an allkeys one would drop them
+# without a trace.
 ACTIVE_USERS_HLL_WRITE = True
 ACTIVE_USERS_HLL_READ = False
 ACTIVE_USERS_HLL_COMPARE = False
