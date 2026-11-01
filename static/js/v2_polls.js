@@ -104,6 +104,19 @@ $(".tab-button-time-filter").click(function (e) {
 });
 
 
+// a count to 3 significant figures in rolled up units, e.g. 165k for 165,233
+var roundedCount = function (count) {
+  if (count < 1000) {
+    return String(count);
+  }
+
+  var rounded = Number(count.toPrecision(3));
+  if (rounded < 1000000) {
+    return Number((rounded / 1000).toPrecision(3)) + "k";
+  }
+  return Number((rounded / 1000000).toPrecision(3)) + "M";
+};
+
 // show the engagement chart with the passed in params
 var showEngagementChart = function (metricSlug, segmentType, timeFilter) {
   var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
@@ -137,10 +150,15 @@ var showEngagementChart = function (metricSlug, segmentType, timeFilter) {
       var cleanedData = [];
       for (var key in data) {
         if (Object.prototype.hasOwnProperty.call(data, key)) {
-          cleanedData.push([Date.parse(key), data[key]]);
+          cleanedData.push({
+            x: Date.parse(key),
+            y: data[key],
+            // active users are estimates, so hovering shouldn't suggest they're exact
+            display: metricSlug === "active-users" ? roundedCount(data[key]) : data[key]
+          });
         }
       }
-      cleanedData.sort(function (a, b) { return a[0] - b[0]; });
+      cleanedData.sort(function (a, b) { return a.x - b.x; });
 
       series.push({
         name: segment.name,
@@ -155,9 +173,9 @@ var showEngagementChart = function (metricSlug, segmentType, timeFilter) {
       chartType = "column";
     }
 
-    var pointFormat = '{point.x: %b %Y}: {point.y}';
+    var pointFormat = '{point.x: %b %Y}: {point.display}';
     if (timeFilter != 12) {
-      pointFormat = '{point.x: %e %b %Y}: {point.y}';
+      pointFormat = '{point.x: %e %b %Y}: {point.display}';
     }
 
 
