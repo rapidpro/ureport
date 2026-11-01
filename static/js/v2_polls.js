@@ -104,13 +104,19 @@ $(".tab-button-time-filter").click(function (e) {
 });
 
 
-// a count to 3 significant figures in rolled up units, e.g. 165k for 165,233
+// a count rounded to about its error, e.g. 97, ~830 for 832, or to 3 significant figures in rolled up units, as in
+// 165k for 165,233
 var roundedCount = function (count) {
-  if (count < 1000) {
+  if (count < 100) {
     return String(count);
   }
 
-  var rounded = Number(count.toPrecision(3));
+  var nearestTen = Math.round(count / 10) * 10;
+  if (nearestTen < 1000) {
+    return "~" + nearestTen;
+  }
+
+  var rounded = Number(Math.max(count, 1000).toPrecision(3));
   if (rounded < 1000000) {
     return Number((rounded / 1000).toPrecision(3)) + "k";
   }
