@@ -1338,6 +1338,30 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
+    def test_delete_poll_results_in_batches(self):
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+        poll_question = self.create_poll_question(self.admin, poll, "question 1", "step-uuid")
+
+        def result(flow, contact):
+            return PollResult(
+                org=self.nigeria,
+                flow=flow,
+                ruleset=poll_question.flow_result.result_uuid,
+                date=timezone.now(),
+                contact=contact,
+                completed=False,
+            )
+
+        PollResult.objects.bulk_create([result(poll.flow_uuid, f"contact-{i}") for i in range(1001)])
+        PollResult.objects.bulk_create([result("other-flow-uuid", "contact-0")])
+
+        with self.assertLogs("ureport.polls.models", level="INFO") as logs:
+            poll.delete_poll_results()
+
+        self.assertIn(f"Deleted 1001 poll results for poll #{poll.pk}", logs.output[-1])
+        self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
+        self.assertEqual(PollResult.objects.filter(org=self.nigeria, flow="other-flow-uuid").count(), 1)
+
     @patch("ureport.tests.TestBackend.update_poll_questions")
     @patch("dash.orgs.models.Org.get_backend")
     def test_update_or_create_questions_marks_results_changed(self, mock_get_backend, mock_update_poll_questions):

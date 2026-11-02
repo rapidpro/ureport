@@ -23,7 +23,7 @@ from ureport.syncjobs.models import (
     LeaseLost,
     SyncJob,
 )
-from ureport.syncjobs.tasks import JOB_TASKS, MAX_REPORTED_JOBS, check_jobs, chunked_task
+from ureport.syncjobs.tasks import JOB_TASKS, LEASE_RETRY_GRACE, MAX_REPORTED_JOBS, check_jobs, chunked_task
 from ureport.syncjobs.tests.base import (
     SyncJobTestMixin,
     drop_lease,
@@ -381,6 +381,36 @@ class ChunkedTaskTest(SyncJobTestMixin, TestCase):
 
         # the job itself is untouched
         self.assertJobState(self.job, lease_owner="other-worker")
+
+    def test_continuation_retries_shortly_if_lease_released_after_failed_claim(self):
+        task, ran = make_task(chunks_to_run=2)
+        run_task(task, self.job.id)
+        self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, lease_owner=None)
+
+        # the continuation lost its claim to the chunk ahead of it, which has since released
+        # the lease - it's the only thing driving the run so has to try again, and soon
+        with (
+            patch.object(SyncJob, "claim", return_value=None),
+            patch.object(task, "retry", side_effect=Retry()) as retry,
+        ):
+            with self.assertRaises(Retry):
+                task(self.job.id)
+
+        retry.assert_called_once_with(countdown=LEASE_RETRY_GRACE, max_retries=2)
+        self.assertEqual(ran, [0])
+
+    def test_failed_claim_of_ended_run_skips(self):
+        task, ran = make_task(chunks_to_run=2)
+
+        for status in (SyncJob.STATUS_COMPLETE, SyncJob.STATUS_FAILED):
+            end_run(self.job, status=status)
+
+            # nothing is waiting on this message, and retrying it could start another run
+            with patch.object(SyncJob, "claim", return_value=None):
+                mock_continue = run_task(task, self.job.id)
+
+            self.assertEqual(ran, [])
+            mock_continue.assert_not_called()
 
     def test_trigger_against_paused_job_skips(self):
         task, ran = make_task(chunks_to_run=2)
