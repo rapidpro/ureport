@@ -1519,7 +1519,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1582,7 +1582,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1625,7 +1625,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1650,7 +1650,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll celebrate today")
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(7):
             (
                 num_val_created,
                 num_val_updated,
@@ -1667,7 +1667,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(7):
             (
                 num_val_created,
                 num_val_updated,
@@ -1710,7 +1710,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1754,7 +1754,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1781,7 +1781,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset="ruleset-uuid-2").update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1799,7 +1799,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset="ruleset-uuid").update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1905,7 +1905,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_no_response])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -1966,7 +1966,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -2236,7 +2236,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             (
                 num_val_created,
                 num_val_updated,
@@ -2859,8 +2859,6 @@ class PerfTest(UreportTest):
 
             self.assertFalse(mock_delete_poll_results.called)
 
-            valkey_client.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk), now_date, None)
-
             mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
             (
@@ -3099,7 +3097,6 @@ class PerfTest(UreportTest):
         ) = self.backend.pull_results(poll, None, None)
 
         expected_args = [
-            (Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk),),
             (Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (poll.org.pk, poll.flow_uuid),),
         ]
 

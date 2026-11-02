@@ -1140,7 +1140,7 @@ class FLOIPBackendTest(UreportTest):
 
         progress_calls = []
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
