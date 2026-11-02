@@ -11,11 +11,15 @@ set, and the checkpoint adds a copy of their raw bytes to Postgres every night, 
 topped up with the results since rather than rebuilt from every result. The copies of the last 30 days are all kept,
 as a contact can't be taken back out of a sketch: sketches that went wrong are rolled back to a night before that.
 
+The charts read these when ACTIVE_USERS_HLL_READ or an org's common.active_users_hll config is set. The contact
+activity tables are still written, so the charts can go back to them, and compare() measures how far apart the two are.
+
 Sketches have no expiry time, as Valkey is shared and its volatile-lru policy only evicts keys that have one. Those
 past RETENTION_MONTHS are deleted with their checkpoints instead.
 
 The contact activity tables still feed the charts. An org only reads these when ACTIVE_USERS_HLL_READ or its
 common.active_users_hll config is set, and compare() measures how far apart the two are.
+
 """
 
 import logging
