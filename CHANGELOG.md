@@ -1,3 +1,9 @@
+## v1.10.2 (2026-11-02)
+ * Keep pending flow retirements and full re-pulls in the database rather than the cache
+ * Leave a contact activity month to whichever transaction inserted it first
+ * Check the runs the backend has for the flows refresh_reused_flows lists
+ * Leave a full re-pull's delete of FLOIP results to the results sync
+
 ## v1.10.1 (2026-11-02)
  * Retry a continuation whose claim lost out to a lease that has since been released
  * Stream a poll's result ids when deleting them rather than loading them all
