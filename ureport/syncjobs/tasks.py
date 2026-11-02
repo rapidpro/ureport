@@ -87,7 +87,8 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
 
     def decorator(chunk_func):
         @app.task(name=name, bind=True, queue=queue, acks_late=True, reject_on_worker_lost=True)
-        def _task(self, job_id):
+        def _task(self, job_id, handoff_from=None):
+            # handoff_from is the lease of the chunk that enqueued this one, see SyncJob.claim
             job = SyncJob.objects.filter(id=job_id).first()
             if not job:
                 logger.warning("Job #%s no longer exists, skipping", job_id)
@@ -100,7 +101,7 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
             # unique per execution so two deliveries of the same message can't share a lease
             owner = f"{self.request.hostname or 'local'}:{self.request.id or 'direct'}:{uuid.uuid4().hex[:8]}"
 
-            job = job.claim(owner, lease_seconds)
+            job = job.claim(owner, lease_seconds, handoff_from=handoff_from)
             if job is None:
                 _retry_if_leased(self, job_id)
                 return
