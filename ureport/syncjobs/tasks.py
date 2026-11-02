@@ -167,24 +167,28 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
             """
             A failed claim against a live lease may be a redelivery of a chunk whose worker
             died - the message is our only prompt to resume, so reschedule it for just
-            after the lease expires instead of dropping it.
+            after the lease expires instead of dropping it. Or it may be a continuation that
+            landed just before the chunk ahead of it released the lease, in which case the
+            job is running with the lease already gone by now, and it only needs a moment.
             """
             current = SyncJob.objects.filter(id=job_id).first()
             now = timezone.now()
+            countdown = None
 
-            if (
-                current
-                and current.status != SyncJob.STATUS_PAUSED
-                and current.lease_expires_on
-                and current.lease_expires_on > now
-            ):
-                remaining = (current.lease_expires_on - now).total_seconds()
-                try:
-                    raise task_self.retry(countdown=remaining + LEASE_RETRY_GRACE, max_retries=2)
-                except MaxRetriesExceededError:
-                    logger.warning("Job #%s (%s) still leased after retries, giving up", job_id, job_type)
-            else:
+            if current and current.status != SyncJob.STATUS_PAUSED:
+                if current.lease_expires_on and current.lease_expires_on > now:
+                    countdown = (current.lease_expires_on - now).total_seconds() + LEASE_RETRY_GRACE
+                elif current.status == SyncJob.STATUS_RUNNING:
+                    countdown = LEASE_RETRY_GRACE
+
+            if countdown is None:
                 logger.info("Job #%s (%s) not claimable, skipping", job_id, job_type)
+                return
+
+            try:
+                raise task_self.retry(countdown=countdown, max_retries=2)
+            except MaxRetriesExceededError:
+                logger.warning("Job #%s (%s) still leased after retries, giving up", job_id, job_type)
 
         # what a job of this type is run by - the queue comes with the task itself
         _task.lease_seconds = lease_seconds
