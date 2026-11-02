@@ -344,6 +344,8 @@ class Poll(SmartModel):
         ).update(repull_requested_on=None)
         cache.delete(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid))
 
+        return results_ids_count
+
     def update_questions_results_cache(self):
         for question in self.questions.all():
             # the unsegmented results also refresh the question's polled and responded caches

@@ -1601,15 +1601,18 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         mock_rebuild.assert_not_called()
         self.assertEqual(self.results(), 0)
-        self.assertEqual(reload(self.job).progress, {"cleared": 1, "skipped_retired": 1, "skipped_pulling": 1})
+        self.assertEqual(
+            reload(self.job).progress,
+            {"cleared": 1, "deleted_results": 1, "skipped_retired": 1, "skipped_pulling": 1},
+        )
 
     def test_leaves_recent_polls_alone(self):
-        # results are kept for a year from the poll's date
-        Poll.objects.filter(id=self.poll.id).update(poll_date=timezone.now() - timedelta(days=366))
-        Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=364))
-        # and a new poll's date defaults to its flow's, so it is synced for 30 days from its creation
-        Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=29))
-        Poll.objects.filter(id=self.dupe.id).update(created_on=timezone.now() - timedelta(days=31))
+        # results are kept for 90 days from the poll's date
+        Poll.objects.filter(id=self.poll.id).update(poll_date=timezone.now() - timedelta(days=91))
+        Poll.objects.filter(id=self.second.id).update(poll_date=timezone.now() - timedelta(days=89))
+        # and a new poll's date defaults to its flow's, so it is synced for 90 days from its creation too
+        Poll.objects.filter(id=self.third.id).update(created_on=timezone.now() - timedelta(days=89))
+        Poll.objects.filter(id=self.dupe.id).update(created_on=timezone.now() - timedelta(days=91))
 
         self.prune()
         self.prune()
@@ -1801,7 +1804,9 @@ class PrunePollResultsTest(PollSyncTestBase):
         # duplicate poll of the flow finds nothing left to delete
         mock_rebuild.assert_not_called()
         self.assertEqual(self.results(), 0)
-        self.assertJobState(self.job, progress={"cleared": 1, "skipped_retired": 1, "requested": 1})
+        self.assertJobState(
+            self.job, progress={"cleared": 1, "deleted_results": 2, "skipped_retired": 1, "requested": 1}
+        )
 
     def test_leaves_the_results_of_a_reused_flow_alone(self):
         # the first flow was retired long ago, and a new poll on it is syncing its results again
@@ -1817,7 +1822,7 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertFalse(Poll.objects.get(id=reused.id).stopped_syncing)
 
         # nor is a retired poll the walk had already picked when the new poll came along
-        self.assertEqual(_prune_poll(self.nigeria, self.poll, True), PRUNE_SKIPPED_RETIRED)
+        self.assertEqual(_prune_poll(self.nigeria, self.poll, True, True, {}), PRUNE_SKIPPED_RETIRED)
         self.assertEqual(self.results(), 1)
 
     def test_keeps_the_results_of_a_reused_flow_while_its_new_poll_is_inactive(self):
@@ -1960,6 +1965,33 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
         self.assertJobState(self.job, progress={"retired": 1, "skipped_retired": 1, "requested": 1})
+
+    @patch("ureport.polls.sync.PRUNE_MAX_DELETES", 2)
+    def test_spreads_a_backlog_of_deletes_over_runs(self):
+        # two retired flows, the first with as many results as a run may delete
+        Poll.objects.filter(flow_uuid__in=["uuid-1", "uuid-2"]).update(stopped_syncing=True)
+        self.add_result("uuid-1", contact="contact-1")
+        self.add_result("uuid-1", contact="contact-2")
+        self.add_result("uuid-2", contact="contact-1")
+
+        with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
+            run_task(prune_poll_results, self.job.id)
+            run_task(prune_poll_results, self.job.id)
+
+        # the second flow's results are left to the next run
+        mock_rebuild.assert_not_called()
+        self.assertEqual(self.results("uuid-1"), 0)
+        self.assertEqual(self.results("uuid-2"), 1)
+        self.assertJobState(
+            self.job,
+            progress={"cleared": 1, "deleted_results": 2, "skipped_retired": 1, "deferred_clearing": 1, "requested": 1},
+        )
+
+        with patch.object(Poll, "rebuild_poll_results_counts"):
+            run_task(prune_poll_results, self.job.id)
+            run_task(prune_poll_results, self.job.id)
+
+        self.assertEqual(self.results("uuid-2"), 0)
 
     @patch("ureport.polls.sync.PRUNE_MAX_REQUESTS", 1)
     def test_spreads_a_backlog_of_flows_over_runs(self):
