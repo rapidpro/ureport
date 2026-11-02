@@ -1376,10 +1376,17 @@ class PollTest(UreportTest):
         PollResult.objects.bulk_create([result(poll.flow_uuid, f"contact-{i}") for i in range(1001)])
         PollResult.objects.bulk_create([result("other-flow-uuid", "contact-0")])
 
-        with self.assertLogs("ureport.polls.models", level="INFO") as logs:
-            poll.delete_poll_results()
+        with (
+            patch.object(Poll, "DELETE_RESULTS_LOG_EVERY", 1000),
+            self.assertLogs("ureport.polls.models", level="INFO") as logs,
+        ):
+            self.assertEqual(poll.delete_poll_results(), 1001)
 
-        self.assertIn(f"Deleted 1001 poll results for poll #{poll.pk}", logs.output[-1])
+        # its start, its progress every so many results and its end
+        self.assertEqual(len(logs.output), 3)
+        self.assertIn(f"Deleting poll results for poll #{poll.pk}", logs.output[0])
+        self.assertIn(f"Deleted 1000 poll results so far for poll #{poll.pk}", logs.output[1])
+        self.assertIn(f"Deleted 1001 poll results for poll #{poll.pk}", logs.output[2])
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
         self.assertEqual(PollResult.objects.filter(org=self.nigeria, flow="other-flow-uuid").count(), 1)
 

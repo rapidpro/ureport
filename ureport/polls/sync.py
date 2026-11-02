@@ -99,10 +99,11 @@ POPULATE_BATCH_SIZE = 1000
 POPULATE_BATCHES_PER_CHUNK = 5
 
 # results of polls whose date is older than this are dropped, unless the poll itself was
-# only created recently - a poll's date defaults to its flow's, so a new poll on an old flow
-# is still synced for a while
-RESULTS_RETENTION = timedelta(days=365)
-NEW_POLL_WINDOW = timedelta(days=30)
+# created more recently than that - a poll's date defaults to its flow's, so a new poll on an
+# old flow is still synced for the whole period. Nearly all of a poll's responses come in well
+# within it, and any arriving after its flow is retired are no longer pulled
+RESULTS_RETENTION = timedelta(days=90)
+NEW_POLL_WINDOW = RESULTS_RETENTION
 
 # a flow old enough to retire is retired by the end of its next results sync, so that nothing
 # pulled before it is lost - when that was asked for is kept in its FlowSyncState until its
@@ -115,6 +116,12 @@ RETIRE_FALLBACK_WAIT = timedelta(days=3)
 # rather than queueing a sync of every one at once
 PRUNE_MAX_REQUESTS = 50
 
+# how many results a prune run may delete before it leaves the rest of the retired flows to
+# the next run, which can spread a backlog of them over nights, e.g. after the retention is
+# shortened. Checked before each flow, so a run can go past it by one flow's results. None
+# deletes them all in one run
+PRUNE_MAX_DELETES = None
+
 # an age and gender backfill populates the results, then rebuilds what they feed
 STAGE_POPULATE = "populate"
 STAGE_REBUILD = "rebuild"
@@ -123,6 +130,7 @@ STAGE_REBUILD = "rebuild"
 # every run is distinguishable from one that was merely busy
 PRUNE_REQUESTED = "requested"
 PRUNE_DEFERRED = "deferred"
+PRUNE_DEFERRED_CLEARING = "deferred_clearing"
 PRUNE_RETIRED = "retired"
 PRUNE_CLEARED = "cleared"
 PRUNE_SKIPPED_SYNCING = "skipped_syncing"
@@ -131,6 +139,9 @@ PRUNE_SKIPPED_PROTECTED = "skipped_protected"
 PRUNE_SKIPPED_PULLING = "skipped_pulling"
 PRUNE_SKIPPED_REBUILDING = "skipped_rebuilding"
 PRUNE_ERRORED = "errors"
+
+# how many results a prune run deleted, kept alongside its outcomes
+PRUNE_DELETED = "deleted_results"
 
 
 def get_job_poll(org_id, flow_uuid):
@@ -961,7 +972,8 @@ def prune_poll_results(job):
     deleted by a later run. As retiring a flow retires every poll on it, a flow is only
     retired once none of the polls syncing it is within the retention period, nor the main
     poll. Polls whose flow is still being synced are stepped over rather than waited for,
-    and reconsidered by a later run.
+    and reconsidered by a later run, as are retired flows once the run has deleted
+    PRUNE_MAX_DELETES results, if that is set.
     """
     from ureport.polls.models import Poll, PollResult
 
@@ -993,15 +1005,23 @@ def prune_poll_results(job):
 
     polls = list(polls.order_by("pk")[:PRUNE_CHUNK_SIZE])
     if not polls:
+        progress = job.progress or {}
+        logger.info(
+            "Finished pruning poll results on org #%d, deleting %d: %s"
+            % (org.pk, progress.get(PRUNE_DELETED, 0), ", ".join("%s=%d" % kv for kv in sorted(progress.items())))
+        )
         return True
 
     for poll in polls:
-        can_request = (job.progress or {}).get(PRUNE_REQUESTED, 0) < PRUNE_MAX_REQUESTS
-        outcome = _prune_poll(org, poll, can_request)
+        progress = job.progress or {}
+        can_request = progress.get(PRUNE_REQUESTED, 0) < PRUNE_MAX_REQUESTS
+        can_clear = PRUNE_MAX_DELETES is None or progress.get(PRUNE_DELETED, 0) < PRUNE_MAX_DELETES
+        counts = {}
+        outcome = _prune_poll(org, poll, can_request, can_clear, counts)
 
         # the position advances past a poll that was skipped or errored too, so that one
         # unhappy poll can't stall everything behind it - the next run reconsiders it
-        job.checkpoint(cursor={"after_pk": poll.pk}, progress=job.add_progress(**{outcome: 1}))
+        job.checkpoint(cursor={"after_pk": poll.pk}, progress=job.add_progress(**{outcome: 1}, **counts))
 
     return False
 
@@ -1139,14 +1159,15 @@ def _retire_flow(org, flow_uuid, holder=None):
     return PRUNE_RETIRED
 
 
-def _prune_poll(org, poll, can_request):
+def _prune_poll(org, poll, can_request, can_clear, counts):
     """
     Does the next step of retiring one poll's flow, returning what that was. A flow still
     being synced is left alone - its results must not be deleted mid traversal. A retired
     flow has its results deleted, unless a newer poll on the flow is syncing it again and
     the results are that poll's, or none are left, which is how the duplicated polls of a
     flow are recognised. A flow still syncing is asked to retire by the end of its next
-    sync, or retired here if that sync hasn't happened in RETIRE_FALLBACK_WAIT.
+    sync, or retired here if that sync hasn't happened in RETIRE_FALLBACK_WAIT. How many
+    results were deleted is added to counts.
     """
     from ureport.polls.models import Poll
 
@@ -1170,7 +1191,7 @@ def _prune_poll(org, poll, can_request):
 
         try:
             if poll.stopped_syncing:
-                return _delete_retired_results(org, poll)
+                return _delete_retired_results(org, poll, can_clear, counts)
 
             return _request_retirement(org, poll, can_request)
         except Exception:
@@ -1209,7 +1230,7 @@ def _request_retirement(org, poll, can_request):
     return _retire_flow(org, poll.flow_uuid)
 
 
-def _delete_retired_results(org, poll):
+def _delete_retired_results(org, poll, can_clear, counts):
     from ureport.polls.models import PollResult
 
     if (
@@ -1220,6 +1241,14 @@ def _delete_retired_results(org, poll):
             "Skipping clearing old results for poll #%d on org #%d as it appear to be duplicated" % (poll.pk, org.pk)
         )
         return PRUNE_SKIPPED_RETIRED
+
+    # the run has deleted as many results as it may, and the next one carries on from here
+    if not can_clear:
+        logger.info(
+            "Leaving clearing old results for poll #%d on org #%d to the next run, as this one has reached its "
+            "limit of %d deleted results" % (poll.pk, org.pk, PRUNE_MAX_DELETES)
+        )
+        return PRUNE_DEFERRED_CLEARING
 
     # a retirement still asked for is one whose rebuild didn't replace all of the counts, and
     # the counts left now are the flow's for good. Otherwise the counts were rebuilt when the
@@ -1235,7 +1264,7 @@ def _delete_retired_results(org, poll):
 
         _set_flow_state(org.pk, poll.flow_uuid, retire_requested_on=None)
 
-    poll.delete_poll_results()
+    counts[PRUNE_DELETED] = poll.delete_poll_results()
 
     logger.info("Cleared poll results for poll #%s on org #%s" % (poll.id, poll.org_id))
     return PRUNE_CLEARED

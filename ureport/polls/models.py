@@ -112,6 +112,9 @@ class Poll(SmartModel):
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
+    # how many results a delete of a poll's results logs its progress after, as a big flow's can take a while
+    DELETE_RESULTS_LOG_EVERY = 100_000
+
     # how long a rebuild waits for, and then holds, the stats squash lock while it replaces a poll's counters
     POLL_REPLACE_COUNTS_LOCK_TIMEOUT = 60 * 30
 
@@ -320,6 +323,7 @@ class Poll(SmartModel):
         from ureport.utils import chunk_list
 
         started_on = timezone.now()
+        logger.info("Deleting poll results for poll #%d on org #%d" % (self.pk, self.org_id))
 
         # a flow can have tens of millions of results, so their ids are streamed rather than loaded
         results_ids = (
@@ -329,13 +333,24 @@ class Poll(SmartModel):
         )
 
         results_ids_count = 0
+        logged_count = 0
 
         for batch in chunk_list(results_ids, 1000):
             batch = list(batch)
             PollResult.objects.filter(pk__in=batch).delete()
             results_ids_count += len(batch)
 
-        logger.info("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
+            if results_ids_count - logged_count >= Poll.DELETE_RESULTS_LOG_EVERY:
+                logged_count = results_ids_count
+                logger.info(
+                    "Deleted %d poll results so far for poll #%d on org #%d in %ds"
+                    % (results_ids_count, self.pk, self.org_id, (timezone.now() - started_on).total_seconds())
+                )
+
+        logger.info(
+            "Deleted %d poll results for poll #%d on org #%d in %ds"
+            % (results_ids_count, self.pk, self.org_id, (timezone.now() - started_on).total_seconds())
+        )
 
         # a re-pull asked for while the results were being deleted may have missed some of them, so is left for
         # the next sync
@@ -343,6 +358,8 @@ class Poll(SmartModel):
             org_id=self.org_id, flow_uuid=self.flow_uuid, repull_requested_on__lte=started_on
         ).update(repull_requested_on=None)
         cache.delete(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid))
+
+        return results_ids_count
 
     def update_questions_results_cache(self):
         for question in self.questions.all():
