@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from datetime import timedelta, timezone as tzone
+import importlib
+from datetime import datetime, timedelta, timezone as tzone
 from io import StringIO
 
 from mock import patch
 from temba_client.v2.types import Flow as TembaFlow
 
+from django.apps import apps
 from django.core.cache import cache
 from django.core.management import call_command
 from django.db import IntegrityError, transaction
+from django.db.models import QuerySet
 from django.utils import timezone
 
 from dash.categories.models import Category
@@ -17,7 +20,7 @@ from dash.test import MockClientQuery
 from ureport.backend import ChunkResult
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.contacts.models import Contact
-from ureport.polls.models import Poll, PollResult
+from ureport.polls.models import LEGACY_FLOW_STATE_KEYS, LEGACY_REPULL_FLAG, FlowSyncState, Poll, PollResult
 from ureport.polls.sync import (
     AGE_GENDER_JOB_TYPE,
     ARCHIVE_ATTEMPTS,
@@ -29,7 +32,6 @@ from ureport.polls.sync import (
     ARCHIVES_RESET_PENDING,
     COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
-    FULL_REPULL_KEY,
     PRUNE_JOB_TYPE,
     PRUNE_RETIRED,
     PRUNE_SKIPPED_PULLING,
@@ -39,7 +41,6 @@ from ureport.polls.sync import (
     RESULTS_JOB_TYPE,
     RESULTS_LEASE_SECONDS,
     RETIRE_FALLBACK_WAIT,
-    RETIRE_KEY,
     _archives_walked,
     _counts_rebuild_due,
     _delete_flow_results,
@@ -121,12 +122,15 @@ class PollSyncTestBase(SyncJobTestMixin, UreportTest):
     def clear_poll_cache_keys(self):
         for poll in Poll.objects.all():
             cache.delete(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (poll.org_id, poll.flow_uuid))
-            cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk))
             cache.delete(Poll.ORG_MAIN_POLL_ID % poll.org_id)
             cache.delete(Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (poll.org_id, poll.flow_uuid))
             cache.delete(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (poll.org_id, poll.flow_uuid))
-            cache.delete(RETIRE_KEY % (poll.org_id, poll.flow_uuid))
-            cache.delete(FULL_REPULL_KEY % (poll.org_id, poll.flow_uuid))
+
+    def set_flow_state(self, flow_uuid="uuid-1", org=None, **values):
+        FlowSyncState.set_values((org or self.nigeria).pk, flow_uuid, **values)
+
+    def flow_state(self, field, flow_uuid="uuid-1", org=None):
+        return FlowSyncState.get_value((org or self.nigeria).pk, flow_uuid, field)
 
     def get_job(self, job_type=RESULTS_JOB_TYPE, org=None, flow_uuid="uuid-1"):
         return SyncJob.objects.get(org=org or self.nigeria, job_type=job_type, scope=flow_uuid)
@@ -273,7 +277,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         archives_job = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
         SyncJob.objects.filter(id=archives_job.id).update(cursor={"before": "2026-01-01"})
 
-        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+        self.set_flow_state(repull_requested_on=timezone.now())
 
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
@@ -283,7 +287,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         # the traversal starts over, the deleted results are gone and the archives are walked again
         self.assertEqual(mock_chunk.call_args[0][1], {})
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow="uuid-1").exists())
-        self.assertIsNone(cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk)))
+        self.assertIsNone(self.flow_state("repull_requested_on"))
         self.assertEqual(self.get_job(ARCHIVES_JOB_TYPE).cursor, {})
         self.mock_queue_archives.assert_called_once_with((archives_job.id,), queue="sync")
 
@@ -291,7 +295,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         self.assertIsNotNone(self.poll.get_counts_stamps()[0])
 
     def test_a_rebuild_during_the_delete_leaves_the_flow_due(self):
-        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+        self.set_flow_state(repull_requested_on=timezone.now())
 
         # a rebuild that starts while the results are being deleted counts some of them
         def rebuilt_during_delete():
@@ -309,11 +313,11 @@ class SyncPollResultsTest(PollSyncTestBase):
         self.assertGreater(changed_on, rebuilt_on)
 
     def test_restart_survives_an_interrupted_delete(self):
-        # deleting consumes the flag and the legacy position, so the restart has to already
+        # deleting consumes the request and the legacy position, so the restart has to already
         # be durable when a chunk dies part way through
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, "uuid-1"), "t0", None)
         SyncJob.objects.filter(id=self.job.id).update(cursor={"after": "t1"})
-        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+        self.set_flow_state(repull_requested_on=timezone.now())
 
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.side_effect = [
@@ -333,12 +337,12 @@ class SyncPollResultsTest(PollSyncTestBase):
         self.assertEqual(mock_chunk.call_args[0][1], {})
 
     def test_restarts_when_a_duplicate_poll_asks_for_it(self):
-        # the newest poll of the flow is the one the job syncs, but the flag can be set on
-        # any poll sharing it
+        # the newest poll of the flow is the one the job syncs, but a re-pull can be asked
+        # for on any poll sharing it
         newest = self.create_poll(self.nigeria, "Poll newest", "uuid-1", self.education_nigeria, self.admin)
         SyncJob.objects.filter(id=self.job.id).update(cursor={"after": "t1"})
 
-        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+        self.poll.request_full_repull()
 
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
@@ -348,9 +352,8 @@ class SyncPollResultsTest(PollSyncTestBase):
         self.assertEqual(mock_chunk.call_args[0][1], {})
         self.assertEqual(mock_chunk.call_args[0][0].pk, newest.pk)
 
-        # the flags of every poll on the flow are cleared, they never expire on their own
-        for poll_id in (self.poll.pk, newest.pk):
-            self.assertIsNone(cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, poll_id)))
+        # the request is the flow's, so it is consumed for all of its polls
+        self.assertIsNone(self.flow_state("repull_requested_on"))
 
         self.mock_queue_archives.assert_called_once()
 
@@ -362,7 +365,7 @@ class SyncPollResultsTest(PollSyncTestBase):
             lease_owner="worker-1",
             lease_expires_on=timezone.now() + timedelta(minutes=5),
         )
-        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+        self.set_flow_state(repull_requested_on=timezone.now())
 
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"})
@@ -383,7 +386,7 @@ class SyncPollResultsTest(PollSyncTestBase):
         archives_job = SyncJob.get_or_create_job(self.nigeria, ARCHIVES_JOB_TYPE, "uuid-1")
         SyncJob.objects.filter(id=archives_job.id).update(cursor={"before": "2026-01-01"})
         hold_lease(archives_job)
-        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk), "2026-08-01", None)
+        self.set_flow_state(repull_requested_on=timezone.now())
 
         with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
             mock_chunk.return_value = ChunkResult(counts=results_counts(), cursor={"after": "t2"}, done=True)
@@ -825,8 +828,7 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
         self.walk(job, ChunkResult(counts={}, cursor={"before": "2026-07-01"}))
         results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
         SyncJob.objects.filter(id=results_job.id).update(cursor={"after": "t1"})
-        flag = Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, self.poll.pk)
-        cache.set(flag, "2026-08-01", None)
+        self.set_flow_state(repull_requested_on=timezone.now())
 
         with (
             patch.object(Poll, "get_flow_date", return_value=None),
@@ -839,7 +841,7 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
             # nothing is deleted under the batch, and the request is kept for later
             self.assertEqual(mock_chunk.call_args[0][1], {"after": "t1"})
             self.assertTrue(PollResult.objects.filter(flow="uuid-1").exists())
-            self.assertIsNotNone(cache.get(flag))
+            self.assertIsNotNone(self.flow_state("repull_requested_on"))
 
             # the first sync's archives job ends itself, the batch has them
             archives_job = self.get_job(ARCHIVES_JOB_TYPE)
@@ -853,7 +855,7 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
         # once the batch is done the delete goes ahead and the archives are walked again
         self.assertEqual(mock_chunk.call_args[0][1], {})
         self.assertFalse(PollResult.objects.filter(flow="uuid-1").exists())
-        self.assertIsNone(cache.get(flag))
+        self.assertIsNone(self.flow_state("repull_requested_on"))
         mock_archives_queue.assert_called_once_with((archives_job.id,), queue="sync")
 
     def test_pending_archives_reset_waits_for_the_batch(self):
@@ -907,7 +909,7 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
         self.assertJobState(self.get_job(ARCHIVES_JOB_TYPE), cursor={})
 
         # so the re-pull isn't over, and its counts wait for it
-        self.assertTrue(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertTrue(self.flow_state("full_repull_on"))
         self.mock_rebuild.assert_not_called()
 
         with patch.object(RapidProBackend, "pull_results_from_archives_batch_chunk") as mock_chunk:
@@ -917,14 +919,14 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
             run_to_completion(sync_poll_archives_batch, job.id)
 
         # the end of the batch ends it, and rebuilds the counts on everything pulled again
-        self.assertIsNone(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertIsNone(self.flow_state("full_repull_on"))
         self.assertEqual(self.rebuilt_flows(), ["uuid-1"])
         self.assertJobState(self.get_job(ARCHIVES_JOB_TYPE), cursor={"before": "2026-06-01"})
 
     def test_a_flow_is_only_retired_once_its_batch_is_done(self):
         long_ago = timezone.now() - timedelta(days=500)
         Poll.objects.filter(id=self.poll.id).update(poll_date=long_ago, created_on=long_ago)
-        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), timezone.now(), None)
+        self.set_flow_state("uuid-1", retire_requested_on=timezone.now())
         job = self.queue_batch(["uuid-1"])
         results_job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1")
 
@@ -977,8 +979,7 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
 
         # each flow is asked to delete and pull its results again, a retired one syncing again
         for poll in (self.poll, self.poll2, retired, uganda_poll):
-            flag = Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk)
-            self.assertIsNotNone(cache.get(flag))
+            self.assertIsNotNone(self.flow_state("repull_requested_on", poll.flow_uuid, poll.org))
         self.assertFalse(Poll.objects.get(id=retired.id).stopped_syncing)
 
 
@@ -1541,7 +1542,7 @@ class PrunePollResultsTest(PollSyncTestBase):
         return mock_rebuild
 
     def requested(self, flow_uuid="uuid-1"):
-        return cache.get(RETIRE_KEY % (self.nigeria.pk, flow_uuid))
+        return self.flow_state("retire_requested_on", flow_uuid)
 
     def stopped(self):
         return set(Poll.objects.filter(stopped_syncing=True).values_list("pk", flat=True))
@@ -1625,7 +1626,7 @@ class PrunePollResultsTest(PollSyncTestBase):
             self.assertIsNone(self.requested("uuid-2"))
 
             # nor is it retired by a sync asked to retire it before it became the main poll
-            cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-2"), timezone.now(), None)
+            self.set_flow_state("uuid-2", retire_requested_on=timezone.now())
             self.finish_sync("uuid-2")
 
         self.assertNotIn(self.second.pk, self.stopped())
@@ -1640,7 +1641,7 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertIsNone(self.requested("uuid-1"))
 
         # nor is it retired by a sync that was asked to retire it before the recent poll came along
-        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), timezone.now(), None)
+        self.set_flow_state("uuid-1", retire_requested_on=timezone.now())
         self.finish_sync("uuid-1")
 
         self.assertEqual(self.stopped(), set())
@@ -1769,9 +1770,6 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
         self.assertTrue(self.requested("uuid-1"))
 
-        # and that is kept for however long it takes, as the results are deleted without a rebuild once it's gone
-        self.assertIsNone(cache.ttl(RETIRE_KEY % (self.nigeria.pk, "uuid-1")))
-
         # the results are kept until a rebuild replaced all of the counts
         self.prune()
         self.prune()
@@ -1883,7 +1881,7 @@ class PrunePollResultsTest(PollSyncTestBase):
 
         # but not forever - the prune retires it, unless a chunk of either sync is under way
         asked_on = timezone.now() - RETIRE_FALLBACK_WAIT - timedelta(minutes=1)
-        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), asked_on, None)
+        self.set_flow_state("uuid-1", retire_requested_on=asked_on)
         archives = self.archives_job()
         SyncJob.objects.filter(id=archives.id).update(status=SyncJob.STATUS_RUNNING)
         hold_lease(archives)
@@ -1907,9 +1905,9 @@ class PrunePollResultsTest(PollSyncTestBase):
     def test_retires_a_flow_failing_mid_full_repull_on_the_counts_it_had(self):
         # its results were deleted to be pulled again, and its archives walk then kept failing
         end_run(self.results_job(), status=SyncJob.STATUS_FAILED, failures=3)
-        cache.set(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1"), True, None)
+        self.set_flow_state(full_repull_on=timezone.now())
         asked_on = timezone.now() - RETIRE_FALLBACK_WAIT - timedelta(minutes=1)
-        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), asked_on, None)
+        self.set_flow_state("uuid-1", retire_requested_on=asked_on)
 
         with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
             run_to_completion(prune_poll_results, self.job.id)
@@ -1918,13 +1916,13 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.assertEqual(self.stopped(), {self.poll.pk, self.dupe.pk})
         mock_rebuild.assert_not_called()
         self.assertIsNone(self.requested("uuid-1"))
-        self.assertFalse(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertFalse(self.flow_state("full_repull_on"))
 
     def test_waits_for_a_paused_sync_however_long(self):
         self.prune()
 
         asked_on = timezone.now() - RETIRE_FALLBACK_WAIT - timedelta(days=10)
-        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), asked_on, None)
+        self.set_flow_state("uuid-1", retire_requested_on=asked_on)
 
         # whichever of the flow's syncs it is
         for job in (self.results_job(), self.archives_job()):
@@ -1938,6 +1936,21 @@ class PrunePollResultsTest(PollSyncTestBase):
             self.assertJobState(job, status=SyncJob.STATUS_PAUSED)
 
             job.resume()
+
+    def test_the_retire_marker_rolls_back_with_the_polls(self):
+        original = QuerySet.update
+
+        def update(queryset, **kwargs):
+            if "stopped_syncing" in kwargs:
+                raise ValueError("boom")
+            return original(queryset, **kwargs)
+
+        with patch.object(QuerySet, "update", update), self.assertRaises(ValueError):
+            _retire_flow(self.nigeria, "uuid-1")
+
+        # the flow isn't retired, so it isn't marked as such either
+        self.assertEqual(self.stopped(), set())
+        self.assertIsNone(self.requested("uuid-1"))
 
     def test_retires_a_flow_whose_polls_are_all_inactive_straight_away(self):
         # no sync is run for inactive polls, so there is none to wait for
@@ -1980,7 +1993,7 @@ class FullRepullTest(PollSyncTestBase):
 
         # the results were deleted by a run of the results sync, which is still going
         SyncJob.objects.filter(id=self.results_job.id).update(status=SyncJob.STATUS_RUNNING)
-        cache.set(RETIRE_KEY % (self.nigeria.pk, "uuid-1"), timezone.now(), None)
+        self.set_flow_state("uuid-1", retire_requested_on=timezone.now())
 
         with patch.object(Poll, "delete_poll_results"):
             _delete_flow_results(self.results_job, self.poll)
@@ -1997,10 +2010,10 @@ class FullRepullTest(PollSyncTestBase):
 
     def test_counts_wait_for_both_halves(self):
         # a retirement asked for before is moot, as the flow is pulled again in full
-        self.assertIsNone(cache.get(RETIRE_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertIsNone(self.flow_state("retire_requested_on", "uuid-1"))
 
         # and the re-pull is waited for however long it takes, the counts being replaced once it's over
-        self.assertIsNone(cache.ttl(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertIsNotNone(self.flow_state("full_repull_on"))
 
         # neither the nightly pass nor the results sync rebuilds a flow pulled again in part
         self.assertFalse(_counts_rebuild_due(self.poll, timezone.now()))
@@ -2013,7 +2026,7 @@ class FullRepullTest(PollSyncTestBase):
         self.set_state(self.results_job, status=SyncJob.STATUS_COMPLETE, progress={"num_val_created": 3})
         self.assertEqual(self.finalize(self.results_job), 1)
 
-        self.assertFalse(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertFalse(self.flow_state("full_repull_on"))
         self.assertTrue(_counts_rebuild_due(self.poll, timezone.now()))
 
     def test_a_walk_from_before_the_reset_does_not_end_it(self):
@@ -2028,7 +2041,7 @@ class FullRepullTest(PollSyncTestBase):
 
         self.set_state(self.archives_job, cursor={"before": "2026-02-01"})
         self.assertEqual(self.finalize(self.archives_job), 1)
-        self.assertFalse(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertFalse(self.flow_state("full_repull_on"))
 
     def test_a_leftover_finalization_ends_it(self):
         self.set_state(self.archives_job, status=SyncJob.STATUS_COMPLETE, cursor={"before": "2026-01-01"})
@@ -2041,7 +2054,7 @@ class FullRepullTest(PollSyncTestBase):
             _finalize_results(completed)
 
         self.assertEqual(mock_rebuild.call_count, 1)
-        self.assertFalse(cache.get(FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1")))
+        self.assertFalse(self.flow_state("full_repull_on"))
 
     def test_backfills_leave_the_counts_alone(self):
         with (
@@ -2643,3 +2656,135 @@ class SyncStatusTest(PollSyncTestBase):
         Poll.objects.filter(id=self.poll.id).update(has_synced=False)
 
         self.assertIn("in progress", self.view.get_sync_status(Poll.objects.get(id=self.poll.id)))
+
+
+class LegacyFlowStateTest(PollSyncTestBase):
+    def set_legacy(self, key, value):
+        cache.set(key, value, None)
+        self.addCleanup(cache.delete, key)
+
+    def test_adopts_a_retirement_an_older_worker_asked_for(self):
+        key = LEGACY_FLOW_STATE_KEYS["retire_requested_on"] % (self.nigeria.pk, "uuid-1")
+        asked_on = timezone.now() - timedelta(days=1)
+        self.set_legacy(key, asked_on)
+
+        with self.captureOnCommitCallbacks(execute=True):
+            self.assertEqual(self.flow_state("retire_requested_on"), asked_on)
+
+        # it's the database's from then on
+        self.assertIsNone(cache.get(key))
+        self.assertEqual(FlowSyncState.objects.get(flow_uuid="uuid-1").retire_requested_on, asked_on)
+
+    def test_adopts_a_full_repull_an_older_worker_started(self):
+        key = LEGACY_FLOW_STATE_KEYS["full_repull_on"] % (self.nigeria.pk, "uuid-1")
+        self.set_legacy(key, True)
+
+        with self.captureOnCommitCallbacks(execute=True):
+            self.assertIsNotNone(self.flow_state("full_repull_on"))
+
+        self.assertIsNone(cache.get(key))
+
+    def test_adopts_a_repull_an_older_worker_asked_for_on_any_poll(self):
+        dupe = self.create_poll(self.nigeria, "Poll 1 dupe", "uuid-1", self.education_nigeria, self.admin)
+        key = LEGACY_REPULL_FLAG % (self.nigeria.pk, dupe.pk)
+        self.set_legacy(key, "2026-08-01T10:00:00.000Z")
+
+        with self.captureOnCommitCallbacks(execute=True):
+            self.assertEqual(self.flow_state("repull_requested_on"), datetime(2026, 8, 1, 10, tzinfo=tzone.utc))
+
+        self.assertIsNone(cache.get(key))
+
+    def test_only_reads_the_cache_for_an_unset_value(self):
+        key = LEGACY_FLOW_STATE_KEYS["retire_requested_on"] % (self.nigeria.pk, "uuid-1")
+        asked_on = timezone.now() - timedelta(days=1)
+        self.set_flow_state(retire_requested_on=asked_on)
+        self.set_legacy(key, timezone.now())
+
+        with self.captureOnCommitCallbacks(execute=True):
+            self.assertEqual(self.flow_state("retire_requested_on"), asked_on)
+
+        self.assertIsNotNone(cache.get(key))
+
+        # and a value that wasn't set in the cache either isn't
+        self.set_legacy(LEGACY_FLOW_STATE_KEYS["full_repull_on"] % (self.nigeria.pk, "uuid-1"), False)
+        self.assertIsNone(self.flow_state("full_repull_on"))
+
+
+class CopyCachedStateMigrationTest(PollSyncTestBase):
+    def setUp(self):
+        super().setUp()
+
+        self.migration = importlib.import_module("ureport.polls.migrations.0083_flowsyncstate")
+
+    def set_keys(self, keys):
+        for key, value in keys.items():
+            cache.set(key, value, None)
+            self.addCleanup(cache.delete, key)
+
+    def test_copies_what_is_pending_in_the_cache(self):
+        migration = self.migration
+        dupe = self.create_poll(self.nigeria, "Poll 1 dupe", "uuid-1", self.education_nigeria, self.admin)
+        self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
+
+        asked_on = timezone.now() - timedelta(days=1)
+        keys = {
+            migration.RETIRE_KEY % (self.nigeria.pk, "uuid-1"): asked_on,
+            migration.FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1"): True,
+            migration.REPULL_FLAG % (self.nigeria.pk, dupe.pk): "2026-08-01T10:00:00.000Z",
+            migration.RETIRE_KEY % (self.nigeria.pk, "uuid-2"): None,
+        }
+        self.set_keys(keys)
+
+        with self.captureOnCommitCallbacks(execute=True):
+            migration.copy_cached_state(apps, None)
+
+        self.assertEqual(self.flow_state("retire_requested_on"), asked_on)
+        self.assertIsNotNone(self.flow_state("full_repull_on"))
+
+        # the re-pull flag of any poll on the flow is the flow's
+        self.assertEqual(self.flow_state("repull_requested_on"), datetime(2026, 8, 1, 10, tzinfo=tzone.utc))
+
+        # and a flow with nothing pending has no state
+        self.assertFalse(FlowSyncState.objects.filter(flow_uuid="uuid-2").exists())
+
+        # the copied keys are gone, so nothing reads them as a fallback once their state is cleared
+        self.assertEqual(cache.get_many(list(keys)[:3]), {})
+
+    def test_copies_a_value_it_cannot_parse_as_of_now(self):
+        self.set_keys({self.migration.RETIRE_KEY % (self.nigeria.pk, "uuid-1"): "not a date"})
+
+        before = timezone.now()
+        self.migration.copy_cached_state(apps, None)
+
+        self.assertGreaterEqual(self.flow_state("retire_requested_on"), before)
+
+    def test_restores_what_is_pending_to_the_cache_on_rollback(self):
+        migration = self.migration
+        dupe = self.create_poll(self.nigeria, "Poll 1 dupe", "uuid-1", self.education_nigeria, self.admin)
+        asked_on = timezone.now() - timedelta(days=1)
+        requested_on = datetime(2026, 8, 1, 10, tzinfo=tzone.utc)
+        self.set_flow_state(
+            retire_requested_on=asked_on, full_repull_on=timezone.now(), repull_requested_on=requested_on
+        )
+
+        keys = [
+            migration.RETIRE_KEY % (self.nigeria.pk, "uuid-1"),
+            migration.FULL_REPULL_KEY % (self.nigeria.pk, "uuid-1"),
+            migration.REPULL_FLAG % (self.nigeria.pk, self.poll.pk),
+            migration.REPULL_FLAG % (self.nigeria.pk, dupe.pk),
+        ]
+        for key in keys:
+            self.addCleanup(cache.delete, key)
+
+        migration.restore_cached_state(apps, None)
+
+        # as the release before this one wrote them, the re-pull flag on every poll of the flow
+        self.assertEqual(
+            cache.get_many(keys),
+            {
+                keys[0]: asked_on,
+                keys[1]: True,
+                keys[2]: datetime_to_json_date(requested_on),
+                keys[3]: datetime_to_json_date(requested_on),
+            },
+        )

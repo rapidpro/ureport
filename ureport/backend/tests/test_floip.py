@@ -12,7 +12,7 @@ from ureport.backend.floip import ContactSyncer, FLOIPBackend
 from ureport.contacts.models import Contact
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
-from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
+from ureport.polls.models import FlowSyncState, Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.tests import MockResponse, UreportTest
 from ureport.utils import json_date_to_datetime
 
@@ -1146,7 +1146,7 @@ class FLOIPBackendTest(UreportTest):
 
         progress_calls = []
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1205,4 +1205,4 @@ class FLOIPBackendTest(UreportTest):
         # still pulled incrementally, with nothing deleted
         self.assertEqual(mock_request.call_args[1]["params"]["filter"]["start-timestamp"], last_pull)
         self.assertTrue(PollResult.objects.filter(pk=result.pk).exists())
-        self.assertIsNotNone(cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, poll.pk)))
+        self.assertIsNotNone(FlowSyncState.get_value(self.nigeria.pk, poll.flow_uuid, "repull_requested_on"))

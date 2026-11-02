@@ -28,7 +28,7 @@ from dash.orgs.models import Org
 from dash.tags.models import Tag
 from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
-from ureport.polls.models import Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
+from ureport.polls.models import FlowSyncState, Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import (
     backfill_poll_results,
     fetch_old_sites_count,
@@ -180,19 +180,15 @@ class PollTest(UreportTest):
             mock_pull_refresh.assert_called_once_with()
 
     @patch("ureport.polls.tasks.pull_refresh.apply_async")
-    @patch("django.core.cache.cache.set")
-    def test_pull_refresh_task(self, mock_cache_set, mock_pull_refresh):
+    def test_pull_refresh_task(self, mock_pull_refresh):
         tz = zoneinfo.ZoneInfo("Africa/Kigali")
         with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 0, tzinfo=tz)):
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
             poll1.pull_refresh_task()
 
-            now = timezone.now()
-            mock_cache_set.assert_called_once_with(
-                Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll1.org_id, poll1.pk),
-                datetime_to_json_date(now.replace(tzinfo=tzone.utc)),
-                None,
+            self.assertEqual(
+                FlowSyncState.get_value(poll1.org_id, poll1.flow_uuid, "repull_requested_on"), timezone.now()
             )
 
             mock_pull_refresh.assert_called_once_with((poll1.pk,), queue="sync")
@@ -1341,6 +1337,27 @@ class PollTest(UreportTest):
         poll.delete_poll_results()
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
+
+    def test_delete_poll_results_consumes_only_an_earlier_repull_request(self):
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+        dupe = self.create_poll(self.nigeria, "Poll 1 dupe", "flow-uuid", self.education_nigeria, self.admin)
+
+        def requested_on():
+            return FlowSyncState.get_value(self.nigeria.pk, "flow-uuid", "repull_requested_on")
+
+        dupe.request_full_repull()
+        poll.delete_poll_results()
+        self.assertIsNone(requested_on())
+
+        # one asked for on the duplicate while the delete was under way may have missed some results
+        def request_during_delete(*args, **kwargs):
+            dupe.request_full_repull()
+            return iter(())
+
+        with patch("ureport.utils.chunk_list", side_effect=request_during_delete):
+            poll.delete_poll_results()
+
+        self.assertIsNotNone(requested_on())
 
     def test_delete_poll_results_in_batches(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
