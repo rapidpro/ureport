@@ -321,12 +321,19 @@ class Poll(SmartModel):
     def delete_poll_results(self):
         from ureport.utils import chunk_list
 
-        results_ids = PollResult.objects.filter(org_id=self.org_id, flow=self.flow_uuid).values_list("pk", flat=True)
+        # a flow can have tens of millions of results, so their ids are streamed rather than loaded
+        results_ids = (
+            PollResult.objects.filter(org_id=self.org_id, flow=self.flow_uuid)
+            .values_list("pk", flat=True)
+            .iterator(chunk_size=1000)
+        )
 
-        results_ids_count = len(results_ids)
+        results_ids_count = 0
 
         for batch in chunk_list(results_ids, 1000):
+            batch = list(batch)
             PollResult.objects.filter(pk__in=batch).delete()
+            results_ids_count += len(batch)
 
         logger.info("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
 
