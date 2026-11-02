@@ -13,6 +13,13 @@ as a contact can't be taken back out of a sketch: sketches that went wrong are r
 
 The charts read these when ACTIVE_USERS_HLL_READ or an org's common.active_users_hll config is set. The contact
 activity tables are still written, so the charts can go back to them, and compare() measures how far apart the two are.
+
+Sketches have no expiry time, as Valkey is shared and its volatile-lru policy only evicts keys that have one. Those
+past RETENTION_MONTHS are deleted with their checkpoints instead.
+
+The contact activity tables still feed the charts. An org only reads these when ACTIVE_USERS_HLL_READ or its
+common.active_users_hll config is set, and compare() measures how far apart the two are.
+
 """
 
 import logging
@@ -137,10 +144,6 @@ def is_countable(result):
     )
 
 
-def _expire_at(month):
-    return int(datetime.combine(add_months(month, RETENTION_MONTHS), datetime.min.time(), tzinfo=tzone.utc).timestamp())
-
-
 def _add(r, contacts_by_key):
     """
     Adds contacts to sketches, by key, and marks those sketches dirty
@@ -148,10 +151,8 @@ def _add(r, contacts_by_key):
     pipe = r.pipeline(transaction=False)
     pending = 0
     for key, contacts in contacts_by_key.items():
-        _, month, _ = parse_key(key)
         pipe.pfadd(key, *contacts)
-        pipe.expireat(key, _expire_at(month))
-        pending += 2
+        pending += 1
         if pending >= PIPELINE_SIZE:
             pipe.execute()
             pending = 0
@@ -587,7 +588,7 @@ def _save_checkpointing(r, taken_on, batch_size):
 
         checkpoints = []
         for key, value in zip(keys, values):
-            if value is None:  # expired since
+            if value is None:  # deleted since
                 continue
             org_id, month, _ = parse_key(key)
             checkpoints.append(
@@ -615,21 +616,27 @@ def _existing_org_ids(org_ids):
 
 def prune_checkpoints():
     """
-    Deletes checkpoints of sketches that have since expired, and those older than the history that a later one
-    as old replaces, an org at a time, and the records of runs older than the history but for the last two, which a
-    restore as of its start replays from
+    Deletes sketches past their retention along with their checkpoints, and checkpoints older than the history that a
+    later one as old replaces, an org at a time, and the records of runs older than the history but for the last two,
+    which a restore as of its start replays from
     """
     from dash.orgs.models import Org
 
     from .models import ActiveUsersCheckpoint, ActiveUsersCheckpointRun
 
+    r = get_valkey_connection()
     cutoff = add_months(month_start(timezone.now()), 1 - RETENTION_MONTHS)
     oldest = timezone.now() - CHECKPOINT_HISTORY
     replaced = ActiveUsersCheckpoint.objects.filter(
         key=OuterRef("key"), taken_on__gt=OuterRef("taken_on"), taken_on__lte=oldest
     )
     for org_id in Org.objects.values_list("id", flat=True):
-        ActiveUsersCheckpoint.objects.filter(org_id=org_id, month__lt=cutoff).delete()
+        # sketches first, so that any left by an interrupted run still have the checkpoints that find them
+        past = ActiveUsersCheckpoint.objects.filter(org_id=org_id, month__lt=cutoff)
+        for keys in _chunks(list(past.order_by("key").values_list("key", flat=True).distinct()), PIPELINE_SIZE):
+            r.delete(*keys)
+        past.delete()
+
         ActiveUsersCheckpoint.objects.filter(org_id=org_id, taken_on__lte=oldest).filter(Exists(replaced)).delete()
 
     runs = ActiveUsersCheckpointRun.objects.filter(taken_on__lte=oldest).order_by("-id").values_list("id", flat=True)
@@ -690,7 +697,6 @@ def restore(org, as_of=None, batch_size=500):
             tmp_key = f"{c.key}:restoring"
             pipe.set(tmp_key, bytes(c.value), ex=60)
             pipe.pfmerge(c.key, c.key, tmp_key)
-            pipe.expireat(c.key, _expire_at(c.month))
             pipe.delete(tmp_key)
             restored += 1
         pipe.execute()
@@ -745,6 +751,23 @@ def _delete_sketches(org):
         r.srem(DIRTY_KEY, *chunk)
         r.srem(CHECKPOINTING_KEY, *chunk)
     return len(keys)
+
+
+def remove_expiries():
+    """
+    Takes the expiry time off sketches that were given one before they stopped having them, leaving the temporary keys
+    of a restore alone. Returns the number of sketches changed.
+    """
+    r = get_valkey_connection()
+    keys = [k.decode() if isinstance(k, bytes) else k for k in r.scan_iter(match=f"{KEY_PREFIX}:*", count=1000)]
+
+    changed = 0
+    for chunk in _chunks([k for k in keys if not k.endswith(":restoring")], PIPELINE_SIZE):
+        pipe = r.pipeline(transaction=False)
+        for key in chunk:
+            pipe.persist(key)
+        changed += sum(pipe.execute())
+    return changed
 
 
 # ------------------------------------------------------------------------------

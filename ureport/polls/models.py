@@ -4,7 +4,7 @@ import json
 import logging
 import uuid
 from collections import defaultdict
-from datetime import timedelta, timezone as tzone
+from datetime import datetime, timedelta, timezone as tzone
 from itertools import groupby
 from operator import itemgetter
 
@@ -109,8 +109,6 @@ class Poll(SmartModel):
     # how far back a rebuild dates itself, so a sync on a worker whose clock is a little behind can't stamp a change
     # the rebuild missed as older than it
     POLL_COUNTS_REBUILT_CLOCK_MARGIN = timedelta(minutes=1)
-
-    POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = "poll-results-pull-after-delete-flag:%s:%s"
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
@@ -250,7 +248,7 @@ class Poll(SmartModel):
     def get_pull_cached_params(self):
         latest_synced_obj_time = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid), None)
 
-        pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org.pk, self.pk), None)
+        pull_after_delete = FlowSyncState.get_value(self.org_id, self.flow_uuid, "repull_requested_on")
 
         return latest_synced_obj_time, pull_after_delete
 
@@ -321,16 +319,29 @@ class Poll(SmartModel):
     def delete_poll_results(self):
         from ureport.utils import chunk_list
 
-        results_ids = PollResult.objects.filter(org_id=self.org_id, flow=self.flow_uuid).values_list("pk", flat=True)
+        started_on = timezone.now()
 
-        results_ids_count = len(results_ids)
+        # a flow can have tens of millions of results, so their ids are streamed rather than loaded
+        results_ids = (
+            PollResult.objects.filter(org_id=self.org_id, flow=self.flow_uuid)
+            .values_list("pk", flat=True)
+            .iterator(chunk_size=1000)
+        )
+
+        results_ids_count = 0
 
         for batch in chunk_list(results_ids, 1000):
+            batch = list(batch)
             PollResult.objects.filter(pk__in=batch).delete()
+            results_ids_count += len(batch)
 
         logger.info("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
 
-        cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
+        # a re-pull asked for while the results were being deleted may have missed some of them, so is left for
+        # the next sync
+        FlowSyncState.objects.filter(
+            org_id=self.org_id, flow_uuid=self.flow_uuid, repull_requested_on__lte=started_on
+        ).update(repull_requested_on=None)
         cache.delete(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid))
 
     def update_questions_results_cache(self):
@@ -389,16 +400,10 @@ class Poll(SmartModel):
         """
         Asks the next results sync of this poll's flow to delete its results and pull them all again
         """
-        from ureport.utils import datetime_to_json_date
-
-        now = timezone.now()
-        cache.set(
-            Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk),
-            datetime_to_json_date(now.replace(tzinfo=tzone.utc)),
-            None,
-        )
-
-        Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
+        # the poll is locked before the flow's state, in the same order as retiring the flow locks them
+        with transaction.atomic():
+            Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
+            FlowSyncState.set_values(self.org_id, self.flow_uuid, repull_requested_on=timezone.now())
 
     @classmethod
     def mark_results_changed(cls, org_id, flow_uuid):
@@ -849,6 +854,104 @@ class Poll(SmartModel):
         indexes = [
             models.Index(fields=["org", "published", "id"], name="polls_poll_org_pblshd_id_idx"),
         ]
+
+
+# LEGACY: the cache keys flow sync state was kept in before FlowSyncState, which workers on an older release go on
+# writing while a new one is rolled out. Read as a fallback by FlowSyncState.get_value, and can be removed in a later
+# release
+LEGACY_FLOW_STATE_KEYS = {
+    "retire_requested_on": "poll-retire:org:%d:flow:%s",
+    "full_repull_on": "poll-full-repull:org:%d:flow:%s",
+}
+LEGACY_REPULL_FLAG = "poll-results-pull-after-delete-flag:%s:%s"
+
+
+def _legacy_datetime(value, now):
+    """
+    LEGACY: the cached values were timestamps, as datetimes or JSON date strings, or just True
+    """
+    if isinstance(value, datetime):
+        return value
+    if isinstance(value, str):
+        try:
+            parsed = datetime.fromisoformat(value)
+            return parsed if parsed.tzinfo else parsed.replace(tzinfo=tzone.utc)
+        except ValueError:
+            pass
+    return now
+
+
+class FlowSyncState(models.Model):
+    """
+    What is pending for the results of a flow that losing it would get wrong for good, so kept in the database
+    rather than the cache. It is per flow as polls sharing a flow share its results, and kept off the polls so
+    that saving one loaded before it changed can't overwrite it.
+    """
+
+    org = models.ForeignKey(Org, on_delete=models.CASCADE, related_name="flow_sync_states")
+    flow_uuid = models.CharField(max_length=36)
+
+    # when the next results sync was asked to delete the flow's results and pull them all again
+    repull_requested_on = models.DateTimeField(null=True)
+
+    # when a full re-pull of the flow started, i.e. its results were deleted and are being pulled again, so that its
+    # counts are left as they were rather than rebuilt from part of them. Kept until both its results and archives
+    # have been pulled again, as a re-pull stuck on a failing sync would otherwise go on to replace them
+    full_repull_on = models.DateTimeField(null=True)
+
+    # when the flow was asked to retire, kept after it is until its counts were rebuilt - see polls.sync
+    retire_requested_on = models.DateTimeField(null=True)
+
+    @classmethod
+    def get_value(cls, org_id, flow_uuid, field):
+        value = cls.objects.filter(org_id=org_id, flow_uuid=flow_uuid).values_list(field, flat=True).first()
+        if value is None:
+            value = cls._adopt_legacy_value(org_id, flow_uuid, field)
+
+        return value
+
+    @classmethod
+    def _adopt_legacy_value(cls, org_id, flow_uuid, field):
+        """
+        LEGACY: takes over a value a worker on an older release set in the cache since the upgrade copied them, so
+        that it isn't missed while a release is rolled out. Can be removed in a later release
+        """
+        if field == "repull_requested_on":
+            # the flag was set per poll, and checked for being set at all
+            poll_ids = Poll.objects.filter(org_id=org_id, flow_uuid=flow_uuid).values_list("pk", flat=True)
+            found = cache.get_many([LEGACY_REPULL_FLAG % (org_id, poll_id) for poll_id in poll_ids])
+            found = {key: value for key, value in found.items() if value is not None}
+        else:
+            key = LEGACY_FLOW_STATE_KEYS[field] % (org_id, flow_uuid)
+            value = cache.get(key)
+            found = {key: value} if value else {}
+
+        if not found:
+            return None
+
+        value = _legacy_datetime(next(iter(found.values())), timezone.now())
+
+        # a value set meanwhile wins over the legacy one
+        state, _ = cls.objects.get_or_create(org_id=org_id, flow_uuid=flow_uuid)
+        cls.objects.filter(id=state.id, **{f"{field}__isnull": True}).update(**{field: value})
+
+        # only once it's in the database, which may be in a transaction that rolls back
+        transaction.on_commit(lambda: cache.delete_many(list(found)))
+
+        return cls.objects.filter(id=state.id).values_list(field, flat=True).first()
+
+    @classmethod
+    def set_values(cls, org_id, flow_uuid, **values):
+        """
+        Sets the given fields of the flow's state, a value of None clearing one
+        """
+        if any(v is not None for v in values.values()):
+            cls.objects.update_or_create(org_id=org_id, flow_uuid=flow_uuid, defaults=values)
+        else:
+            cls.objects.filter(org_id=org_id, flow_uuid=flow_uuid).update(**values)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["org", "flow_uuid"], name="polls_flowsyncstate_unique_flow")]
 
 
 class PollImage(SmartModel):

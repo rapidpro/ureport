@@ -71,6 +71,16 @@ class BaseBackend(object):
         """
         pass
 
+    def fetch_flow_runs(self, org, flow_uuids):
+        """
+        Fetches how many runs the given flows have in the backend
+        :param org: the org
+        :param flow_uuids: the UUIDs of the flows
+        :return: dict of {"runs": n, "completed": n} by flow UUID, without the flows the backend doesn't have, or
+            None if the backend can't tell
+        """
+        return None
+
     # ------------------------------------------------------------------------------
     # Chunked pulls - bounded, resumable units of the pulls above. These defaults do
     # the entire pull as a single chunk; backends that support real pagination should

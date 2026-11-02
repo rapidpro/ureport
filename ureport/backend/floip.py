@@ -318,15 +318,10 @@ class FLOIPBackend(BaseBackend):
 
                 questions_uuids = poll.get_question_uuids()
 
-                # ignore the TaskState time and use the time we stored in valkey
-                (
-                    latest_synced_obj_time,
-                    pull_after_delete,
-                ) = poll.get_pull_cached_params()
-
-                if pull_after_delete is not None:
-                    latest_synced_obj_time = None
-                    poll.delete_poll_results()
+                # ignore the TaskState time and use the time we stored in valkey. A full re-pull's delete is
+                # left to sync_poll_results, which does it for all the flow's polls and holds it back while an
+                # archives batch is walking the flow
+                latest_synced_obj_time, _ = poll.get_pull_cached_params()
 
                 start = time.time()
                 logger.info("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))

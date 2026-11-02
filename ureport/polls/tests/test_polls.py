@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import threading
+import time
 import uuid
 import zoneinfo
 from datetime import datetime, timedelta, timezone as tzone
@@ -11,20 +13,22 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.db import connection
+from django.db import connection, connections, transaction
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Sum, TextField, Value
 from django.db.models.functions import Cast, ExtractYear
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
+from django.test import TransactionTestCase
 from django.urls import reverse
 from django.utils import timezone
 
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import Org
 from dash.tags.models import Tag
 from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
-from ureport.polls.models import Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
+from ureport.polls.models import FlowSyncState, Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import (
     backfill_poll_results,
     fetch_old_sites_count,
@@ -176,19 +180,15 @@ class PollTest(UreportTest):
             mock_pull_refresh.assert_called_once_with()
 
     @patch("ureport.polls.tasks.pull_refresh.apply_async")
-    @patch("django.core.cache.cache.set")
-    def test_pull_refresh_task(self, mock_cache_set, mock_pull_refresh):
+    def test_pull_refresh_task(self, mock_pull_refresh):
         tz = zoneinfo.ZoneInfo("Africa/Kigali")
         with patch.object(timezone, "now", return_value=datetime(2015, 9, 4, 3, 4, 5, 0, tzinfo=tz)):
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
             poll1.pull_refresh_task()
 
-            now = timezone.now()
-            mock_cache_set.assert_called_once_with(
-                Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll1.org_id, poll1.pk),
-                datetime_to_json_date(now.replace(tzinfo=tzone.utc)),
-                None,
+            self.assertEqual(
+                FlowSyncState.get_value(poll1.org_id, poll1.flow_uuid, "repull_requested_on"), timezone.now()
             )
 
             mock_pull_refresh.assert_called_once_with((poll1.pk,), queue="sync")
@@ -1337,6 +1337,51 @@ class PollTest(UreportTest):
         poll.delete_poll_results()
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
+
+    def test_delete_poll_results_consumes_only_an_earlier_repull_request(self):
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+        dupe = self.create_poll(self.nigeria, "Poll 1 dupe", "flow-uuid", self.education_nigeria, self.admin)
+
+        def requested_on():
+            return FlowSyncState.get_value(self.nigeria.pk, "flow-uuid", "repull_requested_on")
+
+        dupe.request_full_repull()
+        poll.delete_poll_results()
+        self.assertIsNone(requested_on())
+
+        # one asked for on the duplicate while the delete was under way may have missed some results
+        def request_during_delete(*args, **kwargs):
+            dupe.request_full_repull()
+            return iter(())
+
+        with patch("ureport.utils.chunk_list", side_effect=request_during_delete):
+            poll.delete_poll_results()
+
+        self.assertIsNotNone(requested_on())
+
+    def test_delete_poll_results_in_batches(self):
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+        poll_question = self.create_poll_question(self.admin, poll, "question 1", "step-uuid")
+
+        def result(flow, contact):
+            return PollResult(
+                org=self.nigeria,
+                flow=flow,
+                ruleset=poll_question.flow_result.result_uuid,
+                date=timezone.now(),
+                contact=contact,
+                completed=False,
+            )
+
+        PollResult.objects.bulk_create([result(poll.flow_uuid, f"contact-{i}") for i in range(1001)])
+        PollResult.objects.bulk_create([result("other-flow-uuid", "contact-0")])
+
+        with self.assertLogs("ureport.polls.models", level="INFO") as logs:
+            poll.delete_poll_results()
+
+        self.assertIn(f"Deleted 1001 poll results for poll #{poll.pk}", logs.output[-1])
+        self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
+        self.assertEqual(PollResult.objects.filter(org=self.nigeria, flow="other-flow-uuid").count(), 1)
 
     @patch("ureport.tests.TestBackend.update_poll_questions")
     @patch("dash.orgs.models.Org.get_backend")
@@ -3006,3 +3051,101 @@ class PollsTasksTest(UreportTest):
 
         job = SyncJob.objects.get(org=self.nigeria, job_type="poll-results", scope=self.poll.flow_uuid)
         mock_queue_sync.assert_called_once_with((job.id,), queue="sync")
+
+
+class ContactActivityRaceTest(TransactionTestCase):
+    """
+    Results saved for the same contact by two transactions at once, which both find the contact's months missing
+    from its activities and both insert them
+    """
+
+    def _fixture_teardown(self):
+        # flushing truncates every table at once, which the truncate triggers of the counters can't do, so
+        # only what the test made is removed
+        ContactActivity.objects.filter(org__subdomain="race").delete()
+        ContactActivityCounter.objects.filter(org__subdomain="race").delete()
+        PollResult.objects.filter(org__subdomain="race").delete()
+        Org.objects.filter(subdomain="race").delete()
+        User.objects.filter(username="race").delete()
+
+    def test_concurrent_results_for_a_contact(self):
+        user = User.objects.create_user("race", "race@example.com")
+        org = Org.objects.create(
+            name="race", subdomain="race", timezone=zoneinfo.ZoneInfo("UTC"), created_by=user, modified_by=user
+        )
+        now = timezone.now()
+
+        def save_result(ruleset):
+            PollResult.objects.create(
+                org=org,
+                flow="flow-uuid",
+                ruleset=ruleset,
+                category="Yes",
+                date=now,
+                contact="contact-uuid",
+                completed=False,
+            )
+
+        first_saved, release_first = threading.Event(), threading.Event()
+        errors = []
+
+        def first():
+            try:
+                with transaction.atomic():
+                    save_result("ruleset-1")
+                    first_saved.set()
+                    release_first.wait(10)
+            except Exception as e:
+                errors.append(e)
+            finally:
+                connections.close_all()
+
+        def second():
+            try:
+                with transaction.atomic():
+                    save_result("ruleset-2")
+            except Exception as e:
+                errors.append(e)
+            finally:
+                connections.close_all()
+
+        first_thread = threading.Thread(target=first)
+        second_thread = threading.Thread(target=second)
+        first_thread.start()
+
+        try:
+            self.assertTrue(first_saved.wait(10))
+            second_thread.start()
+
+            # the second insert waits on the first transaction before it can tell whether their rows collide
+            with connection.cursor() as cursor:
+                for _ in range(100):
+                    cursor.execute(
+                        "SELECT count(*) FROM pg_stat_activity WHERE datname = current_database() "
+                        "AND wait_event = 'transactionid' AND pid <> pg_backend_pid()"
+                    )
+                    if cursor.fetchone()[0]:
+                        break
+                    time.sleep(0.1)
+                else:
+                    self.fail("second transaction never waited on the first")
+        finally:
+            # whatever happened, the first transaction ends before the teardown so none of its rows are left behind
+            release_first.set()
+            for thread in (first_thread, second_thread):
+                if thread.ident:  # started
+                    thread.join(10)
+
+        self.assertFalse(first_thread.is_alive() or second_thread.is_alive())
+        self.assertEqual([], errors)
+        self.assertEqual(2, PollResult.objects.filter(org=org, contact="contact-uuid").count())
+        self.assertEqual(12, ContactActivity.objects.filter(org=org, contact="contact-uuid").count())
+
+        # each month counted once, by the transaction that inserted it
+        counts = (
+            ContactActivityCounter.objects.filter(org=org, type=ContactActivityCounter.TYPE_ALL)
+            .values("date")
+            .annotate(Sum("count"))
+        )
+        self.assertEqual(12, counts.count())
+        self.assertEqual({1}, {c["count__sum"] for c in counts})
