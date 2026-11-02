@@ -1,3 +1,6 @@
+## v1.10.5 (2026-11-02)
+ * Have a continuation name the lease of the chunk that enqueued it
+
 ## v1.10.4 (2026-11-02)
  * Let a continuation claim the lease of the chunk that enqueued it
  * Delete all of a prune run's retired results unless a limit is set
