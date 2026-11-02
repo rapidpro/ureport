@@ -117,10 +117,10 @@ RETIRE_FALLBACK_WAIT = timedelta(days=3)
 PRUNE_MAX_REQUESTS = 50
 
 # how many results a prune run may delete before it leaves the rest of the retired flows to
-# the next run, which can spread a backlog of them over nights, e.g. after the retention is
-# shortened. Checked before each flow, so a run can go past it by one flow's results. None
+# the next run, so that a backlog of them, e.g. after the retention is shortened, is spread
+# over nights. Checked before each flow, so a run can go past it by one flow's results. None
 # deletes them all in one run
-PRUNE_MAX_DELETES = None
+PRUNE_MAX_DELETES = 10_000_000
 
 # an age and gender backfill populates the results, then rebuilds what they feed
 STAGE_POPULATE = "populate"
