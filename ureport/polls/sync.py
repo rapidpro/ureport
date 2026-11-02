@@ -1004,6 +1004,11 @@ def prune_poll_results(job):
 
     polls = list(polls.order_by("pk")[:PRUNE_CHUNK_SIZE])
     if not polls:
+        progress = job.progress or {}
+        logger.info(
+            "Finished pruning poll results on org #%d, deleting %d: %s"
+            % (org.pk, progress.get(PRUNE_DELETED, 0), ", ".join("%s=%d" % kv for kv in sorted(progress.items())))
+        )
         return True
 
     for poll in polls:
@@ -1238,6 +1243,10 @@ def _delete_retired_results(org, poll, can_clear, counts):
 
     # the run has deleted as many results as it may, and the next one carries on from here
     if not can_clear:
+        logger.info(
+            "Leaving clearing old results for poll #%d on org #%d to the next run, as this one has reached its "
+            "limit of %d deleted results" % (poll.pk, org.pk, PRUNE_MAX_DELETES)
+        )
         return PRUNE_DEFERRED_CLEARING
 
     # a retirement still asked for is one whose rebuild didn't replace all of the counts, and

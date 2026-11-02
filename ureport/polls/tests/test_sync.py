@@ -1974,16 +1974,27 @@ class PrunePollResultsTest(PollSyncTestBase):
         self.add_result("uuid-1", contact="contact-2")
         self.add_result("uuid-2", contact="contact-1")
 
-        with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
+        with (
+            patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild,
+            self.assertLogs("ureport.polls.sync", level="INFO") as logs,
+        ):
+            run_task(prune_poll_results, self.job.id)
             run_task(prune_poll_results, self.job.id)
             run_task(prune_poll_results, self.job.id)
 
-        # the second flow's results are left to the next run
+        # the second flow's results are left to the next run, which the end of this one says
+        self.assertTrue(any("to the next run" in line and f"poll #{self.second.pk}" in line for line in logs.output))
+        self.assertIn(
+            "Finished pruning poll results on org #%d, deleting 2: cleared=1, deferred_clearing=1, "
+            "deleted_results=2, requested=1, skipped_retired=1" % self.nigeria.pk,
+            logs.output[-1],
+        )
         mock_rebuild.assert_not_called()
         self.assertEqual(self.results("uuid-1"), 0)
         self.assertEqual(self.results("uuid-2"), 1)
         self.assertJobState(
             self.job,
+            status=SyncJob.STATUS_COMPLETE,
             progress={"cleared": 1, "deleted_results": 2, "skipped_retired": 1, "deferred_clearing": 1, "requested": 1},
         )
 
