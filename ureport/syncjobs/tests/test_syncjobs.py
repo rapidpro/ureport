@@ -109,6 +109,24 @@ class SyncJobTest(SyncJobTestMixin, TestCase):
         self.assertEqual(resumed.progress, {"chunks": 1})
         self.assertEqual(resumed.cursor, {"after": "t1"})
 
+    def test_claim_handed_off_lease(self):
+        self.job.claim("worker-1")
+        self.job.checkpoint(cursor={"after": "t1"}, progress={"chunks": 1})
+
+        # only the lease the continuation names can be taken while live
+        self.assertIsNone(SyncJob.objects.get(id=self.job.id).claim("worker-2", handoff_from="worker-0"))
+
+        continuation = SyncJob.objects.get(id=self.job.id)
+        resumed = continuation.claim("worker-2", handoff_from="worker-1")
+        self.assertIsNotNone(resumed)
+        self.assertEqual(resumed.lease_owner, "worker-2")
+        self.assertEqual(resumed.cursor, {"after": "t1"})
+        self.assertFalse(resumed.new_run)
+
+        # the release that lands late leaves the new holder's lease alone
+        self.assertFalse(self.job.release_lease())
+        self.assertJobState(self.job, lease_owner="worker-2")
+
     def test_claim_complete_job_starts_new_run(self):
         self.job.claim("worker-1")
         self.job.checkpoint(cursor={"after": "t1"}, progress={"chunks": 5})
@@ -398,6 +416,36 @@ class ChunkedTaskTest(SyncJobTestMixin, TestCase):
 
         retry.assert_called_once_with(countdown=LEASE_RETRY_GRACE, max_retries=2)
         self.assertEqual(ran, [0])
+
+    def test_continuation_naming_unreleased_lease_runs_at_once(self):
+        task, ran = make_task(chunks_to_run=3)
+
+        # the chunk's release hasn't landed by the time its continuation is picked up
+        with patch.object(SyncJob, "release_lease"):
+            run_task(task, self.job.id)
+
+        args, kwargs = (self.job.id,), dict(handoff_from=reload(self.job).lease_owner)
+
+        with (
+            patch.object(task, "retry", side_effect=Retry()) as retry,
+            patch.object(task, "apply_async") as mock_continue,
+        ):
+            task(*args, **kwargs)
+
+        retry.assert_not_called()
+        self.assertEqual(ran, [0, 1])
+        mock_continue.assert_called_once()
+
+        # the continuation releases the lease it took over as any chunk does
+        self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, lease_owner=None, cursor={"chunk": 2})
+
+        # any other copy of that continuation still waits out whoever holds the lease
+        hold_lease(self.job, owner="worker-2")
+        with patch.object(task, "retry", side_effect=Retry()) as retry, self.assertRaises(Retry):
+            task(*args, **kwargs)
+
+        self.assertGreater(retry.call_args.kwargs["countdown"], 590)
+        self.assertEqual(ran, [0, 1])
 
     def test_failed_claim_of_ended_run_skips(self):
         task, ran = make_task(chunks_to_run=2)

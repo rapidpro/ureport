@@ -139,12 +139,17 @@ class SyncJob(models.Model):
         job, _ = cls.objects.get_or_create(org=org, job_type=job_type, scope=scope)
         return job
 
-    def claim(self, owner, lease_seconds=DEFAULT_LEASE_SECONDS):
+    def claim(self, owner, lease_seconds=DEFAULT_LEASE_SECONDS, handoff_from=None):
         """
         Attempts to take this job's lease with a single atomic conditional update. The gate
         is purely the lease: a null lease (never started, released between chunks, or
         released by completion/failure) or an expired lease (worker died) is claimable, a
         live lease is not - including the lease deliberately held through finalization.
+        The one live lease that is claimable is handoff_from's: a continuation names the
+        chunk that enqueued it, which has nothing left to do but release, so taking the
+        lease from it can't race its work - and its release, being ownership guarded, then
+        does nothing.
+
         Claiming a job whose previous run finished (or never started) begins a new run;
         claiming a running or failed job resumes the interrupted run. Returns the refreshed
         job - with new_run saying which of those it did - if the claim succeeded, None
@@ -153,10 +158,14 @@ class SyncJob(models.Model):
         now = timezone.now()
         resuming = Q(status__in=(self.STATUS_RUNNING, self.STATUS_FAILED))
 
+        claimable = Q(lease_expires_on__lt=now) | Q(lease_expires_on__isnull=True)
+        if handoff_from:
+            claimable |= Q(lease_owner=handoff_from)
+
         updated = (
             SyncJob.objects.filter(id=self.id)
             .exclude(status=self.STATUS_PAUSED)
-            .filter(Q(lease_expires_on__lt=now) | Q(lease_expires_on__isnull=True))
+            .filter(claimable)
             .update(
                 status=self.STATUS_RUNNING,
                 lease_owner=owner,
