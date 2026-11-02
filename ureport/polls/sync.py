@@ -116,10 +116,11 @@ RETIRE_FALLBACK_WAIT = timedelta(days=3)
 # rather than queueing a sync of every one at once
 PRUNE_MAX_REQUESTS = 50
 
-# how many results a prune run deletes before it leaves the rest of the retired flows to the
-# next run, so that a backlog of them, e.g. after the retention is shortened, is spread over
-# nights too. Checked before each flow, so a run can go past it by one flow's results
-PRUNE_MAX_DELETES = 10_000_000
+# how many results a prune run may delete before it leaves the rest of the retired flows to
+# the next run, which can spread a backlog of them over nights, e.g. after the retention is
+# shortened. Checked before each flow, so a run can go past it by one flow's results. None
+# deletes them all in one run
+PRUNE_MAX_DELETES = None
 
 # an age and gender backfill populates the results, then rebuilds what they feed
 STAGE_POPULATE = "populate"
@@ -972,7 +973,7 @@ def prune_poll_results(job):
     retired once none of the polls syncing it is within the retention period, nor the main
     poll. Polls whose flow is still being synced are stepped over rather than waited for,
     and reconsidered by a later run, as are retired flows once the run has deleted
-    PRUNE_MAX_DELETES results.
+    PRUNE_MAX_DELETES results, if that is set.
     """
     from ureport.polls.models import Poll, PollResult
 
@@ -1014,7 +1015,7 @@ def prune_poll_results(job):
     for poll in polls:
         progress = job.progress or {}
         can_request = progress.get(PRUNE_REQUESTED, 0) < PRUNE_MAX_REQUESTS
-        can_clear = progress.get(PRUNE_DELETED, 0) < PRUNE_MAX_DELETES
+        can_clear = PRUNE_MAX_DELETES is None or progress.get(PRUNE_DELETED, 0) < PRUNE_MAX_DELETES
         counts = {}
         outcome = _prune_poll(org, poll, can_request, can_clear, counts)
 
