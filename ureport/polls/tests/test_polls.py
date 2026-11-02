@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import threading
+import time
 import uuid
 import zoneinfo
 from datetime import datetime, timedelta, timezone as tzone
@@ -11,16 +13,18 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.db import connection
+from django.db import connection, connections, transaction
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Sum, TextField, Value
 from django.db.models.functions import Cast, ExtractYear
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
+from django.test import TransactionTestCase
 from django.urls import reverse
 from django.utils import timezone
 
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import Org
 from dash.tags.models import Tag
 from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
@@ -3030,3 +3034,101 @@ class PollsTasksTest(UreportTest):
 
         job = SyncJob.objects.get(org=self.nigeria, job_type="poll-results", scope=self.poll.flow_uuid)
         mock_queue_sync.assert_called_once_with((job.id,), queue="sync")
+
+
+class ContactActivityRaceTest(TransactionTestCase):
+    """
+    Results saved for the same contact by two transactions at once, which both find the contact's months missing
+    from its activities and both insert them
+    """
+
+    def _fixture_teardown(self):
+        # flushing truncates every table at once, which the truncate triggers of the counters can't do, so
+        # only what the test made is removed
+        ContactActivity.objects.filter(org__subdomain="race").delete()
+        ContactActivityCounter.objects.filter(org__subdomain="race").delete()
+        PollResult.objects.filter(org__subdomain="race").delete()
+        Org.objects.filter(subdomain="race").delete()
+        User.objects.filter(username="race").delete()
+
+    def test_concurrent_results_for_a_contact(self):
+        user = User.objects.create_user("race", "race@example.com")
+        org = Org.objects.create(
+            name="race", subdomain="race", timezone=zoneinfo.ZoneInfo("UTC"), created_by=user, modified_by=user
+        )
+        now = timezone.now()
+
+        def save_result(ruleset):
+            PollResult.objects.create(
+                org=org,
+                flow="flow-uuid",
+                ruleset=ruleset,
+                category="Yes",
+                date=now,
+                contact="contact-uuid",
+                completed=False,
+            )
+
+        first_saved, release_first = threading.Event(), threading.Event()
+        errors = []
+
+        def first():
+            try:
+                with transaction.atomic():
+                    save_result("ruleset-1")
+                    first_saved.set()
+                    release_first.wait(10)
+            except Exception as e:
+                errors.append(e)
+            finally:
+                connections.close_all()
+
+        def second():
+            try:
+                with transaction.atomic():
+                    save_result("ruleset-2")
+            except Exception as e:
+                errors.append(e)
+            finally:
+                connections.close_all()
+
+        first_thread = threading.Thread(target=first)
+        second_thread = threading.Thread(target=second)
+        first_thread.start()
+
+        try:
+            self.assertTrue(first_saved.wait(10))
+            second_thread.start()
+
+            # the second insert waits on the first transaction before it can tell whether their rows collide
+            with connection.cursor() as cursor:
+                for _ in range(100):
+                    cursor.execute(
+                        "SELECT count(*) FROM pg_stat_activity WHERE datname = current_database() "
+                        "AND wait_event = 'transactionid' AND pid <> pg_backend_pid()"
+                    )
+                    if cursor.fetchone()[0]:
+                        break
+                    time.sleep(0.1)
+                else:
+                    self.fail("second transaction never waited on the first")
+        finally:
+            # whatever happened, the first transaction ends before the teardown so none of its rows are left behind
+            release_first.set()
+            for thread in (first_thread, second_thread):
+                if thread.ident:  # started
+                    thread.join(10)
+
+        self.assertFalse(first_thread.is_alive() or second_thread.is_alive())
+        self.assertEqual([], errors)
+        self.assertEqual(2, PollResult.objects.filter(org=org, contact="contact-uuid").count())
+        self.assertEqual(12, ContactActivity.objects.filter(org=org, contact="contact-uuid").count())
+
+        # each month counted once, by the transaction that inserted it
+        counts = (
+            ContactActivityCounter.objects.filter(org=org, type=ContactActivityCounter.TYPE_ALL)
+            .values("date")
+            .annotate(Sum("count"))
+        )
+        self.assertEqual(12, counts.count())
+        self.assertEqual({1}, {c["count__sum"] for c in counts})
