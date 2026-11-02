@@ -1,3 +1,9 @@
+## v1.10.4 (2026-11-02)
+ * Let a continuation claim the lease of the chunk that enqueued it
+ * Delete all of a prune run's retired results unless a limit is set
+ * Log the progress of deleting a poll's results and of each prune run
+ * Keep the results of old polls for 90 days instead of a year
+
 ## v1.10.3 (2026-11-02)
  * Read active users charts from their sketches
  * Round active users to rolled up units, with under 1,000 rounded to the nearest 10 and under 10k to 2 significant figures, when hovering over their charts
