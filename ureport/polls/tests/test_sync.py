@@ -4,7 +4,7 @@ import importlib
 from datetime import datetime, timedelta, timezone as tzone
 from io import StringIO
 
-from mock import patch
+from mock import ANY, patch
 from temba_client.v2.types import Flow as TembaFlow
 
 from django.apps import apps
@@ -180,7 +180,7 @@ class SyncPollResultsTest(PollSyncTestBase):
             mock_chunk.side_effect = chunks
 
             mock_continue = run_task(sync_poll_results, self.job.id)
-            mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=None)
+            mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="sync", countdown=None)
 
             self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, cursor={"after": "t1", "resume": "c1"})
 
@@ -201,7 +201,9 @@ class SyncPollResultsTest(PollSyncTestBase):
             )
             mock_continue = run_task(sync_poll_results, self.job.id)
 
-        mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=RATE_LIMITED_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue="sync", countdown=RATE_LIMITED_BACKOFF
+        )
         self.assertJobState(self.job, cursor={"after": "t1", "resume": "c1"})
 
     def test_rebuilds_counts_periodically(self):
@@ -394,7 +396,9 @@ class SyncPollResultsTest(PollSyncTestBase):
             # the pull is done, but ending the run would drop the reset its next run knows nothing of
             mock_continue = run_task(sync_poll_results, self.job.id)
 
-            mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=ARCHIVES_RESET_BACKOFF)
+            mock_continue.assert_called_once_with(
+                (self.job.id,), dict(handoff_from=ANY), queue="sync", countdown=ARCHIVES_RESET_BACKOFF
+            )
             self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING)
             self.assertEqual(self.get_job().progress[ARCHIVES_RESET_PENDING], 1)
 
@@ -520,7 +524,9 @@ class SyncPollArchivesTest(PollSyncTestBase):
 
             with patch.object(Poll, "rebuild_poll_results_counts") as mock_rebuild:
                 mock_continue = run_task(sync_poll_archives, self.job.id)
-                mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=None)
+                mock_continue.assert_called_once_with(
+                    (self.job.id,), dict(handoff_from=ANY), queue="sync", countdown=None
+                )
 
                 run_task(sync_poll_archives, self.job.id)
 
@@ -553,7 +559,9 @@ class SyncPollArchivesTest(PollSyncTestBase):
             )
             mock_continue = run_task(sync_poll_archives, self.job.id)
 
-        mock_continue.assert_called_once_with((self.job.id,), queue="sync", countdown=RATE_LIMITED_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue="sync", countdown=RATE_LIMITED_BACKOFF
+        )
 
     def test_a_new_run_retries_the_archives_it_failed_to_pull(self):
         failed = {"2026-03-03|daily": 1, "2026-02-01|monthly": ARCHIVE_ATTEMPTS}
@@ -739,7 +747,9 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
             mock_continue = run_task(sync_poll_archives_batch, job.id)
 
             mock_chunk.assert_not_called()
-            mock_continue.assert_called_once_with((job.id,), queue="sync", countdown=ARCHIVES_BATCH_BUSY_BACKOFF)
+            mock_continue.assert_called_once_with(
+                (job.id,), dict(handoff_from=ANY), queue="sync", countdown=ARCHIVES_BATCH_BUSY_BACKOFF
+            )
 
             # once that chunk is over, the per flow job ends itself rather than write on
             drop_lease(busy)
@@ -892,7 +902,9 @@ class SyncPollArchivesBatchTest(PollSyncTestBase):
         # the batch waits for the flow's results sync to delete its results
         mock_chunk, mock_continue = self.walk(job, ChunkResult(counts={}, cursor={}))
         mock_chunk.assert_not_called()
-        mock_continue.assert_called_once_with((job.id,), queue="sync", countdown=ARCHIVES_BATCH_BUSY_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (job.id,), dict(handoff_from=ANY), queue="sync", countdown=ARCHIVES_BATCH_BUSY_BACKOFF
+        )
 
         with (
             patch.object(sync_poll_archives, "apply_async") as mock_archives_queue,
@@ -1298,7 +1310,7 @@ class RebuildPollCountsTest(PollSyncTestBase):
         rebuilt, mock_continue = self.rebuild()
 
         self.assertEqual(rebuilt, [poll.pk for poll in self.polls[:5]])
-        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="slow", countdown=None)
 
         self.assertJobState(
             self.job,
@@ -1551,7 +1563,7 @@ class PrunePollResultsTest(PollSyncTestBase):
         mock_continue = self.prune()
 
         # the first two polls share a flow, which is only asked once
-        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="slow", countdown=None)
         self.assertJobState(
             self.job, cursor={"after_pk": self.second.pk}, progress={"requested": 2, "skipped_pulling": 1}
         )
@@ -2419,7 +2431,7 @@ class BackfillAgeGenderTest(PollSyncTestBase):
         # two batches of two contacts, the org's own, and nothing rebuilt yet
         self.assertEqual(populated, [self.contact_ids(0, 1), self.contact_ids(2, 3)])
         self.assertEqual(rebuilt, [])
-        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="slow", countdown=None)
 
         self.assertJobState(
             self.job,

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django_valkey import get_valkey_connection
-from mock import Mock, call, patch
+from mock import ANY, Mock, call, patch
 
 from django.core.cache import cache
 from django.db import connection
@@ -118,7 +118,9 @@ class RebuildReportersCountsTest(MaintenanceTest):
         with held_lock(TaskState.get_lock_key(self.nigeria, PULL_JOB_TYPE)):
             mock_continue = self._run()
 
-        mock_continue.assert_called_once_with((self.job.id,), queue=QUEUE, countdown=LOCK_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue=QUEUE, countdown=LOCK_BACKOFF
+        )
         mock_recalculate.assert_not_called()
 
         # a rebuild spinning on a busy org is visible in its progress
@@ -137,7 +139,9 @@ class RebuildReportersCountsTest(MaintenanceTest):
 
         mock_continue = self._run()
 
-        mock_continue.assert_called_once_with((self.job.id,), queue=QUEUE, countdown=LOCK_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue=QUEUE, countdown=LOCK_BACKOFF
+        )
         mock_update_counts.assert_not_called()
         self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, progress={"lock_backoffs": 1})
 
@@ -167,7 +171,9 @@ class RebuildReportersCountsTest(MaintenanceTest):
 
         # the worker that reclaimed the job backs off instead of rebuilding the same counters
         mock_recalculate.assert_not_called()
-        mock_continue.assert_called_once_with((self.job.id,), queue=QUEUE, countdown=LOCK_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue=QUEUE, countdown=LOCK_BACKOFF
+        )
 
     def test_shim_enqueues_a_job_per_active_org(self):
         with patch.object(rebuild_reporters_counts, "apply_async") as mock_enqueue:
@@ -266,7 +272,7 @@ class SchemesBackfillTest(MaintenanceTest):
             cursor={"max_id": self.contacts[3].id},
             progress={"chunks": 2, "contacts": 4},
         )
-        mock_continue.assert_called_once_with((self.job.id,), queue=QUEUE, countdown=None)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue=QUEUE, countdown=None)
 
         self.assertEqual(
             self._activity_schemes(),

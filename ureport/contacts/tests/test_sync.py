@@ -4,7 +4,7 @@ import json
 from datetime import timedelta
 
 from django_valkey import get_valkey_connection
-from mock import patch
+from mock import ANY, patch
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -82,7 +82,7 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         self.assertEqual(job.cursor["stage"], "boundaries")
         self.assertIsNone(job.cursor["since"])
         until = job.cursor["until"]
-        mock_continue.assert_called_once_with((self.job.id,), queue="celery", countdown=None)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="celery", countdown=None)
         self.mock_pull_boundaries.assert_not_called()
 
         # boundaries
@@ -305,7 +305,9 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         self._run(times=2)  # fields, boundaries
         mock_continue = self._run()
 
-        mock_continue.assert_called_once_with((self.job.id,), queue="celery", countdown=RATE_LIMIT_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue="celery", countdown=RATE_LIMIT_BACKOFF
+        )
 
         # the chunk's progress is kept so the backoff costs nothing
         job = SyncJob.objects.get(id=self.job.id)
@@ -316,7 +318,9 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         with held_lock(TaskState.get_lock_key(self.nigeria, JOB_TYPE)):
             mock_continue = self._run()
 
-        mock_continue.assert_called_once_with((self.job.id,), queue="celery", countdown=LOCK_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue="celery", countdown=LOCK_BACKOFF
+        )
         self.mock_pull_fields.assert_not_called()
         self.assertJobState(self.job, cursor={})
 

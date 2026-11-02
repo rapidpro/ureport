@@ -1,6 +1,6 @@
 import uuid
 from datetime import timedelta
-from unittest.mock import patch
+from unittest.mock import ANY, patch
 
 from celery.exceptions import Retry
 
@@ -372,7 +372,7 @@ class ChunkedTaskTest(SyncJobTestMixin, TestCase):
         with patch.object(task, "apply_async") as mock_continue:
             # each continuation is enqueued, not executed - drive them by hand as a worker would
             task(self.job.id)
-            mock_continue.assert_called_once_with((self.job.id,), queue="testq", countdown=None)
+            mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="testq", countdown=None)
             task(self.job.id)
             task(self.job.id)
             self.assertEqual(mock_continue.call_count, 2)
@@ -422,9 +422,11 @@ class ChunkedTaskTest(SyncJobTestMixin, TestCase):
 
         # the chunk's release hasn't landed by the time its continuation is picked up
         with patch.object(SyncJob, "release_lease"):
-            run_task(task, self.job.id)
+            mock_continue = run_task(task, self.job.id)
 
-        args, kwargs = (self.job.id,), dict(handoff_from=reload(self.job).lease_owner)
+        # the continuation names the lease it was enqueued under
+        args, kwargs = mock_continue.call_args.args
+        self.assertEqual(kwargs, dict(handoff_from=reload(self.job).lease_owner))
 
         with (
             patch.object(task, "retry", side_effect=Retry()) as retry,
@@ -562,7 +564,7 @@ class ChunkedTaskTest(SyncJobTestMixin, TestCase):
 
         with patch.object(sync_backoff, "apply_async") as mock_continue:
             sync_backoff(self.job.id)
-            mock_continue.assert_called_once_with((self.job.id,), queue="testq", countdown=300)
+            mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="testq", countdown=300)
             sync_backoff(self.job.id)
 
         self.assertEqual(delayed, [True])
@@ -725,7 +727,7 @@ class ChunkedTaskStateTest(SyncJobTestMixin, TestCase):
 
         mock_continue = run_task(sync_blocked, self.job.id)
 
-        mock_continue.assert_called_once_with((self.job.id,), queue="testq", countdown=300)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="testq", countdown=300)
         self.assertJobState(self.job, progress={"lock_backoffs": 1}, cursor={})
 
         run_task(sync_blocked, self.job.id)

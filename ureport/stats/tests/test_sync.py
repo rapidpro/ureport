@@ -2,7 +2,7 @@
 
 import math
 from datetime import timedelta
-from unittest.mock import call, patch
+from unittest.mock import ANY, call, patch
 
 from django.conf import settings
 from django.utils import timezone
@@ -62,7 +62,7 @@ class RefreshEngagementTest(SyncJobTestMixin, UreportTest):
             cursor={"combo_index": ENGAGEMENT_BATCH_SIZE, "combo_count": len(combos)},
             progress={"chunks": 1, "combos": ENGAGEMENT_BATCH_SIZE},
         )
-        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="slow", countdown=None)
 
         # the metric leads the call, the cursor position doesn't, and each call covers every time filter
         self.assertEqual(
@@ -207,7 +207,7 @@ class PruneContactActivitiesTest(SyncJobTestMixin, UreportTest):
             mock_continue = run_task(prune_contact_activities, self.job.id)
 
             self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, progress={"chunks": 1, "deleted": 4})
-            mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+            mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="slow", countdown=None)
 
             # the chunk that runs out of expired activities is the one that finishes the run
             run_task(prune_contact_activities, self.job.id)
@@ -282,7 +282,7 @@ class RebuildContactActivityCountsTest(SyncJobTestMixin, UreportTest):
         )
         mock_recalculate.assert_called_once_with(self.nigeria)
         self.mock_refresh.assert_not_called()
-        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=None)
+        mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue="slow", countdown=None)
 
         # then the engagement data it feeds, a batch at a time
         with patch("ureport.stats.sync.REBUILD_BATCH_SIZE", 3):
@@ -324,7 +324,9 @@ class RebuildContactActivityCountsTest(SyncJobTestMixin, UreportTest):
             mock_continue = run_task(rebuild_contact_activity_counts, self.job.id)
 
         mock_recalculate.assert_not_called()
-        mock_continue.assert_called_once_with((self.job.id,), queue="slow", countdown=LOCK_BACKOFF)
+        mock_continue.assert_called_once_with(
+            (self.job.id,), dict(handoff_from=ANY), queue="slow", countdown=LOCK_BACKOFF
+        )
 
         self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING, cursor={}, progress={"lock_backoffs": 1})
 
