@@ -1,3 +1,7 @@
+## v1.10.1 (2026-11-02)
+ * Retry a continuation whose claim lost out to a lease that has since been released
+ * Stream a poll's result ids when deleting them rather than loading them all
+
 ## v1.10.0 (2026-11-01)
  * Add superuser pages comparing active users charts with their sketches, ranking orgs whose sketches alone are large and matching series as the compare command does
 
