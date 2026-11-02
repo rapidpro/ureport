@@ -399,6 +399,20 @@ class RapidProBackend(BaseBackend):
             all_flows[flow.uuid] = flow_json
         return all_flows
 
+    def fetch_flow_runs(self, org, flow_uuids):
+        # the flows endpoint filters on a single UUID, so one walk of all the org's flows, archived ones included,
+        # covers any number of them
+        client = self._get_client(org, 2)
+        flow_uuids = set(flow_uuids)
+
+        flow_runs = dict()
+        for flow in client.get_flows().all(retry_on_rate_exceed=True):
+            if flow.uuid in flow_uuids:
+                runs = flow.runs
+                statuses = (runs.active, runs.waiting, runs.completed, runs.interrupted, runs.expired, runs.failed)
+                flow_runs[flow.uuid] = dict(runs=sum(n or 0 for n in statuses), completed=runs.completed or 0)
+        return flow_runs
+
     def get_definition(self, org, flow_uuid):
         client = self._get_client(org, 2)
         export_definition = client.get_definitions(flows=(flow_uuid,))

@@ -315,6 +315,10 @@ class FLOIPBackendTest(UreportTest):
 
         self.assertEqual(self.backend.fetch_flows(self.nigeria), fetched_flows)
 
+    def test_fetch_flow_runs(self):
+        # the flow results packages don't say how many runs a flow has
+        self.assertIsNone(self.backend.fetch_flow_runs(self.nigeria, ["2a754346-a0dc-4176-a8b9-0f978f6b04c7"]))
+
     @patch("requests.request")
     def test_get_definition(self, mock_get):
         response_contents = """

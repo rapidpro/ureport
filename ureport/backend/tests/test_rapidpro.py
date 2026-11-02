@@ -14,6 +14,7 @@ from temba_client.v2.types import (
     Boundary as TembaBoundary,
     Contact as TembaContact,
     Field as TembaField,
+    Flow as TembaFlow,
     ObjectRef,
     Run as TembaRun,
 )
@@ -1279,6 +1280,31 @@ class RapidProBackendTest(UreportTest):
         )
 
         self.assertFalse(Contact.objects.filter(uuid="C-002", is_active=True))
+
+    @patch("dash.orgs.models.TembaClient.get_flows")
+    def test_fetch_flow_runs(self, mock_get_flows):
+        def flow(uuid, **runs):
+            counts = dict(active=0, waiting=0, completed=0, interrupted=0, expired=0, failed=0)
+            counts.update(runs)
+            return TembaFlow.create(uuid=uuid, runs=TembaFlow.Runs.create(**counts))
+
+        # a page of the org's flows, and another with an archived one, and runs from a server too old to have some
+        mock_get_flows.return_value = MockClientQuery(
+            [flow("flow-1", active=1, completed=5, expired=2, waiting=1, failed=1), flow("flow-other", completed=9)],
+            [flow("flow-2"), TembaFlow.create(uuid="flow-3", runs=TembaFlow.Runs.create(completed=4, expired=1))],
+        )
+
+        self.assertEqual(
+            self.backend.fetch_flow_runs(self.nigeria, ["flow-1", "flow-2", "flow-3", "flow-deleted"]),
+            {
+                "flow-1": {"runs": 10, "completed": 5},
+                "flow-2": {"runs": 0, "completed": 0},
+                "flow-3": {"runs": 5, "completed": 4},
+            },
+        )
+
+        # all of the org's flows, as the endpoint only filters on one
+        mock_get_flows.assert_called_once_with()
 
     @patch("dash.orgs.models.TembaClient.get_fields")
     def test_pull_fields(self, mock_get_fields):

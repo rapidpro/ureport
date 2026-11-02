@@ -4,6 +4,7 @@ from datetime import timedelta, timezone as tzone
 from io import StringIO
 
 from mock import patch
+from temba_client.v2.types import Flow as TembaFlow
 
 from django.core.cache import cache
 from django.core.management import call_command
@@ -12,6 +13,7 @@ from django.utils import timezone
 
 from dash.categories.models import Category
 from dash.orgs.models import Org, TaskState
+from dash.test import MockClientQuery
 from ureport.backend import ChunkResult
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.contacts.models import Contact
@@ -2218,6 +2220,99 @@ class RefreshReusedFlowsTest(PollSyncTestBase):
         # one poll per flow, the newest
         self.assertEqual([poll.pk for poll in mock_repulls.call_args[0][0]], [dupe.pk, poll2.pk])
         self.assertIn("Scheduled a full pull of 2 flows", out.getvalue())
+
+    @patch("dash.orgs.models.TembaClient.get_flows")
+    def test_checks_the_runs_of_the_listed_flows_in_the_backend(self, mock_get_flows):
+        def zeroed_poll(title, flow_uuid):
+            poll = self.create_poll(self.nigeria, title, flow_uuid, self.education_nigeria, self.admin)
+            Poll.objects.filter(id=poll.id).update(stopped_syncing=True)
+            self.create_poll_question(self.admin, poll, "Question", "ruleset-%s" % flow_uuid)
+            return poll
+
+        self.create_poll_question(self.admin, self.poll, "Question", "ruleset-uuid-1")
+        Poll.objects.filter(id=self.poll.id).update(stopped_syncing=True)
+        no_runs = zeroed_poll("Poll 2 without runs", "uuid-2")
+        deleted = zeroed_poll("Poll 3 deleted", "uuid-3")
+
+        runs = dict(active=1, waiting=0, completed=8, interrupted=1, expired=2, failed=0)
+        no_run = dict(active=0, waiting=0, completed=0, interrupted=0, expired=0, failed=0)
+        mock_get_flows.return_value = MockClientQuery(
+            [
+                TembaFlow.create(uuid="uuid-1", runs=TembaFlow.Runs.create(**runs)),
+                TembaFlow.create(uuid="uuid-2", runs=TembaFlow.Runs.create(**no_run)),
+            ]
+        )
+
+        out = StringIO()
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
+            call_command("refresh_reused_flows", "--zeroed", "--check", stdout=out)
+
+        # read only, with one walk of the org's flows for all of them
+        mock_repulls.assert_not_called()
+        mock_get_flows.assert_called_once_with()
+
+        self.assertIn(
+            "flow uuid-1 (poll #%d Poll 1): 12 runs in the backend (8 completed), no results stored" % self.poll.pk,
+            out.getvalue(),
+        )
+        self.assertIn(
+            "flow uuid-2 (poll #%d Poll 2 without runs): no runs in the backend, no results stored" % no_runs.pk,
+            out.getvalue(),
+        )
+        self.assertIn(
+            "flow uuid-3 (poll #%d Poll 3 deleted): not found in the backend, no results stored" % deleted.pk,
+            out.getvalue(),
+        )
+        self.assertIn("Found 3 flows, 1 with runs in the backend but no results stored", out.getvalue())
+
+        # with --refresh, only the flow the backend has runs for is pulled again
+        out = StringIO()
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
+            call_command("refresh_reused_flows", "--zeroed", "--check", "--refresh", stdout=out)
+
+        self.assertEqual([poll.pk for poll in mock_repulls.call_args[0][0]], [self.poll.pk])
+        self.assertIn("Scheduled a full pull of 1 flows", out.getvalue())
+
+        # a backend that can't tell, or can't be asked, leaves the runs unknown and nothing pulled again
+        for fetched in (dict(return_value=None), dict(side_effect=Exception("boom"))):
+            out, err = StringIO(), StringIO()
+            with (
+                patch.object(RapidProBackend, "fetch_flow_runs", **fetched),
+                patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls,
+                patch("ureport.polls.management.commands.refresh_reused_flows.logger"),
+            ):
+                call_command("refresh_reused_flows", "--zeroed", "--check", "--refresh", stdout=out, stderr=err)
+
+            self.assertIn("flow uuid-1 (poll #%d Poll 1): runs unknown" % self.poll.pk, out.getvalue())
+            self.assertIn("Found 3 flows, 0 with runs in the backend but no results stored", out.getvalue())
+            self.assertEqual(mock_repulls.call_args[0][0], [])
+
+        self.assertIn("Couldn't fetch the flows of org #%d from rapidpro" % self.nigeria.pk, err.getvalue())
+
+        # the flows of the other listings may have results stored
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow="uuid-1",
+            ruleset="ruleset-uuid-1",
+            contact="contact-1",
+            date=timezone.now(),
+            completed=False,
+        )
+
+        out = StringIO()
+        call_command("refresh_reused_flows", "--poll", str(self.poll.pk), "--check", stdout=out)
+
+        self.assertIn("12 runs in the backend (8 completed), results stored", out.getvalue())
+        self.assertIn("Found 1 flows, 0 with runs in the backend but no results stored", out.getvalue())
+
+        # with --refresh the limit is on the flows pulled again, so flows without runs listed first can't fill it
+        PollResult.objects.filter(flow="uuid-1").delete()
+        zeroed_poll("Poll 0 deleted", "uuid-0")
+
+        with patch("ureport.polls.management.commands.refresh_reused_flows.queue_full_repulls") as mock_repulls:
+            call_command("refresh_reused_flows", "--zeroed", "--check", "--refresh", "--limit", "1", stdout=StringIO())
+
+        self.assertEqual([poll.pk for poll in mock_repulls.call_args[0][0]], [self.poll.pk])
 
 
 @patch("ureport.polls.sync.POPULATE_BATCH_SIZE", 2)
