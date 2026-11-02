@@ -1,3 +1,8 @@
+## v1.10.3 (2026-11-02)
+ * Read active users charts from their sketches
+ * Round active users to rolled up units, with under 1,000 rounded to the nearest 10 and under 10k to 2 significant figures, when hovering over their charts
+ * Keep active users sketches from being evicted by removing their expiry times
+
 ## v1.10.2 (2026-11-02)
  * Keep pending flow retirements and full re-pulls in the database rather than the cache
  * Leave a contact activity month to whichever transaction inserted it first
