@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
             "orgs",
             "0033_rename_orgs_orgbac_org_id_607508_idx_orgs_orgbac_org_slug_idx_and_more",
         ),
-        ("polls", "0081_install_triggers"),
+        ("polls", "0082_install_triggers"),
     ]
 
     operations = [

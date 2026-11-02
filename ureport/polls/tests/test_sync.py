@@ -2714,7 +2714,7 @@ class CopyCachedStateMigrationTest(PollSyncTestBase):
     def setUp(self):
         super().setUp()
 
-        self.migration = importlib.import_module("ureport.polls.migrations.0082_flowsyncstate")
+        self.migration = importlib.import_module("ureport.polls.migrations.0083_flowsyncstate")
 
     def set_keys(self, keys):
         for key, value in keys.items():
