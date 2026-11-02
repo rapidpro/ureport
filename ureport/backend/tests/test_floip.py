@@ -3,6 +3,8 @@
 from mock import patch
 from temba_client.v2.types import Contact as TembaContact, ObjectRef
 
+from django.core.cache import cache
+
 from dash.categories.models import Category
 from dash.test import MockClientQuery
 from dash.utils.sync import SyncOutcome
@@ -1173,3 +1175,30 @@ class FLOIPBackendTest(UreportTest):
         self.assertEqual(poll_result.flow, "2a754346-a0dc-4176-a8b9-0f978f6b04c7")
         self.assertEqual(poll_result.category, "Man")
         self.assertEqual(poll_result.text, "Man")
+
+    @patch("requests.request")
+    def test_pull_results_leaves_a_full_repull_delete_to_the_sync(self, mock_request):
+        mock_request.return_value = MockResponse(
+            200,
+            '{"data": {"attributes": {"responses": []}, "relationships": {"links": {"next": null}}}}',
+        )
+
+        poll = self.create_poll(
+            self.nigeria, "Flow 1", "2a754346-a0dc-4176-a8b9-0f978f6b04c7", self.education_nigeria, self.admin
+        )
+        result = PollResult.objects.create(
+            org=self.nigeria, flow=poll.flow_uuid, ruleset="q_1522956745304_75", contact="C-001", completed=False
+        )
+
+        last_pull = "2026-10-01T00:00:00.000000Z"
+        cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid), last_pull, None)
+
+        # e.g. a sync held the delete back while an archives batch walks the flow
+        poll.request_full_repull()
+
+        self.backend.pull_results(poll, None, None)
+
+        # still pulled incrementally, with nothing deleted
+        self.assertEqual(mock_request.call_args[1]["params"]["filter"]["start-timestamp"], last_pull)
+        self.assertTrue(PollResult.objects.filter(pk=result.pk).exists())
+        self.assertIsNotNone(cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.nigeria.pk, poll.pk)))
