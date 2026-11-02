@@ -276,8 +276,8 @@ class SyncJob(models.Model):
     def clear_finalize(self):
         return self._update_owned(needs_finalize=False, modified_on=timezone.now())
 
-    def release_lease(self):
-        return self._update_owned(lease_owner=None, lease_expires_on=None, modified_on=timezone.now())
+    def release_lease(self, warn=True):
+        return self._update_owned(warn=warn, lease_owner=None, lease_expires_on=None, modified_on=timezone.now())
 
     def record_failure(self, error):
         """
@@ -451,10 +451,11 @@ class SyncJob(models.Model):
         self.refresh_from_db()
         return True
 
-    def _update_owned(self, **updates):
+    def _update_owned(self, warn=True, **updates):
         """
         Applies updates only while this worker still owns the lease, so a worker that lost
-        its lease can't clobber the job. Returns whether the update was applied.
+        its lease can't clobber the job. Returns whether the update was applied - a lost lease
+        warns unless the caller says losing it is expected.
         """
         # a None owner would match any unowned row, which is not ownership
         if not self.lease_owner:
@@ -466,7 +467,8 @@ class SyncJob(models.Model):
             self.refresh_from_db()
             return True
 
-        logger.warning("Job #%d (%s:%s) no longer owned, update skipped", self.id, self.job_type, self.scope)
+        if warn:
+            logger.warning("Job #%d (%s:%s) no longer owned, update skipped", self.id, self.job_type, self.scope)
         return False
 
     def __str__(self):

@@ -71,10 +71,11 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
     API rate limit without losing the chunk's progress.
 
     Every caller - beat nudges, continuations, redeliveries, manual triggers - invokes the
-    task the same way, with the job id. The atomic claim serializes execution: an
-    invocation that finds the job under a live lease retries once shortly after the lease
-    expires (so a chunk redelivered after a worker death is resumed from the last
-    checkpoint rather than lost), and gives up quietly otherwise.
+    task with the job id, a continuation also naming the chunk that enqueued it so that it
+    can take over that chunk's lease without waiting for the release. The atomic claim
+    serializes execution: an invocation that finds the job under a live lease retries once
+    shortly after the lease expires (so a chunk redelivered after a worker death is resumed
+    from the last checkpoint rather than lost), and gives up quietly otherwise.
 
     The optional finalize hook runs when a run completes (e.g. rebuilding counts). It MUST
     be idempotent: it runs at least once per completed run and can run again after crashes,
@@ -88,7 +89,6 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
     def decorator(chunk_func):
         @app.task(name=name, bind=True, queue=queue, acks_late=True, reject_on_worker_lost=True)
         def _task(self, job_id, handoff_from=None):
-            # handoff_from is the lease of the chunk that enqueued this one, see SyncJob.claim
             job = SyncJob.objects.filter(id=job_id).first()
             if not job:
                 logger.warning("Job #%s no longer exists, skipping", job_id)
@@ -148,10 +148,11 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
                 # an int subclass, so False must be checked first)
                 countdown = done if not isinstance(done, bool) and isinstance(done, (int, float)) else None
 
-                # enqueue before releasing so a continuation that lands early retries
-                # against our still-held lease instead of racing the release
-                _task.apply_async((job_id,), queue=queue, countdown=countdown)
-                job.release_lease()
+                # enqueue before releasing so a continuation can't be lost to a worker death
+                # in between - it names our lease so that one landing early can take it over
+                # rather than wait for it to expire, which leaves our release nothing to do
+                _task.apply_async((job_id,), dict(handoff_from=owner), queue=queue, countdown=countdown)
+                job.release_lease(warn=False)
 
         def _finalize_run(state):
             """
@@ -168,9 +169,10 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
             """
             A failed claim against a live lease may be a redelivery of a chunk whose worker
             died - the message is our only prompt to resume, so reschedule it for just
-            after the lease expires instead of dropping it. Or it may be a continuation that
-            landed just before the chunk ahead of it released the lease, in which case the
-            job is running with the lease already gone by now, and it only needs a moment.
+            after the lease expires instead of dropping it. Or it may have landed just before
+            a chunk released the lease - a nudge, or a continuation enqueued without naming
+            the chunk ahead of it - in which case the job is running with the lease already
+            gone by now, and it only needs a moment.
             """
             current = SyncJob.objects.filter(id=job_id).first()
             now = timezone.now()
