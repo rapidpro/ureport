@@ -16,7 +16,6 @@ from ureport.contacts.sync import (
     force_full_repull,
     is_pull_disabled,
 )
-from ureport.stats.models import ContactActivity
 from ureport.syncjobs.dispatch import enqueue, in_flight
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tasks import chunked_task
@@ -30,7 +29,6 @@ from ureport.utils import (
 logger = logging.getLogger(__name__)
 
 REBUILD_JOB_TYPE = "reporters-rebuild"
-ACTIVITIES_JOB_TYPE = "schemes-activities"
 RESULTS_JOB_TYPE = "schemes-results"
 
 QUEUE = "slow"
@@ -64,11 +62,6 @@ TRIGGER_RETRY = 60
 POPULATED_KEY = "schemes_populated:%d"
 
 
-def _update_contact_activities(org_id, by_scheme):
-    for scheme, uuids in by_scheme.items():
-        ContactActivity.objects.filter(org_id=org_id, contact__in=uuids).update(scheme=scheme)
-
-
 def _update_poll_results(org_id, by_scheme):
     from ureport.polls.models import PollResult
 
@@ -78,16 +71,10 @@ def _update_poll_results(org_id, by_scheme):
         PollResult.objects.filter(contact__in=uuids).update(scheme=scheme)
 
 
-# one of the one-off backfills that copy Contact.scheme onto the rows keyed by contact uuid.
-# both keep the pre-chunking task's cache keys - the done flag as a skip condition and dual
+# the one-off backfill that copies Contact.scheme onto the poll results keyed by contact uuid.
+# it keeps the pre-chunking task's cache keys - the done flag as a skip condition and dual
 # written on completion, the max id as a seed - so that neither redoes the other's work
 SchemesBackfill = namedtuple("SchemesBackfill", ("done_key", "cursor_key", "update_rows"))
-
-ACTIVITIES_BACKFILL = SchemesBackfill(
-    done_key="contact_activities_schemes_populated:%d",
-    cursor_key="contact_activities_schemes_max_id:%d",
-    update_rows=_update_contact_activities,
-)
 
 RESULTS_BACKFILL = SchemesBackfill(
     done_key="poll_results_schemes_populated:%d",
@@ -185,28 +172,8 @@ def _mark_backfill_done(job, backfill):
     cache.set(backfill.done_key % job.org_id, datetime_to_json_date(timezone.now()), None)
 
 
-def finalize_schemes_activities(job):
-    _mark_backfill_done(job, ACTIVITIES_BACKFILL)
-
-    # the pre-chunking task chained the poll results backfill after this one, and this is
-    # where that chain now lives
-    if job.org:
-        enqueue_schemes_results(job.org)
-
-
 def finalize_schemes_results(job):
     _mark_backfill_done(job, RESULTS_BACKFILL)
-
-
-@chunked_task(
-    ACTIVITIES_JOB_TYPE,
-    queue=QUEUE,
-    lease_seconds=LEASE_SECONDS,
-    finalize=finalize_schemes_activities,
-    name="contacts.backfill_activities_schemes",
-)
-def backfill_activities_schemes(job):
-    return _run_schemes_chunk(job, ACTIVITIES_BACKFILL)
 
 
 @chunked_task(
@@ -254,11 +221,6 @@ def enqueue_reporters_rebuilds(org_id=None):
     return {"enqueued": enqueued, "skipped": skipped}
 
 
-def enqueue_schemes_activities(org):
-    job, _ = _enqueue_org_job(org, ACTIVITIES_JOB_TYPE)
-    return job.id
-
-
 def enqueue_schemes_results(org):
     job, _ = _enqueue_org_job(org, RESULTS_JOB_TYPE)
     return job.id
@@ -292,7 +254,7 @@ def start_schemes_backfill(org):
 
     if cache.get(POPULATED_KEY % org.id):
         logger.info("Contact schemes already pulled for org #%d, backfilling only", org.id)
-        return {"repulled": [], "skipped": [], "backfill": enqueue_schemes_activities(org)}
+        return {"repulled": [], "skipped": [], "backfill": enqueue_schemes_results(org)}
 
     repulled, skipped = force_full_repull(org)
 
@@ -304,7 +266,7 @@ def start_schemes_backfill(org):
 
     if not repulled:
         # nothing to re-pull from, so there is nothing for the backfill to wait on
-        return {"repulled": [], "skipped": [], "backfill": enqueue_schemes_activities(org)}
+        return {"repulled": [], "skipped": [], "backfill": enqueue_schemes_results(org)}
 
     # marked after every re-pull is set up and before any is triggered, so that only a run
     # whose window this trigger widened can satisfy the wait
@@ -342,7 +304,7 @@ def resume_schemes_backfill(org):
     # trigger re-pulling the whole org again
     cache.set(POPULATED_KEY % org.id, datetime_to_json_date(timezone.now()), None)
 
-    enqueue_schemes_activities(org)
+    enqueue_schemes_results(org)
 
 
 def _pulled_since(org, since):

@@ -8,15 +8,12 @@ from django.utils import timezone
 from dash.orgs.models import Org, TaskState
 from ureport.celery import app
 from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due
-from ureport.syncjobs.locks import chunk_lock
 from ureport.syncjobs.models import DEFAULT_LEASE_SECONDS, SyncJob
 from ureport.syncjobs.tasks import JOB_TASKS, chunked_task
 
 logger = logging.getLogger(__name__)
 
 ENGAGEMENT_JOB_TYPE = "engagement-refresh"
-PRUNE_JOB_TYPE = "activities-prune"
-REBUILD_JOB_TYPE = "activities-rebuild"
 
 QUEUE = "slow"
 
@@ -24,42 +21,14 @@ QUEUE = "slow"
 # a few of them rather than the whole product of segments and metrics
 ENGAGEMENT_BATCH_SIZE = 3
 
-# the rebuild's engagement pass only covers one metric, so a chunk can take all its segments
-REBUILD_BATCH_SIZE = 5
-REBUILD_METRIC = "active-users"
-
-# a rebuild run recalculates the org's counters first, then refreshes what they feed
-STAGE_ENGAGEMENT = "engagement"
-
-# contact activities are kept for this long, and pruned this many rows at a time
-ACTIVITY_RETENTION = timedelta(days=400)
-PRUNE_BATCH_SIZE = 1000
-PRUNE_BATCHES_PER_CHUNK = 20
-
 # must comfortably exceed the slowest single chunk - a lease that expires mid chunk loses
-# that chunk's work. The rebuild's first chunk is one unbounded pass over the org's
-# activities, so it gets the same headroom as the contact sync's unbounded stages.
+# that chunk's work
 ENGAGEMENT_LEASE_SECONDS = 60 * 30
-PRUNE_LEASE_SECONDS = 60 * 20
-REBUILD_LEASE_SECONDS = 60 * 30
-
-# the counter rebuild replaces every counter an org has and they carry no unique constraint,
-# so two rebuilds running at once leave the org's counts permanently doubled - which the
-# squash task then merges into plausible looking data. The lease alone doesn't prevent that:
-# a redelivered message becomes claimable the moment the lease expires, while the original
-# chunk may still be running. So the recalculation takes a lock whose timeout comfortably
-# outlives both the lease and the broker's redelivery window.
-REBUILD_LOCK_KEY = "rebuild-contacts-activities-counts"
-REBUILD_LOCK_TIMEOUT = REBUILD_LEASE_SECONDS * 4
-
-# how long to wait before trying the recalculation again when another worker holds its lock
-LOCK_BACKOFF = 300
 
 # the task keys the pre-chunking tasks were disabled per org by, honored for the release
 # they still exist in - a chunked job is stopped by pausing it instead
 LEGACY_TASK_KEYS = {
     ENGAGEMENT_JOB_TYPE: "refresh-engagement-data",
-    PRUNE_JOB_TYPE: "delete-old-contact-activities",
 }
 
 # how often a run of these jobs should start. A little under a day, so that a run which
@@ -91,16 +60,6 @@ def engagement_combos():
         for segment in PollEngagementDailyCount.DATA_SEGMENTS
         for metric in PollEngagementDailyCount.DATA_METRICS
     ]
-
-
-def rebuild_combos():
-    """
-    The engagement data a counter rebuild invalidates, i.e. every segment of the metric the
-    contact activity counters feed, each refreshed for every time filter.
-    """
-    from .models import PollEngagementDailyCount
-
-    return list(PollEngagementDailyCount.DATA_SEGMENTS)
 
 
 def finalize_engagement_refresh(job):
@@ -156,111 +115,6 @@ def refresh_engagement(job):
     return done
 
 
-@chunked_task(PRUNE_JOB_TYPE, queue=QUEUE, lease_seconds=PRUNE_LEASE_SECONDS, name="stats.prune_contact_activities")
-def prune_contact_activities(job):
-    """
-    Deletes a bounded number of batches of one org's expired contact activities. The
-    deletion is its own resume position - each chunk works on what is still older than the
-    cutoff - so nothing has to be carried in the cursor, and a chunk replayed after a crash
-    simply deletes the next rows rather than the ones already gone.
-    """
-    from .models import ContactActivity
-
-    org = job.org
-    if _should_stop(org, job.job_type):
-        return job.abort()
-
-    # recomputed per chunk rather than frozen for the run - it only ever moves forward, and
-    # a run spanning midnight pruning a few extra hours of activities is harmless
-    cutoff = timezone.now() - ACTIVITY_RETENTION
-
-    deleted = 0
-    exhausted = False
-
-    for _ in range(PRUNE_BATCHES_PER_CHUNK):
-        # unordered - which expired activities go first doesn't matter, and asking for an
-        # order would only cost a sort
-        batch_ids = list(
-            ContactActivity.objects.filter(org=org, date__lte=cutoff).values_list("id", flat=True)[:PRUNE_BATCH_SIZE]
-        )
-        if not batch_ids:
-            exhausted = True
-            break
-
-        ContactActivity.objects.filter(id__in=batch_ids).delete()
-        deleted += len(batch_ids)
-
-    logger.info("Deleted %d contact activities older than %s on org #%d", deleted, cutoff, org.id)
-
-    job.checkpoint(progress=job.add_progress(chunks=1, deleted=deleted))
-
-    return exhausted
-
-
-@chunked_task(
-    REBUILD_JOB_TYPE, queue=QUEUE, lease_seconds=REBUILD_LEASE_SECONDS, name="stats.rebuild_contact_activity_counts"
-)
-def rebuild_contact_activity_counts(job):
-    """
-    Rebuilds one org's contact activity counters, then refreshes the engagement data they
-    feed a batch at a time. The recalculation is a single chunk - it is bounded by the org's
-    activities and rewrites the counters wholesale, so splitting it would leave the counters
-    visibly incomplete between chunks - and it holds a lock while it does, as two of them at
-    once would double the org's counts rather than replace them.
-    """
-    from .models import ContactActivity, PollEngagementDailyCount
-
-    org = job.org
-    if _should_stop(org, job.job_type):
-        return job.abort()
-
-    cursor = dict(job.cursor)
-
-    if not cursor.get("stage"):
-        with _rebuild_lock(org) as acquired:
-            if not acquired:
-                logger.info("Rebuild lock held for org #%d, backing off", org.id)
-                return job.back_off(LOCK_BACKOFF, lock_backoffs=1)
-
-            counters = ContactActivity.recalculate_contact_activity_counts(org)
-
-            job.checkpoint(
-                cursor={"stage": STAGE_ENGAGEMENT, "combo_index": 0, "combo_count": len(rebuild_combos())},
-                progress=job.add_progress(chunks=1, counters=len(counters)),
-            )
-
-        return False
-
-    combos = rebuild_combos()
-    index = _resume_index(cursor, len(combos))
-    batch = combos[index : index + REBUILD_BATCH_SIZE]
-
-    for segment in batch:
-        PollEngagementDailyCount.refresh_engagement_data(org, REBUILD_METRIC, segment)
-        logger.info(
-            "Refreshed rebuilt engagement data for org #%d, segment - %s, metric - %s", org.id, segment, REBUILD_METRIC
-        )
-
-    index += len(batch)
-    done = index >= len(combos)
-
-    job.checkpoint(
-        cursor={} if done else {"stage": STAGE_ENGAGEMENT, "combo_index": index, "combo_count": len(combos)},
-        progress=job.add_progress(chunks=1, combos=len(batch)),
-    )
-
-    return done
-
-
-def _rebuild_lock(org):
-    """
-    Serializes one org's counter recalculation, which two workers at once would double
-    rather than replace - see REBUILD_LOCK_TIMEOUT. Held for the chunk that does the
-    recalculation, not for the whole run.
-    """
-    return chunk_lock(TaskState.get_lock_key(org, REBUILD_LOCK_KEY), REBUILD_LOCK_TIMEOUT)
-
-
 def _should_stop(org, job_type):
     """
     Whether the run has nothing left to do for this org: it went away, was deactivated, or
@@ -314,7 +168,7 @@ def dispatch_org_stats(org, countdown=None):
     now = timezone.now()
     queued = []
 
-    for job_type in (ENGAGEMENT_JOB_TYPE, PRUNE_JOB_TYPE):
+    for job_type in (ENGAGEMENT_JOB_TYPE,):
         if _is_disabled(org, job_type):
             logger.info("Job type %s disabled for org #%d, skipping", job_type, org.id)
             continue

@@ -1070,36 +1070,16 @@ CELERY_BEAT_SCHEDULE = {
         "relative": True,
         "options": {"queue": "slow"},
     },
-    "stats_activities_squash": {
-        "task": "stats.squash_contact_activities_counts",
-        "schedule": timedelta(minutes=15),
-        "relative": True,
-        "options": {"queue": "slow"},
-    },
     "active-users-checkpoint": {
         "task": "stats.checkpoint_active_users",
         "schedule": crontab(hour=5, minute=30),
         "options": {"queue": "slow"},
     },
-    "active-users-compare": {
-        "task": "stats.compare_active_users",
-        "schedule": crontab(hour=6, minute=30),
-        "options": {"queue": "slow"},
-    },
 }
 
-# Active users are also counted by HyperLogLog sketches in Valkey, alongside the contact activity tables, which are
-# still written so the charts can go back to them - see ureport.stats.active_users. Synced results are only added to
-# the sketches when ACTIVE_USERS_HLL_WRITE is set, the charts read them when ACTIVE_USERS_HLL_READ is set or for orgs
-# with the common.active_users_hll config, and the nightly comparison is only logged when ACTIVE_USERS_HLL_COMPARE is
-# set.
-#
-# The sketches share Valkey with the cache and the broker, at up to 12KB each, so Valkey needs the room for them. They
-# have no expiry times, so a maxmemory-policy of volatile-lru can't evict them, but an allkeys one would drop them
-# without a trace.
-ACTIVE_USERS_HLL_WRITE = True
-ACTIVE_USERS_HLL_READ = True
-ACTIVE_USERS_HLL_COMPARE = False
+# Active users are counted by HyperLogLog sketches in Valkey - see ureport.stats.active_users. They share Valkey with
+# the cache and the broker, at up to 12KB each, so Valkey needs the room for them. They have no expiry times, so a
+# maxmemory-policy of volatile-lru can't evict them, but an allkeys one would drop them without a trace.
 
 # -----------------------------------------------------------------------------------
 # U-Report Defaults
@@ -1149,9 +1129,6 @@ SITE_ALLOW_NO_ORG = (
     "syncjobs.syncjob_pause",
     "syncjobs.syncjob_resume",
     "syncjobs.syncjob_force_resync",
-    # these compare active users across all orgs, and are for superusers only as no permission of theirs exists
-    "admins.org_active_users",
-    "admins.org_active_users_charts",
     "public.countries",
     "public.status",
     "public.task_status",
