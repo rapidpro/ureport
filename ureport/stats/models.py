@@ -687,6 +687,13 @@ class PollEngagementDailyCount(BaseDailyCount):
         indexes = [
             models.Index(fields=["org", "flow_result"], name="stats_pedc_org_flowresult_idx"),
             models.Index(fields=["org", "day"], name="stats_pedc_org_date_idx"),
+            # for the engagement sums, which filter on a scope and sum a year of days - the included columns let
+            # them mostly be answered from the index, visiting only the table pages not yet vacuumed
+            models.Index(
+                name="stats_pedc_org_scope_day",
+                fields=("org", "scope", "day"),
+                include=("flow_result", "is_responded", "count"),
+            ),
             # for squashing task
             models.Index(
                 name="stats_pedc_unsquashed",
