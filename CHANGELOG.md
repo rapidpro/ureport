@@ -1,3 +1,6 @@
+## v1.10.7 (2026-11-03)
+ * Drop unused indexes on contact activity and contacts
+
 ## v1.10.6 (2026-11-03)
  * Add a covering index for the engagement count sums, and let its migration re-run after a failed build
  * Sum every scope of an engagement segment in one query
