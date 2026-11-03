@@ -3,7 +3,9 @@ from datetime import date, datetime, timedelta, timezone as tzone
 from unittest.mock import patch
 
 from django.core.cache import cache
+from django.db import connection
 from django.test import override_settings
+from django.test.utils import CaptureQueriesContext
 
 from dash.categories.models import Category
 from ureport.contacts.models import ReportersCounter
@@ -201,6 +203,22 @@ class EngagementDataTest(UreportTest):
                 day += timedelta(days=1)
 
             self.assertEqual(expected, data[time_filter][0]["data"])
+
+    @override_settings(ACTIVE_USERS_HLL_READ=False)
+    def test_refresh_sums_every_scope_in_one_query(self):
+        with frozen_now(datetime(2026, 3, 1, 0, 30, tzinfo=tzone.utc)):
+            for metric in ("opinion-responses", "response-rate"):
+                for segment in PollEngagementDailyCount.DATA_SEGMENTS:
+                    with self.subTest(metric=metric, segment=segment):
+                        with CaptureQueriesContext(connection) as queries:
+                            data = PollEngagementDailyCount.refresh_engagement_data(self.org, metric, segment)
+
+                        # however many series the segment has, and whether or not they need the polled counts too
+                        self.assertTrue(data[12])
+                        self.assertEqual(
+                            1,
+                            sum('"stats_pollengagementdailycount"' in query["sql"] for query in queries),
+                        )
 
     def test_get_engagement_data_fills_cache_on_miss(self):
         with frozen_now(datetime(2026, 10, 16, 12, 0, tzinfo=tzone.utc)):

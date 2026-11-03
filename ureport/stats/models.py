@@ -230,28 +230,49 @@ class PollEngagementDailyCount(BaseDailyCount):
         return results
 
     @classmethod
-    def get_all_opinion_responses(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
+    def get_daily_sums(cls, org, scopes, responded_only=False):
+        """
+        Sums the last year of counts of the org's active questions by day for each of the given scopes, in one query
+        rather than one per scope. Returns the polled and the responded sums by scope, each a list of dicts with date
+        and count__sum keys as get_counts_data and get_response_rate_data take. Only the responded sums are fetched
+        when responded_only is set, leaving the polled ones empty.
+        """
+        year_ago = timezone.now() - timedelta(days=365)
         start = year_ago.replace(day=1)
-        translation.activate(org.language)
 
         flow_result_ids = list(
             PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
         )
 
-        responses = list(
-            PollEngagementDailyCount.objects.filter(
-                org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids, is_responded=True
-            )
-            .values(date=Cast("day", output_field=models.DateTimeField()))
-            .annotate(Sum("count"))
+        counts = PollEngagementDailyCount.objects.filter(
+            org=org, day__gte=start, scope__in=list(scopes), flow_result_id__in=flow_result_ids
         )
+        if responded_only:
+            counts = counts.filter(is_responded=True)
+            sums = {"responded": Sum("count")}
+        else:
+            sums = {"polled": Sum("count"), "responded": Sum("count", filter=Q(is_responded=True))}
+
+        polled, responded = defaultdict(list), defaultdict(list)
+        for row in counts.values("scope", date=Cast("day", output_field=models.DateTimeField())).annotate(**sums):
+            if row.get("polled") is not None:
+                polled[row["scope"]].append(dict(date=row["date"], count__sum=row["polled"]))
+            if row["responded"] is not None:
+                responded[row["scope"]].append(dict(date=row["date"], count__sum=row["responded"]))
+
+        return polled, responded
+
+    @classmethod
+    def get_all_opinion_responses(cls, org, time_filters):
+        translation.activate(org.language)
+
+        responded = PollEngagementDailyCount.get_daily_sums(org, ["all"], responded_only=True)[1]
+
         return {
             time_filter: [
                 dict(
                     name=str(_("Opinion Responses")),
-                    data=PollEngagementDailyCount.get_counts_data(responses, time_filter),
+                    data=PollEngagementDailyCount.get_counts_data(responded["all"], time_filter),
                 )
             ]
             for time_filter in time_filters
@@ -259,14 +280,7 @@ class PollEngagementDailyCount(BaseDailyCount):
 
     @classmethod
     def get_gender_opinion_responses(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
         org_gender_labels = org.get_gender_labels()
-
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
 
         genders = GenderSegment.objects.all()
         if not org.get_config("common.has_extra_gender"):
@@ -274,41 +288,66 @@ class PollEngagementDailyCount(BaseDailyCount):
 
         genders = genders.values("gender", "id")
 
-        output_data = {time_filter: [] for time_filter in time_filters}
-        for gender in genders:
-            responses = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"gender:{gender['gender'].lower()}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
+        scopes = {gender["gender"]: f"gender:{gender['gender'].lower()}" for gender in genders}
+        responded = PollEngagementDailyCount.get_daily_sums(org, scopes.values(), responded_only=True)[1]
 
+        output_data = {time_filter: [] for time_filter in time_filters}
+        for gender, scope in scopes.items():
             for time_filter in time_filters:
-                series = PollEngagementDailyCount.get_counts_data(responses, time_filter)
-                output_data[time_filter].append(dict(name=org_gender_labels.get(gender["gender"]), data=series))
+                series = PollEngagementDailyCount.get_counts_data(responded[scope], time_filter)
+                output_data[time_filter].append(dict(name=org_gender_labels.get(gender), data=series))
         return output_data
 
     @classmethod
     def get_scheme_opinion_responses(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
         translation.activate(org.language)
 
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
+        names = PollEngagementDailyCount.get_org_scheme_names(org)
+        responded = PollEngagementDailyCount.get_daily_sums(org, names.keys(), responded_only=True)[1]
 
+        output_data = {time_filter: [] for time_filter in time_filters}
+        for scope, name in names.items():
+            for time_filter in time_filters:
+                series = PollEngagementDailyCount.get_counts_data(responded[scope], time_filter)
+                output_data[time_filter].append(dict(name=name, data=series))
+        return output_data
+
+    @classmethod
+    def get_location_opinion_responses(cls, org, time_filters):
+        top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+
+        scopes = {osm_id: f"state:{osm_id.upper()}" for osm_id in top_boundaries}
+        responded = PollEngagementDailyCount.get_daily_sums(org, scopes.values(), responded_only=True)[1]
+
+        output_data = {time_filter: [] for time_filter in time_filters}
+        for osm_id, name in top_boundaries.items():
+            for time_filter in time_filters:
+                series = PollEngagementDailyCount.get_counts_data(responded[scopes[osm_id]], time_filter)
+                output_data[time_filter].append(dict(name=name, osm_id=osm_id, data=series))
+        return output_data
+
+    @classmethod
+    def get_age_opinion_responses(cls, org, time_filters):
+        names = PollEngagementDailyCount.get_age_names()
+        responded = PollEngagementDailyCount.get_daily_sums(org, names.keys(), responded_only=True)[1]
+
+        output_data = {time_filter: [] for time_filter in time_filters}
+        for scope, name in names.items():
+            for time_filter in time_filters:
+                series = PollEngagementDailyCount.get_counts_data(responded[scope], time_filter)
+                output_data[time_filter].append(dict(name=name, data=series))
+        return output_data
+
+    @classmethod
+    def get_org_scheme_names(cls, org):
+        """
+        The display names of the schemes the org has contacts on, by their scope
+        """
         schemes = SchemeSegment.objects.all().values("scheme", "id")
         org_contacts_counts = org.get_org_contacts_counts()
         org_schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
 
-        output_data = {time_filter: [] for time_filter in time_filters}
+        names = {}
         for scheme in schemes:
             if scheme["scheme"] not in org_schemes:
                 continue
@@ -317,64 +356,17 @@ class PollEngagementDailyCount(BaseDailyCount):
             if not name:
                 continue
 
-            responses = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"scheme:{scheme['scheme'].lower()}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
-            for time_filter in time_filters:
-                series = PollEngagementDailyCount.get_counts_data(responses, time_filter)
-                output_data[time_filter].append(dict(name=name, data=series))
-        return output_data
+            names[f"scheme:{scheme['scheme'].lower()}"] = name
+        return names
 
     @classmethod
-    def get_location_opinion_responses(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
-
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
-
-        top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
-        output_data = {time_filter: [] for time_filter in time_filters}
-        for osm_id, name in top_boundaries.items():
-            responses = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"state:{osm_id.upper()}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
-            for time_filter in time_filters:
-                series = PollEngagementDailyCount.get_counts_data(responses, time_filter)
-                output_data[time_filter].append(dict(name=name, osm_id=osm_id, data=series))
-        return output_data
-
-    @classmethod
-    def get_age_opinion_responses(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
-
+    def get_age_names(cls):
+        """
+        The display names of the age segments, by their scope
+        """
         ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
-        output_data = {time_filter: [] for time_filter in time_filters}
+
+        names = {}
         for age in ages:
             if age["min_age"] == 0:
                 data_key = "0-14"
@@ -389,22 +381,8 @@ class PollEngagementDailyCount(BaseDailyCount):
             elif age["min_age"] == 35:
                 data_key = "35+"
 
-            responses = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"age:{age['min_age']}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
-            for time_filter in time_filters:
-                series = PollEngagementDailyCount.get_counts_data(responses, time_filter)
-                output_data[time_filter].append(dict(name=data_key, data=series))
-        return output_data
+            names[f"age:{age['min_age']}"] = data_key
+        return names
 
     @classmethod
     def get_counts_data(cls, stats_qs, time_filter):
@@ -426,36 +404,15 @@ class PollEngagementDailyCount(BaseDailyCount):
 
     @classmethod
     def get_all_response_rate_series(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
         translation.activate(org.language)
 
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
-
-        polled_stats = list(
-            PollEngagementDailyCount.objects.filter(
-                org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids
-            )
-            .values(date=Cast("day", output_field=models.DateTimeField()))
-            .annotate(Sum("count"))
-        )
-
-        responded_stats = list(
-            PollEngagementDailyCount.objects.filter(
-                org=org, day__gte=start, scope="all", flow_result_id__in=flow_result_ids, is_responded=True
-            )
-            .values(date=Cast("day", output_field=models.DateTimeField()))
-            .annotate(Sum("count"))
-        )
+        polled, responded = PollEngagementDailyCount.get_daily_sums(org, ["all"])
 
         return {
             time_filter: [
                 dict(
                     name=str(_("Response Rate")),
-                    data=PollEngagementDailyCount.get_response_rate_data(polled_stats, responded_stats, time_filter),
+                    data=PollEngagementDailyCount.get_response_rate_data(polled["all"], responded["all"], time_filter),
                 )
             ]
             for time_filter in time_filters
@@ -463,89 +420,29 @@ class PollEngagementDailyCount(BaseDailyCount):
 
     @classmethod
     def get_location_response_rate_series(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
-
         top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+
+        scopes = {osm_id: f"state:{osm_id.upper()}" for osm_id in top_boundaries}
+        polled, responded = PollEngagementDailyCount.get_daily_sums(org, scopes.values())
+
         output_data = {time_filter: [] for time_filter in time_filters}
         for osm_id, name in top_boundaries.items():
-            polled_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org, day__gte=start, scope=f"state:{osm_id.upper()}", flow_result_id__in=flow_result_ids
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
-            responded_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"state:{osm_id.upper()}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
+            scope = scopes[osm_id]
             for time_filter in time_filters:
-                series = PollEngagementDailyCount.get_response_rate_data(polled_stats, responded_stats, time_filter)
+                series = PollEngagementDailyCount.get_response_rate_data(polled[scope], responded[scope], time_filter)
                 output_data[time_filter].append(dict(name=name, osm_id=osm_id, data=series))
         return output_data
 
     @classmethod
     def get_scheme_response_rate_series(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
-
-        schemes = SchemeSegment.objects.all().values("scheme", "id")
-        org_contacts_counts = org.get_org_contacts_counts()
-        org_schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
+        names = PollEngagementDailyCount.get_org_scheme_names(org)
+        polled, responded = PollEngagementDailyCount.get_daily_sums(org, names.keys())
 
         output_data = {time_filter: [] for time_filter in time_filters}
-        for scheme in schemes:
-            if scheme["scheme"] not in org_schemes:
-                continue
-
-            name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
-            if not name:
-                continue
-
-            polled_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"scheme:{scheme['scheme'].lower()}",
-                    flow_result_id__in=flow_result_ids,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
-            responded_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"scheme:{scheme['scheme'].lower()}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
+        for scope, name in names.items():
             for time_filter in time_filters:
                 scheme_rate_series = PollEngagementDailyCount.get_response_rate_data(
-                    polled_stats, responded_stats, time_filter
+                    polled[scope], responded[scope], time_filter
                 )
                 output_data[time_filter].append(dict(name=name, data=scheme_rate_series))
 
@@ -553,12 +450,6 @@ class PollEngagementDailyCount(BaseDailyCount):
 
     @classmethod
     def get_gender_response_rate_series(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
         org_gender_labels = org.get_gender_labels()
 
         genders = GenderSegment.objects.all()
@@ -567,91 +458,31 @@ class PollEngagementDailyCount(BaseDailyCount):
 
         genders = genders.values("gender", "id")
 
+        scopes = {gender["gender"]: f"gender:{gender['gender'].lower()}" for gender in genders}
+        polled, responded = PollEngagementDailyCount.get_daily_sums(org, scopes.values())
+
         output_data = {time_filter: [] for time_filter in time_filters}
-        for gender in genders:
-            polled_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"gender:{gender['gender'].lower()}",
-                    flow_result_id__in=flow_result_ids,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
-            responded_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"gender:{gender['gender'].lower()}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
+        for gender, scope in scopes.items():
             for time_filter in time_filters:
                 gender_rate_series = PollEngagementDailyCount.get_response_rate_data(
-                    polled_stats, responded_stats, time_filter
+                    polled[scope], responded[scope], time_filter
                 )
-                output_data[time_filter].append(
-                    dict(name=org_gender_labels.get(gender["gender"]), data=gender_rate_series)
-                )
+                output_data[time_filter].append(dict(name=org_gender_labels.get(gender), data=gender_rate_series))
 
         return output_data
 
     @classmethod
     def get_age_response_rate_series(cls, org, time_filters):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
-        flow_result_ids = list(
-            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("flow_result_id", flat=True)
-        )
+        names = PollEngagementDailyCount.get_age_names()
+        polled, responded = PollEngagementDailyCount.get_daily_sums(org, names.keys())
 
-        ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
         output_data = {time_filter: [] for time_filter in time_filters}
-        for age in ages:
-            if age["min_age"] == 0:
-                data_key = "0-14"
-            elif age["min_age"] == 15:
-                data_key = "15-19"
-            elif age["min_age"] == 20:
-                data_key = "20-24"
-            elif age["min_age"] == 25:
-                data_key = "25-30"
-            elif age["min_age"] == 31:
-                data_key = "31-34"
-            elif age["min_age"] == 35:
-                data_key = "35+"
-
-            polled_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org, day__gte=start, scope=f"age:{age['min_age']}", flow_result_id__in=flow_result_ids
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
-            responded_stats = list(
-                PollEngagementDailyCount.objects.filter(
-                    org=org,
-                    day__gte=start,
-                    scope=f"age:{age['min_age']}",
-                    flow_result_id__in=flow_result_ids,
-                    is_responded=True,
-                )
-                .values(date=Cast("day", output_field=models.DateTimeField()))
-                .annotate(Sum("count"))
-            )
-
+        for scope, name in names.items():
             for time_filter in time_filters:
                 age_rate_series = PollEngagementDailyCount.get_response_rate_data(
-                    polled_stats, responded_stats, time_filter
+                    polled[scope], responded[scope], time_filter
                 )
-                output_data[time_filter].append(dict(name=data_key, data=age_rate_series))
+                output_data[time_filter].append(dict(name=name, data=age_rate_series))
         return output_data
 
     @classmethod
