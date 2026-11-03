@@ -1,3 +1,7 @@
+## v1.10.6 (2026-11-03)
+ * Add a covering index for the engagement count sums, and let its migration re-run after a failed build
+ * Sum every scope of an engagement segment in one query
+
 ## v1.10.5 (2026-11-02)
  * Have a continuation name the lease of the chunk that enqueued it
 
