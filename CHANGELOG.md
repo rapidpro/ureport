@@ -1,3 +1,6 @@
+## v2.0.0 (2026-11-03)
+ * Drop the contact activity tables
+
 ## v1.10.7 (2026-11-03)
  * Drop unused indexes on contact activity and contacts
 
