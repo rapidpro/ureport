@@ -1,6 +1,3 @@
-import csv
-import os
-import tempfile
 from datetime import date, datetime, timedelta, timezone as tzone
 from io import StringIO
 from unittest.mock import patch
@@ -9,9 +6,7 @@ from django_valkey import get_valkey_connection
 
 from django.core.cache import cache
 from django.core.management import CommandError, call_command
-from django.db import connection
-from django.test import override_settings
-from django.urls import reverse
+from django.utils import translation
 
 from dash.categories.models import Category
 from dash.orgs.models import Org
@@ -25,19 +20,19 @@ from ureport.stats.models import (
     ActiveUsersCheckpoint,
     ActiveUsersCheckpointRun,
     AgeSegment,
-    ContactActivity,
     PollEngagementDailyCount,
     SchemeSegment,
 )
-from ureport.stats.tasks import checkpoint_active_users, compare_active_users
+from ureport.stats.tasks import checkpoint_active_users
 from ureport.stats.tests.test_engagement import frozen_now
 from ureport.tests import UreportTest
 from ureport.utils import ORG_CONTACT_COUNT_KEY, datetime_to_json_date
 
 NOW = datetime(2026, 10, 15, 12, 0, tzinfo=tzone.utc)
 
+SEGMENTS = ("all", "age", "gender", "location", "scheme")
 
-@override_settings(ACTIVE_USERS_HLL_WRITE=True)
+
 class ActiveUsersTest(UreportTest):
     def setUp(self):
         super().setUp()
@@ -90,8 +85,7 @@ class ActiveUsersTest(UreportTest):
 
     def seed(self):
         """
-        Saves results for a couple of years of answers from contacts of varied segments, which the contact activity
-        trigger turns into activities, and returns them
+        Saves results for a couple of years of answers from contacts of varied segments, and returns them
         """
         genders = ["M", "F", "O", None]
         states = ["R1", "r2", None]
@@ -115,6 +109,33 @@ class ActiveUsersTest(UreportTest):
 
         PollResult.objects.bulk_create(results)
         return results
+
+    def expected_activity(self, results, segment_slug, time_filters):
+        """
+        The chart data of a segment as get_activity gives it, but with each count taken exactly from the results
+        """
+        translation.activate(self.org.language)
+
+        months = active_users.chart_months()
+        output = {tf: [] for tf in time_filters}
+        for name, extra, segments_of in active_users._segment_series(self.org, segment_slug):
+            counts = {}
+            for month in months:
+                window = {active_users.add_months(month, -i) for i in range(active_users.WINDOW_MONTHS)}
+                segments = set(segments_of(month))
+                counts[month] = len(
+                    {
+                        r.contact
+                        for r in results
+                        if active_users.is_countable(r)
+                        and r.org_id == self.org.id
+                        and active_users.result_month(r.date) in window
+                        and segments & set(active_users.result_segments(r.born, r.gender, r.state, r.scheme))
+                    }
+                )
+            for tf in time_filters:
+                output[tf].append(dict(name=name, **extra, data=active_users._time_filter_data(counts, tf)))
+        return output
 
     def test_add_results_segments(self):
         when = datetime(2026, 3, 31, 23, 30, tzinfo=tzone.utc)  # still March in UTC though April in Kampala
@@ -152,10 +173,6 @@ class ActiveUsersTest(UreportTest):
 
     def test_record_results(self):
         when = datetime(2026, 3, 10, tzinfo=tzone.utc)
-
-        with override_settings(ACTIVE_USERS_HLL_WRITE=False):
-            active_users.record_results([self.result("c1", when)])
-        self.assertEqual(0, self.pfcount(date(2026, 3, 1), "all"))
 
         # a failing write is logged rather than failing the sync
         with patch("ureport.stats.active_users.add_results", side_effect=ConnectionError("down")):
@@ -267,7 +284,7 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual("born:1900", active_users._born_segments(date(2026, 1, 1), 35, 2000)[0])
 
         # born years before the ones kept count together, in the band that reaches back past them, while no born year
-        # and those the counters leave out as over the oldest band count in none
+        # and those over the oldest band count in none
         active_users.add_results(
             [
                 self.result("c2", datetime(2025, 12, 6, tzinfo=tzone.utc), born=1066),
@@ -284,40 +301,58 @@ class ActiveUsersTest(UreportTest):
         self.assertEqual({date(2025, 12, 1): 0}, series[None])
         self.assertNotIn(active_users.OLD_BORN_SEGMENT, active_users._born_segments(date(2026, 1, 1), 31, 34))
 
-    def test_reader_matches_contact_activity(self):
+    def test_get_activity(self):
         results = self.seed()
         active_users.add_results(results)
 
         with frozen_now(NOW):
-            for segment in active_users.COMPARE_SEGMENTS:
-                existing = active_users._existing_activity(self.org, segment, [3, 6, 12])
+            for segment in SEGMENTS:
                 hll = active_users.get_activity(self.org, segment, [3, 6, 12])
-                self.assertEqual(existing, hll, segment)
+                self.assertEqual(self.expected_activity(results, segment, [3, 6, 12]), hll, segment)
                 self.assertTrue(any(v for s in hll[12] for v in s["data"].values()), segment)
 
-            with self.settings(ACTIVE_USERS_HLL_READ=False):
-                self.assertEqual([], active_users.get_activity(self.org, "unknown", [12])[12])
+            self.assertEqual([], active_users.get_activity(self.org, "unknown", [12])[12])
 
-    def test_reader_switch(self):
-        active_users.add_results(self.seed())
+    def test_time_filter_data(self):
+        counts = {active_users.add_months(date(2025, 10, 1), i): i + 1 for i in range(13)}
+
+        with frozen_now(NOW):
+            data = active_users._time_filter_data(counts, 12)
+            self.assertEqual({str(m): c for m, c in counts.items()}, data)
+
+            # each bucket shows the count of its month, but for the buckets of a month whose start is out of range
+            self.assertEqual(
+                {
+                    "2026-07-11": 0,
+                    "2026-07-21": 0,
+                    "2026-08-01": 11,
+                    "2026-08-11": 11,
+                    "2026-08-21": 11,
+                    "2026-09-01": 12,
+                    "2026-09-11": 12,
+                    "2026-09-21": 12,
+                    "2026-10-01": 13,
+                    "2026-10-11": 13,
+                },
+                active_users._time_filter_data(counts, 3),
+            )
+
+            expected = {f"2026-{m:02d}-{d}": m + 3 for m in range(4, 11) for d in ("01", "16")}
+            del expected["2026-10-16"]
+            self.assertEqual(expected, active_users._time_filter_data(counts, 6))
+
+    def test_engagement_reads_sketches(self):
+        results = self.seed()
+        active_users.add_results(results)
 
         with frozen_now(NOW), patch.object(active_users, "get_activity", wraps=active_users.get_activity) as mock:
-            with self.settings(ACTIVE_USERS_HLL_READ=False):
-                PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "gender")
-                self.assertEqual(0, mock.call_count)
+            data = PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "gender", [12])
+            self.assertEqual(1, mock.call_count)
+            self.assertEqual(self.expected_activity(results, "gender", [12]), data)
 
-                self.org.set_config("common.active_users_hll", True)
-                PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "gender")
-                self.assertEqual(1, mock.call_count)
-
-            self.org.set_config("common.active_users_hll", False)
-            result = PollEngagementDailyCount.refresh_engagement_data(self.org, "active-users", "all", [12])
-            self.assertEqual(2, mock.call_count)
-            self.assertEqual(ContactActivity.get_activity(self.org, [12]), result)
-
-            # other metrics are unaffected
+            # other metrics don't read them
             PollEngagementDailyCount.refresh_engagement_data(self.org, "response-rate", "all")
-            self.assertEqual(2, mock.call_count)
+            self.assertEqual(1, mock.call_count)
 
     def test_checkpoint_and_restore(self):
         results = self.seed()
@@ -329,7 +364,7 @@ class ActiveUsersTest(UreportTest):
         self.r.sadd(active_users.DIRTY_KEY, active_users.sketch_key(self.org.id, date(2026, 1, 1), "gone"))
 
         with frozen_now(NOW):
-            before = {s: active_users.get_activity(self.org, s, [12]) for s in active_users.COMPARE_SEGMENTS}
+            before = {s: active_users.get_activity(self.org, s, [12]) for s in SEGMENTS}
 
         keys = self.dirty() - {
             active_users.sketch_key(999999, date(2026, 1, 1), "all"),
@@ -407,10 +442,11 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(1, self.pfcount(date(2026, 8, 1), "all"))
             self.assertEqual(1, self.pfcount(date(2026, 10, 1), "gender:F"))
 
-            # nothing to restore from fills back everything, here from the two answers of its activity rows
+            # nothing to restore from fills back everything from the results, here the one as it is now
             ActiveUsersCheckpoint.objects.all().delete()
             active_users._delete_sketches(self.org)
-            self.assertEqual((0, 2), active_users.restore(self.org))
+            self.assertEqual((0, 1), active_users.restore(self.org))
+            self.assertEqual(0, self.pfcount(date(2026, 8, 1), "all"))
             self.assertEqual(1, self.pfcount(date(2026, 10, 1), "all"))
 
     def test_interrupted_checkpoint_resumed(self):
@@ -570,43 +606,6 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(2, self.pfcount(august, "all"))
             self.assertEqual(0, self.pfcount(september, "all"))
 
-    def test_comparison_pages(self):
-        with frozen_now(NOW):
-            active_users.add_results([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc), gender="F")])
-
-        ranking_url = reverse("admins.org_active_users")
-        charts_url = reverse("admins.org_active_users_charts")
-
-        # as the permission doesn't exist, only superusers get in
-        self.login(self.admin)
-        for url in (ranking_url, charts_url):
-            self.assertEqual(403, self.client.get(url, SERVER_NAME="uganda.ureport.io").status_code)
-
-        self.login(self.superuser)
-        response = self.client.get(ranking_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(200, response.status_code)
-        self.assertIn({"id": self.org.id, "name": self.org.name}, response.context["orgs_data"])
-        self.assertContains(response, charts_url)
-
-        response = self.client.get(charts_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(200, response.status_code)
-        self.assertContains(response, f'id="org-{self.org.id}"')
-        self.assertContains(response, '<option value="location">')
-
-        # also reachable from a host without an org
-        self.assertEqual(200, self.client.get(ranking_url).status_code)
-
-        params = {"org": self.org.id, "segment": "gender", "filter": 12}
-        with frozen_now(NOW):
-            data = self.client.get(charts_url, params, SERVER_NAME="uganda.ureport.io").json()
-        self.assertEqual(["existing", "hll"], sorted(data))
-        hll = {s["name"]: s["data"] for s in data["hll"]}
-        self.assertEqual(1, max(hll["Female"].values()))
-
-        for bad in ({"segment": "nope"}, {"filter": 7}, {"filter": "x"}, {"org": 0}, {"org": "abc"}):
-            response = self.client.get(charts_url, {**params, **bad}, SERVER_NAME="uganda.ureport.io")
-            self.assertEqual(404, response.status_code)
-
     def test_rollback_limits(self):
         with frozen_now(NOW):
             active_users.add_results([self.result("c1", datetime(2026, 8, 1, tzinfo=tzone.utc))])
@@ -665,10 +664,7 @@ class ActiveUsersTest(UreportTest):
         )
 
         with frozen_now(NOW):
-            answers, added = active_users.backfill(
-                self.org, since=date(2026, 1, 1), until=date(2026, 3, 1), batch_size=3, with_results=True
-            )
-            self.assertGreater(answers, 0)
+            added = active_users.backfill(self.org, since=date(2026, 1, 1), until=date(2026, 3, 1), batch_size=3)
             self.assertEqual(len([r for r in results if date(2026, 1, 1) <= r.date.date() < date(2026, 4, 1)]), added)
             self.assertEqual(0, self.pfcount(date(2025, 12, 1), "all"))
             self.assertGreater(self.pfcount(date(2026, 3, 1), "all"), 0)
@@ -676,24 +672,16 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(0, self.pfcount(date(2026, 1, 1), "all", org=self.nigeria))
 
             # the rest, overlapping what's there
-            self.assertEqual(len(results), active_users.backfill(self.org, with_results=True)[1])
-            for segment in active_users.COMPARE_SEGMENTS:
+            self.assertEqual(len(results), active_users.backfill(self.org))
+            for segment in SEGMENTS:
                 self.assertEqual(
-                    active_users._existing_activity(self.org, segment, [12]),
+                    self.expected_activity(results, segment, [12]),
                     active_users.get_activity(self.org, segment, [12]),
+                    segment,
                 )
 
-    def activities(self, contact, first, last, org=None, **kwargs):
-        """
-        Contact activity rows for every month from first to last, as the trigger would have written them
-        """
-        fields = dict(born=None, gender=None, state=None, district=None, ward=None, scheme=None)
-        fields.update(kwargs)
-        rows, month = [], first
-        while month <= last:
-            rows.append(ContactActivity(org=org or self.org, contact=contact, date=month, used=True, **fields))
-            month = active_users.add_months(month, 1)
-        return rows
+            # the sketches it touched are left to be checkpointed
+            self.assertIn(active_users.sketch_key(self.org.id, date(2026, 1, 1), "all"), self.dirty())
 
     def months_of(self, contact, org):
         """
@@ -711,181 +699,6 @@ class ActiveUsersTest(UreportTest):
 
         self.r.delete(probe)
         return found
-
-    def test_backfill_reconstructs_activity_answers(self):
-        org = self.nigeria
-        ContactActivity.objects.bulk_create(
-            # a long run, which answered at its start, a year later, and 12 months before its end
-            self.activities("0aaa", date(2024, 10, 1), date(2026, 12, 1), org=org)
-            # two runs with a gap between
-            + self.activities("Fbbb", date(2025, 1, 1), date(2025, 12, 1), org=org)
-            + self.activities("Fbbb", date(2026, 3, 1), date(2027, 2, 1), org=org)
-            # a run the prune has cut into at the start, which answered before its first row
-            + self.activities("zccc", date(2025, 10, 1), date(2026, 3, 1), org=org, gender="F")
-            # answered before the sketches are kept
-            + self.activities("9ddd", date(2024, 1, 1), date(2024, 12, 1), org=org)
-        )
-
-        with frozen_now(NOW):
-            progress = []
-            answers, _ = active_users.backfill(org, prefix_length=1, progress=lambda *a: progress.append(a))
-            self.assertEqual(6, answers)
-
-        progress = [p for p in progress if p[0] == "activities"]
-        self.assertEqual(16, len(progress))
-        self.assertEqual(("activities", "contacts [, 1)", 3), progress[0])  # the long run
-        self.assertEqual("contacts [f, )", progress[-1][1])
-        # wherever the collation puts uppercase and non hex uuids, the ranges between them cover every one
-        self.assertEqual(6, sum(n for *_, n in progress))
-
-        self.assertEqual([date(2024, 10, 1), date(2025, 10, 1), date(2026, 1, 1)], self.months_of("0aaa", org))
-        self.assertEqual([date(2025, 1, 1), date(2026, 3, 1)], self.months_of("Fbbb", org))
-        self.assertEqual([date(2025, 4, 1)], self.months_of("zccc", org))
-        self.assertEqual([], self.months_of("9ddd", org))
-        self.assertEqual(1, self.pfcount(date(2025, 4, 1), "gender:F", org=org))
-
-        # the sketches it touched are left to be checkpointed
-        self.assertIn(active_users.sketch_key(org.id, date(2025, 4, 1), "gender:F"), self.dirty())
-
-    def test_backfill_activity_runs_of_changed_values(self):
-        org = self.nigeria
-        ContactActivity.objects.bulk_create(
-            # updated in June, with months back to the prune
-            self.activities("aaaa", date(2025, 10, 1), date(2026, 5, 1), org=org, born=2003, gender="M")
-            + self.activities("aaaa", date(2026, 6, 1), date(2027, 9, 1), org=org, born=2009, gender="")
-            # the same but first active after the prune, so not before its first row
-            + self.activities("bbbb", date(2026, 3, 1), date(2026, 5, 1), org=org, born=0)
-            + self.activities("bbbb", date(2026, 6, 1), date(2027, 2, 1), org=org, born=2007)
-            # updated with under a year of months left, which can't go before the update
-            + self.activities("cccc", date(2025, 10, 1), date(2026, 1, 1), org=org, state=None)
-            + self.activities("cccc", date(2026, 2, 1), date(2026, 11, 1), org=org, state="R1")
-        )
-
-        with frozen_now(NOW):
-            self.assertEqual(5, active_users.backfill(org, prefix_length=0)[0])
-
-            # being active doesn't depend on any of the values changing
-            self.assertEqual([date(2025, 10, 1), date(2026, 10, 1)], self.months_of("aaaa", org))
-            self.assertEqual([date(2026, 3, 1)], self.months_of("bbbb", org))
-            self.assertEqual([date(2025, 10, 1), date(2025, 12, 1)], self.months_of("cccc", org))
-
-            self.assertEqual(0, active_users.count(org, date(2026, 1, 1), ["state:R1"]))
-            self.assertEqual(1, active_users.count(org, date(2026, 2, 1), ["state:R1"]))
-
-            # each month has the values of its own row
-            june, may = date(2026, 6, 1), date(2026, 5, 1)
-            self.assertEqual(1, active_users.count(org, may, active_users._born_segments(may, 20, 24)))
-            self.assertEqual(0, active_users.count(org, june, active_users._born_segments(june, 20, 24)))
-            self.assertEqual(1, active_users.count(org, may, ["gender:M"]))
-            self.assertEqual(0, active_users.count(org, june, ["gender:M"]))
-
-    def test_backfill_activity_runs_of_each_kind(self):
-        org = self.nigeria
-        ContactActivity.objects.bulk_create(
-            self.activities("aaaa", date(2026, 1, 1), date(2026, 6, 1), org=org, gender="F", state="R1")
-            + self.activities("aaaa", date(2026, 7, 1), date(2026, 12, 1), org=org, gender="F", state="R2")
-        )
-
-        with frozen_now(NOW):
-            self.assertEqual(1, active_users.backfill(org, prefix_length=0)[0])
-
-            # the update only splits the state's months, so the rest answered once and aren't kept active past the rows
-            self.assertEqual([date(2026, 1, 1)], self.months_of("aaaa", org))
-            for segment in ("all", "gender:F"):
-                self.assertEqual(1, self.pfcount(date(2026, 1, 1), segment, org=org))
-                self.assertEqual(0, self.pfcount(date(2026, 7, 1), segment, org=org))
-
-            self.assertEqual(1, self.pfcount(date(2026, 1, 1), "state:R1", org=org))
-            self.assertEqual(1, self.pfcount(date(2026, 7, 1), "state:R2", org=org))
-
-    def test_backfill_matches_contact_activity(self):
-        genders = ["M", "F", "O", None]
-        states = ["R1", "r2", None]
-        schemes = ["tel", "twitterid", "TEL", None]
-        borns = [2011, 2008, 2004, 1999, 1994, 1980, None]
-
-        rows = []
-        for i in range(60):
-            attrs = dict(
-                born=borns[i % len(borns)],
-                gender=genders[i % len(genders)],
-                state=states[i % len(states)],
-                scheme=schemes[i % len(schemes)],
-            )
-            contact = f"{i:02x}-contact"
-            first = active_users.add_months(date(2024, 10, 1), i % 9)
-            if i % 3 == 0:  # one long run
-                rows += self.activities(contact, first, active_users.add_months(first, 14 + i % 13), **attrs)
-            elif i % 3 == 1:  # runs with gaps between
-                rows += self.activities(contact, first, active_users.add_months(first, 11), **attrs)
-                second = active_users.add_months(first, 13 + i % 5)
-                rows += self.activities(contact, second, active_users.add_months(second, 11 + i % 7), **attrs)
-            else:  # cut short at the start by the prune
-                start = date(2025, 10, 1)
-                rows += self.activities(contact, start, active_users.add_months(start, i % 11), **attrs)
-        ContactActivity.objects.bulk_create(rows)
-
-        with frozen_now(NOW):
-            answers, _ = active_users.backfill(self.org)
-            for segment in active_users.COMPARE_SEGMENTS:
-                existing = active_users._existing_activity(self.org, segment, [12])
-                self.assertEqual(existing, active_users.get_activity(self.org, segment, [12]), segment)
-                self.assertTrue(any(v for s in existing[12] for v in s["data"].values()), segment)
-
-            # backfilling again changes nothing
-            self.assertEqual((answers, 0), active_users.backfill(self.org, prefix_length=0))
-            for segment in active_users.COMPARE_SEGMENTS:
-                self.assertEqual(
-                    active_users._existing_activity(self.org, segment, [12]),
-                    active_users.get_activity(self.org, segment, [12]),
-                    segment,
-                )
-
-    def test_compare(self):
-        results = self.seed()
-        active_users.add_results(results)
-
-        with frozen_now(NOW):
-            rows = active_users.compare_org(self.org)
-
-        self.assertEqual(
-            {"org", "month", "segment", "series", "existing", "hll", "error", "rel_error"}, set(rows[0].keys())
-        )
-        self.assertEqual(set(active_users.COMPARE_SEGMENTS), {r["segment"] for r in rows})
-        self.assertTrue(all(r["error"] == 0 for r in rows))
-
-        # series are matched by name, whatever order each side lists them in
-        with frozen_now(NOW), patch("ureport.stats.active_users.get_activity", side_effect=lambda *a: {12: []}):
-            missing = active_users.compare_org(self.org, segments=["gender"])
-        self.assertEqual({0}, {r["hll"] for r in missing})
-        self.assertTrue(any(r["existing"] for r in missing))
-
-        reversed_get_activity = active_users.get_activity
-
-        def reverse(org, segment, tfs):
-            output = reversed_get_activity(org, segment, tfs)
-            return {tf: list(reversed(series)) for tf, series in output.items()}
-
-        with frozen_now(NOW), patch("ureport.stats.active_users.get_activity", side_effect=reverse):
-            self.assertTrue(all(r["error"] == 0 for r in active_users.compare_org(self.org)))
-
-        # make one series undercount, and another count where there's nothing
-        rows[0].update(existing=1000, hll=950, error=-50, rel_error=-0.05)
-        rows[1].update(existing=0, hll=3, error=3, rel_error=None)
-        rows[2].update(existing=200, hll=201, error=1, rel_error=0.005)
-
-        summary = active_users.summarize(rows, min_count=100)
-        self.assertEqual(len(rows), summary["rows"])
-        self.assertEqual(2, summary["measured"])
-        self.assertAlmostEqual(0.05, summary["max_abs_rel_error"])
-        self.assertAlmostEqual(0.0275, summary["mean_abs_rel_error"])
-        self.assertAlmostEqual(0.5, summary["within_2se"])
-
-        self.assertEqual([rows[0], rows[2], rows[1]], active_users.worst(rows, limit=3))
-
-        empty = active_users.summarize([])
-        self.assertIsNone(empty["mean_abs_rel_error"])
-        self.assertIsNone(empty["p95_abs_rel_error"])
 
     def test_command(self):
         results = self.seed()
@@ -905,30 +718,10 @@ class ActiveUsersTest(UreportTest):
             "--until",
             "2026-10",
             "--clear",
-            "--with-results",
         )
         self.assertIn(f"sketches of org #{self.org.id}", out)
         self.assertIn("flow flow-1", out)
-
-        with tempfile.TemporaryDirectory() as tmp:
-            path = os.path.join(tmp, "rows.csv")
-            out = run("compare", "--org", str(self.org.id), "--worst", "3", "--min-count", "1", "--csv", path)
-            with open(path) as f:
-                rows = list(csv.DictReader(f))
-
-        self.assertIn(f"org #{self.org.id} (uganda):", out)
-        self.assertIn("all orgs:", out)
-        self.assertIn("Worst 3:", out)
-        self.assertIn("within 2SE 100.00%", out)
-        self.assertGreater(len(rows), 10)
-
-        out = run("compare", "--org", str(self.org.id), "--segment", "gender")
-        self.assertIn("mean", out)
-
-        ContactActivity.objects.create(org=self.nigeria, contact="abc", date=date(2026, 1, 1), used=True)
-        out = run("backfill", "--org", str(self.nigeria.id), "--prefix-length", "1")
-        self.assertIn(f"org #{self.nigeria.id} contacts [a, b): 1 activities", out)
-        self.assertIn(f"org #{self.nigeria.id} (nigeria): 1 answer months from activity tables, 0 results", out)
+        self.assertIn(f"org #{self.org.id} (uganda): {len(results)} results", out)
 
         self.assertIn("Checkpointed", run("checkpoint"))
         self.assertIn(f"sketches of org #{self.org.id} and replayed", run("restore", "--org", str(self.org.id)))
@@ -941,77 +734,10 @@ class ActiveUsersTest(UreportTest):
             run("restore", "--org", str(self.org.id), "--as-of", "nope")
 
         # all active orgs by default
-        self.assertIn(f"org #{self.nigeria.id}", run("compare", "--segment", "all"))
+        self.assertIn(f"org #{self.nigeria.id} (nigeria): 0 results", run("backfill"))
 
         with self.assertRaises(Exception):
             run("backfill", "--since", "nope")
-
-        self.assertTrue(len(results))
-
-    def test_backfill_results_only_without_activity_tables(self):
-        results = self.seed()
-
-        out = StringIO()
-        with frozen_now(NOW), patch("ureport.stats.active_users._backfill_results") as backfill_results:
-            call_command("active_users", "backfill", "--org", str(self.org.id), stdout=out)
-            backfill_results.assert_not_called()
-
-            for segment in active_users.COMPARE_SEGMENTS:
-                self.assertEqual(
-                    active_users._existing_activity(self.org, segment, [12]),
-                    active_users.get_activity(self.org, segment, [12]),
-                    segment,
-                )
-
-        self.assertRegex(
-            out.getvalue(), rf"org #{self.org.id} \(uganda\): \d+ answer months from activity tables, 0 results"
-        )
-
-        out = StringIO()
-        with frozen_now(NOW):
-            call_command("active_users", "backfill", "--org", str(self.org.id), "--with-results", stdout=out)
-        self.assertIn(f"tables, {len(results)} results", out.getvalue())
-
-    def test_backfill_without_activity_tables(self):
-        results = self.seed()
-        with frozen_now(NOW):
-            expected = {s: active_users._existing_activity(self.org, s, [12]) for s in active_users.COMPARE_SEGMENTS}
-
-        # a later release drops the tables
-        self.assertTrue(active_users.activity_table_exists())
-        with connection.cursor() as cursor:
-            cursor.execute("SET CONSTRAINTS ALL IMMEDIATE")
-            cursor.execute("DROP TABLE stats_contactactivity CASCADE")
-        self.assertFalse(active_users.activity_table_exists())
-
-        # just the results
-        with frozen_now(NOW):
-            self.assertEqual((None, len(results)), active_users.backfill(self.org))
-            self.assertTrue(self.dirty())
-            for segment in active_users.COMPARE_SEGMENTS:
-                self.assertEqual(expected[segment], active_users.get_activity(self.org, segment, [12]), segment)
-
-            out = StringIO()
-            call_command("active_users", "backfill", stdout=out)
-
-        out = out.getvalue()
-        self.assertEqual(1, out.count("No contact activity tables, backfilling from results only"))
-        self.assertIn(f"org #{self.org.id} (uganda): {len(results)} results", out)
-        self.assertIn(f"org #{self.nigeria.id} (nigeria): 0 results", out)
-
-        # clearing what the results alone can't fill back needs forcing
-        with self.assertRaisesMessage(CommandError, "use --force to clear"):
-            call_command("active_users", "backfill", "--clear", stdout=StringIO())
-
-        out = StringIO()
-        with frozen_now(NOW):
-            call_command("active_users", "backfill", "--org", str(self.org.id), "--clear", "--force", stdout=out)
-        self.assertIn(f"sketches of org #{self.org.id}", out.getvalue())
-
-    def test_backfill_command_needs_writes(self):
-        with override_settings(ACTIVE_USERS_HLL_WRITE=False):
-            with self.assertRaisesMessage(CommandError, "ACTIVE_USERS_HLL_WRITE is off"):
-                call_command("active_users", "backfill", stdout=StringIO())
 
     def test_backfill_command_orgs(self):
         def run(*args):
@@ -1076,21 +802,6 @@ class ActiveUsersTest(UreportTest):
             self.assertEqual(1, ActiveUsersCheckpoint.objects.count())
         finally:
             self.r.delete("checkpoint_active_users_lock")
-
-        with patch("ureport.stats.active_users.compare_org") as mock_compare:
-            compare_active_users()
-            mock_compare.assert_not_called()
-
-            mock_compare.return_value = []
-            with self.settings(ACTIVE_USERS_HLL_COMPARE=True):
-                with self.assertLogs("ureport.stats.tasks", level="INFO"):
-                    compare_active_users()
-            self.assertTrue(mock_compare.called)
-
-            mock_compare.side_effect = ValueError("boom")
-            with self.settings(ACTIVE_USERS_HLL_COMPARE=True):
-                with self.assertLogs("ureport.stats.tasks", level="ERROR"):
-                    compare_active_users()
 
     def test_remove_expiries(self):
         sketch = active_users.sketch_key(self.org.id, date(2026, 3, 1), "all")

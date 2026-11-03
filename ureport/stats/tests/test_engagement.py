@@ -4,13 +4,14 @@ from unittest.mock import patch
 
 from django.core.cache import cache
 from django.db import connection
-from django.test import override_settings
 from django.test.utils import CaptureQueriesContext
 
 from dash.categories.models import Category
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
-from ureport.stats.models import ContactActivityCounter, PollEngagementDailyCount, SchemeSegment
+from ureport.polls.models import PollResult
+from ureport.stats import active_users
+from ureport.stats.models import PollEngagementDailyCount, SchemeSegment
 from ureport.tests import UreportTest
 from ureport.utils import ORG_CONTACT_COUNT_KEY
 
@@ -100,27 +101,32 @@ class EngagementDataTest(UreportTest):
             [ReportersCounter(org=self.org, type=t, count=c) for t, c in reporters_counts.items()], batch_size=5000
         )
 
-        activity = []
+        # a varying number of contacts of every age band, gender, state and scheme answering each month
+        answers = []
         month = self.SEED_START
         k = 0
         while month <= self.SEED_END:
-            for counter_type, values in (
-                (ContactActivityCounter.TYPE_ALL, [""]),
-                (ContactActivityCounter.TYPE_AGE, ["12", "17", "22", "28", "33", "40"]),
-                (ContactActivityCounter.TYPE_GENDER, ["M", "F"]),
-                (ContactActivityCounter.TYPE_LOCATION, ["R1", "R2"]),
-                (ContactActivityCounter.TYPE_SCHEME, ["tel", "twitterid"]),
-            ):
-                for value in values:
+            for i, age in enumerate((12, 17, 22, 28, 33, 40)):
+                for j in range(k % 4 + 1):
                     k += 1
-                    activity.append(
-                        ContactActivityCounter(
-                            org=self.org, date=month, type=counter_type, value=value, count=k % 11 + 1
+                    answers.append(
+                        PollResult(
+                            org=self.org,
+                            flow="flow-uuid-1",
+                            ruleset="result-uuid-1",
+                            contact=f"contact-{month}-{age}-{j}",
+                            category="Yes",
+                            date=datetime(month.year, month.month, 1 + k % 27, tzinfo=tzone.utc),
+                            born=month.year - age,
+                            gender="MF"[(i + j) % 2],
+                            state=("R1", "R2")[(i + j + k) % 2],
+                            scheme=("tel", "twitterid")[(i + k) % 2],
                         )
                     )
             month = (month + timedelta(days=32)).replace(day=1)
 
-        ContactActivityCounter.objects.bulk_create(activity)
+        self.addCleanup(active_users.clear, self.org)
+        active_users.add_results(answers)
 
         cache.delete(ORG_CONTACT_COUNT_KEY % self.org.id)
 
@@ -138,7 +144,6 @@ class EngagementDataTest(UreportTest):
         key = f"org:{self.org.id}:metric:{metric}:segment:{segment}:filter:{time_filter}"
         return cache.get(key)
 
-    @override_settings(ACTIVE_USERS_HLL_READ=False)
     def test_refresh_matches_per_filter_calculation(self):
         time_filters = list(PollEngagementDailyCount.DATA_TIME_FILTERS)
 
@@ -204,7 +209,6 @@ class EngagementDataTest(UreportTest):
 
             self.assertEqual(expected, data[time_filter][0]["data"])
 
-    @override_settings(ACTIVE_USERS_HLL_READ=False)
     def test_refresh_sums_every_scope_in_one_query(self):
         with frozen_now(datetime(2026, 3, 1, 0, 30, tzinfo=tzone.utc)):
             for metric in ("opinion-responses", "response-rate"):

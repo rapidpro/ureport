@@ -4,7 +4,7 @@ from unittest.mock import patch
 from django.db import IntegrityError, connection, transaction
 
 from ureport.flows.models import FlowResult, FlowResultCategory
-from ureport.stats.models import ContactActivityCounter, PollEngagementDailyCount, PollStatsCounter
+from ureport.stats.models import PollEngagementDailyCount, PollStatsCounter
 from ureport.tests import UreportTest
 from ureport.utils.counts import get_merge_squashed_sql
 
@@ -37,11 +37,6 @@ class SquashableCountTest(UreportTest):
             day=day,
             count=count,
             is_squashed=is_squashed,
-        )
-
-    def add_activity(self, count, value="M", is_squashed=False):
-        return ContactActivityCounter.objects.create(
-            org=self.uganda, date=date(2026, 1, 1), type="G", value=value, count=count, is_squashed=is_squashed
         )
 
     def assert_rows(self, qs, expected):
@@ -141,52 +136,9 @@ class SquashableCountTest(UreportTest):
         with self.assertRaises(IntegrityError), transaction.atomic():
             self.add_engagement(1, is_squashed=True)
 
-        self.add_activity(1, is_squashed=True)
-        with self.assertRaises(IntegrityError), transaction.atomic():
-            self.add_activity(1, is_squashed=True)
-
         # but any number of unsquashed rows are fine
         self.add_stats(1)
         self.add_stats(1)
-
-    def test_squash_contact_activity(self):
-        counters = ContactActivityCounter.objects.filter(org=self.uganda)
-
-        self.add_activity(2)
-        self.add_activity(3)
-
-        ContactActivityCounter.squash()
-        total = counters.get()
-        self.assertEqual((5, True), (total.count, total.is_squashed))
-
-        # deltas are added onto the squashed row, which keeps its id
-        self.add_activity(2)
-        ContactActivityCounter.squash()
-        self.assertEqual([(total.id, 7)], list(counters.values_list("id", "count")))
-
-        self.add_activity(-3)
-        ContactActivityCounter.squash()
-        self.assertEqual([(total.id, 4)], list(counters.values_list("id", "count")))
-
-        # deltas summing to zero leave it untouched
-        self.add_activity(2)
-        self.add_activity(-2)
-        ContactActivityCounter.squash()
-        self.assertEqual([(total.id, 4)], list(counters.values_list("id", "count")))
-
-        # it never goes below zero, and is deleted when it reaches zero
-        self.add_activity(-6)
-        ContactActivityCounter.squash()
-        self.assertEqual(0, counters.count())
-
-        # a set without a squashed row only gets one if its deltas sum above zero
-        self.add_activity(-2)
-        ContactActivityCounter.squash()
-        self.assertEqual(0, counters.count())
-
-        self.add_activity(3)
-        ContactActivityCounter.squash()
-        self.assertEqual([3], list(counters.values_list("count", flat=True)))
 
     def test_merge_squashed_sql(self):
         table = PollStatsCounter._meta.db_table
@@ -209,24 +161,4 @@ class SquashableCountTest(UreportTest):
         self.assertEqual(
             {(None, "all", 5, True), (None, "other", 1, True), (None, "all", 6, False)},
             set(PollStatsCounter.objects.values_list("flow_result_category_id", "scope", "count", "is_squashed")),
-        )
-
-    def test_merge_squashed_sql_contact_activity(self):
-        table = ContactActivityCounter._meta.db_table
-        columns = ("org_id", "date", "type", "value")
-
-        with connection.cursor() as cursor:
-            cursor.execute('DROP INDEX "stats_cac_squashed"')
-
-        self.add_activity(2, is_squashed=True)
-        self.add_activity(3, is_squashed=True)
-        self.add_activity(4, value="F", is_squashed=True)
-        self.add_activity(1)
-
-        with connection.cursor() as cursor:
-            cursor.execute(get_merge_squashed_sql(table, columns))
-
-        self.assertEqual(
-            {("M", 5, True), ("F", 4, True), ("M", 1, False)},
-            set(ContactActivityCounter.objects.values_list("value", "count", "is_squashed")),
         )

@@ -25,7 +25,6 @@ from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.stats import active_users
-from ureport.stats.models import ContactActivity
 from ureport.syncjobs.models import LeaseLost
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
@@ -339,23 +338,6 @@ class ContactSyncer(BaseSyncer):
                 local.scheme != local_kwargs["scheme"],
             ]
         )
-
-    def update_local(self, local, remote_as_kwargs):
-        local = super().update_local(local, remote_as_kwargs)
-
-        now = timezone.now()
-        start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        ContactActivity.objects.filter(org_id=local.org_id, contact=local.uuid, date__gte=start_of_month).update(
-            gender=local.gender,
-            born=local.born,
-            state=local.state,
-            district=local.district,
-            ward=local.ward,
-            scheme=local.scheme,
-            used=True,
-        )
-
-        return local
 
 
 class RapidProBackend(BaseBackend):

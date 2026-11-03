@@ -1,36 +1,25 @@
 """
-Active users counted with HyperLogLog sketches in Valkey, alongside the contact activity tables.
+Active users counted with HyperLogLog sketches in Valkey.
 
 Each answer adds the contact to one sketch per segment for the month it was given in, e.g. act:12:2026-10:gender:F.
 The active users of a month are then the distinct contacts across that month and the 11 before it - a PFCOUNT over
-their sketches - which is what the contact activity tables get by writing every answer forward into the next 12
-months. Sketches count within a standard error of 0.81%, in at most 12KB each.
+their sketches. Sketches count within a standard error of 0.81%, in at most 12KB each.
 
 Valkey only holds the sketches being written to. The ones touched since the last checkpoint are tracked in a dirty
 set, and the checkpoint adds a copy of their raw bytes to Postgres every night, so they can be restored from there and
 topped up with the results since rather than rebuilt from every result. The copies of the last 30 days are all kept,
 as a contact can't be taken back out of a sketch: sketches that went wrong are rolled back to a night before that.
 
-The charts read these when ACTIVE_USERS_HLL_READ or an org's common.active_users_hll config is set. The contact
-activity tables are still written, so the charts can go back to them, and compare() measures how far apart the two are.
-
 Sketches have no expiry time, as Valkey is shared and its volatile-lru policy only evicts keys that have one. Those
 past RETENTION_MONTHS are deleted with their checkpoints instead.
-
-The contact activity tables still feed the charts. An org only reads these when ACTIVE_USERS_HLL_READ or its
-common.active_users_hll config is set, and compare() measures how far apart the two are.
-
 """
 
 import logging
-import statistics
-import time
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone as tzone
 
 from django_valkey import get_valkey_connection
 
-from django.conf import settings
 from django.db.models import Exists, OuterRef
 from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
@@ -54,14 +43,14 @@ RETENTION_MONTHS = 25
 MIN_BORN = 1900
 OLD_BORN_SEGMENT = "born:pre1900"
 
-# born years below this are left out, as the activity counters leave them out for being over the oldest age band - most
-# are contacts' ages typed in place of the year
+# born years below this are left out, as being over the oldest age band - most are contacts' ages typed in place of
+# the year
 MIN_OLD_BORN = 26
 
 # how many commands are sent in one pipeline
 PIPELINE_SIZE = 1000
 
-# results, or reconstructed answers, read per query by the backfill and restore
+# results read per query by the backfill and restore
 RESULTS_BATCH_SIZE = 5000
 
 # a restore replays results answered this long before its checkpoint was taken, to cover the ones that were saved
@@ -70,16 +59,6 @@ REPLAY_OVERLAP = timedelta(days=1)
 
 # how far back a restore can roll sketches back to
 CHECKPOINT_HISTORY = timedelta(days=30)
-
-COMPARE_SEGMENTS = ("all", "age", "gender", "location", "scheme")
-
-
-def is_write_enabled():
-    return settings.ACTIVE_USERS_HLL_WRITE
-
-
-def is_read_enabled(org):
-    return settings.ACTIVE_USERS_HLL_READ or bool(org.get_config("common.active_users_hll"))
 
 
 def month_start(d):
@@ -106,16 +85,15 @@ def parse_key(key):
 
 def result_month(result_date):
     """
-    The month an answer counts in, which like the contact activity trigger is the month of its UTC date
+    The month an answer counts in, which is the month of its UTC date
     """
     return month_start(result_date.astimezone(tzone.utc))
 
 
 def result_segments(born, gender, state, scheme):
     """
-    The segments an answer counts in, matching the values the contact activity counters are written and read with.
-    Ages are kept by the year the contact was born, so that a month's age bands can be taken at that month just as
-    the activity rows are - from the year of the month each row is for.
+    The segments an answer counts in. Ages are kept by the year the contact was born, so that a month's age bands can
+    be taken at that month.
     """
     values = {"born": born, "gender": gender, "state": state, "scheme": scheme}
     segments = (_value_segment(kind, value) for kind, value in values.items())
@@ -137,7 +115,7 @@ def _value_segment(kind, value):
 
 def is_countable(result):
     """
-    Whether a result makes its contact active, the same condition the contact activity trigger has
+    Whether a result makes its contact active
     """
     return bool(
         result.org_id and result.flow and result.ruleset and result.category is not None and result.date is not None
@@ -183,12 +161,9 @@ def add_results(results):
 
 def record_results(results):
     """
-    Called as results are synced. Writes to the sketches are a side line for now, so they're never allowed to fail
-    the sync - whatever is lost is recovered by a restore or backfill.
+    Called as results are synced. Writes to the sketches are never allowed to fail the sync - whatever is lost is
+    recovered by a restore or backfill.
     """
-    if not is_write_enabled():
-        return
-
     try:
         add_results(results)
     except Exception:
@@ -224,129 +199,6 @@ def _add_results_qs(qs, batch_size=RESULTS_BATCH_SIZE):
     return added
 
 
-# the reconstructed answers of one range of an org's contacts, from its contact activity rows, for one kind of segment.
-# Every answer writes rows for its month and the 11 after, and updating a contact rewrites its rows from that month on,
-# so each contact's active months are split into runs of consecutive months with the same value of that kind (gaps and
-# islands) - a kind on its own, so that a change of one value doesn't affect the others - and each run [s, e] gets
-# answers at s, s+12, s+24... while below e-11, then at e-11 - whose windows of 12 months together cover the run exactly.
-# A run shorter than 12 months can't be covered exactly: when it's the first of months that start at the prune it gets
-# e-11, before its first row, as the months before that row have just been cut, otherwise it gets s, as answering any
-# earlier would give the months before it this value, which are the ones the charts would show wrong - or this month if
-# s is still to come, so that the sketches have it by then. Months are numbered year * 12 + month - 1.
-ACTIVITY_ANSWERS_SQL = """
-WITH months AS (
-    SELECT contact, %(value)s AS value,
-           (EXTRACT(YEAR FROM date)::int * 12 + EXTRACT(MONTH FROM date)::int - 1) AS mi
-    FROM stats_contactactivity
-    WHERE org_id = %%s %(range)s
-), islands AS (
-    SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact ORDER BY mi) AS island FROM months
-), values_islands AS (
-    SELECT *, mi - ROW_NUMBER() OVER (PARTITION BY contact, island, value ORDER BY mi) AS run
-    FROM islands
-), runs AS (
-    SELECT *, MIN(mi) OVER (PARTITION BY contact, island) AS first_mi, MIN(mi) OVER w AS s, MAX(mi) OVER w AS e
-    FROM values_islands
-    WINDOW w AS (PARTITION BY contact, island, value, run)
-), answers AS (
-    SELECT contact, value,
-           CASE WHEN s <= e - 11 THEN mi
-                WHEN s = first_mi AND s <= %%s THEN e - 11
-                ELSE LEAST(s, %%s) END AS answer_mi
-    FROM runs
-    WHERE (MOD(mi - s, 12) = 0 AND mi <= e - 12) OR mi = GREATEST(s, e - 11)
-)
-SELECT contact, answer_mi, value FROM answers WHERE answer_mi >= %%s AND answer_mi < %%s
-"""
-
-# the kinds of segment the activities are read for, by the column of their values
-ACTIVITY_KINDS = {"all": "NULL::text", "born": "born", "gender": "gender", "state": "state", "scheme": "scheme"}
-
-# the activities are read a range of contact uuids at a time, split on their first characters
-ACTIVITY_PREFIX_LENGTH = 2
-
-
-def activity_table_exists():
-    """
-    Whether the contact activity table is still there to backfill from
-    """
-    from django.db import connection
-
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT to_regclass('stats_contactactivity') IS NOT NULL")
-        return cursor.fetchone()[0]
-
-
-def _contact_ranges(prefix_length):
-    """
-    Ranges of contact uuids that together cover every string, split on hex prefixes of the given length, as
-    (from inclusive, to exclusive) with None for unbounded
-    """
-    if not prefix_length:
-        return [(None, None)]
-
-    bounds = [f"{i:0{prefix_length}x}" for i in range(1, 16**prefix_length)]
-    return list(zip([None] + bounds, bounds + [None]))
-
-
-def _first_unpruned_month():
-    """
-    The index of the first month the prune of the contact activities leaves whole
-    """
-    from .sync import ACTIVITY_RETENTION
-
-    return _month_index(add_months(month_start(timezone.now() - ACTIVITY_RETENTION), 1))
-
-
-def _backfill_activities(org, since, until, prefix_length, batch_size, progress):
-    """
-    Adds the answers reconstructed from an org's contact activity rows, so that every contact is active in exactly
-    the months it's active in there. That includes the contacts of results that have since been deleted. Returns the
-    number of answers, which are those of the all segment as the others split these by when their values changed.
-    """
-    from django.db import connection, transaction
-
-    r = get_valkey_connection()
-    today = month_start(timezone.now())
-
-    added = 0
-    for start, end in _contact_ranges(prefix_length):
-        conds, params = [], [org.id]
-        if start is not None:
-            conds.append("AND contact >= %s")
-            params.append(start)
-        if end is not None:
-            conds.append("AND contact < %s")
-            params.append(end)
-        params += [_first_unpruned_month(), _month_index(today), _month_index(since), _month_index(until)]
-
-        range_added = 0
-        for kind, column in ACTIVITY_KINDS.items():
-            sql = ACTIVITY_ANSWERS_SQL % {"value": column, "range": " ".join(conds)}
-
-            # a server side cursor, which needs a transaction, streams the range's answers rather than loading them
-            with transaction.atomic():
-                with connection.chunked_cursor() as cursor:
-                    cursor.execute(sql, params)
-                    while rows := cursor.fetchmany(batch_size):
-                        contacts_by_key = defaultdict(set)
-                        for contact, answer_mi, value in rows:
-                            segment = "all" if kind == "all" else _value_segment(kind, value)
-                            if segment:
-                                month = date(answer_mi // 12, answer_mi % 12 + 1, 1)
-                                contacts_by_key[sketch_key(org.id, month, segment)].add(contact)
-                        if contacts_by_key:
-                            _add(r, contacts_by_key)
-                        if kind == "all":
-                            range_added += len(rows)
-
-        added += range_added
-        if progress:
-            progress("activities", f"contacts [{start or ''}, {end or ''})", range_added)
-
-    return added
-
-
 def _backfill_results(org, since, until, batch_size, progress):
     """
     Adds an org's existing results, one poll at a time
@@ -368,40 +220,20 @@ def _backfill_results(org, since, until, batch_size, progress):
     return added
 
 
-def backfill(
-    org,
-    since=None,
-    until=None,
-    prefix_length=ACTIVITY_PREFIX_LENGTH,
-    batch_size=RESULTS_BATCH_SIZE,
-    progress=None,
-    with_results=False,
-):
+def backfill(org, since=None, until=None, batch_size=RESULTS_BATCH_SIZE, progress=None):
     """
-    Fills an org's sketches with everything answered between the given months (inclusive), defaulting to every month
-    still kept: the answers reconstructed from the contact activity tables while they exist, otherwise the results still
-    there. Every result writes activity rows for the months it counts in, so the tables cover the results, which can be
-    read as well if asked for. Both only add to the sketches, so this is safe to run again, or alongside the sync.
-    Returns the number of answers from the activities (None without the tables) and of results added.
+    Fills an org's sketches with the results answered between the given months (inclusive), defaulting to every month
+    still kept. It only adds to the sketches, so this is safe to run again, or alongside the sync. Returns the number of
+    results added.
     """
     today = month_start(timezone.now())
     since = month_start(since) if since else add_months(today, 1 - RETENTION_MONTHS)
     until = add_months(month_start(until) if until else today, 1)
 
-    answers = None
-    if activity_table_exists():
-        answers = _backfill_activities(org, since, until, prefix_length, batch_size, progress)
+    results = _backfill_results(org, since, until, batch_size, progress)
 
-    results = 0
-    if answers is None or with_results:
-        results = _backfill_results(org, since, until, batch_size, progress)
-
-    logger.info("Backfilled %s activity answers and %d results for org #%d", answers, results, org.id)
-    return answers, results
-
-
-def _month_index(month):
-    return month.year * 12 + month.month - 1
+    logger.info("Backfilled %d results for org #%d", results, org.id)
+    return results
 
 
 # ------------------------------------------------------------------------------
@@ -427,7 +259,7 @@ def _born_segments(month, min_age, max_age):
     first, last = month.year - max_age, month.year - min_age
     segments = [f"born:{born}" for born in range(max(first, MIN_BORN), last + 1)]
 
-    # the band reaching back past the kept born years also takes the older ones, as the activity counters count them
+    # the band reaching back past the kept born years also takes the older ones
     if first < MIN_BORN <= last:
         segments.append(OLD_BORN_SEGMENT)
     return segments
@@ -435,8 +267,7 @@ def _born_segments(month, min_age, max_age):
 
 def _segment_series(org, segment_slug):
     """
-    The series a chart segment has, as (name, extra fields, segments of a month) - mirroring the series the contact
-    activity charts have
+    The series a chart segment has, as (name, extra fields, segments of a month)
     """
     from .models import AgeSegment, GenderSegment, SchemeSegment
 
@@ -486,7 +317,7 @@ def _segment_series(org, segment_slug):
 
 def chart_months(now=None):
     """
-    The months the active users charts cover, the same range the contact activity charts read
+    The months the active users charts cover
     """
     now = now or timezone.now()
     start = (now - timedelta(days=365)).replace(day=1).date()
@@ -518,19 +349,31 @@ def get_series_counts(org, segment_slug, months):
 
 def get_activity(org, segment_slug, time_filters):
     """
-    The active users chart data of a segment from the sketches, in the same shape the contact activity readers give
+    The active users chart data of a segment, by time filter
     """
-    from .models import ContactActivity
-
     translation.activate(org.language)
 
     series = get_series_counts(org, segment_slug, chart_months())
     output = {tf: [] for tf in time_filters}
     for name, extra, counts in series:
-        activities = [{"date": m, "count__sum": c} for m, c in counts.items()]
         for tf in time_filters:
-            output[tf].append(dict(name=name, **extra, data=ContactActivity.get_activity_data(activities, tf)))
+            output[tf].append(dict(name=name, **extra, data=_time_filter_data(counts, tf)))
     return output
+
+
+def _time_filter_data(counts, time_filter):
+    """
+    The counts of months as a chart's data for a time filter, each of its points showing the count of its month
+    """
+    from ureport.utils import get_time_filter_dates_map
+
+    dates_map = get_time_filter_dates_map(time_filter=time_filter)
+
+    by_key = defaultdict(int)
+    for month, count in counts.items():
+        by_key[dates_map.get(str(month))] += count
+
+    return {key: by_key[key[:-2] + "01"] for key in set(dates_map.values())}
 
 
 # ------------------------------------------------------------------------------
@@ -705,8 +548,7 @@ def restore(org, as_of=None, batch_size=500):
 
     # with no checkpoint run to replay from, everything still kept is replayed
     if not restored or not runs:
-        answers, results = backfill(org)
-        replayed = (answers or 0) + results
+        replayed = backfill(org)
     else:
         after = datetime.combine(cutoff, datetime.min.time(), tzinfo=tzone.utc)
         watermark = runs[1].watermark if len(runs) > 1 else 0
@@ -768,121 +610,6 @@ def remove_expiries():
             pipe.persist(key)
         changed += sum(pipe.execute())
     return changed
-
-
-# ------------------------------------------------------------------------------
-# Comparison
-# ------------------------------------------------------------------------------
-
-
-def _existing_activity(org, segment_slug, time_filters):
-    from .models import ContactActivity
-
-    readers = {
-        "all": ContactActivity.get_activity,
-        "age": ContactActivity.get_activity_age,
-        "gender": ContactActivity.get_activity_gender,
-        "location": ContactActivity.get_contact_activity_location,
-        "scheme": ContactActivity.get_contact_activity_scheme,
-    }
-    return readers[segment_slug](org, time_filters)
-
-
-def get_chart_comparison(org, segment_slug, time_filter):
-    """
-    The active users chart data of a segment as read from the contact activity counters and from the sketches
-    """
-    return {
-        "existing": _existing_activity(org, segment_slug, [time_filter])[time_filter],
-        "hll": get_activity(org, segment_slug, [time_filter])[time_filter],
-    }
-
-
-def compare_org(org, segments=COMPARE_SEGMENTS):
-    """
-    Compares the active users of each month and series an org's charts show, as read from the contact activity
-    counters and from the sketches. Returns a row for each, as a dict.
-    """
-    rows = []
-    for segment_slug in segments:
-        start = time.monotonic()
-        existing = _existing_activity(org, segment_slug, [12])[12]
-        existing_secs = time.monotonic() - start
-
-        start = time.monotonic()
-        hll = get_activity(org, segment_slug, [12])[12]
-        hll_secs = time.monotonic() - start
-
-        logger.debug(
-            "Read %s active users of org #%d in %.3fs from counters, %.3fs from sketches",
-            segment_slug,
-            org.id,
-            existing_secs,
-            hll_secs,
-        )
-
-        # series are matched by what they're of rather than by position, as each side lists them in its own order
-        def series_key(series):
-            return series.get("osm_id") or str(series["name"])
-
-        hll_by_key = {series_key(s): s for s in hll}
-        for existing_series in existing:
-            hll_data = hll_by_key.get(series_key(existing_series), {}).get("data", {})
-            for month, expected in sorted(existing_series["data"].items()):
-                actual = hll_data.get(month, 0)
-                error = actual - expected
-                rows.append(
-                    dict(
-                        org=org.id,
-                        month=month[:7],
-                        segment=segment_slug,
-                        series=str(existing_series["name"]),
-                        existing=expected,
-                        hll=actual,
-                        error=error,
-                        rel_error=(error / expected) if expected else (0.0 if not actual else None),
-                    )
-                )
-    return rows
-
-
-def summarize(rows, min_count=100):
-    """
-    Summarizes the relative errors of comparison rows. Rows with fewer than min_count active users are left out of
-    the error statistics, as a handful of contacts makes for large relative errors that mean nothing.
-    """
-    measured = [r for r in rows if r["existing"] >= min_count and r["rel_error"] is not None]
-    errors = sorted(abs(r["rel_error"]) for r in measured)
-
-    def percentile(p):
-        return errors[min(len(errors) - 1, int(p * len(errors)))] if errors else None
-
-    return dict(
-        rows=len(rows),
-        measured=len(measured),
-        mean_abs_rel_error=statistics.fmean(errors) if errors else None,
-        p50_abs_rel_error=percentile(0.5),
-        p95_abs_rel_error=percentile(0.95),
-        max_abs_rel_error=errors[-1] if errors else None,
-        # the share of rows within 2 standard errors, which should be about 95%
-        within_2se=(sum(1 for e in errors if e <= 0.0162) / len(errors)) if errors else None,
-        existing_total=sum(r["existing"] for r in rows if r["segment"] == "all"),
-        hll_total=sum(r["hll"] for r in rows if r["segment"] == "all"),
-    )
-
-
-def worst(rows, limit=20, min_count=100):
-    """
-    The rows furthest apart, by relative error where there are enough active users to measure it, else by absolute
-    """
-    return sorted(
-        rows,
-        key=lambda r: (
-            r["existing"] >= min_count and r["rel_error"] is not None,
-            abs(r["rel_error"]) if r["existing"] >= min_count and r["rel_error"] is not None else abs(r["error"]),
-        ),
-        reverse=True,
-    )[:limit]
 
 
 def _chunks(items, size):

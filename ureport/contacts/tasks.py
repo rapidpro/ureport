@@ -12,10 +12,8 @@ from ureport.celery import app
 # the chunked contact tasks live in sync.py and maintenance.py - imported here so celery,
 # which only autodiscovers tasks modules, registers them
 from ureport.contacts.maintenance import (  # noqa: F401
-    backfill_activities_schemes,
     backfill_results_schemes,
     enqueue_reporters_rebuilds,
-    enqueue_schemes_activities,
     enqueue_schemes_results,
     rebuild_reporters_counts,
     start_schemes_backfill,
@@ -113,16 +111,6 @@ def populate_contact_schemes(org_id):
     arranges for the schemes backfill to follow it.
     """
     return start_schemes_backfill(Org.objects.get(pk=org_id))
-
-
-@app.task(name="contacts.populate_contact_activities_schemes")
-def populate_contact_activities_schemes(org_id):
-    """
-    Deprecated - kept for one release so existing triggers keep working. The backfill itself is
-    now done in resumable chunks by contacts.backfill_activities_schemes, so this only ensures
-    this org's job exists and is enqueued.
-    """
-    return enqueue_schemes_activities(Org.objects.get(pk=org_id))
 
 
 @app.task(name="contacts.populate_poll_results_schemes")

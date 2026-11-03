@@ -1067,61 +1067,6 @@ def populate_age_and_gender_poll_results(org=None):
         )
 
 
-def populate_contact_activity(org):
-    from ureport.contacts.models import Contact
-
-    now = timezone.now()
-    now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    start_date = now - timedelta(days=365)
-
-    flows = list(
-        Poll.objects.filter(org_id=org.id, published=True, poll_date__gte=start_date)
-        .only("flow_uuid")
-        .values_list("flow_uuid", flat=True)
-    )
-
-    all_contacts = Contact.objects.filter(org=org).values_list("id", flat=True).order_by("id")
-
-    start = time.time()
-    i = 0
-
-    all_contacts = list(all_contacts)
-
-    for contact_id_batch in chunk_list(all_contacts, 1000):
-        contact_batch = list(contact_id_batch)
-        contacts = Contact.objects.filter(id__in=contact_batch)
-        for contact in contacts:
-            i += 1
-            results = PollResult.objects.filter(contact=contact.uuid, org_id=org.id, flow__in=flows).exclude(date=None)
-
-            oldest_id = None
-            newest_id = None
-            oldest_seen = now
-            newest_seen = start_date
-            for result in results:
-                if result.date > newest_seen:
-                    newest_seen = result.date
-                    newest_id = result.id
-                if result.date < oldest_seen:
-                    oldest_seen = result.date
-                    oldest_id = result.id
-
-                if oldest_seen <= start_date and newest_seen >= now_month:
-                    break
-
-            ids_to_update = []
-            if oldest_id:
-                ids_to_update.append(oldest_id)
-            if newest_id:
-                ids_to_update.append(newest_id)
-
-            PollResult.objects.filter(id__in=ids_to_update).update(contact=contact.uuid)
-
-        logger.info(
-            "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
-        )
-
-
 Org.get_gender_labels = get_gender_labels
 Org.get_org_contacts_counts = get_org_contacts_counts
 Org.get_reporters_count = get_reporters_count

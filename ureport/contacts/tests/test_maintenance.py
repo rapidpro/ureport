@@ -6,12 +6,9 @@ from mock import ANY, Mock, call, patch
 from django.core.cache import cache
 from django.db import connection
 from django.test.utils import CaptureQueriesContext
-from django.utils import timezone
 
 from dash.orgs.models import TaskState
 from ureport.contacts.maintenance import (
-    ACTIVITIES_BACKFILL,
-    ACTIVITIES_JOB_TYPE,
     LEASE_SECONDS,
     PENDING_KEY,
     POPULATED_KEY,
@@ -20,7 +17,6 @@ from ureport.contacts.maintenance import (
     RESULTS_BACKFILL,
     RESULTS_JOB_TYPE,
     TRIGGER_RETRY,
-    backfill_activities_schemes,
     backfill_results_schemes,
     rebuild_reporters_counts,
     resume_schemes_backfill,
@@ -35,13 +31,11 @@ from ureport.contacts.sync import (
     sync_contacts,
 )
 from ureport.contacts.tasks import (
-    populate_contact_activities_schemes,
     populate_contact_schemes,
     populate_poll_results_schemes,
     rebuild_contacts_counts,
 )
 from ureport.polls.models import PollResult
-from ureport.stats.models import ContactActivity
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tests.base import (
     SyncJobTestMixin,
@@ -71,8 +65,6 @@ class MaintenanceTest(SyncJobTestMixin, UreportTest):
         self.nigeria.backends.exclude(slug="rapidpro").delete()
 
         for key in (
-            ACTIVITIES_BACKFILL.done_key,
-            ACTIVITIES_BACKFILL.cursor_key,
             RESULTS_BACKFILL.done_key,
             RESULTS_BACKFILL.cursor_key,
             POPULATED_KEY,
@@ -223,15 +215,13 @@ class RebuildReportersCountsTest(MaintenanceTest):
 
 class SchemesBackfillTest(MaintenanceTest):
     """
-    Both backfills walk the org's contacts the same way, so the progression, resume and skip
-    cases are covered against the contact activities one and the poll results one is checked
-    for the rows it updates and the chain it ends.
+    The backfill copying contact schemes onto their poll results.
     """
 
     def setUp(self):
         super().setUp()
 
-        self.job = SyncJob.get_or_create_job(self.nigeria, ACTIVITIES_JOB_TYPE)
+        self.job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE)
         self.contacts = [self._create_contact(f"C-00{i}", "tel") for i in range(5)]
 
         # a contact whose scheme the pull hasn't filled in - not this backfill's to copy
@@ -240,22 +230,14 @@ class SchemesBackfillTest(MaintenanceTest):
     def _create_contact(self, uuid, scheme, org=None):
         org = org or self.nigeria
         contact = Contact.objects.create(org=org, uuid=uuid, gender="M", born=1990, scheme=scheme)
-        ContactActivity.objects.create(org=org, contact=uuid, date=timezone.now().date())
         PollResult.objects.create(org=org, flow="flow-1", ruleset="ruleset-1", contact=uuid, completed=False)
         return contact
 
-    def _run(self, task=None, times=1):
+    def _run(self, times=1):
         """
-        Runs the backfill task, holding back both what it might ask a continuation of and the
-        backfill its finalization chains.
+        Runs the backfill task, holding back what it might ask a continuation of
         """
-        task = task or backfill_activities_schemes
-        with patch.object(backfill_results_schemes, "apply_async") as mock_chain:
-            mock_continue = run_task(task, self.job.id, times=times)
-        return mock_continue, mock_chain
-
-    def _activity_schemes(self):
-        return {a.contact: a.scheme for a in ContactActivity.objects.filter(org=self.nigeria)}
+        return run_task(backfill_results_schemes, self.job.id, times=times)
 
     def _result_schemes(self):
         return {r.contact: r.scheme for r in PollResult.objects.filter(org=self.nigeria)}
@@ -264,7 +246,7 @@ class SchemesBackfillTest(MaintenanceTest):
     @patch("ureport.contacts.maintenance.BATCH_SIZE", 2)
     def test_batches_progress_across_chunks(self):
         # first chunk fills its two batches, so there may be more behind it
-        mock_continue, _ = self._run()
+        mock_continue = self._run()
 
         self.assertJobState(
             self.job,
@@ -275,15 +257,15 @@ class SchemesBackfillTest(MaintenanceTest):
         mock_continue.assert_called_once_with((self.job.id,), dict(handoff_from=ANY), queue=QUEUE, countdown=None)
 
         self.assertEqual(
-            self._activity_schemes(),
+            self._result_schemes(),
             {"C-000": "tel", "C-001": "tel", "C-002": "tel", "C-003": "tel", "C-004": None, "C-009": None},
         )
 
         # the pre-chunking task's cursor is dual written so a rollback to it resumes here
-        self.assertEqual(cache.get(ACTIVITIES_BACKFILL.cursor_key % self.nigeria.id), self.contacts[3].id)
+        self.assertEqual(cache.get(RESULTS_BACKFILL.cursor_key % self.nigeria.id), self.contacts[3].id)
 
         # the second chunk finishes the contacts and, being short, ends the run
-        mock_continue, mock_chain = self._run()
+        mock_continue = self._run()
 
         self.assertJobState(
             self.job,
@@ -294,14 +276,12 @@ class SchemesBackfillTest(MaintenanceTest):
         mock_continue.assert_not_called()
 
         # the schemeless contact is left for a run that comes after the pull that fills it in
-        self.assertEqual(self._activity_schemes()["C-004"], "tel")
-        self.assertIsNone(self._activity_schemes()["C-009"])
+        self.assertEqual(self._result_schemes()["C-004"], "tel")
+        self.assertIsNone(self._result_schemes()["C-009"])
 
-        # completion dual writes the pre-chunking task's done flag and chains the next backfill
-        self.assertIsNotNone(cache.get(ACTIVITIES_BACKFILL.done_key % self.nigeria.id))
-
-        results_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
-        mock_chain.assert_called_once_with((results_job.id,), queue=QUEUE)
+        # completion dual writes the pre-chunking task's done flag, and nothing is chained after it
+        self.assertIsNotNone(cache.get(RESULTS_BACKFILL.done_key % self.nigeria.id))
+        self.assertEqual([self.job.id], list(SyncJob.objects.filter(org=self.nigeria).values_list("id", flat=True)))
 
     @patch("ureport.contacts.maintenance.BATCHES_PER_CHUNK", 1)
     @patch("ureport.contacts.maintenance.BATCH_SIZE", 2)
@@ -314,13 +294,13 @@ class SchemesBackfillTest(MaintenanceTest):
         self._run()
 
         self.assertJobState(self.job, cursor={"max_id": self.contacts[3].id})
-        self.assertEqual(self._activity_schemes()["C-003"], "tel")
-        self.assertIsNone(self._activity_schemes()["C-004"])
+        self.assertEqual(self._result_schemes()["C-003"], "tel")
+        self.assertIsNone(self._result_schemes()["C-004"])
 
     @patch("ureport.contacts.maintenance.BATCHES_PER_CHUNK", 1)
     @patch("ureport.contacts.maintenance.BATCH_SIZE", 2)
     def test_first_chunk_seeds_from_legacy_max_id(self):
-        cache.set(ACTIVITIES_BACKFILL.cursor_key % self.nigeria.id, self.contacts[3].id, None)
+        cache.set(RESULTS_BACKFILL.cursor_key % self.nigeria.id, self.contacts[3].id, None)
 
         self._run()
 
@@ -328,26 +308,22 @@ class SchemesBackfillTest(MaintenanceTest):
         # may have died part way through - it wrote that position per contact, not per batch
         self.assertJobState(self.job, cursor={"max_id": self.contacts[3].id})
         self.assertEqual(
-            self._activity_schemes(),
+            self._result_schemes(),
             {"C-000": None, "C-001": None, "C-002": "tel", "C-003": "tel", "C-004": None, "C-009": None},
         )
 
     def test_legacy_done_flag_skips_everything(self):
-        cache.set(ACTIVITIES_BACKFILL.done_key % self.nigeria.id, "2026-01-01T00:00:00.000Z", None)
+        cache.set(RESULTS_BACKFILL.done_key % self.nigeria.id, "2026-01-01T00:00:00.000Z", None)
 
-        _, mock_chain = self._run()
+        self._run()
 
         self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, progress={"skipped": 1}, cursor={})
-        self.assertEqual(set(self._activity_schemes().values()), {None})
+        self.assertEqual(set(self._result_schemes().values()), {None})
 
         # the flag it skipped on is left set, refreshed with this run's own completion
-        done = cache.get(ACTIVITIES_BACKFILL.done_key % self.nigeria.id)
+        done = cache.get(RESULTS_BACKFILL.done_key % self.nigeria.id)
         self.assertIsNotNone(done)
         self.assertNotEqual(done, "2026-01-01T00:00:00.000Z")
-
-        # and the chain to the next backfill is what the pre-chunking task did here too
-        results_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
-        mock_chain.assert_called_once_with((results_job.id,), queue=QUEUE)
 
     @patch("ureport.contacts.maintenance.BATCHES_PER_CHUNK", 1)
     @patch("ureport.contacts.maintenance.BATCH_SIZE", 4)
@@ -360,51 +336,21 @@ class SchemesBackfillTest(MaintenanceTest):
 
         # a batch is a thousand contacts over a handful of schemes, so it's one update per
         # distinct scheme rather than one per contact
-        updates = [q["sql"] for q in queries.captured_queries if 'UPDATE "stats_contactactivity"' in q["sql"]]
+        updates = [q["sql"] for q in queries.captured_queries if 'UPDATE "polls_pollresult"' in q["sql"]]
         self.assertEqual(len(updates), 2)
 
-        self.assertEqual(self._activity_schemes()["C-001"], "facebook")
-        self.assertEqual(self._activity_schemes()["C-002"], "tel")
+        self.assertEqual(self._result_schemes()["C-001"], "facebook")
+        self.assertEqual(self._result_schemes()["C-002"], "tel")
 
     def test_backfill_is_scoped_to_its_org(self):
         other = self._create_contact("C-100", "tel", org=self.uganda)
 
         self._run()
 
-        self.assertIsNone(ContactActivity.objects.get(org=self.uganda, contact=other.uuid).scheme)
-        self.assertEqual(set(self._activity_schemes().values()), {"tel", None})
-
-    @patch("ureport.contacts.maintenance.BATCHES_PER_CHUNK", 1)
-    @patch("ureport.contacts.maintenance.BATCH_SIZE", 2)
-    def test_results_backfill_updates_poll_results(self):
-        self.job = SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE)
-
-        self._run(task=backfill_results_schemes)
-
-        self.assertJobState(self.job, status=SyncJob.STATUS_RUNNING)
-        self.assertEqual(self._result_schemes()["C-001"], "tel")
-        self.assertIsNone(self._result_schemes()["C-002"])
-        self.assertEqual(set(self._activity_schemes().values()), {None})
-
-        self.assertEqual(run_to_completion(backfill_results_schemes, self.job.id), 2)
-
-        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE)
-        self.assertEqual(self._result_schemes()["C-004"], "tel")
-        self.assertIsNotNone(cache.get(RESULTS_BACKFILL.done_key % self.nigeria.id))
-
-        # nothing is chained after the last backfill
-        self.assertEqual(
-            SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE).status, SyncJob.STATUS_PENDING
-        )
+        self.assertIsNone(PollResult.objects.get(org=self.uganda, contact=other.uuid).scheme)
+        self.assertEqual(set(self._result_schemes().values()), {"tel", None})
 
     def test_shims_only_enqueue(self):
-        with patch.object(backfill_activities_schemes, "apply_async") as mock_enqueue:
-            job_id = populate_contact_activities_schemes(self.nigeria.id)
-
-        job = SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE)
-        self.assertEqual(job_id, job.id)
-        mock_enqueue.assert_called_once_with((job.id,), queue=QUEUE)
-
         with patch.object(backfill_results_schemes, "apply_async") as mock_enqueue:
             job_id = populate_poll_results_schemes(self.nigeria.id)
 
@@ -412,8 +358,7 @@ class SchemesBackfillTest(MaintenanceTest):
         self.assertEqual(job_id, job.id)
         mock_enqueue.assert_called_once_with((job.id,), queue=QUEUE)
 
-        # neither backfilled anything itself, nor reported one in the org's task state
-        self.assertEqual(set(self._activity_schemes().values()), {None})
+        # it neither backfilled anything itself, nor reported one in the org's task state
         self.assertEqual(set(self._result_schemes().values()), {None})
         self.assertFalse(self._task_states().exists())
 
@@ -439,7 +384,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         backfill, and the retry of itself.
         """
         with patch.object(sync_contacts, "apply_async") as mock_pull:
-            with patch.object(backfill_activities_schemes, "apply_async") as mock_backfill:
+            with patch.object(backfill_results_schemes, "apply_async") as mock_backfill:
                 with patch.object(populate_contact_schemes, "apply_async") as mock_retry:
                     result = populate_contact_schemes(self.nigeria.id)
         return result, mock_pull, mock_backfill, mock_retry
@@ -455,7 +400,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         job.mark_complete()
 
         with patch("ureport.contacts.sync.update_cache_org_contact_counts"):
-            with patch.object(backfill_activities_schemes, "apply_async") as mock_backfill:
+            with patch.object(backfill_results_schemes, "apply_async") as mock_backfill:
                 finalize_contacts_sync(reload(job))
 
         job.release_lease()
@@ -485,7 +430,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         # completing the re-pull is what starts it
         mock_backfill = self._complete_pull()
 
-        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE)
+        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
         mock_backfill.assert_called_once_with((backfill_job.id,), queue=QUEUE)
         self.assertIsNone(cache.get(PENDING_KEY % self.nigeria.id))
 
@@ -506,7 +451,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
 
         result, mock_pull, mock_backfill, _ = self._trigger()
 
-        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE)
+        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
         self.assertEqual(result, {"repulled": [], "skipped": [], "backfill": backfill_job.id})
         mock_backfill.assert_called_once_with((backfill_job.id,), queue=QUEUE)
 
@@ -551,7 +496,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         self.assertIsNone(cache.get(PENDING_KEY % self.nigeria.id))
 
         self._complete_pull().assert_not_called()
-        self.assertFalse(SyncJob.objects.filter(job_type=ACTIVITIES_JOB_TYPE).exists())
+        self.assertFalse(SyncJob.objects.filter(job_type=RESULTS_JOB_TYPE).exists())
 
         # the retry finds the backend free and resets it, and now the wait is armed
         result, mock_pull, _, mock_retry = self._trigger()
@@ -563,7 +508,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
 
         mock_backfill = self._complete_pull()
 
-        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE)
+        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
         mock_backfill.assert_called_once_with((backfill_job.id,), queue=QUEUE)
 
     def test_reset_never_clobbers_a_claimed_job(self):
@@ -593,13 +538,13 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         # marker before either cleared it
         cache.set(PENDING_KEY % self.nigeria.id, "2026-08-11T09:00:00.000Z", None)
 
-        with patch.object(backfill_activities_schemes, "apply_async") as mock_backfill:
+        with patch.object(backfill_results_schemes, "apply_async") as mock_backfill:
             resume_schemes_backfill(self.nigeria)
 
         # they nudge the one job, and the framework's claim lets only one run of it proceed
-        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE)
+        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
         mock_backfill.assert_called_once_with((backfill_job.id,), queue=QUEUE)
-        self.assertEqual(SyncJob.objects.filter(job_type=ACTIVITIES_JOB_TYPE).count(), 1)
+        self.assertEqual(SyncJob.objects.filter(job_type=RESULTS_JOB_TYPE).count(), 1)
 
     def test_backfill_waits_for_every_backend(self):
         self.nigeria.backends.create(
@@ -620,7 +565,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
 
         mock_backfill = self._complete_pull("floip")
 
-        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE)
+        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
         mock_backfill.assert_called_once_with((backfill_job.id,), queue=QUEUE)
 
     def test_run_that_predates_the_trigger_does_not_satisfy_the_wait(self):
@@ -636,7 +581,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         mock_backfill = self._complete_pull()
 
         mock_backfill.assert_not_called()
-        self.assertFalse(SyncJob.objects.filter(job_type=ACTIVITIES_JOB_TYPE).exists())
+        self.assertFalse(SyncJob.objects.filter(job_type=RESULTS_JOB_TYPE).exists())
 
     def test_trigger_without_an_active_backend_backfills_directly(self):
         self.nigeria.backends.update(is_active=False)
@@ -644,7 +589,7 @@ class SchemesBackfillTriggerTest(MaintenanceTest):
         result, mock_pull, mock_backfill, _ = self._trigger()
 
         # there is no pull left to wait on, so waiting would strand the backfill
-        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=ACTIVITIES_JOB_TYPE)
+        backfill_job = SyncJob.objects.get(org=self.nigeria, job_type=RESULTS_JOB_TYPE)
         self.assertEqual(result, {"repulled": [], "skipped": [], "backfill": backfill_job.id})
         mock_backfill.assert_called_once_with((backfill_job.id,), queue=QUEUE)
         mock_pull.assert_not_called()
@@ -655,16 +600,13 @@ class TaskNamesTest(UreportTest):
     def test_registered_names_are_preserved(self):
         self.assertEqual(rebuild_contacts_counts.name, "contacts.rebuild_contacts_counts")
         self.assertEqual(populate_contact_schemes.name, "ureport.contacts.tasks.populate_contact_schemes")
-        self.assertEqual(populate_contact_activities_schemes.name, "contacts.populate_contact_activities_schemes")
         self.assertEqual(populate_poll_results_schemes.name, "contacts.populate_poll_results_schemes")
 
         self.assertEqual(rebuild_reporters_counts.name, "contacts.rebuild_reporters_counts")
-        self.assertEqual(backfill_activities_schemes.name, "contacts.backfill_activities_schemes")
         self.assertEqual(backfill_results_schemes.name, "contacts.backfill_results_schemes")
 
     def test_maintenance_jobs_run_on_the_slow_queue(self):
         self.assertEqual(rebuild_reporters_counts.queue, QUEUE)
-        self.assertEqual(backfill_activities_schemes.queue, QUEUE)
         self.assertEqual(backfill_results_schemes.queue, QUEUE)
 
 
