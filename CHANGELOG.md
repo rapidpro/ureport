@@ -1,3 +1,6 @@
+## v2.0.1 (2026-11-04)
+ * Limit a prune run to deleting 10 million results again
+
 ## v2.0.0 (2026-11-03)
  * Drop the contact activity tables
 
