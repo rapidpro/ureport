@@ -1,3 +1,7 @@
+## v2.0.2 (2026-11-10)
+ * Sync the main poll on every dispatcher pass and cap the phased rerun gap
+ * Keep poll syncs on a fixed daily time instead of walking later
+
 ## v2.0.1 (2026-11-04)
  * Limit a prune run to deleting 10 million results again
 
