@@ -13,7 +13,7 @@ from django.utils import timezone
 from dash.orgs.models import Org
 from ureport.backend import failed_archives
 from ureport.celery import app
-from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due
+from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due, spread_phase
 from ureport.syncjobs.locks import chunk_lock
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tasks import chunked_task
@@ -61,7 +61,7 @@ ARCHIVE_RETRY_WAIT = timedelta(hours=1)
 # counters that mean a run actually changed results, i.e. counts are worth rebuilding
 RESULT_CHANGE_KEYS = ("num_val_created", "num_val_updated", "num_path_created", "num_path_updated")
 
-# how stale a job's last run may be before the dispatcher runs it again
+# how often the dispatcher runs each flow's results job
 MAIN_POLL_INTERVAL = timedelta(minutes=20)
 RECENT_POLLS_INTERVAL = timedelta(hours=1)
 OTHER_POLLS_INTERVAL = timedelta(hours=24)
@@ -863,8 +863,12 @@ def dispatch_flows(org, flow_uuids, interval=None, handled=None):
 
         handled.add(flow_uuid)
 
+        # each flow's period starts at its own offset, so the flows on a cadence are spread
+        # over it, and stay put rather than walking a dispatcher pass later every period
+        phase = spread_phase(flow_uuid, interval) if interval else None
+
         job = SyncJob.get_or_create_job(org, RESULTS_JOB_TYPE, flow_uuid)
-        if is_due(job, now, interval=interval, backoff=FAILURE_BACKOFF):
+        if is_due(job, now, interval=interval, phase=phase, backoff=FAILURE_BACKOFF):
             _queue(job)
             queued.append(flow_uuid)
 

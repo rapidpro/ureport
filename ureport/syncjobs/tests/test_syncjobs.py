@@ -1,5 +1,5 @@
 import uuid
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone as tzone
 from unittest.mock import ANY, patch
 
 from celery.exceptions import Retry
@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from dash.orgs.models import Org
-from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due
+from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due, period_start, spread_phase
 from ureport.syncjobs.models import (
     ABORTED,
     DEFAULT_LEASE_SECONDS,
@@ -813,6 +813,42 @@ class DispatchTest(SyncJobTestMixin, TestCase):
         # a run that ended without ever starting - an abort, say - falls back to its end
         job = end_run(self.job, started_on=None, ended_on=now - timedelta(minutes=5))
         self.assertFalse(is_due(job, now, interval=hourly))
+
+    def test_is_due_with_a_phase_is_due_once_per_period(self):
+        hourly = timedelta(hours=1)
+        start = period_start(timezone.now(), hourly, timedelta(minutes=7))
+        now = start + timedelta(minutes=1)
+
+        def due(started_ago):
+            job = end_run(self.job, started_on=now - started_ago, ended_on=now - started_ago + timedelta(seconds=10))
+            return is_due(job, now, interval=hourly, phase=timedelta(minutes=7))
+
+        # a run in this period has spent it
+        self.assertFalse(due(timedelta(seconds=30)))
+
+        # a run that started late in the last period - a dispatcher pass after its start - doesn't
+        # push this one back, which is what measuring from the last start would do
+        self.assertTrue(due(timedelta(minutes=46)))
+        self.assertFalse(is_due(reload(self.job), now, interval=hourly))
+
+        # nor does a run that missed a period altogether
+        self.assertTrue(due(timedelta(hours=3)))
+
+        # but one that only started near the end of the last period isn't run again straight away
+        self.assertFalse(due(timedelta(minutes=6)))
+
+    def test_period_start_and_spread_phase(self):
+        daily = timedelta(hours=24)
+        now = datetime(2026, 11, 10, 15, 30, tzinfo=tzone.utc)
+
+        self.assertEqual(datetime(2026, 11, 10, 8, 0, tzinfo=tzone.utc), period_start(now, daily, timedelta(hours=8)))
+        self.assertEqual(datetime(2026, 11, 9, 16, 0, tzinfo=tzone.utc), period_start(now, daily, timedelta(hours=16)))
+
+        # a key always gets the same phase, inside the interval, and keys are spread over it
+        self.assertEqual(spread_phase("flow-1", daily), spread_phase("flow-1", daily))
+        phases = {spread_phase(f"flow-{i}", daily) for i in range(100)}
+        self.assertTrue(all(timedelta(0) <= p < daily for p in phases))
+        self.assertGreater(len(phases), 90)
 
     def test_is_due_waits_out_the_failure_backoff(self):
         now = timezone.now()
