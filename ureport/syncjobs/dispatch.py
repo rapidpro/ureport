@@ -12,6 +12,9 @@ Backoff = namedtuple("Backoff", ("base", "cap", "max_doublings"))
 # what the periods of a phased cadence are counted from
 PERIOD_EPOCH = datetime(2000, 1, 1, tzinfo=tzone.utc)
 
+# the most a phased job waits after a run before it can be due again, however long its cadence
+PHASED_RERUN_GAP = timedelta(hours=1)
+
 
 def enqueue(job, countdown=None):
     """
@@ -72,9 +75,10 @@ def is_due(job, now, *, interval=None, phase=None, backoff=None):
 
         return not (job.ended_on and job.ended_on > now - wait)
 
-    # the cadence is how often a run should start, so it is measured from the last start. A
-    # run that never ended isn't waited out at all: there is nothing to schedule the next one
-    # from, and nudging is how a chain that died without recording a failure is picked up
+    # the cadence is how often a run should start, so it is measured from the last start, or
+    # from the period's start with a phase. A run that never ended isn't waited out at all:
+    # there is nothing to schedule the next one from, and nudging is how a chain that died
+    # without recording a failure is picked up
     if interval and job.ended_on:
         # a job that ended without ever starting only comes out of a fixture, but the fall
         # back keeps one from being read as never having run at all
@@ -85,8 +89,10 @@ def is_due(job, now, *, interval=None, phase=None, backoff=None):
                 return False
 
         # a run that started late in the last period, near the start of this one, doesn't
-        # make the job due again straight away
-        elif anchor >= period_start(now, interval, phase) or anchor > now - interval / 2:
+        # make the job due again straight away. The gap is kept short, as every job whose
+        # period started within it is held back until it passes - jobs that last ran
+        # together, after an outage say, would otherwise all be released at once again
+        elif anchor >= period_start(now, interval, phase) or anchor > now - min(interval / 2, PHASED_RERUN_GAP):
             return False
 
     return True
