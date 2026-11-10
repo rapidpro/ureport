@@ -61,6 +61,9 @@ ARCHIVE_RETRY_WAIT = timedelta(hours=1)
 # counters that mean a run actually changed results, i.e. counts are worth rebuilding
 RESULT_CHANGE_KEYS = ("num_val_created", "num_val_updated", "num_path_created", "num_path_updated")
 
+# how often the sync-polls-dispatch beat entry runs the dispatcher
+DISPATCH_INTERVAL = timedelta(minutes=20)
+
 # how often the dispatcher runs each flow's results job
 MAIN_POLL_INTERVAL = timedelta(minutes=20)
 RECENT_POLLS_INTERVAL = timedelta(hours=1)
@@ -863,12 +866,19 @@ def dispatch_flows(org, flow_uuids, interval=None, handled=None):
 
         handled.add(flow_uuid)
 
-        # each flow's period starts at its own offset, so the flows on a cadence are spread
-        # over it, and stay put rather than walking a dispatcher pass later every period
-        phase = spread_phase(flow_uuid, interval) if interval else None
-
         job = SyncJob.get_or_create_job(org, RESULTS_JOB_TYPE, flow_uuid)
-        if is_due(job, now, interval=interval, phase=phase, backoff=FAILURE_BACKOFF):
+
+        if interval and interval > DISPATCH_INTERVAL:
+            # each flow's period starts at its own offset, so the flows on a cadence are spread
+            # over it, and stay put rather than walking a dispatcher pass later every period
+            due = is_due(job, now, interval=interval, phase=spread_phase(flow_uuid, interval), backoff=FAILURE_BACKOFF)
+        else:
+            # a cadence of one pass has nothing to spread, and a period boundary between a pass
+            # and the start of the run it queued would make the next pass skip it - so it is due
+            # on every pass, as long as the run it queued last time has started by halfway
+            due = is_due(job, now, interval=interval and interval / 2, backoff=FAILURE_BACKOFF)
+
+        if due:
             _queue(job)
             queued.append(flow_uuid)
 

@@ -837,6 +837,21 @@ class DispatchTest(SyncJobTestMixin, TestCase):
         # but one that only started near the end of the last period isn't run again straight away
         self.assertFalse(due(timedelta(minutes=6)))
 
+    def test_is_due_with_a_phase_waits_at_most_an_hour_after_a_late_run(self):
+        # however long the cadence, so jobs that last ran together - after an outage, say -
+        # aren't all held back to be released on the same pass again
+        daily = timedelta(hours=24)
+        phase = timedelta(hours=8)
+        start = period_start(timezone.now(), daily, phase)
+
+        def due(started_on, now):
+            job = end_run(self.job, started_on=started_on, ended_on=started_on + timedelta(seconds=10))
+            return is_due(job, now, interval=daily, phase=phase)
+
+        self.assertTrue(due(start - timedelta(minutes=30), start + timedelta(hours=2)))
+        self.assertFalse(due(start - timedelta(minutes=10), start + timedelta(minutes=20)))
+        self.assertTrue(due(start - timedelta(minutes=10), start + timedelta(minutes=51)))
+
     def test_period_start_and_spread_phase(self):
         daily = timedelta(hours=24)
         now = datetime(2026, 11, 10, 15, 30, tzinfo=tzone.utc)
