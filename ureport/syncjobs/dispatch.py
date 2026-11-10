@@ -1,5 +1,6 @@
+import zlib
 from collections import namedtuple
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone as tzone
 
 from .models import DEFAULT_LEASE_SECONDS, SyncJob
 from .tasks import JOB_TASKS
@@ -7,6 +8,9 @@ from .tasks import JOB_TASKS
 # an exponential wait after a failure: the first one waits base, each further one doubles it
 # up to max_doublings times, and none of them waits longer than cap
 Backoff = namedtuple("Backoff", ("base", "cap", "max_doublings"))
+
+# what the periods of a phased cadence are counted from
+PERIOD_EPOCH = datetime(2000, 1, 1, tzinfo=tzone.utc)
 
 
 def enqueue(job, countdown=None):
@@ -25,13 +29,34 @@ def enqueue(job, countdown=None):
     task.apply_async((job.id,), **options)
 
 
-def is_due(job, now, *, interval=None, backoff=None):
+def spread_phase(key, interval):
+    """
+    A fixed offset into the interval for the given key, so that jobs on the same cadence
+    have their periods start at different times rather than all at once.
+    """
+    return timedelta(seconds=zlib.crc32(key.encode()) % int(interval.total_seconds()))
+
+
+def period_start(now, interval, phase):
+    """
+    The start of the period of the given cadence and phase that now falls in.
+    """
+    return now - (now - PERIOD_EPOCH - phase) % interval
+
+
+def is_due(job, now, *, interval=None, phase=None, backoff=None):
     """
     Whether a dispatcher should nudge this job: it isn't paused, no run is already moving,
     and enough time has passed since its last run - the cadence asked for, an interval of
     None meaning any run that isn't moving is due, or the wait its failure streak has
     earned. The failure backoff matters because a job that fails deterministically would
     otherwise be retried on every pass.
+
+    Without a phase the cadence is measured from the last start, so a dispatcher that only
+    looks every so often runs the job up to one of its passes late, and the next run is
+    measured from that late start - the job's start time walks later by up to a pass every
+    period. With a phase the job is instead due once per fixed period, from that period's
+    start, so it runs on the first pass after it whenever the last run happened to start.
     """
     if job.status == SyncJob.STATUS_PAUSED or in_flight(job, now):
         return False
@@ -54,7 +79,14 @@ def is_due(job, now, *, interval=None, backoff=None):
         # a job that ended without ever starting only comes out of a fixture, but the fall
         # back keeps one from being read as never having run at all
         anchor = job.started_on or job.ended_on
-        if anchor > now - interval:
+
+        if phase is None:
+            if anchor > now - interval:
+                return False
+
+        # a run that started late in the last period, near the start of this one, doesn't
+        # make the job due again straight away
+        elif anchor >= period_start(now, interval, phase) or anchor > now - interval / 2:
             return False
 
     return True

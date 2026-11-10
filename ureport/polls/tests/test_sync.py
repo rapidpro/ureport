@@ -32,6 +32,8 @@ from ureport.polls.sync import (
     ARCHIVES_RESET_PENDING,
     COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
+    MAIN_POLL_INTERVAL,
+    OTHER_POLLS_INTERVAL,
     PRUNE_JOB_TYPE,
     PRUNE_RETIRED,
     PRUNE_SKIPPED_PULLING,
@@ -77,6 +79,7 @@ from ureport.polls.tasks import (
 )
 from ureport.polls.views import PollCRUDL
 from ureport.stats.models import PollStatsCounter
+from ureport.syncjobs.dispatch import period_start, spread_phase
 from ureport.syncjobs.models import SyncJob
 from ureport.syncjobs.tests.base import (
     SyncJobTestMixin,
@@ -1011,8 +1014,9 @@ class DispatchTest(PollSyncTestBase):
         job_ids = [call[0][0][0] for call in mock_queue.call_args_list]
         return set(SyncJob.objects.filter(id__in=job_ids).values_list("scope", flat=True))
 
-    def dispatch(self):
+    def dispatch(self, now=None):
         with (
+            patch("ureport.polls.sync.timezone.now", return_value=now or timezone.now()),
             patch.object(sync_poll_results, "apply_async") as mock_queue,
             patch.object(Poll, "get_main_poll") as mock_main_poll,
             patch.object(Poll, "get_recent_polls") as mock_recent_polls,
@@ -1041,18 +1045,35 @@ class DispatchTest(PollSyncTestBase):
         )
 
     def test_respects_cadence_of_completed_jobs(self):
-        now = timezone.now()
-        self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main", "uuid-other"})
+        # fifteen minutes into the main poll's current period
+        main_phase = spread_phase("uuid-main", MAIN_POLL_INTERVAL)
+        now = period_start(timezone.now(), MAIN_POLL_INTERVAL, main_phase) + timedelta(minutes=15)
+        self.assertEqual(self.dispatch(now), {"uuid-1", "uuid-main", "uuid-other"})
 
         self.complete_runs(now - timedelta(minutes=11), now - timedelta(minutes=10))
-        self.assertEqual(self.dispatch(), {"uuid-1"})
+        self.assertEqual(self.dispatch(now), {"uuid-1"})
 
-        # the main poll is due again after twenty minutes, the other poll only after a day
+        # the main poll is due again in its next twenty minute period, the other poll only in its next day
         self.complete_runs(now - timedelta(minutes=31), now - timedelta(minutes=30))
-        self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main"})
+        self.assertEqual(self.dispatch(now), {"uuid-1", "uuid-main"})
 
         self.complete_runs(now - timedelta(days=2), now - timedelta(days=2))
-        self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main", "uuid-other"})
+        self.assertEqual(self.dispatch(now), {"uuid-1", "uuid-main", "uuid-other"})
+
+    def test_a_late_start_doesnt_push_the_next_run_back(self):
+        # the dispatcher only looks every so often, so a run starts a little after its period
+        # does - the next one is still due from the start of the next period, not a whole
+        # cadence after that late start, which would walk the run later every day
+        self.dispatch()
+        other_phase = spread_phase("uuid-other", OTHER_POLLS_INTERVAL)
+        start = period_start(timezone.now(), OTHER_POLLS_INTERVAL, other_phase)
+        now = start + timedelta(minutes=1)
+
+        self.complete_runs(start - OTHER_POLLS_INTERVAL + timedelta(minutes=20), start - timedelta(hours=23))
+        self.assertIn("uuid-other", self.dispatch(now))
+
+        self.complete_runs(start + timedelta(seconds=10), start + timedelta(seconds=40))
+        self.assertNotIn("uuid-other", self.dispatch(now))
 
     def test_cadence_is_spent_by_a_long_run(self):
         # the cadence is how often a run should start, so a run that takes longer than it
