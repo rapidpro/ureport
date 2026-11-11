@@ -1,3 +1,6 @@
+## v2.0.3 (2026-11-11)
+ * Remove the Uzbekistan site from the global sites list
+
 ## v2.0.2 (2026-11-10)
  * Sync the main poll on every dispatcher pass and cap the phased rerun gap
  * Keep poll syncs on a fixed daily time instead of walking later
