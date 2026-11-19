@@ -69,6 +69,12 @@ MAIN_POLL_INTERVAL = timedelta(minutes=20)
 RECENT_POLLS_INTERVAL = timedelta(hours=1)
 OTHER_POLLS_INTERVAL = timedelta(hours=24)
 
+# the least time between the counts rebuilds that end the main poll's syncs. Its flow is synced on
+# every dispatcher pass, but rebuilding its counts reads every one of its results again, so a sync
+# that lands sooner leaves its changes for the first one after - every flow synced less often than
+# this is rebuilt at the end of every sync that changed its results, as before
+MAIN_POLL_REBUILD_GAP = timedelta(hours=1)
+
 # a failing job backs off exponentially, so a deterministically broken sync isn't retried at
 # the dispatcher's full rate
 FAILURE_BACKOFF = Backoff(base=timedelta(minutes=20), cap=timedelta(hours=24), max_doublings=10)
@@ -462,9 +468,34 @@ def _finalize_flow(job, retire):
         return
 
     # during a full re-pull the counts wait for both of its halves to be done
-    if (repulled or _changed_results(job)) and not _full_repull_pending(job.org_id, job.scope):
+    if _full_repull_pending(job.org_id, job.scope):
+        return
+
+    if repulled or _counts_rebuild_due_after_sync(job, poll):
         # rebuilding refreshes the question caches of every poll on the flow itself
         poll.rebuild_poll_results_counts()
+
+
+def _counts_rebuild_due_after_sync(job, poll):
+    """
+    Whether a sync of the flow that just ended has to rebuild its counts: one that changed its
+    results does, unless the flow is the main poll's and its counts were rebuilt less than
+    MAIN_POLL_REBUILD_GAP ago. The main poll's flow is synced on every dispatcher pass, so the
+    changes such a sync leaves are rebuilt by the first sync after the gap, whether or not that
+    one changed anything itself.
+    """
+    from ureport.polls.models import Poll
+
+    main_poll = Poll.get_main_poll(job.org)
+    if not main_poll or main_poll.flow_uuid != job.scope:
+        return _changed_results(job)
+
+    changed_on, rebuilt_on = poll.get_counts_stamps()
+    if rebuilt_on is None:
+        return _changed_results(job)
+
+    behind = _changed_results(job) or (changed_on is not None and changed_on > rebuilt_on)
+    return behind and rebuilt_on <= timezone.now() - MAIN_POLL_REBUILD_GAP
 
 
 def _finalize_archives_batch(job):
