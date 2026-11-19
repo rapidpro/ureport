@@ -567,6 +567,13 @@ class PublicTest(UreportTest):
         self.assertTrue(poll2 not in response.context["polls"])
         self.assertTrue(poll3 not in response.context["polls"])
 
+        # the listed polls don't load their questions, only what they're listed by
+        listed = response.context["categories"][0]["polls"][0]
+        self.assertFalse(hasattr(listed, "prefetched_questions"))
+        with self.assertNumQueries(0):
+            listed.category.name
+            list(listed.tags.all())
+
         story1 = Story.objects.create(
             title="story 1",
             content="body contents 1",
