@@ -90,14 +90,27 @@ class FieldSyncerTest(UreportTest):
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaField.create(key="foo", name="Bar", type="numeric")
+        remote = TembaField.create(key="foo", name="Bar", type="number")
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaField.create(key="foo", name="Baz", type="numeric")
+        remote = TembaField.create(key="foo", name="Baz", type="number")
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
+
+        # a numeric field already saved as one is unchanged, whichever name the server gives its type
+        local = ContactField.objects.create(
+            org=self.nigeria, key="age", label="Age", value_type="N", backend=self.rapidpro_backend
+        )
+        for temba_type in ("number", "numeric"):
+            remote = TembaField.create(key="age", name="Age", type=temba_type)
+            self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+
+        # a type with no mapping is saved as text, so a text field of it is unchanged too
+        remote = TembaField.create(key="foo", name="Bar", type="unknown")
+        local = ContactField.objects.get(key="foo")
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
 
 class BoundarySyncerTest(UreportTest):
@@ -1278,7 +1291,7 @@ class RapidProBackendTest(UreportTest):
         mock_get_fields.return_value = MockClientQuery(
             [
                 TembaField.create(key="nick_name", name="Nickname", type="text"),
-                TembaField.create(key="age", name="Age", type="numeric"),
+                TembaField.create(key="age", name="Age", type="number"),
             ]
         )
 
@@ -1295,7 +1308,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_fields.return_value = MockClientQuery(
             [
-                TembaField.create(key="age", name="Age (Years)", type="numeric"),
+                TembaField.create(key="age", name="Age (Years)", type="number"),
                 TembaField.create(key="homestate", name="Homestate", type="state"),
             ]
         )

@@ -52,13 +52,17 @@ class FieldSyncer(BaseSyncer):
             "org": org,
             "key": remote.key,
             "label": remote.name,
-            "value_type": self.model.TEMBA_TYPES.get(remote.type, self.model.TYPE_TEXT),
+            "value_type": self.value_type(remote),
         }
+
+    def value_type(self, remote):
+        return self.model.TEMBA_TYPES.get(remote.type, self.model.TYPE_TEXT)
 
     def update_required(self, local, remote, local_kwargs):
         if local_kwargs and local_kwargs["backend"].id != local.backend_id:
             return False
-        return any([local.label != remote.name, local.value_type != self.model.TEMBA_TYPES.get(remote.type)])
+        # compared against the type the field would be saved with, so a type with no mapping isn't seen as a change
+        return any([local.label != remote.name, local.value_type != self.value_type(remote)])
 
     def delete_local(self, local):
         local.release()
