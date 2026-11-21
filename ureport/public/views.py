@@ -288,7 +288,8 @@ class PollContextMixin(object):
             context["gender_stats"] = org.get_gender_stats()
             context["age_stats"] = org.get_age_stats()
 
-        polls = Poll.get_public_polls(org=org).order_by("-poll_date")
+        # only listed by title, date, category and tags, so their questions aren't needed
+        polls = Poll.get_public_polls(org=org, with_questions=False).order_by("-poll_date")
 
         categories_dict = defaultdict(list)
         date_categories_dict = defaultdict(list)
