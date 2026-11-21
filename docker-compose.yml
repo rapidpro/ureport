@@ -5,13 +5,14 @@
 #   docker compose exec web python manage.py createsuperuser
 services:
   postgres:
-    image: postgres:15-alpine
+    image: postgres:18-alpine
     environment:
       POSTGRES_DB: ureport
       POSTGRES_USER: ureport
       POSTGRES_PASSWORD: nyaruka
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      # 18+ images keep data in a versioned subdirectory, so the volume mounts one level up
+      - pgdata:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ureport"]
       interval: 5s
@@ -54,5 +55,5 @@ services:
         condition: service_started
 
 volumes:
-  postgres-data:
+  pgdata:
   media-data:
