@@ -60,15 +60,15 @@
           {% for field in fields %}<td class="value-{{ field }}">{% get_value obj field %}</td>{% endfor %}
           <td>
             <div class="field is-grouped">
-              <form method="post" action="{% url 'syncjobs.syncjob_pause' obj.id %}">
+              <form method="post" action="{% url 'syncjobs.syncjob_pause' obj.id %}{% if list_query %}?{{ list_query }}{% endif %}">
                 {% csrf_token %}
                 <button type="submit" class="button is-small">{% trans "Pause" %}</button>
               </form>
-              <form method="post" action="{% url 'syncjobs.syncjob_resume' obj.id %}">
+              <form method="post" action="{% url 'syncjobs.syncjob_resume' obj.id %}{% if list_query %}?{{ list_query }}{% endif %}">
                 {% csrf_token %}
                 <button type="submit" class="button is-small">{% trans "Resume" %}</button>
               </form>
-              <form method="post" action="{% url 'syncjobs.syncjob_force_resync' obj.id %}">
+              <form method="post" action="{% url 'syncjobs.syncjob_force_resync' obj.id %}{% if list_query %}?{{ list_query }}{% endif %}">
                 {% csrf_token %}
                 <button type="submit" class="button is-small is-warning">{% trans "Force resync" %}</button>
               </form>
