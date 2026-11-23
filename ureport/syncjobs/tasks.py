@@ -10,7 +10,7 @@ from django.utils import timezone
 
 from ureport.celery import app
 
-from .models import ABORTED, DEFAULT_LEASE_SECONDS, STATUS_CACHE_KEY, LeaseLost, SyncJob
+from .models import ABORTED, DEFAULT_LEASE_SECONDS, STATUS_CACHE_KEY, LeaseLost, SourceUnavailable, SyncJob
 
 logger = logging.getLogger(__name__)
 
@@ -121,6 +121,12 @@ def chunked_task(job_type, name, queue="celery", lease_seconds=DEFAULT_LEASE_SEC
                 # another worker owns the job now - drop our work, the new holder resumes
                 # from the last committed checkpoint
                 logger.warning("Job #%s (%s) lease lost mid chunk, discarding", job_id, job_type)
+                return
+            except SourceUnavailable as e:
+                # nothing a retry would fix, so the run is set aside without counting as a
+                # failure - whoever triggers the job once the source is back resumes it
+                logger.info("Job #%s (%s) held, %s", job_id, job_type, e)
+                job.hold(e)
                 return
             except Exception:
                 job.record_failure(traceback.format_exc())

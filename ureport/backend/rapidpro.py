@@ -25,10 +25,10 @@ from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.stats import active_users
-from ureport.syncjobs.models import LeaseLost
+from ureport.syncjobs.models import LeaseLost, SourceUnavailable
 from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
-from . import BaseBackend, ChunkResult, failed_archives
+from . import BaseBackend, ChunkResult, failed_archives, is_suspended
 
 logger = logging.getLogger(__name__)
 
@@ -349,8 +349,11 @@ class RapidProBackend(BaseBackend):
     RapidPro instance as a backend
     """
 
-    @staticmethod
-    def _get_client(org, api_version):
+    def _get_client(self, org, api_version):
+        """
+        The client every call to the API is made with, which makes this the one place that
+        stops them all for a backend marked suspended - by raising SourceUnavailable.
+        """
         from temba_client.v2.types import Field
 
         def convert_old_fields(clazz, item):
@@ -360,6 +363,9 @@ class RapidProBackend(BaseBackend):
                     "number" if item.get("value_type") == "numeric" else item.get("type") or item.get("value_type")
                 )
             return item
+
+        if is_suspended(org, self.backend.slug):
+            raise SourceUnavailable(f"backend {self.backend.slug} of org #{org.pk} is marked suspended")
 
         return org.get_temba_client(api_version=api_version, transformer=convert_old_fields)
 
@@ -1228,7 +1234,7 @@ class RapidProBackend(BaseBackend):
                 self._process_archive(archive, process_archive)
 
             failed.pop(key, None)
-        except TembaRateExceededError, LeaseLost:
+        except TembaRateExceededError, LeaseLost, SourceUnavailable:
             raise
         except Exception as e:
             failed[key] = failed.get(key, 0) + 1

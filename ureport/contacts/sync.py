@@ -7,12 +7,12 @@ from django.core.cache import cache
 from django.utils import timezone
 
 from dash.orgs.models import Org, TaskState
-from ureport.backend import BaseBackend
+from ureport.backend import BaseBackend, suspended_slugs
 from ureport.celery import app
 from ureport.contacts.models import Contact
 from ureport.syncjobs.dispatch import enqueue, in_flight
 from ureport.syncjobs.locks import chunk_lock
-from ureport.syncjobs.models import LeaseLost, SyncJob
+from ureport.syncjobs.models import LeaseLost, SourceUnavailable, SyncJob
 from ureport.syncjobs.tasks import chunked_task
 from ureport.utils import datetime_to_json_date, update_cache_org_contact_counts
 
@@ -145,8 +145,9 @@ def sync_contacts(job):
 
         try:
             return _run_chunk(job, org, backend_obj, cursor)
-        except LeaseLost:
-            # not our run to report on anymore - the worker that took it over owns its outcome
+        except LeaseLost, SourceUnavailable:
+            # not a failure of the pull: either it isn't our run to report on anymore, the
+            # worker that took it over owns its outcome, or the backend is marked suspended
             raise
         except Exception:
             _mark_state_failing(org)
@@ -231,8 +232,15 @@ def enqueue_org_syncs(org):
     skipped = {}
     now = timezone.now()
 
+    suspended = suspended_slugs(org)
+
     for backend_obj in org.backends.filter(is_active=True):
         job = SyncJob.get_or_create_job(org, JOB_TYPE, scope=backend_obj.slug)
+
+        if backend_obj.slug in suspended:
+            logger.info("Job #%d (%s:%s) not nudged, backend is marked suspended", job.id, JOB_TYPE, job.scope)
+            skipped[backend_obj.slug] = job.id
+            continue
 
         if job.status == SyncJob.STATUS_PAUSED or in_flight(job, now):
             logger.info("Job #%d (%s:%s) not nudged, %s", job.id, JOB_TYPE, job.scope, job.get_status_display())

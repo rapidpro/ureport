@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Ellen Gonçalves <ellen.goncalves@weni.ai>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1819,6 +1819,9 @@ msgstr "Чоловіки"
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Жінки"
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "Чи показувати цю організацію на головній сторінці?"
 
@@ -1975,6 +1978,9 @@ msgstr "Чи потрібно включити деякі користуваць
 msgid "Other language sites links"
 msgstr "Посилання на іншомовні версії сайту"
 
+msgid "Active Users"
+msgstr "Активні користувачі"
+
 msgid "90 Days"
 msgstr "90 днів"
 
@@ -2001,9 +2007,6 @@ msgstr "Кількість підключень"
 
 msgid "Response Rate"
 msgstr "Рівень активності"
-
-msgid "Active Users"
-msgstr "Активні користувачі"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

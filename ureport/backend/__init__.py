@@ -35,6 +35,23 @@ def failed_archives(cursor):
     return dict(failed)
 
 
+def is_suspended(org, backend_slug):
+    """
+    Whether the org's backend is marked suspended in the org's config, which stops every call
+    to its API - for a workspace suspended there, whose API only refuses them.
+    """
+    return bool(org.get_config(f"{backend_slug}.is_suspended"))
+
+
+def suspended_slugs(org):
+    """
+    The active backends of the org that are marked suspended.
+    """
+    slugs = org.backends.filter(is_active=True).values_list("slug", flat=True)
+
+    return {slug for slug in slugs if is_suspended(org, slug)}
+
+
 class BaseBackend(object):
     __metaclass__ = ABCMeta
 

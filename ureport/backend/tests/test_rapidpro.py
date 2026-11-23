@@ -25,13 +25,14 @@ from django.test import override_settings
 from django.utils import timezone
 
 from dash.categories.models import Category
-from dash.test import MockClientQuery
+from dash.test import MockClientQuery, MockResponse
 from dash.utils.sync import SyncOutcome
 from ureport.backend.rapidpro import BoundarySyncer, ContactSyncer, FieldSyncer, RapidProBackend
 from ureport.contacts.models import Contact, ContactField
 from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
+from ureport.syncjobs.models import SourceUnavailable
 from ureport.tests import UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -2308,6 +2309,38 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(FlowResultCategory.objects.filter(flow_result=flow_result).count(), 5)
         self.assertEqual(PollResponseCategory.objects.filter(question=question, is_active=True).count(), 4)
         self.assertEqual(FlowResultCategory.objects.filter(flow_result=flow_result, is_active=True).count(), 4)
+
+
+class SuspendedBackendTest(UreportTest):
+    def setUp(self):
+        super().setUp()
+        self.backend = RapidProBackend(self.rapidpro_backend)
+
+    @patch("temba_client.base.request")
+    def test_no_calls_are_made_for_a_suspended_backend(self, mock_request):
+        mock_request.return_value = MockResponse(200, json.dumps({"next": None, "results": []}))
+
+        self.assertEqual(self.backend.fetch_flows(self.nigeria), {})
+        self.assertEqual(mock_request.call_count, 1)
+
+        self.nigeria.set_config("rapidpro.is_suspended", True)
+
+        for call in (
+            lambda: self.backend.fetch_flows(self.nigeria),
+            lambda: self.backend.pull_fields(self.nigeria),
+            lambda: self.backend.pull_contacts_chunk(self.nigeria, None, None, {}),
+        ):
+            with self.assertRaisesMessage(SourceUnavailable, "marked suspended"):
+                call()
+
+        self.assertEqual(mock_request.call_count, 1)
+
+        # other orgs are unaffected, and so is this one once the mark is cleared
+        self.assertEqual(self.backend.fetch_flows(self.uganda), {})
+
+        self.nigeria.set_config("rapidpro.is_suspended", False)
+        self.assertEqual(self.backend.fetch_flows(self.nigeria), {})
+        self.assertEqual(mock_request.call_count, 3)
 
 
 class PerfTest(UreportTest):

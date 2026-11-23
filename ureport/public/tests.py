@@ -52,11 +52,13 @@ class PublicTest(UreportTest):
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
         self.assertEqual(len(response.context["form"].fields), 47)
+        self.assertNotIn("rapidpro.is_suspended", response.context["form"].fields)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 63)
+        self.assertEqual(len(response.context["form"].fields), 64)
+        self.assertIn("rapidpro.is_suspended", response.context["form"].fields)
 
     def test_count(self):
         count_url = reverse("public.count")

@@ -91,6 +91,17 @@ class UtilsTest(UreportTest):
         self.assertEqual(get_linked_orgs()[0]["name"].lower(), "afghanistan")
 
     @patch("dash.orgs.models.TembaClient.get_flows")
+    def test_fetch_flows_from_a_suspended_backend(self, mock_get_flows):
+        self.org.set_config("rapidpro.is_suspended", True)
+
+        with patch("django.core.cache.cache.set") as cache_set_mock, self.assertNoLogs("ureport.utils", "ERROR"):
+            self.assertEqual(fetch_flows(self.org, self.rapidpro_backend), {})
+
+        # nothing is asked of the API, and what was cached before is left to be served
+        mock_get_flows.assert_not_called()
+        cache_set_mock.assert_not_called()
+
+    @patch("dash.orgs.models.TembaClient.get_flows")
     def test_fetch_flows(self, mock_get_flows):
         mock_get_flows.side_effect = [
             MockClientQuery(

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Artemis Papakostouli, 2022\n"
 "Language-Team: Greek (https://www.transifex.com/rapidpro/teams/226/el/)\n"
@@ -1804,6 +1804,9 @@ msgstr "Η ετικέτα που αποδίδεται στους U-Reporters π�
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Η ετικέτα που αποδίδεται στους U-Reporters που είναι Γυναίκες"
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "Εάν αυτό το org θα πρέπει να εμφανίζεται στη σελίδα προορισμού"
 
@@ -1960,6 +1963,9 @@ msgstr "Εάν χρειάζεται να συμπεριλάβετε ορισμέ
 msgid "Other language sites links"
 msgstr "Σύνδεσμοι ιστοτόπων άλλων γλωσσών"
 
+msgid "Active Users"
+msgstr "Ενεργοί Χρήστες"
+
 msgid "90 Days"
 msgstr "90 μέρες"
 
@@ -1986,9 +1992,6 @@ msgstr "Ποσοστό εγγραφής"
 
 msgid "Response Rate"
 msgstr "Ποσοστό απαντήσεων"
-
-msgid "Active Users"
-msgstr "Ενεργοί Χρήστες"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

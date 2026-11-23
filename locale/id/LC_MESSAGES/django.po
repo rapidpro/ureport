@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1800,6 +1800,9 @@ msgstr "Label untuk U-Reporters yang Laki-laki."
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Label untuk U-Reporters yang Perempuan."
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "Centang jika ingin ditampilkan di halaman depan"
 
@@ -1956,6 +1959,9 @@ msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, sep
 msgid "Other language sites links"
 msgstr "Tautan situs bahasa lain"
 
+msgid "Active Users"
+msgstr "Pengguna Aktif"
+
 msgid "90 Days"
 msgstr "90 Hari"
 
@@ -1982,9 +1988,6 @@ msgstr "Tingkat Pendaftaran"
 
 msgid "Response Rate"
 msgstr "Rating Tanggapan"
-
-msgid "Active Users"
-msgstr "Pengguna Aktif"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"
