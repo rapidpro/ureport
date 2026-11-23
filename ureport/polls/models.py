@@ -646,16 +646,25 @@ class Poll(SmartModel):
         return question_uuids
 
     @classmethod
-    def get_public_polls(cls, org):
+    def get_public_polls(cls, org, with_questions=True):
         categories = Category.objects.filter(org=org, is_active=True).only("id")
-        return Poll.get_valid_polls(org).filter(published=True, category_id__in=categories)
+        return Poll.get_valid_polls(org, with_questions=with_questions).filter(
+            published=True, category_id__in=categories
+        )
 
     @classmethod
-    def get_valid_polls(cls, org):
-        return (
-            Poll.objects.filter(org=org, is_active=True, has_synced=True)
-            .exclude(flow_uuid="")
-            .prefetch_related(
+    def get_valid_polls(cls, org, with_questions=True):
+        """
+        The org's synced, active polls with their tags and category. Their questions and response categories are
+        prefetched too unless with_questions is false - for an org with many polls that's most of the work, so callers
+        that only list the polls should leave it out
+        """
+        prefetches = [
+            Prefetch("tags", queryset=Tag.objects.filter(is_active=True, org=org).only("name", "id")),
+            Prefetch("category", queryset=Category.objects.filter(is_active=True, org=org).only("name")),
+        ]
+        if with_questions:
+            prefetches.append(
                 Prefetch(
                     "questions",
                     to_attr="prefetched_questions",
@@ -671,10 +680,13 @@ class Poll(SmartModel):
                         )
                     )
                     .order_by("-priority", "id"),
-                ),
-                Prefetch("tags", queryset=Tag.objects.filter(is_active=True, org=org).only("name", "id")),
-                Prefetch("category", queryset=Category.objects.filter(is_active=True, org=org).only("name")),
+                )
             )
+
+        return (
+            Poll.objects.filter(org=org, is_active=True, has_synced=True)
+            .exclude(flow_uuid="")
+            .prefetch_related(*prefetches)
         )
 
     @classmethod
