@@ -1,3 +1,9 @@
+## v2.0.4 (2026-11-23)
+ * Keep the sync job list's filter after a job action
+ * Run CI and the local stack against PostgreSQL 18
+ * Stop loading every poll's questions to list them on the polls page
+ * Stop rewriting numeric contact fields on every field sync
+
 ## v2.0.3 (2026-11-11)
  * Remove the Uzbekistan site from the global sites list
 
