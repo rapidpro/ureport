@@ -1,3 +1,7 @@
+## v2.0.5 (2026-11-23)
+ * Update the org config fields test for the suspended flag
+ * Stop API calls for a backend marked suspended
+
 ## v2.0.4 (2026-11-23)
  * Keep the sync job list's filter after a job action
  * Run CI and the local stack against PostgreSQL 18
