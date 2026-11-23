@@ -21,6 +21,7 @@ from ureport.syncjobs.models import (
     MAX_ERROR_SUMMARY_LENGTH,
     STATUS_CACHE_KEY,
     LeaseLost,
+    SourceUnavailable,
     SyncJob,
 )
 from ureport.syncjobs.tasks import JOB_TASKS, LEASE_RETRY_GRACE, MAX_REPORTED_JOBS, check_jobs, chunked_task
@@ -1404,3 +1405,49 @@ class SyncJobCRUDLTest(UreportTest):
         response = self.client.get(menu_page_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, list_url)
+
+
+class HeldRunTest(SyncJobTestMixin, TestCase):
+    def setUp(self):
+        user = User.objects.create(username="u")
+        self.org = Org.objects.create(name="Test", subdomain="test", created_by=user, modified_by=user)
+        self.job = SyncJob.get_or_create_job(self.org, "test-sync", "flow-1")
+
+    def test_unavailable_source_sets_the_run_aside(self):
+        JOB_TASKS.pop("test-sync", None)
+        unavailable = [False]
+
+        @chunked_task("test-sync", name=f"test.sync.{uuid.uuid4().hex}")
+        def sync_test(job):
+            if unavailable[0]:
+                raise SourceUnavailable("backend is held: Workspace is suspended")
+
+            chunk = job.cursor.get("chunk", 0)
+            job.checkpoint(cursor={"chunk": chunk + 1}, progress=job.add_progress(chunks=1))
+            return chunk + 1 >= 3
+
+        run_task(sync_test, self.job.id)
+
+        # not raised, and nothing is asked to continue the run
+        unavailable[0] = True
+        mock_enqueue = run_task(sync_test, self.job.id)
+        mock_enqueue.assert_not_called()
+
+        # the run can be resumed from where it was, and isn't counted as failing
+        job = self.assertJobState(
+            self.job,
+            status=SyncJob.STATUS_FAILED,
+            consecutive_failures=0,
+            cursor={"chunk": 1},
+            progress={"chunks": 1},
+            lease_owner=None,
+        )
+        self.assertEqual(job.last_error, "backend is held: Workspace is suspended")
+        self.assertIsNotNone(job.ended_on)
+        self.assertFalse(SyncJob.objects.failing(threshold=1).exists())
+        self.assertFalse(SyncJob.objects.stale(grace_seconds=0).exists())
+
+        unavailable[0] = False
+        run_task(sync_test, self.job.id, times=2)
+
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={"chunk": 3}, progress={"chunks": 3})

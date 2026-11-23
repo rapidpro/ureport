@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1761,6 +1761,9 @@ msgstr ""
 msgid "The label assigned to U-Reporters that are Female."
 msgstr ""
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr ""
 
@@ -1917,6 +1920,9 @@ msgstr ""
 msgid "Other language sites links"
 msgstr ""
 
+msgid "Active Users"
+msgstr ""
+
 msgid "90 Days"
 msgstr ""
 
@@ -1942,9 +1948,6 @@ msgid "Sign Up Rate"
 msgstr ""
 
 msgid "Response Rate"
-msgstr ""
-
-msgid "Active Users"
 msgstr ""
 
 #, python-format

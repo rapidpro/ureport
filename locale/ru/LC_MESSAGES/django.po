@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Mirbek Tursunbekov, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/rapidpro/teams/226/ru/)\n"
@@ -1816,6 +1816,9 @@ msgstr "Ярлык, присвоенный Ю-репортерам мужско�
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Ярлык, присвоенный Ю-репортерам женского пола. "
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "Должна ли эта org отображаться на главной странице"
 
@@ -1972,6 +1975,9 @@ msgstr "Если вам нужно включить некоторые поль�
 msgid "Other language sites links"
 msgstr "Ссылки на сайты на других языках"
 
+msgid "Active Users"
+msgstr "Активные пользователи"
+
 msgid "90 Days"
 msgstr "90 дней"
 
@@ -1998,9 +2004,6 @@ msgstr "Скорость регистрации"
 
 msgid "Response Rate"
 msgstr "Скорость отклика"
-
-msgid "Active Users"
-msgstr "Активные пользователи"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

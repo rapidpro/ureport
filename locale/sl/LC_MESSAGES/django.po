@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Tjaša Jazbinšek, 2023\n"
 "Language-Team: Slovenian (https://app.transifex.com/rapidpro/teams/226/sl/)\n"
@@ -1822,6 +1822,9 @@ msgstr "Oznaka za U-Reporterje, ki so moškega spola."
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Oznaka za U-Reporterje, ki so ženskega spola."
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "Ali naj se to prikaže na vstopni strani"
 
@@ -1978,6 +1981,9 @@ msgstr "Če želite na strani organizacije vključiti HTML kode po meri, na prim
 msgid "Other language sites links"
 msgstr "Povezave do drugih jezikovnih strani"
 
+msgid "Active Users"
+msgstr "Aktivni uporabniki"
+
 msgid "90 Days"
 msgstr "90 dni"
 
@@ -2004,9 +2010,6 @@ msgstr "Stopnja registracije"
 
 msgid "Response Rate"
 msgstr "Stopnja odziva"
-
-msgid "Active Users"
-msgstr "Aktivni uporabniki"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

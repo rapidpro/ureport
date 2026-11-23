@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Juan Arguello Yepez, 2022\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1815,6 +1815,9 @@ msgstr "Le label assigné aux U-Reporters qui sont masculins."
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Le label assigné aux U-Reporters qui sont féminins."
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "Si cette organisation devrait montrer sur la page d’atterrissage"
 
@@ -1971,6 +1974,9 @@ msgstr "Si vous devez inclure des codes HTML personnalisés dans vos pages d'org
 msgid "Other language sites links"
 msgstr "Liens vers d'autres sites linguistiques"
 
+msgid "Active Users"
+msgstr "Utilisateurs actives"
+
 msgid "90 Days"
 msgstr "90 jours"
 
@@ -1997,9 +2003,6 @@ msgstr "Recrutement"
 
 msgid "Response Rate"
 msgstr "Taux de réponse"
-
-msgid "Active Users"
-msgstr "Utilisateurs actives"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

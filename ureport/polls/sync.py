@@ -11,7 +11,7 @@ from django.db.models import Exists, OuterRef, Q
 from django.utils import timezone
 
 from dash.orgs.models import Org
-from ureport.backend import failed_archives
+from ureport.backend import failed_archives, suspended_slugs
 from ureport.celery import app
 from ureport.syncjobs.dispatch import Backoff, enqueue, in_flight, is_due, spread_phase
 from ureport.syncjobs.locks import chunk_lock
@@ -796,6 +796,14 @@ def sync_polls_dispatch(org_id=None):
 
 def dispatch_org_polls(org):
     from ureport.polls.models import Poll
+
+    slugs = set(org.backends.filter(is_active=True).values_list("slug", flat=True))
+    if slugs and slugs == suspended_slugs(org):
+        # every job would only be claimed to find its backend suspended. With some of the
+        # org's backends still in use the jobs are queued as usual, and those of a suspended
+        # one are set aside as they run
+        logger.info("Backends of org #%d are marked suspended, not dispatching poll syncs" % org.pk)
+        return
 
     handled = set()
 

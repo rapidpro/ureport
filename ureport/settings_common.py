@@ -276,6 +276,14 @@ BACKENDS_ORG_CONFIG_FIELDS = [
         superuser_only=True,
         read_only=True,
     ),
+    dict(
+        name="is_suspended",
+        field=dict(
+            help_text=_("Whether the workspace is suspended on this backend. No calls are made to its API while set."),
+            required=False,
+        ),
+        superuser_only=True,
+    ),
 ]
 
 ORG_CONFIG_FIELDS = [

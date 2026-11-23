@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1806,6 +1806,9 @@ msgstr "အမျိုးသား U-Reporter များအတွက် သ�
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "အမျိုးသမီး U-Reporter များအတွက် သတ်မှတ်ထားသော အညွှန်း။"
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "ဤအဖွဲ့အစည်းကို landing စာမျက်နှာတွင် ပြသသင့်၊ မသင့်"
 
@@ -1962,6 +1965,9 @@ msgstr "သင့်အဖွဲ့အစည်းစာမျက်နှာမ
 msgid "Other language sites links"
 msgstr "အခြားဘာသာစကား ဆိုဒ်လင့်ခ်များ"
 
+msgid "Active Users"
+msgstr "အသုံးပြုနေသူများ"
+
 msgid "90 Days"
 msgstr "ရက် ၉၀"
 
@@ -1988,9 +1994,6 @@ msgstr "စာရင်းသွင်းမှုနှုန်း"
 
 msgid "Response Rate"
 msgstr "ပြန်လည်ဖြေကြားနှုန်း"
-
-msgid "Active Users"
-msgstr "အသုံးပြုနေသူများ"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

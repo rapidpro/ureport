@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1807,6 +1807,9 @@ msgstr "ছেলে U-reporter দের চেনার জন্য লেব
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "মেয়ে U-reporter দের চেনার জন্য লেবেল "
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
@@ -1965,6 +1968,9 @@ msgstr "আপনার প্রতিষ্ঠান এর পেজ এর �
 msgid "Other language sites links"
 msgstr "অন্যান্য ভাষার সাইটের লিংক"
 
+msgid "Active Users"
+msgstr "সক্রিয় ব্যবহারকারী"
+
 msgid "90 Days"
 msgstr "৯০ দিন"
 
@@ -1991,9 +1997,6 @@ msgstr "সাইন আপ রেট"
 
 msgid "Response Rate"
 msgstr "উত্তর দেওয়ার হার "
-
-msgid "Active Users"
-msgstr "সক্রিয় ব্যবহারকারী"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

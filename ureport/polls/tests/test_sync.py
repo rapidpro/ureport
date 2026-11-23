@@ -1030,6 +1030,22 @@ class DispatchTest(PollSyncTestBase):
 
         return self.queued_flows(mock_queue)
 
+    def test_skips_orgs_whose_backends_are_suspended(self):
+        self.nigeria.set_config("rapidpro.is_suspended", True)
+
+        # with a backend still in use the jobs are left to find the suspended one out themselves
+        self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main", "uuid-other"})
+
+        SyncJob.objects.all().delete()
+        self.nigeria.set_config("floip.is_suspended", True)
+
+        self.assertEqual(self.dispatch(), set())
+        self.assertFalse(SyncJob.objects.exists())
+
+        self.nigeria.set_config("rapidpro.is_suspended", False)
+
+        self.assertEqual(self.dispatch(), {"uuid-1", "uuid-main", "uuid-other"})
+
     def test_queues_unsynced_polls_every_pass(self):
         # the unsynced poll is queued even though its job just completed
         end_run(SyncJob.get_or_create_job(self.nigeria, RESULTS_JOB_TYPE, "uuid-1"))

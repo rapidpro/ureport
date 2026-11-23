@@ -25,7 +25,7 @@ from ureport.contacts.sync import (
     sync_contacts,
     sync_contacts_dispatch,
 )
-from ureport.syncjobs.models import ABORTED, SyncJob
+from ureport.syncjobs.models import ABORTED, SourceUnavailable, SyncJob
 from ureport.syncjobs.tests.base import SyncJobTestMixin, drop_lease, held_lock, make_stale, run_task
 from ureport.tests import UreportTest
 
@@ -397,6 +397,30 @@ class SyncContactsTest(SyncJobTestMixin, UreportTest):
         self.assertIsNone(self._task_state())
         self.mock_update_counts.assert_not_called()
 
+    def test_suspended_backend_sets_the_run_aside(self):
+        self.mock_pull_fields.return_value = outcome_counts()
+        self.mock_pull_boundaries.return_value = outcome_counts()
+        self.mock_pull_contacts_chunk.side_effect = SourceUnavailable("backend is marked suspended")
+
+        self._run(times=2)  # fields, boundaries
+        until = SyncJob.objects.get(id=self.job.id).cursor["until"]
+
+        mock_enqueue = self._run()
+        mock_enqueue.assert_not_called()
+
+        # neither the job nor the pull is reported as failing
+        job = self.assertJobState(self.job, status=SyncJob.STATUS_FAILED, consecutive_failures=0)
+        self.assertEqual(job.cursor["until"], until)
+        self.assertIsNone(self._task_state())
+
+        # once the backend is back the run is resumed against its window
+        self.mock_pull_contacts_chunk.side_effect = None
+        self.mock_pull_contacts_chunk.return_value = ChunkResult(counts=chunk_counts(), cursor={}, done=True)
+        self._run()
+
+        self.assertEqual(self.mock_pull_contacts_chunk.call_args[0][1:3], (None, until))
+        self.assertJobState(self.job, status=SyncJob.STATUS_COMPLETE, cursor={"last_until": until})
+
     def test_deactivated_backend_leaves_an_idle_job_alone(self):
         SyncJob.objects.filter(id=self.job.id).update(cursor={"last_until": "2026-08-10T10:00:00.000Z"})
         self.nigeria.backends.filter(slug="rapidpro").update(is_active=False)
@@ -509,6 +533,24 @@ class DispatchTest(UreportTest):
             sync_contacts_dispatch()
 
         mock_enqueue.assert_not_called()
+
+    def test_dispatch_skips_suspended_backends(self):
+        self.nigeria.set_config("rapidpro.is_suspended", True)
+
+        with patch.object(sync_contacts, "apply_async") as mock_enqueue:
+            sync_contacts_dispatch()
+
+        mock_enqueue.assert_not_called()
+
+        job = SyncJob.objects.get(org=self.nigeria, job_type=JOB_TYPE)
+        self.assertEqual(enqueue_org_syncs(self.nigeria), {"enqueued": {}, "skipped": {"rapidpro": job.id}})
+
+        self.nigeria.set_config("rapidpro.is_suspended", False)
+
+        with patch.object(sync_contacts, "apply_async") as mock_enqueue:
+            sync_contacts_dispatch()
+
+        mock_enqueue.assert_called_once_with((job.id,), queue="celery")
 
     def test_dispatch_skips_orgs_with_the_pull_disabled(self):
         TaskState.objects.create(org=self.nigeria, task_key=JOB_TYPE, is_disabled=True)

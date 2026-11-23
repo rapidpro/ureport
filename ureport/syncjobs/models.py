@@ -38,6 +38,14 @@ class LeaseLost(Exception):
     """
 
 
+class SourceUnavailable(Exception):
+    """
+    Raised by a chunk when what it syncs from can't be reached for now, and trying again
+    before that changes is pointless. The run is set aside rather than failed - see
+    SyncJob.hold.
+    """
+
+
 class SyncJobQuerySet(models.QuerySet):
     def stale(self, grace_seconds=DEFAULT_STALE_GRACE_SECONDS):
         """
@@ -290,6 +298,23 @@ class SyncJob(models.Model):
             ended_on=now,
             consecutive_failures=F("consecutive_failures") + 1,
             last_error=str(error)[:MAX_ERROR_LENGTH],
+            lease_owner=None,
+            lease_expires_on=None,
+            modified_on=now,
+        )
+
+    def hold(self, reason):
+        """
+        Sets the current run aside because what it syncs from can't be reached for now. The
+        lease is released and the cursor left as its last checkpoint, as for a failure, so the
+        next claim resumes the run - but it isn't counted as one, since retrying wouldn't have
+        helped and the job isn't what needs an operator's attention.
+        """
+        now = timezone.now()
+        return self._update_owned(
+            status=self.STATUS_FAILED,
+            ended_on=now,
+            last_error=str(reason)[:MAX_ERROR_LENGTH],
             lease_owner=None,
             lease_expires_on=None,
             modified_on=now,

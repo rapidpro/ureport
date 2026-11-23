@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 15:35+0000\n"
+"POT-Creation-Date: 2026-11-23 14:49+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/rapidpro/teams/226/cs/)\n"
@@ -1821,6 +1821,9 @@ msgstr "Označení přiřazené U-Reporterům, kteří jsou Muži."
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Označení přiřazené U-Reporterům, kteří jsou Ženy."
 
+msgid "Whether the workspace is suspended on this backend. No calls are made to its API while set."
+msgstr ""
+
 msgid "Whether this org should be show on the landing page"
 msgstr "Zda se má tato organizace zobrazit na vstupní stránce"
 
@@ -1977,6 +1980,9 @@ msgstr "Pokud potřebujete do svých stránek organizace zahrnout některé vlas
 msgid "Other language sites links"
 msgstr "Odkazy na další jazykové stránky"
 
+msgid "Active Users"
+msgstr "Aktivní uživatelé"
+
 msgid "90 Days"
 msgstr "90 dní"
 
@@ -2003,9 +2009,6 @@ msgstr "Rychlost registrace"
 
 msgid "Response Rate"
 msgstr "Míra odezvy"
-
-msgid "Active Users"
-msgstr "Aktivní uživatelé"
 
 #, python-format
 msgid "Job #%(job_id)d is being worked on, try again in a moment"

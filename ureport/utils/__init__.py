@@ -21,6 +21,7 @@ from dash.utils import datetime_to_ms
 from ureport.assets.models import LOGO, Image
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
+from ureport.syncjobs.models import SourceUnavailable
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -170,6 +171,10 @@ def fetch_flows(org, backend=None):
 
             cache_key = CACHE_ORG_FLOWS_KEY % (org.pk, backend_obj.slug)
             cache.set(cache_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
+        except SourceUnavailable as e:
+            # expected for as long as the backend is marked suspended, so not an error to report
+            logger.info("Not fetching flows for %s, %s", org.name, e)
 
         except Exception:
             # logged with the traceback so an error reporter attached to logging picks it up
