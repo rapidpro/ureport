@@ -1331,6 +1331,37 @@ class SyncJobCRUDLTest(UreportTest):
         self.assertEqual(current.cursor, {})
         self.assertEqual(current.progress, {})
 
+    def test_actions_keep_the_list_filter(self):
+        list_url = reverse("syncjobs.syncjob_list")
+        pause_url = reverse("syncjobs.syncjob_pause", args=[self.job.id])
+        resync_url = reverse("syncjobs.syncjob_force_resync", args=[self.job.id])
+        query = "job_type=test-sync&status=P"
+
+        self.login(self.superuser)
+
+        # the filtered list posts its actions with the filter attached
+        response = self.client.get(f"{list_url}?{query}", SERVER_NAME="uganda.ureport.io")
+        self.assertContains(response, f"{pause_url}?job_type=test-sync&amp;status=P")
+        self.assertContains(response, f"{resync_url}?job_type=test-sync&amp;status=P")
+
+        # and the unfiltered one posts them bare
+        response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
+        self.assertContains(response, f'action="{pause_url}"')
+
+        # so each action lands back on the same filtered list
+        response = self.client.post(f"{resync_url}?{query}", SERVER_NAME="uganda.ureport.io")
+        self.assertRedirects(response, f"{list_url}?{query}", fetch_redirect_response=False)
+
+        response = self.client.post(f"{pause_url}?{query}", SERVER_NAME="uganda.ureport.io")
+        self.assertRedirects(response, f"{list_url}?{query}", fetch_redirect_response=False)
+
+        # a refused action keeps it too
+        response = self.client.post(f"{pause_url}?{query}", SERVER_NAME="uganda.ureport.io")
+        self.assertRedirects(response, f"{list_url}?{query}", fetch_redirect_response=False)
+
+        response = self.client.post(pause_url, SERVER_NAME="uganda.ureport.io")
+        self.assertRedirects(response, list_url, fetch_redirect_response=False)
+
     def test_actions_refused_while_job_is_running(self):
         self.job.claim("worker-1", lease_seconds=600)
         self.job.checkpoint(cursor={"after": "t1"})

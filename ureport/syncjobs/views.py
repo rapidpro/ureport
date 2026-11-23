@@ -44,6 +44,7 @@ class SyncJobCRUDL(SmartCRUDL):
             context["statuses"] = SyncJob.STATUS_CHOICES
             context["filter_job_type"] = self.request.GET.get("job_type", "")
             context["filter_status"] = self.request.GET.get("status", "")
+            context["list_query"] = self.request.GET.urlencode()
             return context
 
         def get_org(self, obj):
@@ -74,6 +75,12 @@ class SyncJobCRUDL(SmartCRUDL):
 
         def apply(self, job):  # pragma: no cover
             raise NotImplementedError
+
+        def get_success_url(self):
+            # the list posts its own query string along, so the operator lands back on the same filtered view
+            url = super().get_success_url()
+            query = self.request.GET.urlencode()
+            return f"{url}?{query}" if query else url
 
         def form_valid(self, form):
             job = self.get_object()
