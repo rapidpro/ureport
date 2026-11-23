@@ -36,6 +36,7 @@ class ContactField(models.Model):
 
     TEMBA_TYPES = {
         "text": TYPE_TEXT,
+        "number": TYPE_DECIMAL,
         "numeric": TYPE_DECIMAL,
         "datetime": TYPE_DATETIME,
         "state": TYPE_STATE,
