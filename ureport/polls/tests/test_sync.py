@@ -33,6 +33,7 @@ from ureport.polls.sync import (
     COUNTS_FULL_REBUILD_DAYS,
     COUNTS_JOB_TYPE,
     DISPATCH_INTERVAL,
+    MAIN_POLL_REBUILD_GAP,
     OTHER_POLLS_INTERVAL,
     PRUNE_JOB_TYPE,
     PRUNE_RETIRED,
@@ -443,6 +444,54 @@ class SyncPollResultsTest(PollSyncTestBase):
 
         self.mock_rebuild.assert_not_called()
         self.assertTrue(Poll.objects.get(id=self.poll.id).has_synced)
+
+    def _sync_once(self, **counts):
+        with patch.object(RapidProBackend, "pull_results_chunk") as mock_chunk:
+            mock_chunk.return_value = ChunkResult(counts=results_counts(**counts), cursor={}, done=True)
+            run_task(sync_poll_results, self.job.id)
+
+    def _set_counts_stamps(self, rebuilt_ago, changed_ago=None):
+        now = timezone.now()
+        cache.set(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.nigeria.pk, "uuid-1"), now - rebuilt_ago, None)
+        if changed_ago is not None:
+            cache.set(Poll.POLL_RESULTS_CHANGED_CACHE_KEY % (self.nigeria.pk, "uuid-1"), now - changed_ago, None)
+
+    def test_finalize_rebuilds_the_main_poll_at_most_once_per_gap(self):
+        with patch.object(Poll, "get_main_poll", return_value=self.poll):
+            # rebuilt recently, so this sync's changes wait
+            self._set_counts_stamps(rebuilt_ago=timedelta(minutes=20))
+            self._sync_once(num_val_created=3)
+            self.mock_rebuild.assert_not_called()
+
+            # the first sync after the gap rebuilds them, even having changed nothing itself
+            self._set_counts_stamps(rebuilt_ago=MAIN_POLL_REBUILD_GAP + timedelta(minutes=1))
+            self._sync_once(num_val_ignored=2)
+            self.mock_rebuild.assert_called_once()
+
+            # and with nothing left over to count, nothing is rebuilt
+            self.mock_rebuild.reset_mock()
+            self._set_counts_stamps(
+                rebuilt_ago=MAIN_POLL_REBUILD_GAP + timedelta(minutes=1),
+                changed_ago=MAIN_POLL_REBUILD_GAP + timedelta(minutes=5),
+            )
+            self._sync_once(num_val_ignored=2)
+            self.mock_rebuild.assert_not_called()
+
+            # counts never rebuilt are rebuilt by the first sync that changes results, as before
+            cache.delete(Poll.POLL_COUNTS_REBUILT_CACHE_KEY % (self.nigeria.pk, "uuid-1"))
+            self._sync_once(num_val_ignored=2)
+            self.mock_rebuild.assert_not_called()
+            self._sync_once(num_val_created=1)
+            self.mock_rebuild.assert_called_once()
+
+    def test_finalize_rebuilds_other_polls_after_every_sync_that_changed_results(self):
+        other = self.create_poll(self.nigeria, "Main poll", "uuid-main", self.education_nigeria, self.admin)
+
+        with patch.object(Poll, "get_main_poll", return_value=other):
+            self._set_counts_stamps(rebuilt_ago=timedelta(minutes=20))
+            self._sync_once(num_val_created=3)
+
+        self.mock_rebuild.assert_called_once()
 
     def test_leftover_finalize_runs_against_the_completed_run(self):
         # a worker that completed a run but died before finalizing it
