@@ -1,3 +1,6 @@
+## v2.0.6 (2026-11-24)
+ * Restore the Uzbekistan site
+
 ## v2.0.5 (2026-11-23)
  * Update the org config fields test for the suspended flag
  * Stop API calls for a backend marked suspended
