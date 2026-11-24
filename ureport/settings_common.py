@@ -2005,6 +2005,14 @@ COUNTRY_FLAGS_SITES = [
         region="ECARO",
     ),
     dict(
+        name="Uzbekistan",
+        host="//uzbekistan.ureport.in",
+        flag="flag_uzberkistan.png",
+        country_codes=["UZB"],
+        count_link="http://uzbekistan.ureport.in/count/",
+        region="ECARO",
+    ),
+    dict(
         name="Vietnam",
         host="//vietnam.ureport.in",
         flag="flag_vietnam.png",
